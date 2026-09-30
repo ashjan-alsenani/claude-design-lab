@@ -36,12 +36,14 @@ const moduleLabel = n => tx('الوحدة ', 'Module ') + n;
 function renderSidebar(route) {
   const nav = $('#sidebar'); const cur = route.name;
   const last = Store.state.last && LESSON[Store.state.last.lesson] ? Store.state.last.lesson : null;
-  const NAV_C = { home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
+  const NAV_C = { compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
   const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '><span class="ic-tile" style="--tc:' + NAV_C[ic] + '">' + icon(ic) + '</span><span>' + label + '</span>' + (extra || '') + '</a></li>';
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
   nav.innerHTML =
     '<div><p class="nav-group-title">' + tx('المنصة', 'Platform') + '</p><ul class="nav-list">' +
     item('#/home', 'home', tx('الرئيسية', 'Home'), cur === 'home') +
+    item('#/tour', 'compass', tx('جولة ClickUp', 'ClickUp tour'), cur === 'tour', '<span class="count num">' + tourDone() + '/12</span>') +
+    item('#/questions', 'message', tx('الأسئلة الشائعة', 'Common questions'), cur === 'questions') +
     item('#/library', 'book', tx('مكتبة الدروس', 'Learning Library'), cur === 'library', '<span class="count num">' + LESSONS.length + '</span>') +
     (last ? item(lessonLink(last), 'play', tx('متابعة الدرس', 'Continue lesson'), cur === 'lesson') : '') +
     item('#/lab', 'flask', tx('مختبر التطبيق', 'Practice Lab'), cur === 'lab') +
@@ -83,8 +85,8 @@ function viewHome(main) {
     '<span class="hero-kicker">' + icon('sparkle', 'icon-sm') + tx('منصة تعلّم تفاعلية لموظفي Omantel', 'Interactive learning for Omantel teams') + '</span>' +
     '<h1 id="homeTitle">' + tx('تعلّم <span class="grad-text">ClickUp</span> بالممارسة، خطوة بخطوة', 'Learn <span class="grad-text">ClickUp</span> by doing, one step at a time') + '</h1>' +
     '<p class="lead">' + tx('من أول مهمة إلى سير عمل متكامل: دروس قصيرة بالعربية، وعروض متحركة، ومساحة تدريب تشبه ClickUp، لتنجز عملك اليومي بثقة.', 'From your first task to a complete workflow: short lessons, animated walkthroughs and a ClickUp-style practice space, so you can handle your daily work with confidence.') + '</p>' +
-    '<div class="hero-actions"><a class="btn btn-primary btn-lg" href="' + lessonLink(anyProgress && next ? next : 'l1-1') + '">' + icon(anyProgress ? 'play' : 'rocket') + (anyProgress ? tx('تابع التعلّم', 'Continue learning') : tx('ابدأ التعلّم', 'Start learning')) + '</a>' +
-    '<a class="btn btn-secondary btn-lg" href="#/lab">' + icon('flask') + tx('جرّب مختبر التطبيق', 'Try the Practice Lab') + '</a></div>' +
+    '<div class="hero-actions"><a class="btn btn-primary btn-lg" href="#/tour">' + icon('compass') + tx('ابدأ جولة ClickUp', 'Take the ClickUp tour') + '</a>' +
+    '<a class="btn btn-secondary btn-lg" href="' + lessonLink(anyProgress && next ? next : 'l1-1') + '">' + icon('play') + (anyProgress ? tx('تابع التعلّم', 'Continue learning') : tx('ابدأ الدروس', 'Start the lessons')) + '</a></div>' +
     (last && !Store.isDone(last.id) ? '<a class="resume-card" href="' + lessonLink(last.id) + '">' + icon('replay') + '<span><small>' + tx('آخر درس فتحته', 'Last lesson you opened') + '</small>' + t(last.title) + '</span><span style="margin-inline-start:auto">' + icon('fwd') + '</span></a>' : '') +
     '</div><div class="hero-demo"><div data-home-demo></div></div></section>' +
 
@@ -97,6 +99,10 @@ function viewHome(main) {
     tile('assess', '#22c38e', qCount, tx('سؤالاً بشرح', 'Explained questions')) +
     tile('flask', '#1fb6e0', CHALLENGES.length, tx('تحديات في المختبر', 'Lab challenges')) +
     '</div></section>' +
+
+    '<section class="section" aria-labelledby="discT"><div class="section-head"><h2 id="discT">' + tx('اكتشف ClickUp في 12 جزءاً', 'Discover ClickUp in 12 parts') + '</h2><a class="btn btn-ghost" href="#/tour">' + tx('الجولة كاملة ', 'The full tour ') + icon('fwd', 'icon-sm') + '</a></div>' +
+    '<div class="disc-strip">' + TOUR_PARTS.map((p, i) => '<a class="disc-tile' + (Store.isToured(p.id) ? ' seen' : '') + '" data-rv href="#/tour/' + p.id + '" style="' + modStyle(p.mod) + '"><span class="ic-tile">' + icon(p.icon) + '</span><span class="num dt-n">' + (i + 1) + '</span><strong>' + tp(TOUR_SHORT[p.id]) + '</strong></a>').join('') +
+    '<a class="disc-tile disc-faq" data-rv href="#/questions"><span class="ic-tile">' + icon('message') + '</span><strong>' + tx('الأسئلة الشائعة', 'Common questions') + '</strong></a></div></section>' +
 
     '<section class="section" aria-labelledby="loopT"><div class="section-head"><h2 id="loopT">' + tx('كل درس يسير في أربع خطوات', 'Every lesson follows four steps') + '</h2></div>' +
     '<div class="journey">' + [
@@ -380,7 +386,7 @@ function viewProgress(main) {
       (allDone ? '<div class="panel panel-pad" style="display:flex;gap:14px;align-items:center;border-color:#b6dcc6;background:#f7fcf9">' + icon('check-circle', 'icon-lg') + '<div><h2 style="font-size:1.1rem">' + tx('أكملت المسار التعليمي كاملاً', 'You completed the full learning path') + '</h2><p class="small">' + tx('كل الدروس، والتقييم النهائي، والتحدي العملي. هذا سجل شخصي على جهازك، وليس شهادة رسمية أو اعتماداً من أي جهة.', 'Every lesson, the final assessment and the practical challenge. This is a personal record on your device, not an official certificate or accreditation from any body.') + '</p></div></div>' : '') +
       '<div class="panel prog-hero" data-rv>' + ring(Math.round(done / LESSONS.length * 100), { size: 132, stroke: 14, label: '<b class="num">' + countEl(Math.round(done / LESSONS.length * 100), '%') + '</b><small>' + tx('من الدروس', 'of lessons') + '</small>' }) +
       '<div><h2>' + (done ? tx('عمل رائع، استمر!', 'Great work, keep going!') : tx('ابدأ أول درس لتظهر إنجازاتك هنا', 'Start your first lesson to see your achievements here')) + '</h2><p class="small muted">' + tx('كل رقم هنا محسوب من نشاطك الفعلي على هذا الجهاز.', 'Every number here is calculated from your real activity on this device.') + '</p><div class="prog-minis">' +
-      [[done, LESSONS.length, tx('دروس مكتملة', 'Lessons completed'), '#7b68ee'], [passed, 12, tx('اختبارات وحدات ناجحة', 'Module quizzes passed'), '#22c38e'], [S.final ? S.final.best : 0, S.final ? S.final.total : 18, tx('أفضل نتيجة في التقييم النهائي', 'Best final assessment score'), '#f5a524', !S.final], [ch, CHALLENGES.length, tx('تحديات المختبر', 'Lab challenges') + (S.practical ? tx('، والتحدي الشامل مكتمل', ', plus the end-to-end challenge') : ''), '#1fb6e0']]
+      [[tourDone(), 12, tx('أجزاء مكتشفة في جولة ClickUp', 'ClickUp tour parts explored'), '#ff02f0'], [done, LESSONS.length, tx('دروس مكتملة', 'Lessons completed'), '#7b68ee'], [passed, 12, tx('اختبارات وحدات ناجحة', 'Module quizzes passed'), '#22c38e'], [S.final ? S.final.best : 0, S.final ? S.final.total : 18, tx('أفضل نتيجة في التقييم النهائي', 'Best final assessment score'), '#f5a524', !S.final], [ch, CHALLENGES.length, tx('تحديات المختبر', 'Lab challenges') + (S.practical ? tx('، والتحدي الشامل مكتمل', ', plus the end-to-end challenge') : ''), '#1fb6e0']]
         .map(x => '<div class="prog-mini">' + ring(Math.round(x[0] / x[1] * 100), { size: 44, stroke: 6, color: x[3] }) + '<span><b class="num">' + (x[4] ? '-' : x[0] + '/' + x[1]) + '</b>' + x[2] + '</span></div>').join('') + '</div></div></div>' +
       '<section class="section" aria-labelledby="bdT"><div class="section-head"><h2 id="bdT">' + tx('الإنجازات', 'Achievements') + '</h2><p class="num">' + tx(achievements().filter(x => x.got).length + ' من ' + achievements().length + ' مفتوحة', achievements().filter(x => x.got).length + ' of ' + achievements().length + ' unlocked') + '</p></div><ul class="badges" role="list">' +
       achievements().map(x => '<li class="badge-card' + (x.got ? '' : ' locked') + '" data-rv style="--bc:' + x.c + '"><span class="medal" aria-hidden="true">' + icon(x.got ? x.icon : 'lock') + '</span><h3>' + x.t + '</h3><p>' + x.d + '</p><span class="state">' + (x.got ? tx('مفتوح', 'Unlocked') : tx('مقفل', 'Locked')) + '</span></li>').join('') + '</ul></section>' +

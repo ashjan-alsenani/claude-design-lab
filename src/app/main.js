@@ -4,6 +4,8 @@
 
 const ROUTES = {
   home: { view: viewHome, title: () => tx('الرئيسية', 'Home') },
+  tour: { view: viewTour, title: () => tx('جولة ClickUp', 'ClickUp tour') },
+  questions: { view: viewQuestions, title: () => tx('الأسئلة الشائعة', 'Common questions') },
   library: { view: viewLibrary, title: () => tx('مكتبة الدروس', 'Learning Library') },
   lesson: { view: viewLesson, title: () => tx('درس', 'Lesson') },
   lab: { view: (el) => { LabUI.mount(el); return () => LabUI.unmount(); }, title: () => tx('مختبر التطبيق', 'Practice Lab') },
@@ -40,7 +42,8 @@ function renderRoute(keepScroll, langSwitch) {
   currentRoute = route;
   try { currentCleanup = def.view(host, route.params) || null; }
   catch (e) { console.error(e); host.innerHTML = '<div class="page page-narrow"><div class="panel empty-state">' + icon('alert') + '<h1 style="font-size:1.2rem">' + tx('حدث خطأ أثناء عرض هذه الصفحة', 'Something went wrong while showing this page') + '</h1><p>' + tx('أعد تحميل الصفحة. تقدّمك محفوظ.', 'Reload the page. Your progress is saved.') + '</p><a class="btn btn-primary" href="#/home">' + tx('الرئيسية', 'Home') + '</a></div></div>'; }
-  const pageTitle = route.name === 'lesson' && LESSON[route.params[0]] ? LESSON[route.params[0]].title : def.title();
+  const pageTitle = route.name === 'lesson' && LESSON[route.params[0]] ? LESSON[route.params[0]].title
+    : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name) : def.title();
   document.title = pageTitle + site;
   renderSidebar(route);
   renderTopProgress();
@@ -174,6 +177,9 @@ function buildSearch() {
   LESSONS.forEach(l => items.push({ kind: 'lesson', title: l.title, sub: tx('الوحدة ', 'Module ') + MODULE[l.module].n + ': ' + MODULE[l.module].title, href: '#/lesson/' + l.id, hay: (l.title + ' ' + l.objective + ' ' + MODULE[l.module].title + ' ' + MODULE[l.module].en + ' ' + l.explain.join(' ')).toLowerCase() }));
   GLOSSARY.forEach(g => items.push({ kind: 'term', title: isEN() ? g.en : g.en + ' | ' + g.ar, sub: g.def, href: '#/help/glossary', term: g.en, hay: (g.en + ' ' + g.ar + ' ' + g.def).toLowerCase() }));
   [['#/lab', tx('مختبر التطبيق Practice Lab', 'Practice Lab')], ['#/studio', tx('استوديو لوحات المعلومات Dashboard Studio', 'Dashboard Studio')], ['#/assess', tx('التقييمات Assessments', 'Assessments')], ['#/progress', tx('تقدّمي My Progress', 'My Progress')], ['#/help/faq', tx('أسئلة شائعة FAQ', 'FAQ')]].forEach(p => items.push({ kind: 'page', title: p[1], sub: tx('صفحة', 'Page'), href: p[0], hay: p[1].toLowerCase() }));
+  TOUR_PARTS.forEach(p => items.push({ kind: 'tour', title: tp(p.name), sub: tp(p.one), href: '#/tour/' + p.id, hay: (tp(p.name) + ' ' + tp(p.one) + ' ' + p.name[1]).toLowerCase() }));
+  CU_FAQ.forEach(f => items.push({ kind: 'faq', title: tp(f.q), sub: tp(f.a), href: '#/questions', hay: (tp(f.q) + ' ' + tp(f.a)).toLowerCase() }));
+  [['#/tour', tx('جولة ClickUp ClickUp tour', 'ClickUp tour')], ['#/questions', tx('الأسئلة الشائعة Common questions', 'Common questions')]].forEach(p => items.push({ kind: 'page', title: p[1], sub: tx('صفحة', 'Page'), href: p[0], hay: p[1].toLowerCase() }));
   searchIndex = items;
   const box = $('#globalSearchResults'); if (box) { box.hidden = true; $('#globalSearchInput').setAttribute('aria-expanded', 'false'); }
 }
@@ -187,8 +193,8 @@ function setupSearch() {
     if (!q) { close(); return; }
     const terms = q.split(/\s+/);
     results = searchIndex.map(it => ({ it, score: terms.every(tm => it.hay.includes(tm)) ? (it.title.toLowerCase().includes(q) ? 2 : 1) : 0 })).filter(r => r.score).sort((a, b) => b.score - a.score).slice(0, 10).map(r => r.it);
-    const groups = [['lesson', tx('الدروس', 'Lessons')], ['term', tx('المصطلحات', 'Terms')], ['page', tx('الصفحات', 'Pages')]];
-    box.innerHTML = results.length ? groups.map(g => { const list = results.filter(r => r.kind === g[0]); if (!list.length) return ''; return '<div class="gs-group" role="presentation">' + g[1] + '</div>' + list.map(r => { const idx = results.indexOf(r); return '<a class="gs-item" role="option" id="gs-' + idx + '" data-idx="' + idx + '" href="' + r.href + '" aria-selected="false">' + icon(r.kind === 'lesson' ? 'book' : r.kind === 'term' ? 'tag' : 'compass', 'icon-sm') + '<span>' + t(r.title) + '<small>' + t(r.sub.length > 90 ? r.sub.slice(0, 88) + '…' : r.sub) + '</small></span></a>'; }).join(''); }).join('')
+    const groups = [['tour', tx('جولة ClickUp', 'ClickUp tour')], ['faq', tx('الأسئلة الشائعة', 'Common questions')], ['lesson', tx('الدروس', 'Lessons')], ['term', tx('المصطلحات', 'Terms')], ['page', tx('الصفحات', 'Pages')]];
+    box.innerHTML = results.length ? groups.map(g => { const list = results.filter(r => r.kind === g[0]); if (!list.length) return ''; return '<div class="gs-group" role="presentation">' + g[1] + '</div>' + list.map(r => { const idx = results.indexOf(r); return '<a class="gs-item" role="option" id="gs-' + idx + '" data-idx="' + idx + '" href="' + r.href + '" aria-selected="false">' + icon({ lesson: 'book', term: 'tag', tour: 'rocket', faq: 'help' }[r.kind] || 'compass', 'icon-sm') + '<span>' + t(r.title) + '<small>' + t(r.sub.length > 90 ? r.sub.slice(0, 88) + '…' : r.sub) + '</small></span></a>'; }).join(''); }).join('')
       : '<div class="gs-empty">' + tx('لا نتائج لـ «' + esc(input.value) + '». جرّب كلمة أخرى أو', 'No results for “' + esc(input.value) + '”. Try another word or') + ' <a href="#/help/glossary">' + tx('تصفّح المصطلحات', 'browse the glossary') + '</a>.</div>';
     box.hidden = false; input.setAttribute('aria-expanded', 'true'); sel = -1;
   };

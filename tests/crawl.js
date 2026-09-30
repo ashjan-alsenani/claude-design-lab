@@ -2,7 +2,8 @@ const { chromium } = require('./pw');
 const URL = 'file://' + require('path').resolve(__dirname, '../index.html');
 const lessons = ['l1-1','l1-2','l1-3','l2-1','l2-2','l3-1','l3-2','l3-3','l3-4','l3-5','l4-1','l4-2','l4-3','l5-1','l5-2','l6-1','l6-2','l7-1','l7-2','l8-1','l8-2','l9-1','l9-2','l10-1','l10-2','l11-1','l11-2','l12-1','l12-2'];
 const routes = ['home','library','lab','studio','assess','assess/final','assess/practical','progress','help/glossary','help/faq','help/mistakes','help/resources','about','nowhere']
-  .concat(Array.from({length:12},(_,i)=>'assess/m'+(i+1))).concat(lessons.map(l=>'lesson/'+l));
+  .concat(Array.from({length:12},(_,i)=>'assess/m'+(i+1))).concat(lessons.map(l=>'lesson/'+l))
+  .concat(['tour', 'questions']).concat(['start','structure','tasks','views','fields','collab','time','dash','auto','forms','share','power'].map(x => 'tour/' + x));
 (async () => {
   const b = await chromium.launch();
   for (const lang of ['en', 'ar']) for (const vp of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
@@ -29,6 +30,13 @@ const routes = ['home','library','lab','studio','assess','assess/final','assess/
         await p.$$eval('details', ds => ds.forEach(d => d.open = true));
       }
       if (r === 'studio') await p.$$eval('details', ds => ds.forEach(d => d.open = true));
+      if (r.startsWith('tour/')) { // every step of the part
+        for (let s = 0; s < 3; s++) { await p.$$eval('[data-tstep]', (x, s) => x[s].click(), s); await p.waitForTimeout(60); await scan(p, r + ':step' + (s + 1), lang, issues); }
+        await p.$$eval('[data-tstep]', x => x[3].click()); await p.waitForTimeout(60);
+        await p.$$eval('details', ds => ds.forEach(d => d.open = true));
+      }
+      if (r === 'tour') { for (const pin of ['start', 'fields', 'power']) { await p.$eval('[data-pin="' + pin + '"]', b => b.click()); await p.waitForTimeout(40); } await p.$eval('[data-ba-set="after"]', b => b.click()); }
+      if (r === 'questions') await p.$$eval('details', ds => ds.forEach(d => d.open = true));
       await scan(p, r, lang, issues);
     }
     console.log(`== ${lang} ${vp.width}px: ${issues.length} issues, ${errs.length} page errors`);

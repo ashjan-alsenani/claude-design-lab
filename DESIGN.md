@@ -75,3 +75,12 @@ All motion uses `cubic-bezier(0.23, 1, 0.32, 1)` and explains something:
 - Hover lifts are limited to devices with a fine pointer; presses scale to 0.97–0.98.
 - A language switch or in-place refresh shows everything immediately, so the learner's place never moves.
 - `prefers-reduced-motion: reduce` disables drifting hero blobs, reveals, count-ups, chart growth and confetti.
+
+## ClickUp tour and common questions
+
+The platform now leads with explaining ClickUp itself, before practice:
+
+- **`#/tour`**: a dark hero with a floating cloud of the 12 part icons; a "Why teams love ClickUp" before/after scene (scattered emails, spreadsheets and chats fly together into one clear task card, played once on view, replayable with the Without/With toggle); six benefit cards; an **interactive map of a simplified ClickUp screen** with 12 pulsing numbered pins (press a pin or any region to spotlight it and read what it is, or press "Play the tour" to step through all 12); and a grid of the 12 parts.
+- **`#/tour/<part>`**: each part is taught in four steps (Meet it, Why you'll love it, How to use it, Check & questions). Step 1 spotlights the part on the screen map, step 2 shows three benefits, step 3 pairs numbered instructions with the module's animated walkthrough, step 4 has a quick check, the part's common questions and links to the full lessons. Reaching step 4 marks the part explored (saved locally; a 12/12 "ClickUp explorer" badge and confetti).
+- **`#/questions`**: about 30 of the most asked ClickUp questions, searchable and filterable by part, each with a "Show me how" link into the tour.
+- Content lives in `src/content/tour.js` as [Arabic, English] pairs; views in `src/app/tour.js`; styles in `src/tour.css`. Home, the sidebar and global search all link into the tour. All motion is skipped under reduced motion.

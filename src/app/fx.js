@@ -117,6 +117,7 @@ function achievements() {
     { id: 'lab', icon: 'flask', c: '#1fb6e0', t: tx('يد عملية', 'Hands-on'), d: tx('أكمل 3 تحديات في المختبر', 'Complete 3 lab challenges'), got: ch >= 3 },
     { id: 'half', icon: 'flame', c: '#ec4899', t: tx('في منتصف الطريق', 'Halfway there'), d: tx('أكمل نصف الدروس', 'Complete half of the lessons'), got: done >= Math.ceil(LESSONS.length / 2) },
     { id: 'practical', icon: 'target', c: '#a855f7', t: tx('من البداية إلى المتابعة', 'Start to follow-up'), d: tx('أكمل التحدي العملي الشامل', 'Complete the end-to-end challenge'), got: !!S.practical },
+    { id: 'explorer', icon: 'compass', c: '#ff02f0', t: tx('مستكشف ClickUp', 'ClickUp explorer'), d: tx('اكتشف أجزاء الجولة الاثني عشر', 'Explore all 12 parts of the tour'), got: TOUR_PARTS.every(p => Store.isToured(p.id)) },
     { id: 'final', icon: 'trophy', c: '#ffb800', t: tx('خبير ClickUp', 'ClickUp pro'), d: tx('اجتز التقييم النهائي', 'Pass the final assessment'), got: !!finalPass }
   ];
 }

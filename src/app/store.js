@@ -12,7 +12,7 @@ const Store = (() => {
 
   const blank = () => ({
     v: 1, lessons: {}, bookmarks: [], last: null, quizzes: {}, final: null,
-    practical: null, challenges: {}, lab: null, startedAt: Date.now()
+    practical: null, challenges: {}, lab: null, tour: {}, startedAt: Date.now()
   });
 
   let state = blank();
@@ -74,6 +74,9 @@ const Store = (() => {
       this.save('quiz');
       return rec;
     },
+    /* ClickUp tour: which app parts the learner has explored */
+    tourSeen(id) { if (!state.tour[id]) { state.tour[id] = Date.now(); this.save('tour'); return true; } return false; },
+    isToured(id) { return !!state.tour[id]; },
     completeChallenge(id) { if (!state.challenges[id]) { state.challenges[id] = Date.now(); this.save('challenge'); return true; } return false; },
     setPractical() { if (!state.practical) { state.practical = { done: Date.now() }; this.save('challenge'); } },
     setLab(lab) { state.lab = lab; persist(); },

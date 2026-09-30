@@ -91,6 +91,18 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   await p.fill('#dTitle', 'My own title'); await p.$eval('#dTitle', e => e.dispatchEvent(new Event('change', { bubbles: true }))); await p.waitForTimeout(100);
   await p.click('[data-lang="ar"]'); await p.waitForTimeout(300);
   ok((await p.inputValue('#dTitle')) === 'My own title', 'learner edit not overwritten by translation');
+
+  // 4b. ClickUp tour: step kept across a language switch, part marked explored
+  await p.evaluate(() => { location.hash = '#/tour/tasks'; }); await p.waitForTimeout(300);
+  await p.click('[data-tgo="1"]'); await p.waitForTimeout(150); await p.click('[data-tgo="1"]'); await p.waitForTimeout(300);
+  await p.click('[data-lang="en"]'); await p.waitForTimeout(300);
+  ok(await p.$eval('[data-tstep="2"]', e => e.getAttribute('aria-current') === 'step'), 'tour step kept after switch');
+  ok(await p.isVisible('[data-tp-demo] .demo-stage'), 'tour walkthrough shown in English');
+  await p.click('[data-tgo="1"]'); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => JSON.parse(localStorage.getItem('omantel-clickup-hub:v1')).tour.tasks > 0), 'tour part saved as explored');
+  await p.evaluate(() => { location.hash = '#/questions'; }); await p.waitForTimeout(300);
+  await p.fill('#cuqQ', 'dashboard'); await p.waitForTimeout(300);
+  ok((await p.$$('details.cuq')).length >= 2, 'questions search finds matches');
   await ctx.close();
 
   // 5. Storage blocked
