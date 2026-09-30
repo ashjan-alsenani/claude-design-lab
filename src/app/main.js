@@ -87,6 +87,30 @@ function applyChrome() {
   $$('[data-t-attr]').forEach(el => el.dataset.tAttr.split(';').forEach(pair => { const [attr, key] = pair.split(':'); el.setAttribute(attr, CHROME[key][k]); }));
   const md = $('meta[name="description"]'); if (md) md.setAttribute('content', CHROME.metaDesc[k]);
   $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
+  updateNavBtn();
+}
+
+/* ---------- Focus mode: hide the sidebar on wide screens ----------
+   On phones and tablets the same button opens the navigation drawer. */
+const NAV_KEY = 'omantel-clickup-hub:nav';
+const wideScreen = () => window.matchMedia('(min-width: 1081px)').matches;
+function updateNavBtn() {
+  const b = $('#navToggle'); if (!b) return;
+  if (wideScreen()) {
+    const hidden = document.documentElement.classList.contains('nav-hidden');
+    const label = hidden ? tx('إظهار القائمة', 'Show menu') : tx('إخفاء القائمة للتركيز على الصفحة', 'Hide menu to focus on the page');
+    b.innerHTML = icon(hidden ? 'menu' : 'panel');
+    b.setAttribute('aria-label', label); b.title = label; b.setAttribute('aria-expanded', String(!hidden));
+  } else {
+    b.innerHTML = icon('menu'); b.removeAttribute('title');
+    b.setAttribute('aria-label', CHROME.navOpen[LANG === 'en' ? 1 : 0]);
+    b.setAttribute('aria-expanded', String($('#sidebar').classList.contains('open')));
+  }
+}
+function setNavHidden(on) {
+  document.documentElement.classList.toggle('nav-hidden', on);
+  try { window.localStorage.setItem(NAV_KEY, on ? 'hidden' : 'shown'); } catch (e) { /* per-viewer convenience only */ }
+  updateNavBtn();
 }
 
 /* ---------- Language ---------- */
@@ -276,7 +300,13 @@ function boot() {
   setupLogos();
   setupSearch();
   applyChrome();
-  $('#navToggle').addEventListener('click', () => { if ($('#sidebar').classList.contains('open')) closeNav(); else openNav(); });
+  try { if (window.localStorage.getItem(NAV_KEY) === 'hidden') document.documentElement.classList.add('nav-hidden'); } catch (e) { /* ignore */ }
+  updateNavBtn();
+  window.matchMedia('(min-width: 1081px)').addEventListener('change', () => { closeNav(); updateNavBtn(); });
+  $('#navToggle').addEventListener('click', () => {
+    if (wideScreen()) { setNavHidden(!document.documentElement.classList.contains('nav-hidden')); return; }
+    if ($('#sidebar').classList.contains('open')) closeNav(); else openNav();
+  });
   $('#scrim').addEventListener('click', closeNav);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#sidebar').classList.contains('open')) { closeNav(); $('#navToggle').focus(); } });
   $('#sidebar').addEventListener('click', e => { if (e.target.closest('a')) closeNav(); });

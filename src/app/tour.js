@@ -113,14 +113,6 @@ function bindBeforeAfter(root) {
 function viewTour(main, params) {
   if (params[0]) return TOUR_PART[params[0]] ? viewTourPart(main, params[0]) : viewNotFound(main);
   const done = tourDone();
-  const BENEFITS = [
-    ['layers', '#7b68ee', tx('كل العمل في مكان واحد', 'All work in one place'), tx('المهام والمستندات والنقاش ولوحات المعلومات معاً، بدلاً من عشر أدوات.', 'Tasks, docs, conversations and dashboards together, instead of ten different tools.')],
-    ['user', '#e44bb6', tx('من يفعل ماذا ومتى', 'Who does what, by when'), tx('لكل مهمة مسؤول وموعد واضحان يراهما الجميع.', 'Every task has a clear owner and date that everyone can see.')],
-    ['eye', '#1fb6e0', tx('التقدّم بلمحة', 'Progress at a glance'), tx('طرق العرض ولوحات المعلومات تُظهر أين وصل العمل دون اجتماعات متابعة.', 'Views and dashboards show where work stands without status meetings.')],
-    ['message', '#22c38e', tx('بريد أقل، وضوح أكثر', 'Less email, more clarity'), tx('النقاش يحدث على المهمة نفسها، فلا يضيع قرار في صندوق البريد.', 'Conversations happen on the task itself, so no decision gets lost in an inbox.')],
-    ['zap', '#f5a524', tx('الروتين يعمل وحده', 'The routine runs itself'), tx('الأتمتة تتولى الخطوات المتكررة مثل التعيين وتغيير الحالة.', 'Automations take care of repeated steps such as assigning and changing status.')],
-    ['mobile', '#ff4d6d', tx('في كل مكان', 'Everywhere you are'), tx('في المتصفح وعلى سطح المكتب والجوال، والعمل نفسه في كل مكان.', 'In the browser, on desktop and on mobile, with the same work everywhere.')]
-  ];
   main.innerHTML = '<div class="page">' +
     '<section class="hero-x tour-hero" aria-labelledby="tourTitle"><div class="hero-art" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="grid-lines"></span></div><div>' +
     '<span class="hero-kicker">' + icon('compass', 'icon-sm') + tx('جولة ClickUp · 12 جزءاً · خطوة بخطوة', 'ClickUp tour · 12 parts · step by step') + '</span>' +
@@ -131,10 +123,6 @@ function viewTour(main, params) {
     '<p class="tour-count">' + ring(Math.round(done / 12 * 100), { size: 40, stroke: 5, color: '#ffc800', track: 'rgb(255 255 255 / .18)' }) + '<span class="num">' + tx(done + ' من 12 جزءاً مكتشفاً', done + ' of 12 parts explored') + '</span></p></div>' +
     '<div class="icon-cloud" aria-hidden="true">' + TOUR_PARTS.map((p, i) => '<span class="ic-float" style="' + modStyle(p.mod) + ';--i:' + i + '">' + icon(p.icon) + '</span>').join('') + '</div></section>' +
 
-    '<section class="section" aria-labelledby="whyT"><div class="section-head"><h2 id="whyT">' + tx('لماذا تحب الفرق ClickUp؟', 'Why do teams love ClickUp?') + '</h2><p>' + tx('اضغط «مع ClickUp» وشاهد العمل المتفرّق يتحول إلى مهمة واحدة واضحة.', 'Press “With ClickUp” and watch scattered work turn into one clear task.') + '</p></div>' +
-    '<div class="why-wrap"><div class="panel" data-rv>' + beforeAfter() + '</div><div class="why-grid">' +
-    BENEFITS.map(b => '<div class="why-card" data-rv style="--tc:' + b[1] + '"><span class="ic-tile">' + icon(b[0]) + '</span><h3>' + b[2] + '</h3><p>' + b[3] + '</p></div>').join('') + '</div></div></section>' +
-
     '<section class="section" aria-labelledby="mapT"><div class="section-head"><h2 id="mapT">' + tx('استكشف الشاشة', 'Explore the screen') + '</h2><p>' + tx('هذه شاشة ClickUp مبسّطة. اضغط أي رقم لتعرف ما هذا الجزء، أو شغّل الجولة لتتنقل بينها تلقائياً.', 'This is a simplified ClickUp screen. Press any number to learn what that part is, or play the tour to move through them automatically.') + '</p></div>' +
     '<div class="panel map-panel" data-rv><div class="map-bar"><button type="button" class="btn btn-primary btn-sm" data-am-play>' + icon('play', 'icon-sm') + '<span>' + tx('شغّل الجولة', 'Play the tour') + '</span></button><span class="chip chip-sim">' + icon('eye', 'icon-sm') + tx('محاكاة تعليمية مبسّطة', 'Simplified educational simulation') + '</span></div>' +
     appMap() + '<div class="am-tip" data-am-tip aria-live="polite"></div></div></section>' +
@@ -142,7 +130,7 @@ function viewTour(main, params) {
     '<section class="section" aria-labelledby="partsT"><div class="section-head"><h2 id="partsT">' + tx('أجزاء ClickUp الاثنا عشر', 'The 12 parts of ClickUp') + '</h2><p>' + tx('كل جزء في أربع خطوات قصيرة: تعرّف، ولماذا، وكيف، وتحقّق.', 'Each part in four short steps: meet it, why, how, and check.') + '</p></div><div class="tour-grid">' +
     TOUR_PARTS.map((p, i) => '<a class="tour-card' + (Store.isToured(p.id) ? ' seen' : '') + '" data-rv href="#/tour/' + p.id + '" style="' + modStyle(p.mod) + '"><span class="tc-top"><span class="ic-tile">' + icon(p.icon) + '</span><span class="tc-n num">' + (i + 1) + '</span>' + (Store.isToured(p.id) ? '<span class="tc-seen">' + icon('check', 'icon-sm') + '<span class="visually-hidden">' + tx('مكتشف', 'Explored') + '</span></span>' : '') + '</span><strong>' + tp(p.name) + '</strong><p>' + tp(p.one) + '</p><span class="tc-go">' + tx('ابدأ هذا الجزء', 'Start this part') + icon('fwd', 'icon-sm') + '</span></a>').join('') + '</div></section>' +
 
-    '<section class="cta-band" data-rv><div><h2>' + tx('لديك سؤال عن ClickUp؟', 'Got a question about ClickUp?') + '</h2><p>' + tx('جمعنا أكثر الأسئلة شيوعاً مع إجابات قصيرة وواضحة، وكل إجابة تأخذك إلى الجزء الذي يشرحها.', 'We gathered the most common questions with short, clear answers, and each answer takes you to the part that shows it.') + '</p></div><a class="btn btn-lg" href="#/questions">' + icon('message') + tx('الأسئلة الشائعة', 'Common questions') + '</a></section>' +
+    '<p class="h-center tour-more">' + icon('message', 'icon-sm') + tx('لديك سؤال؟ ', 'Got a question? ') + '<a href="#/questions">' + tx('اقرأ الأسئلة الشائعة', 'Read the common questions') + '</a></p>' +
     '</div>';
 
   // Map interactions
@@ -172,8 +160,7 @@ function viewTour(main, params) {
     const id = pn ? pn.dataset.pin : reg ? reg.dataset.part : null;
     if (id) { stop(); showTip(id); }
   });
-  const offBA = bindBeforeAfter(main);
-  return () => { stop(); stopFit(); offBA(); };
+  return () => { stop(); stopFit(); };
 }
 
 /* ---------- One part of the tour, in four steps ---------- */
@@ -185,8 +172,8 @@ function viewTourPart(main, id) {
   let step = UIState.get(key) || 0, player = null, stopFit = () => {};
   main.innerHTML = '<div class="page tour-part" style="' + modStyle(p.mod) + '">' +
     '<header class="lesson-hero"><span class="lh-art" aria-hidden="true">' + icon(p.icon) + '</span><div class="breadcrumbs"><a href="#/tour">' + tx('جولة ClickUp', 'ClickUp tour') + '</a><span aria-hidden="true">/</span><span class="num">' + tx('الجزء ' + n + ' من 12', 'Part ' + n + ' of 12') + '</span></div>' +
-    '<h1 id="tpTitle" tabindex="-1">' + tp(p.name) + '</h1><div class="lh-progress" data-tp-prog></div></header>' +
-    '<nav class="tour-chips" aria-label="' + tx('أجزاء الجولة', 'Tour parts') + '">' + TOUR_PARTS.map((x, i) => '<a href="#/tour/' + x.id + '" style="' + modStyle(x.mod) + '"' + (x.id === id ? ' aria-current="page"' : '') + ' class="' + (Store.isToured(x.id) ? 'seen' : '') + '"><span class="num">' + (i + 1) + '</span>' + icon(x.icon, 'icon-sm') + '<span class="tcl">' + tp(TOUR_SHORT[x.id]) + '</span></a>').join('') + '</nav>' +
+    '<h1 id="tpTitle" tabindex="-1">' + tp(p.name) + '</h1><div class="lh-progress" data-tp-prog></div>' +
+    '<nav class="tp-dots" aria-label="' + tx('أجزاء الجولة', 'Tour parts') + '">' + TOUR_PARTS.map((x, i) => '<a href="#/tour/' + x.id + '"' + (x.id === id ? ' aria-current="page"' : '') + (Store.isToured(x.id) ? ' class="seen"' : '') + ' aria-label="' + tx('الجزء ', 'Part ') + (i + 1) + ': ' + esc(tp(TOUR_SHORT[x.id])) + '" title="' + esc(tp(TOUR_SHORT[x.id])) + '"><span class="num">' + (i + 1) + '</span></a>').join('') + '</nav></header>' +
     '<div class="tour-steps" role="group" aria-label="' + tx('خطوات هذا الجزء', 'Steps in this part') + '">' + STEPS.map((s, i) => '<button type="button" data-tstep="' + i + '"><span class="ts-n num">' + (i + 1) + '</span>' + icon(s[0], 'icon-sm') + '<span>' + s[1] + '</span></button>').join('') + '</div>' +
     '<section class="panel tour-panel" data-tp aria-live="polite"></section>' +
     '<nav class="tour-nav" aria-label="' + tx('التنقل بين الخطوات', 'Step navigation') + '"><button type="button" class="btn btn-secondary" data-tgo="-1">' + icon('back', 'icon-sm') + '<span></span></button><button type="button" class="btn btn-primary" data-tgo="1"><span></span>' + icon('fwd', 'icon-sm') + '</button></nav></div>';
@@ -224,7 +211,7 @@ function viewTourPart(main, id) {
         const all = tourDone() === 12;
         toast(all ? tx('رائع! اكتشفت أجزاء ClickUp الاثني عشر كلها', 'Amazing! You explored all 12 parts of ClickUp') : tx('اكتشفت جزء «' + tp(TOUR_SHORT[id]) + '»', 'You explored “' + tp(TOUR_SHORT[id]) + '”'));
         if (all) Motion.confetti(null, 120);
-        const chip = main.querySelector('.tour-chips [aria-current]'); if (chip) chip.classList.add('seen');
+        const chip = main.querySelector('.tp-dots [aria-current]'); if (chip) chip.classList.add('seen');
         $$('[data-tstep]', main)[3].classList.add('done');
       }
     }
@@ -240,7 +227,6 @@ function viewTourPart(main, id) {
     const h = $('h2', panel); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
   };
   paint(0);
-  const cur = $('.tour-chips [aria-current]', main); if (cur && cur.scrollIntoView) { const nav = cur.parentElement; nav.scrollLeft = 0; const r = cur.offsetLeft - nav.clientWidth / 2 + cur.clientWidth / 2; nav.scrollLeft = isRTL() ? r - nav.scrollWidth + nav.clientWidth : r; }
   main.addEventListener('click', e => {
     const s = e.target.closest('[data-tstep]'); if (s) { const to = +s.dataset.tstep; if (to !== step) { const d = to > step ? 1 : -1; step = to; paint(d); } return; }
     const g = e.target.closest('[data-tgo]'); if (g) go(+g.dataset.tgo);

@@ -35,7 +35,8 @@ const routes = ['home','library','lab','studio','assess','assess/final','assess/
         await p.$$eval('[data-tstep]', x => x[3].click()); await p.waitForTimeout(60);
         await p.$$eval('details', ds => ds.forEach(d => d.open = true));
       }
-      if (r === 'tour') { for (const pin of ['start', 'fields', 'power']) { await p.$eval('[data-pin="' + pin + '"]', b => b.click()); await p.waitForTimeout(40); } await p.$eval('[data-ba-set="after"]', b => b.click()); }
+      if (r === 'tour') { for (const pin of ['start', 'fields', 'power']) { await p.$eval('[data-pin="' + pin + '"]', b => b.click()); await p.waitForTimeout(40); } }
+      if (r === 'home') { await p.$eval('[data-ba-set="after"]', b => b.click()); await p.$$eval('details', ds => ds.forEach(d => d.open = true)); }
       if (r === 'questions') await p.$$eval('details', ds => ds.forEach(d => d.open = true));
       await scan(p, r, lang, issues);
     }

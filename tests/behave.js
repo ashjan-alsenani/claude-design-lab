@@ -16,7 +16,7 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   ok(await p.evaluate(() => localStorage.getItem('omantel-clickup-hub:lang') === 'en'), 'choice saved locally');
   await p.reload(); await p.waitForTimeout(300);
   ok(!(await p.isVisible('#langGate')) && (await p.evaluate(() => document.documentElement.dir)) === 'ltr', 'reload keeps English, no screen');
-  ok((await p.textContent('#main h1')).includes('Learn ClickUp'), 'home in English');
+  ok((await p.textContent('#main h1')).includes('Discover ClickUp'), 'home in English');
   ok(await p.isVisible('.lang-switch'), 'header switcher visible');
 
   // 2. State preservation mid-lesson
@@ -103,6 +103,13 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   await p.evaluate(() => { location.hash = '#/questions'; }); await p.waitForTimeout(300);
   await p.fill('#cuqQ', 'dashboard'); await p.waitForTimeout(300);
   ok((await p.$$('details.cuq')).length >= 2, 'questions search finds matches');
+  // 4c. Focus mode: hide the sidebar, remembered after reload
+  await p.click('#navToggle'); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => document.documentElement.classList.contains('nav-hidden')) && !(await p.isVisible('#sidebar .nav-link')), 'menu hidden for focus');
+  await p.reload(); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => document.documentElement.classList.contains('nav-hidden')), 'hidden menu remembered');
+  await p.click('#navToggle'); await p.waitForTimeout(400);
+  ok(await p.isVisible('#sidebar .nav-link'), 'menu shown again');
   await ctx.close();
 
   // 5. Storage blocked

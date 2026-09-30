@@ -84,3 +84,11 @@ The platform now leads with explaining ClickUp itself, before practice:
 - **`#/tour/<part>`**: each part is taught in four steps (Meet it, Why you'll love it, How to use it, Check & questions). Step 1 spotlights the part on the screen map, step 2 shows three benefits, step 3 pairs numbered instructions with the module's animated walkthrough, step 4 has a quick check, the part's common questions and links to the full lessons. Reaching step 4 marks the part explored (saved locally; a 12/12 "ClickUp explorer" badge and confetti).
 - **`#/questions`**: about 30 of the most asked ClickUp questions, searchable and filterable by part, each with a "Show me how" link into the tour.
 - Content lives in `src/content/tour.js` as [Arabic, English] pairs; views in `src/app/tour.js`; styles in `src/tour.css`. Home, the sidebar and global search all link into the tour. All motion is skipped under reduced motion.
+
+## Calmer structure, new home, focus mode
+
+- **Home** is now one message and one piece of living art: a ClickUp-style board where a task card moves TO DO → IN PROGRESS → COMPLETE, a task card with a filling progress bar, a spinning progress donut, a comment bubble, a ringing bell and a check that pops, all drifting gently with the pointer (fine pointers only). Below it, only four airy, centred sections: three ways to learn (tour, lessons, lab), the before/after "why ClickUp" scene, the 12 tour parts as colourful bubbles, and three common questions.
+- **Sidebar** shows five main items (Home, ClickUp tour, Lessons, Practice Lab, Common questions); everything else sits under "More", and the 12 modules fold away until you are in the lessons.
+- **Focus mode**: the button at the start of the header hides the sidebar on wide screens (remembered on this device); on phones it opens the menu as before. With the sidebar visible on medium screens, a lesson's module list folds into a single row at the top.
+- **Tour parts** lost the crowded chip row: the 12 parts are small numbered dots inside the coloured header, and the four steps are a simple numbered stepper.
+- Styles: `src/home.css` (loaded last); home view: `src/app/home.js`.

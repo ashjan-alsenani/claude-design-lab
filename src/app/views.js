@@ -39,103 +39,36 @@ function renderSidebar(route) {
   const NAV_C = { compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
   const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '><span class="ic-tile" style="--tc:' + NAV_C[ic] + '">' + icon(ic) + '</span><span>' + label + '</span>' + (extra || '') + '</a></li>';
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
+  const inLesson = cur === 'lesson' || cur === 'library';
   nav.innerHTML =
-    '<div><p class="nav-group-title">' + tx('المنصة', 'Platform') + '</p><ul class="nav-list">' +
+    '<div><p class="nav-group-title">' + tx('ابدأ هنا', 'Start here') + '</p><ul class="nav-list nav-main">' +
     item('#/home', 'home', tx('الرئيسية', 'Home'), cur === 'home') +
     item('#/tour', 'compass', tx('جولة ClickUp', 'ClickUp tour'), cur === 'tour', '<span class="count num">' + tourDone() + '/12</span>') +
-    item('#/questions', 'message', tx('الأسئلة الشائعة', 'Common questions'), cur === 'questions') +
-    item('#/library', 'book', tx('مكتبة الدروس', 'Learning Library'), cur === 'library', '<span class="count num">' + LESSONS.length + '</span>') +
+    item('#/library', 'book', tx('الدروس', 'Lessons'), cur === 'library' || (cur === 'lesson' && !last), '<span class="count num">' + done + '/' + LESSONS.length + '</span>') +
     (last ? item(lessonLink(last), 'play', tx('متابعة الدرس', 'Continue lesson'), cur === 'lesson') : '') +
     item('#/lab', 'flask', tx('مختبر التطبيق', 'Practice Lab'), cur === 'lab') +
-    item('#/studio', 'chart', tx('استوديو لوحات المعلومات', 'Dashboard Studio'), cur === 'studio') +
+    item('#/questions', 'message', tx('الأسئلة الشائعة', 'Common questions'), cur === 'questions') +
+    '</ul></div>' +
+    '<details class="nav-more"' + (['studio', 'assess', 'progress', 'help', 'about'].includes(cur) || UIState.get('nav-more') ? ' open' : '') + '><summary class="nav-group-title">' + tx('المزيد', 'More') + icon('chev-down', 'icon-sm') + '</summary><ul class="nav-list">' +
+    item('#/progress', 'progress', tx('تقدّمي', 'My Progress'), cur === 'progress') +
     item('#/assess', 'assess', tx('التقييمات', 'Assessments'), cur === 'assess') +
-    item('#/progress', 'progress', tx('تقدّمي', 'My Progress'), cur === 'progress', '<span class="count num">' + done + '/' + LESSONS.length + '</span>') +
+    item('#/studio', 'chart', tx('استوديو لوحات المعلومات', 'Dashboard Studio'), cur === 'studio') +
     item('#/help', 'help', tx('المصطلحات والمساعدة', 'Glossary & Help'), cur === 'help') +
     item('#/about', 'info', tx('حول المنصة', 'About'), cur === 'about') +
-    '</ul></div>' +
-    '<div><p class="nav-group-title">' + tx('الوحدات', 'Modules') + '</p><ul class="nav-list">' + MODULES.map(m => {
+    '</ul></details>' +
+    '<details class="nav-more"' + (inLesson ? ' open' : '') + '><summary class="nav-group-title">' + tx('الوحدات الاثنتا عشرة', 'The 12 modules') + icon('chev-down', 'icon-sm') + '</summary><ul class="nav-list">' + MODULES.map(m => {
       const p = moduleProgress(m.id);
       const target = m.lessons.find(id => !Store.isDone(id)) || m.lessons[0];
       const active = cur === 'lesson' && route.params[0] && LESSON[route.params[0]] && LESSON[route.params[0]].module === m.id;
       return '<li><a class="nav-link" style="' + modStyle(m.id) + '" href="' + lessonLink(target) + '"' + (active ? ' aria-current="page"' : '') + '><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><span>' + t(m.title) + '</span>' +
         (p.done === p.total ? '<span class="mini-check" aria-label="' + tx('مكتملة', 'Completed') + '">' + icon('check', 'icon-sm') + '</span>' : '<span class="count num">' + p.done + '/' + p.total + '</span>') + '</a></li>';
-    }).join('') + '</ul></div>' +
+    }).join('') + '</ul></details>' +
     '<div class="sidebar-foot"><p>' + (Store.ok ? tx('يُحفظ تقدّمك على هذا المتصفح وهذا الجهاز فقط.', 'Your progress is saved on this browser and this device only.') : tx('التخزين المحلي غير متاح: التقدّم لهذه الجلسة فقط.', 'Local storage is unavailable: progress lasts for this session only.')) + '</p><p class="credit" lang="en" dir="ltr">' + CREDIT + '</p></div>';
 }
 function renderTopProgress() {
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
   $('#topProgress').innerHTML = '<span class="num tp-long">' + tx(done + ' من ' + LESSONS.length + ' درساً', done + ' of ' + LESSONS.length + ' lessons') + '</span><span class="num tp-short">' + done + '/' + LESSONS.length + '</span><span class="meter" aria-hidden="true"><i style="width:' + (done / LESSONS.length * 100) + '%"></i></span>';
   $('#topProgress').setAttribute('aria-label', tx('تقدّمي: ' + done + ' من ' + LESSONS.length + ' درساً مكتملاً', 'My progress: ' + done + ' of ' + LESSONS.length + ' lessons completed'));
-}
-
-/* ---------- Home ---------- */
-function viewHome(main) {
-  const next = nextLessonId();
-  const last = Store.state.last && LESSON[Store.state.last.lesson] ? LESSON[Store.state.last.lesson] : null;
-  const anyProgress = LESSONS.some(l => lessonStatusKey(l.id) !== 'todo');
-  const previews = ['l3-2', 'l4-2', 'l9-1', 'l11-2'].map(id => LESSON[id]);
-  const done = LESSONS.filter(l => Store.isDone(l.id)).length;
-  const pct = Math.round(done / LESSONS.length * 100);
-  const qCount = LESSONS.reduce((a, l) => a + (l.check || []).length, 0) + Object.values(QUIZZES).reduce((a, q) => a + q.length, 0);
-  const PATH_G = { p1: 'linear-gradient(125deg,#ff02f0,#ff7a45 70%,#ffb13d)', p2: 'linear-gradient(125deg,#8930fd,#4f86f7 60%,#49ccf9)', p3: 'linear-gradient(125deg,#5b45d6,#a855f7 50%,#ec4899)' };
-  const STEP_C = [STAGE_COLORS.watch, STAGE_COLORS.understand, STAGE_COLORS.practice, STAGE_COLORS.check];
-  const tile = (ic, c, n, lbl, suf) => '<div class="stat-tile" data-rv style="--tc:' + c + '"><span class="ic-tile">' + icon(ic) + '</span><span class="big">' + countEl(n, suf) + '</span><span class="lbl">' + lbl + '</span></div>';
-  main.innerHTML = '<div class="page">' +
-    '<section class="hero-x" aria-labelledby="homeTitle"><div class="hero-art" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="grid-lines"></span></div><div>' +
-    '<span class="hero-kicker">' + icon('sparkle', 'icon-sm') + tx('منصة تعلّم تفاعلية لموظفي Omantel', 'Interactive learning for Omantel teams') + '</span>' +
-    '<h1 id="homeTitle">' + tx('تعلّم <span class="grad-text">ClickUp</span> بالممارسة، خطوة بخطوة', 'Learn <span class="grad-text">ClickUp</span> by doing, one step at a time') + '</h1>' +
-    '<p class="lead">' + tx('من أول مهمة إلى سير عمل متكامل: دروس قصيرة بالعربية، وعروض متحركة، ومساحة تدريب تشبه ClickUp، لتنجز عملك اليومي بثقة.', 'From your first task to a complete workflow: short lessons, animated walkthroughs and a ClickUp-style practice space, so you can handle your daily work with confidence.') + '</p>' +
-    '<div class="hero-actions"><a class="btn btn-primary btn-lg" href="#/tour">' + icon('compass') + tx('ابدأ جولة ClickUp', 'Take the ClickUp tour') + '</a>' +
-    '<a class="btn btn-secondary btn-lg" href="' + lessonLink(anyProgress && next ? next : 'l1-1') + '">' + icon('play') + (anyProgress ? tx('تابع التعلّم', 'Continue learning') : tx('ابدأ الدروس', 'Start the lessons')) + '</a></div>' +
-    (last && !Store.isDone(last.id) ? '<a class="resume-card" href="' + lessonLink(last.id) + '">' + icon('replay') + '<span><small>' + tx('آخر درس فتحته', 'Last lesson you opened') + '</small>' + t(last.title) + '</span><span style="margin-inline-start:auto">' + icon('fwd') + '</span></a>' : '') +
-    '</div><div class="hero-demo"><div data-home-demo></div></div></section>' +
-
-    '<section class="section" aria-label="' + tx('لمحة سريعة', 'At a glance') + '"><div class="stats-bento">' +
-    '<a class="panel me-card" data-rv href="' + (next ? lessonLink(next) : '#/progress') + '">' + ring(pct, { size: 96, stroke: 10, label: '<b class="num">' + countEl(pct, '%') + '</b><small>' + tx('مكتمل', 'done') + '</small>' }) +
-    '<div><h2>' + (done ? tx('تقدّمك حتى الآن', 'Your progress so far') : tx('رحلتك تبدأ هنا', 'Your journey starts here')) + '</h2><p class="num">' + tx(done + ' من ' + LESSONS.length + ' درساً مكتملاً', done + ' of ' + LESSONS.length + ' lessons completed') + '</p>' +
-    (next ? '<span class="next-chip">' + icon('fwd', 'icon-sm') + tx('التالي: ', 'Next: ') + t(LESSON[next].title) + '</span>' : '<span class="next-chip">' + icon('trophy', 'icon-sm') + tx('أكملت كل الدروس', 'All lessons completed') + '</span>') + '</div></a>' +
-    tile('module', '#7b68ee', MODULES.length, tx('وحدة تعليمية', 'Modules')) +
-    tile('book', '#e44bb6', LESSONS.length, tx('درساً تفاعلياً', 'Interactive lessons')) +
-    tile('assess', '#22c38e', qCount, tx('سؤالاً بشرح', 'Explained questions')) +
-    tile('flask', '#1fb6e0', CHALLENGES.length, tx('تحديات في المختبر', 'Lab challenges')) +
-    '</div></section>' +
-
-    '<section class="section" aria-labelledby="discT"><div class="section-head"><h2 id="discT">' + tx('اكتشف ClickUp في 12 جزءاً', 'Discover ClickUp in 12 parts') + '</h2><a class="btn btn-ghost" href="#/tour">' + tx('الجولة كاملة ', 'The full tour ') + icon('fwd', 'icon-sm') + '</a></div>' +
-    '<div class="disc-strip">' + TOUR_PARTS.map((p, i) => '<a class="disc-tile' + (Store.isToured(p.id) ? ' seen' : '') + '" data-rv href="#/tour/' + p.id + '" style="' + modStyle(p.mod) + '"><span class="ic-tile">' + icon(p.icon) + '</span><span class="num dt-n">' + (i + 1) + '</span><strong>' + tp(TOUR_SHORT[p.id]) + '</strong></a>').join('') +
-    '<a class="disc-tile disc-faq" data-rv href="#/questions"><span class="ic-tile">' + icon('message') + '</span><strong>' + tx('الأسئلة الشائعة', 'Common questions') + '</strong></a></div></section>' +
-
-    '<section class="section" aria-labelledby="loopT"><div class="section-head"><h2 id="loopT">' + tx('كل درس يسير في أربع خطوات', 'Every lesson follows four steps') + '</h2></div>' +
-    '<div class="journey">' + [
-      ['WATCH', 'play', tx('شاهد', 'Watch'), tx('عرض متحرك يُظهر المؤشر والنقر وتغيّر الحالة، مع شرح عربي لكل خطوة، وتحكم كامل في التشغيل.', 'An animated walkthrough shows the pointer, clicks and status changes, with a caption for every step and full playback control.')],
-      ['UNDERSTAND', 'bulb', tx('افهم', 'Understand'), tx('شرح مختصر أولاً، وتفاصيل أعمق عند الطلب، وخطأ شائع مع طريقة تجنّبه.', 'A short explanation first, deeper detail on request, and a common mistake with how to avoid it.')],
-      ['PRACTICE', 'flask', tx('تدرّب', 'Practice'), tx('نشاط تفاعلي يتحقق من إجابتك الفعلية، ثم مختبر يشبه مساحة عمل حقيقية.', 'An interactive activity that checks what you actually did, then a lab that feels like a real workspace.')],
-      ['CHECK', 'assess', tx('تحقّق', 'Check'), tx('أسئلة قصيرة بشرح لكل إجابة، واختبارات للوحدات، وتحدٍّ عملي شامل.', 'Short questions with an explanation for every answer, module quizzes and an end-to-end practical challenge.')]
-    ].map((s, i) => '<div class="j-step" data-rv style="--sc:' + STEP_C[i] + '"><span class="j-node">' + icon(s[1]) + '</span><span class="loop-en">' + (isEN() ? 'STEP ' + (i + 1) : s[0]) + '</span><h3>' + s[2] + '</h3><p>' + s[3] + '</p></div>').join('') + '</div></section>' +
-
-    '<section class="section" aria-labelledby="pathT"><div class="section-head"><h2 id="pathT">' + tx('مسارات التعلّم', 'Learning paths') + '</h2><p>' + tx('اختر المسار الأقرب لعملك، أو اتبع الوحدات بالترتيب.', 'Pick the path closest to your work, or follow the modules in order.') + '</p></div><div class="path-grid">' +
-    PATHWAYS.map(p => {
-      const ls = p.modules.flatMap(m => MODULE[m].lessons); const d = ls.filter(id => Store.isDone(id)).length;
-      return '<div class="panel path-card" data-rv><div class="path-top" style="--pg:' + PATH_G[p.id] + '"><h3><span class="ic-tile">' + icon(p.icon) + '</span>' + t(p.title) + '</h3><p>' + t(p.who) + '</p></div><div class="path-body"><p class="small">' + t(p.goal) + '</p>' +
-        '<ol>' + p.modules.map(m => '<li><a href="' + lessonLink(MODULE[m].lessons[0]) + '" style="' + modStyle(m) + '"><span class="space-avatar ' + stAvatar(moduleProgress(m)) + '">' + MODULE[m].n + '</span>' + t(MODULE[m].title) + '</a></li>').join('') + '</ol>' +
-        '<div class="path-foot">' + ring(Math.round(d / ls.length * 100), { size: 34, stroke: 5 }) + '<span class="small muted num">' + tx(d + ' من ' + ls.length + ' دروس مكتملة', d + ' of ' + ls.length + ' lessons completed') + '</span></div></div></div>';
-    }).join('') + '</div></section>' +
-
-    '<section class="section" aria-labelledby="mapT"><div class="section-head"><h2 id="mapT">' + tx('خريطة المنهج', 'Curriculum map') + '</h2><p>' + tx('12 وحدة من المستوى المبتدئ إلى المتقدم. لكل وحدة لونها، مثل Spaces في ClickUp.', '12 modules, from beginner to advanced. Each module has its own colour, like Spaces in ClickUp.') + '</p></div>' +
-    '<div class="mod-grid">' + ['beginner', 'intermediate', 'advanced'].map(lv =>
-      '<p class="mod-level">' + icon(lv === 'beginner' ? 'compass' : lv === 'intermediate' ? 'layers' : 'rocket', 'icon-sm') + LEVELS[lv].name + (isEN() ? '' : ' <bdi dir="ltr" class="muted">' + LEVELS[lv].en + '</bdi>') + '</p><div class="mod-row">' +
-      MODULES.filter(m => m.level === lv).map(m => { const p = moduleProgress(m.id);
-        return '<a class="mod-tile" data-rv style="' + modStyle(m.id) + '" href="' + lessonLink(m.lessons.find(id => !Store.isDone(id)) || m.lessons[0]) + '"><span class="mt-top"><span class="ic-tile">' + icon(m.icon) + '</span>' + ring(Math.round(p.done / p.total * 100), { size: 34, stroke: 5, color: MODULE_COLORS[m.id].c }) + '</span>' +
-          '<span class="mt-n">' + moduleLabel(m.n) + (isEN() ? '' : ' · <bdi dir="ltr">' + m.en + '</bdi>') + '</span><strong>' + t(m.title) + '</strong><p>' + t(m.desc) + '</p><span class="mt-foot num">' + icon('book', 'icon-sm') + tx(p.done + ' من ' + p.total + ' دروس', p.done + ' of ' + p.total + ' lessons') + '</span></a>'; }).join('') + '</div>').join('') +
-    '</div></section>' +
-
-    '<section class="section" aria-labelledby="prevT"><div class="section-head"><h2 id="prevT">' + tx('من داخل الدروس', 'Inside the lessons') + '</h2><a class="btn btn-ghost" href="#/library">' + tx('كل الدروس ', 'All lessons ') + icon('fwd', 'icon-sm') + '</a></div><div class="preview-list">' +
-    previews.map(l => '<a class="panel lesson-preview" data-rv style="' + modStyle(l.module) + '" href="' + lessonLink(l.id) + '"><span class="meta"><span class="space-avatar">' + MODULE[l.module].n + '</span>' + levelChip(l.level) + timeChip(l.minutes) + '</span><h3>' + t(l.title) + '</h3><p class="obj">' + t(l.objective) + '</p><p class="scenario-quote">' + icon('users', 'icon-sm') + ' ' + t(l.scenario) + '</p></a>').join('') +
-    '</div></section>' +
-    '<p class="help-text">' + tx('الواجهات داخل المنصة محاكاة تعليمية مبسّطة، وليست تسجيلات من ClickUp. المنصة مستقلة وغير معتمدة أو مدعومة من ClickUp.', 'Screens inside the platform are simplified educational simulations, not recordings of ClickUp. The platform is independent and is not certified or endorsed by ClickUp.') + ' <a href="#/about">' + tx('اعرف المزيد', 'Learn more') + '</a></p>' +
-    '</div>';
-  const demoEl = $('[data-home-demo]', main);
-  const player = new DemoPlayer(demoEl, HOME_DEMO, { autoplay: true, key: 'demo-home' });
-  return () => player.destroy();
 }
 
 /* ---------- Library ---------- */
