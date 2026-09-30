@@ -20,7 +20,7 @@ const Clicky = (() => {
     ['boss', 'manager managers boss مدير مديري المدير لمديري للمدير'],
     ['checklist', 'checklist checklists تحقق'],
     ['import', 'import importing excel csv spreadsheet sheet xlsx استيراد استورد اكسل إكسل جدول ملف'],
-    ['export', 'export download exporting تصدير صدر تحميل حمل'],
+    ['export', 'export download exporting تصدير صدر اصدر أصدر تحميل حمل'],
     ['template', 'template templates reuse قالب قوالب'],
     ['auto', 'automation automations automate automatic automatically trigger action أتمتة اتمتة الأتمتة تلقائي تلقائيا تلقائياً'],
     ['ai', 'ai brain summarize summary summarise gpt ذكاء اصطناعي الذكاء لخص تلخيص ملخص'],
@@ -31,7 +31,7 @@ const Clicky = (() => {
     ['comment', 'comment comments mention mentions reply email @ تعليق تعليقات اشارة إشارة بريد رد'],
     ['struct', 'space spaces folder folders workspace hierarchy مساحة مساحات مجلد مجلدات هيكل'],
     ['search', 'search find lost locate بحث ابحث اعثر أجد اجد'],
-    ['mobile', 'mobile phone app iphone android site جوال هاتف تطبيق ميداني'],
+    ['mobile', 'mobile phone iphone android جوال الجوال هاتف ميداني'],
     ['form', 'form forms request requests intake نموذج نماذج طلب طلبات'],
     ['goal', 'goal goals target targets kpi objective هدف أهداف مستهدف مؤشر'],
     ['time', 'time timer track tracking estimate وقت الوقت مؤقت تتبع تقدير'],
@@ -48,13 +48,14 @@ const Clicky = (() => {
     return w;
   }
   function tokens(text) {
-    return String(text).toLowerCase().split(/[^\p{L}\p{N}@]+/u).filter(Boolean).filter(w => !STOP.has(w)).map(norm1).filter(w => w.length > 1).map(w => SYN_MAP[w] || w);
+    return String(text).toLowerCase().replace(/[\u064B-\u0652\u0640]/g, '').split(/[^\p{L}\p{N}@]+/u).filter(Boolean).filter(w => !STOP.has(w)).map(norm1).filter(w => w.length > 1).flatMap(w => SYN_MAP[w] && SYN_MAP[w] !== w ? [w, SYN_MAP[w]] : [w]);
   }
 
   /* ---- The knowledge Clicky answers from (built in the current language) ---- */
   function knowledge() {
     const K = [];
-    const add = (title, text, links, extra, w, def) => K.push({ title, text, links, w: w || 1, def: !!def, t: new Set(tokens(title + ' ' + (extra || ''))), b: new Set(tokens(text)) });
+    const add = (title, text, links, extra, w, def) => K.push({ title, text, links, w: w || 1, def: !!def, n: new Set(tokens(title)).size, t: new Set(tokens(title + ' ' + (extra || ''))), b: new Set(tokens(text)) });
+    CLICKY_KB.forEach(r => add(tp(r[2]), tp(r[3]), [r[5] ? ['fwd', tx('افتح', 'Open'), r[5]] : null, ['compass', tx('في الجولة', 'In the tour'), '#/tour/' + r[0]]].filter(Boolean), r[2][0] + ' ' + r[2][1] + ' ' + r[4], 1.2, /^(what|ما )/i.test(r[2][1]) || /^ما (هو|هي|هم)/.test(r[2][0])));
     CU_FAQ.forEach(f => add(tp(f.q), tp(f.a), [f.demo ? ['play', tx('شاهد الدرس', 'Watch the lesson'), '#/lesson/' + f.demo] : null, f.go ? ['robot', tx('جرّبها', 'Try it'), f.go] : null, ['compass', tx('في الجولة', 'In the tour'), '#/tour/' + f.part]].filter(Boolean), '', 1.35));
     TOUR_PARTS.forEach(p => add(tp(p.name), tp(p.one) + ' ' + tx('أين تجده: ', 'Where: ') + tp(p.where), [['compass', tx('افتح هذا الجزء', 'Open this part'), '#/tour/' + p.id], ['book', tx('الدرس', 'Lesson'), '#/lesson/' + p.lesson]], p.name[0] + ' ' + p.name[1] + ' ' + p.how.map(tp).join(' '), 1, true));
     WORKSHOPS().forEach(w => add(w.t, w.d, [['robot', tx('افتح الورشة', 'Open the workshop'), w.href]]));
@@ -69,12 +70,59 @@ const Clicky = (() => {
     ].forEach(x => add(x[0], x[1], [['fwd', tx('افتح', 'Open'), x[2]]], x[3]));
     return K;
   }
+  /* Knowledge is cached per language, with its vocabulary for typo repair. */
+  let cache = null;
+  function kb() {
+    if (cache && cache.lang === LANG) return cache;
+    const K = knowledge(), vocab = new Set();
+    K.forEach(k => { k.t.forEach(w => vocab.add(w)); k.b.forEach(w => vocab.add(w)); });
+    Object.keys(SYN_MAP).forEach(w => vocab.add(w));
+    return (cache = { lang: LANG, K, vocab: [...vocab] });
+  }
+  function dist(a, b, max) { // Levenshtein with an early exit
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+    for (let i = 1; i <= a.length; i++) {
+      const cur = [i]; let low = i;
+      for (let j = 1; j <= b.length; j++) { cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); low = Math.min(low, cur[j]); }
+      if (low > max) return max + 1; prev = cur;
+    }
+    return prev[b.length];
+  }
+  // Unknown words (typos like "notifcations" or "اتمتت") snap to the closest known word.
+  function repair(qt) {
+    const { vocab } = kb(), known = new Set(vocab);
+    return qt.flatMap(w => {
+      if (known.has(w) || w.length < 4) return [w];
+      const max = w.length > 7 ? 2 : 1; let best = w, bd = max + 1;
+      for (const v of vocab) { if (Math.abs(v.length - w.length) > max) continue; const d = dist(w, v, max); if (d < bd) { bd = d; best = v; if (d === 1 && max === 1) break; } }
+      if (best === w) return [w];
+      const fixed = [{ w: best, f: .6 }]; if (SYN_MAP[best] && SYN_MAP[best] !== best) fixed.push({ w: SYN_MAP[best], f: .6 });
+      return fixed;
+    });
+  }
+  function score(qt, q) {
+    const { K } = kb(); const whatIs = /^\s*(what\s+is|what\s+are|what's|whats|define|ما\s*هي|ما\s*هو|ماهي|ماهو|ما\s*معنى|ما\s*المقصود)/i.test(q);
+    const seen = new Set();
+    return K.map(k => { let s = 0; qt.forEach(x => { const w = x.w || x, f = x.f || 1; if (k.t.has(w)) s += 3 * f; else if (k.b.has(w)) s += f; }); return { k, s: k.w * (whatIs && k.def ? 1.8 : 1) * s / Math.sqrt(Math.min(k.t.size, k.n + 6) + 3) }; })
+      .filter(x => x.s > 0).sort((a, b) => b.s - a.s).filter(x => !seen.has(x.k.title) && seen.add(x.k.title));
+  }
+  const FOLLOW = /^\s*((and|also|what about|how about|and if|then|same)\b|(طيب|وماذا|وكيف|وإذا|واذا|وهل|وعلى|وفي|ومن|ماذا عن|نفس)(\s|$))/i;
+  let lastTopic = null; // tokens of the last answered question, for follow-ups
   function answer(q) {
-    const qt = tokens(q); if (!qt.length) return null;
-    const K = knowledge(); const whatIs = /^\s*(what\s+is|what\s+are|what's|whats|define|ما\s*هي|ما\s*هو|ماهي|ماهو|ما\s*معنى|ما\s*المقصود)/i.test(q);
-    const scored = K.map(k => { let s = 0; qt.forEach(w => { if (k.t.has(w)) s += 3; else if (k.b.has(w)) s += 1; }); return { k, s: k.w * (whatIs && k.def ? 1.8 : 1) * s / Math.sqrt(k.t.size + 3) }; }).filter(x => x.s > 0).sort((a, b) => b.s - a.s);
-    if (!scored.length || scored[0].s < 0.55) return null;
-    return { best: scored[0].k, more: scored.slice(1, 4).map(x => x.k).filter(k => k.title !== scored[0].k.title).slice(0, 2) };
+    let qt = repair(tokens(q)); if (!qt.length) return null;
+    let scored = score(qt, q);
+    // Follow-ups ("and in the app?", "وعلى الجوال؟") borrow the previous topic.
+    if (lastTopic && (FOLLOW.test(q) ? !scored.length || scored[0].s < 1.2 : qt.length <= 2 && scored.length && scored[0].s < .55)) {
+      const merged = score(qt.concat(lastTopic.map(w => ({ w, f: .35 }))), q);
+      if (merged.length && (!scored.length || merged[0].s > scored[0].s)) scored = merged;
+    }
+    if (!scored.length) return null;
+    if (scored[0].s < 0.55) return scored[0].s >= 0.2 ? { guess: scored.slice(0, 3).map(x => x.k) } : null;
+    // A weak tie means the question is vague: offer choices instead of guessing one.
+    if (scored[0].s < 1.5 && scored[1] && scored[1].s >= scored[0].s * .9) return { guess: scored.slice(0, 3).map(x => x.k) };
+    lastTopic = qt.filter(x => typeof x === 'string').slice(0, 8);
+    return { best: scored[0].k, more: scored.slice(1, 3).map(x => x.k), s: scored.slice(0, 3).map(x => +x.s.toFixed(2)) };
   }
   const SMALL = [
     [/^(hi|hello|hey|salam|hola|مرحبا|مرحباً|اهلا|أهلا|هلا|السلام|صباح|مساء)/i, () => tx('أهلاً! أنا Clicky. اسألني أي شيء عن ClickUp، مثل «كيف أكرر مهمة كل أحد؟».', 'Hi! I’m Clicky. Ask me anything about ClickUp, like “how do I repeat a task every Sunday?”.')],
@@ -96,6 +144,10 @@ const Clicky = (() => {
   function renderAnswer(el, res, q) {
     if (!res) {
       el.innerHTML = '<p>' + tx('لم أجد إجابة دقيقة لهذا السؤال بعد. جرّب كلمات أخرى، أو اسأل زملاءك وفريق الدعم:', 'I don’t have an exact answer for that yet. Try other words, or ask your colleagues and the support team:') + '</p><div class="cc-links"><a href="#/forum">' + icon('users', 'icon-sm') + tx('اسأل في المنتدى', 'Ask the forum') + '</a><a href="#/support">' + icon('send', 'icon-sm') + tx('اسأل الفريق', 'Ask the team') + '</a><a href="#/questions">' + icon('message', 'icon-sm') + tx('الأسئلة الشائعة', 'Common questions') + '</a></div>';
+      return;
+    }
+    if (res.guess) {
+      el.innerHTML = '<p>' + tx('لست متأكداً مما تقصد. هل تقصد أحد هذه؟', 'I’m not sure what you mean. Did you mean one of these?') + '</p><div class="cc-sugs in">' + res.guess.map(m => '<button type="button" data-cq>' + esc(m.title) + '</button>').join('') + '</div><div class="cc-links"><a href="#/forum">' + icon('users', 'icon-sm') + tx('اسأل في المنتدى', 'Ask the forum') + '</a><a href="#/support">' + icon('send', 'icon-sm') + tx('اسأل الفريق', 'Ask the team') + '</a></div>';
       return;
     }
     const b = res.best;
@@ -171,5 +223,5 @@ const Clicky = (() => {
       setTimeout(() => $('.cc-input input', root).focus(), 50);
     } else stopType();
   }
-  return { init: () => build(), relabel, open: () => toggle(true), ask: q => { toggle(true); ask(q); } };
+  return { init: () => build(), relabel, open: () => toggle(true), ask: q => { toggle(true); ask(q); }, debug: q => ({ tokens: repair(tokens(q)), res: answer(q) }) };
 })();

@@ -1,0 +1,866 @@
+[
+ {
+  "id": "kb-what",
+  "part": "start",
+  "q_ar": "ما هو ClickUp؟",
+  "q_en": "What is ClickUp?",
+  "a_ar": "ClickUp منصة عمل واحدة تجمع المهام والمستندات والمحادثات واللوحات والأهداف. تنظّم فيها عمل فريقك وتتابع من يفعل ماذا ومتى.",
+  "a_en": "ClickUp is one work platform for tasks, Docs, chat, dashboards and goals. Your team organizes its work there and sees who does what, and by when."
+ },
+ {
+  "id": "kb-login",
+  "part": "start",
+  "q_ar": "كيف أدخل إلى ClickUp؟",
+  "q_en": "How do I log in to ClickUp?",
+  "a_ar": "افتح app.clickup.com أو تطبيق الجوال وادخل ببريد العمل. إن كانت شركتك تستخدم الدخول الموحّد (SSO) فاختر «Continue with SSO». إن لم تصلك دعوة فاطلبها من مسؤول مساحة العمل.",
+  "a_en": "Open app.clickup.com or the mobile app and sign in with your work email. If your company uses single sign-on (SSO), choose the SSO option. No invite yet? Ask your Workspace admin."
+ },
+ {
+  "id": "kb-password",
+  "part": "start",
+  "q_ar": "نسيت كلمة المرور، ماذا أفعل؟",
+  "q_en": "I forgot my password. What do I do?",
+  "a_ar": "في صفحة الدخول اختر «Forgot password» وستصلك رسالة لإعادة التعيين. إن كان الدخول عبر SSO فكلمة المرور هي كلمة مرور الشركة، فتواصل مع دعم تقنية المعلومات.",
+  "a_en": "On the login page choose \"Forgot password\" and you get a reset email. If you sign in with SSO, it is your company password, so contact IT support."
+ },
+ {
+  "id": "kb-sidebar",
+  "part": "start",
+  "q_ar": "ما هو الشريط الجانبي في ClickUp؟",
+  "q_en": "What is the ClickUp sidebar?",
+  "a_ar": "الشريط الجانبي على اليسار يعرض مساحاتك ومجلداتك وقوائمك، ومعها الصفحة الرئيسية وصندوق الوارد والمستندات واللوحات. يمكنك تصغيره أو تثبيت ما تستخدمه كثيراً في المفضلة.",
+  "a_en": "The sidebar on the left shows your Spaces, Folders and Lists, plus Home, Inbox, Docs and Dashboards. You can collapse it and keep what you use often in Favorites."
+ },
+ {
+  "id": "kb-favorites",
+  "part": "start",
+  "q_ar": "كيف أضيف قائمة إلى المفضلة؟",
+  "q_en": "How do I add a List to Favorites?",
+  "a_ar": "مرّر المؤشر على القائمة أو المستند في الشريط الجانبي، افتح قائمة النقاط (…) واختر «Add to Favorites». تظهر في قسم المفضلة أعلى الشريط.",
+  "a_en": "Hover the List or Doc in the sidebar, open the ellipsis (…) menu and choose \"Add to Favorites\". It appears in the Favorites section at the top."
+ },
+ {
+  "id": "kb-home",
+  "part": "start",
+  "q_ar": "ما هي صفحة «مهامي» (Home)؟",
+  "q_en": "What is the My Tasks (Home) page?",
+  "a_ar": "صفحة «مهامي»، وكانت تُسمّى Home، تجمع المهام المسندة إليك والتذكيرات والتقويم في مكان واحد. ابدأ يومك منها.",
+  "a_en": "The My Tasks page, formerly called Home, gathers the tasks assigned to you, your reminders and your calendar in one place. Start your day there."
+ },
+ {
+  "id": "kb-inbox",
+  "part": "start",
+  "q_ar": "ما هو صندوق الوارد (Inbox)؟",
+  "q_en": "What is the Inbox?",
+  "a_ar": "صندوق الوارد يجمع الإشعارات: الإشارات إليك، والتعليقات، وتغييرات المهام التي تتابعها. علّم الإشعار كمقروء أو «Clear» عند الانتهاء منه.",
+  "a_en": "The Inbox collects your notifications: mentions, comments and changes on tasks you watch. Mark items as read or clear them when you are done."
+ },
+ {
+  "id": "kb-workspace-switch",
+  "part": "start",
+  "q_ar": "كيف أنتقل بين مساحات العمل؟",
+  "q_en": "How do I switch Workspaces?",
+  "a_ar": "اضغط على صورة حسابك أو اسم مساحة العمل في الزاوية العلوية واختر مساحة العمل الأخرى. معظم الموظفين يعملون في مساحة عمل واحدة للشركة.",
+  "a_en": "Click your avatar or the Workspace name in the top corner and pick the other Workspace. Most employees work in one company Workspace."
+ },
+ {
+  "id": "kb-profile",
+  "part": "start",
+  "q_ar": "كيف أغيّر صورتي أو اسمي؟",
+  "q_en": "How do I change my photo or name?",
+  "a_ar": "اضغط صورة حسابك ثم «Settings» أو «My Settings». من هناك غيّر الصورة والاسم والمنطقة الزمنية.",
+  "a_en": "Click your avatar, then Settings (My Settings). Change your photo, name and time zone there."
+ },
+ {
+  "id": "kb-timezone",
+  "part": "start",
+  "q_ar": "مواعيد المهام تظهر بتوقيت خاطئ",
+  "q_en": "Due times show in the wrong time zone",
+  "a_ar": "تأكد من المنطقة الزمنية في إعداداتك الشخصية (My Settings). اختر توقيت مسقط (GMT+4) لتظهر المواعيد صحيحة.",
+  "a_en": "Check the time zone in your personal settings (My Settings). Choose Muscat (GMT+4) so due times show correctly."
+ },
+ {
+  "id": "kb-dark",
+  "part": "start",
+  "q_ar": "هل يوجد وضع داكن؟",
+  "q_en": "Is there a dark mode?",
+  "a_ar": "نعم. من إعداداتك اختر المظهر (Theme) ثم الوضع الداكن أو التلقائي حسب جهازك.",
+  "a_en": "Yes. In your settings open the theme options and choose dark, or auto to follow your device."
+ },
+ {
+  "id": "kb-shortcuts",
+  "part": "start",
+  "q_ar": "ما هي اختصارات لوحة المفاتيح؟",
+  "q_en": "What keyboard shortcuts are there?",
+  "a_ar": "فعّل الاختصارات أولاً من إعداداتك (Preferences). أمثلة: Ctrl/Cmd+K للبحث السريع، T لمهمة جديدة، R لتذكير، M لإسناد المهمة لنفسك، Shift+S لتغيير الحالة. قد تختلف حسب الإصدار.",
+  "a_en": "Turn shortcuts on in your Preferences first. Examples: Ctrl/Cmd+K to search, T for a new task, R for a reminder, M to assign to yourself, Shift+S for status. They may vary by version."
+ },
+ {
+  "id": "kb-university",
+  "part": "start",
+  "q_ar": "أين أتعلّم ClickUp أكثر؟",
+  "q_en": "Where can I learn more ClickUp?",
+  "a_ar": "ابدأ بدروس هذه المنصة وورشها. وتوفّر ClickUp University دورات مجانية بالإنجليزية، ويوجد مركز المساعدة help.clickup.com لكل ميزة.",
+  "a_en": "Start with this hub’s lessons and workshops. ClickUp University also has free courses in English, and help.clickup.com explains every feature."
+ },
+ {
+  "id": "kb-hierarchy",
+  "part": "structure",
+  "q_ar": "ما الفرق بين المساحة والمجلد والقائمة؟",
+  "q_en": "What is the difference between a Space, Folder and List?",
+  "a_ar": "مساحة العمل هي الشركة. المساحة (Space) لقسم أو فريق. المجلد (Folder) لمشروع أو مجموعة. القائمة (List) تحمل المهام نفسها. والمهمة تحتوي مهام فرعية وقوائم تحقق.",
+  "a_en": "The Workspace is the company. A Space is for a department or team. A Folder groups a project. A List holds the tasks themselves. Tasks can hold subtasks and checklists."
+ },
+ {
+  "id": "kb-new-space",
+  "part": "structure",
+  "q_ar": "كيف أنشئ مساحة جديدة؟",
+  "q_en": "How do I create a new Space?",
+  "a_ar": "في الشريط الجانبي اضغط «+» بجانب المساحات أو «Create Space»، اختر الاسم واللون والأعضاء والـ ClickApps. قد يحتاج ذلك صلاحية مسؤول.",
+  "a_en": "In the sidebar click \"+\" next to Spaces (Create Space), set a name, color, members and ClickApps. This may need admin rights."
+ },
+ {
+  "id": "kb-new-list",
+  "part": "structure",
+  "q_ar": "كيف أنشئ قائمة جديدة؟",
+  "q_en": "How do I create a new List?",
+  "a_ar": "مرّر على المساحة أو المجلد واضغط «+» ثم «List». سمّها باسم واضح مثل «طلبات الصيانة 2026».",
+  "a_en": "Hover a Space or Folder, click \"+\" then \"List\". Give it a clear name like \"Maintenance requests 2026\"."
+ },
+ {
+  "id": "kb-move-list",
+  "part": "structure",
+  "q_ar": "كيف أنقل قائمة إلى مجلد آخر؟",
+  "q_en": "How do I move a List to another Folder?",
+  "a_ar": "اسحب القائمة في الشريط الجانبي إلى المجلد الجديد، أو افتح قائمة النقاط (…) واختر «Move».",
+  "a_en": "Drag the List in the sidebar to the new Folder, or open its ellipsis (…) menu and choose \"Move\"."
+ },
+ {
+  "id": "kb-archive",
+  "part": "structure",
+  "q_ar": "ما الفرق بين الأرشفة والحذف؟",
+  "q_en": "What is the difference between archive and delete?",
+  "a_ar": "الأرشفة تخفي القائمة أو المهمة مع بقاء كل شيء، ويمكن استعادتها في أي وقت. الحذف ينقلها إلى سلة المهملات لمدة 30 يوماً تقريباً ثم تُحذف نهائياً.",
+  "a_en": "Archiving hides a List or task but keeps everything, and you can restore it anytime. Deleting moves it to Trash for about 30 days, then it is gone for good."
+ },
+ {
+  "id": "kb-trash",
+  "part": "structure",
+  "q_ar": "حذفت مهمة بالخطأ، كيف أستعيدها؟",
+  "q_en": "I deleted a task by mistake. How do I get it back?",
+  "a_ar": "افتح سلة المهملات (Trash) من الشريط الجانبي أو الإعدادات، ابحث عن المهمة واضغط «Restore». العناصر تبقى هناك نحو 30 يوماً. التعليقات وسجلات الوقت المحذوفة لا تُستعاد.",
+  "a_en": "Open Trash from the sidebar or settings, find the task and click \"Restore\". Items stay there for about 30 days. Deleted comments and time entries cannot be restored."
+ },
+ {
+  "id": "kb-everything",
+  "part": "structure",
+  "q_ar": "كيف أرى كل المهام في كل المساحات؟",
+  "q_en": "How do I see every task across all Spaces?",
+  "a_ar": "استخدم عرض «Everything» في أعلى الشريط الجانبي. يعرض المهام من كل مكان، ثم صفِّها بالمسؤول أو الحالة أو التاريخ.",
+  "a_en": "Use the Everything view at the top of the sidebar. It shows tasks from everywhere; then filter by assignee, status or date."
+ },
+ {
+  "id": "kb-new-task",
+  "part": "tasks",
+  "q_ar": "كيف أنشئ مهمة؟",
+  "q_en": "How do I create a task?",
+  "a_ar": "داخل القائمة اضغط «+ Task» أو «Add Task»، اكتب الاسم واضغط Enter. أو اضغط زر «Create» / الاختصار T من أي مكان.",
+  "a_en": "Inside a List click \"+ Task\" (Add Task), type a name and press Enter. Or use the Create button, or the T shortcut, from anywhere."
+ },
+ {
+  "id": "kb-good-task",
+  "part": "tasks",
+  "q_ar": "كيف أكتب مهمة جيدة؟",
+  "q_en": "How do I write a good task?",
+  "a_ar": "ابدأ الاسم بفعل ونتيجة: «أرسل عرض السعر لمورد الألياف». أضف مسؤولاً واحداً، وتاريخ استحقاق، ووصفاً قصيراً بما هو «منتهٍ»، وأرفق الملفات.",
+  "a_en": "Start the name with a verb and a result: \"Send the quote to the fibre vendor\". Add one assignee, a due date, a short description of \"done\", and attach files."
+ },
+ {
+  "id": "kb-description",
+  "part": "tasks",
+  "q_ar": "كيف أضيف وصفاً أو مرفقاً لمهمة؟",
+  "q_en": "How do I add a description or attachment to a task?",
+  "a_ar": "افتح المهمة واكتب في حقل الوصف؛ يدعم العناوين والقوائم والجداول. للمرفقات اسحب الملف إلى المهمة أو استخدم «Attach».",
+  "a_en": "Open the task and type in the description; it supports headings, lists and tables. For attachments drag the file onto the task or use Attach."
+ },
+ {
+  "id": "kb-multi-assign",
+  "part": "tasks",
+  "q_ar": "هل يمكن إسناد مهمة لأكثر من شخص؟",
+  "q_en": "Can a task have more than one assignee?",
+  "a_ar": "نعم إن كانت ميزة «Multiple Assignees» مفعّلة في المساحة. لكن الأفضل مسؤول واحد واضح، والباقون متابعون (Watchers).",
+  "a_en": "Yes, if the Multiple Assignees ClickApp is on for the Space. Still, one clear owner is best; add others as watchers."
+ },
+ {
+  "id": "kb-watchers",
+  "part": "tasks",
+  "q_ar": "ما هم المتابعون (Watchers)؟",
+  "q_en": "What are watchers?",
+  "a_ar": "المتابع يتلقى إشعارات تحديثات المهمة دون أن يكون مسؤولاً عنها. أضف مديرك متابعاً ليرى التقدّم دون متابعة يدوية.",
+  "a_en": "A watcher gets notifications about a task without owning it. Add your manager as a watcher so they see progress without chasing you."
+ },
+ {
+  "id": "kb-multi-list",
+  "part": "tasks",
+  "q_ar": "هل يمكن وضع المهمة في أكثر من قائمة؟",
+  "q_en": "Can one task live in more than one List?",
+  "a_ar": "نعم عبر «Tasks in Multiple Lists» إن كانت مفعّلة. تبقى المهمة واحدة وتظهر في القائمتين، فأي تحديث يظهر في المكانين.",
+  "a_en": "Yes, with Tasks in Multiple Lists turned on. It stays one task shown in both Lists, so any update appears in both places."
+ },
+ {
+  "id": "kb-move-task",
+  "part": "tasks",
+  "q_ar": "كيف أنقل مهمة إلى قائمة أخرى؟",
+  "q_en": "How do I move a task to another List?",
+  "a_ar": "افتح المهمة، ثم قائمة النقاط (…) واختر «Move». أو حدّد عدة مهام في عرض القائمة واستخدم شريط الإجراءات بالأسفل.",
+  "a_en": "Open the task, then the ellipsis (…) menu and choose \"Move\". Or select several tasks in List view and use the bulk action bar."
+ },
+ {
+  "id": "kb-bulk",
+  "part": "tasks",
+  "q_ar": "كيف أعدّل عدة مهام مرة واحدة؟",
+  "q_en": "How do I edit many tasks at once?",
+  "a_ar": "في عرض القائمة حدّد المربعات بجانب المهام، فيظهر شريط إجراءات جماعية لتغيير الحالة أو المسؤول أو التاريخ أو النقل أو الحذف.",
+  "a_en": "In List view tick the boxes next to the tasks and a bulk action bar appears: change status, assignee or dates, move or delete."
+ },
+ {
+  "id": "kb-duplicate",
+  "part": "tasks",
+  "q_ar": "كيف أنسخ مهمة؟",
+  "q_en": "How do I duplicate a task?",
+  "a_ar": "من قائمة النقاط (…) في المهمة اختر «Duplicate» واختر ما يُنسخ: المهام الفرعية، التعليقات، المرفقات. للمهام المتكررة استخدم التكرار أو القوالب.",
+  "a_en": "From the task’s ellipsis (…) menu choose \"Duplicate\" and pick what to copy: subtasks, comments, attachments. For repeating work use recurrence or templates."
+ },
+ {
+  "id": "kb-merge",
+  "part": "tasks",
+  "q_ar": "كيف أدمج مهمتين مكررتين؟",
+  "q_en": "How do I merge two duplicate tasks?",
+  "a_ar": "افتح إحدى المهمتين، ثم قائمة النقاط (…) واختر «Merge»، واختر المهمة الأخرى. تنتقل التعليقات والمرفقات إلى مهمة واحدة.",
+  "a_en": "Open one task, then the ellipsis (…) menu, choose \"Merge\" and pick the other task. Comments and attachments combine into one task."
+ },
+ {
+  "id": "kb-link",
+  "part": "tasks",
+  "q_ar": "كيف أربط مهمتين ببعض؟",
+  "q_en": "How do I link two related tasks?",
+  "a_ar": "افتح المهمة واختر «Relationships» أو «Add relationship» ثم «Link» وابحث عن المهمة الأخرى. للربط بين قوائم مختلفة يمكن استخدام حقل علاقة مخصّص.",
+  "a_en": "Open the task, choose Relationships (Add relationship), then Link, and search for the other task. For links between different Lists you can use a relationship Custom Field."
+ },
+ {
+  "id": "kb-milestone",
+  "part": "tasks",
+  "q_ar": "ما هي المعالم (Milestones)؟",
+  "q_en": "What are milestones?",
+  "a_ar": "المَعلم مهمة تمثل نقطة مهمة في المشروع، مثل «إطلاق الخدمة». يظهر بشكل ماسة في مخطط غانت. من قائمة النقاط في المهمة اختر «Mark as Milestone».",
+  "a_en": "A milestone is a task that marks a key point, like \"Service launch\". It shows as a diamond in Gantt. From the task menu choose \"Mark as Milestone\"."
+ },
+ {
+  "id": "kb-task-id",
+  "part": "tasks",
+  "q_ar": "ما هو رقم المهمة وكيف أشاركه؟",
+  "q_en": "What is a task ID and how do I share it?",
+  "a_ar": "لكل مهمة رقم فريد يظهر أعلاها. يمكن للمسؤول تفعيل أرقام مخصّصة مثل IT-120. انسخ رابط المهمة من الأعلى وأرسله لزميلك.",
+  "a_en": "Every task has a unique ID at the top. Admins can turn on custom IDs like IT-120. Copy the task link from the top and send it to a colleague."
+ },
+ {
+  "id": "kb-task-types",
+  "part": "tasks",
+  "q_ar": "ما هي أنواع المهام؟",
+  "q_en": "What are task types?",
+  "a_ar": "يمكن تسمية نوع المهمة، مثل «طلب» أو «خلل» أو «اجتماع»، بأيقونة خاصة. يساعد ذلك على الفرز والتقارير. يضبطها المسؤول من إعدادات مساحة العمل.",
+  "a_en": "Tasks can have a type, like Request, Bug or Meeting, with its own icon. It helps filtering and reports. Admins set types in Workspace settings."
+ },
+ {
+  "id": "kb-priority",
+  "part": "tasks",
+  "q_ar": "كيف أحدد أولوية المهمة؟",
+  "q_en": "How do I set a task priority?",
+  "a_ar": "اضغط علم الأولوية في المهمة واختر: عاجل، مرتفع، عادي، منخفض. ثم رتّب أو صفِّ العرض حسب الأولوية.",
+  "a_en": "Click the priority flag on the task and choose Urgent, High, Normal or Low. Then sort or filter your view by priority."
+ },
+ {
+  "id": "kb-tags",
+  "part": "tasks",
+  "q_ar": "ما هي الوسوم (Tags)؟",
+  "q_en": "What are tags?",
+  "a_ar": "الوسوم تسميات سريعة مثل «عميل» أو «مسقط» تضيفها للمهام لتجميعها والبحث عنها. للبيانات المنظّمة استخدم الحقول المخصّصة بدلاً منها.",
+  "a_en": "Tags are quick labels like \"client\" or \"Muscat\" you add to tasks to group and find them. For structured data use Custom Fields instead."
+ },
+ {
+  "id": "kb-reminder",
+  "part": "tasks",
+  "q_ar": "كيف أضع تذكيراً لنفسي؟",
+  "q_en": "How do I set a reminder for myself?",
+  "a_ar": "أنشئ تذكيراً من زر «Create» أو الاختصار R، واختر الوقت. التذكير لا يحتاج قائمة، ويظهر في «مهامي». يمكن أيضاً إرسال تذكير لزميل.",
+  "a_en": "Create a reminder from the Create button or the R shortcut and pick a time. A reminder needs no List and shows in My Tasks. You can also send one to a colleague."
+ },
+ {
+  "id": "kb-dates",
+  "part": "tasks",
+  "q_ar": "ما الفرق بين تاريخ البدء وتاريخ الاستحقاق؟",
+  "q_en": "What is the difference between start date and due date?",
+  "a_ar": "تاريخ البدء متى يبدأ العمل، وتاريخ الاستحقاق متى يجب أن ينتهي. معاً يرسمان شريط المهمة في غانت والجدول الزمني.",
+  "a_en": "The start date is when work begins; the due date is when it must be done. Together they draw the task bar in Gantt and Timeline."
+ },
+ {
+  "id": "kb-overdue",
+  "part": "tasks",
+  "q_ar": "كيف أرى المهام المتأخرة؟",
+  "q_en": "How do I see overdue tasks?",
+  "a_ar": "صفِّ العرض بتاريخ الاستحقاق «Overdue» أو افتح «مهامي» حيث تظهر المتأخرة أولاً. يمكن أيضاً إضافة بطاقة المتأخرات في لوحة المعلومات.",
+  "a_en": "Filter the view by due date \"Overdue\", or open My Tasks where late tasks show first. You can also add an overdue card on a Dashboard."
+ },
+ {
+  "id": "kb-private-task",
+  "part": "tasks",
+  "q_ar": "كيف أجعل مهمة خاصة؟",
+  "q_en": "How do I make a task private?",
+  "a_ar": "من زر المشاركة (Share) في المهمة اجعلها خاصة وحدد من يراها. تذكّر أن المسؤولين قد يرون كل شيء حسب إعدادات الشركة.",
+  "a_en": "From the task’s Share button make it private and choose who can see it. Remember admins may still see everything depending on company settings."
+ },
+ {
+  "id": "kb-status",
+  "part": "tasks",
+  "q_ar": "كيف أغيّر حالة المهمة؟",
+  "q_en": "How do I change a task status?",
+  "a_ar": "اضغط الحالة في أعلى المهمة، أو اسحب البطاقة إلى عمود آخر في عرض اللوحة. الاختصار Shift+S يعمل أيضاً إن كانت الاختصارات مفعّلة.",
+  "a_en": "Click the status at the top of the task, or drag the card to another column in Board view. Shift+S also works if shortcuts are on."
+ },
+ {
+  "id": "kb-custom-status",
+  "part": "tasks",
+  "q_ar": "كيف أضيف حالة جديدة مثل «بانتظار الموافقة»؟",
+  "q_en": "How do I add a status like \"Waiting for approval\"?",
+  "a_ar": "من إعدادات القائمة أو المساحة اختر «Statuses» وأضف حالة جديدة بلونها. يمكن حفظ مجموعة الحالات كقالب لاستخدامها في قوائم أخرى.",
+  "a_en": "In the List or Space settings open Statuses and add a new status with a color. You can save the set as a status template for other Lists."
+ },
+ {
+  "id": "kb-closed",
+  "part": "tasks",
+  "q_ar": "لماذا اختفت المهمة بعد إغلاقها؟",
+  "q_en": "Why did the task disappear after I closed it?",
+  "a_ar": "المهام المغلقة تُخفى افتراضياً. فعّل «Show closed» من إعدادات العرض لرؤيتها، أو ابحث عنها بالبحث.",
+  "a_en": "Closed tasks are hidden by default. Turn on \"Show closed\" in the view settings to see them, or find them with search."
+ },
+ {
+  "id": "kb-subtask-vs-checklist",
+  "part": "tasks",
+  "q_ar": "متى أستخدم مهمة فرعية ومتى قائمة تحقق؟",
+  "q_en": "When do I use a subtask vs a checklist?",
+  "a_ar": "المهمة الفرعية لها مسؤول وتاريخ وحالة خاصة، فاستخدمها عندما يعمل عليها شخص آخر. قائمة التحقق خطوات بسيطة تُعلَّم بصح داخل المهمة نفسها.",
+  "a_en": "A subtask has its own assignee, date and status; use it when someone else works on it. A checklist is simple tick-off steps inside the same task."
+ },
+ {
+  "id": "kb-checklist-template",
+  "part": "tasks",
+  "q_ar": "كيف أعيد استخدام قائمة تحقق؟",
+  "q_en": "How do I reuse a checklist?",
+  "a_ar": "في المهمة افتح قائمة النقاط بجانب قائمة التحقق واختر «Save as template». ثم أضفها لأي مهمة من «Add checklist» ← القوالب.",
+  "a_en": "In the task open the checklist’s ellipsis menu and choose \"Save as template\". Then add it to any task from Add checklist, then Templates."
+ },
+ {
+  "id": "kb-add-view",
+  "part": "views",
+  "q_ar": "كيف أضيف طريقة عرض جديدة؟",
+  "q_en": "How do I add a new view?",
+  "a_ar": "في أعلى القائمة اضغط «+ View» واختر: قائمة، لوحة، تقويم، غانت، جدول، عبء العمل وغيرها. العرض يغيّر الشكل فقط؛ المهام نفسها لا تتغير.",
+  "a_en": "At the top of the List click \"+ View\" and choose List, Board, Calendar, Gantt, Table, Workload and more. A view only changes the layout; the tasks stay the same."
+ },
+ {
+  "id": "kb-board",
+  "part": "views",
+  "q_ar": "ما فائدة عرض اللوحة (Board)؟",
+  "q_en": "What is Board view for?",
+  "a_ar": "يعرض المهام كبطاقات في أعمدة حسب الحالة، فترى أين يتوقف العمل. اسحب البطاقة لتغيير حالتها.",
+  "a_en": "It shows tasks as cards in columns by status, so you see where work gets stuck. Drag a card to change its status."
+ },
+ {
+  "id": "kb-gantt",
+  "part": "views",
+  "q_ar": "كيف أستخدم مخطط غانت؟",
+  "q_en": "How do I use Gantt view?",
+  "a_ar": "أضف عرض Gantt، واعطِ المهام تاريخ بدء واستحقاق. اسحب الأشرطة لتغيير التواريخ، واربط بينها لتحديد الاعتماديات.",
+  "a_en": "Add a Gantt view and give tasks start and due dates. Drag bars to change dates and connect them to set dependencies."
+ },
+ {
+  "id": "kb-workload",
+  "part": "views",
+  "q_ar": "كيف أعرف من عنده عمل كثير في الفريق؟",
+  "q_en": "How do I see who is overloaded on the team?",
+  "a_ar": "استخدم عرض Workload (عبء العمل). يظهر لكل شخص حجم مهامه في كل يوم حسب التقديرات أو عدد المهام.",
+  "a_en": "Use the Workload view. It shows each person’s load per day based on estimates or task count."
+ },
+ {
+  "id": "kb-filter",
+  "part": "views",
+  "q_ar": "كيف أصفّي المهام في العرض؟",
+  "q_en": "How do I filter tasks in a view?",
+  "a_ar": "اضغط «Filter» في أعلى العرض وأضف شرطاً مثل المسؤول = أنا أو الأولوية = عاجل. احفظ العرض ليبقى الفلتر لكل الفريق.",
+  "a_en": "Click Filter at the top of the view and add a rule like Assignee = me or Priority = Urgent. Save the view so the filter stays for the team."
+ },
+ {
+  "id": "kb-group",
+  "part": "views",
+  "q_ar": "كيف أجمّع المهام حسب المسؤول أو الأولوية؟",
+  "q_en": "How do I group tasks by assignee or priority?",
+  "a_ar": "من إعدادات العرض اختر «Group by» ثم المسؤول أو الأولوية أو التاريخ أو حقل مخصّص.",
+  "a_en": "In view settings choose \"Group by\", then assignee, priority, due date or a Custom Field."
+ },
+ {
+  "id": "kb-me-mode",
+  "part": "views",
+  "q_ar": "كيف أرى مهامي فقط في القائمة؟",
+  "q_en": "How do I see only my tasks in a List?",
+  "a_ar": "فعّل «Me mode» أو زر «Me» في أعلى العرض، أو أضف فلتر المسؤول = أنا.",
+  "a_en": "Turn on \"Me mode\" (the Me button) at the top of the view, or add the filter Assignee = me."
+ },
+ {
+  "id": "kb-private-view",
+  "part": "views",
+  "q_ar": "هل تغييرات العرض تظهر للجميع؟",
+  "q_en": "Do my view changes show for everyone?",
+  "a_ar": "العروض المشتركة يراها الجميع. لتجربة ترتيبك الخاص أنشئ عرضاً خاصاً (Private view) أو لا تحفظ التغييرات.",
+  "a_en": "Shared views are seen by everyone. To try your own layout, create a Private view or do not save the changes."
+ },
+ {
+  "id": "kb-columns",
+  "part": "views",
+  "q_ar": "كيف أضيف عموداً في عرض القائمة أو الجدول؟",
+  "q_en": "How do I add a column in List or Table view?",
+  "a_ar": "اضغط «+» في نهاية رؤوس الأعمدة واختر حقلاً موجوداً أو أنشئ حقلاً مخصّصاً جديداً.",
+  "a_en": "Click \"+\" at the end of the column headers and pick an existing field or create a new Custom Field."
+ },
+ {
+  "id": "kb-field-types",
+  "part": "fields",
+  "q_ar": "ما أنواع الحقول المخصّصة؟",
+  "q_en": "What types of Custom Fields are there?",
+  "a_ar": "منها: نص، رقم، مبلغ مالي، قائمة منسدلة، تاريخ، مربع اختيار، تقدّم، تقييم، ملفات، أشخاص، علاقة، ومعادلة. اختر ما يناسب نوع البيانات.",
+  "a_en": "They include text, number, money, dropdown, date, checkbox, progress, rating, files, people, relationship and formula. Pick the one that fits your data."
+ },
+ {
+  "id": "kb-formula",
+  "part": "fields",
+  "q_ar": "هل يمكن عمل معادلة في حقل؟",
+  "q_en": "Can a field calculate a formula?",
+  "a_ar": "نعم بحقل «Formula». مثلاً: الكمية × السعر، أو عدد الأيام بين تاريخين. ويمكن جمع الأرقام في أسفل عرض القائمة.",
+  "a_en": "Yes, with a Formula field. For example quantity × price, or days between two dates. Number columns can also show totals at the bottom of List view."
+ },
+ {
+  "id": "kb-required",
+  "part": "fields",
+  "q_ar": "كيف أجعل الحقل إلزامياً؟",
+  "q_en": "How do I make a field required?",
+  "a_ar": "في إعدادات الحقل فعّل «Required» إن كانت متاحة في خطتك، فلا تُنشأ المهمة دون تعبئته. في النماذج اجعل السؤال مطلوباً.",
+  "a_en": "In the field settings turn on \"Required\" if your plan has it, so tasks cannot be created without it. In Forms mark the question as required."
+ },
+ {
+  "id": "kb-mention",
+  "part": "collab",
+  "q_ar": "كيف أشير إلى زميل في تعليق؟",
+  "q_en": "How do I mention a colleague in a comment?",
+  "a_ar": "اكتب @ ثم اسم الزميل واختره. يصله إشعار في صندوق الوارد. استخدم @فريق لإشارة فريق كامل.",
+  "a_en": "Type @ and the colleague’s name and pick them. They get a notification in their Inbox. Use @team to mention a whole team."
+ },
+ {
+  "id": "kb-assign-comment",
+  "part": "collab",
+  "q_ar": "ما هو التعليق المُسند؟",
+  "q_en": "What is an assigned comment?",
+  "a_ar": "يمكن إسناد تعليق لشخص ليعمل عليه، فيظهر كعنصر يجب حلّه. عندما يُنجز يضغط «Resolve». مفيد لطلبات صغيرة داخل مهمة.",
+  "a_en": "You can assign a comment to someone as an action item. When done they click \"Resolve\". Useful for small asks inside a task."
+ },
+ {
+  "id": "kb-edit-comment",
+  "part": "collab",
+  "q_ar": "كيف أعدّل أو أحذف تعليقي؟",
+  "q_en": "How do I edit or delete my comment?",
+  "a_ar": "مرّر على تعليقك وافتح قائمة النقاط (…) واختر تعديل أو حذف. التعليق المحذوف لا يُستعاد.",
+  "a_en": "Hover your comment, open the ellipsis (…) menu and choose edit or delete. A deleted comment cannot be restored."
+ },
+ {
+  "id": "kb-chat",
+  "part": "collab",
+  "q_ar": "ما هي قنوات المحادثة (Chat)؟",
+  "q_en": "What are Chat channels?",
+  "a_ar": "Chat في ClickUp قنوات محادثة للفريق مرتبطة بالمساحات والمهام، ورسائل مباشرة بين الزملاء. يمكن تحويل الرسالة إلى مهمة.",
+  "a_en": "ClickUp Chat gives team channels linked to your Spaces and tasks, plus direct messages. You can turn a message into a task."
+ },
+ {
+  "id": "kb-docs",
+  "part": "collab",
+  "q_ar": "كيف أنشئ مستنداً (Doc)؟",
+  "q_en": "How do I create a Doc?",
+  "a_ar": "من الشريط الجانبي أو زر «Create» اختر «Doc». اكتب بالعناوين والجداول، واربط المهام داخله، وأضف صفحات فرعية لبناء دليل أو ويكي للقسم.",
+  "a_en": "From the sidebar or the Create button choose \"Doc\". Write with headings and tables, link tasks inside, and add sub-pages to build a guide or wiki."
+ },
+ {
+  "id": "kb-share-doc",
+  "part": "collab",
+  "q_ar": "كيف أشارك مستنداً مع شخص من خارج الشركة؟",
+  "q_en": "How do I share a Doc with someone outside the company?",
+  "a_ar": "من زر «Share» في المستند يمكن دعوة ضيف أو إنشاء رابط عام إن سمح المسؤول بذلك. استشر سياسة الشركة قبل النشر الخارجي.",
+  "a_en": "From the Doc’s Share button you can invite a guest or create a public link if your admin allows it. Check company policy before sharing outside."
+ },
+ {
+  "id": "kb-whiteboard",
+  "part": "collab",
+  "q_ar": "ما هي السبورة (Whiteboard)؟",
+  "q_en": "What is a Whiteboard?",
+  "a_ar": "لوحة رسم مشتركة للعصف الذهني ورسم الخطط. يمكن تحويل الملاحظات اللاصقة والأشكال مباشرة إلى مهام.",
+  "a_en": "A shared canvas for brainstorming and drawing plans. You can turn sticky notes and shapes straight into tasks."
+ },
+ {
+  "id": "kb-clips",
+  "part": "collab",
+  "q_ar": "كيف أسجّل شاشتي لأشرح مشكلة؟",
+  "q_en": "How do I record my screen to explain a problem?",
+  "a_ar": "استخدم «Clip» من زر التسجيل في التعليق أو من «Create». سجّل الشاشة مع صوتك، ويُحفظ الرابط لتشاركه في مهمة أو محادثة.",
+  "a_en": "Use Clip from the record button in a comment or from Create. Record your screen with your voice, and share the link in a task or chat."
+ },
+ {
+  "id": "kb-email",
+  "part": "collab",
+  "q_ar": "هل يمكن الرد على تعليق من البريد؟",
+  "q_en": "Can I reply to a comment from email?",
+  "a_ar": "نعم، إشعارات البريد تسمح بالرد مباشرة فيُضاف ردّك كتعليق. ويمكن أيضاً إرسال بريد إلى قائمة لإنشاء مهمة إن فعّل المسؤول ذلك.",
+  "a_en": "Yes, email notifications let you reply and your reply becomes a comment. You can also email a List to create a task if your admin enabled it."
+ },
+ {
+  "id": "kb-notif-settings",
+  "part": "collab",
+  "q_ar": "كيف أتحكم في الإشعارات؟",
+  "q_en": "How do I control my notifications?",
+  "a_ar": "من إعداداتك افتح «Notifications» واختر لكل نوع: داخل التطبيق، البريد، الجوال. قلّل البريد واترك الإشارات إليك فقط إن كانت كثيرة.",
+  "a_en": "In your settings open Notifications and choose per type: in-app, email, mobile. If there are too many, turn off email and keep only mentions."
+ },
+ {
+  "id": "kb-unwatch",
+  "part": "collab",
+  "q_ar": "كيف أوقف إشعارات مهمة معيّنة؟",
+  "q_en": "How do I stop notifications from one task?",
+  "a_ar": "افتح المهمة واضغط على أيقونة العين (المتابعون) ثم أزل نفسك من المتابعين.",
+  "a_en": "Open the task, click the eye icon (watchers) and remove yourself."
+ },
+ {
+  "id": "kb-timer",
+  "part": "time",
+  "q_ar": "كيف أسجّل الوقت على مهمة؟",
+  "q_en": "How do I track time on a task?",
+  "a_ar": "افتح المهمة واضغط زر المؤقت «Start» ثم «Stop» عند التوقف، أو أضف الوقت يدوياً. يمكن رؤية المجموع في التقارير ولوحات المعلومات.",
+  "a_en": "Open the task, click the timer Start, then Stop when you finish, or add time manually. Totals show in reports and Dashboards."
+ },
+ {
+  "id": "kb-estimate",
+  "part": "time",
+  "q_ar": "كيف أضع تقديراً للوقت؟",
+  "q_en": "How do I add a time estimate?",
+  "a_ar": "في المهمة اضغط «Time estimate» واكتب مثلاً 3h. تُستخدم التقديرات في عرض عبء العمل للتخطيط.",
+  "a_en": "In the task click Time estimate and type e.g. 3h. Estimates feed the Workload view for planning."
+ },
+ {
+  "id": "kb-dependency",
+  "part": "time",
+  "q_ar": "ما هي الاعتماديات (Dependencies)؟",
+  "q_en": "What are dependencies?",
+  "a_ar": "الاعتمادية تعني أن مهمة تنتظر أخرى: «ينتظر» أو «يعيق». أضفها من «Relationships» في المهمة، وتظهر كخطوط في غانت.",
+  "a_en": "A dependency means one task waits on another: \"waiting on\" or \"blocking\". Add it from Relationships in the task; it shows as lines in Gantt."
+ },
+ {
+  "id": "kb-sprints",
+  "part": "time",
+  "q_ar": "ما هي السبرنتات (Sprints)؟",
+  "q_en": "What are Sprints?",
+  "a_ar": "السبرنت فترة عمل قصيرة، أسبوعان مثلاً، بقائمة مهام محددة. تُفعَّل من ClickApps، وتعطيك نقاط الجهد ومخططات التقدّم. مفيدة لفرق التطوير.",
+  "a_en": "A Sprint is a short work period, like two weeks, with a set list of tasks. Turn it on in ClickApps; you get sprint points and burndown charts. Useful for agile teams."
+ },
+ {
+  "id": "kb-calendar-sync",
+  "part": "time",
+  "q_ar": "هل يتزامن ClickUp مع تقويم Outlook أو Google؟",
+  "q_en": "Does ClickUp sync with Outlook or Google Calendar?",
+  "a_ar": "نعم. تقويم Google يتزامن في الاتجاهين. Outlook وiCal يعرضان مهام ClickUp باتجاه واحد عبر رابط اشتراك. الإعداد من التكاملات أو عرض التقويم، وقد يحتاج موافقة تقنية المعلومات.",
+  "a_en": "Yes. Google Calendar syncs both ways. Outlook and iCal show ClickUp tasks one way through a subscription link. Set it up from Integrations or the Calendar view; IT approval may be needed."
+ },
+ {
+  "id": "kb-dashboard",
+  "part": "dash",
+  "q_ar": "كيف أنشئ لوحة معلومات (Dashboard)؟",
+  "q_en": "How do I create a Dashboard?",
+  "a_ar": "من الشريط الجانبي اختر «Dashboards» ثم «+ New». أضف بطاقات: مخطط دائري للحالات، عدد المتأخرات، عبء العمل، أو مؤشر رقمي. شاركها مع مديرك.",
+  "a_en": "From the sidebar choose Dashboards, then + New. Add cards: a pie of statuses, overdue count, workload, or a number KPI. Share it with your manager."
+ },
+ {
+  "id": "kb-report-export",
+  "part": "dash",
+  "q_ar": "كيف أرسل تقريراً لمديري كل أسبوع؟",
+  "q_en": "How do I send my manager a report every week?",
+  "a_ar": "أنشئ لوحة معلومات واجدول إرسالها بالبريد إن كانت خطتك تدعم ذلك، أو شارك رابط اللوحة ليرى البيانات مباشرة. أتمتة أسبوعية يمكنها إنشاء مهمة تذكير بالتقرير.",
+  "a_en": "Build a Dashboard and schedule it by email if your plan supports it, or share the Dashboard link so they see live data. A weekly automation can also create a reminder task for the report."
+ },
+ {
+  "id": "kb-auto-how",
+  "part": "auto",
+  "q_ar": "كيف أنشئ أتمتة؟",
+  "q_en": "How do I create an automation?",
+  "a_ar": "في القائمة اضغط «Automate» أو أيقونة البرق ← «Add automation». اختر المُشغِّل (مثل: تغيّرت الحالة) والإجراء (مثل: أسند إلى فلان). ابدأ بأتمتة واحدة بسيطة وجرّبها.",
+  "a_en": "In the List click Automate (the lightning icon), then Add automation. Pick a trigger (e.g. status changes) and an action (e.g. assign to someone). Start with one simple automation and test it."
+ },
+ {
+  "id": "kb-auto-limit",
+  "part": "auto",
+  "q_ar": "هل للأتمتة حدّ في عدد مرات التشغيل؟",
+  "q_en": "Is there a limit on automation runs?",
+  "a_ar": "نعم، لكل خطة عدد تشغيلات شهري. إن توقفت الأتمتة فقد يكون الحد انتهى أو تغيّرت الحالة أو الشخص المستخدم فيها. راجع سجل الأتمتة (Activity).",
+  "a_en": "Yes, each plan has a monthly number of runs. If an automation stops, the limit may be reached, or a status or person it uses changed. Check the automation activity log."
+ },
+ {
+  "id": "kb-auto-examples",
+  "part": "auto",
+  "q_ar": "ما أمثلة الأتمتة المفيدة للموظفين؟",
+  "q_en": "What are useful automation examples?",
+  "a_ar": "أمثلة: عند إنشاء مهمة أسندها لمسؤول الفريق. عند تغيّر الحالة إلى «مكتمل» أبلغ المدير. عند اقتراب الاستحقاق غيّر الأولوية. عند وصول نموذج أنشئ مهمة بقائمة تحقق.",
+  "a_en": "Examples: when a task is created, assign the team lead. When status becomes Complete, notify the manager. When a due date is near, raise priority. When a form arrives, create a task with a checklist."
+ },
+ {
+  "id": "kb-form-create",
+  "part": "forms",
+  "q_ar": "كيف أنشئ نموذج طلبات؟",
+  "q_en": "How do I create a request form?",
+  "a_ar": "في القائمة أضف عرض «Form». اسحب الحقول التي تريدها، واجعل المهم منها مطلوباً، ثم شارك الرابط. كل إرسال يصبح مهمة في القائمة.",
+  "a_en": "In the List add a Form view. Drag in the fields you need, make the important ones required, then share the link. Every submission becomes a task in the List."
+ },
+ {
+  "id": "kb-form-logic",
+  "part": "forms",
+  "q_ar": "هل يمكن أن يتغيّر النموذج حسب الإجابة؟",
+  "q_en": "Can a form change based on the answer?",
+  "a_ar": "نعم، بالمنطق الشرطي (Conditional logic) تظهر أسئلة معيّنة حسب اختيار سابق، إن كانت متاحة في خطتك.",
+  "a_en": "Yes, conditional logic shows certain questions based on an earlier choice, if your plan includes it."
+ },
+ {
+  "id": "kb-goals",
+  "part": "dash",
+  "q_ar": "كيف أتابع الأهداف (Goals)؟",
+  "q_en": "How do I track Goals?",
+  "a_ar": "أنشئ هدفاً وأضف له مستهدفات: رقم، نعم/لا، مبلغ، أو مهام. يتحدّث التقدّم تلقائياً عندما تُنجز المهام المرتبطة. توفرها قد يختلف حسب الإصدار.",
+  "a_en": "Create a Goal and add targets: number, true/false, currency or tasks. Progress updates automatically as linked tasks are done. Availability may vary by version."
+ },
+ {
+  "id": "kb-roles",
+  "part": "share",
+  "q_ar": "ما الفرق بين المالك والمسؤول والعضو والضيف؟",
+  "q_en": "What is the difference between Owner, Admin, Member and Guest?",
+  "a_ar": "المالك يملك مساحة العمل كاملة. المسؤول يدير الإعدادات والأعضاء. العضو يعمل في ما يُتاح له. العضو المحدود والضيف يريان فقط ما شُورك معهما، ومناسبان للموردين.",
+  "a_en": "The Owner owns the whole Workspace. Admins manage settings and members. Members work in what they can access. Limited Members and Guests only see what is shared with them, which suits vendors."
+ },
+ {
+  "id": "kb-invite",
+  "part": "share",
+  "q_ar": "كيف أضيف زميلاً إلى مساحة العمل؟",
+  "q_en": "How do I add a colleague to the Workspace?",
+  "a_ar": "يدعو المسؤول الأعضاء من إعدادات الأشخاص (People) بالبريد. إن لم تكن مسؤولاً فاطلب من مسؤول مساحة العمل، أو شارك معه القائمة كضيف إن سُمح.",
+  "a_en": "Admins invite members from People settings by email. If you are not an admin, ask your Workspace admin, or share the List with them as a guest if allowed."
+ },
+ {
+  "id": "kb-permissions",
+  "part": "share",
+  "q_ar": "ما مستويات صلاحية المشاركة؟",
+  "q_en": "What are the sharing permission levels?",
+  "a_ar": "عند المشاركة تختار: مشاهدة فقط، تعليق، تعديل، أو تحكم كامل. أعطِ أقل صلاحية تكفي للعمل.",
+  "a_en": "When sharing you choose View only, Comment, Edit or Full access. Give the lowest level that gets the job done."
+ },
+ {
+  "id": "kb-2fa",
+  "part": "share",
+  "q_ar": "كيف أفعّل التحقق بخطوتين؟",
+  "q_en": "How do I turn on two-factor authentication?",
+  "a_ar": "من إعداداتك الشخصية افتح الأمان وفعّل 2FA عبر تطبيق المصادقة أو الرسائل. قد يفرضه المسؤول على الجميع. إن كان الدخول عبر SSO فالأمان تديره الشركة.",
+  "a_en": "In your personal settings open Security and turn on 2FA with an authenticator app or SMS. Admins may require it for everyone. With SSO, your company manages sign-in security."
+ },
+ {
+  "id": "kb-leaver",
+  "part": "share",
+  "q_ar": "موظف غادر الفريق، ماذا نفعل بمهامه؟",
+  "q_en": "An employee left the team. What happens to their tasks?",
+  "a_ar": "قبل إزالته أعد إسناد مهامه المفتوحة: صفِّ بالمسؤول = اسمه وغيّر المسؤول جماعياً. المسؤول يزيل الحساب من إعدادات الأشخاص.",
+  "a_en": "Before removing them, reassign their open tasks: filter Assignee = their name and bulk-change the assignee. An admin then removes the account in People settings."
+ },
+ {
+  "id": "kb-brain",
+  "part": "power",
+  "q_ar": "ما هو ClickUp Brain؟",
+  "q_en": "What is ClickUp Brain?",
+  "a_ar": "Brain هو الذكاء الاصطناعي في ClickUp. يلخّص المهام والتعليقات، يكتب ويعيد صياغة النصوص، ينشئ مهاماً فرعية، ويجيب عن أسئلة حول عملك. ميزاته تعتمد على الخطة وإعدادات الشركة.",
+  "a_en": "Brain is ClickUp’s AI. It summarizes tasks and comments, writes and rewrites text, creates subtasks and answers questions about your work. Features depend on your plan and company settings."
+ },
+ {
+  "id": "kb-ai-write",
+  "part": "power",
+  "q_ar": "كيف أستخدم الذكاء الاصطناعي لكتابة وصف مهمة؟",
+  "q_en": "How do I use AI to write a task description?",
+  "a_ar": "في الوصف اكتب / أو اضغط زر الذكاء الاصطناعي، واطلب مثلاً «اكتب خطوات تسليم الموقع». راجع النص دائماً قبل الإرسال، ولا تضع بيانات سرية.",
+  "a_en": "In the description type / or click the AI button, and ask e.g. \"write the steps to hand over the site\". Always review the text, and do not paste confidential data."
+ },
+ {
+  "id": "kb-ai-notetaker",
+  "part": "power",
+  "q_ar": "هل يمكن للذكاء الاصطناعي تدوين محضر الاجتماع؟",
+  "q_en": "Can AI take meeting notes?",
+  "a_ar": "نعم، AI Notetaker يمكنه الانضمام للاجتماعات وتلخيصها وتحويل القرارات إلى مهام إن كان مفعّلاً في خطتكم. أبلغ الحضور قبل التسجيل.",
+  "a_en": "Yes, the AI Notetaker can join meetings, summarize them and turn decisions into tasks if enabled on your plan. Tell attendees before recording."
+ },
+ {
+  "id": "kb-ai-agents",
+  "part": "power",
+  "q_ar": "ما هم وكلاء Autopilot؟",
+  "q_en": "What are Autopilot Agents?",
+  "a_ar": "وكلاء ذكاء اصطناعي يعملون تلقائياً داخل قائمة أو قناة، مثل الرد على الأسئلة المتكررة أو كتابة تحديث يومي. تتوفر حسب الخطة ويضبطها المسؤولون.",
+  "a_en": "AI agents that work on their own in a List or channel, like answering repeat questions or writing a daily update. They depend on your plan and are set up by admins."
+ },
+ {
+  "id": "kb-ai-search",
+  "part": "power",
+  "q_ar": "كيف أبحث في كل شيء بالذكاء الاصطناعي؟",
+  "q_en": "How do I search everything with AI?",
+  "a_ar": "البحث الشامل (Enterprise Search) مع Brain يبحث في المهام والمستندات والمحادثات والتطبيقات المربوطة، ويجيب بجملة مع الروابط. ابدأ بـ Ctrl/Cmd+K.",
+  "a_en": "Enterprise Search with Brain looks across tasks, Docs, chat and connected apps and answers in a sentence with links. Start with Ctrl/Cmd+K."
+ },
+ {
+  "id": "kb-ai-safe",
+  "part": "power",
+  "q_ar": "هل استخدام الذكاء الاصطناعي آمن لبيانات الشركة؟",
+  "q_en": "Is AI safe for company data?",
+  "a_ar": "اتبع سياسة Omantel: لا تُدخل بيانات عملاء أو كلمات مرور أو معلومات سرية. راجع كل نص ينتجه الذكاء الاصطناعي، واسأل فريق الأمن عند الشك.",
+  "a_en": "Follow Omantel policy: do not enter customer data, passwords or confidential information. Review every AI output, and ask the security team when in doubt."
+ },
+ {
+  "id": "kb-import-steps",
+  "part": "power",
+  "q_ar": "ما خطوات استيراد ملف Excel؟",
+  "q_en": "What are the steps to import an Excel file?",
+  "a_ar": "جهّز الملف: صف أول للعناوين، عمود لكل حقل، والتواريخ بصيغة واحدة. ثم من الإعدادات ← Import/Export اختر CSV أو Excel، طابق الأعمدة مع الحقول، وراجع قبل التأكيد.",
+  "a_en": "Prepare the file: a header row, one column per field, dates in one format. Then in Settings open Import/Export, choose CSV or Excel, map columns to fields, and review before confirming."
+ },
+ {
+  "id": "kb-import-tools",
+  "part": "power",
+  "q_ar": "هل يمكن الاستيراد من Trello أو Asana أو Jira؟",
+  "q_en": "Can I import from Trello, Asana or Jira?",
+  "a_ar": "نعم، لدى ClickUp أدوات استيراد جاهزة لأدوات شائعة مثل Trello وAsana وJira وMonday. تجدها في Import/Export ضمن الإعدادات.",
+  "a_en": "Yes, ClickUp has ready importers for common tools like Trello, Asana, Jira and Monday. Find them under Import/Export in settings."
+ },
+ {
+  "id": "kb-export",
+  "part": "power",
+  "q_ar": "كيف أصدّر المهام إلى Excel؟",
+  "q_en": "How do I export tasks to Excel?",
+  "a_ar": "في عرض القائمة أو الجدول افتح قائمة النقاط أو «Export» واختر CSV أو Excel. يُصدَّر ما يظهر في العرض بفلاتره وأعمدته.",
+  "a_en": "In List or Table view open the ellipsis menu (Export) and choose CSV or Excel. It exports what the view shows, with its filters and columns."
+ },
+ {
+  "id": "kb-template-save",
+  "part": "power",
+  "q_ar": "كيف أحفظ قائمة أو مهمة كقالب؟",
+  "q_en": "How do I save a List or task as a template?",
+  "a_ar": "من قائمة النقاط (…) للقائمة أو المهمة اختر «Templates» ← «Save as template». سمّه بوضوح واختر ما يُحفظ مثل المهام الفرعية والحقول.",
+  "a_en": "From the List’s or task’s ellipsis (…) menu choose Templates, then Save as template. Name it clearly and choose what to keep, like subtasks and fields."
+ },
+ {
+  "id": "kb-template-center",
+  "part": "power",
+  "q_ar": "أين أجد القوالب الجاهزة؟",
+  "q_en": "Where do I find ready-made templates?",
+  "a_ar": "افتح «Template Center» من زر «+» أو قائمة القوالب. ابحث بكلمة مثل «Project» أو «IT» واختر قالباً ثم عدّله لفريقك.",
+  "a_en": "Open the Template Center from \"+\" or the Templates menu. Search a word like \"Project\" or \"IT\", pick one and adapt it for your team."
+ },
+ {
+  "id": "kb-clickapps",
+  "part": "power",
+  "q_ar": "ما هي ClickApps؟",
+  "q_en": "What are ClickApps?",
+  "a_ar": "ClickApps مفاتيح لتشغيل ميزات إضافية في المساحة، مثل تتبع الوقت والنقاط والتواريخ المتعددة والأولويات. يفعّلها المسؤول من إعدادات المساحة.",
+  "a_en": "ClickApps are switches that turn on extra features in a Space, like time tracking, sprint points, multiple assignees and priorities. Admins turn them on in Space settings."
+ },
+ {
+  "id": "kb-integrations",
+  "part": "power",
+  "q_ar": "ما التكاملات المتاحة مع ClickUp؟",
+  "q_en": "What integrations does ClickUp have?",
+  "a_ar": "يتكامل مع Microsoft Teams وOutlook وGoogle Drive وSlack وGitHub وZoom وغيرها. التفعيل من «App Center» أو التكاملات، وقد يحتاج موافقة تقنية المعلومات.",
+  "a_en": "It integrates with Microsoft Teams, Outlook, Google Drive, Slack, GitHub, Zoom and more. Turn them on from the App Center (Integrations); IT approval may be needed."
+ },
+ {
+  "id": "kb-teams",
+  "part": "power",
+  "q_ar": "هل يعمل ClickUp مع Microsoft Teams؟",
+  "q_en": "Does ClickUp work with Microsoft Teams?",
+  "a_ar": "نعم، تكامل Teams يعرض إشعارات المهام وروابطها داخل Teams ويسمح بإنشاء مهام من الرسائل، بعد تفعيله من المسؤول.",
+  "a_en": "Yes, the Teams integration shows task notifications and link previews in Teams and lets you create tasks from messages, once an admin enables it."
+ },
+ {
+  "id": "kb-mobile-app",
+  "part": "start",
+  "q_ar": "هل يوجد تطبيق جوال؟",
+  "q_en": "Is there a mobile app?",
+  "a_ar": "نعم لأجهزة iPhone وAndroid. يمكنك إنشاء المهام وتحديث الحالة والتعليق وإرفاق الصور من الموقع، وتصلك الإشعارات.",
+  "a_en": "Yes, for iPhone and Android. You can create tasks, update status, comment and attach photos from site, and get notifications."
+ },
+ {
+  "id": "kb-offline",
+  "part": "start",
+  "q_ar": "هل يعمل ClickUp دون إنترنت؟",
+  "q_en": "Does ClickUp work offline?",
+  "a_ar": "بشكل محدود. تطبيق الجوال يسمح بإنشاء بعض المهام والتذكيرات دون اتصال ويزامنها لاحقاً. معظم الميزات تحتاج إنترنت.",
+  "a_en": "Only partly. The mobile app lets you create some tasks and reminders offline and syncs them later. Most features need internet."
+ },
+ {
+  "id": "kb-desktop",
+  "part": "start",
+  "q_ar": "هل يوجد تطبيق سطح مكتب؟",
+  "q_en": "Is there a desktop app?",
+  "a_ar": "نعم لـ Windows وMac، ويعمل أيضاً في المتصفح. التطبيق يعطي إشعارات سطح المكتب واختصارات أسرع.",
+  "a_en": "Yes, for Windows and Mac, and it also runs in the browser. The app gives desktop notifications and faster shortcuts."
+ },
+ {
+  "id": "kb-cant-see",
+  "part": "start",
+  "q_ar": "لا أرى مساحة أو قائمة يراها زميلي",
+  "q_en": "I cannot see a Space or List my colleague sees",
+  "a_ar": "غالباً ليست مشاركة معك. اطلب من صاحبها أو المسؤول إضافتك من زر «Share». وتأكد أنك في مساحة العمل الصحيحة.",
+  "a_en": "Most likely it is not shared with you. Ask its owner or an admin to add you from the Share button. Also check you are in the right Workspace."
+ },
+ {
+  "id": "kb-slow",
+  "part": "start",
+  "q_ar": "ClickUp بطيء، ماذا أفعل؟",
+  "q_en": "ClickUp is slow. What can I do?",
+  "a_ar": "حدّث الصفحة، أغلق التبويبات الكثيرة، واستخدم فلاتر لتقليل عدد المهام في العرض. جرّب التطبيق أو متصفحاً آخر. إن استمر فأبلغ الدعم.",
+  "a_en": "Refresh, close extra tabs, and use filters so the view loads fewer tasks. Try the app or another browser. If it continues, tell support."
+ },
+ {
+  "id": "kb-undo",
+  "part": "start",
+  "q_ar": "كيف أتراجع عن تغيير؟",
+  "q_en": "How do I undo a change?",
+  "a_ar": "بعد كثير من الإجراءات يظهر زر «Undo» لثوانٍ. وسجل النشاط (Activity) في المهمة يبيّن من غيّر ماذا ومتى.",
+  "a_en": "After many actions an Undo button shows for a few seconds. The task’s Activity log shows who changed what, and when."
+ },
+ {
+  "id": "kb-history",
+  "part": "start",
+  "q_ar": "كيف أعرف من عدّل المهمة؟",
+  "q_en": "How do I see who changed a task?",
+  "a_ar": "افتح المهمة وانظر إلى سجل النشاط (Activity) بجانب التعليقات. يعرض كل تغيير في الحالة والمسؤول والتاريخ.",
+  "a_en": "Open the task and look at the Activity feed next to the comments. It lists every change to status, assignee and dates."
+ },
+ {
+  "id": "kb-support",
+  "part": "start",
+  "q_ar": "من أسأل إن لم أجد الإجابة؟",
+  "q_en": "Who do I ask if I cannot find the answer?",
+  "a_ar": "اسأل زملاءك في منتدى هذه المنصة، أو أرسل سؤالك لفريق الدعم من صفحة «اسأل الفريق». ولدى ClickUp مركز مساعدة ودعم عبر المحادثة.",
+  "a_en": "Ask colleagues in this hub’s forum, or send your question to the support team from Ask the team. ClickUp also has a Help Center and chat support."
+ }
+]

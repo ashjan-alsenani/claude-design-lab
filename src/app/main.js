@@ -291,7 +291,7 @@ function boot() {
   renderRoute();
   Clicky.init();
   setupLanguage();
-  if (location.protocol === 'file:') window.__hub = { setLanguage, get lang() { return LANG; }, errors: I18N.errors, content: { LESSONS, MODULES, GLOSSARY, QUIZZES, FAQ, PATHWAYS, COMMON_MISTAKES, RESOURCES, PEOPLE, LAB_LISTS, CHALLENGES, PRACTICAL, HOME_DEMO }, demoStr, Lab };
+  if (location.protocol === 'file:') window.__hub = { setLanguage, get lang() { return LANG; }, errors: I18N.errors, content: { LESSONS, MODULES, GLOSSARY, QUIZZES, FAQ, PATHWAYS, COMMON_MISTAKES, RESOURCES, PEOPLE, LAB_LISTS, CHALLENGES, PRACTICAL, HOME_DEMO }, demoStr, Lab, Clicky };
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

@@ -8,3 +8,4 @@ dist/
 
 # Impeccable review captures (local only)
 .impeccable/review/
+__pycache__/
