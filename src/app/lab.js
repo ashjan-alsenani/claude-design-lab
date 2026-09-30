@@ -17,7 +17,7 @@ const CAPACITY_H = 10; // weekly capacity per person used by the workload chart
 function badge(k) { return '<span class="status-badge st-' + k + '">' + STATUS[k].en + '</span>'; }
 function prioHTML(k) { return k ? '<span class="prio prio-' + k + '">' + prioFlag() + '<span dir="ltr">' + PRIORITY[k].en + '</span></span>' : '<span class="muted small">-</span>'; }
 function avatarHTML(pid, size) {
-  if (!pid || !PERSON[pid]) return '<span class="avatar avatar-empty" title="بدون مسؤول" aria-label="بدون مسؤول">' + icon('user', 'icon-sm') + '</span>';
+  if (!pid || !PERSON[pid]) return '<span class="avatar avatar-empty" title="' + tx('بدون مسؤول', 'No assignee') + '" aria-label="' + tx('بدون مسؤول', 'No assignee') + '">' + icon('user', 'icon-sm') + '</span>';
   const p = PERSON[pid]; const s = size ? ' style="width:' + size + 'px;height:' + size + 'px"' : '';
   return '<span class="avatar" style="background:' + p.color + (size ? ';width:' + size + 'px;height:' + size + 'px' : '') + '" title="' + esc(p.name) + '">' + p.initials + '</span>' + (s ? '' : '');
 }
@@ -76,7 +76,23 @@ const Lab = (() => {
   function load() {
     const saved = Store.state.lab;
     S = saved && saved.v === 1 && Array.isArray(saved.tasks) ? saved : seed();
-    if (!saved) Store.setLab(S);
+    relocalize();
+    Store.setLab(S);
+  }
+  /* Seeded training text follows the chosen language. Anything the learner
+     typed or edited is left exactly as written. */
+  function relocalize() {
+    const ar = seed().tasks.reduce((m, x) => (m[x.id] = x, m), {});
+    const en = LAB_SEED_EN;
+    const swap = (cur, a, e) => { const from = LANG === 'en' ? a : e, to = LANG === 'en' ? e : a; return from != null && cur === from ? to : cur; };
+    S.tasks.forEach(tk => {
+      if (tk.learner) { tk.title = swap(tk.title, 'مهمة جديدة', 'New task'); return; }
+      const a = ar[tk.id], e = en[tk.id]; if (!a || !e) return;
+      tk.title = swap(tk.title, a.title, e.title);
+      if (a.desc) tk.desc = swap(tk.desc, a.desc, e.desc);
+      tk.checklist.forEach(k => { const ak = a.checklist.find(x => x.id === k.id); if (ak && e.checklist) k.text = swap(k.text, ak.text, e.checklist[k.id]); });
+      tk.comments.forEach((c, i) => { if (a.comments[i] && e.comments) c.text = swap(c.text, a.comments[i].text, e.comments[i]); });
+    });
   }
   function commit(kind) { Store.setLab(S); listeners.forEach(fn => { try { fn(kind); } catch (e) { console.error(e); } }); }
   function log(entry) { entry.at = Date.now(); S.log.push(entry); if (S.log.length > 400) S.log.splice(0, S.log.length - 400); }
@@ -100,14 +116,14 @@ const Lab = (() => {
           log({ type: 'status', id, from, to, via: via || S.ui.view });
         } else log({ type: 'field', id, field: k, via: via || S.ui.view });
         if (['status', 'assignee', 'priority', 'due', 'start', 'list', 'title'].includes(k)) {
-          tk.activity.push({ at: Date.now(), text: activityText(k, from, to) });
+          tk.activity.push({ at: Date.now(), k, from, to });
         }
       });
       commit('task');
     },
     create(data) {
       const id = 'n' + Date.now().toString(36);
-      const tk = Object.assign({ id, list: 'weekly', title: '', desc: '', assignee: '', priority: '', status: 'todo', start: '', due: '', estimate: 0, tags: [], checklist: [], comments: [], deps: [], created: Date.now(), completedAt: null, learner: true, activity: [{ at: Date.now(), text: 'أنشأتَ المهمة' }] }, data);
+      const tk = Object.assign({ id, list: 'weekly', title: '', desc: '', assignee: '', priority: '', status: 'todo', start: '', due: '', estimate: 0, tags: [], checklist: [], comments: [], deps: [], created: Date.now(), completedAt: null, learner: true, activity: [{ at: Date.now(), created: true }] }, data);
       S.tasks.unshift(tk);
       log({ type: 'create', id, via: S.ui.view });
       commit('task');
@@ -118,7 +134,8 @@ const Lab = (() => {
     removeChecklist(id, kid) { const tk = this.task(id); if (!tk) return; tk.checklist = tk.checklist.filter(x => x.id !== kid); commit('task'); },
     addComment(id, text) { const tk = this.task(id); if (!tk || !text.trim()) return; tk.comments.push({ by: 'me', text: text.trim(), at: Date.now() }); log({ type: 'comment', id, mention: /@/.test(text) }); commit('task'); },
     logOpen(id) { log({ type: 'open', id, via: S.ui.view }); },
-    reset() { S = seed(); Store.setLab(S); commit('reset'); },
+    reset() { S = seed(); relocalize(); Store.setLab(S); commit('reset'); },
+    relocalize() { if (S) { relocalize(); Store.setLab(S); } },
     visible() {
       const u = S.ui; const q = u.q.trim();
       let out = S.tasks.filter(tk =>
@@ -133,16 +150,22 @@ const Lab = (() => {
   };
 })();
 
-function activityText(k, from, to) {
-  const lbl = { status: 'الحالة', assignee: 'المسؤول', priority: 'الأولوية', due: 'تاريخ الاستحقاق', start: 'تاريخ البدء', list: 'القائمة', title: 'العنوان' }[k];
-  const fmt = v => k === 'status' ? STATUS[v].en : k === 'assignee' ? (v ? PERSON[v].short : 'بدون') : k === 'priority' ? (v ? PRIORITY[v].en : 'بدون') : (k === 'due' || k === 'start') ? (v ? fmtDate(v) : 'بدون') : k === 'list' ? LAB_LIST[v].name : v;
-  return 'غيّرتَ ' + lbl + ' من «' + fmt(from) + '» إلى «' + fmt(to) + '»';
+/* Activity entries are stored as data and worded at display time, so the
+   log reads naturally in whichever language is active. */
+function activityText(a) {
+  if (a.text) return a.text; // entries saved by an earlier version
+  if (a.created) return tx('أنشأتَ المهمة', 'You created the task');
+  const k = a.k;
+  const lbl = { status: tx('الحالة', 'status'), assignee: tx('المسؤول', 'assignee'), priority: tx('الأولوية', 'priority'), due: tx('تاريخ الاستحقاق', 'due date'), start: tx('تاريخ البدء', 'start date'), list: tx('القائمة', 'List'), title: tx('العنوان', 'title') }[k];
+  const none = tx('بدون', 'none');
+  const fmt = v => k === 'status' ? STATUS[v].en : k === 'assignee' ? (v ? PERSON[v].short : none) : k === 'priority' ? (v ? PRIORITY[v].en : none) : (k === 'due' || k === 'start') ? (v ? fmtDate(v) : none) : k === 'list' ? LAB_LIST[v].name : v;
+  return tx('غيّرتَ ' + lbl + ' من «' + fmt(a.from) + '» إلى «' + fmt(a.to) + '»', 'You changed the ' + lbl + ' from “' + fmt(a.from) + '” to “' + fmt(a.to) + '”');
 }
 function sortTasks(arr, how) {
   const a = arr.slice();
   if (how === 'due') a.sort((x, y) => (x.due || '9999').localeCompare(y.due || '9999'));
   else if (how === 'priority') a.sort((x, y) => (x.priority ? PRIORITY[x.priority].rank : 9) - (y.priority ? PRIORITY[y.priority].rank : 9));
-  else if (how === 'title') a.sort((x, y) => x.title.localeCompare(y.title, 'ar'));
+  else if (how === 'title') a.sort((x, y) => x.title.localeCompare(y.title, LANG));
   return a;
 }
 
@@ -151,7 +174,7 @@ const CHALLENGES = [
   { id: 'c1', title: 'مهمة التقرير الأسبوعي', text: 'أنشئ مهمة لمراجعة التقرير الأسبوعي، وعيّن لها مسؤولاً، وحدد تاريخ استحقاق، ثم انقلها إلى IN PROGRESS.',
     steps: ['أنشئ مهمة جديدة يتضمن عنوانها «التقرير الأسبوعي»', 'عيّن لها مسؤولاً', 'حدد تاريخ استحقاق', 'انقلها إلى IN PROGRESS'],
     check(S) {
-      const c = S.tasks.filter(x => x.learner && /التقرير\s*الأسبوعي/.test(x.title));
+      const c = S.tasks.filter(x => x.learner && /التقرير\s*الأسبوعي|weekly\s*report/i.test(x.title));
       const best = c.map(x => [true, !!x.assignee, !!x.due, x.status === 'progress']).sort((a, b) => b.filter(Boolean).length - a.filter(Boolean).length)[0];
       return best || [false, false, false, false];
     } },
@@ -205,17 +228,17 @@ const LabUI = (() => {
     root = el;
     root.innerHTML =
       '<div class="page">' +
-      '<div class="page-head"><div><div class="breadcrumbs"><a href="#/home">الرئيسية</a><span aria-hidden="true">/</span><span>مختبر التطبيق</span></div>' +
-      '<h1>مختبر التطبيق <bdi class="en" dir="ltr" style="font-weight:400;color:var(--ink-3);font-size:1rem">Practice Lab</bdi></h1>' +
-      '<p>مساحة عمل تدريبية على نمط ClickUp ببيانات وهمية. أنشئ المهام وعدّلها وحرّكها. كل طريقة عرض، وكل رسم في استوديو لوحات المعلومات، يقرأ البيانات نفسها.</p></div>' +
-      '<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip chip-sim">' + icon('eye', 'icon-sm') + 'محاكاة تعليمية، ليست ClickUp الحقيقي</span>' +
-      '<a class="btn btn-secondary btn-sm" href="#/studio">' + icon('chart', 'icon-sm') + 'افتح الاستوديو</a>' +
-      '<button type="button" class="btn btn-ghost btn-sm" data-act="reset">' + icon('reset', 'icon-sm') + 'إعادة ضبط المختبر</button></div></div>' +
-      (Store.ok ? '' : '<div class="storage-note warn">' + icon('alert') + '<p>التخزين المحلي غير متاح في هذا المتصفح، لذلك ستعمل التغييرات أثناء هذه الجلسة فقط وتضيع عند إغلاق الصفحة.</p></div>') +
-      '<div class="lab"><section class="panel lab-work" aria-label="مساحة العمل التدريبية"><div data-top></div><div data-tabs></div><div data-tools></div><div class="lab-view" data-view></div></section>' +
-      '<aside class="lab-side" aria-label="التحديات الموجهة"><div data-challenges></div></aside></div>' +
+      '<div class="page-head"><div><div class="breadcrumbs"><a href="#/home">' + tx('الرئيسية', 'Home') + '</a><span aria-hidden="true">/</span><span>' + tx('مختبر التطبيق', 'Practice Lab') + '</span></div>' +
+      '<h1>' + tx('مختبر التطبيق', 'Practice Lab') + enSub('Practice Lab') + '</h1>' +
+      '<p>' + tx('مساحة عمل تدريبية على نمط ClickUp ببيانات وهمية. أنشئ المهام وعدّلها وحرّكها. كل طريقة عرض، وكل رسم في استوديو لوحات المعلومات، يقرأ البيانات نفسها.', 'A ClickUp-style training workspace with fictional data. Create, edit and move tasks. Every view, and every chart in the Dashboard Studio, reads the same data.') + '</p></div>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip chip-sim">' + icon('eye', 'icon-sm') + tx('محاكاة تعليمية، ليست ClickUp الحقيقي', 'Educational simulation, not the real ClickUp') + '</span>' +
+      '<a class="btn btn-secondary btn-sm" href="#/studio">' + icon('chart', 'icon-sm') + tx('افتح الاستوديو', 'Open the Studio') + '</a>' +
+      '<button type="button" class="btn btn-ghost btn-sm" data-act="reset">' + icon('reset', 'icon-sm') + tx('إعادة ضبط المختبر', 'Reset the lab') + '</button></div></div>' +
+      (Store.ok ? '' : '<div class="storage-note warn">' + icon('alert') + '<p>' + tx('التخزين المحلي غير متاح في هذا المتصفح، لذلك ستعمل التغييرات أثناء هذه الجلسة فقط وتضيع عند إغلاق الصفحة.', 'Local storage is not available in this browser, so your changes work during this session only and are lost when you close the page.') + '</p></div>') +
+      '<div class="lab"><section class="panel lab-work" aria-label="' + tx('مساحة العمل التدريبية', 'Training workspace') + '"><div data-top></div><div data-tabs></div><div data-tools></div><div class="lab-view" data-view></div></section>' +
+      '<aside class="lab-side" aria-label="' + tx('التحديات الموجهة', 'Guided challenges') + '"><div data-challenges></div></aside></div>' +
       '</div>' +
-      '<aside class="drawer" id="taskDrawer" aria-label="تفاصيل المهمة" aria-hidden="true"></aside>';
+      '<aside class="drawer" id="taskDrawer" aria-label="' + tx('تفاصيل المهمة', 'Task details') + '" aria-hidden="true"></aside>';
     bind();
     paint();
     unsub = Lab.on(kind => { paint(); });
@@ -224,27 +247,28 @@ const LabUI = (() => {
 
   function focusKey() { const a = document.activeElement; return a && a.dataset ? a.dataset.fk : null; }
   function restoreFocus(k) { if (!k || !root) return; const el = document.querySelector('[data-fk="' + CSS.escape(k) + '"]'); if (el) el.focus({ preventScroll: true }); }
+  const space = () => tx('العمليات', 'Operations');
 
   function paint() {
     if (!root) return;
     const fk = focusKey();
     const u = Lab.ui;
-    $('[data-top]', root).innerHTML = '<div class="lab-top"><h2>' + '<span class="space-avatar started">ع</span>' + 'Space: العمليات</h2>' +
-      '<div class="lab-lists" role="group" aria-label="القوائم">' +
-      [['all', 'كل القوائم']].concat(LAB_LISTS.map(l => [l.id, l.name])).map(l => '<button type="button" data-fk="list-' + l[0] + '" data-list="' + l[0] + '" aria-pressed="' + (u.list === l[0]) + '">' + t(l[1]) + '</button>').join('') + '</div></div>';
-    $('[data-tabs]', root).innerHTML = '<div class="view-tabs" role="tablist" aria-label="طرق العرض">' +
+    $('[data-top]', root).innerHTML = '<div class="lab-top"><h2>' + '<span class="space-avatar started">' + tx('ع', 'O') + '</span>' + 'Space: ' + t(space()) + '</h2>' +
+      '<div class="lab-lists" role="group" aria-label="' + tx('القوائم', 'Lists') + '">' +
+      [['all', tx('كل القوائم', 'All Lists')]].concat(LAB_LISTS.map(l => [l.id, l.name])).map(l => '<button type="button" data-fk="list-' + l[0] + '" data-list="' + l[0] + '" aria-pressed="' + (u.list === l[0]) + '">' + t(l[1]) + '</button>').join('') + '</div></div>';
+    $('[data-tabs]', root).innerHTML = '<div class="view-tabs" role="tablist" aria-label="' + tx('طرق العرض', 'Views') + '">' +
       [['list', 'List', 'list'], ['board', 'Board', 'board'], ['calendar', 'Calendar', 'calendar'], ['table', 'Table', 'table']].map(v =>
         '<button type="button" role="tab" data-fk="view-' + v[0] + '" data-view-tab="' + v[0] + '" aria-selected="' + (u.view === v[0]) + '">' + icon(v[2], 'icon-sm') + '<span dir="ltr">' + v[1] + '</span></button>').join('') + '</div>';
     const n = Lab.activeFilterCount();
     $('[data-tools]', root).innerHTML = '<div class="lab-tools">' +
-      '<label class="visually-hidden" for="labQ">بحث في المهام</label><input class="input" id="labQ" data-fk="q" type="search" placeholder="ابحث في المهام" value="' + esc(u.q) + '">' +
-      '<label class="visually-hidden" for="labA">المسؤول</label><select class="select" id="labA" data-fk="fa" data-filter="assignee"><option value="">كل المسؤولين</option><option value="none"' + (u.assignee === 'none' ? ' selected' : '') + '>بدون مسؤول</option>' + PEOPLE.map(p => '<option value="' + p.id + '"' + (u.assignee === p.id ? ' selected' : '') + '>' + esc(p.name) + '</option>').join('') + '</select>' +
-      '<label class="visually-hidden" for="labP">الأولوية</label><select class="select" id="labP" data-fk="fp" data-filter="priority"><option value="">كل الأولويات</option>' + PRIORITIES.map(p => '<option value="' + p.key + '"' + (u.priority === p.key ? ' selected' : '') + ' dir="ltr">' + p.en + '</option>').join('') + '</select>' +
-      (u.view !== 'board' ? '<label class="visually-hidden" for="labS">الحالة</label><select class="select" id="labS" data-fk="fs" data-filter="status"><option value="">كل الحالات</option>' + STATUSES.map(s => '<option value="' + s.key + '"' + (u.status === s.key ? ' selected' : '') + ' dir="ltr">' + s.en + '</option>').join('') + '</select>' : '') +
-      '<label class="visually-hidden" for="labSort">الترتيب</label><select class="select" id="labSort" data-fk="sort" data-sort><option value="none">الترتيب: الافتراضي</option><option value="due"' + (u.sort === 'due' ? ' selected' : '') + '>Sort: Due date</option><option value="priority"' + (u.sort === 'priority' ? ' selected' : '') + '>Sort: Priority</option><option value="title"' + (u.sort === 'title' ? ' selected' : '') + '>Sort: Task name</option></select>' +
-      (n ? '<button type="button" class="btn btn-ghost btn-sm" data-act="clear" data-fk="clear">' + icon('x', 'icon-sm') + 'مسح المرشّحات (' + n + ')</button>' : '') +
-      '<span class="spacer"></span><span class="filter-summary" aria-live="polite">' + Lab.visible().length + ' مهمة ظاهرة</span>' +
-      '<button type="button" class="btn btn-primary btn-sm" data-act="new" data-fk="new">' + icon('plus', 'icon-sm') + 'مهمة جديدة</button></div>';
+      '<label class="visually-hidden" for="labQ">' + tx('بحث في المهام', 'Search tasks') + '</label><input class="input" id="labQ" data-fk="q" type="search" placeholder="' + tx('ابحث في المهام', 'Search tasks') + '" value="' + esc(u.q) + '">' +
+      '<label class="visually-hidden" for="labA">' + tx('المسؤول', 'Assignee') + '</label><select class="select" id="labA" data-fk="fa" data-filter="assignee"><option value="">' + tx('كل المسؤولين', 'All assignees') + '</option><option value="none"' + (u.assignee === 'none' ? ' selected' : '') + '>' + tx('بدون مسؤول', 'No assignee') + '</option>' + PEOPLE.map(p => '<option value="' + p.id + '"' + (u.assignee === p.id ? ' selected' : '') + '>' + esc(p.name) + '</option>').join('') + '</select>' +
+      '<label class="visually-hidden" for="labP">' + tx('الأولوية', 'Priority') + '</label><select class="select" id="labP" data-fk="fp" data-filter="priority"><option value="">' + tx('كل الأولويات', 'All priorities') + '</option>' + PRIORITIES.map(p => '<option value="' + p.key + '"' + (u.priority === p.key ? ' selected' : '') + ' dir="ltr">' + p.en + '</option>').join('') + '</select>' +
+      (u.view !== 'board' ? '<label class="visually-hidden" for="labS">' + tx('الحالة', 'Status') + '</label><select class="select" id="labS" data-fk="fs" data-filter="status"><option value="">' + tx('كل الحالات', 'All statuses') + '</option>' + STATUSES.map(s => '<option value="' + s.key + '"' + (u.status === s.key ? ' selected' : '') + ' dir="ltr">' + s.en + '</option>').join('') + '</select>' : '') +
+      '<label class="visually-hidden" for="labSort">' + tx('الترتيب', 'Sort') + '</label><select class="select" id="labSort" data-fk="sort" data-sort><option value="none">' + tx('الترتيب: الافتراضي', 'Sort: Default') + '</option><option value="due"' + (u.sort === 'due' ? ' selected' : '') + '>Sort: Due date</option><option value="priority"' + (u.sort === 'priority' ? ' selected' : '') + '>Sort: Priority</option><option value="title"' + (u.sort === 'title' ? ' selected' : '') + '>Sort: Task name</option></select>' +
+      (n ? '<button type="button" class="btn btn-ghost btn-sm" data-act="clear" data-fk="clear">' + icon('x', 'icon-sm') + tx('مسح المرشّحات', 'Clear filters') + ' (' + n + ')</button>' : '') +
+      '<span class="spacer"></span><span class="filter-summary" aria-live="polite">' + tx(Lab.visible().length + ' مهمة ظاهرة', nEn(Lab.visible().length, 'task') + ' shown') + '</span>' +
+      '<button type="button" class="btn btn-primary btn-sm" data-act="new" data-fk="new">' + icon('plus', 'icon-sm') + tx('مهمة جديدة', 'New task') + '</button></div>';
     const v = $('[data-view]', root);
     v.innerHTML = VIEWS[u.view]();
     $('[data-challenges]', root).innerHTML = challengesHTML();
@@ -256,7 +280,7 @@ const LabUI = (() => {
   function rowHTML(tk) {
     const open = Lab.ui.open === tk.id;
     return '<div class="lab-row' + (open ? ' is-open' : '') + '" data-open="' + tk.id + '">' +
-      '<button type="button" class="lr-title" data-fk="row-' + tk.id + '" data-open="' + tk.id + '" aria-label="افتح المهمة: ' + esc(tk.title) + '">' + '<span class="st-dot st-' + tk.status + '" aria-hidden="true"></span><span>' + t(tk.title) + '</span>' +
+      '<button type="button" class="lr-title" data-fk="row-' + tk.id + '" data-open="' + tk.id + '" aria-label="' + tx('افتح المهمة: ', 'Open task: ') + esc(tk.title) + '">' + '<span class="st-dot st-' + tk.status + '" aria-hidden="true"></span><span>' + t(tk.title) + '</span>' +
       (tk.checklist.length ? '<small class="muted num" style="flex:none">' + icon('checklist', 'icon-sm') + '</small><small class="muted num">' + tk.checklist.filter(k => k.done).length + '/' + tk.checklist.length + '</small>' : '') +
       (tk.comments.length ? '<small class="muted num" style="flex:none;display:inline-flex;gap:2px">' + icon('message', 'icon-sm') + tk.comments.length + '</small>' : '') + '</button>' +
       '<span class="hide-sm">' + avatarHTML(tk.assignee) + '</span>' +
@@ -267,7 +291,7 @@ const LabUI = (() => {
   function dueHTML(tk) {
     if (!tk.due) return '<span class="date-chip muted">-</span>';
     const od = isOverdue(tk); const soon = !od && tk.status !== 'done' && daysBetween(todayISO(), tk.due) <= 1;
-    return '<span class="date-chip' + (od ? ' overdue' : soon ? ' soon' : '') + '">' + (od ? '<span class="visually-hidden">متأخرة: </span>' : '') + relDate(tk.due) + '</span>';
+    return '<span class="date-chip' + (od ? ' overdue' : soon ? ' soon' : '') + '">' + (od ? '<span class="visually-hidden">' + tx('متأخرة: ', 'Overdue: ') + '</span>' : '') + relDate(tk.due) + '</span>';
   }
 
   const VIEWS = {
@@ -280,17 +304,17 @@ const LabUI = (() => {
           const g = tasks.filter(x => x.status === s.key);
           return '<section class="lab-group" aria-label="' + s.en + '"><div class="lab-group-h">' + badge(s.key) + '<span class="num">' + g.length + '</span></div>' +
             g.map(rowHTML).join('') +
-            (s.key === 'todo' ? '<form class="add-row" data-add="todo"><label class="visually-hidden" for="addTodo">عنوان مهمة جديدة</label><input class="input" id="addTodo" data-fk="add-todo" placeholder="+ أضف مهمة إلى TO DO ثم اضغط Enter"><button class="btn btn-soft btn-sm" type="submit">إضافة</button></form>' : '') + '</section>';
+            (s.key === 'todo' ? '<form class="add-row" data-add="todo"><label class="visually-hidden" for="addTodo">' + tx('عنوان مهمة جديدة', 'New task name') + '</label><input class="input" id="addTodo" data-fk="add-todo" placeholder="' + tx('+ أضف مهمة إلى TO DO ثم اضغط Enter', '+ Add a task to TO DO and press Enter') + '"><button class="btn btn-soft btn-sm" type="submit">' + tx('إضافة', 'Add') + '</button></form>' : '') + '</section>';
         }).join('');
     },
     board() {
       const tasks = Lab.visible();
-      return '<p class="kb-hint" style="padding:10px 16px 0">اسحب البطاقة إلى عمود آخر، أو استخدم «نقل إلى»، أو من لوحة المفاتيح: ركّز على البطاقة واضغط <kbd>Space</kbd> لالتقاطها، ثم الأسهم للتنقل بين الأعمدة، ثم <kbd>Space</kbd> للإفلات.</p>' +
+      return '<p class="kb-hint" style="padding:10px 16px 0">' + tx('اسحب البطاقة إلى عمود آخر، أو استخدم «نقل إلى»، أو من لوحة المفاتيح: ركّز على البطاقة واضغط <kbd>Space</kbd> لالتقاطها، ثم الأسهم للتنقل بين الأعمدة، ثم <kbd>Space</kbd> للإفلات.', 'Drag a card to another column, or use “Move to”. With the keyboard: focus a card and press <kbd>Space</kbd> to pick it up, use the arrow keys to move between columns, then press <kbd>Space</kbd> to drop it.') + '</p>' +
         '<div class="board" data-board>' + STATUSES.map(s => {
           const g = tasks.filter(x => x.status === s.key);
-          return '<section class="board-col" data-col="' + s.key + '" aria-label="' + s.en + '، ' + g.length + ' مهام"><div class="board-col-h">' + badge(s.key) + '<span class="count">' + g.length + '</span></div>' +
+          return '<section class="board-col" data-col="' + s.key + '" aria-label="' + s.en + tx('، ' + g.length + ' مهام', ', ' + nEn(g.length, 'task')) + '"><div class="board-col-h">' + badge(s.key) + '<span class="count">' + g.length + '</span></div>' +
             g.map(cardHTML).join('') +
-            '<form class="board-add" data-add="' + s.key + '"><label class="visually-hidden" for="badd-' + s.key + '">مهمة جديدة في ' + s.en + '</label><input class="input" id="badd-' + s.key + '" data-fk="badd-' + s.key + '" placeholder="+ مهمة"><button class="icon-btn" type="submit" aria-label="إضافة">' + icon('plus', 'icon-sm') + '</button></form></section>';
+            '<form class="board-add" data-add="' + s.key + '"><label class="visually-hidden" for="badd-' + s.key + '">' + tx('مهمة جديدة في ', 'New task in ') + s.en + '</label><input class="input" id="badd-' + s.key + '" data-fk="badd-' + s.key + '" placeholder="' + tx('+ مهمة', '+ Task') + '"><button class="icon-btn" type="submit" aria-label="' + tx('إضافة', 'Add') + '">' + icon('plus', 'icon-sm') + '</button></form></section>';
         }).join('') + '</div>';
     },
     calendar() {
@@ -304,20 +328,20 @@ const LabUI = (() => {
       while (cells.length % 7) { const last = parseISO(cells[cells.length - 1].iso); last.setDate(last.getDate() + 1); cells.push({ iso: isoDate(last), other: true }); }
       const T = todayISO();
       const noDue = tasks.filter(x => !x.due);
-      return '<div class="cal"><div class="cal-head"><button type="button" class="icon-btn" data-cal="-1" data-fk="cal-prev" aria-label="الشهر السابق">' + icon('chev-right') + '</button>' +
-        '<h3 style="min-width:140px;text-align:center">' + AR_MONTHS[m - 1] + ' ' + y + '</h3><button type="button" class="icon-btn" data-cal="1" data-fk="cal-next" aria-label="الشهر التالي">' + icon('chev-left') + '</button>' +
-        '<button type="button" class="btn btn-ghost btn-sm" data-cal="0" data-fk="cal-today">اليوم</button><span class="spacer" style="flex:1"></span><span class="help-text">المهام تظهر في يوم استحقاقها</span></div>' +
-        '<div class="cal-grid" role="grid" aria-label="تقويم ' + AR_MONTHS[m - 1] + '">' + AR_DOW.map(d => '<div class="cal-dow" role="columnheader">' + d + '</div>').join('') +
-        cells.map(c => { const list = tasks.filter(x => x.due === c.iso); return '<div class="cal-day' + (c.other ? ' other' : '') + (c.iso === T ? ' today' : '') + '" role="gridcell" aria-label="' + fmtDate(c.iso, true) + (list.length ? '، ' + list.length + ' مهام' : '') + '"><span class="d">' + parseISO(c.iso).getDate() + '</span>' +
+      return '<div class="cal"><div class="cal-head"><button type="button" class="icon-btn" data-cal="-1" data-fk="cal-prev" aria-label="' + tx('الشهر السابق', 'Previous month') + '">' + icon('back') + '</button>' +
+        '<h3 style="min-width:140px;text-align:center">' + monthName(m - 1) + ' ' + y + '</h3><button type="button" class="icon-btn" data-cal="1" data-fk="cal-next" aria-label="' + tx('الشهر التالي', 'Next month') + '">' + icon('fwd') + '</button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-cal="0" data-fk="cal-today">' + tx('اليوم', 'Today') + '</button><span class="spacer" style="flex:1"></span><span class="help-text">' + tx('المهام تظهر في يوم استحقاقها', 'Tasks appear on their due date') + '</span></div>' +
+        '<div class="cal-grid" role="grid" aria-label="' + tx('تقويم ', 'Calendar, ') + monthName(m - 1) + '">' + dowNames().map(d => '<div class="cal-dow" role="columnheader">' + d + '</div>').join('') +
+        cells.map(c => { const list = tasks.filter(x => x.due === c.iso); return '<div class="cal-day' + (c.other ? ' other' : '') + (c.iso === T ? ' today' : '') + '" role="gridcell" aria-label="' + fmtDate(c.iso, true) + (list.length ? tx('، ' + list.length + ' مهام', ', ' + nEn(list.length, 'task')) : '') + '"><span class="d">' + parseISO(c.iso).getDate() + '</span>' +
           list.map(x => '<button type="button" class="cal-task" data-open="' + x.id + '" data-fk="cal-' + x.id + '" title="' + esc(x.title) + '"><span class="st-dot st-' + x.status + '" aria-hidden="true"></span><span class="t">' + t(x.title) + '</span><span class="visually-hidden"> ' + STATUS[x.status].en + '</span></button>').join('') + '</div>'; }).join('') + '</div>' +
-        (noDue.length ? '<p class="help-text" style="margin-top:10px">بدون تاريخ استحقاق: ' + noDue.map(x => '<button type="button" class="link-btn" data-open="' + x.id + '">' + t(x.title) + '</button>').join('، ') + '</p>' : '') + '</div>';
+        (noDue.length ? '<p class="help-text" style="margin-top:10px">' + tx('بدون تاريخ استحقاق: ', 'No due date: ') + noDue.map(x => '<button type="button" class="link-btn" data-open="' + x.id + '">' + t(x.title) + '</button>').join(tx('، ', ', ')) + '</p>' : '') + '</div>';
     },
     table() {
       const tasks = Lab.visible();
       if (!tasks.length) return emptyHTML();
-      return '<div class="table-wrap"><table class="data-table"><caption class="visually-hidden">مهام المختبر في جدول</caption><thead><tr><th scope="col">Task</th><th scope="col">List</th><th scope="col">Status</th><th scope="col">Assignee</th><th scope="col">Priority</th><th scope="col">Start date</th><th scope="col">Due date</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Checklist</th></tr></thead><tbody>' +
+      return '<div class="table-wrap"><table class="data-table"><caption class="visually-hidden">' + tx('مهام المختبر في جدول', 'Lab tasks in a table') + '</caption><thead><tr><th scope="col">Task</th><th scope="col">List</th><th scope="col">Status</th><th scope="col">Assignee</th><th scope="col">Priority</th><th scope="col">Start date</th><th scope="col">Due date</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Checklist</th></tr></thead><tbody>' +
         tasks.map(x => '<tr><td><button type="button" class="linkish" data-open="' + x.id + '" data-fk="tbl-' + x.id + '">' + t(x.title) + '</button></td><td>' + t(LAB_LIST[x.list].name) + '</td>' +
-          '<td><label class="visually-hidden" for="ts-' + x.id + '">حالة ' + esc(x.title) + '</label><select class="select select-sm" id="ts-' + x.id + '" data-fk="ts-' + x.id + '" data-set="status" data-id="' + x.id + '" style="width:auto">' + STATUSES.map(s => '<option value="' + s.key + '"' + (s.key === x.status ? ' selected' : '') + ' dir="ltr">' + s.en + '</option>').join('') + '</select></td>' +
+          '<td><label class="visually-hidden" for="ts-' + x.id + '">' + tx('حالة ', 'Status of ') + esc(x.title) + '</label><select class="select select-sm" id="ts-' + x.id + '" data-fk="ts-' + x.id + '" data-set="status" data-id="' + x.id + '" style="width:auto">' + STATUSES.map(s => '<option value="' + s.key + '"' + (s.key === x.status ? ' selected' : '') + ' dir="ltr">' + s.en + '</option>').join('') + '</select></td>' +
           '<td>' + (x.assignee ? t(PERSON[x.assignee].short) : '<span class="muted">-</span>') + '</td><td>' + prioHTML(x.priority) + '</td><td class="num">' + (x.start ? fmtDate(x.start) : '-') + '</td><td>' + dueHTML(x) + '</td>' +
           '<td class="num" dir="ltr">' + (x.estimate ? x.estimate + 'h' : '-') + '</td><td class="num">' + (x.checklist.length ? x.checklist.filter(k => k.done).length + '/' + x.checklist.length : '-') + '</td></tr>').join('') +
         '</tbody></table></div>';
@@ -325,26 +349,26 @@ const LabUI = (() => {
   };
 
   function cardHTML(x) {
-    return '<article class="bcard' + (picked === x.id ? ' picked' : '') + '" tabindex="0" data-card="' + x.id + '" data-fk="card-' + x.id + '" aria-roledescription="بطاقة قابلة للسحب" aria-label="' + esc(x.title) + '، ' + STATUS[x.status].en + '">' +
+    return '<article class="bcard' + (picked === x.id ? ' picked' : '') + '" tabindex="0" data-card="' + x.id + '" data-fk="card-' + x.id + '" aria-roledescription="' + tx('بطاقة قابلة للسحب', 'draggable card') + '" aria-label="' + esc(x.title) + tx('، ', ', ') + STATUS[x.status].en + '">' +
       '<button type="button" class="bcard-title" data-open="' + x.id + '" tabindex="-1">' + t(x.title) + '</button>' +
       '<div class="bcard-meta">' + avatarHTML(x.assignee) + dueHTML(x) + prioHTML(x.priority) + '</div>' +
-      '<div class="bcard-move"><label class="visually-hidden" for="mv-' + x.id + '">نقل إلى</label><select class="select" id="mv-' + x.id + '" data-fk="mv-' + x.id + '" data-set="status" data-id="' + x.id + '" data-via="board">' +
-      STATUSES.map(s => '<option value="' + s.key + '"' + (s.key === x.status ? ' selected' : '') + ' dir="ltr">' + (s.key === x.status ? s.en : 'نقل إلى ' + s.en) + '</option>').join('') + '</select>' +
+      '<div class="bcard-move"><label class="visually-hidden" for="mv-' + x.id + '">' + tx('نقل إلى', 'Move to') + '</label><select class="select" id="mv-' + x.id + '" data-fk="mv-' + x.id + '" data-set="status" data-id="' + x.id + '" data-via="board">' +
+      STATUSES.map(s => '<option value="' + s.key + '"' + (s.key === x.status ? ' selected' : '') + ' dir="ltr">' + (s.key === x.status ? s.en : tx('نقل إلى ', 'Move to ') + s.en) + '</option>').join('') + '</select>' +
       '<span class="muted small" style="margin-inline-start:auto">' + t(LAB_LIST[x.list].name) + '</span></div></article>';
   }
   function emptyHTML() {
-    return '<div class="empty-state">' + icon('filter') + '<h3>لا توجد مهام تطابق المرشّحات الحالية</h3><p>المرشّح يخفي المهام ولا يحذفها. امسح المرشّحات لرؤية كل المهام.</p>' +
-      '<button type="button" class="btn btn-secondary" data-act="clear">مسح المرشّحات</button></div>';
+    return '<div class="empty-state">' + icon('filter') + '<h3>' + tx('لا توجد مهام تطابق المرشّحات الحالية', 'No tasks match the current filters') + '</h3><p>' + tx('المرشّح يخفي المهام ولا يحذفها. امسح المرشّحات لرؤية كل المهام.', 'A filter hides tasks; it does not delete them. Clear the filters to see every task.') + '</p>' +
+      '<button type="button" class="btn btn-secondary" data-act="clear">' + tx('مسح المرشّحات', 'Clear filters') + '</button></div>';
   }
 
   function challengesHTML() {
     const S = Lab.state;
     const done = CHALLENGES.filter(c => Store.state.challenges[c.id]).length;
-    return '<div class="challenge-head"><h2 style="font-size:1rem">التحديات الموجهة</h2><span class="chip num">' + done + ' / ' + CHALLENGES.length + '</span></div>' +
-      '<p class="help-text" style="margin:4px 0 10px">كل تحدٍّ يتحقق من أفعالك الفعلية في المختبر.</p><div class="challenge-list">' +
+    return '<div class="challenge-head"><h2 style="font-size:1rem">' + tx('التحديات الموجهة', 'Guided challenges') + '</h2><span class="chip num">' + done + ' / ' + CHALLENGES.length + '</span></div>' +
+      '<p class="help-text" style="margin:4px 0 10px">' + tx('كل تحدٍّ يتحقق من أفعالك الفعلية في المختبر.', 'Each challenge checks what you actually do in the lab.') + '</p><div class="challenge-list">' +
       CHALLENGES.map(c => {
         const res = c.check(S); const all = res.every(Boolean);
-        if (all && Store.completeChallenge(c.id)) setTimeout(() => toast('أحسنت! أكملت تحدي «' + c.title + '»'), 50);
+        if (all && Store.completeChallenge(c.id)) setTimeout(() => toast(tx('أحسنت! أكملت تحدي «' + c.title + '»', 'Well done! You completed the “' + c.title + '” challenge')), 50);
         const isDone = !!Store.state.challenges[c.id];
         return '<div class="panel challenge' + (isDone ? ' is-done' : '') + '"><h3>' + (isDone ? '<span style="color:var(--ok)">' + icon('check-circle') + '</span>' : icon('flask')) + '<span>' + t(c.title) + '</span></h3><p class="small">' + t(c.text) + '</p>' +
           '<ul class="goal-list">' + c.steps.map((s, i) => '<li class="' + (res[i] || isDone ? 'met' : '') + '"><span class="gtick">' + (res[i] || isDone ? icon('check') : '') + '</span><span class="small">' + t(s) + '</span></li>').join('') + '</ul></div>';
@@ -373,42 +397,43 @@ const LabUI = (() => {
     const deps = x.deps.map(id => Lab.task(id)).filter(Boolean);
     const waitingOnMe = Lab.tasks().filter(o => o.deps.includes(x.id));
     const fk = focusKey();
-    d.innerHTML = '<div class="drawer-head"><span class="crumb">' + t('Space: العمليات / ' + LAB_LIST[x.list].name) + '</span><span style="flex:1"></span>' +
-      '<span class="chip chip-sim">' + icon('eye', 'icon-sm') + 'محاكاة</span><button type="button" class="icon-btn" data-act="close" aria-label="إغلاق تفاصيل المهمة">' + icon('x') + '</button></div>' +
+    const lbl = (ar, en) => isEN() ? en : ar + ' <bdi class="en" dir="ltr">' + en + '</bdi>';
+    d.innerHTML = '<div class="drawer-head"><span class="crumb">' + t('Space: ' + space() + ' / ' + LAB_LIST[x.list].name) + '</span><span style="flex:1"></span>' +
+      '<span class="chip chip-sim">' + icon('eye', 'icon-sm') + tx('محاكاة', 'Simulation') + '</span><button type="button" class="icon-btn" data-act="close" aria-label="' + tx('إغلاق تفاصيل المهمة', 'Close task details') + '">' + icon('x') + '</button></div>' +
       '<div class="drawer-body">' +
-      '<label class="visually-hidden" for="dTitle">عنوان المهمة</label><input class="input title-input" id="dTitle" data-fk="d-title" data-set="title" value="' + esc(x.title) + '">' +
-      (isOverdue(x) ? '<div class="feedback bad">' + icon('alert') + '<div>متأخرة: تاريخ الاستحقاق ' + fmtDate(x.due) + ' مضى والمهمة غير مغلقة.</div></div>' : '') +
+      '<label class="visually-hidden" for="dTitle">' + tx('عنوان المهمة', 'Task name') + '</label><input class="input title-input" id="dTitle" data-fk="d-title" data-set="title" value="' + esc(x.title) + '" dir="auto">' +
+      (isOverdue(x) ? '<div class="feedback bad">' + icon('alert') + '<div>' + tx('متأخرة: تاريخ الاستحقاق ' + fmtDate(x.due) + ' مضى والمهمة غير مغلقة.', 'Overdue: the due date ' + fmtDate(x.due) + ' has passed and the task is not closed.') + '</div></div>' : '') +
       '<div class="props">' +
       prop('Status', 'الحالة', '<select class="select select-sm" id="dStatus" data-fk="d-status" data-set="status">' + STATUSES.map(s => '<option value="' + s.key + '"' + (s.key === x.status ? ' selected' : '') + ' dir="ltr">' + s.en + '</option>').join('') + '</select>', 'dStatus') +
-      prop('Assignee', 'المسؤول', '<select class="select select-sm" id="dAs" data-fk="d-as" data-set="assignee"><option value="">بدون مسؤول</option>' + PEOPLE.map(p => '<option value="' + p.id + '"' + (p.id === x.assignee ? ' selected' : '') + '>' + esc(p.name) + '</option>').join('') + '</select>', 'dAs') +
-      prop('Priority', 'الأولوية', '<select class="select select-sm" id="dPr" data-fk="d-pr" data-set="priority"><option value="">بدون</option>' + PRIORITIES.map(p => '<option value="' + p.key + '"' + (p.key === x.priority ? ' selected' : '') + ' dir="ltr">' + p.en + '</option>').join('') + '</select>', 'dPr') +
+      prop('Assignee', 'المسؤول', '<select class="select select-sm" id="dAs" data-fk="d-as" data-set="assignee"><option value="">' + tx('بدون مسؤول', 'No assignee') + '</option>' + PEOPLE.map(p => '<option value="' + p.id + '"' + (p.id === x.assignee ? ' selected' : '') + '>' + esc(p.name) + '</option>').join('') + '</select>', 'dAs') +
+      prop('Priority', 'الأولوية', '<select class="select select-sm" id="dPr" data-fk="d-pr" data-set="priority"><option value="">' + tx('بدون', 'None') + '</option>' + PRIORITIES.map(p => '<option value="' + p.key + '"' + (p.key === x.priority ? ' selected' : '') + ' dir="ltr">' + p.en + '</option>').join('') + '</select>', 'dPr') +
       prop('Start date', 'تاريخ البدء', '<input type="date" class="input input-sm" id="dStart" data-fk="d-start" data-set="start" value="' + x.start + '">', 'dStart') +
       prop('Due date', 'تاريخ الاستحقاق', '<input type="date" class="input input-sm" id="dDue" data-fk="d-due" data-set="due" value="' + x.due + '">', 'dDue') +
-      prop('Time estimate', 'تقدير الوقت (ساعات)', '<input type="number" min="0" max="80" step="0.5" class="input input-sm" id="dEst" data-fk="d-est" data-set="estimate" value="' + (x.estimate || '') + '" dir="ltr">', 'dEst') +
+      prop('Time estimate', 'تقدير الوقت (ساعات)', '<input type="number" min="0" max="80" step="0.5" class="input input-sm" id="dEst" data-fk="d-est" data-set="estimate" value="' + (x.estimate || '') + '" dir="ltr">', 'dEst', 'Time estimate (hours)') +
       prop('List', 'القائمة', '<select class="select select-sm" id="dList" data-fk="d-list" data-set="list">' + LAB_LISTS.map(l => '<option value="' + l.id + '"' + (l.id === x.list ? ' selected' : '') + '>' + esc(l.name) + '</option>').join('') + '</select>', 'dList') +
-      prop('Tags', 'الوسوم', '<input class="input input-sm" id="dTags" data-fk="d-tags" data-set="tags" value="' + esc(x.tags.join('، ')) + '" placeholder="افصل بفاصلة">', 'dTags') +
+      prop('Tags', 'الوسوم', '<input class="input input-sm" id="dTags" data-fk="d-tags" data-set="tags" value="' + esc(x.tags.join(tx('، ', ', '))) + '" placeholder="' + tx('افصل بفاصلة', 'Separate with commas') + '">', 'dTags') +
       '</div>' +
-      (deps.length || waitingOnMe.length ? '<div><p class="field-label">Dependencies</p><ul class="activity" style="color:var(--ink-2)">' + deps.map(o => '<li>' + icon('link', 'icon-sm') + ' تنتظر <bdi dir="ltr">(Waiting on)</bdi>: ' + t(o.title) + ' ' + badge(o.status) + '</li>').join('') + waitingOnMe.map(o => '<li>' + icon('link', 'icon-sm') + ' تحجب <bdi dir="ltr">(Blocking)</bdi>: ' + t(o.title) + '</li>').join('') + '</ul></div>' : '') +
-      '<div class="field"><label for="dDesc">الوصف <bdi class="en" dir="ltr">Description</bdi></label><textarea class="textarea" id="dDesc" data-fk="d-desc" data-set="desc" placeholder="المطلوب: ... يُعدّ منجزاً عندما: ...">' + esc(x.desc) + '</textarea></div>' +
-      '<div><p class="field-label" id="ckLbl">قائمة التحقق <bdi class="en" dir="ltr">Checklist</bdi> <span class="num muted">' + x.checklist.filter(k => k.done).length + '/' + x.checklist.length + '</span></p><ul class="checklist" aria-labelledby="ckLbl">' +
-      x.checklist.map(k => '<li class="' + (k.done ? 'done' : '') + '"><input type="checkbox" id="ck-' + k.id + '" data-fk="ck-' + k.id + '" data-ck="' + k.id + '"' + (k.done ? ' checked' : '') + '><label for="ck-' + k.id + '"><span>' + t(k.text) + '</span></label><button type="button" class="icon-btn" data-ckdel="' + k.id + '" aria-label="حذف البند: ' + esc(k.text) + '">' + icon('trash', 'icon-sm') + '</button></li>').join('') + '</ul>' +
-      '<form class="add-row" style="padding:6px 0 0" data-ckadd><label class="visually-hidden" for="ckNew">بند جديد</label><input class="input input-sm" id="ckNew" data-fk="ck-new" placeholder="+ أضف بنداً"><button class="btn btn-soft btn-sm" type="submit">إضافة</button></form></div>' +
-      '<div><p class="field-label">التعليقات <bdi class="en" dir="ltr">Comments</bdi></p><div class="comments">' +
-      (x.comments.length ? x.comments.map(c => '<div class="comment">' + avatarHTML(c.by) + '<div class="bubble"><small>' + t(PERSON[c.by].short) + '، ' + fmtStamp(c.at) + '</small>' + t(c.text).replace(/@([؀-ۿ\w]+)/g, '<b style="color:var(--accent-ink)">@$1</b>') + '</div></div>').join('') : '<p class="help-text">لا توجد تعليقات بعد.</p>') +
-      '</div><form data-cmadd style="display:grid;gap:6px;margin-top:8px"><label class="visually-hidden" for="cmNew">تعليق جديد</label><textarea class="textarea" id="cmNew" data-fk="cm-new" style="min-height:64px" placeholder="اكتب تعليقاً. استخدم @ لإشارة زميل، مثل @مريم"></textarea><div><button class="btn btn-soft btn-sm" type="submit">' + icon('message', 'icon-sm') + 'إرسال التعليق</button></div></form></div>' +
-      '<div><p class="field-label">سجل النشاط <bdi class="en" dir="ltr">Activity</bdi></p><ul class="activity">' + (x.activity.length ? x.activity.slice().reverse().slice(0, 8).map(a => '<li>' + fmtStamp(a.at) + ': ' + t(a.text) + '</li>').join('') : '<li>لا تغييرات مسجلة في هذا التدريب.</li>') + '</ul></div>' +
+      (deps.length || waitingOnMe.length ? '<div><p class="field-label">Dependencies</p><ul class="activity" style="color:var(--ink-2)">' + deps.map(o => '<li>' + icon('link', 'icon-sm') + tx(' تنتظر <bdi dir="ltr">(Waiting on)</bdi>: ', ' Waiting on: ') + t(o.title) + ' ' + badge(o.status) + '</li>').join('') + waitingOnMe.map(o => '<li>' + icon('link', 'icon-sm') + tx(' تحجب <bdi dir="ltr">(Blocking)</bdi>: ', ' Blocking: ') + t(o.title) + '</li>').join('') + '</ul></div>' : '') +
+      '<div class="field"><label for="dDesc">' + lbl('الوصف', 'Description') + '</label><textarea class="textarea" id="dDesc" data-fk="d-desc" data-set="desc" dir="auto" placeholder="' + tx('المطلوب: ... يُعدّ منجزاً عندما: ...', 'Required: ... Done when: ...') + '">' + esc(x.desc) + '</textarea></div>' +
+      '<div><p class="field-label" id="ckLbl">' + lbl('قائمة التحقق', 'Checklist') + ' <span class="num muted">' + x.checklist.filter(k => k.done).length + '/' + x.checklist.length + '</span></p><ul class="checklist" aria-labelledby="ckLbl">' +
+      x.checklist.map(k => '<li class="' + (k.done ? 'done' : '') + '"><input type="checkbox" id="ck-' + k.id + '" data-fk="ck-' + k.id + '" data-ck="' + k.id + '"' + (k.done ? ' checked' : '') + '><label for="ck-' + k.id + '"><span>' + t(k.text) + '</span></label><button type="button" class="icon-btn" data-ckdel="' + k.id + '" aria-label="' + tx('حذف البند: ', 'Delete item: ') + esc(k.text) + '">' + icon('trash', 'icon-sm') + '</button></li>').join('') + '</ul>' +
+      '<form class="add-row" style="padding:6px 0 0" data-ckadd><label class="visually-hidden" for="ckNew">' + tx('بند جديد', 'New item') + '</label><input class="input input-sm" id="ckNew" data-fk="ck-new" dir="auto" placeholder="' + tx('+ أضف بنداً', '+ Add an item') + '"><button class="btn btn-soft btn-sm" type="submit">' + tx('إضافة', 'Add') + '</button></form></div>' +
+      '<div><p class="field-label">' + lbl('التعليقات', 'Comments') + '</p><div class="comments">' +
+      (x.comments.length ? x.comments.map(c => '<div class="comment">' + avatarHTML(c.by) + '<div class="bubble"><small>' + t(PERSON[c.by].short) + tx('، ', ', ') + fmtStamp(c.at) + '</small>' + t(c.text).replace(/(^|[\s>(])@([؀-ۿ\w]+)/g, '$1<b style="color:var(--accent-ink)">@$2</b>') + '</div></div>').join('') : '<p class="help-text">' + tx('لا توجد تعليقات بعد.', 'No comments yet.') + '</p>') +
+      '</div><form data-cmadd style="display:grid;gap:6px;margin-top:8px"><label class="visually-hidden" for="cmNew">' + tx('تعليق جديد', 'New comment') + '</label><textarea class="textarea" id="cmNew" data-fk="cm-new" dir="auto" style="min-height:64px" placeholder="' + tx('اكتب تعليقاً. استخدم @ لإشارة زميل، مثل @مريم', 'Write a comment. Use @ to mention a colleague, for example @Maryam') + '"></textarea><div><button class="btn btn-soft btn-sm" type="submit">' + icon('message', 'icon-sm') + tx('إرسال التعليق', 'Send comment') + '</button></div></form></div>' +
+      '<div><p class="field-label">' + lbl('سجل النشاط', 'Activity') + '</p><ul class="activity">' + (x.activity.length ? x.activity.slice().reverse().slice(0, 8).map(a => '<li>' + fmtStamp(a.at) + ': ' + t(activityText(a)) + '</li>').join('') : '<li>' + tx('لا تغييرات مسجلة في هذا التدريب.', 'No changes recorded in this training session.') + '</li>') + '</ul></div>' +
       '</div>';
     d.classList.add('open'); d.setAttribute('aria-hidden', 'false');
     restoreFocus(fk);
   }
-  function prop(en, ar, control, id) { return '<label class="pk" for="' + id + '">' + ar + ' <bdi class="en muted" dir="ltr">' + en + '</bdi></label><div>' + control + '</div>'; }
+  function prop(en, ar, control, id, enLong) { return '<label class="pk" for="' + id + '">' + (isEN() ? (enLong || en) : ar + ' <bdi class="en muted" dir="ltr">' + en + '</bdi>') + '</label><div>' + control + '</div>'; }
 
   function setField(id, k, val, via) {
     if (k === 'tags') val = val.split(/[،,]/).map(s => s.trim()).filter(Boolean);
     if (k === 'estimate') val = Math.max(0, parseFloat(val) || 0);
-    if (k === 'title' && !val.trim()) { toast('العنوان لا يمكن أن يكون فارغاً'); paint(); return; }
+    if (k === 'title' && !val.trim()) { toast(tx('العنوان لا يمكن أن يكون فارغاً', 'The name cannot be empty')); paint(); return; }
     Lab.update(id, { [k]: val }, via);
-    if (k === 'status') announce('الحالة الآن ' + STATUS[val].en);
+    if (k === 'status') announce(tx('الحالة الآن ', 'Status is now ') + STATUS[val].en);
   }
 
   function bind() {
@@ -417,9 +442,9 @@ const LabUI = (() => {
       if (a) {
         const act = a.dataset.act;
         if (act === 'reset') {
-          confirmDialog('إعادة ضبط المختبر؟', 'ستعود كل المهام إلى بياناتها التدريبية الأصلية وتُحذف المهام التي أنشأتها. تقدّمك في الدروس والتحديات المكتملة لا يتأثر.', 'إعادة الضبط').then(ok => { if (ok) { Lab.reset(); toast('أُعيد ضبط المختبر'); } });
+          confirmDialog(tx('إعادة ضبط المختبر؟', 'Reset the lab?'), tx('ستعود كل المهام إلى بياناتها التدريبية الأصلية وتُحذف المهام التي أنشأتها. تقدّمك في الدروس والتحديات المكتملة لا يتأثر.', 'Every task returns to its original training data and the tasks you created are deleted. Your lesson progress and completed challenges are not affected.'), tx('إعادة الضبط', 'Reset')).then(ok => { if (ok) { Lab.reset(); toast(tx('أُعيد ضبط المختبر', 'The lab was reset')); } });
         } else if (act === 'clear') Lab.setUI({ q: '', assignee: '', priority: '', status: '' });
-        else if (act === 'new') { const tk = Lab.create({ list: Lab.ui.list === 'all' ? 'weekly' : Lab.ui.list, title: 'مهمة جديدة' }); openTask(tk.id); }
+        else if (act === 'new') { const tk = Lab.create({ list: Lab.ui.list === 'all' ? 'weekly' : Lab.ui.list, title: tx('مهمة جديدة', 'New task') }); openTask(tk.id); }
         else if (act === 'close') closeDrawer();
         return;
       }
@@ -448,7 +473,7 @@ const LabUI = (() => {
       d.addEventListener('submit', e => {
         e.preventDefault(); const id = Lab.ui.open;
         if (e.target.matches('[data-ckadd]')) { const inp = $('#ckNew', d); const v = inp.value; if (v.trim()) { Lab.addChecklist(id, v); requestAnimationFrame(() => { const n = $('#ckNew'); if (n) n.focus(); }); } }
-        if (e.target.matches('[data-cmadd]')) { const inp = $('#cmNew', d); if (inp.value.trim()) { Lab.addComment(id, inp.value); announce('أُضيف التعليق'); } }
+        if (e.target.matches('[data-cmadd]')) { const inp = $('#cmNew', d); if (inp.value.trim()) { Lab.addComment(id, inp.value); announce(tx('أُضيف التعليق', 'Comment added')); } }
       });
       d.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); closeDrawer(); } });
     };
@@ -464,7 +489,7 @@ const LabUI = (() => {
       e.preventDefault(); const inp = $('input', f); const title = inp.value.trim();
       if (!title) { inp.focus(); return; }
       Lab.create({ title, status: f.dataset.add, list: Lab.ui.list === 'all' ? 'weekly' : Lab.ui.list });
-      toast('أُنشئت المهمة «' + title + '»');
+      toast(tx('أُنشئت المهمة «' + title + '»', 'Task “' + title + '” created'));
       requestAnimationFrame(() => { const n = document.querySelector('[data-fk="' + (f.dataset.add === 'todo' && Lab.ui.view === 'list' ? 'add-todo' : 'badd-' + f.dataset.add) + '"]'); if (n) n.focus(); });
     });
 
@@ -476,18 +501,20 @@ const LabUI = (() => {
       if (e.key === 'Enter') { e.preventDefault(); openTask(id, card); return; }
       if (e.key === ' ') {
         e.preventDefault();
-        if (picked === id) { picked = null; announce('أُفلتت البطاقة في ' + STATUS[Lab.task(id).status].en); paint(); }
-        else { picked = id; announce('التُقطت البطاقة «' + Lab.task(id).title + '». استخدم الأسهم لنقلها ثم Space للإفلات، أو Escape للإلغاء.'); paint(); }
+        if (picked === id) { picked = null; announce(tx('أُفلتت البطاقة في ', 'Card dropped in ') + STATUS[Lab.task(id).status].en); paint(); }
+        else { picked = id; announce(tx('التُقطت البطاقة «' + Lab.task(id).title + '». استخدم الأسهم لنقلها ثم Space للإفلات، أو Escape للإلغاء.', 'Picked up “' + Lab.task(id).title + '”. Use the arrow keys to move it, then Space to drop, or Escape to cancel.')); paint(); }
         return;
       }
       if (picked === id && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
         e.preventDefault();
         const cur = order.indexOf(Lab.task(id).status);
-        const next = clamp(cur + (e.key === 'ArrowLeft' ? 1 : -1), 0, order.length - 1); // RTL: left = next column
-        if (next !== cur) { Lab.update(id, { status: order[next] }, 'board'); announce('في عمود ' + STATUSES[next].en); }
+        // Columns follow reading direction: the "next" column is to the left in Arabic, to the right in English.
+        const fwdKey = isRTL() ? 'ArrowLeft' : 'ArrowRight';
+        const next = clamp(cur + (e.key === fwdKey ? 1 : -1), 0, order.length - 1);
+        if (next !== cur) { Lab.update(id, { status: order[next] }, 'board'); announce(tx('في عمود ', 'In column ') + STATUSES[next].en); }
         return;
       }
-      if (e.key === 'Escape' && picked) { picked = null; announce('أُلغي النقل'); paint(); }
+      if (e.key === 'Escape' && picked) { picked = null; announce(tx('أُلغي النقل', 'Move cancelled')); paint(); }
     });
     document.addEventListener('keydown', escHandler);
 
@@ -515,7 +542,7 @@ const LabUI = (() => {
       if (d.moved) {
         d.el.style.transform = ''; d.el.style.pointerEvents = ''; d.el.classList.remove('dragging');
         $$('.board-col', root).forEach(c => c.classList.remove('drop-target'));
-        if (d.col && Lab.task(d.id).status !== d.col) { Lab.update(d.id, { status: d.col }, 'board'); announce('نُقلت إلى ' + STATUS[d.col].en); }
+        if (d.col && Lab.task(d.id).status !== d.col) { Lab.update(d.id, { status: d.col }, 'board'); announce(tx('نُقلت إلى ', 'Moved to ') + STATUS[d.col].en); }
         setTimeout(() => { drag = null; }, 0);
       } else drag = null;
     };

@@ -22,7 +22,7 @@ A working, interactive learning platform. It takes employees from ClickUp fundam
 
 ## Positioning
 
-The platform does not just describe ClickUp; learners practice in it. Its animated step-by-step demonstrations have synchronized Arabic captions and full playback control. Learners practice in a simulated ClickUp workspace where one shared data model drives every view and chart. Challenges check what the learner actually did. All content is written in Arabic first for an Omantel workplace, with English ClickUp interface terms kept alongside.
+The platform does not just describe ClickUp; learners practice in it. Its animated step-by-step demonstrations have synchronized captions in Arabic or English and full playback control. Learners practice in a simulated ClickUp workspace where one shared data model drives every view and chart. Challenges check what the learner actually did. All content is available in Arabic and English for an Omantel workplace, with English ClickUp interface terms kept alongside the Arabic.
 
 ## Operating Context
 
@@ -88,7 +88,14 @@ The platform does not just describe ClickUp; learners practice in it. Its animat
 - Handle unavailable local storage gracefully.
 - Support desktop, tablet and mobile layouts.
 
-**Open decision:** A full English interface and content mode. It is allowed only if everything is translated. A toggle that changes only a few labels is not allowed. Arabic is the primary teaching language.
+**Languages:** The whole platform is available in Arabic and English, and both are mandatory deliverables.
+- A first-visit screen offers "العربية" and "English" with equal weight. A switcher sits in the header on every screen.
+- Everything is translated: navigation, lessons, demo captions, exercises, quizzes, feedback, charts, tooltips, glossary, notifications and help.
+- Arabic is right-to-left and English is left-to-right, including the sidebar, drawers, directional icons, demo stages and chart axes.
+- English ClickUp interface terms stay alongside the Arabic explanations.
+- Switching language keeps the current lesson, exercise state, quiz answers, demo position, typed drafts, scroll position and progress.
+- The choice is remembered on the browser when storage is available.
+- One shared content and progress model. Lesson, question, task and challenge IDs are identical in both languages, and chart numbers are identical; only labels and date formats change.
 
 ## Brand Commitments
 
@@ -110,13 +117,13 @@ The platform does not just describe ClickUp; learners practice in it. Its animat
 
 1. **Practice over presentation.** Every concept leads to something the learner does, and completion is checked against what they actually did.
 2. **Truthful by construction.** Simulations are labeled as simulations, dependencies on plan or role are stated, uncertainty is marked, and numbers come from the shared training data.
-3. **Arabic first, precise with English.** The explanations use clear, simple Arabic. ClickUp terms, shortcuts and formulas keep their English form and left-to-right direction.
+3. **Bilingual, precise with ClickUp terms.** Explanations use clear, simple Arabic or clear, accessible English. ClickUp terms, shortcuts and formulas keep their English form and left-to-right direction.
 4. **Calm enough for long sessions.** Show the essentials first and disclose more on request. Motion explains; it does not decorate.
 5. **Nothing inert.** Every visible control works; otherwise it is not shipped.
 
 ## Accessibility & Inclusion
 
-- Correct RTL layout, with isolated LTR runs for English terms.
+- Correct RTL layout in Arabic and LTR layout in English, with the other script isolated inside mixed sentences.
 - Full keyboard operation with visible focus.
 - Adequate contrast.
 - `prefers-reduced-motion` support.

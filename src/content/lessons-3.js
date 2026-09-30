@@ -265,3 +265,5 @@ LESSONS.push(
 
 const LESSON = Object.fromEntries(LESSONS.map(l => [l.id, l]));
 MODULES.forEach(m => { m.lessons = LESSONS.filter(l => l.module === m.id).map(l => l.id); });
+/* Stable question IDs shared by both languages */
+LESSONS.forEach(l => (l.check || []).forEach((q, i) => { q.id = l.id + '-c' + (i + 1); }));

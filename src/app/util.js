@@ -8,15 +8,19 @@ function esc(s) {
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-/* Wrap Latin runs (ClickUp terms, shortcuts, formulas) in LTR isolates so they
-   read correctly inside Arabic sentences. Input is trusted authored HTML. */
+/* Isolate the "other" script inside a sentence so mixed Arabic-English text
+   reads correctly. Arabic mode: Latin runs (ClickUp terms, shortcuts,
+   formulas) become LTR isolates. English mode: Arabic runs (for example a
+   task title a learner typed in Arabic) become RTL isolates.
+   Input is trusted authored HTML. */
+const BIDI_LATIN = /(<(bdi|kbd|code)\b[^>]*>[\s\S]*?<\/\2>)|(<[^>]+>)|(&[#a-zA-Z0-9]+;)|([A-Za-z](?:[A-Za-z0-9+'’./:@#\-]*[A-Za-z0-9)])?(?:[ ](?:\(?[A-Za-z0-9][A-Za-z0-9+'’./:@#\-]*[A-Za-z0-9)]?|[+&\/→]))*(?<![ +&\/→]))/g;
+const BIDI_ARABIC = /(<(bdi|kbd|code)\b[^>]*>[\s\S]*?<\/\2>)|(<[^>]+>)|(&[#a-zA-Z0-9]+;)|(@?[\u0600-\u06FF](?:[\u0600-\u06FF\u064B-\u065F0-9،؛ .:\-]*[\u0600-\u06FF0-9])?)/g;
 function bidi(html) {
   if (html == null) return '';
-  // Skip tags, entities and existing isolates; wrap the rest of each Latin run.
-  return String(html).replace(/(<(bdi|kbd|code)\b[^>]*>[\s\S]*?<\/\2>)|(<[^>]+>)|(&[#a-zA-Z0-9]+;)|([A-Za-z](?:[A-Za-z0-9+'’./:@#\-]*[A-Za-z0-9)])?(?:[ ](?:\(?[A-Za-z0-9][A-Za-z0-9+'’./:@#\-]*[A-Za-z0-9)]?|[+&\/→]))*(?<![ +&\/→]))/g, (m, iso, _n, tag, ent, run) => {
-    if (iso || tag || ent) return m;
-    return '<bdi class="en" dir="ltr">' + run + '</bdi>';
-  });
+  if (LANG === 'en') {
+    return String(html).replace(BIDI_ARABIC, (m, iso, _n, tag, ent, run) => (iso || tag || ent) ? m : '<bdi dir="rtl" lang="ar">' + run + '</bdi>');
+  }
+  return String(html).replace(BIDI_LATIN, (m, iso, _n, tag, ent, run) => (iso || tag || ent) ? m : '<bdi class="en" dir="ltr">' + run + '</bdi>');
 }
 /* Plain text -> escaped + bidi */
 function t(s) { return bidi(esc(s)); }
@@ -51,30 +55,31 @@ function parseISO(iso) { const [y, m, d] = iso.split('-').map(Number); return ne
 function daysBetween(a, b) { return Math.round((parseISO(b) - parseISO(a)) / 86400000); }
 const AR_MONTHS = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
 const AR_DOW = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const EN_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const EN_DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const monthName = m => (LANG === 'en' ? EN_MONTHS : AR_MONTHS)[m];
+const dowNames = () => LANG === 'en' ? EN_DOW : AR_DOW;
+/* Arabic: "30 سبتمبر 2026". English (day-month, as used in Oman): "30 Sep 2026" */
 function fmtDate(iso, withYear) {
   if (!iso) return '';
   const d = parseISO(iso);
+  if (LANG === 'en') return d.getDate() + ' ' + (withYear ? EN_MONTHS[d.getMonth()] : EN_MONTHS[d.getMonth()].slice(0, 3)) + (withYear ? ' ' + d.getFullYear() : '');
   return d.getDate() + ' ' + AR_MONTHS[d.getMonth()] + (withYear ? ' ' + d.getFullYear() : '');
 }
 function relDate(iso) {
   if (!iso) return '';
   const n = daysBetween(todayISO(), iso);
-  if (n === 0) return 'اليوم';
-  if (n === 1) return 'غداً';
-  if (n === -1) return 'أمس';
+  if (n === 0) return tx('اليوم', 'Today');
+  if (n === 1) return tx('غداً', 'Tomorrow');
+  if (n === -1) return tx('أمس', 'Yesterday');
   return fmtDate(iso);
 }
 function fmtStamp(ts) {
   const d = new Date(ts);
-  return fmtDate(isoDate(d)) + '، ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  return fmtDate(isoDate(d)) + tx('، ', ', ') + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
 }
-/* Arabic plural helper for counts */
-function plural(n, one, two, few, many) {
-  if (n === 1) return one;
-  if (n === 2) return two;
-  if (n >= 3 && n <= 10) return n + ' ' + few;
-  return n + ' ' + many;
-}
+/* English count + noun: nEn(3, 'task') -> "3 tasks" */
+function nEn(n, one, many) { return n + ' ' + (n === 1 ? one : (many || one + 's')); }
 
 function announce(msg) {
   const el = $('#announcer'); if (!el) return;
@@ -94,7 +99,7 @@ function confirmDialog(title, body, okLabel) {
   const dlg = $('#confirmDialog');
   $('#confirmTitle').textContent = title;
   $('#confirmBody').textContent = body;
-  $('#confirmOk').textContent = okLabel || 'تأكيد';
+  $('#confirmOk').textContent = okLabel || tx('تأكيد', 'Confirm');
   return new Promise(resolve => {
     if (typeof dlg.showModal !== 'function') { resolve(window.confirm(title + '\n' + body)); return; }
     dlg.returnValue = '';

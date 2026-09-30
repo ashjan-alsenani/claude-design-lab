@@ -11,11 +11,17 @@ SRC = ROOT / "src"
 
 CSS_FILES = ["styles.css"]
 JS_FILES = [
+    "i18n/core.js",
     "content/core.js",
     "content/lessons-1.js",
     "content/lessons-2.js",
     "content/lessons-3.js",
     "content/quizzes.js",
+    "content/en/core.js",
+    "content/en/lessons-1.js",
+    "content/en/lessons-2.js",
+    "content/en/lessons-3.js",
+    "content/en/quizzes.js",
     "app/util.js",
     "app/store.js",
     "app/icons.js",

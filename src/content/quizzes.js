@@ -75,6 +75,9 @@ const QUIZZES = {
   ]
 };
 
+/* Stable question IDs shared by both languages */
+Object.keys(QUIZZES).forEach(m => QUIZZES[m].forEach((q, i) => { q.id = m + '-q' + (i + 1); }));
+
 /* Final assessment: two questions from each module pool, fixed selection
    rotated by attempt number so retries see a different mix. */
 function buildFinal(attempt) {

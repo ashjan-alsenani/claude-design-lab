@@ -78,7 +78,10 @@ const ICONS = {
   path: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h5a3 3 0 000-6h-2a3 3 0 010-6h5"/>'
 };
 
+/* Direction-aware aliases: "fwd" points toward reading direction's end */
+const DIR_ICONS = { fwd: ['chev-left', 'chev-right'], back: ['chev-right', 'chev-left'], 'step-prev': ['step-fwd', 'step-back'], 'step-next': ['step-back', 'step-fwd'] };
 function icon(name, cls) {
+  if (DIR_ICONS[name]) name = DIR_ICONS[name][LANG === 'en' ? 1 : 0];
   const body = ICONS[name] || ICONS.info;
   return '<svg class="icon' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + body + '</svg>';
 }

@@ -15,33 +15,75 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+<!-- First visit: choose a language. Both options carry equal weight. -->
+<div class="lang-gate" id="langGate" role="dialog" aria-modal="true" aria-labelledby="gateTitleAr gateTitleEn" hidden>
+  <div class="gate-card" tabindex="-1">
+    <div class="gate-logos">
+      <span class="logo-slot" data-logo="omantel">
+        <img alt="Omantel" data-candidates="assets/omantel-logo.svg,assets/omantel-logo.png" hidden>
+        <span class="logo-ph" aria-hidden="true"><b>Omantel</b><small>Official logo · شعار رسمي</small></span>
+      </span>
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="logo-slot" data-logo="clickup">
+        <img alt="ClickUp" data-candidates="assets/clickup-logo.svg,assets/clickup-logo.png" hidden>
+        <span class="logo-ph" aria-hidden="true"><b>ClickUp</b><small>Official logo · شعار رسمي</small></span>
+      </span>
+    </div>
+    <p class="gate-product" dir="ltr" lang="en">Learning Hub <span>Learn. Practice. Achieve.</span></p>
+    <div class="gate-titles">
+      <h1 id="gateTitleAr" lang="ar" dir="rtl">اختر لغة المنصة</h1>
+      <p id="gateTitleEn" lang="en" dir="ltr">Choose your language</p>
+    </div>
+    <div class="gate-options">
+      <button type="button" class="gate-opt" data-gate="ar" lang="ar" dir="rtl">
+        <span class="gate-glyph" aria-hidden="true">ع</span>
+        <span class="gate-name">العربية</span>
+        <span class="gate-sub">تابع بالعربية، من اليمين إلى اليسار</span>
+      </button>
+      <button type="button" class="gate-opt" data-gate="en" lang="en" dir="ltr">
+        <span class="gate-glyph" aria-hidden="true">En</span>
+        <span class="gate-name">English</span>
+        <span class="gate-sub">Continue in English, left to right</span>
+      </button>
+    </div>
+    <p class="gate-foot"><span lang="ar" dir="rtl">يمكنك التبديل في أي وقت من أعلى الصفحة.</span><span lang="en" dir="ltr">You can switch at any time from the top of the page.</span></p>
+    <p class="gate-foot gate-warn" id="gateNote" hidden><span lang="ar" dir="rtl">لا يمكن حفظ اختيارك على هذا المتصفح، لذلك ستظهر هذه الشاشة في كل زيارة.</span><span lang="en" dir="ltr">Your choice cannot be saved on this browser, so this screen will appear on each visit.</span></p>
+    <p class="gate-credit" lang="en" dir="ltr">Designed by Ashjan Al Sinani</p>
+  </div>
+</div>
+
+<div id="appRoot">
+<a class="skip-link" href="#main" data-t="skip">تخطَّ إلى المحتوى</a>
 
 <header class="topbar" role="banner">
-  <button class="icon-btn nav-toggle" type="button" id="navToggle" aria-controls="sidebar" aria-expanded="false" aria-label="فتح قائمة التنقل"></button>
-  <a class="brand" href="#/home" aria-label="Omantel | ClickUp Learning Hub، الصفحة الرئيسية">
+  <button class="icon-btn nav-toggle" type="button" id="navToggle" aria-controls="sidebar" aria-expanded="false" data-t-attr="aria-label:navOpen"></button>
+  <a class="brand" href="#/home" data-t-attr="aria-label:brand">
     <span class="logo-slot" data-logo="omantel">
       <img alt="Omantel" data-candidates="assets/omantel-logo.svg,assets/omantel-logo.png" hidden>
-      <span class="logo-ph" aria-hidden="true"><b>Omantel</b><small>شعار رسمي مطلوب</small></span>
+      <span class="logo-ph" aria-hidden="true"><b>Omantel</b><small data-t="logoNeeded">شعار رسمي مطلوب</small></span>
     </span>
     <span class="brand-divider" aria-hidden="true"></span>
     <span class="logo-slot" data-logo="clickup">
       <img alt="ClickUp" data-candidates="assets/clickup-logo.svg,assets/clickup-logo.png" hidden>
-      <span class="logo-ph" aria-hidden="true"><b>ClickUp</b><small>شعار رسمي مطلوب</small></span>
+      <span class="logo-ph" aria-hidden="true"><b>ClickUp</b><small data-t="logoNeeded">شعار رسمي مطلوب</small></span>
     </span>
     <span class="brand-name"><span dir="ltr">Learning Hub</span><small>Learn. Practice. Achieve.</small></span>
   </a>
   <form class="global-search" role="search" id="globalSearch" autocomplete="off">
-    <label class="visually-hidden" for="globalSearchInput">ابحث في الدروس والمصطلحات</label>
+    <label class="visually-hidden" for="globalSearchInput" data-t="searchLabel">ابحث في الدروس والمصطلحات</label>
     <span class="gs-icon" aria-hidden="true"></span>
-    <input id="globalSearchInput" type="search" placeholder="ابحث عن درس أو مصطلح، مثل: Due Date" aria-autocomplete="list" aria-controls="globalSearchResults" aria-expanded="false">
+    <input id="globalSearchInput" type="search" data-t-attr="placeholder:searchPh" aria-autocomplete="list" aria-controls="globalSearchResults" aria-expanded="false">
     <div class="gs-results" id="globalSearchResults" role="listbox" hidden></div>
   </form>
+  <div class="lang-switch" role="group" data-t-attr="aria-label:langGroup">
+    <button type="button" data-lang="ar" lang="ar" aria-pressed="true"><span class="ls-long">العربية</span><span class="ls-short" aria-hidden="true">ع</span></button>
+    <button type="button" data-lang="en" lang="en" aria-pressed="false"><span class="ls-long">English</span><span class="ls-short" aria-hidden="true">EN</span></button>
+  </div>
   <a class="topbar-progress" href="#/progress" id="topProgress"></a>
 </header>
 
 <div class="shell">
-  <nav class="sidebar" id="sidebar" aria-label="التنقل الرئيسي"></nav>
+  <nav class="sidebar" id="sidebar" data-t-attr="aria-label:mainNav"></nav>
   <div class="scrim" id="scrim" hidden></div>
   <main id="main" tabindex="-1"></main>
 </div>
@@ -50,9 +92,10 @@
   <div class="footer-inner">
     <p class="footer-brand"><span dir="ltr">Omantel | ClickUp Learning Hub</span><span class="sep" aria-hidden="true"></span><span dir="ltr">Learn. Practice. Achieve.</span></p>
     <p class="footer-credit" dir="ltr" lang="en">Designed by Ashjan Al Sinani</p>
-    <p class="footer-note">منصة تعليمية مستقلة. الواجهات المعروضة محاكاة تعليمية مبسّطة، والمنصة غير معتمدة أو مدعومة رسمياً من ClickUp. <a href="#/about">حول المنصة</a></p>
+    <p class="footer-note"><span data-t="footerNote"></span> <a href="#/about" data-t="about">حول المنصة</a></p>
   </div>
 </footer>
+</div>
 
 <div class="toast-region" id="toasts" role="status" aria-live="polite"></div>
 <div class="visually-hidden" id="announcer" aria-live="assertive"></div>
@@ -63,7 +106,7 @@
     <p id="confirmBody"></p>
     <div class="confirm-actions">
       <button class="btn btn-danger" value="ok" id="confirmOk"></button>
-      <button class="btn btn-ghost" value="cancel">إلغاء</button>
+      <button class="btn btn-ghost" value="cancel" data-t="cancel">إلغاء</button>
     </div>
   </form>
 </dialog>

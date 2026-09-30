@@ -4,7 +4,7 @@ Recorded from the built world of `index.html` (Omantel | ClickUp Learning Hub). 
 
 ## Direction
 
-A learning product that *is* a workspace: modules sit in the sidebar like ClickUp Spaces, lessons are task rows with real status badges, and demos run inside a live mini-workspace. Light, calm, and familiar to ClickUp users, without imitating ClickUp or implying endorsement. Arabic first (RTL), with English ClickUp terms isolated as LTR runs.
+A learning product that *is* a workspace: modules sit in the sidebar like ClickUp Spaces, lessons are task rows with real status badges, and demos run inside a live mini-workspace. Light, calm, and familiar to ClickUp users, without imitating ClickUp or implying endorsement. Fully bilingual: Arabic (RTL) and English (LTR), with the other script isolated inside mixed sentences.
 
 ## Color tokens (`:root` in `src/styles.css`)
 
@@ -42,3 +42,14 @@ Topbar with the logo pair and global search; sidebar of nav plus module "Spaces"
 ## Layout
 
 Sidebar 272px (off-canvas below 1080px). Content max 1180px. Lab challenges sit beside the board at 1400px and wider, and below it on narrower screens. No page-level horizontal overflow from 360px to 1440px (verified).
+
+## Bilingual system
+
+- **Content model.** Arabic content lives in `src/content/`; English overlays in `src/content/en/` address the same lesson, question, task and challenge IDs. `src/i18n/core.js` applies an overlay in place when the language changes, so answers, progress and IDs never change. Interface strings use `tx('عربي', 'English')`.
+- **First visit.** A full-screen language screen with two equal cards, "العربية" and "English". Focus lands on the dialog, not an option, so neither looks preselected. The choice is stored under `omantel-clickup-hub:lang`; without storage the screen shows each visit and says so.
+- **Switcher.** A segmented control in the header on every screen ("العربية" / "English", shortened to "ع" / "EN" below 760px). On phones below 480px the header progress meter gives way to it (progress stays in the sidebar).
+- **State kept on switch.** Lesson route, demo step and speed, exercise and quiz answers (stored as indexes), graded results, open panels, unsent drafts, open task drawer, filters, and scroll position anchored to the same block.
+- **Direction.** `html[dir]` drives layout: logical properties everywhere, mirrored sidebar and drawers, directional icon aliases (`fwd`, `back`, `step-prev`, `step-next`). Demo stages are authored RTL and mirrored for English. Studio charts compute geometry in reading order, so categories and time run right-to-left in Arabic and left-to-right in English with identical numbers.
+- **Dates.** Arabic "30 سبتمبر 2026"; English day-month "30 Sep 2026".
+- **Logos and credit.** The Omantel and ClickUp logos appear unchanged in both languages. "Designed by Ashjan Al Sinani" appears in the footer, sidebar, About page and language screen.
+- **Verification.** `tests/` holds Playwright checks: content completeness and answer parity, every screen in both languages at 360, 390, 820 and 1280px (no overflow, no stray Arabic in English), and behaviour (language screen, remembered choice, state kept on switch, exercises solvable in English, storage blocked).
