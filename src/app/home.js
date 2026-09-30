@@ -18,7 +18,7 @@ function heroArt() {
       '<span class="ht-row"><span class="ht-av" style="background:#e44bb6">N</span><span class="ht-chip">' + icon('calendar', 'icon-sm') + tx('الخميس', 'Thu') + '</span><span class="ht-chip ht-flag">' + icon('flag', 'icon-sm') + 'High</span></span>' +
       '<span class="ht-prog"><i></i></span></div></div></div>' +
     '<div class="hx-layer hx-l-donut" data-depth="30"><div class="hx-float f2"><div class="hx-donut"><span class="num">75%</span></div><small>' + tx('أُنجز هذا الأسبوع', 'Done this week') + '</small></div></div>' +
-    '<div class="hx-layer hx-l-chat" data-depth="16"><div class="hx-float f3"><div class="hx-chat"><span class="ht-av" style="background:#ff7a45">S</span><span>' + tx('عمل رائع <b>@نورة</b>!', 'Great work <b>@Noura</b>!') + '</span></div></div></div>' +
+    '<div class="hx-layer hx-l-chat" data-depth="16"><div class="hx-float f3"><div class="hx-chat"><span class="ht-av" style="background:#ff7a45">S</span><span>' + tx('عمل رائع <b>@أشجان</b>!', 'Great work <b>@Ashjan</b>!') + '</span></div></div></div>' +
     '<div class="hx-layer hx-l-check" data-depth="36"><div class="hx-check">' + icon('check') + '</div></div>' +
     '<div class="hx-layer hx-l-bell" data-depth="26"><div class="hx-bell">' + icon('bell') + '<b>3</b></div></div>' +
     '<div class="hx-layer hx-l-zap" data-depth="40"><div class="hx-float f2"><div class="hx-zap">' + icon('zap') + '</div></div></div>' +
@@ -58,10 +58,10 @@ function viewHome(main) {
       t: tx('جرّب بنفسك', 'Try it yourself'), d: tx('مساحة تدريب تشبه ClickUp: أنشئ مهام وحرّكها دون خوف من الخطأ.', 'A ClickUp-style practice space: create and move tasks with no fear of mistakes.'),
       art: '<div class="w-board"><span></span><span></span><span></span><i></i></div>' }
   ];
-  const faqs = [0, 10, 20].map(i => CU_FAQ[i]);
+  const faqs = ['start-where', 'weekly-repeat', 'excel-import'].map(id => CU_FAQ.find(f => f.id === id));
   main.innerHTML = '<div class="page home">' +
     '<section class="hx" aria-labelledby="homeTitle"><div class="hx-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="hx-grid"></span></div>' +
-    '<div class="hx-copy"><span class="hero-kicker">' + icon('sparkle', 'icon-sm') + tx('لفِرق Omantel · بالعربية والإنجليزية', 'For Omantel teams · in Arabic and English') + '</span>' +
+    '<div class="hx-copy"><span class="hero-kicker">' + icon('sparkle', 'icon-sm') + tx('لموظفي Omantel · ClickUp', 'For Omantel Employees · ClickUp') + '</span>' +
     '<h1 id="homeTitle">' + tx('اكتشف <span class="grad-text">ClickUp</span> بطريقة سهلة وممتعة', 'Discover <span class="grad-text">ClickUp</span> the easy, fun way') + '</h1>' +
     '<p class="lead">' + tx('دليل ملوّن ومتحرك يشرح لك كل جزء من ClickUp خطوة بخطوة، حتى تنجز عملك اليومي بثقة.', 'A colourful, animated guide that shows you every part of ClickUp, step by step, so you can handle your daily work with confidence.') + '</p>' +
     '<div class="hero-actions"><a class="btn btn-primary btn-lg hx-cta" href="#/tour' + (toured ? '/' + tourNext() : '') + '">' + icon('rocket') + (toured ? tx('تابع الجولة', 'Continue the tour') : tx('ابدأ الجولة', 'Start the tour')) + '</a>' +
@@ -75,7 +75,9 @@ function viewHome(main) {
     '<section class="hsec" aria-labelledby="waysT"><p class="h-kicker">' + tx('اختر طريقتك', 'Pick your way') + '</p><h2 id="waysT">' + tx('ثلاث طرق ممتعة لتتعلّم', 'Three fun ways to learn') + '</h2>' +
     '<div class="ways">' + WAYS.map(w => '<a class="way" data-rv href="' + w.href + '" style="--g:' + w.g + '"><div class="way-art">' + w.art + '</div><div class="way-body"><span class="way-tag">' + icon(w.icon, 'icon-sm') + w.tag + '</span><h3>' + w.t + '</h3><p>' + w.d + '</p><span class="way-go">' + tx('هيا بنا', 'Let’s go') + icon('fwd', 'icon-sm') + '</span></div></a>').join('') + '</div></section>' +
 
-    '<a class="au-banner" data-rv href="#/automations"><span class="au-bn-art" aria-hidden="true"><span class="au-bn-robot">' + icon('robot') + '</span><i></i><i></i><i></i></span><span class="au-bn-text"><span class="way-tag">' + icon('zap', 'icon-sm') + tx('جديد', 'New') + '</span><b>' + tx('ورشة الأتمتة', 'Automations workshop') + '</b><span>' + tx('ابنِ أول أتمتة لك كما في ClickUp، وجرّبها على مهمة تجريبية.', 'Build your first automation the ClickUp way and test it on a sample task.') + '</span></span><span class="btn btn-primary">' + tx('ابدأ', 'Start') + icon('fwd', 'icon-sm') + '</span></a>' +
+    '<a class="au-banner" data-rv href="#/workshops"><span class="au-bn-art" aria-hidden="true"><span class="au-bn-robot">' + icon('robot') + '</span><i></i><i></i><i></i></span><span class="au-bn-text"><span class="way-tag">' + icon('zap', 'icon-sm') + tx('جديد', 'New') + '</span><b>' + tx('الورش التفاعلية', 'Hands-on workshops') + '</b><span>' + tx('الأتمتة، والذكاء الاصطناعي، والاستيراد والتصدير، والقوالب: جرّبها بيدك.', 'Automations, AI, Import & Export and Templates: try them with your own hands.') + '</span></span><span class="btn btn-primary">' + tx('ابدأ', 'Start') + icon('fwd', 'icon-sm') + '</span></a>' +
+
+    '<section class="clicky" aria-label="' + tx('نصائح Clicky', 'Tips from Clicky') + '"><button type="button" class="clicky-btn" data-clicky aria-label="' + tx('اضغط Clicky لنصيحة جديدة', 'Tap Clicky for a new tip') + '">' + mascot() + '</button><p class="clicky-say" data-clicky-say aria-live="polite"></p></section>' +
 
     '<section class="hsec" aria-labelledby="whyT"><p class="h-kicker">' + tx('لماذا ClickUp؟', 'Why ClickUp?') + '</p><h2 id="whyT">' + tx('من الفوضى إلى الوضوح في لحظة', 'From chaos to clarity in a moment') + '</h2>' +
     '<div class="panel why-home" data-rv>' + beforeAfter() + '</div></section>' +
@@ -84,12 +86,14 @@ function viewHome(main) {
     '<div class="bubbles">' + TOUR_PARTS.map((p, i) => '<a class="bubble' + (Store.isToured(p.id) ? ' seen' : '') + '" data-rv href="#/tour/' + p.id + '" style="' + modStyle(p.mod) + ';--i:' + i + '"><span class="bb-ic">' + icon(p.icon) + '</span><span class="bb-t">' + tp(TOUR_SHORT[p.id]) + '</span>' + (Store.isToured(p.id) ? '<span class="bb-ok">' + icon('check', 'icon-sm') + '<span class="visually-hidden">' + tx('مكتشف', 'Explored') + '</span></span>' : '') + '</a>').join('') + '</div></section>' +
 
     '<section class="hsec hsec-narrow" aria-labelledby="faqT"><p class="h-kicker">' + tx('أسئلة سريعة', 'Quick answers') + '</p><h2 id="faqT">' + tx('يسأل الناس كثيراً', 'People often ask') + '</h2><div class="cuq-list">' +
-    faqs.map(f => '<details class="cuq" style="' + modStyle(TOUR_PART[f.part].mod) + '"><summary>' + icon('help', 'icon-sm') + '<span>' + tp(f.q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(f.a) + '</p><a class="cuq-show" href="#/tour/' + f.part + '">' + icon('play', 'icon-sm') + tx('أرني كيف', 'Show me how') + '</a></div></details>').join('') +
-    '</div><div class="h-center"><a class="btn btn-secondary" href="#/questions">' + icon('message') + tx('كل الأسئلة الشائعة', 'All common questions') + '</a></div></section>' +
+    faqs.map(faqItem).join('') +
+    '</div><div class="h-center h-row"><a class="btn btn-secondary" href="#/questions">' + icon('message') + tx('كل الأسئلة الشائعة', 'All common questions') + '</a><a class="btn btn-primary" href="#/forum">' + icon('users') + tx('اسأل زملاءك في المنتدى', 'Ask colleagues in the forum') + '</a></div></section>' +
 
     '<p class="help-text h-center">' + tx('الواجهات داخل المنصة محاكاة تعليمية مبسّطة، وليست تسجيلات من ClickUp. المنصة مستقلة وغير معتمدة أو مدعومة من ClickUp.', 'Screens inside the platform are simplified educational simulations, not recordings of ClickUp. The platform is independent and is not certified or endorsed by ClickUp.') + ' <a href="#/about">' + tx('اعرف المزيد', 'Learn more') + '</a></p>' +
     '</div>';
   const offP = bindParallax(main);
+  bindClicky(main);
   const offBA = bindBeforeAfter(main);
-  return () => { offP(); offBA(); };
+  const offF = bindFaqDemos(main);
+  return () => { offP(); offBA(); offF(); };
 }

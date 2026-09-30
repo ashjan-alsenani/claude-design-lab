@@ -36,7 +36,7 @@ const moduleLabel = n => tx('الوحدة ', 'Module ') + n;
 function renderSidebar(route) {
   const nav = $('#sidebar'); const cur = route.name;
   const last = Store.state.last && LESSON[Store.state.last.lesson] ? Store.state.last.lesson : null;
-  const NAV_C = { robot: '#ff4d6d', bulb: '#f5a524', users: '#1fb6e0', sparkle: '#a855f7', compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
+  const NAV_C = { robot: '#ff4d6d', bulb: '#f5a524', users: '#ff7a45', send: '#1fb6e0', sparkle: '#a855f7', compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
   const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '><span class="ic-tile" style="--tc:' + NAV_C[ic] + '">' + icon(ic) + '</span><span>' + label + '</span>' + (extra || '') + '</a></li>';
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
   const inLesson = cur === 'lesson' || cur === 'library';
@@ -46,13 +46,14 @@ function renderSidebar(route) {
     item('#/tour', 'compass', tx('جولة ClickUp', 'ClickUp tour'), cur === 'tour', '<span class="count num">' + tourDone() + '/12</span>') +
     item('#/library', 'book', tx('الدروس', 'Lessons'), cur === 'library' || (cur === 'lesson' && !last), '<span class="count num">' + done + '/' + LESSONS.length + '</span>') +
     (last ? item(lessonLink(last), 'play', tx('متابعة الدرس', 'Continue lesson'), cur === 'lesson') : '') +
-    item('#/automations', 'robot', tx('ورشة الأتمتة', 'Automations'), cur === 'automations') +
+    item('#/workshops', 'robot', tx('الورش التفاعلية', 'Workshops'), cur === 'automations' || cur === 'workshops', '<span class="count num">4</span>') +
     item('#/lab', 'flask', tx('مختبر التطبيق', 'Practice Lab'), cur === 'lab') +
     item('#/questions', 'message', tx('الأسئلة الشائعة', 'Common questions'), cur === 'questions') +
+    item('#/forum', 'users', tx('المنتدى', 'Forum'), cur === 'forum') +
     '</ul></div>' +
     '<div><p class="nav-group-title">' + tx('المساعدة والاقتراحات', 'Help & ideas') + '</p><ul class="nav-list">' +
     item('#/guide', 'bulb', tx('كيف تستخدم الموقع', 'How to use this site'), cur === 'guide') +
-    item('#/support', 'users', tx('اسأل الفريق', 'Ask the team'), cur === 'support') +
+    item('#/support', 'send', tx('اسأل الفريق', 'Ask the team'), cur === 'support') +
     item('#/ideas', 'sparkle', tx('اقترح ميزة', 'Suggest a feature'), cur === 'ideas') +
     '</ul></div>' +
     '<details class="nav-more"' + (['studio', 'assess', 'progress', 'help', 'about'].includes(cur) || UIState.get('nav-more') ? ' open' : '') + '><summary class="nav-group-title">' + tx('المزيد', 'More') + icon('chev-down', 'icon-sm') + '</summary><ul class="nav-list">' +
@@ -70,11 +71,6 @@ function renderSidebar(route) {
         (p.done === p.total ? '<span class="mini-check" aria-label="' + tx('مكتملة', 'Completed') + '">' + icon('check', 'icon-sm') + '</span>' : '<span class="count num">' + p.done + '/' + p.total + '</span>') + '</a></li>';
     }).join('') + '</ul></details>' +
     '<div class="sidebar-foot"><p>' + (Store.ok ? tx('يُحفظ تقدّمك على هذا المتصفح وهذا الجهاز فقط.', 'Your progress is saved on this browser and this device only.') : tx('التخزين المحلي غير متاح: التقدّم لهذه الجلسة فقط.', 'Local storage is unavailable: progress lasts for this session only.')) + '</p><p class="credit" lang="en" dir="ltr">' + CREDIT + '</p></div>';
-}
-function renderTopProgress() {
-  const done = LESSONS.filter(l => Store.isDone(l.id)).length;
-  $('#topProgress').innerHTML = '<span class="num tp-long">' + tx(done + ' من ' + LESSONS.length + ' درساً', done + ' of ' + LESSONS.length + ' lessons') + '</span><span class="num tp-short">' + done + '/' + LESSONS.length + '</span><span class="meter" aria-hidden="true"><i style="width:' + (done / LESSONS.length * 100) + '%"></i></span>';
-  $('#topProgress').setAttribute('aria-label', tx('تقدّمي: ' + done + ' من ' + LESSONS.length + ' درساً مكتملاً', 'My progress: ' + done + ' of ' + LESSONS.length + ' lessons completed'));
 }
 
 /* ---------- Library ---------- */

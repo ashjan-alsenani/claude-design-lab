@@ -86,7 +86,7 @@ function announce(msg) {
   el.textContent = ''; setTimeout(() => { el.textContent = msg; }, 30);
 }
 
-function toast(msg) {
+function toast(msg) { Sound.play('pop');
   const region = $('#toasts'); if (!region) return;
   const el = document.createElement('div');
   el.className = 'toast';

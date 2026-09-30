@@ -169,7 +169,7 @@ function viewTourPart(main, id) {
   const prevP = TOUR_PARTS[n - 2], nextP = TOUR_PARTS[n];
   const STEPS = [['eye', tx('تعرّف', 'Meet it')], ['bulb', tx('لماذا ستحبه', 'Why you’ll love it')], ['play', tx('كيف تستخدمه', 'How to use it')], ['assess', tx('تحقّق وأسئلة', 'Check & questions')]];
   const key = 'tstep:' + id;
-  let step = UIState.get(key) || 0, player = null, stopFit = () => {};
+  let step = UIState.get(key) || 0, player = null, stopFit = () => {}, faqOff = () => {};
   main.innerHTML = '<div class="page tour-part" style="' + modStyle(p.mod) + '">' +
     '<header class="lesson-hero"><span class="lh-art" aria-hidden="true">' + icon(p.icon) + '</span><div class="breadcrumbs"><a href="#/tour">' + tx('جولة ClickUp', 'ClickUp tour') + '</a><span aria-hidden="true">/</span><span class="num">' + tx('الجزء ' + n + ' من 12', 'Part ' + n + ' of 12') + '</span></div>' +
     '<h1 id="tpTitle" tabindex="-1">' + tp(p.name) + '</h1><div class="lh-progress" data-tp-prog></div>' +
@@ -191,11 +191,12 @@ function viewTourPart(main, id) {
       (id === 'auto' ? '<a class="au-banner au-banner-sm" href="#/automations"><span class="au-bn-robot" aria-hidden="true">' + icon('robot') + '</span><span class="au-bn-text"><b>' + tx('ابنِ أتمتة بنفسك', 'Build one yourself') + '</b><span>' + tx('افتح ورشة الأتمتة وجرّبها على مهمة تجريبية.', 'Open the Automations workshop and test it on a sample task.') + '</span></span>' + icon('fwd') + '</a>' : '') +
       '<p class="help-text">' + tx('تريد أن تجرّب بنفسك؟', 'Want to try it yourself?') + ' <a href="#/lab">' + tx('افتح مختبر التطبيق', 'Open the Practice Lab') + '</a></p>';
     return '<div class="tp-check"><div><p class="tp-kicker">' + tx('سؤال سريع', 'Quick check') + '</p><h2>' + tx('هل فهمت الفكرة؟', 'Did you get it?') + '</h2><div data-tp-quiz></div></div>' +
-      '<div><p class="tp-kicker">' + tx('أسئلة يطرحها الناس', 'Questions people ask') + '</p><div class="cuq-list">' + faqs.map(f => '<details class="cuq"><summary>' + icon('help', 'icon-sm') + '<span>' + tp(f.q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(f.a) + '</p></div></details>').join('') + '</div>' +
+      '<div><p class="tp-kicker">' + tx('أسئلة يطرحها الناس', 'Questions people ask') + '</p><div class="cuq-list">' + faqs.map(faqItem).join('') + '</div>' +
       '<p class="tp-kicker" style="margin-top:18px">' + tx('تعمّق أكثر', 'Go deeper') + '</p><ul class="tp-lessons">' + p.lessons.map(lid => '<li><a href="#/lesson/' + lid + '">' + icon('book', 'icon-sm') + t(LESSON[lid].title) + '</a></li>').join('') + '</ul></div></div>';
   };
   const paint = (dir) => {
-    if (player) { player.destroy(); player = null; } stopFit();
+    if (dir) Sound.play('whoosh');
+    if (player) { player.destroy(); player = null; } stopFit(); faqOff(); faqOff = () => {};
     panel.innerHTML = '<div class="tp-body' + (dir ? ' tp-in' : '') + '" style="--dir:' + (dir || 1) + '">' + body(step) + '</div>';
     $$('[data-tstep]', main).forEach(b => { const k = +b.dataset.tstep; b.setAttribute('aria-current', k === step ? 'step' : 'false'); b.classList.toggle('done', k < step || (k === 3 && Store.isToured(id))); });
     $('[data-tp-prog]', main).innerHTML = '<span class="lh-bar" aria-hidden="true"><i style="width:' + ((step + 1) / 4 * 100) + '%"></i></span><span class="num">' + tx('الخطوة ' + (step + 1) + ' من 4', 'Step ' + (step + 1) + ' of 4') + '</span>';
@@ -206,6 +207,7 @@ function viewTourPart(main, id) {
     if (step === 0) { const w = $('[data-am]', panel); stopFit = fitMap(w); focusMap(w, id); }
     if (step === 2) player = new DemoPlayer($('[data-tp-demo]', panel), L.demo, { key: 'tour-' + id });
     if (step === 3) {
+      faqOff = bindFaqDemos(panel);
       const q = L.check && L.check[0];
       if (q) renderQuiz($('[data-tp-quiz]', panel), [q], 'tour-q-' + id, { onSubmit: (s, total) => { if (s === total) Motion.confetti($('[data-tp-quiz]', panel), 45); } });
       if (Store.tourSeen(id)) {
@@ -232,29 +234,62 @@ function viewTourPart(main, id) {
     const s = e.target.closest('[data-tstep]'); if (s) { const to = +s.dataset.tstep; if (to !== step) { const d = to > step ? 1 : -1; step = to; paint(d); } return; }
     const g = e.target.closest('[data-tgo]'); if (g) go(+g.dataset.tgo);
   });
-  return () => { if (player) player.destroy(); stopFit(); };
+  return () => { if (player) player.destroy(); stopFit(); faqOff(); };
+}
+
+/* ---------- Answers you can watch ----------
+   Opening a question plays the matching lesson's animated walkthrough right
+   inside the answer (one open at a time), or offers the hands-on workshop. */
+function faqItem(f) {
+  const p = TOUR_PART[f.part];
+  const isWs = f.go && (f.go.indexOf('#/workshops') === 0 || f.go === '#/automations');
+  return '<details class="cuq" data-fid="' + f.id + '" style="' + modStyle(p.mod) + '"><summary>' + icon('help', 'icon-sm') + '<span>' + tp(f.q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(f.a) + '</p>' +
+    (f.demo ? '<p class="cuq-watch">' + icon('play', 'icon-sm') + tx('شاهدها تحدث:', 'Watch it happen:') + '</p><div class="cuq-demo" data-cdemo="' + f.demo + '"></div>'
+      : '<a class="cuq-visual" href="' + f.go + '"><span class="ic-tile" style="--tc:' + MODULE_COLORS[p.mod].c + '">' + icon(isWs ? 'robot' : p.icon) + '</span><span><b>' + (isWs ? tx('تعلّمها بيدك', 'Learn it hands-on') : tp(TOUR_SHORT[f.part])) + '</b><small>' + (isWs ? tx('افتح الورشة وجرّبها خطوة بخطوة.', 'Open the workshop and try it step by step.') : tx('شاهد هذا الجزء في جولة ClickUp.', 'See this part in the ClickUp tour.')) + '</small></span>' + icon('fwd', 'icon-sm') + '</a>') +
+    '<div class="cuq-links">' + (f.demo && f.go ? '<a class="cuq-show" href="' + f.go + '">' + icon('robot', 'icon-sm') + tx('جرّبها في الورشة', 'Try it in the workshop') + '</a>' : '') +
+    (f.demo ? '<a class="cuq-show alt" href="#/lesson/' + f.demo + '">' + icon('book', 'icon-sm') + tx('الدرس كاملاً', 'Full lesson') + '</a>' : '') +
+    '<a class="cuq-show alt" href="#/tour/' + f.part + '">' + icon('compass', 'icon-sm') + tx('في الجولة', 'In the tour') + '</a></div></div></details>';
+}
+function bindFaqDemos(root, onOpen) {
+  const players = new Map();
+  const onToggle = e => {
+    const d = e.target; if (!d.matches || !d.matches('details.cuq[data-fid]')) return;
+    if (d.open) {
+      $$('details.cuq[data-fid][open]', root).forEach(o => { if (o !== d) o.open = false; });
+      const box = $('[data-cdemo]', d); const L = box && LESSON[box.dataset.cdemo];
+      if (L && L.demo && !players.has(d)) players.set(d, new DemoPlayer(box, L.demo, { autoplay: true }));
+    } else if (players.has(d)) { players.get(d).destroy(); players.delete(d); const box = $('[data-cdemo]', d); if (box) { box.innerHTML = ''; box.className = 'cuq-demo'; } }
+    if (onOpen) onOpen();
+  };
+  root.addEventListener('toggle', onToggle, true);
+  $$('details.cuq[data-fid][open]', root).forEach(d => onToggle({ target: d }));
+  return () => { players.forEach(p => p.destroy()); players.clear(); root.removeEventListener('toggle', onToggle, true); };
 }
 
 /* ---------- The questions people ask most ---------- */
 function viewQuestions(main) {
-  const st = UIState.get('cuq') || { q: '', part: '', open: [] };
-  main.innerHTML = '<div class="page page-narrow"><div class="page-head"><div><h1 tabindex="-1">' + tx('الأسئلة الأكثر شيوعاً عن ClickUp', 'The most asked questions about ClickUp') + enSub('Most asked questions') + '</h1><p>' + tx('إجابات قصيرة وواضحة، وكل إجابة تأخذك إلى الجزء الذي يشرحها بالحركة خطوة بخطوة.', 'Short, clear answers, and each one takes you to the part that shows it, animated step by step.') + '</p></div></div>' +
-    '<div class="panel cuq-tools"><div class="field grow"><label for="cuqQ">' + tx('ابحث في الأسئلة', 'Search the questions') + '</label><input class="input" id="cuqQ" type="search" placeholder="' + tx('مثل: الإشعارات أو Dashboard', 'For example: notifications or Dashboard') + '" value="' + esc(st.q) + '"></div>' +
+  const st = UIState.get('cuq') || { q: '', part: '', open: null };
+  main.innerHTML = '<div class="page page-narrow cuq-page"><div class="cuq-hero"><div><h1 tabindex="-1">' + tx('أكثر ما يسأل عنه موظفو Omantel', 'What Omantel employees ask most') + '</h1><p>' + tx('اضغط أي سؤال: تظهر الإجابة ومعها عرض متحرك يريك كيف تفعلها في ClickUp.', 'Tap any question: the answer opens with a short animation that shows you how to do it in ClickUp.') + '</p></div>' + mascot() + '</div>' +
+    '<div class="panel cuq-tools"><div class="field grow"><label for="cuqQ">' + tx('ابحث في الأسئلة', 'Search the questions') + '</label><input class="input" id="cuqQ" type="search" placeholder="' + tx('مثل: الإشعارات أو Excel', 'For example: notifications or Excel') + '" value="' + esc(st.q) + '"></div>' +
     '<div class="cuq-cats" role="group" aria-label="' + tx('التصنيفات', 'Categories') + '"><button type="button" data-cat="" aria-pressed="' + !st.part + '">' + tx('الكل', 'All') + '</button>' +
-    TOUR_PARTS.map(p => '<button type="button" data-cat="' + p.id + '" style="' + modStyle(p.mod) + '" aria-pressed="' + (st.part === p.id) + '">' + icon(p.icon, 'icon-sm') + tp(TOUR_SHORT[p.id]) + '</button>').join('') + '</div></div>' +
+    TOUR_PARTS.filter(p => CU_FAQ.some(f => f.part === p.id)).map(p => '<button type="button" data-cat="' + p.id + '" style="' + modStyle(p.mod) + '" aria-pressed="' + (st.part === p.id) + '">' + icon(p.icon, 'icon-sm') + tp(TOUR_SHORT[p.id]) + '</button>').join('') + '</div></div>' +
     '<p class="filter-summary" id="cuqCount" aria-live="polite"></p><div data-cuq></div>' +
-    '<div class="panel panel-pad cuq-more"><span class="ic-tile" style="--tc:#8930fd">' + icon('help') + '</span><div><h2>' + tx('سؤالك عن هذه المنصة التعليمية؟', 'Is your question about this learning platform?') + '</h2><p class="small muted">' + tx('مثل حفظ التقدم أو تبديل اللغة.', 'Such as saving progress or switching language.') + '</p></div><a class="btn btn-secondary" href="#/help/faq">' + tx('أسئلة المنصة', 'Platform questions') + '</a></div></div>';
+    '<div class="panel panel-pad cuq-more"><span class="ic-tile" style="--tc:#14b8a6">' + icon('users') + '</span><div><h2>' + tx('لم تجد سؤالك؟', 'Didn’t find your question?') + '</h2><p class="small muted">' + tx('اسأله في المنتدى ليجيبك الزملاء، أو اسأل الفريق مباشرة.', 'Ask it in the forum so colleagues can answer, or ask the team directly.') + '</p></div><a class="btn btn-primary" href="#/forum">' + icon('message', 'icon-sm') + tx('المنتدى', 'Forum') + '</a><a class="btn btn-secondary" href="#/support">' + tx('اسأل الفريق', 'Ask the team') + '</a></div></div>';
+  let off = () => {};
   const paint = () => {
+    off();
     const q = st.q.trim().toLowerCase();
-    const idx = CU_FAQ.map((f, i) => i).filter(i => { const f = CU_FAQ[i]; return (!st.part || f.part === st.part) && (!q || (tp(f.q) + ' ' + tp(f.a) + ' ' + tp(TOUR_SHORT[f.part])).toLowerCase().includes(q)); });
-    $('#cuqCount').textContent = tx(idx.length + ' سؤالاً', nEn(idx.length, 'question'));
+    const list = CU_FAQ.filter(f => (!st.part || f.part === st.part) && (!q || (tp(f.q) + ' ' + tp(f.a) + ' ' + tp(TOUR_SHORT[f.part])).toLowerCase().includes(q)));
+    $('#cuqCount').textContent = tx(list.length + ' سؤالاً', nEn(list.length, 'question'));
     const box = $('[data-cuq]', main);
-    if (!idx.length) { box.innerHTML = '<div class="panel empty-state">' + icon('search') + '<p>' + tx('لا يوجد سؤال مطابق. جرّب كلمة أخرى أو اختر «الكل».', 'No matching question. Try another word or choose “All”.') + '</p></div>'; return; }
-    box.innerHTML = TOUR_PARTS.filter(p => idx.some(i => CU_FAQ[i].part === p.id)).map(p => '<section class="cuq-group" style="' + modStyle(p.mod) + '" aria-labelledby="cg-' + p.id + '"><header><span class="ic-tile">' + icon(p.icon) + '</span><h2 id="cg-' + p.id + '">' + tp(TOUR_SHORT[p.id]) + '</h2><a class="small" href="#/tour/' + p.id + '">' + tx('شاهده في الجولة', 'See it in the tour') + icon('fwd', 'icon-sm') + '</a></header>' +
-      idx.filter(i => CU_FAQ[i].part === p.id).map(i => '<details class="cuq" data-q="' + i + '"' + (st.open.includes(i) ? ' open' : '') + '><summary>' + icon('help', 'icon-sm') + '<span>' + tp(CU_FAQ[i].q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(CU_FAQ[i].a) + '</p><a class="cuq-show" href="#/tour/' + p.id + '">' + icon('play', 'icon-sm') + tx('أرني كيف', 'Show me how') + '</a></div></details>').join('') + '</section>').join('');
+    if (!list.length) { box.innerHTML = '<div class="panel empty-state">' + icon('search') + '<p>' + tx('لا يوجد سؤال مطابق. جرّب كلمة أخرى أو اسأل في المنتدى.', 'No matching question. Try another word or ask in the forum.') + '</p></div>'; return; }
+    box.innerHTML = TOUR_PARTS.filter(p => list.some(f => f.part === p.id)).map(p => '<section class="cuq-group" style="' + modStyle(p.mod) + '" aria-labelledby="cg-' + p.id + '"><header><span class="ic-tile">' + icon(p.icon) + '</span><h2 id="cg-' + p.id + '">' + tp(TOUR_SHORT[p.id]) + '</h2></header>' +
+      list.filter(f => f.part === p.id).map(faqItem).join('') + '</section>').join('');
+    if (st.open) { const d = box.querySelector('[data-fid="' + st.open + '"]'); if (d) d.open = true; }
+    off = bindFaqDemos(box, () => { const o = box.querySelector('details.cuq[open]'); st.open = o ? o.dataset.fid : null; UIState.set('cuq', st); });
   };
   paint();
   main.addEventListener('input', debounce(e => { if (e.target.id === 'cuqQ') { st.q = e.target.value; UIState.set('cuq', st); paint(); } }, 140));
   main.addEventListener('click', e => { const c = e.target.closest('[data-cat]'); if (c) { st.part = c.dataset.cat; UIState.set('cuq', st); $$('[data-cat]', main).forEach(b => b.setAttribute('aria-pressed', b === c)); paint(); } });
-  main.addEventListener('toggle', e => { if (e.target.matches && e.target.matches('details[data-q]')) { const i = +e.target.dataset.q; st.open = st.open.filter(x => x !== i); if (e.target.open) st.open.push(i); UIState.set('cuq', st); } }, true);
+  return () => off();
 }

@@ -2224,6 +2224,330 @@ html[dir="rtl"] .cu-link { padding: 10px 22px 10px 0; }
   .au-mst .m1 { opacity: 0; } .au-mst .m2, .au-pop, .au-mcomment { opacity: 1; }
 }
 
+/* ==========================================================================
+   FUN LAYER: sticker icons, Clicky the mascot, header additions. Loaded last.
+   ========================================================================== */
+
+/* Header: sounds and a shortcut to the ClickUp app */
+.sound-btn { border-radius: 10px; }
+.sound-btn[aria-pressed="false"] { color: var(--ink-3); }
+.open-cu { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 10px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: .88rem; color: #fff; background: linear-gradient(135deg, #7b68ee, #ff02f0); box-shadow: 0 8px 18px -10px #8930fd; flex: none; transition: transform 200ms var(--ease-out), box-shadow 200ms ease; }
+html[dir="rtl"] .open-cu { padding: 0 10px 0 14px; }
+.open-cu img { width: 20px; height: 24px; object-fit: contain; background: #fff; border-radius: 6px; padding: 2px; }
+@media (hover: hover) and (pointer: fine) { .open-cu:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -10px #8930fd; } .open-cu:hover img { animation: icon-wiggle 600ms var(--ease-out); } }
+.open-cu:active { transform: scale(0.97); }
+@media (max-width: 640px) { .open-cu span { display: none; } .open-cu { padding: 0 8px; } }
+
+/* Sticker icons: glossy, colourful, and they wiggle when you point at them */
+.ic-tile, .nav-link .ic-tile { position: relative; overflow: hidden; color: #fff; background: linear-gradient(145deg, color-mix(in srgb, var(--tc, #7b68ee) 60%, #fff), var(--tc, #7b68ee)); box-shadow: 0 6px 14px -8px var(--tc, #7b68ee), inset 0 -2px 0 rgb(0 0 0 / .12), inset 0 1px 0 rgb(255 255 255 / .5); }
+.ic-tile::before { content: ""; position: absolute; inset: 2px 3px 55% 3px; border-radius: inherit; background: linear-gradient(180deg, rgb(255 255 255 / .5), rgb(255 255 255 / 0)); pointer-events: none; }
+.ic-tile .icon { position: relative; stroke-width: 2.1; filter: drop-shadow(0 1px 0 rgb(0 0 0 / .18)); }
+.nav-link[aria-current="page"] .ic-tile { transform: rotate(-6deg) scale(1.06); }
+.nav-link[aria-current="page"] .ic-tile .icon { animation: icon-bob 2.6s ease-in-out infinite; }
+.rv-in .ic-tile { animation: sticker-in 640ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@media (hover: hover) and (pointer: fine) {
+  a:hover .ic-tile .icon, button:hover .ic-tile .icon, .why-card:hover .ic-tile .icon, .au-type:hover .ic-tile .icon, .guide-step:hover .ic-tile .icon, .ic-tile:hover .icon { animation: icon-wiggle 650ms var(--ease-out); }
+  .bubble:hover .bb-ic .icon, .disc-tile:hover .ic-tile .icon { animation: icon-wiggle 650ms var(--ease-out); }
+}
+@keyframes sticker-in { from { transform: scale(.6) rotate(-14deg); opacity: 0; } }
+@keyframes icon-wiggle { 0% { transform: none; } 25% { transform: rotate(-16deg) scale(1.15); } 50% { transform: rotate(12deg) scale(1.1); } 75% { transform: rotate(-6deg); } 100% { transform: none; } }
+@keyframes icon-bob { 50% { transform: translateY(-2px) rotate(-6deg); } }
+.bb-ic, .ic-float, .j-node, .medal, .au-nic, .guide-path li span { position: relative; overflow: hidden; }
+.bb-ic::before, .ic-float::before, .au-nic::before, .guide-path li span::before { content: ""; position: absolute; inset: 3px 4px 55% 4px; border-radius: inherit; background: linear-gradient(180deg, rgb(255 255 255 / .45), rgb(255 255 255 / 0)); pointer-events: none; }
+.bubble .bb-ic { animation: bubble-idle 5s ease-in-out infinite; animation-delay: calc(var(--i) * -.4s); }
+@keyframes bubble-idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px) rotate(-3deg); } }
+
+/* Clicky */
+.mascot { display: inline-block; width: 104px; animation: mascot-bob 3.4s ease-in-out infinite; }
+.mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
+.mascot .m-arm { transform-box: fill-box; transform-origin: 50% 100%; animation: wave 2.6s ease-in-out infinite; }
+.mascot .m-bulb { animation: bulb 1.8s ease-in-out infinite; }
+.mascot .m-shadow { transform-box: fill-box; transform-origin: center; animation: shadow 3.4s ease-in-out infinite; }
+@keyframes mascot-bob { 50% { transform: translateY(-7px); } }
+@keyframes shadow { 50% { transform: scaleX(.8); opacity: .08; } }
+@keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+@keyframes wave { 0%, 55%, 100% { transform: rotate(0deg); } 65% { transform: rotate(-26deg); } 75% { transform: rotate(12deg); } 85% { transform: rotate(-18deg); } }
+@keyframes bulb { 50% { fill: #ff7a45; } }
+.clicky { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.clicky-btn { border: 0; background: transparent; padding: 0; cursor: pointer; border-radius: 24px; }
+.clicky-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.clicky-btn.jump .mascot { animation: mascot-jump 620ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes mascot-jump { 0% { transform: none; } 35% { transform: translateY(-22px) rotate(-8deg) scale(1.05); } 70% { transform: translateY(0) scale(.96, 1.04); } 100% { transform: none; } }
+.clicky-say { position: relative; max-width: 360px; padding: 14px 18px; border-radius: 18px; background: #fff; border: 2px solid #e6ddff; box-shadow: var(--shadow-2); font-weight: 600; line-height: 1.6; text-align: start; }
+.clicky-say::before { content: ""; position: absolute; top: 50%; inset-inline-start: -10px; width: 16px; height: 16px; background: #fff; border-inline-start: 2px solid #e6ddff; border-bottom: 2px solid #e6ddff; transform: translateY(-50%) rotate(45deg); }
+html[dir="rtl"] .clicky-say::before { transform: translateY(-50%) rotate(-45deg); }
+.clicky small { display: block; color: var(--ink-3); font-weight: 500; font-size: .78rem; margin-top: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .mascot, .mascot .m-eyes, .mascot .m-arm, .mascot .m-bulb, .mascot .m-shadow, .clicky-btn.jump .mascot, .bubble .bb-ic, .rv-in .ic-tile, .nav-link[aria-current="page"] .ic-tile .icon { animation: none !important; }
+  a:hover .ic-tile .icon, button:hover .ic-tile .icon { animation: none !important; }
+}
+
+/* ==========================================================================
+   WORKSHOPS: hub cards, AI (ClickUp Brain), Import & Export, Templates.
+   ========================================================================== */
+.page.ws-hub { gap: 36px; }
+.ws-hero-art { display: grid; place-items: center; }
+.mascot-lg { width: 170px; }
+.ws-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.ws-card { display: grid; grid-template-rows: auto 1fr; border-radius: 24px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink); box-shadow: var(--shadow-2); transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out); }
+.ws-art { position: relative; height: 130px; background: var(--g); display: grid; place-items: center; overflow: hidden; }
+.ws-art .ic-tile { width: 72px; height: 72px; border-radius: 22px; --tc: rgb(255 255 255 / .28); background: rgb(255 255 255 / .22); box-shadow: 0 14px 30px -12px rgb(0 0 0 / .35), inset 0 1px 0 rgb(255 255 255 / .5); animation: bubble-idle 5s ease-in-out infinite; animation-delay: calc(var(--i) * -.7s); }
+.ws-art .ic-tile .icon { width: 36px; height: 36px; }
+.ws-art i { position: absolute; border-radius: 50%; background: rgb(255 255 255 / .18); }
+.ws-art i:nth-of-type(1) { width: 120px; height: 120px; inset-inline-end: -30px; top: -50px; }
+.ws-art i:nth-of-type(2) { width: 40px; height: 40px; inset-inline-start: 18%; bottom: 14px; animation: bob 4s ease-in-out infinite; }
+.ws-art i:nth-of-type(3) { width: 16px; height: 16px; inset-inline-start: 30%; top: 22px; background: rgb(255 255 255 / .5); animation: bob 3s ease-in-out infinite reverse; }
+.ws-body { display: grid; gap: 8px; align-content: start; padding: 18px 20px 20px; }
+.ws-body h2 { font-size: 1.15rem; }
+.ws-body p { color: var(--ink-2); line-height: 1.6; }
+@media (hover: hover) and (pointer: fine) { .ws-card:hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: var(--shadow-3); } .ws-card:hover .ws-art .ic-tile .icon { animation: icon-wiggle 650ms var(--ease-out); } }
+.ws-card:active { transform: scale(0.98); }
+.ws-back { justify-self: center; }
+.ws-h3 { display: flex; gap: 8px; align-items: center; font-size: 1.05rem; margin-bottom: 10px; color: var(--md); }
+.ie-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-bottom: 10px; }
+
+/* AI */
+.ai-orbit { position: relative; height: 280px; margin: 6px 0 18px; }
+.ai-core { position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: radial-gradient(circle at 30% 30%, #ff9af5, #8930fd 55%, #49ccf9); box-shadow: 0 0 0 10px rgb(137 48 253 / .12), 0 20px 40px -12px #8930fd; animation: core-pulse 2.8s ease-in-out infinite; }
+.ai-core .icon { width: 40px; height: 40px; }
+.ai-core.sm { position: static; width: 32px; height: 32px; margin: 0; box-shadow: 0 6px 12px -6px #8930fd; flex: none; }
+.ai-core.sm .icon { width: 16px; height: 16px; }
+@keyframes core-pulse { 50% { box-shadow: 0 0 0 20px rgb(137 48 253 / .06), 0 20px 40px -12px #8930fd; } }
+.ai-ring { position: absolute; left: 50%; top: 50%; width: 230px; height: 230px; margin: -115px 0 0 -115px; border-radius: 50%; border: 2px dashed #d9ccfb; animation: spin-slow 30s linear infinite; }
+.ai-sat { position: absolute; display: grid; justify-items: center; gap: 4px; width: 170px; text-align: center; padding: 12px; border-radius: 16px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-2); animation: rise-in 600ms var(--ease-out) both; }
+.ai-sat b { font-size: 1rem; } .ai-sat small { color: var(--ink-2); font-size: .78rem; line-height: 1.5; }
+.ai-sat .ic-tile { width: 34px; height: 34px; border-radius: 10px; }
+.ai-sat.s0 { left: 4%; top: 6%; } .ai-sat.s1 { right: 4%; top: 6%; animation-delay: 150ms; } .ai-sat.s2 { left: 50%; bottom: 0; margin-left: -85px; animation-delay: 300ms; }
+.ai-lab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 16px; align-items: start; }
+.ai-task { display: grid; gap: 10px; padding: 16px; border-radius: 16px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-1); }
+.ai-desc { color: var(--ink-2); font-size: .9rem; }
+.ai-thread { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+.ai-thread p { display: flex; gap: 8px; align-items: flex-start; font-size: .84rem; line-height: 1.55; }
+.ai-thread .avatar { flex: none; }
+.ai-subs:empty { display: none; }
+.ai-subs { display: grid; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
+.ai-subs-h { display: flex; gap: 6px; align-items: center; font-weight: 700; font-size: .86rem; }
+.ai-sub { display: flex; gap: 8px; align-items: center; font-size: .84rem; animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(var(--k) * 110ms); }
+.ai-panel { display: grid; grid-template-rows: auto 1fr auto auto; gap: 10px; padding: 14px; border-radius: 18px; background: linear-gradient(180deg, #faf6ff, #fff); border: 1px solid #e6dcff; box-shadow: 0 24px 50px -30px rgb(137 48 253 / .6); min-height: 380px; }
+.ai-ph { display: flex; gap: 8px; align-items: center; }
+.ai-ph .chip { margin-inline-start: auto; }
+.ai-chat { display: grid; align-content: start; gap: 8px; max-height: 280px; overflow: auto; padding: 4px; }
+.ai-msg { max-width: 92%; padding: 10px 12px; border-radius: 14px; font-size: .88rem; line-height: 1.6; animation: tip-in 240ms var(--ease-out); }
+.ai-bot { justify-self: start; background: #fff; border: 1px solid #ebe3ff; }
+.ai-me { justify-self: end; background: linear-gradient(135deg, #7b68ee, #a855f7); color: #fff; }
+.ai-bot ul { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 4px; }
+.ai-bot li { display: flex; gap: 6px; align-items: center; }
+.ai-think { display: flex; gap: 4px; padding: 14px; }
+.ai-think i { width: 7px; height: 7px; border-radius: 50%; background: #a855f7; animation: think 900ms ease-in-out infinite; }
+.ai-think i:nth-child(2) { animation-delay: 150ms; } .ai-think i:nth-child(3) { animation-delay: 300ms; }
+@keyframes think { 50% { transform: translateY(-5px); opacity: .4; } }
+.ai-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ai-chip { display: inline-flex; gap: 6px; align-items: center; padding: 7px 11px; border-radius: 999px; border: 1px solid #e0d4ff; background: #fff; color: #5b2bd6; font: 600 .8rem/1.2 var(--font); cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.ai-chip:hover { background: #f4eeff; } .ai-chip:active { transform: scale(0.96); }
+.ai-input { display: flex; gap: 6px; }
+.ai-input .input { flex: 1; }
+.ai-input .icon-btn { background: linear-gradient(135deg, #7b68ee, #a855f7); color: #fff; }
+.pb { display: grid; gap: 14px; margin-bottom: 18px; }
+.pb-controls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.pb-controls label { display: grid; gap: 4px; font-size: .78rem; font-weight: 700; color: var(--ink-3); }
+.pb-out { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 16px; background: linear-gradient(135deg, #f6f0ff, #fff); border: 1px dashed #c9b6fb; }
+.pb-out p { flex: 1; font-weight: 600; line-height: 1.7; }
+.ai-shot { box-shadow: 0 0 0 3px #a855f7; animation-name: ring-pulse-ai; color: #a855f7; }
+@keyframes ring-pulse-ai { 0% { box-shadow: 0 0 0 0 rgb(168 85 247 / .7); } 100% { box-shadow: 0 0 0 12px rgb(168 85 247 / 0); } }
+
+/* Import & Export */
+.ie-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr) auto minmax(0, .8fr); gap: 10px; align-items: center; margin: 6px 0 20px; }
+.ie-sheet { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 12px 12px 30px; border-radius: 14px; background: #eafaf2; border: 1px solid #b6e6cc; }
+.ie-sheet > b { position: absolute; bottom: 8px; inset-inline-start: 12px; font-size: .74rem; color: #0f7f58; }
+.ie-h { font-size: .7rem; font-weight: 800; color: #0f7f58; text-align: center; }
+.ie-row { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; animation: ie-out 4.5s ease-in-out infinite; animation-delay: calc(var(--r) * .5s); }
+.ie-row i { height: 12px; border-radius: 3px; background: #fff; border: 1px solid #b6e6cc; }
+@keyframes ie-out { 0%, 20% { transform: none; opacity: 1; } 45% { transform: translateX(calc(var(--s, 1) * 60px)); opacity: 0; } 46%, 60% { transform: none; opacity: 0; } 80%, 100% { opacity: 1; } }
+html[dir="rtl"] .ie-row { --s: -1; }
+.ie-arrow { display: grid; justify-items: center; color: var(--md); }
+.ie-arrow small { font-weight: 800; font-size: .72rem; }
+html[dir="rtl"] .ie-arrow .icon { transform: scaleX(-1); }
+.ie-list { display: grid; gap: 6px; padding: 12px; border-radius: 14px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-1); }
+.ie-list > b { font-size: .8rem; }
+.ie-task { display: flex; gap: 6px; align-items: center; animation: ie-in 4.5s ease-in-out infinite; animation-delay: calc(var(--r) * .5s + .9s); }
+.ie-task i { flex: 1; height: 8px; border-radius: 4px; background: #eee9f8; }
+@keyframes ie-in { 0%, 10% { opacity: 0; transform: translateY(-6px); } 25%, 100% { opacity: 1; transform: none; } }
+.ie-file { display: grid; justify-items: center; gap: 6px; padding: 16px 10px; border-radius: 14px; background: #eef4ff; border: 1px solid #c9dafc; color: #2659c7; text-align: center; }
+.ie-file .icon { width: 32px; height: 32px; animation: bob 2.4s ease-in-out infinite; }
+.ie-file b { font-size: .74rem; word-break: break-all; }
+.ie-src { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.ie-up { cursor: pointer; }
+.ie-map .data-table th { vertical-align: top; min-width: 130px; }
+.ie-colname { display: block; margin-bottom: 6px; }
+.ie-skip { opacity: .35; text-decoration: line-through; }
+.ie-done { display: grid; gap: 10px; margin-top: 14px; animation: tip-in 300ms var(--ease-out); }
+.ie-sum { display: flex; gap: 6px; align-items: center; font-weight: 700; color: #0f7f58; }
+.ie-warn { display: flex; gap: 8px; align-items: flex-start; padding: 10px 12px; border-radius: 12px; background: #fff4e0; color: #7a4a00; font-size: .86rem; }
+.ie-warn .icon { flex: none; margin-top: 3px; }
+.ie-listview { display: grid; gap: 4px; padding: 10px; border-radius: 14px; background: #fff; border: 1px solid var(--line); }
+.ie-trow { display: grid; grid-template-columns: auto minmax(0, 1fr) 28px 90px 80px auto; gap: 10px; align-items: center; padding: 7px 8px; border-bottom: 1px solid #f0eef6; font-size: .86rem; animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(var(--k) * 90ms); }
+.ie-tn { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.ie-exp { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 16px; align-items: start; }
+.ie-cols { display: grid; gap: 6px; padding: 16px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.ie-cols .btn { margin-top: 10px; justify-self: start; }
+.ie-preview { display: grid; gap: 8px; }
+.ie-preview pre { margin: 0; padding: 14px; border-radius: 14px; background: #1b1340; color: #d9d2f5; font: 500 .8rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; word-break: break-word; max-height: 260px; overflow: auto; }
+.ie-got { grid-template-columns: auto 1fr; justify-items: start; align-items: center; background: #eafaf2; border-color: #b6e6cc; color: #0f7f58; }
+.ie-got .icon { width: 24px; height: 24px; animation: none; }
+
+/* Templates */
+.tp-stamp { position: relative; height: 190px; display: flex; align-items: center; justify-content: center; gap: 16px; margin: 6px 0 18px; }
+.stamp { width: 74px; height: 74px; border-radius: 22px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #22c38e, #14b8a6); box-shadow: 0 16px 30px -12px #14b8a6; animation: stamp 3s var(--ease-out) infinite; }
+.stamp .icon { width: 36px; height: 36px; }
+@keyframes stamp { 0%, 100% { transform: translateY(-14px) rotate(-8deg); } 20% { transform: translateY(6px) rotate(0) scale(.95); } 35% { transform: translateY(0) rotate(0); } }
+.stamp-copy { display: grid; gap: 6px; width: 120px; padding: 12px; border-radius: 12px; background: #fff; border: 1px solid #b6e6cc; box-shadow: var(--shadow-2); animation: copy-pop 3s var(--ease-out) infinite; animation-delay: calc(.35s + var(--k) * .18s); }
+.stamp-copy b { font-size: .78rem; } .stamp-copy i { height: 7px; border-radius: 4px; background: #e6f6ee; }
+@keyframes copy-pop { 0%, 15% { opacity: 0; transform: scale(.85) translateY(8px); } 30%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.tc { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 14px; align-items: start; }
+.tc-win { border-radius: 16px; background: #fff; border: 1px solid #e1dcef; box-shadow: 0 30px 60px -30px rgb(40 20 110 / .4); overflow: hidden; }
+.tc-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 14px; background: #fbfaff; border-bottom: 1px solid #ebe8f3; }
+.tc-head .cuq-cats { margin-inline-start: auto; }
+.tc-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 14px; }
+.tc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: start; }
+.tc-card { display: grid; justify-items: start; gap: 6px; padding: 12px; border-radius: 14px; border: 1px solid var(--line); background: #fff; text-align: start; cursor: pointer; font: inherit; color: var(--ink); transition: border-color 150ms ease, box-shadow 150ms ease, transform 160ms var(--ease-out); }
+.tc-card .ic-tile { width: 32px; height: 32px; border-radius: 10px; }
+.tc-card b { font-size: .86rem; } .tc-card small { color: var(--ink-3); font-size: .74rem; }
+.tc-card.on { border-color: var(--tc); box-shadow: 0 0 0 2px color-mix(in srgb, var(--tc) 30%, transparent); }
+.tc-card:active { transform: scale(0.97); }
+.tc-prev { display: grid; gap: 8px; align-content: start; padding: 14px; border-radius: 14px; background: color-mix(in srgb, var(--tc) 7%, #fff); border: 1px solid color-mix(in srgb, var(--tc) 25%, var(--line)); animation: tip-in 240ms var(--ease-out); }
+.tc-prev .ic-tile { width: 40px; height: 40px; border-radius: 12px; }
+.tc-prev .chip { justify-self: start; }
+.tc-prev ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; font-size: .86rem; }
+.tc-prev li { display: flex; gap: 6px; align-items: center; }
+.tc-prev .btn { justify-self: start; margin-top: 6px; }
+.tc-st { display: flex; flex-wrap: wrap; gap: 4px; }
+.tc-side { display: grid; gap: 6px; padding: 14px; border-radius: 16px; background: #f7f6fb; border: 1px solid var(--line); }
+.tc-made { display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 10px; background: #fff; font-size: .84rem; }
+.tc-made .chip { margin-inline-start: auto; font-size: .68rem; }
+.tc-made.new { animation: sticker-in 600ms cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 0 2px #22c38e; }
+.mk-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.mk-task { display: grid; gap: 8px; padding: 14px; border-radius: 14px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-1); margin-bottom: 10px; animation: tip-in 280ms var(--ease-out); }
+.mk-sub { display: flex; gap: 6px; align-items: center; font-size: .84rem; color: var(--ink-2); }
+.mk-form { display: grid; gap: 10px; padding: 16px; border-radius: 16px; background: linear-gradient(180deg, #effbf5, #fff); border: 1px solid #b6e6cc; }
+.mk-form .btn { justify-self: start; }
+.mk-inc { display: grid; gap: 4px; }
+.mk-saved { display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 14px; background: #fff; border: 1px solid #b6e6cc; box-shadow: var(--shadow-1); animation: sticker-in 600ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.mk-saved div { display: grid; flex: 1; } .mk-saved small { color: var(--ink-3); }
+
+@media (max-width: 1080px) {
+  .ai-lab, .ie-exp, .tc, .mk-grid { grid-template-columns: minmax(0, 1fr); }
+  .pb-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .ai-orbit { height: auto; display: grid; gap: 10px; justify-items: center; }
+  .ai-core, .ai-ring { position: relative; left: auto; top: auto; margin: 0; }
+  .ai-ring { display: none; }
+  .ai-sat { position: static; width: 100%; margin: 0 !important; }
+  .ie-flow { grid-template-columns: minmax(0, 1fr); }
+  .ie-arrow .icon { transform: rotate(90deg); }
+  .ie-two, .tc-body, .tc-grid { grid-template-columns: minmax(0, 1fr); }
+  .ie-trow { grid-template-columns: auto minmax(0, 1fr) 28px; }
+  .ie-trow > :nth-child(n+4) { display: none; }
+  .mascot-lg { width: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ws-art .ic-tile, .ws-art i, .ai-core, .ai-ring, .ai-sat, .ai-sub, .ai-msg, .ai-think i, .ie-row, .ie-task, .ie-file .icon, .ie-trow, .stamp, .stamp-copy, .tc-made.new, .mk-saved, .mk-task { animation: none !important; }
+  .stamp-copy, .ie-task { opacity: 1; }
+}
+.au-trow .mx-status, .ie-trow .mx-status, .ai-sub .mx-status { flex: none; white-space: nowrap; }
+.ie-map .select { min-width: 150px; }
+.tc-made { flex-wrap: wrap; }
+
+/* ==========================================================================
+   WATCHABLE ANSWERS AND THE FORUM
+   ========================================================================== */
+.h-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.mascot-md { width: 110px; flex: none; }
+
+/* Questions page */
+.cuq-hero { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; border-radius: 26px; color: #fff; background: linear-gradient(125deg, #14b8a6, #1fb6e0 45%, #7b68ee); box-shadow: 0 26px 50px -28px #1fb6e0; }
+.cuq-hero h1 { color: #fff; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem); }
+.cuq-hero p { color: rgb(255 255 255 / .92); max-width: 56ch; margin-top: 6px; }
+.cuq-hero .mascot { width: 100px; flex: none; }
+.cuq-watch { display: flex; gap: 6px; align-items: center; font-weight: 700; color: var(--md, var(--accent-ink)); }
+.cuq-demo { min-height: 60px; }
+.cuq-demo.demo { margin: 0; }
+.cuq-visual { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; text-decoration: none; color: var(--ink); background: linear-gradient(135deg, color-mix(in srgb, var(--mc, #7b68ee) 10%, #fff), #fff); border: 1px solid color-mix(in srgb, var(--mc, #7b68ee) 25%, var(--line)); transition: transform 220ms var(--ease-out), box-shadow 220ms ease; }
+.cuq-visual .ic-tile { width: 54px; height: 54px; border-radius: 16px; flex: none; animation: bubble-idle 4s ease-in-out infinite; }
+.cuq-visual .ic-tile .icon { width: 26px; height: 26px; }
+.cuq-visual > span:nth-child(2) { display: grid; flex: 1; }
+.cuq-visual small { color: var(--ink-2); }
+@media (hover: hover) and (pointer: fine) { .cuq-visual:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); } }
+.cuq-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.cuq-show.alt { background: var(--surface-2, #f5f3fb); color: var(--ink-2); }
+.cuq summary { transition: background-color 150ms ease; border-radius: 14px; }
+@media (hover: hover) and (pointer: fine) { .cuq summary:hover { background: color-mix(in srgb, var(--mc, #7b68ee) 6%, #fff); } }
+.cuq[open] summary > .icon { animation: icon-wiggle 600ms var(--ease-out); }
+
+/* Forum */
+.forum { gap: 18px; }
+.fm-hero { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 24px 28px; border-radius: 26px; color: #fff; background: linear-gradient(125deg, #ff7a45, #ff02f0 55%, #8930fd); box-shadow: 0 26px 50px -28px #ff02f0; }
+.fm-hero h1 { color: #fff; font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.3rem); margin: 8px 0 4px; }
+.fm-hero p { color: rgb(255 255 255 / .92); max-width: 54ch; }
+.fm-note { display: flex; gap: 8px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: #fff8e6; border: 1px solid #f4e3a3; color: #6b4e00; font-size: .86rem; line-height: 1.6; }
+.fm-note .icon { flex: none; margin-top: 3px; }
+.fm-compose { display: grid; gap: 12px; padding: 16px; border-radius: 22px; }
+.fm-row { display: flex; gap: 12px; align-items: flex-start; }
+.fm-row textarea { flex: 1; resize: vertical; min-height: 84px; }
+.fm-opts { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.fm-opts .input { flex: 1 1 160px; }
+.fm-opts .btn { margin-inline-start: auto; }
+.fm-types { display: flex; gap: 6px; flex-wrap: wrap; }
+.fm-types button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font: 600 .84rem/1 var(--font); color: var(--ink-2); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.fm-types button .icon { color: var(--tc); }
+.fm-types button[aria-checked="true"] { background: var(--tc); border-color: var(--tc); color: #fff; }
+.fm-types button[aria-checked="true"] .icon { color: #fff; }
+.fm-types button:active { transform: scale(0.96); }
+.fm-topic, .fm-sort { display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; font-weight: 600; color: var(--ink-3); }
+.fm-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.fm-list { display: grid; gap: 14px; }
+.fm-post { display: grid; gap: 10px; padding: 16px 18px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--tc); box-shadow: var(--shadow-1); }
+.fm-post.mine { background: linear-gradient(180deg, #fbf8ff, #fff); }
+.fm-post > header { display: flex; align-items: center; gap: 12px; }
+.fm-av { display: grid; place-items: center; flex: none; border-radius: 50%; color: #fff; font-weight: 800; background: linear-gradient(135deg, hsl(var(--h) 80% 62%), hsl(calc(var(--h) + 40) 75% 50%)); box-shadow: inset 0 -2px 0 rgb(0 0 0 / .12); }
+.fm-who { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.fm-id { font-size: .76rem; color: var(--ink-3); }
+.fm-time { font-size: .76rem; color: var(--ink-3); }
+.fm-type { margin-inline-start: auto; display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; font-size: .76rem; font-weight: 700; color: #fff; background: var(--tc); }
+.fm-text { font-size: 1rem; line-height: 1.7; white-space: pre-line; }
+.fm-part { justify-self: start; text-decoration: none; }
+.fm-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding-top: 8px; border-top: 1px solid var(--line); }
+.fm-btn { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; border: 1px solid transparent; background: transparent; font: 600 .84rem/1 var(--font); color: var(--ink-2); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.fm-btn:hover { background: var(--surface-2, #f5f3fb); }
+.fm-btn:active { transform: scale(0.95); }
+.fm-btn b { font-weight: 800; }
+.fm-btn.agree[aria-pressed="true"] { background: #e8f0ff; color: #2659c7; border-color: #c9dafc; }
+.fm-btn.like[aria-pressed="true"], .fm-mini.like[aria-pressed="true"] { background: #ffe8f0; color: #d6245f; border-color: #ffc2d6; }
+.fm-btn.like[aria-pressed="true"] .icon, .fm-mini.like[aria-pressed="true"] .icon { fill: currentColor; }
+.fm-del { margin-inline-start: auto; }
+.burst .icon { animation: burst 520ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.burst::after { content: ""; position: absolute; inset-inline-start: 10px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; border: 2px solid currentColor; animation: burst-ring 520ms ease-out forwards; pointer-events: none; }
+@keyframes burst { 0% { transform: scale(1); } 40% { transform: scale(1.5) rotate(-12deg); } 100% { transform: scale(1); } }
+@keyframes burst-ring { from { transform: scale(.4); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+.fm-thread { display: grid; gap: 10px; padding: 12px; border-radius: 16px; background: var(--surface-2, #f7f6fb); animation: tip-in 240ms var(--ease-out); }
+.fm-c { display: flex; gap: 10px; align-items: flex-start; }
+.fm-c > div { display: grid; gap: 4px; flex: 1; padding: 10px 12px; border-radius: 14px; background: #fff; border: 1px solid var(--line); }
+.fm-mini { position: relative; justify-self: start; display: inline-flex; gap: 4px; align-items: center; padding: 3px 8px; border-radius: 999px; border: 1px solid transparent; background: transparent; font: 700 .76rem/1 var(--font); color: var(--ink-3); cursor: pointer; }
+.fm-reply { display: flex; gap: 8px; align-items: center; }
+.fm-reply .input { flex: 1; }
+.fm-reply .icon-btn { background: linear-gradient(135deg, #ff7a45, #ff02f0); color: #fff; }
+html[dir="rtl"] .fm-reply .icon-btn svg, html[dir="rtl"] .fm-compose [data-post] svg, html[dir="rtl"] .ai-input .icon-btn svg { transform: scaleX(-1); }
+@media (max-width: 640px) {
+  .fm-hero, .cuq-hero { padding: 20px; }
+  .fm-hero .mascot, .cuq-hero .mascot { width: 72px; }
+  .fm-btn span { display: none; }
+  .fm-opts .btn { flex: 1 1 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .burst .icon, .burst::after, .fm-thread, .cuq-visual .ic-tile, .cuq[open] summary > .icon { animation: none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -2273,7 +2597,8 @@ html[dir="rtl"] .cu-link { padding: 10px 22px 10px 0; }
     <button type="button" data-lang="ar" lang="ar" aria-pressed="true"><span class="ls-long">العربية</span><span class="ls-short" aria-hidden="true">ع</span></button>
     <button type="button" data-lang="en" lang="en" aria-pressed="false"><span class="ls-long">English</span><span class="ls-short" aria-hidden="true">EN</span></button>
   </div>
-  <a class="topbar-progress" href="#/progress" id="topProgress"></a>
+  <button type="button" class="icon-btn sound-btn" id="soundToggle" aria-pressed="true"></button>
+  <a class="open-cu" id="openClickUp" href="https://app.clickup.com/" target="_blank" rel="noopener noreferrer"><img class="cu-app-ic" data-cuicon alt="" width="20" height="24"><span data-t="openCU">افتح ClickUp</span></a>
 </header>
 
 <div class="shell">
@@ -3812,66 +4137,70 @@ const TOUR_PARTS = [
 ];
 const TOUR_PART = Object.fromEntries(TOUR_PARTS.map(p => [p.id, p]));
 
-/* The questions people ask most about ClickUp, grouped by app part. */
+/* Questions Omantel employees typically ask when they start with ClickUp.
+   Each answer names a lesson whose animated walkthrough plays inside the
+   answer (demo), or a workshop to open (go), so people see it, not only
+   read it. Examples are representative; real questions from the team can
+   be added to this list. */
 const CU_FAQ = [
-  { part: 'start', q: ['ما هو ClickUp، ولماذا نستخدمه؟', 'What is ClickUp, and why do we use it?'],
-    a: ['منصة لإدارة العمل يخطط فيها الفريق للمهام ويتابع تقدّمها ويتعاون في مكان واحد، بدلاً من توزيع العمل بين البريد والجداول والمحادثات. النتيجة: كل شخص يعرف ما المطلوب منه ومتى.', 'A work management platform where the team plans tasks, follows progress and collaborates in one place, instead of spreading work across email, spreadsheets and chats. The result: everyone knows what is expected of them and by when.'] },
-  { part: 'start', q: ['من أين أبدأ كل يوم؟', 'Where should I start each day?'],
-    a: ['من Home: تعرض المهام المسندة إليك مرتبة حسب التوقيت (المتأخر، ثم اليوم، ثم القادم). بعدها افتح Inbox لترى الإشارات والتعيينات الجديدة.', 'From Home: it shows the tasks assigned to you ordered by timing (overdue, today, then upcoming). Then open Inbox to see new mentions and assignments.'] },
-  { part: 'start', q: ['كيف لا تفوتني الإشعارات المهمة؟', 'How do I stop missing important notifications?'],
-    a: ['استخدم تبويبات Inbox: رد على ما يحتاج رداً، وانقل إلى Later ما يحتاج وقتاً، وامسح (Clear) ما انتهى. ومن إعدادات الإشعارات قلّل ما لا يهمك حتى تبرز الإشارات المهمة.', 'Use the Inbox tabs: reply to what needs an answer, move what needs time to Later, and Clear what is done. In your notification settings, turn down what does not matter so important mentions stand out.'] },
-  { part: 'start', q: ['هل يمكنني استخدام ClickUp على الجوال؟', 'Can I use ClickUp on my phone?'],
-    a: ['نعم. يتوفر ClickUp في المتصفح، وكتطبيق لسطح المكتب، وكتطبيق للجوال على iOS وAndroid، وكلها تعرض العمل نفسه.', 'Yes. ClickUp works in the browser, as a desktop app and as a mobile app for iOS and Android, and they all show the same work.'] },
-  { part: 'structure', q: ['ما الفرق بين Space وFolder وList؟', 'What is the difference between a Space, a Folder and a List?'],
-    a: ['Space قسم كبير لفريق أو إدارة. Folder اختياري يجمع قوائم مترابطة. List هي الحاوية التي تعيش فيها المهام. فكّر فيها كخزانة، ثم درج، ثم ملف.', 'A Space is a large area for a team or department. A Folder is optional and groups related Lists. A List is the container where tasks live. Think of a cabinet, a drawer and a file.'] },
-  { part: 'structure', q: ['هل يجب أن أنشئ Folder دائماً؟', 'Do I always need a Folder?'],
-    a: ['لا. يمكنك وضع القوائم مباشرة داخل Space. استخدم Folder فقط عندما تحتاج إلى جمع عدة قوائم مترابطة، مثل قوائم مشروع واحد.', 'No. You can put Lists directly inside a Space. Use a Folder only when you need to group several related Lists, such as the Lists of one project.'] },
-  { part: 'tasks', q: ['ما الذي يجعل المهمة واضحة؟', 'What makes a task clear?'],
-    a: ['عنوان يبدأ بفعل، ومسؤول واحد، وتاريخ استحقاق، وأولوية، وحالة محدّثة، ووصف قصير يوضح النتيجة المطلوبة.', 'A title that starts with a verb, one owner, a due date, a priority, an up-to-date status and a short description of the expected result.'] },
-  { part: 'tasks', q: ['ما الفرق بين المهمة الفرعية وقائمة التحقق؟', 'What is the difference between a subtask and a checklist?'],
-    a: ['المهمة الفرعية (Subtask) لها مسؤول وتاريخ وحالة مستقلة، فهي مناسبة لجزء يقوم به شخص آخر. قائمة التحقق (Checklist) بنود بسيطة داخل المهمة تؤشر عليها عند إنجازها.', 'A subtask has its own assignee, date and status, so it suits a part someone else does. A checklist is a set of simple items inside the task that you tick off as you go.'] },
-  { part: 'tasks', q: ['هل يمكن إسناد مهمة إلى أكثر من شخص؟', 'Can a task have more than one assignee?'],
-    a: ['نعم إذا كان خيار تعدد المسؤولين مفعّلاً في مساحة العمل. لكن الأفضل غالباً مسؤول واحد واضح، ومهام فرعية لمن يساعد.', 'Yes, if multiple assignees is turned on in the Workspace. Usually, though, one clear owner plus subtasks for helpers works best.'] },
-  { part: 'tasks', q: ['ماذا تعني الحالات مثل TO DO وIN PROGRESS؟', 'What do statuses like TO DO and IN PROGRESS mean?'],
-    a: ['الحالة تقول أين وصل العمل: TO DO لم يبدأ، وIN PROGRESS قيد العمل، وREVIEW ينتظر المراجعة، وCOMPLETE انتهى. قد تختلف أسماء الحالات من قائمة لأخرى بحسب إعداد الفريق.', 'The status says where the work stands: TO DO has not started, IN PROGRESS is being worked on, REVIEW is waiting for review and COMPLETE is done. Status names can differ between Lists depending on the team’s setup.'] },
-  { part: 'views', q: ['أي طريقة عرض أستخدم؟', 'Which view should I use?'],
-    a: ['List للتفاصيل والتحرير السريع، وBoard لتحريك العمل بين المراحل، وCalendar للمواعيد، وGantt للخط الزمني والاعتماديات، وTable لتحرير يشبه الجداول، وWorkload لمعرفة من عليه ضغط.', 'List for details and quick editing, Board to move work between stages, Calendar for dates, Gantt for timelines and dependencies, Table for spreadsheet-style editing, and Workload to see who is overloaded.'] },
-  { part: 'views', q: ['إذا غيّرت مهمة في Board، هل تتغير في List؟', 'If I change a task in Board, does it change in List?'],
-    a: ['نعم. طرق العرض عدسات مختلفة على المهام نفسها، فأي تغيير يظهر في كل العروض فوراً.', 'Yes. Views are different lenses on the same tasks, so any change shows up in every view straight away.'] },
-  { part: 'views', q: ['هل تؤثر مرشّحاتي على زملائي؟', 'Do my filters affect my colleagues?'],
-    a: ['المرشّح المؤقت يخصك وحدك. أما إذا حفظت التغيير على عرض مشترك فقد يراه الآخرون، لذلك أنشئ عرضاً خاصاً بك إن أردت إعداداتك الشخصية.', 'A temporary filter only affects you. If you save changes to a shared view, others may see them, so create your own view for personal settings.'] },
-  { part: 'fields', q: ['متى أضيف حقلاً مخصصاً؟', 'When should I add a Custom Field?'],
-    a: ['عندما يحتاج الفريق المعلومة نفسها في كل مهمة، ويريد التصفية بها أو قياسها، مثل الإدارة أو نوع الطلب أو المبلغ. لا تضف حقلاً لن يملأه أحد.', 'When the team needs the same piece of information on every task and wants to filter or measure it, such as department, request type or amount. Do not add a field nobody will fill in.'] },
-  { part: 'collab', q: ['كيف أسأل زميلاً عن مهمة دون بريد إلكتروني؟', 'How do I ask a colleague about a task without email?'],
-    a: ['اكتب تعليقاً داخل المهمة وأشر إليه بـ @ متبوعة باسمه، فيصله إشعار ويبقى النقاش بجانب العمل. وإذا كان يحتاج إجراءً فأسند التعليق إليه.', 'Write a comment on the task and @mention them, so they get a notification and the conversation stays next to the work. If it needs action, assign the comment to them.'] },
-  { part: 'collab', q: ['ما فائدة Docs وWhiteboards؟', 'What are Docs and Whiteboards for?'],
-    a: ['Docs لكتابة المستندات معاً، مثل محاضر الاجتماعات والأدلة، وربطها بالمهام. وWhiteboards لرسم الأفكار وتخطيطها بصرياً، ويمكن تحويل عناصرها إلى مهام.', 'Docs are for writing documents together, such as meeting notes and guides, and linking them to tasks. Whiteboards are for sketching and planning ideas visually, and items on them can be turned into tasks.'] },
-  { part: 'time', q: ['ما هي الاعتمادية (Dependency)؟', 'What is a dependency?'],
-    a: ['علاقة تقول إن مهمة تنتظر أخرى (Waiting on) أو تمنعها (Blocking). عندما تتأخر المهمة الأولى ترى فوراً ما يتأثر بها.', 'A relationship that says one task is waiting on another (Waiting on) or holding it up (Blocking). When the first task slips, you immediately see what is affected.'] },
-  { part: 'time', q: ['كيف أرى ما هو متأخر؟', 'How do I see what is overdue?'],
-    a: ['Home تعرض مهامك المتأخرة أولاً. وللفريق كله استخدم مرشّح تاريخ الاستحقاق في أي عرض، أو بطاقة المهام المتأخرة في Dashboard.', 'Home shows your overdue tasks first. For the whole team, use a due date filter in any view, or an overdue tasks card on a Dashboard.'] },
-  { part: 'dash', q: ['ما هي Dashboard؟', 'What is a Dashboard?'],
-    a: ['صفحة من البطاقات والرسوم تُحسب من المهام نفسها: عدد المهام حسب الحالة، والمتأخر، وعبء العمل، وغيرها. تتحدث تلقائياً كلما تغيّرت المهام.', 'A page of cards and charts calculated from the tasks themselves: tasks by status, overdue work, workload and more. It updates automatically as tasks change.'] },
-  { part: 'dash', q: ['لماذا يبدو رقم في Dashboard غير صحيح؟', 'Why does a Dashboard number look wrong?'],
-    a: ['غالباً بسبب مصدر البيانات أو المرشّحات: قد تقرأ البطاقة قائمة واحدة فقط، أو تستثني المهام المغلقة، أو مهاماً بلا تاريخ. راجع إعداد البطاقة قبل أن تستنتج.', 'Usually because of the data source or filters: the card may read only one List, exclude closed tasks, or skip tasks without a date. Check the card’s setup before drawing conclusions.'] },
-  { part: 'auto', q: ['ما هي الأتمتة؟ أعطني مثالاً.', 'What is an Automation? Give me an example.'],
-    a: ['قاعدة من ثلاثة أجزاء: Trigger ثم Condition اختياري ثم Action. مثال: عندما تتغير الحالة إلى REVIEW، عيّن سالم مراجعاً وأضف تعليقاً.', 'A rule in three parts: a Trigger, an optional Condition, then an Action. Example: when the status changes to REVIEW, assign Salim as reviewer and add a comment.'] },
-  { part: 'auto', q: ['هل الأتمتة آمنة؟', 'Are Automations safe to use?'],
-    a: ['نعم إذا جرّبتها أولاً على مهمة تجريبية وتأكدت من الشروط. انتبه إلى أن عدد مرات تشغيل الأتمتة قد يكون محدوداً بحسب خطة الاشتراك.', 'Yes, if you try them first on a sample task and check the conditions. Note that the number of automation runs can be limited depending on your plan.'] },
-  { part: 'forms', q: ['كيف يرسل الناس طلبات دون رسائل متفرقة؟', 'How can people send requests without scattered messages?'],
-    a: ['بنموذج Form: يملؤه صاحب الطلب، فيتحول كل إرسال إلى مهمة في List محددة وبالحقول التي تحتاجها.', 'With a Form: the requester fills it in, and each submission becomes a task in a specific List with the fields you need.'] },
-  { part: 'forms', q: ['ما هي الأهداف (Goals)؟', 'What are Goals?'],
-    a: ['طريقة لمتابعة مستهدفات قابلة للقياس، مثل عدد الطلبات المغلقة هذا الربع، وربطها بالمهام التي تحققها. قد يختلف اسمها وموضعها بحسب إصدار ClickUp.', 'A way to track measurable targets, such as requests closed this quarter, and link them to the tasks that achieve them. The name and location can vary by ClickUp version.'] },
-  { part: 'share', q: ['من يستطيع رؤية القائمة التي أنشأتها؟', 'Who can see the List I created?'],
-    a: ['بحسب إعدادات المشاركة: القوائم ترث صلاحيات Space أو Folder الذي توجد فيه، إلا إذا جعلتها خاصة (Private). افتح Share لترى من يملك الوصول بالضبط.', 'It depends on sharing: Lists inherit the permissions of the Space or Folder they are in, unless you make them Private. Open Share to see exactly who has access.'] },
-  { part: 'share', q: ['هل يمكنني المشاركة مع شخص من خارج المؤسسة؟', 'Can I share with someone outside the organization?'],
-    a: ['يمكن دعوة ضيوف (Guests) بصلاحيات محددة إذا سمحت إعدادات مساحة العمل وخطتها بذلك. اتبع سياسة مؤسستك واسأل مسؤول النظام أولاً.', 'Guests can be invited with limited permissions if your Workspace settings and plan allow it. Follow your organization’s policy and check with your admin first.'] },
-  { part: 'power', q: ['ما أسرع طريقة للعثور على أي شيء؟', 'What is the fastest way to find anything?'],
-    a: ['اضغط Ctrl+K (أو Cmd+K على Mac) واكتب جزءاً من الاسم، أو استخدم مربع البحث أعلى الشاشة وضيّق النتائج حسب النوع أو المسؤول.', 'Press Ctrl+K (Cmd+K on Mac) and type part of the name, or use the search box at the top and narrow results by type or assignee.'] },
-  { part: 'power', q: ['ما هو ClickUp Brain (الذكاء الاصطناعي)؟', 'What is ClickUp Brain (AI)?'],
-    a: ['مساعد ذكاء اصطناعي داخل ClickUp يلخّص المهام والنقاشات، ويساعد في الكتابة، ويجيب عن أسئلة حول العمل. يعتمد توفره على الخطة وإعدادات المسؤول، وراجع نتيجته دائماً قبل مشاركتها.', 'An AI assistant inside ClickUp that summarizes tasks and threads, helps you write and answers questions about your work. Availability depends on your plan and admin settings, and you should always review its output before sharing it.'] },
-  { part: 'power', q: ['كيف أعيد استخدام عمل متكرر؟', 'How do I reuse work that repeats?'],
-    a: ['احفظ المهمة أو القائمة كقالب (Template) لتنشئ نسخة جاهزة منها بنقرة، واستخدم المهام المتكررة (Recurring) لما يتكرر بموعد ثابت.', 'Save the task or List as a Template to create a ready copy in one click, and use recurring tasks for work that repeats on a fixed schedule.'] }
+  { id: 'start-where', part: 'start', demo: 'l1-2', q: ['حصلت على حساب ClickUp للتو. من أين أبدأ؟', 'I just got access to ClickUp. Where do I start?'],
+    a: ['ابدأ من Home: تعرض المهام المسندة إليك مرتبة حسب الموعد، المتأخر أولاً ثم مهام اليوم. ثم افتح Space إدارتك من الشريط الجانبي.', 'Start from Home: it shows the tasks assigned to you by due date, overdue first, then today’s. Then open your department’s Space from the sidebar.'] },
+  { id: 'my-tasks', part: 'start', demo: 'l1-2', q: ['كيف أرى المهام المسندة إليّ فقط؟', 'How do I see only the tasks assigned to me?'],
+    a: ['في Home يجمع قسم My Work كل ما أُسند إليك من كل المساحات. وفي أي قائمة يمكنك إضافة مرشّح «المسند إليّ».', 'In Home, the My Work section gathers everything assigned to you from every Space. In any List you can also add an “Assigned to me” filter.'] },
+  { id: 'notifs', part: 'start', demo: 'l1-3', q: ['تصلني إشعارات كثيرة جداً. كيف أتحكم بها؟', 'I get far too many notifications. How do I control them?'],
+    a: ['في Inbox رد على المهم، وانقل إلى Later ما يحتاج وقتاً، وامسح ما انتهى. ومن إعدادات الإشعارات أوقف ما لا يهمك حتى تبرز الإشارات المهمة.', 'In Inbox, reply to what matters, move what needs time to Later and clear what is done. In notification settings, turn off what you don’t need so important mentions stand out.'] },
+  { id: 'mobile', part: 'start', go: '#/tour/start', q: ['هل أستطيع متابعة مهامي من الجوال أثناء الزيارات الميدانية؟', 'Can I follow my tasks from my phone during site visits?'],
+    a: ['نعم. تطبيق ClickUp للجوال على iOS وAndroid يعرض مهامك نفسها، ويمكنك التعليق وتغيير الحالة وإرفاق صورة من الموقع.', 'Yes. The ClickUp mobile app for iOS and Android shows the same tasks, and you can comment, change the status and attach a photo from the site.'] },
+  { id: 'arabic', part: 'start', go: '#/tour/start', q: ['هل أستطيع العمل بالعربية في ClickUp؟', 'Can I work in Arabic in ClickUp?'],
+    a: ['يمكنك كتابة أسماء المهام والتعليقات والمستندات بالعربية. أما لغة الواجهة فتُختار من إعداداتك الشخصية ضمن اللغات التي يدعمها ClickUp.', 'You can write task names, comments and Docs in Arabic. The interface language is chosen in your personal settings from the languages ClickUp supports.'] },
+  { id: 'find-space', part: 'structure', demo: 'l2-1', q: ['لا أجد Space إدارتي. ماذا أفعل؟', 'I can’t find my department’s Space. What should I do?'],
+    a: ['قد تكون المساحة خاصة ولم تُضف إليها بعد. اطلب من مالك المساحة أو مسؤول ClickUp في إدارتك إضافتك، ثم ستظهر في الشريط الجانبي.', 'The Space may be private and you haven’t been added yet. Ask the Space owner or your department’s ClickUp admin to add you; it will then appear in the sidebar.'] },
+  { id: 'list-folder', part: 'structure', demo: 'l2-2', q: ['هل أنشئ List أم Folder لمشروعي الجديد؟', 'Should I create a List or a Folder for my new project?'],
+    a: ['مشروع صغير بمرحلة واحدة تكفيه List. استخدم Folder عندما يضم المشروع عدة قوائم مترابطة، مثل التخطيط والتنفيذ والإغلاق.', 'A small project with one phase only needs a List. Use a Folder when the project has several related Lists, such as planning, delivery and closure.'] },
+  { id: 'log-task', part: 'tasks', demo: 'l3-1', q: ['طلب مني مديري «سجّلها في ClickUp». كيف أنشئ مهمة صحيحة؟', 'My manager said “log it in ClickUp”. How do I create a proper task?'],
+    a: ['افتح القائمة الصحيحة واضغط + Task، واكتب عنواناً يبدأ بفعل، ثم عيّن مسؤولاً وموعداً وأولوية، وأضف وصفاً قصيراً للنتيجة المطلوبة.', 'Open the right List and press + Task, write a title that starts with a verb, then set an assignee, a due date and a priority, and add a short description of the expected result.'] },
+  { id: 'assign', part: 'tasks', demo: 'l3-2', q: ['كيف أسند مهمة لزميل وأحدد موعدها؟', 'How do I assign a task to a colleague and set its due date?'],
+    a: ['داخل المهمة اضغط على المسؤول واختر اسم الزميل، ثم اضغط على تاريخ الاستحقاق واختر اليوم. يصله إشعار تلقائياً.', 'Inside the task, click the assignee and choose your colleague, then click the due date and pick the day. They are notified automatically.'] },
+  { id: 'break-down', part: 'tasks', demo: 'l3-3', q: ['كيف أقسّم مهمة كبيرة إلى خطوات أصغر؟', 'How do I break a big task into smaller steps?'],
+    a: ['استخدم المهام الفرعية للأجزاء التي لها مسؤول وموعد، وقائمة التحقق للبنود البسيطة التي تؤشر عليها بنفسك.', 'Use subtasks for parts with their own owner and date, and a checklist for simple items you tick off yourself.'] },
+  { id: 'weekly-repeat', part: 'tasks', demo: 'l3-5', q: ['كيف أجعل مهمة التقرير الأسبوعي تتكرر كل أحد؟', 'How do I make the weekly report task repeat every Sunday?'],
+    a: ['افتح المهمة واضغط على تاريخ الاستحقاق ثم اختر التكرار (Recurring) أسبوعياً يوم الأحد. عند إغلاقها تُنشأ النسخة التالية تلقائياً.', 'Open the task, click the due date, then set it to recur weekly on Sunday. When you close it, the next one is created automatically.'] },
+  { id: 'follow-up', part: 'collab', demo: 'l6-1', q: ['كيف أتابع مع زميل دون إرسال بريد إلكتروني؟', 'How do I follow up with a colleague without sending an email?'],
+    a: ['اكتب تعليقاً داخل المهمة وأشر إليه بـ @ واسمه. وإذا كان يحتاج إجراءً، أسند التعليق إليه فيظهر عنده كعمل مطلوب.', 'Write a comment on the task and @mention them. If it needs action, assign the comment to them so it shows up as work to do.'] },
+  { id: 'minutes', part: 'collab', demo: 'l6-2', q: ['أين أضع محاضر الاجتماعات؟', 'Where should meeting minutes go?'],
+    a: ['في Doc داخل Space الفريق، واربط القرارات بمهام حتى لا تضيع المتابعة. يمكنك إنشاء المهام من داخل المستند.', 'In a Doc inside the team’s Space, and link decisions to tasks so follow-ups don’t get lost. You can create tasks from inside the Doc.'] },
+  { id: 'team-week', part: 'views', demo: 'l4-2', q: ['ما أسرع طريقة لأرى ما يعمل عليه فريقي هذا الأسبوع؟', 'What’s the fastest way to see what my team is working on this week?'],
+    a: ['استخدم عرض Calendar لرؤية المواعيد، أو Workload لمعرفة حمل كل شخص، أو Board مجمّعاً حسب المسؤول.', 'Use Calendar view to see dates, Workload to see each person’s load, or Board grouped by assignee.'] },
+  { id: 'urgent-filter', part: 'views', demo: 'l4-3', q: ['كيف أعرض المهام العاجلة أو المتأخرة فقط؟', 'How do I show only urgent or overdue tasks?'],
+    a: ['اضغط Filter واختر Priority = Urgent، أو Due date = Overdue. احفظ العرض إن أردت الرجوع إليه يومياً.', 'Press Filter and choose Priority = Urgent, or Due date = Overdue. Save the view if you want to come back to it daily.'] },
+  { id: 'region-field', part: 'fields', demo: 'l5-1', q: ['كيف نتابع أي فرع أو منطقة يخصها الطلب، مثل مسقط أو صلالة؟', 'How do we track which branch or region a request belongs to, such as Muscat or Salalah?'],
+    a: ['أضف حقلاً مخصصاً من نوع Dropdown باسم «المنطقة» وخياراته. بعدها يمكنك التصفية والتجميع وبناء تقارير حسبه.', 'Add a Dropdown Custom Field called “Region” with its options. You can then filter, group and report by it.'] },
+  { id: 'waiting', part: 'time', demo: 'l7-2', q: ['كيف أوضح أن مهمتي تنتظر فريقاً آخر؟', 'How do I show that my task is waiting on another team?'],
+    a: ['أضف علاقة Waiting on تربط مهمتك بمهمة الفريق الآخر. إذا تأخرت مهمتهم يظهر الأثر على مهمتك وعلى الخط الزمني.', 'Add a Waiting on relationship linking your task to the other team’s task. If theirs slips, the effect shows on your task and on the timeline.'] },
+  { id: 'log-time', part: 'time', demo: 'l7-1', q: ['كيف أسجّل الوقت الذي قضيته في مهمة؟', 'How do I log the time I spent on a task?'],
+    a: ['شغّل مؤقت Track Time داخل المهمة أثناء العمل، أو أضف المدة يدوياً بعد الانتهاء.', 'Start the Track Time timer in the task while you work, or add the duration manually afterwards.'] },
+  { id: 'weekly-report-auto', part: 'dash', demo: 'l8-1', q: ['يريد مديري تقريراً أسبوعياً عن التقدم. هل يعدّه ClickUp تلقائياً؟', 'My manager wants a weekly progress report. Can ClickUp prepare it automatically?'],
+    a: ['نعم، ابنِ Dashboard ببطاقات مثل المهام حسب الحالة والمتأخر. تتحدث الأرقام وحدها، ويمكن مشاركة اللوحة مع مديرك.', 'Yes. Build a Dashboard with cards such as tasks by status and overdue work. The numbers update by themselves and you can share it with your manager.'] },
+  { id: 'auto-move', part: 'auto', demo: 'l9-1', go: '#/automations', q: ['هل يستطيع ClickUp تذكير الناس أو نقل المهام تلقائياً؟', 'Can ClickUp remind people or move tasks automatically?'],
+    a: ['نعم بالأتمتة: عندما يحدث شيء (Trigger) ينفّذ ClickUp إجراءً (Action)، مثل تعيين المراجع عند وصول المهمة إلى REVIEW.', 'Yes, with automations: when something happens (Trigger), ClickUp takes an action (Action), such as assigning the reviewer when a task reaches REVIEW.'] },
+  { id: 'auto-stopped', part: 'auto', demo: 'l9-2', q: ['لماذا توقفت الأتمتة عن العمل؟', 'Why did my automation stop working?'],
+    a: ['تحقق أنها مفعّلة، وأن الحدث يطابق Trigger تماماً، وأن الشروط متحققة، وأن مساحة العمل لم تبلغ حدها الشهري من الإجراءات.', 'Check it is on, that the event matches the Trigger exactly, that the conditions are true, and that the Workspace hasn’t reached its monthly action limit.'] },
+  { id: 'requests-form', part: 'forms', demo: 'l10-1', q: ['كيف ترسل لنا الإدارات الأخرى طلباتها بطريقة موحدة؟', 'How can other departments send us requests in a standard way?'],
+    a: ['أنشئ Form داخل قائمة الطلبات وشارك رابطه. كل إرسال يصبح مهمة بالحقول نفسها، فلا تضيع الطلبات في البريد.', 'Create a Form in your requests List and share its link. Each submission becomes a task with the same fields, so requests don’t get lost in email.'] },
+  { id: 'kpi', part: 'forms', demo: 'l10-2', q: ['كيف نتابع مؤشر أداء أو مستهدفاً؟', 'How do we track a KPI or a target?'],
+    a: ['استخدم Goals: حدد المستهدف بالأرقام واربطه بالمهام التي تحققه، فيتحدث التقدم تلقائياً.', 'Use Goals: set the target in numbers and link it to the tasks that achieve it, so progress updates automatically.'] },
+  { id: 'vendor', part: 'share', demo: 'l11-2', q: ['هل أستطيع مشاركة مهمة مع مورّد أو مقاول من خارج Omantel؟', 'Can I share a task with a vendor or contractor outside Omantel?'],
+    a: ['يمكن دعوة ضيف (Guest) إلى مهمة بعينها بصلاحيات محددة إذا سمحت الإعدادات. اتبع سياسة المؤسسة واستشر مسؤول النظام أولاً.', 'A Guest can be invited to one specific task with limited permissions if settings allow. Follow company policy and check with your admin first.'] },
+  { id: 'private', part: 'share', demo: 'l11-1', q: ['من يستطيع رؤية مهامي الخاصة؟', 'Who can see my private tasks?'],
+    a: ['الموقع الخاص (Private) يراه فقط من أضفته إليه، إضافة إلى المسؤولين بحسب إعدادات مساحة العمل. افتح Share لترى القائمة بالضبط.', 'A Private location is seen only by the people you add, plus admins depending on Workspace settings. Open Share to see exactly who has access.'] },
+  { id: 'find-old', part: 'power', demo: 'l12-1', q: ['ما أسرع طريقة للعثور على مهمة أو مستند قديم؟', 'What’s the fastest way to find an old task or document?'],
+    a: ['اضغط Ctrl+K (أو Cmd+K على Mac) واكتب جزءاً من الاسم، ثم ضيّق النتائج حسب النوع أو المسؤول.', 'Press Ctrl+K (Cmd+K on Mac) and type part of the name, then narrow the results by type or assignee.'] },
+  { id: 'ai-summary', part: 'power', go: '#/workshops/ai', q: ['هل أستطيع استخدام الذكاء الاصطناعي لتلخيص نقاش طويل في مهمة؟', 'Can I use AI to summarize a long discussion in a task?'],
+    a: ['نعم، إن كان ClickUp Brain متاحاً لكم: افتح المهمة واطلب ملخصاً، ثم راجعه قبل مشاركته.', 'Yes, if ClickUp Brain is available to you: open the task and ask for a summary, then review it before sharing.'] },
+  { id: 'excel-import', part: 'power', go: '#/workshops/import', q: ['عندي ملف Excel لمتابعة المهام. هل أنقله إلى ClickUp؟', 'I track tasks in an Excel file. Can I move it into ClickUp?'],
+    a: ['نعم، استورد الملف (CSV أو Excel) واربط كل عمود بحقل: الاسم، والمسؤول، والتاريخ، والحالة. جرّب أولاً بخمسة صفوف.', 'Yes. Import the file (CSV or Excel) and map each column to a field: name, assignee, date and status. Try five rows first.'] },
+  { id: 'same-checklist', part: 'power', go: '#/workshops/templates', q: ['كيف أستخدم قائمة التحقق نفسها لكل طلب جديد؟', 'How do I reuse the same checklist for every new request?'],
+    a: ['احفظ المهمة بقائمة تحققها كقالب (Template)، ثم أنشئ كل طلب جديد من القالب بنقرة.', 'Save the task with its checklist as a Template, then create each new request from it in one click.'] }
 ];
 
 ;
@@ -5132,7 +5461,7 @@ function announce(msg) {
   el.textContent = ''; setTimeout(() => { el.textContent = msg; }, 30);
 }
 
-function toast(msg) {
+function toast(msg) { Sound.play('pop');
   const region = $('#toasts'); if (!region) return;
   const el = document.createElement('div');
   el.className = 'toast';
@@ -5175,7 +5504,7 @@ const Store = (() => {
 
   const blank = () => ({
     v: 1, lessons: {}, bookmarks: [], last: null, quizzes: {}, final: null,
-    practical: null, challenges: {}, lab: null, tour: {}, ideas: [], tickets: [], autos: null, profile: null, startedAt: Date.now()
+    practical: null, challenges: {}, lab: null, tour: {}, ideas: [], tickets: [], autos: null, profile: null, forum: null, startedAt: Date.now()
   });
 
   let state = blank();
@@ -5244,6 +5573,9 @@ const Store = (() => {
        learner copies or emails them to the team. */
     addItem(kind, item) { state[kind].unshift(item); this.save(kind); return item; },
     removeItem(kind, id) { state[kind] = state[kind].filter(x => x.id !== id); this.save(kind); },
+    /* Forum: this device's own posts, reactions and comments */
+    forum() { return state.forum || (state.forum = { posts: [], likes: {}, agrees: {}, comments: {} }); },
+    saveForum() { this.save('forum'); },
     setProfile(v) { state.profile = v; this.save('profile'); },
     setAutos(v) { state.autos = v; this.save('autos'); },
     completeChallenge(id) { if (!state.challenges[id]) { state.challenges[id] = Date.now(); this.save('challenge'); return true; } return false; },
@@ -5343,6 +5675,13 @@ const ICONS = {
   trophy: '<path d="M8 4h8v5a4 4 0 01-8 0z"/><path d="M8 5.5H5.2a2.8 2.8 0 003 3.5M16 5.5h2.8a2.8 2.8 0 01-3 3.5"/><path d="M12 13v3.5M9 20.5h6M10 16.5h4l.6 4H9.4z"/>',
   globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.5 3.4 5.3 3.4 8.5S14.3 18 12 20.5C9.7 18 8.6 15.2 8.6 12S9.7 6 12 3.5z"/>',
   robot: '<rect x="4.5" y="8" width="15" height="11" rx="3"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1.2"/><circle cx="9.3" cy="13" r="1.3" fill="currentColor"/><circle cx="14.7" cy="13" r="1.3" fill="currentColor"/><path d="M9.5 16.3h5M2.5 12.5v2.5M21.5 12.5v2.5"/>',
+  volume: '<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11"/>',
+  'volume-off': '<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/>',
+  heart: '<path d="M12 19.5s-7.5-4.4-7.5-9.7A4.2 4.2 0 0112 7.3a4.2 4.2 0 017.5 2.5c0 5.3-7.5 9.7-7.5 9.7z"/>',
+  thumb: '<path d="M7.5 10.5V20H4.5v-9.5z"/><path d="M7.5 10.5l3.6-6.2a1.7 1.7 0 013.1 1.2l-.7 3.9h5a1.8 1.8 0 011.8 2.1l-1.2 6.8a1.8 1.8 0 01-1.8 1.5H7.5"/>',
+  upload: '<path d="M12 15.5V4.5M7.5 9L12 4.5 16.5 9"/><path d="M4.5 15v3.5a1.5 1.5 0 001.5 1.5h12a1.5 1.5 0 001.5-1.5V15"/>',
+  download: '<path d="M12 4.5v11M7.5 11l4.5 4.5 4.5-4.5"/><path d="M4.5 15v3.5a1.5 1.5 0 001.5 1.5h12a1.5 1.5 0 001.5-1.5V15"/>',
+  send: '<path d="M4 12l16-7.5-5.5 16-3-6.5z"/><path d="M11.5 14l3-3"/>',
   panel: '<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M9.5 4.5v15"/><path d="M6 8.5h1.5M6 11.5h1.5"/>'
 };
 
@@ -5356,6 +5695,61 @@ function icon(name, cls) {
 
 /* Priority flag, filled */
 function prioFlag() { return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M6 4.5h11l-2.5 4 2.5 4H6z"/></svg>'; }
+
+;
+/* ---- app/sound.js ---- */
+/* ==========================================================================
+   Sounds. Small, soft sounds made in the browser with the Web Audio API (no
+   audio files): a tap for buttons, a pop for messages, a chime for correct
+   answers, a little fanfare for celebrations and a whoosh between steps.
+   They only play after the learner interacts, stay quiet in volume, and the
+   speaker button in the header turns them off (remembered on this device).
+   ========================================================================== */
+const Sound = (() => {
+  const KEY = 'omantel-clickup-hub:sound';
+  let on = true, ctx = null, last = {}, hush = 0;
+  try { on = window.localStorage.getItem(KEY) !== 'off'; } catch (e) { /* default on */ }
+  const audio = () => {
+    if (ctx) return ctx;
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+    try { ctx = new AC(); } catch (e) { ctx = null; }
+    return ctx;
+  };
+  function tone(freq, t0, dur, type, vol, to) {
+    const c = ctx; const o = c.createOscillator(); const g = c.createGain();
+    o.type = type || 'sine'; o.frequency.setValueAtTime(freq, t0); if (to) o.frequency.exponentialRampToValueAtTime(to, t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g).connect(c.destination); o.start(t0); o.stop(t0 + dur + 0.02);
+  }
+  function noise(t0, dur, vol) {
+    const c = ctx; const len = Math.floor(c.sampleRate * dur); const buf = c.createBuffer(1, len, c.sampleRate); const d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+    const src = c.createBufferSource(); src.buffer = buf; const f = c.createBiquadFilter(); f.type = 'bandpass'; f.frequency.setValueAtTime(600, t0); f.frequency.exponentialRampToValueAtTime(2400, t0 + dur); f.Q.value = 0.9;
+    const g = c.createGain(); g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    src.connect(f).connect(g).connect(c.destination); src.start(t0);
+  }
+  const SOUNDS = {
+    tap: t => tone(620, t, 0.05, 'triangle', 0.035, 520),
+    toggle: t => { tone(520, t, 0.06, 'sine', 0.05); tone(780, t + 0.06, 0.08, 'sine', 0.05); },
+    pop: t => tone(380, t, 0.09, 'sine', 0.07, 900),
+    like: t => { tone(660, t, 0.07, 'sine', 0.06, 990); tone(1320, t + 0.07, 0.09, 'sine', 0.04); },
+    whoosh: t => noise(t, 0.18, 0.05),
+    success: t => [523.25, 659.25, 783.99].forEach((f, i) => tone(f, t + i * 0.075, 0.16, 'triangle', 0.06)),
+    party: t => [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(f, t + i * 0.09, i === 3 ? 0.35 : 0.18, 'triangle', 0.07)),
+    error: t => { tone(240, t, 0.12, 'square', 0.025, 200); tone(200, t + 0.12, 0.14, 'square', 0.02, 170); }
+  };
+  function play(name) {
+    if (!on || hush > 0 || !SOUNDS[name]) return;
+    const now = performance.now(); if (last[name] && now - last[name] < 90) return; last[name] = now;
+    const c = audio(); if (!c) return;
+    if (c.state === 'suspended') c.resume();
+    try { SOUNDS[name](c.currentTime + 0.01); } catch (e) { /* never break the page for a sound */ }
+  }
+  function set(v) { on = v; try { window.localStorage.setItem(KEY, v ? 'on' : 'off'); } catch (e) { /* per-viewer convenience */ } if (v) play('toggle'); }
+  /* Silence sounds while the page re-renders (for example a language switch). */
+  function quiet(fn) { hush++; try { return fn(); } finally { setTimeout(() => { hush--; }, 50); } }
+  return { play, set, quiet, get on() { return on; } };
+})();
 
 ;
 /* ---- app/fx.js ---- */
@@ -5438,6 +5832,7 @@ const Motion = (() => {
   /* Confetti in ClickUp colours, from a point (or the top centre). */
   const COLORS = ['#ff02f0', '#ff7a45', '#ffc800', '#8930fd', '#49ccf9', '#22c38e'];
   function confetti(origin, amount) {
+    Sound.play((amount || 60) >= 80 ? 'party' : 'success');
     if (reduce()) return;
     const layer = document.createElement('div'); layer.className = 'confetti'; layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
@@ -5481,6 +5876,45 @@ function achievements() {
     { id: 'explorer', icon: 'compass', c: '#ff02f0', t: tx('مستكشف ClickUp', 'ClickUp explorer'), d: tx('اكتشف أجزاء الجولة الاثني عشر', 'Explore all 12 parts of the tour'), got: TOUR_PARTS.every(p => Store.isToured(p.id)) },
     { id: 'final', icon: 'trophy', c: '#ffb800', t: tx('خبير ClickUp', 'ClickUp pro'), d: tx('اجتز التقييم النهائي', 'Pass the final assessment'), got: !!finalPass }
   ];
+}
+
+/* Clicky, the friendly helper robot in ClickUp colours. Pure SVG, so it
+   scales crisply and speaks no particular language. */
+function mascot(cls) {
+  const g = uid('mg');
+  return '<span class="mascot' + (cls ? ' ' + cls : '') + '" aria-hidden="true"><svg viewBox="0 0 120 132">' +
+    '<defs><linearGradient id="' + g + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff02f0"/><stop offset=".55" stop-color="#8930fd"/><stop offset="1" stop-color="#49ccf9"/></linearGradient></defs>' +
+    '<ellipse class="m-shadow" cx="60" cy="128" rx="30" ry="4" fill="#1b1340" opacity=".15"/>' +
+    '<line x1="60" y1="24" x2="60" y2="10" stroke="#8930fd" stroke-width="4" stroke-linecap="round"/><circle class="m-bulb" cx="60" cy="9" r="6.5" fill="#ffc800"/>' +
+    '<rect x="16" y="22" width="88" height="68" rx="26" fill="url(#' + g + ')"/><rect x="26" y="33" width="68" height="44" rx="18" fill="#fff"/>' +
+    '<g class="m-eyes"><circle cx="46" cy="53" r="6.5" fill="#1b1340"/><circle cx="74" cy="53" r="6.5" fill="#1b1340"/><circle cx="48" cy="51" r="2" fill="#fff"/><circle cx="76" cy="51" r="2" fill="#fff"/></g>' +
+    '<path d="M50 66q10 7.5 20 0" stroke="#1b1340" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
+    '<circle cx="35" cy="65" r="4.5" fill="#ff9ad8" opacity=".75"/><circle cx="85" cy="65" r="4.5" fill="#ff9ad8" opacity=".75"/>' +
+    '<rect x="36" y="93" width="48" height="30" rx="13" fill="url(#' + g + ')"/><path d="M50 112l10-7 10 7" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<rect x="14" y="97" width="24" height="10" rx="5" fill="#a855f7"/>' +
+    '<g class="m-arm"><rect x="84" y="78" width="10" height="28" rx="5" fill="#a855f7"/><circle cx="89" cy="78" r="6" fill="#ffc800"/></g>' +
+    '</svg></span>';
+}
+const CLICKY_TIPS = () => [
+  tx('مرحباً! أنا Clicky. اضغطني لأعطيك نصيحة عن ClickUp.', 'Hi! I’m Clicky. Tap me for a ClickUp tip.'),
+  tx('ابدأ يومك من Home: المتأخر أولاً، ثم مهام اليوم.', 'Start your day from Home: overdue first, then today’s tasks.'),
+  tx('اكتب @ واسم زميلك في التعليق بدلاً من إرسال بريد.', 'Type @ and a colleague’s name in a comment instead of sending an email.'),
+  tx('Ctrl+K يفتح البحث السريع في ClickUp.', 'Ctrl+K opens quick search in ClickUp.'),
+  tx('مهمة واحدة = مسؤول واحد + موعد واضح.', 'One task = one owner + a clear due date.'),
+  tx('كرّرت الخطوات نفسها أكثر من مرة؟ جرّب الأتمتة!', 'Doing the same steps again and again? Try an automation!'),
+  tx('احفظ المهام المتكررة كقالب ووفّر وقتك.', 'Save repeated tasks as a template and save time.'),
+  tx('Board تُظهر أين وصل كل عمل بلمحة.', 'Board view shows where every piece of work stands at a glance.')
+];
+function bindClicky(root) {
+  const btn = root.querySelector('[data-clicky]'); if (!btn) return;
+  const bub = root.querySelector('[data-clicky-say]'); let i = 0;
+  bub.textContent = CLICKY_TIPS()[0];
+  btn.addEventListener('click', () => {
+    i = (i + 1) % CLICKY_TIPS().length; if (i === 0) i = 1;
+    bub.textContent = CLICKY_TIPS()[i]; Sound.play('like');
+    btn.classList.remove('jump'); void btn.offsetWidth; btn.classList.add('jump');
+    bub.classList.remove('tip-in'); void bub.offsetWidth; bub.classList.add('tip-in');
+  });
 }
 
 ;
@@ -6244,6 +6678,7 @@ const HOME_DEMO = {
    ========================================================================== */
 
 function feedbackHTML(kind, html) {
+  if (kind === 'ok') Sound.play('success'); else if (kind === 'bad') Sound.play('error');
   const ic = kind === 'ok' ? 'check-circle' : kind === 'bad' ? 'x-circle' : 'info';
   return '<div class="feedback ' + kind + '" role="status">' + icon(ic) + '<div>' + html + '</div></div>';
 }
@@ -7509,7 +7944,7 @@ const moduleLabel = n => tx('الوحدة ', 'Module ') + n;
 function renderSidebar(route) {
   const nav = $('#sidebar'); const cur = route.name;
   const last = Store.state.last && LESSON[Store.state.last.lesson] ? Store.state.last.lesson : null;
-  const NAV_C = { robot: '#ff4d6d', bulb: '#f5a524', users: '#1fb6e0', sparkle: '#a855f7', compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
+  const NAV_C = { robot: '#ff4d6d', bulb: '#f5a524', users: '#ff7a45', send: '#1fb6e0', sparkle: '#a855f7', compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
   const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '><span class="ic-tile" style="--tc:' + NAV_C[ic] + '">' + icon(ic) + '</span><span>' + label + '</span>' + (extra || '') + '</a></li>';
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
   const inLesson = cur === 'lesson' || cur === 'library';
@@ -7519,13 +7954,14 @@ function renderSidebar(route) {
     item('#/tour', 'compass', tx('جولة ClickUp', 'ClickUp tour'), cur === 'tour', '<span class="count num">' + tourDone() + '/12</span>') +
     item('#/library', 'book', tx('الدروس', 'Lessons'), cur === 'library' || (cur === 'lesson' && !last), '<span class="count num">' + done + '/' + LESSONS.length + '</span>') +
     (last ? item(lessonLink(last), 'play', tx('متابعة الدرس', 'Continue lesson'), cur === 'lesson') : '') +
-    item('#/automations', 'robot', tx('ورشة الأتمتة', 'Automations'), cur === 'automations') +
+    item('#/workshops', 'robot', tx('الورش التفاعلية', 'Workshops'), cur === 'automations' || cur === 'workshops', '<span class="count num">4</span>') +
     item('#/lab', 'flask', tx('مختبر التطبيق', 'Practice Lab'), cur === 'lab') +
     item('#/questions', 'message', tx('الأسئلة الشائعة', 'Common questions'), cur === 'questions') +
+    item('#/forum', 'users', tx('المنتدى', 'Forum'), cur === 'forum') +
     '</ul></div>' +
     '<div><p class="nav-group-title">' + tx('المساعدة والاقتراحات', 'Help & ideas') + '</p><ul class="nav-list">' +
     item('#/guide', 'bulb', tx('كيف تستخدم الموقع', 'How to use this site'), cur === 'guide') +
-    item('#/support', 'users', tx('اسأل الفريق', 'Ask the team'), cur === 'support') +
+    item('#/support', 'send', tx('اسأل الفريق', 'Ask the team'), cur === 'support') +
     item('#/ideas', 'sparkle', tx('اقترح ميزة', 'Suggest a feature'), cur === 'ideas') +
     '</ul></div>' +
     '<details class="nav-more"' + (['studio', 'assess', 'progress', 'help', 'about'].includes(cur) || UIState.get('nav-more') ? ' open' : '') + '><summary class="nav-group-title">' + tx('المزيد', 'More') + icon('chev-down', 'icon-sm') + '</summary><ul class="nav-list">' +
@@ -7543,11 +7979,6 @@ function renderSidebar(route) {
         (p.done === p.total ? '<span class="mini-check" aria-label="' + tx('مكتملة', 'Completed') + '">' + icon('check', 'icon-sm') + '</span>' : '<span class="count num">' + p.done + '/' + p.total + '</span>') + '</a></li>';
     }).join('') + '</ul></details>' +
     '<div class="sidebar-foot"><p>' + (Store.ok ? tx('يُحفظ تقدّمك على هذا المتصفح وهذا الجهاز فقط.', 'Your progress is saved on this browser and this device only.') : tx('التخزين المحلي غير متاح: التقدّم لهذه الجلسة فقط.', 'Local storage is unavailable: progress lasts for this session only.')) + '</p><p class="credit" lang="en" dir="ltr">' + CREDIT + '</p></div>';
-}
-function renderTopProgress() {
-  const done = LESSONS.filter(l => Store.isDone(l.id)).length;
-  $('#topProgress').innerHTML = '<span class="num tp-long">' + tx(done + ' من ' + LESSONS.length + ' درساً', done + ' of ' + LESSONS.length + ' lessons') + '</span><span class="num tp-short">' + done + '/' + LESSONS.length + '</span><span class="meter" aria-hidden="true"><i style="width:' + (done / LESSONS.length * 100) + '%"></i></span>';
-  $('#topProgress').setAttribute('aria-label', tx('تقدّمي: ' + done + ' من ' + LESSONS.length + ' درساً مكتملاً', 'My progress: ' + done + ' of ' + LESSONS.length + ' lessons completed'));
 }
 
 /* ---------- Library ---------- */
@@ -8056,7 +8487,7 @@ function viewTourPart(main, id) {
   const prevP = TOUR_PARTS[n - 2], nextP = TOUR_PARTS[n];
   const STEPS = [['eye', tx('تعرّف', 'Meet it')], ['bulb', tx('لماذا ستحبه', 'Why you’ll love it')], ['play', tx('كيف تستخدمه', 'How to use it')], ['assess', tx('تحقّق وأسئلة', 'Check & questions')]];
   const key = 'tstep:' + id;
-  let step = UIState.get(key) || 0, player = null, stopFit = () => {};
+  let step = UIState.get(key) || 0, player = null, stopFit = () => {}, faqOff = () => {};
   main.innerHTML = '<div class="page tour-part" style="' + modStyle(p.mod) + '">' +
     '<header class="lesson-hero"><span class="lh-art" aria-hidden="true">' + icon(p.icon) + '</span><div class="breadcrumbs"><a href="#/tour">' + tx('جولة ClickUp', 'ClickUp tour') + '</a><span aria-hidden="true">/</span><span class="num">' + tx('الجزء ' + n + ' من 12', 'Part ' + n + ' of 12') + '</span></div>' +
     '<h1 id="tpTitle" tabindex="-1">' + tp(p.name) + '</h1><div class="lh-progress" data-tp-prog></div>' +
@@ -8078,11 +8509,12 @@ function viewTourPart(main, id) {
       (id === 'auto' ? '<a class="au-banner au-banner-sm" href="#/automations"><span class="au-bn-robot" aria-hidden="true">' + icon('robot') + '</span><span class="au-bn-text"><b>' + tx('ابنِ أتمتة بنفسك', 'Build one yourself') + '</b><span>' + tx('افتح ورشة الأتمتة وجرّبها على مهمة تجريبية.', 'Open the Automations workshop and test it on a sample task.') + '</span></span>' + icon('fwd') + '</a>' : '') +
       '<p class="help-text">' + tx('تريد أن تجرّب بنفسك؟', 'Want to try it yourself?') + ' <a href="#/lab">' + tx('افتح مختبر التطبيق', 'Open the Practice Lab') + '</a></p>';
     return '<div class="tp-check"><div><p class="tp-kicker">' + tx('سؤال سريع', 'Quick check') + '</p><h2>' + tx('هل فهمت الفكرة؟', 'Did you get it?') + '</h2><div data-tp-quiz></div></div>' +
-      '<div><p class="tp-kicker">' + tx('أسئلة يطرحها الناس', 'Questions people ask') + '</p><div class="cuq-list">' + faqs.map(f => '<details class="cuq"><summary>' + icon('help', 'icon-sm') + '<span>' + tp(f.q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(f.a) + '</p></div></details>').join('') + '</div>' +
+      '<div><p class="tp-kicker">' + tx('أسئلة يطرحها الناس', 'Questions people ask') + '</p><div class="cuq-list">' + faqs.map(faqItem).join('') + '</div>' +
       '<p class="tp-kicker" style="margin-top:18px">' + tx('تعمّق أكثر', 'Go deeper') + '</p><ul class="tp-lessons">' + p.lessons.map(lid => '<li><a href="#/lesson/' + lid + '">' + icon('book', 'icon-sm') + t(LESSON[lid].title) + '</a></li>').join('') + '</ul></div></div>';
   };
   const paint = (dir) => {
-    if (player) { player.destroy(); player = null; } stopFit();
+    if (dir) Sound.play('whoosh');
+    if (player) { player.destroy(); player = null; } stopFit(); faqOff(); faqOff = () => {};
     panel.innerHTML = '<div class="tp-body' + (dir ? ' tp-in' : '') + '" style="--dir:' + (dir || 1) + '">' + body(step) + '</div>';
     $$('[data-tstep]', main).forEach(b => { const k = +b.dataset.tstep; b.setAttribute('aria-current', k === step ? 'step' : 'false'); b.classList.toggle('done', k < step || (k === 3 && Store.isToured(id))); });
     $('[data-tp-prog]', main).innerHTML = '<span class="lh-bar" aria-hidden="true"><i style="width:' + ((step + 1) / 4 * 100) + '%"></i></span><span class="num">' + tx('الخطوة ' + (step + 1) + ' من 4', 'Step ' + (step + 1) + ' of 4') + '</span>';
@@ -8093,6 +8525,7 @@ function viewTourPart(main, id) {
     if (step === 0) { const w = $('[data-am]', panel); stopFit = fitMap(w); focusMap(w, id); }
     if (step === 2) player = new DemoPlayer($('[data-tp-demo]', panel), L.demo, { key: 'tour-' + id });
     if (step === 3) {
+      faqOff = bindFaqDemos(panel);
       const q = L.check && L.check[0];
       if (q) renderQuiz($('[data-tp-quiz]', panel), [q], 'tour-q-' + id, { onSubmit: (s, total) => { if (s === total) Motion.confetti($('[data-tp-quiz]', panel), 45); } });
       if (Store.tourSeen(id)) {
@@ -8119,31 +8552,64 @@ function viewTourPart(main, id) {
     const s = e.target.closest('[data-tstep]'); if (s) { const to = +s.dataset.tstep; if (to !== step) { const d = to > step ? 1 : -1; step = to; paint(d); } return; }
     const g = e.target.closest('[data-tgo]'); if (g) go(+g.dataset.tgo);
   });
-  return () => { if (player) player.destroy(); stopFit(); };
+  return () => { if (player) player.destroy(); stopFit(); faqOff(); };
+}
+
+/* ---------- Answers you can watch ----------
+   Opening a question plays the matching lesson's animated walkthrough right
+   inside the answer (one open at a time), or offers the hands-on workshop. */
+function faqItem(f) {
+  const p = TOUR_PART[f.part];
+  const isWs = f.go && (f.go.indexOf('#/workshops') === 0 || f.go === '#/automations');
+  return '<details class="cuq" data-fid="' + f.id + '" style="' + modStyle(p.mod) + '"><summary>' + icon('help', 'icon-sm') + '<span>' + tp(f.q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(f.a) + '</p>' +
+    (f.demo ? '<p class="cuq-watch">' + icon('play', 'icon-sm') + tx('شاهدها تحدث:', 'Watch it happen:') + '</p><div class="cuq-demo" data-cdemo="' + f.demo + '"></div>'
+      : '<a class="cuq-visual" href="' + f.go + '"><span class="ic-tile" style="--tc:' + MODULE_COLORS[p.mod].c + '">' + icon(isWs ? 'robot' : p.icon) + '</span><span><b>' + (isWs ? tx('تعلّمها بيدك', 'Learn it hands-on') : tp(TOUR_SHORT[f.part])) + '</b><small>' + (isWs ? tx('افتح الورشة وجرّبها خطوة بخطوة.', 'Open the workshop and try it step by step.') : tx('شاهد هذا الجزء في جولة ClickUp.', 'See this part in the ClickUp tour.')) + '</small></span>' + icon('fwd', 'icon-sm') + '</a>') +
+    '<div class="cuq-links">' + (f.demo && f.go ? '<a class="cuq-show" href="' + f.go + '">' + icon('robot', 'icon-sm') + tx('جرّبها في الورشة', 'Try it in the workshop') + '</a>' : '') +
+    (f.demo ? '<a class="cuq-show alt" href="#/lesson/' + f.demo + '">' + icon('book', 'icon-sm') + tx('الدرس كاملاً', 'Full lesson') + '</a>' : '') +
+    '<a class="cuq-show alt" href="#/tour/' + f.part + '">' + icon('compass', 'icon-sm') + tx('في الجولة', 'In the tour') + '</a></div></div></details>';
+}
+function bindFaqDemos(root, onOpen) {
+  const players = new Map();
+  const onToggle = e => {
+    const d = e.target; if (!d.matches || !d.matches('details.cuq[data-fid]')) return;
+    if (d.open) {
+      $$('details.cuq[data-fid][open]', root).forEach(o => { if (o !== d) o.open = false; });
+      const box = $('[data-cdemo]', d); const L = box && LESSON[box.dataset.cdemo];
+      if (L && L.demo && !players.has(d)) players.set(d, new DemoPlayer(box, L.demo, { autoplay: true }));
+    } else if (players.has(d)) { players.get(d).destroy(); players.delete(d); const box = $('[data-cdemo]', d); if (box) { box.innerHTML = ''; box.className = 'cuq-demo'; } }
+    if (onOpen) onOpen();
+  };
+  root.addEventListener('toggle', onToggle, true);
+  $$('details.cuq[data-fid][open]', root).forEach(d => onToggle({ target: d }));
+  return () => { players.forEach(p => p.destroy()); players.clear(); root.removeEventListener('toggle', onToggle, true); };
 }
 
 /* ---------- The questions people ask most ---------- */
 function viewQuestions(main) {
-  const st = UIState.get('cuq') || { q: '', part: '', open: [] };
-  main.innerHTML = '<div class="page page-narrow"><div class="page-head"><div><h1 tabindex="-1">' + tx('الأسئلة الأكثر شيوعاً عن ClickUp', 'The most asked questions about ClickUp') + enSub('Most asked questions') + '</h1><p>' + tx('إجابات قصيرة وواضحة، وكل إجابة تأخذك إلى الجزء الذي يشرحها بالحركة خطوة بخطوة.', 'Short, clear answers, and each one takes you to the part that shows it, animated step by step.') + '</p></div></div>' +
-    '<div class="panel cuq-tools"><div class="field grow"><label for="cuqQ">' + tx('ابحث في الأسئلة', 'Search the questions') + '</label><input class="input" id="cuqQ" type="search" placeholder="' + tx('مثل: الإشعارات أو Dashboard', 'For example: notifications or Dashboard') + '" value="' + esc(st.q) + '"></div>' +
+  const st = UIState.get('cuq') || { q: '', part: '', open: null };
+  main.innerHTML = '<div class="page page-narrow cuq-page"><div class="cuq-hero"><div><h1 tabindex="-1">' + tx('أكثر ما يسأل عنه موظفو Omantel', 'What Omantel employees ask most') + '</h1><p>' + tx('اضغط أي سؤال: تظهر الإجابة ومعها عرض متحرك يريك كيف تفعلها في ClickUp.', 'Tap any question: the answer opens with a short animation that shows you how to do it in ClickUp.') + '</p></div>' + mascot() + '</div>' +
+    '<div class="panel cuq-tools"><div class="field grow"><label for="cuqQ">' + tx('ابحث في الأسئلة', 'Search the questions') + '</label><input class="input" id="cuqQ" type="search" placeholder="' + tx('مثل: الإشعارات أو Excel', 'For example: notifications or Excel') + '" value="' + esc(st.q) + '"></div>' +
     '<div class="cuq-cats" role="group" aria-label="' + tx('التصنيفات', 'Categories') + '"><button type="button" data-cat="" aria-pressed="' + !st.part + '">' + tx('الكل', 'All') + '</button>' +
-    TOUR_PARTS.map(p => '<button type="button" data-cat="' + p.id + '" style="' + modStyle(p.mod) + '" aria-pressed="' + (st.part === p.id) + '">' + icon(p.icon, 'icon-sm') + tp(TOUR_SHORT[p.id]) + '</button>').join('') + '</div></div>' +
+    TOUR_PARTS.filter(p => CU_FAQ.some(f => f.part === p.id)).map(p => '<button type="button" data-cat="' + p.id + '" style="' + modStyle(p.mod) + '" aria-pressed="' + (st.part === p.id) + '">' + icon(p.icon, 'icon-sm') + tp(TOUR_SHORT[p.id]) + '</button>').join('') + '</div></div>' +
     '<p class="filter-summary" id="cuqCount" aria-live="polite"></p><div data-cuq></div>' +
-    '<div class="panel panel-pad cuq-more"><span class="ic-tile" style="--tc:#8930fd">' + icon('help') + '</span><div><h2>' + tx('سؤالك عن هذه المنصة التعليمية؟', 'Is your question about this learning platform?') + '</h2><p class="small muted">' + tx('مثل حفظ التقدم أو تبديل اللغة.', 'Such as saving progress or switching language.') + '</p></div><a class="btn btn-secondary" href="#/help/faq">' + tx('أسئلة المنصة', 'Platform questions') + '</a></div></div>';
+    '<div class="panel panel-pad cuq-more"><span class="ic-tile" style="--tc:#14b8a6">' + icon('users') + '</span><div><h2>' + tx('لم تجد سؤالك؟', 'Didn’t find your question?') + '</h2><p class="small muted">' + tx('اسأله في المنتدى ليجيبك الزملاء، أو اسأل الفريق مباشرة.', 'Ask it in the forum so colleagues can answer, or ask the team directly.') + '</p></div><a class="btn btn-primary" href="#/forum">' + icon('message', 'icon-sm') + tx('المنتدى', 'Forum') + '</a><a class="btn btn-secondary" href="#/support">' + tx('اسأل الفريق', 'Ask the team') + '</a></div></div>';
+  let off = () => {};
   const paint = () => {
+    off();
     const q = st.q.trim().toLowerCase();
-    const idx = CU_FAQ.map((f, i) => i).filter(i => { const f = CU_FAQ[i]; return (!st.part || f.part === st.part) && (!q || (tp(f.q) + ' ' + tp(f.a) + ' ' + tp(TOUR_SHORT[f.part])).toLowerCase().includes(q)); });
-    $('#cuqCount').textContent = tx(idx.length + ' سؤالاً', nEn(idx.length, 'question'));
+    const list = CU_FAQ.filter(f => (!st.part || f.part === st.part) && (!q || (tp(f.q) + ' ' + tp(f.a) + ' ' + tp(TOUR_SHORT[f.part])).toLowerCase().includes(q)));
+    $('#cuqCount').textContent = tx(list.length + ' سؤالاً', nEn(list.length, 'question'));
     const box = $('[data-cuq]', main);
-    if (!idx.length) { box.innerHTML = '<div class="panel empty-state">' + icon('search') + '<p>' + tx('لا يوجد سؤال مطابق. جرّب كلمة أخرى أو اختر «الكل».', 'No matching question. Try another word or choose “All”.') + '</p></div>'; return; }
-    box.innerHTML = TOUR_PARTS.filter(p => idx.some(i => CU_FAQ[i].part === p.id)).map(p => '<section class="cuq-group" style="' + modStyle(p.mod) + '" aria-labelledby="cg-' + p.id + '"><header><span class="ic-tile">' + icon(p.icon) + '</span><h2 id="cg-' + p.id + '">' + tp(TOUR_SHORT[p.id]) + '</h2><a class="small" href="#/tour/' + p.id + '">' + tx('شاهده في الجولة', 'See it in the tour') + icon('fwd', 'icon-sm') + '</a></header>' +
-      idx.filter(i => CU_FAQ[i].part === p.id).map(i => '<details class="cuq" data-q="' + i + '"' + (st.open.includes(i) ? ' open' : '') + '><summary>' + icon('help', 'icon-sm') + '<span>' + tp(CU_FAQ[i].q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(CU_FAQ[i].a) + '</p><a class="cuq-show" href="#/tour/' + p.id + '">' + icon('play', 'icon-sm') + tx('أرني كيف', 'Show me how') + '</a></div></details>').join('') + '</section>').join('');
+    if (!list.length) { box.innerHTML = '<div class="panel empty-state">' + icon('search') + '<p>' + tx('لا يوجد سؤال مطابق. جرّب كلمة أخرى أو اسأل في المنتدى.', 'No matching question. Try another word or ask in the forum.') + '</p></div>'; return; }
+    box.innerHTML = TOUR_PARTS.filter(p => list.some(f => f.part === p.id)).map(p => '<section class="cuq-group" style="' + modStyle(p.mod) + '" aria-labelledby="cg-' + p.id + '"><header><span class="ic-tile">' + icon(p.icon) + '</span><h2 id="cg-' + p.id + '">' + tp(TOUR_SHORT[p.id]) + '</h2></header>' +
+      list.filter(f => f.part === p.id).map(faqItem).join('') + '</section>').join('');
+    if (st.open) { const d = box.querySelector('[data-fid="' + st.open + '"]'); if (d) d.open = true; }
+    off = bindFaqDemos(box, () => { const o = box.querySelector('details.cuq[open]'); st.open = o ? o.dataset.fid : null; UIState.set('cuq', st); });
   };
   paint();
   main.addEventListener('input', debounce(e => { if (e.target.id === 'cuqQ') { st.q = e.target.value; UIState.set('cuq', st); paint(); } }, 140));
   main.addEventListener('click', e => { const c = e.target.closest('[data-cat]'); if (c) { st.part = c.dataset.cat; UIState.set('cuq', st); $$('[data-cat]', main).forEach(b => b.setAttribute('aria-pressed', b === c)); paint(); } });
-  main.addEventListener('toggle', e => { if (e.target.matches && e.target.matches('details[data-q]')) { const i = +e.target.dataset.q; st.open = st.open.filter(x => x !== i); if (e.target.open) st.open.push(i); UIState.set('cuq', st); } }, true);
+  return () => off();
 }
 
 ;
@@ -8168,7 +8634,7 @@ function heroArt() {
       '<span class="ht-row"><span class="ht-av" style="background:#e44bb6">N</span><span class="ht-chip">' + icon('calendar', 'icon-sm') + tx('الخميس', 'Thu') + '</span><span class="ht-chip ht-flag">' + icon('flag', 'icon-sm') + 'High</span></span>' +
       '<span class="ht-prog"><i></i></span></div></div></div>' +
     '<div class="hx-layer hx-l-donut" data-depth="30"><div class="hx-float f2"><div class="hx-donut"><span class="num">75%</span></div><small>' + tx('أُنجز هذا الأسبوع', 'Done this week') + '</small></div></div>' +
-    '<div class="hx-layer hx-l-chat" data-depth="16"><div class="hx-float f3"><div class="hx-chat"><span class="ht-av" style="background:#ff7a45">S</span><span>' + tx('عمل رائع <b>@نورة</b>!', 'Great work <b>@Noura</b>!') + '</span></div></div></div>' +
+    '<div class="hx-layer hx-l-chat" data-depth="16"><div class="hx-float f3"><div class="hx-chat"><span class="ht-av" style="background:#ff7a45">S</span><span>' + tx('عمل رائع <b>@أشجان</b>!', 'Great work <b>@Ashjan</b>!') + '</span></div></div></div>' +
     '<div class="hx-layer hx-l-check" data-depth="36"><div class="hx-check">' + icon('check') + '</div></div>' +
     '<div class="hx-layer hx-l-bell" data-depth="26"><div class="hx-bell">' + icon('bell') + '<b>3</b></div></div>' +
     '<div class="hx-layer hx-l-zap" data-depth="40"><div class="hx-float f2"><div class="hx-zap">' + icon('zap') + '</div></div></div>' +
@@ -8208,10 +8674,10 @@ function viewHome(main) {
       t: tx('جرّب بنفسك', 'Try it yourself'), d: tx('مساحة تدريب تشبه ClickUp: أنشئ مهام وحرّكها دون خوف من الخطأ.', 'A ClickUp-style practice space: create and move tasks with no fear of mistakes.'),
       art: '<div class="w-board"><span></span><span></span><span></span><i></i></div>' }
   ];
-  const faqs = [0, 10, 20].map(i => CU_FAQ[i]);
+  const faqs = ['start-where', 'weekly-repeat', 'excel-import'].map(id => CU_FAQ.find(f => f.id === id));
   main.innerHTML = '<div class="page home">' +
     '<section class="hx" aria-labelledby="homeTitle"><div class="hx-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="hx-grid"></span></div>' +
-    '<div class="hx-copy"><span class="hero-kicker">' + icon('sparkle', 'icon-sm') + tx('لفِرق Omantel · بالعربية والإنجليزية', 'For Omantel teams · in Arabic and English') + '</span>' +
+    '<div class="hx-copy"><span class="hero-kicker">' + icon('sparkle', 'icon-sm') + tx('لموظفي Omantel · ClickUp', 'For Omantel Employees · ClickUp') + '</span>' +
     '<h1 id="homeTitle">' + tx('اكتشف <span class="grad-text">ClickUp</span> بطريقة سهلة وممتعة', 'Discover <span class="grad-text">ClickUp</span> the easy, fun way') + '</h1>' +
     '<p class="lead">' + tx('دليل ملوّن ومتحرك يشرح لك كل جزء من ClickUp خطوة بخطوة، حتى تنجز عملك اليومي بثقة.', 'A colourful, animated guide that shows you every part of ClickUp, step by step, so you can handle your daily work with confidence.') + '</p>' +
     '<div class="hero-actions"><a class="btn btn-primary btn-lg hx-cta" href="#/tour' + (toured ? '/' + tourNext() : '') + '">' + icon('rocket') + (toured ? tx('تابع الجولة', 'Continue the tour') : tx('ابدأ الجولة', 'Start the tour')) + '</a>' +
@@ -8225,7 +8691,9 @@ function viewHome(main) {
     '<section class="hsec" aria-labelledby="waysT"><p class="h-kicker">' + tx('اختر طريقتك', 'Pick your way') + '</p><h2 id="waysT">' + tx('ثلاث طرق ممتعة لتتعلّم', 'Three fun ways to learn') + '</h2>' +
     '<div class="ways">' + WAYS.map(w => '<a class="way" data-rv href="' + w.href + '" style="--g:' + w.g + '"><div class="way-art">' + w.art + '</div><div class="way-body"><span class="way-tag">' + icon(w.icon, 'icon-sm') + w.tag + '</span><h3>' + w.t + '</h3><p>' + w.d + '</p><span class="way-go">' + tx('هيا بنا', 'Let’s go') + icon('fwd', 'icon-sm') + '</span></div></a>').join('') + '</div></section>' +
 
-    '<a class="au-banner" data-rv href="#/automations"><span class="au-bn-art" aria-hidden="true"><span class="au-bn-robot">' + icon('robot') + '</span><i></i><i></i><i></i></span><span class="au-bn-text"><span class="way-tag">' + icon('zap', 'icon-sm') + tx('جديد', 'New') + '</span><b>' + tx('ورشة الأتمتة', 'Automations workshop') + '</b><span>' + tx('ابنِ أول أتمتة لك كما في ClickUp، وجرّبها على مهمة تجريبية.', 'Build your first automation the ClickUp way and test it on a sample task.') + '</span></span><span class="btn btn-primary">' + tx('ابدأ', 'Start') + icon('fwd', 'icon-sm') + '</span></a>' +
+    '<a class="au-banner" data-rv href="#/workshops"><span class="au-bn-art" aria-hidden="true"><span class="au-bn-robot">' + icon('robot') + '</span><i></i><i></i><i></i></span><span class="au-bn-text"><span class="way-tag">' + icon('zap', 'icon-sm') + tx('جديد', 'New') + '</span><b>' + tx('الورش التفاعلية', 'Hands-on workshops') + '</b><span>' + tx('الأتمتة، والذكاء الاصطناعي، والاستيراد والتصدير، والقوالب: جرّبها بيدك.', 'Automations, AI, Import & Export and Templates: try them with your own hands.') + '</span></span><span class="btn btn-primary">' + tx('ابدأ', 'Start') + icon('fwd', 'icon-sm') + '</span></a>' +
+
+    '<section class="clicky" aria-label="' + tx('نصائح Clicky', 'Tips from Clicky') + '"><button type="button" class="clicky-btn" data-clicky aria-label="' + tx('اضغط Clicky لنصيحة جديدة', 'Tap Clicky for a new tip') + '">' + mascot() + '</button><p class="clicky-say" data-clicky-say aria-live="polite"></p></section>' +
 
     '<section class="hsec" aria-labelledby="whyT"><p class="h-kicker">' + tx('لماذا ClickUp؟', 'Why ClickUp?') + '</p><h2 id="whyT">' + tx('من الفوضى إلى الوضوح في لحظة', 'From chaos to clarity in a moment') + '</h2>' +
     '<div class="panel why-home" data-rv>' + beforeAfter() + '</div></section>' +
@@ -8234,14 +8702,16 @@ function viewHome(main) {
     '<div class="bubbles">' + TOUR_PARTS.map((p, i) => '<a class="bubble' + (Store.isToured(p.id) ? ' seen' : '') + '" data-rv href="#/tour/' + p.id + '" style="' + modStyle(p.mod) + ';--i:' + i + '"><span class="bb-ic">' + icon(p.icon) + '</span><span class="bb-t">' + tp(TOUR_SHORT[p.id]) + '</span>' + (Store.isToured(p.id) ? '<span class="bb-ok">' + icon('check', 'icon-sm') + '<span class="visually-hidden">' + tx('مكتشف', 'Explored') + '</span></span>' : '') + '</a>').join('') + '</div></section>' +
 
     '<section class="hsec hsec-narrow" aria-labelledby="faqT"><p class="h-kicker">' + tx('أسئلة سريعة', 'Quick answers') + '</p><h2 id="faqT">' + tx('يسأل الناس كثيراً', 'People often ask') + '</h2><div class="cuq-list">' +
-    faqs.map(f => '<details class="cuq" style="' + modStyle(TOUR_PART[f.part].mod) + '"><summary>' + icon('help', 'icon-sm') + '<span>' + tp(f.q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(f.a) + '</p><a class="cuq-show" href="#/tour/' + f.part + '">' + icon('play', 'icon-sm') + tx('أرني كيف', 'Show me how') + '</a></div></details>').join('') +
-    '</div><div class="h-center"><a class="btn btn-secondary" href="#/questions">' + icon('message') + tx('كل الأسئلة الشائعة', 'All common questions') + '</a></div></section>' +
+    faqs.map(faqItem).join('') +
+    '</div><div class="h-center h-row"><a class="btn btn-secondary" href="#/questions">' + icon('message') + tx('كل الأسئلة الشائعة', 'All common questions') + '</a><a class="btn btn-primary" href="#/forum">' + icon('users') + tx('اسأل زملاءك في المنتدى', 'Ask colleagues in the forum') + '</a></div></section>' +
 
     '<p class="help-text h-center">' + tx('الواجهات داخل المنصة محاكاة تعليمية مبسّطة، وليست تسجيلات من ClickUp. المنصة مستقلة وغير معتمدة أو مدعومة من ClickUp.', 'Screens inside the platform are simplified educational simulations, not recordings of ClickUp. The platform is independent and is not certified or endorsed by ClickUp.') + ' <a href="#/about">' + tx('اعرف المزيد', 'Learn more') + '</a></p>' +
     '</div>';
   const offP = bindParallax(main);
+  bindClicky(main);
   const offBA = bindBeforeAfter(main);
-  return () => { offP(); offBA(); };
+  const offF = bindFaqDemos(main);
+  return () => { offP(); offBA(); offF(); };
 }
 
 ;
@@ -8468,6 +8938,7 @@ function viewAutomations(main) {
 
   const BODY = [howHTML, typesHTML, buildHTML, inClickUpHTML, knowHTML];
   const paint = dir => {
+    if (dir) Sound.play('whoosh');
     panel.innerHTML = '<div class="tp-body' + (dir ? ' tp-in' : '') + '" style="--dir:' + (dir || 1) + '">' + BODY[step]() + '</div>';
     if (step === 2) paintLab();
     $$('[data-astep]', main).forEach(b => { const k = +b.dataset.astep; b.setAttribute('aria-current', k === step ? 'step' : 'false'); b.classList.toggle('done', k < step); });
@@ -8517,6 +8988,436 @@ function viewAutomations(main) {
     put(s); paintLab(); const again = $('[data-f="' + f + '"]', panel); if (again) again.focus();
   });
 }
+
+;
+/* ---- app/workshops.js ---- */
+/* ==========================================================================
+   Workshops: hands-on, step-by-step pages for the bigger ClickUp features.
+   Automations has its own page (automations.js); this file holds the hub and
+   the AI, Import & Export and Templates workshops, which share one stepper.
+   Every screen here is a simplified educational simulation.
+   ========================================================================== */
+
+const WORKSHOPS = () => [
+  { id: 'automations', href: '#/automations', icon: 'robot', c: '#ff4d6d', g: 'linear-gradient(140deg,#ff4d6d,#ff7a45)', t: tx('الأتمتة', 'Automations'), d: tx('دع ClickUp يتولى الخطوات المتكررة: When ثم If ثم Then.', 'Let ClickUp handle repeated steps: When, If, Then.') },
+  { id: 'ai', href: '#/workshops/ai', icon: 'sparkle', c: '#a855f7', g: 'linear-gradient(140deg,#8930fd,#ff02f0)', t: tx('الذكاء الاصطناعي ClickUp Brain', 'AI with ClickUp Brain'), d: tx('لخّص، واكتب، واطلب مهاماً فرعية، واسأل عن عملك.', 'Summarize, write, get subtasks and ask about your work.') },
+  { id: 'import', href: '#/workshops/import', icon: 'upload', c: '#1fb6e0', g: 'linear-gradient(140deg,#1fb6e0,#22c38e)', t: tx('الاستيراد والتصدير', 'Import & Export'), d: tx('انقل جدول Excel إلى ClickUp، وصدّر مهامك إلى ملف.', 'Bring an Excel sheet into ClickUp, and export your tasks to a file.') },
+  { id: 'templates', href: '#/workshops/templates', icon: 'template', c: '#22c38e', g: 'linear-gradient(140deg,#22c38e,#14b8a6)', t: tx('القوالب', 'Templates'), d: tx('اختر قالباً جاهزاً، أو أنشئ قالبك الخاص وأعد استخدامه.', 'Pick a ready template, or create your own and reuse it.') },
+  { id: 'studio', href: '#/studio', icon: 'chart', c: '#4f86f7', g: 'linear-gradient(140deg,#4f86f7,#49ccf9)', t: tx('لوحات المعلومات', 'Dashboards'), d: tx('اقرأ الرسوم والأرقام في استوديو لوحات المعلومات.', 'Read charts and numbers in the Dashboard Studio.') },
+  { id: 'lab', href: '#/lab', icon: 'flask', c: '#f5a524', g: 'linear-gradient(140deg,#f5a524,#ff7a45)', t: tx('مختبر التطبيق', 'Practice Lab'), d: tx('مساحة كاملة تشبه ClickUp للتدرّب بحرية.', 'A full ClickUp-like space to practise freely.') }
+];
+
+function viewWorkshops(main, params) {
+  if (params[0]) return WS_DEF[params[0]] ? viewWorkshop(main, params[0]) : viewNotFound(main);
+  main.innerHTML = '<div class="page ws-hub">' +
+    '<section class="hx hx-small" aria-labelledby="wsT"><div class="hx-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b3"></span><span class="hx-grid"></span></div>' +
+    '<div class="hx-copy"><span class="hero-kicker">' + icon('robot', 'icon-sm') + tx('تعلّم بيدك', 'Learn by doing') + '</span><h1 id="wsT" tabindex="-1">' + tx('الورش التفاعلية', 'Hands-on workshops') + '</h1>' +
+    '<p class="lead">' + tx('كل ورشة تشرح ميزة كبيرة في ClickUp خطوة بخطوة، ثم تتركك تجرّبها بنفسك في محاكاة آمنة.', 'Each workshop explains a big ClickUp feature step by step, then lets you try it yourself in a safe simulation.') + '</p></div>' +
+    '<div class="ws-hero-art">' + mascot('mascot-lg') + '</div></section>' +
+    '<div class="ws-grid">' + WORKSHOPS().map((w, i) => '<a class="ws-card" data-rv href="' + w.href + '" style="--g:' + w.g + ';--tc:' + w.c + ';--i:' + i + '"><span class="ws-art"><span class="ic-tile">' + icon(w.icon) + '</span><i></i><i></i><i></i></span><span class="ws-body"><h2>' + w.t + '</h2><p>' + w.d + '</p><span class="way-go">' + tx('ابدأ الورشة', 'Start workshop') + icon('fwd', 'icon-sm') + '</span></span></a>').join('') + '</div></div>';
+}
+
+/* One stepper for every workshop: numbered steps, animated panels, back/next. */
+function viewWorkshop(main, id) {
+  const W = WS_DEF[id]; const meta = WORKSHOPS().find(w => w.id === id);
+  const steps = W.steps();
+  let step = UIState.get('ws-step:' + id) || 0; let cleanup = null;
+  main.innerHTML = '<div class="page tour-part ws-page" style="--mc:' + meta.c + ';--md:' + W.dark + '">' +
+    '<header class="lesson-hero" style="background:' + meta.g + '"><span class="lh-art" aria-hidden="true">' + icon(meta.icon) + '</span><div class="breadcrumbs"><a href="#/workshops">' + tx('الورش التفاعلية', 'Workshops') + '</a><span aria-hidden="true">/</span><span>' + meta.t + '</span></div>' +
+    '<h1 tabindex="-1">' + W.title() + '</h1><p class="au-sub">' + W.sub() + '</p></header>' +
+    '<div class="tour-steps" role="group" aria-label="' + tx('خطوات الورشة', 'Workshop steps') + '">' + steps.map((s, i) => '<button type="button" data-wstep="' + i + '"><span class="ts-n num">' + (i + 1) + '</span>' + icon(s.ic, 'icon-sm') + '<span>' + s.label + '</span></button>').join('') + '</div>' +
+    '<section class="panel tour-panel" data-wp aria-live="polite"></section>' +
+    '<nav class="tour-nav" aria-label="' + tx('التنقل', 'Navigation') + '"><button type="button" class="btn btn-secondary" data-wgo="-1">' + icon('back', 'icon-sm') + '<span>' + tx('السابق', 'Back') + '</span></button><button type="button" class="btn btn-primary" data-wgo="1"><span></span>' + icon('fwd', 'icon-sm') + '</button></nav>' +
+    '<a class="rq-other ws-back" href="#/workshops">' + icon('robot', 'icon-sm') + tx('كل الورش', 'All workshops') + icon('fwd', 'icon-sm') + '</a></div>';
+  const panel = $('[data-wp]', main);
+  const paint = dir => {
+    if (dir) Sound.play('whoosh');
+    if (typeof cleanup === 'function') cleanup(); cleanup = null;
+    panel.innerHTML = '<div class="tp-body' + (dir ? ' tp-in' : '') + '" style="--dir:' + (dir || 1) + '">' + steps[step].html() + '</div>';
+    if (steps[step].mount) cleanup = steps[step].mount(panel);
+    $$('[data-wstep]', main).forEach(b => { const k = +b.dataset.wstep; b.setAttribute('aria-current', k === step ? 'step' : 'false'); b.classList.toggle('done', k < step); });
+    $('[data-wgo="-1"]', main).hidden = step === 0;
+    const fwd = $('[data-wgo="1"]', main); fwd.hidden = step === steps.length - 1;
+    if (step < steps.length - 1) $('span', fwd).textContent = tx('التالي: ', 'Next: ') + steps[step + 1].label;
+    UIState.set('ws-step:' + id, step);
+  };
+  const go = to => {
+    const d = to > step ? 1 : -1; step = to; paint(d);
+    const top = panel.getBoundingClientRect().top;
+    if (top < 70 || top > window.innerHeight * .6) $('.tour-steps', main).scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+    const h = $('h2', panel); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  };
+  paint(0);
+  main.addEventListener('click', e => {
+    const s = e.target.closest('[data-wstep]'); if (s) { if (+s.dataset.wstep !== step) go(+s.dataset.wstep); return; }
+    const g = e.target.closest('[data-wgo]'); if (g) go(clamp(step + +g.dataset.wgo, 0, steps.length - 1));
+  });
+  return () => { if (typeof cleanup === 'function') cleanup(); };
+}
+
+/* Shared bits */
+const wsKicker = (k, h) => '<p class="tp-kicker">' + k + '</p><h2>' + h + '</h2>';
+const wsSteps = list => '<ol class="tp-steps">' + list.map((h, k) => '<li style="--k:' + k + '"><span class="num">' + (k + 1) + '</span><p>' + h + '</p></li>').join('') + '</ol>';
+const wsCards = list => '<div class="au-know">' + list.map(x => '<div class="why-card" style="--tc:' + x[1] + '"><span class="ic-tile">' + icon(x[0]) + '</span><h3>' + x[2] + '</h3><p>' + x[3] + '</p></div>').join('') + '</div>';
+const wsFaq = list => '<p class="tp-kicker" style="margin-top:22px">' + tx('أسئلة شائعة', 'Common questions') + '</p><div class="cuq-list">' + list.map(f => '<details class="cuq"><summary>' + icon('help', 'icon-sm') + '<span>' + f[0] + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + f[1] + '</p></div></details>').join('') + '</div>';
+const wsNote = t => '<p class="help-text au-note">' + icon('eye', 'icon-sm') + '<span>' + t + '</span></p>';
+const wsVersion = () => wsNote(tx('قد تختلف أسماء الأزرار ومواضعها قليلاً بين إصدارات ClickUp وخطط الاشتراك.', 'Button names and positions may differ slightly between ClickUp versions and plans.'));
+function typeInto(el, text, done) {
+  if (prefersReducedMotion()) { el.textContent = text; if (done) done(); return () => {}; }
+  let i = 0; el.textContent = '';
+  const t = setInterval(() => { i += Math.max(1, Math.round(text.length / 60)); el.textContent = text.slice(0, i); if (i >= text.length) { clearInterval(t); if (done) done(); } }, 22);
+  return () => clearInterval(t);
+}
+function downloadFile(name, text, type) {
+  const blob = new Blob([text], { type: type || 'text/csv;charset=utf-8' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function parseCSV(text) {
+  const rows = []; let row = [], cell = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) { if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; } else if (ch === '"') q = false; else cell += ch; }
+    else if (ch === '"') q = true; else if (ch === ',' || ch === ';' || ch === '\t') { row.push(cell); cell = ''; }
+    else if (ch === '\n' || ch === '\r') { if (ch === '\r' && text[i + 1] === '\n') i++; row.push(cell); cell = ''; if (row.some(c => c.trim())) rows.push(row); row = []; }
+    else cell += ch;
+  }
+  row.push(cell); if (row.some(c => c.trim())) rows.push(row);
+  return rows.map(r => r.map(c => c.trim()));
+}
+const csvCell = v => /[",\n]/.test(v) ? '"' + String(v).replace(/"/g, '""') + '"' : String(v);
+
+const WS_DEF = {
+  /* ---------------- AI ---------------- */
+  ai: {
+    dark: '#6d28d9',
+    title: () => tx('الذكاء الاصطناعي في ClickUp: ClickUp Brain', 'AI in ClickUp: ClickUp Brain'),
+    sub: () => tx('تعرّف ماذا يفعل، وجرّبه على مهمة تجريبية، وتعلّم كتابة طلبات واضحة.', 'See what it does, try it on a sample task, and learn to write clear requests.'),
+    steps: () => [
+      { ic: 'bulb', label: tx('ما هو؟', 'What is it?'), html: () => wsKicker(tx('مساعد داخل عملك', 'An assistant inside your work'), tx('ClickUp Brain يفهم مهامك ومستنداتك ويساعدك بثلاث طرق', 'ClickUp Brain understands your tasks and Docs and helps in three ways')) +
+        '<div class="ai-orbit" aria-hidden="true"><span class="ai-core">' + icon('sparkle') + '</span><span class="ai-ring"></span>' +
+        [['help', '#4f86f7', tx('اسأل', 'Ask'), tx('«ما الذي يؤخر تقرير الربع؟»', '“What’s holding up the Q3 report?”')], ['doc', '#ff02f0', tx('اكتب', 'Write'), tx('لخّص، أعد الصياغة، ترجم', 'Summarize, rewrite, translate')], ['checklist', '#22c38e', tx('نفّذ', 'Do'), tx('مهام فرعية، تحديثات، أتمتة بالكلمات', 'Subtasks, updates, automations from words')]]
+          .map((s, i) => '<span class="ai-sat s' + i + '" style="--tc:' + s[1] + '"><span class="ic-tile">' + icon(s[0], 'icon-sm') + '</span><b>' + s[2] + '</b><small>' + s[3] + '</small></span>').join('') + '</div>' +
+        wsCards([
+          ['help', '#4f86f7', tx('اسأل عن عملك', 'Ask about your work'), tx('اسأل بلغة بسيطة عن المهام والمستندات، مثل «ما المتأخر في قائمتي؟».', 'Ask in plain words about tasks and Docs, such as “what’s overdue in my List?”.')],
+          ['doc', '#ff02f0', tx('اكتب أسرع', 'Write faster'), tx('لخّص نقاشاً طويلاً، اكتب تحديث حالة، حسّن الصياغة أو ترجمها.', 'Summarize a long thread, write a status update, improve or translate wording.')],
+          ['checklist', '#22c38e', tx('أنجز أكثر', 'Get more done'), tx('اقترح مهاماً فرعية، وجهّز ملخصات، وابنِ أتمتة بوصفها بالكلمات.', 'Suggest subtasks, prepare summaries and build automations by describing them.')]
+        ]) + wsNote(tx('يعتمد توفر ClickUp Brain وميزاته على خطة الاشتراك وإعدادات المسؤول، وقد تتغير أسماء الميزات.', 'ClickUp Brain and its features depend on your plan and admin settings, and feature names can change.')) },
+      { ic: 'play', label: tx('جرّبه', 'Try it'), html: () => wsKicker(tx('جرّبه', 'Try it'), tx('اطلب من Brain المساعدة في هذه المهمة', 'Ask Brain to help with this task')) +
+        '<div class="ai-lab"><div class="ai-task"><div class="au-trow"><span class="mx-status st-progress">IN PROGRESS</span><b>' + tx('تجهيز تقرير رضا العملاء للربع الثالث', 'Prepare the Q3 customer satisfaction report') + '</b></div>' +
+        '<p class="ai-desc">' + tx('جمع نتائج الاستبيان، وتحديث الرسوم، وكتابة الملخص التنفيذي قبل اجتماع الأحد.', 'Collect the survey results, update the charts and write the executive summary before Sunday’s meeting.') + '</p>' +
+        '<div class="ai-thread">' + [['salim', tx('ما زلت أنتظر أرقام الاستبيان النهائية من التسويق.', 'Still waiting for the final survey numbers from Marketing.')], ['noura', tx('الرسوم جاهزة، سأحدّثها عند وصول الأرقام.', 'The charts are ready; I’ll update them when the numbers arrive.')], ['maryam', tx('لنراجع المسودة يوم الأحد.', 'Let’s review the draft on Sunday.')]].map(c => '<p>' + DM.av(c[0], 22) + '<span><b>' + PN(c[0]) + '</b> ' + c[1] + '</span></p>').join('') + '</div>' +
+        '<div class="ai-subs" data-subs></div></div>' +
+        '<div class="ai-panel"><div class="ai-ph"><span class="ai-core sm">' + icon('sparkle', 'icon-sm') + '</span><b>ClickUp Brain</b><span class="chip chip-sim">' + tx('محاكاة', 'Simulation') + '</span></div>' +
+        '<div class="ai-chat" data-chat aria-live="polite"><p class="ai-msg ai-bot">' + tx('مرحباً! ماذا تريد أن أفعل بهذه المهمة؟', 'Hi! What would you like me to do with this task?') + '</p></div>' +
+        '<div class="ai-chips">' + [['sum', tx('لخّص المهمة', 'Summarize this task')], ['upd', tx('اكتب تحديث حالة', 'Write a status update')], ['subs', tx('اقترح مهاماً فرعية', 'Suggest subtasks')], ['reply', tx('اكتب رداً على سالم', 'Draft a reply to Salim')], ['tr', tx('ترجم الوصف إلى الإنجليزية', 'Translate the description to Arabic')]].map(c => '<button type="button" class="ai-chip" data-ask="' + c[0] + '">' + icon('sparkle', 'icon-sm') + c[1] + '</button>').join('') + '</div>' +
+        '<form class="ai-input" data-askform><input class="input" data-askq placeholder="' + tx('اكتب طلبك…', 'Type your request…') + '" aria-label="' + tx('طلبك لـ ClickUp Brain', 'Your request to ClickUp Brain') + '"><button type="submit" class="icon-btn" aria-label="' + tx('أرسل', 'Send') + '">' + icon('send', 'icon-sm') + '</button></form></div></div>',
+        mount: panel => {
+          const chat = $('[data-chat]', panel); let stop = () => {}; let busy = false;
+          const ANS = {
+            sum: tx('الملخص: التقرير شبه جاهز. الرسوم جاهزة عند نورة، وسالم ينتظر أرقام الاستبيان النهائية من التسويق. الخطوة التالية: مراجعة المسودة مع مريم يوم الأحد.', 'Summary: the report is nearly ready. Noura’s charts are done, and Salim is waiting for the final survey numbers from Marketing. Next step: review the draft with Maryam on Sunday.'),
+            upd: tx('تحديث الحالة: الرسوم جاهزة والمسودة قيد المراجعة. عائق واحد: أرقام الاستبيان النهائية من التسويق. نحن على المسار لمراجعة يوم الأحد.', 'Status update: the charts are ready and the draft is in review. One blocker: the final survey numbers from Marketing. We are on track for Sunday’s review.'),
+            subs: tx('إليك مهام فرعية مقترحة:', 'Here are suggested subtasks:'),
+            reply: tx('مسودة رد: شكراً يا سالم! سأتابع مع التسويق اليوم لنحصل على الأرقام النهائية قبل الخميس.', 'Draft reply: Thanks, Salim! I’ll follow up with Marketing today so we have the final numbers before Thursday.'),
+            tr: tx('Collect the survey results, update the charts and write the executive summary before Sunday’s meeting.', 'جمع نتائج الاستبيان، وتحديث الرسوم، وكتابة الملخص التنفيذي قبل اجتماع الأحد.')
+          };
+          const SUBS = [tx('استلام أرقام الاستبيان النهائية من التسويق', 'Get the final survey numbers from Marketing'), tx('تحديث الرسوم بأرقام الربع الثالث', 'Update the charts with Q3 numbers'), tx('كتابة الملخص التنفيذي', 'Write the executive summary'), tx('مراجعة المسودة مع مريم يوم الأحد', 'Review the draft with Maryam on Sunday')];
+          const guess = q => { q = q.toLowerCase(); return /summar|لخص|لخّص|ملخص/.test(q) ? 'sum' : /update|status|تحديث/.test(q) ? 'upd' : /subtask|step|فرعي|خطوات/.test(q) ? 'subs' : /reply|respond|رد/.test(q) ? 'reply' : /translat|ترجم/.test(q) ? 'tr' : null; };
+          const ask = (key, label) => {
+            if (busy) return; busy = true;
+            chat.insertAdjacentHTML('beforeend', '<p class="ai-msg ai-me">' + esc(label) + '</p><p class="ai-msg ai-bot ai-think"><i></i><i></i><i></i></p>');
+            chat.scrollTop = chat.scrollHeight;
+            setTimeout(() => {
+              const th = $('.ai-think', chat); if (!th) { busy = false; return; }
+              th.classList.remove('ai-think'); th.innerHTML = '<span></span>'; Sound.play('pop');
+              const text = key ? ANS[key] : tx('في هذه المحاكاة جرّب أحد الاقتراحات أعلاه. في ClickUp يستطيع Brain الإجابة عن أسئلة أكثر بكثير.', 'In this simulation, try one of the suggestions above. In ClickUp, Brain can answer many more kinds of requests.');
+              stop = typeInto($('span', th), text, () => {
+                busy = false;
+                if (key === 'subs') { th.insertAdjacentHTML('beforeend', '<ul>' + SUBS.map(s => '<li>' + icon('subtask', 'icon-sm') + s + '</li>').join('') + '</ul><button type="button" class="btn btn-primary btn-sm" data-addsubs>' + icon('plus', 'icon-sm') + tx('أضفها كمهام فرعية', 'Add as subtasks') + '</button>'); }
+                chat.scrollTop = chat.scrollHeight;
+              });
+            }, prefersReducedMotion() ? 50 : 800);
+          };
+          const onClick = e => {
+            const c = e.target.closest('[data-ask]'); if (c) { ask(c.dataset.ask, c.textContent); return; }
+            if (e.target.closest('[data-addsubs]')) {
+              const box = $('[data-subs]', panel); if (box.children.length) return;
+              box.innerHTML = '<p class="ai-subs-h">' + icon('subtask', 'icon-sm') + tx('المهام الفرعية', 'Subtasks') + '</p>' + SUBS.map((s, i) => '<p class="ai-sub" style="--k:' + i + '"><span class="mx-status st-todo">TO DO</span>' + s + '</p>').join('');
+              e.target.closest('[data-addsubs]').disabled = true; Motion.confetti(box, 40); toast(tx('أُضيفت 4 مهام فرعية', '4 subtasks added'));
+            }
+          };
+          const onSubmit = e => { e.preventDefault(); const inp = $('[data-askq]', panel); const q = inp.value.trim(); if (!q) return; inp.value = ''; ask(guess(q), q); };
+          panel.addEventListener('click', onClick); $('[data-askform]', panel).addEventListener('submit', onSubmit);
+          return () => { stop(); panel.removeEventListener('click', onClick); };
+        } },
+      { ic: 'doc', label: tx('طلبات جيدة', 'Good prompts'), html: () => {
+        const opt = (k, list) => '<label>' + list[0] + '<select class="select select-sm" data-pb="' + k + '">' + list.slice(1).map((o, i) => '<option value="' + i + '">' + o + '</option>').join('') + '</select></label>';
+        return wsKicker(tx('ابنِ طلباً واضحاً', 'Build a clear request'), tx('الطلب الواضح = هدف + جمهور + أسلوب + شكل', 'A clear request = goal + audience + tone + format')) +
+          '<div class="pb"><div class="pb-controls">' + opt('goal', [tx('الهدف', 'Goal'), tx('لخّص', 'Summarize'), tx('اكتب تحديث حالة عن', 'Write a status update about'), tx('اقترح خطوات لـ', 'Suggest steps for'), tx('اكتب رسالة عن', 'Draft a message about')]) +
+          opt('aud', [tx('لمن؟', 'For whom?'), tx('مديري', 'my manager'), tx('فريقي', 'my team'), tx('قسم آخر', 'another department')]) +
+          opt('tone', [tx('الأسلوب', 'Tone'), tx('قصير وواضح', 'short and clear'), tx('ودود', 'friendly'), tx('رسمي', 'formal')]) +
+          opt('fmt', [tx('الشكل', 'Format'), tx('3 نقاط', '3 bullet points'), tx('فقرة واحدة', 'one paragraph'), tx('جدول', 'a table')]) + '</div>' +
+          '<div class="pb-out"><span class="ai-core sm">' + icon('sparkle', 'icon-sm') + '</span><p data-pbout></p><button type="button" class="btn btn-secondary btn-sm" data-pbcopy>' + icon('doc', 'icon-sm') + tx('انسخ', 'Copy') + '</button></div></div>' +
+          wsCards([
+            ['target', '#7b68ee', tx('كن محدداً', 'Be specific'), tx('اذكر المهمة أو القائمة والفترة، مثل «هذا الأسبوع».', 'Name the task or List and the period, such as “this week”.')],
+            ['users', '#e44bb6', tx('اذكر الجمهور', 'Say who it’s for'), tx('ما يُكتب للمدير يختلف عما يُكتب للفريق.', 'What you write for a manager differs from what you write for the team.')],
+            ['table', '#1fb6e0', tx('اطلب شكلاً', 'Ask for a format'), tx('نقاط أو جدول أو فقرة قصيرة.', 'Bullet points, a table or a short paragraph.')],
+            ['eye', '#f5a524', tx('راجع دائماً', 'Always review'), tx('تحقق من الأرقام والأسماء قبل المشاركة.', 'Check numbers and names before sharing.')]
+          ]);
+      }, mount: panel => {
+        const out = $('[data-pbout]', panel);
+        const G = [tx('لخّص', 'Summarize'), tx('اكتب تحديث حالة عن', 'Write a status update about'), tx('اقترح خطوات لـ', 'Suggest steps for'), tx('اكتب رسالة عن', 'Draft a message about')];
+        const A = [tx('مديري', 'my manager'), tx('فريقي', 'my team'), tx('قسم آخر', 'another department')];
+        const T = [tx('قصير وواضح', 'short and clear'), tx('ودود', 'friendly'), tx('رسمي', 'formal')];
+        const F = [tx('3 نقاط', '3 bullet points'), tx('فقرة واحدة', 'one paragraph'), tx('جدول', 'a table')];
+        const v = k => +$('[data-pb="' + k + '"]', panel).value;
+        const render = () => { out.textContent = tx(G[v('goal')] + ' مهمة «تقرير الربع الثالث» لـ' + A[v('aud')] + '. اجعله ' + T[v('tone')] + '، على شكل ' + F[v('fmt')] + '، واذكر أي عائق وموعده.', G[v('goal')] + ' the “Q3 report” task for ' + A[v('aud')] + '. Keep it ' + T[v('tone')] + ', as ' + F[v('fmt')] + ', and mention any blocker and its date.'); out.classList.remove('tip-in'); void out.offsetWidth; out.classList.add('tip-in'); };
+        render();
+        const onChange = e => { if (e.target.dataset.pb) render(); };
+        const onClick = e => { if (e.target.closest('[data-pbcopy]')) copyText(out.textContent).then(ok => toast(ok ? tx('نُسخ الطلب', 'Prompt copied') : tx('تعذّر النسخ', 'Copying is not available'))); };
+        panel.addEventListener('change', onChange); panel.addEventListener('click', onClick);
+        return () => { panel.removeEventListener('change', onChange); panel.removeEventListener('click', onClick); };
+      } },
+      { ic: 'list', label: tx('في ClickUp', 'In ClickUp'), html: () => wsKicker(tx('داخل ClickUp', 'Inside ClickUp'), tx('كيف تستخدم Brain خطوة بخطوة', 'How to use Brain, step by step')) +
+        '<div class="tp-how">' + wsSteps([
+          tx('ابحث عن زر الذكاء الاصطناعي (Brain أو Ask AI) في الشريط العلوي أو داخل المهمة أو المستند.', 'Look for the AI button (Brain or Ask AI) in the top bar, or inside a task or Doc.'),
+          tx('اكتب طلبك بلغة بسيطة، مثل «ما الذي يؤخر تقرير الربع؟».', 'Type your request in plain words, such as “what’s holding up the Q3 report?”.'),
+          tx('داخل المهمة: اطلب ملخصاً للنشاط أو اقتراح مهام فرعية.', 'Inside a task: ask for an activity summary or suggested subtasks.'),
+          tx('داخل مستند أو تعليق: حدّد النص واطلب تحسينه أو اختصاره أو ترجمته.', 'Inside a Doc or comment: select text and ask to improve, shorten or translate it.'),
+          tx('راجع النتيجة، وعدّلها، ثم طبّقها.', 'Review the result, edit it, then apply it.')
+        ]) + '<div class="au-shot" aria-hidden="true"><div class="au-shot-bar"><span>' + L_OPS() + ' / <b>' + L_WEEKLY() + '</b></span><span class="au-shot-robot ai-shot">' + icon('sparkle') + '</span><span class="au-shot-share">Share</span></div><div class="au-shot-menu"><b>ClickUp Brain</b><span class="au-shot-create">' + icon('sparkle', 'icon-sm') + 'Ask AI</span><span>' + icon('doc', 'icon-sm') + tx('اكتب', 'Write') + '</span><span>' + icon('checklist', 'icon-sm') + tx('لخّص', 'Summarize') + '</span></div></div></div>' + wsVersion() },
+      { ic: 'info', label: tx('معلومات مهمة', 'Good to know'), html: () => wsKicker(tx('استخدمه بمسؤولية', 'Use it responsibly'), tx('نصائح مهمة قبل أن تبدأ', 'Important tips before you start')) + wsCards([
+          ['lock', '#ff4d6d', tx('البيانات الحساسة', 'Sensitive data'), tx('لا تضع بيانات العملاء الشخصية أو المعلومات السرية إلا بما تسمح به سياسة المؤسسة.', 'Don’t include customers’ personal data or confidential information beyond what company policy allows.')],
+          ['eye', '#f5a524', tx('تحقّق من النتيجة', 'Check the result'), tx('قد يخطئ الذكاء الاصطناعي. راجع الأرقام والأسماء والتواريخ.', 'AI can be wrong. Check numbers, names and dates.')],
+          ['chart', '#4f86f7', tx('التوفر', 'Availability'), tx('يعتمد على الخطة أو الإضافة وإعدادات المسؤول في مساحة العمل.', 'It depends on your plan or add-on and the Workspace admin settings.')],
+          ['users', '#22c38e', tx('أنت المسؤول', 'You are responsible'), tx('ما تشاركه باسمك مسؤوليتك، حتى لو كتبه الذكاء الاصطناعي.', 'What you share under your name is your responsibility, even if AI wrote it.')]
+        ]) + wsFaq([
+          [tx('هل يرى Brain كل شيء في مساحة العمل؟', 'Can Brain see everything in the Workspace?'), tx('يعمل ضمن صلاحياتك: يستخدم ما تستطيع أنت الوصول إليه. تفاصيل الخصوصية يحددها ClickUp ومسؤول مساحة العمل.', 'It works within your permissions, using what you can access. Privacy details are set by ClickUp and your Workspace admin.')],
+          [tx('هل يكتب بالعربية؟', 'Can it write in Arabic?'), tx('يمكنك أن تطلب منه الكتابة أو الترجمة بالعربية. راجع الصياغة دائماً قبل المشاركة.', 'You can ask it to write or translate in Arabic. Always review the wording before sharing.')],
+          [tx('هل يبني أتمتة؟', 'Can it build automations?'), tx('نعم، يمكنك وصف الأتمتة بالكلمات ليقترحها، ثم تراجعها وتحفظها. جرّب الفكرة في ورشة الأتمتة.', 'Yes, you can describe an automation in words for it to suggest, then review and save it. Try the idea in the Automations workshop.')]
+        ]) }
+    ]
+  },
+
+  /* ---------------- Import & Export ---------------- */
+  import: {
+    dark: '#0a7a9c',
+    title: () => tx('الاستيراد والتصدير: من Excel إلى ClickUp وبالعكس', 'Import & Export: from Excel to ClickUp and back'),
+    sub: () => tx('انقل جدولك إلى قائمة مهام في دقائق، ثم صدّر مهامك إلى ملف تفتحه في Excel.', 'Turn your spreadsheet into a List of tasks in minutes, then export your tasks to a file you can open in Excel.'),
+    steps: () => [
+      { ic: 'bulb', label: tx('كيف يعمل', 'How it works'), html: () => wsKicker(tx('الفكرة', 'The idea'), tx('كل صف في الجدول يصبح مهمة، وكل عمود يصبح حقلاً', 'Each spreadsheet row becomes a task, and each column becomes a field')) +
+        '<div class="ie-flow" aria-hidden="true"><div class="ie-sheet">' + ['A', 'B', 'C'].map(c => '<span class="ie-h">' + c + '</span>').join('') + [0, 1, 2].map(r => '<span class="ie-row" style="--r:' + r + '"><i></i><i></i><i></i></span>').join('') + '<b>.xlsx / .csv</b></div>' +
+        '<span class="ie-arrow">' + icon('fwd') + '<small>Import</small></span><div class="ie-list"><b>' + L_REQ() + '</b>' + ['todo', 'progress', 'done'].map((s, r) => '<span class="ie-task" style="--r:' + r + '"><span class="mx-status st-' + s + '">' + STATUS[s].en + '</span><i></i></span>').join('') + '</div>' +
+        '<span class="ie-arrow">' + icon('fwd') + '<small>Export</small></span><div class="ie-file">' + icon('download') + '<b>clickup-export.csv</b></div></div>' +
+        wsCards([
+          ['upload', '#1fb6e0', 'Import', tx('من ملف CSV أو Excel، أو من تطبيقات أخرى مثل Asana وTrello وJira وMonday.com.', 'From a CSV or Excel file, or from other apps such as Asana, Trello, Jira and Monday.com.')],
+          ['table', '#7b68ee', tx('ربط الأعمدة', 'Map the columns'), tx('تختار لكل عمود الحقل المقابل: اسم المهمة، المسؤول، التاريخ، الحالة…', 'For each column you pick the matching field: task name, assignee, date, status…')],
+          ['download', '#22c38e', 'Export', tx('صدّر ما يعرضه View إلى ملف CSV أو Excel، ويستطيع المسؤول تصدير مساحة العمل كاملة.', 'Export what a view shows to a CSV or Excel file; admins can export the whole Workspace.')]
+        ]) },
+      { ic: 'upload', label: tx('جرّب الاستيراد', 'Try importing'), html: () => wsKicker(tx('جرّب الاستيراد', 'Try importing'), tx('اربط الأعمدة ثم استورد', 'Map the columns, then import')) +
+        '<div class="ie-src"><button type="button" class="btn btn-secondary btn-sm" data-sample>' + icon('table', 'icon-sm') + tx('استخدم الجدول التجريبي', 'Use the sample sheet') + '</button><label class="btn btn-secondary btn-sm ie-up">' + icon('upload', 'icon-sm') + tx('أو ارفع ملف CSV من جهازك', 'Or upload a CSV from your device') + '<input type="file" accept=".csv,text/csv" data-csv hidden></label><span class="help-text">' + tx('الملف يُقرأ في متصفحك فقط ولا يُرسل إلى أي مكان.', 'The file is read in your browser only and is not sent anywhere.') + '</span></div>' +
+        '<div data-imp></div>', mount: panel => {
+        const box = $('[data-imp]', panel);
+        const FIELDS = () => [['name', tx('اسم المهمة', 'Task name')], ['assignee', 'Assignee'], ['due', 'Due date'], ['status', 'Status'], ['priority', 'Priority'], ['field', 'Custom Field'], ['skip', tx('لا تستورد', 'Don’t import')]];
+        const sample = () => [[tx('المهمة', 'Task'), tx('المسؤول', 'Owner'), tx('الموعد', 'Due'), tx('الحالة', 'Status'), tx('الأولوية', 'Priority'), tx('الإدارة', 'Department')],
+          [tx('تحديث عرض المبيعات', 'Update the sales deck'), PN('salim'), '2026-10-04', 'In progress', 'High', tx('المبيعات', 'Sales')],
+          [tx('مراجعة عقود الموردين', 'Review supplier contracts'), PN('maryam'), '2026-10-06', 'To do', 'Urgent', tx('المشتريات', 'Procurement')],
+          [tx('تجهيز استبيان العملاء', 'Prepare the customer survey'), PN('noura'), '2026-10-08', 'Review', 'Normal', tx('التسويق', 'Marketing')],
+          [tx('إغلاق ملاحظة التدقيق 4', 'Close audit finding 4'), tx('أحمد', 'Ahmed'), '2026-10-01', 'Done', 'Low', tx('التدقيق', 'Audit')],
+          [tx('طلب شاشات لقاعة الاجتماعات', 'Order screens for the meeting room'), PN('khalid'), '2026-10-12', 'To do', 'Normal', tx('العمليات', 'Operations')]];
+        const guessField = h => { h = h.toLowerCase(); return /task|name|title|مهمة|عنوان|اسم/.test(h) ? 'name' : /owner|assign|who|مسؤول|المالك/.test(h) ? 'assignee' : /due|date|deadline|موعد|تاريخ/.test(h) ? 'due' : /status|state|حالة/.test(h) ? 'status' : /prio|أولوية/.test(h) ? 'priority' : 'field'; };
+        const s = UIState.get('imp') || { rows: null, map: [] };
+        const toStatus = v => { v = (v || '').toLowerCase(); return /done|complete|closed|مكتمل|منجز/.test(v) ? 'done' : /review|مراجع/.test(v) ? 'review' : /progress|doing|تنفيذ|جار/.test(v) ? 'progress' : 'todo'; };
+        const toPrio = v => { v = (v || '').toLowerCase(); return /urgent|عاجل/.test(v) ? 'urgent' : /high|عال/.test(v) ? 'high' : /low|منخفض/.test(v) ? 'low' : /normal|عادي/.test(v) ? 'normal' : null; };
+        const people = () => PPL_IE().reduce((m, p) => (m[PN(p).toLowerCase()] = p, m), {});
+        const load = rows => { rows = rows.slice(0, 51).map(r => r.slice(0, 8)); s.rows = rows; s.map = rows[0].map(guessField); if (!s.map.includes('name')) s.map[0] = 'name'; s.done = null; UIState.set('imp', s); paint(); Sound.play('pop'); };
+        const paint = () => {
+          if (!s.rows) { box.innerHTML = '<div class="empty-state">' + icon('table') + '<p>' + tx('اختر الجدول التجريبي أو ارفع ملفك لتبدأ.', 'Choose the sample sheet or upload your file to begin.') + '</p></div>'; return; }
+          const head = s.rows[0], body = s.rows.slice(1);
+          const nameCount = s.map.filter(m => m === 'name').length;
+          box.innerHTML = '<div class="ie-map table-wrap"><table class="data-table"><thead><tr>' + head.map((h, i) => '<th scope="col"><span class="ie-colname">' + esc(h || '—') + '</span><select class="select select-sm" data-map="' + i + '" aria-label="' + tx('اربط العمود ', 'Map column ') + esc(h) + '">' + FIELDS().map(f => '<option value="' + f[0] + '"' + (f[0] === s.map[i] ? ' selected' : '') + '>' + f[1] + '</option>').join('') + '</select></th>').join('') + '</tr></thead><tbody>' +
+            body.slice(0, 5).map(r => '<tr>' + head.map((h, i) => '<td class="' + (s.map[i] === 'skip' ? 'ie-skip' : '') + '">' + esc(r[i] || '') + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>' +
+            '<p class="help-text">' + tx(body.length + ' صفاً في الملف', body.length + ' rows in the file') + (body.length > 5 ? tx(' (نعرض أول 5)', ' (showing the first 5)') : '') + '</p>' +
+            (nameCount !== 1 ? feedbackHTML('bad', tx('اربط عموداً واحداً بالضبط بـ «اسم المهمة».', 'Map exactly one column to “Task name”.')) : '') +
+            '<div class="ex-actions"><button type="button" class="btn btn-primary" data-doimport' + (nameCount !== 1 ? ' disabled' : '') + '>' + icon('upload', 'icon-sm') + tx('استورد إلى ', 'Import to ') + L_REQ() + '</button></div><div data-result></div>';
+          if (s.done) result();
+        };
+        const result = () => {
+          const head = s.rows[0], body = s.rows.slice(1), ppl = people(); const warn = [];
+          const tasks = body.map(r => { const t = { name: '', assignee: null, due: '', status: 'todo', priority: null, field: '' };
+            s.map.forEach((m, i) => { const v = r[i] || ''; if (m === 'name') t.name = v; if (m === 'due') t.due = v; if (m === 'status') t.status = toStatus(v); if (m === 'priority') t.priority = toPrio(v); if (m === 'field') t.field = t.field ? t.field + ' · ' + v : v;
+              if (m === 'assignee' && v) { const p = ppl[v.toLowerCase()]; if (p) t.assignee = p; else warn.push(v); } });
+            return t; }).filter(t => t.name);
+          s.tasks = tasks; UIState.set('imp', s);
+          $('[data-result]', box).innerHTML = '<div class="ie-done"><p class="ie-sum">' + icon('check-circle', 'icon-sm') + tx(tasks.length + ' مهام استُوردت إلى «' + L_REQ() + '»', tasks.length + ' tasks imported into “' + L_REQ() + '”') + (s.map.includes('skip') ? tx(' · تُخطّي عمود', ' · a column was skipped') : '') + '</p>' +
+            (warn.length ? '<p class="ie-warn">' + icon('alert', 'icon-sm') + '<span>' + tx('«' + [...new Set(warn)].join('، ') + '» ليس عضواً في مساحة العمل، فاستُوردت مهمته بلا مسؤول. في ClickUp يجب أن يكون المسؤول عضواً.', '“' + [...new Set(warn)].join(', ') + '” is not a Workspace member, so the task was imported without an assignee. In ClickUp, assignees must be members.') + '</span></p>' : '') +
+            '<div class="ie-listview">' + tasks.map((t, i) => '<div class="ie-trow" style="--k:' + i + '"><span class="mx-status st-' + t.status + '">' + STATUS[t.status].en + '</span><span class="ie-tn">' + esc(t.name) + '</span><span>' + (t.assignee ? DM.av(t.assignee, 20) : DM.noav()) + '</span><span class="num">' + esc(t.due) + '</span><span>' + (t.priority ? DM.pr(t.priority) : '<span class="mx-note">-</span>') + '</span>' + (t.field ? '<span class="chip">' + esc(t.field) + '</span>' : '<span></span>') + '</div>').join('') + '</div>' +
+            '<p class="help-text">' + tx('التالي: صدّر هذه المهام إلى ملف من الخطوة 3.', 'Next: export these tasks to a file in step 3.') + '</p></div>';
+        };
+        const onClick = e => {
+          if (e.target.closest('[data-sample]')) { load(sample()); return; }
+          if (e.target.closest('[data-doimport]')) { s.done = true; UIState.set('imp', s); result(); Motion.confetti($('[data-result]', box), 50); }
+        };
+        const onChange = e => {
+          if (e.target.dataset.map != null) { s.map[+e.target.dataset.map] = e.target.value; s.done = null; UIState.set('imp', s); paint(); const again = $('[data-map="' + e.target.dataset.map + '"]', box); if (again) again.focus(); return; }
+          if (e.target.matches('[data-csv]') && e.target.files[0]) {
+            const f = e.target.files[0]; if (f.size > 2e6) { toast(tx('الملف كبير جداً لهذه المحاكاة (الحد 2 ميغابايت).', 'The file is too large for this simulation (2 MB limit).')); return; }
+            const rd = new FileReader(); rd.onload = () => { const rows = parseCSV(String(rd.result).replace(/^﻿/, '')); if (rows.length < 2) { toast(tx('لم نجد صفوفاً في الملف.', 'No rows found in the file.')); return; } load(rows); }; rd.readAsText(f);
+          }
+        };
+        paint();
+        panel.addEventListener('click', onClick); panel.addEventListener('change', onChange);
+        return () => { panel.removeEventListener('click', onClick); panel.removeEventListener('change', onChange); };
+      } },
+      { ic: 'download', label: tx('جرّب التصدير', 'Try exporting'), html: () => wsKicker(tx('جرّب التصدير', 'Try exporting'), tx('اختر الأعمدة وحمّل ملفاً حقيقياً', 'Pick the columns and download a real file')) + '<div data-exp></div>', mount: panel => {
+        const box = $('[data-exp]', panel);
+        const s = UIState.get('imp') || {};
+        const tasks = s.tasks && s.tasks.length ? s.tasks : [
+          { name: tx('تحديث عرض المبيعات', 'Update the sales deck'), assignee: 'salim', due: '2026-10-04', status: 'progress', priority: 'high', field: tx('المبيعات', 'Sales') },
+          { name: tx('مراجعة عقود الموردين', 'Review supplier contracts'), assignee: 'maryam', due: '2026-10-06', status: 'todo', priority: 'urgent', field: tx('المشتريات', 'Procurement') },
+          { name: tx('تجهيز استبيان العملاء', 'Prepare the customer survey'), assignee: 'noura', due: '2026-10-08', status: 'review', priority: 'normal', field: tx('التسويق', 'Marketing') }];
+        const COLS = () => [['name', 'Task name', true], ['status', 'Status', true], ['assignee', 'Assignee', true], ['due', 'Due date', true], ['priority', 'Priority', true], ['field', tx('الإدارة', 'Department'), false]];
+        box.innerHTML = '<div class="ie-exp"><div class="ie-cols"><p class="field-label">' + tx('الأعمدة', 'Columns') + '</p>' + COLS().map(c => '<label class="check"><input type="checkbox" data-col="' + c[0] + '"' + (c[2] ? ' checked' : '') + '> ' + c[1] + '</label>').join('') +
+          '<p class="field-label" style="margin-top:10px">' + tx('الصيغة', 'Format') + '</p><label class="check"><input type="radio" name="fmt" value="csv" checked> CSV</label><label class="check"><input type="radio" name="fmt" value="xls"> ' + tx('CSV مناسب لـ Excel (يحفظ العربية)', 'Excel-friendly CSV (keeps Arabic)') + '</label>' +
+          '<button type="button" class="btn btn-primary" data-doexport>' + icon('download', 'icon-sm') + tx('صدّر وحمّل الملف', 'Export and download') + '</button></div>' +
+          '<div class="ie-preview"><p class="field-label">' + tx('معاينة ', 'Preview · ') + (s.tasks && s.tasks.length ? tx('المهام التي استوردتها', 'the tasks you imported') : tx('مهام تجريبية', 'sample tasks')) + '</p><pre data-csvprev dir="auto"></pre><div class="ie-file ie-got" data-got hidden>' + icon('check-circle') + '<b>clickup-export.csv</b></div></div></div>';
+        const build = () => { const cols = COLS().filter(c => $('[data-col="' + c[0] + '"]', box).checked); const lines = [cols.map(c => c[1]).join(',')].concat(tasks.map(t => cols.map(c => csvCell(c[0] === 'status' ? STATUS[t.status].en : c[0] === 'assignee' ? (t.assignee ? PN(t.assignee) : '') : c[0] === 'priority' ? (t.priority ? PRIORITY[t.priority].en : '') : (t[c[0]] || ''))).join(','))); return lines.join('\r\n'); };
+        const prev = () => { $('[data-csvprev]', box).textContent = build(); };
+        prev();
+        const onChange = e => { if (e.target.dataset.col) prev(); };
+        const onClick = e => {
+          if (!e.target.closest('[data-doexport]')) return;
+          const xls = $('input[name="fmt"]:checked', box).value === 'xls';
+          downloadFile('clickup-export.csv', (xls ? '﻿' : '') + build());
+          const got = $('[data-got]', box); got.hidden = false; got.classList.remove('tip-in'); void got.offsetWidth; got.classList.add('tip-in');
+          Sound.play('success'); toast(tx('حُمّل الملف clickup-export.csv', 'Downloaded clickup-export.csv'));
+        };
+        panel.addEventListener('change', onChange); panel.addEventListener('click', onClick);
+        return () => { panel.removeEventListener('change', onChange); panel.removeEventListener('click', onClick); };
+      } },
+      { ic: 'list', label: tx('في ClickUp', 'In ClickUp'), html: () => wsKicker(tx('داخل ClickUp', 'Inside ClickUp'), tx('الخطوات الحقيقية', 'The real steps')) +
+        '<div class="ie-two"><div><h3 class="ws-h3">' + icon('upload', 'icon-sm') + 'Import</h3>' + wsSteps([
+          tx('افتح إعدادات مساحة العمل واختر Imports، أو استخدم خيار الاستيراد من قائمة + في Space.', 'Open your Workspace settings and choose Imports, or use the import option from a Space’s + menu.'),
+          tx('اختر المصدر: ملف CSV أو Excel، أو تطبيقاً آخر.', 'Choose the source: a CSV or Excel file, or another app.'),
+          tx('ارفع الملف أو اربط التطبيق.', 'Upload the file or connect the app.'),
+          tx('اربط كل عمود بحقل في ClickUp، واختر القائمة التي ستستقبل المهام.', 'Map each column to a ClickUp field and choose the List that will receive the tasks.'),
+          tx('ابدأ الاستيراد، ثم راجع المهام.', 'Start the import, then check the tasks.')
+        ]) + '</div><div><h3 class="ws-h3">' + icon('download', 'icon-sm') + 'Export</h3>' + wsSteps([
+          tx('افتح القائمة في عرض List أو Table.', 'Open the List in List or Table view.'),
+          tx('افتح قائمة خيارات العرض (…) واختر Export view.', 'Open the view options (…) and choose Export view.'),
+          tx('اختر CSV أو Excel والأعمدة المطلوبة.', 'Choose CSV or Excel and the columns you need.'),
+          tx('حمّل الملف. تصدير مساحة العمل كاملة من الإعدادات للمسؤولين.', 'Download the file. Exporting the whole Workspace is in settings, for admins.')
+        ]) + '</div></div>' + wsVersion() },
+      { ic: 'info', label: tx('معلومات مهمة', 'Good to know'), html: () => wsKicker(tx('قبل الاستيراد', 'Before you import'), tx('جهّز جدولك لنتيجة نظيفة', 'Prepare your sheet for a clean result')) + wsCards([
+          ['table', '#1fb6e0', tx('صف لكل مهمة', 'One row per task'), tx('صف عناوين واحد في الأعلى، وصف واحد لكل مهمة، بلا خلايا مدمجة.', 'One header row at the top and one row per task, with no merged cells.')],
+          ['calendar', '#f5a524', tx('تواريخ متسقة', 'Consistent dates'), tx('اكتب كل التواريخ بالصيغة نفسها، مثل 2026-10-04.', 'Write every date in the same format, such as 2026-10-04.')],
+          ['user', '#e44bb6', tx('المسؤولون أعضاء', 'Assignees are members'), tx('استخدم أسماء أو بريد أعضاء مساحة العمل حتى يُعيَّنوا تلقائياً.', 'Use the names or emails of Workspace members so they are assigned automatically.')],
+          ['flask', '#22c38e', tx('جرّب صغيراً', 'Start small'), tx('استورد 5 صفوف أولاً وتأكد من النتيجة قبل الملف كاملاً.', 'Import 5 rows first and check the result before the whole file.')],
+          ['lock', '#ff4d6d', tx('احمِ الملفات المصدّرة', 'Protect exported files'), tx('الملفات المصدّرة قد تحتوي بيانات حساسة، فاحفظها حسب سياسة المؤسسة.', 'Exported files can contain sensitive data, so store them according to company policy.')]
+        ]) + wsFaq([
+          [tx('هل تُستورد الحالات كما هي؟', 'Are statuses imported as they are?'), tx('تُربط بحالات القائمة. إن لم تطابق حالة موجودة، راجعها بعد الاستيراد أو أضفها للقائمة أولاً.', 'They are matched to the List’s statuses. If one doesn’t match, review it after import or add it to the List first.')],
+          [tx('ماذا يصدّر Export view؟', 'What does Export view include?'), tx('المهام والأعمدة الظاهرة في ذلك العرض، بما فيها أثر المرشّحات.', 'The tasks and columns visible in that view, including the effect of filters.')]
+        ]) }
+    ]
+  },
+
+  /* ---------------- Templates ---------------- */
+  templates: {
+    dark: '#0f7f58',
+    title: () => tx('القوالب: ابدأ جاهزاً ولا تكرر العمل', 'Templates: start ready, never repeat the setup'),
+    sub: () => tx('اختر قالباً من مركز القوالب، أو احفظ عملك كقالب وأعد استخدامه بنقرة.', 'Pick one from the Template Center, or save your own work as a template and reuse it in one click.'),
+    steps: () => [
+      { ic: 'bulb', label: tx('ما هي؟', 'What are they?'), html: () => wsKicker(tx('الفكرة', 'The idea'), tx('القالب نسخة جاهزة من هيكل عمل تعيد استخدامه متى شئت', 'A template is a ready copy of a work structure you can reuse any time')) +
+        '<div class="tp-stamp" aria-hidden="true"><span class="stamp">' + icon('template') + '</span>' + [0, 1, 2].map(i => '<span class="stamp-copy" style="--k:' + i + '"><b>' + tx('تقرير أسبوعي', 'Weekly report') + '</b><i></i><i></i><i></i></span>').join('') + '</div>' +
+        wsCards([
+          ['checklist', '#22c38e', tx('قوالب المهام', 'Task templates'), tx('مهمة بمهامها الفرعية وقائمة تحققها، مثل «طلب عميل جديد».', 'A task with its subtasks and checklist, such as “new customer request”.')],
+          ['list', '#7b68ee', tx('قوالب القوائم والمجلدات', 'List and Folder templates'), tx('هيكل كامل بالحالات والحقول والمهام، مثل «خطة فعالية».', 'A full structure with statuses, fields and tasks, such as “event plan”.')],
+          ['doc', '#e44bb6', tx('قوالب المستندات والعروض', 'Doc and view templates'), tx('محضر اجتماع جاهز، أو عرض Board بمرشّحاته.', 'A ready meeting-notes Doc, or a Board view with its filters.')]
+        ]) },
+      { ic: 'layers', label: tx('اختر قالباً', 'Choose a template'), html: () => wsKicker(tx('مركز القوالب', 'Template Center'), tx('اختر قالباً واستخدمه', 'Pick a template and use it')) + '<div class="tc" data-tc></div>', mount: panel => {
+        const box = $('[data-tc]', panel);
+        const T = () => [
+          { id: 'weekly', cat: 'rep', ic: 'chart', c: '#4f86f7', type: 'List', t: tx('تقرير أسبوعي', 'Weekly report'), st: ['todo', 'progress', 'review', 'done'], f: [tx('الإدارة', 'Department'), tx('الأسبوع', 'Week')], tasks: [tx('جمع الأرقام', 'Collect the figures'), tx('كتابة الملخص', 'Write the summary'), tx('مراجعة المدير', 'Manager review')] },
+          { id: 'intake', cat: 'ops', ic: 'inbox', c: '#1fb6e0', type: 'List + Form', t: tx('استقبال طلبات العملاء', 'Customer request intake'), st: ['todo', 'progress', 'done'], f: [tx('نوع الطلب', 'Request type'), tx('القناة', 'Channel')], tasks: [tx('فرز الطلب', 'Triage the request'), tx('تعيين مسؤول', 'Assign an owner'), tx('الرد على العميل', 'Reply to the customer')] },
+          { id: 'onboard', cat: 'hr', ic: 'users', c: '#e44bb6', type: 'List', t: tx('تهيئة موظف جديد', 'New employee onboarding'), st: ['todo', 'progress', 'done'], f: [tx('الإدارة', 'Department'), tx('تاريخ البدء', 'Start date')], tasks: [tx('تجهيز الجهاز والحساب', 'Prepare device and account'), tx('جولة تعريفية', 'Welcome tour'), tx('خطة أول 30 يوماً', 'First 30-day plan')] },
+          { id: 'event', cat: 'proj', ic: 'calendar', c: '#f5a524', type: 'Folder', t: tx('خطة فعالية', 'Event plan'), st: ['todo', 'progress', 'review', 'done'], f: [tx('الميزانية', 'Budget'), tx('المكان', 'Venue')], tasks: [tx('حجز القاعة', 'Book the venue'), tx('الدعوات', 'Invitations'), tx('التجهيزات', 'Logistics')] },
+          { id: 'audit', cat: 'ops', ic: 'checklist', c: '#22c38e', type: 'List', t: tx('متابعة ملاحظات التدقيق', 'Audit follow-up'), st: ['todo', 'progress', 'review', 'done'], f: [tx('الخطورة', 'Severity')], tasks: [tx('تحليل السبب', 'Root cause'), tx('خطة التصحيح', 'Corrective plan'), tx('إغلاق الملاحظة', 'Close the finding')] },
+          { id: 'notes', cat: 'proj', ic: 'doc', c: '#a855f7', type: 'Doc', t: tx('محضر اجتماع', 'Meeting notes'), st: [], f: [], tasks: [tx('الحضور', 'Attendees'), tx('القرارات', 'Decisions'), tx('المهام التالية', 'Next actions')] }
+        ];
+        const CATS = () => [['', tx('الكل', 'All')], ['ops', tx('العمليات', 'Operations')], ['rep', tx('التقارير', 'Reporting')], ['hr', tx('الموارد البشرية', 'HR')], ['proj', tx('المشاريع', 'Projects')]];
+        const s = UIState.get('tc') || { cat: '', sel: 'weekly', made: [] };
+        const paint = () => {
+          const list = T().filter(x => !s.cat || x.cat === s.cat); const cur = T().find(x => x.id === s.sel) || T()[0];
+          box.innerHTML = '<div class="tc-win"><div class="tc-head">' + icon('template', 'icon-sm') + '<b>Template Center</b><div class="cuq-cats">' + CATS().map(c => '<button type="button" data-tcat="' + c[0] + '" aria-pressed="' + (s.cat === c[0]) + '">' + c[1] + '</button>').join('') + '</div></div>' +
+            '<div class="tc-body"><div class="tc-grid">' + list.map(x => '<button type="button" class="tc-card' + (x.id === cur.id ? ' on' : '') + '" data-tsel="' + x.id + '" style="--tc:' + x.c + '" aria-pressed="' + (x.id === cur.id) + '"><span class="ic-tile">' + icon(x.ic) + '</span><b>' + x.t + '</b><small>' + x.type + '</small></button>').join('') + '</div>' +
+            '<div class="tc-prev" style="--tc:' + cur.c + '"><span class="ic-tile">' + icon(cur.ic) + '</span><h3>' + cur.t + '</h3><span class="chip">' + cur.type + '</span>' +
+            (cur.st.length ? '<p class="field-label">Statuses</p><p class="tc-st">' + cur.st.map(k => '<span class="mx-status st-' + k + '">' + STATUS[k].en + '</span>').join('') + '</p>' : '') +
+            (cur.f.length ? '<p class="field-label">Custom Fields</p><p>' + cur.f.map(f => '<span class="chip">' + icon('table', 'icon-sm') + f + '</span>').join(' ') + '</p>' : '') +
+            '<p class="field-label">' + (cur.type === 'Doc' ? tx('الأقسام', 'Sections') : tx('المهام', 'Tasks')) + '</p><ul>' + cur.tasks.map(t => '<li>' + icon('check', 'icon-sm') + t + '</li>').join('') + '</ul>' +
+            '<button type="button" class="btn btn-primary" data-tuse="' + cur.id + '">' + icon('plus', 'icon-sm') + 'Use template</button></div></div></div>' +
+            '<div class="tc-side"><p class="field-label">' + tx('مساحتك', 'Your Space') + ' · ' + L_OPS() + '</p>' + ['weekly-base'].concat(s.made).map((m, i) => { const x = m === 'weekly-base' ? null : T().find(y => y.id === m); return '<div class="tc-made' + (x && i === s.made.length ? ' new' : '') + '">' + icon(x ? (x.type === 'Doc' ? 'doc' : x.type === 'Folder' ? 'folder' : 'list') : 'list', 'icon-sm') + '<span>' + (x ? x.t : L_REQ()) + '</span>' + (x ? '<span class="chip">' + tx('من قالب', 'From template') + '</span>' : '') + '</div>'; }).join('') + '</div>';
+        };
+        paint();
+        const onClick = e => {
+          const c = e.target.closest('[data-tcat]'); if (c) { s.cat = c.dataset.tcat; UIState.set('tc', s); paint(); return; }
+          const sl = e.target.closest('[data-tsel]'); if (sl) { s.sel = sl.dataset.tsel; UIState.set('tc', s); paint(); const again = $('[data-tsel="' + s.sel + '"]', box); if (again) again.focus(); return; }
+          const u = e.target.closest('[data-tuse]'); if (u) { s.made.push(u.dataset.tuse); UIState.set('tc', s); paint(); Motion.confetti($('.tc-side', box), 45); toast(tx('أُنشئ من القالب في مساحتك', 'Created from the template in your Space')); }
+        };
+        panel.addEventListener('click', onClick);
+        return () => panel.removeEventListener('click', onClick);
+      } },
+      { ic: 'plus', label: tx('أنشئ قالبك', 'Create your own'), html: () => wsKicker(tx('أنشئ قالبك', 'Create your own'), tx('احفظ هذه المهمة كقالب، ثم استخدمه', 'Save this task as a template, then use it')) + '<div class="mk" data-mk></div>', mount: panel => {
+        const box = $('[data-mk]', panel);
+        const s = UIState.get('mk') || { name: tx('تقرير الأداء الشهري', 'Monthly performance report'), inc: { subs: true, check: true, fields: true, assg: false, dates: true }, share: 'ws', saved: null, used: 0 };
+        const INC = () => [['subs', tx('المهام الفرعية', 'Subtasks')], ['check', tx('قوائم التحقق', 'Checklists')], ['fields', 'Custom Fields'], ['assg', tx('المسؤولون', 'Assignees')], ['dates', tx('التواريخ (تُعاد جدولتها)', 'Dates (remapped)')]];
+        const task = inc => '<div class="mk-task"><div class="au-trow"><span class="mx-status st-todo">TO DO</span><b>' + esc(s.name) + '</b>' + (inc.assg ? DM.av('noura', 22) : '') + '</div>' +
+          '<p class="au-tmeta">' + (inc.dates ? '<span class="chip">' + icon('calendar', 'icon-sm') + tx('بعد 30 يوماً', 'In 30 days') + '</span>' : '') + (inc.fields ? '<span class="chip">' + icon('table', 'icon-sm') + tx('الإدارة: العمليات', 'Department: Operations') + '</span>' : '') + DM.pr('high') + '</p>' +
+          (inc.subs ? '<p class="mk-sub">' + icon('subtask', 'icon-sm') + tx('جمع الأرقام · إعداد الرسوم · المراجعة', 'Collect figures · Build charts · Review') + '</p>' : '') +
+          (inc.check ? '<p class="mk-sub">' + icon('checklist', 'icon-sm') + tx('قائمة تحقق: 4 بنود', 'Checklist: 4 items') + '</p>' : '') + '</div>';
+        const paint = () => {
+          box.innerHTML = '<div class="mk-grid"><div><p class="field-label">' + tx('المهمة الأصلية', 'The original task') + '</p>' + task({ subs: true, check: true, fields: true, assg: true, dates: true }) +
+            '<form class="mk-form" data-mkform><p class="field-label">' + icon('template', 'icon-sm') + ' Save as template</p>' +
+            '<div class="field"><label for="mkName">' + tx('اسم القالب', 'Template name') + '</label><input class="input" id="mkName" value="' + esc(s.name) + '"></div>' +
+            '<p class="field-label">' + tx('ما الذي يُضمَّن؟', 'What to include') + '</p><div class="mk-inc">' + INC().map(o => '<label class="check"><input type="checkbox" data-inc="' + o[0] + '"' + (s.inc[o[0]] ? ' checked' : '') + '> ' + o[1] + '</label>').join('') + '</div>' +
+            '<p class="field-label">' + tx('المشاركة', 'Sharing') + '</p><div class="seg" role="group"><button type="button" data-share="me" aria-pressed="' + (s.share === 'me') + '">' + tx('أنا فقط', 'Only me') + '</button><button type="button" data-share="ws" aria-pressed="' + (s.share === 'ws') + '">' + tx('كل مساحة العمل', 'Whole Workspace') + '</button></div>' +
+            '<button type="submit" class="btn btn-primary">' + icon('template', 'icon-sm') + tx('احفظ القالب', 'Save template') + '</button></form></div>' +
+            '<div><p class="field-label">' + tx('قوالبي', 'My templates') + '</p>' + (s.saved ? '<div class="mk-saved"><span class="ic-tile" style="--tc:#22c38e">' + icon('template') + '</span><div><b>' + esc(s.saved.name) + '</b><small>' + (s.saved.share === 'ws' ? tx('مشترك مع مساحة العمل', 'Shared with the Workspace') : tx('لك فقط', 'Only you')) + '</small></div><button type="button" class="btn btn-secondary btn-sm" data-mkuse>' + icon('plus', 'icon-sm') + 'Use</button></div>' : '<div class="empty-state">' + icon('template') + '<p>' + tx('احفظ القالب ليظهر هنا.', 'Save the template to see it here.') + '</p></div>') +
+            (s.used ? '<p class="field-label" style="margin-top:12px">' + tx('مهام جديدة من القالب', 'New tasks from the template') + '</p>' + Array.from({ length: s.used }, () => task(s.saved.inc)).join('') + '<p class="help-text">' + tx('لاحظ: ما لم تضمّنه (مثل المسؤول) لا يظهر في المهمة الجديدة.', 'Notice: what you did not include (such as the assignee) does not appear in the new task.') + '</p>' : '') + '</div></div>';
+        };
+        paint();
+        const onClick = e => {
+          const sh = e.target.closest('[data-share]'); if (sh) { s.share = sh.dataset.share; UIState.set('mk', s); $$('[data-share]', box).forEach(b => b.setAttribute('aria-pressed', b === sh)); return; }
+          if (e.target.closest('[data-mkuse]')) { s.used++; UIState.set('mk', s); paint(); Motion.confetti($('[data-mkuse]', box) || box, 40); }
+        };
+        const onChange = e => { if (e.target.dataset.inc) { s.inc[e.target.dataset.inc] = e.target.checked; UIState.set('mk', s); } };
+        const onInput = e => { if (e.target.id === 'mkName') { s.name = e.target.value; UIState.set('mk', s); } };
+        const onSubmit = e => { if (!e.target.matches('[data-mkform]')) return; e.preventDefault(); if (!s.name.trim()) { toast(tx('اكتب اسماً للقالب.', 'Give the template a name.')); Sound.play('error'); return; } s.saved = { name: s.name.trim(), inc: Object.assign({}, s.inc), share: s.share }; s.used = 0; UIState.set('mk', s); paint(); Sound.play('success'); toast(tx('حُفظ القالب', 'Template saved')); };
+        panel.addEventListener('click', onClick); panel.addEventListener('change', onChange); panel.addEventListener('input', onInput); panel.addEventListener('submit', onSubmit);
+        return () => { panel.removeEventListener('click', onClick); panel.removeEventListener('change', onChange); panel.removeEventListener('input', onInput); panel.removeEventListener('submit', onSubmit); };
+      } },
+      { ic: 'list', label: tx('في ClickUp', 'In ClickUp'), html: () => wsKicker(tx('داخل ClickUp', 'Inside ClickUp'), tx('الخطوات الحقيقية', 'The real steps')) +
+        '<div class="ie-two"><div><h3 class="ws-h3">' + icon('layers', 'icon-sm') + tx('استخدم قالباً', 'Use a template') + '</h3>' + wsSteps([
+          tx('اضغط + لإنشاء Space أو Folder أو List أو مهمة، واختر Templates، أو افتح Template Center.', 'Press + to create a Space, Folder, List or task and choose Templates, or open the Template Center.'),
+          tx('تصفّح أو ابحث، وافتح المعاينة لترى ما يتضمنه.', 'Browse or search, and open the preview to see what it includes.'),
+          tx('اضغط Use template، واختر المكان والخيارات مثل التواريخ.', 'Press Use template and choose the location and options such as dates.')
+        ]) + '</div><div><h3 class="ws-h3">' + icon('template', 'icon-sm') + tx('احفظ قالبك', 'Save your own') + '</h3>' + wsSteps([
+          tx('افتح المهمة أو القائمة أو المستند الذي تريد تكراره.', 'Open the task, List or Doc you want to reuse.'),
+          tx('افتح قائمة الخيارات (…) ثم Templates ثم Save as template.', 'Open the options menu (…), then Templates, then Save as template.'),
+          tx('سمّه، واختر ما يتضمنه، وحدد من يستطيع استخدامه.', 'Name it, choose what to include and who can use it.')
+        ]) + '</div></div>' + wsVersion() },
+      { ic: 'info', label: tx('معلومات مهمة', 'Good to know'), html: () => wsKicker(tx('قوالب ناجحة', 'Templates that work'), tx('نصائح لقوالب يحبها الفريق', 'Tips for templates your team will love')) + wsCards([
+          ['tag', '#22c38e', tx('أسماء واضحة', 'Clear names'), tx('اسم يقول متى يُستخدم، مثل «طلب عميل – شكوى».', 'A name that says when to use it, such as “Customer request – complaint”.')],
+          ['user', '#e44bb6', tx('بلا أسماء ثابتة', 'No fixed people'), tx('في القوالب العامة لا تضمّن المسؤولين، ودع كل فريق يعيّن من يناسبه.', 'In general templates, leave assignees out and let each team assign its own.')],
+          ['calendar', '#f5a524', tx('أعد جدولة التواريخ', 'Remap dates'), tx('اجعل التواريخ نسبية لتبدأ من يوم الاستخدام.', 'Make dates relative so they start from the day you use the template.')],
+          ['repeat', '#7b68ee', tx('حدّثها', 'Keep them updated'), tx('عندما يتغير الإجراء، حدّث القالب حتى لا يتكرر القديم.', 'When a process changes, update the template so the old one isn’t repeated.')]
+        ]) + wsFaq([
+          [tx('هل تغيير القالب يغيّر ما أُنشئ منه؟', 'Does changing a template change what was made from it?'), tx('لا، ما أُنشئ سابقاً يبقى كما هو. التغيير يظهر في الاستخدامات الجديدة فقط.', 'No, what was created earlier stays as it is. Changes appear only in new uses.')],
+          [tx('من يستطيع رؤية قالبي؟', 'Who can see my template?'), tx('بحسب إعداد المشاركة عند الحفظ: أنت فقط أو أعضاء مساحة العمل.', 'It depends on the sharing you chose when saving: only you, or Workspace members.')]
+        ]) }
+    ]
+  }
+};
+const PPL_IE = () => ['salim', 'maryam', 'noura', 'khalid', 'me'];
 
 ;
 /* ---- app/feedback.js ---- */
@@ -8677,6 +9578,136 @@ function copyText(text) {
 }
 
 ;
+/* ---- app/forum.js ---- */
+/* ==========================================================================
+   Community forum: questions, tips and ideas from employees, with Agree,
+   Like and comments.
+
+   Storage: this single-file website has no server, so ForumStore keeps
+   posts, reactions and comments on this device (inside Store). To make the
+   forum shared by every employee, replace ForumStore's methods with calls to
+   a shared database (for example SharePoint / Microsoft Lists or another
+   API); the page only talks to ForumStore. The page says this plainly.
+   ========================================================================== */
+
+const FORUM_SEED = () => {
+  const h = 3600e3, now = Date.now();
+  const P = (id, name, emp) => ({ name, emp, pid: id });
+  return [
+    { id: 's4', seed: true, type: 'idea', part: 'power', at: now - 2 * h, by: P('ashjan', EXAMPLE_PERSON.name, EXAMPLE_PERSON.id), likes: 17, agrees: 14,
+      text: tx('فكرة: لننشئ قالباً مشتركاً واحداً لطلبات العملاء، حتى تستخدم كل الفرق قائمة التحقق نفسها.', 'Idea: let’s create one shared template for customer requests, so every team uses the same checklist.'),
+      comments: [{ id: 's4c1', by: P('salim', PERSON.salim.name, '70231'), at: now - 1.5 * h, likes: 4, text: tx('نعم رجاءً! سأستخدمه من الغد.', 'Yes please! I’d use it from tomorrow.') }] },
+    { id: 's2', seed: true, type: 'tip', part: 'auto', at: now - 5 * h, by: P('noura', PERSON.noura.name, '70819'), likes: 21, agrees: 9,
+      text: tx('نصيحة: أضفنا أتمتة تعيّن المراجع عندما تنتقل المهمة إلى REVIEW. انتهت رسائل «من سيراجع هذا؟».', 'Tip: we added an automation that assigns the reviewer when a task moves to REVIEW. No more “who is checking this?” messages.'),
+      comments: [{ id: 's2c1', by: P('khalid', PERSON.khalid.name, '71102'), at: now - 4 * h, likes: 2, text: tx('فكرة رائعة، سننقلها لفريقنا.', 'Great idea, we’ll copy it for our team.') }] },
+    { id: 's1', seed: true, type: 'q', part: 'start', at: now - 26 * h, by: P('salim', PERSON.salim.name, '70231'), likes: 8, agrees: 12,
+      text: tx('كيف تنظّمون Inbox؟ يمتلئ عندي بالإشعارات كل صباح.', 'How do you all organise your Inbox? Mine fills up with notifications every morning.'),
+      comments: [{ id: 's1c1', by: P('noura', PERSON.noura.name, '70819'), at: now - 25 * h, likes: 6, text: tx('أمسح كل ما انتهى في آخر اليوم، وأنقل الباقي إلى Later.', 'I clear everything that’s done at the end of the day and move the rest to Later.') },
+        { id: 's1c2', by: P('maryam', PERSON.maryam.name, '70458'), at: now - 23 * h, likes: 3, text: tx('إيقاف إشعارات المتابعة للقوائم الكبيرة ساعدني كثيراً.', 'Turning off watcher notifications for big Lists helped me a lot.') }] },
+    { id: 's3', seed: true, type: 'q', part: 'views', at: now - 50 * h, by: P('khalid', PERSON.khalid.name, '71102'), likes: 5, agrees: 3,
+      text: tx('أي عرض تفضّلون لاجتماع الفريق الأسبوعي: Board أم Workload؟', 'Which view do you prefer for the weekly team meeting: Board or Workload?'),
+      comments: [{ id: 's3c1', by: P('maryam', PERSON.maryam.name, '70458'), at: now - 49 * h, likes: 5, text: tx('Board للحديث عن التقدم، وWorkload لإعادة توزيع المهام.', 'Board to talk about progress, Workload to rebalance tasks.') }] },
+    { id: 's5', seed: true, type: 'tip', part: 'tasks', at: now - 74 * h, by: P('maryam', PERSON.maryam.name, '70458'), likes: 11, agrees: 10,
+      text: tx('اكتب عنوان المهمة بفعل: «أرسل التقرير» وليس «التقرير». القوائم تصبح أوضح بكثير.', 'Write task titles that start with a verb: “Send the report”, not “Report”. Lists become so much clearer.'), comments: [] }
+  ];
+};
+
+/* The only place the forum reads or writes data. Local for now. */
+const ForumStore = {
+  shared: false,
+  all() {
+    const F = Store.forum();
+    return F.posts.concat(FORUM_SEED()).map(p => Object.assign({}, p, {
+      liked: !!F.likes[p.id], agreed: !!F.agrees[p.id],
+      likeCount: (p.likes || 0) + (F.likes[p.id] ? 1 : 0), agreeCount: (p.agrees || 0) + (F.agrees[p.id] ? 1 : 0),
+      thread: (p.comments || []).concat(F.comments[p.id] || []).map(c => Object.assign({}, c, { liked: !!F.likes[c.id], likeCount: (c.likes || 0) + (F.likes[c.id] ? 1 : 0) }))
+    }));
+  },
+  add(post) { Store.forum().posts.unshift(post); Store.saveForum(); },
+  toggle(kind, id) { const F = Store.forum(); const m = kind === 'like' ? F.likes : F.agrees; if (m[id]) delete m[id]; else m[id] = Date.now(); Store.saveForum(); return !!m[id]; },
+  comment(postId, c) { const F = Store.forum(); (F.comments[postId] = F.comments[postId] || []).push(c); Store.saveForum(); },
+  remove(id) { const F = Store.forum(); F.posts = F.posts.filter(p => p.id !== id); Store.saveForum(); }
+};
+
+function viewForum(main) {
+  const TYPES = () => [['q', tx('سؤال', 'Question'), 'help', '#4f86f7'], ['tip', tx('نصيحة', 'Tip'), 'bulb', '#22c38e'], ['idea', tx('فكرة', 'Idea'), 'sparkle', '#a855f7']];
+  const typeOf = k => TYPES().find(t => t[0] === k) || TYPES()[0];
+  const prof = Store.state.profile || {};
+  const st = UIState.get('forum') || { filter: '', sort: 'new', open: {}, type: 'q', part: 'start', text: '', name: prof.name || '', emp: prof.emp || '' };
+  const put = () => UIState.set('forum', st);
+  const hue = s => { let h = 0; for (const ch of String(s)) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
+  const av = (name, size) => '<span class="fm-av" style="--h:' + hue(name) + ';width:' + (size || 38) + 'px;height:' + (size || 38) + 'px">' + esc(String(name || '?').trim().charAt(0).toUpperCase()) + '</span>';
+  const ago = t => { const m = Math.max(1, Math.round((Date.now() - t) / 60000)); return m < 60 ? tx('قبل ' + m + ' د', m + 'm ago') : m < 1440 ? tx('قبل ' + Math.round(m / 60) + ' س', Math.round(m / 60) + 'h ago') : tx('قبل ' + Math.round(m / 1440) + ' يوم', Math.round(m / 1440) + 'd ago'); };
+  const who = b => '<b><bdi>' + esc(b.name) + '</bdi></b>' + (b.emp ? '<span class="fm-id num">' + tx('الرقم الوظيفي ', 'ID ') + '<bdi dir="ltr">' + esc(b.emp) + '</bdi></span>' : '');
+
+  main.innerHTML = '<div class="page page-narrow forum">' +
+    '<header class="fm-hero"><div><span class="hero-kicker">' + icon('users', 'icon-sm') + tx('مجتمع موظفي Omantel', 'Omantel employee community') + '</span><h1 tabindex="-1">' + tx('منتدى ClickUp', 'ClickUp Forum') + '</h1><p>' + tx('اسأل، وشارك نصيحة أو فكرة. وافق على ما يفيدك، وأعجب به، وعلّق لتساعد زملاءك.', 'Ask, share a tip or an idea. Agree with what helps you, like it and comment to help colleagues.') + '</p></div>' + mascot('mascot-md') + '</header>' +
+    (ForumStore.shared ? '' : '<p class="fm-note">' + icon('info', 'icon-sm') + '<span>' + tx('نسخة تجريبية: المنشورات والإعجابات والتعليقات التي تضيفها تُحفظ على هذا الجهاز. لتصبح مرئية لكل الموظفين يلزم ربط المنتدى بقاعدة بيانات مشتركة (مثل SharePoint أو Microsoft Lists)، والصفحة جاهزة لذلك.', 'Preview: the posts, likes and comments you add are saved on this device. To make them visible to every employee, the forum needs to be connected to a shared database (such as SharePoint or Microsoft Lists); the page is ready for it.') + '</span></p>') +
+    '<form class="panel fm-compose" data-compose novalidate><div class="fm-row">' + av(st.name || EXAMPLE_PERSON.name, 42) +
+    '<textarea class="input" id="fmText" rows="3" placeholder="' + tx('اكتب سؤالك أو نصيحتك أو فكرتك…', 'Write your question, tip or idea…') + '" aria-label="' + tx('نص المنشور', 'Post text') + '">' + esc(st.text) + '</textarea></div>' +
+    '<div class="fm-opts"><div class="fm-types" role="radiogroup" aria-label="' + tx('نوع المنشور', 'Post type') + '">' + TYPES().map(t => '<button type="button" role="radio" data-ptype="' + t[0] + '" aria-checked="' + (st.type === t[0]) + '" style="--tc:' + t[3] + '">' + icon(t[2], 'icon-sm') + t[1] + '</button>').join('') + '</div>' +
+    '<label class="fm-topic">' + tx('الموضوع', 'Topic') + '<select class="select select-sm" id="fmPart">' + TOUR_PARTS.map(p => '<option value="' + p.id + '"' + (p.id === st.part ? ' selected' : '') + '>' + tp(TOUR_SHORT[p.id]) + '</option>').join('') + '</select></label></div>' +
+    '<div class="fm-opts"><input class="input" id="fmName" value="' + esc(st.name) + '" placeholder="' + tx('الاسم، مثال: ', 'Name, e.g. ') + EXAMPLE_PERSON.name + '" aria-label="' + tx('الاسم', 'Name') + '"><input class="input num" id="fmEmp" inputmode="numeric" value="' + esc(st.emp) + '" placeholder="' + tx('الرقم الوظيفي، مثال: ', 'Employee ID, e.g. ') + EXAMPLE_PERSON.id + '" aria-label="' + tx('الرقم الوظيفي', 'Employee ID') + '">' +
+    '<button type="submit" class="btn btn-primary" data-post>' + icon('send', 'icon-sm') + tx('انشر', 'Post') + '</button></div><p class="rq-err" id="fmErr" hidden></p></form>' +
+    '<div class="fm-bar"><div class="cuq-cats" role="group" aria-label="' + tx('تصفية', 'Filter') + '"><button type="button" data-ffilter="" aria-pressed="' + !st.filter + '">' + tx('الكل', 'All') + '</button>' + TYPES().map(t => '<button type="button" data-ffilter="' + t[0] + '" aria-pressed="' + (st.filter === t[0]) + '" style="--mc:' + t[3] + ';--md:' + t[3] + '">' + icon(t[2], 'icon-sm') + t[1] + '</button>').join('') + '</div>' +
+    '<label class="fm-sort">' + tx('الترتيب', 'Sort') + '<select class="select select-sm" id="fmSort"><option value="new"' + (st.sort === 'new' ? ' selected' : '') + '>' + tx('الأحدث', 'Newest') + '</option><option value="top"' + (st.sort === 'top' ? ' selected' : '') + '>' + tx('الأكثر إعجاباً', 'Most liked') + '</option><option value="talk"' + (st.sort === 'talk' ? ' selected' : '') + '>' + tx('الأكثر نقاشاً', 'Most discussed') + '</option></select></label></div>' +
+    '<div class="fm-list" data-posts aria-live="polite"></div></div>';
+
+  const paint = () => {
+    let list = ForumStore.all().filter(p => !st.filter || p.type === st.filter);
+    list.sort((a, b) => st.sort === 'top' ? (b.likeCount + b.agreeCount) - (a.likeCount + a.agreeCount) : st.sort === 'talk' ? b.thread.length - a.thread.length : b.at - a.at);
+    $('[data-posts]', main).innerHTML = list.length ? list.map(p => { const T = typeOf(p.type); const part = TOUR_PART[p.part]; const open = !!st.open[p.id];
+      return '<article class="fm-post' + (p.seed ? '' : ' mine') + '" data-pid="' + p.id + '" style="--tc:' + T[3] + '"><header>' + av(p.by.name) + '<div class="fm-who">' + who(p.by) + '<span class="fm-time">' + ago(p.at) + '</span></div><span class="fm-type">' + icon(T[2], 'icon-sm') + T[1] + '</span></header>' +
+        '<p class="fm-text">' + esc(p.text) + '</p>' + (part ? '<a class="chip fm-part" href="#/tour/' + part.id + '">' + icon(part.icon, 'icon-sm') + tp(TOUR_SHORT[part.id]) + '</a>' : '') +
+        '<div class="fm-actions"><button type="button" class="fm-btn agree" data-agree="' + p.id + '" aria-pressed="' + p.agreed + '">' + icon('thumb', 'icon-sm') + '<span>' + tx('أوافق', 'Agree') + '</span><b class="num">' + p.agreeCount + '</b></button>' +
+        '<button type="button" class="fm-btn like" data-like="' + p.id + '" aria-pressed="' + p.liked + '">' + icon('heart', 'icon-sm') + '<span>' + tx('إعجاب', 'Like') + '</span><b class="num">' + p.likeCount + '</b></button>' +
+        '<button type="button" class="fm-btn" data-thread="' + p.id + '" aria-expanded="' + open + '">' + icon('message', 'icon-sm') + '<span>' + tx('تعليقات', 'Comments') + '</span><b class="num">' + p.thread.length + '</b></button>' +
+        (p.seed ? '' : '<button type="button" class="icon-btn fm-del" data-fdel="' + p.id + '" aria-label="' + tx('احذف منشوري', 'Delete my post') + '">' + icon('trash', 'icon-sm') + '</button>') + '</div>' +
+        (open ? '<div class="fm-thread">' + p.thread.map(c => '<div class="fm-c">' + av(c.by.name, 30) + '<div><p class="fm-who">' + who(c.by) + '<span class="fm-time">' + ago(c.at) + '</span></p><p>' + esc(c.text) + '</p><button type="button" class="fm-mini like" data-like="' + c.id + '" aria-pressed="' + c.liked + '">' + icon('heart', 'icon-sm') + '<b class="num">' + c.likeCount + '</b><span class="visually-hidden">' + tx('إعجاب', 'Like') + '</span></button></div></div>').join('') +
+          '<form class="fm-reply" data-reply="' + p.id + '">' + av(st.name || '?', 30) + '<input class="input" placeholder="' + tx('اكتب تعليقاً…', 'Write a comment…') + '" aria-label="' + tx('تعليقك', 'Your comment') + '"><button type="submit" class="icon-btn" aria-label="' + tx('أرسل التعليق', 'Send comment') + '">' + icon('send', 'icon-sm') + '</button></form></div>' : '') + '</article>'; }).join('')
+      : '<div class="panel empty-state">' + mascot() + '<p>' + tx('لا توجد منشورات هنا بعد. كن أول من يكتب!', 'Nothing here yet. Be the first to post!') + '</p></div>';
+  };
+  paint();
+  const burst = btn => { if (prefersReducedMotion() || !btn) return; btn.classList.remove('burst'); void btn.offsetWidth; btn.classList.add('burst'); };
+  const needName = () => { if (!st.name.trim()) { const e = $('#fmErr', main); e.hidden = false; e.textContent = tx('اكتب اسمك أولاً في نموذج النشر.', 'Write your name in the post form first.'); $('#fmName', main).focus(); Sound.play('error'); return true; } return false; };
+
+  main.addEventListener('input', e => {
+    if (e.target.id === 'fmText') st.text = e.target.value; if (e.target.id === 'fmName') st.name = e.target.value; if (e.target.id === 'fmEmp') st.emp = e.target.value; put();
+  });
+  main.addEventListener('change', e => { if (e.target.id === 'fmPart') { st.part = e.target.value; put(); } if (e.target.id === 'fmSort') { st.sort = e.target.value; put(); paint(); } });
+  main.addEventListener('click', e => {
+    const t = e.target.closest('[data-ptype]'); if (t) { st.type = t.dataset.ptype; put(); $$('[data-ptype]', main).forEach(b => b.setAttribute('aria-checked', b === t)); return; }
+    const f = e.target.closest('[data-ffilter]'); if (f) { st.filter = f.dataset.ffilter; put(); $$('[data-ffilter]', main).forEach(b => b.setAttribute('aria-pressed', b === f)); paint(); return; }
+    const lk = e.target.closest('[data-like]'); if (lk) { const on = ForumStore.toggle('like', lk.dataset.like); Sound.play(on ? 'like' : 'tap'); paint(); const again = $('[data-like="' + lk.dataset.like + '"]', main); if (again) { again.focus(); if (on) burst(again); } return; }
+    const ag = e.target.closest('[data-agree]'); if (ag) { const on = ForumStore.toggle('agree', ag.dataset.agree); Sound.play(on ? 'pop' : 'tap'); paint(); const again = $('[data-agree="' + ag.dataset.agree + '"]', main); if (again) { again.focus(); if (on) burst(again); } return; }
+    const th = e.target.closest('[data-thread]'); if (th) { st.open[th.dataset.thread] = !st.open[th.dataset.thread]; put(); paint(); const inp = $('[data-reply="' + th.dataset.thread + '"] input', main); if (inp) inp.focus(); else { const again = $('[data-thread="' + th.dataset.thread + '"]', main); if (again) again.focus(); } return; }
+    const dl = e.target.closest('[data-fdel]'); if (dl) confirmDialog(tx('حذف منشورك؟', 'Delete your post?'), tx('سيُحذف من هذا الجهاز.', 'It will be removed from this device.'), tx('نعم، احذف', 'Yes, delete')).then(ok => { if (ok) { ForumStore.remove(dl.dataset.fdel); paint(); } });
+  });
+  main.addEventListener('submit', e => {
+    e.preventDefault();
+    const rep = e.target.closest('[data-reply]');
+    if (rep) {
+      const inp = $('input', rep); const text = inp.value.trim(); if (!text) return; if (needName()) return;
+      ForumStore.comment(rep.dataset.reply, { id: uid('c'), by: { name: st.name.trim(), emp: st.emp.trim() }, at: Date.now(), likes: 0, text });
+      Store.setProfile({ name: st.name.trim(), emp: st.emp.trim() }); Sound.play('success'); paint();
+      const again = $('[data-reply="' + rep.dataset.reply + '"] input', main); if (again) again.focus(); return;
+    }
+    if (!e.target.matches('[data-compose]')) return;
+    const err = $('#fmErr', main); let msg = '';
+    if (st.text.trim().length < 5) msg = tx('اكتب منشوراً من 5 أحرف على الأقل.', 'Write at least 5 characters.');
+    else if (!st.name.trim()) msg = tx('اكتب اسمك.', 'Please write your name.');
+    else if (st.emp && !/^\d{3,10}$/.test(st.emp.trim())) msg = tx('الرقم الوظيفي أرقام فقط، مثل ', 'The employee ID is digits only, such as ') + EXAMPLE_PERSON.id + '.';
+    err.hidden = !msg; err.textContent = msg;
+    if (msg) { Sound.play('error'); return; }
+    ForumStore.add({ id: uid('p'), type: st.type, part: st.part, at: Date.now(), by: { name: st.name.trim(), emp: st.emp.trim() }, text: st.text.trim(), likes: 0, agrees: 0, comments: [] });
+    Store.setProfile({ name: st.name.trim(), emp: st.emp.trim() });
+    st.text = ''; st.filter = ''; st.sort = 'new'; put(); $('#fmText', main).value = ''; $('#fmSort', main).value = 'new'; $$('[data-ffilter]', main).forEach(b => b.setAttribute('aria-pressed', !b.dataset.ffilter));
+    paint(); Motion.confetti($('[data-post]', main), 50); toast(tx('نُشر منشورك', 'Your post is published'));
+    const first = $('.fm-post', main); if (first && !prefersReducedMotion()) first.animate([{ opacity: 0, transform: 'translateY(-12px) scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+  });
+}
+
+;
 /* ---- app/main.js ---- */
 /* ==========================================================================
    Boot, router, language selection, navigation drawer and focus mode, logos.
@@ -8685,6 +9716,8 @@ function copyText(text) {
 const ROUTES = {
   home: { view: viewHome, title: () => tx('الرئيسية', 'Home') },
   tour: { view: viewTour, title: () => tx('جولة ClickUp', 'ClickUp tour') },
+  forum: { view: viewForum, title: () => tx('منتدى ClickUp', 'ClickUp Forum') },
+  workshops: { view: viewWorkshops, title: () => tx('الورش التفاعلية', 'Workshops') },
   automations: { view: viewAutomations, title: () => tx('ورشة الأتمتة', 'Automations workshop') },
   guide: { view: viewGuide, title: () => tx('كيف تستخدم هذا الموقع', 'How to use this website') },
   ideas: { view: m => viewRequests(m, 'ideas'), title: () => tx('اقترح ميزة', 'Suggest a feature') },
@@ -8727,10 +9760,10 @@ function renderRoute(keepScroll, langSwitch) {
   try { currentCleanup = def.view(host, route.params) || null; }
   catch (e) { console.error(e); host.innerHTML = '<div class="page page-narrow"><div class="panel empty-state">' + icon('alert') + '<h1 style="font-size:1.2rem">' + tx('حدث خطأ أثناء عرض هذه الصفحة', 'Something went wrong while showing this page') + '</h1><p>' + tx('أعد تحميل الصفحة. تقدّمك محفوظ.', 'Reload the page. Your progress is saved.') + '</p><a class="btn btn-primary" href="#/home">' + tx('الرئيسية', 'Home') + '</a></div></div>'; }
   const pageTitle = route.name === 'lesson' && LESSON[route.params[0]] ? LESSON[route.params[0]].title
-    : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name) : def.title();
+    : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name)
+    : route.name === 'workshops' && WS_DEF[route.params[0]] ? WS_DEF[route.params[0]].title() : def.title();
   document.title = pageTitle + site;
   renderSidebar(route);
-  renderTopProgress();
   /* Blocks rise into view on a fresh visit; a language switch or in-place
      refresh keeps everything where the learner was. */
   if (keepScroll || langSwitch) Motion.settle(host); else Motion.reveal(host);
@@ -8750,6 +9783,7 @@ function closeNav() { const sb = $('#sidebar'); if (!sb.classList.contains('open
 /* ---------- Static chrome strings (template) ---------- */
 const CHROME = {
   skip: ['تخطَّ إلى المحتوى', 'Skip to content'],
+  openCU: ['افتح ClickUp', 'Open ClickUp'],
   navOpen: ['فتح قائمة التنقل', 'Open navigation menu'],
   brand: ['Omantel | ClickUp Learning Hub، الصفحة الرئيسية', 'Omantel | ClickUp Learning Hub, home'],
   logoNeeded: ['شعار رسمي مطلوب', 'Official logo needed'],
@@ -8770,6 +9804,12 @@ function applyChrome() {
   const md = $('meta[name="description"]'); if (md) md.setAttribute('content', CHROME.metaDesc[k]);
   $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
   updateNavBtn();
+  updateSoundBtn();
+}
+function updateSoundBtn() {
+  const b = $('#soundToggle'); if (!b) return;
+  const label = Sound.on ? tx('إيقاف الأصوات', 'Turn sounds off') : tx('تشغيل الأصوات', 'Turn sounds on');
+  b.innerHTML = icon(Sound.on ? 'volume' : 'volume-off'); b.setAttribute('aria-pressed', String(Sound.on)); b.setAttribute('aria-label', label); b.title = label;
 }
 
 /* ---------- Focus mode: hide the sidebar on wide screens ----------
@@ -8830,7 +9870,7 @@ function setLanguage(lang, opts) {
   applyChrome();
   // Hold the page height during the swap so the browser does not clamp the scroll position.
   main.style.minHeight = main.offsetHeight + 'px';
-  if (currentRoute) renderRoute(true, true);
+  if (currentRoute) Sound.quiet(() => renderRoute(true, true));
   if (navOpen) { $('#sidebar').classList.add('open'); $('#scrim').hidden = false; }
 
   Object.keys(drafts).forEach(id => {
@@ -8929,6 +9969,10 @@ function boot() {
     if (wideScreen()) { setNavHidden(!document.documentElement.classList.contains('nav-hidden')); return; }
     if ($('#sidebar').classList.contains('open')) closeNav(); else openNav();
   });
+  $('#soundToggle').addEventListener('click', () => { Sound.set(!Sound.on); updateSoundBtn(); toast(Sound.on ? tx('الأصوات مفعّلة', 'Sounds on') : tx('الأصوات متوقفة', 'Sounds off')); });
+  $$('[data-cuicon]').forEach(img => { const l = $('link[rel="icon"]'); if (l) img.src = l.href; });
+  // A soft tap for every press; specific moments (correct, celebrate, step) add their own sound.
+  document.addEventListener('click', e => { if (e.target.closest('button:not(:disabled), a[href], summary, [role="switch"]') && !e.target.closest('#soundToggle')) Sound.play('tap'); }, true);
   $('#scrim').addEventListener('click', closeNav);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#sidebar').classList.contains('open')) { closeNav(); $('#navToggle').focus(); } });
   $('#sidebar').addEventListener('click', e => { if (e.target.closest('a')) closeNav(); });
@@ -8942,7 +9986,7 @@ function boot() {
   window.addEventListener('hashchange', () => { routedByUser = true; renderRoute(); });
   Store.on(kind => {
     if (!currentRoute) return;
-    renderSidebar(currentRoute); renderTopProgress();
+    renderSidebar(currentRoute);
     if (kind === 'reset' && currentRoute.name !== 'progress') rerender();
     if (kind === 'storage') toast(tx('تعذّر الحفظ على هذا الجهاز. سيعمل التقدم لهذه الجلسة فقط.', 'Saving failed on this device. Progress will work for this session only.'));
   });

@@ -101,7 +101,7 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   await p.click('[data-tgo="1"]'); await p.waitForTimeout(300);
   ok(await p.evaluate(() => JSON.parse(localStorage.getItem('omantel-clickup-hub:v1')).tour.tasks > 0), 'tour part saved as explored');
   await p.evaluate(() => { location.hash = '#/questions'; }); await p.waitForTimeout(300);
-  await p.fill('#cuqQ', 'dashboard'); await p.waitForTimeout(300);
+  await p.fill('#cuqQ', 'report'); await p.waitForTimeout(300);
   ok((await p.$$('details.cuq')).length >= 2, 'questions search finds matches');
   // 4c. Focus mode: hide the sidebar, remembered after reload
   await p.click('#navToggle'); await p.waitForTimeout(400);
@@ -138,6 +138,38 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   ok((await p.textContent('.rq-card .rq-id')).includes('REQ-0001'), 'question saved as REQ-0001');
   await p.evaluate(() => { location.hash = '#/ideas'; }); await p.waitForTimeout(300);
   ok((await p.inputValue('#rqName')) === 'Ashjan Al Sinani' && (await p.inputValue('#rqEmp')) === '71067', 'name and ID remembered for the next form');
+
+  // 4f. Watchable answers, forum, workshops, header
+  ok(!(await p.$('#topProgress')), 'lesson counter removed from the header');
+  ok((await p.getAttribute('#openClickUp', 'href')).startsWith('https://app.clickup.com'), 'Open ClickUp links to the ClickUp app');
+  await p.click('#soundToggle'); await p.waitForTimeout(100);
+  ok((await p.getAttribute('#soundToggle', 'aria-pressed')) === 'false' && await p.evaluate(() => localStorage.getItem('omantel-clickup-hub:sound') === 'off'), 'sounds can be turned off and it is remembered');
+  await p.click('#soundToggle');
+  await p.evaluate(() => { location.hash = '#/questions'; }); await p.waitForTimeout(300);
+  await p.click('[data-fid="assign"] summary'); await p.waitForTimeout(400);
+  ok(await p.isVisible('[data-fid="assign"] .demo-stage'), 'opening a question plays its animated walkthrough');
+  await p.click('[data-fid="notifs"] summary'); await p.waitForTimeout(300);
+  ok(!(await p.$eval('[data-fid="assign"]', d => d.open)), 'one answer open at a time');
+  await p.evaluate(() => { location.hash = '#/forum'; }); await p.waitForTimeout(300);
+  const before = await p.$eval('[data-like="s2"] b', b => +b.textContent);
+  await p.click('[data-like="s2"]'); await p.waitForTimeout(100);
+  ok((await p.$eval('[data-like="s2"] b', b => +b.textContent)) === before + 1, 'like adds one');
+  await p.click('[data-agree="s1"]'); await p.waitForTimeout(100);
+  ok((await p.getAttribute('[data-agree="s1"]', 'aria-pressed')) === 'true', 'agree toggles on');
+  await p.fill('#fmText', 'Where do I find recurring task settings?'); await p.click('[data-post]'); await p.waitForTimeout(300);
+  ok((await p.textContent('.fm-post .fm-text')).includes('recurring'), 'new post appears at the top');
+  await p.click('[data-thread="s3"]'); await p.fill('[data-reply="s3"] input', 'Board works best for us.'); await p.press('[data-reply="s3"] input', 'Enter'); await p.waitForTimeout(200);
+  ok((await p.textContent('[data-pid="s3"] .fm-thread')).includes('Board works best'), 'comment added to the thread');
+  await p.evaluate(() => { location.hash = '#/workshops/import'; }); await p.waitForTimeout(300);
+  await p.click('[data-wstep="1"]'); await p.click('[data-sample]'); await p.click('[data-doimport]'); await p.waitForTimeout(200);
+  ok((await p.$$('.ie-trow')).length === 5, 'sample sheet imports 5 tasks');
+  await p.click('[data-wstep="2"]'); await p.waitForTimeout(200);
+  const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-doexport]')]);
+  ok(dl.suggestedFilename() === 'clickup-export.csv', 'export downloads a CSV file');
+  await p.evaluate(() => { location.hash = '#/workshops/ai'; }); await p.waitForTimeout(300);
+  await p.click('[data-wstep="1"]'); await p.click('[data-ask="subs"]'); await p.waitForTimeout(2500);
+  await p.click('[data-addsubs]'); await p.waitForTimeout(200);
+  ok((await p.$$('.ai-sub')).length === 4, 'AI suggests subtasks that can be added');
   await ctx.close();
 
   // 5. Storage blocked

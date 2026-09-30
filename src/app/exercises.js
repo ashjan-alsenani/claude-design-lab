@@ -6,6 +6,7 @@
    ========================================================================== */
 
 function feedbackHTML(kind, html) {
+  if (kind === 'ok') Sound.play('success'); else if (kind === 'bad') Sound.play('error');
   const ic = kind === 'ok' ? 'check-circle' : kind === 'bad' ? 'x-circle' : 'info';
   return '<div class="feedback ' + kind + '" role="status">' + icon(ic) + '<div>' + html + '</div></div>';
 }

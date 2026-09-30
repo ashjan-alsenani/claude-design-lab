@@ -1,0 +1,88 @@
+/* ==========================================================================
+   WATCHABLE ANSWERS AND THE FORUM
+   ========================================================================== */
+.h-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.mascot-md { width: 110px; flex: none; }
+
+/* Questions page */
+.cuq-hero { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; border-radius: 26px; color: #fff; background: linear-gradient(125deg, #14b8a6, #1fb6e0 45%, #7b68ee); box-shadow: 0 26px 50px -28px #1fb6e0; }
+.cuq-hero h1 { color: #fff; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem); }
+.cuq-hero p { color: rgb(255 255 255 / .92); max-width: 56ch; margin-top: 6px; }
+.cuq-hero .mascot { width: 100px; flex: none; }
+.cuq-watch { display: flex; gap: 6px; align-items: center; font-weight: 700; color: var(--md, var(--accent-ink)); }
+.cuq-demo { min-height: 60px; }
+.cuq-demo.demo { margin: 0; }
+.cuq-visual { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; text-decoration: none; color: var(--ink); background: linear-gradient(135deg, color-mix(in srgb, var(--mc, #7b68ee) 10%, #fff), #fff); border: 1px solid color-mix(in srgb, var(--mc, #7b68ee) 25%, var(--line)); transition: transform 220ms var(--ease-out), box-shadow 220ms ease; }
+.cuq-visual .ic-tile { width: 54px; height: 54px; border-radius: 16px; flex: none; animation: bubble-idle 4s ease-in-out infinite; }
+.cuq-visual .ic-tile .icon { width: 26px; height: 26px; }
+.cuq-visual > span:nth-child(2) { display: grid; flex: 1; }
+.cuq-visual small { color: var(--ink-2); }
+@media (hover: hover) and (pointer: fine) { .cuq-visual:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); } }
+.cuq-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.cuq-show.alt { background: var(--surface-2, #f5f3fb); color: var(--ink-2); }
+.cuq summary { transition: background-color 150ms ease; border-radius: 14px; }
+@media (hover: hover) and (pointer: fine) { .cuq summary:hover { background: color-mix(in srgb, var(--mc, #7b68ee) 6%, #fff); } }
+.cuq[open] summary > .icon { animation: icon-wiggle 600ms var(--ease-out); }
+
+/* Forum */
+.forum { gap: 18px; }
+.fm-hero { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 24px 28px; border-radius: 26px; color: #fff; background: linear-gradient(125deg, #ff7a45, #ff02f0 55%, #8930fd); box-shadow: 0 26px 50px -28px #ff02f0; }
+.fm-hero h1 { color: #fff; font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.3rem); margin: 8px 0 4px; }
+.fm-hero p { color: rgb(255 255 255 / .92); max-width: 54ch; }
+.fm-note { display: flex; gap: 8px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: #fff8e6; border: 1px solid #f4e3a3; color: #6b4e00; font-size: .86rem; line-height: 1.6; }
+.fm-note .icon { flex: none; margin-top: 3px; }
+.fm-compose { display: grid; gap: 12px; padding: 16px; border-radius: 22px; }
+.fm-row { display: flex; gap: 12px; align-items: flex-start; }
+.fm-row textarea { flex: 1; resize: vertical; min-height: 84px; }
+.fm-opts { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.fm-opts .input { flex: 1 1 160px; }
+.fm-opts .btn { margin-inline-start: auto; }
+.fm-types { display: flex; gap: 6px; flex-wrap: wrap; }
+.fm-types button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font: 600 .84rem/1 var(--font); color: var(--ink-2); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.fm-types button .icon { color: var(--tc); }
+.fm-types button[aria-checked="true"] { background: var(--tc); border-color: var(--tc); color: #fff; }
+.fm-types button[aria-checked="true"] .icon { color: #fff; }
+.fm-types button:active { transform: scale(0.96); }
+.fm-topic, .fm-sort { display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; font-weight: 600; color: var(--ink-3); }
+.fm-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.fm-list { display: grid; gap: 14px; }
+.fm-post { display: grid; gap: 10px; padding: 16px 18px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--tc); box-shadow: var(--shadow-1); }
+.fm-post.mine { background: linear-gradient(180deg, #fbf8ff, #fff); }
+.fm-post > header { display: flex; align-items: center; gap: 12px; }
+.fm-av { display: grid; place-items: center; flex: none; border-radius: 50%; color: #fff; font-weight: 800; background: linear-gradient(135deg, hsl(var(--h) 80% 62%), hsl(calc(var(--h) + 40) 75% 50%)); box-shadow: inset 0 -2px 0 rgb(0 0 0 / .12); }
+.fm-who { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.fm-id { font-size: .76rem; color: var(--ink-3); }
+.fm-time { font-size: .76rem; color: var(--ink-3); }
+.fm-type { margin-inline-start: auto; display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; font-size: .76rem; font-weight: 700; color: #fff; background: var(--tc); }
+.fm-text { font-size: 1rem; line-height: 1.7; white-space: pre-line; }
+.fm-part { justify-self: start; text-decoration: none; }
+.fm-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding-top: 8px; border-top: 1px solid var(--line); }
+.fm-btn { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; border: 1px solid transparent; background: transparent; font: 600 .84rem/1 var(--font); color: var(--ink-2); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+.fm-btn:hover { background: var(--surface-2, #f5f3fb); }
+.fm-btn:active { transform: scale(0.95); }
+.fm-btn b { font-weight: 800; }
+.fm-btn.agree[aria-pressed="true"] { background: #e8f0ff; color: #2659c7; border-color: #c9dafc; }
+.fm-btn.like[aria-pressed="true"], .fm-mini.like[aria-pressed="true"] { background: #ffe8f0; color: #d6245f; border-color: #ffc2d6; }
+.fm-btn.like[aria-pressed="true"] .icon, .fm-mini.like[aria-pressed="true"] .icon { fill: currentColor; }
+.fm-del { margin-inline-start: auto; }
+.burst .icon { animation: burst 520ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.burst::after { content: ""; position: absolute; inset-inline-start: 10px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; border: 2px solid currentColor; animation: burst-ring 520ms ease-out forwards; pointer-events: none; }
+@keyframes burst { 0% { transform: scale(1); } 40% { transform: scale(1.5) rotate(-12deg); } 100% { transform: scale(1); } }
+@keyframes burst-ring { from { transform: scale(.4); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+.fm-thread { display: grid; gap: 10px; padding: 12px; border-radius: 16px; background: var(--surface-2, #f7f6fb); animation: tip-in 240ms var(--ease-out); }
+.fm-c { display: flex; gap: 10px; align-items: flex-start; }
+.fm-c > div { display: grid; gap: 4px; flex: 1; padding: 10px 12px; border-radius: 14px; background: #fff; border: 1px solid var(--line); }
+.fm-mini { position: relative; justify-self: start; display: inline-flex; gap: 4px; align-items: center; padding: 3px 8px; border-radius: 999px; border: 1px solid transparent; background: transparent; font: 700 .76rem/1 var(--font); color: var(--ink-3); cursor: pointer; }
+.fm-reply { display: flex; gap: 8px; align-items: center; }
+.fm-reply .input { flex: 1; }
+.fm-reply .icon-btn { background: linear-gradient(135deg, #ff7a45, #ff02f0); color: #fff; }
+html[dir="rtl"] .fm-reply .icon-btn svg, html[dir="rtl"] .fm-compose [data-post] svg, html[dir="rtl"] .ai-input .icon-btn svg { transform: scaleX(-1); }
+@media (max-width: 640px) {
+  .fm-hero, .cuq-hero { padding: 20px; }
+  .fm-hero .mascot, .cuq-hero .mascot { width: 72px; }
+  .fm-btn span { display: none; }
+  .fm-opts .btn { flex: 1 1 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .burst .icon, .burst::after, .fm-thread, .cuq-visual .ic-tile, .cuq[open] summary > .icon { animation: none !important; }
+}

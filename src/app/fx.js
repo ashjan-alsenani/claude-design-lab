@@ -77,6 +77,7 @@ const Motion = (() => {
   /* Confetti in ClickUp colours, from a point (or the top centre). */
   const COLORS = ['#ff02f0', '#ff7a45', '#ffc800', '#8930fd', '#49ccf9', '#22c38e'];
   function confetti(origin, amount) {
+    Sound.play((amount || 60) >= 80 ? 'party' : 'success');
     if (reduce()) return;
     const layer = document.createElement('div'); layer.className = 'confetti'; layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
@@ -120,4 +121,43 @@ function achievements() {
     { id: 'explorer', icon: 'compass', c: '#ff02f0', t: tx('مستكشف ClickUp', 'ClickUp explorer'), d: tx('اكتشف أجزاء الجولة الاثني عشر', 'Explore all 12 parts of the tour'), got: TOUR_PARTS.every(p => Store.isToured(p.id)) },
     { id: 'final', icon: 'trophy', c: '#ffb800', t: tx('خبير ClickUp', 'ClickUp pro'), d: tx('اجتز التقييم النهائي', 'Pass the final assessment'), got: !!finalPass }
   ];
+}
+
+/* Clicky, the friendly helper robot in ClickUp colours. Pure SVG, so it
+   scales crisply and speaks no particular language. */
+function mascot(cls) {
+  const g = uid('mg');
+  return '<span class="mascot' + (cls ? ' ' + cls : '') + '" aria-hidden="true"><svg viewBox="0 0 120 132">' +
+    '<defs><linearGradient id="' + g + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff02f0"/><stop offset=".55" stop-color="#8930fd"/><stop offset="1" stop-color="#49ccf9"/></linearGradient></defs>' +
+    '<ellipse class="m-shadow" cx="60" cy="128" rx="30" ry="4" fill="#1b1340" opacity=".15"/>' +
+    '<line x1="60" y1="24" x2="60" y2="10" stroke="#8930fd" stroke-width="4" stroke-linecap="round"/><circle class="m-bulb" cx="60" cy="9" r="6.5" fill="#ffc800"/>' +
+    '<rect x="16" y="22" width="88" height="68" rx="26" fill="url(#' + g + ')"/><rect x="26" y="33" width="68" height="44" rx="18" fill="#fff"/>' +
+    '<g class="m-eyes"><circle cx="46" cy="53" r="6.5" fill="#1b1340"/><circle cx="74" cy="53" r="6.5" fill="#1b1340"/><circle cx="48" cy="51" r="2" fill="#fff"/><circle cx="76" cy="51" r="2" fill="#fff"/></g>' +
+    '<path d="M50 66q10 7.5 20 0" stroke="#1b1340" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
+    '<circle cx="35" cy="65" r="4.5" fill="#ff9ad8" opacity=".75"/><circle cx="85" cy="65" r="4.5" fill="#ff9ad8" opacity=".75"/>' +
+    '<rect x="36" y="93" width="48" height="30" rx="13" fill="url(#' + g + ')"/><path d="M50 112l10-7 10 7" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<rect x="14" y="97" width="24" height="10" rx="5" fill="#a855f7"/>' +
+    '<g class="m-arm"><rect x="84" y="78" width="10" height="28" rx="5" fill="#a855f7"/><circle cx="89" cy="78" r="6" fill="#ffc800"/></g>' +
+    '</svg></span>';
+}
+const CLICKY_TIPS = () => [
+  tx('مرحباً! أنا Clicky. اضغطني لأعطيك نصيحة عن ClickUp.', 'Hi! I’m Clicky. Tap me for a ClickUp tip.'),
+  tx('ابدأ يومك من Home: المتأخر أولاً، ثم مهام اليوم.', 'Start your day from Home: overdue first, then today’s tasks.'),
+  tx('اكتب @ واسم زميلك في التعليق بدلاً من إرسال بريد.', 'Type @ and a colleague’s name in a comment instead of sending an email.'),
+  tx('Ctrl+K يفتح البحث السريع في ClickUp.', 'Ctrl+K opens quick search in ClickUp.'),
+  tx('مهمة واحدة = مسؤول واحد + موعد واضح.', 'One task = one owner + a clear due date.'),
+  tx('كرّرت الخطوات نفسها أكثر من مرة؟ جرّب الأتمتة!', 'Doing the same steps again and again? Try an automation!'),
+  tx('احفظ المهام المتكررة كقالب ووفّر وقتك.', 'Save repeated tasks as a template and save time.'),
+  tx('Board تُظهر أين وصل كل عمل بلمحة.', 'Board view shows where every piece of work stands at a glance.')
+];
+function bindClicky(root) {
+  const btn = root.querySelector('[data-clicky]'); if (!btn) return;
+  const bub = root.querySelector('[data-clicky-say]'); let i = 0;
+  bub.textContent = CLICKY_TIPS()[0];
+  btn.addEventListener('click', () => {
+    i = (i + 1) % CLICKY_TIPS().length; if (i === 0) i = 1;
+    bub.textContent = CLICKY_TIPS()[i]; Sound.play('like');
+    btn.classList.remove('jump'); void btn.offsetWidth; btn.classList.add('jump');
+    bub.classList.remove('tip-in'); void bub.offsetWidth; bub.classList.add('tip-in');
+  });
 }

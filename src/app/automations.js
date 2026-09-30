@@ -220,6 +220,7 @@ function viewAutomations(main) {
 
   const BODY = [howHTML, typesHTML, buildHTML, inClickUpHTML, knowHTML];
   const paint = dir => {
+    if (dir) Sound.play('whoosh');
     panel.innerHTML = '<div class="tp-body' + (dir ? ' tp-in' : '') + '" style="--dir:' + (dir || 1) + '">' + BODY[step]() + '</div>';
     if (step === 2) paintLab();
     $$('[data-astep]', main).forEach(b => { const k = +b.dataset.astep; b.setAttribute('aria-current', k === step ? 'step' : 'false'); b.classList.toggle('done', k < step); });

@@ -100,3 +100,15 @@ The platform now leads with explaining ClickUp itself, before practice:
 - **`#/guide`**: how to use this website in eight steps, with tips.
 - **`#/ideas`** and **`#/support`**: forms for feature ideas and team questions with validation, importance/urgency, suggested answers from the common questions, and a saved list with Copy and Email. There is no server, so items are saved on this device and sent by the learner; the page says so. The example request uses Ashjan Al Sinani, ID 71067, and the last name and ID entered are remembered for the next form.
 - Code: `src/app/automations.js`, `src/app/feedback.js`, styles in `src/pages.css`.
+
+## Sounds, sticker icons, workshops, watchable answers, forum
+
+- **Header**: the lesson counter is gone; a speaker button turns sounds on or off (remembered on this device), and **Open ClickUp** (with the ClickUp icon) opens app.clickup.com in a new tab.
+- **Sounds** (`src/app/sound.js`): tiny Web Audio sounds, no audio files: tap, pop, chime for correct answers, fanfare with confetti, whoosh between steps, soft buzz for errors. Silent during language switches.
+- **Sticker icons and Clicky** (`src/fun.css`, `mascot()` in `fx.js`): icon tiles are glossy gradient stickers that pop in and wiggle on hover; Clicky, a friendly robot in ClickUp colours, blinks and waves, and on the home page gives a new tip each time you tap him.
+- **Workshops hub** (`#/workshops`, `src/app/workshops.js`): Automations plus three new hands-on workshops, each in five steps:
+  - **AI (ClickUp Brain)**: what it does, a simulated Brain panel on a sample task (summary, status update, suggested subtasks you can add, reply, translation, free typing), a prompt builder, steps in ClickUp and responsible-use notes.
+  - **Import & Export**: animated flow, a sample sheet or your own CSV (read only in the browser) with column mapping and a warning for non-members, then a real CSV download (Excel-friendly option keeps Arabic).
+  - **Templates**: a Template Center to preview and use templates, and a "Save as template" builder showing what is included when reused.
+- **Questions** (`#/questions`): rewritten around what Omantel employees typically ask (29 questions). Opening one plays the matching lesson's animated walkthrough inside the answer (one open at a time), or offers the workshop.
+- **Forum** (`#/forum`, `src/app/forum.js`): post a question, tip or idea with name and employee ID; Agree, Like and comment, with sorting and filters. Everything goes through `ForumStore`, which is local to this device for now; connecting it to a shared database makes it visible to everyone. The page states this.

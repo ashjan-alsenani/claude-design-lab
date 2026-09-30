@@ -5,6 +5,8 @@
 const ROUTES = {
   home: { view: viewHome, title: () => tx('الرئيسية', 'Home') },
   tour: { view: viewTour, title: () => tx('جولة ClickUp', 'ClickUp tour') },
+  forum: { view: viewForum, title: () => tx('منتدى ClickUp', 'ClickUp Forum') },
+  workshops: { view: viewWorkshops, title: () => tx('الورش التفاعلية', 'Workshops') },
   automations: { view: viewAutomations, title: () => tx('ورشة الأتمتة', 'Automations workshop') },
   guide: { view: viewGuide, title: () => tx('كيف تستخدم هذا الموقع', 'How to use this website') },
   ideas: { view: m => viewRequests(m, 'ideas'), title: () => tx('اقترح ميزة', 'Suggest a feature') },
@@ -47,10 +49,10 @@ function renderRoute(keepScroll, langSwitch) {
   try { currentCleanup = def.view(host, route.params) || null; }
   catch (e) { console.error(e); host.innerHTML = '<div class="page page-narrow"><div class="panel empty-state">' + icon('alert') + '<h1 style="font-size:1.2rem">' + tx('حدث خطأ أثناء عرض هذه الصفحة', 'Something went wrong while showing this page') + '</h1><p>' + tx('أعد تحميل الصفحة. تقدّمك محفوظ.', 'Reload the page. Your progress is saved.') + '</p><a class="btn btn-primary" href="#/home">' + tx('الرئيسية', 'Home') + '</a></div></div>'; }
   const pageTitle = route.name === 'lesson' && LESSON[route.params[0]] ? LESSON[route.params[0]].title
-    : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name) : def.title();
+    : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name)
+    : route.name === 'workshops' && WS_DEF[route.params[0]] ? WS_DEF[route.params[0]].title() : def.title();
   document.title = pageTitle + site;
   renderSidebar(route);
-  renderTopProgress();
   /* Blocks rise into view on a fresh visit; a language switch or in-place
      refresh keeps everything where the learner was. */
   if (keepScroll || langSwitch) Motion.settle(host); else Motion.reveal(host);
@@ -70,6 +72,7 @@ function closeNav() { const sb = $('#sidebar'); if (!sb.classList.contains('open
 /* ---------- Static chrome strings (template) ---------- */
 const CHROME = {
   skip: ['تخطَّ إلى المحتوى', 'Skip to content'],
+  openCU: ['افتح ClickUp', 'Open ClickUp'],
   navOpen: ['فتح قائمة التنقل', 'Open navigation menu'],
   brand: ['Omantel | ClickUp Learning Hub، الصفحة الرئيسية', 'Omantel | ClickUp Learning Hub, home'],
   logoNeeded: ['شعار رسمي مطلوب', 'Official logo needed'],
@@ -90,6 +93,12 @@ function applyChrome() {
   const md = $('meta[name="description"]'); if (md) md.setAttribute('content', CHROME.metaDesc[k]);
   $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
   updateNavBtn();
+  updateSoundBtn();
+}
+function updateSoundBtn() {
+  const b = $('#soundToggle'); if (!b) return;
+  const label = Sound.on ? tx('إيقاف الأصوات', 'Turn sounds off') : tx('تشغيل الأصوات', 'Turn sounds on');
+  b.innerHTML = icon(Sound.on ? 'volume' : 'volume-off'); b.setAttribute('aria-pressed', String(Sound.on)); b.setAttribute('aria-label', label); b.title = label;
 }
 
 /* ---------- Focus mode: hide the sidebar on wide screens ----------
@@ -150,7 +159,7 @@ function setLanguage(lang, opts) {
   applyChrome();
   // Hold the page height during the swap so the browser does not clamp the scroll position.
   main.style.minHeight = main.offsetHeight + 'px';
-  if (currentRoute) renderRoute(true, true);
+  if (currentRoute) Sound.quiet(() => renderRoute(true, true));
   if (navOpen) { $('#sidebar').classList.add('open'); $('#scrim').hidden = false; }
 
   Object.keys(drafts).forEach(id => {
@@ -249,6 +258,10 @@ function boot() {
     if (wideScreen()) { setNavHidden(!document.documentElement.classList.contains('nav-hidden')); return; }
     if ($('#sidebar').classList.contains('open')) closeNav(); else openNav();
   });
+  $('#soundToggle').addEventListener('click', () => { Sound.set(!Sound.on); updateSoundBtn(); toast(Sound.on ? tx('الأصوات مفعّلة', 'Sounds on') : tx('الأصوات متوقفة', 'Sounds off')); });
+  $$('[data-cuicon]').forEach(img => { const l = $('link[rel="icon"]'); if (l) img.src = l.href; });
+  // A soft tap for every press; specific moments (correct, celebrate, step) add their own sound.
+  document.addEventListener('click', e => { if (e.target.closest('button:not(:disabled), a[href], summary, [role="switch"]') && !e.target.closest('#soundToggle')) Sound.play('tap'); }, true);
   $('#scrim').addEventListener('click', closeNav);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#sidebar').classList.contains('open')) { closeNav(); $('#navToggle').focus(); } });
   $('#sidebar').addEventListener('click', e => { if (e.target.closest('a')) closeNav(); });
@@ -262,7 +275,7 @@ function boot() {
   window.addEventListener('hashchange', () => { routedByUser = true; renderRoute(); });
   Store.on(kind => {
     if (!currentRoute) return;
-    renderSidebar(currentRoute); renderTopProgress();
+    renderSidebar(currentRoute);
     if (kind === 'reset' && currentRoute.name !== 'progress') rerender();
     if (kind === 'storage') toast(tx('تعذّر الحفظ على هذا الجهاز. سيعمل التقدم لهذه الجلسة فقط.', 'Saving failed on this device. Progress will work for this session only.'));
   });

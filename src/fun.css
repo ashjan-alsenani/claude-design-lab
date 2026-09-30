@@ -1,0 +1,58 @@
+/* ==========================================================================
+   FUN LAYER: sticker icons, Clicky the mascot, header additions. Loaded last.
+   ========================================================================== */
+
+/* Header: sounds and a shortcut to the ClickUp app */
+.sound-btn { border-radius: 10px; }
+.sound-btn[aria-pressed="false"] { color: var(--ink-3); }
+.open-cu { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 10px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: .88rem; color: #fff; background: linear-gradient(135deg, #7b68ee, #ff02f0); box-shadow: 0 8px 18px -10px #8930fd; flex: none; transition: transform 200ms var(--ease-out), box-shadow 200ms ease; }
+html[dir="rtl"] .open-cu { padding: 0 10px 0 14px; }
+.open-cu img { width: 20px; height: 24px; object-fit: contain; background: #fff; border-radius: 6px; padding: 2px; }
+@media (hover: hover) and (pointer: fine) { .open-cu:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -10px #8930fd; } .open-cu:hover img { animation: icon-wiggle 600ms var(--ease-out); } }
+.open-cu:active { transform: scale(0.97); }
+@media (max-width: 640px) { .open-cu span { display: none; } .open-cu { padding: 0 8px; } }
+
+/* Sticker icons: glossy, colourful, and they wiggle when you point at them */
+.ic-tile, .nav-link .ic-tile { position: relative; overflow: hidden; color: #fff; background: linear-gradient(145deg, color-mix(in srgb, var(--tc, #7b68ee) 60%, #fff), var(--tc, #7b68ee)); box-shadow: 0 6px 14px -8px var(--tc, #7b68ee), inset 0 -2px 0 rgb(0 0 0 / .12), inset 0 1px 0 rgb(255 255 255 / .5); }
+.ic-tile::before { content: ""; position: absolute; inset: 2px 3px 55% 3px; border-radius: inherit; background: linear-gradient(180deg, rgb(255 255 255 / .5), rgb(255 255 255 / 0)); pointer-events: none; }
+.ic-tile .icon { position: relative; stroke-width: 2.1; filter: drop-shadow(0 1px 0 rgb(0 0 0 / .18)); }
+.nav-link[aria-current="page"] .ic-tile { transform: rotate(-6deg) scale(1.06); }
+.nav-link[aria-current="page"] .ic-tile .icon { animation: icon-bob 2.6s ease-in-out infinite; }
+.rv-in .ic-tile { animation: sticker-in 640ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@media (hover: hover) and (pointer: fine) {
+  a:hover .ic-tile .icon, button:hover .ic-tile .icon, .why-card:hover .ic-tile .icon, .au-type:hover .ic-tile .icon, .guide-step:hover .ic-tile .icon, .ic-tile:hover .icon { animation: icon-wiggle 650ms var(--ease-out); }
+  .bubble:hover .bb-ic .icon, .disc-tile:hover .ic-tile .icon { animation: icon-wiggle 650ms var(--ease-out); }
+}
+@keyframes sticker-in { from { transform: scale(.6) rotate(-14deg); opacity: 0; } }
+@keyframes icon-wiggle { 0% { transform: none; } 25% { transform: rotate(-16deg) scale(1.15); } 50% { transform: rotate(12deg) scale(1.1); } 75% { transform: rotate(-6deg); } 100% { transform: none; } }
+@keyframes icon-bob { 50% { transform: translateY(-2px) rotate(-6deg); } }
+.bb-ic, .ic-float, .j-node, .medal, .au-nic, .guide-path li span { position: relative; overflow: hidden; }
+.bb-ic::before, .ic-float::before, .au-nic::before, .guide-path li span::before { content: ""; position: absolute; inset: 3px 4px 55% 4px; border-radius: inherit; background: linear-gradient(180deg, rgb(255 255 255 / .45), rgb(255 255 255 / 0)); pointer-events: none; }
+.bubble .bb-ic { animation: bubble-idle 5s ease-in-out infinite; animation-delay: calc(var(--i) * -.4s); }
+@keyframes bubble-idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px) rotate(-3deg); } }
+
+/* Clicky */
+.mascot { display: inline-block; width: 104px; animation: mascot-bob 3.4s ease-in-out infinite; }
+.mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
+.mascot .m-arm { transform-box: fill-box; transform-origin: 50% 100%; animation: wave 2.6s ease-in-out infinite; }
+.mascot .m-bulb { animation: bulb 1.8s ease-in-out infinite; }
+.mascot .m-shadow { transform-box: fill-box; transform-origin: center; animation: shadow 3.4s ease-in-out infinite; }
+@keyframes mascot-bob { 50% { transform: translateY(-7px); } }
+@keyframes shadow { 50% { transform: scaleX(.8); opacity: .08; } }
+@keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+@keyframes wave { 0%, 55%, 100% { transform: rotate(0deg); } 65% { transform: rotate(-26deg); } 75% { transform: rotate(12deg); } 85% { transform: rotate(-18deg); } }
+@keyframes bulb { 50% { fill: #ff7a45; } }
+.clicky { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.clicky-btn { border: 0; background: transparent; padding: 0; cursor: pointer; border-radius: 24px; }
+.clicky-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.clicky-btn.jump .mascot { animation: mascot-jump 620ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes mascot-jump { 0% { transform: none; } 35% { transform: translateY(-22px) rotate(-8deg) scale(1.05); } 70% { transform: translateY(0) scale(.96, 1.04); } 100% { transform: none; } }
+.clicky-say { position: relative; max-width: 360px; padding: 14px 18px; border-radius: 18px; background: #fff; border: 2px solid #e6ddff; box-shadow: var(--shadow-2); font-weight: 600; line-height: 1.6; text-align: start; }
+.clicky-say::before { content: ""; position: absolute; top: 50%; inset-inline-start: -10px; width: 16px; height: 16px; background: #fff; border-inline-start: 2px solid #e6ddff; border-bottom: 2px solid #e6ddff; transform: translateY(-50%) rotate(45deg); }
+html[dir="rtl"] .clicky-say::before { transform: translateY(-50%) rotate(-45deg); }
+.clicky small { display: block; color: var(--ink-3); font-weight: 500; font-size: .78rem; margin-top: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .mascot, .mascot .m-eyes, .mascot .m-arm, .mascot .m-bulb, .mascot .m-shadow, .clicky-btn.jump .mascot, .bubble .bb-ic, .rv-in .ic-tile, .nav-link[aria-current="page"] .ic-tile .icon { animation: none !important; }
+  a:hover .ic-tile .icon, button:hover .ic-tile .icon { animation: none !important; }
+}
