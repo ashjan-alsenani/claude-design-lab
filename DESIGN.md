@@ -125,3 +125,18 @@ The platform now leads with explaining ClickUp itself, before practice:
 - **Knowledge base** (`src/content/kb.js`): 108 more questions employees commonly ask, in Arabic and English, grouped by the tour parts: getting started and navigation, structure, tasks, statuses, views, fields, collaboration, notifications, time, dashboards, automations, forms, goals, roles and security, AI, import/export, templates, integrations, mobile and troubleshooting. Topics follow the public ClickUp Help Center and University catalogue; the wording is our own and says where menus may differ by plan or version.
 - **Smarter matching** (`src/app/clicky.js`): each word counts both as itself and as its synonym group; misspelled words snap to the nearest known word (edit distance, at reduced weight); short follow-ups ("what about on mobile?", "وعلى الجوال؟") reuse the previous topic; vague questions get "Did you mean" choices instead of a wrong guess; Arabic diacritics are ignored.
 - **AI add-on** (`server/clicky_api.py`, optional): a small service for `/api/clicky` that asks Claude, grounded in `server/clicky_kb.json` (written by `build.py`). It keeps the API key on the server, limits size and rate, retries declined requests on a fallback model, and returns an empty answer on any failure so the page uses its built-in knowledge. Setup is in `SERVER.md`.
+
+## Clicky as a ChatGPT-style assistant
+
+- With `<meta name="clicky-api" content="/api/clicky">` (or `hub-api`), Clicky becomes an AI chat for ClickUp only:
+  - answers stream in as they are written (`Api.chat`, newline-delimited JSON);
+  - the last 10 messages go with each question, so follow-ups work;
+  - answers are formatted safely: escaped text with numbered steps, bullets and bold only;
+  - each answer has copy and "Did this help?" buttons.
+- New header buttons: **New chat** (clears the conversation) and **Bigger** (a wide 760px window). The input is a growing text box: Enter sends, Shift+Enter adds a new line.
+- `server/clicky_api.py`:
+  - streams Claude's answer and keeps it to ClickUp topics (off-topic requests get a polite redirect);
+  - asks a short clarifying question when a request is unclear;
+  - answers in the person's language;
+  - `--site` serves the hub with AI on, for a one-step trial.
+- Any AI failure or refusal falls back to the built-in answers, so the chat never breaks.

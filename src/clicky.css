@@ -39,8 +39,9 @@ html[dir="rtl"] .clicky-chat { transform-origin: bottom left; }
 .clicky-chat > header > div { display: grid; flex: 1; line-height: 1.3; }
 .clicky-chat > header small { display: inline-flex; align-items: center; gap: 6px; opacity: .92; font-size: .76rem; }
 .clicky-chat > header small i { width: 8px; height: 8px; border-radius: 50%; background: #5cf2a4; box-shadow: 0 0 0 3px rgb(92 242 164 / .3); }
-.clicky-chat .cc-close { color: #fff; }
-.clicky-chat .cc-close:hover { background: rgb(255 255 255 / .18); }
+.clicky-chat .cc-hbtn { color: #fff; }
+.clicky-chat .cc-hbtn:hover { background: rgb(255 255 255 / .18); }
+.clicky-chat .cc-wide[aria-pressed="true"] { background: rgb(255 255 255 / .22); }
 .mascot-head { width: 42px; background: #fff; border-radius: 50%; padding: 3px 4px 1px; }
 .mascot-head .m-shadow { display: none; }
 .cc-log { overflow: auto; padding: 14px; display: grid; align-content: start; gap: 10px; background: linear-gradient(180deg, #faf8ff, #fff); }
@@ -84,3 +85,16 @@ html[dir="rtl"] .cc-send svg { transform: scaleX(-1); }
 .cb-hint { order: -2; }
 .is-open .cf-label { display: none; }
 .is-open .clicky-fab { padding: 5px; }
+
+/* ChatGPT-style details: bigger window, formatted answers, multi-line input */
+.clicky-bot.is-wide .clicky-chat { width: min(760px, calc(100vw - 24px)); height: min(82vh, 860px); }
+.cc-md { display: grid; gap: 6px; }
+.cc-md p { margin: 0; }
+.cc-md ol, .cc-md ul { margin: 0; padding-inline-start: 1.3em; display: grid; gap: 3px; }
+.cc-md li::marker { color: #7b68ee; font-weight: 700; }
+.cc-md b { color: #3b1f8f; }
+.clicky-bot.is-wide .cc-msg { max-width: 82%; font-size: .95rem; }
+.cc-input { align-items: flex-end; }
+.cc-input .cc-q { resize: none; min-height: 42px; max-height: 120px; padding-block: 10px; line-height: 1.45; border-radius: 20px; font: inherit; overflow-y: auto; }
+.cc-rate [data-copy].done { background: #e7fbef; color: #0f7a42; border-color: #b6ecc9; }
+.cc-input .cc-q::placeholder { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

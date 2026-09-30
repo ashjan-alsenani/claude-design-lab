@@ -47,29 +47,56 @@ Requests are same-origin, send cookies (`credentials: same-origin`), JSON bodies
 | `POST /api/forum/{id}/delete` | `{}` | any 2xx (only the author or a moderator) |
 | `POST /api/ideas` | `{ "id", "name", "emp", "cat", "level", "subject", "body", "at" }` | any 2xx |
 | `POST /api/support` | same fields as ideas | any 2xx |
-| `POST /api/clicky` | `{ "question", "lang": "ar" \| "en" }` | `{ "answer": "plain text" }` |
+| `POST /api/clicky` | `{ "question", "lang", "history", "stream" }` | streamed lines or `{ "answer" }` (see section 4) |
 
 `/api/clicky` is where you connect AI (next section). If it is missing or fails, Clicky answers from the platform's built-in knowledge, so the chatbot always works.
 
 The `connect-src 'self'` rule in the page allows these calls only on the same domain. If the API lives on another domain, add that https address to `connect-src` in `build.py` and rebuild.
 
-## 4. Let Clicky understand any question (optional, uses Claude)
+## 4. Make Clicky a ChatGPT-style AI assistant for ClickUp (optional, uses Claude)
 
-Built in, Clicky matches questions against about 140 prepared answers. That covers typos, follow-up questions and Arabic, but not every possible wording. `server/clicky_api.py` is a small ready-made service that sends each question to Claude, together with the hub's own questions and answers, so Clicky understands any wording.
+Without AI, Clicky matches questions against about 140 prepared answers. That handles typos, follow-ups and Arabic, but not every possible wording. With the AI service switched on, Clicky works like ChatGPT, but only for ClickUp:
 
-1. On the server: `pip install -r server/requirements.txt` (the official `anthropic` library).
-2. Put the API key in the server environment only: `export ANTHROPIC_API_KEY=...`. Never put it in the page or in this repository.
-3. Run `python3 server/clicky_api.py`. It listens on `127.0.0.1:8787`. Run it as a service (systemd or similar) so it restarts.
-4. In your web server, forward `/api/clicky` to `http://127.0.0.1:8787/api/clicky`. If it sits behind that proxy, set `CLICKY_TRUST_PROXY=1` so rate limits use the real visitor address.
-5. In `src/template.html` set `<meta name="hub-api" content="/api">`, run `python3 build.py`, and upload `index.html`.
+- he understands any wording, spelling mistakes, dialect and mixed Arabic/English;
+- he remembers the conversation, so "and on the phone?" makes sense;
+- his answer appears word by word as it is written, with numbered steps;
+- he asks a short question back when a request is unclear;
+- he politely declines anything that is not about ClickUp or this hub.
 
-What the service does:
+`server/clicky_api.py` is the ready-made service that does this with Claude, Anthropic's AI model.
 
-- It uses the model `claude-opus-5-5` (change it with `CLICKY_MODEL`) and answers in the visitor's language, in plain text.
-- Its instructions contain `server/clicky_kb.json`, which `build.py` writes from `src/content/kb.js`. Rebuild and restart after you edit the questions. The instructions are cached, so repeat questions cost less.
-- If Claude declines a question, the request is retried automatically on Anthropic's recommended fallback model (server-side fallbacks). If that fails too, the page shows its built-in answer.
-- Safety limits: questions up to 500 characters, JSON only, the `X-Requested-With: fetch` header is required, and each address can ask 12 questions a minute (`CLICKY_RATE_PER_MIN`). Question text is never written to the log.
-- Company rules on sending staff questions to an external AI service still apply. Check with your security team before you turn it on.
+**Try it in one step** (on a test machine):
+
+```
+pip install -r server/requirements.txt
+export ANTHROPIC_API_KEY=...          # from console.anthropic.com, server only
+python3 server/clicky_api.py --site   # open http://127.0.0.1:8787/
+```
+
+`--site` serves `index.html` with Clicky's AI switched on and the security headers above.
+
+**On your real server:**
+
+1. Install and set the key as above. Never put the key in the page or in this repository.
+2. Run `python3 server/clicky_api.py` as a service (systemd or similar). It listens on `127.0.0.1:8787`.
+3. In the web server, forward `/api/clicky` to `http://127.0.0.1:8787/api/clicky`. Turn off response buffering for that path so answers stream (nginx: `proxy_buffering off;`). Set `CLICKY_TRUST_PROXY=1` so rate limits use the real visitor address.
+4. In `src/template.html` set `<meta name="clicky-api" content="/api/clicky">`, run `python3 build.py`, and upload `index.html`. This switches on only the AI chat. The forum, ideas and support pages still use `hub-api`, which is set separately.
+
+**What the service does:**
+
+- It uses the model `claude-opus-5-5` (change it with `CLICKY_MODEL`). Its instructions are cached, so repeat questions cost less.
+- It grounds answers in `server/clicky_kb.json`, which `build.py` writes from `src/content/kb.js`. Rebuild and restart after you edit the questions.
+- It receives the last 10 messages of the conversation. Nothing is stored on the server, and question text is never written to the log.
+- If Claude declines a request, it is retried automatically on Anthropic's recommended fallback model (server-side fallbacks). If anything still fails, the page quietly shows its built-in answer instead.
+- Safety limits:
+  - questions up to 800 characters and 16 KB per request;
+  - JSON only, and the `X-Requested-With: fetch` header is required;
+  - 12 questions a minute per address (`CLICKY_RATE_PER_MIN`);
+  - answers are shown as plain text: only steps, bullets and bold are formatted, so HTML in an answer is shown as text and never runs.
+- Cost: you pay Anthropic per question, usually a small amount per answer. Set a monthly spending limit in the Anthropic console.
+- Company rules on sending staff questions to an external AI service still apply. Check with your security team before you switch it on.
+
+**Contract** (if IT prefers its own implementation): `POST /api/clicky` with `{ "question", "lang", "history": [{ "role": "user" | "assistant", "text" }], "stream": true }`. Reply either as `application/x-ndjson`, one line per piece (`{"t": "..."}`, then `{"done": true}`, or `{"error": "..."}` to use the built-in answer), or as JSON `{ "answer": "text" }`.
 
 ## 5. Updating the site
 

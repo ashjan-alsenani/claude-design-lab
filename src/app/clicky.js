@@ -8,7 +8,7 @@
    ========================================================================== */
 const Clicky = (() => {
   const log = []; // the conversation survives page changes
-  let open = false, busy = false, root = null, stopType = () => {};
+  let open = false, busy = false, root = null, stopType = () => {}, abortAI = () => {};
 
   /* ---- Language helpers: Arabic normalisation, stop words, synonyms ---- */
   const STOP = new Set('how do does i the a an to can could what is are my in of for and with it on you me where why when which should would will please about this that from be at or your our we us there any get use using ClickUp clickup كيف ما ماذا هل في من على الى إلى عن ان أن هو هي لا او أو و مع اين أين لماذا هذا هذه ذلك التي الذي كل عند انا أنا لي لدي يمكن يمكنني أستطيع استطيع اريد أريد'.split(' ').map(w => w.toLowerCase()));
@@ -159,39 +159,78 @@ const Clicky = (() => {
       $log().scrollTop = $log().scrollHeight;
     });
   }
+  /* ---- Conversation memory, sent to the AI so follow-ups make sense ---- */
+  const convo = [];
+  function remember(role, text) { convo.push({ role, text: String(text).slice(0, 1500) }); if (convo.length > 12) convo.splice(0, convo.length - 12); }
+  // Light, safe formatting for AI answers: escaped text, numbered steps, bullets and **bold** only.
+  function fmt(text) {
+    const inline = x => esc(x).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+    let html = '', list = null;
+    const close = () => { if (list) { html += '</' + list + '>'; list = null; } };
+    String(text).split('\n').forEach(line => {
+      const l = line.trim(); let m;
+      if (!l) { close(); return; }
+      if ((m = l.match(/^(\d{1,2})[.)]\s+(.*)$/))) { if (list !== 'ol') { close(); html += '<ol>'; list = 'ol'; } html += '<li value="' + (+m[1]) + '">' + inline(m[2]) + '</li>'; return; }
+      if ((m = l.match(/^[-•*]\s+(.*)$/))) { if (list !== 'ul') { close(); html += '<ul>'; list = 'ul'; } html += '<li>' + inline(m[1]) + '</li>'; return; }
+      close(); html += '<p>' + inline(l.replace(/^#+\s*/, '')) + '</p>';
+    });
+    close(); return html;
+  }
+  const rateHTML = () => '<div class="cc-rate"><button type="button" data-copy aria-label="' + tx('انسخ الإجابة', 'Copy the answer') + '">' + icon('doc', 'icon-sm') + '</button><span>' + tx('هل ساعدك هذا؟', 'Did this help?') + '</span><button type="button" data-rate="up" aria-label="' + tx('نعم', 'Yes') + '">' + icon('thumb', 'icon-sm') + '</button><button type="button" data-rate="down" class="down" aria-label="' + tx('لا', 'No') + '">' + icon('thumb', 'icon-sm') + '</button></div>';
+  const stick = () => { const l = $log(); if (l) l.scrollTop = l.scrollHeight; };
   function ask(q) {
     q = q.trim(); if (!q || busy) return;
     busy = true; bubble(esc(q), 'me'); log.push({ me: q });
-    const el = bubble('<span class="cc-dots"><i></i><i></i><i></i></span>', 'bot');
-    const small = SMALL.find(s => s[0].test(q));
+    const el = bubble('<span class="cc-dots" aria-label="' + tx('Clicky يفكّر', 'Clicky is thinking') + '"><i></i><i></i><i></i></span>', 'bot');
+    const small = !Api.chatOn && SMALL.find(s => s[0].test(q));
     const local = () => {
       Sound.play('pop');
       if (small) { el.innerHTML = '<p></p>'; stopType = typeInto($('p', el), small[1](), () => { busy = false; }); return; }
-      renderAnswer(el, answer(q), q); busy = false;
+      const res = answer(q); renderAnswer(el, res, q); busy = false;
+      remember('user', q); if (res && res.best) remember('assistant', res.best.title + '\n' + res.best.text);
     };
-    const wait = prefersReducedMotion() ? 60 : 650;
-    if (Api.on && !small) {
-      Api.post('chat', { question: cleanText(q, 500), lang: LANG }).then(r => {
-        const text = r && cleanText(r.answer, 3000);
-        if (!text) return local();
-        Sound.play('pop'); el.innerHTML = '<p class="cc-a"></p>'; stopType = typeInto($('.cc-a', el), text, () => { busy = false; });
-      }, () => setTimeout(local, 50));
-    } else setTimeout(local, wait);
+    if (!Api.chatOn) { setTimeout(local, prefersReducedMotion() ? 60 : 650); return; }
+    // AI mode: the answer appears as it is written; any failure falls back to the built-in answer.
+    const ctl = new AbortController(); let cancelled = false; abortAI = () => { cancelled = true; ctl.abort(); };
+    let text = '', started = false, raf = 0;
+    const box = () => { if (!started) { started = true; el.innerHTML = '<div class="cc-md"></div>'; el._text = ''; Sound.play('pop'); } };
+    const paint = () => { raf = 0; const m = $('.cc-md', el); if (m) { m.innerHTML = fmt(text); stick(); } };
+    Api.chat({ question: cleanText(q, 800), lang: LANG, history: convo.slice(-10) }, piece => { box(); text += piece; if (!raf) raf = requestAnimationFrame(paint); }, ctl).then(all => {
+      text = all; box(); paint(); el._text = all; el.insertAdjacentHTML('beforeend', rateHTML()); stick();
+      remember('user', q); remember('assistant', all); busy = false;
+    }, () => { if (raf) cancelAnimationFrame(raf); if (cancelled) return; el.innerHTML = ''; local(); });
+  }
+  function greet() {
+    bubble('<p>' + (Api.chatOn
+      ? tx('أهلاً! أنا Clicky، مساعدك الذكي في ClickUp. اكتب سؤالك بكلماتك، بالعربية أو الإنجليزية، وسأفهم ما تحتاجه وأشرح لك الخطوات.', 'Hi! I’m Clicky, your ClickUp AI assistant. Ask in your own words, in Arabic or English, and I’ll work out what you need and walk you through it.')
+      : tx('أهلاً! أنا Clicky. اسألني أي سؤال عن ClickUp أو عن هذه المنصة، أو اختر سؤالاً من الأسفل.', 'Hi! I’m Clicky. Ask me any question about ClickUp or this platform, or pick one below.')) + '</p>', 'bot');
+  }
+  function newChat() {
+    stopType(); abortAI(); abortAI = () => {}; convo.length = 0; log.length = 0; lastTopic = null; busy = false;
+    $log().innerHTML = ''; greet(); $('.cc-q', root).focus();
   }
   function build() {
     root = document.createElement('div'); root.className = 'clicky-bot';
     root.innerHTML = '<p class="cb-hint" hidden></p><button type="button" class="clicky-fab" aria-expanded="false" aria-controls="clickyChat">' + mascot('mascot-fab') + '<span class="cf-label"></span></button>' +
-      '<section class="clicky-chat" id="clickyChat" role="dialog" aria-modal="false" aria-labelledby="ccTitle" hidden><header>' + mascot('mascot-head') + '<div><b id="ccTitle">Clicky</b><small><i></i><span class="cc-sub"></span></small></div><button type="button" class="icon-btn cc-close">' + icon('x') + '</button></header>' +
+      '<section class="clicky-chat" id="clickyChat" role="dialog" aria-modal="false" aria-labelledby="ccTitle" hidden><header>' + mascot('mascot-head') + '<div><b id="ccTitle">Clicky</b><small><i></i><span class="cc-sub"></span></small></div><button type="button" class="icon-btn cc-hbtn cc-new">' + icon('plus') + '</button><button type="button" class="icon-btn cc-hbtn cc-wide" aria-pressed="false">' + icon('panel') + '</button><button type="button" class="icon-btn cc-hbtn cc-close">' + icon('x') + '</button></header>' +
       '<div class="cc-log" aria-live="polite"></div><div class="cc-sugs" data-sugs></div>' +
-      '<form class="cc-input"><input class="input" maxlength="300" autocomplete="off"><button type="submit" class="icon-btn cc-send">' + icon('send', 'icon-sm') + '</button></form></section>';
+      '<form class="cc-input"><textarea class="input cc-q" rows="1" maxlength="800" autocomplete="off"></textarea><button type="submit" class="icon-btn cc-send">' + icon('send', 'icon-sm') + '</button></form></section>';
     $('#appRoot').appendChild(root);
     const fab = $('.clicky-fab', root), chat = $('.clicky-chat', root);
     fab.addEventListener('click', () => toggle(!open));
     $('.cc-close', root).addEventListener('click', () => { toggle(false); fab.focus(); });
     root.addEventListener('keydown', e => { if (e.key === 'Escape' && open) { toggle(false); fab.focus(); } });
-    $('.cc-input', root).addEventListener('submit', e => { e.preventDefault(); const inp = $('.cc-input input', root); const q = inp.value; inp.value = ''; ask(q); });
+    const inp = $('.cc-q', root);
+    const grow = () => { inp.style.height = ''; if (inp.value) inp.style.height = Math.min(inp.scrollHeight, 120) + 'px'; };
+    $('.cc-input', root).addEventListener('submit', e => { e.preventDefault(); const q = inp.value; inp.value = ''; grow(); ask(q); });
+    inp.addEventListener('input', grow);
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('.cc-input', root).requestSubmit(); } });
+    $('.cc-new', root).addEventListener('click', newChat);
+    $('.cc-wide', root).addEventListener('click', () => { const on = !root.classList.contains('is-wide'); root.classList.toggle('is-wide', on); $('.cc-wide', root).setAttribute('aria-pressed', String(on)); Sound.play('tap'); stick(); });
     root.addEventListener('click', e => {
       const s = e.target.closest('[data-cq]'); if (s) { ask(s.textContent); return; }
+      const c = e.target.closest('[data-copy]');
+      if (c) { const m = c.closest('.cc-msg'); copyText(m._text || m.innerText).then(ok => { if (ok) { c.classList.add('done'); Sound.play('tap'); setTimeout(() => c.classList.remove('done'), 1400); } }); return; }
       const r = e.target.closest('[data-rate]');
       if (r) { const box = r.closest('.cc-rate'); box.innerHTML = r.dataset.rate === 'up' ? '<span>' + icon('heart', 'icon-sm') + tx('رائع! سعيد أنني ساعدتك.', 'Great! Glad I could help.') + '</span>' : '<span>' + tx('آسف! جرّب المنتدى أو اسأل الفريق.', 'Sorry! Try the forum or ask the team.') + ' <a href="#/forum">' + tx('المنتدى', 'Forum') + '</a> · <a href="#/support">' + tx('اسأل الفريق', 'Ask the team') + '</a></span>'; Sound.play(r.dataset.rate === 'up' ? 'like' : 'tap'); return; }
       if (e.target.closest('.cc-log a, .cc-links a') && window.matchMedia('(max-width: 640px)').matches) toggle(false);
@@ -205,10 +244,12 @@ const Clicky = (() => {
     const fab = $('.clicky-fab', root);
     $('.cf-label', root).textContent = tx('اسأل Clicky', 'Ask Clicky');
     fab.setAttribute('aria-label', tx('اسأل Clicky، مساعد ClickUp', 'Ask Clicky, the ClickUp helper'));
-    $('.cc-sub', root).textContent = tx('متصل · مساعد ClickUp', 'Online · ClickUp helper');
+    $('.cc-sub', root).textContent = Api.chatOn ? tx('مساعد ذكي · لأسئلة ClickUp', 'AI assistant · for ClickUp questions') : tx('متصل · مساعد ClickUp', 'Online · ClickUp helper');
+    $('.cc-new', root).setAttribute('aria-label', tx('محادثة جديدة', 'New chat')); $('.cc-new', root).title = tx('محادثة جديدة', 'New chat');
+    $('.cc-wide', root).setAttribute('aria-label', tx('تكبير نافذة المحادثة', 'Make the chat bigger')); $('.cc-wide', root).title = tx('تكبير', 'Bigger');
     $('.cc-close', root).setAttribute('aria-label', tx('أغلق المحادثة', 'Close the chat'));
-    $('.cc-input input', root).placeholder = tx('اكتب سؤالك عن ClickUp…', 'Type your question about ClickUp…');
-    $('.cc-input input', root).setAttribute('aria-label', tx('سؤالك لـ Clicky', 'Your question for Clicky'));
+    $('.cc-q', root).placeholder = Api.chatOn ? tx('اسأل أي شيء عن ClickUp بكلماتك…', 'Ask anything about ClickUp, in your own words…') : tx('اكتب سؤالك عن ClickUp…', 'Type your question about ClickUp…');
+    $('.cc-q', root).setAttribute('aria-label', tx('سؤالك لـ Clicky', 'Your question for Clicky'));
     $('.cc-send', root).setAttribute('aria-label', tx('أرسل', 'Send'));
     $('.cb-hint', root).textContent = tx('عندك سؤال عن ClickUp؟ اسألني!', 'Got a ClickUp question? Ask me!');
     const sugs = $('[data-sugs]', root);
@@ -219,8 +260,8 @@ const Clicky = (() => {
     chat.hidden = !v; fab.setAttribute('aria-expanded', String(v)); root.classList.toggle('is-open', v); $('.cb-hint', root).hidden = true;
     if (v) {
       Sound.play('pop');
-      if (!$log().children.length) bubble('<p>' + tx('أهلاً! أنا Clicky. اسألني أي سؤال عن ClickUp أو عن هذه المنصة، أو اختر سؤالاً من الأسفل.', 'Hi! I’m Clicky. Ask me any question about ClickUp or this platform, or pick one below.') + '</p>', 'bot');
-      setTimeout(() => $('.cc-input input', root).focus(), 50);
+      if (!$log().children.length) greet();
+      setTimeout(() => $('.cc-q', root).focus(), 50);
     } else stopType();
   }
   return { init: () => build(), relabel, open: () => toggle(true), ask: q => { toggle(true); ask(q); }, debug: q => ({ tokens: repair(tokens(q)), res: answer(q) }) };
