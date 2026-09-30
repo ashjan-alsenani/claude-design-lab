@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "source": "src/styles.css",
+  "color": {
+    "bg": "#f6f5fa", "surface": "#ffffff", "surface2": "#f1eff8", "line": "#e4e1ee",
+    "ink": "#1c1a27", "ink2": "#454257", "ink3": "#625f76",
+    "brand": "#7b68ee", "accent": "#5b45d6", "accentInk": "#4a36b8",
+    "status": { "todo": "#687083", "progress": "#2f6bd6", "review": "#b25f00", "done": "#18814f" },
+    "priority": { "urgent": "#cf3434", "high": "#c77700", "normal": "#3e63d6", "low": "#7d8193" }
+  },
+  "font": { "family": "Readex Pro", "fallback": ["Segoe UI", "Tahoma", "system-ui"] },
+  "radius": { "sm": 6, "md": 8, "lg": 12 },
+  "ease": { "out": "cubic-bezier(0.23,1,0.32,1)", "drawer": "cubic-bezier(0.32,0.72,0,1)" },
+  "direction": "rtl"
+}

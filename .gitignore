@@ -5,3 +5,6 @@ dist/
 !.env.example
 .claude/settings.local.json
 .DS_Store
+
+# Impeccable review captures (local only)
+.impeccable/review/

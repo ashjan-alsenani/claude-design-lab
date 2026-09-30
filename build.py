@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Assemble the self-contained index.html from src/.
+
+Usage: python3 build.py
+Only the Python standard library is used. The output inlines all CSS and JS.
+"""
+from pathlib import Path
+
+ROOT = Path(__file__).parent
+SRC = ROOT / "src"
+
+CSS_FILES = ["styles.css"]
+JS_FILES = [
+    "content/core.js",
+    "content/lessons-1.js",
+    "content/lessons-2.js",
+    "content/lessons-3.js",
+    "content/quizzes.js",
+    "app/util.js",
+    "app/store.js",
+    "app/icons.js",
+    "app/demo.js",
+    "app/exercises.js",
+    "app/lab.js",
+    "app/charts.js",
+    "app/views.js",
+    "app/main.js",
+]
+
+
+def read(rel):
+    return (SRC / rel).read_text(encoding="utf-8")
+
+
+def main():
+    template = read("template.html")
+    css = "\n".join(read(f) for f in CSS_FILES)
+    js = "\n;\n".join(f"/* ---- {f} ---- */\n" + read(f) for f in JS_FILES)
+    js = "(function(){\n'use strict';\n" + js + "\n})();"
+    if "</script" in js.lower():
+        raise SystemExit("A source file contains a literal </script> tag; escape it.")
+    out = template.replace("/*__CSS__*/", css).replace("/*__JS__*/", js)
+    (ROOT / "index.html").write_text(out, encoding="utf-8")
+    print(f"index.html written ({len(out.encode('utf-8')) / 1024:.0f} KB)")
+
+
+if __name__ == "__main__":
+    main()

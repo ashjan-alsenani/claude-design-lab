@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Omantel | ClickUp Learning Hub</title>
+<meta name="description" content="منصة تعلّم تفاعلية لاستخدام ClickUp بثقة: شاهد، افهم، تدرّب، ثم تحقّق.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f6f5fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&display=swap">
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+<header class="topbar" role="banner">
+  <button class="icon-btn nav-toggle" type="button" id="navToggle" aria-controls="sidebar" aria-expanded="false" aria-label="فتح قائمة التنقل"></button>
+  <a class="brand" href="#/home" aria-label="Omantel | ClickUp Learning Hub، الصفحة الرئيسية">
+    <span class="logo-slot" data-logo="omantel">
+      <img alt="Omantel" data-candidates="assets/omantel-logo.svg,assets/omantel-logo.png" hidden>
+      <span class="logo-ph" aria-hidden="true"><b>Omantel</b><small>شعار رسمي مطلوب</small></span>
+    </span>
+    <span class="brand-divider" aria-hidden="true"></span>
+    <span class="logo-slot" data-logo="clickup">
+      <img alt="ClickUp" data-candidates="assets/clickup-logo.svg,assets/clickup-logo.png" hidden>
+      <span class="logo-ph" aria-hidden="true"><b>ClickUp</b><small>شعار رسمي مطلوب</small></span>
+    </span>
+    <span class="brand-name"><span dir="ltr">Learning Hub</span><small>Learn. Practice. Achieve.</small></span>
+  </a>
+  <form class="global-search" role="search" id="globalSearch" autocomplete="off">
+    <label class="visually-hidden" for="globalSearchInput">ابحث في الدروس والمصطلحات</label>
+    <span class="gs-icon" aria-hidden="true"></span>
+    <input id="globalSearchInput" type="search" placeholder="ابحث عن درس أو مصطلح، مثل: Due Date" aria-autocomplete="list" aria-controls="globalSearchResults" aria-expanded="false">
+    <div class="gs-results" id="globalSearchResults" role="listbox" hidden></div>
+  </form>
+  <a class="topbar-progress" href="#/progress" id="topProgress"></a>
+</header>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar" aria-label="التنقل الرئيسي"></nav>
+  <div class="scrim" id="scrim" hidden></div>
+  <main id="main" tabindex="-1"></main>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-brand"><span dir="ltr">Omantel | ClickUp Learning Hub</span><span class="sep" aria-hidden="true"></span><span dir="ltr">Learn. Practice. Achieve.</span></p>
+    <p class="footer-credit" dir="ltr" lang="en">Designed by Ashjan Al Sinani</p>
+    <p class="footer-note">منصة تعليمية مستقلة. الواجهات المعروضة محاكاة تعليمية مبسّطة، والمنصة غير معتمدة أو مدعومة رسمياً من ClickUp. <a href="#/about">حول المنصة</a></p>
+  </div>
+</footer>
+
+<div class="toast-region" id="toasts" role="status" aria-live="polite"></div>
+<div class="visually-hidden" id="announcer" aria-live="assertive"></div>
+
+<dialog class="confirm" id="confirmDialog" aria-labelledby="confirmTitle">
+  <form method="dialog">
+    <h2 id="confirmTitle"></h2>
+    <p id="confirmBody"></p>
+    <div class="confirm-actions">
+      <button class="btn btn-danger" value="ok" id="confirmOk"></button>
+      <button class="btn btn-ghost" value="cancel">إلغاء</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+/*__JS__*/
+</script>
+</body>
+</html>
