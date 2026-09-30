@@ -1980,6 +1980,250 @@ html[dir="rtl"] .w-board { --s: -1; }
   .shell, .site-footer, .hx-layer, .hx-shape { transition: none !important; }
 }
 
+/* ==========================================================================
+   AUTOMATIONS WORKSHOP, HOW-TO GUIDE, IDEAS AND SUPPORT. Loaded last.
+   ========================================================================== */
+
+/* The header has no search now: keep the language switch at the far end. */
+.lang-switch { margin-inline-start: auto; }
+
+/* ---------- Home additions ---------- */
+.hx-guide { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; color: #ffe27a; font-weight: 600; font-size: .92rem; text-decoration: none; }
+.hx-guide:hover { text-decoration: underline; text-underline-offset: 4px; }
+.au-banner { position: relative; overflow: hidden; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 20px; align-items: center; padding: 20px 24px; border-radius: 24px; text-decoration: none; color: var(--ink);
+  background: linear-gradient(120deg, #fff1f4 0%, #fff 45%, #f4efff 100%); border: 1px solid #f7d5de; box-shadow: var(--shadow-2); transition: transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out); }
+.au-bn-art { position: relative; width: 86px; height: 70px; }
+.au-bn-robot { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #ff4d6d, #ff7a45); box-shadow: 0 12px 22px -10px #ff4d6d; }
+.au-bn-art .au-bn-robot { position: absolute; top: 6px; inset-inline-start: 0; animation: bob 4s ease-in-out infinite; }
+.au-bn-robot .icon { width: 30px; height: 30px; }
+.au-bn-art i { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #ffc800; inset-inline-end: 4px; top: 8px; animation: blink-dot 1.8s ease-in-out infinite; }
+.au-bn-art i:nth-of-type(2) { top: 30px; background: #49ccf9; animation-delay: .3s; } .au-bn-art i:nth-of-type(3) { top: 52px; background: #22c38e; animation-delay: .6s; }
+@keyframes blink-dot { 50% { opacity: .25; transform: scale(.7); } }
+.au-bn-text { display: grid; gap: 4px; }
+.au-bn-text b { font-size: 1.2rem; }
+.au-bn-text > span:last-child { color: var(--ink-2); }
+.au-bn-text .way-tag { background: #ffe3ea; color: #c2233f; }
+@media (hover: hover) and (pointer: fine) { .au-banner:hover { transform: translateY(-4px); box-shadow: var(--shadow-3); } }
+.au-banner-sm { grid-template-columns: auto minmax(0, 1fr) auto; padding: 14px 16px; margin: 6px 0 10px; border-radius: 18px; }
+.au-banner-sm .au-bn-robot { width: 46px; height: 46px; border-radius: 14px; }
+.au-banner-sm .au-bn-robot .icon { width: 24px; height: 24px; }
+.au-banner-sm b { font-size: 1rem; }
+
+/* ---------- Automations workshop ---------- */
+.au-sub { color: rgb(255 255 255 / .9); max-width: 60ch; }
+.au-pills { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.au-pills span { padding: 5px 14px; border-radius: 999px; background: rgb(255 255 255 / .2); font-weight: 700; letter-spacing: .02em; }
+.au-pills .icon { opacity: .8; }
+.tour-steps { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: minmax(0, 1fr); }
+.au-flow { display: grid; grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1fr) 60px minmax(0, 1fr); align-items: center; margin: 8px 0 18px; }
+.au-node { display: grid; gap: 4px; justify-items: center; text-align: center; padding: 18px 12px; border-radius: 20px; background: #fff; border: 2px solid var(--nc); box-shadow: 0 16px 30px -18px var(--nc); animation: rise-in 520ms var(--ease-out) both; }
+.au-node:nth-child(3) { animation-delay: 140ms; } .au-node:nth-child(5) { animation-delay: 280ms; }
+.n-when { --nc: #e44bb6; } .n-if { --nc: #f59e0b; } .n-then { --nc: #22c38e; }
+.au-nic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; color: #fff; background: var(--nc); }
+.au-node b { font-size: 1.2rem; }
+.au-node small { color: var(--ink-3); font-weight: 600; }
+.au-node p { font-size: .9rem; color: var(--ink-2); }
+.au-wire { position: relative; height: 4px; margin-inline: 6px; border-radius: 4px; background: repeating-linear-gradient(90deg, #d9d3ee 0 8px, transparent 8px 14px); }
+.au-wire i { position: absolute; top: -4px; width: 12px; height: 12px; border-radius: 50%; background: #8930fd; box-shadow: 0 0 0 4px rgb(137 48 253 / .2); animation: wire-run 2.4s ease-in-out infinite; }
+.au-wire:nth-of-type(4) i { animation-delay: 1.2s; }
+@keyframes wire-run { 0% { inset-inline-start: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { inset-inline-start: calc(100% - 12px); opacity: 0; } }
+.au-live { display: grid; gap: 10px; justify-items: center; margin-bottom: 20px; }
+.au-mini { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 14px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-2); min-width: min(420px, 100%); }
+.au-mini b { flex: 1; font-size: .92rem; }
+.au-mst { position: relative; width: 92px; height: 20px; flex: none; }
+.au-mst em { position: absolute; inset-inline-start: 0; top: 0; font-style: normal; font-size: .68rem; font-weight: 800; color: #fff; padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
+.au-mst .m1 { background: #4f86f7; animation: m1 6s linear infinite; } .au-mst .m2 { background: #b45309; opacity: 0; animation: m2 6s linear infinite; }
+@keyframes m1 { 0%, 30% { opacity: 1; } 31%, 100% { opacity: 0; } }
+@keyframes m2 { 0%, 30% { opacity: 0; } 31%, 100% { opacity: 1; } }
+.au-mav { display: flex; }
+.au-pop { margin-inline-start: -6px; animation: pop-av 6s var(--ease-out) infinite; }
+@keyframes pop-av { 0%, 45% { opacity: 0; transform: scale(.4); } 55%, 100% { opacity: 1; transform: scale(1); } }
+.au-mcomment { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 12px; background: #eafaf2; color: #0f5132; font-size: .86rem; animation: show-cm 6s var(--ease-out) infinite; }
+@keyframes show-cm { 0%, 60% { opacity: 0; transform: translateY(8px); } 70%, 100% { opacity: 1; transform: none; } }
+.au-three, .au-know { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.au-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.au-type { display: grid; gap: 10px; align-content: start; padding: 18px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--tc); box-shadow: var(--shadow-1); }
+.au-type-h { display: flex; align-items: center; gap: 10px; }
+.au-type-h .ic-tile { width: 38px; height: 38px; border-radius: 11px; background: var(--tc); color: #fff; }
+.au-type h3 { font-size: 1.02rem; }
+.au-type > p { color: var(--ink-2); font-size: .88rem; }
+.au-type ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.au-type li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--tc) 8%, #fff); font-size: .84rem; line-height: 1.55; }
+.au-type .chip { justify-self: start; }
+
+/* ClickUp-style Automations window */
+.au-lab { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 18px; align-items: start; margin-bottom: 10px; }
+.cu-modal { border-radius: 16px; background: #fff; border: 1px solid #e1dcef; box-shadow: 0 30px 60px -30px rgb(40 20 110 / .45); overflow: hidden; font-size: .88rem; }
+.cu-mhead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 12px 14px; border-bottom: 1px solid #ebe8f3; background: #fbfaff; }
+.cu-robot { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #7b68ee, #a855f7); flex: none; }
+.cu-mhead > div:first-of-type { display: grid; line-height: 1.25; }
+.cu-mhead small { color: var(--ink-3); font-size: .74rem; }
+.cu-mtabs { display: flex; gap: 2px; margin-inline-start: auto; padding: 3px; border-radius: 10px; background: #f0eef7; }
+.cu-mtabs button { border: 0; background: transparent; padding: 6px 10px; border-radius: 8px; font: 600 .8rem/1 var(--font); color: var(--ink-2); cursor: pointer; }
+.cu-mtabs button[aria-selected="true"] { background: #fff; color: #5b45d6; box-shadow: var(--shadow-1); }
+.cu-mtabs .num { margin-inline-start: 4px; padding: 1px 6px; border-radius: 6px; background: #ece8ff; }
+.cu-mbody { padding: 14px; min-height: 260px; }
+.cu-build { display: grid; gap: 0; }
+.cu-block { position: relative; display: grid; gap: 8px; padding: 12px 14px; border-radius: 12px; border: 1px solid #e6e2f1; border-inline-start: 4px solid var(--bc); background: #fff; }
+.cu-when { --bc: #e44bb6; } .cu-if { --bc: #f59e0b; margin-top: 8px; } .cu-then { --bc: #22c38e; }
+.cu-lbl { font-weight: 800; font-size: .95rem; color: var(--bc); }
+.cu-hint { position: absolute; top: 12px; inset-inline-end: 14px; font-size: .72rem; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; }
+.cu-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cu-row .select { min-width: 0; flex: 1 1 150px; }
+.cu-to { color: var(--ink-3); font-weight: 600; }
+.cu-help { font-size: .78rem; color: var(--ink-3); }
+.au-ic { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in srgb, var(--bc) 14%, #fff); color: var(--bc); flex: none; }
+.cu-link { position: relative; display: flex; align-items: center; gap: 10px; padding: 10px 0 10px 22px; }
+html[dir="rtl"] .cu-link { padding: 10px 22px 10px 0; }
+.cu-link::before { content: ""; position: absolute; inset-block: 0; inset-inline-start: 12px; width: 2px; background: #e6e2f1; }
+.cu-plus { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; border: 1px dashed #c9c1e6; background: #fff; color: #5b45d6; font: 600 .8rem/1 var(--font); cursor: pointer; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.cu-plus:hover { background: #f4f1ff; }
+.cu-plus:active { transform: scale(0.97); }
+.cu-then .cu-plus { justify-self: start; }
+.cu-plan { font-size: .72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: #fff4e0; color: #9a5b00; }
+.cu-sum { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: #f6f4ff; color: #3d2d9a; font-weight: 500; line-height: 1.6; }
+.cu-sum .icon { flex: none; margin-top: 3px; }
+.cu-foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+.cu-tpls { display: grid; gap: 8px; }
+.cu-tpl { display: flex; align-items: center; gap: 10px; text-align: start; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e2f1; background: #fff; font: 500 .84rem/1.5 var(--font); color: var(--ink); cursor: pointer; transition: border-color 150ms ease, transform 160ms var(--ease-out), box-shadow 150ms ease; }
+.cu-tpl .ic-tile { width: 30px; height: 30px; border-radius: 9px; background: var(--tc); color: #fff; flex: none; }
+.cu-tpl:hover { border-color: var(--tc); box-shadow: var(--shadow-1); }
+.cu-tpl:active { transform: scale(0.98); }
+.cu-manage { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.cu-manage li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px; border-radius: 12px; border: 1px solid #e6e2f1; transition: opacity 200ms ease; }
+.cu-manage li.off { opacity: .55; }
+.cu-manage p { line-height: 1.55; }
+.cu-manage small { color: var(--ink-3); }
+.cu-switch { position: relative; width: 40px; height: 22px; border-radius: 22px; border: 0; background: #d5d0e6; cursor: pointer; transition: background-color 200ms ease; flex: none; }
+.cu-switch i { position: absolute; top: 3px; inset-inline-start: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .25); transition: inset-inline-start 200ms var(--ease-out); }
+.cu-switch[aria-checked="true"] { background: #22c38e; }
+.cu-switch[aria-checked="true"] i { inset-inline-start: 21px; }
+.cu-switch:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Sample task and activity */
+.au-sand { display: grid; gap: 12px; padding: 16px; border-radius: 16px; background: linear-gradient(180deg, #fbfaff, #fff); border: 1px solid var(--line); }
+.au-sand h3 { display: flex; gap: 8px; align-items: center; font-size: .98rem; }
+.au-task { display: grid; gap: 10px; padding: 14px; border-radius: 14px; background: #fff; border: 1px solid #e6e2f1; box-shadow: var(--shadow-1); }
+.au-trow { display: flex; gap: 10px; align-items: center; }
+.au-tmeta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.au-avs { display: inline-flex; }
+.au-avs .avatar + .avatar { margin-inline-start: -6px; }
+.au-comments { display: grid; gap: 6px; }
+.au-comments p { display: flex; gap: 6px; align-items: center; padding: 7px 10px; border-radius: 10px; background: #eafaf2; color: #0f5132; font-size: .82rem; }
+.au-flash { animation: au-flash 900ms var(--ease-out); border-radius: 8px; }
+@keyframes au-flash { 0% { box-shadow: 0 0 0 0 rgb(255 77 109 / .7); transform: scale(1.08); } 100% { box-shadow: 0 0 0 10px rgb(255 77 109 / 0); transform: none; } }
+.au-do { font-weight: 600; font-size: .88rem; }
+.au-events { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+.au-events label { display: grid; gap: 4px; font-size: .74rem; font-weight: 600; color: var(--ink-3); }
+.au-log-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.au-log { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.au-log li { display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; font-size: .82rem; line-height: 1.5; animation: tip-in 260ms var(--ease-out); }
+.au-log li .icon { flex: none; margin-top: 2px; }
+.lg-ok { background: #eafaf2; color: #0f5132; } .lg-skip { background: #fff4e0; color: #7a4a00; } .lg-none { background: #f3f1f8; color: var(--ink-2); }
+
+/* "In ClickUp" illustration */
+.au-shot { border-radius: 14px; background: #fff; border: 1px solid #e1dcef; box-shadow: var(--shadow-3); overflow: hidden; font-size: .84rem; }
+.au-shot-bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid #ebe8f3; color: #6b6880; }
+.au-shot-bar > span:first-child { margin-inline-end: auto; }
+.au-shot-robot { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; color: #7b68ee; background: #f1eeff; box-shadow: 0 0 0 3px #ff4d6d; animation: ring-pulse 2s ease-out infinite; }
+@keyframes ring-pulse { 0% { box-shadow: 0 0 0 0 rgb(255 77 109 / .7); } 100% { box-shadow: 0 0 0 12px rgb(255 77 109 / 0); } }
+.au-shot-share { padding: 6px 12px; border-radius: 8px; background: #7b68ee; color: #fff; font-weight: 600; }
+.au-shot-menu { display: grid; gap: 6px; padding: 14px; margin: 12px; margin-inline-start: auto; width: min(260px, 90%); border-radius: 12px; border: 1px solid #e6e2f1; box-shadow: var(--shadow-2); }
+.au-shot-menu > span { display: flex; gap: 8px; align-items: center; padding: 7px 10px; border-radius: 8px; color: var(--ink-2); }
+.au-shot-create { background: #7b68ee; color: #fff !important; font-weight: 600; }
+
+.au-note { display: flex; gap: 6px; align-items: flex-start; } .au-note .icon { flex: none; margin-top: 3px; }
+.hsec > .au-know { width: 100%; text-align: start; }
+
+/* ---------- How to use this website ---------- */
+.page.guide { gap: 60px; }
+.hx-small { min-height: 0; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+.guide-path { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 12px; justify-items: center; }
+.guide-path li span { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; color: #fff; background: var(--tc); box-shadow: 0 14px 26px -12px var(--tc); animation: hx-in 700ms var(--ease-out) both, floaty 6s ease-in-out infinite; animation-delay: calc(var(--i) * 90ms), calc(var(--i) * -.6s); }
+.guide-path li span .icon { width: 26px; height: 26px; }
+.guide-steps { width: 100%; list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; text-align: start; counter-reset: none; }
+.guide-step { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; padding: 20px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-1); overflow: hidden; }
+.guide-step::before { content: ""; position: absolute; inset-inline-start: 0; inset-block: 0; width: 4px; background: var(--tc); }
+.gs-n { position: absolute; top: 10px; inset-inline-end: 16px; font-size: 2rem; font-weight: 800; color: color-mix(in srgb, var(--tc) 25%, #fff); line-height: 1; }
+.guide-step .ic-tile { width: 46px; height: 46px; border-radius: 14px; background: var(--tc); color: #fff; }
+.guide-step h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.guide-step p { color: var(--ink-2); font-size: .9rem; line-height: 1.65; }
+.gs-go { display: inline-flex; gap: 4px; align-items: center; margin-top: 8px; font-weight: 700; color: color-mix(in srgb, var(--tc) 75%, black); text-decoration: none; }
+.gs-go:hover { text-decoration: underline; }
+
+/* ---------- Ideas and support ---------- */
+.rq-page { gap: 22px; }
+.rq-hero { position: relative; overflow: hidden; display: flex; gap: 18px; align-items: center; padding: 26px 28px; border-radius: 26px; color: #fff; background: var(--rg); box-shadow: 0 26px 50px -28px rgb(80 40 180 / .6); }
+.rq-hero::after { content: ""; position: absolute; width: 240px; height: 240px; border-radius: 50%; background: rgb(255 255 255 / .12); inset-inline-end: -60px; top: -110px; }
+.rq-hero h1 { color: #fff; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem); }
+.rq-hero p { color: rgb(255 255 255 / .92); max-width: 62ch; }
+.rq-art { width: 70px; height: 70px; border-radius: 22px; display: grid; place-items: center; background: rgb(255 255 255 / .2); flex: none; animation: bob 5s ease-in-out infinite; }
+.rq-art .icon { width: 36px; height: 36px; }
+.rq-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.rq-form { display: grid; gap: 14px; padding: 22px; border-radius: 22px; }
+.rq-two { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 12px; }
+.rq-field { display: grid; gap: 6px; }
+.rq-field textarea { resize: vertical; min-height: 110px; }
+.rq-field [aria-invalid="true"] { border-color: #d63a4a; box-shadow: 0 0 0 3px rgb(214 58 74 / .15); }
+.rq-err { color: #b3261e; font-size: .82rem; font-weight: 600; }
+.rq-levels { display: flex; flex-wrap: wrap; gap: 8px; }
+.rq-levels button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font: 600 .86rem/1 var(--font); color: var(--ink-2); cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease, transform 160ms var(--ease-out); }
+.rq-levels button i { width: 10px; height: 10px; border-radius: 50%; background: var(--lc); }
+.rq-levels button[aria-checked="true"] { border-color: var(--lc); background: color-mix(in srgb, var(--lc) 12%, #fff); color: var(--ink); box-shadow: 0 0 0 2px color-mix(in srgb, var(--lc) 30%, transparent); }
+.rq-levels button:active { transform: scale(0.97); }
+.rq-send { justify-self: start; background: var(--rg); }
+.rq-note { display: flex; gap: 8px; align-items: flex-start; font-size: .82rem; color: var(--ink-3); line-height: 1.6; }
+.rq-note .icon { flex: none; margin-top: 3px; }
+.rq-suggest:empty { display: none; }
+.rq-suggest { padding: 12px 14px; border-radius: 14px; background: #fffbe8; border: 1px solid #f4e3a3; animation: tip-in 240ms var(--ease-out); }
+.rq-sg-t { display: flex; gap: 6px; align-items: center; font-weight: 700; color: #7a5a00; margin-bottom: 6px; }
+.rq-suggest ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.rq-suggest a { display: inline-flex; gap: 6px; align-items: center; }
+.rq-list { display: grid; gap: 12px; }
+.rq-list h2 { font-size: 1.2rem; }
+[data-items] { display: grid; gap: 12px; }
+.rq-card { position: relative; display: grid; gap: 8px; padding: 16px 18px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); border-inline-start: 5px solid var(--lc); box-shadow: var(--shadow-1); }
+.rq-card.is-example { background: repeating-linear-gradient(135deg, #fff, #fff 12px, #faf8ff 12px, #faf8ff 24px); border-style: dashed; border-inline-start-style: solid; }
+.rq-card-h { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.rq-id { font-size: .76rem; font-weight: 800; padding: 3px 9px; border-radius: 7px; background: #efeaff; color: #5b45d6; }
+.is-example .rq-id { background: #fff0c2; color: #7a5a00; }
+.rq-lvl { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; color: var(--ink-2); }
+.rq-lvl i { width: 9px; height: 9px; border-radius: 50%; background: var(--lc); }
+.rq-card h3 { font-size: 1rem; }
+.rq-card > p { color: var(--ink-2); font-size: .9rem; line-height: 1.65; white-space: pre-line; }
+.rq-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: .8rem; color: var(--ink-3); }
+.rq-av { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: .74rem; background: var(--rg); }
+.rq-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rq-actions .chip { margin-inline-end: auto; }
+.rq-other { justify-self: start; display: inline-flex; gap: 8px; align-items: center; padding: 10px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; text-decoration: none; color: var(--ink); box-shadow: var(--shadow-1); }
+.rq-other:hover { border-color: #c9c1e6; }
+
+@media (max-width: 1080px) {
+  .au-lab, .rq-grid { grid-template-columns: minmax(0, 1fr); }
+  .hx-small { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .au-flow { grid-template-columns: minmax(0, 1fr); gap: 0; justify-items: stretch; }
+  .au-wire { width: 4px; height: 28px; justify-self: center; margin: 0; background: repeating-linear-gradient(180deg, #d9d3ee 0 8px, transparent 8px 14px); }
+  .au-wire i { inset-inline-start: -4px; animation-name: wire-run-y; }
+  .guide-steps { grid-template-columns: minmax(0, 1fr); }
+  .au-banner { grid-template-columns: auto minmax(0, 1fr); }
+  .au-banner > .btn { grid-column: 1 / -1; justify-self: start; }
+  .rq-two { grid-template-columns: minmax(0, 1fr); }
+  .rq-hero { padding: 20px; }
+  .rq-art { width: 54px; height: 54px; border-radius: 16px; }
+}
+@media (max-width: 640px) {
+  .tour-steps { overflow-x: auto; grid-auto-columns: minmax(78px, 1fr); padding-bottom: 4px; }
+  .guide-path { grid-template-columns: repeat(4, 1fr); }
+  .guide-path li span { width: 46px; height: 46px; border-radius: 14px; }
+}
+@keyframes wire-run-y { 0% { top: 0; opacity: 0; } 15%, 85% { opacity: 1; } 100% { top: calc(100% - 12px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .au-bn-art .au-bn-robot, .au-bn-art i, .au-node, .au-wire i, .au-mst em, .au-pop, .au-mcomment, .au-flash, .au-log li, .au-shot-robot, .guide-path li span, .rq-art, .rq-suggest { animation: none !important; }
+  .au-mst .m1 { opacity: 0; } .au-mst .m2, .au-pop, .au-mcomment { opacity: 1; }
+}
+
 </style>
 </head>
 <body>
@@ -2025,12 +2269,6 @@ html[dir="rtl"] .w-board { --s: -1; }
     <img class="logo logo-clickup" src="data:image/webp;base64,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" alt="ClickUp" width="480" height="119">
     <span class="brand-name"><span dir="ltr">Learning Hub</span><small>Learn. Practice. Achieve.</small></span>
   </a>
-  <form class="global-search" role="search" id="globalSearch" autocomplete="off">
-    <label class="visually-hidden" for="globalSearchInput" data-t="searchLabel">ابحث في الدروس والمصطلحات</label>
-    <span class="gs-icon" aria-hidden="true"></span>
-    <input id="globalSearchInput" type="search" data-t-attr="placeholder:searchPh" aria-autocomplete="list" aria-controls="globalSearchResults" aria-expanded="false">
-    <div class="gs-results" id="globalSearchResults" role="listbox" hidden></div>
-  </form>
   <div class="lang-switch" role="group" data-t-attr="aria-label:langGroup">
     <button type="button" data-lang="ar" lang="ar" aria-pressed="true"><span class="ls-long">العربية</span><span class="ls-short" aria-hidden="true">ع</span></button>
     <button type="button" data-lang="en" lang="en" aria-pressed="false"><span class="ls-long">English</span><span class="ls-short" aria-hidden="true">EN</span></button>
@@ -4937,7 +5175,7 @@ const Store = (() => {
 
   const blank = () => ({
     v: 1, lessons: {}, bookmarks: [], last: null, quizzes: {}, final: null,
-    practical: null, challenges: {}, lab: null, tour: {}, startedAt: Date.now()
+    practical: null, challenges: {}, lab: null, tour: {}, ideas: [], tickets: [], autos: null, profile: null, startedAt: Date.now()
   });
 
   let state = blank();
@@ -5002,6 +5240,12 @@ const Store = (() => {
     /* ClickUp tour: which app parts the learner has explored */
     tourSeen(id) { if (!state.tour[id]) { state.tour[id] = Date.now(); this.save('tour'); return true; } return false; },
     isToured(id) { return !!state.tour[id]; },
+    /* Feature ideas and support questions: kept on this device until the
+       learner copies or emails them to the team. */
+    addItem(kind, item) { state[kind].unshift(item); this.save(kind); return item; },
+    removeItem(kind, id) { state[kind] = state[kind].filter(x => x.id !== id); this.save(kind); },
+    setProfile(v) { state.profile = v; this.save('profile'); },
+    setAutos(v) { state.autos = v; this.save('autos'); },
     completeChallenge(id) { if (!state.challenges[id]) { state.challenges[id] = Date.now(); this.save('challenge'); return true; } return false; },
     setPractical() { if (!state.practical) { state.practical = { done: Date.now() }; this.save('challenge'); } },
     setLab(lab) { state.lab = lab; persist(); },
@@ -5098,6 +5342,7 @@ const ICONS = {
   flame: '<path d="M12 21c-3.6 0-6-2.4-6-5.6 0-2.7 1.6-4.4 3-6 .4 1.6 1.2 2.5 2.2 2.9C11 9 12.2 6 14.5 3.5c.2 3 1.4 4.6 2.5 6.2 1 1.4 1.5 2.6 1.5 4.2C18.5 18 15.8 21 12 21z"/><path d="M12 21c-1.5 0-2.6-1-2.6-2.5 0-1.4 1-2.3 1.9-3.2.3 1 .9 1.4 1.5 1.5.3-1 .8-1.8 1.5-2.4.3 1.2 1 2 1 3.3 0 1.9-1.4 3.3-3.3 3.3z"/>',
   trophy: '<path d="M8 4h8v5a4 4 0 01-8 0z"/><path d="M8 5.5H5.2a2.8 2.8 0 003 3.5M16 5.5h2.8a2.8 2.8 0 01-3 3.5"/><path d="M12 13v3.5M9 20.5h6M10 16.5h4l.6 4H9.4z"/>',
   globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.5 3.4 5.3 3.4 8.5S14.3 18 12 20.5C9.7 18 8.6 15.2 8.6 12S9.7 6 12 3.5z"/>',
+  robot: '<rect x="4.5" y="8" width="15" height="11" rx="3"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1.2"/><circle cx="9.3" cy="13" r="1.3" fill="currentColor"/><circle cx="14.7" cy="13" r="1.3" fill="currentColor"/><path d="M9.5 16.3h5M2.5 12.5v2.5M21.5 12.5v2.5"/>',
   panel: '<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M9.5 4.5v15"/><path d="M6 8.5h1.5M6 11.5h1.5"/>'
 };
 
@@ -7264,7 +7509,7 @@ const moduleLabel = n => tx('الوحدة ', 'Module ') + n;
 function renderSidebar(route) {
   const nav = $('#sidebar'); const cur = route.name;
   const last = Store.state.last && LESSON[Store.state.last.lesson] ? Store.state.last.lesson : null;
-  const NAV_C = { compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
+  const NAV_C = { robot: '#ff4d6d', bulb: '#f5a524', users: '#1fb6e0', sparkle: '#a855f7', compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
   const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '><span class="ic-tile" style="--tc:' + NAV_C[ic] + '">' + icon(ic) + '</span><span>' + label + '</span>' + (extra || '') + '</a></li>';
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
   const inLesson = cur === 'lesson' || cur === 'library';
@@ -7274,8 +7519,14 @@ function renderSidebar(route) {
     item('#/tour', 'compass', tx('جولة ClickUp', 'ClickUp tour'), cur === 'tour', '<span class="count num">' + tourDone() + '/12</span>') +
     item('#/library', 'book', tx('الدروس', 'Lessons'), cur === 'library' || (cur === 'lesson' && !last), '<span class="count num">' + done + '/' + LESSONS.length + '</span>') +
     (last ? item(lessonLink(last), 'play', tx('متابعة الدرس', 'Continue lesson'), cur === 'lesson') : '') +
+    item('#/automations', 'robot', tx('ورشة الأتمتة', 'Automations'), cur === 'automations') +
     item('#/lab', 'flask', tx('مختبر التطبيق', 'Practice Lab'), cur === 'lab') +
     item('#/questions', 'message', tx('الأسئلة الشائعة', 'Common questions'), cur === 'questions') +
+    '</ul></div>' +
+    '<div><p class="nav-group-title">' + tx('المساعدة والاقتراحات', 'Help & ideas') + '</p><ul class="nav-list">' +
+    item('#/guide', 'bulb', tx('كيف تستخدم الموقع', 'How to use this site'), cur === 'guide') +
+    item('#/support', 'users', tx('اسأل الفريق', 'Ask the team'), cur === 'support') +
+    item('#/ideas', 'sparkle', tx('اقترح ميزة', 'Suggest a feature'), cur === 'ideas') +
     '</ul></div>' +
     '<details class="nav-more"' + (['studio', 'assess', 'progress', 'help', 'about'].includes(cur) || UIState.get('nav-more') ? ' open' : '') + '><summary class="nav-group-title">' + tx('المزيد', 'More') + icon('chev-down', 'icon-sm') + '</summary><ul class="nav-list">' +
     item('#/progress', 'progress', tx('تقدّمي', 'My Progress'), cur === 'progress') +
@@ -7824,6 +8075,7 @@ function viewTourPart(main, id) {
     if (i === 2) return '<p class="tp-kicker">' + tx('كيف تستخدمه؟', 'How do I use it?') + '</p><h2>' + tx('خطوة بخطوة', 'Step by step') + '</h2><div class="tp-how"><ol class="tp-steps">' +
       p.how.map((h, k) => '<li style="--k:' + k + '"><span class="num">' + (k + 1) + '</span><p>' + tp(h) + '</p></li>').join('') + '</ol>' +
       '<div><p class="tp-watch">' + icon('play', 'icon-sm') + tx('شاهدها تحدث أمامك:', 'Watch it happen:') + '</p><div data-tp-demo></div></div></div>' +
+      (id === 'auto' ? '<a class="au-banner au-banner-sm" href="#/automations"><span class="au-bn-robot" aria-hidden="true">' + icon('robot') + '</span><span class="au-bn-text"><b>' + tx('ابنِ أتمتة بنفسك', 'Build one yourself') + '</b><span>' + tx('افتح ورشة الأتمتة وجرّبها على مهمة تجريبية.', 'Open the Automations workshop and test it on a sample task.') + '</span></span>' + icon('fwd') + '</a>' : '') +
       '<p class="help-text">' + tx('تريد أن تجرّب بنفسك؟', 'Want to try it yourself?') + ' <a href="#/lab">' + tx('افتح مختبر التطبيق', 'Open the Practice Lab') + '</a></p>';
     return '<div class="tp-check"><div><p class="tp-kicker">' + tx('سؤال سريع', 'Quick check') + '</p><h2>' + tx('هل فهمت الفكرة؟', 'Did you get it?') + '</h2><div data-tp-quiz></div></div>' +
       '<div><p class="tp-kicker">' + tx('أسئلة يطرحها الناس', 'Questions people ask') + '</p><div class="cuq-list">' + faqs.map(f => '<details class="cuq"><summary>' + icon('help', 'icon-sm') + '<span>' + tp(f.q) + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + tp(f.a) + '</p></div></details>').join('') + '</div>' +
@@ -7964,6 +8216,7 @@ function viewHome(main) {
     '<p class="lead">' + tx('دليل ملوّن ومتحرك يشرح لك كل جزء من ClickUp خطوة بخطوة، حتى تنجز عملك اليومي بثقة.', 'A colourful, animated guide that shows you every part of ClickUp, step by step, so you can handle your daily work with confidence.') + '</p>' +
     '<div class="hero-actions"><a class="btn btn-primary btn-lg hx-cta" href="#/tour' + (toured ? '/' + tourNext() : '') + '">' + icon('rocket') + (toured ? tx('تابع الجولة', 'Continue the tour') : tx('ابدأ الجولة', 'Start the tour')) + '</a>' +
     '<a class="btn btn-secondary btn-lg" href="#/library">' + icon('book') + tx('تصفّح الدروس', 'Browse lessons') + '</a></div>' +
+    '<a class="hx-guide" href="#/guide">' + icon('bulb', 'icon-sm') + tx('جديد هنا؟ تعرّف كيف تستخدم هذا الموقع', 'New here? See how to use this website') + icon('fwd', 'icon-sm') + '</a>' +
     (started ? '<a class="hx-resume" href="' + (last && !Store.isDone(last.id) ? lessonLink(last.id) : '#/progress') + '">' + ring(Math.round((done + toured) / (LESSONS.length + 12) * 100), { size: 34, stroke: 5, color: '#ffc800', track: 'rgb(255 255 255 / .2)' }) +
       '<span><small class="num">' + tx(toured + '/12 من الجولة · ' + done + '/' + LESSONS.length + ' درساً', toured + '/12 tour parts · ' + done + '/' + LESSONS.length + ' lessons') + '</small>' + (last && !Store.isDone(last.id) ? tx('تابع: ', 'Continue: ') + t(last.title) : tx('شاهد تقدّمي', 'See my progress')) + '</span>' + icon('fwd', 'icon-sm') + '</a>'
       : '<p class="hx-facts"><span>' + icon('compass', 'icon-sm') + tx('12 جزءاً', '12 parts') + '</span><span>' + icon('play', 'icon-sm') + tx('عروض متحركة', 'Animated demos') + '</span><span>' + icon('flask', 'icon-sm') + tx('تدريب عملي', 'Hands-on practice') + '</span></p>') +
@@ -7971,6 +8224,8 @@ function viewHome(main) {
 
     '<section class="hsec" aria-labelledby="waysT"><p class="h-kicker">' + tx('اختر طريقتك', 'Pick your way') + '</p><h2 id="waysT">' + tx('ثلاث طرق ممتعة لتتعلّم', 'Three fun ways to learn') + '</h2>' +
     '<div class="ways">' + WAYS.map(w => '<a class="way" data-rv href="' + w.href + '" style="--g:' + w.g + '"><div class="way-art">' + w.art + '</div><div class="way-body"><span class="way-tag">' + icon(w.icon, 'icon-sm') + w.tag + '</span><h3>' + w.t + '</h3><p>' + w.d + '</p><span class="way-go">' + tx('هيا بنا', 'Let’s go') + icon('fwd', 'icon-sm') + '</span></div></a>').join('') + '</div></section>' +
+
+    '<a class="au-banner" data-rv href="#/automations"><span class="au-bn-art" aria-hidden="true"><span class="au-bn-robot">' + icon('robot') + '</span><i></i><i></i><i></i></span><span class="au-bn-text"><span class="way-tag">' + icon('zap', 'icon-sm') + tx('جديد', 'New') + '</span><b>' + tx('ورشة الأتمتة', 'Automations workshop') + '</b><span>' + tx('ابنِ أول أتمتة لك كما في ClickUp، وجرّبها على مهمة تجريبية.', 'Build your first automation the ClickUp way and test it on a sample task.') + '</span></span><span class="btn btn-primary">' + tx('ابدأ', 'Start') + icon('fwd', 'icon-sm') + '</span></a>' +
 
     '<section class="hsec" aria-labelledby="whyT"><p class="h-kicker">' + tx('لماذا ClickUp؟', 'Why ClickUp?') + '</p><h2 id="whyT">' + tx('من الفوضى إلى الوضوح في لحظة', 'From chaos to clarity in a moment') + '</h2>' +
     '<div class="panel why-home" data-rv>' + beforeAfter() + '</div></section>' +
@@ -7990,14 +8245,450 @@ function viewHome(main) {
 }
 
 ;
+/* ---- app/automations.js ---- */
+/* ==========================================================================
+   Automations workshop. Explains Trigger → Condition → Action, shows the
+   kinds of automations teams use, and lets the learner build automations in
+   a simplified ClickUp-style "Automations" window and test them on a sample
+   task. Nothing here connects to ClickUp; it is an educational simulation.
+   ========================================================================== */
+
+const AU = (() => {
+  const ST = ['todo', 'progress', 'review', 'done'];
+  const PR = ['urgent', 'high', 'normal', 'low'];
+  const PPL = ['salim', 'maryam', 'noura', 'khalid'];
+  const OPT = {
+    status: () => ST.map(k => [k, STATUS[k].en]),
+    priority: () => PR.map(k => [k, PRIORITY[k].en]),
+    person: () => PPL.map(k => [k, PN(k)]),
+    dept: () => [['ops', tx('العمليات', 'Operations')], ['fin', tx('المالية', 'Finance')], ['mkt', tx('التسويق', 'Marketing')]],
+    list: () => [['weekly', L_WEEKLY()], ['req', L_REQ()], ['audit', tx('إجراءات التدقيق', 'Audit actions')]],
+    comment: () => [['review', tx('جاهزة لمراجعتك، شكراً!', 'Ready for your review, thanks!')], ['done', tx('تم الإنجاز. عمل رائع!', 'Done. Great work, everyone!')], ['due', tx('تذكير: موعد هذه المهمة اليوم.', 'Reminder: this task is due today.')]],
+    template: () => [['review', tx('قائمة تحقق المراجعة', 'Review checklist')]],
+    email: () => [['assignees', tx('إلى المسؤولين', 'To the assignees')]]
+  };
+  const TRIG = {
+    created: { en: 'Task or subtask created', ar: 'عند إنشاء مهمة أو مهمة فرعية', ic: 'plus' },
+    status: { en: 'Status changes', ar: 'عندما تتغير الحالة', ic: 'board', p: 'status' },
+    priority: { en: 'Priority changes', ar: 'عندما تتغير الأولوية', ic: 'flag', p: 'priority' },
+    assignee: { en: 'Assignee added', ar: 'عند إضافة مسؤول', ic: 'user' },
+    due: { en: 'Due date arrives', ar: 'عندما يحين تاريخ الاستحقاق', ic: 'calendar' },
+    field: { en: 'Custom Field changes', ar: 'عندما يتغير حقل مخصص', ic: 'table', p: 'dept' }
+  };
+  const COND = {
+    priority: { en: 'Priority is', ar: 'الأولوية هي', p: 'priority' },
+    dept: { en: 'Department is', ar: 'الإدارة هي', p: 'dept' },
+    assignee: { en: 'Assignee is', ar: 'المسؤول هو', p: 'person' }
+  };
+  const ACT = {
+    status: { en: 'Change status', ar: 'غيّر الحالة', ic: 'board', p: 'status' },
+    assignee: { en: 'Add assignee', ar: 'أضف مسؤولاً', ic: 'user', p: 'person' },
+    priority: { en: 'Change priority', ar: 'غيّر الأولوية', ic: 'flag', p: 'priority' },
+    comment: { en: 'Add a comment', ar: 'أضف تعليقاً', ic: 'message', p: 'comment' },
+    move: { en: 'Move to List', ar: 'انقل إلى قائمة', ic: 'list', p: 'list' },
+    template: { en: 'Apply a template', ar: 'طبّق قالباً', ic: 'template', p: 'template' },
+    email: { en: 'Send email', ar: 'أرسل بريداً', ic: 'at', p: 'email' }
+  };
+  const lab = (p, v) => { const o = (OPT[p] ? OPT[p]() : []).find(x => x[0] === v); return o ? o[1] : ''; };
+  const first = p => OPT[p]()[0][0];
+  const R = (k, v, c, a, by) => ({ t: { k, v }, c: c.map(x => ({ k: x[0], v: x[1] })), a: a.map(x => ({ k: x[0], v: x[1] })), by });
+  const trigSent = t => { const T = TRIG[t.k]; return tx(T.ar + (T.p ? ' إلى ' + lab(T.p, t.v) : ''), 'When ' + T.en.charAt(0).toLowerCase() + T.en.slice(1) + (T.p ? ' to ' + lab(T.p, t.v) : '')); };
+  const condSent = c => tx(COND[c.k].ar + ' ' + lab(COND[c.k].p, c.v), COND[c.k].en.toLowerCase() + ' ' + lab(COND[c.k].p, c.v));
+  const actSent = a => tx(ACT[a.k].ar + ': ' + lab(ACT[a.k].p, a.v), ACT[a.k].en.toLowerCase() + ': ' + lab(ACT[a.k].p, a.v));
+  const sentence = au => { const s = trigSent(au.t) + (au.c.length ? tx(' وكان ', ', if ') + au.c.map(condSent).join(tx(' و', ' and ')) : '') + tx('، ', ', ') + au.a.map(actSent).join(tx('، ثم ', ', then ')); return /[.!؟?]$/.test(s) ? s : s + '.'; };
+  const emailMix = a => a.some(x => x.k === 'email') && a.some(x => x.k !== 'email');
+
+  const TYPES = () => [
+    { ic: 'board', c: '#7b68ee', t: tx('الحالة وسير العمل', 'Status & workflow'), d: tx('حرّك العمل وأبلغ الشخص التالي عندما تتغير الحالة.', 'Move work along and tell the next person when a status changes.'),
+      r: [R('status', 'review', [], [['assignee', 'salim'], ['comment', 'review']]), R('status', 'done', [], [['comment', 'done'], ['move', 'audit']])] },
+    { ic: 'user', c: '#e44bb6', t: tx('المسؤولون والتسليم', 'Assignees & hand-offs'), d: tx('لا تبقى مهمة بلا صاحب.', 'No task is ever left without an owner.'),
+      r: [R('created', null, [], [['assignee', 'maryam']]), R('assignee', null, [], [['status', 'progress']])] },
+    { ic: 'flag', c: '#ff7a45', t: tx('الأولويات', 'Priorities'), d: tx('العاجل يصل إلى الشخص المناسب فوراً.', 'Urgent work reaches the right person straight away.'),
+      r: [R('priority', 'urgent', [], [['email', 'assignees']]), R('priority', 'urgent', [['dept', 'fin']], [['assignee', 'khalid']])] },
+    { ic: 'calendar', c: '#1fb6e0', t: tx('المواعيد والتذكير', 'Dates & reminders'), d: tx('تذكير تلقائي قبل أن يفوت الموعد.', 'Automatic reminders before a deadline slips.'),
+      r: [R('due', null, [], [['priority', 'urgent'], ['comment', 'due']])] },
+    { ic: 'template', c: '#22c38e', t: tx('القوالب وقوائم التحقق', 'Templates & checklists'), d: tx('كل مهمة جديدة تبدأ بالخطوات نفسها.', 'Every new task starts with the same steps.'),
+      r: [R('created', null, [], [['template', 'review']])] },
+    { ic: 'table', c: '#f5a524', t: tx('الحقول المخصصة', 'Custom Fields'), d: tx('وجّه العمل حسب بياناته، مثل الإدارة.', 'Route work by its data, such as the department.'),
+      r: [R('field', 'fin', [], [['move', 'req'], ['assignee', 'khalid']])] },
+    { ic: 'link', c: '#4f86f7', t: tx('التكاملات', 'Integrations'), d: tx('أرسل رسالة إلى Slack أو اربط GitHub أو البريد عند حدوث تغيير. تُضبط داخل ClickUp بعد ربط التطبيقات، ولا نحاكيها هنا.', 'Post to Slack, connect GitHub or email when something changes. These are set up inside ClickUp after connecting the apps, so they are not simulated here.') },
+    { ic: 'sparkle', c: '#a855f7', t: tx('ابنها بالذكاء الاصطناعي', 'Build it with AI'), d: tx('صف ما تريده بكلمات بسيطة، مثل «عندما تصبح المهمة عاجلة أبلغ مريم»، فيجهّز ClickUp Brain الأتمتة لك. يعتمد توفره على خطتكم وإعدادات المسؤول.', 'Describe what you want in plain words, such as “when a task becomes urgent, tell Maryam”, and ClickUp Brain sets up the automation. Availability depends on your plan and admin settings.') }
+  ];
+  const seed = () => [Object.assign(R('status', 'review', [], [['assignee', 'salim'], ['comment', 'review']], 'Ashjan Al Sinani · 71067'), { id: 'au1', on: true })];
+  const autos = () => Store.state.autos || seed();
+  const saveAutos = list => Store.setAutos(list);
+  const newTask = () => ({ status: 'todo', priority: 'normal', assignees: ['noura'], dept: 'ops', list: 'req', comments: [], checklist: false, emails: 0, flash: [] });
+  return { OPT, TRIG, COND, ACT, lab, first, R, sentence, emailMix, TYPES, autos, saveAutos, newTask, trigSent, actSent };
+})();
+
+function viewAutomations(main) {
+  const STEPS = [['bulb', tx('كيف تعمل', 'How it works')], ['layers', tx('أنواعها', 'Types')], ['robot', tx('ابنِ وجرّب', 'Build & test')], ['list', tx('في ClickUp', 'In ClickUp')], ['info', tx('معلومات مهمة', 'Good to know')]];
+  let step = UIState.get('au-step') || 0;
+  const S = () => UIState.get('au') || { view: 'manage', draft: null, task: AU.newTask(), log: [], used: 0 };
+  const put = s => UIState.set('au', s);
+  const sel = (f, opts, v, lbl) => '<select class="select select-sm" data-f="' + f + '" aria-label="' + esc(lbl) + '">' + opts.map(o => '<option value="' + o[0] + '"' + (o[0] === v ? ' selected' : '') + '>' + esc(o[1]) + '</option>').join('') + '</select>';
+  const ic = n => '<span class="au-ic">' + icon(n, 'icon-sm') + '</span>';
+
+  main.innerHTML = '<div class="page tour-part au-page" style="' + modStyle('m9') + '">' +
+    '<header class="lesson-hero"><span class="lh-art" aria-hidden="true">' + icon('robot') + '</span><div class="breadcrumbs"><a href="#/home">' + tx('الرئيسية', 'Home') + '</a><span aria-hidden="true">/</span><span>Automations</span></div>' +
+    '<h1 tabindex="-1">' + tx('ورشة الأتمتة: دع ClickUp يتولى الروتين', 'Automations workshop: let ClickUp handle the routine') + '</h1>' +
+    '<p class="au-sub">' + tx('تعلّم الفكرة، واختر النوع المناسب، ثم ابنِ أتمتة بنفسك وجرّبها على مهمة تجريبية.', 'Learn the idea, pick the right type, then build an automation yourself and test it on a sample task.') + '</p>' +
+    '<div class="au-pills"><span>When</span>' + icon('fwd', 'icon-sm') + '<span>If</span>' + icon('fwd', 'icon-sm') + '<span>Then</span></div></header>' +
+    '<div class="tour-steps" role="group" aria-label="' + tx('أقسام الورشة', 'Workshop sections') + '">' + STEPS.map((s, i) => '<button type="button" data-astep="' + i + '"><span class="ts-n num">' + (i + 1) + '</span>' + icon(s[0], 'icon-sm') + '<span>' + s[1] + '</span></button>').join('') + '</div>' +
+    '<section class="panel tour-panel" data-ap aria-live="polite"></section>' +
+    '<nav class="tour-nav" aria-label="' + tx('التنقل', 'Navigation') + '"><button type="button" class="btn btn-secondary" data-ago="-1">' + icon('back', 'icon-sm') + '<span>' + tx('السابق', 'Back') + '</span></button><button type="button" class="btn btn-primary" data-ago="1"><span></span>' + icon('fwd', 'icon-sm') + '</button></nav></div>';
+  const panel = $('[data-ap]', main);
+
+  /* ---- 1. How it works ---- */
+  const howHTML = () => '<p class="tp-kicker">' + tx('الفكرة في جملة', 'The idea in one sentence') + '</p><h2>' + tx('عندما يحدث شيء، وإذا تحقق شرط، ينفّذ ClickUp إجراءً عنك', 'When something happens, and a condition is true, ClickUp takes an action for you') + '</h2>' +
+    '<div class="au-flow" aria-hidden="true">' +
+    '<div class="au-node n-when"><span class="au-nic">' + icon('zap') + '</span><b>When</b><small>Trigger · ' + tx('المُشغِّل', 'what happens') + '</small><p>' + tx('تتغير الحالة إلى REVIEW', 'Status changes to REVIEW') + '</p></div><span class="au-wire"><i></i></span>' +
+    '<div class="au-node n-if"><span class="au-nic">' + icon('filter') + '</span><b>If</b><small>Condition · ' + tx('اختياري', 'optional') + '</small><p>' + tx('الأولوية High', 'Priority is High') + '</p></div><span class="au-wire"><i></i></span>' +
+    '<div class="au-node n-then"><span class="au-nic">' + icon('check') + '</span><b>Then</b><small>Action · ' + tx('الإجراء', 'what ClickUp does') + '</small><p>' + tx('أضف سالم مراجعاً وأضف تعليقاً', 'Add Salim as reviewer and post a comment') + '</p></div></div>' +
+    '<div class="au-live" aria-hidden="true"><div class="au-mini"><span class="au-mst"><em class="m1">IN PROGRESS</em><em class="m2">REVIEW</em></span><b>' + tx('تجهيز التقرير الأسبوعي', 'Prepare the weekly report') + '</b><span class="au-mav">' + DM.av('noura', 22) + '<span class="au-pop">' + DM.av('salim', 22) + '</span></span></div>' +
+    '<div class="au-mcomment">' + icon('robot', 'icon-sm') + '<span><b>Automation</b> · ' + tx('جاهزة لمراجعتك يا سالم', 'Ready for your review, Salim') + '</span></div></div>' +
+    '<div class="au-three">' + [
+      ['zap', '#e44bb6', 'Trigger', tx('الحدث الذي يبدأ الأتمتة، مثل إنشاء مهمة أو تغيّر الحالة أو حلول الموعد.', 'The event that starts the automation, such as a task being created, a status changing or a due date arriving.')],
+      ['filter', '#f59e0b', 'Condition', tx('شرط اختياري يحدد أي المهام تُنفَّذ عليها الأتمتة، مثل «الأولوية High». متاح في خطة Business وما فوقها.', 'An optional filter for which tasks it runs on, such as “Priority is High”. Available on the Business plan and above.')],
+      ['check', '#22c38e', 'Action', tx('ما ينفّذه ClickUp: تغيير الحالة، إضافة مسؤول، تعليق، نقل، بريد... ويمكن إضافة أكثر من إجراء.', 'What ClickUp does: change status, add an assignee, comment, move, email and more. You can add several actions.')]
+    ].map(x => '<div class="why-card" style="--tc:' + x[1] + '"><span class="ic-tile">' + icon(x[0]) + '</span><h3>' + x[2] + '</h3><p>' + x[3] + '</p></div>').join('') + '</div>';
+
+  /* ---- 2. Types ---- */
+  const typesHTML = () => '<p class="tp-kicker">' + tx('ماذا يمكن أن تؤتمت؟', 'What can you automate?') + '</p><h2>' + tx('أنواع الأتمتة الأكثر استخداماً', 'The most useful types of automation') + '</h2><div class="au-types">' +
+    AU.TYPES().map((ty, i) => '<div class="au-type" style="--tc:' + ty.c + '"><div class="au-type-h"><span class="ic-tile">' + icon(ty.ic) + '</span><h3>' + ty.t + '</h3></div><p>' + ty.d + '</p>' +
+      (ty.r ? '<ul>' + ty.r.map((r, j) => '<li><span>' + AU.sentence(r) + '</span><button type="button" class="btn btn-ghost btn-sm" data-try="' + i + ':' + j + '">' + icon('play', 'icon-sm') + tx('جرّبها', 'Try it') + '</button></li>').join('') + '</ul>' : '<span class="chip">' + icon('eye', 'icon-sm') + tx('داخل ClickUp فقط', 'Inside ClickUp only') + '</span>') + '</div>').join('') + '</div>';
+
+  /* ---- 3. Build & test ---- */
+  const buildHTML = () => '<p class="tp-kicker">' + tx('ابنِ وجرّب', 'Build & test') + '</p><h2>' + tx('ابنِ أتمتة كما في ClickUp، ثم جرّبها', 'Build an automation the ClickUp way, then test it') + '</h2>' +
+    '<div class="au-lab"><div class="cu-modal" data-modal></div><div class="au-sand" data-sand></div></div>' +
+    '<p class="help-text au-note">' + icon('eye', 'icon-sm') + '<span>' + tx('محاكاة تعليمية مبسّطة لنافذة Automations. في هذه المحاكاة لا تُشغِّل إجراءات الأتمتة أتمتة أخرى.', 'A simplified educational simulation of the Automations window. In this simulation, automation actions do not start other automations.') + '</span></p>';
+  const modalHTML = () => {
+    const s = S(); const list = AU.autos();
+    const head = '<div class="cu-mhead"><span class="cu-robot">' + icon('robot') + '</span><div><b>Automations</b><small>List · ' + L_REQ() + '</small></div>' +
+      '<div class="cu-mtabs" role="tablist"><button type="button" role="tab" data-view="browse" aria-selected="' + (s.view === 'browse') + '">Templates</button><button type="button" role="tab" data-view="manage" aria-selected="' + (s.view === 'manage') + '">Manage <span class="num">' + list.length + '</span></button></div>' +
+      '<button type="button" class="btn btn-primary btn-sm" data-new>' + icon('plus', 'icon-sm') + 'Add Automation</button></div>';
+    let body = '';
+    if (s.view === 'build' && s.draft) {
+      const d = s.draft; const T = AU.TRIG[d.t.k];
+      body = '<div class="cu-build">' +
+        '<div class="cu-block cu-when"><span class="cu-lbl">When</span><span class="cu-hint">Trigger</span><div class="cu-row">' + ic(T.ic) + AU_sel('t.k', Object.keys(AU.TRIG).map(k => [k, AU.TRIG[k].en]), d.t.k, 'Trigger') + (T.p ? '<span class="cu-to">to</span>' + AU_sel('t.v', AU.OPT[T.p](), d.t.v, T.en) : '') + '</div>' + (isEN() ? '' : '<p class="cu-help">' + T.ar + '</p>') + '</div>' +
+        d.c.map((c, i) => '<div class="cu-block cu-if"><span class="cu-lbl">If</span><span class="cu-hint">Condition</span><div class="cu-row">' + AU_sel('c.' + i + '.k', Object.keys(AU.COND).map(k => [k, AU.COND[k].en]), c.k, 'Condition') + AU_sel('c.' + i + '.v', AU.OPT[AU.COND[c.k].p](), c.v, 'Value') + '<button type="button" class="icon-btn" data-rm="c.' + i + '" aria-label="' + tx('احذف الشرط', 'Remove condition') + '">' + icon('x', 'icon-sm') + '</button></div></div>').join('') +
+        '<div class="cu-link"><button type="button" class="cu-plus" data-add="c">' + icon('plus', 'icon-sm') + 'Add condition</button><span class="cu-plan">' + tx('خطة Business وما فوقها', 'Business plan and above') + '</span></div>' +
+        '<div class="cu-block cu-then"><span class="cu-lbl">Then</span><span class="cu-hint">Action</span>' +
+        d.a.map((a, i) => '<div class="cu-row">' + ic(AU.ACT[a.k].ic) + AU_sel('a.' + i + '.k', Object.keys(AU.ACT).map(k => [k, AU.ACT[k].en]), a.k, 'Action') + AU_sel('a.' + i + '.v', AU.OPT[AU.ACT[a.k].p](), a.v, 'Value') + (d.a.length > 1 ? '<button type="button" class="icon-btn" data-rm="a.' + i + '" aria-label="' + tx('احذف الإجراء', 'Remove action') + '">' + icon('x', 'icon-sm') + '</button>' : '') + '</div>').join('') +
+        '<button type="button" class="cu-plus" data-add="a">' + icon('plus', 'icon-sm') + 'Add action</button></div>' +
+        (AU.emailMix(d.a) ? feedbackHTML('bad', tx('في ClickUp، إجراء Send email يُجمع فقط مع إجراءات Send email أخرى. احذف أحد النوعين.', 'In ClickUp, a Send email action can only be combined with other Send email actions. Remove one kind.')) : '') +
+        '<p class="cu-sum">' + icon('robot', 'icon-sm') + '<span>' + AU.sentence(d) + '</span></p>' +
+        '<div class="cu-foot"><button type="button" class="btn btn-ghost btn-sm" data-cancel>Cancel</button><button type="button" class="btn btn-primary btn-sm" data-create' + (AU.emailMix(d.a) ? ' disabled' : '') + '>Create</button></div></div>';
+    } else if (s.view === 'browse') {
+      body = '<div class="cu-tpls">' + AU.TYPES().filter(ty => ty.r).map((ty, i) => ty.r.map((r, j) => '<button type="button" class="cu-tpl" data-try="' + i + ':' + j + '" style="--tc:' + ty.c + '"><span class="ic-tile">' + icon(ty.ic, 'icon-sm') + '</span><span>' + AU.sentence(r) + '</span></button>').join('')).join('') + '</div>';
+    } else {
+      body = list.length ? '<ul class="cu-manage">' + list.map(a => '<li class="' + (a.on ? '' : 'off') + '"><button type="button" class="cu-switch" role="switch" aria-checked="' + a.on + '" data-toggle="' + a.id + '" aria-label="' + tx('تشغيل أو إيقاف: ', 'Turn on or off: ') + esc(AU.sentence(a)) + '"><i></i></button><div><p>' + AU.sentence(a) + '</p>' + (a.by ? '<small>' + tx('أنشأها ', 'Created by ') + '<bdi dir="ltr">' + esc(a.by) + '</bdi></small>' : '') + '</div><button type="button" class="icon-btn" data-del="' + a.id + '" aria-label="' + tx('احذف الأتمتة', 'Delete automation') + '">' + icon('trash', 'icon-sm') + '</button></li>').join('') + '</ul>'
+        : '<div class="empty-state">' + icon('robot') + '<p>' + tx('لا توجد أتمتة بعد. اضغط Add Automation.', 'No automations yet. Press Add Automation.') + '</p></div>';
+    }
+    return head + '<div class="cu-mbody">' + body + '</div>';
+  };
+  function AU_sel(f, opts, v, lbl) { return sel(f, opts, v, lbl); }
+  const sandHTML = () => {
+    const s = S(); const tk = s.task; const fl = k => tk.flash.includes(k) ? ' au-flash' : '';
+    return '<h3>' + icon('checklist', 'icon-sm') + tx('مهمة تجريبية', 'Sample task') + '</h3>' +
+      '<div class="au-task"><div class="au-trow"><span class="mx-status st-' + tk.status + fl('status') + '">' + STATUS[tk.status].en + '</span><b>' + tx('طلب تقرير مبيعات الباقات', 'Plan sales report request') + '</b></div>' +
+      '<div class="au-tmeta"><span class="' + fl('priority') + '">' + DM.pr(tk.priority) + '</span><span class="au-avs' + fl('assignee') + '">' + tk.assignees.map(p => DM.av(p, 22)).join('') + '</span><span class="chip' + fl('dept') + '">' + icon('table', 'icon-sm') + AU.lab('dept', tk.dept) + '</span><span class="chip' + fl('move') + '">' + icon('list', 'icon-sm') + AU.lab('list', tk.list) + '</span>' +
+      (tk.checklist ? '<span class="chip' + fl('template') + '">' + icon('checklist', 'icon-sm') + AU.lab('template', 'review') + '</span>' : '') + (tk.emails ? '<span class="chip' + fl('email') + '">' + icon('at', 'icon-sm') + tx('بريد: ', 'Emails: ') + tk.emails + '</span>' : '') + '</div>' +
+      (tk.comments.length ? '<div class="au-comments">' + tk.comments.map((c, i) => '<p class="' + (i === tk.comments.length - 1 ? fl('comment') : '') + '">' + icon('robot', 'icon-sm') + c + '</p>').join('') + '</div>' : '') + '</div>' +
+      '<p class="au-do">' + tx('افعل شيئاً بالمهمة، وشاهد ماذا تفعل الأتمتة:', 'Do something to the task and watch what the automations do:') + '</p><div class="au-events">' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-ev="created">' + icon('plus', 'icon-sm') + tx('أنشئ مهمة جديدة', 'Create a new task') + '</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-ev="due">' + icon('calendar', 'icon-sm') + tx('حلّ الموعد', 'Due date arrives') + '</button>' +
+      '<label>' + tx('الحالة', 'Status') + AU_sel('ev.status', AU.OPT.status(), tk.status, tx('الحالة', 'Status')) + '</label>' +
+      '<label>' + tx('الأولوية', 'Priority') + AU_sel('ev.priority', AU.OPT.priority(), tk.priority, tx('الأولوية', 'Priority')) + '</label>' +
+      '<label>' + tx('أضف مسؤولاً', 'Add assignee') + AU_sel('ev.assignee', [['', '—']].concat(AU.OPT.person()), '', tx('أضف مسؤولاً', 'Add assignee')) + '</label>' +
+      '<label>' + tx('الإدارة', 'Department') + AU_sel('ev.field', AU.OPT.dept(), tk.dept, tx('الإدارة', 'Department')) + '</label></div>' +
+      '<div class="au-log-h"><h3>' + icon('clock', 'icon-sm') + 'Activity</h3><span class="chip num">' + tx('الإجراءات المستخدمة: ', 'Actions used: ') + s.used + '</span></div>' +
+      '<ul class="au-log" aria-live="polite">' + (s.log.length ? s.log.slice(0, 6).map(l => '<li class="lg-' + l.k + '">' + icon(l.k === 'ok' ? 'check-circle' : l.k === 'skip' ? 'alert' : 'info', 'icon-sm') + '<span>' + l.t + '</span></li>').join('') : '<li class="lg-none">' + icon('info', 'icon-sm') + '<span>' + tx('لم يحدث شيء بعد.', 'Nothing has happened yet.') + '</span></li>') + '</ul>';
+  };
+  const paintLab = () => { const m = $('[data-modal]', panel), sd = $('[data-sand]', panel); if (m) m.innerHTML = modalHTML(); if (sd) sd.innerHTML = sandHTML(); };
+
+  /* The engine: apply the learner's change, then every matching automation. */
+  const fire = (k, v) => {
+    const s = S(); const tk = s.task; tk.flash = [];
+    if (k === 'created') { Object.assign(tk, AU.newTask()); }
+    if (k === 'status') { if (tk.status === v) return; tk.status = v; tk.flash.push('status'); }
+    if (k === 'priority') { if (tk.priority === v) return; tk.priority = v; tk.flash.push('priority'); }
+    if (k === 'assignee') { if (!v || tk.assignees.includes(v)) return; tk.assignees.push(v); tk.flash.push('assignee'); }
+    if (k === 'field') { if (tk.dept === v) return; tk.dept = v; tk.flash.push('dept'); }
+    const matches = AU.autos().filter(a => a.on && a.t.k === k && (!AU.TRIG[k].p || a.t.v === v));
+    const evLabel = AU.trigSent({ k, v });
+    if (!matches.length) s.log.unshift({ k: 'none', t: evLabel + tx(': لا توجد أتمتة لهذا التغيير.', ': no automation for this change.') });
+    matches.forEach(a => {
+      const pass = a.c.every(c => c.k === 'priority' ? tk.priority === c.v : c.k === 'dept' ? tk.dept === c.v : tk.assignees.includes(c.v));
+      if (!pass) { s.log.unshift({ k: 'skip', t: tx('تخطّت الأتمتة التشغيل لأن الشرط غير متحقق. لم يُستخدم أي إجراء.', 'Skipped because the condition was not met. No actions used.') }); return; }
+      a.a.forEach(x => {
+        if (x.k === 'status') tk.status = x.v; if (x.k === 'priority') tk.priority = x.v; if (x.k === 'move') tk.list = x.v; if (x.k === 'template') tk.checklist = true;
+        if (x.k === 'assignee' && !tk.assignees.includes(x.v)) tk.assignees.push(x.v);
+        if (x.k === 'comment') tk.comments.push(AU.lab('comment', x.v)); if (x.k === 'email') tk.emails++;
+        tk.flash.push(x.k); s.used++;
+      });
+      s.log.unshift({ k: 'ok', t: tx('نُفّذت: ', 'Ran: ') + AU.sentence(a) });
+    });
+    put(s); paintLab();
+    if (matches.length && !prefersReducedMotion()) { const t = $('.au-task', panel); if (t) t.animate([{ boxShadow: '0 0 0 4px rgb(255 77 109 / .45)' }, { boxShadow: '0 0 0 0 rgb(255 77 109 / 0)' }], { duration: 900, easing: 'ease-out' }); }
+  };
+
+  /* ---- 4. In ClickUp ---- */
+  const inClickUpHTML = () => '<p class="tp-kicker">' + tx('داخل ClickUp', 'Inside ClickUp') + '</p><h2>' + tx('كيف تنشئ أتمتة، خطوة بخطوة', 'How to create an automation, step by step') + '</h2>' +
+    '<div class="tp-how"><ol class="tp-steps">' + [
+      tx('افتح Space أو Folder أو List حيث يحدث العمل.', 'Open the Space, Folder or List where the work happens.'),
+      tx('اضغط أيقونة الروبوت (Automations) أعلى العرض.', 'Click the robot icon (Automations) at the top of the view.'),
+      tx('اضغط Create Automation، أو Add Automation أعلى يمين النافذة.', 'Click Create Automation, or Add Automation in the upper-right of the window.'),
+      tx('اختر أتمتة مقترحة، أو قالباً جاهزاً، أو ابنِ واحدة من البداية.', 'Choose a suggested automation, a ready template, or build one from scratch.'),
+      tx('اختر Trigger: متى تبدأ الأتمتة.', 'Choose a Trigger: when the automation starts.'),
+      tx('اختياري: اضغط + أسفل Trigger لإضافة Conditions (خطة Business وما فوقها).', 'Optional: click + below the Trigger to add Conditions (Business plan and above).'),
+      tx('أضف Action واحداً أو أكثر: ما يفعله ClickUp.', 'Add one or more Actions: what ClickUp does.'),
+      tx('أنشئها وجرّبها على مهمة تجريبية. يمكنك إيقافها أو تعديلها لاحقاً من قائمة الإدارة.', 'Create it and test it on a sample task. You can turn it off or edit it later from the manage list.')
+    ].map((h, k) => '<li style="--k:' + k + '"><span class="num">' + (k + 1) + '</span><p>' + h + '</p></li>').join('') + '</ol>' +
+    '<div class="au-shot" aria-hidden="true"><div class="au-shot-bar"><span>' + L_OPS() + ' / <b>' + L_REQ() + '</b></span><span class="au-shot-robot">' + icon('robot') + '</span><span class="au-shot-share">Share</span></div>' +
+    '<div class="au-shot-menu"><b>Automations</b><span class="au-shot-create">' + icon('plus', 'icon-sm') + 'Create Automation</span><span>' + icon('sparkle', 'icon-sm') + tx('اقتراحات', 'Suggested') + '</span><span>' + icon('template', 'icon-sm') + 'Templates</span></div></div></div>' +
+    '<p class="help-text">' + tx('قد تختلف أسماء الأزرار ومواضعها قليلاً بين إصدارات ClickUp.', 'Button names and positions may differ slightly between ClickUp versions.') + ' <a href="https://help.clickup.com/hc/en-us/articles/6312102752791-Intro-to-Automations" target="_blank" rel="noopener noreferrer">' + icon('external', 'icon-sm') + 'Intro to Automations' + NEW_TAB() + '</a></p>';
+
+  /* ---- 5. Good to know ---- */
+  const knowHTML = () => {
+    const faq = [
+      [tx('لماذا لم تعمل الأتمتة؟', 'Why didn’t my automation run?'), tx('تأكد أنها مفعّلة، وأن الحدث يطابق Trigger تماماً (مثل الحالة الصحيحة)، وأن الشروط متحققة، وأن مساحة العمل لم تصل إلى حدها الشهري من الإجراءات.', 'Check it is turned on, that the event matches the Trigger exactly (such as the right status), that the conditions are true, and that the Workspace has not reached its monthly action limit.')],
+      [tx('هل يمكن لأتمتة واحدة أن تفعل عدة أشياء؟', 'Can one automation do several things?'), tx('نعم، أضف أكثر من Action. الاستثناء: إجراء Send email يُجمع فقط مع إجراءات Send email أخرى.', 'Yes, add several Actions. The exception: a Send email action can only be combined with other Send email actions.')]
+    ].concat(CU_FAQ.filter(f => f.part === 'auto').map(f => [tp(f.q), tp(f.a)]));
+    return '<p class="tp-kicker">' + tx('قبل أن تبدأ', 'Before you start') + '</p><h2>' + tx('معلومات مهمة ونصائح', 'Good to know, and tips') + '</h2><div class="au-know">' + [
+      ['chart', '#ff4d6d', tx('الحد الشهري', 'Monthly limit'), tx('لكل مساحة عمل عدد شهري من إجراءات الأتمتة يعتمد على الخطة. كل إجراء يُنفَّذ يُحسب حتى لو فشل، أما الإجراء الذي تخطّاه شرط فلا يُحسب. عند بلوغ الحد تتوقف الأتمتة حتى الشهر التالي.', 'Each Workspace has a monthly number of automation actions that depends on the plan. Every action that runs counts, even if it fails; an action skipped by a condition does not. When the limit is reached, automations pause until the next month.')],
+      ['flask', '#1fb6e0', tx('جرّب أولاً', 'Test first'), tx('جرّب الأتمتة على مهمة تجريبية قبل الاعتماد عليها في عمل حقيقي.', 'Try an automation on a sample task before relying on it for real work.')],
+      ['repeat', '#f5a524', tx('تجنّب التعارض', 'Avoid clashes'), tx('لا تجعل أتمتتين تغيّران الشيء نفسه بطريقتين مختلفتين، وكن محدداً في الشروط.', 'Don’t let two automations change the same thing in different ways, and be specific with conditions.')],
+      ['sparkle', '#a855f7', tx('صفها بكلماتك', 'Describe it in words'), tx('إن كان ClickUp Brain متاحاً لكم، صف الأتمتة بكلمات بسيطة وراجع ما يقترحه قبل الحفظ.', 'If ClickUp Brain is available to you, describe the automation in plain words and review what it suggests before saving.')]
+    ].map(x => '<div class="why-card" style="--tc:' + x[1] + '"><span class="ic-tile">' + icon(x[0]) + '</span><h3>' + x[2] + '</h3><p>' + x[3] + '</p></div>').join('') + '</div>' +
+      '<p class="tp-kicker" style="margin-top:22px">' + tx('أسئلة شائعة', 'Common questions') + '</p><div class="cuq-list">' + faq.map(f => '<details class="cuq"><summary>' + icon('help', 'icon-sm') + '<span>' + f[0] + '</span><span class="chev">' + icon('fwd', 'icon-sm') + '</span></summary><div class="cuq-a"><p>' + f[1] + '</p></div></details>').join('') + '</div>' +
+      '<div class="ex-actions" style="margin-top:16px"><a class="btn btn-secondary" href="#/lesson/l9-1">' + icon('book', 'icon-sm') + tx('درس: Trigger ثم Condition ثم Action', 'Lesson: Trigger, Condition, Action') + '</a><a class="btn btn-secondary" href="#/support">' + icon('users', 'icon-sm') + tx('اسأل الفريق', 'Ask the team') + '</a></div>';
+  };
+
+  const BODY = [howHTML, typesHTML, buildHTML, inClickUpHTML, knowHTML];
+  const paint = dir => {
+    panel.innerHTML = '<div class="tp-body' + (dir ? ' tp-in' : '') + '" style="--dir:' + (dir || 1) + '">' + BODY[step]() + '</div>';
+    if (step === 2) paintLab();
+    $$('[data-astep]', main).forEach(b => { const k = +b.dataset.astep; b.setAttribute('aria-current', k === step ? 'step' : 'false'); b.classList.toggle('done', k < step); });
+    $('[data-ago="-1"]', main).hidden = step === 0;
+    const fwd = $('[data-ago="1"]', main); fwd.hidden = step === 4;
+    if (step < 4) $('span', fwd).textContent = tx('التالي: ', 'Next: ') + STEPS[step + 1][1];
+    UIState.set('au-step', step);
+  };
+  const goStep = (to, focus) => {
+    const d = to > step ? 1 : -1; step = to; paint(d);
+    const top = panel.getBoundingClientRect().top;
+    if (top < 70 || top > window.innerHeight * .6) $('.tour-steps', main).scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+    if (focus) { const h = $('h2', panel); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+  };
+  paint(0);
+
+  main.addEventListener('click', e => {
+    const st = e.target.closest('[data-astep]'); if (st) { if (+st.dataset.astep !== step) goStep(+st.dataset.astep, true); return; }
+    const g = e.target.closest('[data-ago]'); if (g) { goStep(clamp(step + +g.dataset.ago, 0, 4), true); return; }
+    const tr = e.target.closest('[data-try]');
+    if (tr) { const [i, j] = tr.dataset.try.split(':').map(Number); const r = AU.TYPES()[i].r[j]; const s = S(); s.draft = JSON.parse(JSON.stringify(r)); s.view = 'build'; put(s); if (step !== 2) goStep(2, false); else paintLab(); return; }
+    const s = S();
+    const v = e.target.closest('[data-view]'); if (v) { s.view = v.dataset.view; put(s); paintLab(); return; }
+    if (e.target.closest('[data-new]')) { s.draft = { t: { k: 'status', v: 'review' }, c: [], a: [{ k: 'assignee', v: 'salim' }] }; s.view = 'build'; put(s); paintLab(); const f = $('[data-f="t.k"]', panel); if (f) f.focus(); return; }
+    if (e.target.closest('[data-cancel]')) { s.view = 'manage'; s.draft = null; put(s); paintLab(); return; }
+    const add = e.target.closest('[data-add]');
+    if (add && s.draft) { if (add.dataset.add === 'c') s.draft.c.push({ k: 'priority', v: 'high' }); else s.draft.a.push({ k: 'comment', v: 'review' }); put(s); paintLab(); return; }
+    const rm = e.target.closest('[data-rm]');
+    if (rm && s.draft) { const [arr, i] = rm.dataset.rm.split('.'); s.draft[arr].splice(+i, 1); put(s); paintLab(); return; }
+    if (e.target.closest('[data-create]') && s.draft && !AU.emailMix(s.draft.a)) {
+      const list = AU.autos().concat([Object.assign(JSON.parse(JSON.stringify(s.draft)), { id: uid('au'), on: true, by: null })]);
+      AU.saveAutos(list); s.view = 'manage'; s.draft = null; put(s); paintLab();
+      toast(tx('أُنشئت الأتمتة. جرّبها على المهمة التجريبية.', 'Automation created. Try it on the sample task.')); Motion.confetti($('[data-modal]', panel), 40); return;
+    }
+    const tg = e.target.closest('[data-toggle]'); if (tg) { AU.saveAutos(AU.autos().map(a => a.id === tg.dataset.toggle ? Object.assign(a, { on: !a.on }) : a)); paintLab(); const again = $('[data-toggle="' + tg.dataset.toggle + '"]', panel); if (again) again.focus(); return; }
+    const dl = e.target.closest('[data-del]'); if (dl) { AU.saveAutos(AU.autos().filter(a => a.id !== dl.dataset.del)); paintLab(); return; }
+    const ev = e.target.closest('[data-ev]'); if (ev) { fire(ev.dataset.ev); return; }
+  });
+  main.addEventListener('change', e => {
+    const f = e.target.dataset && e.target.dataset.f; if (!f) return;
+    const s = S(); const parts = f.split('.');
+    if (parts[0] === 'ev') { fire(parts[1], e.target.value); return; }
+    if (!s.draft) return;
+    const d = s.draft; const val = e.target.value;
+    if (parts[0] === 't') { if (parts[1] === 'k') { d.t = { k: val, v: AU.TRIG[val].p ? AU.first(AU.TRIG[val].p) : null }; } else d.t.v = val; }
+    else { const item = d[parts[0]][+parts[1]]; const DEF = parts[0] === 'c' ? AU.COND : AU.ACT; if (parts[2] === 'k') { item.k = val; item.v = AU.first(DEF[val].p); } else item.v = val; }
+    put(s); paintLab(); const again = $('[data-f="' + f + '"]', panel); if (again) again.focus();
+  });
+}
+
+;
+/* ---- app/feedback.js ---- */
+/* ==========================================================================
+   How to use this website, feature ideas and team questions.
+   This website has no server: ideas and questions are kept on this device,
+   and the learner sends them to the team with Copy or Email. The page says
+   so plainly, so nobody thinks a request went somewhere it did not.
+   ========================================================================== */
+
+const EXAMPLE_PERSON = { name: 'Ashjan Al Sinani', id: '71067' };
+
+/* ---------- How to use this website ---------- */
+function viewGuide(main) {
+  const STEPS = [
+    ['globe', '#7b68ee', tx('اختر لغتك', 'Choose your language'), tx('العربية أو الإنجليزية من أعلى الصفحة في أي وقت. لا يضيع تقدّمك ولا إجاباتك عند التبديل.', 'Arabic or English from the top of the page, at any time. Switching never loses your progress or answers.'), null],
+    ['compass', '#ff02f0', tx('ابدأ بجولة ClickUp', 'Start with the ClickUp tour'), tx('12 جزءاً من التطبيق، كل جزء في 4 خطوات: تعرّف، لماذا، كيف، ثم تحقّق.', '12 parts of the app, each in 4 steps: meet it, why, how, then check.'), '#/tour'],
+    ['book', '#e44bb6', tx('تعلّم من الدروس', 'Learn from the lessons'), tx('كل درس: شاهد عرضاً متحركاً، افهم الفكرة، تدرّب، ثم أجب عن سؤالين.', 'Each lesson: watch an animation, understand the idea, practise, then answer two questions.'), '#/library'],
+    ['robot', '#ff4d6d', tx('ابنِ أتمتة', 'Build an automation'), tx('في ورشة الأتمتة تبني أتمتة كما في ClickUp وتجرّبها على مهمة تجريبية.', 'In the Automations workshop you build an automation the ClickUp way and test it on a sample task.'), '#/automations'],
+    ['flask', '#1fb6e0', tx('تدرّب في المختبر', 'Practise in the lab'), tx('مساحة تشبه ClickUp ببيانات وهمية: أنشئ مهام وحرّكها دون خوف من الخطأ.', 'A ClickUp-like space with sample data: create and move tasks with no fear of mistakes.'), '#/lab'],
+    ['message', '#14b8a6', tx('ابحث عن إجابة', 'Find an answer'), tx('الأسئلة الشائعة تجيب باختصار، وكل إجابة تأخذك إلى الجزء الذي يشرحها.', 'Common questions give short answers, and each one takes you to the part that shows it.'), '#/questions'],
+    ['users', '#f5a524', tx('اسأل الفريق أو اقترح ميزة', 'Ask the team or suggest a feature'), tx('اكتب سؤالك أو فكرتك، ثم انسخها أو أرسلها بالبريد إلى فريقك.', 'Write your question or idea, then copy it or email it to your team.'), '#/support'],
+    ['progress', '#22c38e', tx('تابع تقدّمك', 'Follow your progress'), tx('صفحة «تقدّمي» تعرض ما أنجزته وشاراتك. التقدّم محفوظ على هذا الجهاز فقط.', 'The My Progress page shows what you have done and your badges. Progress is saved on this device only.'), '#/progress']
+  ];
+  const TIPS = [
+    ['panel', tx('ركّز على الصفحة', 'Focus on the page'), tx('زر القائمة في أول الشريط العلوي يخفي القائمة الجانبية على الشاشات الكبيرة، ويتذكر اختيارك.', 'The menu button at the start of the top bar hides the side menu on large screens and remembers your choice.')],
+    ['play', tx('تحكّم في العروض', 'Control the animations'), tx('أوقف أي عرض متحرك، وتنقّل بين خطواته، وغيّر سرعته، أو فعّل «خطوة بخطوة».', 'Pause any animation, move between its steps, change its speed, or turn on “Step by step”.')],
+    ['eye', tx('محاكاة آمنة', 'A safe simulation'), tx('الشاشات هنا إعادة بناء مبسّطة ولا تتصل بحسابك في ClickUp.', 'The screens here are simplified reconstructions and do not connect to your ClickUp account.')],
+    ['mobile', tx('على الجوال أيضاً', 'On your phone too'), tx('الموقع يعمل على الجوال: افتح القائمة من الزر أعلى الشاشة.', 'The website works on phones: open the menu from the button at the top.')]
+  ];
+  main.innerHTML = '<div class="page guide">' +
+    '<section class="hx hx-small" aria-labelledby="guideT"><div class="hx-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b3"></span><span class="hx-grid"></span></div><div class="hx-copy">' +
+    '<span class="hero-kicker">' + icon('bulb', 'icon-sm') + tx('دليل سريع', 'Quick guide') + '</span><h1 id="guideT" tabindex="-1">' + tx('كيف تستخدم هذا الموقع', 'How to use this website') + '</h1>' +
+    '<p class="lead">' + tx('ثماني خطوات بسيطة لتستفيد من كل جزء في المنصة. ابدأ من الأولى، أو اقفز إلى ما تحتاجه.', 'Eight simple steps to get the most from every part of the platform. Start at the first, or jump to what you need.') + '</p></div>' +
+    '<ol class="guide-path" aria-hidden="true">' + STEPS.map((s, i) => '<li style="--tc:' + s[1] + ';--i:' + i + '"><span>' + icon(s[0]) + '</span></li>').join('') + '</ol></section>' +
+    '<section class="hsec" aria-labelledby="gStepsT"><p class="h-kicker">' + tx('خطوة بخطوة', 'Step by step') + '</p><h2 id="gStepsT">' + tx('رحلتك في المنصة', 'Your journey through the platform') + '</h2><ol class="guide-steps">' +
+    STEPS.map((s, i) => '<li class="guide-step" data-rv style="--tc:' + s[1] + '"><span class="gs-n num">' + (i + 1) + '</span><span class="ic-tile">' + icon(s[0]) + '</span><div><h3>' + s[2] + '</h3><p>' + s[3] + '</p>' + (s[4] ? '<a class="gs-go" href="' + s[4] + '">' + tx('افتح', 'Open') + icon('fwd', 'icon-sm') + '</a>' : '') + '</div></li>').join('') + '</ol></section>' +
+    '<section class="hsec" aria-labelledby="gTipsT"><p class="h-kicker">' + tx('نصائح', 'Tips') + '</p><h2 id="gTipsT">' + tx('أشياء صغيرة تجعلها أسهل', 'Little things that make it easier') + '</h2><div class="au-know">' +
+    TIPS.map(x => '<div class="why-card" data-rv style="--tc:#8930fd"><span class="ic-tile">' + icon(x[0]) + '</span><h3>' + x[1] + '</h3><p>' + x[2] + '</p></div>').join('') + '</div></section>' +
+    '<div class="h-center"><a class="btn btn-primary btn-lg" href="#/tour">' + icon('rocket') + tx('ابدأ الجولة الآن', 'Start the tour now') + '</a></div></div>';
+}
+
+/* ---------- Ideas and team questions share one form engine ---------- */
+const REQ_KINDS = {
+  ideas: {
+    prefix: 'IDEA', icon: 'sparkle', grad: 'linear-gradient(135deg,#a855f7,#ff02f0)',
+    title: () => tx('اقترح ميزة جديدة', 'Suggest a new feature'),
+    lead: () => tx('ما الذي تتمنى أن تضيفه إلى هذه المنصة أو إلى طريقة استخدامنا لـ ClickUp؟ كل فكرة تهمّنا.', 'What would you like added to this platform, or to the way we use ClickUp? Every idea matters.'),
+    subjectLabel: () => tx('اسم الفكرة', 'Idea title'), subjectPh: () => tx('مثال: وضع ليلي للعمل مساءً', 'Example: a dark mode for evening work'),
+    bodyLabel: () => tx('اشرح فكرتك وفائدتها', 'Describe your idea and how it helps'), bodyPh: () => tx('ما المشكلة التي تحلّها؟ ومن سيستفيد منها؟', 'What problem does it solve? Who will benefit?'),
+    catLabel: () => tx('أين؟', 'Where?'), cats: () => [['site', tx('هذه المنصة التعليمية', 'This learning platform')], ['clickup', tx('إعداد ClickUp لدينا', 'Our ClickUp setup')], ['auto', tx('أتمتة جديدة', 'A new automation')], ['other', tx('أخرى', 'Other')]],
+    levelLabel: () => tx('ما مدى أهميتها؟', 'How important is it?'), levels: () => [['nice', tx('فكرة لطيفة', 'Nice to have'), '#1fb6e0'], ['important', tx('مهمة', 'Important'), '#f5a524'], ['must', tx('ضرورية', 'Must have'), '#ff4d6d']],
+    listTitle: () => tx('أفكارك', 'Your ideas'), send: () => tx('أرسل الفكرة', 'Submit idea'), saved: () => tx('حُفظت فكرتك. أرسلها إلى فريقك بالنسخ أو البريد.', 'Your idea is saved. Send it to your team by copying or email.'),
+    example: { cat: 'site', level: 'important', subject: 'Add a dark mode for evening work', subjectAr: 'إضافة وضع ليلي للعمل مساءً', body: 'A darker theme would be easier on the eyes when we review tasks late in the day.', bodyAr: 'واجهة داكنة أريح للعين عندما نراجع المهام في آخر اليوم.' }
+  },
+  tickets: {
+    prefix: 'REQ', icon: 'users', grad: 'linear-gradient(135deg,#1fb6e0,#22c38e)',
+    title: () => tx('أسئلة الفريق والدعم', 'Team questions & support'),
+    lead: () => tx('عالق في شيء أو عندك سؤال لفريقك؟ اكتب سؤالك هنا، وسنقترح عليك إجابات قد تساعد فوراً.', 'Stuck on something, or have a question for your team? Write it here and we will suggest answers that may help straight away.'),
+    subjectLabel: () => tx('موضوع السؤال', 'Subject'), subjectPh: () => tx('مثال: كيف أشارك مهمة واحدة مع ضيف؟', 'Example: How do I share one task with a guest?'),
+    bodyLabel: () => tx('اكتب التفاصيل', 'Details'), bodyPh: () => tx('ماذا حاولت؟ وماذا حدث؟ وأين (Space أو List)؟', 'What did you try? What happened? Where (Space or List)?'),
+    catLabel: () => tx('نوع الطلب', 'Type of request'), cats: () => [['howto', tx('كيف أفعل شيئاً في ClickUp', 'How to do something in ClickUp')], ['access', tx('الوصول والصلاحيات', 'Access and permissions')], ['problem', tx('مشكلة أو خطأ', 'A problem or error')], ['site', tx('هذه المنصة التعليمية', 'This learning platform')], ['other', tx('أخرى', 'Other')]],
+    levelLabel: () => tx('مدى الاستعجال', 'How urgent?'), levels: () => [['low', tx('غير عاجل', 'Not urgent'), '#22c38e'], ['normal', tx('عادي', 'Normal'), '#4f86f7'], ['urgent', tx('عاجل', 'Urgent'), '#ff4d6d']],
+    listTitle: () => tx('أسئلتك', 'Your questions'), send: () => tx('أرسل السؤال', 'Submit question'), saved: () => tx('حُفظ سؤالك. أرسله إلى فريقك بالنسخ أو البريد.', 'Your question is saved. Send it to your team by copying or email.'),
+    example: { cat: 'howto', level: 'normal', subject: 'How do I share one task with a guest?', subjectAr: 'كيف أشارك مهمة واحدة مع ضيف؟', body: 'I need an external consultant to comment on one task only, without seeing the rest of the List.', bodyAr: 'أحتاج أن يعلّق مستشار خارجي على مهمة واحدة فقط دون أن يرى بقية القائمة.' }
+  }
+};
+
+function viewRequests(main, kind) {
+  const K = REQ_KINDS[kind];
+  const prof = Store.state.profile || {};
+  const draft = UIState.get('req-' + kind) || { name: prof.name || '', emp: prof.emp || '', cat: K.cats()[0][0], level: K.levels()[1][0], subject: '', body: '' };
+  const put = () => UIState.set('req-' + kind, draft);
+  const other = kind === 'ideas' ? ['#/support', 'users', tx('عندك سؤال؟ اسأل الفريق', 'Have a question? Ask the team')] : ['#/ideas', 'sparkle', tx('عندك فكرة؟ اقترح ميزة', 'Have an idea? Suggest a feature')];
+  const field = (id, label, input, hint) => '<div class="field rq-field"><label for="' + id + '">' + label + '</label>' + input + (hint ? '<p class="help-text">' + hint + '</p>' : '') + '<p class="rq-err" id="' + id + 'Err" hidden></p></div>';
+  main.innerHTML = '<div class="page rq-page" style="--rg:' + K.grad + '">' +
+    '<header class="rq-hero"><span class="rq-art" aria-hidden="true">' + icon(K.icon) + '</span><div><h1 tabindex="-1">' + K.title() + '</h1><p>' + K.lead() + '</p></div></header>' +
+    '<div class="rq-grid"><form class="panel rq-form" novalidate data-rq>' +
+    '<div class="rq-two">' + field('rqName', tx('الاسم', 'Name'), '<input class="input" id="rqName" autocomplete="name" value="' + esc(draft.name) + '" placeholder="' + tx('مثال: ', 'e.g. ') + EXAMPLE_PERSON.name + '" aria-describedby="rqNameErr">') +
+    field('rqEmp', tx('الرقم الوظيفي', 'Employee ID'), '<input class="input num" id="rqEmp" inputmode="numeric" value="' + esc(draft.emp) + '" placeholder="' + tx('مثال: ', 'e.g. ') + EXAMPLE_PERSON.id + '" aria-describedby="rqEmpErr">') + '</div>' +
+    field('rqCat', K.catLabel(), '<select class="select" id="rqCat">' + K.cats().map(c => '<option value="' + c[0] + '"' + (c[0] === draft.cat ? ' selected' : '') + '>' + c[1] + '</option>').join('') + '</select>') +
+    field('rqSubject', K.subjectLabel(), '<input class="input" id="rqSubject" value="' + esc(draft.subject) + '" placeholder="' + esc(K.subjectPh()) + '" aria-describedby="rqSubjectErr">') +
+    (kind === 'tickets' ? '<div class="rq-suggest" data-suggest aria-live="polite"></div>' : '') +
+    field('rqBody', K.bodyLabel(), '<textarea class="input" id="rqBody" rows="5" placeholder="' + esc(K.bodyPh()) + '" aria-describedby="rqBodyErr">' + esc(draft.body) + '</textarea>') +
+    '<div class="field"><span class="field-label" id="rqLvL">' + K.levelLabel() + '</span><div class="rq-levels" role="radiogroup" aria-labelledby="rqLvL">' + K.levels().map(l => '<button type="button" role="radio" data-level="' + l[0] + '" aria-checked="' + (l[0] === draft.level) + '" style="--lc:' + l[2] + '"><i></i>' + l[1] + '</button>').join('') + '</div></div>' +
+    '<button type="submit" class="btn btn-primary btn-lg rq-send">' + icon('fwd', 'icon-sm') + K.send() + '</button>' +
+    '<p class="rq-note">' + icon('info', 'icon-sm') + '<span>' + tx('هذا الموقع بلا خادم، لذلك يُحفظ طلبك على هذا الجهاز. استخدم «انسخ» أو «أرسل بالبريد» لإيصاله إلى فريقك.', 'This website has no server, so your request is saved on this device. Use “Copy” or “Email” to get it to your team.') + '</span></p></form>' +
+    '<section class="rq-list" aria-labelledby="rqListT"><h2 id="rqListT">' + K.listTitle() + '</h2><div data-items></div>' +
+    '<a class="rq-other" href="' + other[0] + '">' + icon(other[1], 'icon-sm') + other[2] + icon('fwd', 'icon-sm') + '</a></section></div></div>';
+
+  const catName = v => { const c = K.cats().find(x => x[0] === v); return c ? c[1] : v; };
+  const lvl = v => K.levels().find(x => x[0] === v) || K.levels()[1];
+  const textOf = it => [K.title() + ' · ' + it.id, tx('الاسم: ', 'Name: ') + it.name, tx('الرقم الوظيفي: ', 'Employee ID: ') + it.emp, K.catLabel() + ': ' + catName(it.cat), K.levelLabel() + ': ' + lvl(it.level)[1], K.subjectLabel() + ': ' + it.subject, '', it.body].join('\n');
+  const card = (it, example) => '<article class="rq-card' + (example ? ' is-example' : '') + '" style="--lc:' + lvl(it.level)[2] + '">' +
+    '<div class="rq-card-h"><span class="rq-id num">' + (example ? tx('مثال', 'Example') : it.id) + '</span><span class="rq-lvl"><i></i>' + lvl(it.level)[1] + '</span></div>' +
+    '<h3>' + esc(it.subject) + '</h3><p>' + esc(it.body) + '</p>' +
+    '<p class="rq-meta"><span class="rq-av" aria-hidden="true">' + esc((it.name || '?').trim().charAt(0).toUpperCase()) + '</span><bdi>' + esc(it.name) + '</bdi><span class="num">· ' + tx('الرقم الوظيفي ', 'ID ') + '<bdi dir="ltr">' + esc(it.emp) + '</bdi></span><span>· ' + catName(it.cat) + '</span>' + (example ? '' : '<span>· ' + fmtStamp(it.at) + '</span>') + '</p>' +
+    (example ? '' : '<div class="rq-actions"><span class="chip">' + icon('check', 'icon-sm') + tx('محفوظ على هذا الجهاز', 'Saved on this device') + '</span><button type="button" class="btn btn-ghost btn-sm" data-copy="' + it.id + '">' + icon('doc', 'icon-sm') + tx('انسخ', 'Copy') + '</button>' +
+      '<a class="btn btn-ghost btn-sm" href="mailto:?subject=' + encodeURIComponent(K.title() + ' · ' + it.id + ' · ' + it.subject) + '&body=' + encodeURIComponent(textOf(it)) + '">' + icon('at', 'icon-sm') + tx('أرسل بالبريد', 'Email') + '</a>' +
+      '<button type="button" class="icon-btn" data-remove="' + it.id + '" aria-label="' + tx('احذف: ', 'Delete: ') + esc(it.subject) + '">' + icon('trash', 'icon-sm') + '</button></div>') + '</article>';
+  const paintList = () => {
+    const ex = K.example;
+    const exItem = { id: 'EX', name: EXAMPLE_PERSON.name, emp: EXAMPLE_PERSON.id, cat: ex.cat, level: ex.level, subject: tx(ex.subjectAr, ex.subject), body: tx(ex.bodyAr, ex.body) };
+    const mine = Store.state[kind];
+    $('[data-items]', main).innerHTML = mine.map(it => card(it, false)).join('') + card(exItem, true) + (mine.length ? '' : '<p class="help-text">' + tx('لم ترسل شيئاً بعد. هذا مثال لطريقة ظهور طلبك.', 'You have not sent anything yet. This is an example of how your request will look.') + '</p>');
+  };
+  const suggest = () => {
+    const box = $('[data-suggest]', main); if (!box) return;
+    const words = (draft.subject + ' ' + draft.body).toLowerCase().split(/[^\p{L}\p{N}@]+/u).filter(w => w.length > 2);
+    if (!words.length) { box.innerHTML = ''; return; }
+    const scored = CU_FAQ.map(f => { const hay = (tp(f.q) + ' ' + tp(f.a)).toLowerCase(); return { f, s: words.filter(w => hay.includes(w)).length }; }).filter(x => x.s > 0).sort((a, b) => b.s - a.s).slice(0, 3);
+    box.innerHTML = scored.length ? '<p class="rq-sg-t">' + icon('bulb', 'icon-sm') + tx('قد تجد الإجابة هنا:', 'You may find the answer here:') + '</p><ul>' + scored.map(x => '<li><a href="#/tour/' + x.f.part + '">' + icon('help', 'icon-sm') + tp(x.f.q) + '</a></li>').join('') + '</ul>' : '';
+  };
+  const setErr = (id, msg) => { const e = $('#' + id + 'Err', main), inp = $('#' + id, main); e.hidden = !msg; e.textContent = msg || ''; inp.setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg; };
+  paintList(); suggest();
+
+  const form = $('[data-rq]', main);
+  form.addEventListener('input', debounce(e => {
+    const map = { rqName: 'name', rqEmp: 'emp', rqSubject: 'subject', rqBody: 'body' };
+    if (map[e.target.id]) { draft[map[e.target.id]] = e.target.value; put(); if (e.target.getAttribute('aria-invalid') === 'true') setErr(e.target.id, ''); if (e.target.id === 'rqSubject' || e.target.id === 'rqBody') suggest(); }
+  }, 120));
+  form.addEventListener('change', e => { if (e.target.id === 'rqCat') { draft.cat = e.target.value; put(); } });
+  form.addEventListener('click', e => { const b = e.target.closest('[data-level]'); if (!b) return; draft.level = b.dataset.level; put(); $$('[data-level]', form).forEach(x => x.setAttribute('aria-checked', x === b)); });
+  form.addEventListener('keydown', e => {
+    const b = e.target.closest('[data-level]'); if (!b || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
+    e.preventDefault(); const all = $$('[data-level]', form); const fwd = e.key === 'ArrowDown' || e.key === (isRTL() ? 'ArrowLeft' : 'ArrowRight');
+    const n = all[(all.indexOf(b) + (fwd ? 1 : -1) + all.length) % all.length]; n.focus(); n.click();
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    ['name', 'emp', 'subject', 'body'].forEach(k => { draft[k] = $('#' + { name: 'rqName', emp: 'rqEmp', subject: 'rqSubject', body: 'rqBody' }[k], main).value.trim(); });
+    const ok = [
+      setErr('rqName', draft.name.length < 2 ? tx('اكتب اسمك.', 'Please write your name.') : ''),
+      setErr('rqEmp', !/^\d{3,10}$/.test(draft.emp) ? tx('اكتب رقمك الوظيفي بالأرقام فقط، مثل ', 'Write your employee ID in digits only, such as ') + EXAMPLE_PERSON.id + '.' : ''),
+      setErr('rqSubject', draft.subject.length < 4 ? tx('اكتب عنواناً قصيراً.', 'Please write a short title.') : ''),
+      setErr('rqBody', draft.body.length < 10 ? tx('أضف تفاصيل أكثر قليلاً (10 أحرف على الأقل).', 'Please add a little more detail (at least 10 characters).') : '')
+    ];
+    if (ok.includes(false)) { const bad = $('[aria-invalid="true"]', form); if (bad) bad.focus(); return; }
+    const n = Store.state[kind].reduce((m, x) => Math.max(m, +String(x.id).split('-')[1] || 0), 0) + 1;
+    const item = { id: K.prefix + '-' + String(n).padStart(4, '0'), at: Date.now(), name: draft.name, emp: draft.emp, cat: draft.cat, level: draft.level, subject: draft.subject, body: draft.body };
+    Store.addItem(kind, item); Store.setProfile({ name: draft.name, emp: draft.emp });
+    draft.subject = ''; draft.body = ''; put();
+    $('#rqSubject', main).value = ''; $('#rqBody', main).value = ''; suggest();
+    paintList(); toast(K.saved()); Motion.confetti($('.rq-send', main), 45); announce(K.saved());
+    const first = $('[data-items] .rq-card', main); if (first && !prefersReducedMotion()) first.animate([{ opacity: 0, transform: 'translateY(-10px) scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+  });
+  $('[data-items]', main).addEventListener('click', e => {
+    const c = e.target.closest('[data-copy]');
+    if (c) { const it = Store.state[kind].find(x => x.id === c.dataset.copy); copyText(textOf(it)).then(ok => toast(ok ? tx('نُسخ. الصقه في رسالة إلى فريقك.', 'Copied. Paste it into a message to your team.') : tx('تعذّر النسخ على هذا المتصفح.', 'Copying is not available on this browser.'))); return; }
+    const r = e.target.closest('[data-remove]');
+    if (r) confirmDialog(tx('حذف هذا الطلب؟', 'Delete this request?'), tx('سيُحذف من هذا الجهاز فقط.', 'It will be removed from this device only.'), tx('نعم، احذف', 'Yes, delete')).then(ok => { if (ok) { Store.removeItem(kind, r.dataset.remove); paintList(); } });
+  });
+}
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).then(() => true, () => false);
+  try { const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); const ok = document.execCommand('copy'); ta.remove(); return Promise.resolve(ok); }
+  catch (e) { return Promise.resolve(false); }
+}
+
+;
 /* ---- app/main.js ---- */
 /* ==========================================================================
-   Boot, router, language selection, global search, navigation drawer, logos.
+   Boot, router, language selection, navigation drawer and focus mode, logos.
    ========================================================================== */
 
 const ROUTES = {
   home: { view: viewHome, title: () => tx('الرئيسية', 'Home') },
   tour: { view: viewTour, title: () => tx('جولة ClickUp', 'ClickUp tour') },
+  automations: { view: viewAutomations, title: () => tx('ورشة الأتمتة', 'Automations workshop') },
+  guide: { view: viewGuide, title: () => tx('كيف تستخدم هذا الموقع', 'How to use this website') },
+  ideas: { view: m => viewRequests(m, 'ideas'), title: () => tx('اقترح ميزة', 'Suggest a feature') },
+  support: { view: m => viewRequests(m, 'tickets'), title: () => tx('أسئلة الفريق والدعم', 'Team questions & support') },
   questions: { view: viewQuestions, title: () => tx('الأسئلة الشائعة', 'Common questions') },
   library: { view: viewLibrary, title: () => tx('مكتبة الدروس', 'Learning Library') },
   lesson: { view: viewLesson, title: () => tx('درس', 'Lesson') },
@@ -8062,8 +8753,6 @@ const CHROME = {
   navOpen: ['فتح قائمة التنقل', 'Open navigation menu'],
   brand: ['Omantel | ClickUp Learning Hub، الصفحة الرئيسية', 'Omantel | ClickUp Learning Hub, home'],
   logoNeeded: ['شعار رسمي مطلوب', 'Official logo needed'],
-  searchLabel: ['ابحث في الدروس والمصطلحات', 'Search lessons and terms'],
-  searchPh: ['ابحث عن درس أو مصطلح، مثل: Due Date', 'Search for a lesson or term, e.g. Due Date'],
   mainNav: ['التنقل الرئيسي', 'Main navigation'],
   langGroup: ['اللغة', 'Language'],
   footerNote: ['منصة تعليمية مستقلة. الواجهات المعروضة محاكاة تعليمية مبسّطة، والمنصة غير معتمدة أو مدعومة رسمياً من ClickUp.', 'An independent learning platform. The screens shown are simplified educational simulations, and the platform is not officially certified or endorsed by ClickUp.'],
@@ -8139,7 +8828,6 @@ function setLanguage(lang, opts) {
   I18N.set(lang);
   Lab.relocalize();
   applyChrome();
-  buildSearch();
   // Hold the page height during the swap so the browser does not clamp the scroll position.
   main.style.minHeight = main.offsetHeight + 'px';
   if (currentRoute) renderRoute(true, true);
@@ -8187,63 +8875,6 @@ function setupLanguage() {
   });
 }
 
-/* ---------- Global search ---------- */
-let searchIndex = [];
-function buildSearch() {
-  const items = [];
-  LESSONS.forEach(l => items.push({ kind: 'lesson', title: l.title, sub: tx('الوحدة ', 'Module ') + MODULE[l.module].n + ': ' + MODULE[l.module].title, href: '#/lesson/' + l.id, hay: (l.title + ' ' + l.objective + ' ' + MODULE[l.module].title + ' ' + MODULE[l.module].en + ' ' + l.explain.join(' ')).toLowerCase() }));
-  GLOSSARY.forEach(g => items.push({ kind: 'term', title: isEN() ? g.en : g.en + ' | ' + g.ar, sub: g.def, href: '#/help/glossary', term: g.en, hay: (g.en + ' ' + g.ar + ' ' + g.def).toLowerCase() }));
-  [['#/lab', tx('مختبر التطبيق Practice Lab', 'Practice Lab')], ['#/studio', tx('استوديو لوحات المعلومات Dashboard Studio', 'Dashboard Studio')], ['#/assess', tx('التقييمات Assessments', 'Assessments')], ['#/progress', tx('تقدّمي My Progress', 'My Progress')], ['#/help/faq', tx('أسئلة شائعة FAQ', 'FAQ')]].forEach(p => items.push({ kind: 'page', title: p[1], sub: tx('صفحة', 'Page'), href: p[0], hay: p[1].toLowerCase() }));
-  TOUR_PARTS.forEach(p => items.push({ kind: 'tour', title: tp(p.name), sub: tp(p.one), href: '#/tour/' + p.id, hay: (tp(p.name) + ' ' + tp(p.one) + ' ' + p.name[1]).toLowerCase() }));
-  CU_FAQ.forEach(f => items.push({ kind: 'faq', title: tp(f.q), sub: tp(f.a), href: '#/questions', hay: (tp(f.q) + ' ' + tp(f.a)).toLowerCase() }));
-  [['#/tour', tx('جولة ClickUp ClickUp tour', 'ClickUp tour')], ['#/questions', tx('الأسئلة الشائعة Common questions', 'Common questions')]].forEach(p => items.push({ kind: 'page', title: p[1], sub: tx('صفحة', 'Page'), href: p[0], hay: p[1].toLowerCase() }));
-  searchIndex = items;
-  const box = $('#globalSearchResults'); if (box) { box.hidden = true; $('#globalSearchInput').setAttribute('aria-expanded', 'false'); }
-}
-function setupSearch() {
-  buildSearch();
-  const form = $('#globalSearch'), input = $('#globalSearchInput'), box = $('#globalSearchResults');
-  let results = [], sel = -1;
-  const close = () => { box.hidden = true; input.setAttribute('aria-expanded', 'false'); sel = -1; input.removeAttribute('aria-activedescendant'); };
-  const paint = () => {
-    const q = input.value.trim().toLowerCase();
-    if (!q) { close(); return; }
-    const terms = q.split(/\s+/);
-    results = searchIndex.map(it => ({ it, score: terms.every(tm => it.hay.includes(tm)) ? (it.title.toLowerCase().includes(q) ? 2 : 1) : 0 })).filter(r => r.score).sort((a, b) => b.score - a.score).slice(0, 10).map(r => r.it);
-    const groups = [['tour', tx('جولة ClickUp', 'ClickUp tour')], ['faq', tx('الأسئلة الشائعة', 'Common questions')], ['lesson', tx('الدروس', 'Lessons')], ['term', tx('المصطلحات', 'Terms')], ['page', tx('الصفحات', 'Pages')]];
-    box.innerHTML = results.length ? groups.map(g => { const list = results.filter(r => r.kind === g[0]); if (!list.length) return ''; return '<div class="gs-group" role="presentation">' + g[1] + '</div>' + list.map(r => { const idx = results.indexOf(r); return '<a class="gs-item" role="option" id="gs-' + idx + '" data-idx="' + idx + '" href="' + r.href + '" aria-selected="false">' + icon({ lesson: 'book', term: 'tag', tour: 'rocket', faq: 'help' }[r.kind] || 'compass', 'icon-sm') + '<span>' + t(r.title) + '<small>' + t(r.sub.length > 90 ? r.sub.slice(0, 88) + '…' : r.sub) + '</small></span></a>'; }).join(''); }).join('')
-      : '<div class="gs-empty">' + tx('لا نتائج لـ «' + esc(input.value) + '». جرّب كلمة أخرى أو', 'No results for “' + esc(input.value) + '”. Try another word or') + ' <a href="#/help/glossary">' + tx('تصفّح المصطلحات', 'browse the glossary') + '</a>.</div>';
-    box.hidden = false; input.setAttribute('aria-expanded', 'true'); sel = -1;
-  };
-  const go = r => {
-    if (!r) return;
-    if (r.term) { try { window.sessionStorage.setItem('focusTerm', r.term); } catch (e) { } }
-    close(); input.value = ''; input.blur();
-    if (location.hash === r.href) rerender(); else location.hash = r.href;
-    $('#globalSearch').classList.remove('show-mobile');
-  };
-  input.addEventListener('input', debounce(paint, 100));
-  input.addEventListener('focus', () => { if (input.value.trim()) paint(); });
-  input.addEventListener('keydown', e => {
-    const items = $$('.gs-item', box);
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-      if (!items.length) return; e.preventDefault();
-      sel = (sel + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
-      items.forEach((it, k) => it.setAttribute('aria-selected', k === sel));
-      input.setAttribute('aria-activedescendant', items[sel].id); items[sel].scrollIntoView({ block: 'nearest' });
-    } else if (e.key === 'Escape') { close(); }
-  });
-  form.addEventListener('submit', e => { e.preventDefault(); const items = $$('.gs-item', box); const pick = sel >= 0 ? items[sel] : items[0]; if (pick) go(results[+pick.dataset.idx]); });
-  box.addEventListener('click', e => { const a = e.target.closest('.gs-item'); if (!a) return; e.preventDefault(); go(results[+a.dataset.idx]); });
-  document.addEventListener('click', e => { if (!form.contains(e.target)) close(); });
-
-  // Mobile: a search button reveals the field
-  const btn = document.createElement('button');
-  btn.type = 'button'; btn.className = 'icon-btn mobile-search-btn'; btn.dataset.tAttr = 'aria-label:search'; btn.innerHTML = icon('search');
-  $('.topbar').insertBefore(btn, $('.lang-switch'));
-  btn.addEventListener('click', () => { form.classList.toggle('show-mobile'); if (form.classList.contains('show-mobile')) input.focus(); });
-}
-
 /* ---------- Logos: official files if supplied, clear placeholders otherwise ---------- */
 function setupLogos() {
   // The logos are embedded once in the header; other placements reuse them.
@@ -8288,10 +8919,8 @@ function registerContent() {
 function boot() {
   registerContent();
   $('#navToggle').innerHTML = icon('menu');
-  $('.gs-icon').innerHTML = icon('search', 'icon-sm');
   Lab.init();
   setupLogos();
-  setupSearch();
   applyChrome();
   try { if (window.localStorage.getItem(NAV_KEY) === 'hidden') document.documentElement.classList.add('nav-hidden'); } catch (e) { /* ignore */ }
   updateNavBtn();
@@ -8319,7 +8948,7 @@ function boot() {
   });
   // Apply a remembered language before the first render, so the page renders once.
   const pref = readLangPref();
-  if (pref && pref !== LANG) { LANG = pref; I18N.set(pref); Lab.relocalize(); applyChrome(); buildSearch(); }
+  if (pref && pref !== LANG) { LANG = pref; I18N.set(pref); Lab.relocalize(); applyChrome(); }
   if (!location.hash) history.replaceState(null, '', '#/home');
   renderRoute();
   setupLanguage();

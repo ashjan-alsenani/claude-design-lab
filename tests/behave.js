@@ -110,6 +110,34 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   ok(await p.evaluate(() => document.documentElement.classList.contains('nav-hidden')), 'hidden menu remembered');
   await p.click('#navToggle'); await p.waitForTimeout(400);
   ok(await p.isVisible('#sidebar .nav-link'), 'menu shown again');
+  ok(!(await p.$('#globalSearch')), 'header search removed');
+
+  // 4d. Automations workshop: build an automation with a condition, then test it
+  await p.evaluate(() => { location.hash = '#/automations'; }); await p.waitForTimeout(300);
+  await p.click('[data-astep="2"]'); await p.waitForTimeout(200);
+  await p.click('[data-new]'); await p.waitForTimeout(100);
+  await p.selectOption('[data-f="t.k"]', 'priority'); await p.selectOption('[data-f="t.v"]', 'urgent');
+  await p.click('[data-add="c"]'); await p.selectOption('[data-f="c.0.k"]', 'dept'); await p.selectOption('[data-f="c.0.v"]', 'fin');
+  await p.selectOption('[data-f="a.0.k"]', 'status'); await p.selectOption('[data-f="a.0.v"]', 'progress');
+  await p.click('[data-create]'); await p.waitForTimeout(200);
+  ok((await p.$$('.cu-manage li')).length === 2, 'automation created and listed');
+  await p.selectOption('[data-f="ev.priority"]', 'urgent'); await p.waitForTimeout(200);
+  ok((await p.textContent('.au-log li')).includes('condition'), 'condition not met: skipped, no actions used');
+  await p.selectOption('[data-f="ev.field"]', 'fin'); await p.selectOption('[data-f="ev.priority"]', 'high'); await p.selectOption('[data-f="ev.priority"]', 'urgent'); await p.waitForTimeout(200);
+  ok((await p.textContent('.au-task .mx-status')).includes('IN PROGRESS'), 'automation ran and changed the status');
+  await p.click('[data-new]'); await p.selectOption('[data-f="a.0.k"]', 'email'); await p.click('[data-add="a"]'); await p.waitForTimeout(100);
+  ok(await p.$eval('[data-create]', b => b.disabled), 'Send email cannot mix with other actions');
+
+  // 4e. Support and ideas: validation, saved request, example with the owner's name and ID
+  await p.evaluate(() => { location.hash = '#/support'; }); await p.waitForTimeout(300);
+  ok((await p.textContent('.rq-card.is-example')).includes('Ashjan Al Sinani') && (await p.textContent('.rq-card.is-example')).includes('71067'), 'example shows Ashjan Al Sinani and ID 71067');
+  await p.click('.rq-send'); await p.waitForTimeout(100);
+  ok(await p.isVisible('#rqNameErr') && await p.isVisible('#rqEmpErr'), 'empty form shows errors');
+  await p.fill('#rqName', 'Ashjan Al Sinani'); await p.fill('#rqEmp', '71067'); await p.fill('#rqSubject', 'Share one task with a guest'); await p.fill('#rqBody', 'The consultant should see one task only.');
+  await p.click('.rq-send'); await p.waitForTimeout(300);
+  ok((await p.textContent('.rq-card .rq-id')).includes('REQ-0001'), 'question saved as REQ-0001');
+  await p.evaluate(() => { location.hash = '#/ideas'; }); await p.waitForTimeout(300);
+  ok((await p.inputValue('#rqName')) === 'Ashjan Al Sinani' && (await p.inputValue('#rqEmp')) === '71067', 'name and ID remembered for the next form');
   await ctx.close();
 
   // 5. Storage blocked

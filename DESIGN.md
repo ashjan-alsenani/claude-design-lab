@@ -92,3 +92,11 @@ The platform now leads with explaining ClickUp itself, before practice:
 - **Focus mode**: the button at the start of the header hides the sidebar on wide screens (remembered on this device); on phones it opens the menu as before. With the sidebar visible on medium screens, a lesson's module list folds into a single row at the top.
 - **Tour parts** lost the crowded chip row: the 12 parts are small numbered dots inside the coloured header, and the four steps are a simple numbered stepper.
 - Styles: `src/home.css` (loaded last); home view: `src/app/home.js`.
+
+## Automations workshop, guide, ideas and support
+
+- **Header search removed.** Pages keep their own filters (library, glossary, questions).
+- **`#/automations`** (five steps, same stepper as the tour): how it works (animated When → If → Then with a live task example), the types of automations with ready recipes, a **simplified ClickUp-style Automations window** (Templates / Manage tabs, Add Automation, When · If · Then builder with the Business-plan note on Conditions, the Send-email-only-with-Send-email rule) plus a **sample task and Activity log** where the learner triggers events and watches automations run, skip on unmet conditions, and count monthly actions; then the steps inside ClickUp (robot icon → Create Automation → suggested, template or custom → Trigger → optional Conditions → Actions) and good-to-know limits and tips. Based on ClickUp Help's Automations articles; it is an educational simulation and does not connect to ClickUp.
+- **`#/guide`**: how to use this website in eight steps, with tips.
+- **`#/ideas`** and **`#/support`**: forms for feature ideas and team questions with validation, importance/urgency, suggested answers from the common questions, and a saved list with Copy and Email. There is no server, so items are saved on this device and sent by the learner; the page says so. The example request uses Ashjan Al Sinani, ID 71067, and the last name and ID entered are remembered for the next form.
+- Code: `src/app/automations.js`, `src/app/feedback.js`, styles in `src/pages.css`.

@@ -66,6 +66,7 @@ function viewHome(main) {
     '<p class="lead">' + tx('دليل ملوّن ومتحرك يشرح لك كل جزء من ClickUp خطوة بخطوة، حتى تنجز عملك اليومي بثقة.', 'A colourful, animated guide that shows you every part of ClickUp, step by step, so you can handle your daily work with confidence.') + '</p>' +
     '<div class="hero-actions"><a class="btn btn-primary btn-lg hx-cta" href="#/tour' + (toured ? '/' + tourNext() : '') + '">' + icon('rocket') + (toured ? tx('تابع الجولة', 'Continue the tour') : tx('ابدأ الجولة', 'Start the tour')) + '</a>' +
     '<a class="btn btn-secondary btn-lg" href="#/library">' + icon('book') + tx('تصفّح الدروس', 'Browse lessons') + '</a></div>' +
+    '<a class="hx-guide" href="#/guide">' + icon('bulb', 'icon-sm') + tx('جديد هنا؟ تعرّف كيف تستخدم هذا الموقع', 'New here? See how to use this website') + icon('fwd', 'icon-sm') + '</a>' +
     (started ? '<a class="hx-resume" href="' + (last && !Store.isDone(last.id) ? lessonLink(last.id) : '#/progress') + '">' + ring(Math.round((done + toured) / (LESSONS.length + 12) * 100), { size: 34, stroke: 5, color: '#ffc800', track: 'rgb(255 255 255 / .2)' }) +
       '<span><small class="num">' + tx(toured + '/12 من الجولة · ' + done + '/' + LESSONS.length + ' درساً', toured + '/12 tour parts · ' + done + '/' + LESSONS.length + ' lessons') + '</small>' + (last && !Store.isDone(last.id) ? tx('تابع: ', 'Continue: ') + t(last.title) : tx('شاهد تقدّمي', 'See my progress')) + '</span>' + icon('fwd', 'icon-sm') + '</a>'
       : '<p class="hx-facts"><span>' + icon('compass', 'icon-sm') + tx('12 جزءاً', '12 parts') + '</span><span>' + icon('play', 'icon-sm') + tx('عروض متحركة', 'Animated demos') + '</span><span>' + icon('flask', 'icon-sm') + tx('تدريب عملي', 'Hands-on practice') + '</span></p>') +
@@ -73,6 +74,8 @@ function viewHome(main) {
 
     '<section class="hsec" aria-labelledby="waysT"><p class="h-kicker">' + tx('اختر طريقتك', 'Pick your way') + '</p><h2 id="waysT">' + tx('ثلاث طرق ممتعة لتتعلّم', 'Three fun ways to learn') + '</h2>' +
     '<div class="ways">' + WAYS.map(w => '<a class="way" data-rv href="' + w.href + '" style="--g:' + w.g + '"><div class="way-art">' + w.art + '</div><div class="way-body"><span class="way-tag">' + icon(w.icon, 'icon-sm') + w.tag + '</span><h3>' + w.t + '</h3><p>' + w.d + '</p><span class="way-go">' + tx('هيا بنا', 'Let’s go') + icon('fwd', 'icon-sm') + '</span></div></a>').join('') + '</div></section>' +
+
+    '<a class="au-banner" data-rv href="#/automations"><span class="au-bn-art" aria-hidden="true"><span class="au-bn-robot">' + icon('robot') + '</span><i></i><i></i><i></i></span><span class="au-bn-text"><span class="way-tag">' + icon('zap', 'icon-sm') + tx('جديد', 'New') + '</span><b>' + tx('ورشة الأتمتة', 'Automations workshop') + '</b><span>' + tx('ابنِ أول أتمتة لك كما في ClickUp، وجرّبها على مهمة تجريبية.', 'Build your first automation the ClickUp way and test it on a sample task.') + '</span></span><span class="btn btn-primary">' + tx('ابدأ', 'Start') + icon('fwd', 'icon-sm') + '</span></a>' +
 
     '<section class="hsec" aria-labelledby="whyT"><p class="h-kicker">' + tx('لماذا ClickUp؟', 'Why ClickUp?') + '</p><h2 id="whyT">' + tx('من الفوضى إلى الوضوح في لحظة', 'From chaos to clarity in a moment') + '</h2>' +
     '<div class="panel why-home" data-rv>' + beforeAfter() + '</div></section>' +

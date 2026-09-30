@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 SRC = ROOT / "src"
 
-CSS_FILES = ["styles.css", "tour.css", "home.css"]
+CSS_FILES = ["styles.css", "tour.css", "home.css", "pages.css"]
 JS_FILES = [
     "i18n/core.js",
     "content/core.js",
@@ -36,6 +36,8 @@ JS_FILES = [
     "app/views.js",
     "app/tour.js",
     "app/home.js",
+    "app/automations.js",
+    "app/feedback.js",
     "app/main.js",
 ]
 
