@@ -9,7 +9,7 @@ const ROUTES = {
   workshops: { view: viewWorkshops, title: () => tx('الورش التفاعلية', 'Workshops') },
   automations: { view: viewAutomations, title: () => tx('ورشة الأتمتة', 'Automations workshop') },
   guide: { view: viewGuide, title: () => tx('كيف تستخدم هذا الموقع', 'How to use this website') },
-  ideas: { view: m => viewRequests(m, 'ideas'), title: () => tx('اقترح ميزة', 'Suggest a feature') },
+  ideas: { view: m => viewRequests(m, 'ideas'), title: () => tx('اقترح ميزة جديدة تتمنّاها', 'Suggest a new feature you hope to see') },
   support: { view: m => viewRequests(m, 'tickets'), title: () => tx('أسئلة الفريق والدعم', 'Team questions & support') },
   questions: { view: viewQuestions, title: () => tx('الأسئلة الشائعة', 'Common questions') },
   library: { view: viewLibrary, title: () => tx('مكتبة الدروس', 'Learning Library') },
@@ -52,7 +52,8 @@ function renderRoute(keepScroll, langSwitch) {
     : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name)
     : route.name === 'workshops' && WS_DEF[route.params[0]] ? WS_DEF[route.params[0]].title() : def.title();
   document.title = pageTitle + site;
-  renderSidebar(route);
+  renderSidebar(route); updateSoundBtn();
+  $('#topForum').toggleAttribute('aria-current', route.name === 'forum');
   /* Blocks rise into view on a fresh visit; a language switch or in-place
      refresh keeps everything where the learner was. */
   if (keepScroll || langSwitch) Motion.settle(host); else Motion.reveal(host);
@@ -73,6 +74,7 @@ function closeNav() { const sb = $('#sidebar'); if (!sb.classList.contains('open
 const CHROME = {
   skip: ['تخطَّ إلى المحتوى', 'Skip to content'],
   openCU: ['افتح ClickUp', 'Open ClickUp'],
+  forum: ['المنتدى', 'Forum'],
   navOpen: ['فتح قائمة التنقل', 'Open navigation menu'],
   brand: ['Omantel | ClickUp Learning Hub، الصفحة الرئيسية', 'Omantel | ClickUp Learning Hub, home'],
   logoNeeded: ['شعار رسمي مطلوب', 'Official logo needed'],
@@ -94,11 +96,12 @@ function applyChrome() {
   $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
   updateNavBtn();
   updateSoundBtn();
+  if (typeof Clicky !== 'undefined') Clicky.relabel();
 }
 function updateSoundBtn() {
   const b = $('#soundToggle'); if (!b) return;
-  const label = Sound.on ? tx('إيقاف الأصوات', 'Turn sounds off') : tx('تشغيل الأصوات', 'Turn sounds on');
-  b.innerHTML = icon(Sound.on ? 'volume' : 'volume-off'); b.setAttribute('aria-pressed', String(Sound.on)); b.setAttribute('aria-label', label); b.title = label;
+  b.innerHTML = icon(Sound.on ? 'volume' : 'volume-off', 'icon-sm') + '<span>' + tx('الأصوات', 'Sounds') + '</span><i class="sw" aria-hidden="true"></i>';
+  b.setAttribute('aria-pressed', String(Sound.on));
 }
 
 /* ---------- Focus mode: hide the sidebar on wide screens ----------
@@ -258,7 +261,9 @@ function boot() {
     if (wideScreen()) { setNavHidden(!document.documentElement.classList.contains('nav-hidden')); return; }
     if ($('#sidebar').classList.contains('open')) closeNav(); else openNav();
   });
-  $('#soundToggle').addEventListener('click', () => { Sound.set(!Sound.on); updateSoundBtn(); toast(Sound.on ? tx('الأصوات مفعّلة', 'Sounds on') : tx('الأصوات متوقفة', 'Sounds off')); });
+  $('#topForum .tf-ic').innerHTML = icon('users', 'icon-sm');
+  // The sound switch lives at the bottom of the side menu (re-rendered on every page).
+  document.addEventListener('click', e => { if (!e.target.closest('#soundToggle')) return; Sound.set(!Sound.on); updateSoundBtn(); toast(Sound.on ? tx('الأصوات مفعّلة', 'Sounds on') : tx('الأصوات متوقفة', 'Sounds off')); });
   $$('[data-cuicon]').forEach(img => { const l = $('link[rel="icon"]'); if (l) img.src = l.href; });
   // A soft tap for every press; specific moments (correct, celebrate, step) add their own sound.
   document.addEventListener('click', e => { if (e.target.closest('button:not(:disabled), a[href], summary, [role="switch"]') && !e.target.closest('#soundToggle')) Sound.play('tap'); }, true);
@@ -275,7 +280,7 @@ function boot() {
   window.addEventListener('hashchange', () => { routedByUser = true; renderRoute(); });
   Store.on(kind => {
     if (!currentRoute) return;
-    renderSidebar(currentRoute);
+    renderSidebar(currentRoute); updateSoundBtn();
     if (kind === 'reset' && currentRoute.name !== 'progress') rerender();
     if (kind === 'storage') toast(tx('تعذّر الحفظ على هذا الجهاز. سيعمل التقدم لهذه الجلسة فقط.', 'Saving failed on this device. Progress will work for this session only.'));
   });
@@ -284,8 +289,9 @@ function boot() {
   if (pref && pref !== LANG) { LANG = pref; I18N.set(pref); Lab.relocalize(); applyChrome(); }
   if (!location.hash) history.replaceState(null, '', '#/home');
   renderRoute();
+  Clicky.init();
   setupLanguage();
-  window.__hub = { setLanguage, get lang() { return LANG; }, errors: I18N.errors, content: { LESSONS, MODULES, GLOSSARY, QUIZZES, FAQ, PATHWAYS, COMMON_MISTAKES, RESOURCES, PEOPLE, LAB_LISTS, CHALLENGES, PRACTICAL, HOME_DEMO }, demoStr, Lab };
+  if (location.protocol === 'file:') window.__hub = { setLanguage, get lang() { return LANG; }, errors: I18N.errors, content: { LESSONS, MODULES, GLOSSARY, QUIZZES, FAQ, PATHWAYS, COMMON_MISTAKES, RESOURCES, PEOPLE, LAB_LISTS, CHALLENGES, PRACTICAL, HOME_DEMO }, demoStr, Lab };
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

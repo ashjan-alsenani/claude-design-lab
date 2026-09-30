@@ -151,6 +151,7 @@ const CLICKY_TIPS = () => [
   tx('Board تُظهر أين وصل كل عمل بلمحة.', 'Board view shows where every piece of work stands at a glance.')
 ];
 function bindClicky(root) {
+  const chatBtn = root.querySelector('[data-open-clicky]'); if (chatBtn) chatBtn.addEventListener('click', () => Clicky.open());
   const btn = root.querySelector('[data-clicky]'); if (!btn) return;
   const bub = root.querySelector('[data-clicky-say]'); let i = 0;
   bub.textContent = CLICKY_TIPS()[0];

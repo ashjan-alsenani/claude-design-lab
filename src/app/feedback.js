@@ -41,7 +41,7 @@ function viewGuide(main) {
 const REQ_KINDS = {
   ideas: {
     prefix: 'IDEA', icon: 'sparkle', grad: 'linear-gradient(135deg,#a855f7,#ff02f0)',
-    title: () => tx('اقترح ميزة جديدة', 'Suggest a new feature'),
+    title: () => tx('اقترح ميزة جديدة تتمنّاها', 'Suggest a new feature you hope to see'),
     lead: () => tx('ما الذي تتمنى أن تضيفه إلى هذه المنصة أو إلى طريقة استخدامنا لـ ClickUp؟ كل فكرة تهمّنا.', 'What would you like added to this platform, or to the way we use ClickUp? Every idea matters.'),
     subjectLabel: () => tx('اسم الفكرة', 'Idea title'), subjectPh: () => tx('مثال: وضع ليلي للعمل مساءً', 'Example: a dark mode for evening work'),
     bodyLabel: () => tx('اشرح فكرتك وفائدتها', 'Describe your idea and how it helps'), bodyPh: () => tx('ما المشكلة التي تحلّها؟ ومن سيستفيد منها؟', 'What problem does it solve? Who will benefit?'),
@@ -81,7 +81,7 @@ function viewRequests(main, kind) {
     field('rqBody', K.bodyLabel(), '<textarea class="input" id="rqBody" rows="5" placeholder="' + esc(K.bodyPh()) + '" aria-describedby="rqBodyErr">' + esc(draft.body) + '</textarea>') +
     '<div class="field"><span class="field-label" id="rqLvL">' + K.levelLabel() + '</span><div class="rq-levels" role="radiogroup" aria-labelledby="rqLvL">' + K.levels().map(l => '<button type="button" role="radio" data-level="' + l[0] + '" aria-checked="' + (l[0] === draft.level) + '" style="--lc:' + l[2] + '"><i></i>' + l[1] + '</button>').join('') + '</div></div>' +
     '<button type="submit" class="btn btn-primary btn-lg rq-send">' + icon('fwd', 'icon-sm') + K.send() + '</button>' +
-    '<p class="rq-note">' + icon('info', 'icon-sm') + '<span>' + tx('هذا الموقع بلا خادم، لذلك يُحفظ طلبك على هذا الجهاز. استخدم «انسخ» أو «أرسل بالبريد» لإيصاله إلى فريقك.', 'This website has no server, so your request is saved on this device. Use “Copy” or “Email” to get it to your team.') + '</span></p></form>' +
+    '</form>' +
     '<section class="rq-list" aria-labelledby="rqListT"><h2 id="rqListT">' + K.listTitle() + '</h2><div data-items></div>' +
     '<a class="rq-other" href="' + other[0] + '">' + icon(other[1], 'icon-sm') + other[2] + icon('fwd', 'icon-sm') + '</a></section></div></div>';
 
@@ -92,7 +92,7 @@ function viewRequests(main, kind) {
     '<div class="rq-card-h"><span class="rq-id num">' + (example ? tx('مثال', 'Example') : it.id) + '</span><span class="rq-lvl"><i></i>' + lvl(it.level)[1] + '</span></div>' +
     '<h3>' + esc(it.subject) + '</h3><p>' + esc(it.body) + '</p>' +
     '<p class="rq-meta"><span class="rq-av" aria-hidden="true">' + esc((it.name || '?').trim().charAt(0).toUpperCase()) + '</span><bdi>' + esc(it.name) + '</bdi><span class="num">· ' + tx('الرقم الوظيفي ', 'ID ') + '<bdi dir="ltr">' + esc(it.emp) + '</bdi></span><span>· ' + catName(it.cat) + '</span>' + (example ? '' : '<span>· ' + fmtStamp(it.at) + '</span>') + '</p>' +
-    (example ? '' : '<div class="rq-actions"><span class="chip">' + icon('check', 'icon-sm') + tx('محفوظ على هذا الجهاز', 'Saved on this device') + '</span><button type="button" class="btn btn-ghost btn-sm" data-copy="' + it.id + '">' + icon('doc', 'icon-sm') + tx('انسخ', 'Copy') + '</button>' +
+    (example ? '' : '<div class="rq-actions"><span class="chip">' + icon('check', 'icon-sm') + (it.sent ? tx('أُرسل إلى الفريق', 'Sent to the team') : tx('محفوظ', 'Saved')) + '</span><button type="button" class="btn btn-ghost btn-sm" data-copy="' + it.id + '">' + icon('doc', 'icon-sm') + tx('انسخ', 'Copy') + '</button>' +
       '<a class="btn btn-ghost btn-sm" href="mailto:?subject=' + encodeURIComponent(K.title() + ' · ' + it.id + ' · ' + it.subject) + '&body=' + encodeURIComponent(textOf(it)) + '">' + icon('at', 'icon-sm') + tx('أرسل بالبريد', 'Email') + '</a>' +
       '<button type="button" class="icon-btn" data-remove="' + it.id + '" aria-label="' + tx('احذف: ', 'Delete: ') + esc(it.subject) + '">' + icon('trash', 'icon-sm') + '</button></div>') + '</article>';
   const paintList = () => {
@@ -136,6 +136,7 @@ function viewRequests(main, kind) {
     const n = Store.state[kind].reduce((m, x) => Math.max(m, +String(x.id).split('-')[1] || 0), 0) + 1;
     const item = { id: K.prefix + '-' + String(n).padStart(4, '0'), at: Date.now(), name: draft.name, emp: draft.emp, cat: draft.cat, level: draft.level, subject: draft.subject, body: draft.body };
     Store.addItem(kind, item); Store.setProfile({ name: draft.name, emp: draft.emp });
+    if (Api.on) Api.post(kind, item).then(() => { item.sent = true; Store.save(kind); paintList(); }, () => toast(tx('حُفظ طلبك وسنعيد المحاولة لاحقاً. يمكنك نسخه أو إرساله بالبريد.', 'Your request is saved; you can also copy or email it.')));
     draft.subject = ''; draft.body = ''; put();
     $('#rqSubject', main).value = ''; $('#rqBody', main).value = ''; suggest();
     paintList(); toast(K.saved()); Motion.confetti($('.rq-send', main), 45); announce(K.saved());
@@ -145,7 +146,7 @@ function viewRequests(main, kind) {
     const c = e.target.closest('[data-copy]');
     if (c) { const it = Store.state[kind].find(x => x.id === c.dataset.copy); copyText(textOf(it)).then(ok => toast(ok ? tx('نُسخ. الصقه في رسالة إلى فريقك.', 'Copied. Paste it into a message to your team.') : tx('تعذّر النسخ على هذا المتصفح.', 'Copying is not available on this browser.'))); return; }
     const r = e.target.closest('[data-remove]');
-    if (r) confirmDialog(tx('حذف هذا الطلب؟', 'Delete this request?'), tx('سيُحذف من هذا الجهاز فقط.', 'It will be removed from this device only.'), tx('نعم، احذف', 'Yes, delete')).then(ok => { if (ok) { Store.removeItem(kind, r.dataset.remove); paintList(); } });
+    if (r) confirmDialog(tx('حذف هذا الطلب؟', 'Delete this request?'), tx('سيُحذف من قائمتك.', 'It will be removed from your list.'), tx('نعم، احذف', 'Yes, delete')).then(ok => { if (ok) { Store.removeItem(kind, r.dataset.remove); paintList(); } });
   });
 }
 function copyText(text) {

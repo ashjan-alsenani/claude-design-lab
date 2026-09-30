@@ -54,7 +54,7 @@ function renderSidebar(route) {
     '<div><p class="nav-group-title">' + tx('المساعدة والاقتراحات', 'Help & ideas') + '</p><ul class="nav-list">' +
     item('#/guide', 'bulb', tx('كيف تستخدم الموقع', 'How to use this site'), cur === 'guide') +
     item('#/support', 'send', tx('اسأل الفريق', 'Ask the team'), cur === 'support') +
-    item('#/ideas', 'sparkle', tx('اقترح ميزة', 'Suggest a feature'), cur === 'ideas') +
+    item('#/ideas', 'sparkle', tx('اقترح ميزة تتمنّاها', 'Suggest a feature you hope for'), cur === 'ideas') +
     '</ul></div>' +
     '<details class="nav-more"' + (['studio', 'assess', 'progress', 'help', 'about'].includes(cur) || UIState.get('nav-more') ? ' open' : '') + '><summary class="nav-group-title">' + tx('المزيد', 'More') + icon('chev-down', 'icon-sm') + '</summary><ul class="nav-list">' +
     item('#/progress', 'progress', tx('تقدّمي', 'My Progress'), cur === 'progress') +
@@ -70,7 +70,7 @@ function renderSidebar(route) {
       return '<li><a class="nav-link" style="' + modStyle(m.id) + '" href="' + lessonLink(target) + '"' + (active ? ' aria-current="page"' : '') + '><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><span>' + t(m.title) + '</span>' +
         (p.done === p.total ? '<span class="mini-check" aria-label="' + tx('مكتملة', 'Completed') + '">' + icon('check', 'icon-sm') + '</span>' : '<span class="count num">' + p.done + '/' + p.total + '</span>') + '</a></li>';
     }).join('') + '</ul></details>' +
-    '<div class="sidebar-foot"><p>' + (Store.ok ? tx('يُحفظ تقدّمك على هذا المتصفح وهذا الجهاز فقط.', 'Your progress is saved on this browser and this device only.') : tx('التخزين المحلي غير متاح: التقدّم لهذه الجلسة فقط.', 'Local storage is unavailable: progress lasts for this session only.')) + '</p><p class="credit" lang="en" dir="ltr">' + CREDIT + '</p></div>';
+    '<div class="sidebar-foot"><p>' + (Store.ok ? tx('يُحفظ تقدّمك على هذا المتصفح وهذا الجهاز فقط.', 'Your progress is saved on this browser and this device only.') : tx('التخزين المحلي غير متاح: التقدّم لهذه الجلسة فقط.', 'Local storage is unavailable: progress lasts for this session only.')) + '</p><button type="button" class="sound-switch" id="soundToggle" aria-pressed="true"></button><p class="credit" lang="en" dir="ltr">' + CREDIT + '</p></div>';
 }
 
 /* ---------- Library ---------- */

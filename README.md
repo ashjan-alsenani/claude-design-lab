@@ -65,3 +65,8 @@ claude
 - المحتوى العربي في `src/content/`، والترجمة الإنجليزية في `src/content/en/` بنفس معرّفات الدروس والأسئلة.
 - اختبارات Playwright في `tests/` (التعليمات في `tests/README.md`).
 - `PRODUCT.md` يوثّق حقائق المنتج، و`DESIGN.md` يوثّق نظام التصميم.
+
+
+## Hosting
+
+To host the platform on your own server (security headers, optional shared forum, ideas, support and Clicky API), see [SERVER.md](SERVER.md).

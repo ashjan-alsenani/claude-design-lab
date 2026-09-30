@@ -92,7 +92,9 @@ function parseCSV(text) {
   row.push(cell); if (row.some(c => c.trim())) rows.push(row);
   return rows.map(r => r.map(c => c.trim()));
 }
-const csvCell = v => /[",\n]/.test(v) ? '"' + String(v).replace(/"/g, '""') + '"' : String(v);
+/* CSV cell, safe for spreadsheets: a value starting with = + - @ (or a tab or
+   carriage return) could run as a formula in Excel, so it gets a leading apostrophe. */
+const csvCell = v => { let s = String(v == null ? '' : v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
 
 const WS_DEF = {
   /* ---------------- AI ---------------- */

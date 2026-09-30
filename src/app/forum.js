@@ -1,12 +1,8 @@
 /* ==========================================================================
    Community forum: questions, tips and ideas from employees, with Agree,
-   Like and comments.
-
-   Storage: this single-file website has no server, so ForumStore keeps
-   posts, reactions and comments on this device (inside Store). To make the
-   forum shared by every employee, replace ForumStore's methods with calls to
-   a shared database (for example SharePoint / Microsoft Lists or another
-   API); the page only talks to ForumStore. The page says this plainly.
+   Like and comments. The page talks only to ForumStore. With a server
+   configured (see api.js and SERVER.md) posts, reactions and comments are
+   shared through it; without one, they are kept in this browser.
    ========================================================================== */
 
 const FORUM_SEED = () => {
@@ -31,22 +27,32 @@ const FORUM_SEED = () => {
   ];
 };
 
-/* The only place the forum reads or writes data. Local for now. */
-const ForumStore = {
-  shared: false,
-  all() {
-    const F = Store.forum();
-    return F.posts.concat(FORUM_SEED()).map(p => Object.assign({}, p, {
-      liked: !!F.likes[p.id], agreed: !!F.agrees[p.id],
-      likeCount: (p.likes || 0) + (F.likes[p.id] ? 1 : 0), agreeCount: (p.agrees || 0) + (F.agrees[p.id] ? 1 : 0),
-      thread: (p.comments || []).concat(F.comments[p.id] || []).map(c => Object.assign({}, c, { liked: !!F.likes[c.id], likeCount: (c.likes || 0) + (F.likes[c.id] ? 1 : 0) }))
-    }));
-  },
-  add(post) { Store.forum().posts.unshift(post); Store.saveForum(); },
-  toggle(kind, id) { const F = Store.forum(); const m = kind === 'like' ? F.likes : F.agrees; if (m[id]) delete m[id]; else m[id] = Date.now(); Store.saveForum(); return !!m[id]; },
-  comment(postId, c) { const F = Store.forum(); (F.comments[postId] = F.comments[postId] || []).push(c); Store.saveForum(); },
-  remove(id) { const F = Store.forum(); F.posts = F.posts.filter(p => p.id !== id); Store.saveForum(); }
-};
+/* The only place the forum reads or writes data. */
+const ForumStore = (() => {
+  let remote = null;
+  const cleanBy = b => ({ name: cleanText(b && b.name, 80), emp: cleanText(b && b.emp, 12).replace(/[^0-9]/g, '') });
+  const cleanPost = p => ({ id: cleanText(p.id, 64), type: ['q', 'tip', 'idea'].includes(p.type) ? p.type : 'q', part: TOUR_PART[p.part] ? p.part : 'start', at: +p.at || Date.now(), by: cleanBy(p.by), text: cleanText(p.text, 4000), likes: +p.likes || 0, agrees: +p.agrees || 0, mine: !!p.mine,
+    comments: (Array.isArray(p.comments) ? p.comments : []).map(c => ({ id: cleanText(c.id, 64), by: cleanBy(c.by), at: +c.at || Date.now(), text: cleanText(c.text, 2000), likes: +c.likes || 0 })) });
+  const local = () => Store.forum();
+  return {
+    refresh() { return Api.get('forum').then(r => { remote = (r && Array.isArray(r.posts) ? r.posts : []).map(cleanPost); }); },
+    all() {
+      const F = local();
+      const src = Api.on && remote ? remote : F.posts.concat(FORUM_SEED());
+      const extra = (id, n) => Api.on && remote ? n : n + (F.likes[id] ? 1 : 0);
+      return src.map(p => Object.assign({}, p, {
+        seed: !!p.seed || (Api.on && remote && !p.mine), liked: !!F.likes[p.id], agreed: !!F.agrees[p.id],
+        likeCount: extra(p.id, p.likes || 0), agreeCount: Api.on && remote ? (p.agrees || 0) : (p.agrees || 0) + (F.agrees[p.id] ? 1 : 0),
+        thread: (p.comments || []).concat(Api.on && remote ? [] : (F.comments[p.id] || [])).map(c => Object.assign({}, c, { liked: !!F.likes[c.id], likeCount: extra(c.id, c.likes || 0) }))
+      }));
+    },
+    add(post) { if (Api.on) return Api.post('forum', { type: post.type, part: post.part, text: post.text, by: post.by }).then(() => this.refresh()); local().posts.unshift(post); Store.saveForum(); return Promise.resolve(); },
+    toggle(kind, id) { const F = local(); const m = kind === 'like' ? F.likes : F.agrees; if (m[id]) delete m[id]; else m[id] = Date.now(); Store.saveForum(); const on = !!m[id];
+      const done = Api.on ? Api.post('forum', { on }, '/' + encodeURIComponent(id) + '/' + kind).then(() => this.refresh()) : Promise.resolve(); return { on, done }; },
+    comment(postId, c) { if (Api.on) return Api.post('forum', { text: c.text, by: c.by }, '/' + encodeURIComponent(postId) + '/comments').then(() => this.refresh()); const F = local(); (F.comments[postId] = F.comments[postId] || []).push(c); Store.saveForum(); return Promise.resolve(); },
+    remove(id) { if (Api.on) return Api.post('forum', {}, '/' + encodeURIComponent(id) + '/delete').then(() => this.refresh()); const F = local(); F.posts = F.posts.filter(p => p.id !== id); Store.saveForum(); return Promise.resolve(); }
+  };
+})();
 
 function viewForum(main) {
   const TYPES = () => [['q', tx('سؤال', 'Question'), 'help', '#4f86f7'], ['tip', tx('نصيحة', 'Tip'), 'bulb', '#22c38e'], ['idea', tx('فكرة', 'Idea'), 'sparkle', '#a855f7']];
@@ -61,7 +67,6 @@ function viewForum(main) {
 
   main.innerHTML = '<div class="page page-narrow forum">' +
     '<header class="fm-hero"><div><span class="hero-kicker">' + icon('users', 'icon-sm') + tx('مجتمع موظفي Omantel', 'Omantel employee community') + '</span><h1 tabindex="-1">' + tx('منتدى ClickUp', 'ClickUp Forum') + '</h1><p>' + tx('اسأل، وشارك نصيحة أو فكرة. وافق على ما يفيدك، وأعجب به، وعلّق لتساعد زملاءك.', 'Ask, share a tip or an idea. Agree with what helps you, like it and comment to help colleagues.') + '</p></div>' + mascot('mascot-md') + '</header>' +
-    (ForumStore.shared ? '' : '<p class="fm-note">' + icon('info', 'icon-sm') + '<span>' + tx('نسخة تجريبية: المنشورات والإعجابات والتعليقات التي تضيفها تُحفظ على هذا الجهاز. لتصبح مرئية لكل الموظفين يلزم ربط المنتدى بقاعدة بيانات مشتركة (مثل SharePoint أو Microsoft Lists)، والصفحة جاهزة لذلك.', 'Preview: the posts, likes and comments you add are saved on this device. To make them visible to every employee, the forum needs to be connected to a shared database (such as SharePoint or Microsoft Lists); the page is ready for it.') + '</span></p>') +
     '<form class="panel fm-compose" data-compose novalidate><div class="fm-row">' + av(st.name || EXAMPLE_PERSON.name, 42) +
     '<textarea class="input" id="fmText" rows="3" placeholder="' + tx('اكتب سؤالك أو نصيحتك أو فكرتك…', 'Write your question, tip or idea…') + '" aria-label="' + tx('نص المنشور', 'Post text') + '">' + esc(st.text) + '</textarea></div>' +
     '<div class="fm-opts"><div class="fm-types" role="radiogroup" aria-label="' + tx('نوع المنشور', 'Post type') + '">' + TYPES().map(t => '<button type="button" role="radio" data-ptype="' + t[0] + '" aria-checked="' + (st.type === t[0]) + '" style="--tc:' + t[3] + '">' + icon(t[2], 'icon-sm') + t[1] + '</button>').join('') + '</div>' +
@@ -86,7 +91,9 @@ function viewForum(main) {
           '<form class="fm-reply" data-reply="' + p.id + '">' + av(st.name || '?', 30) + '<input class="input" placeholder="' + tx('اكتب تعليقاً…', 'Write a comment…') + '" aria-label="' + tx('تعليقك', 'Your comment') + '"><button type="submit" class="icon-btn" aria-label="' + tx('أرسل التعليق', 'Send comment') + '">' + icon('send', 'icon-sm') + '</button></form></div>' : '') + '</article>'; }).join('')
       : '<div class="panel empty-state">' + mascot() + '<p>' + tx('لا توجد منشورات هنا بعد. كن أول من يكتب!', 'Nothing here yet. Be the first to post!') + '</p></div>';
   };
+  const fail = () => { Sound.play('error'); toast(tx('تعذّر الإرسال الآن. حاول مرة أخرى.', 'Could not send right now. Please try again.')); };
   paint();
+  if (Api.on) ForumStore.refresh().then(paint, () => {});
   const burst = btn => { if (prefersReducedMotion() || !btn) return; btn.classList.remove('burst'); void btn.offsetWidth; btn.classList.add('burst'); };
   const needName = () => { if (!st.name.trim()) { const e = $('#fmErr', main); e.hidden = false; e.textContent = tx('اكتب اسمك أولاً في نموذج النشر.', 'Write your name in the post form first.'); $('#fmName', main).focus(); Sound.play('error'); return true; } return false; };
 
@@ -97,19 +104,20 @@ function viewForum(main) {
   main.addEventListener('click', e => {
     const t = e.target.closest('[data-ptype]'); if (t) { st.type = t.dataset.ptype; put(); $$('[data-ptype]', main).forEach(b => b.setAttribute('aria-checked', b === t)); return; }
     const f = e.target.closest('[data-ffilter]'); if (f) { st.filter = f.dataset.ffilter; put(); $$('[data-ffilter]', main).forEach(b => b.setAttribute('aria-pressed', b === f)); paint(); return; }
-    const lk = e.target.closest('[data-like]'); if (lk) { const on = ForumStore.toggle('like', lk.dataset.like); Sound.play(on ? 'like' : 'tap'); paint(); const again = $('[data-like="' + lk.dataset.like + '"]', main); if (again) { again.focus(); if (on) burst(again); } return; }
-    const ag = e.target.closest('[data-agree]'); if (ag) { const on = ForumStore.toggle('agree', ag.dataset.agree); Sound.play(on ? 'pop' : 'tap'); paint(); const again = $('[data-agree="' + ag.dataset.agree + '"]', main); if (again) { again.focus(); if (on) burst(again); } return; }
+    const lk = e.target.closest('[data-like]'); if (lk) { const r = ForumStore.toggle('like', lk.dataset.like); const on = r.on; r.done.then(paint, () => {}); Sound.play(on ? 'like' : 'tap'); paint(); const again = $('[data-like="' + lk.dataset.like + '"]', main); if (again) { again.focus(); if (on) burst(again); } return; }
+    const ag = e.target.closest('[data-agree]'); if (ag) { const r = ForumStore.toggle('agree', ag.dataset.agree); const on = r.on; r.done.then(paint, () => {}); Sound.play(on ? 'pop' : 'tap'); paint(); const again = $('[data-agree="' + ag.dataset.agree + '"]', main); if (again) { again.focus(); if (on) burst(again); } return; }
     const th = e.target.closest('[data-thread]'); if (th) { st.open[th.dataset.thread] = !st.open[th.dataset.thread]; put(); paint(); const inp = $('[data-reply="' + th.dataset.thread + '"] input', main); if (inp) inp.focus(); else { const again = $('[data-thread="' + th.dataset.thread + '"]', main); if (again) again.focus(); } return; }
-    const dl = e.target.closest('[data-fdel]'); if (dl) confirmDialog(tx('حذف منشورك؟', 'Delete your post?'), tx('سيُحذف من هذا الجهاز.', 'It will be removed from this device.'), tx('نعم، احذف', 'Yes, delete')).then(ok => { if (ok) { ForumStore.remove(dl.dataset.fdel); paint(); } });
+    const dl = e.target.closest('[data-fdel]'); if (dl) confirmDialog(tx('حذف منشورك؟', 'Delete your post?'), tx('لن يظهر بعد الآن في المنتدى.', 'It will no longer appear in the forum.'), tx('نعم، احذف', 'Yes, delete')).then(ok => { if (ok) ForumStore.remove(dl.dataset.fdel).then(paint, fail); });
   });
   main.addEventListener('submit', e => {
     e.preventDefault();
     const rep = e.target.closest('[data-reply]');
     if (rep) {
       const inp = $('input', rep); const text = inp.value.trim(); if (!text) return; if (needName()) return;
-      ForumStore.comment(rep.dataset.reply, { id: uid('c'), by: { name: st.name.trim(), emp: st.emp.trim() }, at: Date.now(), likes: 0, text });
-      Store.setProfile({ name: st.name.trim(), emp: st.emp.trim() }); Sound.play('success'); paint();
-      const again = $('[data-reply="' + rep.dataset.reply + '"] input', main); if (again) again.focus(); return;
+      ForumStore.comment(rep.dataset.reply, { id: uid('c'), by: { name: st.name.trim(), emp: st.emp.trim() }, at: Date.now(), likes: 0, text }).then(() => {
+        Store.setProfile({ name: st.name.trim(), emp: st.emp.trim() }); Sound.play('success'); paint();
+        const again = $('[data-reply="' + rep.dataset.reply + '"] input', main); if (again) again.focus();
+      }, fail); return;
     }
     if (!e.target.matches('[data-compose]')) return;
     const err = $('#fmErr', main); let msg = '';
@@ -118,10 +126,11 @@ function viewForum(main) {
     else if (st.emp && !/^\d{3,10}$/.test(st.emp.trim())) msg = tx('الرقم الوظيفي أرقام فقط، مثل ', 'The employee ID is digits only, such as ') + EXAMPLE_PERSON.id + '.';
     err.hidden = !msg; err.textContent = msg;
     if (msg) { Sound.play('error'); return; }
-    ForumStore.add({ id: uid('p'), type: st.type, part: st.part, at: Date.now(), by: { name: st.name.trim(), emp: st.emp.trim() }, text: st.text.trim(), likes: 0, agrees: 0, comments: [] });
-    Store.setProfile({ name: st.name.trim(), emp: st.emp.trim() });
-    st.text = ''; st.filter = ''; st.sort = 'new'; put(); $('#fmText', main).value = ''; $('#fmSort', main).value = 'new'; $$('[data-ffilter]', main).forEach(b => b.setAttribute('aria-pressed', !b.dataset.ffilter));
-    paint(); Motion.confetti($('[data-post]', main), 50); toast(tx('نُشر منشورك', 'Your post is published'));
-    const first = $('.fm-post', main); if (first && !prefersReducedMotion()) first.animate([{ opacity: 0, transform: 'translateY(-12px) scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    ForumStore.add({ id: uid('p'), type: st.type, part: st.part, at: Date.now(), by: { name: st.name.trim(), emp: st.emp.trim() }, text: st.text.trim(), likes: 0, agrees: 0, comments: [], mine: true }).then(() => {
+      Store.setProfile({ name: st.name.trim(), emp: st.emp.trim() });
+      st.text = ''; st.filter = ''; st.sort = 'new'; put(); $('#fmText', main).value = ''; $('#fmSort', main).value = 'new'; $$('[data-ffilter]', main).forEach(b => b.setAttribute('aria-pressed', !b.dataset.ffilter));
+      paint(); Motion.confetti($('[data-post]', main), 50); toast(tx('نُشر منشورك', 'Your post is published'));
+      const first = $('.fm-post', main); if (first && !prefersReducedMotion()) first.animate([{ opacity: 0, transform: 'translateY(-12px) scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    }, fail);
   });
 }

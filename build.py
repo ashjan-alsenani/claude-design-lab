@@ -5,13 +5,14 @@ Usage: python3 build.py
 Only the Python standard library is used. The output inlines all CSS and JS.
 """
 import base64
+import hashlib
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "src"
 
-CSS_FILES = ["styles.css", "tour.css", "home.css", "pages.css", "fun.css", "workshops.css", "community.css"]
+CSS_FILES = ["styles.css", "tour.css", "home.css", "pages.css", "fun.css", "workshops.css", "community.css", "clicky.css"]
 JS_FILES = [
     "i18n/core.js",
     "content/core.js",
@@ -28,6 +29,7 @@ JS_FILES = [
     "app/util.js",
     "app/store.js",
     "app/icons.js",
+    "app/api.js",
     "app/sound.js",
     "app/fx.js",
     "app/demo.js",
@@ -41,6 +43,7 @@ JS_FILES = [
     "app/workshops.js",
     "app/feedback.js",
     "app/forum.js",
+    "app/clicky.js",
     "app/main.js",
 ]
 
@@ -71,6 +74,15 @@ def main():
     if "</script" in js.lower():
         raise SystemExit("A source file contains a literal </script> tag; escape it.")
     out = template.replace("/*__CSS__*/", css).replace("/*__JS__*/", js)
+    # Content Security Policy: only this exact inline script may run (hash),
+    # no plugins, no frames, no foreign scripts. Styles allow inline because
+    # the page colours elements with style attributes; fonts come from Google.
+    digest = base64.b64encode(hashlib.sha256(("\n" + js + "\n").encode("utf-8")).digest()).decode("ascii")
+    csp = ("default-src 'self'; script-src 'sha256-" + digest + "'; "
+           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; "
+           "img-src 'self' data: blob:; connect-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; "
+           "worker-src 'none'; base-uri 'none'; form-action 'self'")
+    out = out.replace("<!--__CSP__-->", '<meta http-equiv="Content-Security-Policy" content="' + csp + '">')
     out = inline_assets(out)
     (ROOT / "index.html").write_text(out, encoding="utf-8")
     print(f"index.html written ({len(out.encode('utf-8')) / 1024:.0f} KB)")

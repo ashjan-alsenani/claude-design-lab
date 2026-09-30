@@ -170,6 +170,21 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   await p.click('[data-wstep="1"]'); await p.click('[data-ask="subs"]'); await p.waitForTimeout(2500);
   await p.click('[data-addsubs]'); await p.waitForTimeout(200);
   ok((await p.$$('.ai-sub')).length === 4, 'AI suggests subtasks that can be added');
+
+  // 4g. Clicky chatbot, forum in the header, security
+  ok(await p.isVisible('#topForum'), 'forum button in the header');
+  ok(!(await p.$('.topbar #soundToggle')), 'sound switch is not in the header');
+  await p.click('.clicky-fab'); await p.waitForTimeout(200);
+  await p.fill('.cc-input input', 'how do i make a task repeat every sunday'); await p.press('.cc-input input', 'Enter'); await p.waitForTimeout(1200);
+  ok(await p.$$eval('.cc-msg.bot .cc-t', x => x.length > 0 && /repeat|تتكرر/i.test(x[x.length - 1].textContent)), 'Clicky answers a question: ' + await p.$$eval('.cc-msg.bot', x => x[x.length - 1].textContent.slice(0, 80)));
+  await p.fill('.cc-input input', 'what is an automation'); await p.press('.cc-input input', 'Enter'); await p.waitForTimeout(1200);
+  ok(await p.$$eval('.cc-msg.bot .cc-t', x => x[x.length - 1].textContent === 'Automation'), 'Clicky explains a term');
+  await p.keyboard.press('Escape'); await p.waitForTimeout(100);
+  ok(!(await p.isVisible('.clicky-chat')), 'Escape closes the chat');
+  await p.evaluate(() => { location.hash = '#/forum'; }); await p.waitForTimeout(300);
+  await p.fill('#fmText', '<img src=x onerror="window.__pwned=1"><svg onload="window.__pwned=1">'); await p.click('[data-post]'); await p.waitForTimeout(300);
+  ok(!(await p.evaluate(() => window.__pwned)), 'typed HTML is shown as text, never run');
+  ok(await p.evaluate(() => !!document.querySelector('meta[http-equiv="Content-Security-Policy"]')), 'content security policy present');
   await ctx.close();
 
   // 5. Storage blocked

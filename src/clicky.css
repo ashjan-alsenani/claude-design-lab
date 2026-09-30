@@ -1,0 +1,86 @@
+/* ==========================================================================
+   CLICKY CHATBOT, HEADER FORUM BUTTON, SOUND SWITCH
+   ========================================================================== */
+.top-forum { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 8px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: .88rem; color: #c2410c; background: #fff1e8; border: 1px solid #ffd3bd; flex: none; transition: transform 200ms var(--ease-out), background-color 150ms ease; }
+html[dir="rtl"] .top-forum { padding: 0 8px 0 14px; }
+.tf-ic { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #ff7a45, #ff02f0); box-shadow: 0 4px 10px -4px #ff7a45; }
+.top-forum[aria-current] { background: linear-gradient(135deg, #ff7a45, #ff02f0); color: #fff; border-color: transparent; }
+.top-forum[aria-current] .tf-ic { background: rgb(255 255 255 / .25); box-shadow: none; }
+@media (hover: hover) and (pointer: fine) { .top-forum:hover { transform: translateY(-2px); } .top-forum:hover .tf-ic .icon { animation: icon-wiggle 600ms var(--ease-out); } }
+.top-forum:active { transform: scale(0.97); }
+@media (max-width: 640px) { .top-forum span:last-child { display: none; } .top-forum { padding: 0 6px; } }
+
+.sound-switch { display: flex; align-items: center; gap: 8px; width: 100%; margin: 10px 0 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink-2); font: 600 .84rem/1 var(--font); cursor: pointer; }
+.sound-switch .sw { position: relative; margin-inline-start: auto; width: 34px; height: 20px; border-radius: 20px; background: #d5d0e6; transition: background-color 200ms ease; }
+.sound-switch .sw::after { content: ""; position: absolute; top: 3px; inset-inline-start: 3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .25); transition: inset-inline-start 200ms var(--ease-out); }
+.sound-switch[aria-pressed="true"] .sw { background: #22c38e; }
+.sound-switch[aria-pressed="true"] .sw::after { inset-inline-start: 17px; }
+.sound-switch:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.clicky-side { display: grid; gap: 10px; justify-items: start; }
+
+/* Floating helper */
+.clicky-bot { position: fixed; z-index: 80; bottom: 18px; inset-inline-end: 18px; display: grid; justify-items: end; gap: 10px; }
+.clicky-fab { position: relative; display: flex; align-items: center; gap: 6px; padding: 6px 16px 6px 6px; border: 0; border-radius: 999px; cursor: pointer; color: #fff; font: 700 .9rem/1 var(--font); background: linear-gradient(135deg, #7b68ee, #ff02f0); box-shadow: 0 16px 34px -12px rgb(137 48 253 / .8); transition: transform 220ms var(--ease-out); }
+html[dir="rtl"] .clicky-fab { padding: 6px 6px 6px 16px; }
+.clicky-fab::before { content: ""; position: absolute; inset: -4px; border-radius: inherit; border: 2px solid #ff02f0; opacity: 0; animation: pin-pulse 2.8s ease-out infinite; }
+.is-open .clicky-fab::before { animation: none; }
+.mascot-fab { width: 46px; background: #fff; border-radius: 50%; padding: 4px 5px 2px; animation: none; }
+.mascot-fab .m-shadow { display: none; }
+@media (hover: hover) and (pointer: fine) { .clicky-fab:hover { transform: translateY(-3px) scale(1.03); } }
+.clicky-fab:active { transform: scale(0.96); }
+.clicky-fab:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.cb-hint { position: relative; max-width: 240px; padding: 10px 14px; border-radius: 16px; background: #fff; color: var(--ink); font-weight: 600; font-size: .86rem; box-shadow: var(--shadow-3); border: 2px solid #e6ddff; }
+.cb-hint::after { content: ""; position: absolute; bottom: -8px; inset-inline-end: 32px; width: 14px; height: 14px; background: #fff; border-inline-end: 2px solid #e6ddff; border-bottom: 2px solid #e6ddff; transform: rotate(45deg); }
+.clicky-chat { width: min(390px, calc(100vw - 24px)); height: min(560px, calc(100vh - 120px)); display: grid; grid-template-rows: auto 1fr auto auto; border-radius: 22px; overflow: hidden; background: #fff; border: 1px solid #e6ddff; box-shadow: 0 40px 80px -30px rgb(60 20 140 / .55); animation: chat-in 280ms var(--ease-out); transform-origin: bottom right; }
+html[dir="rtl"] .clicky-chat { transform-origin: bottom left; }
+@keyframes chat-in { from { opacity: 0; transform: translateY(12px) scale(.96); } }
+.clicky-chat > header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; color: #fff; background: linear-gradient(125deg, #7b68ee, #a855f7 55%, #ff02f0); }
+.clicky-chat > header > div { display: grid; flex: 1; line-height: 1.3; }
+.clicky-chat > header small { display: inline-flex; align-items: center; gap: 6px; opacity: .92; font-size: .76rem; }
+.clicky-chat > header small i { width: 8px; height: 8px; border-radius: 50%; background: #5cf2a4; box-shadow: 0 0 0 3px rgb(92 242 164 / .3); }
+.clicky-chat .cc-close { color: #fff; }
+.clicky-chat .cc-close:hover { background: rgb(255 255 255 / .18); }
+.mascot-head { width: 42px; background: #fff; border-radius: 50%; padding: 3px 4px 1px; }
+.mascot-head .m-shadow { display: none; }
+.cc-log { overflow: auto; padding: 14px; display: grid; align-content: start; gap: 10px; background: linear-gradient(180deg, #faf8ff, #fff); }
+.cc-msg { max-width: 88%; padding: 10px 13px; border-radius: 16px; font-size: .9rem; line-height: 1.65; animation: tip-in 240ms var(--ease-out); }
+.cc-msg.bot { justify-self: start; background: #fff; border: 1px solid #ebe3ff; border-end-start-radius: 6px; }
+.cc-msg.me { justify-self: end; color: #fff; background: linear-gradient(135deg, #7b68ee, #a855f7); border-end-end-radius: 6px; }
+.cc-t { font-weight: 800; margin-bottom: 4px; }
+.cc-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.cc-links a { display: inline-flex; gap: 5px; align-items: center; padding: 5px 10px; border-radius: 999px; background: #f4eeff; color: #5b2bd6; font-weight: 700; font-size: .78rem; text-decoration: none; }
+.cc-links a:hover { background: #ebe2ff; }
+.cc-more { margin-top: 10px; font-size: .78rem; color: var(--ink-3); font-weight: 600; }
+.cc-rate { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: .78rem; color: var(--ink-3); }
+.cc-rate button { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: #fff; color: var(--ink-2); cursor: pointer; }
+.cc-rate button:hover { background: #f4eeff; color: #5b2bd6; }
+.cc-rate button.down .icon { transform: rotate(180deg); }
+.cc-rate span { display: inline-flex; gap: 6px; align-items: center; }
+.cc-dots { display: inline-flex; gap: 4px; padding: 4px 2px; }
+.cc-dots i { width: 7px; height: 7px; border-radius: 50%; background: #a855f7; animation: think 900ms ease-in-out infinite; }
+.cc-dots i:nth-child(2) { animation-delay: 150ms; } .cc-dots i:nth-child(3) { animation-delay: 300ms; }
+.cc-sugs { display: flex; gap: 6px; overflow-x: auto; padding: 8px 12px; border-top: 1px solid #f0ebfb; scrollbar-width: thin; }
+.cc-sugs.in { flex-wrap: wrap; padding: 6px 0 0; border: 0; overflow: visible; }
+.cc-sugs button { flex: none; max-width: 260px; padding: 7px 11px; border-radius: 999px; border: 1px solid #e0d4ff; background: #fff; color: #5b2bd6; font: 600 .78rem/1.3 var(--font); text-align: start; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background-color 150ms ease, transform 160ms var(--ease-out); }
+.cc-sugs.in button { white-space: normal; }
+.cc-sugs button:hover { background: #f4eeff; } .cc-sugs button:active { transform: scale(0.96); }
+.cc-input { display: flex; gap: 8px; padding: 10px 12px 12px; }
+.cc-input .input { flex: 1; border-radius: 999px; }
+.cc-send { background: linear-gradient(135deg, #7b68ee, #ff02f0); color: #fff; border-radius: 50%; }
+html[dir="rtl"] .cc-send svg { transform: scaleX(-1); }
+@media (max-width: 640px) {
+  .clicky-bot { bottom: 12px; inset-inline-end: 12px; }
+  .cf-label { display: none; }
+  .clicky-fab { padding: 5px; }
+  html[dir="rtl"] .clicky-fab { padding: 5px; }
+  .clicky-chat { height: min(78vh, 600px); }
+}
+@media print { .clicky-bot { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .clicky-fab::before, .clicky-chat, .cc-msg, .cc-dots i, .top-forum:hover .tf-ic .icon { animation: none !important; }
+}
+.clicky-chat { order: -1; }
+.cb-hint { order: -2; }
+.is-open .cf-label { display: none; }
+.is-open .clicky-fab { padding: 5px; }
