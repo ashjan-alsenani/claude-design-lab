@@ -247,12 +247,13 @@ const Studio = (() => {
     root.addEventListener('pointerleave', hideTips, true);
     root.addEventListener('focusin', onFocus);
     root.addEventListener('focusout', e => { if (e.target.classList && e.target.classList.contains('hit')) hideTips(); });
-    paint();
+    fresh = true; paint();
     unsub = Lab.on(() => paint());
   }
   function unmount() { if (unsub) unsub(); unsub = null; root = null; }
 
-  let built = {};
+  let built = {}; let fresh = false;
+  const CARD_IC = { status: ['board', '#7b68ee'], assignee: ['users', '#e44bb6'], trend: ['progress', '#22c38e'], overdue: ['alert', '#ff4d6d'], workload: ['workload', '#f5a524'], deps: ['gantt', '#1fb6e0'] };
   function paint() {
     if (!root) return;
     const tasks = scope();
@@ -262,8 +263,8 @@ const Studio = (() => {
       const r = c.build(tasks); built[c.id] = r;
       const q = r.q; const a = answered[c.id];
       const chosen = a && q ? q.options[a.idx] : null;
-      return '<article class="panel chart-card' + (c.wide ? ' wide' : '') + '" aria-labelledby="ch-' + c.id + '"><header><div><h2 id="ch-' + c.id + '" style="font-size:1.05rem">' + t(c.title()) + enSub(c.en, 'muted chart-en') + '</h2><p>' + t(c.sub()) + '</p></div></header>' +
-        '<div class="chart-box" data-chart="' + c.id + '">' + r.svg + '<div class="chart-tip" role="tooltip"></div></div>' +
+      return '<article class="panel chart-card' + (c.wide ? ' wide' : '') + '" aria-labelledby="ch-' + c.id + '"><header><div><h2 id="ch-' + c.id + '" style="font-size:1.05rem"><span class="ic-tile" style="--tc:' + CARD_IC[c.id][1] + '">' + icon(CARD_IC[c.id][0], 'icon-sm') + '</span>' + t(c.title()) + enSub(c.en, 'muted chart-en') + '</h2><p>' + t(c.sub()) + '</p></div></header>' +
+        '<div class="chart-box' + (fresh ? ' fresh' : '') + '" data-chart="' + c.id + '">' + r.svg + '<div class="chart-tip" role="tooltip"></div></div>' +
         '<div class="chart-explain"><p>' + icon('bulb', 'icon-sm') + ' ' + t(c.explain()) + '</p><p class="calc-def"><b>' + tx('طريقة الحساب:', 'How it is calculated:') + '</b> ' + t(c.calc()) + '</p></div>' +
         '<details class="deeper" data-tbl="' + c.id + '"' + (openDetails.has(c.id) ? ' open' : '') + '><summary>' + icon('table', 'icon-sm') + tx('عرض البيانات كجدول', 'Show the data as a table') + '<span class="chev" style="margin-inline-start:auto">' + icon('fwd', 'icon-sm') + '</span></summary><div class="deeper-body"><div class="table-wrap"><table class="data-table"><caption class="visually-hidden">' + tx('بيانات ', 'Data: ') + esc(c.title()) + '</caption><thead><tr>' + r.table[0].map(h => '<th scope="col">' + t(h) + '</th>').join('') + '</tr></thead><tbody>' +
         (r.table.length > 1 ? r.table.slice(1).map(row => '<tr>' + row.map(v => '<td' + (typeof v === 'number' ? ' class="num"' : '') + '>' + t(v) + '</td>').join('') + '</tr>').join('') : '<tr><td colspan="' + r.table[0].length + '" class="muted">' + tx('لا توجد بيانات في هذا النطاق', 'No data in this scope') + '</td></tr>') + '</tbody></table></div></div></details>' +
@@ -272,6 +273,7 @@ const Studio = (() => {
           (chosen != null ? feedbackHTML(q.correct.includes(chosen) ? 'ok' : 'bad', (q.correct.includes(chosen) ? tx('صحيح. ', 'Correct. ') : tx('ليست هذه. ', 'Not this one. ')) + t(q.why())) : '') + '</div></div>' : '') +
         '</article>';
     }).join('');
+    fresh = false;
     $$('details[data-tbl]', root).forEach(d => d.addEventListener('toggle', () => UIState.set('studio-tables', $$('details[data-tbl][open]', root).map(x => x.dataset.tbl))));
   }
   function onClick(e) {

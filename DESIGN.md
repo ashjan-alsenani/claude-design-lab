@@ -53,3 +53,25 @@ Sidebar 272px (off-canvas below 1080px). Content max 1180px. Lab challenges sit 
 - **Dates.** Arabic "30 سبتمبر 2026"; English day-month "30 Sep 2026".
 - **Logos and credit.** The Omantel and ClickUp logos appear unchanged in both languages. "Designed by Ashjan Al Sinani" appears in the footer, sidebar, About page and language screen.
 - **Verification.** `tests/` holds Playwright checks: content completeness and answer parity, every screen in both languages at 360, 390, 820 and 1280px (no overflow, no stray Arabic in English), and behaviour (language screen, remembered choice, state kept on switch, exercises solvable in English, storage blocked).
+
+## Vivid theme (ClickUp brand layer)
+
+A second layer at the end of `src/styles.css` ("VIVID THEME") gives the platform ClickUp's energy without changing any behaviour.
+
+- **Brand colours**: pink `#ff02f0`, orange `#ff7a45`, yellow `#ffc800`, violet `#8930fd`, sky `#49ccf9`. Gradients `--grad-warm` (headline accent), `--grad-cool`, `--grad-brand` (hairlines, meters) and `--grad-btn` (primary buttons).
+- **Module colours**: each of the 12 modules has a vivid and a dark tone (`MODULE_COLORS` in `src/app/fx.js`), applied through `--mc`/`--md` with `modStyle(id)`, like ClickUp Spaces. They colour the sidebar avatars, curriculum tiles, library headers, lesson hero, progress bars and quiz cards.
+- **Stage colours**: Watch pink, Understand amber, Practice sky, Check green (`STAGE_COLORS`), used on the home journey, the stage rail and stage headings.
+- **Icon tiles**: `.ic-tile` with `--tc` puts every navigation item, stat, chart card and assessment in a tinted tile.
+- **Charts from real data**: progress rings (`ring()`), per-module bar chart, and 8 achievements computed only from the learner's actual progress.
+- **Logos**: the supplied Omantel and ClickUp logos appear in the header, language screen and footer, unchanged.
+
+### Motion
+
+All motion uses `cubic-bezier(0.23, 1, 0.32, 1)` and explains something:
+
+- Blocks rise in once as they scroll into view (staggered 55 ms); numbers count up and rings/bars fill when shown.
+- Dashboard Studio charts grow on first paint only, not on every data change.
+- Confetti marks rare wins: solving an exercise the first time, a perfect lesson check, passing a quiz or the final assessment, completing a lesson.
+- Hover lifts are limited to devices with a fine pointer; presses scale to 0.97–0.98.
+- A language switch or in-place refresh shows everything immediately, so the learner's place never moves.
+- `prefers-reduced-motion: reduce` disables drifting hero blobs, reveals, count-ups, chart growth and confetti.

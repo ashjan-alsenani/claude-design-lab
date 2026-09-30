@@ -4,6 +4,8 @@
 Usage: python3 build.py
 Only the Python standard library is used. The output inlines all CSS and JS.
 """
+import base64
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -25,6 +27,7 @@ JS_FILES = [
     "app/util.js",
     "app/store.js",
     "app/icons.js",
+    "app/fx.js",
     "app/demo.js",
     "app/exercises.js",
     "app/lab.js",
@@ -38,6 +41,20 @@ def read(rel):
     return (SRC / rel).read_text(encoding="utf-8")
 
 
+MIME = {".png": "image/png", ".webp": "image/webp", ".jpg": "image/jpeg", ".svg": "image/svg+xml"}
+
+
+def inline_assets(html):
+    """Embed files from assets/ as data URIs so index.html works on its own."""
+    def repl(m):
+        path = ROOT / "assets" / m.group(2)
+        if not path.exists():
+            return m.group(0)
+        data = base64.b64encode(path.read_bytes()).decode("ascii")
+        return f'{m.group(1)}="data:{MIME[path.suffix]};base64,{data}"'
+    return re.sub(r'(src|href)="assets/([\w.-]+\.(?:png|webp|jpg|svg))"', repl, html)
+
+
 def main():
     template = read("template.html")
     css = "\n".join(read(f) for f in CSS_FILES)
@@ -46,6 +63,7 @@ def main():
     if "</script" in js.lower():
         raise SystemExit("A source file contains a literal </script> tag; escape it.")
     out = template.replace("/*__CSS__*/", css).replace("/*__JS__*/", js)
+    out = inline_assets(out)
     (ROOT / "index.html").write_text(out, encoding="utf-8")
     print(f"index.html written ({len(out.encode('utf-8')) / 1024:.0f} KB)")
 

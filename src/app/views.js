@@ -36,7 +36,8 @@ const moduleLabel = n => tx('الوحدة ', 'Module ') + n;
 function renderSidebar(route) {
   const nav = $('#sidebar'); const cur = route.name;
   const last = Store.state.last && LESSON[Store.state.last.lesson] ? Store.state.last.lesson : null;
-  const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '>' + icon(ic) + '<span>' + label + '</span>' + (extra || '') + '</a></li>';
+  const NAV_C = { home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
+  const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '><span class="ic-tile" style="--tc:' + NAV_C[ic] + '">' + icon(ic) + '</span><span>' + label + '</span>' + (extra || '') + '</a></li>';
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
   nav.innerHTML =
     '<div><p class="nav-group-title">' + tx('المنصة', 'Platform') + '</p><ul class="nav-list">' +
@@ -54,7 +55,7 @@ function renderSidebar(route) {
       const p = moduleProgress(m.id);
       const target = m.lessons.find(id => !Store.isDone(id)) || m.lessons[0];
       const active = cur === 'lesson' && route.params[0] && LESSON[route.params[0]] && LESSON[route.params[0]].module === m.id;
-      return '<li><a class="nav-link" href="' + lessonLink(target) + '"' + (active ? ' aria-current="page"' : '') + '><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><span>' + t(m.title) + '</span>' +
+      return '<li><a class="nav-link" style="' + modStyle(m.id) + '" href="' + lessonLink(target) + '"' + (active ? ' aria-current="page"' : '') + '><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><span>' + t(m.title) + '</span>' +
         (p.done === p.total ? '<span class="mini-check" aria-label="' + tx('مكتملة', 'Completed') + '">' + icon('check', 'icon-sm') + '</span>' : '<span class="count num">' + p.done + '/' + p.total + '</span>') + '</a></li>';
     }).join('') + '</ul></div>' +
     '<div class="sidebar-foot"><p>' + (Store.ok ? tx('يُحفظ تقدّمك على هذا المتصفح وهذا الجهاز فقط.', 'Your progress is saved on this browser and this device only.') : tx('التخزين المحلي غير متاح: التقدّم لهذه الجلسة فقط.', 'Local storage is unavailable: progress lasts for this session only.')) + '</p><p class="credit" lang="en" dir="ltr">' + CREDIT + '</p></div>';
@@ -71,39 +72,58 @@ function viewHome(main) {
   const last = Store.state.last && LESSON[Store.state.last.lesson] ? LESSON[Store.state.last.lesson] : null;
   const anyProgress = LESSONS.some(l => lessonStatusKey(l.id) !== 'todo');
   const previews = ['l3-2', 'l4-2', 'l9-1', 'l11-2'].map(id => LESSON[id]);
+  const done = LESSONS.filter(l => Store.isDone(l.id)).length;
+  const pct = Math.round(done / LESSONS.length * 100);
+  const qCount = LESSONS.reduce((a, l) => a + (l.check || []).length, 0) + Object.values(QUIZZES).reduce((a, q) => a + q.length, 0);
+  const PATH_G = { p1: 'linear-gradient(125deg,#ff02f0,#ff7a45 70%,#ffb13d)', p2: 'linear-gradient(125deg,#8930fd,#4f86f7 60%,#49ccf9)', p3: 'linear-gradient(125deg,#5b45d6,#a855f7 50%,#ec4899)' };
+  const STEP_C = [STAGE_COLORS.watch, STAGE_COLORS.understand, STAGE_COLORS.practice, STAGE_COLORS.check];
+  const tile = (ic, c, n, lbl, suf) => '<div class="stat-tile" data-rv style="--tc:' + c + '"><span class="ic-tile">' + icon(ic) + '</span><span class="big">' + countEl(n, suf) + '</span><span class="lbl">' + lbl + '</span></div>';
   main.innerHTML = '<div class="page">' +
-    '<section class="home-hero" aria-labelledby="homeTitle"><div>' +
-    '<h1 id="homeTitle">' + tx('تعلّم ClickUp بالممارسة، خطوة بخطوة', 'Learn ClickUp by doing, one step at a time') + '</h1>' +
+    '<section class="hero-x" aria-labelledby="homeTitle"><div class="hero-art" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="grid-lines"></span></div><div>' +
+    '<span class="hero-kicker">' + icon('sparkle', 'icon-sm') + tx('منصة تعلّم تفاعلية لموظفي Omantel', 'Interactive learning for Omantel teams') + '</span>' +
+    '<h1 id="homeTitle">' + tx('تعلّم <span class="grad-text">ClickUp</span> بالممارسة، خطوة بخطوة', 'Learn <span class="grad-text">ClickUp</span> by doing, one step at a time') + '</h1>' +
     '<p class="lead">' + tx('من أول مهمة إلى سير عمل متكامل: دروس قصيرة بالعربية، وعروض متحركة، ومساحة تدريب تشبه ClickUp، لتنجز عملك اليومي بثقة.', 'From your first task to a complete workflow: short lessons, animated walkthroughs and a ClickUp-style practice space, so you can handle your daily work with confidence.') + '</p>' +
-    '<div class="hero-actions"><a class="btn btn-primary btn-lg" href="' + lessonLink(anyProgress && next ? next : 'l1-1') + '">' + icon('play') + (anyProgress ? tx('تابع التعلّم', 'Continue learning') : tx('ابدأ التعلّم', 'Start learning')) + '</a>' +
+    '<div class="hero-actions"><a class="btn btn-primary btn-lg" href="' + lessonLink(anyProgress && next ? next : 'l1-1') + '">' + icon(anyProgress ? 'play' : 'rocket') + (anyProgress ? tx('تابع التعلّم', 'Continue learning') : tx('ابدأ التعلّم', 'Start learning')) + '</a>' +
     '<a class="btn btn-secondary btn-lg" href="#/lab">' + icon('flask') + tx('جرّب مختبر التطبيق', 'Try the Practice Lab') + '</a></div>' +
     (last && !Store.isDone(last.id) ? '<a class="resume-card" href="' + lessonLink(last.id) + '">' + icon('replay') + '<span><small>' + tx('آخر درس فتحته', 'Last lesson you opened') + '</small>' + t(last.title) + '</span><span style="margin-inline-start:auto">' + icon('fwd') + '</span></a>' : '') +
-    '</div><div data-home-demo></div></section>' +
+    '</div><div class="hero-demo"><div data-home-demo></div></div></section>' +
+
+    '<section class="section" aria-label="' + tx('لمحة سريعة', 'At a glance') + '"><div class="stats-bento">' +
+    '<a class="panel me-card" data-rv href="' + (next ? lessonLink(next) : '#/progress') + '">' + ring(pct, { size: 96, stroke: 10, label: '<b class="num">' + countEl(pct, '%') + '</b><small>' + tx('مكتمل', 'done') + '</small>' }) +
+    '<div><h2>' + (done ? tx('تقدّمك حتى الآن', 'Your progress so far') : tx('رحلتك تبدأ هنا', 'Your journey starts here')) + '</h2><p class="num">' + tx(done + ' من ' + LESSONS.length + ' درساً مكتملاً', done + ' of ' + LESSONS.length + ' lessons completed') + '</p>' +
+    (next ? '<span class="next-chip">' + icon('fwd', 'icon-sm') + tx('التالي: ', 'Next: ') + t(LESSON[next].title) + '</span>' : '<span class="next-chip">' + icon('trophy', 'icon-sm') + tx('أكملت كل الدروس', 'All lessons completed') + '</span>') + '</div></a>' +
+    tile('module', '#7b68ee', MODULES.length, tx('وحدة تعليمية', 'Modules')) +
+    tile('book', '#e44bb6', LESSONS.length, tx('درساً تفاعلياً', 'Interactive lessons')) +
+    tile('assess', '#22c38e', qCount, tx('سؤالاً بشرح', 'Explained questions')) +
+    tile('flask', '#1fb6e0', CHALLENGES.length, tx('تحديات في المختبر', 'Lab challenges')) +
+    '</div></section>' +
 
     '<section class="section" aria-labelledby="loopT"><div class="section-head"><h2 id="loopT">' + tx('كل درس يسير في أربع خطوات', 'Every lesson follows four steps') + '</h2></div>' +
-    '<div class="loop-grid">' + [
+    '<div class="journey">' + [
       ['WATCH', 'play', tx('شاهد', 'Watch'), tx('عرض متحرك يُظهر المؤشر والنقر وتغيّر الحالة، مع شرح عربي لكل خطوة، وتحكم كامل في التشغيل.', 'An animated walkthrough shows the pointer, clicks and status changes, with a caption for every step and full playback control.')],
       ['UNDERSTAND', 'bulb', tx('افهم', 'Understand'), tx('شرح مختصر أولاً، وتفاصيل أعمق عند الطلب، وخطأ شائع مع طريقة تجنّبه.', 'A short explanation first, deeper detail on request, and a common mistake with how to avoid it.')],
       ['PRACTICE', 'flask', tx('تدرّب', 'Practice'), tx('نشاط تفاعلي يتحقق من إجابتك الفعلية، ثم مختبر يشبه مساحة عمل حقيقية.', 'An interactive activity that checks what you actually did, then a lab that feels like a real workspace.')],
       ['CHECK', 'assess', tx('تحقّق', 'Check'), tx('أسئلة قصيرة بشرح لكل إجابة، واختبارات للوحدات، وتحدٍّ عملي شامل.', 'Short questions with an explanation for every answer, module quizzes and an end-to-end practical challenge.')]
-    ].map((s, i) => '<div class="loop-step"><span class="loop-en">' + (isEN() ? 'Step ' + (i + 1) : s[0]) + '</span><h3>' + icon(s[1]) + s[2] + '</h3><p>' + s[3] + '</p></div>').join('') + '</div></section>' +
+    ].map((s, i) => '<div class="j-step" data-rv style="--sc:' + STEP_C[i] + '"><span class="j-node">' + icon(s[1]) + '</span><span class="loop-en">' + (isEN() ? 'STEP ' + (i + 1) : s[0]) + '</span><h3>' + s[2] + '</h3><p>' + s[3] + '</p></div>').join('') + '</div></section>' +
 
     '<section class="section" aria-labelledby="pathT"><div class="section-head"><h2 id="pathT">' + tx('مسارات التعلّم', 'Learning paths') + '</h2><p>' + tx('اختر المسار الأقرب لعملك، أو اتبع الوحدات بالترتيب.', 'Pick the path closest to your work, or follow the modules in order.') + '</p></div><div class="path-grid">' +
     PATHWAYS.map(p => {
-      const ls = p.modules.flatMap(m => MODULE[m].lessons); const done = ls.filter(id => Store.isDone(id)).length;
-      return '<div class="panel path-card"><h3>' + icon(p.icon) + t(p.title) + '</h3><p class="small muted">' + t(p.who) + '</p><p class="small">' + t(p.goal) + '</p>' +
-        '<ol>' + p.modules.map(m => '<li><a href="' + lessonLink(MODULE[m].lessons[0]) + '"><span class="space-avatar ' + stAvatar(moduleProgress(m)) + '">' + MODULE[m].n + '</span>' + t(MODULE[m].title) + '</a></li>').join('') + '</ol>' +
-        '<p class="small muted num">' + tx(done + ' من ' + ls.length + ' دروس مكتملة', done + ' of ' + ls.length + ' lessons completed') + '</p></div>';
+      const ls = p.modules.flatMap(m => MODULE[m].lessons); const d = ls.filter(id => Store.isDone(id)).length;
+      return '<div class="panel path-card" data-rv><div class="path-top" style="--pg:' + PATH_G[p.id] + '"><h3><span class="ic-tile">' + icon(p.icon) + '</span>' + t(p.title) + '</h3><p>' + t(p.who) + '</p></div><div class="path-body"><p class="small">' + t(p.goal) + '</p>' +
+        '<ol>' + p.modules.map(m => '<li><a href="' + lessonLink(MODULE[m].lessons[0]) + '" style="' + modStyle(m) + '"><span class="space-avatar ' + stAvatar(moduleProgress(m)) + '">' + MODULE[m].n + '</span>' + t(MODULE[m].title) + '</a></li>').join('') + '</ol>' +
+        '<div class="path-foot">' + ring(Math.round(d / ls.length * 100), { size: 34, stroke: 5 }) + '<span class="small muted num">' + tx(d + ' من ' + ls.length + ' دروس مكتملة', d + ' of ' + ls.length + ' lessons completed') + '</span></div></div></div>';
     }).join('') + '</div></section>' +
 
-    '<section class="section" aria-labelledby="mapT"><div class="section-head"><h2 id="mapT">' + tx('خريطة المنهج', 'Curriculum map') + '</h2><p>' + tx('12 وحدة من المستوى المبتدئ إلى المتقدم.', '12 modules, from beginner to advanced.') + '</p></div>' +
-    '<div class="panel curriculum-map"><div class="cmap">' + ['beginner', 'intermediate', 'advanced'].map(lv =>
-      '<div class="cmap-row-label">' + LEVELS[lv].name + (isEN() ? '' : ' <bdi dir="ltr">' + LEVELS[lv].en + '</bdi>') + '</div>' +
-      MODULES.filter(m => m.level === lv).map(m => { const p = moduleProgress(m.id); return '<a class="cmap-node" href="' + lessonLink(m.lessons.find(id => !Store.isDone(id)) || m.lessons[0]) + '"><span class="cmap-top"><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><small class="num">' + p.done + '/' + p.total + '</small></span><strong>' + t(m.title) + '</strong>' + (isEN() ? '' : '<small dir="ltr" style="text-align:end">' + m.en + '</small>') + '<span class="bar" aria-hidden="true"><i style="width:' + (p.done / p.total * 100) + '%"></i></span></a>'; }).join('')).join('') +
-    '</div></div></section>' +
+    '<section class="section" aria-labelledby="mapT"><div class="section-head"><h2 id="mapT">' + tx('خريطة المنهج', 'Curriculum map') + '</h2><p>' + tx('12 وحدة من المستوى المبتدئ إلى المتقدم. لكل وحدة لونها، مثل Spaces في ClickUp.', '12 modules, from beginner to advanced. Each module has its own colour, like Spaces in ClickUp.') + '</p></div>' +
+    '<div class="mod-grid">' + ['beginner', 'intermediate', 'advanced'].map(lv =>
+      '<p class="mod-level">' + icon(lv === 'beginner' ? 'compass' : lv === 'intermediate' ? 'layers' : 'rocket', 'icon-sm') + LEVELS[lv].name + (isEN() ? '' : ' <bdi dir="ltr" class="muted">' + LEVELS[lv].en + '</bdi>') + '</p><div class="mod-row">' +
+      MODULES.filter(m => m.level === lv).map(m => { const p = moduleProgress(m.id);
+        return '<a class="mod-tile" data-rv style="' + modStyle(m.id) + '" href="' + lessonLink(m.lessons.find(id => !Store.isDone(id)) || m.lessons[0]) + '"><span class="mt-top"><span class="ic-tile">' + icon(m.icon) + '</span>' + ring(Math.round(p.done / p.total * 100), { size: 34, stroke: 5, color: MODULE_COLORS[m.id].c }) + '</span>' +
+          '<span class="mt-n">' + moduleLabel(m.n) + (isEN() ? '' : ' · <bdi dir="ltr">' + m.en + '</bdi>') + '</span><strong>' + t(m.title) + '</strong><p>' + t(m.desc) + '</p><span class="mt-foot num">' + icon('book', 'icon-sm') + tx(p.done + ' من ' + p.total + ' دروس', p.done + ' of ' + p.total + ' lessons') + '</span></a>'; }).join('') + '</div>').join('') +
+    '</div></section>' +
 
     '<section class="section" aria-labelledby="prevT"><div class="section-head"><h2 id="prevT">' + tx('من داخل الدروس', 'Inside the lessons') + '</h2><a class="btn btn-ghost" href="#/library">' + tx('كل الدروس ', 'All lessons ') + icon('fwd', 'icon-sm') + '</a></div><div class="preview-list">' +
-    previews.map(l => '<a class="panel lesson-preview" href="' + lessonLink(l.id) + '"><span class="meta"><span class="space-avatar">' + MODULE[l.module].n + '</span>' + levelChip(l.level) + timeChip(l.minutes) + '</span><h3>' + t(l.title) + '</h3><p class="obj">' + t(l.objective) + '</p><p class="scenario-quote">' + icon('users', 'icon-sm') + ' ' + t(l.scenario) + '</p></a>').join('') +
+    previews.map(l => '<a class="panel lesson-preview" data-rv style="' + modStyle(l.module) + '" href="' + lessonLink(l.id) + '"><span class="meta"><span class="space-avatar">' + MODULE[l.module].n + '</span>' + levelChip(l.level) + timeChip(l.minutes) + '</span><h3>' + t(l.title) + '</h3><p class="obj">' + t(l.objective) + '</p><p class="scenario-quote">' + icon('users', 'icon-sm') + ' ' + t(l.scenario) + '</p></a>').join('') +
     '</div></section>' +
     '<p class="help-text">' + tx('الواجهات داخل المنصة محاكاة تعليمية مبسّطة، وليست تسجيلات من ClickUp. المنصة مستقلة وغير معتمدة أو مدعومة من ClickUp.', 'Screens inside the platform are simplified educational simulations, not recordings of ClickUp. The platform is independent and is not certified or endorsed by ClickUp.') + ' <a href="#/about">' + tx('اعرف المزيد', 'Learn more') + '</a></p>' +
     '</div>';
@@ -133,7 +153,7 @@ function viewLibrary(main) {
     if (!res.length) { box.innerHTML = '<div class="panel empty-state">' + icon('search') + '<h2 style="font-size:1.05rem">' + tx('لا توجد دروس تطابق هذه المرشّحات', 'No lessons match these filters') + '</h2><p>' + tx('جرّب كلمة أخرى أو امسح المرشّحات.', 'Try another word or clear the filters.') + '</p><button type="button" class="btn btn-secondary" data-clear>' + tx('مسح المرشّحات', 'Clear filters') + '</button></div>'; return; }
     box.innerHTML = MODULES.filter(m => res.some(l => l.module === m.id)).map(m => {
       const p = moduleProgress(m.id);
-      return '<section class="panel module-group" aria-labelledby="mg-' + m.id + '"><header><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><h2 id="mg-' + m.id + '">' + t(m.title) + '</h2>' + enSub(m.en, 'muted small') + '<span class="muted num">' + p.done + '/' + p.total + tx(' مكتمل', ' completed') + '</span></header><ul class="task-rows">' +
+      return '<section class="panel module-group" style="' + modStyle(m.id) + '" aria-labelledby="mg-' + m.id + '"><header><span class="ic-tile">' + icon(m.icon) + '</span><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><h2 id="mg-' + m.id + '">' + t(m.title) + '</h2>' + enSub(m.en, 'muted small') + '<span class="muted num">' + p.done + '/' + p.total + tx(' مكتمل', ' completed') + '</span></header><ul class="task-rows">' +
         res.filter(l => l.module === m.id).map(l => {
           const st = lessonStatusKey(l.id); const bm = Store.isBookmarked(l.id);
           return '<li class="task-row"><span aria-hidden="true">' + (st === 'done' ? '<span style="color:var(--st-done)">' + icon('check-circle') + '</span>' : st === 'progress' ? '<span style="color:var(--st-progress)">' + icon('play') + '</span>' : '<span style="color:var(--ink-4)">' + icon('book') + '</span>') + '</span>' +
@@ -163,7 +183,7 @@ function viewLibrary(main) {
 const STAGES = () => [['watch', tx('شاهد', 'Watch'), 'WATCH'], ['understand', tx('افهم', 'Understand'), 'UNDERSTAND'], ['practice', tx('تدرّب', 'Practice'), 'PRACTICE'], ['check', tx('تحقّق', 'Check'), 'CHECK']];
 function stageTitle(id, ic, idx) {
   const s = STAGES()[idx];
-  return '<div class="stage-title"><span class="stage-num">' + icon(ic, 'icon-sm') + '</span><h2 id="' + id + '">' + s[1] + '</h2>' + (isEN() ? '' : '<span class="en">' + s[2] + '</span>') + '</div>';
+  return '<div class="stage-title" style="--sc:' + STAGE_COLORS[s[0]] + '"><span class="stage-num">' + icon(ic, 'icon-sm') + '</span><h2 id="' + id + '">' + s[1] + '</h2>' + (isEN() ? '' : '<span class="en">' + s[2] + '</span>') + '</div>';
 }
 function viewLesson(main, params) {
   const L = LESSON[params[0]];
@@ -177,17 +197,17 @@ function viewLesson(main, params) {
   };
   const kinds = new Set((L.notes || []).map(n => n.kind));
   const saveLbl = on => on ? tx('محفوظ', 'Saved') : tx('حفظ', 'Save');
-  main.innerHTML = '<div class="lesson-layout">' +
+  main.innerHTML = '<div class="lesson-layout" style="' + modStyle(M.id) + '">' +
     '<nav class="panel lesson-nav collapsible" aria-label="' + tx('دروس الوحدة', 'Lessons in this module') + '"><h2><span class="space-avatar started">' + M.n + '</span>' + t(M.title) + '</h2>' +
     '<button type="button" class="btn btn-ghost btn-sm" data-toggle-nav style="width:100%;justify-content:space-between" aria-expanded="false">' + tx('دروس هذه الوحدة', 'Lessons in this module') + ' (' + M.lessons.length + ')' + icon('chev-down', 'icon-sm') + '</button>' +
     '<ol>' + M.lessons.map(id => '<li><a href="' + lessonLink(id) + '"' + (id === L.id ? ' aria-current="page"' : '') + '><span class="ln-state' + (Store.isDone(id) ? ' done' : '') + '">' + (Store.isDone(id) ? icon('check') : '') + '</span><span>' + t(LESSON[id].title) + '</span></a></li>').join('') + '</ol>' +
     '<div class="other-modules"><a class="btn btn-ghost btn-sm" href="#/library">' + icon('book', 'icon-sm') + tx('كل الوحدات والدروس', 'All modules and lessons') + '</a></div></nav>' +
     '<article class="lesson-main" aria-labelledby="lessonTitle">' +
-    '<header class="lesson-head"><div class="breadcrumbs"><a href="#/library">' + tx('مكتبة الدروس', 'Learning Library') + '</a><span aria-hidden="true">/</span><span>' + moduleLabel(M.n) + ': ' + t(M.title) + '</span></div>' +
+    '<header class="lesson-hero" style="' + modStyle(M.id) + '"><span class="lh-art" aria-hidden="true">' + icon(M.icon) + '</span><div class="breadcrumbs"><a href="#/library">' + tx('مكتبة الدروس', 'Learning Library') + '</a><span aria-hidden="true">/</span><span>' + moduleLabel(M.n) + ': ' + t(M.title) + '</span></div>' +
     '<div class="meta">' + levelChip(L.level) + timeChip(L.minutes) + '<span class="chip">' + icon('check-circle', 'icon-sm') + tx('روجع في ', 'Reviewed ') + fmtDate(REVIEW_DATE, true) + '</span>' +
     (kinds.has('plan') ? '<span class="chip chip-plan">' + tx('يعتمد على الخطة أو الإعدادات', 'Depends on plan or settings') + '</span>' : '') + (kinds.has('admin') ? '<span class="chip chip-admin">' + tx('يتضمن إجراءً إدارياً', 'Includes an admin action') + '</span>' : '') +
     '<button type="button" class="btn btn-ghost btn-sm bookmark-btn" data-bm="' + L.id + '" aria-pressed="' + Store.isBookmarked(L.id) + '">' + icon('bookmark', 'icon-sm') + '<span>' + saveLbl(Store.isBookmarked(L.id)) + '</span></button></div>' +
-    '<h1 id="lessonTitle" tabindex="-1">' + t(L.title) + '</h1></header>' +
+    '<h1 id="lessonTitle" tabindex="-1">' + t(L.title) + '</h1><div class="lh-progress" data-lhp></div></header>' +
     '<nav class="stage-rail" aria-label="' + tx('مراحل الدرس', 'Lesson stages') + '" data-rail></nav>' +
     '<div class="panel lesson-intro"><div><h2>' + icon('target', 'icon-sm') + tx('هدف التعلّم', 'Learning objective') + '</h2><p>' + t(L.objective) + '</p></div><div><h2>' + icon('users', 'icon-sm') + tx('موقف من العمل', 'Workplace scenario') + '</h2><p>' + t(L.scenario) + '</p></div></div>' +
 
@@ -218,14 +238,17 @@ function viewLesson(main, params) {
 
   const player = new DemoPlayer($('[data-demo]', main), L.demo, { key: 'demo-' + L.id, onWatched: () => { if (!Store.lessonState(L.id).watched) { Store.mark(L.id, 'watched', true); toast(tx('اكتملت مرحلة «شاهد»', 'Watch stage completed')); } } });
   if (L.hier) renderHierExplorer($('[data-hier]', main));
-  renderExercise($('[data-ex]', main), L.exercise, L.id, () => { if (!Store.lessonState(L.id).practiced) { Store.mark(L.id, 'practiced', true); toast(tx('اكتملت مرحلة «تدرّب»', 'Practice stage completed')); } });
-  renderQuiz($('[data-quiz]', main), L.check, 'chk-' + L.id, { onSubmit: (s, n) => { Store.mark(L.id, 'checked', { score: s, total: n }); }, resultNote: () => tx('يمكنك إعادة المحاولة. لإكمال الدرس يكفي أن تجيب عن الأسئلة، ونتيجتك تساعدك على معرفة ما تراجعه.', 'You can try again. Answering the questions is enough to complete the lesson; your score shows you what to review.') });
+  renderExercise($('[data-ex]', main), L.exercise, L.id, () => { if (!Store.lessonState(L.id).practiced) { Motion.confetti($('[data-ex]', main), 40); Store.mark(L.id, 'practiced', true); toast(tx('اكتملت مرحلة «تدرّب»', 'Practice stage completed')); } });
+  renderQuiz($('[data-quiz]', main), L.check, 'chk-' + L.id, { onSubmit: (s, n) => { Store.mark(L.id, 'checked', { score: s, total: n }); if (s === n) Motion.confetti($('[data-quiz]', main), 50); }, resultNote: () => tx('يمكنك إعادة المحاولة. لإكمال الدرس يكفي أن تجيب عن الأسئلة، ونتيجتك تساعدك على معرفة ما تراجعه.', 'You can try again. Answering the questions is enough to complete the lesson; your score shows you what to review.') });
 
   const paintRail = () => {
     const s = Store.lessonState(L.id);
     const doneFlags = [s.watched, s.watched || s.practiced || !!s.checked, s.practiced, !!s.checked];
-    $('[data-rail]', main).innerHTML = STAGES().map((st, i) => '<a href="#' + st[0] + '" data-stage="' + st[0] + '" class="' + (doneFlags[i] ? 'done' : '') + '"><span class="sr-tick" aria-hidden="true">' + (doneFlags[i] ? icon('check') : '') + '</span><span>' + st[1] + '</span>' + (isEN() ? '' : '<span class="sr-en">' + st[2] + '</span>') + '<span class="visually-hidden">' + (doneFlags[i] ? tx(' (مكتملة)', ' (completed)') : '') + '</span></a>').join('');
+    $('[data-rail]', main).innerHTML = STAGES().map((st, i) => '<a href="#' + st[0] + '" data-stage="' + st[0] + '" style="--sc:' + STAGE_COLORS[st[0]] + '" class="' + (doneFlags[i] ? 'done' : '') + '"><span class="sr-tick" aria-hidden="true">' + (doneFlags[i] ? icon('check') : '') + '</span><span>' + st[1] + '</span>' + (isEN() ? '' : '<span class="sr-en">' + st[2] + '</span>') + '<span class="visually-hidden">' + (doneFlags[i] ? tx(' (مكتملة)', ' (completed)') : '') + '</span></a>').join('');
+    const nDone = s.done ? 4 : doneFlags.filter(Boolean).length;
+    $('[data-lhp]', main).innerHTML = '<span class="lh-bar" aria-hidden="true"><i style="width:' + (nDone / 4 * 100) + '%"></i></span><span class="num">' + (s.done ? tx('الدرس مكتمل', 'Lesson completed') : tx(nDone + ' من 4 مراحل', nDone + ' of 4 stages')) + '</span>';
     const cb = $('[data-complete]', main);
+    cb.classList.toggle('is-done', !!s.done);
     if (s.done) cb.innerHTML = '<div style="display:flex;gap:10px;align-items:center"><span style="color:var(--ok)">' + icon('check-circle', 'icon-lg') + '</span><div><strong>' + tx('أكملت هذا الدرس', 'You completed this lesson') + '</strong><p class="help-text">' + tx('في ', 'On ') + fmtStamp(s.done) + '</p></div></div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-ghost btn-sm" data-undone>' + tx('إلغاء تحديده كمكتمل', 'Mark as not completed') + '</button>' + (next ? '<a class="btn btn-primary" href="' + lessonLink(next.id) + '">' + tx('الدرس التالي ', 'Next lesson ') + icon('fwd', 'icon-sm') + '</a>' : '<a class="btn btn-primary" href="#/assess">' + tx('إلى التقييمات', 'Go to assessments') + '</a>') + '</div>';
     else {
@@ -245,7 +268,7 @@ function viewLesson(main, params) {
 
   main.addEventListener('toggle', e => { const k = e.target.dataset && e.target.dataset.keep; if (k) UIState.set(k, e.target.open); }, true);
   main.addEventListener('click', e => {
-    if (e.target.closest('[data-done]')) { Store.complete(L.id); toast(tx('أحسنت! أكملت درس «' + L.title + '»', 'Well done! You completed “' + L.title + '”')); announce(tx('اكتمل الدرس', 'Lesson completed')); const n = main.querySelector('[data-complete] a.btn-primary'); if (n) n.focus(); return; }
+    if (e.target.closest('[data-done]')) { Motion.confetti(e.target.closest('[data-done]'), 70); Store.complete(L.id); toast(tx('أحسنت! أكملت درس «' + L.title + '»', 'Well done! You completed “' + L.title + '”')); announce(tx('اكتمل الدرس', 'Lesson completed')); const n = main.querySelector('[data-complete] a.btn-primary'); if (n) n.focus(); return; }
     if (e.target.closest('[data-undone]')) { Store.uncomplete(L.id); return; }
     const bm = e.target.closest('[data-bm]');
     if (bm) { const on = Store.toggleBookmark(L.id); bm.setAttribute('aria-pressed', on); $('span', bm).textContent = saveLbl(on); toast(on ? tx('حُفظ الدرس', 'Lesson saved') : tx('أُزيل من المحفوظات', 'Removed from saved')); return; }
@@ -300,21 +323,21 @@ function viewAssess(main, params) {
   const fin = S.final; const prac = PRACTICAL.check(Lab.state);
   const pracDone = !!S.practical || prac.every(Boolean);
   main.innerHTML = '<div class="page"><div class="page-head"><div><h1>' + tx('التقييمات', 'Assessments') + enSub('Assessments') + '</h1><p>' + tx('اختبارات قصيرة لكل وحدة، وتقييم نهائي، وتحدٍّ عملي شامل. النتائج للتعلّم الذاتي وتُحفظ على هذا الجهاز فقط، وليست شهادة رسمية أو اعتماداً.', 'Short quizzes for each module, a final assessment and an end-to-end practical challenge. Results are for self-study, are saved on this device only, and are not an official certificate or accreditation.') + '</p></div></div>' +
-    '<div class="big-cards"><div class="panel big-card"><h2>' + icon('assess') + tx('التقييم النهائي', 'Final assessment') + '</h2><p>' + tx('18 سؤالاً من الوحدات الاثنتي عشرة، بشرح لكل إجابة. نسبة الاجتياز ', '18 questions across all twelve modules, with an explanation for every answer. Pass mark ') + Math.round(FINAL_PASS * 100) + '%.</p>' +
+    '<div class="big-cards"><div class="panel big-card" data-rv style="--tg:linear-gradient(135deg,#22c38e,#14b8a6)"><h2><span class="ic-tile">' + icon('trophy') + '</span>' + tx('التقييم النهائي', 'Final assessment') + '</h2><p>' + tx('18 سؤالاً من الوحدات الاثنتي عشرة، بشرح لكل إجابة. نسبة الاجتياز ', '18 questions across all twelve modules, with an explanation for every answer. Pass mark ') + Math.round(FINAL_PASS * 100) + '%.</p>' +
     '<p class="small">' + (fin ? tx('أفضل نتيجة: ', 'Best score: ') + '<b class="num">' + fin.best + '/' + fin.total + '</b>' + tx('، آخر نتيجة: ', ', last score: ') + '<b class="num">' + fin.last + '/' + fin.total + '</b>' + tx('، المحاولات: ', ', attempts: ') + '<span class="num">' + fin.attempts + '</span>' : tx('لم تبدأ بعد.', 'Not started yet.')) + '</p>' +
     '<div><a class="btn btn-primary" href="#/assess/final">' + (fin ? tx('إعادة التقييم', 'Retake the assessment') : tx('ابدأ التقييم النهائي', 'Start the final assessment')) + '</a></div></div>' +
-    '<div class="panel big-card"><h2>' + icon('flask') + tx('التحدي العملي الشامل', 'End-to-end practical challenge') + '</h2><p>' + t(PRACTICAL.scenario) + '</p><p class="small num">' + tx(prac.filter(Boolean).length + ' من ' + prac.length + ' خطوات مكتملة', prac.filter(Boolean).length + ' of ' + prac.length + ' steps completed') + (pracDone ? ' <b style="color:var(--ok)">' + tx('(مكتمل)', '(completed)') + '</b>' : '') + '</p>' +
+    '<div class="panel big-card" data-rv style="--tg:linear-gradient(135deg,#ff02f0,#ff7a45)"><h2><span class="ic-tile">' + icon('flask') + '</span>' + tx('التحدي العملي الشامل', 'End-to-end practical challenge') + '</h2><p>' + t(PRACTICAL.scenario) + '</p><p class="small num">' + tx(prac.filter(Boolean).length + ' من ' + prac.length + ' خطوات مكتملة', prac.filter(Boolean).length + ' of ' + prac.length + ' steps completed') + (pracDone ? ' <b style="color:var(--ok)">' + tx('(مكتمل)', '(completed)') + '</b>' : '') + '</p>' +
     '<div><a class="btn btn-primary" href="#/assess/practical">' + (pracDone ? tx('راجع التحدي', 'Review the challenge') : tx('ابدأ التحدي', 'Start the challenge')) + '</a></div></div></div>' +
     '<section class="section" aria-labelledby="mqT"><div class="section-head"><h2 id="mqT">' + tx('اختبارات الوحدات', 'Module quizzes') + '</h2><p>' + tx('4 أسئلة لكل وحدة. نسبة الاجتياز ', '4 questions per module. Pass mark ') + Math.round(QUIZ_PASS * 100) + '%.</p></div><div class="assess-grid">' +
     MODULES.map(m => { const r = S.quizzes[m.id]; const passed = r && r.best / r.total >= QUIZ_PASS;
-      return '<div class="panel assess-card"><h3><span class="space-avatar ' + (passed ? 'done' : r ? 'started' : '') + '">' + m.n + '</span>' + t(m.title) + '</h3><div class="row"><span class="small muted">' + (r ? tx('أفضل نتيجة ', 'Best score ') + '<b class="num">' + r.best + '/' + r.total + '</b>' + (passed ? tx(' ، ناجح', ', passed') : '') : tx('لم يُختبر بعد', 'Not taken yet')) + '</span>' +
+      return '<div class="panel assess-card" data-rv style="' + modStyle(m.id) + '"><h3><span><span class="space-avatar ' + (passed ? 'done' : r ? 'started' : '') + '">' + m.n + '</span>' + t(m.title) + '</span>' + ring(r ? Math.round(r.best / r.total * 100) : 0, { size: 40, stroke: 5, color: passed ? '#22c38e' : MODULE_COLORS[m.id].c, label: '<small class="num">' + (r ? Math.round(r.best / r.total * 100) + '%' : '') + '</small>' }) + '</h3><div class="row"><span class="small muted">' + (r ? tx('أفضل نتيجة ', 'Best score ') + '<b class="num">' + r.best + '/' + r.total + '</b>' + (passed ? tx(' ، ناجح', ', passed') : '') : tx('لم يُختبر بعد', 'Not taken yet')) + '</span>' +
         '<a class="btn btn-secondary btn-sm" href="#/assess/' + m.id + '">' + (r ? tx('إعادة', 'Retake') : tx('ابدأ', 'Start')) + '<span class="visually-hidden">' + tx(' اختبار الوحدة ', ' module quiz ') + m.n + '</span></a></div></div>'; }).join('') + '</div></section></div>';
 }
 function viewModuleQuiz(main, mid) {
   const M = MODULE[mid]; const rec = Store.state.quizzes[mid];
   main.innerHTML = '<div class="page page-narrow"><div class="page-head"><div><div class="breadcrumbs"><a href="#/assess">' + tx('التقييمات', 'Assessments') + '</a><span aria-hidden="true">/</span><span>' + moduleLabel(M.n) + '</span></div><h1 tabindex="-1">' + tx('اختبار الوحدة ', 'Module ') + M.n + tx(': ', ' quiz: ') + t(M.title) + '</h1><p>' + tx(QUIZZES[mid].length + ' أسئلة. ترتيب الخيارات يتغير في كل محاولة.', QUIZZES[mid].length + ' questions. The order of options changes with each attempt.') + (rec ? tx(' أفضل نتيجة سابقة: ', ' Previous best score: ') + rec.best + '/' + rec.total + '.' : '') + '</p></div>' +
     '<a class="btn btn-ghost" href="' + lessonLink(M.lessons[0]) + '">' + icon('book', 'icon-sm') + tx('راجع دروس الوحدة', 'Review the module lessons') + '</a></div><div data-q></div></div>';
-  renderQuiz($('[data-q]', main), QUIZZES[mid], 'mq-' + mid, { pass: QUIZ_PASS, attempt: rec ? rec.attempts : 0, onSubmit: (s, n) => Store.recordQuiz(mid, s, n) });
+  renderQuiz($('[data-q]', main), QUIZZES[mid], 'mq-' + mid, { pass: QUIZ_PASS, attempt: rec ? rec.attempts : 0, onSubmit: (s, n) => { Store.recordQuiz(mid, s, n); if (s / n >= QUIZ_PASS) Motion.confetti(null, 70); } });
 }
 function viewFinal(main) {
   const rec = Store.state.final;
@@ -322,7 +345,7 @@ function viewFinal(main) {
   const attempt = kept ? kept.attempt : (rec ? rec.attempts : 0);
   const qs = buildFinal(attempt);
   main.innerHTML = '<div class="page page-narrow"><div class="page-head"><div><div class="breadcrumbs"><a href="#/assess">' + tx('التقييمات', 'Assessments') + '</a><span aria-hidden="true">/</span><span>' + tx('التقييم النهائي', 'Final assessment') + '</span></div><h1 tabindex="-1">' + tx('التقييم النهائي للمعرفة', 'Final knowledge assessment') + '</h1><p>' + tx(qs.length + ' سؤالاً تغطي الوحدات الاثنتي عشرة. نسبة الاجتياز ', qs.length + ' questions covering all twelve modules. Pass mark ') + Math.round(FINAL_PASS * 100) + tx('%. كل محاولة جديدة تعرض مزيجاً مختلفاً من الأسئلة.', '%. Each new attempt shows a different mix of questions.') + '</p></div></div><div data-q></div></div>';
-  renderQuiz($('[data-q]', main), qs, 'final', { pass: FINAL_PASS, attempt, fixedSet: true, submitLabel: () => tx('إنهاء التقييم وعرض النتيجة', 'Finish and see my result'), onSubmit: (s, n) => { Store.recordQuiz('final', s, n); if (s / n >= FINAL_PASS) toast(tx('اجتزت التقييم النهائي', 'You passed the final assessment')); },
+  renderQuiz($('[data-q]', main), qs, 'final', { pass: FINAL_PASS, attempt, fixedSet: true, submitLabel: () => tx('إنهاء التقييم وعرض النتيجة', 'Finish and see my result'), onSubmit: (s, n) => { Store.recordQuiz('final', s, n); if (s / n >= FINAL_PASS) { Motion.confetti(null, 110); } if (s / n >= FINAL_PASS) toast(tx('اجتزت التقييم النهائي', 'You passed the final assessment')); },
     resultNote: () => tx('النتيجة للتعلّم الذاتي وتُحفظ على هذا الجهاز فقط. لعرض مزيج جديد من الأسئلة افتح التقييم النهائي من صفحة التقييمات مرة أخرى.', 'The result is for self-study and is saved on this device only. To get a new mix of questions, open the final assessment again from the Assessments page.') });
 }
 function viewPractical(main) {
@@ -351,19 +374,19 @@ function viewProgress(main) {
     const ch = CHALLENGES.filter(c => S.challenges[c.id]).length;
     const next = nextLessonId();
     const allDone = done === LESSONS.length && S.final && S.final.best / S.final.total >= FINAL_PASS && S.practical;
-    const denom = v => '<span class="muted" style="font-size:1rem">/' + v + '</span>';
     main.innerHTML = '<div class="page"><div class="page-head"><div><h1 tabindex="-1">' + tx('تقدّمي', 'My Progress') + enSub('My Progress') + '</h1><p>' + tx('ملخص ما أنجزته في الدروس والتقييمات والتحديات.', 'A summary of what you have completed in lessons, assessments and challenges.') + '</p></div>' +
       (next ? '<a class="btn btn-primary" href="' + lessonLink(next) + '">' + icon('play') + tx('تابع التعلّم: ', 'Continue: ') + t(LESSON[next].title) + '</a>' : '') + '</div>' +
       '<div class="storage-note' + (Store.ok ? '' : ' warn') + '">' + icon(Store.ok ? 'info' : 'alert') + '<p>' + (Store.ok ? tx('يُحفظ هذا التقدم في متصفحك على هذا الجهاز فقط. لا توجد حسابات ولا مزامنة بين الأجهزة ولا تقارير مركزية للموظفين. مسح بيانات المتصفح أو استخدام جهاز آخر يعني البدء من جديد.', 'This progress is saved in your browser on this device only. There are no accounts, no sync between devices and no central reporting on employees. Clearing browser data or using another device means starting again.') : tx('التخزين المحلي غير متاح في هذا المتصفح (مثل وضع التصفح الخاص أو إعدادات تمنعه). يعمل التقدم أثناء هذه الجلسة فقط ويضيع عند إغلاق الصفحة.', 'Local storage is not available in this browser (for example in private browsing, or when settings block it). Progress works for this session only and is lost when you close the page.')) + '</p></div>' +
       (allDone ? '<div class="panel panel-pad" style="display:flex;gap:14px;align-items:center;border-color:#b6dcc6;background:#f7fcf9">' + icon('check-circle', 'icon-lg') + '<div><h2 style="font-size:1.1rem">' + tx('أكملت المسار التعليمي كاملاً', 'You completed the full learning path') + '</h2><p class="small">' + tx('كل الدروس، والتقييم النهائي، والتحدي العملي. هذا سجل شخصي على جهازك، وليس شهادة رسمية أو اعتماداً من أي جهة.', 'Every lesson, the final assessment and the practical challenge. This is a personal record on your device, not an official certificate or accreditation from any body.') + '</p></div></div>' : '') +
-      '<div class="panel stat-row">' +
-      '<div class="stat"><span class="v">' + done + denom(LESSONS.length) + '</span><span class="l">' + tx('دروس مكتملة', 'Lessons completed') + '</span></div>' +
-      '<div class="stat"><span class="v">' + passed + denom(12) + '</span><span class="l">' + tx('اختبارات وحدات ناجحة', 'Module quizzes passed') + '</span></div>' +
-      '<div class="stat"><span class="v">' + (S.final ? S.final.best + denom(S.final.total) : '-') + '</span><span class="l">' + tx('أفضل نتيجة في التقييم النهائي', 'Best final assessment score') + '</span></div>' +
-      '<div class="stat"><span class="v">' + ch + denom(CHALLENGES.length) + '</span><span class="l">' + tx('تحديات المختبر', 'Lab challenges') + (S.practical ? tx('، والتحدي الشامل مكتمل', ', plus the end-to-end challenge') : '') + '</span></div></div>' +
-      '<section class="section" aria-labelledby="pmT"><h2 id="pmT">' + tx('حسب الوحدة', 'By module') + '</h2><ul class="panel module-progress">' + MODULES.map(m => { const p = moduleProgress(m.id); const q = S.quizzes[m.id];
-        return '<li><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><a href="' + lessonLink(m.lessons.find(id => !Store.isDone(id)) || m.lessons[0]) + '">' + t(m.title) + '</a>' +
-          '<span class="meter-cell"><span class="meter" style="width:100%" aria-hidden="true"><i style="width:' + (p.done / p.total * 100) + '%"></i></span></span><span class="small num muted">' + p.done + '/' + p.total + (q ? tx(' ، اختبار ', ', quiz ') + q.best + '/' + q.total : '') + '</span></li>'; }).join('') + '</ul></section>' +
+      '<div class="panel prog-hero" data-rv>' + ring(Math.round(done / LESSONS.length * 100), { size: 132, stroke: 14, label: '<b class="num">' + countEl(Math.round(done / LESSONS.length * 100), '%') + '</b><small>' + tx('من الدروس', 'of lessons') + '</small>' }) +
+      '<div><h2>' + (done ? tx('عمل رائع، استمر!', 'Great work, keep going!') : tx('ابدأ أول درس لتظهر إنجازاتك هنا', 'Start your first lesson to see your achievements here')) + '</h2><p class="small muted">' + tx('كل رقم هنا محسوب من نشاطك الفعلي على هذا الجهاز.', 'Every number here is calculated from your real activity on this device.') + '</p><div class="prog-minis">' +
+      [[done, LESSONS.length, tx('دروس مكتملة', 'Lessons completed'), '#7b68ee'], [passed, 12, tx('اختبارات وحدات ناجحة', 'Module quizzes passed'), '#22c38e'], [S.final ? S.final.best : 0, S.final ? S.final.total : 18, tx('أفضل نتيجة في التقييم النهائي', 'Best final assessment score'), '#f5a524', !S.final], [ch, CHALLENGES.length, tx('تحديات المختبر', 'Lab challenges') + (S.practical ? tx('، والتحدي الشامل مكتمل', ', plus the end-to-end challenge') : ''), '#1fb6e0']]
+        .map(x => '<div class="prog-mini">' + ring(Math.round(x[0] / x[1] * 100), { size: 44, stroke: 6, color: x[3] }) + '<span><b class="num">' + (x[4] ? '-' : x[0] + '/' + x[1]) + '</b>' + x[2] + '</span></div>').join('') + '</div></div></div>' +
+      '<section class="section" aria-labelledby="bdT"><div class="section-head"><h2 id="bdT">' + tx('الإنجازات', 'Achievements') + '</h2><p class="num">' + tx(achievements().filter(x => x.got).length + ' من ' + achievements().length + ' مفتوحة', achievements().filter(x => x.got).length + ' of ' + achievements().length + ' unlocked') + '</p></div><ul class="badges" role="list">' +
+      achievements().map(x => '<li class="badge-card' + (x.got ? '' : ' locked') + '" data-rv style="--bc:' + x.c + '"><span class="medal" aria-hidden="true">' + icon(x.got ? x.icon : 'lock') + '</span><h3>' + x.t + '</h3><p>' + x.d + '</p><span class="state">' + (x.got ? tx('مفتوح', 'Unlocked') : tx('مقفل', 'Locked')) + '</span></li>').join('') + '</ul></section>' +
+      '<section class="section" aria-labelledby="pmT"><h2 id="pmT">' + tx('حسب الوحدة', 'By module') + '</h2><div class="panel bar-chart" data-rv role="list">' + MODULES.map((m, i) => { const p = moduleProgress(m.id); const q = S.quizzes[m.id];
+        return '<a role="listitem" class="bar-row" style="' + modStyle(m.id) + '" href="' + lessonLink(m.lessons.find(id => !Store.isDone(id)) || m.lessons[0]) + '"><span class="space-avatar ' + stAvatar(p) + '">' + m.n + '</span><span class="bar-name">' + t(m.title) + '</span>' +
+          '<span class="bar-track" aria-hidden="true"><i class="grow-bar" data-i="' + i + '" style="width:' + (p.done / p.total * 100) + '%"></i></span><span class="bar-val num">' + p.done + '/' + p.total + (q ? ' · ' + tx('اختبار ', 'quiz ') + q.best + '/' + q.total : '') + '</span></a>'; }).join('') + '</div></section>' +
       '<section class="section" aria-labelledby="bmT"><h2 id="bmT">' + tx('الدروس المحفوظة', 'Saved lessons') + '</h2>' + (S.bookmarks.length ? '<ul class="panel task-rows">' + S.bookmarks.filter(id => LESSON[id]).map(id => '<li class="task-row" style="grid-template-columns:26px minmax(0,1fr) auto 40px"><span aria-hidden="true">' + icon('bookmark') + '</span><div><a class="t-title" href="' + lessonLink(id) + '">' + t(LESSON[id].title) + '</a><span class="t-sub">' + moduleLabel(MODULE[LESSON[id].module].n) + '</span></div>' + badge(lessonStatusKey(id)) + '<button type="button" class="icon-btn bookmark-btn" aria-pressed="true" data-bm="' + id + '" aria-label="' + tx('إزالة من المحفوظات: ', 'Remove from saved: ') + esc(LESSON[id].title) + '">' + icon('bookmark') + '</button></li>').join('') + '</ul>' : '<div class="panel empty-state">' + icon('bookmark') + '<p>' + tx('لم تحفظ أي درس بعد. اضغط زر الحفظ في أي درس للرجوع إليه من هنا.', 'You have not saved any lessons yet. Press Save in any lesson to come back to it from here.') + '</p><a class="btn btn-secondary" href="#/library">' + tx('تصفح المكتبة', 'Browse the library') + '</a></div>') + '</section>' +
       '<section class="section" aria-labelledby="arT"><h2 id="arT">' + tx('نتائج التقييمات', 'Assessment results') + '</h2><div class="panel table-wrap"><table class="data-table"><caption class="visually-hidden">' + tx('نتائج التقييمات', 'Assessment results') + '</caption><thead><tr><th scope="col">' + tx('التقييم', 'Assessment') + '</th><th scope="col" class="num">' + tx('أفضل نتيجة', 'Best') + '</th><th scope="col" class="num">' + tx('آخر نتيجة', 'Last') + '</th><th scope="col" class="num">' + tx('المحاولات', 'Attempts') + '</th><th scope="col">' + tx('آخر محاولة', 'Last attempt') + '</th></tr></thead><tbody>' +
       [[tx('التقييم النهائي', 'Final assessment'), S.final]].concat(MODULES.map(m => [moduleLabel(m.n) + ': ' + m.title, S.quizzes[m.id]])).filter(r => r[1]).map(r => '<tr><td>' + t(r[0]) + '</td><td class="num">' + r[1].best + '/' + r[1].total + '</td><td class="num">' + r[1].last + '/' + r[1].total + '</td><td class="num">' + r[1].attempts + '</td><td>' + fmtStamp(r[1].at) + '</td></tr>').join('') +
@@ -372,10 +395,10 @@ function viewProgress(main) {
   };
   paint();
   main.addEventListener('click', e => {
-    const bm = e.target.closest('[data-bm]'); if (bm) { Store.toggleBookmark(bm.dataset.bm); paint(); return; }
+    const bm = e.target.closest('[data-bm]'); if (bm) { Store.toggleBookmark(bm.dataset.bm); paint(); Motion.settle(main); return; }
     if (e.target.closest('[data-reset]')) {
       confirmDialog(tx('إعادة ضبط كل التقدم؟', 'Reset all progress?'), tx('سيُحذف تقدّمك في كل الدروس ونتائج التقييمات والمحفوظات والتحديات، ويعود المختبر إلى بياناته الأصلية. لا يمكن التراجع عن ذلك. تبقى لغتك المختارة كما هي.', 'Your progress in every lesson, assessment results, saved lessons and challenges will be deleted, and the lab returns to its original data. This cannot be undone. Your language choice is kept.'), tx('نعم، أعد الضبط', 'Yes, reset')).then(ok => {
-        if (!ok) return; Store.resetAll(); Lab.init(); UIState.clear(); toast(tx('أُعيد ضبط التقدم', 'Progress reset')); paint();
+        if (!ok) return; Store.resetAll(); Lab.init(); UIState.clear(); toast(tx('أُعيد ضبط التقدم', 'Progress reset')); paint(); Motion.settle(main);
       });
     }
   });
@@ -433,7 +456,7 @@ function viewAbout(main) {
     '<li><strong>' + tx('بيانات وهمية:', 'Fictional data:') + '</strong> ' + t(tx('كل الأسماء والمهام والأرقام في الأمثلة خيالية، ولا تمثل سياسات Omantel أو إجراءاتها أو بيانات موظفيها.', 'All names, tasks and numbers in the examples are fictional. They do not represent Omantel policies, procedures or employee data.')) + '</li>' +
     '<li><strong>' + tx('التقدّم محلي:', 'Progress is local:') + '</strong> ' + tx('يُحفظ في متصفحك على هذا الجهاز فقط، دون حسابات أو مزامنة أو تقارير مركزية.', 'It is saved in your browser on this device only, with no accounts, sync or central reporting.') + '</li>' +
     '<li><strong>' + tx('دقة المحتوى:', 'Content accuracy:') + '</strong> ' + t(REVIEW.note) + tx(' نقاط لم يمكن التحقق منها بالكامل معلّمة داخل الدروس بتنبيه «تنبيه دقة».', ' Points that could not be fully verified are marked inside the lessons with an “Accuracy note”.') + '</li>' +
-    '<li><strong>' + tx('الشعارات:', 'Logos:') + '</strong> ' + t(tx('الشعاران الرسميان لـ Omantel وClickUp يُضافان من ملفات أصلية مرفقة في مجلد', 'The official Omantel and ClickUp logos come from the original files supplied in the')) + ' <code>assets</code>' + tx('. إلى أن تتوفر تظهر عناصر نائبة واضحة. يظهر الشعاران كما هما في النسختين العربية والإنجليزية.', ' folder. Until they are supplied, clearly labelled placeholders appear. Both logos appear unchanged in the Arabic and English versions.') + '</li></ul>' +
+    '<li><strong>' + tx('الشعارات:', 'Logos:') + '</strong> ' + tx('يظهر شعارا Omantel وClickUp الأصليان كما هما، دون إعادة رسم أو تغيير ألوان، في النسختين العربية والإنجليزية.', 'The original Omantel and ClickUp logos appear unchanged, never redrawn or recoloured, in both the Arabic and English versions.') + '</li></ul>' +
     '<h2>' + tx('المهارات المستخدمة في التصميم', 'Design skills used') + '</h2><p>' + t(tx('صُممت الواجهة بالاستعانة بثلاث مهارات تصميم: Impeccable للبنية والطباعة والمسافات وإمكانية الوصول، وEmil Design Engineering للحركة والتفاعل، وTaste لاتجاه الواجهات التعريفية.', 'The interface was designed with three design skills: Impeccable for structure, typography, spacing and accessibility; Emil Design Engineering for motion and interaction; and Taste for the direction of introductory screens.')) + '</p></section>' +
     '<section class="panel panel-pad" style="display:grid;gap:6px"><h2 style="font-size:1rem">' + tx('التصميم', 'Design') + '</h2><p class="about-credit" lang="en" dir="ltr">' + CREDIT + '</p></section></div>';
 }

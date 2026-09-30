@@ -44,6 +44,9 @@ function renderRoute(keepScroll, langSwitch) {
   document.title = pageTitle + site;
   renderSidebar(route);
   renderTopProgress();
+  /* Blocks rise into view on a fresh visit; a language switch or in-place
+     refresh keeps everything where the learner was. */
+  if (keepScroll || langSwitch) Motion.settle(host); else Motion.reveal(host);
   if (!langSwitch) closeNav();
   if (!keepScroll) {
     window.scrollTo(0, 0);
@@ -220,6 +223,8 @@ function setupSearch() {
 
 /* ---------- Logos: official files if supplied, clear placeholders otherwise ---------- */
 function setupLogos() {
+  // The logos are embedded once in the header; other placements reuse them.
+  $$('img[data-logo]').forEach(img => { const src = $('.topbar .logo-' + img.dataset.logo); if (src) img.src = src.src; });
   $$('.logo-slot').forEach(slot => {
     const img = $('img', slot); const cands = (img.dataset.candidates || '').split(',').filter(Boolean);
     let i = 0;

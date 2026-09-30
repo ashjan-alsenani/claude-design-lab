@@ -7,6 +7,7 @@
 <meta name="description" content="منصة تعلّم تفاعلية لاستخدام ClickUp بثقة: شاهد، افهم، تدرّب، ثم تحقّق.">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f6f5fa">
+<link rel="icon" type="image/webp" href="assets/clickup-icon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&display=swap">
@@ -19,15 +20,9 @@
 <div class="lang-gate" id="langGate" role="dialog" aria-modal="true" aria-labelledby="gateTitleAr gateTitleEn" hidden>
   <div class="gate-card" tabindex="-1">
     <div class="gate-logos">
-      <span class="logo-slot" data-logo="omantel">
-        <img alt="Omantel" data-candidates="assets/omantel-logo.svg,assets/omantel-logo.png" hidden>
-        <span class="logo-ph" aria-hidden="true"><b>Omantel</b><small>Official logo · شعار رسمي</small></span>
-      </span>
+      <img class="logo logo-omantel" data-logo="omantel" alt="Omantel" width="320" height="140">
       <span class="brand-divider" aria-hidden="true"></span>
-      <span class="logo-slot" data-logo="clickup">
-        <img alt="ClickUp" data-candidates="assets/clickup-logo.svg,assets/clickup-logo.png" hidden>
-        <span class="logo-ph" aria-hidden="true"><b>ClickUp</b><small>Official logo · شعار رسمي</small></span>
-      </span>
+      <img class="logo logo-clickup" data-logo="clickup" alt="ClickUp" width="480" height="119">
     </div>
     <p class="gate-product" dir="ltr" lang="en">Learning Hub <span>Learn. Practice. Achieve.</span></p>
     <div class="gate-titles">
@@ -58,15 +53,9 @@
 <header class="topbar" role="banner">
   <button class="icon-btn nav-toggle" type="button" id="navToggle" aria-controls="sidebar" aria-expanded="false" data-t-attr="aria-label:navOpen"></button>
   <a class="brand" href="#/home" data-t-attr="aria-label:brand">
-    <span class="logo-slot" data-logo="omantel">
-      <img alt="Omantel" data-candidates="assets/omantel-logo.svg,assets/omantel-logo.png" hidden>
-      <span class="logo-ph" aria-hidden="true"><b>Omantel</b><small data-t="logoNeeded">شعار رسمي مطلوب</small></span>
-    </span>
+    <img class="logo logo-omantel" src="assets/omantel-logo.webp" alt="Omantel" width="320" height="140">
     <span class="brand-divider" aria-hidden="true"></span>
-    <span class="logo-slot" data-logo="clickup">
-      <img alt="ClickUp" data-candidates="assets/clickup-logo.svg,assets/clickup-logo.png" hidden>
-      <span class="logo-ph" aria-hidden="true"><b>ClickUp</b><small data-t="logoNeeded">شعار رسمي مطلوب</small></span>
-    </span>
+    <img class="logo logo-clickup" src="assets/clickup-logo.webp" alt="ClickUp" width="480" height="119">
     <span class="brand-name"><span dir="ltr">Learning Hub</span><small>Learn. Practice. Achieve.</small></span>
   </a>
   <form class="global-search" role="search" id="globalSearch" autocomplete="off">
@@ -90,6 +79,7 @@
 
 <footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
+    <div class="footer-logos"><img class="logo logo-omantel" data-logo="omantel" alt="Omantel" width="320" height="140"><span class="brand-divider" aria-hidden="true"></span><img class="logo logo-clickup" data-logo="clickup" alt="ClickUp" width="480" height="119"></div>
     <p class="footer-brand"><span dir="ltr">Omantel | ClickUp Learning Hub</span><span class="sep" aria-hidden="true"></span><span dir="ltr">Learn. Practice. Achieve.</span></p>
     <p class="footer-credit" dir="ltr" lang="en">Designed by Ashjan Al Sinani</p>
     <p class="footer-note"><span data-t="footerNote"></span> <a href="#/about" data-t="about">حول المنصة</a></p>

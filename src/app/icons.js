@@ -75,7 +75,12 @@ const ICONS = {
   cursor: '<path d="M5 3l14 7-6 1.8L10.5 18z" fill="#1c1a27" stroke="#fff" stroke-width="1.4"/>',
   module: '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
   mobile: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 17.5h2"/>',
-  path: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h5a3 3 0 000-6h-2a3 3 0 010-6h5"/>'
+  path: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h5a3 3 0 000-6h-2a3 3 0 010-6h5"/>',
+  rocket: '<path d="M14.5 4.5c2.6-1 4.6-1 5.5-.5.5.9.5 2.9-.5 5.5-1.2 3.1-4 5.9-7.5 7.5l-3-3c1.6-3.5 4.4-6.3 5.5-9.5z"/><circle cx="15.3" cy="8.7" r="1.4"/><path d="M9 14l-2.5-.5L4 16l3.5.5M10 15l.5 2.5L8 20l-.5-3.5"/><path d="M6.5 17.5L4 20"/>',
+  star: '<path d="M12 3.8l2.5 5.2 5.6.8-4.1 3.9 1 5.6L12 16.6 7 19.3l1-5.6-4.1-3.9 5.6-.8z"/>',
+  flame: '<path d="M12 21c-3.6 0-6-2.4-6-5.6 0-2.7 1.6-4.4 3-6 .4 1.6 1.2 2.5 2.2 2.9C11 9 12.2 6 14.5 3.5c.2 3 1.4 4.6 2.5 6.2 1 1.4 1.5 2.6 1.5 4.2C18.5 18 15.8 21 12 21z"/><path d="M12 21c-1.5 0-2.6-1-2.6-2.5 0-1.4 1-2.3 1.9-3.2.3 1 .9 1.4 1.5 1.5.3-1 .8-1.8 1.5-2.4.3 1.2 1 2 1 3.3 0 1.9-1.4 3.3-3.3 3.3z"/>',
+  trophy: '<path d="M8 4h8v5a4 4 0 01-8 0z"/><path d="M8 5.5H5.2a2.8 2.8 0 003 3.5M16 5.5h2.8a2.8 2.8 0 01-3 3.5"/><path d="M12 13v3.5M9 20.5h6M10 16.5h4l.6 4H9.4z"/>',
+  globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.5 3.4 5.3 3.4 8.5S14.3 18 12 20.5C9.7 18 8.6 15.2 8.6 12S9.7 6 12 3.5z"/>'
 };
 
 /* Direction-aware aliases: "fwd" points toward reading direction's end */
