@@ -3393,8 +3393,8 @@
     "en": "Is AI safe for company data?"
    },
    "text": {
-    "ar": "اتبع سياسة Omantel: لا تُدخل بيانات عملاء أو كلمات مرور أو معلومات سرية. راجع كل نص ينتجه الذكاء الاصطناعي، واسأل فريق الأمن عند الشك.",
-    "en": "Follow Omantel policy: do not enter customer data, passwords or confidential information. Review every AI output, and ask the security team when in doubt."
+    "ar": "إرشاد عام وليس سياسة معتمدة من Omantel: لا تُدخل بيانات عملاء أو كلمات مرور أو معلومات سرية في أدوات الذكاء الاصطناعي ما لم تسمح بذلك سياسة معتمدة لدى الشركة. تحقق من سياسة البيانات والذكاء الاصطناعي لدى فريق أمن المعلومات، وراجع كل نص ينتجه الذكاء الاصطناعي.",
+    "en": "General guidance, not an official Omantel policy: do not enter customer data, passwords or confidential information into AI tools unless an approved company policy allows it. Check the data and AI policy with your information security team, and review every AI output."
    },
    "url": "#/tour/power",
    "refs": [],

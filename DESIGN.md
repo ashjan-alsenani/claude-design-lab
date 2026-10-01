@@ -161,3 +161,15 @@ The platform now leads with explaining ClickUp itself, before practice:
   - an optional SSO header requirement;
   - rate, concurrency, size and time limits;
   - cancellation, and logs without conversation text.
+
+## Clicky Chatbot: real model tests (2026-10-01)
+
+- A free self-hosted engine was added: `OpenAICompatibleEngine` in `server/clicky_api.py` talks to llama.cpp, Ollama, vLLM or LM Studio. The default engine is now `none`, so nothing (paid or free) is switched on by accident.
+- Real end-to-end answers were produced in this container through the chat widget, `clicky_api.py` and llama.cpp, with Qwen2.5 1.5B and 7B. The in-browser test used Transformers.js with Qwen2.5-0.5B. Results and the conclusion (browser models unsuitable; a 7B self-hosted model on a GPU server is the free route) are in `SERVER.md` section 4.
+- Changes from what the tests showed:
+  - While the model is busy, the server sends a "still working" line every 15 s. The page gives up only after 90 s with no data at all, and shows "The AI is still working on your answer…".
+  - Any web address the model writes is removed before display, because a model invented one. The real sources are listed separately.
+  - Shorter excerpts (5 sources, 900 characters each) so slow hardware reads them faster.
+  - Stricter rules for sensitive company data: say Omantel's policy can't be confirmed, give guidance labelled as general, and point to the policy owner.
+  - The saved answer "Is AI safe for company data?" no longer presents general advice as Omantel policy.
+- `tests/live-ai.js` repeats the live test on any server where the AI is switched on.

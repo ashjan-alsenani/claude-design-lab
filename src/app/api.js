@@ -45,9 +45,10 @@ const Api = (() => {
     } catch (e) { throw e.kind ? e : fail('network'); } finally { clearTimeout(timer); }
   }
   /* Streams one answer: onSources([{n, id}]) once, onPiece(text) per piece; resolves with the whole text. */
-  async function chat(body, onPiece, ctl, onSources) {
+  async function chat(body, onPiece, ctl, onSources, onWait) {
     if (!chatUrl) throw fail('not_configured');
-    let timedOut = false; const timer = setTimeout(() => { timedOut = true; ctl.abort(); }, 90000);
+    // Gives up only after 90 s with no data at all (slow self-hosted models stream steadily but start late).
+    let timedOut = false, timer = 0; const idle = () => { clearTimeout(timer); timer = setTimeout(() => { timedOut = true; ctl.abort(); }, 90000); }; idle();
     try {
       let res;
       try {
@@ -67,13 +68,14 @@ const Api = (() => {
       const reader = res.body.getReader(), dec = new TextDecoder(); let buf = '', all = '', done = false;
       try {
         while (!done) {
-          const r = await reader.read(); if (r.done) break;
+          const r = await reader.read(); if (r.done) break; idle();
           buf += dec.decode(r.value, { stream: true });
           let i; while ((i = buf.indexOf('\n')) >= 0) {
             const ln = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!ln) continue;
             let m; try { m = JSON.parse(ln); } catch (e) { throw fail('service'); }
             if (m.error) throw fail(/^[a-z_]{2,20}$/.test(String(m.error)) ? String(m.error) : 'service');
             if (m.done) { done = true; break; }
+            if (m.wait) { if (onWait) onWait(); continue; }
             if (Array.isArray(m.sources)) { if (onSources) onSources(m.sources.filter(x => x && typeof x.id === 'string' && Number.isInteger(x.n)).slice(0, 8)); continue; }
             if (typeof m.t === 'string' && all.length < 8000) { all += m.t; onPiece(m.t); }
           }

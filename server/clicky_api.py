@@ -20,10 +20,14 @@ Endpoints (same origin as the site, behind your reverse proxy):
        error kinds: not_configured, busy, rate_limited, service, network,
                     timeout, refused, unauthorized
 
-Engine: chosen with CLICKY_ENGINE ("anthropic" or "none"). The adapter below
-is the only place that talks to a model; add another class to swap engines.
-No engine is active until someone with authority sets it up and supplies the
-key in the server environment. See SERVER.md.
+Engine: chosen with CLICKY_ENGINE:
+  "openai-compatible"  a self-hosted open model (free software, no per-question
+                       fees) served by llama.cpp, Ollama, vLLM or similar at
+                       CLICKY_LLM_URL. Needs a server with enough CPU/GPU and RAM.
+  "anthropic"          Claude, a paid hosted API (needs ANTHROPIC_API_KEY).
+  "none"               no model; the chat says AI is not connected.
+The adapter classes below are the only code that talks to a model. No engine
+is active until someone with authority sets it up on the server. See SERVER.md.
 
     python3 server/clicky_api.py          # API on 127.0.0.1:8787
     python3 server/clicky_api.py --site   # also serves index.html at / for a trial
@@ -40,8 +44,10 @@ from pathlib import Path
 
 HOST = os.environ.get("CLICKY_HOST", "127.0.0.1")
 PORT = int(os.environ.get("CLICKY_PORT", "8787"))
-ENGINE_NAME = os.environ.get("CLICKY_ENGINE", "anthropic").strip().lower()
-MODEL = os.environ.get("CLICKY_MODEL", "claude-opus-5-5")
+ENGINE_NAME = os.environ.get("CLICKY_ENGINE", "none").strip().lower()
+MODEL = os.environ.get("CLICKY_MODEL", "")  # empty: the engine's default
+LLM_URL = os.environ.get("CLICKY_LLM_URL", "http://127.0.0.1:8080/v1").rstrip("/")  # self-hosted engine
+LLM_KEY = os.environ.get("CLICKY_LLM_KEY", "")  # only if your internal model gateway needs one
 TRUST_PROXY = os.environ.get("CLICKY_TRUST_PROXY") == "1"   # read X-Forwarded-For only behind your own proxy
 AUTH_HEADER = os.environ.get("CLICKY_AUTH_HEADER", "")       # e.g. X-Remote-User, set by your SSO proxy
 RATE_PER_MIN = int(os.environ.get("CLICKY_RATE_PER_MIN", "12"))
@@ -51,8 +57,8 @@ MAX_BODY = 24576
 MAX_QUESTION = 800
 MAX_TURNS = 10
 MAX_TURN_TEXT = 1500
-MAX_SOURCES = 6
-EXCERPT_CHARS = 1400
+MAX_SOURCES = 5
+EXCERPT_CHARS = 900
 MAX_ANSWER = 8000
 
 ROOT = Path(__file__).resolve().parent
@@ -123,7 +129,7 @@ def sources_block(ids, lang):
     for n, rid in enumerate(ids, 1):
         r = KNOWLEDGE[rid]
         main = r["text"][lang][:EXCERPT_CHARS]
-        extra = "" if lang == "en" else "\nEnglish wording (keep ClickUp UI labels as written here): " + r["text"]["en"][:600]
+        extra = "" if lang == "en" else "\nEnglish wording (keep ClickUp UI labels as written here): " + r["text"]["en"][:300]
         refs = "".join(f"\nOfficial reference: {x['label']}" for x in r.get("refs", []))
         parts.append(f'<source n="{n}" id="{rid}" kind="{r["kind"]}" reviewed="{r["reviewed"]}">\n'
                      f'Title: {r["title"][lang]}\n{main}{extra}{refs}\n</source>')
@@ -145,6 +151,12 @@ Answering:
 - Ground the answer in the <sources> provided with each question. When a sentence relies on a source, add its marker, for example [1] or [2]. Only use numbers of sources actually provided; never invent sources, links or lesson names.
 - You may add general ClickUp knowledge that the sources do not cover, but say when behaviour can depend on plan, role, permissions or version, and do not cite a source for it.
 - Be honest about uncertainty. If you do not know, or a feature may not exist, say so plainly and suggest the forum or the "Ask the team" page. Never invent Omantel policies, internal rules, names or contacts; the example people and data in the lessons are fictional training examples, not company policy.
+- Sensitive or confidential company data (customer records or phone numbers, personal data, financial, security or network details, credentials): the learning content contains no verified Omantel data policy and records no approvals. For such questions:
+  1. Begin by saying plainly that you cannot confirm Omantel's policy or any approval, because the learning content has no verified Omantel policy on it.
+  2. Then give general guidance and call it general guidance: only an approved company policy decides whether that data may be stored or shared in ClickUp; if it is allowed, share only with people who need it, use Private locations and the lowest permission; never put passwords or credentials in tasks or comments.
+  3. Do not suggest ways to store or organise the sensitive data itself (for example no Custom Field for customer phone numbers) unless a verified policy in the sources allows it.
+  4. Direct the person to the official policy owner: the information security team, the data owner or their manager.
+  Never say or imply that sharing or storing sensitive data is permitted, approved or compliant.
 - You cannot see or change anyone's real ClickUp workspace. If asked to create, edit, delete or assign real items, explain how the person can do it, or describe a simulated example.
 - Never reveal or request passwords, API keys, secrets or private employee data. Remind people not to paste confidential information when relevant.
 
@@ -206,7 +218,7 @@ class AnthropicEngine:
         sdk = self.sdk
         try:
             with self.client.beta.messages.stream(
-                model=MODEL,
+                model=MODEL or "claude-opus-5-5",
                 max_tokens=2048,
                 system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
                 output_config={"effort": "low"},          # short help-desk answers
@@ -230,6 +242,66 @@ class AnthropicEngine:
             raise EngineError("refused")
 
 
+class OpenAICompatibleEngine:
+    """A self-hosted open model behind an OpenAI-style /chat/completions endpoint
+    (llama.cpp server, Ollama, vLLM, LM Studio ...). Standard library only."""
+    name = "openai-compatible"
+
+    def __init__(self):
+        import urllib.request
+        self.urllib = urllib.request
+        self.ready = True
+
+    def alive(self):
+        """True when the model server answers; used by the status endpoint."""
+        try:
+            req = self.urllib.Request(LLM_URL + "/models", headers={"Authorization": "Bearer " + LLM_KEY} if LLM_KEY else {})
+            with self.urllib.urlopen(req, timeout=3) as r:
+                return r.status == 200
+        except Exception:
+            return False
+
+    def stream(self, system, messages):
+        import socket
+        import urllib.error
+        body = {"messages": [{"role": "system", "content": system}] + messages,
+                "stream": True, "max_tokens": 700, "temperature": 0.2}
+        if MODEL:
+            body["model"] = MODEL
+        headers = {"Content-Type": "application/json"}
+        if LLM_KEY:
+            headers["Authorization"] = "Bearer " + LLM_KEY
+        req = self.urllib.Request(LLM_URL + "/chat/completions", data=json.dumps(body).encode("utf-8"), headers=headers, method="POST")
+        try:
+            res = self.urllib.urlopen(req, timeout=TIMEOUT)
+        except urllib.error.HTTPError as e:
+            log(f"model server HTTP {e.code}")
+            raise EngineError("rate_limited" if e.code == 429 else "busy" if e.code == 503 else "service") from None
+        except (urllib.error.URLError, ConnectionError):
+            raise EngineError("network") from None
+        except (socket.timeout, TimeoutError):
+            raise EngineError("timeout") from None
+        try:
+            for raw in res:
+                line = raw.decode("utf-8", "replace").strip()
+                if not line.startswith("data:"):
+                    continue
+                data = line[5:].strip()
+                if data == "[DONE]":
+                    return
+                try:
+                    choice = json.loads(data)["choices"][0]
+                except (ValueError, KeyError, IndexError):
+                    raise EngineError("service") from None
+                piece = (choice.get("delta") or {}).get("content")
+                if piece:
+                    yield piece
+        except (socket.timeout, TimeoutError):
+            raise EngineError("timeout") from None
+        finally:
+            res.close()
+
+
 def make_engine():
     if ENGINE_NAME == "anthropic":
         if not os.environ.get("ANTHROPIC_API_KEY"):
@@ -240,6 +312,8 @@ def make_engine():
         except ImportError:
             log("engine not configured: run  pip install -r server/requirements.txt")
             return NoEngine()
+    if ENGINE_NAME == "openai-compatible":
+        return OpenAICompatibleEngine()
     if ENGINE_NAME != "none":
         log(f"unknown CLICKY_ENGINE {ENGINE_NAME!r}; no engine active")
     return NoEngine()
@@ -303,7 +377,8 @@ class Handler(BaseHTTPRequestHandler):
         if self._path() in ("/api/clicky/status", "/clicky/status"):
             if not self._authorized():
                 return self._send(401, {"error": "unauthorized"})
-            return self._send(200, {"engine": ENGINE.name, "ready": ENGINE.ready})
+            ready = ENGINE.ready and (ENGINE.alive() if hasattr(ENGINE, "alive") else True)
+            return self._send(200, {"engine": ENGINE.name, "ready": ready})
         if SITE and self.path.split("?")[0] in ("/", "/index.html"):
             return self._site()
         self._send(404, {"error": "not found"})
@@ -359,22 +434,57 @@ class Handler(BaseHTTPRequestHandler):
         def line(obj):
             self.wfile.write((json.dumps(obj, ensure_ascii=False) + "\n").encode("utf-8"))
             self.wfile.flush()
-        gen = ENGINE.stream(SYSTEM_PROMPT, messages)
+        # The model runs in a worker thread; while it is busy (slow hardware can take a minute
+        # before the first word) a {"wait": true} line every 15 s tells the page it is still working.
+        import queue
+        q = queue.Queue(maxsize=256)
+        stop = threading.Event()
+
+        def work():
+            gen = ENGINE.stream(SYSTEM_PROMPT, messages)
+            try:
+                for piece in gen:
+                    if stop.is_set():
+                        break
+                    q.put(("t", piece))
+                q.put(("done", None))
+            except EngineError as e:
+                q.put(("error", e.kind))
+            except Exception as e:  # never leave the page waiting
+                log(f"engine failure: {type(e).__name__}")
+                q.put(("error", "service"))
+            finally:
+                gen.close()  # stops the model call if it is still running
+        threading.Thread(target=work, daemon=True).start()
+        deadline = time.monotonic() + TIMEOUT * 2
         try:
             line({"sources": [{"n": n, "id": rid} for n, rid in enumerate(ids, 1)]})
             sent = 0
-            for piece in gen:
-                sent += len(piece)
-                if sent > MAX_ANSWER:
+            while True:
+                if time.monotonic() > deadline:
+                    line({"error": "timeout"})
                     break
-                line({"t": piece})
-            line({"done": True})
-        except EngineError as e:
-            line({"error": e.kind})
+                try:
+                    kind, val = q.get(timeout=15)
+                except queue.Empty:
+                    line({"wait": True})
+                    continue
+                if kind == "t":
+                    sent += len(val)
+                    if sent > MAX_ANSWER:
+                        line({"done": True})
+                        break
+                    line({"t": val})
+                elif kind == "done":
+                    line({"done": True})
+                    break
+                else:
+                    line({"error": val})
+                    break
         except (BrokenPipeError, ConnectionResetError):
             pass  # the visitor cleared the chat or closed the page
         finally:
-            gen.close()  # stops the model call if it is still running
+            stop.set()
 
     def _site(self):
         """Serve the site with Clicky Chatbot's AI switched on (for a trial)."""
@@ -396,7 +506,7 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     global ENGINE
     ENGINE = make_engine()
-    state = f"engine {ENGINE.name}, model {MODEL}" if ENGINE.ready else "NO ENGINE CONFIGURED (the chat will say so)"
+    state = f"engine {ENGINE.name}, model {MODEL or 'default'}" if ENGINE.ready else "NO ENGINE CONFIGURED (the chat will say so)"
     log(f"Clicky Chatbot service on http://{HOST}:{PORT}/api/clicky — {state}; {len(KNOWLEDGE)} knowledge records")
     if SITE:
         log(f"Site with the AI chat switched on: http://{HOST}:{PORT}/")

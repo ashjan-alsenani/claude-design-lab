@@ -166,7 +166,11 @@ const Clicky = (() => {
   const convo = [];
   function remember(role, text) { convo.push({ role, text: String(text).slice(0, 1500) }); if (convo.length > 12) convo.splice(0, convo.length - 12); }
   // Light, safe formatting for AI answers: escaped text, numbered steps, bullets and **bold** only.
+  // Model text never carries links: Markdown links keep only their words, bare web addresses are
+  // removed (the model can invent them); real sources are listed separately from the knowledge records.
+  const unlink = x => String(x).replace(/\[([^\]]+)\]\((?:https?:|www\.)[^)]*\)/gi, '$1').replace(/\b(?:https?:\/\/|www\.)\S+/gi, '').replace(/\(\s*\)/g, '');
   function fmt(text, cites) {
+    text = unlink(text);
     const inline = x => esc(x).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
       .replace(/\s?\[(\d{1,2})\]/g, (m, n) => cites && cites[n] ? '<sup class="cc-cite" title="' + esc(cites[n].title) + '">' + n + '</sup>' : '');
     let html = '', list = null;
@@ -254,9 +258,9 @@ const Clicky = (() => {
     const ids = retrieve(q);
     Api.chat({ question: cleanText(q, 800), lang: LANG, history: convo.slice(-10), sources: ids }, piece => { box(); text += piece; if (!raf) raf = requestAnimationFrame(paint); }, ctl, list => {
       srcs = list; cites = {}; list.forEach(x => { const r = Knowledge.get(x.id); if (r) cites[x.n] = Object.assign({}, r, { title: isEN() ? r.title.en : r.title.ar, titles: r.title }); });
-    }).then(all => {
+    }, () => { if (!started && !$('.cc-wait', el)) el.insertAdjacentHTML('beforeend', '<small class="cc-wait">' + tx('ما زال المساعد الذكي يعمل على إجابتك…', 'The AI is still working on your answer…') + '</small>'); }).then(all => {
       if (ai !== 'ready') { ai = 'ready'; relabel(); } text = all; box(); paint();
-      el._text = all.replace(/\s?\[\d{1,2}\]/g, '');
+      el._text = unlink(all).replace(/\s?\[\d{1,2}\]/g, '');
       const named = {}; Object.keys(cites).forEach(n => { named[n] = Knowledge.get(cites[n].id); });
       el.insertAdjacentHTML('beforeend', sourcesHTML(named, all, srcs) + rateHTML()); stick();
       lastIds = srcs.map(x => x.id).filter(id => Knowledge.get(id)).slice(0, 4);
