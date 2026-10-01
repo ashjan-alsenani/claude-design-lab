@@ -71,3 +71,8 @@ Test meaning and context, not exact response strings:
 
 ## Completion report
 State exactly what was implemented, the inference engine and location, what was tested live, deployment state, and remaining requirements. A specification or UI alone is not a working AI assistant.
+
+## Direct integration into the website chatbot — user clarification
+Implement these requirements directly inside the website's existing chatbot as one integrated feature. Upgrade its current conversation window, message flow and response logic; do not create a separate AI page, second chatbot, external chat application or disconnected demo. If no chatbot exists yet, create one integrated chat widget within the site.
+Deliver language understanding, conversational context, lesson grounding, bilingual responses and proper error handling together in that same widget. Preserve the site's existing identity and working features. Do not stop at a plan or instructions for the user to assemble components manually. Complete all unblocked implementation in the current task and perform an end-to-end test once an actual model is configured.
+This request does not authorize paid inference, secret exposure or pretending an unconfigured assistant is live. If the model/hosting choice is still unresolved, identify that specific remaining dependency without calling the feature complete.
