@@ -140,3 +140,24 @@ The platform now leads with explaining ClickUp itself, before practice:
   - answers in the person's language;
   - `--site` serves the hub with AI on, for a one-step trial.
 - Any AI failure or refusal falls back to the built-in answers, so the chat never breaks.
+
+## Clicky Chatbot (AI_ASSISTANT_BRIEF.md)
+
+- **One chatbot, renamed**: "Clicky Chatbot" / "كليكي تشات بوت". The existing floating widget was upgraded in place; there is no second chat or separate page.
+- **Truthful states** (header dot and subtitle):
+  - AI Assistant · online;
+  - connecting;
+  - can't connect;
+  - sign-in needed;
+  - AI not connected · lesson search only.
+  
+  With no model configured, search results carry a "Lesson search · not an AI answer" tag. With a model configured, failures show a specific error and **Retry**, never a canned answer.
+- **Grounding**: `src/app/knowledge.js` turns lessons, tour parts, questions, saved answers and glossary terms into 217 bilingual records (ID, title, text, site link, official refs, review date). Retrieval sends record IDs; the server quotes its trusted copy (`server/knowledge.json`, exported by `tools/export-knowledge.js`). Answers show numbered citations and a Sources list linking to real lessons and ClickUp Help articles; unknown citation numbers are dropped.
+- **Memory**: the last 10 messages go with each question, survive language switches, and are wiped by **Clear conversation** (which also cancels a running answer). Nothing is saved to storage.
+- **Dialect**: added Gulf words (تاسك, اسوي, اعطيه, وين, ألقاه, يشوف, اللست, بسطها, ابا/ابي) to the matcher used for retrieval and offline search.
+- **Accessibility**: the log is a `role="log"` region that stays quiet while streaming; a hidden live region announces each finished answer and each error once; Enter sends, Shift+Enter adds a line; mixed Arabic/English messages use `unicode-bidi: plaintext`.
+- **Server** (`server/clicky_api.py`):
+  - a replaceable engine adapter (`AnthropicEngine`, `NoEngine`) and a status endpoint;
+  - an optional SSO header requirement;
+  - rate, concurrency, size and time limits;
+  - cancellation, and logs without conversation text.

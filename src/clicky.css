@@ -98,3 +98,21 @@ html[dir="rtl"] .cc-send svg { transform: scaleX(-1); }
 .cc-input .cc-q { resize: none; min-height: 42px; max-height: 120px; padding-block: 10px; line-height: 1.45; border-radius: 20px; font: inherit; overflow-y: auto; }
 .cc-rate [data-copy].done { background: #e7fbef; color: #0f7a42; border-color: #b6ecc9; }
 .cc-input .cc-q::placeholder { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Clicky Chatbot: honest states, sources, errors */
+.cc-tag { display: inline-flex; align-items: center; gap: 5px; margin-bottom: 6px; padding: 2px 8px; border-radius: 999px; background: #f2f0f7; color: var(--ink-3); font-size: .72rem; font-weight: 700; }
+.cc-note { margin: 0 0 6px; color: var(--ink-2); font-size: .84rem; }
+.clicky-bot:not([data-ai="ready"]) .clicky-chat > header small i { background: #ffd166; box-shadow: 0 0 0 3px rgb(255 209 102 / .3); }
+.clicky-bot[data-ai="unreachable"] .clicky-chat > header small i, .clicky-bot[data-ai="unauthorized"] .clicky-chat > header small i { background: #ff8a8a; box-shadow: 0 0 0 3px rgb(255 138 138 / .3); }
+.cc-cite { margin-inline-start: 2px; padding: 0 5px; border-radius: 6px; background: #efe8ff; color: #5b2bd6; font-size: .68rem; font-weight: 800; vertical-align: super; line-height: 1; }
+.cc-src ul { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; }
+.cc-src li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: .8rem; }
+.cc-src li > b { min-width: 18px; height: 18px; display: inline-grid; place-items: center; border-radius: 6px; background: #efe8ff; color: #5b2bd6; font-size: .68rem; }
+.cc-src a { display: inline-flex; align-items: center; gap: 4px; color: #5b2bd6; font-weight: 700; text-decoration: none; }
+.cc-src a:hover { text-decoration: underline; }
+.cc-src a.ext { color: var(--ink-3); font-weight: 600; }
+.cc-msg.cc-err { background: #fff6f6; border-color: #ffd4d4; }
+.cc-msg.cc-err p { display: flex; gap: 6px; align-items: flex-start; margin: 0; }
+.cc-retry { display: inline-flex; gap: 5px; align-items: center; padding: 5px 12px; border-radius: 999px; border: 1px solid #e0d4ff; background: #fff; color: #5b2bd6; font: 700 .78rem/1.3 var(--font); cursor: pointer; transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+.cc-retry:hover { background: #f4eeff; } .cc-retry:active { transform: scale(0.97); }
+.cc-msg.me, .cc-md p, .cc-md li, .cc-msg > p { unicode-bidi: plaintext; text-align: start; }

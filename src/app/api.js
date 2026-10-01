@@ -31,40 +31,63 @@ const Api = (() => {
   const cm = document.querySelector('meta[name="clicky-api"]');
   const cRaw = cm ? String(cm.getAttribute('content') || '').trim() : '';
   const chatUrl = cRaw && (cRaw.charAt(0) === '/' || /^https:\/\//i.test(cRaw)) ? cRaw : ok ? base + PATHS.chat : '';
-  /* Streams the answer: onPiece(text) for each piece; resolves with the whole text, or rejects. */
-  async function chat(body, onPiece, ctl) {
-    if (!chatUrl) throw new Error('offline');
-    const timer = setTimeout(() => ctl.abort(), 60000);
+  /* Clicky Chatbot's AI service. Errors carry a kind (network, timeout, rate_limited, busy,
+     not_configured, unauthorized, service, refused, cancelled) so the chat can say what happened. */
+  const fail = kind => { const e = new Error(kind); e.kind = kind; return e; };
+  async function chatStatus() {
+    if (!chatUrl) return { ready: false, engine: 'none' };
+    const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 8000);
     try {
-      const res = await fetch(chatUrl, {
-        method: 'POST', credentials: 'same-origin', signal: ctl.signal,
-        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' },
-        body: JSON.stringify(Object.assign({ stream: true }, body))
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const type = res.headers.get('content-type') || '';
-      if (type.indexOf('application/json') >= 0) { const r = await res.json(); const t = cleanText(r && r.answer, 6000); if (!t) throw new Error('empty'); onPiece(t); return t; }
-      if (!res.body || type.indexOf('ndjson') < 0) throw new Error('format');
-      const reader = res.body.getReader(), dec = new TextDecoder(); let buf = '', all = '', done = false;
-      while (!done) {
-        const r = await reader.read(); if (r.done) break;
-        buf += dec.decode(r.value, { stream: true });
-        let i; while ((i = buf.indexOf('\n')) >= 0) {
-          const ln = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!ln) continue;
-          const m = JSON.parse(ln);
-          if (m.error) throw new Error(String(m.error));
-          if (m.done) { done = true; break; }
-          if (typeof m.t === 'string' && all.length < 8000) { all += m.t; onPiece(m.t); }
-        }
+      const res = await fetch(chatUrl.replace(/\/+$/, '') + '/status', { credentials: 'same-origin', signal: ctl.signal, headers: { 'X-Requested-With': 'fetch' } });
+      if (res.status === 401) throw fail('unauthorized');
+      if (!res.ok) throw fail('service');
+      const r = await res.json(); return { ready: r && r.ready === true, engine: String((r && r.engine) || '') };
+    } catch (e) { throw e.kind ? e : fail('network'); } finally { clearTimeout(timer); }
+  }
+  /* Streams one answer: onSources([{n, id}]) once, onPiece(text) per piece; resolves with the whole text. */
+  async function chat(body, onPiece, ctl, onSources) {
+    if (!chatUrl) throw fail('not_configured');
+    let timedOut = false; const timer = setTimeout(() => { timedOut = true; ctl.abort(); }, 90000);
+    try {
+      let res;
+      try {
+        res = await fetch(chatUrl, {
+          method: 'POST', credentials: 'same-origin', signal: ctl.signal,
+          headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' },
+          body: JSON.stringify(Object.assign({ stream: true }, body))
+        });
+      } catch (e) { throw fail(timedOut ? 'timeout' : ctl.signal.aborted ? 'cancelled' : 'network'); }
+      if (!res.ok) {
+        let kind = res.status === 429 ? 'rate_limited' : res.status === 401 ? 'unauthorized' : 'service';
+        try { const j = await res.json(); if (j && typeof j.error === 'string' && /^[a-z_]{2,20}$/.test(j.error)) kind = j.error; } catch (e) { /* keep status-based kind */ }
+        throw fail(kind);
       }
-      if (!all.trim()) throw new Error('empty');
+      const type = res.headers.get('content-type') || '';
+      if (!res.body || type.indexOf('ndjson') < 0) throw fail('service');
+      const reader = res.body.getReader(), dec = new TextDecoder(); let buf = '', all = '', done = false;
+      try {
+        while (!done) {
+          const r = await reader.read(); if (r.done) break;
+          buf += dec.decode(r.value, { stream: true });
+          let i; while ((i = buf.indexOf('\n')) >= 0) {
+            const ln = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!ln) continue;
+            let m; try { m = JSON.parse(ln); } catch (e) { throw fail('service'); }
+            if (m.error) throw fail(/^[a-z_]{2,20}$/.test(String(m.error)) ? String(m.error) : 'service');
+            if (m.done) { done = true; break; }
+            if (Array.isArray(m.sources)) { if (onSources) onSources(m.sources.filter(x => x && typeof x.id === 'string' && Number.isInteger(x.n)).slice(0, 8)); continue; }
+            if (typeof m.t === 'string' && all.length < 8000) { all += m.t; onPiece(m.t); }
+          }
+        }
+      } catch (e) { throw e.kind ? e : fail(timedOut ? 'timeout' : ctl.signal.aborted ? 'cancelled' : 'network'); }
+      if (!done) throw fail('network'); // the stream ended early
+      if (!all.trim()) throw fail('service');
       return all;
     } finally { clearTimeout(timer); }
   }
   return {
     get on() { return !!ok; },
     get chatOn() { return !!chatUrl; },
-    chat,
+    chat, chatStatus,
     get: (key, sub) => call('GET', key, null, sub),
     post: (key, body, sub) => call('POST', key, body, sub)
   };

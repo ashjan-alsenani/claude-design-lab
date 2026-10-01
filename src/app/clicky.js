@@ -11,10 +11,10 @@ const Clicky = (() => {
   let open = false, busy = false, root = null, stopType = () => {}, abortAI = () => {};
 
   /* ---- Language helpers: Arabic normalisation, stop words, synonyms ---- */
-  const STOP = new Set('how do does i the a an to can could what is are my in of for and with it on you me where why when which should would will please about this that from be at or your our we us there any get use using ClickUp clickup كيف ما ماذا هل في من على الى إلى عن ان أن هو هي لا او أو و مع اين أين لماذا هذا هذه ذلك التي الذي كل عند انا أنا لي لدي يمكن يمكنني أستطيع استطيع اريد أريد'.split(' ').map(w => w.toLowerCase()));
+  const STOP = new Set('how do does i the a an to can could what is are my in of for and with it on you me where why when which should would will please about this that from be at or your our we us there any get use using ClickUp clickup كيف ما ماذا هل في من على الى إلى عن ان أن هو هي لا او أو و مع اين أين لماذا هذا هذه ذلك التي الذي كل عند انا أنا لي لدي يمكن يمكنني أستطيع استطيع اريد أريد ابي أبي ابا أبا ابغى أبغى ابغي بس وش ايش إيش شو شلون كم يعني لو سمحت ممكن عشان علشان'.split(' ').map(w => w.toLowerCase()));
   const SYN = [
     ['notif', 'notification notifications notify inbox alert alerts إشعار اشعار إشعارات اشعارات الاشعارات تنبيه تنبيهات'],
-    ['assign', 'assign assigned assignee assignees owner owners مسؤول المسؤول مسند اسند أسند تعيين عين'],
+    ['assign', 'assign assigned assignee assignees owner owners colleague colleagues give مسؤول المسؤول مسند اسند أسند تعيين عين اعطي اعطيه اعطيها عطيه عطه زميل زميلي زميلتي لزميلي زملائي'],
     ['due', 'due deadline deadlines date dates overdue late موعد مواعيد تاريخ استحقاق متأخر متاخر'],
     ['repeat', 'repeat repeats recurring recurrence every sunday تكرار متكرر متكررة تتكرر الأحد الاحد'],
     ['boss', 'manager managers boss مدير مديري المدير لمديري للمدير'],
@@ -25,19 +25,22 @@ const Clicky = (() => {
     ['auto', 'automation automations automate automatic automatically trigger action أتمتة اتمتة الأتمتة تلقائي تلقائيا تلقائياً'],
     ['ai', 'ai brain summarize summary summarise gpt ذكاء اصطناعي الذكاء لخص تلخيص ملخص'],
     ['dash', 'dashboard dashboards report reports reporting chart charts kpi لوحة لوحات تقرير تقارير رسم'],
-    ['share', 'share sharing guest guests vendor contractor external outside permission permissions private مشاركة شارك ضيف مورد مقاول خارج صلاحية صلاحيات خاص خاصة'],
-    ['view', 'view views board calendar gantt table workload list عرض طرق'],
+    ['share', 'share sharing guest guests vendor contractor external outside permission permissions access visible see private يشوف يشوفها يشوفون يطلع صلاحيه مشاركة شارك ضيف مورد مقاول خارج صلاحية صلاحيات خاص خاصة'],
+    ['view', 'view views board calendar gantt table workload عرض طرق بورد'],
     ['subtask', 'subtask subtasks steps break smaller خطوات فرعية فرعي أصغر'],
     ['comment', 'comment comments mention mentions reply email @ تعليق تعليقات اشارة إشارة بريد رد'],
     ['struct', 'space spaces folder folders workspace hierarchy مساحة مساحات مجلد مجلدات هيكل'],
-    ['search', 'search find lost locate بحث ابحث اعثر أجد اجد'],
+    ['search', 'search find lost locate where بحث ابحث اعثر أجد اجد القاه ألقاه الاقي ألاقي القى وين فين'],
     ['mobile', 'mobile phone iphone android جوال الجوال هاتف ميداني'],
     ['form', 'form forms request requests intake نموذج نماذج طلب طلبات'],
     ['goal', 'goal goals target targets kpi objective هدف أهداف مستهدف مؤشر'],
     ['time', 'time timer track tracking estimate وقت الوقت مؤقت تتبع تقدير'],
-    ['task', 'task tasks todo مهمة مهام المهمة المهام'],
+    ['task', 'task tasks todo مهمة مهام المهمة المهام تاسك تاسكات التاسك مهمه'],
     ['forum', 'forum community colleagues منتدى زملاء'],
     ['lang', 'language arabic english لغة عربي عربية العربية'],
+    ['create', 'create make new add انشئ أنشئ انشاء إنشاء اسوي أسوي سوي اسويه اضيف أضيف'],
+    ['list', 'list lists لست اللست قائمه القائمه قوائم'],
+    ['simple', 'simple simpler simply simplify explain بسط بسطها ببساطه بسيط اشرح اشرحها وضح'],
     ['start', 'start begin beginner new first access login أبدأ ابدأ بداية جديد الوصول']
   ];
   const SYN_MAP = {}; SYN.forEach(([k, ws]) => ws.split(' ').forEach(w => { SYN_MAP[norm1(w)] = k; }));
@@ -163,8 +166,9 @@ const Clicky = (() => {
   const convo = [];
   function remember(role, text) { convo.push({ role, text: String(text).slice(0, 1500) }); if (convo.length > 12) convo.splice(0, convo.length - 12); }
   // Light, safe formatting for AI answers: escaped text, numbered steps, bullets and **bold** only.
-  function fmt(text) {
-    const inline = x => esc(x).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  function fmt(text, cites) {
+    const inline = x => esc(x).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+      .replace(/\s?\[(\d{1,2})\]/g, (m, n) => cites && cites[n] ? '<sup class="cc-cite" title="' + esc(cites[n].title) + '">' + n + '</sup>' : '');
     let html = '', list = null;
     const close = () => { if (list) { html += '</' + list + '>'; list = null; } };
     String(text).split('\n').forEach(line => {
@@ -178,42 +182,123 @@ const Clicky = (() => {
   }
   const rateHTML = () => '<div class="cc-rate"><button type="button" data-copy aria-label="' + tx('انسخ الإجابة', 'Copy the answer') + '">' + icon('doc', 'icon-sm') + '</button><span>' + tx('هل ساعدك هذا؟', 'Did this help?') + '</span><button type="button" data-rate="up" aria-label="' + tx('نعم', 'Yes') + '">' + icon('thumb', 'icon-sm') + '</button><button type="button" data-rate="down" class="down" aria-label="' + tx('لا', 'No') + '">' + icon('thumb', 'icon-sm') + '</button></div>';
   const stick = () => { const l = $log(); if (l) l.scrollTop = l.scrollHeight; };
+  // Screen readers hear each finished answer once (the log itself is not live, so streaming stays quiet).
+  function announce(text) { const r = $('.cc-sr', root); if (!r) return; r.textContent = ''; setTimeout(() => { r.textContent = String(text).replace(/\s?\[\d{1,2}\]/g, '').slice(0, 1200); }, 60); }
+
+  /* ---- AI state: 'off' (no service set on this site), 'checking', 'ready',
+     'not_configured' (service up, no model), 'unreachable', 'unauthorized' ---- */
+  let ai = Api.chatOn ? 'checking' : 'off', statusP = null;
+  const aiTries = () => ai === 'ready' || ai === 'unreachable' || ai === 'checking';
+  function checkStatus() {
+    if (!Api.chatOn) return Promise.resolve();
+    return (statusP = Api.chatStatus().then(r => { ai = r.ready ? 'ready' : 'not_configured'; }, e => { ai = e.kind === 'unauthorized' ? 'unauthorized' : 'unreachable'; }).then(() => {
+      relabel();
+      const l = $log(); if (l && l.children.length === 1 && l.firstChild.classList.contains('cc-hello')) { l.innerHTML = ''; greet(); }
+    }));
+  }
+
+  /* ---- Retrieval: which lesson records to ground the answer in ---- */
+  let kIndex = null, lastIds = [], lastUserTokens = [];
+  function retrieve(q) {
+    if (!kIndex) kIndex = Knowledge.records.map(r => ({ id: r.id, kind: r.kind, t: new Set(tokens(r.title.ar + ' ' + r.title.en)), b: new Set(tokens(r.text.ar + ' ' + r.text.en)) }));
+    let qt = repair(tokens(q));
+    const follow = FOLLOW.test(q) || qt.length <= 3;
+    if (follow) qt = qt.concat(lastUserTokens.map(w => ({ w, f: .4 })));
+    const scored = kIndex.map(k => { let sc = 0; qt.forEach(x => { const w = x.w || x, f = x.f || 1; if (k.t.has(w)) sc += 3 * f; else if (k.b.has(w)) sc += f; }); return { id: k.id, sc: sc * (k.kind === 'lesson' ? 1.15 : 1) / Math.sqrt(k.t.size + 3) }; })
+      .filter(x => x.sc > .3).sort((a, b) => b.sc - a.sc).slice(0, 5).map(x => x.id);
+    const ids = follow ? scored.concat(lastIds.filter(id => scored.indexOf(id) < 0)).slice(0, 6) : scored;
+    lastUserTokens = repair(tokens(q)).filter(x => typeof x === 'string').slice(0, 10);
+    return ids;
+  }
+  const safeUrl = u => typeof u === 'string' && (/^#\/[\w/-]+$/.test(u) || /^https:\/\/[\w.-]+\.[a-z]{2,}(\/[^\s"'<>]*)?$/i.test(u));
+  function sourcesHTML(cites, text, srcs) {
+    const used = Object.keys(cites).filter(n => new RegExp('\\[' + n + '\\]').test(text)).map(n => cites[n]);
+    const list = used.length ? used : srcs.map(x => Knowledge.get(x.id)).filter(r => r && r.kind === 'lesson').slice(0, 2);
+    if (!list.length) return '';
+    return '<div class="cc-src"><p class="cc-more">' + (used.length ? tx('المصادر:', 'Sources:') : tx('دروس ذات صلة:', 'Related lessons:')) + '</p><ul>' + list.map((r, i) => {
+      const n = used.length ? '<b>' + Object.keys(cites).find(k => cites[k] === r) + '</b> ' : '';
+      const own = safeUrl(r.url) ? '<a href="' + esc(r.url) + '">' + icon(r.kind === 'lesson' ? 'book' : 'compass', 'icon-sm') + esc(isEN() ? r.title.en : r.title.ar) + '</a>' : esc(isEN() ? r.title.en : r.title.ar);
+      const refs = (r.refs || []).filter(x => safeUrl(x.url)).slice(0, 2).map(x => ' <a class="ext" href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.label) + icon('external', 'icon-sm') + '</a>').join('');
+      return '<li>' + n + own + refs + '</li>';
+    }).join('') + '</ul></div>';
+  }
+
+  /* ---- Asking ---- */
+  const ERR = {
+    network: () => tx('تعذّر الوصول إلى خدمة الذكاء الاصطناعي. تحقق من اتصالك ثم أعد المحاولة.', 'I couldn’t reach the AI service. Check your connection, then try again.'),
+    unreachable: () => tx('تعذّر الوصول إلى خدمة الذكاء الاصطناعي. تحقق من اتصالك ثم أعد المحاولة.', 'I couldn’t reach the AI service. Check your connection, then try again.'),
+    timeout: () => tx('استغرقت خدمة الذكاء الاصطناعي وقتاً طويلاً للرد.', 'The AI service took too long to answer.'),
+    rate_limited: () => tx('أسئلة كثيرة في وقت قصير. انتظر دقيقة ثم أعد المحاولة.', 'Too many questions in a short time. Wait a minute, then try again.'),
+    busy: () => tx('خدمة الذكاء الاصطناعي مشغولة الآن. أعد المحاولة بعد لحظات.', 'The AI service is busy right now. Try again in a moment.'),
+    service: () => tx('واجهت خدمة الذكاء الاصطناعي مشكلة أثناء الإجابة.', 'The AI service ran into a problem while answering.'),
+    refused: () => tx('لا أستطيع المساعدة في هذا الطلب. اسألني عن ClickUp أو عن دروس المنصة.', 'I can’t help with that request. Ask me about ClickUp or the platform’s lessons.'),
+    unauthorized: () => tx('سجّل الدخول إلى الموقع لاستخدام المساعد الذكي.', 'Please sign in to the site to use the AI assistant.')
+  };
+  const searchTag = () => '<span class="cc-tag">' + icon('search', 'icon-sm') + tx('بحث في الدروس · ليست إجابة ذكاء اصطناعي', 'Lesson search · not an AI answer') + '</span>';
+  function searchAnswer(el, q, note) {
+    const small = SMALL.find(x => x[0].test(q));
+    Sound.play('pop');
+    if (small) { el.innerHTML = searchTag() + '<p></p>'; stopType = typeInto($('p', el), small[1](), () => { busy = false; }); return; }
+    const res = answer(q); renderAnswer(el, res, q);
+    el.insertAdjacentHTML('afterbegin', (note ? '<p class="cc-note">' + note + '</p>' : '') + searchTag());
+    busy = false; remember('user', q); if (res && res.best) remember('assistant', res.best.title + '\n' + res.best.text);
+    announce(el.innerText);
+  }
+  function askAI(q, el) {
+    busy = true;
+    el.className = 'cc-msg bot'; el.innerHTML = '<span class="cc-dots" aria-label="' + tx('كليكي يكتب', 'Clicky is writing') + '"><i></i><i></i><i></i></span>';
+    const ctl = new AbortController(); let cancelled = false; abortAI = () => { cancelled = true; ctl.abort(); };
+    let text = '', started = false, raf = 0, cites = {}, srcs = [];
+    const box = () => { if (!started) { started = true; el.innerHTML = '<div class="cc-md"></div>'; el._text = ''; Sound.play('pop'); } };
+    const paint = () => { raf = 0; const m = $('.cc-md', el); if (m) { m.innerHTML = fmt(text, cites); stick(); } };
+    const ids = retrieve(q);
+    Api.chat({ question: cleanText(q, 800), lang: LANG, history: convo.slice(-10), sources: ids }, piece => { box(); text += piece; if (!raf) raf = requestAnimationFrame(paint); }, ctl, list => {
+      srcs = list; cites = {}; list.forEach(x => { const r = Knowledge.get(x.id); if (r) cites[x.n] = Object.assign({}, r, { title: isEN() ? r.title.en : r.title.ar, titles: r.title }); });
+    }).then(all => {
+      if (ai !== 'ready') { ai = 'ready'; relabel(); } text = all; box(); paint();
+      el._text = all.replace(/\s?\[\d{1,2}\]/g, '');
+      const named = {}; Object.keys(cites).forEach(n => { named[n] = Knowledge.get(cites[n].id); });
+      el.insertAdjacentHTML('beforeend', sourcesHTML(named, all, srcs) + rateHTML()); stick();
+      lastIds = srcs.map(x => x.id).filter(id => Knowledge.get(id)).slice(0, 4);
+      remember('user', q); remember('assistant', el._text); busy = false; announce(el._text);
+    }, e => {
+      if (raf) cancelAnimationFrame(raf);
+      if (cancelled) return;
+      const kind = (e && e.kind) || 'service';
+      if (kind === 'not_configured') { ai = 'not_configured'; relabel(); el.innerHTML = ''; searchAnswer(el, q, tx('المساعد الذكي غير متصل بنموذج ذكاء اصطناعي بعد، لذا لا أستطيع كتابة إجابة. هذا ما وجده البحث في الدروس:', 'The AI assistant isn’t connected to an AI model yet, so I can’t write an answer. Here is what the lesson search found:')); return; }
+      if (kind === 'unauthorized') { ai = 'unauthorized'; relabel(); }
+      if (kind === 'network' || kind === 'timeout') { ai = 'unreachable'; relabel(); } else if (ai === 'unreachable' && kind !== 'unauthorized') { ai = 'ready'; relabel(); } // the service answered
+      const retry = kind !== 'refused' && kind !== 'unauthorized';
+      el.className = 'cc-msg bot cc-err'; el._q = q;
+      el.innerHTML = '<p>' + icon('alert', 'icon-sm') + ' ' + (ERR[kind] || ERR.service)() + '</p>' + (retry ? '<div class="cc-links"><button type="button" class="cc-retry" data-retry>' + icon('replay', 'icon-sm') + tx('أعد المحاولة', 'Retry') + '</button></div>' : '');
+      Sound.play('error'); busy = false; announce((ERR[kind] || ERR.service)()); stick();
+    });
+  }
   function ask(q) {
     q = q.trim(); if (!q || busy) return;
     busy = true; bubble(esc(q), 'me'); log.push({ me: q });
-    const el = bubble('<span class="cc-dots" aria-label="' + tx('Clicky يفكّر', 'Clicky is thinking') + '"><i></i><i></i><i></i></span>', 'bot');
-    const small = !Api.chatOn && SMALL.find(s => s[0].test(q));
-    const local = () => {
-      Sound.play('pop');
-      if (small) { el.innerHTML = '<p></p>'; stopType = typeInto($('p', el), small[1](), () => { busy = false; }); return; }
-      const res = answer(q); renderAnswer(el, res, q); busy = false;
-      remember('user', q); if (res && res.best) remember('assistant', res.best.title + '\n' + res.best.text);
-    };
-    if (!Api.chatOn) { setTimeout(local, prefersReducedMotion() ? 60 : 650); return; }
-    // AI mode: the answer appears as it is written; any failure falls back to the built-in answer.
-    const ctl = new AbortController(); let cancelled = false; abortAI = () => { cancelled = true; ctl.abort(); };
-    let text = '', started = false, raf = 0;
-    const box = () => { if (!started) { started = true; el.innerHTML = '<div class="cc-md"></div>'; el._text = ''; Sound.play('pop'); } };
-    const paint = () => { raf = 0; const m = $('.cc-md', el); if (m) { m.innerHTML = fmt(text); stick(); } };
-    Api.chat({ question: cleanText(q, 800), lang: LANG, history: convo.slice(-10) }, piece => { box(); text += piece; if (!raf) raf = requestAnimationFrame(paint); }, ctl).then(all => {
-      text = all; box(); paint(); el._text = all; el.insertAdjacentHTML('beforeend', rateHTML()); stick();
-      remember('user', q); remember('assistant', all); busy = false;
-    }, () => { if (raf) cancelAnimationFrame(raf); if (cancelled) return; el.innerHTML = ''; local(); });
+    const el = bubble('<span class="cc-dots" aria-label="' + tx('كليكي يكتب', 'Clicky is writing') + '"><i></i><i></i><i></i></span>', 'bot');
+    const go = () => { if (aiTries()) askAI(q, el); else setTimeout(() => searchAnswer(el, q), prefersReducedMotion() ? 60 : 500); };
+    if (ai === 'checking' && statusP) statusP.then(go); else go();
   }
   function greet() {
-    bubble('<p>' + (Api.chatOn
-      ? tx('أهلاً! أنا Clicky، مساعدك الذكي في ClickUp. اكتب سؤالك بكلماتك، بالعربية أو الإنجليزية، وسأفهم ما تحتاجه وأشرح لك الخطوات.', 'Hi! I’m Clicky, your ClickUp AI assistant. Ask in your own words, in Arabic or English, and I’ll work out what you need and walk you through it.')
-      : tx('أهلاً! أنا Clicky. اسألني أي سؤال عن ClickUp أو عن هذه المنصة، أو اختر سؤالاً من الأسفل.', 'Hi! I’m Clicky. Ask me any question about ClickUp or this platform, or pick one below.')) + '</p>', 'bot');
+    const msg = {
+      ready: tx('أهلاً! أنا كليكي تشات بوت، المساعد الذكي لهذه المنصة. اسألني عن ClickUp أو الدروس بكلماتك، بالعربية أو الإنجليزية أو بلهجتك، وسأجيب وأدلّك على الدرس المناسب.', 'Hi! I’m Clicky Chatbot, this platform’s AI assistant. Ask about ClickUp or the lessons in your own words, in Arabic, English or dialect, and I’ll answer and point you to the right lesson.'),
+      checking: tx('أهلاً! أنا كليكي تشات بوت. أتحقق من اتصال المساعد الذكي…', 'Hi! I’m Clicky Chatbot. Checking the AI assistant connection…'),
+      unreachable: tx('أهلاً! أنا كليكي تشات بوت. تعذّر الوصول إلى خدمة الذكاء الاصطناعي الآن؛ اكتب سؤالك وسأحاول مجدداً.', 'Hi! I’m Clicky Chatbot. I can’t reach the AI service right now; type your question and I’ll try again.'),
+      unauthorized: tx('أهلاً! أنا كليكي تشات بوت. سجّل الدخول إلى الموقع لاستخدام المساعد الذكي.', 'Hi! I’m Clicky Chatbot. Please sign in to the site to use the AI assistant.')
+    }[ai] || tx('أهلاً! أنا كليكي تشات بوت. المساعد الذكي غير متصل بنموذج ذكاء اصطناعي في هذا الموقع بعد، لذلك لا أكتب إجابات بنفسي الآن. أستطيع البحث في الدروس والإجابات المحفوظة وعرض ما يطابق سؤالك مع مصدره.', 'Hi! I’m Clicky Chatbot. The AI assistant isn’t connected to an AI model on this site yet, so I can’t write answers myself right now. I can search the lessons and saved answers and show what matches your question, with its source.');
+    const el = bubble('<p></p>', 'bot'); el.classList.add('cc-hello'); $('p', el).textContent = msg;
   }
   function newChat() {
-    stopType(); abortAI(); abortAI = () => {}; convo.length = 0; log.length = 0; lastTopic = null; busy = false;
-    $log().innerHTML = ''; greet(); $('.cc-q', root).focus();
+    stopType(); abortAI(); abortAI = () => {}; convo.length = 0; log.length = 0; lastTopic = null; lastIds = []; lastUserTokens = []; busy = false;
+    $log().innerHTML = ''; greet(); $('.cc-q', root).focus(); announce(tx('تم مسح المحادثة', 'Conversation cleared'));
   }
   function build() {
     root = document.createElement('div'); root.className = 'clicky-bot';
     root.innerHTML = '<p class="cb-hint" hidden></p><button type="button" class="clicky-fab" aria-expanded="false" aria-controls="clickyChat">' + mascot('mascot-fab') + '<span class="cf-label"></span></button>' +
-      '<section class="clicky-chat" id="clickyChat" role="dialog" aria-modal="false" aria-labelledby="ccTitle" hidden><header>' + mascot('mascot-head') + '<div><b id="ccTitle">Clicky</b><small><i></i><span class="cc-sub"></span></small></div><button type="button" class="icon-btn cc-hbtn cc-new">' + icon('plus') + '</button><button type="button" class="icon-btn cc-hbtn cc-wide" aria-pressed="false">' + icon('panel') + '</button><button type="button" class="icon-btn cc-hbtn cc-close">' + icon('x') + '</button></header>' +
-      '<div class="cc-log" aria-live="polite"></div><div class="cc-sugs" data-sugs></div>' +
+      '<section class="clicky-chat" id="clickyChat" role="dialog" aria-modal="false" aria-labelledby="ccTitle" hidden><header>' + mascot('mascot-head') + '<div><b id="ccTitle"></b><small><i></i><span class="cc-sub"></span></small></div><button type="button" class="icon-btn cc-hbtn cc-new">' + icon('plus') + '</button><button type="button" class="icon-btn cc-hbtn cc-wide" aria-pressed="false">' + icon('panel') + '</button><button type="button" class="icon-btn cc-hbtn cc-close">' + icon('x') + '</button></header>' +
+      '<div class="cc-log" role="log" aria-live="off"></div><div class="visually-hidden cc-sr" aria-live="polite" aria-atomic="true"></div><div class="cc-sugs" data-sugs></div>' +
       '<form class="cc-input"><textarea class="input cc-q" rows="1" maxlength="800" autocomplete="off"></textarea><button type="submit" class="icon-btn cc-send">' + icon('send', 'icon-sm') + '</button></form></section>';
     $('#appRoot').appendChild(root);
     const fab = $('.clicky-fab', root), chat = $('.clicky-chat', root);
@@ -229,27 +314,38 @@ const Clicky = (() => {
     $('.cc-wide', root).addEventListener('click', () => { const on = !root.classList.contains('is-wide'); root.classList.toggle('is-wide', on); $('.cc-wide', root).setAttribute('aria-pressed', String(on)); Sound.play('tap'); stick(); });
     root.addEventListener('click', e => {
       const s = e.target.closest('[data-cq]'); if (s) { ask(s.textContent); return; }
+      const rt = e.target.closest('[data-retry]');
+      if (rt) { const m = rt.closest('.cc-msg'); if (m && m._q && !busy) askAI(m._q, m); return; }
       const c = e.target.closest('[data-copy]');
       if (c) { const m = c.closest('.cc-msg'); copyText(m._text || m.innerText).then(ok => { if (ok) { c.classList.add('done'); Sound.play('tap'); setTimeout(() => c.classList.remove('done'), 1400); } }); return; }
       const r = e.target.closest('[data-rate]');
       if (r) { const box = r.closest('.cc-rate'); box.innerHTML = r.dataset.rate === 'up' ? '<span>' + icon('heart', 'icon-sm') + tx('رائع! سعيد أنني ساعدتك.', 'Great! Glad I could help.') + '</span>' : '<span>' + tx('آسف! جرّب المنتدى أو اسأل الفريق.', 'Sorry! Try the forum or ask the team.') + ' <a href="#/forum">' + tx('المنتدى', 'Forum') + '</a> · <a href="#/support">' + tx('اسأل الفريق', 'Ask the team') + '</a></span>'; Sound.play(r.dataset.rate === 'up' ? 'like' : 'tap'); return; }
       if (e.target.closest('.cc-log a, .cc-links a') && window.matchMedia('(max-width: 640px)').matches) toggle(false);
     });
-    relabel();
+    relabel(); checkStatus();
     try { if (!window.sessionStorage.getItem('clicky-hint')) { setTimeout(() => { if (open) return; const h = $('.cb-hint', root); h.hidden = false; h.classList.add('tip-in'); window.sessionStorage.setItem('clicky-hint', '1'); setTimeout(() => { h.hidden = true; }, 6000); }, 3000); } } catch (e) { /* optional */ }
     return chat;
   }
   function relabel() {
     if (!root) return;
     const fab = $('.clicky-fab', root);
-    $('.cf-label', root).textContent = tx('اسأل Clicky', 'Ask Clicky');
-    fab.setAttribute('aria-label', tx('اسأل Clicky، مساعد ClickUp', 'Ask Clicky, the ClickUp helper'));
-    $('.cc-sub', root).textContent = Api.chatOn ? tx('مساعد ذكي · لأسئلة ClickUp', 'AI assistant · for ClickUp questions') : tx('متصل · مساعد ClickUp', 'Online · ClickUp helper');
-    $('.cc-new', root).setAttribute('aria-label', tx('محادثة جديدة', 'New chat')); $('.cc-new', root).title = tx('محادثة جديدة', 'New chat');
+    const name = tx('كليكي تشات بوت', 'Clicky Chatbot');
+    $('.cf-label', root).textContent = name;
+    $('#ccTitle', root).textContent = name;
+    fab.setAttribute('aria-label', tx('افتح كليكي تشات بوت، المساعد الذكي', 'Open Clicky Chatbot, the AI assistant'));
+    const sub = {
+      ready: tx('المساعد الذكي · متصل', 'AI Assistant · online'),
+      checking: tx('المساعد الذكي · جارٍ الاتصال…', 'AI Assistant · connecting…'),
+      unreachable: tx('المساعد الذكي · تعذّر الاتصال', 'AI Assistant · can’t connect'),
+      unauthorized: tx('المساعد الذكي · يتطلب تسجيل الدخول', 'AI Assistant · sign-in needed')
+    }[ai] || tx('الذكاء الاصطناعي غير متصل · بحث في الدروس فقط', 'AI not connected · lesson search only');
+    $('.cc-sub', root).textContent = sub;
+    root.dataset.ai = ai;
+    $('.cc-new', root).setAttribute('aria-label', tx('مسح المحادثة', 'Clear conversation')); $('.cc-new', root).title = tx('مسح المحادثة', 'Clear conversation');
     $('.cc-wide', root).setAttribute('aria-label', tx('تكبير نافذة المحادثة', 'Make the chat bigger')); $('.cc-wide', root).title = tx('تكبير', 'Bigger');
     $('.cc-close', root).setAttribute('aria-label', tx('أغلق المحادثة', 'Close the chat'));
-    $('.cc-q', root).placeholder = Api.chatOn ? tx('اسأل أي شيء عن ClickUp بكلماتك…', 'Ask anything about ClickUp, in your own words…') : tx('اكتب سؤالك عن ClickUp…', 'Type your question about ClickUp…');
-    $('.cc-q', root).setAttribute('aria-label', tx('سؤالك لـ Clicky', 'Your question for Clicky'));
+    $('.cc-q', root).placeholder = aiTries() ? tx('اسأل أي شيء عن ClickUp بكلماتك…', 'Ask anything about ClickUp, in your own words…') : tx('اكتب سؤالك عن ClickUp…', 'Type your question about ClickUp…');
+    $('.cc-q', root).setAttribute('aria-label', tx('سؤالك لكليكي تشات بوت', 'Your question for Clicky Chatbot'));
     $('.cc-send', root).setAttribute('aria-label', tx('أرسل', 'Send'));
     $('.cb-hint', root).textContent = tx('عندك سؤال عن ClickUp؟ اسألني!', 'Got a ClickUp question? Ask me!');
     const sugs = $('[data-sugs]', root);
@@ -264,5 +360,5 @@ const Clicky = (() => {
       setTimeout(() => $('.cc-q', root).focus(), 50);
     } else stopType();
   }
-  return { init: () => build(), relabel, open: () => toggle(true), ask: q => { toggle(true); ask(q); }, debug: q => ({ tokens: repair(tokens(q)), res: answer(q) }) };
+  return { init: () => build(), relabel, open: () => toggle(true), ask: q => { toggle(true); ask(q); }, debug: q => ({ tokens: repair(tokens(q)), res: answer(q) }), retrieve, get state() { return ai; } };
 })();

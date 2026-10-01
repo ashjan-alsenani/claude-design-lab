@@ -6,7 +6,6 @@ Only the Python standard library is used. The output inlines all CSS and JS.
 """
 import base64
 import hashlib
-import json
 import re
 from pathlib import Path
 
@@ -45,6 +44,7 @@ JS_FILES = [
     "app/workshops.js",
     "app/feedback.js",
     "app/forum.js",
+    "app/knowledge.js",
     "app/clicky.js",
     "app/main.js",
 ]
@@ -68,17 +68,14 @@ def inline_assets(html):
     return re.sub(r'(src|href)="assets/([\w.-]+\.(?:png|webp|jpg|svg))"', repl, html)
 
 
-def export_kb():
-    """Write server/clicky_kb.json from src/content/kb.js for the optional AI endpoint."""
-    src = read("content/kb.js")
-    body = src[src.index("= [") + 2:src.rindex("]") + 1]
-    body = re.sub(r"^\s*/\*.*?\*/\s*$", "", body, flags=re.M)
-    body = re.sub(r"'((?:[^'\\]|\\.)*)'", lambda m: json.dumps(m.group(1).replace("\\'", "'")), body)
-    body = re.sub(r",(\s*[\]}])", r"\1", body)
-    rows = json.loads(body)
-    out = [{"id": r[1], "part": r[0], "q_ar": r[2][0], "q_en": r[2][1], "a_ar": r[3][0], "a_en": r[3][1]} for r in rows]
-    (ROOT / "server" / "clicky_kb.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
-    return len(out)
+def export_knowledge():
+    """Write server/knowledge.json (the AI server's trusted lesson excerpts) with Node, if installed."""
+    import shutil
+    import subprocess
+    if not shutil.which("node"):
+        print("note: Node.js not found; server/knowledge.json was not refreshed")
+        return
+    subprocess.run(["node", str(ROOT / "tools" / "export-knowledge.js")], check=True)
 
 
 def main():
@@ -100,7 +97,7 @@ def main():
     out = out.replace("<!--__CSP__-->", '<meta http-equiv="Content-Security-Policy" content="' + csp + '">')
     out = inline_assets(out)
     (ROOT / "index.html").write_text(out, encoding="utf-8")
-    print(f"server/clicky_kb.json written ({export_kb()} questions)")
+    export_knowledge()
     print(f"index.html written ({len(out.encode('utf-8')) / 1024:.0f} KB)")
 
 
