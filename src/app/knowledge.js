@@ -27,6 +27,8 @@ const Knowledge = (() => {
   CLICKY_KB.forEach(r => add('kb:' + r[1], 'answer', { ar: r[2][0], en: r[2][1] }, { ar: r[3][0], en: r[3][1] }, r[5] || '#/tour/' + r[0]));
   GLOSSARY.forEach(g => { const en = ENG[g.en] || {}; add('term:' + g.en, 'term', { ar: g.ar + ' (' + g.en + ')', en: g.en }, { ar: join([g.def, g.ex]), en: join([en.def || '', en.ex || '']) }, g.lesson ? '#/lesson/' + g.lesson : '#/help/glossary'); });
 
+  if (typeof COURSE !== 'undefined') COURSE.forEach(c => add('course:' + c[1], 'course', { ar: c[2][0], en: c[2][1] },
+    { ar: join([c[3][0], c[4].map(x => x[0]), c[5][0]]), en: join([c[3][1], c[4].map(x => x[1]), c[5][1]]) }, '#/course/' + c[1]));
   const byId = Object.fromEntries(records.map(r => [r.id, r]));
   return { records, get: id => byId[id] || null };
 })();

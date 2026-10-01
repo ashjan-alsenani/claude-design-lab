@@ -1,7 +1,7 @@
 const { chromium } = require('./pw');
 const URL = 'file://' + require('path').resolve(__dirname, '../index.html');
 const lessons = ['l1-1','l1-2','l1-3','l2-1','l2-2','l3-1','l3-2','l3-3','l3-4','l3-5','l4-1','l4-2','l4-3','l5-1','l5-2','l6-1','l6-2','l7-1','l7-2','l8-1','l8-2','l9-1','l9-2','l10-1','l10-2','l11-1','l11-2','l12-1','l12-2'];
-const routes = ['home','library','lab','studio','assess','assess/final','assess/practical','progress','help/glossary','help/faq','help/mistakes','help/resources','about','nowhere']
+const routes = ['home','library','lab','studio','assess','assess/final','assess/practical','progress','help/glossary','help/faq','help/mistakes','help/resources','about','course','course/intro','course/hierarchy','course/superagent','course/auto-deep','course/interview','nowhere']
   .concat(Array.from({length:12},(_,i)=>'assess/m'+(i+1))).concat(lessons.map(l=>'lesson/'+l))
   .concat(['tour', 'questions', 'automations', 'guide', 'ideas', 'support', 'forum', 'workshops', 'workshops/ai', 'workshops/import', 'workshops/templates']).concat(['start','structure','tasks','views','fields','collab','time','dash','auto','forms','share','power'].map(x => 'tour/' + x));
 (async () => {

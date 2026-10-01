@@ -173,3 +173,26 @@ The platform now leads with explaining ClickUp itself, before practice:
   - Stricter rules for sensitive company data: say Omantel's policy can't be confirmed, give guidance labelled as general, and point to the policy owner.
   - The saved answer "Is AI safe for company data?" no longer presents general advice as Omantel policy.
 - `tests/live-ai.js` repeats the live test on any server where the AI is switched on.
+
+## ClickUp 4.0 for Beginners course (#/course)
+
+- A new page in the sidebar, **ClickUp 4.0 / دورة ClickUp 4.0**, follows the requested outline: 11 sections, 65 topics and an interview role play.
+- **Content.** `src/content/course.js` holds every topic, written in our own words in Arabic and English:
+  - a friendly "In plain words" explanation;
+  - steps to try;
+  - a pro tip;
+  - a link to the matching site lesson or workshop.
+  
+  AI features (Brain, Knowledge Manager, Project Manager, Super Agents, AI Notetaker) are described as depending on plan and admin settings.
+- **Overview page.**
+  - hero with a progress ring;
+  - "What you'll learn" and "This course includes", which lists only what the site really offers (no video or certificate claims);
+  - collapsible sections, each with its own progress bar.
+- **Topic pages.**
+  - "Topic n of 65";
+  - mark as done (saved on this device);
+  - "Go deeper" link and "Ask Clicky about this";
+  - previous and next topic.
+- **Role play.** Five interview questions: type your answer, reveal a model answer, rate yourself.
+- Course topics are added to Clicky's knowledge source (`course:*` records), so the chatbot can cite them.
+- Code: `src/app/course.js`, `src/course.css`; tests in `tests/behave.js` and `tests/crawl.js`.

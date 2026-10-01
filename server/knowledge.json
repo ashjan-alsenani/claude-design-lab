@@ -4448,6 +4448,1241 @@
     "ar",
     "en"
    ]
+  },
+  {
+   "id": "course:intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة: ماذا ستتعلم؟",
+    "en": "Introduction: what you will learn"
+   },
+   "text": {
+    "ar": "أهلاً بك! في هذه الدورة ستتعلم ClickUp خطوة بخطوة، من أول حساب حتى إدارة فريق كامل بمساعدة الذكاء الاصطناعي. سنبني معاً خطة مشروع حقيقية، ثم نعرضها بطرق مختلفة، ونتواصل مع الفريق، ونقيس التقدم، ونترك الأتمتة تتولى الأعمال المتكررة.\nاقرأ شرح كل موضوع ثم طبّق الخطوات في ClickUp أو في مختبر التطبيق.\nعلّم الموضوع «تم» عند الانتهاء لتتابع تقدمك.\nاسأل كليكي تشات بوت إن احتجت شرحاً إضافياً.\nلا تحاول حفظ كل شيء دفعة واحدة. موضوع واحد في اليوم مع تطبيق بسيط يكفي لتصبح محترفاً خلال أسابيع.",
+    "en": "Welcome! In this course you learn ClickUp step by step, from your very first account to running a whole team with help from AI. Together we build a real project plan, look at it in different views, talk with the team, measure progress, and let automations handle the repetitive work.\nRead each topic, then follow the steps in ClickUp or in the Practice Lab.\nMark the topic as done when you finish to track your progress.\nAsk Clicky Chatbot when you need more explanation.\nDo not try to memorise everything at once. One topic a day with a small practice is enough to become a pro within weeks."
+   },
+   "url": "#/course/intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:account",
+   "kind": "course",
+   "title": {
+    "ar": "إعداد حسابك",
+    "en": "Setting up your account"
+   },
+   "text": {
+    "ar": "الحساب هو بطاقة دخولك إلى ClickUp. في العمل تدخل غالباً ببريد الشركة أو بالدخول الموحّد (SSO)، ثم تنضم إلى مساحة عمل الشركة بدعوة من المسؤول. خمس دقائق في ضبط الصورة والاسم والمنطقة الزمنية توفر عليك ارتباكاً كثيراً لاحقاً.\nافتح app.clickup.com أو التطبيق وسجّل الدخول ببريد العمل.\nاقبل دعوة مساحة العمل إن وصلتك.\nمن صورتك ← Settings أضف صورة واضحة واختر توقيت مسقط (GMT+4).\nالصورة الحقيقية تجعل زملاءك يعرفونك بسرعة في التعليقات والمهام المسندة.",
+    "en": "Your account is your pass into ClickUp. At work you usually sign in with your company email or single sign-on (SSO), then join the company Workspace through an admin’s invite. Five minutes spent on your photo, name and time zone saves a lot of confusion later.\nOpen app.clickup.com or the app and sign in with your work email.\nAccept the Workspace invite if you received one.\nFrom your avatar, open Settings, add a clear photo and choose the Muscat time zone (GMT+4).\nA real photo helps colleagues recognise you quickly in comments and assigned tasks."
+   },
+   "url": "#/course/account",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:interface",
+   "kind": "course",
+   "title": {
+    "ar": "الواجهة: أين كل شيء؟",
+    "en": "The interface: where everything lives"
+   },
+   "text": {
+    "ar": "واجهة ClickUp مثل مبنى مرتّب: الشريط الجانبي هو المصعد الذي يأخذك إلى المساحات والقوائم، والجزء الأوسط هو الغرفة التي تعمل فيها، والشريط العلوي فيه البحث والإنشاء السريع. في الإصدار 4.0 يوجد شريط تنقل عام يضم الصفحة الرئيسية وصندوق الوارد والمستندات والمحادثات والذكاء الاصطناعي.\nجرّب فتح مساحة وقائمة من الشريط الجانبي.\nاضغط Ctrl/Cmd+K وابحث عن أي مهمة.\nثبّت ما تستخدمه كثيراً في المفضلة (Favorites).\nإن ضعت في الواجهة، فاضغط Ctrl/Cmd+K؛ البحث يوصلك لأي مكان أسرع من التنقل.",
+    "en": "The ClickUp interface is like a tidy building: the sidebar is the lift that takes you to Spaces and Lists, the middle is the room where you work, and the top bar holds search and quick create. In version 4.0 a global navigation bar groups Home, Inbox, Docs, Chat and AI.\nOpen a Space and a List from the sidebar.\nPress Ctrl/Cmd+K and search for any task.\nPin what you use often to Favorites.\nIf you get lost, press Ctrl/Cmd+K; search gets you anywhere faster than clicking around."
+   },
+   "url": "#/course/interface",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:hierarchy",
+   "kind": "course",
+   "title": {
+    "ar": "هيكل ClickUp: مساحة العمل، المساحة، المجلد، القائمة، المهمة",
+    "en": "The ClickUp structure: Workspace, Space, Folder, List, Task"
+   },
+   "text": {
+    "ar": "تخيّل ClickUp كخزانة ملفات. مساحة العمل (Workspace) هي الشركة كلها. المساحة (Space) درج لقسم أو فريق. المجلد (Folder) ملف لمشروع. القائمة (List) ورقة تضم المهام. والمهمة (Task) هي العمل الفعلي الذي ينجزه شخص. فهم هذا الترتيب هو أهم خطوة لتعرف أين تضع كل شيء.\nارسم مشروعك على ورقة: من القسم؟ ما المشروع؟ ما المراحل؟\nاجعل القسم مساحة، والمشروع مجلداً، وكل مرحلة قائمة.\nضع المهام داخل القوائم فقط.\nالمجلد اختياري. إن كان المشروع صغيراً فقائمة واحدة داخل المساحة تكفي.",
+    "en": "Think of ClickUp as a filing cabinet. The Workspace is the whole company. A Space is a drawer for a department or team. A Folder is a file for a project. A List is a sheet that holds tasks. A Task is the actual work someone does. Understanding this order is the most important step to know where everything goes.\nSketch your project on paper: which department, which project, which stages?\nMake the department a Space, the project a Folder, and each stage a List.\nPut tasks inside Lists only.\nFolders are optional. For a small project, a single List inside the Space is enough."
+   },
+   "url": "#/course/hierarchy",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:structure1",
+   "kind": "course",
+   "title": {
+    "ar": "إنشاء هيكل المشروع (الجزء 1): المساحة والمجلد",
+    "en": "Creating the project structure, part 1: Space and Folder"
+   },
+   "text": {
+    "ar": "لنبنِ مشروعاً تدريبياً اسمه «إطلاق خدمة الألياف في صلالة». نبدأ بالحاوية الكبيرة: مساحة للفريق ثم مجلد للمشروع. هكذا يبقى كل ما يخص المشروع في مكان واحد ويسهل إيجاده.\nفي الشريط الجانبي اضغط «+» بجانب المساحات وأنشئ مساحة باسم الفريق.\nاختر لوناً وأيقونة، وحدد من يدخلها.\nداخل المساحة أنشئ مجلداً باسم المشروع.\nاستخدم أسماء واضحة يفهمها أي زميل جديد، وتجنب الاختصارات الغامضة.",
+    "en": "Let’s build a practice project called “Fibre service launch in Salalah”. We start with the big container: a Space for the team, then a Folder for the project. That way everything about the project stays in one place and is easy to find.\nIn the sidebar click “+” next to Spaces and create a Space with your team’s name.\nPick a colour and icon, and choose who can access it.\nInside the Space create a Folder with the project name.\nUse clear names any new colleague would understand, and avoid cryptic abbreviations."
+   },
+   "url": "#/course/structure1",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:structure2",
+   "kind": "course",
+   "title": {
+    "ar": "إنشاء هيكل المشروع (الجزء 2): القوائم والحالات",
+    "en": "Creating the project structure, part 2: Lists and statuses"
+   },
+   "text": {
+    "ar": "الآن نقسم المشروع إلى قوائم، كل قائمة مرحلة: «التخطيط»، «التنفيذ»، «الإطلاق». ثم نضبط الحالات (Statuses) التي تمر بها المهمة مثل «للتنفيذ» ← «قيد العمل» ← «مراجعة» ← «مكتمل». الحالات هي خريطة الطريق التي ترى منها أين يقف العمل.\nداخل المجلد أنشئ قائمة لكل مرحلة.\nمن إعدادات المجلد أو القائمة افتح Statuses وأضف حالة «مراجعة».\nاحفظ مجموعة الحالات كقالب لتستخدمها في مشاريع أخرى.\nقلّل الحالات قدر الإمكان. أربع أو خمس حالات تكفي لمعظم الفرق.",
+    "en": "Now we split the project into Lists, one per stage: “Planning”, “Delivery”, “Launch”. Then we set the Statuses a task moves through, such as To do → In progress → Review → Complete. Statuses are the road map that shows where the work stands.\nInside the Folder create one List per stage.\nFrom the Folder or List settings open Statuses and add a “Review” status.\nSave the status set as a template to reuse in other projects.\nKeep statuses few. Four or five are enough for most teams."
+   },
+   "url": "#/course/structure2",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:subtasks",
+   "kind": "course",
+   "title": {
+    "ar": "إنشاء المهام الفرعية",
+    "en": "Creating subtasks"
+   },
+   "text": {
+    "ar": "المهمة الكبيرة تُخيف، والمهام الفرعية (Subtasks) تقسمها إلى قطع صغيرة يمكن إنجازها. لكل مهمة فرعية مسؤول وموعد وحالة خاصة بها، فيعرف كل شخص جزءه بالضبط. أما الخطوات الصغيرة التي ينجزها الشخص نفسه فاستخدم لها قائمة تحقق (Checklist).\nافتح المهمة واضغط «Add subtask».\nاكتب اسم كل جزء واضغط Enter.\nأسند كل مهمة فرعية إلى شخص وحدد موعدها.\nقاعدة سهلة: إذا عمل عليها شخص آخر فهي مهمة فرعية، وإن كانت خطوة لك وحدك فهي بند في قائمة تحقق.",
+    "en": "A big task feels scary; subtasks split it into small pieces you can finish. Each subtask has its own assignee, date and status, so everyone knows exactly their part. For small steps the same person does, use a Checklist instead.\nOpen the task and click “Add subtask”.\nType the name of each part and press Enter.\nAssign each subtask to a person and give it a date.\nEasy rule: if someone else works on it, it is a subtask; if it is a step for you alone, it is a checklist item."
+   },
+   "url": "#/course/subtasks",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:invite",
+   "kind": "course",
+   "title": {
+    "ar": "دعوة أعضاء الفريق وإسناد المهام",
+    "en": "Inviting and assigning team members"
+   },
+   "text": {
+    "ar": "المشروع لا ينجح بشخص واحد. يدعو المسؤول الزملاء إلى مساحة العمل، ثم تشارك المساحة أو القائمة معهم وتسند لكل منهم مهامه. الإسناد يجعل الجواب عن سؤال «من سيفعل هذا؟» واضحاً للجميع.\nاطلب من المسؤول دعوة الزميل، أو ادعه من People إن كانت لديك الصلاحية.\nشارك القائمة معه من زر Share.\nفي المهمة اضغط على Assignee واختر اسمه.\nمسؤول واحد لكل مهمة أفضل. أضف الباقين متابعين (Watchers) ليصلهم التحديث دون التباس.",
+    "en": "A project does not succeed with one person. An admin invites colleagues to the Workspace, then you share the Space or List with them and assign each one their tasks. Assigning makes the answer to “who is doing this?” clear to everyone.\nAsk an admin to invite the colleague, or invite them from People if you have permission.\nShare the List with them from the Share button.\nIn the task click Assignee and pick their name.\nOne assignee per task works best. Add others as watchers so they get updates without confusion."
+   },
+   "url": "#/course/invite",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:dates",
+   "kind": "course",
+   "title": {
+    "ar": "ضبط تواريخ الاستحقاق",
+    "en": "Setting up due dates"
+   },
+   "text": {
+    "ar": "المهمة بلا موعد مجرد أمنية. تاريخ البدء يقول متى يبدأ العمل، وتاريخ الاستحقاق يقول متى يجب أن ينتهي. التواريخ تغذي التقويم وغانت وتذكيرات «مهامي»، فتصبح الخطة حيّة.\nفي المهمة اضغط على أيقونة التاريخ.\nاختر تاريخ البدء ثم تاريخ الاستحقاق، وأضف وقتاً إن احتجت.\nللمهام الدورية فعّل التكرار (Recurring) من نفس النافذة.\nضع مواعيد واقعية. موعد يتأخر دائماً يُفقد الفريق الثقة في الخطة.",
+    "en": "A task with no date is just a wish. The start date says when work begins and the due date says when it must be finished. Dates feed the Calendar, Gantt and the reminders in My Tasks, so the plan comes alive.\nIn the task click the date icon.\nChoose a start date, then a due date, and add a time if needed.\nFor routine tasks turn on Recurring in the same window.\nSet realistic dates. A date that always slips makes the team lose trust in the plan."
+   },
+   "url": "#/course/dates",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:columns",
+   "kind": "course",
+   "title": {
+    "ar": "إضافة أعمدة إضافية",
+    "en": "Adding extra columns"
+   },
+   "text": {
+    "ar": "في عرض القائمة تظهر المهام كجدول مرتب، ويمكنك إضافة أعمدة لما يهمك: الأولوية، تاريخ البدء، الوقت المقدّر، أو حقل خاص بكم. الأعمدة تجعلك ترى صورة المشروع كاملة دون فتح كل مهمة.\nفي نهاية رؤوس الأعمدة اضغط «+».\nاختر عموداً جاهزاً أو أنشئ حقلاً مخصصاً.\nاسحب الأعمدة لترتيبها كما تحب.\nلا تملأ الشاشة بالأعمدة. أبقِ ما تحتاجه يومياً وأخفِ الباقي.",
+    "en": "In List view tasks appear as a tidy table, and you can add columns for what matters to you: priority, start date, time estimate, or a field of your own. Columns let you see the whole project without opening every task.\nAt the end of the column headers click “+”.\nPick a ready column or create a Custom Field.\nDrag the columns to arrange them how you like.\nDo not flood the screen with columns. Keep what you need daily and hide the rest."
+   },
+   "url": "#/course/columns",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:grouping",
+   "kind": "course",
+   "title": {
+    "ar": "تجميع المهام",
+    "en": "Grouping tasks"
+   },
+   "text": {
+    "ar": "التجميع (Group by) يرتب المهام في مجموعات، مثل مجموعة لكل حالة أو لكل مسؤول أو لكل أولوية. فجأة ترى من عنده عمل كثير، وما المهام العاجلة.\nفي أعلى العرض اضغط «Group».\nاختر المسؤول أو الأولوية أو الحالة.\nاحفظ العرض ليبقى التجميع للفريق.\nالتجميع حسب المسؤول ممتاز لاجتماع المتابعة الأسبوعي.",
+    "en": "Grouping sorts tasks into groups, such as one group per status, per assignee or per priority. Suddenly you can see who has a lot of work and which tasks are urgent.\nAt the top of the view click “Group”.\nChoose assignee, priority or status.\nSave the view so the grouping stays for the team.\nGrouping by assignee is perfect for the weekly follow-up meeting."
+   },
+   "url": "#/course/grouping",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:filter",
+   "kind": "course",
+   "title": {
+    "ar": "التصفية والبحث",
+    "en": "Filtering and searching"
+   },
+   "text": {
+    "ar": "كلما كبر المشروع زادت المهام. التصفية (Filter) تخفي ما لا يهمك الآن، مثل «مهامي العاجلة هذا الأسبوع». والبحث يجد أي مهمة أو مستند بكلمة واحدة.\nاضغط Filter وأضف شرطاً: المسؤول = أنا.\nأضف شرطاً ثانياً: الأولوية = عاجل.\nللبحث في كل مكان اضغط Ctrl/Cmd+K.\nزر «Me» في أعلى العرض يريك مهامك فقط بنقرة واحدة.",
+    "en": "The bigger the project, the more tasks. Filters hide what does not matter right now, like “my urgent tasks this week”. Search finds any task or Doc with a single word.\nClick Filter and add a rule: Assignee = me.\nAdd a second rule: Priority = Urgent.\nTo search everywhere press Ctrl/Cmd+K.\nThe “Me” button at the top of a view shows only your tasks in one click."
+   },
+   "url": "#/course/filter",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:bulk",
+   "kind": "course",
+   "title": {
+    "ar": "الإجراءات الجماعية على المهام",
+    "en": "Bulk actions on tasks"
+   },
+   "text": {
+    "ar": "تخيل أنك تريد نقل 20 مهمة إلى زميل آخر. بدلاً من فتحها واحدة واحدة، حدد المهام كلها وغيّرها مرة واحدة: المسؤول، الحالة، التاريخ، النقل أو الحذف. توفير وقت حقيقي!\nفي عرض القائمة حدد المربعات بجانب المهام.\nيظهر شريط الإجراءات في الأسفل.\nاختر الإجراء، مثل تغيير المسؤول، وأكّد.\nراجع التحديد قبل الحذف الجماعي؛ المحذوف يبقى في سلة المهملات نحو 30 يوماً فقط.",
+    "en": "Imagine moving 20 tasks to another colleague. Instead of opening them one by one, select them all and change them at once: assignee, status, date, move or delete. Real time saved!\nIn List view tick the boxes next to the tasks.\nThe action bar appears at the bottom.\nPick the action, such as changing the assignee, and confirm.\nCheck your selection before a bulk delete; deleted items stay in Trash for only about 30 days."
+   },
+   "url": "#/course/bulk",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:finalize",
+   "kind": "course",
+   "title": {
+    "ar": "اللمسات الأخيرة على عرض خطة المشروع",
+    "en": "Finalising the project plan view"
+   },
+   "text": {
+    "ar": "الآن نرتب العرض ليصبح لوحة قيادة المشروع: الأعمدة المهمة ظاهرة، المهام مجمعة حسب المرحلة، ومرتبة حسب التاريخ. ثم نحفظ العرض ليفتحه الجميع بنفس الشكل.\nرتب المهام حسب تاريخ الاستحقاق (Sort).\nأخفِ الأعمدة غير المهمة.\nاضغط Save view، أو اجعله العرض الافتراضي.\nسمِّ العرض باسم يشرح هدفه، مثل «خطة المشروع – حسب المرحلة».",
+    "en": "Now we tidy the view into the project’s cockpit: the important columns visible, tasks grouped by stage, sorted by date. Then we save the view so everyone opens it the same way.\nSort the tasks by due date.\nHide columns you do not need.\nClick Save view, or make it the default view.\nName the view after its purpose, such as “Project plan – by stage”."
+   },
+   "url": "#/course/finalize",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:customfields",
+   "kind": "course",
+   "title": {
+    "ar": "الحقول المخصصة",
+    "en": "Custom Fields"
+   },
+   "text": {
+    "ar": "الحقول المخصصة (Custom Fields) تضيف معلومات خاصة بعملك لكل مهمة، مثل المنطقة، رقم الطلب، أو التكلفة. أنواعها كثيرة: نص، رقم، مبلغ، قائمة منسدلة، تاريخ، مربع اختيار، ومعادلة. وهي ما يجعل التقارير والتصفية دقيقة.\nأضف عموداً جديداً واختر نوع الحقل.\nللخيارات الثابتة استخدم Dropdown، مثل «مسقط، صلالة، صحار».\nاملأ الحقل في المهام، ثم جرّب التصفية به.\nالقائمة المنسدلة أفضل من النص الحر؛ تمنع الأخطاء الإملائية وتجعل التقارير صحيحة.",
+    "en": "Custom Fields add information specific to your work to every task, such as region, request number or cost. There are many types: text, number, money, dropdown, date, checkbox and formula. They are what makes reports and filters precise.\nAdd a new column and choose the field type.\nFor fixed choices use a Dropdown, such as “Muscat, Salalah, Sohar”.\nFill the field in tasks, then try filtering by it.\nA dropdown beats free text; it prevents typos and keeps reports accurate."
+   },
+   "url": "#/course/customfields",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:changes",
+   "kind": "course",
+   "title": {
+    "ar": "تعديلات اللحظة الأخيرة على الخطة",
+    "en": "Last-minute changes to the plan"
+   },
+   "text": {
+    "ar": "الخطط تتغير دائماً: موعد يتأخر، شخص يغيب، أو مرحلة تُضاف. الجميل في ClickUp أن التعديل سهل: اسحب التاريخ، أعد الإسناد، أو انقل المهام، وسجل النشاط يحفظ كل تغيير ليعرف الجميع ما حدث.\nغيّر التاريخ بالسحب في التقويم أو غانت.\nأعد إسناد مهام الزميل الغائب بإجراء جماعي.\nاكتب تعليقاً يشرح سبب التغيير.\nبعد أي تغيير كبير، أخبر الفريق في تعليق أو قناة المشروع؛ لا تعتمد على أن يلاحظوا وحدهم.",
+    "en": "Plans always change: a date slips, someone is away, or a stage is added. The nice thing in ClickUp is that changes are easy: drag the date, reassign, or move tasks, and the Activity log keeps every change so everyone knows what happened.\nChange dates by dragging in Calendar or Gantt.\nReassign the absent colleague’s tasks with a bulk action.\nWrite a comment explaining why it changed.\nAfter any big change, tell the team in a comment or the project channel; do not count on them noticing."
+   },
+   "url": "#/course/changes",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:list",
+   "kind": "course",
+   "title": {
+    "ar": "عرض القائمة",
+    "en": "The List view"
+   },
+   "text": {
+    "ar": "عرض القائمة (List) هو الأساس: جدول بسيط بالمهام وأعمدتها. مناسب للتخطيط وكتابة المهام بسرعة ومراجعة التفاصيل. تذكّر: كل العروض تُظهر نفس المهام، الذي يتغير فقط هو الشكل.\nافتح أي قائمة؛ عرض List غالباً هو الافتراضي.\nاضغط «+ Task» لإضافة مهمة.\nجرب التجميع والتصفية من الأعلى.\nعرض القائمة هو الأسرع لإضافة عشر مهام متتالية: اكتب واضغط Enter وكرر.",
+    "en": "List view is the foundation: a simple table of tasks and their columns. It is great for planning, writing tasks quickly and checking details. Remember: every view shows the same tasks; only the shape changes.\nOpen any List; List view is usually the default.\nClick “+ Task” to add a task.\nTry grouping and filters from the top.\nList view is the fastest way to add ten tasks in a row: type, press Enter, repeat."
+   },
+   "url": "#/course/list",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:board",
+   "kind": "course",
+   "title": {
+    "ar": "عرض اللوحة (Board)",
+    "en": "The Board view"
+   },
+   "text": {
+    "ar": "عرض اللوحة يحوّل المهام إلى بطاقات في أعمدة حسب الحالة، مثل لوحة الملاحظات اللاصقة. تسحب البطاقة من «قيد العمل» إلى «مكتمل» فتتغير حالتها. ممتاز لرؤية أين يتكدس العمل.\nاضغط «+ View» واختر Board.\nاسحب بطاقة إلى عمود آخر.\nجرب التجميع حسب المسؤول بدلاً من الحالة.\nإذا امتلأ عمود «مراجعة» دائماً فهذا يعني أن المراجعة هي عنق الزجاجة.",
+    "en": "Board view turns tasks into cards in columns by status, like a sticky-note wall. Drag a card from In progress to Complete and its status changes. Excellent for seeing where work piles up.\nClick “+ View” and choose Board.\nDrag a card to another column.\nTry grouping by assignee instead of status.\nIf the Review column is always full, review is your bottleneck."
+   },
+   "url": "#/course/board",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:calendar",
+   "kind": "course",
+   "title": {
+    "ar": "عرض التقويم",
+    "en": "The Calendar view"
+   },
+   "text": {
+    "ar": "التقويم يضع المهام على أيام الشهر أو الأسبوع حسب تواريخها. ترى بنظرة الأيام المزدحمة والأيام الفارغة، ويمكنك سحب المهمة إلى يوم آخر لتغيير موعدها.\nأضف عرض Calendar.\nبدّل بين اليوم والأسبوع والشهر.\nاسحب مهمة إلى يوم جديد.\nالمهام بلا تاريخ تظهر في قائمة جانبية؛ اسحبها إلى التقويم لجدولتها.",
+    "en": "Calendar places tasks on the days of the month or week by their dates. At a glance you see busy days and free days, and you can drag a task to another day to change its date.\nAdd a Calendar view.\nSwitch between day, week and month.\nDrag a task to a new day.\nTasks without dates sit in a side list; drag them onto the calendar to schedule them."
+   },
+   "url": "#/course/calendar",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:gantt",
+   "kind": "course",
+   "title": {
+    "ar": "عرض غانت",
+    "en": "The Gantt view"
+   },
+   "text": {
+    "ar": "غانت يرسم كل مهمة كشريط على خط زمني من تاريخ البدء إلى الاستحقاق. ويُظهر الاعتماديات كخطوط بين المهام: «هذه تنتظر تلك». مثالي لمديري المشاريع لرؤية تأثير أي تأخير.\nأضف عرض Gantt.\nاسحب طرفي الشريط لتغيير التواريخ.\nاسحب من نقطة شريط إلى آخر لإنشاء اعتمادية.\nابحث عن «المسار الحرج» في غانت: سلسلة المهام التي إن تأخرت تأخر المشروع كله.",
+    "en": "Gantt draws each task as a bar on a timeline from start to due date. It shows dependencies as lines between tasks: “this waits for that”. Ideal for project managers to see the impact of any delay.\nAdd a Gantt view.\nDrag the ends of a bar to change dates.\nDrag from one bar’s dot to another to create a dependency.\nLook for the critical path in Gantt: the chain of tasks that delays the whole project if it slips."
+   },
+   "url": "#/course/gantt",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:table",
+   "kind": "course",
+   "title": {
+    "ar": "عرض الجدول",
+    "en": "The Table view"
+   },
+   "text": {
+    "ar": "عرض الجدول يشبه جدول بيانات Excel: خلايا تعدّلها مباشرة ويمكنك نسخها ولصقها. مناسب لتعديل بيانات كثيرة بسرعة أو تجهيزها للتصدير.\nأضف عرض Table.\nانقر خلية وعدّلها مباشرة.\nجرّب نسخ عمود من Excel ولصقه.\nعرض الجدول مكان ممتاز لتنظيف البيانات قبل التقارير.",
+    "en": "Table view feels like an Excel sheet: cells you edit directly and can copy and paste. It is good for editing a lot of data quickly or preparing it for export.\nAdd a Table view.\nClick a cell and edit it directly.\nTry copying a column from Excel and pasting it.\nTable view is a great place to clean data before reporting."
+   },
+   "url": "#/course/table",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:whiteboard",
+   "kind": "course",
+   "title": {
+    "ar": "عرض السبورة (Whiteboard)",
+    "en": "The Whiteboard view"
+   },
+   "text": {
+    "ar": "السبورة مساحة رسم مشتركة للعصف الذهني: ملاحظات لاصقة، أشكال، أسهم وصور. والميزة الرائعة أنك تحوّل أي ملاحظة إلى مهمة حقيقية بنقرة، فالأفكار لا تضيع.\nأضف Whiteboard من «+ View» أو من زر Create.\nضع ملاحظات لاصقة للأفكار.\nحدد ملاحظة واختر تحويلها إلى مهمة.\nابدأ اجتماع التخطيط بالسبورة، وأنهه بتحويل الأفكار المتفق عليها إلى مهام.",
+    "en": "A Whiteboard is a shared canvas for brainstorming: sticky notes, shapes, arrows and images. The great part is you can turn any note into a real task with a click, so ideas are never lost.\nAdd a Whiteboard from “+ View” or the Create button.\nDrop sticky notes for ideas.\nSelect a note and choose to convert it to a task.\nStart the planning meeting on a Whiteboard and end it by turning the agreed ideas into tasks."
+   },
+   "url": "#/course/whiteboard",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:timeline",
+   "kind": "course",
+   "title": {
+    "ar": "عرض الخط الزمني (Timeline)",
+    "en": "The Timeline view"
+   },
+   "text": {
+    "ar": "الخط الزمني يشبه غانت لكنه أبسط ومرتب حسب الأشخاص أو المجموعات. يجيب بسرعة عن سؤال: من يعمل على ماذا ومتى؟\nأضف عرض Timeline.\nاختر التجميع حسب المسؤول.\nاسحب المهام لتعديل الفترات.\nاستخدم Timeline لعرض خطة الفريق على المدير، وGantt للتفاصيل الدقيقة.",
+    "en": "Timeline is similar to Gantt but simpler and arranged by people or groups. It quickly answers: who is working on what, and when?\nAdd a Timeline view.\nChoose to group by assignee.\nDrag tasks to adjust periods.\nUse Timeline to show the team plan to your manager, and Gantt for the fine detail."
+   },
+   "url": "#/course/timeline",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:workload",
+   "kind": "course",
+   "title": {
+    "ar": "عرض الفريق وعبء العمل",
+    "en": "Team and Workload views"
+   },
+   "text": {
+    "ar": "عرض عبء العمل (Workload) يقارن عمل كل شخص بقدرته في كل يوم، فترى من مشغول أكثر من اللازم ومن لديه وقت. وعرض الفريق يعرض مهام كل عضو تحت اسمه. معاً يساعدانك على توزيع العمل بعدل.\nأضف عرض Workload.\nاختر طريقة القياس: عدد المهام أو الوقت المقدر.\nاسحب مهمة من شخص مشغول إلى شخص لديه وقت.\nضع تقديرات الوقت للمهام ليصبح عرض عبء العمل دقيقاً.",
+    "en": "The Workload view compares each person’s work with their capacity each day, so you see who is overloaded and who has time. The Team view shows each member’s tasks under their name. Together they help you share work fairly.\nAdd a Workload view.\nChoose how to measure: task count or time estimates.\nDrag a task from a busy person to someone with time.\nAdd time estimates to tasks so the Workload view is accurate."
+   },
+   "url": "#/course/workload",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:activity",
+   "kind": "course",
+   "title": {
+    "ar": "عرض النشاط",
+    "en": "The Activity view"
+   },
+   "text": {
+    "ar": "عرض النشاط يعرض كل ما يحدث في القائمة أو المساحة كأخبار متتالية: من أنشأ مهمة، من غيّر حالة، من علّق. ممتاز لمعرفة ما فاتك بعد إجازة.\nأضف عرض Activity إن كان متاحاً في إصدارك.\nصفِّ حسب الشخص أو نوع التغيير.\nانقر أي حدث لفتح المهمة.\nلسجل مهمة واحدة، افتح المهمة وانظر إلى Activity بجانب التعليقات.",
+    "en": "The Activity view shows everything happening in a List or Space as a news feed: who created a task, who changed a status, who commented. Great for catching up after a holiday.\nAdd an Activity view if your version offers it.\nFilter by person or type of change.\nClick any event to open the task.\nFor the history of one task, open it and look at Activity next to the comments."
+   },
+   "url": "#/course/activity",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:docsforms",
+   "kind": "course",
+   "title": {
+    "ar": "المستندات وعرض النموذج",
+    "en": "Docs and Form views"
+   },
+   "text": {
+    "ar": "المستند (Doc) مكان كتابة الأدلة والمحاضر والسياسات داخل المشروع، ويمكن ربط المهام فيه. وعرض النموذج (Form) يجمع الطلبات من الآخرين: كل نموذج يُرسل يصبح مهمة في القائمة تلقائياً.\nأضف Doc من «+ View» واكتب دليل المشروع.\nأضف Form واسحب الحقول المطلوبة.\nشارك رابط النموذج وجرب إرساله.\nاجعل الأسئلة المهمة في النموذج إلزامية حتى تصل الطلبات كاملة.",
+    "en": "A Doc is where you write guides, minutes and procedures inside the project, and you can link tasks in it. The Form view collects requests from others: every submitted form becomes a task in the List automatically.\nAdd a Doc from “+ View” and write the project guide.\nAdd a Form and drag in the fields you need.\nShare the form link and try submitting it.\nMake important form questions required so requests arrive complete."
+   },
+   "url": "#/course/docsforms",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:mindmap",
+   "kind": "course",
+   "title": {
+    "ar": "لوحات المعلومات والخرائط الذهنية وعرض الخريطة",
+    "en": "Dashboards, Mind Maps and Map view"
+   },
+   "text": {
+    "ar": "ثلاث طرق للنظر من بعيد: لوحة المعلومات تجمع الأرقام والرسوم، والخريطة الذهنية (Mind Map) ترسم المهام والأفكار كشجرة متفرعة، وعرض الخريطة (Map) يضع المهام على خريطة جغرافية حسب حقل الموقع، مثلاً مواقع الأبراج أو الفروع.\nجرّب Mind Map لتقسيم هدف كبير إلى فروع.\nأضف حقل Location ثم عرض Map.\nسنتعمق في لوحات المعلومات في قسمها الخاص.\nعرض الخريطة مفيد جداً للفرق الميدانية: ترى أي المواقع لديها مهام مفتوحة.",
+    "en": "Three ways to look from a distance: a Dashboard gathers numbers and charts, a Mind Map draws tasks and ideas as a branching tree, and the Map view places tasks on a geographic map by a Location field, for example tower or branch sites.\nTry a Mind Map to break a big goal into branches.\nAdd a Location field, then a Map view.\nWe go deeper into Dashboards in their own section.\nThe Map view is very useful for field teams: you see which sites have open tasks."
+   },
+   "url": "#/course/mindmap",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:brain",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة إلى ClickUp Brain",
+    "en": "Intro to ClickUp Brain AI"
+   },
+   "text": {
+    "ar": "ClickUp Brain هو الذكاء الاصطناعي المدمج في ClickUp. ميزته أنه يعرف سياق عملك: يقرأ المهام والمستندات التي لديك صلاحية رؤيتها، فيلخص ويكتب ويجيب ويقترح. توفر ميزاته يعتمد على خطة الاشتراك وما فعّله مسؤولو مساحة العمل.\nابحث عن زر AI أو أيقونة Brain في الشريط أو داخل المهمة.\nاطلب تلخيص مهمة طويلة.\nراجع الناتج دائماً قبل الاعتماد عليه.\nلا تُدخل بيانات سرية أو بيانات عملاء ما لم تسمح بذلك سياسة الشركة المعتمدة.",
+    "en": "ClickUp Brain is the AI built into ClickUp. Its strength is that it knows the context of your work: it reads the tasks and Docs you are allowed to see, so it can summarise, write, answer and suggest. Which features you get depends on your plan and on what your Workspace admins turned on.\nLook for the AI button or Brain icon in the bar or inside a task.\nAsk it to summarise a long task.\nAlways review the output before relying on it.\nDo not enter confidential or customer data unless an approved company policy allows it."
+   },
+   "url": "#/course/brain",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:knowledge",
+   "kind": "course",
+   "title": {
+    "ar": "مدير المعرفة بالذكاء الاصطناعي",
+    "en": "ClickUp AI Knowledge Manager"
+   },
+   "text": {
+    "ar": "مدير المعرفة (Knowledge Manager) هو جزء Brain الذي تسأله أسئلة بلغة عادية فيجيب من مستنداتك ومهامك، مثل: «ما آخر قرار في مشروع الألياف؟». بدلاً من البحث في عشرات الصفحات، تحصل على الجواب مع روابط المصادر.\nافتح Brain واكتب سؤالك.\nاقرأ الجواب وافتح روابط المصادر للتأكد.\nاطلب متابعة مثل «لخصها في ثلاث نقاط».\nجودة الإجابات تعتمد على جودة مستنداتك؛ مستندات مرتبة = أجوبة أفضل.",
+    "en": "The Knowledge Manager is the part of Brain you ask plain questions, and it answers from your Docs and tasks, like “What was the last decision on the fibre project?”. Instead of searching dozens of pages, you get the answer with links to the sources.\nOpen Brain and type your question.\nRead the answer and open the source links to check.\nAsk a follow-up such as “summarise it in three points”.\nAnswer quality depends on your Docs; tidy Docs mean better answers."
+   },
+   "url": "#/course/knowledge",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:pm",
+   "kind": "course",
+   "title": {
+    "ar": "مدير المشاريع بالذكاء الاصطناعي",
+    "en": "ClickUp AI Project Manager"
+   },
+   "text": {
+    "ar": "مدير المشاريع (Project Manager) في Brain يكتب عنك تقارير التقدم، وملخص الاجتماع اليومي (Standup)، وتحديثات الفريق، اعتماداً على ما حدث فعلاً في المهام. يوفر عليك ساعة كل أسبوع في كتابة التقارير.\nاطلب من Brain «اكتب تحديث تقدم لهذه القائمة هذا الأسبوع».\nراجع الأرقام والأسماء.\nانسخ التحديث إلى تعليق أو قناة الفريق.\nالذكاء الاصطناعي يكتب، وأنت المسؤول عن صحة ما يُرسل. راجع قبل النشر دائماً.",
+    "en": "The Project Manager in Brain writes progress reports, daily standups and team updates for you, based on what actually happened in the tasks. It saves you an hour a week of report writing.\nAsk Brain to “write a progress update for this List this week”.\nCheck the numbers and names.\nCopy the update into a comment or the team channel.\nAI writes, but you are responsible for what is sent. Always review before you post."
+   },
+   "url": "#/course/pm",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:sop",
+   "kind": "course",
+   "title": {
+    "ar": "إنشاء مسودة إجراء عمل (SOP) بالذكاء الاصطناعي",
+    "en": "Drafting an SOP with ClickUp AI"
+   },
+   "text": {
+    "ar": "إجراء العمل القياسي (SOP) يشرح كيف يُنجز عمل متكرر خطوة بخطوة. داخل مستند اطلب من الذكاء الاصطناعي مسودة، مثل «إجراء استقبال طلب صيانة»، ثم عدّلها لتطابق طريقة فريقك الحقيقية.\nأنشئ Doc جديداً.\nاكتب / أو اضغط زر AI واطلب مسودة SOP.\nعدّل الخطوات وأضف أسماء المسؤولين الحقيقية.\nالمسودة نقطة بداية وليست إجراءً معتمداً. اعتمدها مع مالك العملية قبل نشرها.",
+    "en": "A standard operating procedure (SOP) explains how a repeated job is done, step by step. Inside a Doc, ask the AI for a draft, like “procedure for receiving a maintenance request”, then edit it to match how your team really works.\nCreate a new Doc.\nType / or click the AI button and ask for an SOP draft.\nEdit the steps and add the real owners.\nThe draft is a starting point, not an approved procedure. Get the process owner to approve it before publishing."
+   },
+   "url": "#/course/sop",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:superagent",
+   "kind": "course",
+   "title": {
+    "ar": "إنشاء وكيل ذكي (Super Agent)",
+    "en": "Creating an AI Super Agent"
+   },
+   "text": {
+    "ar": "الوكيل الذكي (Super Agent) زميل ذكاء اصطناعي تعطيه مهمة محددة، مثل «استقبل الطلبات الجديدة ورتبها وأسندها». يمكنك الإشارة إليه أو إسناد مهام له، ويعمل بالصلاحيات التي تحددها. تنشئه من قسم AI بوصف ما تريده بكلماتك، ويطرح عليك المنشئ أسئلة ليضبطه. يتوفر حسب الخطة وإعدادات المسؤول.\nمن شريط التنقل العام افتح AI واختر Create Agent.\nصف وظيفة الوكيل بوضوح وأجب عن أسئلة المنشئ.\nجرّبه على مهام تجريبية قبل استخدامه مع العمل الحقيقي.\nأعطِ الوكيل أقل صلاحيات تكفي لعمله، كما تفعل مع أي زميل جديد.",
+    "en": "A Super Agent is an AI teammate you give a specific job, like “take in new requests, sort them and assign them”. You can mention it or assign tasks to it, and it works within the permissions you set. You create it from the AI area by describing what you want in your own words, and the builder asks you questions to fine-tune it. Availability depends on your plan and admin settings.\nFrom the global navigation open AI and choose Create Agent.\nDescribe the agent’s job clearly and answer the builder’s questions.\nTest it on practice tasks before using it on real work.\nGive the agent the least access it needs, just as you would a new colleague."
+   },
+   "url": "#/course/superagent",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:superagent-edit",
+   "kind": "course",
+   "title": {
+    "ar": "تعديل الوكيل الذكي",
+    "en": "Editing a Super Agent"
+   },
+   "text": {
+    "ar": "بعد إنشاء الوكيل ستكتشف أشياء تحتاج تحسيناً: تعليمات أوضح، أدوات إضافية، أو حدود أدق. افتح إعداداته من مركز الذكاء الاصطناعي (AI Hub) وعدّل تعليماته ومعرفته وصلاحياته، ثم جرّبه من جديد.\nافتح AI Hub ثم قائمة الوكلاء.\nعدّل التعليمات بأمثلة واضحة لما تريد وما لا تريد.\nراجع ما قام به الوكيل مؤخراً قبل توسيع استخدامه.\nالتعليمات الجيدة قصيرة ومحددة: «افعل كذا، ولا تفعل كذا، وإن لم تتأكد فاسأل».",
+    "en": "After creating an agent you will find things to improve: clearer instructions, extra tools or tighter limits. Open its settings from the AI Hub and edit its instructions, knowledge and permissions, then test it again.\nOpen the AI Hub, then the agents list.\nEdit the instructions with clear examples of what you want and do not want.\nReview what the agent did recently before expanding its use.\nGood instructions are short and specific: “do this, never do that, and ask if unsure”."
+   },
+   "url": "#/course/superagent-edit",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:ai-ui",
+   "kind": "course",
+   "title": {
+    "ar": "جولة في بقية واجهة الذكاء الاصطناعي",
+    "en": "Exploring the rest of the AI interface"
+   },
+   "text": {
+    "ar": "الذكاء الاصطناعي موجود في أماكن كثيرة: في المهمة لتلخيصها أو اقتراح مهام فرعية، في المستند للكتابة وإعادة الصياغة والترجمة، في التعليقات لصياغة الرد، وفي البحث الشامل لسؤال أي شيء. جرّب زر AI أينما رأيته.\nفي مهمة طويلة اطلب ملخصاً.\nفي Doc حدد نصاً واطلب «اجعله أبسط».\nجرّب الترجمة من العربية إلى الإنجليزية.\nكلما كان طلبك أوضح (من، ماذا، بأي شكل) كانت النتيجة أفضل.",
+    "en": "AI lives in many places: in a task to summarise it or suggest subtasks, in a Doc to write, rewrite and translate, in comments to draft a reply, and in enterprise search to ask anything. Try the AI button wherever you see it.\nIn a long task ask for a summary.\nIn a Doc select text and ask “make it simpler”.\nTry translating from Arabic to English.\nThe clearer your request (who, what, in which format), the better the result."
+   },
+   "url": "#/course/ai-ui",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:notetaker",
+   "kind": "course",
+   "title": {
+    "ar": "مدوّن الاجتماعات الذكي (AI Notetaker)",
+    "en": "The AI Notetaker"
+   },
+   "text": {
+    "ar": "مدوّن الاجتماعات يمكنه حضور اجتماعك ونسخ الحديث وتلخيصه واستخراج المهام المطلوبة، فتنتهي من الاجتماع ومحضره جاهز. يعتمد على الخطة وإعدادات الشركة، وأبلغ الحضور دائماً قبل التسجيل.\nفعّله واربطه بتقويمك إن كان متاحاً.\nبعد الاجتماع راجع الملخص والمهام المقترحة.\nحوّل المهام المتفق عليها إلى مهام مسندة بمواعيد.\nلا تسجّل اجتماعات فيها معلومات حساسة إلا إن سمحت سياسة الشركة بذلك.",
+    "en": "The AI Notetaker can join your meeting, transcribe it, summarise it and pull out the action items, so the minutes are ready when the meeting ends. It depends on your plan and company settings, and you should always tell attendees before recording.\nTurn it on and connect your calendar if available.\nAfter the meeting review the summary and suggested tasks.\nTurn the agreed items into assigned tasks with dates.\nDo not record meetings with sensitive information unless company policy allows it."
+   },
+   "url": "#/course/notetaker",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:comments",
+   "kind": "course",
+   "title": {
+    "ar": "التواصل عبر التعليقات",
+    "en": "Communication via comments"
+   },
+   "text": {
+    "ar": "التعليق داخل المهمة يبقي النقاش بجانب العمل نفسه، بدلاً من رسائل بريد متناثرة. اكتب @ ثم اسم الزميل ليصله إشعار، ويمكنك إسناد التعليق ليصبح بنداً يجب إنهاؤه.\nافتح المهمة واكتب في خانة التعليق.\nأشر إلى زميل بـ @.\nأسند التعليق إن كان طلباً يجب تنفيذه.\nالسؤال في تعليق المهمة يجيب عنه الجميع مرة واحدة، والسجل يبقى لمن ينضم لاحقاً.",
+    "en": "A comment inside the task keeps the discussion right next to the work, instead of scattered emails. Type @ and a colleague’s name to notify them, and you can assign a comment so it becomes an item to resolve.\nOpen the task and type in the comment box.\nMention a colleague with @.\nAssign the comment if it is a request to act on.\nA question in a task comment is answered once for everyone, and the record stays for whoever joins later."
+   },
+   "url": "#/course/comments",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:chat",
+   "kind": "course",
+   "title": {
+    "ar": "المحادثات (Chat)",
+    "en": "Chat functionality"
+   },
+   "text": {
+    "ar": "Chat في ClickUp مثل تطبيق محادثة داخل مكان العمل: رسائل مباشرة وقنوات للفريق. الفرق أن الرسالة يمكن أن تتحول إلى مهمة بنقرة، فلا يضيع طلب في زحمة المحادثة.\nافتح Chat من شريط التنقل.\nأرسل رسالة مباشرة لزميل.\nحوّل رسالة فيها طلب إلى مهمة.\nالمحادثة للسرعة، والمهمة للالتزام. أي شيء له موعد ومسؤول يجب أن يصبح مهمة.",
+    "en": "ClickUp Chat is like a messaging app inside your workplace: direct messages and team channels. The difference is that a message can become a task with one click, so no request gets lost in the chatter.\nOpen Chat from the navigation bar.\nSend a direct message to a colleague.\nTurn a message containing a request into a task.\nChat is for speed, tasks are for commitment. Anything with a deadline and an owner should become a task."
+   },
+   "url": "#/course/chat",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:channels",
+   "kind": "course",
+   "title": {
+    "ar": "قنوات ClickUp",
+    "en": "ClickUp Channels"
+   },
+   "text": {
+    "ar": "القناة مكان محادثة دائم لموضوع أو فريق أو مشروع، ويمكن ربطها بالمساحة أو القائمة. كل من يعمل في المشروع يجد التحديثات في مكان واحد.\nأنشئ قناة باسم المشروع.\nأضف أعضاء الفريق.\nثبّت الرسائل المهمة مثل رابط الخطة.\nقناة واحدة لكل مشروع أفضل من مجموعات كثيرة متداخلة.",
+    "en": "A Channel is a lasting conversation space for a topic, team or project, and it can be linked to a Space or List. Everyone on the project finds updates in one place.\nCreate a Channel named after the project.\nAdd the team members.\nPin important messages such as the plan link.\nOne channel per project beats many overlapping groups."
+   },
+   "url": "#/course/channels",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:teams",
+   "kind": "course",
+   "title": {
+    "ar": "فرق ClickUp (Teams)",
+    "en": "ClickUp Teams"
+   },
+   "text": {
+    "ar": "الفريق (Team) في ClickUp مجموعة أشخاص مسماة، مثل «فريق الشبكات». تستطيع إسناد المهام أو مشاركة الأماكن مع الفريق كله دفعة واحدة، والإشارة إليه بـ @ في التعليقات.\nمن إعدادات الأشخاص أو الفرق أنشئ فريقاً (قد يحتاج صلاحية).\nأضف الأعضاء.\nجرب @اسم_الفريق في تعليق.\nعند انضمام موظف جديد أضفه للفريق، فيحصل تلقائياً على ما شُورك مع الفريق.",
+    "en": "A Team in ClickUp is a named group of people, like “Network team”. You can assign tasks or share locations with the whole team at once, and @mention it in comments.\nFrom People or Teams settings create a Team (may need permission).\nAdd the members.\nTry @TeamName in a comment.\nWhen a new employee joins, add them to the Team and they get everything shared with it."
+   },
+   "url": "#/course/teams",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:dash-intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة إلى لوحات المعلومات",
+    "en": "Intro to ClickUp Dashboards"
+   },
+   "text": {
+    "ar": "لوحة المعلومات (Dashboard) شاشة واحدة تجيب عن «كيف يسير العمل؟» ببطاقات: عدد المهام المتأخرة، مخطط الحالات، عبء العمل، والوقت المسجل. مديرك لن يحتاج أن يسألك؛ اللوحة تجيبه.\nافتح Dashboards من الشريط الجانبي.\nأنشئ لوحة جديدة.\nأضف بطاقة واحدة واختر مصدر بياناتها.\nابدأ بثلاث بطاقات فقط تجيب عن أهم ثلاثة أسئلة لديك.",
+    "en": "A Dashboard is one screen that answers “how is the work going?” with cards: overdue count, a status chart, workload and tracked time. Your manager will not need to ask you; the dashboard answers.\nOpen Dashboards from the sidebar.\nCreate a new dashboard.\nAdd one card and choose its data source.\nStart with only three cards that answer your three most important questions."
+   },
+   "url": "#/course/dash-intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:dash-template",
+   "kind": "course",
+   "title": {
+    "ar": "إنشاء لوحة من قالب",
+    "en": "Creating a dashboard from a template"
+   },
+   "text": {
+    "ar": "لا داعي للبدء من الصفر. ClickUp يقدم قوالب لوحات جاهزة لإدارة المشاريع أو الفرق أو المبيعات. اختر قالباً، اربطه بقائمتك أو مساحتك، وستمتلئ البطاقات ببياناتك.\nعند إنشاء لوحة اختر من القوالب.\nحدد المساحة أو القائمة مصدراً للبيانات.\nاحذف البطاقات التي لا تحتاجها.\nالقالب بداية؛ عدّل عناوين البطاقات لتناسب لغة فريقك.",
+    "en": "No need to start from scratch. ClickUp offers ready dashboard templates for project, team or sales management. Pick one, connect it to your List or Space, and the cards fill with your data.\nWhen creating a dashboard choose from templates.\nSelect the Space or List as the data source.\nDelete the cards you do not need.\nA template is a start; rename the cards to suit your team’s language."
+   },
+   "url": "#/course/dash-template",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:dash-more",
+   "kind": "course",
+   "title": {
+    "ar": "وظائف إضافية في لوحات المعلومات",
+    "en": "Additional dashboard functionality"
+   },
+   "text": {
+    "ar": "للوحات مزايا تجعلها أقوى: فلاتر على مستوى اللوحة، بطاقات حسابية (مجموع، متوسط)، تتبع الوقت، الأهداف، ومشاركة اللوحة أو جدولة إرسالها. وتستطيع النقر على أي رقم لترى المهام خلفه.\nأضف فلتر اللوحة حسب الفترة أو المسؤول.\nأضف بطاقة Calculation لمجموع حقل مالي.\nشارك اللوحة مع مديرك.\nقبل استنتاج أي شيء من رقم، انقر عليه وتأكد من المهام التي يحسبها.",
+    "en": "Dashboards have features that make them stronger: dashboard-wide filters, calculation cards (sum, average), time tracking, goals, and sharing or scheduling the dashboard. You can click any number to see the tasks behind it.\nAdd a dashboard filter by period or assignee.\nAdd a Calculation card to total a money field.\nShare the dashboard with your manager.\nBefore drawing a conclusion from a number, click it and check which tasks it counts."
+   },
+   "url": "#/course/dash-more",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:export",
+   "kind": "course",
+   "title": {
+    "ar": "تصدير البيانات من ClickUp",
+    "en": "Exporting data from ClickUp"
+   },
+   "text": {
+    "ar": "أحياناً تحتاج البيانات خارج ClickUp، مثلاً لتقرير في Excel. يمكنك تصدير العرض الحالي إلى CSV أو Excel، ويُصدَّر ما تراه بفلاتره وأعمدته.\nرتب العرض بالأعمدة والفلاتر المطلوبة.\nافتح قائمة النقاط أو Export واختر الصيغة.\nافتح الملف وتأكد من البيانات.\nانتبه لما تصدره: الملف يخرج من حماية صلاحيات ClickUp، فلا ترسله لمن لا يحق له.",
+    "en": "Sometimes you need data outside ClickUp, for example for an Excel report. You can export the current view to CSV or Excel, and what you see is exported with its filters and columns.\nSet up the view with the columns and filters you need.\nOpen the ellipsis menu or Export and choose a format.\nOpen the file and check the data.\nBe careful what you export: the file leaves ClickUp’s permissions, so do not send it to anyone not entitled to it."
+   },
+   "url": "#/course/export",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:import",
+   "kind": "course",
+   "title": {
+    "ar": "استيراد البيانات إلى ClickUp",
+    "en": "Importing data to ClickUp"
+   },
+   "text": {
+    "ar": "لديك ملف Excel فيه المهام؟ لا تنسخها يدوياً. جهّز الملف بصف عناوين وعمود لكل حقل، ثم استورده وطابق الأعمدة مع حقول ClickUp. ويوجد أيضاً استيراد جاهز من أدوات مثل Trello وAsana وJira.\nجهز الملف: عناوين واضحة وتواريخ بصيغة واحدة.\nمن الإعدادات افتح Import/Export واختر CSV أو Excel.\nطابق الأعمدة وراجع المعاينة قبل التأكيد.\nجرّب الاستيراد أولاً على قائمة تجريبية بعشرة صفوف.",
+    "en": "Have an Excel file of tasks? Do not copy it by hand. Prepare the file with a header row and one column per field, then import it and match columns to ClickUp fields. There are also ready importers for tools like Trello, Asana and Jira.\nPrepare the file: clear headers and dates in one format.\nIn settings open Import/Export and choose CSV or Excel.\nMap the columns and review the preview before confirming.\nTest the import first on a practice List with ten rows."
+   },
+   "url": "#/course/import",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:tpl-intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة إلى القوالب",
+    "en": "Intro to ClickUp templates"
+   },
+   "text": {
+    "ar": "القالب نسخة جاهزة من عمل متكرر: قائمة مشروع بمراحلها، مهمة بقائمة تحقق، أو مستند بشكل ثابت. بدلاً من بناء نفس الشيء كل مرة، تستخدم القالب وتبدأ فوراً.\nافتح Template Center من زر «+».\nتصفح قوالب حسب القسم.\nافتح معاينة قالب لترى ما يحتويه.\nأي عمل تكرره أكثر من ثلاث مرات يستحق قالباً.",
+    "en": "A template is a ready copy of repeated work: a project List with its stages, a task with a checklist, or a Doc with a fixed layout. Instead of building the same thing every time, you use the template and start right away.\nOpen the Template Center from the “+” button.\nBrowse templates by department.\nOpen a template preview to see what it contains.\nAny work you repeat more than three times deserves a template."
+   },
+   "url": "#/course/tpl-intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:tpl-use",
+   "kind": "course",
+   "title": {
+    "ar": "كيف تستخدم القوالب",
+    "en": "How to use templates"
+   },
+   "text": {
+    "ar": "لاستخدام قالب: اختره من مركز القوالب، حدد أين يوضع (مساحة، مجلد، قائمة)، واختر ما يُنسخ مثل المهام والتواريخ والمسؤولين. خلال ثوانٍ يصبح المشروع جاهزاً.\nاختر القالب واضغط Use template.\nحدد الموقع واسم المشروع الجديد.\nاختر تعديل التواريخ لتبدأ من اليوم.\nبعد الاستخدام راجع المسؤولين؛ القالب قد يحمل أسماء من مشروع سابق.",
+    "en": "To use a template: pick it from the Template Center, choose where it goes (Space, Folder, List), and choose what to copy such as tasks, dates and assignees. In seconds the project is ready.\nChoose the template and click Use template.\nSet the location and the new project name.\nChoose to shift dates so they start from today.\nAfter using it, check the assignees; a template may carry names from an old project."
+   },
+   "url": "#/course/tpl-use",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:tpl-save",
+   "kind": "course",
+   "title": {
+    "ar": "حفظ قوالبك الخاصة",
+    "en": "Saving your own templates"
+   },
+   "text": {
+    "ar": "أفضل القوالب هي التي تصنعها من عملك الحقيقي. عندما تنجح قائمة أو مهمة، احفظها كقالب لتعيد استخدامها أنت وفريقك، وحدّثها كلما تحسنت طريقتكم.\nمن قائمة النقاط للقائمة أو المهمة اختر Save as template.\nسمِّه بوضوح واختر ما يُحفظ.\nشاركه مع الفريق.\nأضف وصفاً قصيراً للقالب: متى يُستخدم ولمن.",
+    "en": "The best templates are the ones you make from your real work. When a List or task works well, save it as a template so you and your team can reuse it, and update it as your way of working improves.\nFrom the List’s or task’s ellipsis menu choose Save as template.\nName it clearly and choose what to keep.\nShare it with the team.\nAdd a short description to the template: when to use it and for whom."
+   },
+   "url": "#/course/tpl-save",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:mute",
+   "kind": "course",
+   "title": {
+    "ar": "كتم الإشعارات",
+    "en": "Muting notifications"
+   },
+   "text": {
+    "ar": "الإشعارات الكثيرة تشتت التركيز. اضبطها لتصلك المهمة فقط: الإشارات إليك والمهام المسندة لك. ويمكنك إيقاف متابعة مهمة معينة إذا لم تعد تعنيك.\nمن صورتك افتح Settings ثم Notifications.\nأوقف إشعارات البريد غير الضرورية.\nفي مهمة لا تعنيك أزل نفسك من المتابعين.\nخصص وقتين في اليوم لمراجعة صندوق الوارد بدلاً من مطاردة كل إشعار.",
+    "en": "Too many notifications break your focus. Tune them so only what matters reaches you: mentions and tasks assigned to you. You can also stop watching a specific task that no longer concerns you.\nFrom your avatar open Settings, then Notifications.\nTurn off unnecessary email notifications.\nOn a task that does not concern you, remove yourself as a watcher.\nSet two times a day to review the Inbox instead of chasing every notification."
+   },
+   "url": "#/course/mute",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:2fa",
+   "kind": "course",
+   "title": {
+    "ar": "حماية حسابك بالتحقق بخطوتين",
+    "en": "Securing your account with 2FA"
+   },
+   "text": {
+    "ar": "التحقق بخطوتين يعني أن كلمة المرور وحدها لا تكفي للدخول؛ يلزم أيضاً رمز من تطبيق المصادقة أو رسالة. حتى لو سُرقت كلمة المرور يبقى حسابك محمياً.\nافتح Settings ثم Security.\nاختر تطبيق المصادقة وامسح الرمز.\nاحفظ رموز الاسترداد في مكان آمن.\nإن كانت شركتك تستخدم الدخول الموحّد (SSO)، فأمان الدخول تديره الشركة.",
+    "en": "Two-factor authentication means a password alone is not enough to sign in; a code from an authenticator app or a text message is also needed. Even if your password is stolen, your account stays protected.\nOpen Settings, then Security.\nChoose the authenticator app and scan the code.\nKeep the recovery codes somewhere safe.\nIf your company uses single sign-on (SSO), sign-in security is managed by the company."
+   },
+   "url": "#/course/2fa",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:shortcuts",
+   "kind": "course",
+   "title": {
+    "ar": "اختصارات ClickUp",
+    "en": "ClickUp shortcuts"
+   },
+   "text": {
+    "ar": "الاختصارات تجعلك أسرع بكثير. أشهرها Ctrl/Cmd+K للبحث. وبعد تفعيل الاختصارات من الإعدادات: T لمهمة جديدة، R لتذكير، M لإسناد المهمة لنفسك. قد تختلف حسب الإصدار.\nفعّل الاختصارات من Preferences.\nتعلّم اختصاراً واحداً كل يوم.\nاطبع قائمة الاختصارات وضعها بجانبك أسبوعاً.\nCtrl/Cmd+K وحده يوفر عليك نصف التنقل في ClickUp.",
+    "en": "Shortcuts make you much faster. The best known is Ctrl/Cmd+K to search. After turning shortcuts on in settings: T for a new task, R for a reminder, M to assign the task to yourself. They may vary by version.\nTurn on shortcuts in Preferences.\nLearn one shortcut a day.\nPrint the shortcut list and keep it next to you for a week.\nCtrl/Cmd+K alone saves you half of your clicking around."
+   },
+   "url": "#/course/shortcuts",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:themes",
+   "kind": "course",
+   "title": {
+    "ar": "مظاهر ClickUp",
+    "en": "ClickUp themes"
+   },
+   "text": {
+    "ar": "يمكنك تغيير مظهر ClickUp ليريح عينيك: الوضع الفاتح أو الداكن أو التلقائي حسب جهازك، ولون التمييز المفضل لديك. تفصيل صغير يجعل العمل اليومي أمتع.\nافتح Settings ثم Themes أو Preferences.\nاختر الوضع الداكن أو التلقائي.\nاختر لون التمييز.\nالوضع الداكن مريح في العمل الليلي، والتلقائي يغيّر نفسه مع الوقت.",
+    "en": "You can change ClickUp’s look to rest your eyes: light, dark, or automatic to follow your device, plus your favourite accent colour. A small detail that makes daily work nicer.\nOpen Settings, then Themes or Preferences.\nChoose dark or automatic mode.\nPick an accent colour.\nDark mode is easier at night, and automatic switches by itself."
+   },
+   "url": "#/course/themes",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:restore",
+   "kind": "course",
+   "title": {
+    "ar": "استعادة العناصر المحذوفة",
+    "en": "Restoring deleted items"
+   },
+   "text": {
+    "ar": "حذفت شيئاً بالخطأ؟ لا تقلق. العناصر المحذوفة تذهب إلى سلة المهملات (Trash) لمدة 30 يوماً تقريباً، ويمكنك استعادتها. انتبه: التعليقات وسجلات الوقت المحذوفة لا تُستعاد.\nافتح Trash من الشريط الجانبي أو الإعدادات.\nابحث عن العنصر.\nاضغط Restore.\nبدلاً من حذف المشاريع المنتهية، أرشفها؛ تختفي من أمامك وتبقى متاحة دائماً.",
+    "en": "Deleted something by mistake? Don’t worry. Deleted items go to Trash for about 30 days, and you can restore them. Careful: deleted comments and time entries cannot be restored.\nOpen Trash from the sidebar or settings.\nFind the item.\nClick Restore.\nInstead of deleting finished projects, archive them; they disappear from view but stay available forever."
+   },
+   "url": "#/course/restore",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:time",
+   "kind": "course",
+   "title": {
+    "ar": "تتبع الوقت",
+    "en": "Time tracking"
+   },
+   "text": {
+    "ar": "تتبع الوقت يجيب عن «كم أخذ هذا العمل فعلاً؟». شغّل المؤقت عند البدء وأوقفه عند الانتهاء، أو أضف الوقت يدوياً. مع الوقت تصبح تقديراتك أدق وخططك واقعية.\nافتح المهمة واضغط Start على المؤقت.\nأوقفه عند الانتهاء.\nراجع أوقاتك في تقرير أو لوحة.\nقارن الوقت المقدر بالفعلي بعد كل مشروع؛ هكذا تتعلم التخطيط.",
+    "en": "Time tracking answers “how long did this work really take?”. Start the timer when you begin and stop it when you finish, or add time manually. Over time your estimates get sharper and your plans realistic.\nOpen the task and press Start on the timer.\nStop it when you finish.\nReview your times in a report or dashboard.\nCompare estimated and actual time after each project; that is how you learn to plan."
+   },
+   "url": "#/course/time",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:notepad",
+   "kind": "course",
+   "title": {
+    "ar": "المفكرة (Notepad)",
+    "en": "The Notepad"
+   },
+   "text": {
+    "ar": "المفكرة دفتر ملاحظاتك الخاص داخل ClickUp: لا يراه أحد غيرك. اكتب فيها أفكاراً سريعة أو قائمة مهام اليوم، وحوّل أي ملاحظة إلى مهمة حقيقية عندما تصبح جاهزة.\nافتح Notepad من زر الإجراءات السريعة أو اختصاره.\nاكتب ملاحظة أو قائمة تحقق.\nحوّل الملاحظة إلى مهمة.\nالمفكرة للأفكار الخام؛ عندما تصبح الفكرة عملاً بموعد، انقلها إلى مهمة.",
+    "en": "The Notepad is your private notebook inside ClickUp: nobody else can see it. Jot quick ideas or today’s to-do list, and turn any note into a real task when it is ready.\nOpen the Notepad from the quick action button or its shortcut.\nWrite a note or a checklist.\nConvert the note into a task.\nThe Notepad is for raw ideas; when an idea becomes work with a deadline, move it to a task."
+   },
+   "url": "#/course/notepad",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:mywork",
+   "kind": "course",
+   "title": {
+    "ar": "ميزة «عملي» (My Work)",
+    "en": "The My Work feature"
+   },
+   "text": {
+    "ar": "«عملي» (My Work) يجمع كل ما يخصك من كل المساحات: المهام المسندة لك والتذكيرات، مرتبة حسب: اليوم، المتأخر، القادم، وبلا موعد. هي أفضل صفحة لتبدأ يومك.\nافتح Home أو My Tasks حيث تجد My Work.\nابدأ بالمتأخر ثم مهام اليوم.\nجدول المهام بلا موعد.\nخصص خمس دقائق كل صباح لمراجعة My Work؛ ستعرف يومك قبل أن يبدأ.",
+    "en": "My Work gathers everything that is yours from every Space: tasks assigned to you and reminders, sorted into Today, Overdue, Next and Unscheduled. It is the best page to start your day.\nOpen Home or My Tasks, where you find My Work.\nStart with Overdue, then Today.\nSchedule the unscheduled tasks.\nSpend five minutes every morning on My Work; you will know your day before it starts."
+   },
+   "url": "#/course/mywork",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:reminder",
+   "kind": "course",
+   "title": {
+    "ar": "إنشاء تذكير سريع",
+    "en": "Creating a quick reminder"
+   },
+   "text": {
+    "ar": "التذكير أخف من المهمة: لا يحتاج قائمة ولا حقولاً. «اتصل بالمورد الساعة 10» مثال مثالي. يظهر في My Work ويصلك تنبيه في وقته، ويمكنك إرسال تذكير لزميل أيضاً.\nاضغط Create ثم Reminder، أو الاختصار R.\nاكتب النص والوقت.\nاحفظ.\nإذا كان الشيء يحتاج مسؤولاً آخر ومتابعة، فاجعله مهمة لا تذكيراً.",
+    "en": "A reminder is lighter than a task: no List, no fields. “Call the vendor at 10” is a perfect example. It shows in My Work and alerts you on time, and you can send a reminder to a colleague too.\nClick Create, then Reminder, or press R.\nType the text and the time.\nSave.\nIf it needs another owner and follow-up, make it a task, not a reminder."
+   },
+   "url": "#/course/reminder",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:mysettings",
+   "kind": "course",
+   "title": {
+    "ar": "إعداداتي (My Settings)",
+    "en": "My Settings"
+   },
+   "text": {
+    "ar": "في «إعداداتي» تضبط ما يخصك أنت فقط: الاسم والصورة، المنطقة الزمنية، اللغة، شكل التاريخ، الإشعارات، الأمان، والتطبيقات المرتبطة. ضبطها مرة واحدة يجعل كل شيء يعمل كما تتوقع.\nمن صورتك افتح Settings.\nراجع المنطقة الزمنية وصيغة التاريخ.\nراجع الإشعارات والأمان.\nالمنطقة الزمنية الخاطئة سبب شائع لظهور المواعيد في وقت غير صحيح.",
+    "en": "In My Settings you control what is yours alone: name and photo, time zone, language, date format, notifications, security and connected apps. Setting them once makes everything work the way you expect.\nFrom your avatar open Settings.\nCheck the time zone and date format.\nReview notifications and security.\nA wrong time zone is a common reason due times look off."
+   },
+   "url": "#/course/mysettings",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:wssettings",
+   "kind": "course",
+   "title": {
+    "ar": "إعدادات مساحة العمل",
+    "en": "Workspace settings"
+   },
+   "text": {
+    "ar": "إعدادات مساحة العمل تخص الشركة كلها ويديرها المالك والمسؤولون: الأعضاء والأدوار، الميزات المفعلة (ClickApps)، الأمان، الاستيراد، والتكاملات. كموظف عادي يكفي أن تعرف أين هي ومن تسأل.\nمن صورتك أو اسم مساحة العمل افتح Settings.\nتصفح People وClickApps.\nلأي تغيير اطلب من مسؤول مساحة العمل.\nالتغيير في إعدادات مساحة العمل يؤثر على الجميع؛ لذلك يقتصر على المسؤولين.",
+    "en": "Workspace settings affect the whole company and are managed by the owner and admins: members and roles, enabled features (ClickApps), security, import and integrations. As a regular employee, it is enough to know where they are and whom to ask.\nFrom your avatar or the Workspace name open Settings.\nBrowse People and ClickApps.\nFor any change ask your Workspace admin.\nA change in Workspace settings affects everyone; that is why it is limited to admins."
+   },
+   "url": "#/course/wssettings",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:schedule",
+   "kind": "course",
+   "title": {
+    "ar": "ضبط جدول عمل الشركة",
+    "en": "Setting the company work schedule"
+   },
+   "text": {
+    "ar": "جدول العمل يحدد أيام وساعات الدوام والعطل الرسمية. عندها لا يجدول ClickUp بداية أو استحقاق المهام في أيام العطلة، ويحسب عبء العمل على الأيام الحقيقية. مثلاً: الأحد إلى الخميس، والجمعة والسبت عطلة.\nيفتح المالك أو المسؤول إعدادات مساحة العمل ثم Work schedule.\nيحدد أيام وساعات العمل.\nيضيف العطل الرسمية.\nإذا ظهرت مواعيد في عطلة نهاية الأسبوع، فتحقق من جدول العمل مع المسؤول.",
+    "en": "The work schedule sets working days, hours and public holidays. ClickUp then avoids scheduling task start or due dates on days off and calculates workload on the real working days. For example: Sunday to Thursday, with Friday and Saturday off.\nThe owner or an admin opens Workspace settings, then Work schedule.\nThey set working days and hours.\nThey add public holidays.\nIf dates land on the weekend, check the work schedule with your admin."
+   },
+   "url": "#/course/schedule",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:security",
+   "kind": "course",
+   "title": {
+    "ar": "أمان مساحة العمل والصلاحيات",
+    "en": "Workspace security and permissions"
+   },
+   "text": {
+    "ar": "الأمان يعني أن كل شخص يرى ما يحتاجه فقط. الأدوار: المالك، المسؤول، العضو، العضو المحدود، والضيف. ومستويات المشاركة: مشاهدة، تعليق، تعديل، تحكم كامل. ويمكن جعل الأماكن خاصة، وفرض التحقق بخطوتين.\nاجعل المساحة أو القائمة الحساسة خاصة.\nشارك بأقل صلاحية تكفي للعمل.\nراجع قائمة من لديه وصول كل فترة.\nقواعد البيانات الحساسة تحددها سياسة الشركة المعتمدة، وليس هذا الدرس؛ اسأل فريق أمن المعلومات.",
+    "en": "Security means each person sees only what they need. The roles are Owner, Admin, Member, Limited Member and Guest. Sharing levels are View, Comment, Edit and Full access. Locations can be made private, and two-factor authentication can be required.\nMake the sensitive Space or List private.\nShare with the lowest permission that gets the job done.\nReview who has access from time to time.\nRules for sensitive data come from the approved company policy, not this lesson; ask the information security team."
+   },
+   "url": "#/course/security",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:appcenter",
+   "kind": "course",
+   "title": {
+    "ar": "مركز التطبيقات (App Center)",
+    "en": "The App Center"
+   },
+   "text": {
+    "ar": "مركز التطبيقات هو المكان الذي تربط فيه ClickUp بأدوات أخرى، مثل Microsoft Teams وOutlook وGoogle Drive وSlack وGitHub وZoom. الربط يجعل المعلومات تنتقل تلقائياً بدلاً من النسخ اليدوي.\nافتح App Center من الإعدادات أو التنقل.\nابحث عن الأداة التي تستخدمها.\nاطلب موافقة تقنية المعلومات قبل التفعيل.\nكل تكامل يفتح باباً للبيانات؛ فعّل فقط ما يحتاجه العمل فعلاً.",
+    "en": "The App Center is where you connect ClickUp to other tools, like Microsoft Teams, Outlook, Google Drive, Slack, GitHub and Zoom. Connecting them makes information flow automatically instead of copying by hand.\nOpen the App Center from settings or navigation.\nSearch for the tool you use.\nGet IT approval before connecting it.\nEvery integration opens a door for data; connect only what the work really needs."
+   },
+   "url": "#/course/appcenter",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:auto-intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة إلى الأتمتة",
+    "en": "ClickUp automations intro"
+   },
+   "text": {
+    "ar": "الأتمتة تعني: «عندما يحدث كذا، افعل كذا تلقائياً». مثلاً: عندما تتغير الحالة إلى «مكتمل»، أبلغ المدير. تتكون من مُشغِّل (Trigger) وشرط اختياري (Condition) وإجراء (Action). وهي تريحك من الأعمال المتكررة المملة.\nفي القائمة اضغط Automate أو أيقونة البرق.\nتصفح الأتمتة الجاهزة.\nفعّل واحدة بسيطة وجرّبها.\nابدأ بأتمتة واحدة توفر عليك وقتاً كل يوم، ثم أضف غيرها.",
+    "en": "An automation means: “when this happens, do that automatically”. For example: when the status changes to Complete, notify the manager. It is made of a Trigger, an optional Condition and an Action. It frees you from boring repetitive work.\nIn the List click Automate or the lightning icon.\nBrowse the ready-made automations.\nTurn on a simple one and test it.\nStart with one automation that saves you time every day, then add more."
+   },
+   "url": "#/course/auto-intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:auto-edit",
+   "kind": "course",
+   "title": {
+    "ar": "تعديل الأتمتة",
+    "en": "Editing automations"
+   },
+   "text": {
+    "ar": "الأتمتة الجيدة تحتاج ضبطاً. يمكنك تعديل المشغّل أو الشرط أو الإجراء، أو إيقافها مؤقتاً. وكل أتمتة لها سجل يوضح متى عملت وماذا فعلت، فتعرف إن كانت تعمل كما تريد.\nافتح قائمة الأتمتة في القائمة.\nاضغط على الأتمتة لتعديلها.\nراجع السجل (Activity) بعد التعديل.\nإذا توقفت أتمتة، تحقق: هل تغيرت الحالة أو الشخص الذي تعتمد عليه؟ هل انتهى حد التشغيل الشهري؟",
+    "en": "A good automation needs tuning. You can edit the trigger, condition or action, or pause it. Every automation has a log showing when it ran and what it did, so you know whether it works as intended.\nOpen the automations list in the List.\nClick the automation to edit it.\nCheck its activity log after editing.\nIf an automation stops, check: did the status or person it uses change? Has the monthly run limit been reached?"
+   },
+   "url": "#/course/auto-edit",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:auto-deep",
+   "kind": "course",
+   "title": {
+    "ar": "الأتمتة بعمق",
+    "en": "Automations deep dive"
+   },
+   "text": {
+    "ar": "الأتمتة المتقدمة تجمع شروطاً وإجراءات متعددة: «عندما تُنشأ مهمة في قائمة الطلبات، وإذا كانت الأولوية عاجلة، فأسندها لمشرف المناوبة وأضف قائمة تحقق وغيّر الموعد إلى اليوم». هكذا تبني سير عمل كاملاً يعمل وحده.\nأنشئ أتمتة جديدة واختر المشغّل.\nأضف شرطاً يحدد المهام المقصودة فقط.\nأضف أكثر من إجراء وجرّبها على مهمة تجريبية.\nاحذر الحلقات: أتمتتان تغيّر كل منهما ما تراقبه الأخرى قد تعملان بلا توقف.",
+    "en": "Advanced automations combine several conditions and actions: “When a task is created in the Requests List, and if the priority is Urgent, assign it to the shift supervisor, add a checklist and set the due date to today”. That is how you build a whole workflow that runs by itself.\nCreate a new automation and choose the trigger.\nAdd a condition so it targets only the right tasks.\nAdd more than one action and test it on a practice task.\nWatch out for loops: two automations that each change what the other watches can run forever."
+   },
+   "url": "#/course/auto-deep",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:auto-other",
+   "kind": "course",
+   "title": {
+    "ar": "ميزات أتمتة أخرى",
+    "en": "Other automation features"
+   },
+   "text": {
+    "ar": "إلى جانب الأتمتة العادية: النماذج تنشئ المهام تلقائياً، المهام المتكررة تعيد نفسها، القوالب تجهز المشاريع، والتكاملات تنقل البيانات، والوكلاء الأذكياء ينفذون أعمالاً أوسع. اجمعها معاً لتحصل على فريق يعمل بسلاسة.\nارسم سير عمل فريقك من الطلب إلى الإنجاز.\nحدد أي خطوة تكرر نفسها.\nاختر الأداة المناسبة لها: نموذج، تكرار، قالب، أتمتة أو وكيل.\nالأتمتة الأفضل هي الأبسط التي تحل المشكلة؛ لا تعقّد ما يمكن أن يكون بسيطاً.",
+    "en": "Besides regular automations: Forms create tasks automatically, recurring tasks repeat themselves, templates set up projects, integrations move data, and AI agents handle bigger jobs. Combine them to get a team that runs smoothly.\nDraw your team’s workflow from request to done.\nSpot which step repeats itself.\nPick the right tool for it: form, recurrence, template, automation or agent.\nThe best automation is the simplest one that solves the problem; do not complicate what can be simple."
+   },
+   "url": "#/course/auto-other",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
   }
  ]
 }

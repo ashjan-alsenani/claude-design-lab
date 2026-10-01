@@ -171,6 +171,17 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   await p.click('[data-addsubs]'); await p.waitForTimeout(200);
   ok((await p.$$('.ai-sub')).length === 4, 'AI suggests subtasks that can be added');
 
+  // 4f2. ClickUp 4.0 course
+  await p.evaluate(() => { location.hash = '#/course'; }); await p.waitForTimeout(300);
+  ok(await p.$$eval('.co-list a', x => x.length) === 65 && await p.$$eval('details.co-sec', x => x.length) === 11, 'course lists 11 sections and 65 topics');
+  await p.evaluate(() => { location.hash = '#/course/hierarchy'; }); await p.waitForTimeout(300);
+  ok(await p.$$eval('.co-steps li', x => x.length) >= 3 && !!(await p.$('.co-tip')), 'course topic shows explanation, steps and a pro tip');
+  await p.click('[data-done]'); await p.waitForTimeout(150);
+  ok(await p.getAttribute('[data-done]', 'aria-pressed') === 'true', 'a course topic can be marked as done');
+  await p.click('.co-nav .btn-primary'); await p.waitForTimeout(300);
+  ok(/course\/structure1$/.test(await p.evaluate(() => location.hash)), 'Next goes to the following topic');
+  await p.evaluate(() => { location.hash = '#/course/interview'; }); await p.waitForTimeout(300);
+  await p.click('.co-q [data-reveal]'); ok(await p.isVisible('.co-model'), 'role play reveals a model answer');
   // 4g. Clicky chatbot, forum in the header, security
   ok(await p.isVisible('#topForum'), 'forum button in the header');
   ok(!(await p.$('.topbar #soundToggle')), 'sound switch is not in the header');

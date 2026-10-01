@@ -5,6 +5,7 @@
 const ROUTES = {
   home: { view: viewHome, title: () => tx('الرئيسية', 'Home') },
   tour: { view: viewTour, title: () => tx('جولة ClickUp', 'ClickUp tour') },
+  course: { view: viewCourse, title: () => tx('دورة ClickUp 4.0 للمبتدئين', 'ClickUp 4.0 for Beginners') },
   forum: { view: viewForum, title: () => tx('منتدى ClickUp', 'ClickUp Forum') },
   workshops: { view: viewWorkshops, title: () => tx('الورش التفاعلية', 'Workshops') },
   automations: { view: viewAutomations, title: () => tx('ورشة الأتمتة', 'Automations workshop') },
@@ -50,7 +51,8 @@ function renderRoute(keepScroll, langSwitch) {
   catch (e) { console.error(e); host.innerHTML = '<div class="page page-narrow"><div class="panel empty-state">' + icon('alert') + '<h1 style="font-size:1.2rem">' + tx('حدث خطأ أثناء عرض هذه الصفحة', 'Something went wrong while showing this page') + '</h1><p>' + tx('أعد تحميل الصفحة. تقدّمك محفوظ.', 'Reload the page. Your progress is saved.') + '</p><a class="btn btn-primary" href="#/home">' + tx('الرئيسية', 'Home') + '</a></div></div>'; }
   const pageTitle = route.name === 'lesson' && LESSON[route.params[0]] ? LESSON[route.params[0]].title
     : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name)
-    : route.name === 'workshops' && WS_DEF[route.params[0]] ? WS_DEF[route.params[0]].title() : def.title();
+    : route.name === 'workshops' && WS_DEF[route.params[0]] ? WS_DEF[route.params[0]].title()
+    : route.name === 'course' && route.params[0] && COURSE.find(r => r[1] === route.params[0]) ? tp(COURSE.find(r => r[1] === route.params[0])[2]) : def.title();
   document.title = pageTitle + site;
   renderSidebar(route); updateSoundBtn();
   $('#topForum').toggleAttribute('aria-current', route.name === 'forum');
