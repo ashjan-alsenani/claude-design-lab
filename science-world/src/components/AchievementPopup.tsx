@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useProgress } from '../state/ProgressContext';
@@ -37,7 +38,7 @@ export function AchievementPopup() {
             exit={{ scale: 0.96, opacity: 0, transition: { duration: 0.15 } }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="achievement__ribbon">{current.kind === 'trophy' ? 'كأس جديدة!' : 'وسام جديد!'}</div>
+            <div className="achievement__ribbon">{current.kind === 'trophy' ? `كأس جديدة لـ${learner.name}!` : `وسام جديد لـ${learner.name}!`}</div>
             <div className="achievement__medal" aria-hidden="true">
               {current.emoji}
             </div>
@@ -45,7 +46,7 @@ export function AchievementPopup() {
             <p>{current.description}</p>
             <Mascot mood="celebrating" size={90} />
             <button type="button" className="btn btn--sun btn--lg" onClick={dismissAchievement} autoFocus>
-              رائع! ⭐
+              رائع يا {learner.name}! ⭐
             </button>
           </motion.div>
         </motion.div>

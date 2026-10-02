@@ -66,7 +66,7 @@ export function BubblePop({ statements, onFinish }: { statements: Statement[]; o
         ))}
       </div>
       {note && (
-        <Feedback tone={note.tone} title={note.tone === 'good' ? 'فرقعة رائعة! 🫧' : 'انتبه! 🌟'}>
+        <Feedback tone={note.tone} title={note.tone === 'good' ? 'فرقعة رائعة! 🫧' : 'انتبهي! 🌟'}>
           {note.text}
         </Feedback>
       )}

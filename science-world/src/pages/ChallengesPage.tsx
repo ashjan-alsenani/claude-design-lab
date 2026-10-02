@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -102,7 +103,7 @@ export function ChallengesPage() {
       <div className="page challenge-result">
         <motion.div className="card reward-screen" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}>
           <Mascot mood="celebrating" size={140} />
-          <div className="reward-screen__kicker">{result.best ? 'رقم قياسي جديد! 🏅' : 'أحسنت! 🌟'}</div>
+          <div className="reward-screen__kicker">{result.best ? 'رقم قياسي جديد! 🏅' : `أحسنتِ يا ${learner.name}! 🌟`}</div>
           <h1>
             {c.icon} {c.title}
           </h1>
@@ -143,7 +144,7 @@ export function ChallengesPage() {
       <header className="zone-hero zone-hero--coral">
         <div>
           <h1 className="page-title">🎯 منطقة التحديات</h1>
-          <p className="page-sub">تحديات مثيرة من الدروس التي أنهيتها. هل أنت مستعد؟</p>
+          <p className="page-sub">تحديات مثيرة من الدروس التي أنهيتِها. هل أنتِ مستعدة؟</p>
           <div className="zone-hero__points">🏅 نقاط التحدي: {state.points}</div>
         </div>
         <Mascot mood="excited" size={120} />

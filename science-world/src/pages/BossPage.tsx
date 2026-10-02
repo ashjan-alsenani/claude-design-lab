@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -101,7 +102,7 @@ function BossRun({ unitId }: { unitId: string }) {
         {phase === 'play' && mission && (
           <motion.section key={`${mission.id}-${attempt}`} className="boss-mission" initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24, transition: { duration: 0.15 } }}>
             <MascotMessage mood={retryNote ? 'encouraging' : 'thinking'} size={80}>
-              {retryNote && <strong>لا بأس! سنعود لتلك المهمة لاحقًا 💪 </strong>}
+              {retryNote && <strong>لا بأس يا {learner.name}! سنعود لتلك المهمة لاحقًا 💪 </strong>}
               {mission.story}
             </MascotMessage>
             <div className="card">

@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { lessonNo } from '../lib/format';
 import { achievements, characters } from '../data/rewards';
 import { allLessons } from '../data/units';
@@ -16,8 +17,8 @@ export function RewardsPage() {
     <div className="page rewards">
       <header className="zone-hero zone-hero--sun">
         <div>
-          <h1 className="page-title">🏆 غرفة الجوائز</h1>
-          <p className="page-sub">كل ما جمعته في مغامرتك!</p>
+          <h1 className="page-title">🏆 غرفة جوائز {learner.name}</h1>
+          <p className="page-sub">كل ما جمعتِه في مغامرتكِ!</p>
           <div className="treasure-row">
             <span className="treasure">
               ⭐ <strong>{totalStars(state)}</strong> نجمة

@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { useEffect, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { play } from '../lib/sound';
@@ -15,7 +16,7 @@ interface Props {
   actions: ReactNode;
 }
 
-const headlines = ['رائع! ⭐', 'أحسنت!', 'أنت تتقدم بسرعة!', 'ممتاز! فتحت مستوى جديدًا!'];
+const headlines = [`رائع يا ${learner.name}! ⭐`, `أحسنتِ يا ${learner.name}!`, 'أنتِ تتقدّمين بسرعة! 🚀', `ممتاز يا ${learner.name}! فتحتِ مستوى جديدًا!`];
 
 /** Stars + coins + confetti after a lesson / quiz. */
 export function RewardScreen({ title, subtitle, stars, score, coins, children, actions }: Props) {

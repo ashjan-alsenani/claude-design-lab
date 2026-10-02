@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -40,9 +41,9 @@ export function UnitCompletePage() {
     <div className="page complete" data-theme={unit.theme}>
       <motion.div className="complete__card card" initial={{ opacity: 0, y: 20, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: 'spring', duration: 0.6, bounce: 0.3 }}>
         <div className="complete__rays" aria-hidden="true" />
-        <div className="complete__kicker">🎉 مبروك!</div>
-        <h1>أكملت مغامرة «{unit.world}»!</h1>
-        <p className="page-sub">أنهيت كل دروس وحدة {unit.title} والاختبار والتحدي النهائي.</p>
+        <div className="complete__kicker">🎉 مبروك يا {learner.name}!</div>
+        <h1>أكملتِ مغامرة «{unit.world}»!</h1>
+        <p className="page-sub">أنهيتِ كل دروس وحدة {unit.title} والاختبار والتحدي النهائي.</p>
         <Mascot mood="celebrating" size={160} outfit={outfit?.outfit} />
         <div className="complete__stats">
           <div className="mini-stat">
@@ -68,7 +69,7 @@ export function UnitCompletePage() {
           </div>
         </div>
         <Stars count={Math.round((stars / maxStars) * 3)} size="lg" animate />
-        {outfit && <p className="complete__unlock">🎁 فتحت شخصية جديدة: <strong>{outfit.name}</strong>!</p>}
+        {outfit && <p className="complete__unlock">🎁 فتحتِ شخصية جديدة: <strong>{outfit.name}</strong>!</p>}
         <div className="reward-screen__actions">
           {next ? (
             next.lessons.length > 0 && (
@@ -78,7 +79,7 @@ export function UnitCompletePage() {
             )
           ) : (
             <Link to="/rewards" className="btn btn--sun btn--lg">
-              👑 أنهيت الكتاب كله! شاهد جوائزك
+              👑 أنهيتِ الكتاب كله! شاهدي جوائزك
             </Link>
           )}
           <Link to="/rewards" className="btn btn--ghost">

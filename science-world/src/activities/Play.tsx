@@ -149,7 +149,7 @@ export function SortGame({ step, onComplete }: ActivityProps<SortStep>) {
         ))}
       </div>
       {oops && !done && <Feedback tone="oops" title="قريب! 🌟">{oops.msg}</Feedback>}
-      {done && <Feedback tone="good" title="أحسنت! 🎉">{step.explain}</Feedback>}
+      {done && <Feedback tone="good" title="أحسنتِ! 🎉">{step.explain}</Feedback>}
       {dragged && drag && (
         <div className="drag-ghost token" style={{ transform: `translate(${drag.x}px, ${drag.y}px) translate(-50%, -50%) rotate(-3deg)` }} aria-hidden="true">
           {dragged.emoji} {dragged.text}
@@ -183,7 +183,7 @@ export function MatchGame({ step, onComplete }: ActivityProps<MatchStep>) {
       play('wrong');
       setWrong(id);
       const p = step.pairs.find((x) => x.id === pick)!;
-      setHint(`فكّر مرة أخرى: ما الذي يناسب «${p.left}»؟`);
+      setHint(`فكّري مرة أخرى: ما الذي يناسب «${p.left}»؟`);
       window.setTimeout(() => setWrong(null), 450);
     }
     setPick(null);
@@ -390,7 +390,7 @@ export function MemoryGame({ step, onComplete, compact }: ActivityProps<MemorySt
           );
         })}
       </div>
-      {done && <Feedback tone="good" title="ذاكرة رائعة! 🧠">وجدت كل الأزواج في {moves} محاولة.</Feedback>}
+      {done && <Feedback tone="good" title="ذاكرة رائعة! 🧠">وجدتِ كل الأزواج في {moves} محاولة.</Feedback>}
     </div>
   );
 }

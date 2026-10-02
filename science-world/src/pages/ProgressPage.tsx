@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { lessonNo } from '../lib/format';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ export function ProgressPage() {
 
   return (
     <div className="page progress-page">
-      <h1 className="page-title">📊 تقدّمي</h1>
+      <h1 className="page-title">📊 تقدّم {learner.name}</h1>
 
       <section className="progress-hero card">
         <ProgressRing value={pct} size={150} color="var(--sun-deep)">

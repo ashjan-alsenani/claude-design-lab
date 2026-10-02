@@ -163,7 +163,7 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
             <QuizRunner
               questions={lesson.quiz}
               title="تحدي الدرس"
-              intro="هل أنت مستعد للتحدي؟ كل إجابة صحيحة من أول مرة = نجمة ⭐"
+              intro="هل أنتِ مستعدة للتحدي؟ كل إجابة صحيحة من أول مرة = نجمة ⭐"
               onFinish={(score, tot) => {
                 const r = completeLesson(lesson.id, score, tot);
                 setResult({ ...r, score, total: tot });

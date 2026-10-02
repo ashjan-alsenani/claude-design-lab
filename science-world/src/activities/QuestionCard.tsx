@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { useEffect, useMemo, useState } from 'react';
 import type { Choice, Question } from '../data/types';
 import { play } from '../lib/sound';
@@ -22,8 +23,8 @@ interface Props {
   embedded?: boolean;
 }
 
-const praise = ['رائع! ⭐', 'أحسنت!', 'ممتاز! 🎉', 'إجابة عبقرية! 🧠', 'صحيح تمامًا! ✅'];
-const encourage = ['قريب! حاول مرة أخرى 🌟', 'لا بأس، فكّر مرة أخرى 💪', 'تقريبًا! انظر جيدًا 👀'];
+const praise = ['رائع! ⭐', `أحسنتِ يا ${learner.name}!`, 'ممتاز! 🎉', 'إجابة عبقرية! 🧠', 'صحيح تمامًا! ✅'];
+const encourage = ['قريب! حاولي مرة أخرى 🌟', 'لا بأس، فكّري مرة أخرى 💪', 'تقريبًا! انظري جيدًا 👀'];
 
 const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
 

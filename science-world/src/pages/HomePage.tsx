@@ -1,3 +1,4 @@
+import { learner } from '../data/learner';
 import { useState, type PointerEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'framer-motion';
@@ -19,7 +20,7 @@ const floaters = [
 ];
 
 const moods: MascotMood[] = ['happy', 'excited', 'surprised', 'celebrating', 'thinking'];
-const lines = ['مرحبًا! أنا نوري، مرشدك في عالم العلوم 🤖', 'هل أنت مستعد للمغامرة؟ 🚀', 'أوه! لقد دغدغتني 😄', 'لنكتشف شيئًا جديدًا اليوم! ✨', 'هل تعرف كم مرة يدق قلبك في الدقيقة؟ 🤔'];
+const lines = [`مرحبًا يا ${learner.name}! أنا نوري، مرشدكِ في عالم العلوم 🤖`, 'هل أنتِ مستعدة للمغامرة؟ 🚀', 'أوه! لقد دغدغتِني 😄', `لنكتشف شيئًا جديدًا اليوم يا ${learner.name}! ✨`, 'هل تعرفين كم مرة يدق قلبك في الدقيقة؟ 🤔'];
 
 function Floater({ e, x, y, d, mx, my, i }: { e: string; x: number; y: number; d: number; mx: MotionValue<number>; my: MotionValue<number>; i: number }) {
   const tx = useTransform(mx, (v) => v * 26 * d);
@@ -71,15 +72,15 @@ export function HomePage() {
           <Floater key={i} {...f} mx={mx} my={my} i={i} />
         ))}
         <div className="hero__copy">
-          <div className="hero__kicker">✨ العلوم · الصف السادس · الفصل الأول</div>
+          <div className="hero__kicker">👋 أهلًا {learner.name}! · علوم الصف السادس</div>
           <h1 className="hero__title">
             مغامرة العلوم
             <span>مع نوري</span>
           </h1>
-          <p className="hero__lead">اكتشف جسمك العجيب، وعالم الكائنات الحية، وأسرار المادة… بالّلعب والتجارب والتحديات!</p>
+          <p className="hero__lead">اكتشفي جسمكِ العجيب، وعالم الكائنات الحية، وأسرار المادة… باللعب والتجارب والتحديات!</p>
           <div className="hero__cta">
             <button type="button" className="btn btn--sun btn--lg hero__start" onClick={() => navigate(started ? nextStopPath(state) : '/journey')}>
-              {started ? 'أكمل التعلّم ←' : 'ابدأ التعلّم 🚀'}
+              {started ? 'أكملي التعلّم ←' : 'ابدئي التعلّم 🚀'}
             </button>
             {started && (
               <Link to="/journey" className="btn btn--ghost btn--lg">
@@ -167,6 +168,8 @@ export function HomePage() {
           })}
         </div>
       </section>
+
+      <p className="dedication">💜 صُمّم هذا العالم خصيصًا لـ <strong>{learner.fullName}</strong> لتتعلّم العلوم وهي تلعب.</p>
     </div>
   );
 }

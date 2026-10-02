@@ -1598,3 +1598,9 @@ a.lesson-card:active {
 .unit-progress__list small {
   white-space: nowrap;
 }
+.dedication {
+  text-align: center;
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  padding-block: var(--s-4);
+}
