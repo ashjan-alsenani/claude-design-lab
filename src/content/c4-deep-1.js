@@ -175,7 +175,7 @@ Object.assign(C4_DEEP, {
     more: ['التجميع لا يغيّر المهام؛ يغير طريقة ترتيبها على الشاشة. التجميع حسب الحالة يريك مراحل العمل، وحسب المسؤول يريك حمل كل شخص، وحسب الأولوية يرفع العاجل للأعلى، وحسب الموعد يفصل المتأخر عن القادم. ويمكنك طي المجموعات التي لا تهمك لتركز على المهم فقط.', 'Grouping does not change the tasks; it changes how they are arranged on screen. Grouping by status shows the stages of work, by assignee shows each person’s load, by priority lifts the urgent to the top, and by due date separates the late from the upcoming. You can collapse groups you do not care about and focus only on what matters.'],
     like: ['مثل ترتيب الملابس في الخزانة: حسب اللون أو حسب الموسم. الملابس نفسها، لكن ترتيبها يجعلك تجد ما تريد.', 'Like sorting clothes in a wardrobe: by colour or by season. Same clothes, but the arrangement helps you find what you need.'],
     demo: { scene: 'list', steps: [
-      { c: ['المهام الآن غير مجمعة.', 'The tasks are not grouped yet.'], rows: C4_FIB().concat([C4R('t5', ['تحديث خريطة الشبكة', 'Update the network map'], { st: 'prog', who: 'salim', due: C4D(16), prio: 'high' })]), cols: ['assignee', 'due', 'prio'] },
+      { c: ['المهام الآن غير مجمعة.', 'The tasks are not grouped yet.'], group: 'none', rows: C4_FIB().concat([C4R('t5', ['تحديث خريطة الشبكة', 'Update the network map'], { st: 'prog', who: 'salim', due: C4D(16), prio: 'high' })]), cols: ['assignee', 'due', 'prio'] },
       { c: ['اضغط Group.', 'Click Group.'], hl: 'grp', click: true },
       { c: ['اختر Assignee.', 'Choose Assignee.'], pop: 'group', hl: 'gp-assignee', click: true },
       { c: ['انظر: المهام تحركت تحت اسم كل شخص. سالم عنده مهمتان.', 'Look: the tasks moved under each person’s name. Salim has two.'], group: 'assignee', hl: 'g-salim' },

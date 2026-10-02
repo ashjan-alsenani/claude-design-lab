@@ -180,19 +180,32 @@ A separate section of the site, with its own sidebar group **Courses for beginne
 
 - **All courses** (`#/courses`): a card for every course, with level, size and progress, plus a "More courses coming soon" card.
 - **Course overview** (`#/courses/clickup4`): progress ring, "What you'll learn", "This course includes", collapsible sections with progress bars, and the role play. Old `#/course/...` links redirect here.
-- **Interactive topic** (`#/courses/clickup4/:topic`): every one of the 65 topics has the same flow, with sticky part buttons (Understand · Watch · Try · Check) that light up as you scroll:
+- **Interactive topic** (`#/courses/clickup4/:topic`): every one of the 65 topics opens with a **hero banner** in its section colour. The colour is darkened toward deep purple so white text stays readable. The banner shows:
+  - the topic title, its parts as coloured pills, and how far through the course this topic is;
+  - an **animated illustration** (`coArt` in `src/app/courses.js`) chosen from the topic's screen type. There are ten kinds: list, board, timeline, chat, AI, doc, dashboard, automation flow, settings toggles and hierarchy. Each is drawn in HTML/CSS, is decorative (`aria-hidden`) and stays still with reduced motion.
+
+  Each part has its own colour: Understand amber, Watch purple, Try green, Check pink. That colour appears on its button, its card border and its icon tile. Parts reveal as you scroll. Then the same flow, with sticky part buttons that light up as you scroll:
   1. **Understand**: the plain-words explanation, a deeper second paragraph, and a "Think of it like this" comparison.
   2. **Watch how**: an animated simulation of ClickUp (see below), with captions, play/pause, step dots, replay and **Enlarge**. Enlarge opens full screen and turns sideways on portrait phones.
-  3. **Try it yourself**: the steps as a checklist you tick as you do them in ClickUp.
+  3. **Try it yourself**: the steps as a coloured timeline you tick as you do them in ClickUp. A progress bar fills, and confetti plays when all steps are done.
   4. **A real workplace example** (fictional people and data).
   5. **Common mistake**: a card that flips to show the right way.
-  6. **Quick check**: three options; a right answer explains why and offers "Mark as done", a wrong one shakes and points back to the explanation.
+  6. **Quick check**: three options. A right answer bursts confetti, explains why and offers "Mark as done". A wrong one shakes and points back to the explanation.
   7. Pro tip, "Go deeper" link to the matching lesson or workshop, "Ask Clicky about this", and next/previous.
 - **Role play** (`#/courses/clickup4/interview`): five interview questions with model answers and self-rating.
 - **Progress** is saved per course on this device (`omantel-clickup-hub:course:<id>`). It is migrated from the earlier single-course key.
 
 ### The "Watch how" engine (`src/app/cx.js`, `src/cx.css`)
 
+- **ClickUp 4.0 layout.** Screens follow the published ClickUp 4.0 layout (Intro to ClickUp 4.0, Global Navigation, Spaces Sidebar, List view, grouping, and task layouts in ClickUp Help):
+  - a dark "L" frame made of the top bar (centred Search with Ctrl K, Ask AI, Create, notifications, avatar) and the Global Navigation rail (Home, Inbox, Planner, AI, Chat, Docs, Dashboards, Whiteboards, More);
+  - the Spaces sidebar, with coloured Space avatars, folders, lists and item counts;
+  - a view header with the location, Ask AI, Share and Automations;
+  - List view **grouped by status by default**. Each group header has a status pill, a count, "+ Add Task" and the column names. Tasks show status circles (dashed, part-filled, green tick) and priority flags with words. The toolbar reads Group: Status, Subtasks, Sort, Filter, Me and + Task;
+  - Board columns tinted by status, with cards showing assignee, date and priority;
+  - the task view with a type chip, property rows with icons, "Add description / Write with AI", and an Activity side panel.
+
+  A demo can set `group: 'none'` to show an ungrouped list.
 - **Screens.** A simplified, reconstructed ClickUp screen is drawn from a state object, with 30 screen types: list, board, calendar, gantt/timeline, table, whiteboard, workload, activity, doc, form, mind map, map, AI panel, Super Agent builder, meeting notetaker, task detail, chat, dashboard, import/export, templates, settings pages, trash, My Work/Notepad, automations, sign-in and journey.
 - **Steps.** Each step of a demo is a caption plus changes to the state. The engine animates the difference between steps:
   - elements with the same `data-k` glide to their new place;

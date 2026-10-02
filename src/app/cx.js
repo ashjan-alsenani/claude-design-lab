@@ -21,10 +21,14 @@ const CX = (() => {
   const who = id => L((CAST[id] || CAST.me).n);
   const av = (id, k) => { const p = CAST[id] || CAST.me; return '<span class="cx-av" style="--c:' + p.c + '"' + K(k) + ' title="' + esc(L(p.n)) + '">' + (id === 'ai' || id === 'agent' ? I(id === 'ai' ? 'sparkle' : 'robot') : esc(L(p.n).charAt(0))) + '</span>'; };
   const ST = { todo: ['TO DO', '#87909e'], prog: ['IN PROGRESS', '#5b45d6'], rev: ['REVIEW', '#e8590c'], done: ['COMPLETE', '#10b981'], wait: ['WAITING', '#d9480f'] };
-  const st = (s, k) => '<span class="cx-st" style="--c:' + (ST[s] || ST.todo)[1] + '"' + K(k) + '>' + (ST[s] || ST.todo)[0] + '</span>';
-  const dot = s => '<span class="cx-dot" style="--c:' + (ST[s] || ST.todo)[1] + '"></span>';
+  const st = (s, k) => '<span class="cx-st" style="--c:' + (ST[s] || ST.todo)[1] + '"' + K(k) + '>' + dot(s, 1) + (ST[s] || ST.todo)[0] + '</span>';
+  /* ClickUp-style status circle: dashed when not started, part-filled in progress, green tick when complete */
+  const dot = (s, inv) => { s = ST[s] ? s : 'todo'; return '<span class="cx-dot s-' + s + (inv ? ' inv' : '') + '" style="--c:' + ST[s][1] + '">' + (s === 'done' ? I('check') : '') + '</span>'; };
   const PR = { urgent: '#e03131', high: '#f59f00', normal: '#4c6ef5', low: '#adb5bd' };
   const pr = (p, k) => '<span class="cx-pr' + (p ? '' : ' none') + '" style="--c:' + (PR[p] || '#c3c7d0') + '"' + K(k) + '>' + I('flag') + '</span>';
+  /* Flag with its word, as ClickUp shows priority in List and Board */
+  const prl = (p, k) => p ? '<span class="cx-prl" style="--c:' + PR[p] + '"' + K(k) + '>' + I('flag') + p.charAt(0).toUpperCase() + p.slice(1) + '</span>' : pr(null, k);
+  const spav = (n, c, cls) => '<span class="cx-spav' + (cls ? ' ' + cls : '') + '" style="--c:' + (c || '#7b68ee') + '">' + esc(L(n).charAt(0)) + '</span>';
   const btn = (k, label, cls, ic) => '<span class="cx-b' + (cls ? ' ' + cls : '') + '"' + K(k) + '>' + (ic ? I(ic) : '') + E(label) + '</span>';
   const tog = (k, on) => '<span class="cx-tog' + (on ? ' on' : '') + '"' + K(k) + '><i></i></span>';
   const pop = (k, items, style, title) => '<div class="cx-pop"' + K(k) + ' style="' + (style || 'top:70px;inset-inline-end:18px') + '">' + (title ? '<div class="cx-pop-h">' + E(title) + '</div>' : '') + items + '</div>';
@@ -40,26 +44,43 @@ const CX = (() => {
     { k: 'ls-req', l: 1, t: 'list', n: ['الطلبات', 'Requests'] }
   ];
 
-  /* ---------- App shell ---------- */
+  /* ---------- App shell (ClickUp 4.0 layout) ----------
+     Dark "L" frame: top bar + Global Navigation rail. Inside it, a white
+     workspace with the Spaces sidebar and the open view. */
+  const SPC = ['#7b68ee', '#0ea5e9', '#f59f00', '#10b981', '#ec4899'];
+  const CNT = { 'ls-plan': 6, 'ls-del': 4, 'ls-req': 9 };
   function side(s) {
-    const tree = s.tree || TREE;
-    return '<aside class="cx-side"' + K('side') + '><div class="cx-ws"' + K('ws') + '><span class="cx-sq">O</span><span>' + E(['مساحة عمل التدريب', 'Training Workspace']) + '</span></div>' +
+    const tree = s.tree || TREE; let si = 0;
+    const node = n => {
+      let ic;
+      if (n.t === 'space') ic = spav(n.n, n.c || SPC[si++ % SPC.length]);
+      else if (n.t === 'folder') ic = '<span class="cx-fic">' + I('folder') + '</span>';
+      else if (n.t === 'list') ic = '<span class="cx-lic">' + I('list') + '</span>';
+      else ic = I(TI[n.t] || 'list');
+      const cnt = n.cnt != null ? n.cnt : CNT[n.k];
+      return '<div class="cx-tn l' + n.l + ' t-' + n.t + (s.sel === n.k ? ' on' : '') + '"' + K(n.k) + '>' + ic + '<span>' + E(n.n) + '</span>' + (cnt && n.t === 'list' ? '<em>' + cnt + '</em>' : '') + '</div>';
+    };
+    return '<aside class="cx-side"' + K('side') + '><div class="cx-ws"' + K('ws') + '><span class="cx-sq">T</span><span>' + E(['مساحة عمل التدريب', 'Training Workspace']) + '</span>' + I('chev-down') + '</div>' +
+      '<div class="cx-tn quick">' + I('inbox') + '<span>Inbox</span><em class="hot">3</em></div><div class="cx-tn quick">' + I('checklist') + '<span>My Tasks</span></div>' +
       (s.favs ? '<div class="cx-sh">Favorites</div>' + s.favs.map(f => '<div class="cx-tn"' + K('fav-' + f.k) + '>' + I('star') + '<span>' + E(f.n) + '</span></div>').join('') : '') +
-      '<div class="cx-sh">Spaces<span class="cx-plus"' + K('addSpace') + '>+</span></div>' +
-      tree.map(n => '<div class="cx-tn l' + n.l + (s.sel === n.k ? ' on' : '') + '"' + K(n.k) + '>' + I(TI[n.t] || 'list') + '<span>' + E(n.n) + '</span></div>').join('') + '</aside>';
+      '<div class="cx-sh">Spaces<span class="cx-plus"' + K('addSpace') + '>' + I('plus') + '</span></div>' +
+      '<div class="cx-tn quick">' + I('layers') + '<span>Everything</span></div>' + tree.map(node).join('') + '</aside>';
   }
   function shell(s, main, opt) {
     opt = opt || {};
-    const navs = [['home', 'home', 'Home'], ['inbox', 'inbox', 'Inbox'], ['docs', 'doc', 'Docs'], ['chat', 'message', 'Chat'], ['dash', 'chart', 'Dashboards'], ['ai', 'sparkle', 'AI']];
+    const navs = [['home', 'home', 'Home'], ['inbox', 'inbox', 'Inbox'], ['planner', 'calendar', 'Planner'], ['ai', 'sparkle', 'AI'], ['chat', 'message', 'Chat'], ['docs', 'doc', 'Docs'], ['dash', 'chart', 'Dashboards'], ['wb', 'whiteboard', 'Whiteboards'], ['more', 'grip', 'More']];
     return '<div class="cx-app' + (s.dark ? ' dark' : '') + '" style="--ac:' + (s.accent || '#7b68ee') + '">' +
-      '<div class="cx-top"><span class="cx-logo"' + K('logo') + '></span><span class="cx-search' + (s.searchOn ? ' on' : '') + '"' + K('search') + '>' + I('search') + '<span' + K('searchText') + '>' + (s.searchText ? E(s.searchText) : 'Search') + '</span>' + kbd('Ctrl+K') + '</span><span class="cx-gap"></span>' +
-      '<span class="cx-b ai"' + K('askAI') + '>' + I('sparkle') + 'Ask AI</span><span class="cx-b pri"' + K('create') + '>' + I('plus') + 'Create</span>' + av('me', 'meAv') + '</div>' +
-      '<div class="cx-body' + (opt.noSide ? ' noside' : '') + '"><nav class="cx-nav"' + K('nav') + '>' + navs.map(n => '<span class="cx-nv' + (s.nav === n[0] ? ' on' : '') + '"' + K('nav-' + n[0]) + '>' + I(n[1]) + '<small>' + n[2] + '</small></span>').join('') + '</nav>' +
-      (opt.noSide ? '' : side(s)) + '<main class="cx-main"' + K('main') + '>' + main + '</main></div>' +
+      '<div class="cx-top"><span class="cx-brand"><span class="cx-logo"' + K('logo') + '></span><b>ClickUp</b></span>' +
+      '<span class="cx-search' + (s.searchOn ? ' on' : '') + '"' + K('search') + '>' + I('search') + '<span' + K('searchText') + '>' + (s.searchText ? E(s.searchText) : 'Search…') + '</span>' + kbd('Ctrl+K') + '</span>' +
+      '<span class="cx-topr"><span class="cx-b ai"' + K('askAI') + '>' + I('sparkle') + 'Ask AI</span><span class="cx-b pri"' + K('create') + '>' + I('plus') + 'Create</span><span class="cx-bell">' + I('bell') + '<i></i></span>' + av('me', 'meAv') + '</span></div>' +
+      '<div class="cx-body"><nav class="cx-nav"' + K('nav') + '><span class="cx-sq big">T</span>' + navs.map(n => '<span class="cx-nv' + (s.nav === n[0] ? ' on' : '') + '"' + K('nav-' + n[0]) + '>' + I(n[1]) + '<small>' + n[2] + '</small></span>').join('') + '</nav>' +
+      '<div class="cx-work' + (opt.noSide ? ' noside' : '') + '">' + (opt.noSide ? '' : side(s)) + '<main class="cx-main"' + K('main') + '>' + main + '</main></div></div>' +
       (s.results ? pop('results', s.results.map((r, i) => mi('res' + i, r[1], r[0], i === 0)).join(''), 'top:44px;inset-inline-start:260px;width:300px') : '') +
       (s.toast ? '<div class="cx-toast"' + K('toast') + '>' + I('check') + '<span>' + E(s.toast) + '</span></div>' : '') + '</div>';
   }
-  const crumbs = s => '<div class="cx-crumb">' + I('layers') + E(['العمليات', 'Operations']) + ' / ' + E(s.title || ['التخطيط', 'Planning']) + '</div>';
+  /* View header: location, list name, and the header buttons ClickUp shows on the right */
+  const crumbs = s => '<div class="cx-vh"><div class="cx-crumb">' + spav(['العمليات', 'Operations'], '#7b68ee', 'sm') + '<span>' + E(['العمليات', 'Operations']) + '</span><i>/</i><b>' + E(s.title || ['التخطيط', 'Planning']) + '</b>' + I('star') + '</div><span class="cx-gap"></span>' +
+    '<span class="cx-hb ai">' + I('sparkle') + 'Ask AI</span><span class="cx-hb">' + I('share') + 'Share</span><span class="cx-hb">' + I('zap') + 'Automations</span><span class="cx-hb">···</span></div>';
   const tabs = (s, on) => '<div class="cx-tabs">' + [['list', 'list', 'List'], ['board', 'board', 'Board'], ['calendar', 'calendar', 'Calendar'], ['gantt', 'gantt', 'Gantt'], ['table', 'table', 'Table']].concat(s.extraTabs || []).map(t => '<span class="cx-tab' + (on === t[0] ? ' on' : '') + '"' + K('tab-' + t[0]) + '>' + I(t[1]) + t[2] + '</span>').join('') + '<span class="cx-tab add"' + K('addView') + '>' + I('plus') + 'View</span></div>';
 
   /* ---------- Scenes ---------- */
@@ -88,7 +109,7 @@ const CX = (() => {
   function cell(c, r) {
     if (c === 'assignee') return r.who ? (Array.isArray(r.who) ? r.who : [r.who]).map(w => av(w)).join('') : '<span class="cx-empty">' + I('user') + '</span>';
     if (c === 'due' || c === 'start') { const v = r[c]; return v ? '<span class="cx-date' + (r.late && c === 'due' ? ' late' : '') + '">' + E(v) + '</span>' : '<span class="cx-empty">' + I('calendar') + '</span>'; }
-    if (c === 'prio') return pr(r.prio);
+    if (c === 'prio') return prl(r.prio);
     if (c === 'status') return st(r.st || 'todo');
     if (c === 'region') return r.region ? '<span class="cx-tag">' + E(r.region) + '</span>' : '<span class="cx-empty">—</span>';
     if (c === 'est') return r.est ? '<span class="cx-date">' + E(r.est) + '</span>' : '<span class="cx-empty">—</span>';
@@ -99,25 +120,33 @@ const CX = (() => {
       '<span class="cx-name"' + K(r.k + '-name') + '>' + E(r.n) + (r.subs ? '<span class="cx-subs"' + K(r.k + '-subs') + '>' + I('subtask') + r.subs + '</span>' : '') + '</span>' +
       cols.map(c => '<span class="cx-c c-' + c + '"' + K(r.k + '-' + c) + '>' + cell(c, r) + '</span>').join('') + '<span class="cx-c"></span></div>';
   }
+  /* ClickUp's List view is grouped by status by default. Each group header shows
+     the status pill, a count and the column names; "+ Add Task" sits under it. */
   function listBody(s) {
     const cols = s.cols || ['assignee', 'due', 'prio'];
     const rows = (s.rows || []).filter(r => !r.p || (s.rows.find(x => x.k === r.p) || {}).open);
-    const head = '<div class="cx-lhead"><span></span><span></span><span>Name</span>' + cols.map(c => '<span class="cx-c"' + K('col-' + c) + '>' + E(COLN[c] || c) + '</span>').join('') + '<span class="cx-c add"' + K('addCol') + '>' + I('plus') + '</span></div>';
-    let body = '';
-    if (s.group) {
-      const keyOf = r => s.group === 'assignee' ? (Array.isArray(r.who) ? r.who[0] : r.who) || 'none' : s.group === 'prio' ? r.prio || 'none' : r.st || 'todo';
-      const order = s.group === 'assignee' ? ['me', 'salim', 'maryam', 'khalid', 'noura', 'none'] : s.group === 'prio' ? ['urgent', 'high', 'normal', 'low', 'none'] : ['todo', 'prog', 'rev', 'done'];
+    const grp = s.group === 'none' ? null : (s.group || 'status');
+    const heads = first => cols.map(c => '<span class="cx-c ch"' + (first ? K('col-' + c) : '') + '>' + E(COLN[c] || c) + '</span>').join('') + '<span class="cx-c add"' + (first ? K('addCol') : '') + '>' + I('plus') + '</span>';
+    const addRow = keyed => '<div class="cx-addrow"' + (keyed ? K('addTask') : '') + '>' + I('plus') + '<span' + (keyed ? K('newTask') : '') + '>' + (keyed && s.newTask ? E(s.newTask) : 'Add Task') + '</span></div>';
+    let body = '', first = true;
+    if (grp) {
+      const keyOf = r => grp === 'assignee' ? (Array.isArray(r.who) ? r.who[0] : r.who) || 'none' : grp === 'prio' ? r.prio || 'none' : r.st || 'todo';
+      const order = grp === 'assignee' ? ['me', 'salim', 'maryam', 'khalid', 'noura', 'none'] : grp === 'prio' ? ['urgent', 'high', 'normal', 'low', 'none'] : ['todo', 'prog', 'rev', 'wait', 'done'];
       order.forEach(g => {
         const rs = rows.filter(r => keyOf(r) === g); if (!rs.length) return;
-        const label = s.group === 'assignee' ? (g === 'none' ? 'Unassigned' : av(g) + ' ' + esc(who(g))) : s.group === 'prio' ? pr(g === 'none' ? null : g) + ' ' + (g === 'none' ? 'No priority' : g.charAt(0).toUpperCase() + g.slice(1)) : st(g);
-        body += '<div class="cx-group"' + K('g-' + g) + '>' + label + '<small>' + rs.length + '</small></div>' + rs.map(r => listRow(r, cols)).join('');
+        const label = grp === 'assignee' ? (g === 'none' ? '<span class="cx-gl">' + I('user') + 'Unassigned</span>' : '<span class="cx-gl">' + av(g) + esc(who(g)) + '</span>') : grp === 'prio' ? (g === 'none' ? '<span class="cx-gl">' + pr(null) + 'No priority</span>' : '<span class="cx-gl" style="--c:' + PR[g] + '">' + prl(g) + '</span>') : st(g);
+        body += '<div class="cx-ghead"><span class="cx-gname">' + I('chev-down') + '<span class="cx-gk"' + K('g-' + g) + '>' + label + '<small>' + rs.length + '</small></span><span class="cx-gadd">' + I('plus') + 'Add Task</span></span>' + heads(first) + '</div>' +
+          rs.map(r => listRow(r, cols)).join('') + (first ? addRow(true) : '');
+        first = false;
       });
-    } else body = rows.map(r => listRow(r, cols)).join('');
+    }
+    if (!body) body = '<div class="cx-lhead"><span></span><span></span><span>Name</span>' + heads(true) + '</div>' + rows.map(r => listRow(r, cols)).join('') + addRow(true);
     const sel = (s.rows || []).filter(r => r.sel).length;
-    return '<div class="cx-tools">' + btn('grp', s.group ? ['تجميع: ' + ({ assignee: 'Assignee', status: 'Status', prio: 'Priority' })[s.group], 'Group: ' + ({ assignee: 'Assignee', status: 'Status', prio: 'Priority' })[s.group]] : 'Group', s.group ? 'on' : '', 'layers') + btn('flt', s.filter ? s.filter : 'Filter', s.filter ? 'on' : '', 'filter') + btn('meBtn', 'Me', s.me ? 'on' : '', 'user') + btn('sort', s.sort ? s.sort : 'Sort', s.sort ? 'on' : '', 'sort') +
-      (s.dirty ? btn('saveView', 'Save view', 'pri') : '') + '<span class="cx-gap"></span>' + btn('more', '···') + '</div>' +
-      '<div class="cx-list" style="--cols:' + cols.length + '">' + head + body +
-      '<div class="cx-addrow"' + K('addTask') + '>' + I('plus') + '<span' + K('newTask') + '>' + (s.newTask ? E(s.newTask) : 'Add Task') + '</span></div></div>' +
+    const gname = { assignee: 'Assignee', status: 'Status', prio: 'Priority' };
+    return '<div class="cx-tools">' + btn('grp', 'Group: ' + (grp ? gname[grp] : 'None'), grp ? 'on' : '', 'layers') + '<span class="cx-b">' + I('subtask') + 'Subtasks</span><span class="cx-gap"></span>' +
+      btn('sort', s.sort ? s.sort : 'Sort', s.sort ? 'on' : '', 'sort') + btn('flt', s.filter ? s.filter : 'Filter', s.filter ? 'on' : '', 'filter') + btn('meBtn', 'Me', s.me ? 'on' : '', 'user') +
+      (s.dirty ? btn('saveView', 'Save view', 'pri') : '') + btn('more', '···') + '<span class="cx-b pri">' + I('plus') + 'Task</span></div>' +
+      '<div class="cx-list" style="--cols:' + cols.length + '">' + body + '</div>' +
       (sel ? '<div class="cx-bulk"' + K('bulk') + '><b>' + sel + ' ' + E(['محددة', 'selected']) + '</b>' + btn('bAssign', 'Assignee', '', 'user') + btn('bStatus', 'Status', '', 'check') + btn('bDate', 'Dates', '', 'calendar') + btn('bMove', 'Move', '', 'arrow-end') + btn('bDel', 'Delete', '', 'trash') + '</div>' : '') +
       listPop(s);
   }
@@ -135,9 +164,10 @@ const CX = (() => {
   }
   SC.list = s => shell(s, crumbs(s) + tabs(s, 'list') + listBody(s));
 
-  SC.board = s => shell(s, crumbs(s) + tabs(s, 'board') + '<div class="cx-boardv">' + (s.cols || []).map(c => '<div class="cx-col"' + K('col-' + c.st) + '><div class="cx-col-h">' + st(c.st) + '<small>' + c.cards.length + '</small></div>' +
-    c.cards.map(cd => '<div class="cx-card2"' + K(cd.k) + '><b>' + E(cd.n) + '</b><div>' + (cd.prio ? pr(cd.prio) : '') + (cd.due ? '<span class="cx-date">' + E(cd.due) + '</span>' : '') + '<span class="cx-gap"></span>' + (cd.who ? av(cd.who) : '') + '</div></div>').join('') +
-    '<div class="cx-addcard"' + K('add-' + c.st) + '>' + I('plus') + 'Task</div></div>').join('') + '</div>');
+  SC.board = s => shell(s, crumbs(s) + tabs(s, 'board') + '<div class="cx-tools">' + btn('', 'Group: Status', 'on', 'layers') + '<span class="cx-gap"></span>' + btn('', 'Filter', '', 'filter') + btn('', 'Me', '', 'user') + '<span class="cx-b pri">' + I('plus') + 'Task</span></div>' +
+    '<div class="cx-boardv">' + (s.cols || []).map(c => '<div class="cx-col" style="--c:' + (ST[c.st] || ST.todo)[1] + '"' + K('col-' + c.st) + '><div class="cx-col-h">' + st(c.st) + '<small>' + c.cards.length + '</small><span class="cx-gap"></span><span class="cx-cm">···</span></div>' +
+    c.cards.map(cd => '<div class="cx-card2"' + K(cd.k) + '><b>' + E(cd.n) + '</b><div>' + (cd.who ? av(cd.who) : '<span class="cx-empty">' + I('user') + '</span>') + (cd.due ? '<span class="cx-date">' + I('calendar') + E(cd.due) + '</span>' : '') + (cd.prio ? prl(cd.prio) : '') + '</div></div>').join('') +
+    '<div class="cx-addcard"' + K('add-' + c.st) + '>' + I('plus') + 'Add Task</div></div>').join('') + '</div>');
 
   SC.calendar = s => shell(s, crumbs(s) + tabs(s, 'calendar') + '<div class="cx-calv"><div class="cx-cal-tools">' + ['Day', 'Week', 'Month'].map(x => '<span class="cx-b' + ((s.range || 'Week') === x ? ' on' : '') + '"' + K('r-' + x) + '>' + x + '</span>').join('') + '</div><div class="cx-week">' +
     DAYS().map((d, i) => '<div class="cx-day"' + K('day' + i) + '><small>' + d + ' ' + (12 + i) + '</small>' + (s.items || []).filter(t => t.d === i).map(t => '<span class="cx-chip" style="--c:' + (t.c || '#7b68ee') + '"' + K(t.k) + '>' + E(t.n) + '</span>').join('') + '</div>').join('') + '</div>' +
@@ -216,13 +246,16 @@ const CX = (() => {
     const subs = s.subs ? '<div class="cx-sec"><b>Subtasks</b>' + s.subs.map(x => '<div class="cx-row mini"' + K(x.k) + '>' + dot(x.st || 'todo') + '<span>' + E(x.n) + '</span>' + (x.who ? av(x.who) : '<span class="cx-empty">' + I('user') + '</span>') + (x.due ? '<span class="cx-date">' + E(x.due) + '</span>' : '') + '</div>').join('') + '<div class="cx-addrow"' + K('addSub') + '>' + I('plus') + '<span' + K('newSub') + '>' + E(s.newSub || 'Add subtask') + '</span></div></div>' : '';
     const check = s.check ? '<div class="cx-sec"><b>Checklist</b>' + s.check.map(x => '<div class="cx-chk' + (x.done ? ' on' : '') + '"' + K(x.k) + '><span class="cx-cb' + (x.done ? ' on' : '') + '"></span>' + E(x.n) + '</div>').join('') + '</div>' : '';
     const com = (s.comments || []).map(c => '<div class="cx-com' + (c.as ? ' as' : '') + (c.res ? ' res' : '') + '"' + K(c.k) + '>' + av(c.w) + '<div><b>' + esc(who(c.w)) + '</b><p>' + E(c.x) + '</p>' + (c.as ? '<small>' + I('user') + E(['مسند إلى ', 'Assigned to ']) + esc(who(c.as)) + (c.res ? ' · Resolved ✓' : '') + '</small>' : '') + '</div></div>').join('');
-    return shell(s, '<div class="cx-taskv"><div class="cx-tmain"><div class="cx-crumb">' + I('list') + E(s.title2 || ['التخطيط', 'Planning']) + '</div><div class="cx-ttl"' + K('tTitle') + '>' + E(s.title || '') + '</div>' +
-      '<div class="cx-props"><div><small>Status</small>' + st(s.st || 'todo', 'tStatus') + '</div><div><small>Assignees</small><span' + K('tWho') + '>' + ((s.who || []).length ? s.who.map(w => av(w)).join('') : '<span class="cx-empty">' + I('user') + '</span>') + '</span></div>' +
-      '<div><small>Dates</small><span class="cx-date"' + K('tDue') + '>' + E(s.due || 'Empty') + '</span></div><div><small>Priority</small>' + pr(s.prio, 'tPrio') + '</div>' +
-      (s.timer != null ? '<div><small>Track time</small><span class="cx-timer' + (s.run ? ' on' : '') + '"' + K('tTimer') + '>' + I(s.run ? 'pause' : 'play') + E(s.timer) + '</span></div>' : '') +
-      (s.est ? '<div><small>Time estimate</small><span class="cx-date"' + K('tEst') + '>' + E(s.est) + '</span></div>' : '') + '</div>' +
-      (s.desc ? '<p class="cx-desc"' + K('tDesc') + '>' + E(s.desc) + '</p>' : '') + subs + check + '</div>' +
-      '<div class="cx-tside"><div class="cx-tside-h"><b>Activity</b><span class="cx-watch"' + K('tWatch') + '>' + I('eye') + (s.watch != null ? s.watch : 2) + '</span></div>' + (s.act || []).map((a, i) => '<small class="cx-act"' + K('act' + i) + '>' + E(a) + '</small>').join('') + com +
+    const lab = (ic, t) => '<small>' + I(ic) + t + '</small>';
+    return shell(s, '<div class="cx-taskv"><div class="cx-tmain"><div class="cx-thead"><div class="cx-crumb">' + spav(['العمليات', 'Operations'], '#7b68ee', 'sm') + '<span>' + E(['العمليات', 'Operations']) + '</span><i>/</i><b>' + E(s.title2 || ['التخطيط', 'Planning']) + '</b></div><span class="cx-gap"></span><span class="cx-hb ai">' + I('sparkle') + 'Ask AI</span><span class="cx-hb">' + I('share') + 'Share</span></div>' +
+      '<span class="cx-ttype">' + dot(s.st || 'todo') + 'Task</span><div class="cx-ttl"' + K('tTitle') + '>' + E(s.title || '') + '</div>' +
+      '<div class="cx-props"><div>' + lab('check-circle', 'Status') + '<span class="cx-stw">' + st(s.st || 'todo', 'tStatus') + '<span class="cx-stok">' + I('check') + '</span></span></div><div>' + lab('users', 'Assignees') + '<span' + K('tWho') + '>' + ((s.who || []).length ? s.who.map(w => av(w)).join('') : '<span class="cx-empty">Empty</span>') + '</span></div>' +
+      '<div>' + lab('calendar', 'Dates') + '<span class="cx-date"' + K('tDue') + '>' + E(s.due || 'Empty') + '</span></div><div>' + lab('flag', 'Priority') + prl(s.prio, 'tPrio') + '</div>' +
+      (s.timer != null ? '<div>' + lab('timer', 'Track time') + '<span class="cx-timer' + (s.run ? ' on' : '') + '"' + K('tTimer') + '>' + I(s.run ? 'pause' : 'play') + E(s.timer) + '</span></div>' : '') +
+      (s.est ? '<div>' + lab('clock', 'Time estimate') + '<span class="cx-date"' + K('tEst') + '>' + E(s.est) + '</span></div>' : '') + '</div>' +
+      (s.desc ? '<p class="cx-desc"' + K('tDesc') + '>' + E(s.desc) + '</p>' : '<div class="cx-tadd">' + I('doc') + 'Add description<span class="cx-ai-w">' + I('sparkle') + 'Write with AI</span></div>') + subs + check +
+      (subs || check ? '' : '<div class="cx-tchips"><span>' + I('subtask') + 'Add subtask</span><span>' + I('checklist') + 'Checklist</span><span>' + I('clip') + 'Attach file</span></div>') + '</div>' +
+      '<div class="cx-tside"><div class="cx-tside-h"><b>Activity</b><span class="cx-watch"' + K('tWatch') + '>' + I('eye') + (s.watch != null ? s.watch : 2) + '</span></div>' + '<small class="cx-act">' + E(['أنشأتَ هذه المهمة', 'You created this task']) + '</small>' + (s.act || []).map((a, i) => '<small class="cx-act"' + K('act' + i) + '>' + E(a) + '</small>').join('') + com +
       '<div class="cx-in cbox"' + K('cBox') + '>' + E(s.cText || ['اكتب تعليقاً…', 'Write a comment…']) + '</div>' +
       (s.mention ? pop('mention', ['salim', 'maryam', 'khalid'].map(w => '<div class="cx-mi"' + K('mn-' + w) + '>' + av(w) + '<span>' + esc(who(w)) + '</span></div>').join(''), 'bottom:60px;inset-inline-end:20px;width:170px', '@') : '') + '</div>' + listPop(s) + '</div>', { noSide: true });
   };
