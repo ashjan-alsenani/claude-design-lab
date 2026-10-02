@@ -8,7 +8,7 @@ const vm = require('vm');
 
 const SRC = path.join(__dirname, '..', 'src');
 const FILES = ['i18n/core.js', 'content/core.js', 'content/lessons-1.js', 'content/lessons-2.js', 'content/lessons-3.js',
-  'content/tour.js', 'content/kb.js', 'content/course.js', 'content/en/core.js', 'content/en/lessons-1.js', 'content/en/lessons-2.js',
+  'content/tour.js', 'content/kb.js', 'content/course.js', 'content/c4-deep-1.js', 'content/c4-deep-2.js', 'content/c4-deep-3.js', 'content/courses.js', 'content/en/core.js', 'content/en/lessons-1.js', 'content/en/lessons-2.js',
   'content/en/lessons-3.js', 'app/knowledge.js'];
 
 const ctx = vm.createContext({ console });

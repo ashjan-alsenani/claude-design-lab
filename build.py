@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 SRC = ROOT / "src"
 
-CSS_FILES = ["styles.css", "tour.css", "home.css", "pages.css", "fun.css", "workshops.css", "community.css", "clicky.css", "course.css"]
+CSS_FILES = ["styles.css", "tour.css", "home.css", "pages.css", "fun.css", "workshops.css", "community.css", "clicky.css", "course.css", "cx.css"]
 JS_FILES = [
     "i18n/core.js",
     "content/core.js",
@@ -23,6 +23,10 @@ JS_FILES = [
     "content/tour.js",
     "content/kb.js",
     "content/course.js",
+    "content/c4-deep-1.js",
+    "content/c4-deep-2.js",
+    "content/c4-deep-3.js",
+    "content/courses.js",
     "content/en/core.js",
     "content/en/lessons-1.js",
     "content/en/lessons-2.js",
@@ -45,7 +49,8 @@ JS_FILES = [
     "app/workshops.js",
     "app/feedback.js",
     "app/forum.js",
-    "app/course.js",
+    "app/cx.js",
+    "app/courses.js",
     "app/knowledge.js",
     "app/clicky.js",
     "app/main.js",

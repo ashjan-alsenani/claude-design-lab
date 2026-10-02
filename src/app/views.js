@@ -46,11 +46,14 @@ function renderSidebar(route) {
     item('#/tour', 'compass', tx('جولة ClickUp', 'ClickUp tour'), cur === 'tour', '<span class="count num">' + tourDone() + '/12</span>') +
     item('#/library', 'book', tx('الدروس', 'Lessons'), cur === 'library' || (cur === 'lesson' && !last), '<span class="count num">' + done + '/' + LESSONS.length + '</span>') +
     (last ? item(lessonLink(last), 'play', tx('متابعة الدرس', 'Continue lesson'), cur === 'lesson') : '') +
-    item('#/course', 'sparkle', tx('دورة ClickUp 4.0', 'ClickUp 4.0'), cur === 'course', '<span class="count num">' + CourseProgress.count(COURSE.map(r => r[1])) + '/' + COURSE.length + '</span>') +
     item('#/workshops', 'robot', tx('الورش التفاعلية', 'Workshops'), cur === 'automations' || cur === 'workshops', '<span class="count num">4</span>') +
     item('#/lab', 'flask', tx('مختبر التطبيق', 'Practice Lab'), cur === 'lab') +
     item('#/questions', 'message', tx('الأسئلة الشائعة', 'Common questions'), cur === 'questions') +
     item('#/forum', 'users', tx('المنتدى', 'Forum'), cur === 'forum') +
+    '</ul></div>' +
+    '<div><p class="nav-group-title">' + tx('دورات للمبتدئين', 'Courses for beginners') + '</p><ul class="nav-list">' +
+    item('#/courses', 'book', tx('كل الدورات', 'All courses'), cur === 'courses' && !(route.params || [])[0]) +
+    COURSES.map(c => item('#/courses/' + c.id, c.ic, tp(c.short), cur === 'courses' && (route.params || [])[0] === c.id, '<span class="count num">' + CourseProgress.count(c.id, c.topics().map(t => t.id)) + '/' + c.topics().length + '</span>')).join('') +
     '</ul></div>' +
     '<div><p class="nav-group-title">' + tx('المساعدة والاقتراحات', 'Help & ideas') + '</p><ul class="nav-list">' +
     item('#/guide', 'bulb', tx('كيف تستخدم الموقع', 'How to use this site'), cur === 'guide') +

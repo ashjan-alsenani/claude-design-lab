@@ -171,16 +171,27 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   await p.click('[data-addsubs]'); await p.waitForTimeout(200);
   ok((await p.$$('.ai-sub')).length === 4, 'AI suggests subtasks that can be added');
 
-  // 4f2. ClickUp 4.0 course
-  await p.evaluate(() => { location.hash = '#/course'; }); await p.waitForTimeout(300);
+  // 4f2. Courses for beginners
+  await p.evaluate(() => { location.hash = '#/course/grouping'; }); await p.waitForTimeout(400);
+  ok(/#\/courses\/clickup4\/grouping$/.test(await p.evaluate(() => location.hash)), 'old course links redirect to the Courses section');
+  await p.evaluate(() => { location.hash = '#/courses'; }); await p.waitForTimeout(300);
+  ok(await p.$$eval('.cs-card[href]', x => x.length) >= 1 && !!(await p.$('.cs-soon')), 'courses hub lists the courses');
+  await p.evaluate(() => { location.hash = '#/courses/clickup4'; }); await p.waitForTimeout(300);
   ok(await p.$$eval('.co-list a', x => x.length) === 65 && await p.$$eval('details.co-sec', x => x.length) === 11, 'course lists 11 sections and 65 topics');
-  await p.evaluate(() => { location.hash = '#/course/hierarchy'; }); await p.waitForTimeout(300);
-  ok(await p.$$eval('.co-steps li', x => x.length) >= 3 && !!(await p.$('.co-tip')), 'course topic shows explanation, steps and a pro tip');
-  await p.click('[data-done]'); await p.waitForTimeout(150);
-  ok(await p.getAttribute('[data-done]', 'aria-pressed') === 'true', 'a course topic can be marked as done');
+  await p.evaluate(() => { location.hash = '#/courses/clickup4/hierarchy'; }); await p.waitForTimeout(400);
+  ok(!!(await p.$('.co-like')) && !!(await p.$('.cx-stage .cx-scene *')) && !!(await p.$('.co-flip')) && await p.$$eval('.co-opt', x => x.length) === 3, 'topic has idea, animated demo, mistake card and quiz');
+  await p.click('[data-cx-go="2"]'); await p.waitForTimeout(250);
+  ok(/3\//.test(await p.textContent('.cx-cap-n')), 'demo jumps to a chosen step');
+  await p.click('[data-try="0"]'); ok(await p.getAttribute('[data-try="0"]', 'aria-pressed') === 'true', 'a try-it step can be ticked');
+  await p.click('[data-flip]'); await p.waitForTimeout(100); ok(await p.$eval('.co-flip', e => e.classList.contains('on')), 'mistake card flips to the right way');
+  const ans = await p.evaluate(() => window.__hub.COURSES[0].topics().find(t => t.id === 'hierarchy').quiz.a);
+  await p.click('[data-opt="' + ans + '"]'); await p.waitForTimeout(150);
+  ok(await p.$eval('[data-opt="' + ans + '"]', e => e.classList.contains('right')) && !!(await p.$('[data-done2]')), 'right quiz answer is confirmed and offers mark as done');
+  await p.click('[data-done2]'); await p.waitForTimeout(100);
+  ok(await p.getAttribute('[data-done]', 'aria-pressed') === 'true', 'topic marked as done');
   await p.click('.co-nav .btn-primary'); await p.waitForTimeout(300);
-  ok(/course\/structure1$/.test(await p.evaluate(() => location.hash)), 'Next goes to the following topic');
-  await p.evaluate(() => { location.hash = '#/course/interview'; }); await p.waitForTimeout(300);
+  ok(/clickup4\/structure1$/.test(await p.evaluate(() => location.hash)), 'Next goes to the following topic');
+  await p.evaluate(() => { location.hash = '#/courses/clickup4/interview'; }); await p.waitForTimeout(300);
   await p.click('.co-q [data-reveal]'); ok(await p.isVisible('.co-model'), 'role play reveals a model answer');
   // 4g. Clicky chatbot, forum in the header, security
   ok(await p.isVisible('#topForum'), 'forum button in the header');

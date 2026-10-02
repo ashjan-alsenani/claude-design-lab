@@ -5,7 +5,8 @@
 const ROUTES = {
   home: { view: viewHome, title: () => tx('الرئيسية', 'Home') },
   tour: { view: viewTour, title: () => tx('جولة ClickUp', 'ClickUp tour') },
-  course: { view: viewCourse, title: () => tx('دورة ClickUp 4.0 للمبتدئين', 'ClickUp 4.0 for Beginners') },
+  courses: { view: viewCourses, title: () => tx('دورات للمبتدئين', 'Courses for beginners') },
+  course: { view: (m, p) => { location.replace('#/courses/clickup4' + (p[0] ? '/' + encodeURIComponent(p[0]) : '')); }, title: () => tx('دورات للمبتدئين', 'Courses for beginners') },
   forum: { view: viewForum, title: () => tx('منتدى ClickUp', 'ClickUp Forum') },
   workshops: { view: viewWorkshops, title: () => tx('الورش التفاعلية', 'Workshops') },
   automations: { view: viewAutomations, title: () => tx('ورشة الأتمتة', 'Automations workshop') },
@@ -24,6 +25,12 @@ const ROUTES = {
 };
 
 let currentCleanup = null, currentRoute = null;
+function courseRouteTitle(p) {
+  const c = p[0] && COURSE_BY_ID(p[0]); if (!c) return '';
+  if (p[1] === 'interview') return tx('تمثيل الأدوار', 'Role play') + ' · ' + tp(c.short);
+  const t = p[1] && c.topics().find(x => x.id === p[1]);
+  return t ? tp(t.t) : tp(c.title);
+}
 
 function parseHash() {
   const h = (location.hash || '#/home').replace(/^#\/?/, '');
@@ -52,7 +59,7 @@ function renderRoute(keepScroll, langSwitch) {
   const pageTitle = route.name === 'lesson' && LESSON[route.params[0]] ? LESSON[route.params[0]].title
     : route.name === 'tour' && TOUR_PART[route.params[0]] ? tp(TOUR_PART[route.params[0]].name)
     : route.name === 'workshops' && WS_DEF[route.params[0]] ? WS_DEF[route.params[0]].title()
-    : route.name === 'course' && route.params[0] && COURSE.find(r => r[1] === route.params[0]) ? tp(COURSE.find(r => r[1] === route.params[0])[2]) : def.title();
+    : route.name === 'courses' ? courseRouteTitle(route.params) || def.title() : def.title();
   document.title = pageTitle + site;
   renderSidebar(route); updateSoundBtn();
   $('#topForum').toggleAttribute('aria-current', route.name === 'forum');
@@ -293,7 +300,7 @@ function boot() {
   renderRoute();
   Clicky.init();
   setupLanguage();
-  if (location.protocol === 'file:') window.__hub = { setLanguage, get lang() { return LANG; }, errors: I18N.errors, content: { LESSONS, MODULES, GLOSSARY, QUIZZES, FAQ, PATHWAYS, COMMON_MISTAKES, RESOURCES, PEOPLE, LAB_LISTS, CHALLENGES, PRACTICAL, HOME_DEMO }, demoStr, Lab, Clicky, Knowledge };
+  if (location.protocol === 'file:') window.__hub = { setLanguage, get lang() { return LANG; }, errors: I18N.errors, content: { LESSONS, MODULES, GLOSSARY, QUIZZES, FAQ, PATHWAYS, COMMON_MISTAKES, RESOURCES, PEOPLE, LAB_LISTS, CHALLENGES, PRACTICAL, HOME_DEMO }, demoStr, Lab, Clicky, Knowledge, CX, COURSES };
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

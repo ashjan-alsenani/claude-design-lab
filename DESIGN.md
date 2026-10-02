@@ -174,25 +174,47 @@ The platform now leads with explaining ClickUp itself, before practice:
   - The saved answer "Is AI safe for company data?" no longer presents general advice as Omantel policy.
 - `tests/live-ai.js` repeats the live test on any server where the AI is switched on.
 
-## ClickUp 4.0 for Beginners course (#/course)
+## Courses for beginners (#/courses)
 
-- A new page in the sidebar, **ClickUp 4.0 / دورة ClickUp 4.0**, follows the requested outline: 11 sections, 65 topics and an interview role play.
-- **Content.** `src/content/course.js` holds every topic, written in our own words in Arabic and English:
-  - a friendly "In plain words" explanation;
-  - steps to try;
-  - a pro tip;
-  - a link to the matching site lesson or workshop.
-  
-  AI features (Brain, Knowledge Manager, Project Manager, Super Agents, AI Notetaker) are described as depending on plan and admin settings.
-- **Overview page.**
-  - hero with a progress ring;
-  - "What you'll learn" and "This course includes", which lists only what the site really offers (no video or certificate claims);
-  - collapsible sections, each with its own progress bar.
-- **Topic pages.**
-  - "Topic n of 65";
-  - mark as done (saved on this device);
-  - "Go deeper" link and "Ask Clicky about this";
-  - previous and next topic.
-- **Role play.** Five interview questions: type your answer, reveal a model answer, rate yourself.
-- Course topics are added to Clicky's knowledge source (`course:*` records), so the chatbot can cite them.
-- Code: `src/app/course.js`, `src/course.css`; tests in `tests/behave.js` and `tests/crawl.js`.
+A separate section of the site, with its own sidebar group **Courses for beginners / دورات للمبتدئين**:
+
+- **All courses** (`#/courses`): a card for every course, with level, size and progress, plus a "More courses coming soon" card.
+- **Course overview** (`#/courses/clickup4`): progress ring, "What you'll learn", "This course includes", collapsible sections with progress bars, and the role play. Old `#/course/...` links redirect here.
+- **Interactive topic** (`#/courses/clickup4/:topic`): every one of the 65 topics has the same flow, with sticky part buttons (Understand · Watch · Try · Check) that light up as you scroll:
+  1. **Understand**: the plain-words explanation, a deeper second paragraph, and a "Think of it like this" comparison.
+  2. **Watch how**: an animated simulation of ClickUp (see below), with captions, play/pause, step dots, replay and **Enlarge**. Enlarge opens full screen and turns sideways on portrait phones.
+  3. **Try it yourself**: the steps as a checklist you tick as you do them in ClickUp.
+  4. **A real workplace example** (fictional people and data).
+  5. **Common mistake**: a card that flips to show the right way.
+  6. **Quick check**: three options; a right answer explains why and offers "Mark as done", a wrong one shakes and points back to the explanation.
+  7. Pro tip, "Go deeper" link to the matching lesson or workshop, "Ask Clicky about this", and next/previous.
+- **Role play** (`#/courses/clickup4/interview`): five interview questions with model answers and self-rating.
+- **Progress** is saved per course on this device (`omantel-clickup-hub:course:<id>`). It is migrated from the earlier single-course key.
+
+### The "Watch how" engine (`src/app/cx.js`, `src/cx.css`)
+
+- **Screens.** A simplified, reconstructed ClickUp screen is drawn from a state object, with 30 screen types: list, board, calendar, gantt/timeline, table, whiteboard, workload, activity, doc, form, mind map, map, AI panel, Super Agent builder, meeting notetaker, task detail, chat, dashboard, import/export, templates, settings pages, trash, My Work/Notepad, automations, sign-in and journey.
+- **Steps.** Each step of a demo is a caption plus changes to the state. The engine animates the difference between steps:
+  - elements with the same `data-k` glide to their new place;
+  - new elements fade in;
+  - a pointer travels to the highlighted element, rings it and clicks;
+  - text can be typed in.
+- **Playback and accessibility.** It autoplays once when scrolled into view. With reduced motion it changes instantly and never autoplays. The stage is 820×470, scaled to fit, and mirrors in Arabic.
+- `CX.states(demo)` returns every step's state, for tests.
+
+### Content
+
+- **Files.**
+  - `src/content/course.js`: sections, topic titles, explanations, steps, tips and links, plus the interview.
+  - `src/content/c4-deep-1.js` to `c4-deep-3.js`: for each topic, the deeper paragraph, comparison, demo script, example, mistake and quiz, in Arabic and English.
+  - `src/content/courses.js`: the course registry.
+- **Hedging.** AI features (Brain, Knowledge Manager, Project Manager, Super Agents, AI Notetaker) are described as depending on plan and admin settings. Security topics point to the approved company policy.
+- **Clicky.** Course topics are in Clicky's knowledge source as `course:<topic>` records linking to `#/courses/clickup4/<topic>`.
+
+### Adding a course
+
+1. Write its content file(s) in `src/content/`: sections, and topics with `id`, `sec`, `t`, `explain`, `doit`, `tip`, and optionally `more`, `like`, `demo`, `ex`, `wrong`, `right`, `quiz` and `link`. All text is `[arabic, english]`.
+2. Add an entry to `COURSES` in `src/content/courses.js`: `id`, colour and gradient, level, short name, title, subtitle, "what you'll learn", `sections()`, `topics()`, and optionally `interview()`.
+3. Add the file(s) to `JS_FILES` in `build.py` and to `tools/export-knowledge.js`, then run `python3 build.py`.
+
+The hub card, sidebar link, overview, topic pages, progress and Clicky grounding all appear automatically. Demos are optional: a topic without `demo` simply skips "Watch how".
