@@ -3,7 +3,7 @@
 Status: **DESIGNED** (copy + concepts). Asset rendering is planned per the video system; nothing
 has been published. All claims are factual; no invented numbers.
 
-## One Click Bride
+## Bride Planner
 - Summary: an interactive wedding planner with countdown, guided checklist, budget, guests and vendors.
 - Audience: brides and families in the GCC planning a wedding in the next 3-12 months.
 - Main problem: details scattered in 40 chats, deadlines missed, budget creeping.
@@ -14,7 +14,7 @@ has been published. All claims are factual; no invented numbers.
   3. "باقي ٩٤ يوم، وأخيرًا هدوء." / "94 days to go, and finally calm."
 - Headlines: "Your whole wedding, calmly in one place." / "عرسك كله، بهدوء في مكان واحد."
 - CTAs: "Try the free demo" / "جرّبي العرض المجاني"; "Reserve at launch" / "احجزي عند الإطلاق".
-- Instagram caption (AR): "التجهيز للعرس ما لازم يكون فوضى ✨ ون كليك عروس يجمع المهام والميزانية والضيوف في لوحة وحدة. جرّبي العرض المجاني من الرابط في البايو."
+- Instagram caption (AR): "التجهيز للعرس ما لازم يكون فوضى ✨ مخطط العروس يجمع المهام والميزانية والضيوف في لوحة وحدة. جرّبي العرض المجاني من الرابط في البايو."
 - Reel (12-15 s): phone screen full of chat bubbles (0-2 s hook text) → bubbles collapse into the
   One Click list (mark draw-on transition) → ticking 3 tasks, progress ring fills → budget tab →
   end card "جهد أقل. حياة أكثر." + link.
@@ -25,19 +25,19 @@ has been published. All claims are factual; no invented numbers.
 - Visual: rose collection hue on cool neutral; real UI, no stock brides.
 - Landing message: "Know what's next, always."
 
-## One Click Grocery
+## Grocery List
 - Hooks: "قائمة الواتساب الطويلة؟ خلّها ترتب نفسها." / "That long chat list? Let it sort itself."
   "Know the total before the cashier does." / "اعرف المجموع قبل الكاشير."
 - Reel: messy chat list → items fly into sections → running total counts up in OMR → end card.
 - Carousel: "3 rules for a list that saves a second trip" (links to guide).
 - CTA: "Try the demo" / "جرّب العرض".
 
-## One Click Planner
+## Weekly Planner
 - Hooks: "Twelve tabs, five sticky notes, zero focus." / "Three priorities. That's the plan."
   "أسبوعك يبدأ الأحد ولا الاثنين؟"
 - Reel: Sunday-morning panic montage (UI-only) → week view → 3 checks per day → Thursday review.
 
-## One Click Fit
+## Fitness Tracker
 - Hooks: "Log a workout in 3 taps." / "سجّل تمرينك في ٣ ضغطات."
   "Consistency you can see." / "التزام تقدر تشوفه."
 - Guardrail: no body-transformation claims, no medical language, disclaimer in caption.

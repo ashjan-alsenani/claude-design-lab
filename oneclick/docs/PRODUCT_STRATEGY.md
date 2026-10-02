@@ -21,7 +21,7 @@ seasonal limited edition built from Planner components.
 
 ## Product cards
 
-### One Click Bride
+### Bride Planner
 - Problem: wedding details scattered across chats, notes and memory; deadlines and budget drift.
 - Audience: brides, grooms, families helping them (GCC first; works for any wedding).
 - Key benefit: always know the next task and where the money is going.
@@ -33,19 +33,19 @@ seasonal limited edition built from Planner components.
 - Reuse: checklist, progress ring, budget tracker, contacts table, export, countdown.
 - Risks: scope creep. Mitigation: MVP list above is fixed for v1.
 
-### One Click Grocery
+### Grocery List
 - Problem: lists in chat messages, forgotten items, duplicate purchases, surprise bills.
 - Audience: households, busy parents. MVP: sections, regulars/favorites, quantities, expected
   price + running total, multiple lists and stores, purchased status, offline-friendly.
 - Premium: shared household list (real-time), recurring schedules, price history.
 - Differentiator: speed, Arabic item library (المقاضي), totals in OMR.
 
-### One Click Planner
+### Weekly Planner
 - Problem: overloaded weeks, planners too empty or too complex.
 - MVP: three priorities per day, week view (Sun-Thu default), inbox, 5 habits, weekly review.
 - Premium: calendar sync, templates (Ramadan, exam week), goals.
 
-### One Click Fit
+### Fitness Tracker
 - Problem: no plan and no record, progress invisible.
 - MVP: weekly schedule, exercise library (AR/EN), sets/reps/weight log, consistency chart.
 - Guardrail: organization tool only; wellness disclaimer on page and in product; no medical,

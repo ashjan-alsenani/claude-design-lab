@@ -19,7 +19,7 @@ enter, what to send back, cost, whether it blocks development.
 Planning only where it helps execution. Create structure, docs, decisions, then build.
 
 ## 3. Brand name (locked)
-**One Click** (owner decision 2026-10-02; originally written "OneClick", briefly "One Click Digital Hub"). Products use "One Click + Product" (e.g. One Click Bride). No renaming or naming exercises. Before commercial launch:
+**One Click** (owner decision 2026-10-02; originally written "OneClick", briefly "One Click Digital Hub"). Products use "One Click + Product" (e.g. Bride Planner). No renaming or naming exercises. Before commercial launch:
 check domains, social handles, confusingly similar brands, obvious trademark risks; flag serious
 conflicts but never rename independently.
 

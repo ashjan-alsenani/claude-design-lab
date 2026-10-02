@@ -11,8 +11,8 @@ const UPDATED = "2026-10-02";
 export const products: Product[] = [
   {
     id: "prd_bride",
-    slug: "oneclick-bride",
-    name: { en: "One Click Bride", ar: "ون كليك عروس" },
+    slug: "bride-planner",
+    name: { en: "Bride Planner", ar: "مخطط العروس" },
     tagline: { en: "Your whole wedding, calmly in one place.", ar: "عرسك كله، بهدوء في مكان واحد." },
     summary: {
       en: "An interactive wedding planner with a live countdown, guided checklist, budget tracker, guest list and vendor notes. Built around how weddings in the Gulf are actually planned.",
@@ -68,8 +68,8 @@ export const products: Product[] = [
   },
   {
     id: "prd_grocery",
-    slug: "oneclick-grocery",
-    name: { en: "One Click Grocery", ar: "ون كليك مقاضي" },
+    slug: "grocery-list",
+    name: { en: "Grocery List", ar: "قائمة المقاضي" },
     tagline: { en: "Shop once. Forget nothing. Know the total.", ar: "تسوّق مرة. لا تنسى شي. واعرف المجموع." },
     summary: {
       en: "A fast, reusable shopping list that groups items by aisle, remembers your regulars and estimates the total before you reach the cashier.",
@@ -124,8 +124,8 @@ export const products: Product[] = [
   },
   {
     id: "prd_planner",
-    slug: "oneclick-planner",
-    name: { en: "One Click Planner", ar: "ون كليك مخطط" },
+    slug: "weekly-planner",
+    name: { en: "Weekly Planner", ar: "المخطط الأسبوعي" },
     tagline: { en: "A clear week, without a complicated system.", ar: "أسبوع واضح، بدون نظام معقد." },
     summary: {
       en: "A weekly planner that turns a busy week into three clear priorities a day, with time blocks, habits and a gentle end-of-week review.",
@@ -179,8 +179,8 @@ export const products: Product[] = [
   },
   {
     id: "prd_fit",
-    slug: "oneclick-fit",
-    name: { en: "One Click Fit", ar: "ون كليك لياقة" },
+    slug: "fitness-tracker",
+    name: { en: "Fitness Tracker", ar: "متابعة اللياقة" },
     tagline: { en: "Show up, log it, see your progress.", ar: "تمرّن، سجّل، وشوف تقدمك." },
     summary: {
       en: "A simple workout planner and log: plan your training week, record sets and reps, and watch your consistency grow.",
@@ -226,8 +226,8 @@ export const products: Product[] = [
     isNew: false,
     demo: "fit",
     disclaimer: {
-      en: "One Click Fit is an organization tool for general wellness. It does not provide medical advice, diagnosis or treatment. Consult a qualified professional before starting a new exercise program.",
-      ar: "ون كليك لياقة أداة تنظيم للعافية العامة. لا يقدم نصائح طبية أو تشخيصًا أو علاجًا. استشر مختصًا مؤهلًا قبل البدء ببرنامج تمارين جديد.",
+      en: "Fitness Tracker is an organization tool for general wellness. It does not provide medical advice, diagnosis or treatment. Consult a qualified professional before starting a new exercise program.",
+      ar: "متابعة اللياقة أداة تنظيم للعافية العامة. لا يقدم نصائح طبية أو تشخيصًا أو علاجًا. استشر مختصًا مؤهلًا قبل البدء ببرنامج تمارين جديد.",
     },
     faqs: [
       { q: { en: "Does it create a training program for me?", ar: "هل يسوي لي برنامج تمارين؟" }, a: { en: "No. It helps you organize and track the plan you choose. It is not a coaching or medical service.", ar: "لا. يساعدك تنظم وتتابع الخطة اللي تختارها. ليس خدمة تدريب أو خدمة طبية." } },
@@ -279,8 +279,8 @@ export const products: Product[] = [
   },
   {
     id: "prd_budget",
-    slug: "oneclick-budget",
-    name: { en: "One Click Budget", ar: "ون كليك ميزانية" },
+    slug: "budget-planner",
+    name: { en: "Budget Planner", ar: "مخطط الميزانية" },
     tagline: { en: "Know where the month went, and plan the next one.", ar: "اعرف وين راح الشهر، وخطط للي بعده." },
     summary: {
       en: "A monthly budget planner with salary-day planning, category limits and savings goals. Coming after the first launch wave.",
@@ -313,8 +313,8 @@ export const products: Product[] = [
   },
   {
     id: "prd_study",
-    slug: "oneclick-study",
-    name: { en: "One Click Study", ar: "ون كليك دراسة" },
+    slug: "study-planner",
+    name: { en: "Study Planner", ar: "مخطط الدراسة" },
     tagline: { en: "Exams planned backwards from the date that matters.", ar: "اختباراتك مخططة بالعكس من التاريخ المهم." },
     summary: {
       en: "A study planner that turns exam dates into a daily revision plan. Coming after the first launch wave.",
@@ -343,8 +343,8 @@ export const products: Product[] = [
   },
   {
     id: "prd_travel",
-    slug: "oneclick-travel",
-    name: { en: "One Click Travel", ar: "ون كليك سفر" },
+    slug: "travel-planner",
+    name: { en: "Travel Planner", ar: "مخطط السفر" },
     tagline: { en: "Itinerary, packing and budget for every trip.", ar: "البرنامج والشنطة والميزانية لكل رحلة." },
     summary: {
       en: "A trip planner for itineraries, bookings, packing lists and travel budgets. Coming after the first launch wave.",
@@ -428,8 +428,8 @@ function idea(p: {
 function ideas(): Product[] {
   return [
     idea({
-      id: "prd_ramadan", slug: "oneclick-ramadan", art: "ramadan", hue: "budget", price: 5,
-      name: { en: "One Click Ramadan", ar: "ون كليك رمضان" },
+      id: "prd_ramadan", slug: "ramadan-planner", art: "ramadan", hue: "budget", price: 5,
+      name: { en: "Ramadan Planner", ar: "مخطط رمضان" },
       tagline: { en: "A calm, organized Ramadan: worship, meals and family.", ar: "رمضان هادئ ومرتب: العبادة والفطور والعائلة." },
       summary: { en: "A seasonal planner for daily goals, Quran reading, iftar menus, gatherings and Eid preparation.", ar: "مخطط موسمي للأهداف اليومية، وورد القرآن، وقوائم الفطور، والعزايم، وتجهيزات العيد." },
       problem: { en: "Ramadan days fill up fast: cooking, gatherings and goals compete for the same hours.", ar: "أيام رمضان تمتلئ بسرعة: الطبخ والعزايم والأهداف تتنافس على نفس الوقت." },
@@ -440,8 +440,8 @@ function ideas(): Product[] {
       categories: ["life-productivity", "family-kids"], tags: ["ramadan", "seasonal", "family"],
     }),
     idea({
-      id: "prd_meal", slug: "oneclick-meals", art: "meal", hue: "grocery", price: 5,
-      name: { en: "One Click Meals", ar: "ون كليك وجبات" },
+      id: "prd_meal", slug: "meal-planner", art: "meal", hue: "grocery", price: 5,
+      name: { en: "Meal Planner", ar: "مخطط الوجبات" },
       tagline: { en: "Decide the week's meals once. Shop for them in one tap.", ar: "قرّر وجبات الأسبوع مرة وحدة، وتسوّق لها بضغطة." },
       summary: { en: "A weekly meal planner with family favorites that turns your menu into a grocery list.", ar: "مخطط وجبات أسبوعي فيه أكلات العائلة المفضلة، ويحوّل المنيو لقائمة مقاضي." },
       problem: { en: "\"What's for dinner?\" every single day, and a fridge that doesn't match the plan.", ar: "«وش نطبخ اليوم؟» كل يوم، والثلاجة ما تناسب الخطة." },
@@ -452,8 +452,8 @@ function ideas(): Product[] {
       categories: ["shopping-home", "health-fitness"], tags: ["meals", "cooking", "family"],
     }),
     idea({
-      id: "prd_baby", slug: "oneclick-baby", art: "baby", hue: "bride", price: 9,
-      name: { en: "One Click Baby", ar: "ون كليك بيبي" },
+      id: "prd_baby", slug: "baby-tracker", art: "baby", hue: "bride", price: 9,
+      name: { en: "Baby Tracker", ar: "متابعة البيبي" },
       tagline: { en: "Feeds, sleep and appointments, without the 3am guesswork.", ar: "الرضعات والنوم والمواعيد، بدون تخمين الساعة ٣ الفجر." },
       summary: { en: "A gentle tracker for new parents: feeding, sleep, diapers, vaccination dates and milestones.", ar: "متابعة لطيفة للأم والأب الجدد: الرضاعة والنوم والحفاضات ومواعيد التطعيم والمراحل." },
       problem: { en: "New parents are exhausted and every detail feels important.", ar: "الوالدين الجدد تعبانين وكل تفصيلة تحسها مهمة." },
@@ -465,8 +465,8 @@ function ideas(): Product[] {
       disclaimer: { en: "An organization tool, not medical advice. Always follow your doctor.", ar: "أداة تنظيم وليست نصيحة طبية. اتبع دائمًا تعليمات طبيبك." },
     }),
     idea({
-      id: "prd_home", slug: "oneclick-home", art: "home", hue: "grocery", price: 3.5,
-      name: { en: "One Click Home", ar: "ون كليك بيت" },
+      id: "prd_home", slug: "home-cleaning", art: "home", hue: "grocery", price: 3.5,
+      name: { en: "Home Cleaning", ar: "ترتيب البيت" },
       tagline: { en: "A clean home in small, shared steps.", ar: "بيت نظيف بخطوات صغيرة ومشتركة." },
       summary: { en: "A cleaning and home-care routine split by day and by family member.", ar: "روتين تنظيف وعناية بالبيت مقسم على الأيام وأفراد العائلة." },
       problem: { en: "The cleaning always lands on one person, all at once.", ar: "التنظيف دايمًا يطيح على شخص واحد، وكله مرة وحدة." },
@@ -477,8 +477,8 @@ function ideas(): Product[] {
       categories: ["shopping-home", "family-kids"], tags: ["cleaning", "home", "routine"],
     }),
     idea({
-      id: "prd_kids", slug: "oneclick-kids", art: "kids", hue: "study", price: 4,
-      name: { en: "One Click Kids", ar: "ون كليك أطفال" },
+      id: "prd_kids", slug: "kids-chores", art: "kids", hue: "study", price: 4,
+      name: { en: "Kids Chores", ar: "مهام الأطفال" },
       tagline: { en: "Chores and good habits kids actually enjoy.", ar: "مهام وعادات حلوة يحبها الأطفال." },
       summary: { en: "A colorful star chart for chores, homework and habits, with rewards you choose together.", ar: "لوحة نجوم ملونة للمهام والواجبات والعادات، مع مكافآت تختارونها مع بعض." },
       problem: { en: "Reminding kids ten times a day helps nobody.", ar: "التذكير عشر مرات في اليوم ما يفيد أحد." },
@@ -489,8 +489,8 @@ function ideas(): Product[] {
       categories: ["family-kids"], tags: ["kids", "chores", "habits"],
     }),
     idea({
-      id: "prd_party", slug: "oneclick-events", art: "party", hue: "bride", price: 9,
-      name: { en: "One Click Events", ar: "ون كليك مناسبات" },
+      id: "prd_party", slug: "event-planner", art: "party", hue: "bride", price: 9,
+      name: { en: "Event Planner", ar: "مخطط المناسبات" },
       tagline: { en: "Birthdays, graduations and gatherings, perfectly planned.", ar: "أعياد الميلاد والتخرج والعزايم، بتخطيط مثالي." },
       summary: { en: "Plan any occasion: guest list, RSVPs, budget, menu, decorations and a day-of timeline.", ar: "خطّط لأي مناسبة: قائمة الضيوف والردود والميزانية والمنيو والزينة وجدول اليوم." },
       problem: { en: "Every event becomes a mini wedding to organize.", ar: "كل مناسبة تصير عرس صغير يحتاج تنظيم." },
@@ -501,8 +501,8 @@ function ideas(): Product[] {
       categories: ["wedding-events"], tags: ["events", "party", "hosting"],
     }),
     idea({
-      id: "prd_gift", slug: "oneclick-gifts", art: "gift", hue: "fit", price: 3,
-      name: { en: "One Click Gifts", ar: "ون كليك هدايا" },
+      id: "prd_gift", slug: "gift-planner", art: "gift", hue: "fit", price: 3,
+      name: { en: "Gift Planner", ar: "مخطط الهدايا" },
       tagline: { en: "Never miss a birthday or an Eidiya again.", ar: "لا تنسى عيد ميلاد ولا عيدية بعد اليوم." },
       summary: { en: "Remember important dates, gift ideas, sizes and Eidiya budgets for everyone you love.", ar: "تذكّر المواعيد المهمة وأفكار الهدايا والمقاسات وميزانية العيادي لكل اللي تحبهم." },
       problem: { en: "Gift ideas come at random times and vanish before the occasion.", ar: "أفكار الهدايا تجي في أوقات عشوائية وتختفي قبل المناسبة." },
@@ -513,8 +513,8 @@ function ideas(): Product[] {
       categories: ["wedding-events", "family-kids"], tags: ["gifts", "eid", "birthdays"],
     }),
     idea({
-      id: "prd_habits", slug: "oneclick-habits", art: "habit", hue: "fit", price: 3,
-      name: { en: "One Click Habits", ar: "ون كليك عادات" },
+      id: "prd_habits", slug: "habit-tracker", art: "habit", hue: "fit", price: 3,
+      name: { en: "Habit Tracker", ar: "متابعة العادات" },
       tagline: { en: "Small habits, big streaks.", ar: "عادات صغيرة، واستمرار كبير." },
       summary: { en: "Track up to ten daily habits with streaks, gentle reminders and monthly heatmaps.", ar: "تابع لين عشر عادات يومية مع سلاسل الاستمرار وتذكير لطيف وخريطة شهرية." },
       problem: { en: "New habits fade after a week when progress is invisible.", ar: "العادات الجديدة تختفي بعد أسبوع لما ما تشوف تقدمك." },
@@ -525,8 +525,8 @@ function ideas(): Product[] {
       categories: ["life-productivity", "health-fitness"], tags: ["habits", "routine", "goals"],
     }),
     idea({
-      id: "prd_business", slug: "oneclick-business", art: "business", hue: "planner", price: 15,
-      name: { en: "One Click Business", ar: "ون كليك بزنس" },
+      id: "prd_business", slug: "business-organizer", art: "business", hue: "planner", price: 15,
+      name: { en: "Business Organizer", ar: "منظّم المشاريع" },
       tagline: { en: "Orders, customers and follow-ups for small businesses.", ar: "الطلبات والعملاء والمتابعة للمشاريع الصغيرة." },
       summary: { en: "An organizer for home and Instagram businesses: orders, customers, stock, deliveries and income.", ar: "منظّم للمشاريع المنزلية ومشاريع الانستقرام: الطلبات والعملاء والمخزون والتوصيل والدخل." },
       problem: { en: "Orders live in DMs and notebooks, and money is hard to track.", ar: "الطلبات في الرسائل والدفاتر، والفلوس صعب تتابعها." },
@@ -537,8 +537,8 @@ function ideas(): Product[] {
       categories: ["work-business"], tags: ["business", "orders", "customers"],
     }),
     idea({
-      id: "prd_umrah", slug: "oneclick-umrah", art: "travel", hue: "travel", price: 4,
-      name: { en: "One Click Umrah", ar: "ون كليك عمرة" },
+      id: "prd_umrah", slug: "umrah-planner", art: "travel", hue: "travel", price: 4,
+      name: { en: "Umrah Planner", ar: "مخطط العمرة" },
       tagline: { en: "Prepare calmly, travel lightly.", ar: "تجهيز هادئ، وسفر خفيف." },
       summary: { en: "A trip planner for Umrah: documents, packing, schedule and a family checklist.", ar: "مخطط رحلة العمرة: الأوراق والشنطة والجدول وقائمة العائلة." },
       problem: { en: "Preparing a family for Umrah has many small details to remember.", ar: "تجهيز العائلة للعمرة فيه تفاصيل صغيرة كثيرة." },

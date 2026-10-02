@@ -11,7 +11,7 @@ export const guides: Guide[] = [
     },
     category: "wedding-events",
     readingMinutes: 5,
-    relatedProduct: "oneclick-bride",
+    relatedProduct: "bride-planner",
     publishedAt: "2026-10-02",
     body: {
       en: [
@@ -65,7 +65,7 @@ export const guides: Guide[] = [
     },
     category: "shopping-home",
     readingMinutes: 4,
-    relatedProduct: "oneclick-grocery",
+    relatedProduct: "grocery-list",
     publishedAt: "2026-10-02",
     body: {
       en: [
@@ -101,7 +101,7 @@ export const guides: Guide[] = [
     },
     category: "life-productivity",
     readingMinutes: 3,
-    relatedProduct: "oneclick-planner",
+    relatedProduct: "weekly-planner",
     publishedAt: "2026-10-02",
     body: {
       en: [

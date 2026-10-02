@@ -22,11 +22,11 @@ assets (screens from live demos, brand shapes) → animation → voiceover plan 
 CTA → music direction (licensed/royalty-free) → end screen → cover → export (MP4 H.264) → upload
 to `video_assets` → queue in social plan (owner approval).
 
-## Example: "20-second awareness video about One Click Bride"
+## Example: "20-second awareness video about Bride Planner"
 | Time | Visual | Text (AR / EN) |
 |---|---|---|
 | 0-2 s | Stack of chat bubbles shaking | ٤٠ محادثة… / 40 chats… |
 | 2-5 s | Bubbles collapse, mark draws on | خلّيها مكان واحد / Make it one place |
 | 5-12 s | Bride demo: ticking tasks, ring fills to 57% | المهمة الجاية واضحة / Always know what's next |
 | 12-16 s | Budget tab, bars animate | الميزانية تحت السيطرة / Budget under control |
-| 16-20 s | End card | جهد أقل. حياة أكثر. · ون كليك عروس |
+| 16-20 s | End card | جهد أقل. حياة أكثر. · مخطط العروس |

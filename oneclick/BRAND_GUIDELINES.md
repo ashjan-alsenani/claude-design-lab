@@ -8,7 +8,7 @@ Status: **DESIGNED + BUILT LOCALLY** (v1, 2026-10-02). Source of truth for token
 | | English | Arabic |
 |---|---|---|
 | Name | One Click | ون كليك (the Latin wordmark is used in both languages) |
-| Product naming | One Click + product (One Click Bride, One Click Grocery…) | ون كليك + المنتج (ون كليك عروس، ون كليك مقاضي…) |
+| Product naming | One Click + product (Bride Planner, Grocery List…) | ون كليك + المنتج (مخطط العروس، قائمة المقاضي…) |
 | Primary slogan | Less effort. More life. | جهد أقل. حياة أكثر. |
 | Brand statement | One Click makes everyday life simpler with beautiful, useful digital tools. | ون كليك تجعل حياتك اليومية أبسط بأدوات رقمية جميلة ومفيدة. |
 | Hero line | Everyday life, made simpler. | يومك، صار أبسط. |

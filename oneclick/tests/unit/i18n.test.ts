@@ -52,7 +52,7 @@ describe("i18n", () => {
 describe("social links", () => {
   it("adds UTM parameters and points to the relevant page", () => {
     const url = new URL(utmLink("https://oneclick.example", "ar", launchPlan[1]));
-    expect(url.pathname).toBe("/ar/products/oneclick-bride");
+    expect(url.pathname).toBe("/ar/products/bride-planner");
     expect(url.searchParams.get("utm_source")).toBe("instagram");
     expect(url.searchParams.get("utm_campaign")).toBe("launch-bride");
   });

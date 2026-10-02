@@ -23,7 +23,7 @@ lilac, sky on warm off-white / deep indigo), Clicky mascot system, original prod
 
 **D15.** Owner instruction: the brand is **One Click**, short form **OCDH**
 (Arabic: ون كليك). Products keep the family pattern "One Click + Product" so they stay
-short and clearly connected (One Click Bride, One Click Grocery, One Click Planner, One Click Fit).
+short and clearly connected (Bride Planner, Grocery List, Weekly Planner, Fitness Tracker).
 The "closing loop" mark is unchanged. Lockup: mark + "One Click" with "DIGITAL HUB" set beneath;
 an "OCDH" monogram wordmark exists for tight spaces. Code folder name `oneclick/` and asset file
 names are technical identifiers and were left unchanged.
@@ -68,7 +68,7 @@ IBM Plex Sans Arabic.** See BRAND_GUIDELINES.md. Slogan: "Less effort. More life
 **D9. Arabic digits:** Arabic UI uses Arabic-Indic digits consistently via `Intl` (`ar-OM`),
 including prices. Easy to flip globally in `num()`/`formatMoney()` if the owner prefers Latin digits.
 
-**D10. Launch product set (wave 1): One Click Bride, One Click Grocery, One Click Planner, One Click Fit
+**D10. Launch product set (wave 1): Bride Planner, Grocery List, Weekly Planner, Fitness Tracker
 + free Weekly Reset Checklist (lead magnet).** Wave 2: Budget, Study, Travel. Reasoning in
 docs/PRODUCT_STRATEGY.md.
 
