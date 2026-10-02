@@ -172,7 +172,7 @@
 .cert-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 6px; font-weight: 700; }
 .cert-meta span { display: inline-flex; align-items: center; gap: 4px; }
 .cert-foot { display: flex; align-items: flex-end; gap: 12px; margin-top: 6px; }
-.cert-noor { height: 96px; width: auto; }
+.cert-aleen { height: 96px; width: auto; }
 .cert-sign { font-weight: 800; text-align: start; }
 .cert-sign small { color: var(--ink-soft); font-weight: 600; }
 .cert-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
@@ -191,5 +191,5 @@
 }
 @media print {
   .certificate { width: 100%; max-width: 900px; padding: 12px; }
-  .cert-noor { height: 120px; }
+  .cert-aleen { height: 120px; }
 }

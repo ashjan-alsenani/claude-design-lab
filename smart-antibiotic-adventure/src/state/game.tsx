@@ -7,6 +7,7 @@ export type Screen =
   | { name: 'map' }
   | { name: 'mission'; id: number }
   | { name: 'final' }
+  | { name: 'film' }
 
 export type TransitionKind = 'portal' | 'bubbles' | 'clouds'
 
@@ -67,7 +68,14 @@ export function unlockedUpTo(completed: Record<number, number>) {
 export function GameProvider({ children }: { children: ReactNode }) {
   const env = useEnv()
   const [saved, setSaved] = useState<Saved>(() => ({ ...EMPTY, ...storage.get<Saved>(KEY, EMPTY) }))
-  const [screen, setScreen] = useState<Screen>({ name: 'landing' })
+  const [screen, setScreen] = useState<Screen>(() =>
+    typeof location !== 'undefined' && (location.hash === '#film' || new URLSearchParams(location.search).has('record')) ? { name: 'film' } : { name: 'landing' },
+  )
+  // keep a shareable #film link for the movie page
+  useEffect(() => {
+    const want = screen.name === 'film' ? '#film' : ''
+    if (location.hash !== want) history.replaceState(null, '', location.pathname + location.search + want)
+  }, [screen.name])
   const [transition, setTransition] = useState<Game['transition']>({
     active: false,
     color: '#2f5bea',

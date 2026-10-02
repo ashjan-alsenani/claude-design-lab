@@ -4,7 +4,7 @@ import { useGame, type Point } from '../state/game'
 import { missionById, type Step } from '../data/missions'
 import { Hud } from '../components/Hud'
 import { Bursts, centerOf, Confetti, Speech, useBursts } from '../components/fx'
-import { Noor, type NoorMood } from '../art/Noor'
+import { Aleen, type AleenMood } from '../art/Aleen'
 import { Baktoro, type BaktoroMood } from '../art/Baktoro'
 import { Star } from '../art/objects'
 import { CastleScene, ClinicScene, ClockScene, GardenScene, LabScene } from '../art/scenes'
@@ -21,7 +21,7 @@ import './mission.css'
 export type StepApi = {
   correct: (origin: Point, opts?: { firstTry?: boolean; say?: string; points?: number }) => void
   wrong: (hint: string) => void
-  say: (text: string, mood?: NoorMood) => void
+  say: (text: string, mood?: AleenMood) => void
   baktoro: (mood: BaktoroMood, say?: string | null) => void
   burst: (p: Point, kind?: BurstSpec['kind'], n?: number) => void
   done: () => void
@@ -40,7 +40,7 @@ export function MissionScreen({ id }: { id: number }) {
   const [phase, setPhase] = useState<'intro' | 'play' | 'complete'>('intro')
   const [stepIndex, setStepIndex] = useState(0)
   const [mistakes, setMistakes] = useState(0)
-  const [noorMood, setNoorMood] = useState<NoorMood>('idle')
+  const [aleenMood, setAleenMood] = useState<AleenMood>('idle')
   const [moodKey, setMoodKey] = useState(0)
   const [speech, setSpeech] = useState(mission.intro)
   const [bk, setBk] = useState<{ mood: BaktoroMood; say: string | null }>({ mood: 'idle', say: null })
@@ -63,7 +63,7 @@ export function MissionScreen({ id }: { id: number }) {
     completeMission(id, earnedStars)
     sfx('mission')
     setConfetti((c) => c + 1)
-    setNoorMood('celebrate')
+    setAleenMood('celebrate')
     setSpeech(`أنهينا ${mission.place}! 🎉`)
     if (id !== 5) setBk({ mood: 'shocked', say: 'سأعود! 💨' })
   }
@@ -78,7 +78,7 @@ export function MissionScreen({ id }: { id: number }) {
       setEarned((e) => e + pts)
       burst(origin, 'stars', 12)
       sfx('correct')
-      setNoorMood('happy')
+      setAleenMood('happy')
       setMoodKey((k) => k + 1)
       setSpeech(opts?.say ?? CHEERS[Math.floor(Math.random() * CHEERS.length)])
       setBk({ mood: 'shocked', say: 'أوه لااا! 😱' })
@@ -88,14 +88,14 @@ export function MissionScreen({ id }: { id: number }) {
       mistakesRef.current += 1
       setMistakes(mistakesRef.current)
       sfx('wrong')
-      setNoorMood('tip')
+      setAleenMood('tip')
       setSpeech(hint)
       setBk({ mood: 'smug', say: TAUNTS[Math.floor(Math.random() * TAUNTS.length)] })
       later(() => setBk((b) => (b.mood === 'smug' ? { mood: 'idle', say: null } : b)), 2200)
     },
     say: (text, mood = 'tip') => {
       setSpeech(text)
-      setNoorMood(mood)
+      setAleenMood(mood)
       setMoodKey((k) => k + 1)
     },
     baktoro: (mood, say = null) => setBk({ mood, say }),
@@ -103,7 +103,7 @@ export function MissionScreen({ id }: { id: number }) {
     done: () => {
       if (stepIndex + 1 < mission.steps.length) {
         setStepIndex(stepIndex + 1)
-        setNoorMood('idle')
+        setAleenMood('idle')
       } else {
         finish()
       }
@@ -118,7 +118,7 @@ export function MissionScreen({ id }: { id: number }) {
     go({ name: 'map' }, { color: mission.color, origin: centerOf(e.currentTarget as Element), kind: 'clouds' })
 
   const progress = phase === 'complete' ? 1 : phase === 'intro' ? 0.02 : stepIndex / mission.steps.length
-  const noorH = env.portrait ? 150 : Math.min(440, Math.max(300, window.innerHeight * 0.52))
+  const aleenH = env.portrait ? 150 : Math.min(440, Math.max(300, window.innerHeight * 0.52))
 
   return (
     <main className={`mission theme-${id}`}>
@@ -126,13 +126,13 @@ export function MissionScreen({ id }: { id: number }) {
       <Hud progress={progress} label={`المهمة ${ar(id)}: ${mission.title}`} onBack={toMap} />
 
       <div className="stage">
-        <aside className="noor-col">
-          <div className="noor-speech">
-            <Speech who="نور" tail={env.portrait ? 'right' : 'bottom'} id={`${speech}-${moodKey}`}>
+        <aside className="aleen-col">
+          <div className="aleen-speech">
+            <Speech who="ألين" tail={env.portrait ? 'right' : 'bottom'} id={`${speech}-${moodKey}`}>
               {speech}
             </Speech>
           </div>
-          <Noor height={noorH} mood={noorMood} moodKey={moodKey} reduced={env.reducedMotion} />
+          <Aleen height={aleenH} mood={aleenMood} moodKey={moodKey} reduced={env.reducedMotion} />
         </aside>
 
         <section className="play" aria-live="polite">
@@ -171,7 +171,7 @@ export function MissionScreen({ id }: { id: number }) {
                   onClick={() => {
                     sfx('click')
                     setPhase('play')
-                    setNoorMood('idle')
+                    setAleenMood('idle')
                     setSpeech(stepSpeech(mission.steps[0]))
                   }}
                 >

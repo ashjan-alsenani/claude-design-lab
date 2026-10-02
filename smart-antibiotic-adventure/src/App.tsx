@@ -5,6 +5,7 @@ import { Landing } from './screens/Landing'
 import { MissionMap } from './screens/MissionMap'
 import { MissionScreen } from './screens/MissionScreen'
 import { Final } from './screens/Final'
+import { Film } from './screens/Film'
 
 function Screens() {
   const { screen, env } = useGame()
@@ -16,6 +17,7 @@ function Screens() {
         {screen.name === 'map' && <MissionMap />}
         {screen.name === 'mission' && <MissionScreen key={screen.id} id={screen.id} />}
         {screen.name === 'final' && <Final />}
+        {screen.name === 'film' && <Film />}
       </div>
       <FlyingStars />
       <TransitionOverlay />

@@ -200,9 +200,9 @@
 .node-check { position: absolute; top: 24%; right: 2%; }
 .node-sp { position: absolute; top: 10%; left: 10%; }
 
-/* ---- Noor token (positioned in map units, scaled to the box) ---- */
+/* ---- Aleen token (positioned in map units, scaled to the box) ---- */
 .token-track { position: absolute; top: 0; left: 0; z-index: 6; transform-origin: 0 0; pointer-events: none; }
-.noor-token {
+.aleen-token {
   position: absolute;
   top: 0;
   left: 0;
@@ -211,8 +211,8 @@
   offset-anchor: 50% 100%;
   translate: 46px -40px;
 }
-.map-scroll.tall .noor-token { width: 96px; translate: 64px -50px; }
-.noor-token img { width: 100%; height: auto; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 6px 6px rgb(23 32 107 / 0.35)); }
+.map-scroll.tall .aleen-token { width: 96px; translate: 64px -50px; }
+.aleen-token img { width: 100%; height: auto; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 6px 6px rgb(23 32 107 / 0.35)); }
 .token-shadow { position: absolute; bottom: -4px; left: 10%; right: 10%; height: 8px; border-radius: 50%; background: rgb(23 32 107 / 0.25); }
 
 .map-baktoro { position: absolute; z-index: 5; transform: translate(-50%, -50%); pointer-events: none; }

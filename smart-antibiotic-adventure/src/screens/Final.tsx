@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useGame } from '../state/game'
 import { CastleScene } from '../art/scenes'
-import { Noor } from '../art/Noor'
+import { Aleen } from '../art/Aleen'
 import { Baktoro } from '../art/Baktoro'
 import { MiniShield, Star, Sparkle } from '../art/objects'
 import { Icon, type IconName } from '../art/icons'
@@ -10,7 +10,7 @@ import { Hud } from '../components/Hud'
 import { Confetti, CountUp, centerOf } from '../components/fx'
 import { Floater } from '../components/Parallax'
 import { ar } from '../lib/env'
-import noorSrc from '../assets/noor.webp'
+import aleenSrc from '../assets/aleen.webp'
 import './final.css'
 
 const RULES: { icon: IconName; text: string }[] = [
@@ -151,6 +151,13 @@ export function Final() {
                 >
                   <span aria-hidden>↻</span> العب من جديد
                 </button>
+                <button
+                  type="button"
+                  className="btn3d small pink"
+                  onClick={(e) => go({ name: 'film' }, { color: '#ff5fa8', origin: centerOf(e.currentTarget), kind: 'portal' })}
+                >
+                  🎬 شاهد الفيلم
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
@@ -177,7 +184,7 @@ export function Final() {
               </motion.div>
             )}
           </AnimatePresence>
-          <Noor height={env.portrait ? 260 : Math.min(470, window.innerHeight * 0.58)} mood="celebrate" reduced={env.reducedMotion} />
+          <Aleen height={env.portrait ? 260 : Math.min(470, window.innerHeight * 0.58)} mood="celebrate" reduced={env.reducedMotion} />
           <div className="final-baktoro">
             <Baktoro mood="surrender" size={env.portrait ? 92 : 128} say="أستسلم! 🏳️" reduced={env.reducedMotion} />
           </div>
@@ -230,9 +237,9 @@ export function Final() {
                     <span>📅 {today}</span>
                   </div>
                   <div className="cert-foot">
-                    <img src={noorSrc} alt="" className="cert-noor" />
+                    <img src={aleenSrc} alt="" className="cert-aleen" />
                     <span className="cert-sign">
-                      توقيع: نور
+                      توقيع: ألين
                       <br />
                       <small>قائدة فريق مدينة الصحة</small>
                     </span>

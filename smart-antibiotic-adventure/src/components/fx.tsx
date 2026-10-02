@@ -355,7 +355,7 @@ export function TiltCard({ children, className = '', max = 10, disabled = false 
 /*  Speech bubble with typed-in reveal                                 */
 /* ------------------------------------------------------------------ */
 export function Speech({
-  who = 'نور',
+  who = 'ألين',
   children,
   tail = 'right',
   className = '',

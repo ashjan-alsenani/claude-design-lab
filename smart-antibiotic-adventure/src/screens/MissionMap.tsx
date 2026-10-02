@@ -8,7 +8,7 @@ import { Speech, TiltCard, centerOf } from '../components/fx'
 import { Baktoro } from '../art/Baktoro'
 import { CheckBadge, Cloud, Lock, Star, Sparkle, Capsule, Germ, Heart } from '../art/objects'
 import { Bubbles } from '../art/scenes'
-import noorSrc from '../assets/noor.webp'
+import aleenSrc from '../assets/aleen.webp'
 import { ar } from '../lib/env'
 import './map.css'
 
@@ -88,7 +88,7 @@ export function MissionMap() {
   const unlocked = unlockedUpTo(completed)
   const allDone = Object.keys(completed).length >= TOTAL_MISSIONS
   const target = allDone ? TOTAL_MISSIONS : unlocked
-  const [noorAt, setNoorAt] = useState(Math.min(mapNode, target))
+  const [aleenAt, setAleenAt] = useState(Math.min(mapNode, target))
   const [say, setSay] = useState<string>(
     allDone ? 'أنهيت كل المهمات! 🎉 هيا نحتفل في القلعة!' : unlocked === 1 ? 'اضغط على المهمة المضيئة لنبدأ!' : 'رائع! فُتحت مهمة جديدة ✨',
   )
@@ -107,16 +107,16 @@ export function MissionMap() {
   }, [])
   const gid = useId()
 
-  // Walk Noor from where she stood to the newly unlocked mission.
+  // Walk Aleen from where she stood to the newly unlocked mission.
   useEffect(() => {
-    if (noorAt === target) return
+    if (aleenAt === target) return
     const t = window.setTimeout(() => {
-      setNoorAt(target)
+      setAleenAt(target)
       setMapNode(target)
       sfx('pop')
     }, 650)
     return () => window.clearTimeout(t)
-  }, [noorAt, target, setMapNode, sfx])
+  }, [aleenAt, target, setMapNode, sfx])
 
   // On tall layouts scroll the current mission into view.
   useEffect(() => {
@@ -143,9 +143,16 @@ export function MissionMap() {
       <MapBackdrop />
       <Hud label="خريطة مدينة الصحة" />
       <div className="map-intro">
-        <Speech who="نور" tail="none" id={say}>
+        <Speech who="ألين" tail="none" id={say}>
           {say}
         </Speech>
+        <button
+          type="button"
+          className="btn3d small pink"
+          onClick={(e) => go({ name: 'film' }, { color: '#ff5fa8', origin: centerOf(e.currentTarget), kind: 'portal' })}
+        >
+          🎬 الفيلم
+        </button>
         {allDone && (
           <motion.button
             type="button"
@@ -264,19 +271,19 @@ export function MissionMap() {
             )
           })}
 
-          {/* Noor walks along the actual road (CSS offset-path in map units) */}
+          {/* Aleen walks along the actual road (CSS offset-path in map units) */}
           <div className="token-track" style={{ width: W, height: H, transform: `scale(${boxW / W})` }} aria-hidden>
             <motion.div
-              className="noor-token"
+              className="aleen-token"
               style={{ offsetPath: `path('${pathD}')` }}
               initial={false}
-              animate={{ offsetDistance: `${fractions[noorAt - 1] * 100}%` }}
+              animate={{ offsetDistance: `${fractions[aleenAt - 1] * 100}%` }}
               transition={env.reducedMotion ? { duration: 0 } : { duration: 1.4, ease: [0.65, 0, 0.35, 1] }}
             >
               <motion.img
-                src={noorSrc}
+                src={aleenSrc}
                 alt=""
-                key={noorAt}
+                key={aleenAt}
                 animate={env.reducedMotion ? undefined : { y: [0, -14, 0, -14, 0, -14, 0, -8, 0] }}
                 transition={{ duration: 1.4 }}
               />

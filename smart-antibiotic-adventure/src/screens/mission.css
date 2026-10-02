@@ -21,8 +21,8 @@
   padding: 0 24px 24px;
 }
 
-/* ---- Noor column (start side = right in RTL) ---- */
-.noor-col {
+/* ---- Aleen column (start side = right in RTL) ---- */
+.aleen-col {
   position: sticky;
   bottom: 16px;
   display: flex;
@@ -31,8 +31,8 @@
   gap: 10px;
   align-self: end;
 }
-.noor-speech { width: 100%; max-width: 330px; min-height: 96px; display: flex; align-items: flex-end; }
-.noor-speech .speech { width: 100%; }
+.aleen-speech { width: 100%; max-width: 330px; min-height: 96px; display: flex; align-items: flex-end; }
+.aleen-speech .speech { width: 100%; }
 
 /* ---- play area ---- */
 .play {
@@ -191,7 +191,7 @@
 .fact-card .fact-label { display: block; color: #c77800; font-weight: 800; font-size: 0.9em; }
 .next-row { display: flex; justify-content: center; }
 
-/* ---- responsive: Noor becomes a compact header row ---- */
+/* ---- responsive: Aleen becomes a compact header row ---- */
 @media (max-width: 860px), (max-aspect-ratio: 1/1) {
   .stage {
     grid-template-columns: 1fr;
@@ -199,7 +199,7 @@
     padding: 0 14px 28px;
     gap: 6px;
   }
-  .noor-col {
+  .aleen-col {
     position: relative;
     bottom: auto;
     flex-direction: row-reverse;
@@ -208,8 +208,8 @@
     gap: 6px;
     order: 0;
   }
-  .noor-speech { min-height: 0; max-width: none; flex: 1; align-self: center; }
-  .noor-speech .speech { font-size: 1rem; padding: 10px 14px 12px; }
+  .aleen-speech { min-height: 0; max-width: none; flex: 1; align-self: center; }
+  .aleen-speech .speech { font-size: 1rem; padding: 10px 14px 12px; }
   .play { min-height: 0; align-self: start; }
   .intro-card { margin-top: 70px; padding: 70px 18px 26px; }
   .bk-slot { top: -34px; left: -12px; }

@@ -4,7 +4,7 @@ import { useGame } from '../state/game'
 import { ar } from '../lib/env'
 import { CityScene, CITY_FLOATERS, CityFloaterArt } from '../art/scenes'
 import { Floater } from '../components/Parallax'
-import { Noor } from '../art/Noor'
+import { Aleen } from '../art/Aleen'
 import { Baktoro } from '../art/Baktoro'
 import { SoundToggle } from '../components/Hud'
 import { Bursts, centerOf, Speech, useBursts } from '../components/fx'
@@ -16,7 +16,7 @@ export function Landing() {
   const { bursts, burst, done } = useBursts()
   const started = Object.keys(completed).length > 0
   const floaters = env.lowPower || env.reducedMotion ? CITY_FLOATERS.slice(0, 6) : CITY_FLOATERS
-  const noorH = env.portrait ? Math.min(330, window.innerHeight * 0.42) : Math.min(560, window.innerHeight * 0.7)
+  const aleenH = env.portrait ? Math.min(330, window.innerHeight * 0.42) : Math.min(560, window.innerHeight * 0.7)
 
   const start = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (launching) return
@@ -24,7 +24,7 @@ export function Landing() {
     setLaunching(true)
     sfx('celebrate')
     burst(c, 'stars', 14)
-    // Let the rocket + Noor hop play briefly, then fly through the portal.
+    // Let the rocket + Aleen hop play briefly, then fly through the portal.
     window.setTimeout(() => go({ name: 'map' }, { color: '#2f5bea', origin: c, kind: 'portal' }), env.reducedMotion ? 80 : 420)
   }
 
@@ -86,17 +86,24 @@ export function Landing() {
                 🚀
               </span>
             </button>
+            <button
+              type="button"
+              className="btn3d pink film-btn"
+              onClick={(e) => go({ name: 'film' }, { color: '#ff5fa8', origin: centerOf(e.currentTarget), kind: 'portal' })}
+            >
+              🎬 شاهد فيلم ألين
+            </button>
             {started && <span className="landing-progress">أنهيت {ar(Object.keys(completed).length)} من ٥ مهمات ⭐</span>}
           </motion.div>
         </section>
 
         <div className="landing-hero">
           <div className="hero-bubble">
-            <Speech who="نور" tail="bottom" id="hello">
-              أنا نور! هيا نحمي مدينتنا معًا ✨
+            <Speech who="ألين" tail="bottom" id="hello">
+              أنا ألين! هيا نحمي مدينتنا معًا ✨
             </Speech>
           </div>
-          <Noor height={noorH} mood={launching ? 'happy' : 'idle'} reduced={env.reducedMotion} />
+          <Aleen height={aleenH} mood={launching ? 'happy' : 'idle'} reduced={env.reducedMotion} />
           <div className="hero-baktoro">
             <Baktoro mood="smug" size={env.portrait ? 96 : 130} say="هِهِه! أنا باكتورو 😈" reduced={env.reducedMotion} />
           </div>
