@@ -6158,6 +6158,253 @@
     "ar",
     "en"
    ]
+  },
+  {
+   "id": "course:e-intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة: إنشاء حساب واختيار الخطة",
+    "en": "Introduction: create an account and choose a plan"
+   },
+   "text": {
+    "ar": "تبدأ ClickUp بطريقتين: تسجيل جديد بعنوان بريدك، أو رابط دعوة يرسله لك زميل فتنضم إلى مساحة عمل فريقك مباشرة. والخطة المجانية (Free Forever) تكفي الفرق الصغيرة لتبدأ.\nYou start ClickUp in one of two ways: sign up with your email, or open an invitation link from a colleague to join your team’s Workspace directly. The Free Forever plan is enough for small teams to begin.\nفي الشركات غالباً تصلك دعوة من المسؤول، فلا تنشئ مساحة عمل جديدة بنفسك؛ اضغط Join من البريد. صفحة الأسعار تقارن الخطط: المجانية، ثم خطط مدفوعة تضيف مساحة تخزين أكبر وميزات متقدمة. ابدأ بالمجانية للتجربة، والقرار في الشركة عادة لفريق تقنية المعلومات.\nAt work you usually get an invitation from an admin, so do not create a new Workspace yourself; click Join in the email. The pricing page compares plans: Free, then paid plans that add more storage and advanced features. Start free to try it; at a company the plan decision usually belongs to IT.\nافتح بريد الدعوة واضغط Join Workspace (أو سجّل من clickup.com).\nأكمل اسمك واختر كلمة مرور قوية.\nاطّلع على صفحة الأسعار لتعرف ما تتضمنه الخطة المجانية.\nاستخدم بريد العمل في حساب العمل؛ ولا تخلط مهامك الشخصية بمساحة عمل الشركة.\nUse your work email for your work account, and keep personal tasks out of the company Workspace.\nانضمت موظفة جديدة في فريق الإعلام عبر رابط الدعوة، فوجدت مساحة «قناة الفيديو» ومهامها جاهزة من أول دقيقة.\nA new member of the media team joined through the invitation link and found the “Video channel” Space and her tasks ready from the first minute.",
+    "en": "تبدأ ClickUp بطريقتين: تسجيل جديد بعنوان بريدك، أو رابط دعوة يرسله لك زميل فتنضم إلى مساحة عمل فريقك مباشرة. والخطة المجانية (Free Forever) تكفي الفرق الصغيرة لتبدأ.\nYou start ClickUp in one of two ways: sign up with your email, or open an invitation link from a colleague to join your team’s Workspace directly. The Free Forever plan is enough for small teams to begin.\nفي الشركات غالباً تصلك دعوة من المسؤول، فلا تنشئ مساحة عمل جديدة بنفسك؛ اضغط Join من البريد. صفحة الأسعار تقارن الخطط: المجانية، ثم خطط مدفوعة تضيف مساحة تخزين أكبر وميزات متقدمة. ابدأ بالمجانية للتجربة، والقرار في الشركة عادة لفريق تقنية المعلومات.\nAt work you usually get an invitation from an admin, so do not create a new Workspace yourself; click Join in the email. The pricing page compares plans: Free, then paid plans that add more storage and advanced features. Start free to try it; at a company the plan decision usually belongs to IT.\nOpen the invitation email and click Join Workspace (or sign up at clickup.com).\nFill in your name and choose a strong password.\nLook at the pricing page to see what the Free plan includes.\nاستخدم بريد العمل في حساب العمل؛ ولا تخلط مهامك الشخصية بمساحة عمل الشركة.\nUse your work email for your work account, and keep personal tasks out of the company Workspace.\nانضمت موظفة جديدة في فريق الإعلام عبر رابط الدعوة، فوجدت مساحة «قناة الفيديو» ومهامها جاهزة من أول دقيقة.\nA new member of the media team joined through the invitation link and found the “Video channel” Space and her tasks ready from the first minute."
+   },
+   "url": "#/courses/clickup-start/e-intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-account",
+   "kind": "course",
+   "title": {
+    "ar": "الحساب والتعرف على أدوات التحكم الرئيسية",
+    "en": "Your account and the main controls"
+   },
+   "text": {
+    "ar": "بعد الدخول تعرّف على أربعة أماكن: الشريط العلوي (البحث وزر Create)، والقائمة الجانبية الداكنة (Home وInbox وغيرها)، وشريط المساحات، ومنطقة العمل في الوسط. ويمكنك تثبيت تطبيق سطح المكتب إن لم ترد العمل من المتصفح.\nAfter you log in, get to know four places: the top bar (Search and the Create button), the dark side rail (Home, Inbox and more), the Spaces sidebar, and the work area in the middle. You can install the desktop app if you prefer not to use the browser.\nتطبيق سطح المكتب متاح لـ Windows وMac وLinux في كل الخطط، ويقرّب الأفعال المتكررة: إنشاء مهمة، والتذكيرات، والبحث، والإشعارات. والتنظيم كله يقوم على هرم: مساحة العمل ← المساحات ← المجلدات ← القوائم ← المهام ← المهام الفرعية. احفظ Ctrl+K: يبحث في كل شيء.\nThe desktop app is available for Windows, Mac and Linux on every plan, and keeps frequent actions close: creating tasks, reminders, search and notifications. Everything is organised in a pyramid: Workspace → Spaces → Folders → Lists → tasks → subtasks. Remember Ctrl+K: it searches everything.\nسجّل الدخول من المتصفح أو ثبّت تطبيق سطح المكتب من clickup.com/download.\nمرّر على أيقونات القائمة الجانبية لترى أسماءها.\nاضغط Ctrl+K وجرّب البحث.\nافتح مساحة ثم قائمة ثم مهمة لترى الهرم.\nثبّت تطبيق سطح المكتب واجعله يعمل عند بدء التشغيل؛ تصلك الإشعارات دون فتح المتصفح.\nInstall the desktop app and let it start with your computer; notifications reach you without a browser.\nمحرر الفيديو ثبّت تطبيق سطح المكتب، فصار يرى إشعار «جاهز للمونتاج» فور تغيير الحالة دون البحث في المتصفح.\nThe video editor installed the desktop app, so he sees the “ready for editing” notification the moment the status changes, without hunting through the browser.",
+    "en": "بعد الدخول تعرّف على أربعة أماكن: الشريط العلوي (البحث وزر Create)، والقائمة الجانبية الداكنة (Home وInbox وغيرها)، وشريط المساحات، ومنطقة العمل في الوسط. ويمكنك تثبيت تطبيق سطح المكتب إن لم ترد العمل من المتصفح.\nAfter you log in, get to know four places: the top bar (Search and the Create button), the dark side rail (Home, Inbox and more), the Spaces sidebar, and the work area in the middle. You can install the desktop app if you prefer not to use the browser.\nتطبيق سطح المكتب متاح لـ Windows وMac وLinux في كل الخطط، ويقرّب الأفعال المتكررة: إنشاء مهمة، والتذكيرات، والبحث، والإشعارات. والتنظيم كله يقوم على هرم: مساحة العمل ← المساحات ← المجلدات ← القوائم ← المهام ← المهام الفرعية. احفظ Ctrl+K: يبحث في كل شيء.\nThe desktop app is available for Windows, Mac and Linux on every plan, and keeps frequent actions close: creating tasks, reminders, search and notifications. Everything is organised in a pyramid: Workspace → Spaces → Folders → Lists → tasks → subtasks. Remember Ctrl+K: it searches everything.\nLog in from the browser or install the desktop app from clickup.com/download.\nHover the side-rail icons to see their names.\nPress Ctrl+K and try searching.\nOpen a Space, then a List, then a task to see the pyramid.\nثبّت تطبيق سطح المكتب واجعله يعمل عند بدء التشغيل؛ تصلك الإشعارات دون فتح المتصفح.\nInstall the desktop app and let it start with your computer; notifications reach you without a browser.\nمحرر الفيديو ثبّت تطبيق سطح المكتب، فصار يرى إشعار «جاهز للمونتاج» فور تغيير الحالة دون البحث في المتصفح.\nThe video editor installed the desktop app, so he sees the “ready for editing” notification the moment the status changes, without hunting through the browser."
+   },
+   "url": "#/courses/clickup-start/e-account",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-settings",
+   "kind": "course",
+   "title": {
+    "ar": "الإعدادات والإجراءات السريعة",
+    "en": "Settings and quick actions"
+   },
+   "text": {
+    "ar": "زر Create يفتح إجراءات سريعة: مهمة، تذكير، رسالة دردشة، مستند، لوح أبيض، لوحة معلومات. وصفحة My Tasks (Home) وصندوق Inbox يجمعان عملك وإشعاراتك في مكان واحد.\nThe Create button opens quick actions: task, reminder, chat message, Doc, Whiteboard, Dashboard. The My Tasks page (Home) and the Inbox collect your work and notifications in one place.\nعند إنشاء مهمة من النافذة السريعة تختار القائمة والمسؤول والتاريخ والأولوية قبل الحفظ. التذكير شخصي لك فقط. وفي الإعدادات (من صورتك) تضبط ملفك، والإشعارات التي تصلك، والمنطقة الزمنية. My Tasks يرتب مهامك إلى: اليوم، متأخرة، القادمة، بلا موعد.\nWhen you create a task from the quick window you choose the List, assignee, date and priority before saving. A reminder is just for you. In Settings (from your avatar) you set your profile, which notifications you get, and your time zone. My Tasks sorts your work into Today, Overdue, Next and Unscheduled.\nاضغط Create في الأعلى وجرّب Task.\nأنشئ تذكيراً لنفسك لاجتماع الغد.\nافتح My Tasks وراجع أقسام اليوم والمتأخرة.\nمن صورتك ← Settings اضبط المنطقة الزمنية والإشعارات.\nابدأ يومك من My Tasks لا من القوائم؛ يجمع لك ما يخصك من كل المساحات.\nStart your day in My Tasks, not in Lists; it gathers your work from every Space.\nمنسقة الرعايات كانت تكتب تذكيراتها على أوراق لاصقة. الآن تضغط Create ← Reminder، فيظهر التذكير في My Tasks وعلى جوالها.\nThe sponsorship coordinator used to write reminders on sticky notes. Now she clicks Create → Reminder, and it shows in My Tasks and on her phone.",
+    "en": "زر Create يفتح إجراءات سريعة: مهمة، تذكير، رسالة دردشة، مستند، لوح أبيض، لوحة معلومات. وصفحة My Tasks (Home) وصندوق Inbox يجمعان عملك وإشعاراتك في مكان واحد.\nThe Create button opens quick actions: task, reminder, chat message, Doc, Whiteboard, Dashboard. The My Tasks page (Home) and the Inbox collect your work and notifications in one place.\nعند إنشاء مهمة من النافذة السريعة تختار القائمة والمسؤول والتاريخ والأولوية قبل الحفظ. التذكير شخصي لك فقط. وفي الإعدادات (من صورتك) تضبط ملفك، والإشعارات التي تصلك، والمنطقة الزمنية. My Tasks يرتب مهامك إلى: اليوم، متأخرة، القادمة، بلا موعد.\nWhen you create a task from the quick window you choose the List, assignee, date and priority before saving. A reminder is just for you. In Settings (from your avatar) you set your profile, which notifications you get, and your time zone. My Tasks sorts your work into Today, Overdue, Next and Unscheduled.\nClick Create at the top and try Task.\nCreate a reminder for tomorrow’s meeting.\nOpen My Tasks and review Today and Overdue.\nFrom your avatar → Settings, set your time zone and notifications.\nابدأ يومك من My Tasks لا من القوائم؛ يجمع لك ما يخصك من كل المساحات.\nStart your day in My Tasks, not in Lists; it gathers your work from every Space.\nمنسقة الرعايات كانت تكتب تذكيراتها على أوراق لاصقة. الآن تضغط Create ← Reminder، فيظهر التذكير في My Tasks وعلى جوالها.\nThe sponsorship coordinator used to write reminders on sticky notes. Now she clicks Create → Reminder, and it shows in My Tasks and on her phone."
+   },
+   "url": "#/courses/clickup-start/e-settings",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-build",
+   "kind": "course",
+   "title": {
+    "ar": "ماذا يمكنك أن تبني؟ مثال قناة فيديو",
+    "en": "What you can build: a video channel example"
+   },
+   "text": {
+    "ar": "قاعدة بسيطة: مساحة عمل واحدة للمؤسسة، ومساحة لكل قناة أو قسم، ثم مجلدات للمشاريع (الرعايات، التسويق بالعمولة، الاستشارات، الفيديوهات)، وقوائم للمراحل، ومهام فرعية للخطوات مثل كتابة النص والمونتاج.\nA simple rule: one Workspace for the organisation, one Space per channel or department, then Folders for projects (sponsorships, affiliates, consultations, videos), Lists for stages, and subtasks for steps such as writing the script and editing.\nلا تنشئ مساحة عمل ثانية لكل فريق: الأشخاص والتقارير يتفرقون. المساحة تحدد من يرى ماذا، والمجلد يجمع المشروع، والقائمة تجمع نوعاً من العمل. مهمة «فيديو جديد» يمكن أن تحوي مهاماً فرعية: النص، التصوير، المونتاج، النشر، ولكل منها مسؤول.\nDo not create a second Workspace for each team: people and reports get split up. A Space sets who sees what, a Folder groups the project, and a List groups one kind of work. A “New video” task can hold subtasks: script, filming, editing, publishing, each with its own owner.\nارسم هيكلك على ورقة: مساحة لكل قناة أو قسم.\nحدد المجلدات: مشروع أو مجال عمل لكل مجلد.\nحدد القوائم والمراحل داخل كل مجلد.\nابنِ الهيكل في ClickUp كما رسمته.\nإن احترت بين مجلد وقائمة: إذا كان له بداية ونهاية فهو مشروع (مجلد)؛ وإن كان عملاً مستمراً فهو قائمة.\nIf unsure between a Folder and a List: if it has a start and an end it is a project (Folder); if it is ongoing work it is a List.\nفريق الإعلام كان يستخدم ثلاث مساحات عمل مختلفة فضاعت التقارير. دمجوها في مساحة عمل واحدة بمساحة لكل قناة، فصار المدير يرى كل شيء في لوحة واحدة.\nThe media team used three separate Workspaces and reports got lost. They merged them into one Workspace with a Space per channel, and the manager now sees everything on one Dashboard.",
+    "en": "قاعدة بسيطة: مساحة عمل واحدة للمؤسسة، ومساحة لكل قناة أو قسم، ثم مجلدات للمشاريع (الرعايات، التسويق بالعمولة، الاستشارات، الفيديوهات)، وقوائم للمراحل، ومهام فرعية للخطوات مثل كتابة النص والمونتاج.\nA simple rule: one Workspace for the organisation, one Space per channel or department, then Folders for projects (sponsorships, affiliates, consultations, videos), Lists for stages, and subtasks for steps such as writing the script and editing.\nلا تنشئ مساحة عمل ثانية لكل فريق: الأشخاص والتقارير يتفرقون. المساحة تحدد من يرى ماذا، والمجلد يجمع المشروع، والقائمة تجمع نوعاً من العمل. مهمة «فيديو جديد» يمكن أن تحوي مهاماً فرعية: النص، التصوير، المونتاج، النشر، ولكل منها مسؤول.\nDo not create a second Workspace for each team: people and reports get split up. A Space sets who sees what, a Folder groups the project, and a List groups one kind of work. A “New video” task can hold subtasks: script, filming, editing, publishing, each with its own owner.\nSketch your structure on paper: one Space per channel or department.\nDecide the Folders: one project or work area each.\nDecide the Lists and stages inside each Folder.\nBuild it in ClickUp as you sketched it.\nإن احترت بين مجلد وقائمة: إذا كان له بداية ونهاية فهو مشروع (مجلد)؛ وإن كان عملاً مستمراً فهو قائمة.\nIf unsure between a Folder and a List: if it has a start and an end it is a project (Folder); if it is ongoing work it is a List.\nفريق الإعلام كان يستخدم ثلاث مساحات عمل مختلفة فضاعت التقارير. دمجوها في مساحة عمل واحدة بمساحة لكل قناة، فصار المدير يرى كل شيء في لوحة واحدة.\nThe media team used three separate Workspaces and reports got lost. They merged them into one Workspace with a Space per channel, and the manager now sees everything on one Dashboard."
+   },
+   "url": "#/courses/clickup-start/e-build",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-hier",
+   "kind": "course",
+   "title": {
+    "ar": "هيكل ClickUp: مساحة العمل والأعضاء والحالات",
+    "en": "The ClickUp hierarchy: Workspace, members and statuses"
+   },
+   "text": {
+    "ar": "عند إنشاء مساحة عمل تختار استخدامها (عمل، دراسة، شخصي)، ثم تدعو الأعضاء، ثم تنشئ المساحات وتخصصها بأيقونة ولون وقالب وحالات مهام مثل: TO DO، IN PROGRESS، COMPLETE.\nWhen you create a Workspace you choose its use (work, school, personal), invite members, then create Spaces and customise them with an icon, colour, template and task statuses such as TO DO, IN PROGRESS and COMPLETE.\nالحالات هي مراحل العمل، وتُضبط على مستوى المساحة أو المجلد أو القائمة. ابدأ بثلاث حالات بسيطة ثم أضف ما يلزم فعلاً، مثل «مراجعة» أو «بانتظار الراعي». الحالة النهائية (Closed) تعني أن العمل انتهى، وتُخفى المهام المغلقة من القوائم افتراضياً.\nStatuses are the stages of work, set at Space, Folder or List level. Start with three simple statuses, then add only what you really need, such as “Review” or “Waiting for sponsor”. The final (Closed) status means the work is done, and closed tasks are hidden from lists by default.\nأنشئ مساحة عمل واختر نوع الاستخدام.\nادعُ الأعضاء ببريدهم.\nأنشئ مساحة واختر لها أيقونة ولوناً.\nاضبط الحالات: TO DO وIN PROGRESS وCOMPLETE.\nلا تتجاوز خمس حالات في البداية؛ كثرة الحالات تجعل الناس يتجاهلون تحديثها.\nDo not go beyond five statuses at first; too many and people stop updating them.\nالبودكاست كان يستخدم 9 حالات فلا يحدّثها أحد. خفضوها إلى أربع: فكرة، تسجيل، مونتاج، منشور؛ فصارت محدثة دائماً.\nThe podcast used 9 statuses and nobody updated them. They cut them to four: idea, recording, editing, published; now they are always up to date.",
+    "en": "عند إنشاء مساحة عمل تختار استخدامها (عمل، دراسة، شخصي)، ثم تدعو الأعضاء، ثم تنشئ المساحات وتخصصها بأيقونة ولون وقالب وحالات مهام مثل: TO DO، IN PROGRESS، COMPLETE.\nWhen you create a Workspace you choose its use (work, school, personal), invite members, then create Spaces and customise them with an icon, colour, template and task statuses such as TO DO, IN PROGRESS and COMPLETE.\nالحالات هي مراحل العمل، وتُضبط على مستوى المساحة أو المجلد أو القائمة. ابدأ بثلاث حالات بسيطة ثم أضف ما يلزم فعلاً، مثل «مراجعة» أو «بانتظار الراعي». الحالة النهائية (Closed) تعني أن العمل انتهى، وتُخفى المهام المغلقة من القوائم افتراضياً.\nStatuses are the stages of work, set at Space, Folder or List level. Start with three simple statuses, then add only what you really need, such as “Review” or “Waiting for sponsor”. The final (Closed) status means the work is done, and closed tasks are hidden from lists by default.\nCreate a Workspace and choose how you will use it.\nInvite members by email.\nCreate a Space and pick an icon and colour.\nSet the statuses: TO DO, IN PROGRESS and COMPLETE.\nلا تتجاوز خمس حالات في البداية؛ كثرة الحالات تجعل الناس يتجاهلون تحديثها.\nDo not go beyond five statuses at first; too many and people stop updating them.\nالبودكاست كان يستخدم 9 حالات فلا يحدّثها أحد. خفضوها إلى أربع: فكرة، تسجيل، مونتاج، منشور؛ فصارت محدثة دائماً.\nThe podcast used 9 statuses and nobody updated them. They cut them to four: idea, recording, editing, published; now they are always up to date."
+   },
+   "url": "#/courses/clickup-start/e-hier",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-space",
+   "kind": "course",
+   "title": {
+    "ar": "كيف تضيف مساحة (Space)",
+    "en": "How to add a Space"
+   },
+   "text": {
+    "ar": "اضغط «+» بجانب Spaces، سمِّ المساحة، واختر لوناً وأيقونة، ثم قالباً أو إعدادات (الحالات، الأتمتة، الميزات). بعدها أنشئ المهام وجرّب طرق العرض: القائمة، واللوحة، والتقويم، ولوحة المعلومات.\nClick “+” next to Spaces, name the Space, pick a colour and icon, then a template or settings (statuses, automations, features). Then create tasks and try the views: List, Board, Calendar and Dashboard.\nالقالب يوفر عليك الإعداد: حالات وحقول جاهزة لنوع العمل (إدارة مشاريع، محتوى، دعم). الأتمتة ترتب العمل المتكرر، مثل إسناد المهمة للمحرر عند تغيير حالتها إلى «مونتاج». طرق العرض لا تنسخ المهام؛ هي نفس المهام بأشكال مختلفة.\nA template saves setup time: statuses and fields ready for a type of work (project management, content, support). Automations handle repeated work, such as assigning the editor when a task moves to “Editing”. Views do not copy tasks; they are the same tasks shown in different ways.\nاضغط «+» بجانب Spaces.\nاكتب الاسم واختر اللون والأيقونة.\nاختر قالباً أو حالات مناسبة، ثم Create.\nأنشئ مهمة وجرّب Board وCalendar.\nاستخدم لوناً مختلفاً لكل مساحة؛ يتعرّف عليها الجميع من نظرة في الشريط الجانبي.\nGive each Space its own colour; everyone recognises it at a glance in the sidebar.\nفريق الإعلام أنشأ مساحة «قناة الفيديو» من قالب محتوى. وجدوا حالات النشر جاهزة، فبدأوا العمل في نفس الساعة.\nThe media team created the “Video channel” Space from a content template. The publishing statuses were ready, so they started work within the hour.",
+    "en": "اضغط «+» بجانب Spaces، سمِّ المساحة، واختر لوناً وأيقونة، ثم قالباً أو إعدادات (الحالات، الأتمتة، الميزات). بعدها أنشئ المهام وجرّب طرق العرض: القائمة، واللوحة، والتقويم، ولوحة المعلومات.\nClick “+” next to Spaces, name the Space, pick a colour and icon, then a template or settings (statuses, automations, features). Then create tasks and try the views: List, Board, Calendar and Dashboard.\nالقالب يوفر عليك الإعداد: حالات وحقول جاهزة لنوع العمل (إدارة مشاريع، محتوى، دعم). الأتمتة ترتب العمل المتكرر، مثل إسناد المهمة للمحرر عند تغيير حالتها إلى «مونتاج». طرق العرض لا تنسخ المهام؛ هي نفس المهام بأشكال مختلفة.\nA template saves setup time: statuses and fields ready for a type of work (project management, content, support). Automations handle repeated work, such as assigning the editor when a task moves to “Editing”. Views do not copy tasks; they are the same tasks shown in different ways.\nClick “+” next to Spaces.\nType the name and choose the colour and icon.\nPick a template or suitable statuses, then Create.\nCreate a task and try Board and Calendar.\nاستخدم لوناً مختلفاً لكل مساحة؛ يتعرّف عليها الجميع من نظرة في الشريط الجانبي.\nGive each Space its own colour; everyone recognises it at a glance in the sidebar.\nفريق الإعلام أنشأ مساحة «قناة الفيديو» من قالب محتوى. وجدوا حالات النشر جاهزة، فبدأوا العمل في نفس الساعة.\nThe media team created the “Video channel” Space from a content template. The publishing statuses were ready, so they started work within the hour."
+   },
+   "url": "#/courses/clickup-start/e-space",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-space2",
+   "kind": "course",
+   "title": {
+    "ar": "إضافة مساحة - الجزء 2: المجلدات والصلاحيات",
+    "en": "Adding a Space, part 2: Folders and permissions"
+   },
+   "text": {
+    "ar": "داخل المساحة أنشئ مجلدات بأسماء واضحة، مثل «العملاء» و«مشاريع يوتيوب». حدد من يرى كل مساحة أو مجلد، وضع بجانب العمل مستنداته ولوحات المعلومات واللوح الأبيض.\nInside the Space, create clearly named Folders, such as “Clients” and “YouTube projects”. Decide who can see each Space or Folder, and keep Docs, Dashboards and Whiteboards next to the work.\nالصلاحيات: مساحة خاصة (Private) لا يراها إلا من تضيفه، ويمكن مشاركة مجلد أو قائمة مع شخص معيّن بمستوى: عرض، تعليق، تعديل، أو كامل. المستندات ولوحات المعلومات تعيش أيضاً داخل المساحة، فيجدها الفريق حيث يعمل.\nPermissions: a Private Space is visible only to people you add, and you can share a Folder or List with someone at a level: view, comment, edit or full. Docs and Dashboards also live inside the Space, so the team finds them where they work.\nمرّر على المساحة واضغط «+» ثم Folder.\nأنشئ «العملاء» و«مشاريع يوتيوب».\nمن «···» ← Sharing & Permissions حدد من يرى «العملاء».\nأضف مستنداً ولوحة معلومات داخل المساحة.\nاجعل مجلد «العملاء» خاصاً إن كان فيه أسعار وعقود؛ وشارك فقط من يحتاج.\nMake the “Clients” Folder private if it holds prices and contracts, and share it only with those who need it.\nمجلد «العملاء» فيه عقود الرعاية. جعلته المديرة خاصاً بفريق المبيعات، بينما بقي مجلد «مشاريع يوتيوب» مفتوحاً للفريق كله.\nThe “Clients” Folder holds sponsorship contracts. The manager made it private to the sales team, while “YouTube projects” stays open to the whole team.",
+    "en": "داخل المساحة أنشئ مجلدات بأسماء واضحة، مثل «العملاء» و«مشاريع يوتيوب». حدد من يرى كل مساحة أو مجلد، وضع بجانب العمل مستنداته ولوحات المعلومات واللوح الأبيض.\nInside the Space, create clearly named Folders, such as “Clients” and “YouTube projects”. Decide who can see each Space or Folder, and keep Docs, Dashboards and Whiteboards next to the work.\nالصلاحيات: مساحة خاصة (Private) لا يراها إلا من تضيفه، ويمكن مشاركة مجلد أو قائمة مع شخص معيّن بمستوى: عرض، تعليق، تعديل، أو كامل. المستندات ولوحات المعلومات تعيش أيضاً داخل المساحة، فيجدها الفريق حيث يعمل.\nPermissions: a Private Space is visible only to people you add, and you can share a Folder or List with someone at a level: view, comment, edit or full. Docs and Dashboards also live inside the Space, so the team finds them where they work.\nHover the Space, click “+”, then Folder.\nCreate “Clients” and “YouTube projects”.\nFrom “···” → Sharing & Permissions, choose who sees “Clients”.\nAdd a Doc and a Dashboard inside the Space.\nاجعل مجلد «العملاء» خاصاً إن كان فيه أسعار وعقود؛ وشارك فقط من يحتاج.\nMake the “Clients” Folder private if it holds prices and contracts, and share it only with those who need it.\nمجلد «العملاء» فيه عقود الرعاية. جعلته المديرة خاصاً بفريق المبيعات، بينما بقي مجلد «مشاريع يوتيوب» مفتوحاً للفريق كله.\nThe “Clients” Folder holds sponsorship contracts. The manager made it private to the sales team, while “YouTube projects” stays open to the whole team."
+   },
+   "url": "#/courses/clickup-start/e-space2",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-list",
+   "kind": "course",
+   "title": {
+    "ar": "كيف تضيف قائمة (List) وتبني أعمدتها",
+    "en": "How to add a List and its columns"
+   },
+   "text": {
+    "ar": "القائمة مكان المهام. أنشئها، ثم أضف المهام بأسمائها، وأسندها للأشخاص، وحدد تواريخ التسليم، وأضف أعمدة (حقولاً) مثل الوسوم، والمهام الفرعية للخطوات.\nA List is where tasks live. Create it, add tasks with names, assign them to people, set due dates, and add columns (fields) such as Tags, plus subtasks for the steps.\nزر «+» في رأس الأعمدة يضيف عموداً: حقل جاهز (مثل الوسوم والتقدير الزمني) أو حقل مخصص (قائمة منسدلة، رقم، مال، تاريخ). يمكنك دعوة متعاون للقائمة دون إعطائه المساحة كلها. الوسوم (Tags) كلمات قصيرة تساعد على التصفية، مثل «يوتيوب» أو «مونتاج».\nThe “+” at the end of the column headers adds a column: a built-in field (such as Tags or Time estimate) or a Custom Field (dropdown, number, money, date). You can invite a collaborator to a List without giving them the whole Space. Tags are short words that help filtering, such as “YouTube” or “Editing”.\nمرّر على المجلد واضغط «+» ثم List.\nاضغط Add Task واكتب اسم المهمة ثم Enter.\nأسند المهمة واختر تاريخ التسليم من الأعمدة.\nاضغط «+» في رأس الأعمدة وأضف Tags.\nاكتب اسم المهمة بفعل واضح: «صوّر لقاء العميل» أفضل من «لقاء العميل».\nName tasks with a clear verb: “Film the customer interview” beats “Customer interview”.\nكاتب النصوص يصفّي القائمة بوسم «نص» فيرى عمله فقط، والمحرر يصفّي بوسم «مونتاج».\nThe script writer filters the List by the “Script” tag to see only his work, and the editor filters by “Editing”.",
+    "en": "القائمة مكان المهام. أنشئها، ثم أضف المهام بأسمائها، وأسندها للأشخاص، وحدد تواريخ التسليم، وأضف أعمدة (حقولاً) مثل الوسوم، والمهام الفرعية للخطوات.\nA List is where tasks live. Create it, add tasks with names, assign them to people, set due dates, and add columns (fields) such as Tags, plus subtasks for the steps.\nزر «+» في رأس الأعمدة يضيف عموداً: حقل جاهز (مثل الوسوم والتقدير الزمني) أو حقل مخصص (قائمة منسدلة، رقم، مال، تاريخ). يمكنك دعوة متعاون للقائمة دون إعطائه المساحة كلها. الوسوم (Tags) كلمات قصيرة تساعد على التصفية، مثل «يوتيوب» أو «مونتاج».\nThe “+” at the end of the column headers adds a column: a built-in field (such as Tags or Time estimate) or a Custom Field (dropdown, number, money, date). You can invite a collaborator to a List without giving them the whole Space. Tags are short words that help filtering, such as “YouTube” or “Editing”.\nHover the Folder, click “+”, then List.\nClick Add Task, type the name, then Enter.\nAssign the task and pick a due date from the columns.\nClick “+” in the column headers and add Tags.\nاكتب اسم المهمة بفعل واضح: «صوّر لقاء العميل» أفضل من «لقاء العميل».\nName tasks with a clear verb: “Film the customer interview” beats “Customer interview”.\nكاتب النصوص يصفّي القائمة بوسم «نص» فيرى عمله فقط، والمحرر يصفّي بوسم «مونتاج».\nThe script writer filters the List by the “Script” tag to see only his work, and the editor filters by “Editing”."
+   },
+   "url": "#/courses/clickup-start/e-list",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-boardb",
+   "kind": "course",
+   "title": {
+    "ar": "أساسيات عرض اللوحة (Board)",
+    "en": "Board view basics"
+   },
+   "text": {
+    "ar": "في عرض Board تظهر كل حالة كعمود وكل مهمة كبطاقة. اسحب البطاقة من «قيد العمل» إلى «مكتمل» فتتغير حالتها. خصص البطاقات بالألوان والصور (الغلاف) والوسوم، وتابع التواريخ والأولويات.\nIn Board view each status is a column and each task is a card. Drag a card from “In progress” to “Complete” and its status changes. Customise cards with colours, cover images and tags, and keep an eye on dates and priorities.\nمن «Customize» تختار ما يظهر على البطاقة: المسؤول، التاريخ، الأولوية، الوسوم، وصورة الغلاف (أول صورة مرفقة). العمود المزدحم يكشف عنق الزجاجة: إذا امتلأ عمود «مراجعة» فالمراجعة هي ما يؤخر الفريق.\nFrom “Customize” you choose what shows on a card: assignee, date, priority, tags, and a cover image (the first attached image). A crowded column reveals the bottleneck: if “Review” is full, review is what slows the team.\nافتح القائمة واضغط Board.\nاسحب بطاقة إلى العمود التالي.\nمن Customize فعّل الغلاف والوسوم.\nراقب أي عمود يمتلئ أكثر.\nأرفق صورة مصغرة الفيديو بالمهمة؛ تصبح غلاف البطاقة ويتعرف عليها الفريق فوراً.\nAttach the video thumbnail to the task; it becomes the card cover and the team recognises it instantly.\nفي اجتماع الأحد يفتح الفريق اللوحة. لاحظوا أن عمود «مراجعة» ممتلئ، فخصصت المديرة ساعة يومياً للمراجعة.\nIn the Sunday meeting the team opens the board. They saw the “Review” column was full, so the manager set aside an hour a day for review.",
+    "en": "في عرض Board تظهر كل حالة كعمود وكل مهمة كبطاقة. اسحب البطاقة من «قيد العمل» إلى «مكتمل» فتتغير حالتها. خصص البطاقات بالألوان والصور (الغلاف) والوسوم، وتابع التواريخ والأولويات.\nIn Board view each status is a column and each task is a card. Drag a card from “In progress” to “Complete” and its status changes. Customise cards with colours, cover images and tags, and keep an eye on dates and priorities.\nمن «Customize» تختار ما يظهر على البطاقة: المسؤول، التاريخ، الأولوية، الوسوم، وصورة الغلاف (أول صورة مرفقة). العمود المزدحم يكشف عنق الزجاجة: إذا امتلأ عمود «مراجعة» فالمراجعة هي ما يؤخر الفريق.\nFrom “Customize” you choose what shows on a card: assignee, date, priority, tags, and a cover image (the first attached image). A crowded column reveals the bottleneck: if “Review” is full, review is what slows the team.\nOpen the List and click Board.\nDrag a card to the next column.\nIn Customize, turn on cover images and tags.\nWatch which column fills up most.\nأرفق صورة مصغرة الفيديو بالمهمة؛ تصبح غلاف البطاقة ويتعرف عليها الفريق فوراً.\nAttach the video thumbnail to the task; it becomes the card cover and the team recognises it instantly.\nفي اجتماع الأحد يفتح الفريق اللوحة. لاحظوا أن عمود «مراجعة» ممتلئ، فخصصت المديرة ساعة يومياً للمراجعة.\nIn the Sunday meeting the team opens the board. They saw the “Review” column was full, so the manager set aside an hour a day for review."
+   },
+   "url": "#/courses/clickup-start/e-boardb",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-fields",
+   "kind": "course",
+   "title": {
+    "ar": "المهام والمسؤولون والأولويات والمواعيد",
+    "en": "Tasks, assignees, priorities and deadlines"
+   },
+   "text": {
+    "ar": "أضف المهام، وأسند كل واحدة لشخص، وحدد أولويتها (عاجلة، عالية، عادية، منخفضة) وموعد تسليمها. ثم حرّكها بين الحالات وتابع التقدم وحمل كل شخص.\nAdd tasks, assign each one to a person, set its priority (Urgent, High, Normal, Low) and deadline. Then move it between statuses and follow progress and each person’s workload.\nالأولوية تخبر الفريق بما يبدأ أولاً، لا بما هو مهم فقط؛ لا تجعل كل شيء «عاجلاً». التاريخ المتأخر يظهر باللون الأحمر. التجميع حسب المسؤول يريك حمل كل شخص بسرعة، فإن كان أحدهم مثقلاً انقل مهمة لزميل.\nPriority tells the team what to start first, not just what matters; do not make everything “Urgent”. Overdue dates show in red. Grouping by assignee shows each person’s load quickly; if someone is overloaded, move a task to a colleague.\nأضف مهمة واضغط على عمود الأولوية.\nاختر Urgent فقط إن كانت فعلاً لا تنتظر.\nحدد تاريخ التسليم والمسؤول.\nجمّع حسب Assignee لترى حمل كل شخص.\nاتفقوا كفريق على معنى كل أولوية؛ مثلاً «عاجل = خلال 24 ساعة».\nAgree as a team on what each priority means; for example, “Urgent = within 24 hours”.\nكانت كل مهام القناة «عاجلة». بعد الاتفاق على أن العاجل خلال 24 ساعة فقط، صار الفريق يعرف بماذا يبدأ صباحاً.\nEvery channel task used to be “Urgent”. After agreeing that urgent means within 24 hours, the team knows what to start with each morning.",
+    "en": "أضف المهام، وأسند كل واحدة لشخص، وحدد أولويتها (عاجلة، عالية، عادية، منخفضة) وموعد تسليمها. ثم حرّكها بين الحالات وتابع التقدم وحمل كل شخص.\nAdd tasks, assign each one to a person, set its priority (Urgent, High, Normal, Low) and deadline. Then move it between statuses and follow progress and each person’s workload.\nالأولوية تخبر الفريق بما يبدأ أولاً، لا بما هو مهم فقط؛ لا تجعل كل شيء «عاجلاً». التاريخ المتأخر يظهر باللون الأحمر. التجميع حسب المسؤول يريك حمل كل شخص بسرعة، فإن كان أحدهم مثقلاً انقل مهمة لزميل.\nPriority tells the team what to start first, not just what matters; do not make everything “Urgent”. Overdue dates show in red. Grouping by assignee shows each person’s load quickly; if someone is overloaded, move a task to a colleague.\nAdd a task and click its priority column.\nChoose Urgent only if it truly cannot wait.\nSet the due date and assignee.\nGroup by Assignee to see each person’s load.\nاتفقوا كفريق على معنى كل أولوية؛ مثلاً «عاجل = خلال 24 ساعة».\nAgree as a team on what each priority means; for example, “Urgent = within 24 hours”.\nكانت كل مهام القناة «عاجلة». بعد الاتفاق على أن العاجل خلال 24 ساعة فقط، صار الفريق يعرف بماذا يبدأ صباحاً.\nEvery channel task used to be “Urgent”. After agreeing that urgent means within 24 hours, the team knows what to start with each morning."
+   },
+   "url": "#/courses/clickup-start/e-fields",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-task",
+   "kind": "course",
+   "title": {
+    "ar": "داخل المهمة: التواريخ والتقدير والمرفقات والتصويت",
+    "en": "Inside a task: dates, estimates, attachments and votes"
+   },
+   "text": {
+    "ar": "افتح المهمة لتدير تفاصيلها: المسؤول، وتاريخ البدء والتسليم، والأولوية، والتقدير الزمني، والمرفقات، وقائمة التحقق (Checklist)، وحتى التصويت لمعرفة رأي الفريق.\nOpen a task to manage its details: owner, start and due dates, priority, time estimate, attachments, a checklist, and even votes to learn what the team thinks.\nتاريخ البدء مع تاريخ التسليم يرسم المهمة كشريط في عرض Gantt والتقويم. التقدير الزمني يساعد Workload على حساب الحمل. قائمة التحقق لخطوات صغيرة لا تحتاج مسؤولاً منفصلاً. التصويت حقل مخصص (Voting) يفيد في اختيار الأفكار أو الأولويات.\nA start date plus a due date draws the task as a bar in Gantt and Calendar. A time estimate helps Workload measure the load. A checklist is for small steps that do not need their own owner. Voting is a Custom Field that helps choose ideas or priorities.\nافتح مهمة واضغط على Dates وحدد البدء والتسليم.\nأضف تقديراً زمنياً.\nأرفق ملفاً بالسحب والإفلات.\nأضف Checklist بالخطوات الصغيرة.\nإن كان مفعلاً: صوّت على المهمة.\nاستخدم Checklist لخطوات النشر الثابتة: العنوان، الصورة المصغرة، الوصف، الوسوم.\nUse a Checklist for fixed publishing steps: title, thumbnail, description, tags.\nقبل كل نشر، تفتح المحررة المهمة فتجد النص والصورة المصغرة مرفقين، وقائمة التحقق تذكرها بالوصف والوسوم.\nBefore every upload the editor opens the task and finds the script and thumbnail attached, and the checklist reminds her of the description and tags.",
+    "en": "افتح المهمة لتدير تفاصيلها: المسؤول، وتاريخ البدء والتسليم، والأولوية، والتقدير الزمني، والمرفقات، وقائمة التحقق (Checklist)، وحتى التصويت لمعرفة رأي الفريق.\nOpen a task to manage its details: owner, start and due dates, priority, time estimate, attachments, a checklist, and even votes to learn what the team thinks.\nتاريخ البدء مع تاريخ التسليم يرسم المهمة كشريط في عرض Gantt والتقويم. التقدير الزمني يساعد Workload على حساب الحمل. قائمة التحقق لخطوات صغيرة لا تحتاج مسؤولاً منفصلاً. التصويت حقل مخصص (Voting) يفيد في اختيار الأفكار أو الأولويات.\nA start date plus a due date draws the task as a bar in Gantt and Calendar. A time estimate helps Workload measure the load. A checklist is for small steps that do not need their own owner. Voting is a Custom Field that helps choose ideas or priorities.\nOpen a task, click Dates and set start and due.\nAdd a time estimate.\nAttach a file by drag and drop.\nAdd a Checklist with the small steps.\nIf it is turned on: vote on the task.\nاستخدم Checklist لخطوات النشر الثابتة: العنوان، الصورة المصغرة، الوصف، الوسوم.\nUse a Checklist for fixed publishing steps: title, thumbnail, description, tags.\nقبل كل نشر، تفتح المحررة المهمة فتجد النص والصورة المصغرة مرفقين، وقائمة التحقق تذكرها بالوصف والوسوم.\nBefore every upload the editor opens the task and finds the script and thumbnail attached, and the checklist reminds her of the description and tags."
+   },
+   "url": "#/courses/clickup-start/e-task",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-team",
+   "kind": "course",
+   "title": {
+    "ar": "استخدام عرض الفريق (Team view)",
+    "en": "Using Team view"
+   },
+   "text": {
+    "ar": "عرض الفريق (Team view، كان اسمه Box view) يضع كل شخص في صندوق: ماذا ينجز، وماذا أنجز، وكم عليه. غيّر الفترة (اليوم، 7 أيام، 14 يوماً، أسبوع، شهر) وجمّع حسب الحالة أو الأولوية.\nTeam view (formerly Box view) puts each person in a box: what they are working on, what they finished, and how much they have. Change the period (today, 7 days, 14 days, week, month) and group by status or priority.\nالشريط الملون في كل صندوق يقسم مهام الشخص حسب الحالة. إن كان أحدهم مثقلاً، اسحب مهمة من صندوقه إلى صندوق زميل لإعادة التوزيع. ولقياس الساعات والسعة اليومية بدقة، استخدم عرض Workload.\nThe coloured bar in each box splits the person’s tasks by status. If someone is overloaded, drag a task from their box to a colleague’s to rebalance. To measure hours and daily capacity precisely, use the Workload view.\nأضف عرضاً جديداً واختر Team.\nاختر الفترة: 7 أيام أو 14 يوماً.\nجمّع حسب الحالة أو الأولوية.\nاسحب مهمة بين الصناديق لإعادة التوزيع.\nافتح عرض الفريق كل خميس لتوزيع عمل الأسبوع القادم قبل أن يبدأ.\nOpen Team view every Thursday to share out next week’s work before it starts.\nلاحظت المديرة في عرض الفريق أن المحرر عنده 9 مهام وزميله 2. نقلت ثلاث مهام فانتهى المونتاج قبل موعده.\nIn Team view the manager saw one editor had 9 tasks and his colleague 2. She moved three tasks and the editing finished early.",
+    "en": "عرض الفريق (Team view، كان اسمه Box view) يضع كل شخص في صندوق: ماذا ينجز، وماذا أنجز، وكم عليه. غيّر الفترة (اليوم، 7 أيام، 14 يوماً، أسبوع، شهر) وجمّع حسب الحالة أو الأولوية.\nTeam view (formerly Box view) puts each person in a box: what they are working on, what they finished, and how much they have. Change the period (today, 7 days, 14 days, week, month) and group by status or priority.\nالشريط الملون في كل صندوق يقسم مهام الشخص حسب الحالة. إن كان أحدهم مثقلاً، اسحب مهمة من صندوقه إلى صندوق زميل لإعادة التوزيع. ولقياس الساعات والسعة اليومية بدقة، استخدم عرض Workload.\nThe coloured bar in each box splits the person’s tasks by status. If someone is overloaded, drag a task from their box to a colleague’s to rebalance. To measure hours and daily capacity precisely, use the Workload view.\nAdd a new view and choose Team.\nPick the period: 7 or 14 days.\nGroup by status or priority.\nDrag a task between boxes to rebalance.\nافتح عرض الفريق كل خميس لتوزيع عمل الأسبوع القادم قبل أن يبدأ.\nOpen Team view every Thursday to share out next week’s work before it starts.\nلاحظت المديرة في عرض الفريق أن المحرر عنده 9 مهام وزميله 2. نقلت ثلاث مهام فانتهى المونتاج قبل موعده.\nIn Team view the manager saw one editor had 9 tasks and his colleague 2. She moved three tasks and the editing finished early."
+   },
+   "url": "#/courses/clickup-start/e-team",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:e-map",
+   "kind": "course",
+   "title": {
+    "ar": "خريطة الفريق: عرض Map",
+    "en": "Team map: the Map view"
+   },
+   "text": {
+    "ar": "عرض Map يضع المهام على خريطة حسب حقل الموقع (Location). مفيد لمواقع التصوير أو زيارات العملاء: ترى أين كل مهمة، وتنسخ رابط العرض لمشاركته، أو تحذفه عندما لا تحتاجه.\nThe Map view places tasks on a map using a Location field. It is useful for filming locations or client visits: you see where each task is, copy the view’s link to share it, or delete the view when you no longer need it.\nأضف أولاً حقلاً مخصصاً من نوع Location للمهام، واكتب العنوان (يعتمد على خرائط Google). ثم أضف عرض Map. لون الدبوس يمكن أن يتبع الحالة أو الأولوية. من «···» على العرض: نسخ الرابط، إعادة التسمية، أو الحذف. لا تنشر عناوين خاصة برابط عام.\nFirst add a Location Custom Field to the tasks and type the address (it is based on Google Maps). Then add a Map view. The pin colour can follow status or priority. From the view’s “···”: copy link, rename or delete. Never publish private addresses with a public link.\nأضف حقل Location إلى القائمة واكتب العناوين.\nاضغط «+ View» واختر Map.\nاضغط دبوساً لترى المهمة.\nمن «···» انسخ الرابط أو احذف العرض.\nلوّن الدبابيس حسب الحالة؛ ترى المواقع التي انتهى تصويرها بنظرة.\nColour pins by status; you see at a glance which locations are already filmed.\nفريق التصوير يرتب زياراته من عرض Map: الدبابيس القريبة من بعضها في يوم واحد، فوفّروا يوم سفر كاملاً.\nThe filming crew plans visits from Map view: nearby pins on the same day, which saved a whole day of travel.",
+    "en": "عرض Map يضع المهام على خريطة حسب حقل الموقع (Location). مفيد لمواقع التصوير أو زيارات العملاء: ترى أين كل مهمة، وتنسخ رابط العرض لمشاركته، أو تحذفه عندما لا تحتاجه.\nThe Map view places tasks on a map using a Location field. It is useful for filming locations or client visits: you see where each task is, copy the view’s link to share it, or delete the view when you no longer need it.\nأضف أولاً حقلاً مخصصاً من نوع Location للمهام، واكتب العنوان (يعتمد على خرائط Google). ثم أضف عرض Map. لون الدبوس يمكن أن يتبع الحالة أو الأولوية. من «···» على العرض: نسخ الرابط، إعادة التسمية، أو الحذف. لا تنشر عناوين خاصة برابط عام.\nFirst add a Location Custom Field to the tasks and type the address (it is based on Google Maps). Then add a Map view. The pin colour can follow status or priority. From the view’s “···”: copy link, rename or delete. Never publish private addresses with a public link.\nAdd a Location field to the List and type the addresses.\nClick “+ View” and choose Map.\nClick a pin to see the task.\nFrom “···” copy the link or delete the view.\nلوّن الدبابيس حسب الحالة؛ ترى المواقع التي انتهى تصويرها بنظرة.\nColour pins by status; you see at a glance which locations are already filmed.\nفريق التصوير يرتب زياراته من عرض Map: الدبابيس القريبة من بعضها في يوم واحد، فوفّروا يوم سفر كاملاً.\nThe filming crew plans visits from Map view: nearby pins on the same day, which saved a whole day of travel."
+   },
+   "url": "#/courses/clickup-start/e-map",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
   }
  ]
 }

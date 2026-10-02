@@ -28,6 +28,8 @@ const CourseProgress = (() => {
   };
 })();
 
+/* "1 section", "7 sections" / "قسم واحد", "7 أقسام", "11 قسماً" */
+const secCount = n => tx(n === 1 ? 'قسم واحد' : n + (n > 10 ? ' قسماً' : ' أقسام'), n + (n === 1 ? ' section' : ' sections'));
 const coursePath = (c, t) => '#/courses/' + c.id + (t ? '/' + t : '');
 function courseLinkOf(link) {
   if (!link) return null;
@@ -57,7 +59,7 @@ function viewCoursesHub(main) {
     '<div class="cs-grid">' + COURSES.map((c, k) => {
       const T = c.topics(); const d = CourseProgress.count(c.id, T.map(t => t.id)); const pct = Math.round(d / T.length * 100);
       return '<a class="cs-card" data-rv href="' + coursePath(c) + '" style="--g:' + c.g + ';--cc:' + c.c + ';--i:' + k + '"><span class="cs-art"><span class="ic-tile">' + icon(c.ic) + '</span><i></i><i></i><i></i><b class="cs-level">' + tp(c.level) + '</b></span>' +
-        '<span class="cs-body"><h2>' + tp(c.title) + '</h2><p>' + tp(c.sub) + '</p><span class="cs-meta">' + icon('layers', 'icon-sm') + tx(c.sections().length + ' أقسام · ' + T.length + ' موضوعاً', c.sections().length + ' sections · ' + T.length + ' topics') + '</span>' +
+        '<span class="cs-body"><h2>' + tp(c.title) + '</h2><p>' + tp(c.sub) + '</p><span class="cs-meta">' + icon('layers', 'icon-sm') + secCount(c.sections().length) + ' · ' + tx(T.length + ' موضوعاً', T.length + ' topics') + '</span>' +
         '<span class="cs-prog"><i style="width:' + pct + '%"></i></span><span class="way-go">' + (d ? tx('تابع التعلّم', 'Continue learning') + ' · ' + pct + '%' : tx('ابدأ الدورة', 'Start the course')) + icon('fwd', 'icon-sm') + '</span></span></a>';
     }).join('') +
     '<div class="cs-card cs-soon"><span class="cs-soon-ic">' + icon('plus') + '</span><h2>' + tx('دورات جديدة قريباً', 'More courses coming soon') + '</h2><p>' + tx('ستُضاف دورات أخرى للمبتدئين هنا.', 'More beginner courses will be added here.') + '</p></div></div></div>';
@@ -67,7 +69,7 @@ function viewCoursesHub(main) {
 function viewCourseHome(main, c) {
   const T = c.topics(); const S = c.sections(); const ids = T.map(t => t.id); const doneN = CourseProgress.count(c.id, ids);
   const next = T.find(t => !CourseProgress.has(c.id, t.id)) || T[0]; const pct = Math.round(doneN / T.length * 100);
-  const incl = [['layers', tx(S.length + ' قسماً و' + T.length + ' موضوعاً', S.length + ' sections, ' + T.length + ' topics')], ['play', tx('عرض متحرك لكل موضوع', 'An animated demo for every topic')], ['check', tx('اختبار قصير وتطبيق عملي', 'A quick check and hands-on practice')], ].concat(c.interview ? [['users', tx('تمثيل أدوار: مقابلة عمل', '1 role play: a job interview')]] : []).concat([['globe', tx('بالعربية والإنجليزية', 'In Arabic and English')], ['mobile', tx('على الجوال والحاسوب · التقدم محفوظ على هذا الجهاز', 'Mobile and desktop · progress saved on this device')]]);
+  const incl = [['layers', secCount(S.length) + tx(' و', ', ') + tx(T.length + ' موضوعاً', T.length + ' topics')], ['play', tx('عرض متحرك لكل موضوع', 'An animated demo for every topic')], ['check', tx('اختبار قصير وتطبيق عملي', 'A quick check and hands-on practice')], ].concat(c.interview ? [['users', tx('تمثيل أدوار: مقابلة عمل', '1 role play: a job interview')]] : []).concat([['globe', tx('بالعربية والإنجليزية', 'In Arabic and English')], ['mobile', tx('على الجوال والحاسوب · التقدم محفوظ على هذا الجهاز', 'Mobile and desktop · progress saved on this device')]]);
   main.innerHTML = '<div class="page course" style="--cc:' + c.c + '">' +
     '<div class="breadcrumbs cs-bc"><a href="#/courses">' + tx('دورات للمبتدئين', 'Courses for beginners') + '</a><span aria-hidden="true">/</span><span>' + tp(c.short) + '</span></div>' +
     '<section class="hx hx-small co-hero" aria-labelledby="coT" style="background:' + c.g + '"><div class="hx-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b3"></span><span class="hx-grid"></span></div>' +
@@ -76,7 +78,7 @@ function viewCourseHome(main, c) {
     '<div class="co-ring" role="img" aria-label="' + tx('أنجزت ' + doneN + ' من ' + T.length, doneN + ' of ' + T.length + ' done') + '" style="--p:' + pct + '"><span class="num">' + pct + '%</span><small>' + tx('تقدّمك', 'your progress') + '</small></div></section>' +
     '<div class="co-top"><section class="panel co-learn" data-rv><h2>' + tx('ماذا ستتعلم', 'What you’ll learn') + '</h2><ul>' + c.learn.map(l => '<li>' + icon('check', 'icon-sm') + '<span>' + tp(l) + '</span></li>').join('') + '</ul></section>' +
     '<section class="panel co-incl" data-rv><h2>' + tx('تتضمن هذه الدورة', 'This course includes') + '</h2><ul>' + incl.map(x => '<li>' + icon(x[0], 'icon-sm') + '<span>' + x[1] + '</span></li>').join('') + '</ul></section></div>' +
-    '<h2 class="co-h">' + tx('محتوى الدورة', 'Course content') + ' <small>' + tx(S.length + (S.length > 10 ? ' قسماً · ' : ' أقسام · ') + T.length + ' موضوعاً' + (c.interview ? ' · تمثيل أدوار' : ''), S.length + ' sections · ' + T.length + ' topics' + (c.interview ? ' · 1 role play' : '')) + '</small></h2>' +
+    '<h2 class="co-h">' + tx('محتوى الدورة', 'Course content') + ' <small>' + secCount(S.length) + ' · ' + tx(T.length + ' موضوعاً' + (c.interview ? ' · تمثيل أدوار' : ''), T.length + ' topics' + (c.interview ? ' · 1 role play' : '')) + '</small></h2>' +
     '<div class="co-secs">' + S.map((s, si) => {
       const list = T.filter(t => t.sec === s.id); const d = CourseProgress.count(c.id, list.map(t => t.id));
       const open = UIState.get('co-open:' + c.id + s.id); const isOpen = open == null ? si === 0 : open;
@@ -91,7 +93,7 @@ function viewCourseHome(main, c) {
    A small animated "picture" for each topic, drawn with HTML and CSS from the
    kind of ClickUp screen the topic is about (list, board, timeline, chat, AI…).
    Decorative only (aria-hidden); it stops moving when reduced motion is on. */
-const CO_ART_KIND = { list: 'list', shell: 'list', mywork: 'list', table: 'list', activity: 'list', board: 'board', calendar: 'time', gantt: 'time', workload: 'time', chat: 'chat', meeting: 'chat', task: 'chat', ai: 'ai', agent: 'ai', doc: 'doc', form: 'doc', mindmap: 'doc', whiteboard: 'doc', map: 'doc', templates: 'doc', file: 'doc', dash: 'dash', auto: 'flow', settings: 'tog', login: 'tog', trash: 'tog', tree: 'tree', journey: 'tree', browser: 'doc', sprint: 'time', prio: 'list' };
+const CO_ART_KIND = { list: 'list', shell: 'list', mywork: 'list', table: 'list', activity: 'list', board: 'board', calendar: 'time', gantt: 'time', workload: 'time', chat: 'chat', meeting: 'chat', task: 'chat', ai: 'ai', agent: 'ai', doc: 'doc', form: 'doc', mindmap: 'doc', whiteboard: 'doc', map: 'doc', templates: 'doc', file: 'doc', dash: 'dash', auto: 'flow', settings: 'tog', login: 'tog', trash: 'tog', tree: 'tree', journey: 'tree', browser: 'doc', sprint: 'time', prio: 'list', team: 'board' };
 const CO_ART_IC = { list: ['list', 'check', 'flag'], board: ['board', 'users', 'zap'], time: ['calendar', 'clock', 'gantt'], chat: ['message', 'at', 'bell'], ai: ['sparkle', 'robot', 'bulb'], doc: ['doc', 'form', 'link'], dash: ['chart', 'target', 'trophy'], flow: ['zap', 'repeat', 'rocket'], tog: ['lock', 'user', 'bell'], tree: ['layers', 'folder', 'list'] };
 function coArt(scene) {
   const k = CO_ART_KIND[scene] || 'list';

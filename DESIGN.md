@@ -203,6 +203,12 @@ A separate section of the site, with its own sidebar group **Courses for beginne
    - **Topics follow the user's outline.** Where a lecture name is from an older ClickUp version, the topic teaches today's name and mentions the old one: LineUp is now **Personal Priorities**, sprints live in **Sprint Folders**, and "Convert List to Sprint" is shown as moving a List's tasks into a sprint.
    - **Facts were checked against ClickUp Help:** Sprint Folders, Sprint Points, spillover, moving Sprint Folders, Personal Priorities, nested subtasks (3 levels by default, up to 7), Clip, the Email ClickApp, Zoom (`/zoom`), the Chrome extension, Google Calendar two-way sync with iCal for others, imports and Relationships.
 
+3. **Mastering ClickUp: the essentials in under an hour** (`clickup-start`): 1 section and 13 topics, with no role play. Content is in `src/content/ess.js`.
+   - **The example** is a fictional media team running a video channel: sponsorships, affiliates, consultations, and videos with script and editing.
+   - **Lecture names that repeated in the outline** ("What we can found", "How to add space 2") are given clear titles that match each lecture's description.
+   - **Team view is taught under its current name** and noted as the former Box view.
+   - **Votes** are taught as the Voting Custom Field, and **Map** as needing a Location field.
+
 A course without `interview` has no role play. Its overview hides the role-play card, and its last topic's Next button returns to the course contents.
 
 ### The "Watch how" engine (`src/app/cx.js`, `src/cx.css`)
@@ -228,6 +234,11 @@ A course without `interview` has no role play. Its overview hides the role-play 
   - `browser`: a web page with the ClickUp Chrome extension (task, Notepad, screenshot, time, bookmarks);
   - `sprint`: a Sprint List with dates, points, progress, a spillover banner, a setup dialog and a folder menu;
   - `prio`: Personal Priorities and Teams Hub.
+- **Added for the essentials course:**
+  - `team`: Team view boxes with status bars and time ranges;
+  - a Create quick-actions menu in the top bar;
+  - a Tags column, board card covers and tags, task start dates, Votes and attachments, and a view menu on Map;
+  - styles for the hierarchy (`tree`) screen, which had been missing.
 - **Existing screens extended:**
   - the task view gained Relationships, an email composer, Zoom meeting cards and Clip recording;
   - the List view gained nested subtask levels and a Sprint Points column;

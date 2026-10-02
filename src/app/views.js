@@ -36,7 +36,7 @@ const moduleLabel = n => tx('الوحدة ', 'Module ') + n;
 function renderSidebar(route) {
   const nav = $('#sidebar'); const cur = route.name;
   const last = Store.state.last && LESSON[Store.state.last.lesson] ? Store.state.last.lesson : null;
-  const NAV_C = { rocket: '#0e7490', robot: '#ff4d6d', bulb: '#f5a524', users: '#ff7a45', send: '#1fb6e0', sparkle: '#a855f7', compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
+  const NAV_C = { rocket: '#0e7490', target: '#059669', robot: '#ff4d6d', bulb: '#f5a524', users: '#ff7a45', send: '#1fb6e0', sparkle: '#a855f7', compass: '#ff02f0', message: '#14b8a6', home: '#7b68ee', book: '#e44bb6', play: '#ff7a45', flask: '#1fb6e0', chart: '#4f86f7', assess: '#22c38e', progress: '#f5a524', help: '#a855f7', info: '#8a86a0' };
   const item = (href, ic, label, active, extra) => '<li><a class="nav-link" href="' + href + '"' + (active ? ' aria-current="page"' : '') + '><span class="ic-tile" style="--tc:' + NAV_C[ic] + '">' + icon(ic) + '</span><span>' + label + '</span>' + (extra || '') + '</a></li>';
   const done = LESSONS.filter(l => Store.isDone(l.id)).length;
   const inLesson = cur === 'lesson' || cur === 'library';

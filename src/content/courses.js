@@ -39,6 +39,23 @@ const COURSES = [
     sections: () => ADV_SECTIONS,
     topics: () => ADV_TOPICS(),
     interview: null
+  },
+  {
+    id: 'clickup-start',
+    ic: 'target', c: '#059669', g: 'linear-gradient(135deg, #052e2b 0%, #059669 50%, #eab308 100%)',
+    level: ['مبتدئ', 'Beginner'],
+    short: ['أساسيات ClickUp', 'ClickUp Essentials'],
+    title: ['أتقن ClickUp: الأساسيات في أقل من ساعة', 'Mastering ClickUp: the essentials in under an hour'],
+    sub: ['دورة سريعة من 13 درساً: من إنشاء الحساب إلى المساحات والقوائم واللوحات وعرض الفريق والخريطة، بمثال فريق يدير قناة فيديو.', 'A quick 13-lesson course: from creating your account to Spaces, Lists, boards, Team view and Map, with the example of a team running a video channel.'],
+    learn: [
+      ['إنشاء الحساب والتعرف على الواجهة والإعدادات', 'Create your account and learn the interface and settings'],
+      ['بناء هيكل عملك: مساحة العمل والمساحات والمجلدات والقوائم', 'Build your structure: Workspace, Spaces, Folders and Lists'],
+      ['إدارة المهام: المسؤولون والأولويات والمواعيد والحقول', 'Manage tasks: assignees, priorities, deadlines and fields'],
+      ['استخدام عروض Board وTeam وMap لمتابعة الفريق', 'Use Board, Team and Map views to follow your team']
+    ],
+    sections: () => ESS_SECTIONS,
+    topics: () => ESS_TOPICS(),
+    interview: null
   }
 ];
 const COURSE_BY_ID = id => COURSES.find(c => c.id === id) || null;

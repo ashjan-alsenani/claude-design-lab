@@ -29,6 +29,7 @@ JS_FILES = [
     "content/adv-1.js",
     "content/adv-2.js",
     "content/adv-3.js",
+    "content/ess.js",
     "content/courses.js",
     "content/en/core.js",
     "content/en/lessons-1.js",
