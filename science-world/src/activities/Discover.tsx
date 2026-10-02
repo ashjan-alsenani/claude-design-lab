@@ -29,7 +29,7 @@ export function RevealCards({ step, onComplete }: ActivityProps<RevealStep>) {
         {step.cards.slice(0, open).map((c, i) => (
           <motion.article
             key={i}
-            className="reveal-card card"
+            className={`reveal-card card ${c.visual?.math ? 'reveal-card--stack' : ''}`}
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ type: 'spring', duration: 0.45, bounce: 0.2 }}

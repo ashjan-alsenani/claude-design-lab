@@ -1155,3 +1155,46 @@
 .numpad__display input {
   width: 100%;
 }
+.reveal-card--stack {
+  flex-direction: column;
+  align-items: stretch;
+}
+.reveal-card--stack .reveal-card__visual {
+  box-shadow: none;
+  padding: 0;
+}
+/* place-value table: always one row (it IS the number) */
+.pv {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 4px;
+}
+.pv__col {
+  flex: 1 1 0;
+  min-width: 40px;
+  max-width: 76px;
+}
+@media (max-width: 480px) {
+  .pv__name { font-size: 0.6rem; padding: 3px 2px; }
+  .pv__digit { font-size: 1.5rem; padding: 6px 2px; }
+}
+.process {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 820px) {
+  .process {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.process__stage,
+.process__text {
+  min-width: 0;
+}
+.process__stage {
+  place-items: center stretch;
+}
+.process__math,
+.pv {
+  min-width: 0;
+  max-width: 100%;
+}
