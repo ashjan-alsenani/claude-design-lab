@@ -1,0 +1,236 @@
+/* ---------- App shell ---------- */
+.app {
+  position: relative;
+  min-height: 100dvh;
+  isolation: isolate;
+}
+
+.app__main {
+  position: relative;
+  z-index: 1;
+}
+
+.loading {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  min-height: 60dvh;
+  color: var(--ink-2);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* ---------- Living sky ---------- */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  left: 0;
+  width: 160px;
+  height: 52px;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.75;
+  animation: drift linear infinite;
+  filter: drop-shadow(0 8px 10px rgba(91, 91, 247, 0.06));
+}
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+.cloud::before {
+  width: 70px;
+  height: 70px;
+  top: -34px;
+  left: 26px;
+}
+.cloud::after {
+  width: 52px;
+  height: 52px;
+  top: -22px;
+  left: 82px;
+}
+.cloud--1 { top: 9%; animation-duration: 95s; animation-delay: -30s; }
+.cloud--2 { top: 34%; transform: scale(0.7); animation-duration: 120s; animation-delay: -80s; opacity: 0.55; }
+.cloud--3 { top: 62%; animation-duration: 140s; animation-delay: -10s; opacity: 0.5; }
+
+.spark {
+  position: absolute;
+  color: var(--sun);
+  font-size: 14px;
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  height: var(--top-h);
+  padding: 0 var(--s-4);
+  background: rgba(244, 249, 255, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid rgba(219, 229, 245, 0.8);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--primary-deep);
+  white-space: nowrap;
+}
+.brand__logo {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: var(--sun);
+  box-shadow: 0 3px 0 var(--sun-deep);
+  font-size: 1.4rem;
+}
+
+.topbar__stats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: auto;
+}
+
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 38px;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  box-shadow: 0 3px 0 var(--line);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.stat-pill--coin { color: #a86a00; }
+.stat-pill--fire { color: var(--coral-deep); }
+.sound-btn {
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 420px) {
+  .hide-sm { display: none; }
+  .brand__name { display: none; }
+}
+
+/* ---------- Navigation ---------- */
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink-2);
+  transition: background-color var(--t-ui) ease, color var(--t-ui) ease, transform var(--t-press) var(--ease-out);
+}
+.nav__item:active {
+  transform: scale(0.95);
+}
+.nav__item.active {
+  background: var(--primary);
+  color: #fff;
+}
+.nav__icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* top nav: desktop only */
+.nav--top {
+  display: none;
+}
+@media (min-width: 1100px) {
+  .nav--top {
+    display: flex;
+    margin-inline-start: var(--s-4);
+  }
+  .nav--top .nav__item {
+    padding: 8px 14px;
+    font-size: 0.98rem;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .nav--top .nav__item:not(.active):hover {
+      background: var(--primary-soft);
+      color: var(--primary-deep);
+    }
+  }
+}
+
+/* bottom tab bar: phones & tablets */
+.nav--bottom {
+  position: fixed;
+  z-index: 30;
+  inset-inline: 10px;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  justify-content: space-around;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 26px;
+  box-shadow: 0 10px 30px -10px rgba(31, 42, 77, 0.35), 0 0 0 2px var(--line);
+}
+.nav--bottom .nav__item {
+  flex: 1;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+  min-height: 58px;
+  padding: 4px 2px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+}
+.nav--bottom .nav__icon {
+  font-size: 1.45rem;
+}
+@media (min-width: 1100px) {
+  .nav--bottom {
+    display: none;
+  }
+  .page {
+    padding-bottom: var(--s-8);
+  }
+}
+
+/* lesson/quiz screens are focused: no chrome */
+.app--focused .app__main {
+  min-height: 100dvh;
+}
+.nav__label {
+  white-space: nowrap;
+}
