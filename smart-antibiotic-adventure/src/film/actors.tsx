@@ -1,6 +1,9 @@
-import { useId } from 'react'
+import { useId, useRef } from 'react'
 import { motion, AnimatePresence, type TargetAndTransition } from 'motion/react'
-import aleenSrc from '../assets/aleen.webp'
+import rigBody from '../assets/aleen-rig/body.webp'
+import rigHead from '../assets/aleen-rig/head.webp'
+import rigHands from '../assets/aleen-rig/hands.webp'
+import { approach, makeBlinker, mouthAt, useFrame, type Speech } from './timeline'
 import { Sparkle, Star } from '../art/objects'
 
 /* ------------------------------------------------------------------ */
@@ -35,40 +38,213 @@ const BODY: Record<AleenMood, TargetAndTransition> = {
   point: { rotate: [0, -5, -5, 0], x: [0, -10, -10, 0], transition: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' } },
 }
 
+/* Rig geometry, in pixels of the full-resolution source (547 × 1394). */
+const RIG_W = 547
+const RIG_H = 1394
+const EYE_L = '225.3,161.0 229.0,155.8 236.5,153.7 245.8,153.7 252.3,155.8 257.9,160.1 261.6,165.3 259.7,169.6 252.3,171.7 243.9,172.2 236.5,171.3 230.0,168.7 226.2,165.3'
+const EYE_R = '303.3,169.9 305.2,162.1 309.9,157.0 317.3,154.4 326.6,154.4 334.0,157.0 339.6,162.1 341.5,167.3 336.8,171.6 327.5,174.2 318.2,174.6 309.9,173.3 305.2,172.5'
+const IRIS_L = { cx: 236.4, cy: 162.9, r: 10.8 }
+const IRIS_R = { cx: 311.3, cy: 164.5, r: 10.2 }
+const LASH_L = 'M224 161 Q236 150 253 154.5 Q259 158 263 166'
+const LASH_R = 'M302 170 Q307 155 324 152.5 Q337 154 343 168'
+const MOUTH = { cx: 282, cy: 236.5 }
+/** Gaze offsets (source px). Her drawn eyes look toward the viewer's left (the other characters). */
+const GAZE_VIEWER = 6.5
+
 export function AleenActor({
   mood = 'idle',
   talking = false,
   height = 420,
   reduced = false,
+  speech = null,
+  look = 'viewer',
 }: {
   mood?: AleenMood
   talking?: boolean
   height?: number
   reduced?: boolean
+  /** her own audio envelope while she speaks; null when silent */
+  speech?: Speech
+  /** where she looks: at the viewer, or at the other character */
+  look?: 'viewer' | 'other'
 }) {
-  const width = Math.round(height * 0.392)
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, '')
+  const width = Math.round((height * RIG_W) / RIG_H)
   const body = talking && (mood === 'idle' || mood === 'point' || mood === 'nod') ? BODY.talk : BODY[mood]
   const emote = EMOTE[mood]
+
+  const headRef = useRef<HTMLDivElement>(null)
+  const handsRef = useRef<HTMLImageElement>(null)
+  const eyesRef = useRef<SVGGElement>(null)
+  const irisRefs = [useRef<SVGGElement>(null), useRef<SVGGElement>(null)]
+  const lidRefs = [useRef<SVGGElement>(null), useRef<SVGGElement>(null)]
+  const mouthRef = useRef<SVGGElement>(null)
+  const lowLipRef = useRef<SVGGElement>(null)
+  const innerRef = useRef<SVGEllipseElement>(null)
+  const teethRef = useRef<SVGRectElement>(null)
+  const tongueRef = useRef<SVGEllipseElement>(null)
+  const st = useRef({ mouth: 0, gx: look === 'viewer' ? GAZE_VIEWER : 0, gy: 0, rot: 0, lift: 0, last: 0, sacc: 0, sx: 0, sy: 0 })
+  const blink = useRef(makeBlinker(height | 0))
+
+  useFrame((t, wall) => {
+    const s = st.current
+    const dt = s.last ? Math.min(0.1, wall - s.last) : 0.016
+    s.last = wall
+    const speaking = !!speech && t >= speech.start && t <= speech.start + (speech.mouth.length - 1) * 0.04
+    // ---- mouth: driven only by her own audio ----
+    let target = mouthAt(speech, t)
+    const round = mood === 'surprised' || mood === 'worried'
+    // mouth closes the instant her audio ends
+    s.mouth = speaking ? approach(s.mouth, target, dt, 28) : 0
+    // ---- eyes: gaze + micro saccades + blinking ----
+    if (wall > s.sacc) {
+      s.sacc = wall + 1.2 + Math.random() * 1.8
+      s.sx = (Math.random() - 0.5) * 2
+      s.sy = (Math.random() - 0.5) * 1.2
+    }
+    const gTarget = (look === 'viewer' ? GAZE_VIEWER : 0) + (reduced ? 0 : s.sx)
+    s.gx = approach(s.gx, gTarget, dt, 14)
+    s.gy = approach(s.gy, reduced ? 0 : s.sy + (mood === 'sick' || mood === 'worried' ? 1.5 : 0), dt, 14)
+    const b = blink.current(wall)
+    // ---- head: turns toward whoever she attends to, nods with her syllables ----
+    const base = look === 'other' ? -1.6 : 0.5
+    const nod = speaking ? (s.mouth - 0.35) * 2.2 : 0
+    const sway = reduced ? 0 : Math.sin(wall * 1.3) * 0.5
+    s.rot = approach(s.rot, base + nod + sway, dt, 8)
+    // ---- hands: small emphasis gestures while she talks ----
+    let lift = 0
+    if (speaking && !reduced) {
+      const ph = ((t - speech!.start) % 2.4) / 2.4
+      lift = ph < 0.45 ? Math.sin((ph / 0.45) * Math.PI) * 10 : 0
+    }
+    if ((mood === 'cheer' || mood === 'happy') && !reduced) lift = Math.max(lift, (Math.sin(wall * 7) * 0.5 + 0.5) * 9)
+    s.lift = approach(s.lift, lift, dt, 12)
+
+    if (headRef.current) headRef.current.style.transform = `rotate(${s.rot.toFixed(2)}deg)`
+    if (handsRef.current) handsRef.current.style.transform = `scaleY(${((140 - s.lift) / 140).toFixed(4)})`
+    // eye overlay only when it differs from the original drawing
+    const showEyes = Math.abs(s.gx) > 0.25 || Math.abs(s.gy) > 0.25 || b > 0.02
+    if (eyesRef.current) eyesRef.current.style.display = showEyes ? '' : 'none'
+    if (showEyes) {
+      irisRefs.forEach((r) => r.current?.setAttribute('transform', `translate(${s.gx.toFixed(2)} ${s.gy.toFixed(2)})`))
+      lidRefs.forEach((r) => r.current?.setAttribute('transform', `translate(0 ${(b * 26).toFixed(2)})`))
+    }
+    // mouth overlay
+    const o = s.mouth
+    if (mouthRef.current) mouthRef.current.style.display = o > 0.07 ? '' : 'none'
+    if (o > 0.07) {
+      // interior opens just below her lip line; her own lower lip drops to reveal it
+      const drop = (round ? 9 : 7.5) * o
+      const rxIn = round ? 9 + 5 * o : 15 + 6 * o
+      const ryIn = 0.8 + drop * 0.62
+      const cyIn = 235.6 + ryIn * 0.55
+      innerRef.current?.setAttribute('rx', rxIn.toFixed(2))
+      innerRef.current?.setAttribute('ry', ryIn.toFixed(2))
+      innerRef.current?.setAttribute('cy', cyIn.toFixed(2))
+      lowLipRef.current?.setAttribute('transform', `translate(0 ${drop.toFixed(2)})`)
+      if (teethRef.current) {
+        teethRef.current.setAttribute('x', (MOUTH.cx - rxIn * 0.6).toFixed(2))
+        teethRef.current.setAttribute('width', (rxIn * 1.2).toFixed(2))
+        teethRef.current.setAttribute('y', (cyIn - ryIn + 0.2).toFixed(2))
+        teethRef.current.setAttribute('height', (o > 0.3 ? Math.min(2.6, ryIn * 0.4) : 0).toFixed(2))
+      }
+      tongueRef.current?.setAttribute('cy', (cyIn + ryIn * 0.6).toFixed(2))
+      tongueRef.current?.setAttribute('rx', (rxIn * 0.5).toFixed(2))
+      tongueRef.current?.setAttribute('ry', (ryIn * 0.4).toFixed(2))
+    }
+  })
+
   return (
     <div className="actor aleen-actor" style={{ width, height }}>
       <div className="actor-shadow" />
-      <motion.div
-        key={mood}
-        className="aleen-body"
-        animate={reduced ? undefined : body}
-        style={{ transformOrigin: '50% 100%' }}
-      >
-        <img src={aleenSrc} alt="" width={width} height={height} draggable={false} />
+      <motion.div key={mood} className="aleen-body" animate={reduced ? undefined : body} style={{ transformOrigin: '50% 100%' }}>
+        <div className="rig">
+          <img className="rig-layer" src={rigBody} alt="" draggable={false} />
+          <img ref={handsRef} className="rig-layer rig-hands" src={rigHands} alt="" draggable={false} />
+          <div ref={headRef} className="rig-head">
+            <img className="rig-layer" src={rigHead} alt="" draggable={false} />
+            <svg className="rig-face" viewBox={`0 0 ${RIG_W} ${RIG_H}`} aria-hidden>
+              <defs>
+                <clipPath id={`${uid}eL`}>
+                  <polygon points={EYE_L} />
+                </clipPath>
+                <clipPath id={`${uid}eR`}>
+                  <polygon points={EYE_R} />
+                </clipPath>
+                <clipPath id={`${uid}iL`}>
+                  <circle cx={IRIS_L.cx} cy={IRIS_L.cy} r={IRIS_L.r} />
+                </clipPath>
+                <clipPath id={`${uid}iR`}>
+                  <circle cx={IRIS_R.cx} cy={IRIS_R.cy} r={IRIS_R.r} />
+                </clipPath>
+                <linearGradient id={`${uid}sc`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#9c8584" />
+                  <stop offset="0.4" stopColor="#c7b8b7" />
+                  <stop offset="1" stopColor="#d1c3c2" />
+                </linearGradient>
+                <filter id={`${uid}feather`} x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="0.7" />
+                </filter>
+                <mask id={`${uid}mL`} maskUnits="userSpaceOnUse" x="0" y="0" width={RIG_W} height={RIG_H}>
+                  <polygon points={EYE_L} fill="#fff" filter={`url(#${uid}feather)`} />
+                </mask>
+                <mask id={`${uid}mR`} maskUnits="userSpaceOnUse" x="0" y="0" width={RIG_W} height={RIG_H}>
+                  <polygon points={EYE_R} fill="#fff" filter={`url(#${uid}feather)`} />
+                </mask>
+                {/* her real lower lip, softly cut out so it can drop open */}
+                <mask id={`${uid}lowLip`} maskUnits="userSpaceOnUse" x="0" y="0" width={RIG_W} height={RIG_H}>
+                  <ellipse cx={MOUTH.cx} cy={241.8} rx={28} ry={7.2} fill="#fff" filter={`url(#${uid}feather)`} />
+                  <rect x={MOUTH.cx - 34} y={226} width={68} height={10.2} fill="#000" />
+                </mask>
+                <linearGradient id={`${uid}lid`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#d4855f" />
+                  <stop offset="1" stopColor="#df9473" />
+                </linearGradient>
+                <linearGradient id={`${uid}lip`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#e2604f" />
+                  <stop offset="0.55" stopColor="#ee6a5f" />
+                  <stop offset="1" stopColor="#f07a6c" />
+                </linearGradient>
+                <filter id={`${uid}soft`} x="-10%" y="-10%" width="120%" height="120%">
+                  <feGaussianBlur stdDeviation="0.45" />
+                </filter>
+              </defs>
+              <g ref={eyesRef} style={{ display: 'none' }}>
+                {(
+                  [
+                    [EYE_L, IRIS_L, 'L', LASH_L],
+                    [EYE_R, IRIS_R, 'R', LASH_R],
+                  ] as const
+                ).map(([, iris, k, lash], i) => (
+                  <g key={k}>
+                    <g mask={`url(#${uid}m${k})`}>
+                      <rect x={iris.cx - 40} y={140} width={80} height={45} fill={`url(#${uid}sc)`} />
+                      <g ref={irisRefs[i]}>
+                        <image href={rigHead} x={0} y={0} width={RIG_W} height={RIG_H} clipPath={`url(#${uid}i${k})`} />
+                      </g>
+                      <g ref={lidRefs[i]}>
+                        <rect x={iris.cx - 40} y={124} width={80} height={28} fill={`url(#${uid}lid)`} />
+                        <rect x={iris.cx - 40} y={150} width={80} height={2.6} rx={1.3} fill="#3a1b12" />
+                      </g>
+                    </g>
+                    <path d={lash} fill="none" stroke="#2c140d" strokeWidth={2.1} strokeLinecap="round" opacity={0.85} filter={`url(#${uid}soft)`} />
+                  </g>
+                ))}
+              </g>
+              <g ref={mouthRef} style={{ display: 'none' }} data-mouth="aleen">
+                <g filter={`url(#${uid}soft)`}>
+                  <ellipse ref={innerRef} cx={MOUTH.cx} cy={MOUTH.cy} rx={16} ry={1} fill="#5c1520" />
+                  <ellipse ref={tongueRef} cx={MOUTH.cx} cy={MOUTH.cy + 3} rx={6} ry={1} fill="#d9606c" />
+                  <rect ref={teethRef} x={MOUTH.cx - 7} y={MOUTH.cy} width={14} height={0} rx={1.2} fill="#fbf3ec" />
+                </g>
+                <g ref={lowLipRef}>
+                  <image href={rigHead} x={0} y={0} width={RIG_W} height={RIG_H} mask={`url(#${uid}lowLip)`} />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
       </motion.div>
-
-      {/* talking: animated voice waves beside her face */}
-      {talking && (
-        <span className="voice-waves" aria-hidden>
-          <i />
-          <i />
-          <i />
-        </span>
-      )}
 
       {/* emotion bubble */}
       <AnimatePresence mode="wait">
@@ -86,7 +262,6 @@ export function AleenActor({
         )}
       </AnimatePresence>
 
-      {/* mood props */}
       {mood === 'sick' && (
         <>
           <span className="prop thermo">🌡️</span>
@@ -121,12 +296,57 @@ export function AleenActor({
   )
 }
 
+/** Mouth driven by the character's own voice envelope; closed shape otherwise. */
+function useMouth(speech: Speech) {
+  const closed = useRef<SVGPathElement>(null)
+  const open = useRef<SVGGElement>(null)
+  const inner = useRef<SVGEllipseElement>(null)
+  const tongue = useRef<SVGEllipseElement>(null)
+  const st = useRef({ o: 0, last: 0 })
+  useFrame((t, wall) => {
+    const s = st.current
+    const dt = s.last ? Math.min(0.1, wall - s.last) : 0.016
+    s.last = wall
+    const live = !!speech && t >= speech.start && t <= speech.start + (speech.mouth.length - 1) * 0.04
+    s.o = live ? approach(s.o, mouthAt(speech, t), dt, 28) : 0
+    const isOpen = s.o > 0.07
+    if (closed.current) closed.current.style.display = isOpen ? 'none' : ''
+    if (open.current) open.current.style.display = isOpen ? '' : 'none'
+    if (isOpen) {
+      inner.current?.setAttribute('rx', (6 + 5 * s.o).toFixed(2))
+      inner.current?.setAttribute('ry', (1.5 + 8 * s.o).toFixed(2))
+      tongue.current?.setAttribute('cy', (1 + 5 * s.o).toFixed(2))
+      tongue.current?.setAttribute('rx', (3 + 3 * s.o).toFixed(2))
+      tongue.current?.setAttribute('ry', (0.6 + 2.6 * s.o).toFixed(2))
+    }
+  })
+  return { closed, open, inner, tongue }
+}
+
 /* ------------------------------------------------------------------ */
 /*  Dr. Huda — friendly doctor (fully drawn, so her mouth can talk)    */
 /* ------------------------------------------------------------------ */
 
-export function Doctor({ talking = false, height = 400, happy = false }: { talking?: boolean; height?: number; happy?: boolean }) {
+export function Doctor({
+  talking = false,
+  height = 400,
+  happy = false,
+  speech = null,
+  lookAt = 'aleen',
+}: {
+  talking?: boolean
+  height?: number
+  happy?: boolean
+  speech?: Speech
+  lookAt?: 'aleen' | 'viewer'
+}) {
   const id = useId()
+  const { closed: mouthClosed, open: mouthOpen, inner: mouthInner, tongue: mouthTongue } = useMouth(speech)
+  const pupils = useRef<SVGGElement>(null)
+  useFrame(() => {
+    // Dr. Huda faces the viewer; when addressing Aleen her eyes turn to Aleen (stage right)
+    pupils.current?.setAttribute('transform', `translate(${lookAt === 'aleen' ? 3.2 : 0} ${lookAt === 'aleen' ? 0.6 : 0})`)
+  })
   return (
     <motion.div
       className="actor doctor"
@@ -183,21 +403,23 @@ export function Doctor({ talking = false, height = 400, happy = false }: { talki
         <g className="blink">
           <ellipse cx="102" cy="104" rx="8" ry="10" fill="#fff" />
           <ellipse cx="138" cy="104" rx="8" ry="10" fill="#fff" />
-          <circle cx="103" cy="106" r="5.5" fill="#3a2a1a" />
-          <circle cx="139" cy="106" r="5.5" fill="#3a2a1a" />
-          <circle cx="105" cy="103" r="2" fill="#fff" />
-          <circle cx="141" cy="103" r="2" fill="#fff" />
+          <g ref={pupils}>
+            <circle cx="103" cy="106" r="5.5" fill="#3a2a1a" />
+            <circle cx="139" cy="106" r="5.5" fill="#3a2a1a" />
+            <circle cx="105" cy="103" r="2" fill="#fff" />
+            <circle cx="141" cy="103" r="2" fill="#fff" />
+          </g>
         </g>
         <path d="M92 88q10-6 18 0M130 88q10-6 18 0" stroke="#3a2a1a" strokeWidth="3" fill="none" strokeLinecap="round" />
         <ellipse cx="92" cy="122" rx="8" ry="5" fill="#ff8fa8" opacity="0.5" />
         <ellipse cx="148" cy="122" rx="8" ry="5" fill="#ff8fa8" opacity="0.5" />
         {/* mouth: talks */}
         <g transform="translate(120 132)">
-          {talking ? (
-            <ellipse className="mouth-talk" cx="0" cy="0" rx="9" ry="7" fill="#7a1638" />
-          ) : (
-            <path d={happy ? 'M-14-4q14 16 28 0' : 'M-11-2q11 10 22 0'} stroke="#7a1638" strokeWidth="4" fill={happy ? '#7a1638' : 'none'} strokeLinecap="round" />
-          )}
+          <path ref={mouthClosed} d={happy ? 'M-14-4q14 16 28 0' : 'M-11-2q11 10 22 0'} stroke="#7a1638" strokeWidth="4" fill={happy ? '#7a1638' : 'none'} strokeLinecap="round" />
+          <g ref={mouthOpen} style={{ display: 'none' }} data-mouth="doctor">
+            <ellipse ref={mouthInner} cx="0" cy="1" rx="9" ry="6" fill="#7a1638" />
+            <ellipse ref={mouthTongue} cx="0" cy="4" rx="5" ry="2" fill="#ff8fa8" />
+          </g>
         </g>
         {/* head mirror */}
         <circle cx="120" cy="52" r="12" fill="#dfe8ff" stroke="#9aa6d6" strokeWidth="3" />
@@ -213,8 +435,21 @@ export function Doctor({ talking = false, height = 400, happy = false }: { talki
 
 export type CapsuleMood = 'idle' | 'fight' | 'confused' | 'worried' | 'happy'
 
-export function CapsuleHero({ mood = 'idle', talking = false, size = 200, shielded = false }: { mood?: CapsuleMood; talking?: boolean; size?: number; shielded?: boolean }) {
+export function CapsuleHero({
+  mood = 'idle',
+  talking = false,
+  size = 200,
+  shielded = false,
+  speech = null,
+}: {
+  mood?: CapsuleMood
+  talking?: boolean
+  size?: number
+  shielded?: boolean
+  speech?: Speech
+}) {
   const id = useId()
+  const { closed: mouthClosed, open: mouthOpen, inner: mouthInner, tongue: mouthTongue } = useMouth(speech)
   const anim: Record<CapsuleMood, TargetAndTransition> = {
     idle: { y: [0, -10, 0], rotate: [0, 3, 0], transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' } },
     fight: { x: [0, 30, 0], rotate: [0, -8, 0], transition: { duration: 0.5, repeat: Infinity, repeatDelay: 0.3 } },
@@ -223,7 +458,12 @@ export function CapsuleHero({ mood = 'idle', talking = false, size = 200, shield
     happy: { y: [0, -30, 0], rotate: [0, 360], transition: { duration: 1.1, repeat: Infinity, repeatDelay: 0.6 } },
   }
   return (
-    <motion.div className="actor capsule-hero" style={{ width: size, height: size }} animate={anim[mood]} key={mood}>
+    <motion.div
+      className="actor capsule-hero"
+      style={{ width: size, height: size }}
+      animate={talking && mood === 'idle' ? { y: [0, -6, 0], rotate: [0, 3, -3, 0], transition: { duration: 0.8, repeat: Infinity } } : anim[mood]}
+      key={`${mood}-${talking}`}
+    >
       <svg viewBox="0 0 220 220" width="100%" height="100%" aria-hidden>
         <defs>
           <linearGradient id={`${id}r`} x1="0" y1="0" x2="0" y2="1">
@@ -267,13 +507,15 @@ export function CapsuleHero({ mood = 'idle', talking = false, size = 200, shield
         {mood === 'fight' && <path d="M82 96l22 6M138 96l-22 6" stroke="#17206b" strokeWidth="5" strokeLinecap="round" />}
         {mood === 'worried' && <path d="M82 98l20-6M138 98l-20-6" stroke="#17206b" strokeWidth="5" strokeLinecap="round" />}
         <g transform="translate(110 140)">
-          {talking ? (
-            <ellipse className="mouth-talk" rx="9" ry="7" fill="#7a1638" />
-          ) : mood === 'worried' || mood === 'confused' ? (
-            <path d="M-10 4q10-8 20 0" stroke="#17206b" strokeWidth="4" fill="none" strokeLinecap="round" />
+          {mood === 'worried' || mood === 'confused' ? (
+            <path ref={mouthClosed} d="M-10 4q10-8 20 0" stroke="#17206b" strokeWidth="4" fill="none" strokeLinecap="round" />
           ) : (
-            <path d="M-12-2q12 14 24 0" stroke="#17206b" strokeWidth="4" fill="#7a1638" strokeLinecap="round" />
+            <path ref={mouthClosed} d="M-12-2q12 14 24 0" stroke="#17206b" strokeWidth="4" fill="#7a1638" strokeLinecap="round" />
           )}
+          <g ref={mouthOpen} style={{ display: 'none' }} data-mouth="capsule">
+            <ellipse ref={mouthInner} cx="0" cy="1" rx="9" ry="6" fill="#7a1638" stroke="#17206b" strokeWidth="2.5" />
+            <ellipse ref={mouthTongue} cx="0" cy="4" rx="5" ry="2" fill="#ff8fa8" />
+          </g>
         </g>
         <ellipse cx="80" cy="132" rx="7" ry="4" fill="#ff8fa8" opacity="0.6" />
         <ellipse cx="140" cy="132" rx="7" ry="4" fill="#ff8fa8" opacity="0.6" />

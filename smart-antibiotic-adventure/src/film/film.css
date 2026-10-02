@@ -206,7 +206,13 @@
   background: radial-gradient(closest-side, rgb(0 0 0 / 0.32), transparent);
 }
 .aleen-body { position: relative; height: 100%; }
-.aleen-body img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 12px 14px rgb(0 0 0 / 0.25)); user-select: none; }
+.rig { position: relative; width: 100%; height: 100%; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 12px 14px rgb(0 0 0 / 0.25)); }
+.rig-layer { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; pointer-events: none; }
+/* hands lift from the elbows (y = 600 of 1394) */
+.rig-hands { transform-origin: 50% 43.04%; will-change: transform; }
+/* head turns around the neck (285, 290 of 547 × 1394) */
+.rig-head { position: absolute; inset: 0; transform-origin: 52.1% 20.8%; will-change: transform; }
+.rig-face { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .walk-bob { height: 100%; }
 .emote {
   position: absolute;
@@ -538,3 +544,5 @@
 @media (prefers-reduced-motion: reduce) {
   .gold-rays, .finale-icons span, .floaty, .wander, .film-clouds span, .portal-ring { animation: none !important; }
 }
+
+.preroll { position: absolute; inset: 0; z-index: 50; background: #000; }

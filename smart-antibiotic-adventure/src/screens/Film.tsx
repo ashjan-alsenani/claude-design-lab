@@ -1,7 +1,8 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useGame } from '../state/game'
-import { FILM, FILM_STARTS, FILM_TOTAL, SPEAKER_NAME, type Line, type Speaker } from '../film/scenes'
+import { FILM, FILM_STARTS, FILM_TOTAL, SPEAKER_NAME, type Speaker } from '../film/scenes'
+import { FilmClock, type Look, type Speech, type TimedLine } from '../film/timeline'
 import type { AleenMood } from '../film/actors'
 import { SoundToggle } from '../components/Hud'
 import { centerOf } from '../components/fx'
@@ -12,66 +13,67 @@ const W = 1280
 const PARAMS = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams()
 const RECORD = PARAMS.has('record')
 const START = Math.max(0, Number(PARAMS.get('t')) || 0)
-
-const VOICE: Record<Speaker, { pitch: number; rate: number }> = {
-  aleen: { pitch: 1.5, rate: 0.95 },
-  doctor: { pitch: 1.05, rate: 0.92 },
-  capsule: { pitch: 1.8, rate: 1.02 },
-}
+const AUDIT = PARAMS.has('audit')
+const CAPTION_HOLD = 1.4
 
 function sceneAt(time: number) {
   let i = 0
   while (i < FILM.length - 1 && time >= FILM_STARTS[i + 1]) i++
   return i
 }
-function lineAt(lines: Line[], t: number) {
-  let idx = -1
-  lines.forEach((l, i) => {
-    if (t >= l.at) idx = i
-  })
-  return idx
+/** The line currently on screen: the latest one that has started, held briefly after it ends. */
+function captionAt(lines: TimedLine[], t: number) {
+  let cur: TimedLine | null = null
+  for (const l of lines) if (t >= l.start - 0.05) cur = l
+  if (cur && t > cur.end + CAPTION_HOLD) return null
+  return cur
 }
-/** Rough on-screen speaking time when no voice is used. */
-const estSpeak = (text: string) => 0.8 + text.split(/\s+/).length * 0.38
 
-function useArabicVoice() {
-  const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null)
-  useEffect(() => {
-    if (!('speechSynthesis' in window)) return
-    const pick = () => {
-      const vs = window.speechSynthesis.getVoices()
-      setVoice(vs.find((v) => v.lang.toLowerCase().startsWith('ar')) ?? null)
-    }
-    pick()
-    window.speechSynthesis.addEventListener('voiceschanged', pick)
-    return () => window.speechSynthesis.removeEventListener('voiceschanged', pick)
-  }, [])
-  return voice
+/* ------------------------------------------------------------------ */
+/*  Character voice playback: fixed pre-recorded files, never a        */
+/*  browser/device voice. A file that fails to load is never replaced  */
+/*  by another voice — that line simply stays captions-only.            */
+/* ------------------------------------------------------------------ */
+const audioCache = new Map<string, HTMLAudioElement>()
+const failed = new Set<string>()
+function voiceFile(id: string) {
+  let a = audioCache.get(id)
+  if (!a) {
+    a = new Audio(`${import.meta.env.BASE_URL}voices/${id}.mp3`)
+    a.preload = 'auto'
+    a.addEventListener('error', () => failed.add(id))
+    audioCache.set(id, a)
+  }
+  return a
+}
+function stopAllVoices(except?: string) {
+  audioCache.forEach((a, id) => {
+    if (id !== except && !a.paused) a.pause()
+  })
 }
 
 export function Film() {
   const { go, env } = useGame()
   const [time, setTime] = useState(START)
-  const [playing, setPlaying] = useState(RECORD)
+  const [playing, setPlaying] = useState(false)
   const [started, setStarted] = useState(RECORD)
-  const [narrate, setNarrate] = useState(false)
-  const [speaking, setSpeaking] = useState(false)
+  const [voices, setVoices] = useState(!RECORD)
   const [scale, setScale] = useState(1)
-  const voice = useArabicVoice()
   const frameRef = useRef<HTMLDivElement>(null)
   const shellRef = useRef<HTMLDivElement>(null)
   const timeRef = useRef(START)
-  const spokenRef = useRef('')
-  const speakingRef = useRef(false)
+  const voicesRef = useRef(voices)
+  useEffect(() => {
+    voicesRef.current = voices
+  }, [voices])
+  const getFilmTime = useCallback(() => timeRef.current, [])
 
   const si = sceneAt(time)
   const scene = FILM[si]
   const t = time - FILM_STARTS[si]
-  const li = lineAt(scene.lines, t)
-  const line = li >= 0 ? scene.lines[li] : null
-  const lineKey = line ? `${si}-${li}` : ''
+  const line = captionAt(scene.lines, t)
+  const lineKey = line?.id ?? ''
   const ended = time >= FILM_TOTAL - 0.05
-  const canNarrate = !!voice
 
   // scale the 1280×720 stage to the frame width
   useLayoutEffect(() => {
@@ -83,9 +85,31 @@ export function Film() {
     return () => ro.disconnect()
   }, [])
 
-  // film clock (holds while a narrated line is still being spoken)
+  // recording mode: 1 s black pre-roll (sync marker for muxing audio), then roll
   useEffect(() => {
-    if (!playing) return
+    if (!RECORD) return
+    let cancelled = false
+    void document.fonts.ready.then(() =>
+      window.setTimeout(() => {
+        if (!cancelled) setPlaying(true)
+      }, 1000),
+    )
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  // warm the voice files once playback starts
+  useEffect(() => {
+    if (started && !RECORD) FILM.forEach((sc) => sc.lines.forEach((l) => voiceFile(l.id)))
+  }, [started])
+
+  // film clock + keeping each character's audio locked to the timeline
+  useEffect(() => {
+    if (!playing) {
+      stopAllVoices()
+      return
+    }
     let raf = 0
     let last = performance.now()
     let acc = 0
@@ -93,18 +117,26 @@ export function Film() {
       const dt = Math.min(0.1, (now - last) / 1000)
       last = now
       let next = timeRef.current + dt
-      if (narrate && speakingRef.current) {
-        const s = sceneAt(timeRef.current)
-        const lt = timeRef.current - FILM_STARTS[s]
-        const nextLine = FILM[s].lines.find((l) => l.at > lt)
-        const boundary = FILM_STARTS[s] + (nextLine ? nextLine.at : FILM[s].dur) - 0.01
-        if (next > boundary) next = Math.max(timeRef.current, boundary)
-      }
       if (next >= FILM_TOTAL) {
         next = FILM_TOTAL
         setPlaying(false)
       }
       timeRef.current = next
+      // the one line that should be audible right now (lines never overlap)
+      const s = sceneAt(next)
+      const lt = next - FILM_STARTS[s]
+      const active = FILM[s].lines.find((l) => lt >= l.start && lt < l.end - 0.03) ?? null
+      stopAllVoices(active?.id)
+      if (active && voicesRef.current && !failed.has(active.id)) {
+        const a = voiceFile(active.id)
+        const expected = lt - active.start
+        if (a.paused) {
+          if (Math.abs(a.currentTime - expected) > 0.08) a.currentTime = expected
+          void a.play().catch(() => undefined)
+        } else if (Math.abs(a.currentTime - expected) > 0.3) {
+          a.currentTime = expected
+        }
+      }
       acc += dt
       if (acc > 0.05 || next === FILM_TOTAL) {
         acc = 0
@@ -113,44 +145,55 @@ export function Film() {
       if (next < FILM_TOTAL) raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [playing, narrate])
+    return () => {
+      cancelAnimationFrame(raf)
+      stopAllVoices()
+    }
+  }, [playing])
 
-  // narration: speak each new line once
+  // test hook (recording/audit mode only): who should be speaking at this exact instant
   useEffect(() => {
-    if (!narrate || !voice || !playing || !line || spokenRef.current === lineKey) return
-    spokenRef.current = lineKey
-    window.speechSynthesis.cancel()
-    const u = new SpeechSynthesisUtterance(line.text.replace(/\p{Extended_Pictographic}/gu, '').replace(/‍/g, '').replace(/️/g, ''))
-    u.voice = voice
-    u.lang = voice.lang
-    u.pitch = VOICE[line.who].pitch
-    u.rate = VOICE[line.who].rate
-    u.onstart = () => {
-      speakingRef.current = true
-      setSpeaking(true)
+    if (!RECORD) return
+    ;(window as unknown as { __filmSpeaker: () => string }).__filmSpeaker = () => {
+      const now = timeRef.current
+      const s = sceneAt(now)
+      const lt = now - FILM_STARTS[s]
+      const l = FILM[s].lines.find((x) => lt >= x.start && lt <= x.end)
+      return l ? `${l.who}:${l.id}` : ''
     }
-    u.onend = u.onerror = () => {
-      speakingRef.current = false
-      setSpeaking(false)
-    }
-    speakingRef.current = true
-    window.speechSynthesis.speak(u)
-  }, [narrate, voice, playing, line, lineKey])
-
-  useEffect(() => () => {
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel()
   }, [])
 
-  const stopVoice = () => {
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel()
-    speakingRef.current = false
-    setSpeaking(false)
-  }
+  // audit hook (?audit): which voice files are audible, and where they should be
+  useEffect(() => {
+    if (!AUDIT) return
+    ;(window as unknown as { __voiceState: () => unknown }).__voiceState = () => {
+      const now = timeRef.current
+      const s = sceneAt(now)
+      const lt = now - FILM_STARTS[s]
+      const l = FILM[s].lines.find((x) => lt >= x.start && lt < x.end - 0.03)
+      const audible = [...audioCache.entries()].filter(([, a]) => !a.paused).map(([id, a]) => ({ id, at: a.currentTime }))
+      return { line: l ? { id: l.id, who: l.who, expected: lt - l.start } : null, audible, failed: [...failed] }
+    }
+  }, [])
+
+  // pause when the tab is hidden so audio and picture never drift apart
+  useEffect(() => {
+    const onVis = () => document.hidden && setPlaying(false)
+    document.addEventListener('visibilitychange', onVis)
+    return () => {
+      document.removeEventListener('visibilitychange', onVis)
+      stopAllVoices()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!voices) stopAllVoices()
+  }, [voices])
+
+  const stopVoice = () => stopAllVoices()
 
   const seek = (to: number) => {
-    stopVoice()
-    spokenRef.current = ''
+    stopAllVoices()
     timeRef.current = to
     setTime(to)
   }
@@ -162,13 +205,7 @@ export function Film() {
       return
     }
     setStarted(true)
-    if (playing) {
-      setPlaying(false)
-      if ('speechSynthesis' in window) window.speechSynthesis.pause()
-    } else {
-      setPlaying(true)
-      if ('speechSynthesis' in window) window.speechSynthesis.resume()
-    }
+    setPlaying((p) => !p)
   }
 
   const fullscreen = () => {
@@ -178,16 +215,13 @@ export function Film() {
     else void el.requestFullscreen?.()
   }
 
-  // who is talking right now (mouth/voice waves)
-  const talking: Speaker | null = line
-    ? narrate && canNarrate
-      ? speaking
-        ? line.who
-        : null
-      : t < line.at + estSpeak(line.text)
-        ? line.who
-        : null
-    : null
+  // turn-taking: who speaks, and where everyone looks
+  const speaking = line && t >= line.start - 0.05 && t <= line.end ? line.who : null
+  const talking: Speaker | null = speaking
+  const speech = (who: Speaker): Speech => (line && line.who === who ? { id: line.id, start: FILM_STARTS[si] + line.start, mouth: line.mouth } : null)
+  const sp: Record<Speaker, Speech> = { aleen: speech('aleen'), doctor: speech('doctor'), capsule: speech('capsule') }
+  const aleenLook: Look = !line ? 'viewer' : line.who === 'aleen' ? line.look : 'other'
+  const docLook: 'aleen' | 'viewer' = !line ? 'viewer' : line.who === 'doctor' ? (line.look === 'other' ? 'aleen' : 'viewer') : line.who === 'aleen' ? 'aleen' : 'viewer'
   const mood: AleenMood = line?.mood ?? 'idle'
 
   // keyboard: space toggles
@@ -239,7 +273,9 @@ export function Film() {
                 exit={{ opacity: 0, transition: { duration: 0.4 } }}
                 transition={{ duration: 0.8, ease: [0.77, 0, 0.175, 1] }}
               >
-                <Scene t={t} talking={talking} mood={mood} reduced={env.reducedMotion} />
+                <FilmClock.Provider value={getFilmTime}>
+                  <Scene t={t} talking={talking} mood={mood} reduced={env.reducedMotion} sp={sp} aleenLook={aleenLook} docLook={docLook} />
+                </FilmClock.Provider>
               </motion.div>
             </AnimatePresence>
 
@@ -250,6 +286,8 @@ export function Film() {
                   <motion.p
                     key={lineKey}
                     className={`caption who-${line.who}`}
+                    data-line={line.id}
+                    data-speaking={speaking ?? ''}
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8, transition: { duration: 0.15 } }}
@@ -267,6 +305,7 @@ export function Film() {
             </div>
           </div>
 
+          {RECORD && !playing && time < 0.01 && <div className="preroll" />}
           {/* poster / play overlay */}
           <AnimatePresence>
             {(!started || ended) && !RECORD && (
@@ -316,17 +355,12 @@ export function Film() {
             </div>
             <button
               type="button"
-              className={`ctrl-btn voice ${narrate ? 'on' : ''}`}
-              onClick={() => {
-                if (narrate) stopVoice()
-                spokenRef.current = ''
-                setNarrate((n) => !n)
-              }}
-              disabled={!canNarrate}
-              aria-pressed={narrate}
-              title={canNarrate ? 'صوت الراوي' : 'لا يتوفر صوت عربي في هذا المتصفح'}
+              className={`ctrl-btn voice ${voices ? 'on' : ''}`}
+              onClick={() => setVoices((v) => !v)}
+              aria-pressed={voices}
+              title={voices ? 'كتم أصوات الشخصيات' : 'تشغيل أصوات الشخصيات'}
             >
-              🗣️ <span className="ctrl-label">{canNarrate ? (narrate ? 'الصوت مُفعّل' : 'تشغيل الصوت') : 'الترجمة فقط'}</span>
+              {voices ? '🔊' : '🔇'} <span className="ctrl-label">{voices ? 'أصوات الشخصيات' : 'الترجمة فقط'}</span>
             </button>
             <button type="button" className="ctrl-btn" onClick={() => seek(0)} aria-label="من البداية" title="من البداية">
               ↻

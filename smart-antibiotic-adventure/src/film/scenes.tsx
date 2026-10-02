@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { AleenActor, CapsuleHero, Doctor, type AleenMood, type CapsuleMood } from './actors'
+import { buildLines, sceneLength, SPEAKER_NAME, type Look, type Speaker, type Speech, type TimedLine } from './timeline'
 import { BaktoroArt } from '../art/Baktoro'
 import { Capsule, CheckBadge, Cloud, CrossBadge, Germ, Heart, MiniShield, Sparkle, Star } from '../art/objects'
 import { Icon } from '../art/icons'
@@ -9,12 +10,21 @@ import { Icon } from '../art/icons'
 /*  Script                                                             */
 /* ------------------------------------------------------------------ */
 
-export type Speaker = 'aleen' | 'doctor' | 'capsule'
-export type Line = { at: number; who: Speaker; text: string; mood?: AleenMood }
-export type SceneProps = { t: number; talking: Speaker | null; mood: AleenMood; reduced: boolean }
-export type FilmScene = { key: string; chapter: string; emoji: string; dur: number; lines: Line[]; Comp: (p: SceneProps) => ReactNode }
-
-export const SPEAKER_NAME: Record<Speaker, string> = { aleen: 'ألين', doctor: 'الدكتورة هدى', capsule: 'كبسول' }
+export type SceneProps = {
+  t: number
+  talking: Speaker | null
+  mood: AleenMood
+  reduced: boolean
+  /** each character's own voice envelope (null unless that character is speaking) */
+  sp: Record<Speaker, Speech>
+  /** where Aleen looks right now */
+  aleenLook: Look
+  /** where Dr. Huda looks right now */
+  docLook: 'aleen' | 'viewer'
+}
+export type FilmScene = { key: string; chapter: string; emoji: string; dur: number; lines: TimedLine[]; Comp: (p: SceneProps) => ReactNode }
+export { SPEAKER_NAME }
+export type { Speaker }
 
 /* ------------------------------------------------------------------ */
 /*  Shared stage pieces (stage is 1280 × 720)                          */
@@ -29,7 +39,25 @@ function At({ x, y, children, z = 2, className = '' }: { x: number; y: number; c
 }
 
 /** Aleen standing on the right of the stage, feet on the ground line. */
-function AleenSpot({ mood, talking, reduced, x = 960, h = 470, enter = false }: { mood: AleenMood; talking: boolean; reduced: boolean; x?: number; h?: number; enter?: boolean }) {
+function AleenSpot({
+  mood,
+  talking,
+  reduced,
+  speech,
+  look,
+  x = 960,
+  h = 470,
+  enter = false,
+}: {
+  mood: AleenMood
+  talking: boolean
+  reduced: boolean
+  speech: Speech
+  look: Look
+  x?: number
+  h?: number
+  enter?: boolean
+}) {
   return (
     <motion.div
       className="at"
@@ -40,10 +68,10 @@ function AleenSpot({ mood, talking, reduced, x = 960, h = 470, enter = false }: 
     >
       {enter && !reduced && (
         <motion.div className="walk-bob" animate={{ y: [0, -10, 0, -10, 0, -10, 0] }} transition={{ duration: 1.3 }}>
-          <AleenActor mood={mood} talking={talking} height={h} reduced={reduced} />
+          <AleenActor mood={mood} talking={talking} height={h} reduced={reduced} speech={speech} look={look} />
         </motion.div>
       )}
-      {(!enter || reduced) && <AleenActor mood={mood} talking={talking} height={h} reduced={reduced} />}
+      {(!enter || reduced) && <AleenActor mood={mood} talking={talking} height={h} reduced={reduced} speech={speech} look={look} />}
     </motion.div>
   )
 }
@@ -94,7 +122,7 @@ function Floaties({ n = 10, kind = 'mix' }: { n?: number; kind?: 'mix' | 'stars'
 /*  1 · Title                                                          */
 /* ------------------------------------------------------------------ */
 
-function S1({ t, talking, mood, reduced }: SceneProps) {
+function S1({ t, talking, mood, reduced, sp, aleenLook }: SceneProps) {
   return (
     <div className="film-bg bg-sky">
       <div className="film-clouds">
@@ -128,7 +156,7 @@ function S1({ t, talking, mood, reduced }: SceneProps) {
           <MiniShield size={130} gold className="glow-pulse" />
         </motion.div>
       </At>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} enter />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} enter />
     </div>
   )
 }
@@ -138,9 +166,9 @@ function S1({ t, talking, mood, reduced }: SceneProps) {
 /* ------------------------------------------------------------------ */
 
 const HARMFUL = [
-  { x: 120, y: 330, at: 6.3 },
-  { x: 330, y: 200, at: 7.4 },
-  { x: 470, y: 400, at: 8.5 },
+  { x: 120, y: 330, at: 10.6 },
+  { x: 330, y: 200, at: 11.8 },
+  { x: 470, y: 400, at: 13 },
 ]
 const FRIENDLY = [
   { x: 640, y: 150, hue: 'blue' as const },
@@ -157,9 +185,9 @@ function Zap({ x, y }: { x: number; y: number }) {
   )
 }
 
-function S2({ t, talking, mood, reduced }: SceneProps) {
-  const capX = t < 4 ? -260 : t < 6 ? 140 : t < 7.4 ? 40 : t < 8.5 ? 210 : 330
-  const capY = t < 6 ? 260 : t < 7.4 ? 300 : t < 8.5 ? 170 : 340
+function S2({ t, talking, mood, reduced, sp, aleenLook }: SceneProps) {
+  const capX = t < 7.2 ? -260 : t < 10 ? 140 : t < 11.8 ? 40 : t < 13 ? 210 : 330
+  const capY = t < 10 ? 260 : t < 11.8 ? 300 : t < 13 ? 170 : 340
   return (
     <div className="film-bg bg-body">
       <Floaties n={14} kind="cells" />
@@ -175,7 +203,7 @@ function S2({ t, talking, mood, reduced }: SceneProps) {
         t < h.at ? (
           <At key={i} x={h.x} y={h.y} z={3}>
             <div className="wander" style={{ ['--wd' as string]: `${2 + i * 0.5}s` }}>
-              <BaktoroArt mood={t > 5 ? 'shocked' : 'smug'} size={110} />
+              <BaktoroArt mood={t > 9.5 ? 'shocked' : 'smug'} size={110} />
             </div>
           </At>
         ) : (
@@ -183,12 +211,12 @@ function S2({ t, talking, mood, reduced }: SceneProps) {
         ),
       )}
       <motion.div className="at" style={{ zIndex: 4 }} animate={{ left: capX, top: capY }} transition={{ type: 'spring', duration: 0.8, bounce: 0.3 }}>
-        <CapsuleHero mood={t >= 6 && t < 9 ? 'fight' : t >= 9 ? 'happy' : 'idle'} talking={talking === 'capsule'} size={190} />
+        <CapsuleHero mood={t >= 10 && t < 13.6 ? 'fight' : t >= 13.6 ? 'happy' : 'idle'} talking={talking === 'capsule'} speech={sp.capsule} size={190} />
       </motion.div>
-      <Pop show={t >= 9.2} className="badge-float bf-left">
+      <Pop show={t >= 13.8} className="badge-float bf-left">
         <CheckBadge size={44} /> طُردت البكتيريا الضارة!
       </Pop>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} />
     </div>
   )
 }
@@ -197,8 +225,8 @@ function S2({ t, talking, mood, reduced }: SceneProps) {
 /*  3 · Bacteria vs viruses                                            */
 /* ------------------------------------------------------------------ */
 
-function S3({ t, talking, mood, reduced }: SceneProps) {
-  const virusMood: CapsuleMood = t >= 6.5 ? 'confused' : t >= 5 ? 'fight' : 'idle'
+function S3({ t, talking, mood, reduced, sp, aleenLook }: SceneProps) {
+  const virusMood: CapsuleMood = t >= 7.6 ? 'confused' : t >= 6 ? 'fight' : 'idle'
   return (
     <div className="film-bg bg-violet">
       <Floaties n={8} />
@@ -213,7 +241,7 @@ function S3({ t, talking, mood, reduced }: SceneProps) {
             t < 3.4 && <Zap x={40} y={40} />
           )}
           <motion.div className="panel-cap" animate={{ x: t >= 1.2 && t < 2.8 ? -70 : 0 }} transition={{ type: 'spring', duration: 0.5 }}>
-            <CapsuleHero mood={t >= 1.2 && t < 2.8 ? 'fight' : t >= 2.8 ? 'happy' : 'idle'} size={130} talking={talking === 'capsule' && t < 5} />
+            <CapsuleHero mood={t >= 1.2 && t < 2.8 ? 'fight' : t >= 2.8 ? 'happy' : 'idle'} size={130} talking={talking === 'capsule' && sp.capsule?.id === 'virus-1'} speech={sp.capsule?.id === 'virus-1' ? sp.capsule : null} />
           </motion.div>
         </div>
         <Pop show={t >= 2.8} className="verdict yes">
@@ -223,22 +251,22 @@ function S3({ t, talking, mood, reduced }: SceneProps) {
       <div className="vs-panel panel-b">
         <p className="panel-title">زكام وإنفلونزا 🤧</p>
         <div className="panel-stage">
-          <motion.div className="wander" style={{ ['--wd' as string]: '2.4s' }} animate={t >= 6 ? { scale: [1, 1.25, 1] } : {}} transition={{ duration: 0.5 }}>
+          <motion.div className="wander" style={{ ['--wd' as string]: '2.4s' }} animate={t >= 7 ? { scale: [1, 1.25, 1] } : {}} transition={{ duration: 0.5 }}>
             <Icon name="virus" size={130} />
           </motion.div>
           <motion.div
             className="panel-cap"
-            animate={{ x: t >= 5 && t < 6 ? -80 : t >= 6 && t < 6.6 ? 30 : 0, rotate: t >= 6 && t < 6.6 ? 25 : 0 }}
+            animate={{ x: t >= 6 && t < 7 ? -80 : t >= 7 && t < 7.6 ? 30 : 0, rotate: t >= 7 && t < 7.6 ? 25 : 0 }}
             transition={{ type: 'spring', duration: 0.5, bounce: 0.6 }}
           >
-            <CapsuleHero mood={virusMood} size={130} talking={talking === 'capsule' && t >= 5} />
+            <CapsuleHero mood={virusMood} size={130} talking={talking === 'capsule' && sp.capsule?.id === 'virus-2'} speech={sp.capsule?.id === 'virus-2' ? sp.capsule : null} />
           </motion.div>
         </div>
-        <Pop show={t >= 6.6} className="verdict no">
+        <Pop show={t >= 7.6} className="verdict no">
           <CrossBadge size={40} /> لا يعالج الفيروسات
         </Pop>
       </div>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} />
     </div>
   )
 }
@@ -247,7 +275,7 @@ function S3({ t, talking, mood, reduced }: SceneProps) {
 /*  4 · Feeling sick → the doctor                                      */
 /* ------------------------------------------------------------------ */
 
-function S4({ t, talking, mood, reduced }: SceneProps) {
+function S4({ t, talking, mood, reduced, sp, aleenLook, docLook }: SceneProps) {
   return (
     <div className="film-bg bg-room">
       <div className="room-window">
@@ -260,7 +288,7 @@ function S4({ t, talking, mood, reduced }: SceneProps) {
       </div>
       {/* thinking about leftover antibiotics */}
       <AnimatePresence>
-        {t >= 1 && t < 6.2 && (
+        {t >= 1 && t < 6.4 && (
           <motion.div
             className="thought"
             initial={{ opacity: 0, scale: 0.5 }}
@@ -270,7 +298,7 @@ function S4({ t, talking, mood, reduced }: SceneProps) {
           >
             <Icon name="leftover" size={96} />
             <span className="q">؟</span>
-            {t >= 5.2 && (
+            {t >= 5.6 && (
               <motion.span className="thought-x" initial={{ scale: 0.4, rotate: -40 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: 'spring', bounce: 0.6 }}>
                 <CrossBadge size={70} />
               </motion.span>
@@ -282,7 +310,7 @@ function S4({ t, talking, mood, reduced }: SceneProps) {
       </AnimatePresence>
       {/* doctor appears through a sparkle portal */}
       <AnimatePresence>
-        {t >= 4.6 && (
+        {t >= 5.2 && (
           <motion.div
             className="at"
             style={{ left: 120, top: 260, zIndex: 4 }}
@@ -291,14 +319,14 @@ function S4({ t, talking, mood, reduced }: SceneProps) {
             transition={{ type: 'spring', bounce: 0.45, duration: 0.8 }}
           >
             <span className="portal-ring" />
-            <Doctor talking={talking === 'doctor'} height={420} happy={t >= 11} />
+            <Doctor talking={talking === 'doctor'} speech={sp.doctor} lookAt={docLook} height={420} happy={t >= 18.3} />
           </motion.div>
         )}
       </AnimatePresence>
-      <Pop show={t >= 7.5} className="rx-badge">
+      <Pop show={t >= 11} className="rx-badge">
         📋 فقط بوصفة أو نصيحة من الطبيب
       </Pop>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} x={900} />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} x={900} />
     </div>
   )
 }
@@ -308,19 +336,19 @@ function S4({ t, talking, mood, reduced }: SceneProps) {
 /* ------------------------------------------------------------------ */
 
 const RULES = [
-  { icon: '💊', text: 'الجرعة الصحيحة', ok: true, at: 1.6 },
-  { icon: '⏰', text: 'الوقت الصحيح', ok: true, at: 3.2 },
-  { icon: '📋', text: 'تعليمات الطبيب', ok: true, at: 4.8 },
-  { icon: '🗄️', text: 'لا نستخدم البقايا', ok: false, at: 6.4 },
-  { icon: '🤝', text: 'لا نشارك الدواء', ok: false, at: 8 },
+  { icon: '💊', text: 'الجرعة الصحيحة', ok: true, at: 2.4 },
+  { icon: '⏰', text: 'الوقت الصحيح', ok: true, at: 4.1 },
+  { icon: '📋', text: 'تعليمات الطبيب', ok: true, at: 5.8 },
+  { icon: '🗄️', text: 'لا نستخدم البقايا', ok: false, at: 9 },
+  { icon: '🤝', text: 'لا نشارك الدواء', ok: false, at: 11.2 },
 ]
 
-function S5({ t, talking, mood, reduced }: SceneProps) {
+function S5({ t, talking, mood, reduced, sp, aleenLook, docLook }: SceneProps) {
   return (
     <div className="film-bg bg-sun">
       <Floaties n={10} kind="stars" />
       <At x={30} y={300} z={4}>
-        <Doctor talking={talking === 'doctor'} height={380} happy />
+        <Doctor talking={talking === 'doctor'} speech={sp.doctor} lookAt={docLook} height={380} happy />
       </At>
       <div className="rules-grid">
         {RULES.map((r, i) => (
@@ -331,7 +359,7 @@ function S5({ t, talking, mood, reduced }: SceneProps) {
           </Pop>
         ))}
       </div>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} />
     </div>
   )
 }
@@ -354,7 +382,7 @@ const CLONES = [
   { x: 290, y: 400 },
 ]
 
-function S6({ t, talking, mood, reduced }: SceneProps) {
+function S6({ t, talking, mood, reduced, sp, aleenLook }: SceneProps) {
   const s = LENS[SURVIVOR]
   return (
     <div className="film-bg bg-lab">
@@ -362,24 +390,24 @@ function S6({ t, talking, mood, reduced }: SceneProps) {
       <div className="lens-big">
         <div className="lens-grid" />
         {LENS.map((g) => {
-          const gone = t >= 4 && g.i !== SURVIVOR
+          const gone = t >= 6.4 && g.i !== SURVIVOR
           return (
             <motion.div
               key={g.i}
               className="lens-germ"
               style={{ left: g.x, top: g.y }}
-              animate={gone ? { scale: 0.1, opacity: 0, rotate: 120 } : { scale: g.i === SURVIVOR && t >= 6.5 ? 1.3 : 1, opacity: 1 }}
+              animate={gone ? { scale: 0.1, opacity: 0, rotate: 120 } : { scale: g.i === SURVIVOR && t >= 11 ? 1.3 : 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: gone ? (g.i % 4) * 0.12 : 0 }}
             >
               <div className="wander" style={{ ['--wd' as string]: `${2.4 + (g.i % 3)}s` }}>
-                <Germ size={64} hue={g.i === SURVIVOR && t >= 6.5 ? 'purple' : g.hue} mood={t >= 2 && t < 4 ? 'surprised' : 'happy'} shield={g.i === SURVIVOR && t >= 6.5} />
+                <Germ size={64} hue={g.i === SURVIVOR && t >= 11 ? 'purple' : g.hue} mood={t >= 4.4 && t < 6.4 ? 'surprised' : 'happy'} shield={g.i === SURVIVOR && t >= 11} />
               </div>
-              {g.i === SURVIVOR && t >= 6.5 && <span className="glow-shield" />}
+              {g.i === SURVIVOR && t >= 11 && <span className="glow-shield" />}
             </motion.div>
           )
         })}
         <AnimatePresence>
-          {t >= 2 && t < 4.4 &&
+          {t >= 4.4 && t < 6.8 &&
             [0, 1, 2, 3, 4, 5].map((k) => (
               <motion.div
                 key={k}
@@ -393,7 +421,7 @@ function S6({ t, talking, mood, reduced }: SceneProps) {
               </motion.div>
             ))}
         </AnimatePresence>
-        {t >= 9 &&
+        {t >= 13.8 &&
           CLONES.map((c, k) => (
             <motion.div
               key={k}
@@ -413,10 +441,10 @@ function S6({ t, talking, mood, reduced }: SceneProps) {
       <div className="res-steps">
         {[
           { at: 0.3, t: '🦠 بكتيريا كثيرة' },
-          { at: 2, t: '💊 هجوم المضاد' },
-          { at: 4, t: '💨 اختفى معظمها… وواحدة نجت' },
-          { at: 6.5, t: '🛡️ صنعت درعًا لامعًا' },
-          { at: 9, t: '➕ تكاثرت البكتيريا المقاومة' },
+          { at: 4.4, t: '💊 هجوم المضاد' },
+          { at: 6.4, t: '💨 اختفى معظمها… وواحدة بقيت' },
+          { at: 11, t: '🛡️ صنعت درعًا لامعًا' },
+          { at: 13.8, t: '➕ تكاثرت البكتيريا المقاومة' },
         ].map((st, i) => (
           <Pop key={i} show={t >= st.at} className={`res-step ${i === 4 ? 'hot' : ''}`}>
             {st.t}
@@ -424,16 +452,16 @@ function S6({ t, talking, mood, reduced }: SceneProps) {
         ))}
       </div>
       <AnimatePresence>
-        {t >= 11.5 && (
-          <motion.div className="at" style={{ left: 600, top: 330, zIndex: 6 }} initial={{ x: -200, opacity: 0 }} animate={{ x: [-200, -40, 10], opacity: 1 }} transition={{ duration: 1.2, times: [0, 0.6, 1] }}>
-            <CapsuleHero mood={t >= 12.4 ? 'worried' : 'fight'} talking={talking === 'capsule'} size={150} />
+        {t >= 3.6 && (
+          <motion.div className="at" style={{ left: 640, top: 360, zIndex: 6 }} initial={{ x: -160, opacity: 0 }} animate={{ x: t >= 16.9 && t < 17.6 ? -50 : 0, opacity: 1 }} transition={{ type: 'spring', duration: 0.7, bounce: 0.35 }}>
+            <CapsuleHero mood={t >= 17.6 ? 'worried' : t >= 16.9 || (t >= 4.4 && t < 6.4) ? 'fight' : 'idle'} talking={talking === 'capsule'} speech={sp.capsule} size={140} />
           </motion.div>
         )}
       </AnimatePresence>
-      <Pop show={t >= 12.6} className="warn-badge">
+      <Pop show={t >= 18} className="warn-badge">
         ⚠️ المضاد الحيوي أصبح أقل فاعلية
       </Pop>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} x={990} h={440} />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} x={990} h={440} />
     </div>
   )
 }
@@ -451,7 +479,9 @@ const HELP = [
   { icon: '💉', text: 'اللقاحات والنظافة تمنع العدوى' },
 ]
 
-function S7({ t, talking, mood, reduced }: SceneProps) {
+const HELP_AT = [5.6, 8.2, 11, 12.6, 14.8, 16.8]
+
+function S7({ t, talking, mood, reduced, sp, aleenLook, docLook }: SceneProps) {
   return (
     <div className="film-bg bg-park">
       <Floaties n={10} />
@@ -463,17 +493,17 @@ function S7({ t, talking, mood, reduced }: SceneProps) {
         ))}
       </div>
       <At x={20} y={330} z={4}>
-        <Doctor talking={talking === 'doctor'} height={350} happy />
+        <Doctor talking={talking === 'doctor'} speech={sp.doctor} lookAt={docLook} height={350} happy />
       </At>
       <div className="help-grid">
         {HELP.map((h, i) => (
-          <Pop key={i} show={t >= 1.2 + i * 1.3} className="help-card">
+          <Pop key={i} show={t >= HELP_AT[i]} className="help-card">
             <span className="help-icon">{h.icon}</span>
             <span>{h.text}</span>
           </Pop>
         ))}
       </div>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} x={1000} h={440} />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} x={1000} h={440} />
     </div>
   )
 }
@@ -482,7 +512,7 @@ function S7({ t, talking, mood, reduced }: SceneProps) {
 /*  8 · Finale                                                         */
 /* ------------------------------------------------------------------ */
 
-function S8({ t, talking, mood, reduced }: SceneProps) {
+function S8({ t, talking, mood, reduced, sp, aleenLook, docLook }: SceneProps) {
   return (
     <div className="film-bg bg-gold">
       <div className="gold-rays" />
@@ -497,18 +527,18 @@ function S8({ t, talking, mood, reduced }: SceneProps) {
       <motion.h2 className="finale-title" initial={{ opacity: 0, scale: 0.6, y: -30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: 'spring', bounce: 0.5, duration: 1, delay: 0.3 }}>
         معاً نحافظ على فعالية المضادات الحيوية
       </motion.h2>
-      <Pop show={t >= 4.5} className="finale-sub">
+      <Pop show={t >= 4.8} className="finale-sub">
         الاستخدام الصحيح اليوم يساعدنا على حماية فعالية المضادات الحيوية للمستقبل.
       </Pop>
       <At x={70} y={300} z={4}>
-        <Doctor talking={talking === 'doctor'} height={360} happy />
+        <Doctor talking={talking === 'doctor'} speech={sp.doctor} lookAt={docLook} height={360} happy />
       </At>
       <motion.div className="at shield-stage" style={{ left: 390, top: 250, zIndex: 3 }} initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', bounce: 0.4, duration: 1, delay: 1.2 }}>
         <div className="big-glow-shield">
           <MiniShield size={340} gold className="glow-pulse" />
         </div>
         <div className="shield-hero">
-          <CapsuleHero mood="happy" size={170} />
+          <CapsuleHero mood="happy" size={170} talking={talking === 'capsule'} speech={sp.capsule} />
         </div>
       </motion.div>
       <At x={700} y={540} z={4}>
@@ -520,7 +550,7 @@ function S8({ t, talking, mood, reduced }: SceneProps) {
           ))}
         </div>
       </At>
-      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} x={1010} h={430} />
+      <AleenSpot mood={mood} talking={talking === 'aleen'} reduced={reduced} speech={sp.aleen} look={aleenLook} x={1010} h={430} />
       <div className="confetti-css" aria-hidden>
         {Array.from({ length: reduced ? 0 : 28 }, (_, i) => (
           <i key={i} style={{ left: `${(i * 37) % 100}%`, ['--c' as string]: ['#ffd23f', '#ff8fc7', '#5ec8ff', '#7be3b0', '#a46bff'][i % 5], ['--d' as string]: `${3 + (i % 5) * 0.6}s`, ['--dl' as string]: `${-(i % 7) * 0.5}s` }} />
@@ -539,7 +569,7 @@ export const FILM: FilmScene[] = [
     emoji: '🎬',
     dur: 8,
     Comp: S1,
-    lines: [{ at: 0.6, who: 'aleen', text: 'مرحبًا! أنا ألين 👋 هيا نتعلم معًا كيف نستخدم المضادات الحيوية بشكل صحيح!', mood: 'wave' }],
+    lines: buildLines('intro'),
   },
   {
     key: 'micro',
@@ -547,11 +577,7 @@ export const FILM: FilmScene[] = [
     emoji: '🔬',
     dur: 12,
     Comp: S2,
-    lines: [
-      { at: 0.3, who: 'aleen', text: 'واو! انظروا… هذا عالم صغير جدًا داخل أجسامنا!', mood: 'surprised' },
-      { at: 4.2, who: 'capsule', text: 'أنا كبسول، المضاد الحيوي! أساعد الجسم في محاربة البكتيريا الضارة.' },
-      { at: 9.2, who: 'aleen', text: 'رائع يا كبسول! 🎉', mood: 'cheer' },
-    ],
+    lines: buildLines('micro'),
   },
   {
     key: 'virus',
@@ -559,11 +585,7 @@ export const FILM: FilmScene[] = [
     emoji: '🤧',
     dur: 11,
     Comp: S3,
-    lines: [
-      { at: 0.3, who: 'capsule', text: 'أنا أعالج بعض أنواع العدوى البكتيرية…' },
-      { at: 4.8, who: 'capsule', text: 'لكنني لا أعمل ضد الفيروسات، مثل الزكام والإنفلونزا!' },
-      { at: 8.6, who: 'aleen', text: 'فهمت! الزكام لا يحتاج مضادًا حيويًا.', mood: 'nod' },
-    ],
+    lines: buildLines('virus'),
   },
   {
     key: 'doctor',
@@ -571,11 +593,7 @@ export const FILM: FilmScene[] = [
     emoji: '🩺',
     dur: 13,
     Comp: S4,
-    lines: [
-      { at: 0.4, who: 'aleen', text: 'أشعر بالتعب… هل آخذ الدواء القديم من الدرج؟ 🤔', mood: 'sick' },
-      { at: 5, who: 'doctor', text: 'لا يا ألين! المضاد الحيوي يُستخدم فقط عندما يصفه الطبيب أو المختص الصحي.', mood: 'surprised' },
-      { at: 10.6, who: 'aleen', text: 'شكرًا يا دكتورة هدى! سأسأل الطبيب دائمًا.', mood: 'happy' },
-    ],
+    lines: buildLines('doctor'),
   },
   {
     key: 'rules',
@@ -583,11 +601,7 @@ export const FILM: FilmScene[] = [
     emoji: '💊',
     dur: 13,
     Comp: S5,
-    lines: [
-      { at: 0.3, who: 'doctor', text: 'إليكِ الطريقة الصحيحة: الجرعة الصحيحة، في الوقت الصحيح، وحسب تعليمات الطبيب.', mood: 'point' },
-      { at: 6.2, who: 'aleen', text: 'ولا نستخدم بقايا الدواء القديم، ولا نشارك دواءنا مع أحد!', mood: 'point' },
-      { at: 10.6, who: 'doctor', text: 'أحسنتِ يا ألين!', mood: 'happy' },
-    ],
+    lines: buildLines('rules'),
   },
   {
     key: 'resist',
@@ -595,12 +609,7 @@ export const FILM: FilmScene[] = [
     emoji: '🛡️',
     dur: 16,
     Comp: S6,
-    lines: [
-      { at: 0.3, who: 'aleen', text: 'والآن… ما هي مقاومة البكتيريا؟', mood: 'think' },
-      { at: 2.2, who: 'capsule', text: 'هاجمتُ البكتيريا فاختفى معظمها… لكن واحدة نجت!', mood: 'surprised' },
-      { at: 6.6, who: 'aleen', text: 'أوه لا! صنعت لنفسها درعًا لامعًا… ثم تكاثرت!', mood: 'worried' },
-      { at: 11.6, who: 'capsule', text: 'عندما تقاوم البكتيريا، قد أصبح أقل فاعلية ضدها.', mood: 'worried' },
-    ],
+    lines: buildLines('resist'),
   },
   {
     key: 'help',
@@ -608,11 +617,7 @@ export const FILM: FilmScene[] = [
     emoji: '🧼',
     dur: 14,
     Comp: S7,
-    lines: [
-      { at: 0.3, who: 'doctor', text: 'كلنا نستطيع أن نساعد في الحد من مقاومة البكتيريا!', mood: 'cheer' },
-      { at: 4.6, who: 'aleen', text: 'نستخدم المضاد فقط بإرشاد طبي، ونتبع التعليمات، ولا نشاركه، ولا نستخدم البقايا!', mood: 'cheer' },
-      { at: 10.2, who: 'doctor', text: 'ونغسل أيدينا، ونأخذ اللقاحات المناسبة لنمنع العدوى.', mood: 'nod' },
-    ],
+    lines: buildLines('help'),
   },
   {
     key: 'finale',
@@ -620,13 +625,12 @@ export const FILM: FilmScene[] = [
     emoji: '🌟',
     dur: 13,
     Comp: S8,
-    lines: [
-      { at: 0.6, who: 'aleen', text: 'معاً نحافظ على فعالية المضادات الحيوية!', mood: 'cheer' },
-      { at: 4.6, who: 'doctor', text: 'الاستخدام الصحيح اليوم يساعدنا على حماية فعالية المضادات الحيوية للمستقبل.', mood: 'happy' },
-      { at: 10.4, who: 'capsule', text: 'إلى اللقاء يا أبطال! 💪', mood: 'wave' },
-    ],
+    lines: buildLines('finale'),
   },
 ]
+
+// scene length grows to fit the real recorded dialogue
+FILM.forEach((sc) => (sc.dur = sceneLength(sc.dur, sc.lines)))
 
 export const FILM_STARTS = FILM.reduce<number[]>((acc, _sc, i) => [...acc, i === 0 ? 0 : acc[i - 1] + FILM[i - 1].dur], [])
 export const FILM_TOTAL = FILM.reduce((a, sc) => a + sc.dur, 0)
