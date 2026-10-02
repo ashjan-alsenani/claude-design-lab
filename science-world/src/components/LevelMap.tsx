@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Unit } from '../data/types';
 import { useProgress } from '../state/ProgressContext';
-import { isBossUnlocked, isLessonDone, isLessonUnlocked, isUnitQuizUnlocked } from '../state/journey';
-import { allLessons } from '../data/units';
+import { isBossUnlocked, isLessonDone, isLessonUnlocked, isUnitQuizUnlocked, previousLesson } from '../state/journey';
+import { lessonLabel } from '../data/units';
 import { play } from '../lib/sound';
 import { Mascot } from './Mascot';
 import { Stars } from './Stars';
@@ -41,16 +41,16 @@ export function LevelMap({ unit }: { unit: Unit }) {
     ...unit.lessons.map<MapNode>((l) => {
       const done = isLessonDone(state, l.id);
       const open = isLessonUnlocked(state, l.id);
-      const prev = allLessons[allLessons.findIndex((x) => x.id === l.id) - 1];
+      const prev = previousLesson(l.id);
       return {
         key: l.id,
         label: l.title,
-        sub: `المستوى ${lessonNo(l.id)}`,
+        sub: `المستوى ${lessonNo(lessonLabel(l))}`,
         icon: l.emoji,
         state: done ? 'done' : open ? 'current' : 'locked',
         stars: state.lessons[l.id]?.stars,
         to: `/lesson/${l.id}`,
-        lockedMsg: prev ? `أكمل الدرس ${lessonNo(prev.id)} «${prev.title}» لتفتح هذا المستوى!` : '',
+        lockedMsg: prev ? `أكملي الدرس ${lessonNo(lessonLabel(prev))} «${prev.title}» لتفتحي هذا المستوى!` : '',
         kind: 'lesson',
       };
     }),
@@ -62,7 +62,7 @@ export function LevelMap({ unit }: { unit: Unit }) {
       state: state.unitQuizzes[unit.id] ? 'done' : isUnitQuizUnlocked(state, unit) ? 'current' : 'locked',
       stars: state.unitQuizzes[unit.id]?.stars,
       to: `/quiz/${unit.id}`,
-      lockedMsg: 'أكمل كل دروس هذه الوحدة لتفتح اختبارها!',
+      lockedMsg: 'أكملي كل دروس هذه الوحدة لتفتحي اختبارها!',
       kind: 'quiz',
     },
     {
@@ -72,7 +72,7 @@ export function LevelMap({ unit }: { unit: Unit }) {
       icon: '👑',
       state: state.bosses[unit.id] ? 'done' : isBossUnlocked(state, unit) ? 'current' : 'locked',
       to: `/boss/${unit.id}`,
-      lockedMsg: 'أنهِ اختبار الوحدة لتفتح التحدي النهائي!',
+      lockedMsg: 'أنهي اختبار الوحدة لتفتحي التحدي النهائي!',
       kind: 'boss',
     },
   ];

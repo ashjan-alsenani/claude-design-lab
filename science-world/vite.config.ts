@@ -3,14 +3,18 @@ import react from '@vitejs/plugin-react';
 
 // Relative base so the build works from any static host or sub-folder.
 export default defineConfig({
+
+
   base: './',
   plugins: [react()],
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
+        // lesson content is its own cacheable file; libraries are split too
+        manualChunks(id) {
+          if (id.includes('/src/data/')) return 'content';
+          if (id.includes('framer-motion') || id.includes('motion-dom') || id.includes('motion-utils')) return 'motion';
+          if (id.includes('node_modules/react') || id.includes('react-router')) return 'vendor';
         },
       },
     },

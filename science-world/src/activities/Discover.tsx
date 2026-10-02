@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import type { FlipStep, HotspotStep, ProcessStep, RevealStep, ThinkStep } from '../data/types';
 import { Art, SceneView, VisualView } from '../illustrations/registry';
+import { MathView } from '../illustrations/math';
 import { play } from '../lib/sound';
 import { MascotMessage } from '../components/MascotMessage';
 
@@ -143,7 +144,11 @@ export function ProcessPlayer({ step, onComplete }: ActivityProps<ProcessStep>) 
       {step.mascot && <MascotMessage mood="excited">{step.mascot}</MascotMessage>}
       <div className="process">
         <div className="process__stage card">
-          {step.art ? (
+          {cur.math ? (
+            <motion.div key={`m${i}`} className="process__math" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
+              <MathView v={cur.math} />
+            </motion.div>
+          ) : step.art ? (
             <Art name={step.art} frame={cur.frame ?? i} />
           ) : (
             <motion.div key={i} className="process__emoji" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', duration: 0.45, bounce: 0.3 }}>

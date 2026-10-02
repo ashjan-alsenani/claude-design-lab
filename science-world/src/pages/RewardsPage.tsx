@@ -1,7 +1,7 @@
 import { learner } from '../data/learner';
 import { lessonNo } from '../lib/format';
 import { achievements, characters } from '../data/rewards';
-import { allLessons } from '../data/units';
+import { lessonLabel, lessonsOf, subjects } from '../data/units';
 import { useProgress } from '../state/ProgressContext';
 import { totalStars } from '../state/journey';
 import { RewardBadge } from '../components/RewardBadge';
@@ -71,22 +71,29 @@ export function RewardsPage() {
         </div>
       </section>
 
-      <section>
-        <h2 className="section-title">🎨 ملصقات الدروس</h2>
-        <div className="sticker-grid">
-          {allLessons.map((l) => {
-            const on = Boolean(state.lessons[l.id]);
-            return (
-              <div key={l.id} className={`sticker ${on ? 'sticker--on' : ''}`} title={on ? l.title : `أكمل الدرس ${lessonNo(l.id)} لتفتحه!`}>
-                <span className="sticker__emoji" aria-hidden="true">
-                  {l.emoji}
-                </span>
-                <span className="sticker__label">{on ? l.title : `أكمل الدرس ${lessonNo(l.id)} لتفتحه!`}</span>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {subjects
+        .filter((sub) => sub.units.length > 0)
+        .map((sub) => (
+          <section key={sub.id}>
+            <h2 className="section-title">
+              🎨 ملصقات دروس {sub.title} {sub.emoji}
+            </h2>
+            <div className="sticker-grid">
+              {lessonsOf(sub.id).map((l) => {
+                const on = Boolean(state.lessons[l.id]);
+                const msg = `أكملي الدرس ${lessonNo(lessonLabel(l))} لتفتحيه!`;
+                return (
+                  <div key={l.id} className={`sticker ${on ? 'sticker--on' : ''}`} title={on ? l.title : msg}>
+                    <span className="sticker__emoji" aria-hidden="true">
+                      {l.emoji}
+                    </span>
+                    <span className="sticker__label">{on ? l.title : msg}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        ))}
     </div>
   );
 }

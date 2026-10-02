@@ -1,6 +1,7 @@
 import { useState, type ComponentType } from 'react';
 import type { Scene, Visual } from '../data/types';
 import { assetReady } from '../data/assets';
+import { MathView } from './math';
 import { BodyArt, BrainArt, DigestiveArt, HeartArt, KidneysArt, LungsArt, type ArtProps } from './body';
 import { AcidRainArt, ForestArt, PhotosynthesisArt, PollutionArt } from './environment';
 import { DissolveArt, FilterArt, IceCycleArt, MatchArt, MixturesArt, SandFilterArt, SieveArt } from './matter';
@@ -68,6 +69,13 @@ export function VisualView({ visual, className = '' }: { visual: Visual; classNa
         decoding="async"
         onError={() => setAssetFailed(true)}
       />
+    );
+  }
+  if (visual.math) {
+    return (
+      <div className={`visual visual--math ${className}`} role="img" aria-label={visual.alt}>
+        <MathView v={visual.math} />
+      </div>
     );
   }
   if (visual.art) {

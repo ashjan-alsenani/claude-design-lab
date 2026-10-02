@@ -1,5 +1,5 @@
 import type { ProgressState } from '../state/model';
-import { allLessons, units } from './units';
+import { lessonsOf, subjects, units } from './units';
 
 export interface Achievement {
   id: string;
@@ -64,6 +64,15 @@ export const achievements: Achievement[] = [
     earned: (s) => (s.challenges['speed'] ?? 0) >= 8,
   },
   {
+    id: 'tables',
+    title: 'بطلة جدول الضرب',
+    emoji: '✖️',
+    description: 'حللتِ ١٥ ناتج ضرب أو أكثر في سباق الدقيقة!',
+    howTo: 'حلّي ١٥ ناتج ضرب في سباق جدول الضرب',
+    kind: 'badge',
+    earned: (s) => (s.challenges['tables'] ?? 0) >= 15,
+  },
+  {
     id: 'memory',
     title: 'ذاكرة حديدية',
     emoji: '🧠',
@@ -102,50 +111,36 @@ export const achievements: Achievement[] = [
     kind: 'trophy',
     earned: (s) => Boolean(s.bosses[u.id]),
   })),
-  {
-    id: 'hero',
-    title: 'بطل التعلم',
-    emoji: '🦸',
-    description: 'أكملت كل دروس الكتاب!',
-    howTo: `أكمل كل الدروس الـ ${allLessons.length}`,
-    kind: 'trophy',
-    earned: (s) => lessonsDone(s) >= allLessons.length,
-  },
+  ...subjects
+    .filter((sub) => sub.units.length > 0)
+    .map<Achievement>((sub) => ({
+      id: sub.id === 'science' ? 'hero' : `hero-${sub.id}`,
+      title: `بطلة ${sub.title}`,
+      emoji: sub.id === 'science' ? '🦸' : '🦸‍♀️',
+      description: `أكملتِ كل دروس كتاب ${sub.title}!`,
+      howTo: `أكملي كل دروس ${sub.title} الـ ${lessonsOf(sub.id).length}`,
+      kind: 'trophy',
+      earned: (s) => lessonsOf(sub.id).every((l) => s.lessons[l.id]),
+    })),
   {
     id: 'champion',
-    title: 'بطل المعرفة',
+    title: 'بطلة المعرفة',
     emoji: '👑',
-    description: 'هزمت كل التحديات النهائية!',
-    howTo: 'أنهِ التحديات النهائية للوحدات الثلاث',
+    description: 'هزمتِ كل التحديات النهائية في كل المواد!',
+    howTo: 'أنهي التحديات النهائية لكل الوحدات',
     kind: 'trophy',
     earned: (s) => units.every((u) => s.bosses[u.id]),
   },
 ];
 
 /** Outfits for Nouri, unlocked by finishing units. */
-export const characters = [
-  { id: 'nouri', name: 'نوري المستكشف', outfit: 'none' as const, howTo: 'معك من البداية', unlocked: () => true },
-  {
-    id: 'doctor',
-    name: 'نوري الطبيب',
-    outfit: 'doctor' as const,
-    howTo: 'أنهِ وحدة جسم الإنسان',
-    unlocked: (s: ProgressState) => Boolean(s.bosses.u1),
-  },
-  {
-    id: 'ranger',
-    name: 'نوري حارس الغابة',
-    outfit: 'ranger' as const,
-    howTo: 'أنهِ وحدة الكائنات الحية في البيئة',
-    unlocked: (s: ProgressState) => Boolean(s.bosses.u2),
-  },
-  {
-    id: 'chemist',
-    name: 'نوري الكيميائي',
-    outfit: 'chemist' as const,
-    howTo: 'أنهِ وحدة تغيرات المادة',
-    unlocked: (s: ProgressState) => Boolean(s.bosses.u3),
-  },
+export const characters: { id: string; name: string; outfit: 'none' | 'doctor' | 'ranger' | 'chemist' | 'cap' | 'crown'; howTo: string; unitId?: string; unlocked: (s: ProgressState) => boolean }[] = [
+  { id: 'nouri', name: 'نوري المستكشف', outfit: 'none', howTo: 'معك من البداية', unlocked: () => true },
+  { id: 'doctor', name: 'نوري الطبيب', outfit: 'doctor', unitId: 'u1', howTo: 'أنهي وحدة جسم الإنسان', unlocked: (s) => Boolean(s.bosses.u1) },
+  { id: 'ranger', name: 'نوري حارس الغابة', outfit: 'ranger', unitId: 'u2', howTo: 'أنهي وحدة الكائنات الحية في البيئة', unlocked: (s) => Boolean(s.bosses.u2) },
+  { id: 'chemist', name: 'نوري الكيميائي', outfit: 'chemist', unitId: 'u3', howTo: 'أنهي وحدة تغيرات المادة', unlocked: (s) => Boolean(s.bosses.u3) },
+  { id: 'cap', name: 'نوري عبقري الأعداد', outfit: 'cap', unitId: 'm1', howTo: 'أنهي أول وحدة في الرياضيات', unlocked: (s) => Boolean(s.bosses.m1) },
+  { id: 'crown', name: 'نوري ملك الرياضيات', outfit: 'crown', unitId: 'm4', howTo: 'أنهي آخر وحدة في الرياضيات', unlocked: (s) => Boolean(s.bosses.m4) },
 ];
 
 export function newlyEarned(s: ProgressState): Achievement[] {

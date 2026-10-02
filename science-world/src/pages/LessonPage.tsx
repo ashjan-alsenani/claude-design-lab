@@ -2,10 +2,10 @@ import { lessonNo } from '../lib/format';
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { allLessons, getLesson, unitOfLesson } from '../data/units';
+import { getLesson, lessonLabel, subjectOfLesson, unitOfLesson } from '../data/units';
 import type { Lesson } from '../data/types';
 import { useProgress } from '../state/ProgressContext';
-import { isLessonUnlocked, isUnitQuizUnlocked } from '../state/journey';
+import { isLessonUnlocked, isUnitQuizUnlocked, nextLessonInSubject } from '../state/journey';
 import { StepView, headingOf, isPassive, stepIcon } from '../activities/StepView';
 import { ProgressBar } from '../components/ProgressBar';
 import { QuizRunner } from '../components/QuizRunner';
@@ -32,13 +32,17 @@ export function LessonPage() {
 function LessonRun({ lesson }: { lesson: Lesson }) {
   const unit = unitOfLesson(lesson);
   const navigate = useNavigate();
-  const { state, completeLesson, setLastLesson, recordAnswer } = useProgress();
+  const { state, completeLesson, setLastLesson, recordAnswer, setSubject } = useProgress();
   const [phase, setPhase] = useState<Phase>('intro');
   const [i, setI] = useState(0);
   const [stepDone, setStepDone] = useState(false);
   const [result, setResult] = useState<{ stars: number; coins: number; score: number; total: number } | null>(null);
 
-  useEffect(() => setLastLesson(lesson.id), [lesson.id, setLastLesson]);
+  useEffect(() => {
+    setLastLesson(lesson.id);
+    setSubject(subjectOfLesson(lesson).id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lesson.id]);
 
   const step = lesson.steps[i];
   const total = lesson.steps.length;
@@ -55,8 +59,7 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
     else setPhase('quiz');
   }
 
-  const nextIdx = allLessons.findIndex((l) => l.id === lesson.id) + 1;
-  const nextLesson = allLessons[nextIdx];
+  const nextLesson = nextLessonInSubject(lesson.id);
   const nextIsSameUnit = nextLesson && nextLesson.unitId === lesson.unitId;
 
   const progress = phase === 'intro' ? 0 : phase === 'steps' ? (i / (total + 1)) * 100 : phase === 'quiz' ? (total / (total + 1)) * 100 : 100;
@@ -69,7 +72,7 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
         </Link>
         <div className="lesson__bar-mid">
           <div className="lesson__bar-title">
-            <span aria-hidden="true">{lesson.emoji}</span> {lessonNo(lesson.id)} · {lesson.title}
+            <span aria-hidden="true">{lesson.emoji}</span> {lessonNo(lessonLabel(lesson))} · {lesson.title}
           </div>
           <ProgressBar value={progress} label="تقدّم الدرس" />
         </div>

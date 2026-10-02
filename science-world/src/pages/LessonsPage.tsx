@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { units } from '../data/units';
+import { getSubject } from '../data/units';
+import { SubjectTabs } from '../components/SubjectTabs';
 import { useProgress } from '../state/ProgressContext';
 import { isBossUnlocked, isUnitQuizUnlocked } from '../state/journey';
 import { LessonCard } from '../components/LessonCard';
@@ -7,11 +8,15 @@ import { Stars } from '../components/Stars';
 
 export function LessonsPage() {
   const { state } = useProgress();
+  const subject = getSubject(state.subject);
   return (
     <div className="page">
-      <h1 className="page-title">📚 الدروس</h1>
-      <p className="page-sub">كل دروس كتاب العلوم — الصف السادس، الفصل الدراسي الأول.</p>
-      {units.map((u) => (
+      <div className="page-head">
+        <h1 className="page-title">📚 دروس {subject.title}</h1>
+        <SubjectTabs />
+      </div>
+      <p className="page-sub">كل دروس كتاب {subject.title} — الصف السادس، الفصل الدراسي الأول.</p>
+      {subject.units.map((u) => (
         <section key={u.id} className="unit-block" data-theme={u.theme}>
           <div className="unit-block__head">
             <span className="unit-block__emoji" aria-hidden="true">

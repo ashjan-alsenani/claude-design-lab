@@ -3,9 +3,10 @@ import { useState, type PointerEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'framer-motion';
 import type { MascotMood } from '../data/types';
-import { units } from '../data/units';
+import { getSubject, subjects } from '../data/units';
+import type { SubjectId } from '../data/types';
 import { useProgress } from '../state/ProgressContext';
-import { levelInfo, nextStop, nextStopPath, overallPercent, totalStars, unitLessonsDone } from '../state/journey';
+import { levelInfo, nextStop, nextStopPath, overallPercent, stopPath, totalStars } from '../state/journey';
 import { Mascot } from '../components/Mascot';
 import { ProgressBar } from '../components/ProgressBar';
 import { play } from '../lib/sound';
@@ -46,7 +47,7 @@ function Floater({ e, x, y, d, mx, my, i }: { e: string; x: number; y: number; d
 }
 
 export function HomePage() {
-  const { state } = useProgress();
+  const { state, setSubject } = useProgress();
   const navigate = useNavigate();
   const [m, setM] = useState(0);
   const mx = useSpring(useMotionValue(0), { stiffness: 80, damping: 14 });
@@ -72,12 +73,12 @@ export function HomePage() {
           <Floater key={i} {...f} mx={mx} my={my} i={i} />
         ))}
         <div className="hero__copy">
-          <div className="hero__kicker">👋 أهلًا {learner.name}! · علوم الصف السادس</div>
+          <div className="hero__kicker">👋 أهلًا {learner.name}! · الصف السادس</div>
           <h1 className="hero__title">
-            مغامرة العلوم
+            مغامرة التعلّم
             <span>مع نوري</span>
           </h1>
-          <p className="hero__lead">اكتشفي جسمكِ العجيب، وعالم الكائنات الحية، وأسرار المادة… باللعب والتجارب والتحديات!</p>
+          <p className="hero__lead">العلوم والرياضيات… اكتشفي، والعبي، وتحدّي نفسكِ في مغامرة ممتعة!</p>
           <div className="hero__cta">
             <button type="button" className="btn btn--sun btn--lg hero__start" onClick={() => navigate(started ? nextStopPath(state) : '/journey')}>
               {started ? 'أكملي التعلّم ←' : 'ابدئي التعلّم 🚀'}
@@ -88,7 +89,7 @@ export function HomePage() {
               </Link>
             )}
           </div>
-          {started && <div className="hero__next">التالي: {nextLabel}</div>}
+          {started && <div className="hero__next">{getSubject(state.subject).emoji} التالي: {nextLabel}</div>}
         </div>
         <div className="hero__mascot">
           <div className="speech" key={m}>
@@ -100,6 +101,55 @@ export function HomePage() {
             <Mascot mood={moods[m % moods.length]} size={220} interactive label="اضغط على نوري" />
           </div>
           <div className="hero__ground" aria-hidden="true" />
+        </div>
+      </section>
+
+      <section aria-label="المواد">
+        <h2 className="section-title">🌍 اختاري مغامرتكِ</h2>
+        <div className="subjects">
+          {subjects.map((sub) => {
+            const pct = overallPercent(state, sub.id);
+            const nx = nextStop(state, sub.id);
+            const ready = sub.units.length > 0;
+            const go = (path: string, id: SubjectId) => {
+              play('tap');
+              setSubject(id);
+              navigate(path);
+            };
+            return (
+              <article key={sub.id} className="subject-card" data-theme={sub.theme}>
+                <div className="subject-card__head">
+                  <span className="subject-card__emoji" aria-hidden="true">
+                    {sub.emoji}
+                  </span>
+                  <div>
+                    <h2>{sub.title}</h2>
+                    <p>{sub.tagline}</p>
+                  </div>
+                </div>
+                <div className="subject-card__row">
+                  <span>⭐ {totalStars(state, sub.id)}</span>
+                  <span>{pct}%</span>
+                </div>
+                <ProgressBar value={pct} label={`تقدم ${sub.title}`} />
+                {ready && nx.kind === 'lesson' && (
+                  <div className="subject-card__next">
+                    التالي: {nx.lesson.emoji} {nx.lesson.title}
+                  </div>
+                )}
+                <div className="subject-card__actions">
+                  <button type="button" className="btn btn--accent btn--lg" disabled={!ready} onClick={() => go(stopPath(nx), sub.id)}>
+                    {!ready ? 'قريبًا 🚧' : pct > 0 ? 'أكملي ←' : 'ابدئي 🚀'}
+                  </button>
+                  {ready && (
+                    <button type="button" className="btn btn--ghost" onClick={() => go('/journey', sub.id)}>
+                      🗺️ الخريطة
+                    </button>
+                  )}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
@@ -144,32 +194,8 @@ export function HomePage() {
         ))}
       </section>
 
-      <section className="home-worlds">
-        <h2 className="section-title">🌍 عوالم المغامرة</h2>
-        <div className="worlds">
-          {units.map((u) => {
-            const done = unitLessonsDone(state, u);
-            return (
-              <Link key={u.id} to="/journey" className="world card" data-theme={u.theme}>
-                <span className="world__emoji" aria-hidden="true">
-                  {u.emoji}
-                </span>
-                <div className="world__body">
-                  <div className="eyebrow">الوحدة {u.number}</div>
-                  <h3>{u.title}</h3>
-                  <p>{u.intro}</p>
-                  <ProgressBar value={u.lessons.length ? (done / u.lessons.length) * 100 : 0} size="sm" label={`تقدم ${u.title}`} />
-                  <span className="world__count">
-                    {done}/{u.lessons.length} دروس
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
 
-      <p className="dedication">💜 صُمّم هذا العالم خصيصًا لـ <strong>{learner.fullName}</strong> لتتعلّم العلوم وهي تلعب.</p>
+      <p className="dedication">💜 صُمّم هذا العالم خصيصًا لـ <strong>{learner.fullName}</strong> لتتعلّم وهي تلعب.</p>
     </div>
   );
 }

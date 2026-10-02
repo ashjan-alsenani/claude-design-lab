@@ -2,7 +2,8 @@ import { learner } from '../data/learner';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { units } from '../data/units';
+import { getSubject } from '../data/units';
+import { SubjectTabs } from '../components/SubjectTabs';
 import type { MemoryStep } from '../data/types';
 import { useProgress } from '../state/ProgressContext';
 import { isBossUnlocked } from '../state/journey';
@@ -11,6 +12,7 @@ import { sample } from '../lib/random';
 import { SpeedChallenge } from '../challenges/SpeedChallenge';
 import { BubblePop, type Statement } from '../challenges/BubblePop';
 import { Mystery } from '../challenges/Mystery';
+import { TablesSprint } from '../challenges/TablesSprint';
 import { MemoryGame } from '../activities/Play';
 import { QuizRunner } from '../components/QuizRunner';
 import { MascotMessage } from '../components/MascotMessage';
@@ -18,9 +20,10 @@ import { Mascot } from '../components/Mascot';
 import { play } from '../lib/sound';
 import { celebrate } from '../lib/confetti';
 
-type Mode = 'speed' | 'bubbles' | 'memory' | 'mystery' | 'review';
+type Mode = 'speed' | 'bubbles' | 'memory' | 'mystery' | 'review' | 'tables';
 
-const cards: { id: Mode; icon: string; title: string; text: string; tone: string; need: number }[] = [
+const cards: { id: Mode; icon: string; title: string; text: string; tone: string; need: number; only?: 'math' }[] = [
+  { id: 'tables', icon: '✖️', title: 'سباق جدول الضرب', text: 'كم ناتج ضرب تحلّين في 60 ثانية؟', tone: 'grape', need: 0, only: 'math' },
   { id: 'speed', icon: '⏱️', title: 'تحدي الدقيقة', text: 'أجب عن أكبر عدد من الأسئلة في 60 ثانية!', tone: 'coral', need: 1 },
   { id: 'bubbles', icon: '🫧', title: 'فرقع الصحيح', text: 'جد 5 عبارات صحيحة بين الفقاعات.', tone: 'aqua', need: 2 },
   { id: 'memory', icon: '🧠', title: 'تحدي الذاكرة', text: 'طابق كل مصطلح مع معناه.', tone: 'grape', need: 1 },
@@ -92,6 +95,7 @@ export function ChallengesPage() {
         {mode === 'bubbles' && <BubblePop key={round} statements={statements} onFinish={(s) => finish('bubbles', s)} />}
         {mode === 'memory' && <MemoryGame key={round} step={memoryStep} compact onComplete={() => window.setTimeout(() => finish('memory', 1), 1200)} />}
         {mode === 'mystery' && <Mystery key={round} entries={glossaryPool} onFinish={(s) => finish('mystery', s)} />}
+        {mode === 'tables' && <TablesSprint key={round} onFinish={(s) => finish('tables', s)} />}
         {mode === 'review' && <QuizRunner key={round} questions={sample(pool, Math.min(10, pool.length))} title="اختبار المراجعة الشامل" onFinish={(s) => finish('review', s)} />}
       </div>
     );
@@ -144,22 +148,23 @@ export function ChallengesPage() {
       <header className="zone-hero zone-hero--coral">
         <div>
           <h1 className="page-title">🎯 منطقة التحديات</h1>
+          <SubjectTabs compact />
           <p className="page-sub">تحديات مثيرة من الدروس التي أنهيتِها. هل أنتِ مستعدة؟</p>
           <div className="zone-hero__points">🏅 نقاط التحدي: {state.points}</div>
         </div>
         <Mascot mood="excited" size={120} />
       </header>
-      {learnedCount === 0 && (
+      {learnedCount === 0 && state.subject !== 'math' && (
         <MascotMessage mood="encouraging">
-          أكمل درسك الأول لتفتح التحديات! 🔓{' '}
+          أكملي درسكِ الأول في {getSubject(state.subject).title} لتفتحي التحديات! 🔓{' '}
           <Link to="/journey" className="link">
             إلى الرحلة ←
           </Link>
         </MascotMessage>
       )}
       <div className="challenge-grid">
-        {cards.map((c, i) => {
-          const locked = learnedCount < c.need;
+        {cards.filter((c) => !c.only || c.only === state.subject).map((c, i) => {
+          const locked = learnedCount < c.need || (c.id === 'mystery' && glossaryPool.length < 4) || (c.id === 'bubbles' && statements.filter((x) => x.answer).length < 3);
           const best = state.challenges[c.id];
           return (
             <button
@@ -178,7 +183,7 @@ export function ChallengesPage() {
                 {locked ? '🔒' : c.icon}
               </span>
               <span className="challenge-card__title">{c.title}</span>
-              <span className="challenge-card__text">{locked ? `أكمل ${c.need} ${c.need === 1 ? 'درسًا' : 'دروس'} لفتحه` : c.text}</span>
+              <span className="challenge-card__text">{locked ? (c.need <= 1 ? 'أكملي درسًا واحدًا لفتحه' : 'أكملي دروسًا أكثر لفتحه') : c.text}</span>
               {best !== undefined && !locked && <span className="challenge-card__best">أفضل نتيجة: {c.id === 'memory' ? '✓' : best}</span>}
             </button>
           );
@@ -187,7 +192,7 @@ export function ChallengesPage() {
 
       <h2 className="section-title">👑 التحديات النهائية</h2>
       <div className="boss-list">
-        {units.map((u) => {
+        {getSubject(state.subject).units.map((u) => {
           const open = isBossUnlocked(state, u);
           return open ? (
             <Link key={u.id} to={`/boss/${u.id}`} className="boss-card" data-theme={u.theme}>

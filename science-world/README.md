@@ -1,6 +1,6 @@
-# مغامرة العلوم مع نوري 🤖
+# مغامرة التعلّم مع نوري 🤖 — العلوم والرياضيات
 
-An interactive learning world for **Science, Grade 6, Term 1** (Ministry of Education, Oman / Cambridge). It is built from the student book.
+An interactive learning world for **Science and Mathematics, Grade 6, Term 1** (Ministry of Education, Oman / Cambridge), built from the two student books and made for Aleen Al Saidi.
 All educational content comes from the book. The book's three units become a playable journey:
 
 | Unit | World | Lessons |
@@ -8,6 +8,8 @@ All educational content comes from the book. The book's three units become a pla
 | 1 جسم الإنسان | جزيرة الجسم العجيب | 1-1 … 1-7, «تحقّق من تقدّمك», final challenge |
 | 2 الكائنات الحية في البيئة | غابة الكائنات الحية | 2-1 … 2-9, «تحقّق من تقدّمك», final challenge |
 | 3 تغيّرات المادة | مختبر المادة السحري | 3-1 … 3-7, «تحقّق من تقدّمك», final challenge |
+
+**Mathematics** (4 worlds, 35 lessons): الأعداد (1-1 … 4-3) · القياس (5-1 … 7-1) · الهندسة (8-1 … 10-3) · الأعداد والعمليات (11-1 … 16-1), each with a review quiz and a final challenge. Math adds typed answers on an on-screen keypad (Arabic-Indic digits) and parametric drawings (number lines, place-value tables, grids for area and transformations, polygons, triangles, 3D solids, rulers, clocks, thermometers).
 
 ## Run it
 ```bash
@@ -33,14 +35,15 @@ npm run build    # production build in dist/ (static, works from any folder)
 ## Architecture
 ```
 src/
-  data/          types.ts (content schema) · unit1–3.ts (lessons as data) · glossary.ts · rewards.ts · assets.ts
+  data/          types.ts (content schema) · subjects.ts · unit1–3.ts (science) · math/unit1–4.ts · glossary.ts · rewards.ts · learner.ts · assets.ts
   state/         model.ts · ProgressContext.tsx · storage.ts (swap for a server later) · journey.ts (unlock rules)
   activities/    QuestionCard, Discover (reveal/hotspot/process/flip/think), Play (sort/match/order/memory/data/experiment), StepView
-  illustrations/ hand-drawn SVG diagrams (body, environment, matter) + registry
+  illustrations/ hand-drawn SVG diagrams (body, environment, matter) + math.tsx (parametric math drawings) + registry
   components/    Mascot, MascotMessage, Navigation, TopBar, LevelMap, LessonCard, QuizRunner, RewardScreen, AchievementPopup, ProgressBar…
   challenges/ games/ pages/ styles/
 ```
 - **Adding a lesson:** add an object to a unit file. No new components are needed.
+- **Adding a subject:** add an entry to `data/subjects.ts` with its units.
 - **Accounts later:** implement `ProgressStorage` (in `state/storage.ts`) against an API and pass it to `<ProgressProvider storage={…}>`.
 
 ## Privacy and safety

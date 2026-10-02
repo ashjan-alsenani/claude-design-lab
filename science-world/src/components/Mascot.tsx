@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { MascotMood } from '../data/types';
 import { play } from '../lib/sound';
 
-export type Outfit = 'none' | 'doctor' | 'ranger' | 'chemist';
+export type Outfit = 'none' | 'doctor' | 'ranger' | 'chemist' | 'cap' | 'crown';
 
 interface Props {
   mood?: MascotMood;
@@ -100,6 +100,25 @@ function OutfitLayer({ outfit }: { outfit: Outfit }) {
       <g>
         <rect x="54" y="66" width="92" height="32" rx="16" fill="rgba(159,243,255,.35)" stroke="#9b5de5" strokeWidth="5" />
         <path d="M100 66 v32" stroke="#9b5de5" strokeWidth="4" />
+      </g>
+    );
+  if (outfit === 'cap')
+    return (
+      <g>
+        {/* graduation cap */}
+        <path d="M52 44 L100 26 L148 44 L100 62Z" fill="#1f2a4d" stroke="#1f2a4d" strokeWidth="3" strokeLinejoin="round" />
+        <path d="M72 52 V66 Q100 78 128 66 V52" fill="#2f3b63" stroke="#1f2a4d" strokeWidth="3" />
+        <path d="M148 44 V70" stroke="#ffc83d" strokeWidth="4" strokeLinecap="round" />
+        <circle cx="148" cy="73" r="5" fill="#ffc83d" />
+      </g>
+    );
+  if (outfit === 'crown')
+    return (
+      <g>
+        <path d="M58 52 L66 22 L84 40 L100 16 L116 40 L134 22 L142 52Z" fill="#ffc83d" stroke="#1f2a4d" strokeWidth="3" strokeLinejoin="round" />
+        <circle cx="100" cy="40" r="5" fill="#ff6b6b" />
+        <circle cx="76" cy="44" r="4" fill="#2f7ff0" />
+        <circle cx="124" cy="44" r="4" fill="#2fbf71" />
       </g>
     );
   return null;

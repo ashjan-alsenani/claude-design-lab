@@ -2,9 +2,9 @@ import { learner } from '../data/learner';
 import { lessonNo } from '../lib/format';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { units, allLessons } from '../data/units';
+import { allLessons, lessonLabel, subjects } from '../data/units';
 import { useProgress } from '../state/ProgressContext';
-import { levelInfo, maxStars, nextStop, nextStopPath, overallPercent, totalStars, unitLessonsDone } from '../state/journey';
+import { levelInfo, maxStarsFor, nextStop, nextStopPath, overallPercent, totalStars, unitLessonsDone } from '../state/journey';
 import { ProgressBar, ProgressRing } from '../components/ProgressBar';
 import { Stars } from '../components/Stars';
 import { Mascot } from '../components/Mascot';
@@ -55,7 +55,7 @@ export function ProgressPage() {
       <section className="stat-grid">
         {[
           { icon: '📚', v: `${done}/${allLessons.length}`, l: 'دروس مكتملة' },
-          { icon: '⭐', v: `${totalStars(state)}/${maxStars}`, l: 'النجوم' },
+          { icon: '⭐', v: `${totalStars(state)}/${maxStarsFor()}`, l: 'النجوم' },
           { icon: '🏅', v: state.badges.length, l: 'الأوسمة والكؤوس' },
           { icon: '🔥', v: `${state.streak.count} ${state.streak.count === 1 ? 'يوم' : 'أيام'}`, l: `أيام التعلم المتتالية (أفضل: ${state.streak.best})` },
           { icon: '🎯', v: `${accuracy}%`, l: 'إجابات صحيحة من أول مرة' },
@@ -71,7 +71,10 @@ export function ProgressPage() {
         ))}
       </section>
 
-      {units.map((u) => {
+      {subjects.filter((sub) => sub.units.length > 0).map((sub) => (
+        <div key={sub.id} className="progress-subject" data-theme={sub.theme}>
+          <h2 className="section-title">{sub.emoji} {sub.title} <span className="chip">{overallPercent(state, sub.id)}%</span></h2>
+      {sub.units.map((u) => {
         const d = unitLessonsDone(state, u);
         const quiz = state.unitQuizzes[u.id];
         return (
@@ -92,7 +95,7 @@ export function ProgressPage() {
               {u.lessons.map((l) => (
                 <li key={l.id} className={state.lessons[l.id] ? 'is-done' : ''}>
                   <span>
-                    {state.lessons[l.id] ? '✅' : '⬜'} {lessonNo(l.id)} {l.title}
+                    {state.lessons[l.id] ? '✅' : '⬜'} {lessonNo(lessonLabel(l))} {l.title}
                   </span>
                   {state.lessons[l.id] ? <Stars count={state.lessons[l.id].stars} size="sm" /> : <small>لم يكتمل</small>}
                 </li>
@@ -115,6 +118,8 @@ export function ProgressPage() {
           </section>
         );
       })}
+        </div>
+      ))}
 
       <section className="card parents">
         <h2 className="card-title">👨‍👩‍👧 لولي الأمر</h2>

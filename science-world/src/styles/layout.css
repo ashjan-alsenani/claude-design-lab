@@ -234,3 +234,13 @@
 .nav__label {
   white-space: nowrap;
 }
+.subject-switch {
+  border: 0;
+  cursor: pointer;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 30%, white);
+}
+@media (max-width: 520px) {
+  .subject-switch__name { display: none; }
+}

@@ -1,8 +1,8 @@
 import { learner } from '../data/learner';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { getUnit } from '../data/units';
+import { getUnit, subjectOfUnit } from '../data/units';
 import type { BossMission } from '../data/types';
 import { useProgress } from '../state/ProgressContext';
 import { isBossUnlocked } from '../state/journey';
@@ -26,7 +26,11 @@ export function BossPage() {
 function BossRun({ unitId }: { unitId: string }) {
   const unit = getUnit(unitId)!;
   const navigate = useNavigate();
-  const { completeBoss, recordAnswer } = useProgress();
+  const { completeBoss, recordAnswer, setSubject } = useProgress();
+  useEffect(() => {
+    setSubject(subjectOfUnit(unitId).id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unitId]);
   const [phase, setPhase] = useState<'story' | 'play' | 'open'>('story');
   const [queue, setQueue] = useState<BossMission[]>(() => unit.boss.missions.slice());
   const [keys, setKeys] = useState<string[]>([]);

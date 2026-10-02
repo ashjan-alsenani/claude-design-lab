@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getUnit } from '../data/units';
+import { getUnit, subjectOfUnit } from '../data/units';
 import { useProgress } from '../state/ProgressContext';
 import { isUnitQuizUnlocked } from '../state/journey';
 import { QuizRunner } from '../components/QuizRunner';
@@ -12,7 +12,11 @@ export function UnitQuizPage() {
   const { unitId } = useParams();
   const unit = getUnit(unitId);
   const navigate = useNavigate();
-  const { state, completeUnitQuiz } = useProgress();
+  const { state, completeUnitQuiz, setSubject } = useProgress();
+  useEffect(() => {
+    if (unit) setSubject(subjectOfUnit(unit.id).id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unit?.id]);
   const [result, setResult] = useState<{ stars: number; coins: number; score: number; total: number } | null>(null);
   const [round, setRound] = useState(0);
 

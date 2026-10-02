@@ -1,10 +1,10 @@
-import type { Lesson, Question, Unit, UnitId } from './types';
-import { unit1 } from './unit1';
-import { unit2 } from './unit2';
-import { unit3 } from './unit3';
+import type { Lesson, Question, Subject, SubjectId, Unit, UnitId } from './types';
+import { subjects, getSubject } from './subjects';
 
-export const units: Unit[] = [unit1, unit2, unit3];
+export { subjects, getSubject };
 
+/** All units / lessons of every subject (ids are unique across subjects). */
+export const units: Unit[] = subjects.flatMap((s) => s.units);
 export const allLessons: Lesson[] = units.flatMap((u) => u.lessons);
 
 export function getUnit(id: string | undefined): Unit | undefined {
@@ -17,6 +17,23 @@ export function getLesson(id: string | undefined): Lesson | undefined {
 
 export function unitOfLesson(lesson: Lesson): Unit {
   return units.find((u) => u.id === lesson.unitId)!;
+}
+
+export function subjectOfUnit(unitId: UnitId): Subject {
+  return subjects.find((s) => s.units.some((u) => u.id === unitId)) ?? subjects[0];
+}
+
+export function subjectOfLesson(lesson: Lesson): Subject {
+  return subjectOfUnit(lesson.unitId);
+}
+
+export function lessonsOf(subject: SubjectId): Lesson[] {
+  return getSubject(subject).units.flatMap((u) => u.lessons);
+}
+
+/** The lesson number shown to children ("1-2"). */
+export function lessonLabel(lesson: Lesson): string {
+  return lesson.label ?? lesson.id;
 }
 
 /** Every question the child can meet in reviews and challenges, with its unit and lesson. */

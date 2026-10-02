@@ -87,3 +87,7 @@
 [data-theme='leaf'] { --accent: var(--leaf); --accent-deep: var(--leaf-deep); --accent-soft: var(--leaf-soft); }
 [data-theme='grape'] { --accent: var(--grape); --accent-deep: var(--grape-deep); --accent-soft: var(--grape-soft); }
 :root { --accent: var(--primary); --accent-deep: var(--primary-deep); --accent-soft: var(--primary-soft); }
+[data-theme='ocean'] { --accent: #2f7ff0; --accent-deep: #1d5fc4; --accent-soft: #e2eeff; }
+[data-theme='sunset'] { --accent: #ff8a3d; --accent-deep: #d9661c; --accent-soft: #ffeedd; }
+[data-theme='mint'] { --accent: #14b8a6; --accent-deep: #0e8f81; --accent-soft: #d8f6f2; }
+[data-theme='berry'] { --accent: #e64980; --accent-deep: #c2255c; --accent-soft: #ffe3ee; }

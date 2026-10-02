@@ -2,7 +2,7 @@ import { learner } from '../data/learner';
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { getUnit, units } from '../data/units';
+import { getUnit, subjectOfUnit } from '../data/units';
 import { characters } from '../data/rewards';
 import { useProgress } from '../state/ProgressContext';
 import { Mascot } from '../components/Mascot';
@@ -34,8 +34,9 @@ export function UnitCompletePage() {
   const quiz = state.unitQuizzes[unit.id];
   const stars = lessonStars + (quiz?.stars ?? 0);
   const maxStars = (unit.lessons.length + 1) * 3;
-  const next = units[units.findIndex((u) => u.id === unit.id) + 1];
-  const outfit = characters.find((c) => c.howTo.includes(unit.title));
+  const subjectUnits = subjectOfUnit(unit.id).units;
+  const next = subjectUnits[subjectUnits.findIndex((u) => u.id === unit.id) + 1];
+  const outfit = characters.find((c) => c.unitId === unit.id);
 
   return (
     <div className="page complete" data-theme={unit.theme}>
@@ -79,7 +80,7 @@ export function UnitCompletePage() {
             )
           ) : (
             <Link to="/rewards" className="btn btn--sun btn--lg">
-              👑 أنهيتِ الكتاب كله! شاهدي جوائزك
+              👑 أنهيتِ كتاب {subjectOfUnit(unit.id).title} كله! شاهدي جوائزك
             </Link>
           )}
           <Link to="/rewards" className="btn btn--ghost">

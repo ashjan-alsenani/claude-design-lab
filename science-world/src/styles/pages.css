@@ -1604,3 +1604,106 @@ a.lesson-card:active {
   font-size: var(--fs-sm);
   padding-block: var(--s-4);
 }
+
+/* ---------- Subjects ---------- */
+.subject-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 5px;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  box-shadow: 0 3px 0 var(--line);
+}
+.subject-tab {
+  min-height: 44px;
+  padding: 6px 16px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--t-ui) ease, color var(--t-ui) ease, transform var(--t-press) var(--ease-out);
+}
+.subject-tab:active { transform: scale(0.96); }
+.subject-tab--on {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 3px 0 var(--accent-deep);
+}
+.subject-tabs--compact .subject-tab {
+  min-height: 38px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+}
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+.island--ocean { background: linear-gradient(180deg, #dcebff, #f0f7ff 70%, #cfe2ff); }
+.island--sunset { background: linear-gradient(180deg, #ffe7d4, #fff6ee 70%, #ffdcc2); }
+.island--mint { background: linear-gradient(180deg, #d5f5f0, #effcf9 70%, #c5eee7); }
+.island--berry { background: linear-gradient(180deg, #ffe0ec, #fff3f8 70%, #ffd2e3); }
+
+.subjects {
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 760px) {
+  .subjects { grid-template-columns: 1fr 1fr; }
+}
+.subject-card {
+  position: relative;
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border-radius: var(--r-xl);
+  background: linear-gradient(160deg, var(--accent-soft), #fff 65%);
+  box-shadow: var(--shadow-card);
+  border-top: 8px solid var(--accent);
+  overflow: hidden;
+}
+.subject-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.subject-card__emoji {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 5px 0 var(--accent-soft);
+  font-size: 2.8rem;
+  animation: float 5s ease-in-out infinite;
+}
+.subject-card h2 {
+  font-size: var(--fs-xl);
+  color: var(--accent-deep);
+}
+.subject-card p {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+.subject-card__row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+.subject-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+.subject-card__next {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}

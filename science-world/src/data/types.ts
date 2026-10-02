@@ -4,7 +4,9 @@
  * Add a new lesson by adding data, never by writing a new page component.
  */
 
-export type UnitId = 'u1' | 'u2' | 'u3';
+export type UnitId = string; // science: u1–u3 · math: m1–m4
+export type SubjectId = 'science' | 'math';
+export type UnitTheme = 'coral' | 'leaf' | 'grape' | 'ocean' | 'sunset' | 'mint' | 'berry';
 export type MascotMood = 'happy' | 'excited' | 'thinking' | 'surprised' | 'celebrating' | 'encouraging';
 
 /** A visual: an illustration key from the SVG library, or an emoji fallback. */
@@ -14,8 +16,36 @@ export interface Visual {
   emoji?: string;
   /** Optional AI-generated asset path, see ASSETS.md. Falls back to art/emoji if missing. */
   asset?: string;
+  /** A parametric math drawing (number line, place value, grid, shape…). */
+  math?: MathVisual;
   alt: string;
 }
+
+/* ---------- Math drawings (rendered by illustrations/math.tsx) ---------- */
+export type Point = [number, number];
+export type MathVisual =
+  | { type: 'numberLine'; min: number; max: number; step: number; labelEvery?: number; points?: { value: number; label?: string; color?: string }[]; jumps?: { from: number; to: number; label?: string }[] }
+  | { type: 'placeValue'; number: string; highlight?: number[] }
+  | {
+      type: 'grid';
+      cols: number;
+      rows: number;
+      /** show axes with numbers (coordinate grid) */
+      axes?: boolean;
+      cells?: { x: number; y: number; color?: string }[];
+      shapes?: { points: Point[]; color?: string; label?: string; dashed?: boolean }[];
+      lines?: { from: Point; to: Point; color?: string; dashed?: boolean; label?: string }[];
+      dots?: { x: number; y: number; label?: string; color?: string }[];
+    }
+  | { type: 'polygon'; sides: number; label?: string; color?: string }
+  | { type: 'triangle'; angles: [string, string, string]; kind?: 'equilateral' | 'isosceles' | 'right' | 'scalene'; color?: string }
+  | { type: 'solid'; name: 'cube' | 'cuboid' | 'squarePyramid' | 'triangularPyramid' | 'triangularPrism' | 'cylinder' | 'cone' | 'sphere' }
+  | { type: 'array'; rows: number; cols: number; color?: string }
+  | { type: 'ruler'; length: number; mark?: number; label?: string }
+  | { type: 'thermometer'; min: number; max: number; value: number; unit?: string }
+  | { type: 'clock'; hour: number; minute: number; digital?: boolean }
+  | { type: 'cards'; items: string[] }
+  | { type: 'hundredSquare'; shaded: number; color?: string };
 
 export interface Choice {
   id: string;
@@ -61,7 +91,18 @@ export interface TapAllQuestion extends QuestionBase {
   answers: string[];
 }
 
-export type Question = McqQuestion | TrueFalseQuestion | FillQuestion | TapAllQuestion;
+/** Type the answer on a big on-screen keypad (math). Digits may be Arabic-Indic or Western. */
+export interface NumberQuestion extends QuestionBase {
+  kind: 'number';
+  /** the correct answer, e.g. '345' or '0.25' or '-3' (Western or Arabic-Indic digits) */
+  answer: string;
+  /** other accepted forms, e.g. ['0.5', '0.50'] */
+  accept?: string[];
+  /** shown after the input box, e.g. 'سم' */
+  unit?: string;
+}
+
+export type Question = McqQuestion | TrueFalseQuestion | FillQuestion | TapAllQuestion | NumberQuestion;
 
 /* ---------- Lesson steps ---------- */
 
@@ -120,7 +161,7 @@ export interface ProcessStep {
   title: string;
   mascot?: string;
   art?: string;
-  steps: { title: string; text: string; emoji?: string; frame?: number }[];
+  steps: { title: string; text: string; emoji?: string; frame?: number; math?: MathVisual }[];
 }
 
 /** Flip cards: front = term, back = meaning. */
@@ -230,7 +271,9 @@ export interface VocabWord {
 }
 
 export interface Lesson {
-  id: string; // e.g. "1-1"
+  id: string; // unique across subjects, e.g. "1-1" (science) or "m1-1" (math)
+  /** number shown to the child (defaults to id), e.g. "1-1" for math lesson "m1-1" */
+  label?: string;
   unitId: UnitId;
   title: string;
   emoji: string;
@@ -260,8 +303,8 @@ export interface Unit {
   title: string;
   world: string; // name of the map world
   emoji: string;
-  /** css custom-property theme name: coral | leaf | grape */
-  theme: 'coral' | 'leaf' | 'grape';
+  /** css custom-property theme name */
+  theme: UnitTheme;
   intro: string;
   lessons: Lesson[];
   /** "تحقق من تقدمك" — the book's end-of-unit questions */
@@ -273,4 +316,14 @@ export interface Unit {
     missions: BossMission[];
     ending: string;
   };
+}
+
+export interface Subject {
+  id: SubjectId;
+  title: string; // العلوم
+  emoji: string;
+  /** short line under the title */
+  tagline: string;
+  theme: UnitTheme;
+  units: Unit[];
 }

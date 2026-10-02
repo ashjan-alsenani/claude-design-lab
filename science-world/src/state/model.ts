@@ -1,4 +1,4 @@
-import type { UnitId } from '../data/types';
+import type { SubjectId, UnitId } from '../data/types';
 
 export interface LessonRecord {
   stars: number; // 1–3
@@ -26,6 +26,8 @@ export interface ProgressState {
   badges: string[];
   streak: { count: number; best: number; last: string };
   sound: boolean;
+  /** the subject currently shown in the journey, lessons, games and challenges */
+  subject: SubjectId;
   lastLesson?: string;
   celebratedUnits: UnitId[];
 }
@@ -43,6 +45,7 @@ export const initialProgress: ProgressState = {
   badges: [],
   streak: { count: 0, best: 0, last: '' },
   sound: true,
+  subject: 'science',
   celebratedUnits: [],
 };
 

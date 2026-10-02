@@ -1,4 +1,5 @@
-import { units } from '../data/units';
+import { getSubject } from '../data/units';
+import { SubjectTabs } from '../components/SubjectTabs';
 import { useProgress } from '../state/ProgressContext';
 import { isUnitComplete, unitLessonsDone } from '../state/journey';
 import { LevelMap } from '../components/LevelMap';
@@ -9,14 +10,22 @@ const islandDecor: Record<string, string[]> = {
   coral: ['🏖️', '🌴', '🐚', '🦀'],
   leaf: ['🌳', '🦜', '🍄', '🐛'],
   grape: ['⚗️', '🔮', '🧊', '✨'],
+  ocean: ['🔢', '🐬', '💯', '🌊'],
+  sunset: ['📏', '⏰', '📅', '🧭'],
+  mint: ['🔷', '📐', '🔺', '🧊'],
+  berry: ['➗', '✖️', '🔟', '🌡️'],
 };
 
 export function JourneyPage() {
   const { state } = useProgress();
+  const subject = getSubject(state.subject);
   return (
     <div className="page journey">
       <header className="journey__head">
-        <h1 className="page-title">🗺️ رحلة التعلّم</h1>
+        <div className="page-head">
+          <h1 className="page-title">🗺️ رحلة {subject.title}</h1>
+          <SubjectTabs />
+        </div>
         <MascotMessage mood="happy" size={72} compact>
           اتبع الطريق من جزيرة إلى جزيرة! كل محطة تفتح المحطة التي بعدها ⭐
         </MascotMessage>
@@ -32,7 +41,8 @@ export function JourneyPage() {
           </li>
         </ul>
       </header>
-      {units.map((u) => {
+      {subject.units.length === 0 && <p className="page-sub">قريبًا… 🚧</p>}
+      {subject.units.map((u) => {
         const done = unitLessonsDone(state, u);
         return (
           <section key={u.id} className={`island island--${u.theme}`} data-theme={u.theme} aria-labelledby={`island-${u.id}`}>

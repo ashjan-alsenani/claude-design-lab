@@ -1,4 +1,5 @@
-import type { UnitId } from './types';
+import type { SubjectId, UnitId } from './types';
+import { lessonsOf } from './units';
 
 /** قاموس المصطلحات — copied from the book's glossary (pp. 77–82). */
 export interface GlossaryEntry {
@@ -6,6 +7,8 @@ export interface GlossaryEntry {
   definition: string;
   page: number;
   unitId: UnitId;
+  /** set for entries built from a lesson's vocabulary box */
+  lessonId?: string;
 }
 
 export const glossary: GlossaryEntry[] = [
@@ -86,3 +89,17 @@ export const glossary: GlossaryEntry[] = [
   { term: "يقلل", definition: "ينقص.", page: 48, unitId: 'u2' },
   { term: "مَثِّلْ", definition: "اعرِض فكرة معينة باستخدام مخطط أو رسم.", page: 45, unitId: 'u2' },
 ];
+
+/**
+ * Science uses the book's printed glossary. Other subjects use the
+ * «مفردات الدرس» boxes of their lessons (each entry keeps its lesson).
+ */
+export function glossaryFor(subject: SubjectId): GlossaryEntry[] {
+  if (subject === 'science') return glossary;
+  const seen = new Set<string>();
+  return lessonsOf(subject).flatMap((l) =>
+    l.vocab
+      .filter((v) => !seen.has(v.word) && seen.add(v.word))
+      .map((v) => ({ term: v.word, definition: v.meaning, page: l.page, unitId: l.unitId, lessonId: l.id })),
+  );
+}

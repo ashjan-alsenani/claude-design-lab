@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { UnitId } from '../data/types';
+import type { SubjectId, UnitId } from '../data/types';
 import { newlyEarned, type Achievement } from '../data/rewards';
 import { setSoundEnabled } from '../lib/sound';
 import { hydrate, initialProgress, starsFor, touchStreak, type ProgressState } from './model';
@@ -17,6 +17,7 @@ interface ProgressApi {
   setLastLesson: (id: string) => void;
   markUnitCelebrated: (id: UnitId) => void;
   toggleSound: () => void;
+  setSubject: (id: SubjectId) => void;
   reset: () => void;
   /** achievements waiting to be celebrated by <AchievementPopup> */
   pendingAchievements: Achievement[];
@@ -87,6 +88,7 @@ export function ProgressProvider({ children, storage = localProgressStorage }: {
       markUnitCelebrated: (id) =>
         setState((s) => (s.celebratedUnits.includes(id) ? s : { ...s, celebratedUnits: [...s.celebratedUnits, id] })),
       toggleSound: () => setState((s) => ({ ...s, sound: !s.sound })),
+      setSubject: (id) => setState((s) => (s.subject === id ? s : { ...s, subject: id })),
       reset: () => {
         storage.clear();
         first.current = true;

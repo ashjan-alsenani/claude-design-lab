@@ -6,6 +6,8 @@ import { burst } from '../lib/confetti';
 import { shuffle } from '../lib/random';
 import { VisualView } from '../illustrations/registry';
 import { Feedback } from '../components/Feedback';
+import { NumberPad } from './NumberPad';
+import { sameNumber, toArabicDigits } from '../lib/digits';
 
 export interface AnswerResult {
   correct: boolean; // eventually answered correctly
@@ -31,7 +33,7 @@ const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
 /** Max wrong tries before we show the answer and explain it. */
 function maxTries(q: Question) {
   if (q.kind === 'tf') return 1;
-  if (q.kind === 'tapAll') return 2;
+  if (q.kind === 'tapAll' || q.kind === 'number') return 2;
   return Math.max(1, Math.min(2, q.choices.length - 2));
 }
 
@@ -42,6 +44,7 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
         { id: 'true', text: 'صحيح', emoji: '✅' },
         { id: 'false', text: 'خطأ', emoji: '❌' },
       ];
+    if (q.kind === 'number') return [];
     return shuffle(q.choices);
   }, [q]);
 
@@ -50,15 +53,17 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
   const [status, setStatus] = useState<'answering' | 'oops' | 'right' | 'revealed'>('answering');
   const [shakeId, setShakeId] = useState<string | null>(null);
   const [msg, setMsg] = useState('');
+  const [typed, setTyped] = useState('');
 
   useEffect(() => {
     setWrong([]);
     setSelected([]);
     setStatus('answering');
     setMsg('');
+    setTyped('');
   }, [q]);
 
-  const correctIds = q.kind === 'tf' ? [String(q.answer)] : q.kind === 'tapAll' ? q.answers : [q.answer];
+  const correctIds = q.kind === 'tf' ? [String(q.answer)] : q.kind === 'tapAll' ? q.answers : q.kind === 'number' ? [] : [q.answer];
   const done = status === 'right' || status === 'revealed';
 
   function finish(correct: boolean, firstTry: boolean) {
@@ -108,6 +113,13 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
     else fail(id);
   }
 
+  function checkNumber() {
+    if (q.kind !== 'number' || done || typed === '') return;
+    const ok = [q.answer, ...(q.accept ?? [])].some((a) => sameNumber(a, typed));
+    if (ok) succeed(wrong.length === 0);
+    else fail(null);
+  }
+
   function checkTapAll() {
     const ok = selected.length === correctIds.length && selected.every((s) => correctIds.includes(s));
     if (ok) succeed(wrong.length === 0);
@@ -135,8 +147,18 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
           {sentence[1]}
         </p>
       )}
+      {q.kind === 'number' && (
+        <>
+          <NumberPad value={typed} onChange={(v) => { setTyped(v); if (status === 'oops') setStatus('answering'); }} onSubmit={checkNumber} disabled={done} unit={q.unit} shake={shakeId === 'all'} />
+          {status === 'revealed' && (
+            <p className="qcard__answer">
+              الإجابة الصحيحة: <strong dir="ltr">{toArabicDigits(q.answer)}</strong> {q.unit}
+            </p>
+          )}
+        </>
+      )}
       {q.kind === 'tapAll' && <p className="qcard__hint-line">اختر كل الإجابات الصحيحة ثم اضغط «تحقّق»</p>}
-      <div className={`choices choices--${q.kind === 'tf' ? 'tf' : choices.length > 4 ? 'many' : 'grid'}`} role="group" aria-label="الخيارات">
+      {q.kind !== 'number' && <div className={`choices choices--${q.kind === 'tf' ? 'tf' : choices.length > 4 ? 'many' : 'grid'}`} role="group" aria-label="الخيارات">
         {choices.map((c) => (
           <button
             key={c.id}
@@ -155,7 +177,7 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
             {stateOf(c.id) === 'right' && <span className="choice__mark" aria-label="صحيح">✓</span>}
           </button>
         ))}
-      </div>
+      </div>}
       {q.kind === 'tapAll' && !done && (
         <button type="button" className="btn btn--accent btn--block" disabled={selected.length === 0} onClick={checkTapAll}>
           تحقّق ✔️

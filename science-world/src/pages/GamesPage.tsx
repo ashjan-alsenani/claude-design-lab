@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { units } from '../data/units';
-import { glossary } from '../data/glossary';
+import { getSubject, units } from '../data/units';
+import { glossaryFor } from '../data/glossary';
+import { SubjectTabs } from '../components/SubjectTabs';
 import type { LessonStep, UnitId } from '../data/types';
 import { useProgress } from '../state/ProgressContext';
 import { learnedLessons } from '../state/learned';
@@ -32,11 +33,13 @@ export function GamesPage() {
       ),
     [learned],
   );
-  const deck = useMemo(() => glossary.filter((g) => unitFilter === 'all' || g.unitId === unitFilter), [unitFilter]);
+  const subject = getSubject(state.subject);
+  const glossary = useMemo(() => glossaryFor(subject.id), [subject.id]);
+  const deck = useMemo(() => glossary.filter((g) => unitFilter === 'all' || g.unitId === unitFilter), [glossary, unitFilter]);
 
   const tiles = [
     { id: 'wheel' as const, icon: '🎡', title: 'عجلة المراجعة', text: 'أدِر العجلة وأجب عن سؤال من دروسك', tone: 'coral', locked: learned.length === 0 },
-    { id: 'flash' as const, icon: '🔄', title: 'بطاقات المصطلحات', text: `${glossary.length} مصطلحًا من قاموس الكتاب`, tone: 'aqua', locked: false },
+    { id: 'flash' as const, icon: '🔄', title: 'بطاقات المصطلحات', text: `${glossary.length} مصطلحًا من كتاب ${subject.title}`, tone: 'aqua', locked: glossary.length === 0 },
     { id: 'box' as const, icon: '🧺', title: 'صندوق الألعاب', text: 'أعد لعب أنشطتك المفضلة', tone: 'leaf', locked: learned.length === 0 },
   ];
 
@@ -64,7 +67,7 @@ export function GamesPage() {
         {game === 'flash' && (
           <>
             <div className="tabs" role="tablist" aria-label="اختر الوحدة">
-              {[{ id: 'all' as const, label: 'الكل' }, ...units.map((u) => ({ id: u.id, label: `${u.emoji} ${u.title}` }))].map((tab) => (
+              {[{ id: 'all' as const, label: 'الكل' }, ...subject.units.map((u) => ({ id: u.id, label: `${u.emoji} ${u.title}` }))].map((tab) => (
                 <button key={tab.id} type="button" role="tab" aria-selected={unitFilter === tab.id} className={`tab ${unitFilter === tab.id ? 'tab--on' : ''}`} onClick={() => setUnitFilter(tab.id)}>
                   {tab.label}
                 </button>
@@ -115,6 +118,7 @@ export function GamesPage() {
       <header className="zone-hero zone-hero--leaf">
         <div>
           <h1 className="page-title">🎮 الألعاب</h1>
+          <SubjectTabs compact />
           <p className="page-sub">العب وراجع ما تعلّمته بطرق ممتعة!</p>
         </div>
         <Mascot mood="happy" size={110} />
@@ -141,7 +145,7 @@ export function GamesPage() {
         ))}
         <Link to="/games/glossary" className="challenge-card challenge-card--grape" onClick={() => play('tap')}>
           <span className="challenge-card__icon">📖</span>
-          <span className="challenge-card__title">قاموس العلوم</span>
+          <span className="challenge-card__title">قاموس {subject.title}</span>
           <span className="challenge-card__text">ابحث عن معنى أي مصطلح في الكتاب</span>
         </Link>
       </div>
