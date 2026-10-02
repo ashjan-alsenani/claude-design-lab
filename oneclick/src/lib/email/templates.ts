@@ -1,7 +1,7 @@
 import type { Locale } from "@/i18n/config";
 
 /**
- * One Click Digital Hub transactional email templates (bilingual, RTL-aware, inline styles for
+ * One Click transactional email templates (bilingual, RTL-aware, inline styles for
  * email-client compatibility). Rendered to { subject, html, text }.
  * Marketing emails must use a separate path that checks consent + unsubscribe.
  */
@@ -26,7 +26,7 @@ function layout(locale: Locale, opts: { preheader: string; title: string; paragr
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.bg};padding:32px 12px"><tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:${C.card};border:1px solid ${C.line};border-radius:20px;padding:32px;text-align:${align}" dir="${dir}">
 <tr><td>
-<p style="margin:0 0 24px;font-weight:600;font-size:18px;direction:ltr;text-align:${align}"><span style="color:${C.primary}">●</span> One Click Digital Hub</p>
+<p style="margin:0 0 24px;font-weight:600;font-size:18px;direction:ltr;text-align:${align}"><span style="color:${C.primary}">●</span> One Click</p>
 <h1 style="margin:0 0 16px;font-size:22px;line-height:1.35">${esc(opts.title)}</h1>
 ${opts.paragraphs.map((p) => `<p style="margin:0 0 12px;font-size:15px;line-height:1.7;color:${C.ink}">${esc(p)}</p>`).join("")}
 ${cta}
@@ -38,8 +38,8 @@ ${cta}
 }
 
 const footer = {
-  en: "One Click Digital Hub · Less effort. More life. You received this email because of an action on your One Click Digital Hub account.",
-  ar: "ون كليك ديجيتال هب · جهد أقل. حياة أكثر. وصلتك هذه الرسالة بسبب إجراء في حسابك على ون كليك ديجيتال هب.",
+  en: "One Click · Less effort. More life. You received this email because of an action on your One Click account.",
+  ar: "ون كليك · جهد أقل. حياة أكثر. وصلتك هذه الرسالة بسبب إجراء في حسابك على ون كليك.",
 };
 
 type T = { en: string; ar: string };
@@ -47,9 +47,9 @@ const pick = (t: T, l: Locale) => t[l];
 
 export const emailTemplates = {
   welcome(locale: Locale, p: { name: string; dashboardUrl: string }): EmailContent {
-    const title = pick({ en: `Welcome to One Click Digital Hub, ${p.name}`, ar: `أهلًا بك في ون كليك ديجيتال هب، ${p.name}` }, locale);
+    const title = pick({ en: `Welcome to One Click, ${p.name}`, ar: `أهلًا بك في ون كليك، ${p.name}` }, locale);
     return {
-      subject: pick({ en: "Welcome to One Click Digital Hub", ar: "أهلًا بك في ون كليك ديجيتال هب" }, locale),
+      subject: pick({ en: "Welcome to One Click", ar: "أهلًا بك في ون كليك" }, locale),
       ...layout(locale, {
         preheader: pick({ en: "Your account is ready.", ar: "حسابك جاهز." }, locale),
         title,
@@ -137,13 +137,13 @@ export const emailTemplates = {
   },
   ownerNotification(p: { kind: string; reference: string; summary: string; adminUrl: string }): EmailContent {
     return {
-      subject: `[One Click Digital Hub] New ${p.kind}: ${p.reference}`,
+      subject: `[One Click] New ${p.kind}: ${p.reference}`,
       ...layout("en", {
         preheader: p.summary,
         title: `New ${p.kind}`,
         paragraphs: [`Reference: ${p.reference}`, p.summary],
         cta: { label: "Open in Admin", url: p.adminUrl },
-        footer: "Owner notification from One Click Digital Hub.",
+        footer: "Owner notification from One Click.",
       }),
     };
   },

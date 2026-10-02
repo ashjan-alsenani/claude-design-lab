@@ -1,5 +1,5 @@
 /**
- * Analytics event dictionary. The single source of truth for what One Click Digital Hub measures.
+ * Analytics event dictionary. The single source of truth for what One Click measures.
  * Rules: no names, emails, phone numbers or free-text in properties. IDs and enums only.
  * Documented for humans in docs/ANALYTICS_EVENTS.md.
  */

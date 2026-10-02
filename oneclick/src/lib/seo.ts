@@ -19,7 +19,7 @@ export function pageMetadata(opts: {
   noindex?: boolean;
 }): Metadata {
   const d = getDictionary(opts.locale);
-  const title = opts.title ? `${opts.title} | One Click Digital Hub` : d.meta.siteTitle;
+  const title = opts.title ? `${opts.title} | One Click` : d.meta.siteTitle;
   const description = opts.description ?? d.meta.siteDescription;
   const languages: Record<string, string> = {};
   for (const l of locales) languages[localeMeta[l].htmlLang] = localeUrl(l, opts.path);
@@ -32,13 +32,13 @@ export function pageMetadata(opts: {
     alternates: { canonical: localeUrl(opts.locale, opts.path), languages },
     openGraph: {
       type: "website",
-      siteName: "One Click Digital Hub",
+      siteName: "One Click",
       title,
       description,
       url: localeUrl(opts.locale, opts.path),
       locale: localeMeta[opts.locale].ogLocale,
       alternateLocale: locales.filter((l) => l !== opts.locale).map((l) => localeMeta[l].ogLocale),
-      images: [{ url: image, width: 1200, height: 630, alt: "One Click Digital Hub" }],
+      images: [{ url: image, width: 1200, height: 630, alt: "One Click" }],
     },
     twitter: { card: "summary_large_image", title, description, images: [image] },
     robots: opts.noindex ? { index: false, follow: false } : undefined,
@@ -51,8 +51,8 @@ export function organizationJsonLd(locale: Locale) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "One Click Digital Hub",
-    alternateName: "ون كليك ديجيتال هب",
+    name: "One Click",
+    alternateName: "ون كليك",
     url: localeUrl(locale),
     logo: `${siteUrl}/brand/oneclick-app-icon.png`,
     description: getDictionary(locale).meta.siteDescription,

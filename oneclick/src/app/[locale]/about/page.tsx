@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const copy = {
   en: {
-    storyTitle: "Why One Click Digital Hub exists",
+    storyTitle: "Why One Click exists",
     story: [
       "Everyday life is full of small jobs that take more effort than they should: planning a wedding across forty chat threads, rewriting the same grocery list every week, holding a whole week in your head.",
-      "One Click Digital Hub turns those jobs into calm, beautiful tools. Each product does one thing well, works in Arabic and English, and respects your time and your data.",
+      "One Click turns those jobs into calm, beautiful tools. Each product does one thing well, works in Arabic and English, and respects your time and your data.",
       "We started in the Sultanate of Oman, and we design for everyone, everywhere.",
     ],
     principlesTitle: "What we promise",
@@ -36,10 +36,10 @@ const copy = {
     meaning: "One continuous line: a check that keeps moving and becomes an open loop. Completion, flow and connection. The saffron dot is the single click that closes it.",
   },
   ar: {
-    storyTitle: "ليش ون كليك ديجيتال هب",
+    storyTitle: "ليش ون كليك",
     story: [
       "حياتنا اليومية مليانة مهام صغيرة تاخذ جهد أكثر من اللازم: تجهيز عرس بين أربعين محادثة، كتابة نفس قائمة المقاضي كل أسبوع، وشيل أسبوع كامل في راسك.",
-      "ون كليك ديجيتال هب تحوّل هذي المهام لأدوات هادئة وجميلة. كل منتج يسوي شي واحد بإتقان، ويشتغل بالعربي والإنجليزي، ويحترم وقتك وبياناتك.",
+      "ون كليك تحوّل هذي المهام لأدوات هادئة وجميلة. كل منتج يسوي شي واحد بإتقان، ويشتغل بالعربي والإنجليزي، ويحترم وقتك وبياناتك.",
       "بدأنا من سلطنة عُمان، ونصمم للكل، في كل مكان.",
     ],
     principlesTitle: "وعدنا لك",

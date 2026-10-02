@@ -81,7 +81,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
         </div>
         <div className="mt-14 flex flex-col gap-4 border-t border-line pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} One Click Digital Hub. {d.footer.rights}
+            © {new Date().getFullYear()} One Click. {d.footer.rights}
             {businessSettings.showLegalIdentity && businessSettings.legalName && (
               <span className="ms-2">
                 {businessSettings.legalName}

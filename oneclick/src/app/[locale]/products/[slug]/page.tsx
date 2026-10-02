@@ -16,6 +16,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { DemoById } from "@/components/demos/DemoById";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductIcon } from "@/components/product/ProductIcon";
+import { ProductArt } from "@/components/art/ProductArt";
 import { FavoriteButton } from "@/components/product/FavoriteButton";
 import { ProductViewTracker } from "@/components/product/ProductViewTracker";
 import { JsonLd } from "@/components/JsonLd";
@@ -112,14 +113,9 @@ export default async function ProductPage({ params }: Props) {
               <p className="mt-3 text-xs text-muted">{d.product.demoNote}</p>
             </div>
           ) : (
-            <div className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-[var(--radius-xl)]" style={{ background: hueSoft(product.hue, 18) }}>
-              <svg aria-hidden="true" viewBox="0 0 64 64" className="absolute size-[85%] opacity-25">
-                <path d="M47.56 16.44 A22 22 0 1 0 53.25 37.69" fill="none" stroke={hue} strokeWidth="1.4" strokeLinecap="round" strokeDasharray="3 3" />
-              </svg>
-              <span className="grid size-24 place-items-center rounded-[28px] bg-surface-raised shadow-lift" style={{ color: hue }}>
-                <ProductIcon hue={product.hue} size={48} />
-              </span>
-              <p className="absolute bottom-6 text-sm font-medium text-ink-soft">{d.common.comingSoon}</p>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-xl)]" style={{ background: hueSoft(product.hue, 18) }}>
+              <ProductArt hue={product.hue} art={product.art} className="absolute inset-6" />
+              <p className="absolute bottom-5 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rounded-full bg-surface-raised px-4 py-1.5 text-sm font-semibold text-ink shadow-soft">{d.common.comingSoon}</p>
             </div>
           )}
         </div>
@@ -255,7 +251,7 @@ export default async function ProductPage({ params }: Props) {
           "@type": "Product",
           name,
           description: tr(product.summary, locale),
-          brand: { "@type": "Brand", name: "One Click Digital Hub" },
+          brand: { "@type": "Brand", name: "One Click" },
           category: product.categories.join(", "),
           image: `${siteUrl}/brand/og-default.png`,
           url: localeUrl(locale, `/products/${product.slug}`),

@@ -15,8 +15,12 @@ const fontCss = `
 @font-face{font-family:Rubik;src:url(file://${ROOT}/src/fonts/Rubik-Variable-arabic.woff2) format("woff2");font-weight:300 900;unicode-range:U+0600-06FF,U+FB50-FDFF,U+FE70-FEFF}
 *{margin:0;box-sizing:border-box}html,body{background:transparent;font-family:Rubik}`;
 
-const CLICKY = (face = "#12B5A6", features = "#fff", dimple = "#FFC23D") =>
-  `<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="8" y="8" width="84" height="84" rx="30" fill="${face}"/><path d="M22 26 Q24 16 36 15" stroke="#fff" stroke-opacity=".35" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="36" cy="40" r="6" fill="${features}"/><circle cx="64" cy="40" r="6" fill="${features}"/><path d="M32 60 L44 70 L70 56" fill="none" stroke="${features}" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="76" cy="60" r="5" fill="${dimple}"/></svg>`;
+const CLICKY = (face = "#12B5A6") => {
+  const ink = "#1E1B3A";
+  const eye = (cx) => `<ellipse cx="${cx}" cy="44" rx="8.5" ry="10" fill="#fff"/><circle cx="${cx + 1.5}" cy="46" r="5.5" fill="${ink}"/><circle cx="${cx + 3.5}" cy="43.5" r="2" fill="#fff"/>`;
+  const id = "g" + face.replace("#", "");
+  return `<svg viewBox="0 0 100 100" width="100%" height="100%" style="overflow:visible"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="color-mix(in oklab, ${face} 70%, #fff)"/><stop offset="1" stop-color="${face}"/></linearGradient></defs><path d="M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z" fill="url(#${id})"/><path d="M20 30 Q22 16 38 13" stroke="#fff" stroke-opacity=".45" stroke-width="5" stroke-linecap="round" fill="none"/>${eye(36)}${eye(64)}<g fill="#FF8FAB" opacity=".85"><ellipse cx="23" cy="63" rx="6.5" ry="4"/><ellipse cx="77" cy="63" rx="6.5" ry="4"/></g><path d="M38 64 L47 72 L64 58" fill="none" stroke="${ink}" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M84 2 L86.5 9.5 L94 12 L86.5 14.5 L84 22 L81.5 14.5 L74 12 L81.5 9.5 Z" fill="#FFC23D"/></svg>`;
+};
 
 async function render(html, file, w, h) {
   const page = await browser.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 1 });
@@ -38,7 +42,7 @@ await render(icon(512), "oneclick-app-icon.png", 512, 512);
 await render(icon(192), "oneclick-app-icon-192.png", 192, 192);
 await render(`<div style="width:180px;height:180px;background:#FFF9F4;display:grid;place-items:center"><div style="width:150px;height:150px">${CLICKY()}</div></div>`, "apple-touch-icon.png", 180, 180);
 await render(
-  `<div style="width:1080px;height:1080px;background:#FFC23D;display:grid;place-items:center"><div style="width:700px;height:700px">${CLICKY("#12B5A6", "#fff", "#FF6B6B")}</div></div>`,
+  `<div style="width:1080px;height:1080px;background:#FFC23D;display:grid;place-items:center"><div style="width:700px;height:700px">${CLICKY("#12B5A6")}</div></div>`,
   "oneclick-instagram-avatar.png",
   1080,
   1080
@@ -51,9 +55,9 @@ await render(
     <div style="position:absolute;right:120px;bottom:-140px;width:360px;height:360px;border-radius:42%;background:#D9F4F0"></div>
     <div style="position:absolute;right:420px;top:60px;width:90px;height:90px;border-radius:30%;background:#E6E1FF;transform:rotate(14deg)"></div>
     <div style="position:absolute;right:110px;top:150px;width:330px;height:330px;transform:rotate(-6deg)">${CLICKY()}</div>
-    <div style="position:absolute;left:80px;top:80px;display:flex;flex-direction:column;line-height:1">
+    <div style="position:absolute;left:80px;top:80px;display:flex;align-items:center;gap:16px;line-height:1">
+      <div style="width:72px;height:72px">${CLICKY()}</div>
       <span style="font-size:58px;font-weight:700;color:#1E1B3A;letter-spacing:-.01em">One Click</span>
-      <span style="margin-top:10px;font-size:20px;font-weight:600;letter-spacing:.26em;color:#6C6790">DIGITAL HUB</span>
     </div>
     <p style="position:absolute;left:80px;top:250px;font-size:64px;line-height:1.1;font-weight:700;color:#1E1B3A;letter-spacing:-.02em">Less effort.<br>More <span style="background:linear-gradient(transparent 62%,#FFC23D 62%)">life.</span></p>
     <p dir="rtl" style="position:absolute;left:80px;top:470px;font-size:42px;font-weight:700;color:#46416C">جهد أقل. حياة أكثر.</p>

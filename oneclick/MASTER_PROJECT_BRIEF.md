@@ -1,4 +1,4 @@
-# One Click Digital Hub: Master Project Brief
+# One Click: Master Project Brief
 
 Permanent project brief, saved from the owner's instructions of 2026-10-02. Content is kept
 complete; list formatting is condensed. When this brief and code disagree, the brief wins
@@ -19,8 +19,7 @@ enter, what to send back, cost, whether it blocks development.
 Planning only where it helps execution. Create structure, docs, decisions, then build.
 
 ## 3. Brand name (locked)
-**One Click Digital Hub**, short form **OCDH** (renamed by the owner on 2026-10-02; originally
-"OneClick"). Products use "One Click + Product" (e.g. One Click Bride). No renaming or naming exercises. Before commercial launch:
+**One Click** (owner decision 2026-10-02; originally written "OneClick", briefly "One Click Digital Hub"). Products use "One Click + Product" (e.g. One Click Bride). No renaming or naming exercises. Before commercial launch:
 check domains, social handles, confusingly similar brands, obvious trademark risks; flag serious
 conflicts but never rename independently.
 
@@ -53,7 +52,7 @@ Each solves a real problem; not the same template with different words.
 B) Downloadable products: templates, planners, PDFs, checklists, worksheets, guides, kits,
 bundles, printables, resources.
 C) Custom solutions: websites, mini apps, tools, interactive planners, dashboards, organizers.
-All under one One Click Digital Hub brand.
+All under one One Click brand.
 
 ## 9. Product experience
 Dashboards, checklists, tasks, notes, calendars, timelines, progress, charts, statistics,
@@ -61,7 +60,7 @@ reminders, categories, search, filters, favorites, calculators, exports, printab
 settings, sharing, onboarding. Every feature needs a clear user benefit.
 
 ## 10. Product framework
-Build a reusable **OCDH Digital Product Framework** (auth, dashboard shell, navigation, tasks,
+Build a reusable **One Click Product Framework** (auth, dashboard shell, navigation, tasks,
 checklists, notes, calendar, charts, progress, search, filters, categories, export, settings,
 localization, themes, analytics, entitlements, notifications, responsive layouts). Shared
 foundations, unique experiences.
@@ -72,7 +71,7 @@ problem, audience, benefit, MVP, premium features, differentiator, reusable comp
 marketing opportunity, risks, expansion. Choose by value and reuse.
 
 ## 12. Naming
-"One Click Digital Hub + Product" unless a clearly better architecture appears; always tied to One Click Digital Hub.
+"One Click + Product" unless a clearly better architecture appears; always tied to One Click.
 
 ## 13-15. Product examples
 Bride: countdown, timeline, budget, guests, vendors, tasks, appointments, dress, shopping,
@@ -101,13 +100,13 @@ Not a Shopify theme, dropshipping store, generic SaaS, AI landing page, template
 repetitive card grid. Premium, visual: smooth animation, micro-interactions, animated icons,
 original illustrations, mockups, interactive previews, counters, progress, before/after,
 scroll storytelling, soft gradients, screenshots, floating elements, branded graphics.
-Story pattern: Problem → Chaos → One Click Digital Hub → Clear Result, everywhere (site, ads, reels, demos,
+Story pattern: Problem → Chaos → One Click → Clear Result, everywhere (site, ads, reels, demos,
 landing pages). Motion must aid understanding or delight; respect prefers-reduced-motion;
 performance first.
 
 ## 23. Homepage
-Explains One Click Digital Hub in seconds (what, sells, who, why, action). Hero, animated preview, popular
-products, categories, how One Click Digital Hub helps, problem → solution, interactive demos, how it works,
+Explains One Click in seconds (what, sells, who, why, action). Hero, animated preview, popular
+products, categories, how One Click helps, problem → solution, interactive demos, how it works,
 benefits, collections, new products, custom solutions, education, genuine testimonials when
 available, FAQ, newsletter, final CTA. **No fake numbers, reviews, downloads, revenue, awards,
 clients.** Honest launch messaging.
@@ -189,7 +188,7 @@ video only when people/lifestyle/cinematic footage is truly needed; editing tool
 captions, sound, music, timing, export. Cost control: free → included → open-source → low-cost →
 pay-as-you-go → subscription; state expected cost before spending meaningful credits.
 Default: vertical 9:16, Reel-compatible, mobile-first, hook in 1-3 s, clear story, professional
-motion, readable subtitles, brand colors and fonts, one message, strong CTA, One Click Digital Hub end screen,
+motion, readable subtitles, brand colors and fonts, one message, strong CTA, One Click end screen,
 not overcrowded. Full workflow: concept, hook, script, scenes, storyboard, shot list, screenshots,
 assets, animation, voiceover plan, captions, timing, CTA, music, end screen, cover, export.
 Per major product, a marketing package: summary, audience, problem, benefit, hooks, headlines,

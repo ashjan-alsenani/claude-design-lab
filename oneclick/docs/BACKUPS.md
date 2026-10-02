@@ -9,5 +9,5 @@
 | Brand assets | `public/brand` in Git | Regenerate with `scripts/build-brand.mjs` | Run scripts |
 
 Targets: lose at most 24 h of data (RPO), back online within 4 h (RTO).
-One Click Digital Hub does not depend on any single laptop: everything needed lives in GitHub + the hosting
+One Click does not depend on any single laptop: everything needed lives in GitHub + the hosting
 and database providers. Test a restore once before launch and every quarter after.

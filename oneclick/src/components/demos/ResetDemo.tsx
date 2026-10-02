@@ -5,6 +5,7 @@ import { SparkleIcon, ArrowCounterClockwiseIcon } from "@phosphor-icons/react/di
 import { CheckRow, ProductShell, ProgressRing } from "@/framework";
 import { num, type Locale } from "@/i18n/config";
 import { useDemoTracker } from "./useDemoTracker";
+import { Confetti } from "@/components/ui/Confetti";
 
 // The free lead-magnet product. Real, complete and saved on the visitor's device.
 const sections = [
@@ -95,6 +96,11 @@ export function ResetDemo({ locale, hue }: { locale: Locale; hue: string }) {
           <ArrowCounterClockwiseIcon size={16} />
         </button>
       </div>
+      {count === total && (
+        <div className="relative">
+          <Confetti key="reset-done" />
+        </div>
+      )}
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {sections.map((s) => (
           <section key={s.title.en}>

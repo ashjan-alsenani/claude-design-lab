@@ -9,7 +9,7 @@ import type { Money } from "@/lib/money";
  * the platform (orders, entitlements, emails, admin) needs to change.
  *
  * Rules:
- * - One Click Digital Hub never collects or stores card data. Customers pay on the provider's
+ * - One Click never collects or stores card data. Customers pay on the provider's
  *   hosted page (redirect) or embedded secure fields.
  * - Orders are fulfilled ONLY from a verified provider webhook, never from the
  *   browser redirect alone.

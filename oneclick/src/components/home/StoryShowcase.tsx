@@ -36,7 +36,7 @@ export function StoryShowcase({
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
       <div className="min-w-0">
-        <div role="tablist" aria-label="One Click Digital Hub" className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:flex-wrap lg:px-0">
+        <div role="tablist" aria-label="One Click" className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:flex-wrap lg:px-0">
           {items.map((it, i) => (
             <button
               key={it.slug}

@@ -1,4 +1,4 @@
-// Generates the One Click Digital Hub logo system (Clicky) as outlined, editable SVG files.
+// Generates the One Click logo system (Clicky) as outlined, editable SVG files.
 // Run: node scripts/build-brand.mjs   (then scripts/render-brand-png.mjs for PNGs)
 // Wordmark text is converted to vector outlines (Rubik Bold/SemiBold, SIL OFL 1.1).
 import fs from "node:fs";
@@ -21,13 +21,25 @@ export const COLORS = {
   white: "#FFFFFF",
 };
 
-/** Clicky: rounded face, check-mark smile, sunshine "click" dimple. 100x100 grid. */
-function clicky({ face, features = "#fff", dimple = COLORS.sun, highlight = true }) {
-  return `<rect x="8" y="8" width="84" height="84" rx="30" fill="${face}"/>
-  ${highlight ? `<path d="M22 26 Q24 16 36 15" stroke="#fff" stroke-opacity=".35" stroke-width="5" stroke-linecap="round" fill="none"/>` : ""}
-  <circle cx="36" cy="40" r="6" fill="${features}"/><circle cx="64" cy="40" r="6" fill="${features}"/>
-  <path d="M32 60 L44 70 L70 56" fill="none" stroke="${features}" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="76" cy="60" r="5" fill="${dimple}"/>`;
+function clicky({ face, dark = false }) {
+  // Clicky v3: soft blob, big shiny eyes, rosy cheeks, check-mark smile, sunshine sparkle.
+  const ink = "#1E1B3A";
+  const eye = (cx) => `<ellipse cx="${cx}" cy="44" rx="8.5" ry="10" fill="#fff"/><circle cx="${cx + 1.5}" cy="46" r="5.5" fill="${ink}"/><circle cx="${cx + 3.5}" cy="43.5" r="2" fill="#fff"/>`;
+  const id = "g" + face.replace("#", "");
+  return `<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${lighten(face)}"/><stop offset="1" stop-color="${face}"/></linearGradient></defs>
+  <path d="M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z" fill="url(#${id})"/>
+  <path d="M20 30 Q22 16 38 13" stroke="#fff" stroke-opacity=".45" stroke-width="5" stroke-linecap="round" fill="none"/>
+  ${eye(36)}${eye(64)}
+  <g fill="#FF8FAB" opacity=".85"><ellipse cx="23" cy="63" rx="6.5" ry="4"/><ellipse cx="77" cy="63" rx="6.5" ry="4"/></g>
+  <path d="M38 64 L47 72 L64 58" fill="none" stroke="${ink}" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M84 2 L86.5 9.5 L94 12 L86.5 14.5 L84 22 L81.5 14.5 L74 12 L81.5 9.5 Z" fill="${dark ? "#FFCB57" : "#FFC23D"}"/>`;
+}
+
+function lighten(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  const mix = (c) => Math.round(c + (255 - c) * 0.3);
+  const r = mix(n >> 16), g = mix((n >> 8) & 255), b = mix(n & 255);
+  return "#" + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
 }
 
 function svg(w, h, body, title) {
@@ -70,29 +82,24 @@ function textPath(font, text, x, baseline, size, tracking) {
   return { d: parts.join(" "), width: cursor - x - tracking * size };
 }
 
-/** "One Click" over letter-spaced "DIGITAL HUB". */
-function lockupText(x, top, big, color, sub, align = "left") {
-  const small = big * 0.33;
-  const mainW = textPath(bold, "One Click", 0, 0, big, -0.01).width;
-  const subW = textPath(semi, "DIGITAL HUB", 0, 0, small, 0.26).width;
-  const width = Math.max(mainW, subW);
-  const mx = align === "center" ? x + (width - mainW) / 2 : x;
-  const sx = align === "center" ? x + (width - subW) / 2 : x + 1;
-  const main = textPath(bold, "One Click", mx, top + big * 0.72, big, -0.01);
-  const subP = textPath(semi, "DIGITAL HUB", sx, top + big * 0.72 + small * 1.8, small, 0.26);
-  return { width, height: big * 0.72 + small * 1.8, svg: `<path d="${main.d}" fill="${color}"/>\n  <path d="${subP.d}" fill="${sub}"/>` };
+/** Wordmark: "One Click" in Rubik Bold. */
+function lockupText(x, top, big, color, _sub, align = "left") {
+  const w = textPath(bold, "One Click", 0, 0, big, -0.01).width;
+  const mx = align === "center" ? x : x;
+  const main = textPath(bold, "One Click", mx, top + big * 0.74, big, -0.01);
+  return { width: w, height: big * 0.95, svg: `<path d="${main.d}" fill="${color}"/>` };
 }
 
-const NAME = "One Click Digital Hub";
+const NAME = "One Click";
 const variants = {
-  light: { face: COLORS.teal, text: COLORS.ink, sub: COLORS.muted, features: "#fff", dimple: COLORS.sun },
-  dark: { face: COLORS.tealDark, text: COLORS.white, sub: "#A7A1CC", features: COLORS.night, dimple: COLORS.sun },
-  mono: { face: COLORS.ink, text: COLORS.ink, sub: COLORS.ink, features: "#fff", dimple: "#fff" },
-  "mono-white": { face: COLORS.white, text: COLORS.white, sub: COLORS.white, features: COLORS.ink, dimple: COLORS.ink },
+  light: { face: COLORS.teal, text: COLORS.ink, sub: COLORS.muted },
+  dark: { face: COLORS.tealDark, text: COLORS.white, sub: "#A7A1CC", dark: true },
+  mono: { face: COLORS.ink, text: COLORS.ink, sub: COLORS.ink },
+  "mono-white": { face: COLORS.white, text: COLORS.white, sub: COLORS.white },
 };
 
 for (const [name, v] of Object.entries(variants)) {
-  const mark = clicky({ face: v.face, features: v.features, dimple: v.dimple, highlight: !name.startsWith("mono") });
+  const mark = clicky({ face: v.face, dark: v.dark });
   fs.writeFileSync(path.join(OUT, `oneclick-mark-${name}.svg`), svg(100, 100, mark, NAME));
 
   // Primary horizontal lockup
@@ -113,24 +120,21 @@ for (const [name, v] of Object.entries(variants)) {
   const wt = lockupText(2, 4, 52, v.text, v.sub);
   fs.writeFileSync(path.join(OUT, `oneclick-wordmark-${name}.svg`), svg(Math.ceil(wt.width + 6), Math.ceil(wt.height + 12), wt.svg, NAME));
 
-  // OCDH monogram wordmark
-  const oc = textPath(bold, "OCDH", 2, 44, 52, 0.02);
-  fs.writeFileSync(path.join(OUT, `ocdh-monogram-${name}.svg`), svg(Math.ceil(oc.width + 6), 56, `<path d="${oc.d}" fill="${v.text}"/>`, "OCDH"));
 }
 
 // App icons: Clicky on a cream / night tile.
 const tile = (bg, v) => `<rect width="512" height="512" rx="116" fill="${bg}"/><g transform="translate(56 56) scale(4)">${clicky(v)}</g>`;
 fs.writeFileSync(path.join(OUT, "oneclick-app-icon.svg"), svg(512, 512, tile(COLORS.cream, { face: COLORS.teal }), NAME));
-fs.writeFileSync(path.join(OUT, "oneclick-app-icon-dark.svg"), svg(512, 512, tile(COLORS.night, { face: COLORS.tealDark, features: COLORS.night }), NAME));
+fs.writeFileSync(path.join(OUT, "oneclick-app-icon-dark.svg"), svg(512, 512, tile(COLORS.night, { face: COLORS.tealDark, dark: true }), NAME));
 // Instagram avatar (circle crop safe): Clicky on sunshine.
 fs.writeFileSync(
   path.join(OUT, "oneclick-instagram-avatar.svg"),
-  svg(1080, 1080, `<rect width="1080" height="1080" fill="${COLORS.sun}"/><g transform="translate(190 190) scale(7)">${clicky({ face: COLORS.teal, dimple: COLORS.coral })}</g>`, NAME)
+  svg(1080, 1080, `<rect width="1080" height="1080" fill="${COLORS.sun}"/><g transform="translate(190 190) scale(7)">${clicky({ face: COLORS.teal })}</g>`, NAME)
 );
-// Favicon: Clicky face without highlight (crisper at 16px), auto dark mode.
+// Favicon: Clicky v3 simplified for 16-32px (bigger eyes, no sparkle), auto dark mode.
 fs.writeFileSync(
   path.resolve("src/app/icon.svg"),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><style>.f{fill:${COLORS.teal}}@media (prefers-color-scheme:dark){.f{fill:${COLORS.tealDark}}}</style><rect class="f" x="4" y="4" width="92" height="92" rx="32"/><circle cx="35" cy="40" r="8" fill="#fff"/><circle cx="65" cy="40" r="8" fill="#fff"/><path d="M30 60 L44 72 L72 56" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>\n`
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><style>.f{fill:${COLORS.teal}}@media (prefers-color-scheme:dark){.f{fill:${COLORS.tealDark}}}</style><path class="f" d="M50 3 C80 3 97 16 97 48 C97 82 80 97 50 97 C20 97 3 82 3 48 C3 16 20 3 50 3 Z"/><ellipse cx="34" cy="42" rx="11" ry="13" fill="#fff"/><ellipse cx="66" cy="42" rx="11" ry="13" fill="#fff"/><circle cx="36" cy="45" r="7" fill="#1E1B3A"/><circle cx="68" cy="45" r="7" fill="#1E1B3A"/><path d="M36 66 L47 76 L66 60" fill="none" stroke="#1E1B3A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>\n`
 );
 
 console.log("Brand assets written to", OUT);

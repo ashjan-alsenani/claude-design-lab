@@ -53,11 +53,25 @@ export const categories: Category[] = [
     order: 7,
   },
   {
+    slug: "family-kids",
+    name: { en: "Family & Kids", ar: "العائلة والأطفال" },
+    description: { en: "Calmer routines for parents, children and the whole house.", ar: "روتين أهدى للأهل والأطفال والبيت كله." },
+    hue: "study",
+    order: 8,
+  },
+  {
+    slug: "work-business",
+    name: { en: "Work & Business", ar: "العمل والمشاريع" },
+    description: { en: "Simple systems for small businesses and side projects.", ar: "أنظمة بسيطة للمشاريع الصغيرة والجانبية." },
+    hue: "planner",
+    order: 9,
+  },
+  {
     slug: "templates-downloads",
     name: { en: "Templates & Downloads", ar: "قوالب وملفات للتحميل" },
     description: { en: "Printable planners, checklists and digital kits.", ar: "مخططات وقوائم قابلة للطباعة وحزم رقمية." },
     hue: "brand",
-    order: 8,
+    order: 10,
   },
 ];
 

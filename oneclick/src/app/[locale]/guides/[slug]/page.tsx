@@ -64,8 +64,8 @@ export default async function GuidePage({ params }: Props) {
           description: tr(guide.excerpt, locale),
           datePublished: guide.publishedAt,
           inLanguage: locale,
-          author: { "@type": "Organization", name: "One Click Digital Hub" },
-          publisher: { "@type": "Organization", name: "One Click Digital Hub", logo: { "@type": "ImageObject", url: `${siteUrl}/brand/oneclick-app-icon.png` } },
+          author: { "@type": "Organization", name: "One Click" },
+          publisher: { "@type": "Organization", name: "One Click", logo: { "@type": "ImageObject", url: `${siteUrl}/brand/oneclick-app-icon.png` } },
           mainEntityOfPage: localeUrl(locale, `/guides/${slug}`),
         }}
       />

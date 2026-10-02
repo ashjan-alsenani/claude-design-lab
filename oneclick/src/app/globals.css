@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* One Click Digital Hub design tokens (v2 "friendly"). Rationale: BRAND_GUIDELINES.md
+/* One Click design tokens (v2 "friendly"). Rationale: BRAND_GUIDELINES.md
    Semantic CSS variables swapped for dark mode; components use only theme names. */
 
 @font-face {
@@ -321,3 +321,22 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 
 /* Friendly wavy section divider */
 .wave-top { mask: radial-gradient(28px 14px at 50% 0, #0000 98%, #000) 50% / 56px 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .clicky-twinkle { transform-box: fill-box; transform-origin: center; animation: clicky-twinkle 2.8s ease-in-out infinite; }
+}
+@keyframes clicky-twinkle { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(.6) rotate(45deg); opacity: .7; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .art-bob { transform-box: fill-box; animation: art-bob 5s ease-in-out infinite; }
+  .art-bob-2 { transform-box: fill-box; animation: art-bob 4s ease-in-out -2s infinite; }
+}
+@keyframes art-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+/* Product parade marquee (the only marquee on the page) */
+@media (prefers-reduced-motion: no-preference) {
+  .parade-track { animation: parade 48s linear infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parade { overflow-x: auto; }
+}
+@keyframes parade { to { transform: translateX(-50%); } }

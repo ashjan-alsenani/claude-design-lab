@@ -1,11 +1,11 @@
 import { money } from "@/lib/money";
-import type { Product } from "./types";
+import type { Localized } from "@/i18n/config";
+import type { ArtId, Hue, Product } from "./types";
 
 // SAMPLE CATALOG. Every product below is marked `sample: true` until the owner
-// approves final copy and pricing in Admin. Prices are the editable launch default
-// (15 OMR) from the brief, stored as data. Nothing here claims sales, reviews or users.
-
-const LAUNCH_PRICE = money(15, "OMR");
+// approves final copy and pricing in Admin. Prices are set per product from the value it
+// delivers and how often it is used (rationale: docs/PRICING.md). Stored as data, editable.
+// Nothing here claims sales, reviews or users.
 const UPDATED = "2026-10-02";
 
 export const products: Product[] = [
@@ -52,7 +52,7 @@ export const products: Product[] = [
     kind: "interactive",
     access: "lifetime",
     status: "preview",
-    price: LAUNCH_PRICE,
+    price: money(18, "OMR"),
     categories: ["wedding-events"],
     tags: ["wedding", "planner", "budget", "checklist"],
     hue: "bride",
@@ -108,7 +108,7 @@ export const products: Product[] = [
     kind: "interactive",
     access: "lifetime",
     status: "preview",
-    price: LAUNCH_PRICE,
+    price: money(4.5, "OMR"),
     categories: ["shopping-home"],
     tags: ["grocery", "shopping", "household", "list"],
     hue: "grocery",
@@ -164,7 +164,7 @@ export const products: Product[] = [
     kind: "interactive",
     access: "lifetime",
     status: "preview",
-    price: LAUNCH_PRICE,
+    price: money(6, "OMR"),
     categories: ["life-productivity"],
     tags: ["planner", "weekly", "habits", "productivity"],
     hue: "planner",
@@ -218,7 +218,7 @@ export const products: Product[] = [
     kind: "interactive",
     access: "lifetime",
     status: "preview",
-    price: LAUNCH_PRICE,
+    price: money(5, "OMR"),
     categories: ["health-fitness"],
     tags: ["fitness", "workout", "tracker"],
     hue: "fit",
@@ -300,7 +300,7 @@ export const products: Product[] = [
     kind: "interactive",
     access: "lifetime",
     status: "coming-soon",
-    price: LAUNCH_PRICE,
+    price: money(7, "OMR"),
     categories: ["money-budgeting"],
     tags: ["budget", "money", "savings"],
     hue: "budget",
@@ -331,7 +331,7 @@ export const products: Product[] = [
     kind: "interactive",
     access: "lifetime",
     status: "coming-soon",
-    price: LAUNCH_PRICE,
+    price: money(4, "OMR"),
     categories: ["study-education"],
     tags: ["study", "exams", "students"],
     hue: "study",
@@ -361,7 +361,7 @@ export const products: Product[] = [
     kind: "interactive",
     access: "lifetime",
     status: "coming-soon",
-    price: LAUNCH_PRICE,
+    price: money(5, "OMR"),
     categories: ["travel"],
     tags: ["travel", "packing", "itinerary"],
     hue: "travel",
@@ -371,4 +371,194 @@ export const products: Product[] = [
     sample: true,
     updatedAt: UPDATED,
   },
+  ...ideas(),
 ];
+
+/** Compact builder for announced ("coming soon") product ideas. */
+function idea(p: {
+  id: string;
+  slug: string;
+  name: Localized;
+  tagline: Localized;
+  summary: Localized;
+  problem: Localized;
+  audience: Localized;
+  chaos: Localized;
+  result: Localized;
+  benefits: Localized[];
+  price: number | null;
+  categories: string[];
+  tags: string[];
+  hue: Hue;
+  art: ArtId;
+  kind?: Product["kind"];
+  disclaimer?: Localized;
+}): Product {
+  return {
+    id: p.id,
+    slug: p.slug,
+    name: p.name,
+    tagline: p.tagline,
+    summary: p.summary,
+    problem: p.problem,
+    audience: p.audience,
+    story: { chaos: p.chaos, result: p.result },
+    benefits: p.benefits,
+    features: [],
+    included: [],
+    devices: { en: "Any modern browser on phone, tablet or computer", ar: "أي متصفح حديث على الجوال أو التابلت أو الكمبيوتر" },
+    languages: ["ar", "en"],
+    kind: p.kind ?? "interactive",
+    access: p.price === null ? "free" : "lifetime",
+    status: "coming-soon",
+    price: p.price === null ? null : money(p.price, "OMR"),
+    categories: p.categories,
+    tags: p.tags,
+    hue: p.hue,
+    art: p.art,
+    featured: false,
+    isNew: false,
+    faqs: [],
+    disclaimer: p.disclaimer,
+    sample: true,
+    updatedAt: UPDATED,
+  };
+}
+
+function ideas(): Product[] {
+  return [
+    idea({
+      id: "prd_ramadan", slug: "oneclick-ramadan", art: "ramadan", hue: "budget", price: 5,
+      name: { en: "One Click Ramadan", ar: "ون كليك رمضان" },
+      tagline: { en: "A calm, organized Ramadan: worship, meals and family.", ar: "رمضان هادئ ومرتب: العبادة والفطور والعائلة." },
+      summary: { en: "A seasonal planner for daily goals, Quran reading, iftar menus, gatherings and Eid preparation.", ar: "مخطط موسمي للأهداف اليومية، وورد القرآن، وقوائم الفطور، والعزايم، وتجهيزات العيد." },
+      problem: { en: "Ramadan days fill up fast: cooking, gatherings and goals compete for the same hours.", ar: "أيام رمضان تمتلئ بسرعة: الطبخ والعزايم والأهداف تتنافس على نفس الوقت." },
+      audience: { en: "Families and individuals who want a meaningful, organized Ramadan.", ar: "العائلات والأفراد اللي يبون رمضان مرتب وفيه أثر." },
+      chaos: { en: "Iftar at 6, guests at 8, goals forgotten", ar: "فطور ٦، ضيوف ٨، والأهداف منسية" },
+      result: { en: "Thirty calm, planned days", ar: "ثلاثين يوم هادئة ومخططة" },
+      benefits: [{ en: "Daily goals and Quran tracker", ar: "أهداف يومية ومتابعة الورد" }, { en: "Iftar menu and shopping in one place", ar: "قائمة الفطور والمقاضي في مكان واحد" }],
+      categories: ["life-productivity", "family-kids"], tags: ["ramadan", "seasonal", "family"],
+    }),
+    idea({
+      id: "prd_meal", slug: "oneclick-meals", art: "meal", hue: "grocery", price: 5,
+      name: { en: "One Click Meals", ar: "ون كليك وجبات" },
+      tagline: { en: "Decide the week's meals once. Shop for them in one tap.", ar: "قرّر وجبات الأسبوع مرة وحدة، وتسوّق لها بضغطة." },
+      summary: { en: "A weekly meal planner with family favorites that turns your menu into a grocery list.", ar: "مخطط وجبات أسبوعي فيه أكلات العائلة المفضلة، ويحوّل المنيو لقائمة مقاضي." },
+      problem: { en: "\"What's for dinner?\" every single day, and a fridge that doesn't match the plan.", ar: "«وش نطبخ اليوم؟» كل يوم، والثلاجة ما تناسب الخطة." },
+      audience: { en: "Busy households and parents.", ar: "البيوت المشغولة والأمهات والآباء." },
+      chaos: { en: "Daily dinner debate", ar: "نقاش العشاء اليومي" },
+      result: { en: "A week of meals, decided", ar: "أسبوع وجبات محسوم" },
+      benefits: [{ en: "Menu becomes the shopping list", ar: "المنيو يصير قائمة المقاضي" }],
+      categories: ["shopping-home", "health-fitness"], tags: ["meals", "cooking", "family"],
+    }),
+    idea({
+      id: "prd_baby", slug: "oneclick-baby", art: "baby", hue: "bride", price: 9,
+      name: { en: "One Click Baby", ar: "ون كليك بيبي" },
+      tagline: { en: "Feeds, sleep and appointments, without the 3am guesswork.", ar: "الرضعات والنوم والمواعيد، بدون تخمين الساعة ٣ الفجر." },
+      summary: { en: "A gentle tracker for new parents: feeding, sleep, diapers, vaccination dates and milestones.", ar: "متابعة لطيفة للأم والأب الجدد: الرضاعة والنوم والحفاضات ومواعيد التطعيم والمراحل." },
+      problem: { en: "New parents are exhausted and every detail feels important.", ar: "الوالدين الجدد تعبانين وكل تفصيلة تحسها مهمة." },
+      audience: { en: "Expecting and new parents, and helping grandparents.", ar: "الأم الحامل والوالدين الجدد، والجدات اللي يساعدون." },
+      chaos: { en: "When was the last feed?", ar: "متى كانت آخر رضعة؟" },
+      result: { en: "Everything logged in one tap", ar: "كل شي مسجل بضغطة" },
+      benefits: [{ en: "One-tap logging, even at night", ar: "تسجيل بضغطة حتى في الليل" }],
+      categories: ["family-kids", "health-fitness"], tags: ["baby", "parents", "family"],
+      disclaimer: { en: "An organization tool, not medical advice. Always follow your doctor.", ar: "أداة تنظيم وليست نصيحة طبية. اتبع دائمًا تعليمات طبيبك." },
+    }),
+    idea({
+      id: "prd_home", slug: "oneclick-home", art: "home", hue: "grocery", price: 3.5,
+      name: { en: "One Click Home", ar: "ون كليك بيت" },
+      tagline: { en: "A clean home in small, shared steps.", ar: "بيت نظيف بخطوات صغيرة ومشتركة." },
+      summary: { en: "A cleaning and home-care routine split by day and by family member.", ar: "روتين تنظيف وعناية بالبيت مقسم على الأيام وأفراد العائلة." },
+      problem: { en: "The cleaning always lands on one person, all at once.", ar: "التنظيف دايمًا يطيح على شخص واحد، وكله مرة وحدة." },
+      audience: { en: "Households and shared homes.", ar: "البيوت والسكن المشترك." },
+      chaos: { en: "The whole house on Friday", ar: "البيت كله يوم الجمعة" },
+      result: { en: "Fifteen minutes a day, shared", ar: "ربع ساعة يوميًا، بالتشارك" },
+      benefits: [{ en: "Fair, shared routines", ar: "روتين عادل ومشترك" }],
+      categories: ["shopping-home", "family-kids"], tags: ["cleaning", "home", "routine"],
+    }),
+    idea({
+      id: "prd_kids", slug: "oneclick-kids", art: "kids", hue: "study", price: 4,
+      name: { en: "One Click Kids", ar: "ون كليك أطفال" },
+      tagline: { en: "Chores and good habits kids actually enjoy.", ar: "مهام وعادات حلوة يحبها الأطفال." },
+      summary: { en: "A colorful star chart for chores, homework and habits, with rewards you choose together.", ar: "لوحة نجوم ملونة للمهام والواجبات والعادات، مع مكافآت تختارونها مع بعض." },
+      problem: { en: "Reminding kids ten times a day helps nobody.", ar: "التذكير عشر مرات في اليوم ما يفيد أحد." },
+      audience: { en: "Parents of children aged 4 to 12.", ar: "الأهالي لأطفال من ٤ إلى ١٢ سنة." },
+      chaos: { en: "\"Did you brush your teeth?\" x10", ar: "«غسلت أسنانك؟» عشر مرات" },
+      result: { en: "Stars, streaks and proud kids", ar: "نجوم وإنجازات وأطفال فرحانين" },
+      benefits: [{ en: "Rewards kids look forward to", ar: "مكافآت ينتظرونها" }],
+      categories: ["family-kids"], tags: ["kids", "chores", "habits"],
+    }),
+    idea({
+      id: "prd_party", slug: "oneclick-events", art: "party", hue: "bride", price: 9,
+      name: { en: "One Click Events", ar: "ون كليك مناسبات" },
+      tagline: { en: "Birthdays, graduations and gatherings, perfectly planned.", ar: "أعياد الميلاد والتخرج والعزايم، بتخطيط مثالي." },
+      summary: { en: "Plan any occasion: guest list, RSVPs, budget, menu, decorations and a day-of timeline.", ar: "خطّط لأي مناسبة: قائمة الضيوف والردود والميزانية والمنيو والزينة وجدول اليوم." },
+      problem: { en: "Every event becomes a mini wedding to organize.", ar: "كل مناسبة تصير عرس صغير يحتاج تنظيم." },
+      audience: { en: "Hosts planning family and social occasions.", ar: "اللي يرتبون مناسبات العائلة والأصدقاء." },
+      chaos: { en: "Who's coming? What's left?", ar: "من بيجي؟ وش باقي؟" },
+      result: { en: "One page for the whole occasion", ar: "صفحة وحدة للمناسبة كلها" },
+      benefits: [{ en: "Guests, budget and timeline together", ar: "الضيوف والميزانية والجدول مع بعض" }],
+      categories: ["wedding-events"], tags: ["events", "party", "hosting"],
+    }),
+    idea({
+      id: "prd_gift", slug: "oneclick-gifts", art: "gift", hue: "fit", price: 3,
+      name: { en: "One Click Gifts", ar: "ون كليك هدايا" },
+      tagline: { en: "Never miss a birthday or an Eidiya again.", ar: "لا تنسى عيد ميلاد ولا عيدية بعد اليوم." },
+      summary: { en: "Remember important dates, gift ideas, sizes and Eidiya budgets for everyone you love.", ar: "تذكّر المواعيد المهمة وأفكار الهدايا والمقاسات وميزانية العيادي لكل اللي تحبهم." },
+      problem: { en: "Gift ideas come at random times and vanish before the occasion.", ar: "أفكار الهدايا تجي في أوقات عشوائية وتختفي قبل المناسبة." },
+      audience: { en: "Anyone with a big family and many occasions.", ar: "أي أحد عنده عائلة كبيرة ومناسبات كثيرة." },
+      chaos: { en: "Last-minute gift panic", ar: "توتر هدية آخر لحظة" },
+      result: { en: "The right gift, on time", ar: "الهدية المناسبة في وقتها" },
+      benefits: [{ en: "Ideas saved when you think of them", ar: "الأفكار تنحفظ أول ما تجيك" }],
+      categories: ["wedding-events", "family-kids"], tags: ["gifts", "eid", "birthdays"],
+    }),
+    idea({
+      id: "prd_habits", slug: "oneclick-habits", art: "habit", hue: "fit", price: 3,
+      name: { en: "One Click Habits", ar: "ون كليك عادات" },
+      tagline: { en: "Small habits, big streaks.", ar: "عادات صغيرة، واستمرار كبير." },
+      summary: { en: "Track up to ten daily habits with streaks, gentle reminders and monthly heatmaps.", ar: "تابع لين عشر عادات يومية مع سلاسل الاستمرار وتذكير لطيف وخريطة شهرية." },
+      problem: { en: "New habits fade after a week when progress is invisible.", ar: "العادات الجديدة تختفي بعد أسبوع لما ما تشوف تقدمك." },
+      audience: { en: "Anyone building better routines.", ar: "أي أحد يبني روتين أفضل." },
+      chaos: { en: "Started Monday, stopped Thursday", ar: "بديت الاثنين ووقفت الخميس" },
+      result: { en: "A streak you don't want to break", ar: "سلسلة ما تبي تقطعها" },
+      benefits: [{ en: "See your streaks grow", ar: "تشوف استمرارك يكبر" }],
+      categories: ["life-productivity", "health-fitness"], tags: ["habits", "routine", "goals"],
+    }),
+    idea({
+      id: "prd_business", slug: "oneclick-business", art: "business", hue: "planner", price: 15,
+      name: { en: "One Click Business", ar: "ون كليك بزنس" },
+      tagline: { en: "Orders, customers and follow-ups for small businesses.", ar: "الطلبات والعملاء والمتابعة للمشاريع الصغيرة." },
+      summary: { en: "An organizer for home and Instagram businesses: orders, customers, stock, deliveries and income.", ar: "منظّم للمشاريع المنزلية ومشاريع الانستقرام: الطلبات والعملاء والمخزون والتوصيل والدخل." },
+      problem: { en: "Orders live in DMs and notebooks, and money is hard to track.", ar: "الطلبات في الرسائل والدفاتر، والفلوس صعب تتابعها." },
+      audience: { en: "Home-based and social-media sellers in the GCC.", ar: "أصحاب المشاريع المنزلية والبائعين على السوشال ميديا في الخليج." },
+      chaos: { en: "Orders lost in DMs", ar: "طلبات ضايعة في الرسائل" },
+      result: { en: "Every order tracked to delivery", ar: "كل طلب متابع لين التوصيل" },
+      benefits: [{ en: "Know what's paid, packed and delivered", ar: "تعرف وش انْدفع وتجهّز ووصل" }],
+      categories: ["work-business"], tags: ["business", "orders", "customers"],
+    }),
+    idea({
+      id: "prd_umrah", slug: "oneclick-umrah", art: "travel", hue: "travel", price: 4,
+      name: { en: "One Click Umrah", ar: "ون كليك عمرة" },
+      tagline: { en: "Prepare calmly, travel lightly.", ar: "تجهيز هادئ، وسفر خفيف." },
+      summary: { en: "A trip planner for Umrah: documents, packing, schedule and a family checklist.", ar: "مخطط رحلة العمرة: الأوراق والشنطة والجدول وقائمة العائلة." },
+      problem: { en: "Preparing a family for Umrah has many small details to remember.", ar: "تجهيز العائلة للعمرة فيه تفاصيل صغيرة كثيرة." },
+      audience: { en: "Families and groups preparing for Umrah.", ar: "العائلات والمجموعات اللي يتجهزون للعمرة." },
+      chaos: { en: "Passports? Ihram? Chargers?", ar: "الجوازات؟ الإحرام؟ الشواحن؟" },
+      result: { en: "Packed and ready, nothing forgotten", ar: "جاهزين وما نسينا شي" },
+      benefits: [{ en: "Family checklist everyone can follow", ar: "قائمة للعائلة يقدر الكل يتبعها" }],
+      categories: ["travel"], tags: ["umrah", "travel", "family"],
+    }),
+    idea({
+      id: "prd_bundle", slug: "life-starter-bundle", art: "bundle", hue: "brand", price: 12, kind: "bundle",
+      name: { en: "Life Starter Bundle", ar: "حزمة بداية مرتبة" },
+      tagline: { en: "Planner + Grocery + Budget, together for less.", ar: "المخطط + المقاضي + الميزانية، مع بعض بسعر أقل." },
+      summary: { en: "The three everyday essentials in one bundle: 12 OMR instead of 17.5 OMR when bought separately.", ar: "الأساسيات اليومية الثلاث في حزمة وحدة: ١٢ ر.ع بدل ١٧٫٥ ر.ع لو اشتريتها منفصلة." },
+      problem: { en: "Your week, your shopping and your money are connected. Your tools should be too.", ar: "أسبوعك ومقاضيك وفلوسك مرتبطة ببعض، وأدواتك لازم تكون كذلك." },
+      audience: { en: "Anyone starting fresh: new job, new home, new year.", ar: "أي أحد يبدأ بداية جديدة: وظيفة أو بيت أو سنة جديدة." },
+      chaos: { en: "Three apps, zero system", ar: "ثلاث تطبيقات، ولا نظام" },
+      result: { en: "One calm system for everyday life", ar: "نظام واحد هادئ ليومك" },
+      benefits: [{ en: "Save 5.5 OMR versus buying separately", ar: "وفّر ٥٫٥ ر.ع مقارنة بالشراء المنفصل" }],
+      categories: ["life-productivity", "money-budgeting", "shopping-home"], tags: ["bundle", "starter", "value"],
+    }),
+  ];
+}

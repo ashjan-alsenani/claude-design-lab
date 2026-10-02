@@ -13,7 +13,7 @@ Status: **DESIGNED**. When the owner asks for a video, Claude picks tools automa
 
 ## Defaults
 9:16, 1080×1920, 30 fps, 7-20 s, hook in 1-3 s, subtitles in safe area (top 15% / bottom 20% clear),
-brand colors and fonts, one message, CTA, One Click Digital Hub end card (mark draw-on + bilingual slogan),
+brand colors and fonts, one message, CTA, One Click end card (mark draw-on + bilingual slogan),
 cover frame exported as PNG.
 
 ## Workflow checklist

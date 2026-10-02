@@ -3,7 +3,7 @@
 ## Evaluation (launch candidates)
 
 Scores 1-5 (higher is better). Effort is inverted (5 = least effort). Reuse = share of the
-One Click Digital Hub Product Framework the product can use.
+One Click Product Framework the product can use.
 
 | Product | Problem strength | Audience size (GCC) | Willingness to pay | Reuse | Effort | Marketing hook | Risk | Total |
 |---|---|---|---|---|---|---|---|---|
@@ -52,9 +52,9 @@ seasonal limited edition built from Planner components.
   diet or injury advice.
 
 ### Weekly Reset Checklist (free)
-- Purpose: introduce One Click Digital Hub with real value, no account needed; CTA to Planner.
+- Purpose: introduce One Click with real value, no account needed; CTA to Planner.
 
-## OCDH Digital Product Framework
+## One Click Product Framework
 
 Built (`src/framework`): ProductShell, ProgressRing, CheckRow, StatTile, useList.
 Built (`src/lib`): entitlements + `canAccess`, money/currency, discounts, analytics, i18n.

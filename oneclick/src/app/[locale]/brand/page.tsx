@@ -5,7 +5,8 @@ import { pageMetadata } from "@/lib/seo";
 import { Clicky, type ClickyMood } from "@/components/brand/Clicky";
 import { Logo } from "@/components/brand/Logo";
 import { ProductArt } from "@/components/art/ProductArt";
-import type { Hue } from "@/content/types";
+import type { ArtId } from "@/content/types";
+import { products } from "@/content/products";
 
 // Living style guide: logo, Clicky moods, palette and illustrations. Not indexed.
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 const moods: ClickyMood[] = ["happy", "wink", "celebrate", "love", "think", "surprised"];
-const hues: Hue[] = ["bride", "grocery", "planner", "fit", "budget", "study", "travel", "brand"];
+const arts = products.map((p) => ({ name: p.slug.replace("oneclick-", ""), hue: p.hue, art: (p.art ?? p.hue) as ArtId }));
 const swatches = ["brand", "primary", "accent", "coral", "lilac", "sky", "ink", "bg-sunken"];
 
 export default async function BrandPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -24,7 +25,7 @@ export default async function BrandPage({ params }: { params: Promise<{ locale: 
   return (
     <div className="mx-auto max-w-7xl space-y-16 px-4 py-12 sm:px-6 lg:px-8" dir="ltr">
       <section>
-        <h1 className="text-4xl font-bold tracking-tight text-ink">One Click Digital Hub · brand</h1>
+        <h1 className="text-4xl font-bold tracking-tight text-ink">One Click · brand</h1>
         <div className="mt-8 flex flex-wrap items-center gap-10">
           <Logo className="scale-150 origin-left" />
         </div>
@@ -58,10 +59,10 @@ export default async function BrandPage({ params }: { params: Promise<{ locale: 
       <section>
         <h2 className="text-2xl font-bold text-ink">Illustrations</h2>
         <div className="mt-6 grid grid-cols-2 gap-6 md:grid-cols-4">
-          {hues.map((h) => (
-            <div key={h} className="rounded-[var(--radius-lg)] bg-surface p-4">
-              <ProductArt hue={h} className="aspect-[10/7]" />
-              <p className="mt-2 text-sm text-muted">{h}</p>
+          {arts.map((a) => (
+            <div key={a.name} className="rounded-[var(--radius-lg)] bg-surface p-4">
+              <ProductArt hue={a.hue} art={a.art} className="aspect-[10/7]" />
+              <p className="mt-2 text-sm text-muted">{a.name}</p>
             </div>
           ))}
         </div>

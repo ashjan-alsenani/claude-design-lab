@@ -5,9 +5,10 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckRow, ProgressRing } from "@/framework";
 import { LogoMark } from "@/components/brand/Logo";
 import { Clicky } from "@/components/brand/Clicky";
+import { Confetti } from "@/components/ui/Confetti";
 import { num, type Locale } from "@/i18n/config";
 
-// Hero storytelling: scattered notes (chaos) settle into one calm One Click Digital Hub list (clarity).
+// Hero storytelling: scattered notes (chaos) settle into one calm One Click list (clarity).
 // Runs once, then the list stays interactive. Reduced motion shows the final state.
 const notes = [
   { en: "milk!! + eggs", ar: "حليب!! + بيض", x: "4%", y: "6%", r: -8 },
@@ -113,6 +114,8 @@ export function HeroVisual({ locale }: { locale: Locale }) {
         </ul>
       </motion.div>
 
+      {count === list.length && <Confetti key="all-done" />}
+
       {/* Clicky cheering the list on */}
       <motion.div
         aria-hidden="true"
@@ -121,7 +124,7 @@ export function HeroVisual({ locale }: { locale: Locale }) {
         animate={phase === "clear" ? { opacity: 1, y: 0, rotate: -6 } : { opacity: 0 }}
         transition={{ delay: 0.6, type: "spring", stiffness: 160, damping: 14 }}
       >
-        <Clicky size={120} body wave animate mood="wink" style={{ width: "100%", height: "auto" }} />
+        <Clicky size={120} body wave animate mood={count === list.length ? "celebrate" : "wink"} style={{ width: "100%", height: "auto" }} />
       </motion.div>
 
       {/* Floating outcome chips: each product's "clear result", in its own hue */}

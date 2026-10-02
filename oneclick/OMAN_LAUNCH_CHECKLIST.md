@@ -46,7 +46,7 @@ Legend: ☐ to do · ◐ in progress · ☑ done. Who confirms: **L** lawyer, **
 - ☐ VAT treatment of electronically supplied services to customers in Oman, other GCC states and
   outside the GCC (place of supply, B2C vs B2B). (A)
 - ☐ Whether prices are shown VAT-inclusive; tax-invoice content requirements. (A)
-- ☐ E-invoicing (Fawtara) obligations and timeline that apply to One Click Digital Hub, and the provider
+- ☐ E-invoicing (Fawtara) obligations and timeline that apply to One Click, and the provider
   integration needed. (A, G)
 - ☐ Corporate/income tax registration and record-keeping (order records retention period). (A)
 - ☐ Configure `tax_enabled`, `tax_rate_percent`, `prices_include_tax` in Admin after advice. (O)
@@ -55,12 +55,12 @@ Legend: ☐ to do · ◐ in progress · ☑ done. Who confirms: **L** lawyer, **
 - ☐ Bank/gateway selected; merchant agreement allows digital products and international cards. (B, O)
 - ☐ Settlement currency, refunds and chargeback process documented. (B)
 - ☐ Gateway sandbox tested end-to-end, then production keys stored as hosting secrets. (Claude)
-- ☐ Statement descriptor shows a recognizable "One Click Digital Hub" name. (B)
+- ☐ Statement descriptor shows a recognizable "One Click" name. (B)
 
 ## 6. Marketing
 - ☐ Influencer/advertising disclosure rules (paid partnerships). (L)
 - ☐ Email marketing consent and unsubscribe. *Built (consent checkbox; provider pending).* (L)
-- ☐ Trademark search for "One Click Digital Hub" in Oman (and GCC/WIPO) in the relevant classes
+- ☐ Trademark search for "One Click" in Oman (and GCC/WIPO) in the relevant classes
   (9, 35, 42); decide whether to file. Flag conflicts to owner; do not rename without her. (L)
 
 ## 7. Ready to launch when

@@ -1,4 +1,4 @@
-# One Click Digital Hub Brand Guidelines
+# One Click Brand Guidelines
 
 Status: **DESIGNED + BUILT LOCALLY** (v1, 2026-10-02). Source of truth for tokens:
 `src/app/globals.css`. Logo source: `scripts/build-brand.mjs` → `public/brand/`.
@@ -7,19 +7,19 @@ Status: **DESIGNED + BUILT LOCALLY** (v1, 2026-10-02). Source of truth for token
 
 | | English | Arabic |
 |---|---|---|
-| Name | One Click Digital Hub (short: OCDH) | ون كليك ديجيتال هب (the Latin wordmark is used in both languages) |
+| Name | One Click | ون كليك (the Latin wordmark is used in both languages) |
 | Product naming | One Click + product (One Click Bride, One Click Grocery…) | ون كليك + المنتج (ون كليك عروس، ون كليك مقاضي…) |
 | Primary slogan | Less effort. More life. | جهد أقل. حياة أكثر. |
-| Brand statement | One Click Digital Hub makes everyday life simpler with beautiful, useful digital tools. | ون كليك ديجيتال هب تجعل حياتك اليومية أبسط بأدوات رقمية جميلة ومفيدة. |
+| Brand statement | One Click makes everyday life simpler with beautiful, useful digital tools. | ون كليك تجعل حياتك اليومية أبسط بأدوات رقمية جميلة ومفيدة. |
 | Hero line | Everyday life, made simpler. | يومك، صار أبسط. |
-| Elevator pitch | One Click Digital Hub is a digital lifestyle brand from Oman. We design interactive planners, organizers and tools that take everyday tasks from chaos to clarity, in Arabic and English. | ون كليك ديجيتال هب علامة رقمية لأسلوب الحياة من عُمان. نصمم مخططات ومنظّمات وأدوات تفاعلية تنقل مهامك اليومية من الفوضى إلى الوضوح، بالعربي والإنجليزي. |
+| Elevator pitch | One Click is a digital lifestyle brand from Oman. We design interactive planners, organizers and tools that take everyday tasks from chaos to clarity, in Arabic and English. | ون كليك علامة رقمية لأسلوب الحياة من عُمان. نصمم مخططات ومنظّمات وأدوات تفاعلية تنقل مهامك اليومية من الفوضى إلى الوضوح، بالعربي والإنجليزي. |
 | Secondary lines | Smart tools. Simpler life. / From chaos to clarity. / Try it before you buy it. | أدوات ذكية. حياة أبسط. / من الفوضى إلى الوضوح. / جرّبه قبل لا تشتريه. |
 
 Instagram bio (EN): `Less effort. More life.` / `Smart planners & organizers for everyday life` / `Arabic + English · From Oman`
 Instagram bio (AR): `جهد أقل. حياة أكثر.` / `مخططات ومنظّمات ذكية ليومك` / `عربي + English · من عُمان`
 
 **Brand story.** Everyday life is full of small jobs that take more effort than they should.
-One Click Digital Hub turns them into calm, beautiful tools that do one thing well, in Arabic and English,
+One Click turns them into calm, beautiful tools that do one thing well, in Arabic and English,
 and respect people's time and data. Started in Oman, designed for everyone.
 
 **Voice.** Warm, clear, direct. Short sentences. Concrete verbs ("plan", "sort", "know the total"),
@@ -29,16 +29,15 @@ support copy uses formal Modern Standard Arabic. No em dashes in copy.
 
 ## 2. Logo: Clicky
 
-**Concept (v2, chosen by the owner on 2026-10-02):** Clicky, a friendly face whose smile is a
-check mark: a job done, happily. The sunshine dot is the "click", like a dimple. Simple,
-uncluttered, and it works as the logo, app icon, favicon and the brand's character.
+**Concept (v3, 2026-10-02):** Clicky, a soft, rounded friend with big shiny eyes, rosy cheeks and
+a smile shaped like a check mark (a job done, happily), plus a little sunshine sparkle. Simple,
+lovable, and it works as the logo, app icon, favicon and the brand's character.
 
 | Asset | File |
 |---|---|
-| Primary lockup (Clicky + "One Click" / "DIGITAL HUB") | `public/brand/oneclick-logo-{light,dark,mono,mono-white}.svg` |
+| Primary lockup (Clicky + "One Click") | `public/brand/oneclick-logo-{light,dark,mono,mono-white}.svg` |
 | Stacked lockup | `public/brand/oneclick-logo-stacked-*.svg` |
-| Wordmark (two lines) | `public/brand/oneclick-wordmark-*.svg` |
-| OCDH monogram | `public/brand/ocdh-monogram-*.svg` |
+| Wordmark | `public/brand/oneclick-wordmark-*.svg` |
 | Mark (Clicky face) | `public/brand/oneclick-mark-*.svg` |
 | Favicon (auto dark), Apple icon | `src/app/icon.svg`, `src/app/apple-icon.png` |
 | App icons | `oneclick-app-icon(.svg/.png/-192.png)`, `oneclick-app-icon-dark.svg` |
@@ -47,8 +46,7 @@ uncluttered, and it works as the logo, app icon, favicon and the brand's charact
 | Social preview | `og-default.png` (1200×630) |
 | Living style guide | `/en/brand` (not indexed) |
 
-Rules: wordmark is outlined Rubik Bold; "DIGITAL HUB" is Rubik SemiBold at 33% size with +26%
-tracking. Clicky keeps its proportions; never stretch or rotate it more than ±10°, and don't
+Rules: wordmark is outlined Rubik Bold. Clicky keeps its proportions; never stretch or rotate it more than ±10°, and don't
 add a mouth on top of the check smile. The Latin lockup stays left-to-right in Arabic layouts.
 
 **The character.** `src/components/brand/Clicky.tsx` has moods (happy, wink, celebrate, love,

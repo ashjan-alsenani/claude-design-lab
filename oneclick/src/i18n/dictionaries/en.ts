@@ -2,7 +2,7 @@
 // Long-form content (products, guides, legal) lives in src/content.
 export const en = {
   meta: {
-    siteTitle: "One Click Digital Hub | Less effort. More life.",
+    siteTitle: "One Click | Less effort. More life.",
     siteDescription:
       "Interactive planners, organizers and digital tools that make everyday life simpler. Arabic and English. Made in Oman for everywhere.",
   },
@@ -66,17 +66,19 @@ export const en = {
   home: {
     heroTitle: "Everyday life, made simpler.",
     heroHighlight: "simpler",
+    heroPrefix: "Everyday life, made",
+    heroWords: ["simpler.", "calmer.", "happier."],
     heroSub: "Beautiful interactive planners and organizers for weddings, groceries, your week and more. Built in Oman, made for everywhere.",
     heroCta: "Explore products",
     heroSecondary: "Try a live demo",
     storyTitle: "From chaos to clarity",
-    storySub: "Every One Click Digital Hub product starts with a real, messy moment and turns it into something calm.",
+    storySub: "Every One Click product starts with a real, messy moment and turns it into something calm.",
     storyBefore: "Before",
-    storyAfter: "With One Click Digital Hub",
+    storyAfter: "With One Click",
     demoTitle: "Don't take our word for it. Tap around.",
     demoSub: "These are working previews of the real products, running right here with sample data.",
     collectionsTitle: "Find your kind of easier",
-    howTitle: "How One Click Digital Hub works",
+    howTitle: "How One Click works",
     how: [
       { title: "Pick a tool", body: "Browse planners and organizers made for one clear job." },
       { title: "Try before you buy", body: "Every product has a safe demo with sample data." },
@@ -86,7 +88,7 @@ export const en = {
     customSub: "We design custom websites, mini apps, dashboards and interactive planners for people and small businesses.",
     customCta: "Request a custom solution",
     honestTitle: "We're launching, honestly.",
-    honestBody: "One Click Digital Hub is new. You won't find invented reviews or download counts here. When real customers share feedback, it will appear with a Verified Purchase badge.",
+    honestBody: "One Click is new. You won't find invented reviews or download counts here. When real customers share feedback, it will appear with a Verified Purchase badge.",
     guidesTitle: "Guides that actually help",
     faqTitle: "Questions, answered",
     finalTitle: "Make something easier today.",
@@ -97,7 +99,7 @@ export const en = {
     title: "Get new tools and guides first",
     body: "One useful email when something new launches. No spam, unsubscribe anytime.",
     email: "Email address",
-    consent: "I agree to receive One Click Digital Hub product updates by email.",
+    consent: "I agree to receive One Click product updates by email.",
     submit: "Subscribe",
     success: "You're on the list. Check your inbox to confirm.",
     notConnected: "Thanks! Email sign-up opens at launch. Your address was not stored.",
@@ -170,7 +172,7 @@ export const en = {
     email: "Email",
     phone: "Phone or WhatsApp",
     country: "Country",
-    privacy: "I agree that One Click Digital Hub may use these details to reply to my request, as described in the Privacy Policy.",
+    privacy: "I agree that One Click may use these details to reply to my request, as described in the Privacy Policy.",
     next: "Continue",
     prev: "Back",
     submit: "Send request",
@@ -202,7 +204,7 @@ export const en = {
     contactCta: "Contact support",
   },
   contact: {
-    title: "Contact One Click Digital Hub",
+    title: "Contact One Click",
     sub: "Questions, support or partnerships. We reply by email within 2 working days.",
     topic: "Topic",
     topics: { support: "Product support", order: "Order or access", custom: "Custom solution", partnership: "Partnership", other: "Other" },
@@ -213,10 +215,10 @@ export const en = {
   },
   about: {
     title: "Technology that feels human",
-    sub: "One Click Digital Hub began in Oman with a simple belief: everyday life deserves better tools.",
+    sub: "One Click began in Oman with a simple belief: everyday life deserves better tools.",
   },
   account: {
-    title: "Your One Click Digital Hub account",
+    title: "Your One Click account",
     sub: "Your products, downloads, orders and favorites in one place.",
     signIn: "Sign in",
     signUp: "Create account",
@@ -245,7 +247,7 @@ export const en = {
   checkout: {
     title: "Checkout",
     notConnected: "PAYMENT PROVIDER NOT YET CONNECTED",
-    body: "One Click Digital Hub is preparing its payment connection with a bank in Oman. No payment can be taken and no card details are collected on this site.",
+    body: "One Click is preparing its payment connection with a bank in Oman. No payment can be taken and no card details are collected on this site.",
     summary: "Order summary",
     total: "Total",
     notify: "Notify me when it's available",

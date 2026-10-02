@@ -5,7 +5,7 @@ publishing **PRODUCTION CONNECTION REQUIRES OWNER** (Meta Professional account +
 
 ## Profile
 - Avatar: `public/brand/oneclick-instagram-avatar.png` (white mark + saffron dot on Oasis, circle-safe).
-- Name field: `One Click Digital Hub | ون كليك ديجيتال هب`
+- Name field: `One Click | ون كليك`
 - Bio (AR first for GCC):
   ```
   جهد أقل. حياة أكثر.

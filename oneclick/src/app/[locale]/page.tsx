@@ -9,6 +9,8 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { FaqList } from "@/components/ui/Faq";
 import { HeroVisual } from "@/components/home/HeroVisual";
+import { HeroTitle } from "@/components/home/HeroTitle";
+import { ProductParade } from "@/components/home/ProductParade";
 import { StoryShowcase, type ShowcaseItem } from "@/components/home/StoryShowcase";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductIcon } from "@/components/product/ProductIcon";
@@ -21,23 +23,6 @@ import { ProductArt } from "@/components/art/ProductArt";
 const howMoods: ClickyMood[] = ["think", "wink", "celebrate"];
 const howColors = ["var(--oc-hue-planner)", "var(--oc-hue-bride)", "var(--oc-brand)"];
 
-/** Renders a headline with one word wrapped in a hand-drawn sunshine underline. */
-function Highlighted({ text, word }: { text: string; word: string }) {
-  const i = word ? text.indexOf(word) : -1;
-  if (i < 0) return <>{text}</>;
-  return (
-    <>
-      {text.slice(0, i)}
-      <span className="relative inline-block whitespace-nowrap">
-        <span className="relative z-10">{word}</span>
-        <svg aria-hidden="true" viewBox="0 0 200 20" preserveAspectRatio="none" className="absolute -bottom-1 start-0 z-0 h-[0.32em] w-full">
-          <path d="M3 14 C50 4 120 2 197 10" fill="none" stroke="var(--oc-accent)" strokeWidth="9" strokeLinecap="round" />
-        </svg>
-      </span>
-      {text.slice(i + word.length)}
-    </>
-  );
-}
 import { notFound } from "next/navigation";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
@@ -60,6 +45,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     }));
 
   const featured = products.filter((p) => p.status !== "coming-soon").slice(0, 5);
+  const parade = products.filter((p) => p.price !== null);
   const homeFaqs = faqs.filter((f) => ["what", "app", "lifetime", "payment", "languages"].includes(f.id)).map((f) => ({ q: tr(f.q, locale), a: tr(f.a, locale) }));
   const bento = categories.filter((c) => c.slug !== "templates-downloads").slice(0, 7);
 
@@ -70,9 +56,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 sm:px-6 md:pt-16 lg:min-h-[min(780px,calc(100dvh-4rem))] lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:px-8 lg:pb-20">
           <div className="max-w-xl">
             <Reveal>
-              <h1 className="display text-[2.7rem] font-bold leading-[1.05] tracking-[-0.03em] text-ink sm:text-6xl lg:text-[4.2rem]">
-                <Highlighted text={d.home.heroTitle} word={d.home.heroHighlight} />
-              </h1>
+              <HeroTitle full={d.home.heroTitle} prefix={d.home.heroPrefix} words={d.home.heroWords} />
             </Reveal>
             <Reveal delay={0.08}>
               <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-ink-soft sm:text-xl">{d.home.heroSub}</p>
@@ -92,6 +76,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <HeroVisual locale={locale} />
         </div>
       </section>
+
+      {/* PRODUCT PARADE: one colorful marquee of every product */}
+      <ProductParade products={parade} locale={locale} />
 
       {/* CHAOS -> CLARITY: interactive tabbed showcase with real working demos */}
       <section id="demos" className="scroll-mt-20 border-y border-line bg-surface">

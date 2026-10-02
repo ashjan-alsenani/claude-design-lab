@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "One Click Digital Hub",
-    short_name: "One Click Digital Hub",
+    name: "One Click",
+    short_name: "One Click",
     description: "Smart digital tools for a simpler everyday life.",
     start_url: "/",
     display: "standalone",

@@ -1,14 +1,27 @@
 # Changelog
 
+## 0.3.0 — 2026-10-02 — One Click, Clicky v3, pricing, more products
+- Brand name simplified to **One Click**.
+- Clicky v3: cuter mascot/logo with big shiny eyes, rosy cheeks and a twinkling sparkle; all logo,
+  icon, Instagram and social assets regenerated.
+- Per-product prices (4-18 OMR, free checklist, 12 OMR bundle) with rationale in docs/PRICING.md.
+- 11 new product ideas with illustrations: Ramadan, Meals, Baby, Home, Kids, Events, Gifts,
+  Habits, Business, Umrah, Life Starter Bundle. New categories: Family & Kids, Work & Business.
+- Homepage: rotating headline word, colorful product parade, confetti when tasks are completed,
+  animated illustrations.
+
+## 0.2.0 — 2026-10-02 — Friendly redesign
+- Clicky logo + mascot, colorful palette, Rubik font, product illustrations, playful homepage.
+
 ## 0.1.1 — 2026-10-02 — Brand renamed
-- Brand renamed to **One Click Digital Hub (OCDH)** across site, content, emails, SEO and docs.
+- Brand renamed to **One Click** across site, content, emails, SEO and docs.
 - New two-line lockup ("One Click" / "DIGITAL HUB"), OCDH monogram, regenerated social/OG assets.
 - Products renamed to the "One Click + Product" pattern.
 
 ## 0.1.0 — 2026-10-02 — Foundation
 
 ### Added
-- One Click Digital Hub brand identity: "closing loop" logo system (primary, stacked, wordmark, mark; light,
+- One Click brand identity: "closing loop" logo system (primary, stacked, wordmark, mark; light,
   dark, mono), favicon, app icons, Instagram avatar and highlight covers, Open Graph image.
 - Design tokens (light/dark), Geist + IBM Plex Sans Arabic, reusable UI components.
 - Next.js 16 app with Arabic (RTL) and English (LTR) routes and locale detection.
@@ -16,7 +29,7 @@
   request, contact, help center, about, guides (3), legal (7), favorites, account, dashboard
   (demo), admin command center (demo), branded 404 and error pages.
 - Live product demos: Bride, Grocery, Planner, Fit, Weekly Reset (free).
-- OCDH Digital Product Framework primitives.
+- One Click Product Framework primitives.
 - Provider-independent payments, orders, entitlements, discounts; email templates; analytics
   dictionary with consent; lead store; rate limiting; security headers.
 - Supabase schema with RLS (verified on Postgres 16).

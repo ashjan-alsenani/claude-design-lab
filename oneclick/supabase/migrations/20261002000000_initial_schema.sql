@@ -1,4 +1,4 @@
--- One Click Digital Hub initial schema (PostgreSQL / Supabase).
+-- One Click initial schema (PostgreSQL / Supabase).
 -- STATUS: written, NOT YET APPLIED (no Supabase project exists yet; see OWNER_ACTIONS.md).
 -- Principles:
 --   * Money in integer minor units + ISO currency (OMR = 3 decimals). No floats.

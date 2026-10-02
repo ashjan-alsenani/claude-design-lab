@@ -9,7 +9,7 @@ Only things that genuinely need you. Everything else is handled by Claude.
   database; the site needs hosting to be visible online.
 - What to do: reply "approved: Supabase + Vercel free plans". Then sign in to both with your GitHub
   account (supabase.com → "Start your project"; vercel.com → "Sign up" → "Continue with GitHub").
-  Create a Supabase organization called "One Click Digital Hub". No card is needed for free plans.
+  Create a Supabase organization called "One Click". No card is needed for free plans.
 - Send back: just tell me it's done. Supabase and Vercel are connected to this workspace, so I can
   create the project, apply the database schema and deploy a private preview myself.
 - Cost: 0 OMR on free plans (limits in COSTS.md).

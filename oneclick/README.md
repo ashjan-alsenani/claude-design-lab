@@ -1,11 +1,11 @@
-# One Click Digital Hub
+# One Click
 
 **Less effort. More life. · جهد أقل. حياة أكثر.**
 
-One Click Digital Hub is an international digital lifestyle brand from the Sultanate of Oman: interactive
+One Click is an international digital lifestyle brand from the Sultanate of Oman: interactive
 planners, organizers, downloads and custom digital solutions, in Arabic and English.
 
-This folder contains the One Click Digital Hub platform (website, product framework, admin foundation) and
+This folder contains the One Click platform (website, product framework, admin foundation) and
 all project documentation.
 
 ## Quick start
@@ -31,7 +31,7 @@ with sample data.
 ```
 src/app/[locale]/      pages (home, products, collections, custom, guides, help, legal, account, admin…)
 src/components/        UI, layout, home sections, product, demos, forms
-src/framework/         OCDH Digital Product Framework (shared product primitives)
+src/framework/         One Click Product Framework (shared product primitives)
 src/content/           bilingual content: products, categories, guides, FAQs, legal, social plan
 src/i18n/              locales + dictionaries (en, ar)
 src/lib/               money, seo, payments, commerce, auth, email, analytics, data, security

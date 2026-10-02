@@ -1,6 +1,8 @@
 import type { Localized, Locale } from "@/i18n/config";
 import type { Money } from "@/lib/money";
 
+export type ArtId = Hue | "ramadan" | "meal" | "baby" | "home" | "kids" | "party" | "gift" | "habit" | "business" | "bundle";
+
 export type Hue = "bride" | "grocery" | "planner" | "fit" | "budget" | "study" | "travel" | "brand";
 
 export type Category = {
@@ -49,6 +51,8 @@ export type Product = {
   categories: string[];
   tags: string[];
   hue: Hue;
+  /** Illustration scene; defaults to the hue scene. */
+  art?: ArtId;
   featured: boolean;
   isNew: boolean;
   demo?: DemoId;

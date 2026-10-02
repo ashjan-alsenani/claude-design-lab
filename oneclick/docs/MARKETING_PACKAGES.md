@@ -16,7 +16,7 @@ has been published. All claims are factual; no invented numbers.
 - CTAs: "Try the free demo" / "جرّبي العرض المجاني"; "Reserve at launch" / "احجزي عند الإطلاق".
 - Instagram caption (AR): "التجهيز للعرس ما لازم يكون فوضى ✨ ون كليك عروس يجمع المهام والميزانية والضيوف في لوحة وحدة. جرّبي العرض المجاني من الرابط في البايو."
 - Reel (12-15 s): phone screen full of chat bubbles (0-2 s hook text) → bubbles collapse into the
-  One Click Digital Hub list (mark draw-on transition) → ticking 3 tasks, progress ring fills → budget tab →
+  One Click list (mark draw-on transition) → ticking 3 tasks, progress ring fills → budget tab →
   end card "جهد أقل. حياة أكثر." + link.
 - Story: poll "How many WhatsApp groups is your wedding in?" → slide with demo GIF → link sticker.
 - Carousel: 1 chaos photo-style card · 2 "6 months" · 3 "3 months" · 4 "final month" · 5 product.

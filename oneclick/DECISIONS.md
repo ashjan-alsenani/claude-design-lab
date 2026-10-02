@@ -2,6 +2,15 @@
 
 Format: decision, why, alternatives considered, how to reverse. Newest first.
 
+## 2026-10-02 — Name "One Click", Clicky v3, real prices, more products
+
+**D17.** Owner instruction: brand name is simply **One Click** (Arabic: ون كليك); "Digital Hub"
+and "OCDH" are dropped. Logo/mascot upgraded to **Clicky v3** (soft rounded body, big shiny
+eyes, rosy cheeks, check-mark smile, sunshine sparkle) to be more lovable. Per-product prices
+replace the flat 15 OMR (docs/PRICING.md). 11 new product ideas added as "coming soon" with prices
+and illustrations; new categories Family & Kids and Work & Business. Homepage gets a rotating
+headline word, a product parade band and confetti celebrations.
+
 ## 2026-10-02 — Friendly redesign (v2)
 
 **D16.** Owner asked for a friendlier, colorful, animated look with art, icons and characters, and a
@@ -10,10 +19,10 @@ languages (replaces Geist + IBM Plex Sans Arabic), bright palette (Clicky teal, 
 lilac, sky on warm off-white / deep indigo), Clicky mascot system, original product illustrations,
 3D buttons, playful hero and sections. Supersedes the D8 visual identity (name and slogan unchanged).
 
-## 2026-10-02 — Brand renamed to One Click Digital Hub (OCDH)
+## 2026-10-02 — Brand renamed to One Click
 
-**D15.** Owner instruction: the brand is **One Click Digital Hub**, short form **OCDH**
-(Arabic: ون كليك ديجيتال هب). Products keep the family pattern "One Click + Product" so they stay
+**D15.** Owner instruction: the brand is **One Click**, short form **OCDH**
+(Arabic: ون كليك). Products keep the family pattern "One Click + Product" so they stay
 short and clearly connected (One Click Bride, One Click Grocery, One Click Planner, One Click Fit).
 The "closing loop" mark is unchanged. Lockup: mark + "One Click" with "DIGITAL HUB" set beneath;
 an "OCDH" monogram wordmark exists for tight spaces. Code folder name `oneclick/` and asset file
@@ -38,7 +47,7 @@ launch. Alternative: Netlify / self-host (Node) remain possible; nothing Vercel-
 
 **D4. Payments: provider-independent interface only** (`src/lib/payments`). Owner will choose an
 Oman bank/gateway. Checkout shows "PAYMENT PROVIDER NOT YET CONNECTED". Orders are fulfilled only
-from verified webhooks. No card data ever touches One Click Digital Hub.
+from verified webhooks. No card data ever touches One Click.
 
 **D5. Internationalization: own lightweight dictionaries + `[locale]` routes (`/en`, `/ar`).**
 Why: two languages with full type-checking, no runtime dependency, RTL via `dir` on `<html>` and

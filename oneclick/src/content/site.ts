@@ -6,16 +6,16 @@ import type { Localized } from "@/i18n/config";
  * provides final legal information through Admin > Business settings.
  */
 export const brand = {
-  name: "One Click Digital Hub",
-  nameAr: "ون كليك ديجيتال هب",
+  name: "One Click",
+  nameAr: "ون كليك",
   slogan: { en: "Less effort. More life.", ar: "جهد أقل. حياة أكثر." } satisfies Localized,
   statement: {
-    en: "One Click Digital Hub makes everyday life simpler with beautiful, useful digital tools.",
-    ar: "ون كليك ديجيتال هب تجعل حياتك اليومية أبسط بأدوات رقمية جميلة ومفيدة.",
+    en: "One Click makes everyday life simpler with beautiful, useful digital tools.",
+    ar: "ون كليك تجعل حياتك اليومية أبسط بأدوات رقمية جميلة ومفيدة.",
   } satisfies Localized,
   elevator: {
-    en: "One Click Digital Hub is a digital lifestyle brand from Oman. We design interactive planners, organizers and tools that take everyday tasks from chaos to clarity, in Arabic and English.",
-    ar: "ون كليك ديجيتال هب علامة رقمية لأسلوب الحياة من عُمان. نصمم مخططات ومنظّمات وأدوات تفاعلية تنقل مهامك اليومية من الفوضى إلى الوضوح، بالعربي والإنجليزي.",
+    en: "One Click is a digital lifestyle brand from Oman. We design interactive planners, organizers and tools that take everyday tasks from chaos to clarity, in Arabic and English.",
+    ar: "ون كليك علامة رقمية لأسلوب الحياة من عُمان. نصمم مخططات ومنظّمات وأدوات تفاعلية تنقل مهامك اليومية من الفوضى إلى الوضوح، بالعربي والإنجليزي.",
   } satisfies Localized,
   instagramBio: {
     en: "Less effort. More life.\nSmart planners & organizers for everyday life\nArabic + English · From Oman",

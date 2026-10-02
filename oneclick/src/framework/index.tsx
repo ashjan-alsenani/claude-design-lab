@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * OCDH Digital Product Framework (client primitives).
+ * One Click Product Framework (client primitives).
  * Shared building blocks every interactive product composes: progress, checklists,
  * stat tiles, a product shell and a local-state list hook. Each product supplies its
  * own data model, copy and hue, so products share foundations but feel distinct.

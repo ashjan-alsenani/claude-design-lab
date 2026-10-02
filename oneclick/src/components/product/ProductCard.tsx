@@ -14,7 +14,7 @@ export function ProductCard({ product, locale, d, size = "md" }: { product: Prod
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border-2 border-transparent bg-surface shadow-soft transition-[box-shadow,border-color] duration-300 ease-[var(--ease-out-soft)] hover:shadow-lift" style={{ ["--card-hue" as string]: hue }}>
       <div className={`relative overflow-hidden ${size === "lg" ? "h-48" : "h-44"}`} style={{ background: hueSoft(product.hue, 18) }}>
-        <ProductArt hue={product.hue} className="absolute inset-x-4 inset-y-2 transition-transform duration-500 ease-[var(--ease-bounce)] group-hover:scale-[1.06] group-hover:-rotate-1" />
+        <ProductArt hue={product.hue} art={product.art} className="absolute inset-x-4 inset-y-2 transition-transform duration-500 ease-[var(--ease-bounce)] group-hover:scale-[1.06] group-hover:-rotate-1" />
         <div className="absolute end-3 top-3 z-10">
           <FavoriteButton productId={product.id} labels={{ add: d.a11y.favoriteAdd, remove: d.a11y.favoriteRemove }} />
         </div>

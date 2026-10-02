@@ -4,7 +4,7 @@ export const faqs: Faq[] = [
   {
     id: "what",
     group: "general",
-    q: { en: "What exactly does One Click Digital Hub sell?", ar: "وش تبيع ون كليك ديجيتال هب بالضبط؟" },
+    q: { en: "What exactly does One Click sell?", ar: "وش تبيع ون كليك بالضبط؟" },
     a: {
       en: "Interactive web products (planners, organizers and trackers you open in your browser), downloadable templates, and custom digital solutions made for you.",
       ar: "منتجات ويب تفاعلية (مخططات ومنظّمات ومتابعات تفتحها من المتصفح)، وقوالب للتحميل، وحلول رقمية نصممها لك حسب الطلب.",
@@ -24,8 +24,8 @@ export const faqs: Faq[] = [
     group: "access",
     q: { en: "What does lifetime access mean?", ar: "وش يعني وصول مدى الحياة؟" },
     a: {
-      en: "You pay once and keep access to the product, including its updates, for as long as One Click Digital Hub offers it. If a product is ever retired, we give notice and an export of your data.",
-      ar: "تدفع مرة وحدة وتبقى معك المنتج مع تحديثاته طول ما ون كليك ديجيتال هب توفره. ولو انسحب منتج في يوم، نبلغك مسبقًا ونعطيك نسخة من بياناتك.",
+      en: "You pay once and keep access to the product, including its updates, for as long as One Click offers it. If a product is ever retired, we give notice and an export of your data.",
+      ar: "تدفع مرة وحدة وتبقى معك المنتج مع تحديثاته طول ما ون كليك توفره. ولو انسحب منتج في يوم، نبلغك مسبقًا ونعطيك نسخة من بياناتك.",
     },
   },
   {
@@ -33,8 +33,8 @@ export const faqs: Faq[] = [
     group: "general",
     q: { en: "Are products in Arabic and English?", ar: "المنتجات بالعربي والإنجليزي؟" },
     a: {
-      en: "Yes. Every One Click Digital Hub product is designed in both languages from the start, with a proper right-to-left Arabic layout.",
-      ar: "نعم. كل منتجات ون كليك ديجيتال هب مصممة باللغتين من البداية، مع واجهة عربية من اليمين لليسار بشكل صحيح.",
+      en: "Yes. Every One Click product is designed in both languages from the start, with a proper right-to-left Arabic layout.",
+      ar: "نعم. كل منتجات ون كليك مصممة باللغتين من البداية، مع واجهة عربية من اليمين لليسار بشكل صحيح.",
     },
   },
   {

@@ -13,11 +13,11 @@ test("root redirects to a locale", async ({ page }) => {
 test("English is LTR and Arabic is RTL", async ({ page }) => {
   await page.goto("/en");
   await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Everyday life, made simpler.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Everyday life, made simpler.");
   await page.goto("/ar");
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
   await expect(page.locator("html")).toHaveAttribute("lang", "ar");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("يومك، صار أبسط.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("يومك، صار أبسط.");
 });
 
 test("language switch keeps the current page", async ({ page, isMobile }) => {
@@ -80,7 +80,7 @@ test("unknown pages show the branded 404", async ({ page }) => {
 
 test("SEO basics are present", async ({ page }) => {
   await page.goto("/en/products/oneclick-bride");
-  await expect(page).toHaveTitle(/One Click Bride \| One Click Digital Hub/);
+  await expect(page).toHaveTitle(/One Click Bride \| One Click/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/en\/products\/oneclick-bride$/);
   await expect(page.locator('link[rel="alternate"][hreflang="ar"]')).toHaveCount(1);
   const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
