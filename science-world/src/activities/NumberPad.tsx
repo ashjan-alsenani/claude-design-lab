@@ -24,16 +24,17 @@ export function NumberPad({ value, onChange, onSubmit, disabled, unit, shake }: 
   };
   return (
     <div className="numpad">
-      <div className={`numpad__display ${shake ? 'wiggle' : ''}`} dir="ltr">
+      <div className={`numpad__display ${shake ? 'wiggle' : ''}`}>
         <input
           aria-label="اكتبي الإجابة"
           inputMode="decimal"
-          value={toArabicDigits(value)}
+          value={toArabicDigits(value).replace('-', '−')}
           disabled={disabled}
           onChange={(e) => {
             const raw = e.target.value
               .replace(/[٠-٩]/g, (d) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)))
               .replace(/[٫,،]/g, '.')
+              .replace(/−/g, '-')
               .replace(/[^0-9.-]/g, '');
             onChange(raw);
           }}

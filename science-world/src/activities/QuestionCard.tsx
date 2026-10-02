@@ -152,7 +152,7 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
           <NumberPad value={typed} onChange={(v) => { setTyped(v); if (status === 'oops') setStatus('answering'); }} onSubmit={checkNumber} disabled={done} unit={q.unit} shake={shakeId === 'all'} />
           {status === 'revealed' && (
             <p className="qcard__answer">
-              الإجابة الصحيحة: <strong dir="ltr">{toArabicDigits(q.answer)}</strong> {q.unit}
+              الإجابة الصحيحة: <strong>{toArabicDigits(q.answer).replace('-', '−')}</strong> {q.unit}
             </p>
           )}
         </>

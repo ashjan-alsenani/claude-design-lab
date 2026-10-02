@@ -355,7 +355,8 @@ function Thermometer({ v }: { v: Extract<MathVisual, { type: 'thermometer' }> })
   const top = 20;
   const bottom = 220;
   const y = (n: number) => bottom - ((n - v.min) / (v.max - v.min)) * (bottom - top);
-  const step = (v.max - v.min) / 10 >= 5 ? 5 : 1;
+  // at most ~10 labelled ticks, on a friendly step (1, 2, 5, 10, 20…)
+  const step = [1, 2, 5, 10, 20, 25, 50, 100].find((k) => (v.max - v.min) / k <= 10) ?? 100;
   return (
     <svg viewBox="0 0 160 270" className="art math-art" role="img" aria-label={`ميزان حرارة يشير إلى ${v.value}`}>
       <rect x="62" y={top - 8} width="26" height={bottom - top + 16} rx="13" fill="#fff" stroke={INK} strokeWidth="3" />
