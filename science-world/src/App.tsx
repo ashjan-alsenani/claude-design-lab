@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
 import { ProgressProvider } from './state/ProgressContext';
@@ -8,19 +8,23 @@ import { AchievementPopup } from './components/AchievementPopup';
 import { SkyBackground } from './components/SkyBackground';
 import { Mascot } from './components/Mascot';
 import { HomePage } from './pages/HomePage';
+import { PageErrorBoundary } from './components/PageErrorBoundary';
+import { lazyPage, reloadOnStaleAssets } from './lib/lazyPage';
+
+reloadOnStaleAssets();
 
 // Pages beyond the home screen load on demand to keep the first visit fast.
-const JourneyPage = lazy(() => import('./pages/JourneyPage').then((m) => ({ default: m.JourneyPage })));
-const LessonsPage = lazy(() => import('./pages/LessonsPage').then((m) => ({ default: m.LessonsPage })));
-const LessonPage = lazy(() => import('./pages/LessonPage').then((m) => ({ default: m.LessonPage })));
-const UnitQuizPage = lazy(() => import('./pages/UnitQuizPage').then((m) => ({ default: m.UnitQuizPage })));
-const BossPage = lazy(() => import('./pages/BossPage').then((m) => ({ default: m.BossPage })));
-const UnitCompletePage = lazy(() => import('./pages/UnitCompletePage').then((m) => ({ default: m.UnitCompletePage })));
-const GamesPage = lazy(() => import('./pages/GamesPage').then((m) => ({ default: m.GamesPage })));
-const ChallengesPage = lazy(() => import('./pages/ChallengesPage').then((m) => ({ default: m.ChallengesPage })));
-const RewardsPage = lazy(() => import('./pages/RewardsPage').then((m) => ({ default: m.RewardsPage })));
-const ProgressPage = lazy(() => import('./pages/ProgressPage').then((m) => ({ default: m.ProgressPage })));
-const GlossaryPage = lazy(() => import('./pages/GlossaryPage').then((m) => ({ default: m.GlossaryPage })));
+const JourneyPage = lazyPage(() => import('./pages/JourneyPage').then((m) => ({ default: m.JourneyPage })));
+const LessonsPage = lazyPage(() => import('./pages/LessonsPage').then((m) => ({ default: m.LessonsPage })));
+const LessonPage = lazyPage(() => import('./pages/LessonPage').then((m) => ({ default: m.LessonPage })));
+const UnitQuizPage = lazyPage(() => import('./pages/UnitQuizPage').then((m) => ({ default: m.UnitQuizPage })));
+const BossPage = lazyPage(() => import('./pages/BossPage').then((m) => ({ default: m.BossPage })));
+const UnitCompletePage = lazyPage(() => import('./pages/UnitCompletePage').then((m) => ({ default: m.UnitCompletePage })));
+const GamesPage = lazyPage(() => import('./pages/GamesPage').then((m) => ({ default: m.GamesPage })));
+const ChallengesPage = lazyPage(() => import('./pages/ChallengesPage').then((m) => ({ default: m.ChallengesPage })));
+const RewardsPage = lazyPage(() => import('./pages/RewardsPage').then((m) => ({ default: m.RewardsPage })));
+const ProgressPage = lazyPage(() => import('./pages/ProgressPage').then((m) => ({ default: m.ProgressPage })));
+const GlossaryPage = lazyPage(() => import('./pages/GlossaryPage').then((m) => ({ default: m.GlossaryPage })));
 
 function ScrollTop() {
   const { pathname } = useLocation();
@@ -47,6 +51,7 @@ function Shell() {
       <SkyBackground />
       {!focused && <TopBar />}
       <main id="main" className="app__main">
+        <PageErrorBoundary key={location.key}>
         <Suspense fallback={<Loading />}>
           <Routes key={location.key}>
             <Route path="/" element={<HomePage />} />
@@ -64,6 +69,7 @@ function Shell() {
             <Route path="*" element={<HomePage />} />
           </Routes>
         </Suspense>
+        </PageErrorBoundary>
       </main>
       {!focused && <Navigation variant="bottom" />}
       <AchievementPopup />
