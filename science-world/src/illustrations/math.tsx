@@ -3,6 +3,7 @@
  * (e.g. a number line from 0 to 10); these components draw it in the house style.
  * All numbers are shown with Arabic-Indic digits, like the book.
  */
+import { Fragment } from 'react';
 import type { MathVisual, Point } from '../data/types';
 import { toArabicDigits as ar } from '../lib/digits';
 
@@ -88,12 +89,19 @@ function PlaceValue({ v }: { v: Extract<MathVisual, { type: 'placeValue' }> }) {
   return (
     <div className="pv" dir="ltr" role="table" aria-label="جدول القيمة المكانية">
       {cols.map((c, i) => (
-        <div key={i} className={`pv__col ${v.highlight?.includes(i) ? 'pv__col--hl' : ''} ${i === intDigits.length - 1 && dec ? 'pv__col--point' : ''}`} role="cell">
-          <div className="pv__name" dir="rtl">
-            {c.name}
+        <Fragment key={i}>
+          <div className={`pv__col ${v.highlight?.includes(i) ? 'pv__col--hl' : ''}`} role="cell">
+            <div className="pv__name" dir="rtl">
+              {c.name}
+            </div>
+            <div className="pv__digit">{ar(c.d)}</div>
           </div>
-          <div className="pv__digit">{ar(c.d)}</div>
-        </div>
+          {i === intDigits.length - 1 && dec && (
+            <div className="pv__point" aria-label="فاصلة عشرية">
+              ,
+            </div>
+          )}
+        </Fragment>
       ))}
     </div>
   );

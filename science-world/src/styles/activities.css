@@ -1198,3 +1198,12 @@
   min-width: 0;
   max-width: 100%;
 }
+.pv__point {
+  align-self: end;
+  padding-bottom: 6px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: #e04848;
+}
