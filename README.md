@@ -54,3 +54,7 @@ claude
 ## المصادر والتراخيص
 
 المصادر وأرقام النسخ الدقيقة في [SOURCES.json](SOURCES.json)، والتراخيص الأصلية في [licenses](licenses). لم تُعدّل محتويات ملفات المهارات الأصلية.
+
+## مشروع OneClick
+
+يحتوي مجلد [`oneclick/`](oneclick/README.md) على منصة OneClick (الموقع ثنائي اللغة، إطار المنتجات، لوحات الإدارة التجريبية) وكل وثائق المشروع. ابدئي بـ [`oneclick/PROJECT_STATUS.md`](oneclick/PROJECT_STATUS.md) و[`oneclick/OWNER_ACTIONS.md`](oneclick/OWNER_ACTIONS.md).

@@ -1,0 +1,243 @@
+import Link from "next/link";
+import { ArrowRightIcon, CursorClickIcon, DevicesIcon, MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
+import { isLocale, num, tr, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/get-dictionary";
+import { catalog } from "@/lib/data/catalog";
+import { faqs } from "@/content/faqs";
+import { guides } from "@/content/guides";
+import { ButtonLink } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
+import { FaqList } from "@/components/ui/Faq";
+import { HeroVisual } from "@/components/home/HeroVisual";
+import { StoryShowcase, type ShowcaseItem } from "@/components/home/StoryShowcase";
+import { ProductCard } from "@/components/product/ProductCard";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { JsonLd } from "@/components/JsonLd";
+import { faqJsonLd } from "@/lib/seo";
+import { hueSoft, hueVar } from "@/lib/hues";
+import { notFound } from "next/navigation";
+
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: l } = await params;
+  if (!isLocale(l)) notFound();
+  const locale: Locale = l;
+  const d = getDictionary(locale);
+  const [products, categories] = await Promise.all([catalog.listProducts(), catalog.listCategories()]);
+
+  const showcase: ShowcaseItem[] = products
+    .filter((p) => p.demo && p.featured)
+    .map((p) => ({
+      slug: p.slug,
+      name: tr(p.name, locale),
+      tagline: tr(p.tagline, locale),
+      chaos: tr(p.story.chaos, locale),
+      result: tr(p.story.result, locale),
+      demo: p.demo!,
+      hue: p.hue,
+    }));
+
+  const featured = products.filter((p) => p.status !== "coming-soon").slice(0, 5);
+  const homeFaqs = faqs.filter((f) => ["what", "app", "lifetime", "payment", "languages"].includes(f.id)).map((f) => ({ q: tr(f.q, locale), a: tr(f.a, locale) }));
+  const howIcons = [MagnifyingGlassIcon, CursorClickIcon, DevicesIcon];
+  const bento = categories.filter((c) => c.slug !== "templates-downloads").slice(0, 7);
+
+  return (
+    <>
+      {/* HERO: asymmetric split. Story told by the visual: scattered notes become one calm list. */}
+      <section className="relative overflow-hidden">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 sm:px-6 md:pt-16 lg:min-h-[min(780px,calc(100dvh-4rem))] lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:px-8 lg:pb-20">
+          <div className="max-w-xl">
+            <Reveal>
+              <h1 className="display text-[2.6rem] font-semibold leading-[1.05] tracking-[-0.035em] text-ink sm:text-6xl lg:text-[4.1rem]">
+                {d.home.heroTitle}
+              </h1>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-ink-soft sm:text-xl">{d.home.heroSub}</p>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <ButtonLink href={`/${locale}/products`} size="lg">
+                  {d.home.heroCta}
+                  <ArrowRightIcon size={18} className="flip-rtl" />
+                </ButtonLink>
+                <ButtonLink href="#demos" variant="secondary" size="lg">
+                  {d.home.heroSecondary}
+                </ButtonLink>
+              </div>
+            </Reveal>
+          </div>
+          <HeroVisual locale={locale} />
+        </div>
+      </section>
+
+      {/* CHAOS -> CLARITY: interactive tabbed showcase with real working demos */}
+      <section id="demos" className="scroll-mt-20 border-y border-line bg-surface">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <Reveal>
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-primary">{d.home.storyTitle}</p>
+            <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-ink sm:text-[2.6rem] sm:leading-[1.1]">{d.home.demoTitle}</h2>
+            <p className="mt-4 max-w-[60ch] text-lg text-ink-soft">{d.home.storySub}</p>
+          </Reveal>
+          <div className="mt-12">
+            <StoryShowcase
+              items={showcase}
+              locale={locale}
+              labels={{ before: d.home.storyBefore, after: d.home.storyAfter, view: d.common.viewProduct, demoNote: d.product.demoNote }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* COLLECTIONS: asymmetric bento, each cell tinted with its collection hue */}
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <Reveal>
+          <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem]">{d.home.collectionsTitle}</h2>
+        </Reveal>
+        <div className="mt-10 grid auto-rows-[150px] grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+          {bento.map((c, i) => {
+            const big = i === 0 || i === 1;
+            // Exact cell count: an odd number of small tiles stretches the last one on mobile.
+            const smallCount = bento.length - 2;
+            const stretch = !big && smallCount % 2 === 1 && i === bento.length - 1;
+            return (
+              <Reveal key={c.slug} delay={i * 0.04} className={big ? "col-span-2 row-span-1 md:row-span-2" : stretch ? "col-span-2 md:col-span-1" : ""}>
+                <Link
+                  href={`/${locale}/collections/${c.slug}`}
+                  className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[var(--radius-lg)] p-5 transition-transform duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5"
+                  style={{ background: hueSoft(c.hue, big ? 20 : 13) }}
+                >
+                  <span className="grid size-11 place-items-center rounded-[13px] bg-surface-raised shadow-soft" style={{ color: hueVar(c.hue) }}>
+                    <ProductIcon hue={c.hue} size={big ? 24 : 20} />
+                  </span>
+                  <div>
+                    <h3 className={`font-semibold tracking-tight text-ink ${big ? "text-2xl" : "text-base"}`}>{tr(c.name, locale)}</h3>
+                    {big && <p className="mt-1.5 max-w-[36ch] text-ink-soft">{tr(c.description, locale)}</p>}
+                  </div>
+                  {big && (
+                    <span aria-hidden="true" className="absolute -end-10 -top-10 size-48 rounded-full border-[14px] opacity-20 transition-transform duration-500 group-hover:scale-110" style={{ borderColor: hueVar(c.hue) }} />
+                  )}
+                </Link>
+              </Reveal>
+            );
+          })}
+          <Reveal delay={0.3} className={`col-span-2 ${(bento.length - 2) % 4 === 1 ? "md:col-span-3" : (bento.length - 2) % 4 === 2 ? "md:col-span-2" : "md:col-span-1"}`}>
+            <Link href={`/${locale}/products`} className="flex h-full items-center justify-between rounded-[var(--radius-lg)] bg-primary p-5 text-on-primary transition-colors hover:bg-primary-hover">
+              <span className="text-base font-semibold">{d.common.allProducts}</span>
+              <ArrowRightIcon size={20} className="flip-rtl" />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* PRODUCTS: horizontal scroll-snap rail */}
+      <section className="pb-20 lg:pb-28">
+        <div className="mx-auto flex max-w-7xl items-end justify-between gap-6 px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem]">{d.catalog.title}</h2>
+          <Link href={`/${locale}/products`} className="hidden shrink-0 items-center gap-2 font-medium text-primary hover:underline sm:inline-flex">
+            {d.common.allProducts}
+            <ArrowRightIcon size={16} className="flip-rtl" />
+          </Link>
+        </div>
+        <ul className="mx-auto mt-10 flex max-w-7xl snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-4 sm:scroll-px-6 sm:px-6 lg:scroll-px-8 lg:px-8">
+          {featured.map((p) => (
+            <li key={p.id} className="w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
+              <ProductCard product={p} locale={locale} d={d} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* HOW IT WORKS: connected line, not three boxed cards */}
+      <section className="border-y border-line bg-surface">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{d.home.howTitle}</h2>
+          <ol className="relative mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+            <span aria-hidden="true" className="absolute inset-x-[16%] top-6 hidden h-px bg-line-strong md:block" />
+            {d.home.how.map((step, i) => {
+              const I = howIcons[i];
+              return (
+                <li key={step.title} className="relative flex gap-4 md:flex-col md:items-center md:text-center">
+                  <span className="relative grid size-12 shrink-0 place-items-center rounded-full border border-line-strong bg-bg text-primary">
+                    <I size={22} weight="duotone" />
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-ink">{step.title}</h3>
+                    <p className="mt-1 max-w-[30ch] text-ink-soft">{step.body}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
+
+      {/* CUSTOM SOLUTIONS: full-width tinted band */}
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[var(--radius-xl)] bg-primary-soft px-6 py-12 sm:px-12 sm:py-16">
+            <svg aria-hidden="true" viewBox="0 0 64 64" className="absolute -bottom-16 -end-10 size-72 opacity-[0.12] sm:size-96">
+              <path d="M20.5 32.5 L28.5 40.5 L47.56 16.44 A22 22 0 1 0 53.25 37.69" fill="none" stroke="var(--oc-primary)" strokeWidth="6.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <div className="relative max-w-xl">
+              <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem] sm:leading-[1.1]">{d.home.customTitle}</h2>
+              <p className="mt-4 text-lg leading-relaxed text-ink-soft">{d.home.customSub}</p>
+              <ButtonLink href={`/${locale}/custom`} size="lg" className="mt-8">
+                {d.home.customCta}
+                <ArrowRightIcon size={18} className="flip-rtl" />
+              </ButtonLink>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* HONEST LAUNCH + GUIDES: two-column editorial */}
+      <section className="mx-auto grid max-w-7xl gap-14 px-4 pb-20 sm:px-6 lg:grid-cols-[1fr_1.4fr] lg:px-8 lg:pb-28">
+        <Reveal>
+          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{d.home.honestTitle}</h2>
+          <p className="mt-4 max-w-[48ch] leading-relaxed text-ink-soft">{d.home.honestBody}</p>
+        </Reveal>
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{d.home.guidesTitle}</h2>
+          <ul className="mt-6 divide-y divide-line border-y border-line">
+            {guides.map((g) => (
+              <li key={g.slug}>
+                <Link href={`/${locale}/guides/${g.slug}`} className="group flex items-center gap-4 py-5">
+                  <div className="flex-1">
+                    <p className="font-medium text-ink group-hover:text-primary">{tr(g.title, locale)}</p>
+                    <p className="mt-1 text-sm text-muted">
+                      {num(g.readingMinutes, locale)} {d.common.minutes}
+                    </p>
+                  </div>
+                  <ArrowRightIcon size={18} className="flip-rtl shrink-0 text-muted transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:pb-28">
+        <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{d.home.faqTitle}</h2>
+        <div className="mt-8">
+          <FaqList items={homeFaqs} />
+        </div>
+        <JsonLd data={faqJsonLd(homeFaqs)} />
+      </section>
+
+      {/* FINAL CTA: free lead magnet, no popup */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-start gap-6 border-t border-line pt-14 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem]">{d.home.finalTitle}</h2>
+            <p className="mt-2 text-lg text-ink-soft">{d.home.finalSub}</p>
+          </div>
+          <ButtonLink href={`/${locale}/products/weekly-reset-checklist`} variant="accent" size="lg">
+            {d.home.finalCta}
+          </ButtonLink>
+        </div>
+      </section>
+    </>
+  );
+}

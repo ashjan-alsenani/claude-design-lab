@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+/* One Click Digital Hub design tokens. Full rationale: BRAND_GUIDELINES.md
+   Strategy: semantic CSS variables, swapped for dark mode. Components only use
+   the Tailwind theme names below, never raw hex values. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/Geist-Variable-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Arabic";
+  src: url("../fonts/IBMPlexSansArabic-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+@font-face {
+  font-family: "Plex Arabic";
+  src: url("../fonts/IBMPlexSansArabic-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+@font-face {
+  font-family: "Plex Arabic";
+  src: url("../fonts/IBMPlexSansArabic-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+@font-face {
+  font-family: "Plex Arabic";
+  src: url("../fonts/IBMPlexSansArabic-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
+:root {
+  --oc-bg: #f5f7f6;
+  --oc-bg-sunken: #ebefed;
+  --oc-surface: #fcfdfc;
+  --oc-surface-raised: #ffffff;
+  --oc-ink: #121826;
+  --oc-ink-soft: #3a4352;
+  --oc-muted: #5b6573;
+  --oc-line: #dde3e0;
+  --oc-line-strong: #c3ccc8;
+
+  --oc-primary: #0c6b66; /* Oasis */
+  --oc-primary-hover: #095753;
+  --oc-primary-soft: #dcefec;
+  --oc-on-primary: #fcfdfc;
+  --oc-accent: #f0a030; /* Saffron */
+  --oc-accent-soft: #fdf0dc;
+  --oc-on-accent: #121826;
+
+  --oc-success: #23804f;
+  --oc-warning: #a8670a;
+  --oc-error: #c23a3a;
+  --oc-info: #2c63c7;
+
+  /* Collection hues. Used only inside a product's own context. */
+  --oc-hue-bride: #c4507a;
+  --oc-hue-grocery: #3a8a4c;
+  --oc-hue-planner: #3c58cf;
+  --oc-hue-fit: #d65a34;
+  --oc-hue-budget: #a97c12;
+  --oc-hue-study: #6a4fc4;
+  --oc-hue-travel: #1d84ab;
+
+  --oc-shadow-tint: 18 40 38;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --oc-bg: #0c1014;
+    --oc-bg-sunken: #080b0e;
+    --oc-surface: #12181d;
+    --oc-surface-raised: #182027;
+    --oc-ink: #e9eeec;
+    --oc-ink-soft: #c5cdca;
+    --oc-muted: #96a19d;
+    --oc-line: #24302f;
+    --oc-line-strong: #34433f;
+    --oc-primary: #3fb5ac;
+    --oc-primary-hover: #5cc6be;
+    --oc-primary-soft: #11302e;
+    --oc-on-primary: #0c1014;
+    --oc-accent: #f4b04a;
+    --oc-accent-soft: #3a2a12;
+    --oc-success: #4cc285;
+    --oc-warning: #e5a33e;
+    --oc-error: #f07070;
+    --oc-info: #79a6f2;
+    --oc-hue-bride: #e488aa;
+    --oc-hue-grocery: #6cc27e;
+    --oc-hue-planner: #8299f0;
+    --oc-hue-fit: #f08a66;
+    --oc-hue-budget: #dcae45;
+    --oc-hue-study: #a793ef;
+    --oc-hue-travel: #5bb8dc;
+    --oc-shadow-tint: 0 0 0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --oc-bg: #0c1014;
+  --oc-bg-sunken: #080b0e;
+  --oc-surface: #12181d;
+  --oc-surface-raised: #182027;
+  --oc-ink: #e9eeec;
+  --oc-ink-soft: #c5cdca;
+  --oc-muted: #96a19d;
+  --oc-line: #24302f;
+  --oc-line-strong: #34433f;
+  --oc-primary: #3fb5ac;
+  --oc-primary-hover: #5cc6be;
+  --oc-primary-soft: #11302e;
+  --oc-on-primary: #0c1014;
+  --oc-accent: #f4b04a;
+  --oc-accent-soft: #3a2a12;
+  --oc-success: #4cc285;
+  --oc-warning: #e5a33e;
+  --oc-error: #f07070;
+  --oc-info: #79a6f2;
+  --oc-hue-bride: #e488aa;
+  --oc-hue-grocery: #6cc27e;
+  --oc-hue-planner: #8299f0;
+  --oc-hue-fit: #f08a66;
+  --oc-hue-budget: #dcae45;
+  --oc-hue-study: #a793ef;
+  --oc-hue-travel: #5bb8dc;
+  --oc-shadow-tint: 0 0 0;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--oc-bg);
+  --color-bg-sunken: var(--oc-bg-sunken);
+  --color-surface: var(--oc-surface);
+  --color-surface-raised: var(--oc-surface-raised);
+  --color-ink: var(--oc-ink);
+  --color-ink-soft: var(--oc-ink-soft);
+  --color-muted: var(--oc-muted);
+  --color-line: var(--oc-line);
+  --color-line-strong: var(--oc-line-strong);
+  --color-primary: var(--oc-primary);
+  --color-primary-hover: var(--oc-primary-hover);
+  --color-primary-soft: var(--oc-primary-soft);
+  --color-on-primary: var(--oc-on-primary);
+  --color-accent: var(--oc-accent);
+  --color-accent-soft: var(--oc-accent-soft);
+  --color-on-accent: var(--oc-on-accent);
+  --color-success: var(--oc-success);
+  --color-warning: var(--oc-warning);
+  --color-error: var(--oc-error);
+  --color-info: var(--oc-info);
+
+  --font-sans: "Geist", "Plex Arabic", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-soft: 0 1px 2px rgb(var(--oc-shadow-tint) / 0.05), 0 8px 24px -12px rgb(var(--oc-shadow-tint) / 0.18);
+  --shadow-lift: 0 2px 4px rgb(var(--oc-shadow-tint) / 0.06), 0 24px 48px -20px rgb(var(--oc-shadow-tint) / 0.28);
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Arabic: Plex Arabic first so Arabic and Latin digits share Plex metrics in RTL. */
+html[lang="ar"] {
+  --font-sans: "Plex Arabic", "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--oc-bg);
+  color: var(--oc-ink);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+body {
+  font-family: var(--font-sans);
+  background: var(--oc-bg);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+html[lang="ar"] body {
+  line-height: 1.75;
+}
+
+/* Arabic headings: never tight tracking, slightly more leading for ascenders/dots. */
+html[lang="ar"] :is(h1, h2, h3, .display) {
+  letter-spacing: 0 !important;
+  line-height: 1.35 !important;
+}
+
+::selection {
+  background: var(--oc-primary-soft);
+  color: var(--oc-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--oc-primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Direction-aware icon flip for arrows */
+[dir="rtl"] .flip-rtl {
+  transform: scaleX(-1);
+}
+
+/* Paper grain for brand surfaces (fixed, pointer-events-none per perf rules) */
+.oc-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Long-form legal / guide copy */
+.prose-oc {
+  max-width: 68ch;
+  color: var(--oc-ink-soft);
+}
+.prose-oc h2 {
+  color: var(--oc-ink);
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.prose-oc h3 {
+  color: var(--oc-ink);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.prose-oc p,
+.prose-oc ul,
+.prose-oc ol {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+.prose-oc ul {
+  list-style: disc;
+  padding-inline-start: 1.25rem;
+}
+.prose-oc ol {
+  list-style: decimal;
+  padding-inline-start: 1.25rem;
+}
+.prose-oc li {
+  margin-bottom: 0.375rem;
+}
+.prose-oc a {
+  color: var(--oc-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Theme toggle icon visibility follows the active theme without JS state. */
+.dark-icon { display: none; }
+:root[data-theme="dark"] .dark-icon { display: block; }
+:root[data-theme="dark"] .light-icon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dark-icon { display: block; }
+  :root:not([data-theme="light"]) .light-icon { display: none; }
+}
+
+/* Logo mark draw-on: the one continuous stroke, then the click. */
+@media (prefers-reduced-motion: no-preference) {
+  .oc-mark-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: oc-draw 1.1s var(--ease-out-soft) 0.15s forwards;
+  }
+  .oc-mark-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+    animation: oc-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 1.1s forwards;
+  }
+}
+@keyframes oc-draw { to { stroke-dashoffset: 0; } }
+@keyframes oc-pop { to { transform: scale(1); } }
