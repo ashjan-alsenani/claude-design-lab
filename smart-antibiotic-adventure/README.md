@@ -24,7 +24,7 @@ npm run lint      # oxlint
 | 4 · Bacteria Laboratory 🔬 | Step-through microscope story: bacteria → antibiotic → survivors → shields → multiplication; flip-card comparison body ❌ vs bacteria ✅ |
 | 5 · Shield Castle 🛡️ | Mini-game: correct action bubbles fly into a 3D shield piece by piece until it turns gold; Baktoro falls over |
 | Final | Confetti, score count-up, badge spin, golden rules recap, printable certificate with the child's name |
-| Film (`#film`) | ~2.5-minute animated cartoon in 8 chapters: the microscopic world, bacteria vs viruses, the doctor, correct use, how resistance develops, how everyone helps, and the finale. Aleen, Dr. Huda and Kabsool the antibiotic hero speak with fixed character voices, lip-sync to their own audio, blink, look at each other and react. Arabic captions are always on. `public/aleen-film.mp4` is the captioned film with the character voices, for download |
+| Film (`#film`) | ~2.5-minute animated cartoon in 8 chapters: the microscopic world, bacteria vs viruses, the doctor, correct use, how resistance develops, how everyone helps, and the finale. Aleen (a young girl's voice), Dr. Huda and Kabsool the antibiotic hero speak natural Arabic with fixed character voices, lip-sync to their own audio, gesture, blink, look at each other, listen and react, over soft background music. Arabic captions are always on. `public/aleen-film.mp4` is the captioned film with the character voices, for download |
 
 Every drag interaction has a tap/keyboard alternative. Wrong answers never punish: the card wiggles, Baktoro gloats, and Aleen gives a hint with a light bulb.
 
@@ -40,7 +40,8 @@ src/
   film/         film characters (Aleen rig, doctor, capsule hero), 8 scenes, dialogue.json (script),
                 voice-meta.json (generated: durations + lip-sync envelopes), timeline.ts
 public/voices/  one pre-recorded MP3 per dialogue line (generated)
-tools/          generate_voices.py (character voices), build_aleen_rig.py (Aleen's animation layers)
+public/music/   film-music.mp3, the dialogue-ducked background music (generated)
+tools/          generate_voices.py (character voices + lip-sync), build_music.py (music mix), build_aleen_rig.py (Aleen's animation layers)
   state/        game state, progress persistence (localStorage, optional)
   lib/          sound layer, environment detection
 source-art/     original supplied Aleen image (the app uses a background-removed WebP of it)
@@ -52,22 +53,42 @@ source-art/     original supplied Aleen image (the app uses a background-removed
 
 ## Film voices
 
-Every line in `src/film/dialogue.json` has a caption text (`text`) and a separate pronunciation-tuned speech text (`say`, light diacritics, Arabic punctuation, short sentences). `tools/generate_voices.py` renders each line ONCE with a fixed neural Arabic voice per character and ships it as a static MP3, so every visitor hears exactly the same voices — the browser/device speech engine is never used.
+Every line in `src/film/dialogue.json` has a caption (`text`) and a speech text (`say`) written as natural, conversational Modern Standard Arabic: plain spelling, no heavy vowel marks, few commas (heavy marks and extra commas made the delivery choppy). Vowels are added only where a word needs them, e.g. «أَلِين». `tools/generate_voices.py` renders each line once with a fixed neural Arabic voice per character and ships it as a static MP3, so every visitor hears exactly the same voices: the browser/device speech engine is never used.
 
-| Character | Gender | Voice (fixed) |
-| --- | --- | --- |
-| Aleen | Female | `ar-QA-AmalNeural` (+8 Hz, youthful) |
-| Dr. Huda | Female | `ar-JO-SanaNeural` (−6 % rate, calm) |
-| Kabsool | Male | `ar-KW-FahedNeural` (+18 Hz, −9 % rate) |
+| Character | Gender | Voice (fixed) | Measured pitch |
+| --- | --- | --- | --- |
+| Aleen (young girl) | Female | `ar-LB-LaylaNeural`, child rendering ×1.18 | 271–314 Hz |
+| Dr. Huda (adult doctor) | Female | `ar-AE-FatimaNeural` (−3 % rate, calm) | 195–225 Hz |
+| Kabsool | Male | `ar-KW-FahedNeural` (+18 Hz, −6 % rate) | 128–155 Hz |
 
-- The generator refuses to run if a voice's catalogue gender or language does not match the character, and never substitutes another voice.
-- Each clip is trimmed, loudness-normalised to −16 LUFS (measured second pass) and analysed into a 40 ms mouth-openness envelope for lip-sync.
-- At runtime the player schedules lines from their real durations (no overlaps, a short pause at every change of speaker). If a voice file fails to load, that line stays captions-only — no fallback voice.
-- Regenerate after editing dialogue: `pip install edge-tts numpy && python tools/generate_voices.py [line ids…]` (uses Microsoft Edge's online neural voices at build time; needs network and ffmpeg). `--meta-only` refreshes durations/envelopes from existing files.
+- **Aleen's child voice.** The female voice is rendered slightly slower, then resampled ×1.18. This raises pitch *and* formants together, as a child's shorter vocal tract does, with no pitch-shift artifacts.
+- **No wrong voice, ever.** The generator refuses to run if a voice's catalogue gender or language does not match the character, and it never substitutes another voice. If a voice file fails to load in the browser, that line stays captions-only.
+- **Clean, even audio.** Each clip is trimmed, its long sentence pauses are shortened (≤ 0.42 s for Aleen, ≤ 0.55 s for Dr. Huda), and it is loudness-normalised with a measured second pass.
+- **Lip-sync data.** Each clip is analysed every 20 ms into mouth openness (loudness × jaw height from the first formant) and lip shape (rounded u/o ↔ spread i/e from the second formant). The data is smoothed like real articulation and leads the sound by 40 ms.
+- **Timing and sync.** The player schedules lines from their real durations: no overlaps, a 0.75 s reaction pause at every change of speaker. While a character speaks, their voice is the master clock, so lips and picture follow the sound.
+- **Visuals on cue.** Scene beats are anchored to the words that introduce them (`cue()` in `scenes.tsx`), so they stay in place when lines are regenerated.
+- **Regenerating.** After editing dialogue, run `pip install edge-tts numpy && python tools/generate_voices.py [line ids…]`, then `python tools/build_music.py`. This uses Microsoft Edge's online neural voices at build time and needs network access and ffmpeg. `--meta-only` refreshes durations and lip-sync data from the existing files.
+
+## Film music
+
+`source-art/music/` holds an original underscore composed for the film: D major, 96 BPM; piano, Rhodes, strings, pizzicato, celesta, soft brushes. It comes with its MIDI and the scripts that render it with the MIT-licensed FluidR3_GM soundfont. `tools/build_music.py` mixes it against the dialogue timeline into `public/music/film-music.mp3`:
+- under every line it sits about 19 dB below the voices (at least 15 dB);
+- it rises gently in scene transitions, the intro and the outro;
+- its resolved final chord lands on the last seconds of the film.
+
+The player keeps it locked to the picture and has its own 🎵 toggle.
 
 ## Aleen's animation rig
 
-`tools/build_aleen_rig.py` splits the approved cut-out into three layers (body, head, hands) without repainting her: the head turns a few degrees around the neck, the clasped hands lift from the elbows for gestures (the navy dress behind them is filled from its surroundings), and an SVG overlay animates her real irises (gaze), eyelids (blinks, using her own skin and lash colours) and mouth (her own lower lip drops to reveal the mouth, driven by her voice envelope). At rest the layers recompose to the original image.
+`tools/build_aleen_rig.py` splits the approved cut-out into four layers without repainting her:
+- **Skirt.** Wherever the arms, hands or backpack cover the dress, it is rebuilt from the same pleats lower down.
+- **Upper body.** The torso, sleeves and backpack lean, breathe, shrug and shift weight around the waist seam.
+- **Clasped hands.** They rise from the elbows, present toward what she talks about, and beat on stressed syllables.
+- **Head.** It tilts, nods, turns toward whoever is speaking and listens.
+
+An SVG overlay animates her real irises (gaze toward the viewer, the other character or the visual), her eyelids (natural blinks), her eyebrows (raised for surprise and curiosity, inner ends up when worried) and her own lips. The lips part and change shape with her vowels; the mouth stays closed when she is silent.
+
+Gestures are chosen per spoken phrase, so they never loop mechanically. At rest the layers recompose to the original image. Dr. Huda (fully drawn) explains with an open hand, points toward the visuals with her clipboard, tilts her head toward Aleen, nods while listening, blinks and lip-syncs to her own voice.
 
 ## Sound
 

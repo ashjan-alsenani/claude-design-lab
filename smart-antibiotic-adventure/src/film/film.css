@@ -208,6 +208,8 @@
 .aleen-body { position: relative; height: 100%; }
 .rig { position: relative; width: 100%; height: 100%; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 12px 14px rgb(0 0 0 / 0.25)); }
 .rig-layer { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; pointer-events: none; }
+/* upper body leans / breathes / shrugs around the waist seam (285, 515 of 547 × 1394) */
+.rig-torso { position: absolute; inset: 0; transform-origin: 52.1% 36.94%; will-change: transform; }
 /* hands lift from the elbows (y = 600 of 1394) */
 .rig-hands { transform-origin: 50% 43.04%; will-change: transform; }
 /* head turns around the neck (285, 290 of 547 × 1394) */

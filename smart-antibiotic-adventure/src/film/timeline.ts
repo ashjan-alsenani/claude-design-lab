@@ -7,10 +7,11 @@ import type { AleenMood } from './actors'
  * The film timeline is built from the REAL length of every recorded line, so
  * dialogue never overlaps: each line starts at its scripted time or after the
  * previous line finishes plus a short natural pause, whichever is later.
+ * tools/build_music.py mirrors this logic to place the music ducking.
  */
 
 export type Speaker = 'aleen' | 'doctor' | 'capsule'
-export type Look = 'viewer' | 'other'
+export type Look = 'viewer' | 'other' | 'visual'
 export type TimedLine = {
   id: string
   who: Speaker
@@ -20,18 +21,22 @@ export type TimedLine = {
   start: number
   end: number
   mouth: string
+  shape: string
 }
 
 type RawLine = { id: string; at: number; who: Speaker; text: string; say: string; mood?: string; look?: string }
-type Meta = { who: string; voice: string; dur: number; mouth: string }
+type Meta = { who: string; voice: string; dur: number; mouth: string; shape: string }
 
 const META = voiceMeta as unknown as Record<string, Meta>
 export const CAST = dialogue.cast as Record<Speaker, { name: string; gender: 'Female' | 'Male'; voice: string }>
 export const SPEAKER_NAME: Record<Speaker, string> = { aleen: CAST.aleen.name, doctor: CAST.doctor.name, capsule: CAST.capsule.name }
+export const SCENE_DUR = dialogue.sceneDur as Record<string, number>
 
-const SAME_SPEAKER_GAP = 0.35
-const TURN_GAP = 0.6 // listener reacts, then answers
-const SCENE_TAIL = 1.2
+/** lip-sync frame length (s) — matches tools/generate_voices.py */
+export const FRAME = 0.02
+const SAME_SPEAKER_GAP = 0.4
+const TURN_GAP = 0.75 // the listener reacts (nod, smile), then answers
+const SCENE_TAIL = 1.4
 
 export function buildLines(sceneKey: string): TimedLine[] {
   const raw = (dialogue.scenes as Record<string, RawLine[]>)[sceneKey] ?? []
@@ -46,7 +51,7 @@ export function buildLines(sceneKey: string): TimedLine[] {
     const gap = prevWho === l.who ? SAME_SPEAKER_GAP : TURN_GAP
     const start = Math.max(l.at, prevEnd + gap)
     const end = start + meta.dur
-    out.push({ id: l.id, who: l.who, text: l.text, mood: l.mood as AleenMood | undefined, look: (l.look as Look) ?? 'viewer', start, end, mouth: meta.mouth })
+    out.push({ id: l.id, who: l.who, text: l.text, mood: l.mood as AleenMood | undefined, look: (l.look as Look) ?? 'viewer', start, end, mouth: meta.mouth, shape: meta.shape })
     prevEnd = end
     prevWho = l.who
   }
@@ -62,21 +67,54 @@ export function sceneLength(base: number, lines: TimedLine[]) {
 /*  Lip-sync + per-frame helpers shared by every character             */
 /* ------------------------------------------------------------------ */
 
-export type Speech = { id?: string; start: number; mouth: string } | null
+/** A character's own line, in global film time. */
+export type Speech = { id: string; start: number; end: number; mouth: string; shape: string } | null
+/** What a listener knows about the line being spoken to them. */
+export type Heard = { id: string; start: number; end: number } | null
 
 /** Global film clock (seconds). Characters read it every frame. */
 export const FilmClock = createContext<() => number>(() => performance.now() / 1000)
 
-/** Mouth openness 0..1 from the speaker's own audio envelope (40 ms frames). */
+function track(s: string, t: number, rest: number) {
+  const x = t / FRAME
+  const i = Math.floor(x)
+  if (i < 0 || i >= s.length) return rest
+  const a = +s[i] / 9
+  const b = i + 1 < s.length ? +s[i + 1] / 9 : rest
+  return a + (b - a) * (x - i)
+}
+/** Mouth openness 0..1 from the speaker's own audio (jaw height × loudness). */
 export function mouthAt(speech: Speech, t: number) {
-  if (!speech) return 0
-  const i = Math.floor((t - speech.start) / 0.04)
-  if (i < 0 || i >= speech.mouth.length) return 0
-  // interpolate between frames for smooth motion
-  const a = +speech.mouth[i] / 9
-  const b = i + 1 < speech.mouth.length ? +speech.mouth[i + 1] / 9 : 0
-  const f = (t - speech.start) / 0.04 - i
-  return a + (b - a) * f
+  return speech ? track(speech.mouth, t - speech.start, 0) : 0
+}
+/** Lip shape 0..1: 0 rounded (u/o) · 0.5 neutral · 1 spread (i/e). */
+export function shapeAt(speech: Speech, t: number) {
+  return speech ? track(speech.shape, t - speech.start, 0.5) : 0.5
+}
+
+/** Phrases inside a line (speech between pauses), local seconds. Cached per line. */
+const phraseCache = new Map<string, { s: number; e: number; peak: number }[]>()
+export function phrases(speech: NonNullable<Speech>) {
+  let p = phraseCache.get(speech.id)
+  if (p) return p
+  p = []
+  const m = speech.mouth
+  let quiet = 99
+  let cur: { s: number; e: number; peak: number } | null = null
+  for (let i = 0; i < m.length; i++) {
+    const v = +m[i]
+    if (v >= 2) {
+      if (!cur || quiet >= 11) {
+        cur = { s: i * FRAME, e: i * FRAME, peak: 0 }
+        p.push(cur)
+      }
+      cur.e = i * FRAME
+      cur.peak = Math.max(cur.peak, v)
+      quiet = 0
+    } else quiet++
+  }
+  phraseCache.set(speech.id, p)
+  return p
 }
 
 /** Run `fn(filmTime, wallTime)` every animation frame. */
@@ -104,14 +142,14 @@ export function makeBlinker(seed = 0) {
   return (wall: number, force = false) => {
     if (startAt < 0 && (wall >= next || force)) startAt = wall
     if (startAt >= 0) {
-      const p = (wall - startAt) / 0.16
+      const p = (wall - startAt) / 0.17
       if (p >= 1) {
         startAt = -1
-        // occasional double blink, otherwise 2.2–5.5 s apart
-        next = wall + (Math.random() < 0.15 ? 0.25 : 2.2 + Math.random() * 3.3)
+        // occasional double blink, otherwise 2.4–5.5 s apart
+        next = wall + (Math.random() < 0.15 ? 0.28 : 2.4 + Math.random() * 3.1)
         return 0
       }
-      return p < 0.45 ? p / 0.45 : 1 - (p - 0.45) / 0.55
+      return p < 0.42 ? p / 0.42 : 1 - (p - 0.42) / 0.58
     }
     return 0
   }
@@ -120,4 +158,31 @@ export function makeBlinker(seed = 0) {
 /** Smoothly approach a target (critically damped-ish). */
 export function approach(cur: number, target: number, dt: number, speed = 10) {
   return cur + (target - cur) * (1 - Math.exp(-speed * dt))
+}
+
+/** A soft, decaying head-nod impulse: call kick() to start one; value() → 0..1..0. */
+export function makeNod() {
+  let at = -99
+  let amp = 0
+  return {
+    kick(wall: number, a = 1) {
+      if (wall - at > 0.55) {
+        at = wall
+        amp = a
+      }
+    },
+    value(wall: number) {
+      const p = (wall - at) / 0.62
+      if (p < 0 || p > 1) return 0
+      return amp * Math.sin(p * Math.PI) * (1 - p * 0.35)
+    },
+    since: (wall: number) => wall - at,
+  }
+}
+
+/** Deterministic pseudo-random 0..1 from a string + index (stable gestures per line). */
+export function hash01(s: string, k = 0) {
+  let h = 2166136261 ^ k
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619)
+  return ((h >>> 0) % 10000) / 10000
 }

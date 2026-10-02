@@ -2,7 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import { motion, AnimatePresence } from 'motion/react'
 import { useGame } from '../state/game'
 import { FILM, FILM_STARTS, FILM_TOTAL, SPEAKER_NAME, type Speaker } from '../film/scenes'
-import { FilmClock, type Look, type Speech, type TimedLine } from '../film/timeline'
+import { FilmClock, type Heard, type Look, type Speech, type TimedLine } from '../film/timeline'
 import type { AleenMood } from '../film/actors'
 import { SoundToggle } from '../components/Hud'
 import { centerOf } from '../components/fx'
@@ -52,20 +52,39 @@ function stopAllVoices(except?: string) {
   })
 }
 
+/* Soft background music, pre-mixed for this film: it dips under every line of
+   dialogue and rises a little in transitions, the intro and the outro
+   (tools/build_music.py). It follows the film clock like the voices do. */
+let musicEl: HTMLAudioElement | null = null
+function music() {
+  if (!musicEl) {
+    musicEl = new Audio(`${import.meta.env.BASE_URL}music/film-music.mp3`)
+    musicEl.preload = 'auto'
+  }
+  return musicEl
+}
+function stopMusic() {
+  if (musicEl && !musicEl.paused) musicEl.pause()
+}
+
 export function Film() {
   const { go, env } = useGame()
   const [time, setTime] = useState(START)
   const [playing, setPlaying] = useState(false)
   const [started, setStarted] = useState(RECORD)
   const [voices, setVoices] = useState(!RECORD)
+  const [musicOn, setMusicOn] = useState(!RECORD)
   const [scale, setScale] = useState(1)
   const frameRef = useRef<HTMLDivElement>(null)
   const shellRef = useRef<HTMLDivElement>(null)
   const timeRef = useRef(START)
   const voicesRef = useRef(voices)
+  const musicRef = useRef(musicOn)
   useEffect(() => {
     voicesRef.current = voices
-  }, [voices])
+    musicRef.current = musicOn
+    if (!musicOn) stopMusic()
+  }, [voices, musicOn])
   const getFilmTime = useCallback(() => timeRef.current, [])
 
   const si = sceneAt(time)
@@ -101,13 +120,17 @@ export function Film() {
 
   // warm the voice files once playback starts
   useEffect(() => {
-    if (started && !RECORD) FILM.forEach((sc) => sc.lines.forEach((l) => voiceFile(l.id)))
+    if (started && !RECORD) {
+      FILM.forEach((sc) => sc.lines.forEach((l) => voiceFile(l.id)))
+      music()
+    }
   }, [started])
 
   // film clock + keeping each character's audio locked to the timeline
   useEffect(() => {
     if (!playing) {
       stopAllVoices()
+      stopMusic()
       return
     }
     let raf = 0
@@ -133,8 +156,25 @@ export function Film() {
         if (a.paused) {
           if (Math.abs(a.currentTime - expected) > 0.08) a.currentTime = expected
           void a.play().catch(() => undefined)
-        } else if (Math.abs(a.currentTime - expected) > 0.3) {
+        } else if (Math.abs(a.currentTime - expected) > 0.25) {
           a.currentTime = expected
+        } else if (a.readyState >= 3 && !a.seeking) {
+          // while a character speaks, their voice is the master clock: picture and
+          // lips follow the sound exactly instead of drifting against it
+          next += (a.currentTime - expected) * 0.3
+          timeRef.current = next
+        }
+      }
+      if (musicRef.current) {
+        const m = music()
+        if (m.paused) {
+          if (Math.abs(m.currentTime - next) > 0.1) m.currentTime = next
+          if (next < FILM_TOTAL - 0.1) void m.play().catch(() => undefined)
+        } else {
+          // stay locked to the picture without audible jumps: nudge the speed, seek only if far off
+          const err = m.currentTime - next
+          if (Math.abs(err) > 0.6) m.currentTime = next
+          else m.playbackRate = Math.min(1.06, Math.max(0.94, 1 - err * 0.8))
         }
       }
       acc += dt
@@ -148,6 +188,7 @@ export function Film() {
     return () => {
       cancelAnimationFrame(raf)
       stopAllVoices()
+      stopMusic()
     }
   }, [playing])
 
@@ -172,7 +213,8 @@ export function Film() {
       const lt = now - FILM_STARTS[s]
       const l = FILM[s].lines.find((x) => lt >= x.start && lt < x.end - 0.03)
       const audible = [...audioCache.entries()].filter(([, a]) => !a.paused).map(([id, a]) => ({ id, at: a.currentTime }))
-      return { line: l ? { id: l.id, who: l.who, expected: lt - l.start } : null, audible, failed: [...failed] }
+      const m = musicEl && !musicEl.paused ? { at: musicEl.currentTime } : null
+      return { now, line: l ? { id: l.id, who: l.who, expected: lt - l.start } : null, audible, failed: [...failed], music: m }
     }
   }, [])
 
@@ -183,6 +225,7 @@ export function Film() {
     return () => {
       document.removeEventListener('visibilitychange', onVis)
       stopAllVoices()
+      stopMusic()
     }
   }, [])
 
@@ -190,10 +233,14 @@ export function Film() {
     if (!voices) stopAllVoices()
   }, [voices])
 
-  const stopVoice = () => stopAllVoices()
+  const stopVoice = () => {
+    stopAllVoices()
+    stopMusic()
+  }
 
   const seek = (to: number) => {
     stopAllVoices()
+    stopMusic()
     timeRef.current = to
     setTime(to)
   }
@@ -218,10 +265,23 @@ export function Film() {
   // turn-taking: who speaks, and where everyone looks
   const speaking = line && t >= line.start - 0.05 && t <= line.end ? line.who : null
   const talking: Speaker | null = speaking
-  const speech = (who: Speaker): Speech => (line && line.who === who ? { id: line.id, start: FILM_STARTS[si] + line.start, mouth: line.mouth } : null)
+  const g0 = FILM_STARTS[si]
+  const speech = (who: Speaker): Speech =>
+    line && line.who === who ? { id: line.id, start: g0 + line.start, end: g0 + line.end, mouth: line.mouth, shape: line.shape } : null
   const sp: Record<Speaker, Speech> = { aleen: speech('aleen'), doctor: speech('doctor'), capsule: speech('capsule') }
+  // everyone who is not speaking listens to the line (and reacts when it ends)
+  const hear = (who: Speaker): Heard => (line && line.who !== who ? { id: line.id, start: g0 + line.start, end: g0 + line.end } : null)
+  const heard: Record<Speaker, Heard> = { aleen: hear('aleen'), doctor: hear('doctor'), capsule: hear('capsule') }
   const aleenLook: Look = !line ? 'viewer' : line.who === 'aleen' ? line.look : 'other'
-  const docLook: 'aleen' | 'viewer' = !line ? 'viewer' : line.who === 'doctor' ? (line.look === 'other' ? 'aleen' : 'viewer') : line.who === 'aleen' ? 'aleen' : 'viewer'
+  const docLook: 'aleen' | 'viewer' | 'visual' = !line
+    ? 'aleen'
+    : line.who === 'doctor'
+      ? line.look === 'other'
+        ? 'aleen'
+        : line.look
+      : line.who === 'aleen'
+        ? 'aleen'
+        : 'visual'
   const mood: AleenMood = line?.mood ?? 'idle'
 
   // keyboard: space toggles
@@ -274,7 +334,7 @@ export function Film() {
                 transition={{ duration: 0.8, ease: [0.77, 0, 0.175, 1] }}
               >
                 <FilmClock.Provider value={getFilmTime}>
-                  <Scene t={t} talking={talking} mood={mood} reduced={env.reducedMotion} sp={sp} aleenLook={aleenLook} docLook={docLook} />
+                  <Scene t={t} talking={talking} mood={mood} reduced={env.reducedMotion} sp={sp} heard={heard} aleenLook={aleenLook} docLook={docLook} />
                 </FilmClock.Provider>
               </motion.div>
             </AnimatePresence>
@@ -361,6 +421,16 @@ export function Film() {
               title={voices ? 'كتم أصوات الشخصيات' : 'تشغيل أصوات الشخصيات'}
             >
               {voices ? '🔊' : '🔇'} <span className="ctrl-label">{voices ? 'أصوات الشخصيات' : 'الترجمة فقط'}</span>
+            </button>
+            <button
+              type="button"
+              className={`ctrl-btn voice ${musicOn ? 'on' : ''}`}
+              onClick={() => setMusicOn((v) => !v)}
+              aria-pressed={musicOn}
+              aria-label={musicOn ? 'إيقاف الموسيقى' : 'تشغيل الموسيقى'}
+              title={musicOn ? 'إيقاف الموسيقى' : 'تشغيل الموسيقى'}
+            >
+              🎵 <span className="ctrl-label">{musicOn ? 'الموسيقى' : 'بلا موسيقى'}</span>
             </button>
             <button type="button" className="ctrl-btn" onClick={() => seek(0)} aria-label="من البداية" title="من البداية">
               ↻
