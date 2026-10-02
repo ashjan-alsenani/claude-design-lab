@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRightIcon, CursorClickIcon, DevicesIcon, MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale, num, tr, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { catalog } from "@/lib/data/catalog";
@@ -15,6 +15,29 @@ import { ProductIcon } from "@/components/product/ProductIcon";
 import { JsonLd } from "@/components/JsonLd";
 import { faqJsonLd } from "@/lib/seo";
 import { hueSoft, hueVar } from "@/lib/hues";
+import { Clicky, type ClickyMood } from "@/components/brand/Clicky";
+import { ProductArt } from "@/components/art/ProductArt";
+
+const howMoods: ClickyMood[] = ["think", "wink", "celebrate"];
+const howColors = ["var(--oc-hue-planner)", "var(--oc-hue-bride)", "var(--oc-brand)"];
+
+/** Renders a headline with one word wrapped in a hand-drawn sunshine underline. */
+function Highlighted({ text, word }: { text: string; word: string }) {
+  const i = word ? text.indexOf(word) : -1;
+  if (i < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, i)}
+      <span className="relative inline-block whitespace-nowrap">
+        <span className="relative z-10">{word}</span>
+        <svg aria-hidden="true" viewBox="0 0 200 20" preserveAspectRatio="none" className="absolute -bottom-1 start-0 z-0 h-[0.32em] w-full">
+          <path d="M3 14 C50 4 120 2 197 10" fill="none" stroke="var(--oc-accent)" strokeWidth="9" strokeLinecap="round" />
+        </svg>
+      </span>
+      {text.slice(i + word.length)}
+    </>
+  );
+}
 import { notFound } from "next/navigation";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
@@ -38,7 +61,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   const featured = products.filter((p) => p.status !== "coming-soon").slice(0, 5);
   const homeFaqs = faqs.filter((f) => ["what", "app", "lifetime", "payment", "languages"].includes(f.id)).map((f) => ({ q: tr(f.q, locale), a: tr(f.a, locale) }));
-  const howIcons = [MagnifyingGlassIcon, CursorClickIcon, DevicesIcon];
   const bento = categories.filter((c) => c.slug !== "templates-downloads").slice(0, 7);
 
   return (
@@ -48,8 +70,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 sm:px-6 md:pt-16 lg:min-h-[min(780px,calc(100dvh-4rem))] lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:px-8 lg:pb-20">
           <div className="max-w-xl">
             <Reveal>
-              <h1 className="display text-[2.6rem] font-semibold leading-[1.05] tracking-[-0.035em] text-ink sm:text-6xl lg:text-[4.1rem]">
-                {d.home.heroTitle}
+              <h1 className="display text-[2.7rem] font-bold leading-[1.05] tracking-[-0.03em] text-ink sm:text-6xl lg:text-[4.2rem]">
+                <Highlighted text={d.home.heroTitle} word={d.home.heroHighlight} />
               </h1>
             </Reveal>
             <Reveal delay={0.08}>
@@ -89,42 +111,46 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      {/* COLLECTIONS: asymmetric bento, each cell tinted with its collection hue */}
+      {/* COLLECTIONS: playful bento, each tile tinted with its collection color + illustration */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <Reveal>
-          <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem]">{d.home.collectionsTitle}</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-[2.6rem]">{d.home.collectionsTitle}</h2>
         </Reveal>
-        <div className="mt-10 grid auto-rows-[150px] grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+        <div className="mt-10 grid auto-rows-[160px] grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
           {bento.map((c, i) => {
             const big = i === 0 || i === 1;
             // Exact cell count: an odd number of small tiles stretches the last one on mobile.
             const smallCount = bento.length - 2;
             const stretch = !big && smallCount % 2 === 1 && i === bento.length - 1;
             return (
-              <Reveal key={c.slug} delay={i * 0.04} className={big ? "col-span-2 row-span-1 md:row-span-2" : stretch ? "col-span-2 md:col-span-1" : ""}>
+              <Reveal key={c.slug} delay={i * 0.04} className={big ? "col-span-2 row-span-2" : stretch ? "col-span-2 md:col-span-1" : ""}>
                 <Link
                   href={`/${locale}/collections/${c.slug}`}
-                  className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[var(--radius-lg)] p-5 transition-transform duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5"
-                  style={{ background: hueSoft(c.hue, big ? 20 : 13) }}
+                  className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[var(--radius-lg)] p-5 transition-transform duration-300 ease-[var(--ease-bounce)] hover:-rotate-1 hover:scale-[1.02]"
+                  style={{ background: hueSoft(c.hue, big ? 22 : 18) }}
                 >
-                  <span className="grid size-11 place-items-center rounded-[13px] bg-surface-raised shadow-soft" style={{ color: hueVar(c.hue) }}>
-                    <ProductIcon hue={c.hue} size={big ? 24 : 20} />
-                  </span>
-                  <div>
-                    <h3 className={`font-semibold tracking-tight text-ink ${big ? "text-2xl" : "text-base"}`}>{tr(c.name, locale)}</h3>
+                  {big ? (
+                    <ProductArt hue={c.hue} className="absolute -end-4 top-2 h-[62%] w-[70%] transition-transform duration-500 group-hover:scale-105" />
+                  ) : (
+                    <span className="grid size-12 place-items-center rounded-[16px] bg-surface-raised shadow-soft transition-transform duration-300 ease-[var(--ease-bounce)] group-hover:-rotate-6 group-hover:scale-110" style={{ color: hueVar(c.hue) }}>
+                      <ProductIcon hue={c.hue} size={24} />
+                    </span>
+                  )}
+                  <div className={big ? "relative mt-auto" : ""}>
+                    <h3 className={`font-bold tracking-tight text-ink ${big ? "text-2xl" : "text-base"}`}>{tr(c.name, locale)}</h3>
                     {big && <p className="mt-1.5 max-w-[36ch] text-ink-soft">{tr(c.description, locale)}</p>}
                   </div>
-                  {big && (
-                    <span aria-hidden="true" className="absolute -end-10 -top-10 size-48 rounded-full border-[14px] opacity-20 transition-transform duration-500 group-hover:scale-110" style={{ borderColor: hueVar(c.hue) }} />
-                  )}
                 </Link>
               </Reveal>
             );
           })}
           <Reveal delay={0.3} className={`col-span-2 ${(bento.length - 2) % 4 === 1 ? "md:col-span-3" : (bento.length - 2) % 4 === 2 ? "md:col-span-2" : "md:col-span-1"}`}>
-            <Link href={`/${locale}/products`} className="flex h-full items-center justify-between rounded-[var(--radius-lg)] bg-primary p-5 text-on-primary transition-colors hover:bg-primary-hover">
-              <span className="text-base font-semibold">{d.common.allProducts}</span>
-              <ArrowRightIcon size={20} className="flip-rtl" />
+            <Link href={`/${locale}/products`} className="group flex h-full items-center justify-between overflow-hidden rounded-[var(--radius-lg)] bg-ink p-5 ps-6 text-bg">
+              <span className="text-lg font-bold">{d.common.allProducts}</span>
+              <span className="flex items-center gap-3">
+                <Clicky size={64} mood="wink" className="transition-transform duration-300 ease-[var(--ease-bounce)] group-hover:-translate-y-1 group-hover:rotate-6" />
+                <ArrowRightIcon size={22} className="flip-rtl" />
+              </span>
             </Link>
           </Reveal>
         </div>
@@ -133,59 +159,63 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* PRODUCTS: horizontal scroll-snap rail */}
       <section className="pb-20 lg:pb-28">
         <div className="mx-auto flex max-w-7xl items-end justify-between gap-6 px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem]">{d.catalog.title}</h2>
-          <Link href={`/${locale}/products`} className="hidden shrink-0 items-center gap-2 font-medium text-primary hover:underline sm:inline-flex">
+          <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-[2.6rem]">{d.catalog.title}</h2>
+          <Link href={`/${locale}/products`} className="hidden shrink-0 items-center gap-2 font-semibold text-primary hover:underline sm:inline-flex">
             {d.common.allProducts}
             <ArrowRightIcon size={16} className="flip-rtl" />
           </Link>
         </div>
-        <ul className="mx-auto mt-10 flex max-w-7xl snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-4 sm:scroll-px-6 sm:px-6 lg:scroll-px-8 lg:px-8">
+        <ul className="mx-auto mt-10 flex max-w-7xl snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-6 pt-2 sm:scroll-px-6 sm:px-6 lg:scroll-px-8 lg:px-8">
           {featured.map((p) => (
-            <li key={p.id} className="w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
+            <li key={p.id} className="w-[80%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
               <ProductCard product={p} locale={locale} d={d} />
             </li>
           ))}
         </ul>
       </section>
 
-      {/* HOW IT WORKS: connected line, not three boxed cards */}
-      <section className="border-y border-line bg-surface">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{d.home.howTitle}</h2>
-          <ol className="relative mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
-            <span aria-hidden="true" className="absolute inset-x-[16%] top-6 hidden h-px bg-line-strong md:block" />
-            {d.home.how.map((step, i) => {
-              const I = howIcons[i];
-              return (
-                <li key={step.title} className="relative flex gap-4 md:flex-col md:items-center md:text-center">
-                  <span className="relative grid size-12 shrink-0 place-items-center rounded-full border border-line-strong bg-bg text-primary">
-                    <I size={22} weight="duotone" />
-                  </span>
-                  <div>
-                    <h3 className="font-semibold text-ink">{step.title}</h3>
-                    <p className="mt-1 max-w-[30ch] text-ink-soft">{step.body}</p>
-                  </div>
-                </li>
-              );
-            })}
+      {/* HOW IT WORKS: Clicky walks you through it */}
+      <section className="relative overflow-hidden bg-[color-mix(in_oklab,var(--oc-lilac)_12%,var(--oc-bg))]">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+          <h2 className="text-center text-3xl font-bold tracking-tight text-ink sm:text-[2.4rem]">{d.home.howTitle}</h2>
+          <ol className="relative mt-14 grid gap-12 md:grid-cols-3 md:gap-8">
+            <svg aria-hidden="true" className="absolute inset-x-[16%] top-10 hidden h-6 w-[68%] md:block" viewBox="0 0 600 24" preserveAspectRatio="none">
+              <path d="M0 12 Q75 0 150 12 T300 12 T450 12 T600 12" fill="none" stroke="var(--oc-lilac)" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
+            </svg>
+            {d.home.how.map((step, i) => (
+              <li key={step.title} className="relative flex items-center gap-5 md:flex-col md:text-center">
+                <span className="relative grid size-24 shrink-0 place-items-center rounded-full bg-surface-raised shadow-soft">
+                  <Clicky size={64} mood={howMoods[i]} color={howColors[i]} animate />
+                  <span className="absolute -end-1 -top-1 grid size-8 place-items-center rounded-full bg-accent text-sm font-bold text-on-accent tabular">{num(i + 1, locale)}</span>
+                </span>
+                <div>
+                  <h3 className="text-lg font-bold text-ink">{step.title}</h3>
+                  <p className="mt-1 max-w-[30ch] text-ink-soft">{step.body}</p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </section>
 
-      {/* CUSTOM SOLUTIONS: full-width tinted band */}
+      {/* CUSTOM SOLUTIONS: colorful band with Clicky */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[var(--radius-xl)] bg-primary-soft px-6 py-12 sm:px-12 sm:py-16">
-            <svg aria-hidden="true" viewBox="0 0 64 64" className="absolute -bottom-16 -end-10 size-72 opacity-[0.12] sm:size-96">
-              <path d="M20.5 32.5 L28.5 40.5 L47.56 16.44 A22 22 0 1 0 53.25 37.69" fill="none" stroke="var(--oc-primary)" strokeWidth="6.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <div className="relative max-w-xl">
-              <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem] sm:leading-[1.1]">{d.home.customTitle}</h2>
-              <p className="mt-4 text-lg leading-relaxed text-ink-soft">{d.home.customSub}</p>
-              <ButtonLink href={`/${locale}/custom`} size="lg" className="mt-8">
-                {d.home.customCta}
-                <ArrowRightIcon size={18} className="flip-rtl" />
-              </ButtonLink>
+          <div className="relative overflow-hidden rounded-[var(--radius-xl)] px-6 py-12 text-white sm:px-12 sm:py-16" style={{ background: "linear-gradient(135deg, #6d5ef2 0%, #3d7bff 55%, #12a3c9 100%)" }}>
+            <div aria-hidden="true" className="absolute -end-16 -top-16 size-64 rounded-full bg-white/10" />
+            <div aria-hidden="true" className="absolute -bottom-20 end-40 size-48 rounded-full bg-white/10" />
+            <div className="relative grid items-center gap-10 md:grid-cols-[1.4fr_1fr]">
+              <div className="max-w-xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-[2.6rem] sm:leading-[1.1]">{d.home.customTitle}</h2>
+                <p className="mt-4 text-lg leading-relaxed text-white/90">{d.home.customSub}</p>
+                <ButtonLink href={`/${locale}/custom`} size="lg" variant="accent" className="mt-8">
+                  {d.home.customCta}
+                  <ArrowRightIcon size={18} className="flip-rtl" />
+                </ButtonLink>
+              </div>
+              <div className="flex justify-center md:justify-end" aria-hidden="true">
+                <Clicky size={150} body wave animate mood="happy" color="var(--oc-accent)" />
+              </div>
             </div>
           </div>
         </Reveal>
@@ -228,12 +258,15 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* FINAL CTA: free lead magnet, no popup */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-start gap-6 border-t border-line pt-14 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-[2.4rem]">{d.home.finalTitle}</h2>
-            <p className="mt-2 text-lg text-ink-soft">{d.home.finalSub}</p>
+        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-[var(--radius-xl)] bg-accent-soft px-6 py-10 sm:px-10 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-5">
+            <Clicky size={84} mood="celebrate" animate className="shrink-0" />
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-[2.2rem]">{d.home.finalTitle}</h2>
+              <p className="mt-1 text-lg text-ink-soft">{d.home.finalSub}</p>
+            </div>
           </div>
-          <ButtonLink href={`/${locale}/products/weekly-reset-checklist`} variant="accent" size="lg">
+          <ButtonLink href={`/${locale}/products/weekly-reset-checklist`} size="lg">
             {d.home.finalCta}
           </ButtonLink>
         </div>

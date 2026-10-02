@@ -7,7 +7,7 @@ import type { Locale } from "@/i18n/config";
  */
 export type EmailContent = { subject: string; html: string; text: string };
 
-const C = { bg: "#F5F7F6", card: "#FFFFFF", ink: "#121826", muted: "#5B6573", primary: "#0C6B66", accent: "#F0A030", line: "#DDE3E0" };
+const C = { bg: "#FFF9F4", card: "#FFFFFF", ink: "#1E1B3A", muted: "#6C6790", primary: "#0B7D73", accent: "#FFC23D", line: "#EFE5DC" };
 
 function esc(s: string) {
   return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
@@ -15,7 +15,7 @@ function esc(s: string) {
 
 function layout(locale: Locale, opts: { preheader: string; title: string; paragraphs: string[]; cta?: { label: string; url: string }; footer: string }) {
   const dir = locale === "ar" ? "rtl" : "ltr";
-  const font = locale === "ar" ? "'IBM Plex Sans Arabic', Tahoma, Arial, sans-serif" : "Geist, -apple-system, 'Segoe UI', Arial, sans-serif";
+  const font = "Rubik, -apple-system, 'Segoe UI', Tahoma, Arial, sans-serif";
   const align = locale === "ar" ? "right" : "left";
   const cta = opts.cta
     ? `<p style="margin:28px 0 8px"><a href="${esc(opts.cta.url)}" style="display:inline-block;background:${C.primary};color:#fff;text-decoration:none;font-weight:600;padding:12px 22px;border-radius:999px">${esc(opts.cta.label)}</a></p>`

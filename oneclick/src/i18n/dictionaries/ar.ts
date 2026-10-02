@@ -65,6 +65,7 @@ export const ar: Dictionary = {
   },
   home: {
     heroTitle: "يومك، صار أبسط.",
+    heroHighlight: "أبسط",
     heroSub: "مخططات ومنظّمات تفاعلية أنيقة للعرس والمقاضي وأسبوعك وأكثر. صُنعت في عُمان، لكل مكان.",
     heroCta: "تصفّح المنتجات",
     heroSecondary: "جرّب عرض مباشر",

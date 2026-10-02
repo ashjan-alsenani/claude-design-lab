@@ -27,74 +27,68 @@ never hype ("revolutionize", "seamless", "unleash"). Honest about what exists to
 Arabic marketing copy is friendly Gulf-leaning ("خلّي يومك أسهل", "المقاضي"); legal and formal
 support copy uses formal Modern Standard Arabic. No em dashes in copy.
 
-## 2. Logo
+## 2. Logo: Clicky
 
-**Concept: the closing loop.** One continuous stroke: a check mark (completion) that keeps moving
-and becomes an open orbit (the "O" of One Click Digital Hub, flow, connection). The saffron dot sits in the
-opening: the one click that closes the loop. Deliberately avoids cursors, power icons and bolts.
+**Concept (v2, chosen by the owner on 2026-10-02):** Clicky, a friendly face whose smile is a
+check mark: a job done, happily. The sunshine dot is the "click", like a dimple. Simple,
+uncluttered, and it works as the logo, app icon, favicon and the brand's character.
 
 | Asset | File |
 |---|---|
-| Primary logo (horizontal) | `public/brand/oneclick-logo-{light,dark,mono,mono-white}.svg` |
-| Secondary logo (stacked) | `public/brand/oneclick-logo-stacked-*.svg` |
-| Wordmark (two lines: "One Click" / "DIGITAL HUB") | `public/brand/oneclick-wordmark-*.svg` |
-| OCDH monogram (tight spaces, watermarks) | `public/brand/ocdh-monogram-*.svg` |
-| Icon mark | `public/brand/oneclick-mark-*.svg` |
-| Favicon (auto dark mode) | `src/app/icon.svg`, `src/app/apple-icon.png` |
-| App icon | `oneclick-app-icon(.svg/.png/-192.png)`, `oneclick-app-icon-dark.svg` |
-| Instagram avatar | `oneclick-instagram-avatar.(svg/png)` (1080², circle-safe) |
+| Primary lockup (Clicky + "One Click" / "DIGITAL HUB") | `public/brand/oneclick-logo-{light,dark,mono,mono-white}.svg` |
+| Stacked lockup | `public/brand/oneclick-logo-stacked-*.svg` |
+| Wordmark (two lines) | `public/brand/oneclick-wordmark-*.svg` |
+| OCDH monogram | `public/brand/ocdh-monogram-*.svg` |
+| Mark (Clicky face) | `public/brand/oneclick-mark-*.svg` |
+| Favicon (auto dark), Apple icon | `src/app/icon.svg`, `src/app/apple-icon.png` |
+| App icons | `oneclick-app-icon(.svg/.png/-192.png)`, `oneclick-app-icon-dark.svg` |
+| Instagram avatar | `oneclick-instagram-avatar.(svg/png)`: Clicky on sunshine, circle-safe |
 | Instagram highlight covers | `instagram-highlight-{products,bride,grocery,planner,tips,custom}.png` |
 | Social preview | `og-default.png` (1200×630) |
+| Living style guide | `/en/brand` (not indexed) |
 
-Rules: "One Click" is outlined Geist SemiBold, tracking −2%; "DIGITAL HUB" sits beneath at 34% size, tracking +24%, muted color. Use OCDH alone only where the full name already appears nearby. Minimum mark size 16 px (favicon uses
-a heavier 8-unit stroke). Clear space = half the mark height on all sides. Never recolor the
-mark outside the palette, add gradients, rotate, outline, or place the Oasis mark on busy photos
-(use mono-white on a scrim). The Latin wordmark stays left-to-right inside Arabic layouts.
+Rules: wordmark is outlined Rubik Bold; "DIGITAL HUB" is Rubik SemiBold at 33% size with +26%
+tracking. Clicky keeps its proportions; never stretch or rotate it more than ±10°, and don't
+add a mouth on top of the check smile. The Latin lockup stays left-to-right in Arabic layouts.
 
-## 3. Color
+**The character.** `src/components/brand/Clicky.tsx` has moods (happy, wink, celebrate, love,
+think, surprised), an optional body with arms and legs, waving, blinking and floating animations,
+and any face color. Each product has its own colored Clicky (pink Bride, green Grocery, blue
+Planner, orange Fit…). Use Clicky to guide, cheer and fill empty states, but never more than one
+large Clicky per screen.
 
-Colorful but elegant: one brand primary, one warm accent, and a family of collection hues
-that only appear inside their product's context. Cool neutral base (not cream).
+## 3. Color (v2 "friendly")
+
+Bright and joyful, balanced by a deep indigo ink and a warm off-white base.
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `primary` (Oasis) | `#0C6B66` | `#3FB5AC` | Brand, primary buttons, links, focus |
-| `accent` (Saffron) | `#F0A030` | `#F4B04A` | The "click" dot, highlights, free/launch CTAs (dark text) |
-| `bg` | `#F5F7F6` | `#0C1014` | Page |
-| `surface` / `surface-raised` | `#FCFDFC` / `#FFFFFF` | `#12181D` / `#182027` | Cards, panels |
-| `ink` | `#121826` | `#E9EEEC` | Text |
-| `ink-soft` / `muted` | `#3A4352` / `#5B6573` | `#C5CDCA` / `#96A19D` | Body / secondary text |
-| `line` / `line-strong` | `#DDE3E0` / `#C3CCC8` | `#24302F` / `#34433F` | Borders |
-| `success` | `#23804F` | `#4CC285` | |
-| `warning` | `#A8670A` | `#E5A33E` | |
-| `error` | `#C23A3A` | `#F07070` | |
-| `info` | `#2C63C7` | `#79A6F2` | |
+| `brand` (Clicky teal) | `#12B5A6` | `#2DD4BF` | Mascot, decorative |
+| `primary` (button teal) | `#0B7D73` | `#2DD4BF` | Buttons, links, focus (AA contrast) |
+| `accent` (Sunshine) | `#FFC23D` | `#FFCB57` | Highlights, the dimple, secondary CTAs (dark text) |
+| `coral` / `lilac` / `sky` | `#FF6B6B` / `#8B7CF6` / `#3DA5FF` | lighter | Illustrations, sparkles, gradients |
+| `bg` / `bg-sunken` | `#FFF9F4` / `#FBF0E6` | `#15132B` / `#100E22` | Page |
+| `surface` / `surface-raised` | `#FFFEFC` / `#FFFFFF` | `#1C1937` / `#24204A` | Cards |
+| `ink` / `ink-soft` / `muted` | `#1E1B3A` / `#46416C` / `#6C6790` | `#F4F1FF` / `#D2CDEC` / `#A7A1CC` | Text |
 
-Collection hues (same lightness family, used for product identity, charts and tints):
-Bride `#C4507A`, Grocery `#3A8A4C`, Planner `#3C58CF`, Fit `#D65A34`, Budget `#A97C12`,
-Study `#6A4FC4`, Travel `#1D84AB`. Tints are generated with `color-mix()` (see `lib/hues.ts`).
-Primary actions always use Oasis, never a collection hue (consistency + contrast in both themes).
+Collection hues: Bride `#F0567A`, Grocery `#1F9E57`, Planner `#3D7BFF`, Fit `#FF7A2F`,
+Budget `#E09E00`, Study `#8B6CF6`, Travel `#12A3C9`.
 
 ## 4. Typography
 
-| Role | Latin | Arabic |
-|---|---|---|
-| Display / headings | Geist 600, tracking −3% | IBM Plex Sans Arabic 600, tracking 0, line-height 1.35 |
-| Body | Geist 400, 16-18 px, line-height 1.6 | IBM Plex Sans Arabic 400, line-height 1.75 |
-| Buttons / labels | Geist 500 | IBM Plex Sans Arabic 500 |
-| Numbers | Geist, `tabular-nums` | Arabic-Indic digits via `Intl` (`ar-OM`) consistently in Arabic UI; prices via `formatMoney()` |
+**Rubik** (variable, SIL OFL) for everything, Arabic and Latin: rounded, friendly and highly
+legible, with matching Arabic letterforms. Headings 700, UI 500-600, body 400. Arabic headings
+use no negative tracking and 1.3 line height; Arabic body 1.75. Numbers: Arabic-Indic digits in
+Arabic UI via `Intl` (`ar-OM`).
 
-Both fonts are SIL OFL, self-hosted (`src/fonts`), `font-display: swap`. Arabic is loaded with a
-`unicode-range` so English pages never download it. Arabic pages put Plex first in the stack.
+## 5. Shape, depth, motion
 
-## 5. Shape, depth, spacing
-
-- Radius scale: 8 (inputs small), 12 (tiles, rows), 20 (cards), 28 (large panels); buttons and
-  chips are full pill. Followed everywhere.
-- Shadows are tinted with the Oasis hue (`--shadow-soft`, `--shadow-lift`), never pure black.
-- Spacing: Tailwind 4-pt scale; sections `py-16` mobile / `py-24..28` desktop; content max width
-  `max-w-7xl` with 16 px mobile gutters.
-- Paper grain overlay (3.5% opacity, fixed, pointer-events none) adds warmth without cost.
+- Radius: 10 / 16 / 24 / 32 px; buttons and chips fully round.
+- Buttons have a soft "3D" bottom shadow and lift on hover; press flattens them.
+- Shadows are tinted indigo, never pure black.
+- Motion: Clicky floats, blinks and waves; sparkles drift; cards wiggle slightly on hover; the hero
+  list settles from scattered notes. Everything is static under `prefers-reduced-motion`.
+- Illustrations: `src/components/art/ProductArt.tsx`, original flat SVG scenes per product.
 
 ## 6. Components (in code)
 

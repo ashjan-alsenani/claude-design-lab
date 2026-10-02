@@ -2,6 +2,14 @@
 
 Format: decision, why, alternatives considered, how to reverse. Newest first.
 
+## 2026-10-02 — Friendly redesign (v2)
+
+**D16.** Owner asked for a friendlier, colorful, animated look with art, icons and characters, and a
+special, simple logo. Owner chose logo concept **D "Clicky"** from 4 options. Changes: Rubik for both
+languages (replaces Geist + IBM Plex Sans Arabic), bright palette (Clicky teal, sunshine, coral,
+lilac, sky on warm off-white / deep indigo), Clicky mascot system, original product illustrations,
+3D buttons, playful hero and sections. Supersedes the D8 visual identity (name and slogan unchanged).
+
 ## 2026-10-02 — Brand renamed to One Click Digital Hub (OCDH)
 
 **D15.** Owner instruction: the brand is **One Click Digital Hub**, short form **OCDH**

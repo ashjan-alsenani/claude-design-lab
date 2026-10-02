@@ -5,14 +5,14 @@ type Variant = "primary" | "secondary" | "ghost" | "accent";
 type Size = "md" | "lg" | "sm";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap select-none " +
-  "transition-[transform,background-color,box-shadow,color] duration-200 ease-[var(--ease-out-soft)] " +
-  "active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap select-none " +
+  "transition-[transform,background-color,box-shadow,color] duration-200 ease-[var(--ease-bounce)] " +
+  "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-primary text-on-primary hover:bg-primary-hover shadow-soft",
-  accent: "bg-accent text-on-accent hover:brightness-105 shadow-soft",
-  secondary: "bg-surface text-ink border border-line-strong hover:border-ink/40",
+  primary: "bg-primary text-on-primary hover:bg-primary-hover shadow-[0_6px_0_-1px_color-mix(in_oklab,var(--oc-primary)_45%,#000)] active:shadow-none",
+  accent: "bg-accent text-on-accent hover:brightness-105 shadow-[0_6px_0_-1px_color-mix(in_oklab,var(--oc-accent)_60%,#000)] active:shadow-none",
+  secondary: "bg-surface-raised text-ink border-2 border-line-strong hover:border-ink/40",
   ghost: "text-ink hover:bg-bg-sunken",
 };
 

@@ -65,6 +65,7 @@ export const en = {
   },
   home: {
     heroTitle: "Everyday life, made simpler.",
+    heroHighlight: "simpler",
     heroSub: "Beautiful interactive planners and organizers for weddings, groceries, your week and more. Built in Oman, made for everywhere.",
     heroCta: "Explore products",
     heroSecondary: "Try a live demo",

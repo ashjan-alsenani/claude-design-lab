@@ -2,7 +2,7 @@ import type { Hue } from "@/content/types";
 
 /** CSS color for a collection hue. Brand = primary. */
 export function hueVar(hue: Hue) {
-  return hue === "brand" ? "var(--oc-primary)" : `var(--oc-hue-${hue})`;
+  return hue === "brand" ? "var(--oc-brand)" : `var(--oc-hue-${hue})`;
 }
 
 /** Soft tinted background derived from the hue (works in both themes). */

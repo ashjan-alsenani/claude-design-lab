@@ -1,142 +1,133 @@
 @import "tailwindcss";
 
-/* One Click Digital Hub design tokens. Full rationale: BRAND_GUIDELINES.md
-   Strategy: semantic CSS variables, swapped for dark mode. Components only use
-   the Tailwind theme names below, never raw hex values. */
+/* One Click Digital Hub design tokens (v2 "friendly"). Rationale: BRAND_GUIDELINES.md
+   Semantic CSS variables swapped for dark mode; components use only theme names. */
 
 @font-face {
-  font-family: "Geist";
-  src: url("../fonts/Geist-Variable-latin.woff2") format("woff2");
-  font-weight: 100 900;
+  font-family: "Rubik";
+  src: url("../fonts/Rubik-Variable-latin.woff2") format("woff2");
+  font-weight: 300 900;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Plex Arabic";
-  src: url("../fonts/IBMPlexSansArabic-400.woff2") format("woff2");
-  font-weight: 400;
+  font-family: "Rubik";
+  src: url("../fonts/Rubik-Variable-arabic.woff2") format("woff2");
+  font-weight: 300 900;
   font-display: swap;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
-}
-@font-face {
-  font-family: "Plex Arabic";
-  src: url("../fonts/IBMPlexSansArabic-500.woff2") format("woff2");
-  font-weight: 500;
-  font-display: swap;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
-}
-@font-face {
-  font-family: "Plex Arabic";
-  src: url("../fonts/IBMPlexSansArabic-600.woff2") format("woff2");
-  font-weight: 600;
-  font-display: swap;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
-}
-@font-face {
-  font-family: "Plex Arabic";
-  src: url("../fonts/IBMPlexSansArabic-700.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
 }
 
 :root {
-  --oc-bg: #f5f7f6;
-  --oc-bg-sunken: #ebefed;
-  --oc-surface: #fcfdfc;
+  --oc-bg: #fff9f4;
+  --oc-bg-sunken: #fbf0e6;
+  --oc-surface: #fffefc;
   --oc-surface-raised: #ffffff;
-  --oc-ink: #121826;
-  --oc-ink-soft: #3a4352;
-  --oc-muted: #5b6573;
-  --oc-line: #dde3e0;
-  --oc-line-strong: #c3ccc8;
+  --oc-ink: #1e1b3a;
+  --oc-ink-soft: #46416c;
+  --oc-muted: #6c6790;
+  --oc-line: #efe5dc;
+  --oc-line-strong: #ddd1c5;
 
-  --oc-primary: #0c6b66; /* Oasis */
-  --oc-primary-hover: #095753;
-  --oc-primary-soft: #dcefec;
-  --oc-on-primary: #fcfdfc;
-  --oc-accent: #f0a030; /* Saffron */
-  --oc-accent-soft: #fdf0dc;
-  --oc-on-accent: #121826;
+  --oc-primary: #0b7d73; /* button teal (AA with white text) */
+  --oc-primary-hover: #096a62;
+  --oc-primary-soft: #dcf5f1;
+  --oc-on-primary: #ffffff;
+  --oc-brand: #12b5a6; /* Clicky teal (decorative) */
+  --oc-accent: #ffc23d; /* Sunshine */
+  --oc-accent-soft: #fff1cc;
+  --oc-on-accent: #1e1b3a;
+  --oc-coral: #ff6b6b;
+  --oc-lilac: #8b7cf6;
+  --oc-sky: #3da5ff;
 
-  --oc-success: #23804f;
-  --oc-warning: #a8670a;
-  --oc-error: #c23a3a;
-  --oc-info: #2c63c7;
+  --oc-success: #16884a;
+  --oc-warning: #a86400;
+  --oc-error: #d63c3c;
+  --oc-info: #2563eb;
 
-  /* Collection hues. Used only inside a product's own context. */
-  --oc-hue-bride: #c4507a;
-  --oc-hue-grocery: #3a8a4c;
-  --oc-hue-planner: #3c58cf;
-  --oc-hue-fit: #d65a34;
-  --oc-hue-budget: #a97c12;
-  --oc-hue-study: #6a4fc4;
-  --oc-hue-travel: #1d84ab;
+  /* Collection hues: one per product family */
+  --oc-hue-bride: #f0567a;
+  --oc-hue-grocery: #1f9e57;
+  --oc-hue-planner: #3d7bff;
+  --oc-hue-fit: #ff7a2f;
+  --oc-hue-budget: #e09e00;
+  --oc-hue-study: #8b6cf6;
+  --oc-hue-travel: #12a3c9;
 
-  --oc-shadow-tint: 18 40 38;
+  --oc-shadow-tint: 60 40 120;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --oc-bg: #0c1014;
-    --oc-bg-sunken: #080b0e;
-    --oc-surface: #12181d;
-    --oc-surface-raised: #182027;
-    --oc-ink: #e9eeec;
-    --oc-ink-soft: #c5cdca;
-    --oc-muted: #96a19d;
-    --oc-line: #24302f;
-    --oc-line-strong: #34433f;
-    --oc-primary: #3fb5ac;
-    --oc-primary-hover: #5cc6be;
-    --oc-primary-soft: #11302e;
-    --oc-on-primary: #0c1014;
-    --oc-accent: #f4b04a;
-    --oc-accent-soft: #3a2a12;
-    --oc-success: #4cc285;
-    --oc-warning: #e5a33e;
-    --oc-error: #f07070;
-    --oc-info: #79a6f2;
-    --oc-hue-bride: #e488aa;
-    --oc-hue-grocery: #6cc27e;
-    --oc-hue-planner: #8299f0;
-    --oc-hue-fit: #f08a66;
-    --oc-hue-budget: #dcae45;
-    --oc-hue-study: #a793ef;
-    --oc-hue-travel: #5bb8dc;
+    --oc-bg: #15132b;
+    --oc-bg-sunken: #100e22;
+    --oc-surface: #1c1937;
+    --oc-surface-raised: #24204a;
+    --oc-ink: #f4f1ff;
+    --oc-ink-soft: #d2cdec;
+    --oc-muted: #a7a1cc;
+    --oc-line: #2f2a55;
+    --oc-line-strong: #423b73;
+    --oc-primary: #2dd4bf;
+    --oc-primary-hover: #5eead4;
+    --oc-primary-soft: #133d3b;
+    --oc-on-primary: #0f0d22;
+    --oc-brand: #2dd4bf;
+    --oc-accent: #ffcb57;
+    --oc-accent-soft: #3d3015;
+    --oc-coral: #ff8585;
+    --oc-lilac: #a596ff;
+    --oc-sky: #6dbbff;
+    --oc-success: #4ade80;
+    --oc-warning: #fbbf24;
+    --oc-error: #ff8a8a;
+    --oc-info: #7cb8ff;
+    --oc-hue-bride: #ff7f9d;
+    --oc-hue-grocery: #4cd387;
+    --oc-hue-planner: #7aa5ff;
+    --oc-hue-fit: #ff9a5c;
+    --oc-hue-budget: #ffc94a;
+    --oc-hue-study: #ab95ff;
+    --oc-hue-travel: #4cc6e8;
     --oc-shadow-tint: 0 0 0;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --oc-bg: #0c1014;
-  --oc-bg-sunken: #080b0e;
-  --oc-surface: #12181d;
-  --oc-surface-raised: #182027;
-  --oc-ink: #e9eeec;
-  --oc-ink-soft: #c5cdca;
-  --oc-muted: #96a19d;
-  --oc-line: #24302f;
-  --oc-line-strong: #34433f;
-  --oc-primary: #3fb5ac;
-  --oc-primary-hover: #5cc6be;
-  --oc-primary-soft: #11302e;
-  --oc-on-primary: #0c1014;
-  --oc-accent: #f4b04a;
-  --oc-accent-soft: #3a2a12;
-  --oc-success: #4cc285;
-  --oc-warning: #e5a33e;
-  --oc-error: #f07070;
-  --oc-info: #79a6f2;
-  --oc-hue-bride: #e488aa;
-  --oc-hue-grocery: #6cc27e;
-  --oc-hue-planner: #8299f0;
-  --oc-hue-fit: #f08a66;
-  --oc-hue-budget: #dcae45;
-  --oc-hue-study: #a793ef;
-  --oc-hue-travel: #5bb8dc;
-  --oc-shadow-tint: 0 0 0;
-  color-scheme: dark;
+    --oc-bg: #15132b;
+    --oc-bg-sunken: #100e22;
+    --oc-surface: #1c1937;
+    --oc-surface-raised: #24204a;
+    --oc-ink: #f4f1ff;
+    --oc-ink-soft: #d2cdec;
+    --oc-muted: #a7a1cc;
+    --oc-line: #2f2a55;
+    --oc-line-strong: #423b73;
+    --oc-primary: #2dd4bf;
+    --oc-primary-hover: #5eead4;
+    --oc-primary-soft: #133d3b;
+    --oc-on-primary: #0f0d22;
+    --oc-brand: #2dd4bf;
+    --oc-accent: #ffcb57;
+    --oc-accent-soft: #3d3015;
+    --oc-coral: #ff8585;
+    --oc-lilac: #a596ff;
+    --oc-sky: #6dbbff;
+    --oc-success: #4ade80;
+    --oc-warning: #fbbf24;
+    --oc-error: #ff8a8a;
+    --oc-info: #7cb8ff;
+    --oc-hue-bride: #ff7f9d;
+    --oc-hue-grocery: #4cd387;
+    --oc-hue-planner: #7aa5ff;
+    --oc-hue-fit: #ff9a5c;
+    --oc-hue-budget: #ffc94a;
+    --oc-hue-study: #ab95ff;
+    --oc-hue-travel: #4cc6e8;
+    --oc-shadow-tint: 0 0 0;
+    color-scheme: dark;
 }
 
 @theme inline {
@@ -153,30 +144,30 @@
   --color-primary-hover: var(--oc-primary-hover);
   --color-primary-soft: var(--oc-primary-soft);
   --color-on-primary: var(--oc-on-primary);
+  --color-brand: var(--oc-brand);
   --color-accent: var(--oc-accent);
   --color-accent-soft: var(--oc-accent-soft);
   --color-on-accent: var(--oc-on-accent);
+  --color-coral: var(--oc-coral);
+  --color-lilac: var(--oc-lilac);
+  --color-sky: var(--oc-sky);
   --color-success: var(--oc-success);
   --color-warning: var(--oc-warning);
   --color-error: var(--oc-error);
   --color-info: var(--oc-info);
 
-  --font-sans: "Geist", "Plex Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
 
-  --shadow-soft: 0 1px 2px rgb(var(--oc-shadow-tint) / 0.05), 0 8px 24px -12px rgb(var(--oc-shadow-tint) / 0.18);
-  --shadow-lift: 0 2px 4px rgb(var(--oc-shadow-tint) / 0.06), 0 24px 48px -20px rgb(var(--oc-shadow-tint) / 0.28);
+  --shadow-soft: 0 1px 2px rgb(var(--oc-shadow-tint) / 0.05), 0 10px 28px -14px rgb(var(--oc-shadow-tint) / 0.22);
+  --shadow-lift: 0 2px 6px rgb(var(--oc-shadow-tint) / 0.06), 0 28px 56px -24px rgb(var(--oc-shadow-tint) / 0.34);
 
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Arabic: Plex Arabic first so Arabic and Latin digits share Plex metrics in RTL. */
-html[lang="ar"] {
-  --font-sans: "Plex Arabic", "Geist", ui-sans-serif, system-ui, sans-serif;
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 html {
@@ -195,10 +186,10 @@ html[lang="ar"] body {
   line-height: 1.75;
 }
 
-/* Arabic headings: never tight tracking, slightly more leading for ascenders/dots. */
+/* Arabic headings: no negative tracking, a bit more leading for dots and ascenders. */
 html[lang="ar"] :is(h1, h2, h3, .display) {
   letter-spacing: 0 !important;
-  line-height: 1.35 !important;
+  line-height: 1.3 !important;
 }
 
 ::selection {
@@ -222,7 +213,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 }
 
 /* Paper grain for brand surfaces (fixed, pointer-events-none per perf rules) */
-.oc-grain::after {
+.oc-grain-off::after {
   content: "";
   position: fixed;
   inset: 0;
@@ -310,3 +301,23 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 }
 @keyframes oc-draw { to { stroke-dashoffset: 0; } }
 @keyframes oc-pop { to { transform: scale(1); } }
+
+/* ---------- Clicky the mascot ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .clicky-float { animation: clicky-float 4s ease-in-out infinite; }
+  .clicky-blink { transform-box: fill-box; transform-origin: center; animation: clicky-blink 5s infinite; }
+  .clicky-wave { animation: clicky-wave 2.4s ease-in-out infinite; }
+  .float-slow { animation: float-slow 7s ease-in-out infinite; }
+  .float-slow-2 { animation: float-slow 8s ease-in-out -3s infinite; }
+  .spin-slow { animation: spin-slow 24s linear infinite; }
+  .pop-in { animation: pop-in 0.6s var(--ease-bounce) both; }
+}
+@keyframes clicky-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes clicky-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes clicky-wave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-18deg); } 50% { transform: rotate(8deg); } 75% { transform: rotate(-12deg); } }
+@keyframes float-slow { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-10px) rotate(var(--r, 0deg)); } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+
+/* Friendly wavy section divider */
+.wave-top { mask: radial-gradient(28px 14px at 50% 0, #0000 98%, #000) 50% / 56px 100%; }
