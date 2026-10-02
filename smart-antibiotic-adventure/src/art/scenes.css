@@ -1,0 +1,83 @@
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+.layer {
+  position: absolute;
+  inset: -2%;
+  will-change: transform;
+}
+.layer.floater {
+  inset: auto;
+  z-index: 2;
+}
+.scene-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scene-city { background: linear-gradient(180deg, #7cc8ff 0%, #b5e1ff 38%, #ffe9c4 74%, #fff1d8 100%); }
+.scene-clinic { background: linear-gradient(180deg, #a9e0ff 0%, #c9ecff 52%, #fff3c4 100%); }
+.scene-clock { background: linear-gradient(180deg, #5fd9cf 0%, #9cefd6 55%, #e4fff1 100%); }
+.scene-garden { background: linear-gradient(180deg, #d9b8ff 0%, #f4d2ff 45%, #ffe1f0 100%); }
+.scene-lab { background: radial-gradient(120% 90% at 50% 10%, #4b45d6 0%, #2b2a8f 45%, #1b1660 100%); }
+.scene-castle { background: linear-gradient(180deg, #7fe0a5 0%, #c9f6d6 45%, #fff3c4 100%); }
+
+.clouds, .twinkles, .bubbles, .float-hearts, .butterflies { position: absolute; inset: 0; pointer-events: none; }
+.cloud { position: absolute; left: 0; will-change: transform; }
+.tw { position: absolute; }
+.bubble {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 50%;
+  border: 2px solid rgb(255 255 255 / 0.6);
+  box-shadow: inset -3px -3px 0 rgb(255 255 255 / 0.25);
+}
+.float-hearts > div { position: absolute; bottom: -40px; }
+
+.win-blink { animation: win-blink 3.2s ease-in-out infinite; }
+@keyframes win-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.spin-slow.rev { animation-direction: reverse; }
+.scene-svg .spin-slow { transform-box: fill-box; transform-origin: center; }
+
+.flag-wave { transform-box: fill-box; transform-origin: 0 50%; animation: flag-wave 1.6s ease-in-out infinite; }
+@keyframes flag-wave { 0%, 100% { transform: skewY(0deg) scaleX(1); } 50% { transform: skewY(-6deg) scaleX(0.92); } }
+
+.lamp-layer { z-index: 1; }
+.lamp-swing { transform-origin: 800px 0; transform-box: view-box; animation: pendulum 4s var(--ease-in-out) infinite; }
+.pendulum { transform-origin: 800px 0; transform-box: view-box; animation: pendulum 2s var(--ease-in-out) infinite; }
+@keyframes pendulum { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+
+.glow-soft { filter: drop-shadow(0 0 18px rgb(255 120 150 / 0.45)); }
+
+.bubble-pop { animation: bubble-pop 2.4s ease-in infinite; transform-box: fill-box; }
+@keyframes bubble-pop { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-110px); opacity: 0; } }
+
+.lab-blobs { position: absolute; inset: 0; filter: blur(2px); opacity: 0.55; }
+.lab-blob { position: absolute; }
+
+.butterfly { position: absolute; width: 40px; height: 30px; offset-rotate: 0deg; }
+.butterfly .wings { transform-origin: 20px 15px; transform-box: view-box; animation: flap 0.35s ease-in-out infinite alternate; }
+.butterfly.b0 { left: 20%; top: 40%; animation: flutter 14s ease-in-out infinite; }
+.butterfly.b1 { left: 70%; top: 30%; animation: flutter 17s ease-in-out infinite reverse; }
+.butterfly.b2 { left: 45%; top: 55%; animation: flutter 12s ease-in-out infinite; animation-delay: -5s; }
+@keyframes flap { from { transform: scaleX(1); } to { transform: scaleX(0.35); } }
+@keyframes flutter {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(120px, -60px); }
+  50% { transform: translate(40px, -120px); }
+  75% { transform: translate(-90px, -40px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .win-blink, .flag-wave, .lamp-swing, .pendulum, .bubble-pop, .butterfly, .butterfly .wings, .scene .spin-slow, .cloud { animation: none !important; }
+}
+
+/* atmospheric perspective for distant landmarks */
+.scene-svg.hazy { opacity: 0.55; filter: saturate(0.8) blur(0.6px); }

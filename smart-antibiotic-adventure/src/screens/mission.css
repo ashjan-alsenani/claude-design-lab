@@ -1,0 +1,218 @@
+.mission {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+.mission .scene { position: fixed; }
+
+.stage {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(230px, 30%) minmax(0, 1fr);
+  align-items: end;
+  gap: 8px 28px;
+  width: min(1320px, 100%);
+  margin: 0 auto;
+  padding: 0 24px 24px;
+}
+
+/* ---- Noor column (start side = right in RTL) ---- */
+.noor-col {
+  position: sticky;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  align-self: end;
+}
+.noor-speech { width: 100%; max-width: 330px; min-height: 96px; display: flex; align-items: flex-end; }
+.noor-speech .speech { width: 100%; }
+
+/* ---- play area ---- */
+.play {
+  position: relative;
+  align-self: center;
+  display: grid;
+  min-height: min(640px, calc(100dvh - 120px));
+  align-items: center;
+  perspective: 1200px;
+}
+.bk-slot {
+  position: absolute;
+  top: -18px;
+  left: -10px;
+  z-index: 1;
+  pointer-events: none;
+  transition: transform 420ms var(--ease-spring);
+}
+.bk-slot.peek { transform: translate(-28px, 34px) rotate(-14deg) scale(0.86); }
+.bk-slot.up { z-index: 6; transform: translate(0, -20px) rotate(0) scale(1); }
+
+.step-wrap { position: relative; z-index: 3; display: grid; gap: 14px; transform-style: preserve-3d; }
+.step-dots { display: flex; justify-content: center; gap: 8px; }
+.step-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.6);
+  box-shadow: inset 0 2px 3px rgb(23 32 107 / 0.2);
+  transition: transform 300ms var(--ease-spring), background-color 300ms ease;
+}
+.step-dots .past { background: var(--b); }
+.step-dots .now { background: var(--a); transform: scale(1.4); }
+
+/* ---- intro card ---- */
+.intro-card {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 72px 28px 32px;
+  margin-top: 64px;
+  border-radius: 48px 48px 36px 36px;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+.intro-badge {
+  position: absolute;
+  top: -64px;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  font-size: 4rem;
+  background: radial-gradient(circle at 35% 30%, #fff, color-mix(in srgb, var(--b) 80%, white) 45%, var(--b));
+  border: 6px solid #fff;
+  box-shadow: 0 10px 0 color-mix(in srgb, var(--b) 60%, #17206b), 0 24px 34px -12px rgb(23 32 107 / 0.55);
+}
+.intro-place { margin: 0; font-weight: 800; color: var(--a-dark); font-size: 1.1rem; }
+.intro-title {
+  margin: 0;
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.intro-goal {
+  margin: 0 0 14px;
+  padding: 6px 18px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--b) 30%, white);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+/* ---- complete card ---- */
+.complete-card {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 28px 24px 32px;
+  border-radius: 44px;
+  text-align: center;
+}
+.complete-kicker { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: var(--a-dark); }
+.complete-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #ffe27a, #ffb000, #ffe27a, #ffc83d, #ffe27a);
+  box-shadow: 0 0 0 8px #fff, 0 0 0 14px color-mix(in srgb, var(--a) 60%, white), 0 26px 40px -14px rgb(23 32 107 / 0.6);
+  transform-style: preserve-3d;
+}
+.cb-emoji { font-size: 4.2rem; }
+.cb-ribbon {
+  position: absolute;
+  bottom: -16px;
+  padding: 3px 16px 5px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--a) 70%, white), var(--a));
+  color: #fff;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 4px 0 var(--a-dark);
+}
+.complete-stars { display: flex; align-items: flex-end; gap: 6px; margin-top: 16px; }
+.complete-stars .off { filter: grayscale(1) opacity(0.4); }
+.complete-points { margin: 0 0 10px; font-size: 1.4rem; font-weight: 800; color: #b36200; }
+
+/* ---- shared question header used by steps ---- */
+.q-cloud {
+  position: relative;
+  padding: 18px 26px 20px;
+  border-radius: 40px;
+  background: #fff;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--ink);
+  box-shadow: 0 8px 0 color-mix(in srgb, var(--a) 35%, white), 0 22px 36px -16px rgb(23 32 107 / 0.5);
+  border: 4px solid color-mix(in srgb, var(--a) 40%, white);
+}
+.q-cloud::before,
+.q-cloud::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid color-mix(in srgb, var(--a) 40%, white);
+  z-index: -1;
+}
+.q-cloud::before { width: 70px; height: 70px; top: -26px; right: 14%; }
+.q-cloud::after { width: 50px; height: 50px; top: -16px; right: calc(14% + 54px); }
+
+.fact-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #fffbe6, #fff);
+  border: 4px solid #ffe27a;
+  box-shadow: 0 8px 0 rgb(224 154 0 / 0.25), 0 20px 30px -16px rgb(23 32 107 / 0.5);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.3rem);
+}
+.fact-card .fact-text { flex: 1; }
+.fact-card .fact-label { display: block; color: #c77800; font-weight: 800; font-size: 0.9em; }
+.next-row { display: flex; justify-content: center; }
+
+/* ---- responsive: Noor becomes a compact header row ---- */
+@media (max-width: 860px), (max-aspect-ratio: 1/1) {
+  .stage {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding: 0 14px 28px;
+    gap: 6px;
+  }
+  .noor-col {
+    position: relative;
+    bottom: auto;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 6px;
+    order: 0;
+  }
+  .noor-speech { min-height: 0; max-width: none; flex: 1; align-self: center; }
+  .noor-speech .speech { font-size: 1rem; padding: 10px 14px 12px; }
+  .play { min-height: 0; align-self: start; }
+  .intro-card { margin-top: 70px; padding: 70px 18px 26px; }
+  .bk-slot { top: -34px; left: -12px; }
+  .bk-slot.peek { transform: translate(-26px, 26px) rotate(-14deg) scale(0.8); }
+  .bk-slot.up { transform: translate(-8px, -44px) scale(0.85); }
+}

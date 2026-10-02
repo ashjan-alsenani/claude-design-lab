@@ -1,0 +1,62 @@
+.noor {
+  position: relative;
+  flex: none;
+  pointer-events: none;
+}
+.noor img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  /* rim light + contact softness so she sits in the illustrated world */
+  filter: drop-shadow(0 0 1px rgb(255 255 255 / 0.9)) drop-shadow(0 10px 14px rgb(23 32 107 / 0.22));
+}
+.noor-float,
+.noor-float-off {
+  position: relative;
+  height: 100%;
+  z-index: 1;
+}
+.noor-float { animation: noor-float 4.2s var(--ease-in-out) infinite; }
+@keyframes noor-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.noor-ground {
+  position: absolute;
+  bottom: -2%;
+  left: 12%;
+  right: 6%;
+  height: 7%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(23 32 107 / 0.35), rgb(23 32 107 / 0));
+  animation: noor-shadow 4.2s var(--ease-in-out) infinite;
+}
+@keyframes noor-shadow {
+  0%, 100% { transform: scaleX(1); opacity: 1; }
+  50% { transform: scaleX(0.9); opacity: 0.75; }
+}
+.noor-glow {
+  position: absolute;
+  inset: 8% -30% 10%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0));
+}
+.noor-sp { position: absolute; z-index: 2; }
+.noor-bulb {
+  position: absolute;
+  top: -6%;
+  inset-inline-end: -16%;
+  z-index: 3;
+}
+.noor-stars {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  z-index: 3;
+}
+.noor-star { position: absolute; margin: -16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .noor-float, .noor-ground { animation: none; }
+}

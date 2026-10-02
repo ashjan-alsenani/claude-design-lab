@@ -1,0 +1,79 @@
+.hud {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: max(12px, env(safe-area-inset-top)) 16px 10px;
+  pointer-events: none;
+}
+.hud > * { pointer-events: auto; }
+.hud-side { display: flex; align-items: center; gap: 10px; min-width: 52px; }
+.hud-center { display: grid; gap: 4px; justify-items: center; max-width: 520px; width: 100%; margin-inline: auto; }
+.hud-label {
+  padding: 2px 16px 4px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.85);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--a-dark, var(--deep));
+  box-shadow: 0 4px 0 rgb(23 32 107 / 0.1);
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hud-progress {
+  position: relative;
+  width: 100%;
+  height: 18px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.7);
+  box-shadow: inset 0 3px 6px rgb(23 32 107 / 0.18), 0 2px 0 #fff;
+  overflow: hidden;
+}
+.hud-fill {
+  position: absolute;
+  inset: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffd23f, #ff9f2e, #ff8fc7, #a46bff, #4cbcff);
+  transform-origin: right center;
+  overflow: hidden;
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.5);
+}
+.hud-shine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent);
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+.score-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 52px;
+  padding: 0 16px 0 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff, #fff4cf);
+  box-shadow: inset 0 2px 0 #fff, 0 5px 0 rgb(224 138 0 / 0.35), 0 10px 20px -8px rgb(23 32 107 / 0.4);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: #b36200;
+  min-width: 96px;
+  justify-content: center;
+}
+.score-star { animation: twinkle 3s ease-in-out infinite; }
+.score-num { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 560px) {
+  .hud { gap: 8px; padding-inline: 12px; }
+  .hud-label { font-size: 0.9rem; }
+  .score-pill { height: 46px; min-width: 78px; font-size: 1.2rem; padding-inline: 10px; }
+  .icon-btn { width: 46px; height: 46px; border-radius: 16px; font-size: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hud-shine, .score-star { animation: none; }
+}

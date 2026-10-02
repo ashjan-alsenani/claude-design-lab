@@ -1,0 +1,155 @@
+.landing {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.landing-top {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 16px;
+  z-index: 20;
+}
+.landing-grid {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: 72px 32px 40px;
+}
+.landing-copy {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+.landing-copy::before {
+  /* soft atmospheric haze so the title reads over the busy city */
+  content: '';
+  position: absolute;
+  inset: -12% -10% -14%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 0.7), rgb(255 255 255 / 0.35) 60%, transparent);
+  filter: blur(8px);
+  pointer-events: none;
+}
+.landing-kicker {
+  margin: 0;
+  padding: 6px 18px 8px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.85);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--royal);
+  box-shadow: 0 5px 0 rgb(23 32 107 / 0.1), 0 12px 22px -12px rgb(23 32 107 / 0.5);
+}
+.landing-title {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.28em;
+  font-size: clamp(3rem, 1.6rem + 5.6vw, 6.4rem);
+  line-height: 1.12;
+  perspective: 800px;
+}
+.landing-title .title-3d { display: inline-block; transform-origin: 50% 100%; }
+.landing-title .tw-0 {
+  color: #3d78ff;
+  text-shadow:
+    0 1px 0 #2f62e6, 0 2px 0 #2a57d4, 0 3px 0 #254cc2, 0 4px 0 #2142b0,
+    0 5px 0 #1d389e, 0 6px 0 #19308c, 0 7px 0 #17206b, 0 14px 20px rgb(23 32 107 / 0.4);
+  -webkit-text-stroke: 0;
+}
+.landing-title .tw-1 {
+  color: #ff7eb6;
+  text-shadow:
+    0 1px 0 #f56aa6, 0 2px 0 #e85b98, 0 3px 0 #db4d8a, 0 4px 0 #cc407c,
+    0 5px 0 #bd346f, 0 6px 0 #ad2a63, 0 7px 0 #8f1f50, 0 14px 20px rgb(23 32 107 / 0.4);
+  -webkit-text-stroke: 0;
+}
+.landing-title .tw-2 {
+  color: #ffe27a;
+  text-shadow:
+    0 1px 0 #ffd23f, 0 2px 0 #ffc21f, 0 3px 0 #ffb000, 0 4px 0 #f5a000,
+    0 5px 0 #e89400, 0 6px 0 #d98600, 0 7px 0 #c77800, 0 14px 20px rgb(23 32 107 / 0.45);
+}
+.landing-sub {
+  margin: 0;
+  max-width: 30ch;
+  padding: 14px 22px 16px;
+  border-radius: 26px;
+  background: rgb(255 255 255 / 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+}
+.landing-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 10px; }
+.landing-progress {
+  font-weight: 800;
+  color: var(--deep);
+  background: rgb(255 255 255 / 0.75);
+  padding: 4px 14px 6px;
+  border-radius: 999px;
+}
+.rocket { display: inline-block; transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .btn3d:hover .rocket { transform: translate(-4px, -4px) rotate(-8deg); }
+}
+.btn3d.launching .rocket { animation: rocket-off 0.5s var(--ease-in-out) forwards; }
+@keyframes rocket-off {
+  40% { transform: translate(4px, 4px) rotate(10deg); }
+  100% { transform: translate(-120px, -120px) rotate(-20deg) scale(1.4); opacity: 0; }
+}
+
+.landing-hero {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-self: end;
+  padding-bottom: 2vh;
+}
+.hero-bubble {
+  position: absolute;
+  top: -4%;
+  right: 56%;
+  z-index: 4;
+  width: max-content;
+  max-width: 230px;
+}
+.hero-baktoro {
+  position: absolute;
+  bottom: 8%;
+  left: -2%;
+  z-index: 3;
+}
+
+@media (max-width: 860px), (max-aspect-ratio: 1/1) {
+  .landing-grid {
+    grid-template-columns: 1fr;
+    align-content: start;
+    padding: 76px 16px 0;
+    gap: 6px;
+    text-align: center;
+  }
+  .landing-copy { justify-items: center; }
+  .landing-title { justify-content: center; }
+  .landing-cta { justify-content: center; }
+  .landing-hero { align-self: end; padding-bottom: 0; margin-top: 4px; }
+  .hero-bubble { right: 4px; left: auto; top: 6%; max-width: 150px; }
+  .hero-bubble .speech { font-size: 0.95rem; padding: 10px 14px 12px; }
+  .hero-bubble .tail-bottom { right: auto; left: -12px; bottom: 22px; transform: rotate(135deg); }
+  .hero-baktoro { left: 2%; right: auto; bottom: 6%; }
+}

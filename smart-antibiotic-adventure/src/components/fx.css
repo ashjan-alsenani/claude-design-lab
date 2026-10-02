@@ -1,0 +1,56 @@
+.transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--tc) 55%, white), transparent 60%),
+    radial-gradient(circle at 70% 80%, color-mix(in srgb, var(--tc) 70%, #17206b), transparent 65%),
+    var(--tc);
+  pointer-events: all;
+}
+.tr-art { position: absolute; inset: 0; overflow: hidden; }
+.tr-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60vmin;
+  height: 60vmin;
+  margin: -30vmin;
+  border-radius: 50%;
+  border: 14px dashed rgb(255 255 255 / 0.5);
+  animation: spin 1.6s linear infinite;
+}
+.tr-ring.r2 { width: 36vmin; height: 36vmin; margin: -18vmin; border-width: 10px; animation-direction: reverse; border-color: rgb(255 255 255 / 0.35); }
+.tr-star { position: absolute; left: 50%; top: 50%; margin: -60px; animation: spin 2s linear infinite; filter: drop-shadow(0 0 30px rgb(255 230 120 / 0.9)); }
+.tr-capsule { position: absolute; left: 50%; top: 50%; margin: -70px; animation: spin 1.4s linear infinite; }
+.tr-bubble {
+  position: absolute;
+  bottom: -100px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.3);
+  border: 3px solid rgb(255 255 255 / 0.65);
+  animation: tr-up 0.7s var(--ease-out) forwards;
+}
+@keyframes tr-up { to { transform: translateY(-80vh); opacity: 0; } }
+.tr-spark { position: absolute; animation: twinkle 0.6s ease-in-out infinite; }
+
+.fly-layer, .burst-layer { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
+.fly-star { position: absolute; left: -17px; top: -17px; filter: drop-shadow(0 0 10px rgb(255 214 80 / 0.9)); }
+.burst { position: absolute; width: 0; height: 0; }
+.burst-p { position: absolute; left: -11px; top: -11px; }
+
+.confetti, .cursor-sparkles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 95;
+}
+.cursor-sparkles { z-index: 99; }
+
+.tilt { transform-style: preserve-3d; will-change: transform; }
+
+.speech .tail-left { bottom: 22px; left: -15px; transform: rotate(135deg); }
+.speech .tail-right { bottom: 22px; right: -15px; transform: rotate(-45deg); }
+.speech .tail-bottom { bottom: -15px; right: 40px; transform: rotate(45deg); }

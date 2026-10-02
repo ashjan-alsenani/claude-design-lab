@@ -1,0 +1,222 @@
+.map-screen {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.map-backdrop { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.map-sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 85% 75%, rgb(76 188 255 / 0.35), transparent 70%),
+    radial-gradient(50% 45% at 65% 30%, rgb(31 200 192 / 0.35), transparent 70%),
+    radial-gradient(45% 45% at 48% 70%, rgb(255 143 199 / 0.35), transparent 70%),
+    radial-gradient(45% 45% at 30% 30%, rgb(142 91 255 / 0.32), transparent 70%),
+    radial-gradient(45% 45% at 12% 60%, rgb(255 200 61 / 0.4), transparent 70%),
+    linear-gradient(180deg, #a9dcff 0%, #c9f0e4 55%, #fff1c9 100%);
+}
+.map-clouds { position: absolute; inset: 0; }
+
+.map-intro {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px 18px;
+  padding: 0 16px;
+  margin-top: 2px;
+}
+.map-intro .speech { max-width: 560px; text-align: center; }
+
+.map-scroll { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; padding: 8px 16px 24px; }
+.map-scroll.wide .map-box { width: min(100%, calc((100dvh - 190px) * 16 / 9)); }
+.map-scroll.tall { align-items: flex-start; }
+.map-scroll.tall .map-box { width: 100%; max-width: 560px; }
+.map-box { position: relative; margin: 0 auto; }
+
+.map-paths { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; }
+.land-edge { fill: none; stroke: rgb(60 196 106 / 0.18); stroke-width: 250; stroke-linecap: round; stroke-linejoin: round; }
+.land { fill: none; stroke: rgb(214 250 222 / 0.75); stroke-width: 216; stroke-linecap: round; stroke-linejoin: round; }
+.map-scroll.tall .land-edge { stroke-width: 300; }
+.map-scroll.tall .land { stroke-width: 262; }
+.road-base { fill: none; stroke: rgb(23 32 107 / 0.18); stroke-width: 54; stroke-linecap: round; transform: translateY(10px); }
+.road-top { fill: none; stroke: #fff6e0; stroke-width: 46; stroke-linecap: round; }
+.road-dots {
+  fill: none;
+  stroke: #ffb35c;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 2 26;
+  animation: road-march 1.4s linear infinite;
+}
+.road-done { fill: none; stroke-width: 14; stroke-linecap: round; filter: drop-shadow(0 0 6px rgb(255 200 61 / 0.9)); }
+@keyframes road-march { to { stroke-dashoffset: -28; } }
+
+/* ---- world zones ---- */
+.zone {
+  position: absolute;
+  z-index: 1;
+  width: 28%;
+  aspect-ratio: 1;
+  translate: -50% -58%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--mc2) 50%, transparent), color-mix(in srgb, var(--mc) 28%, transparent) 62%, transparent);
+  filter: saturate(0.35) opacity(0.6);
+  transition: filter 600ms ease;
+}
+.zone.lit { filter: none; }
+.map-scroll.tall .zone { width: 62%; }
+.zd { position: absolute; display: block; }
+.zd-gear { height: auto; transform-box: fill-box; }
+
+/* ---- nodes ---- */
+.map-node {
+  position: absolute;
+  width: clamp(120px, 15%, 200px);
+  translate: -50% -78%;
+  z-index: 3;
+  animation: float-y 5s var(--ease-in-out) infinite;
+  animation-delay: var(--fd);
+  --amp: -8px;
+}
+.map-scroll.tall .map-node { width: clamp(118px, 34%, 180px); }
+.node-btn {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 200ms var(--ease-out), filter 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .map-node:not(.state-locked) .node-btn:hover { transform: translateY(-6px) scale(1.04); }
+}
+.node-btn:active { transform: translateY(2px) scale(0.97); }
+
+.island { position: absolute; left: 4%; right: 4%; bottom: 14%; height: 34%; }
+.island-top {
+  position: absolute;
+  inset: 0 0 30%;
+  border-radius: 50%;
+  background: radial-gradient(70% 70% at 40% 35%, color-mix(in srgb, var(--mc2) 70%, white), var(--mc2) 60%, color-mix(in srgb, var(--mc2) 70%, #17206b));
+  z-index: 1;
+}
+.island-side {
+  position: absolute;
+  inset: 22% 6% 0;
+  border-radius: 0 0 50% 50% / 0 0 80% 80%;
+  background: linear-gradient(180deg, var(--mc), color-mix(in srgb, var(--mc) 60%, #17206b));
+  box-shadow: 0 22px 26px -14px rgb(23 32 107 / 0.55);
+}
+.landmark { position: relative; z-index: 2; width: 62%; margin-bottom: 18%; filter: drop-shadow(0 8px 6px rgb(23 32 107 / 0.25)); }
+.lm { width: 100%; height: auto; overflow: visible; }
+.lm .spin-slow, .lm .sway, .lm .bob { transform-box: fill-box; }
+.lm .spin-slow { transform-origin: center; }
+.lm .bob { animation: bob 1.8s var(--ease-in-out) infinite; }
+
+.node-label {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: -6px;
+  padding: 3px 12px 5px 6px;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 800;
+  font-size: clamp(0.85rem, 0.7rem + 0.4vw, 1.05rem);
+  color: var(--ink);
+  white-space: nowrap;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--mc) 50%, #17206b), 0 10px 18px -8px rgb(23 32 107 / 0.5);
+  border: 3px solid var(--mc);
+}
+.node-num {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--mc) 60%, white), var(--mc));
+  color: #fff;
+  font-size: 1rem;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.2);
+}
+
+.state-locked .node-btn { filter: grayscale(0.75) brightness(0.92) opacity(0.82); }
+.state-locked .landmark { opacity: 0.7; }
+.node-lock { position: absolute; top: 18%; left: 50%; margin-left: -20px; z-index: 5; filter: drop-shadow(0 6px 6px rgb(23 32 107 / 0.3)); }
+.map-node.shake .node-btn { animation: wiggle 0.45s var(--ease-out); }
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  20% { transform: translateX(-8px) rotate(-4deg); }
+  40% { transform: translateX(8px) rotate(4deg); }
+  60% { transform: translateX(-5px) rotate(-2deg); }
+  80% { transform: translateX(4px) rotate(1deg); }
+}
+
+.state-current { z-index: 4; }
+.state-current .node-btn { transform: scale(1.14); filter: drop-shadow(0 0 22px color-mix(in srgb, var(--mc2) 80%, white)); }
+@media (hover: hover) and (pointer: fine) {
+  .state-current .node-btn:hover { transform: scale(1.18) translateY(-6px); }
+}
+.state-open .node-btn { filter: drop-shadow(0 0 14px color-mix(in srgb, var(--mc2) 60%, white)); }
+.pulse-ring {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 18%;
+  height: 32%;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  animation: ring-pulse 1.8s var(--ease-out) infinite;
+  pointer-events: none;
+}
+.node-arrow {
+  position: absolute;
+  top: -16%;
+  left: 50%;
+  margin-left: -14px;
+  font-size: 28px;
+  color: #ff6b8b;
+  text-shadow: 0 3px 0 #fff, 0 0 12px #fff;
+  animation: bob 0.9s var(--ease-in-out) infinite;
+  --amp: -10px;
+  z-index: 6;
+}
+.node-done { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+.node-stars { position: absolute; top: -10%; left: 50%; display: flex; transform: translateX(-50%); }
+.node-stars .empty { filter: grayscale(1) opacity(0.45); }
+.node-stars > :nth-child(2) { transform: translateY(-8px) scale(1.15); }
+.node-check { position: absolute; top: 24%; right: 2%; }
+.node-sp { position: absolute; top: 10%; left: 10%; }
+
+/* ---- Noor token (positioned in map units, scaled to the box) ---- */
+.token-track { position: absolute; top: 0; left: 0; z-index: 6; transform-origin: 0 0; pointer-events: none; }
+.noor-token {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  offset-rotate: 0deg;
+  offset-anchor: 50% 100%;
+  translate: 46px -40px;
+}
+.map-scroll.tall .noor-token { width: 96px; translate: 64px -50px; }
+.noor-token img { width: 100%; height: auto; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 6px 6px rgb(23 32 107 / 0.35)); }
+.token-shadow { position: absolute; bottom: -4px; left: 10%; right: 10%; height: 8px; border-radius: 50%; background: rgb(23 32 107 / 0.25); }
+
+.map-baktoro { position: absolute; z-index: 5; transform: translate(-50%, -50%); pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .road-dots, .map-node, .pulse-ring, .node-arrow { animation: none; }
+}
