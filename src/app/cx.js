@@ -79,7 +79,7 @@ const CX = (() => {
       (s.toast ? '<div class="cx-toast"' + K('toast') + '>' + I('check') + '<span>' + E(s.toast) + '</span></div>' : '') + '</div>';
   }
   /* View header: location, list name, and the header buttons ClickUp shows on the right */
-  const crumbs = s => '<div class="cx-vh"><div class="cx-crumb">' + spav(['العمليات', 'Operations'], '#7b68ee', 'sm') + '<span>' + E(['العمليات', 'Operations']) + '</span><i>/</i><b>' + E(s.title || ['التخطيط', 'Planning']) + '</b>' + I('star') + '</div><span class="cx-gap"></span>' +
+  const crumbs = s => '<div class="cx-vh"><div class="cx-crumb">' + spav(s.space || ['العمليات', 'Operations'], s.spaceC || '#7b68ee', 'sm') + '<span>' + E(s.space || ['العمليات', 'Operations']) + '</span><i>/</i><b>' + E(s.title || ['التخطيط', 'Planning']) + '</b>' + I('star') + '</div><span class="cx-gap"></span>' +
     '<span class="cx-hb ai">' + I('sparkle') + 'Ask AI</span><span class="cx-hb">' + I('share') + 'Share</span><span class="cx-hb">' + I('zap') + 'Automations</span><span class="cx-hb">···</span></div>';
   const tabs = (s, on) => '<div class="cx-tabs">' + [['list', 'list', 'List'], ['board', 'board', 'Board'], ['calendar', 'calendar', 'Calendar'], ['gantt', 'gantt', 'Gantt'], ['table', 'table', 'Table']].concat(s.extraTabs || []).map(t => '<span class="cx-tab' + (on === t[0] ? ' on' : '') + '"' + K('tab-' + t[0]) + '>' + I(t[1]) + t[2] + '</span>').join('') + '<span class="cx-tab add"' + K('addView') + '>' + I('plus') + 'View</span></div>';
 
@@ -105,18 +105,19 @@ const CX = (() => {
     (s.menu ? pop('menu', s.menu.map(m => mi('m-' + m[0], m[1], m[2])).join(''), 'top:' + (s.menuTop || 120) + 'px;inset-inline-end:40px;width:190px', 'Create') : '') + '</div></div>');
 
   /* List view body, shared by list, shell and filter scenes */
-  const COLN = { assignee: 'Assignee', due: 'Due date', prio: 'Priority', status: 'Status', region: ['المنطقة', 'Region'], est: 'Time estimate', start: 'Start date' };
+  const COLN = { assignee: 'Assignee', due: 'Due date', prio: 'Priority', status: 'Status', region: ['المنطقة', 'Region'], est: 'Time estimate', pts: 'Sprint Points', start: 'Start date' };
   function cell(c, r) {
     if (c === 'assignee') return r.who ? (Array.isArray(r.who) ? r.who : [r.who]).map(w => av(w)).join('') : '<span class="cx-empty">' + I('user') + '</span>';
     if (c === 'due' || c === 'start') { const v = r[c]; return v ? '<span class="cx-date' + (r.late && c === 'due' ? ' late' : '') + '">' + E(v) + '</span>' : '<span class="cx-empty">' + I('calendar') + '</span>'; }
     if (c === 'prio') return prl(r.prio);
     if (c === 'status') return st(r.st || 'todo');
     if (c === 'region') return r.region ? '<span class="cx-tag">' + E(r.region) + '</span>' : '<span class="cx-empty">—</span>';
+    if (c === 'pts') return r.pts ? '<span class="cx-pts">' + r.pts + '</span>' : '<span class="cx-empty">—</span>';
     if (c === 'est') return r.est ? '<span class="cx-date">' + E(r.est) + '</span>' : '<span class="cx-empty">—</span>';
     return '';
   }
-  function listRow(r, cols) {
-    return '<div class="cx-row' + (r.p ? ' sub' : '') + (r.sel ? ' sel' : '') + '"' + K(r.k) + '><span class="cx-cb' + (r.sel ? ' on' : '') + '"' + K(r.k + '-cb') + '></span>' + dot(r.st || 'todo') +
+  function listRow(r, cols, depth) {
+    return '<div class="cx-row' + (r.p ? ' sub' : '') + (r.sel ? ' sel' : '') + '"' + K(r.k) + (depth > 1 ? ' style="padding-inline-start:' + (8 + depth * 22) + 'px"' : '') + '><span class="cx-cb' + (r.sel ? ' on' : '') + '"' + K(r.k + '-cb') + '></span>' + dot(r.st || 'todo') +
       '<span class="cx-name"' + K(r.k + '-name') + '>' + E(r.n) + (r.subs ? '<span class="cx-subs"' + K(r.k + '-subs') + '>' + I('subtask') + r.subs + '</span>' : '') + '</span>' +
       cols.map(c => '<span class="cx-c c-' + c + '"' + K(r.k + '-' + c) + '>' + cell(c, r) + '</span>').join('') + '<span class="cx-c"></span></div>';
   }
@@ -124,7 +125,11 @@ const CX = (() => {
      the status pill, a count and the column names; "+ Add Task" sits under it. */
   function listBody(s) {
     const cols = s.cols || ['assignee', 'due', 'prio'];
-    const rows = (s.rows || []).filter(r => !r.p || (s.rows.find(x => x.k === r.p) || {}).open);
+    /* A subtask shows only when every parent above it is open; nested levels indent further */
+    const byK = k => (s.rows || []).find(x => x.k === k);
+    const shown = r => !r.p || ((byK(r.p) || {}).open && shown(byK(r.p)));
+    const depth = r => r.p && byK(r.p) ? 1 + depth(byK(r.p)) : 0;
+    const rows = (s.rows || []).filter(shown);
     const grp = s.group === 'none' ? null : (s.group || 'status');
     const heads = first => cols.map(c => '<span class="cx-c ch"' + (first ? K('col-' + c) : '') + '>' + E(COLN[c] || c) + '</span>').join('') + '<span class="cx-c add"' + (first ? K('addCol') : '') + '>' + I('plus') + '</span>';
     const addRow = keyed => '<div class="cx-addrow"' + (keyed ? K('addTask') : '') + '>' + I('plus') + '<span' + (keyed ? K('newTask') : '') + '>' + (keyed && s.newTask ? E(s.newTask) : 'Add Task') + '</span></div>';
@@ -136,11 +141,11 @@ const CX = (() => {
         const rs = rows.filter(r => keyOf(r) === g); if (!rs.length) return;
         const label = grp === 'assignee' ? (g === 'none' ? '<span class="cx-gl">' + I('user') + 'Unassigned</span>' : '<span class="cx-gl">' + av(g) + esc(who(g)) + '</span>') : grp === 'prio' ? (g === 'none' ? '<span class="cx-gl">' + pr(null) + 'No priority</span>' : '<span class="cx-gl" style="--c:' + PR[g] + '">' + prl(g) + '</span>') : st(g);
         body += '<div class="cx-ghead"><span class="cx-gname">' + I('chev-down') + '<span class="cx-gk"' + K('g-' + g) + '>' + label + '<small>' + rs.length + '</small></span><span class="cx-gadd">' + I('plus') + 'Add Task</span></span>' + heads(first) + '</div>' +
-          rs.map(r => listRow(r, cols)).join('') + (first ? addRow(true) : '');
+          rs.map(r => listRow(r, cols, depth(r))).join('') + (first ? addRow(true) : '');
         first = false;
       });
     }
-    if (!body) body = '<div class="cx-lhead"><span></span><span></span><span>Name</span>' + heads(true) + '</div>' + rows.map(r => listRow(r, cols)).join('') + addRow(true);
+    if (!body) body = '<div class="cx-lhead"><span></span><span></span><span>Name</span>' + heads(true) + '</div>' + rows.map(r => listRow(r, cols, depth(r))).join('') + addRow(true);
     const sel = (s.rows || []).filter(r => r.sel).length;
     const gname = { assignee: 'Assignee', status: 'Status', prio: 'Priority' };
     return '<div class="cx-tools">' + btn('grp', 'Group: ' + (grp ? gname[grp] : 'None'), grp ? 'on' : '', 'layers') + '<span class="cx-b">' + I('subtask') + 'Subtasks</span><span class="cx-gap"></span>' +
@@ -169,8 +174,9 @@ const CX = (() => {
     c.cards.map(cd => '<div class="cx-card2"' + K(cd.k) + '><b>' + E(cd.n) + '</b><div>' + (cd.who ? av(cd.who) : '<span class="cx-empty">' + I('user') + '</span>') + (cd.due ? '<span class="cx-date">' + I('calendar') + E(cd.due) + '</span>' : '') + (cd.prio ? prl(cd.prio) : '') + '</div></div>').join('') +
     '<div class="cx-addcard"' + K('add-' + c.st) + '>' + I('plus') + 'Add Task</div></div>').join('') + '</div>');
 
-  SC.calendar = s => shell(s, crumbs(s) + tabs(s, 'calendar') + '<div class="cx-calv"><div class="cx-cal-tools">' + ['Day', 'Week', 'Month'].map(x => '<span class="cx-b' + ((s.range || 'Week') === x ? ' on' : '') + '"' + K('r-' + x) + '>' + x + '</span>').join('') + '</div><div class="cx-week">' +
-    DAYS().map((d, i) => '<div class="cx-day"' + K('day' + i) + '><small>' + d + ' ' + (12 + i) + '</small>' + (s.items || []).filter(t => t.d === i).map(t => '<span class="cx-chip" style="--c:' + (t.c || '#7b68ee') + '"' + K(t.k) + '>' + E(t.n) + '</span>').join('') + '</div>').join('') + '</div>' +
+  SC.calendar = s => shell(s, crumbs(s) + tabs(s, 'calendar') + '<div class="cx-calv"><div class="cx-cal-tools">' + ['Day', 'Week', 'Month'].map(x => '<span class="cx-b' + ((s.range || 'Week') === x ? ' on' : '') + '"' + K('r-' + x) + '>' + x + '</span>').join('') + (s.syncBtn ? '<span class="cx-gap"></span>' + btn('syncBtn', s.synced ? 'Synced' : 'Sync calendars', s.synced ? 'on' : '', s.synced ? 'check' : 'repeat') : '') + '</div><div class="cx-week">' +
+    DAYS().map((d, i) => '<div class="cx-day"' + K('day' + i) + '><small>' + d + ' ' + (12 + i) + '</small>' + (s.items || []).filter(t => t.d === i).map(t => '<span class="cx-chip' + (t.g ? ' g' : '') + '" style="--c:' + (t.g ? '#1a73e8' : (t.c || '#7b68ee')) + '"' + K(t.k) + '>' + (t.g ? '<i>G</i>' : '') + E(t.n) + '</span>').join('') + '</div>').join('') + '</div>' +
+    (s.sync ? pop('syncPop', [['gc-google', 'Google Calendar', 'calendar'], ['gc-outlook', 'Outlook (iCal)', 'calendar'], ['gc-apple', 'Apple (iCal)', 'calendar']].map(x => mi(x[0], x[1], x[2], s.sync === x[0])).join('') + (s.sync === 'gc-google' ? '<div class="cx-pop-f"><div class="cx-krow">' + tog('twoWay', s.twoWay) + E(['مزامنة في الاتجاهين', 'Two-way sync']) + '</div>' + btn('gcGo', 'Connect', 'pri wide') + '</div>' : ''), 'top:96px;inset-inline-end:16px;width:230px', 'Calendar sync') : '') +
     (s.uns ? '<div class="cx-uns"' + K('uns') + '><small>' + E(['بلا موعد', 'Unscheduled']) + '</small>' + s.uns.map(t => '<span class="cx-chip" style="--c:#87909e"' + K(t.k) + '>' + E(t.n) + '</span>').join('') + '</div>' : '') + '</div>');
 
   SC.gantt = s => {
@@ -199,7 +205,9 @@ const CX = (() => {
   SC.activity = s => shell(s, crumbs(s) + tabs(s, 'activity', [['activity', 'clock', 'Activity']]) + '<div class="cx-feed">' + (s.feed || []).map(f => '<div class="cx-ev"' + K(f.k) + '>' + av(f.who) + '<div><b>' + esc(who(f.who)) + '</b> ' + E(f.x) + '<small>' + E(f.t || ['الآن', 'just now']) + '</small></div></div>').join('') +
     (s.flt ? '<div class="cx-feedf"' + K('feedf') + '>' + I('filter') + E(s.flt) + '</div>' : '') + '</div>');
 
-  SC.doc = s => shell(s, '<div class="cx-doc"><div class="cx-doc-t"' + K('docTitle') + '>' + E(s.title || 'Untitled') + '</div>' + (s.blocks || []).map(b => {
+  SC.doc = s => shell(s, (s.pages ? '<div class="cx-dpages"' + K('dPages') + '><small>' + I('doc') + E(s.dname || ['توثيق المشروع', 'Project docs']) + '</small>' + s.pages.map(p => '<div class="cx-dp l' + (p.l || 0) + (s.page === p.k ? ' on' : '') + '"' + K(p.k) + '>' + I(p.l ? 'doc' : 'book') + '<span>' + E(p.n) + '</span></div>').join('') + '<div class="cx-dp add"' + K('addPage') + '>' + I('plus') + '<span>Add page</span></div></div>' : '') +
+    (s.dmenu ? pop('dMenu', s.dmenu.map(x => mi('dm-' + x[0], x[1], x[2], s.dpick === x[0])).join(''), 'top:44px;inset-inline-end:14px;width:200px', ['إعدادات المستند', 'Doc settings']) : '') + (s.dmore ? '<span class="cx-hb cx-dmore"' + K('dMore') + '>···</span>' : '') +
+    '<div class="cx-doc' + (s.pages ? ' wp' : '') + '">' + (s.cover ? '<div class="cx-cover"' + K('cover') + ' style="--c:' + s.cover + '"></div>' : '') + '<div class="cx-doc-t"' + K('docTitle') + '>' + E(s.title || 'Untitled') + '</div>' + (s.blocks || []).map(b => {
     if (b.ty === 'h') return '<h5' + K(b.k) + '>' + E(b.x) + '</h5>';
     if (b.ty === 'li') return '<div class="cx-li"' + K(b.k) + '><span>' + (b.n || '•') + '</span>' + E(b.x) + '</div>';
     if (b.ty === 'task') return '<div class="cx-li task"' + K(b.k) + '>' + I('checklist') + E(b.x) + (b.who ? av(b.who) : '') + '</div>';
@@ -217,7 +225,7 @@ const CX = (() => {
   SC.mindmap = s => {
     const nodes = s.nodes || []; const at = k => nodes.find(n => n.k === k);
     return shell(s, '<div class="cx-mind"><svg>' + nodes.filter(n => n.p && at(n.p)).map(n => { const p = at(n.p); return '<path d="M' + (p.x + 60) + ' ' + (p.y + 16) + ' C' + (p.x + 120) + ' ' + (p.y + 16) + ' ' + (n.x - 40) + ' ' + (n.y + 16) + ' ' + n.x + ' ' + (n.y + 16) + '"/>'; }).join('') + '</svg>' +
-      nodes.map(n => '<div class="cx-mn' + (n.p ? '' : ' root') + (n.task ? ' task' : '') + '"' + K(n.k) + ' style="left:' + n.x + 'px;top:' + n.y + 'px">' + (n.task ? I('checklist') : '') + E(n.n) + '</div>').join('') + '</div>', { noSide: true });
+      nodes.map(n => '<div class="cx-mn' + (n.p ? '' : ' root') + (n.task ? ' task' : '') + (n.c ? ' col' : '') + '"' + K(n.k) + ' style="left:' + n.x + 'px;top:' + n.y + 'px' + (n.c ? ';--c:' + n.c : '') + '">' + (n.ic ? I(n.ic) : n.task ? I('checklist') : '') + E(n.n) + (n.st ? st(n.st) : '') + (n.who ? av(n.who) : '') + '</div>').join('') + (s.mtools ? '<div class="cx-mtools">' + [['mt-add', 'plus'], ['mt-task', 'checklist'], ['mt-col', 'star'], ['mt-fit', 'compass']].map(x => '<span' + K(x[0]) + '>' + I(x[1]) + '</span>').join('') + '</div>' : '') + (s.mmenu ? pop('mMenu', s.mmenu.map((x, i) => mi('mm' + i, x[0], x[1])).join(''), s.mmStyle || 'top:120px;inset-inline-start:300px;width:190px') : '') + '</div>', { noSide: true });
   };
   SC.map = s => shell(s, crumbs(s) + tabs(s, 'map', [['map', 'compass', 'Map']]) + '<div class="cx-mapv"><svg viewBox="0 0 600 300" preserveAspectRatio="none"><path d="M40 260 C120 200 160 210 230 150 S360 60 470 40 L600 20 L600 300 L0 300Z" class="land"/><path d="M60 280 C200 220 300 200 420 120" class="road"/><path d="M200 300 C260 230 330 210 560 160" class="road"/></svg>' +
     (s.pins || []).map(p => '<span class="cx-pin" style="left:' + p.x + '%;top:' + p.y + '%;--c:' + (p.c || '#e03131') + '"' + K(p.k) + '>' + I('target') + (s.open === p.k ? '<em>' + E(p.n) + '</em>' : '') + '</span>').join('') + '</div>');
@@ -245,7 +253,8 @@ const CX = (() => {
   SC.task = s => {
     const subs = s.subs ? '<div class="cx-sec"><b>Subtasks</b>' + s.subs.map(x => '<div class="cx-row mini"' + K(x.k) + '>' + dot(x.st || 'todo') + '<span>' + E(x.n) + '</span>' + (x.who ? av(x.who) : '<span class="cx-empty">' + I('user') + '</span>') + (x.due ? '<span class="cx-date">' + E(x.due) + '</span>' : '') + '</div>').join('') + '<div class="cx-addrow"' + K('addSub') + '>' + I('plus') + '<span' + K('newSub') + '>' + E(s.newSub || 'Add subtask') + '</span></div></div>' : '';
     const check = s.check ? '<div class="cx-sec"><b>Checklist</b>' + s.check.map(x => '<div class="cx-chk' + (x.done ? ' on' : '') + '"' + K(x.k) + '><span class="cx-cb' + (x.done ? ' on' : '') + '"></span>' + E(x.n) + '</div>').join('') + '</div>' : '';
-    const com = (s.comments || []).map(c => '<div class="cx-com' + (c.as ? ' as' : '') + (c.res ? ' res' : '') + '"' + K(c.k) + '>' + av(c.w) + '<div><b>' + esc(who(c.w)) + '</b><p>' + E(c.x) + '</p>' + (c.as ? '<small>' + I('user') + E(['مسند إلى ', 'Assigned to ']) + esc(who(c.as)) + (c.res ? ' · Resolved ✓' : '') + '</small>' : '') + '</div></div>').join('');
+    const extra = c => (c.clip ? '<span class="cx-clipc">' + I('play') + '<em>' + E(c.clip) + '</em></span>' : '') + (c.zoom ? '<span class="cx-zoomc">' + I('play') + '<b>Zoom</b><em>' + E(c.zoom) + '</em>' + btn('zJoin', 'Join', 'pri') + '</span>' : '') + (c.mail ? '<span class="cx-mailc">' + I('inbox') + E(c.mail) + '</span>' : '');
+    const com = (s.comments || []).map(c => '<div class="cx-com' + (c.as ? ' as' : '') + (c.res ? ' res' : '') + '"' + K(c.k) + '>' + av(c.w) + '<div><b>' + esc(who(c.w)) + '</b><p>' + E(c.x) + '</p>' + extra(c) + (c.as ? '<small>' + I('user') + E(['مسند إلى ', 'Assigned to ']) + esc(who(c.as)) + (c.res ? ' · Resolved ✓' : '') + '</small>' : '') + '</div></div>').join('');
     const lab = (ic, t) => '<small>' + I(ic) + t + '</small>';
     return shell(s, '<div class="cx-taskv"><div class="cx-tmain"><div class="cx-thead"><div class="cx-crumb">' + spav(['العمليات', 'Operations'], '#7b68ee', 'sm') + '<span>' + E(['العمليات', 'Operations']) + '</span><i>/</i><b>' + E(s.title2 || ['التخطيط', 'Planning']) + '</b></div><span class="cx-gap"></span><span class="cx-hb ai">' + I('sparkle') + 'Ask AI</span><span class="cx-hb">' + I('share') + 'Share</span></div>' +
       '<span class="cx-ttype">' + dot(s.st || 'todo') + 'Task</span><div class="cx-ttl"' + K('tTitle') + '>' + E(s.title || '') + '</div>' +
@@ -254,10 +263,15 @@ const CX = (() => {
       (s.timer != null ? '<div>' + lab('timer', 'Track time') + '<span class="cx-timer' + (s.run ? ' on' : '') + '"' + K('tTimer') + '>' + I(s.run ? 'pause' : 'play') + E(s.timer) + '</span></div>' : '') +
       (s.est ? '<div>' + lab('clock', 'Time estimate') + '<span class="cx-date"' + K('tEst') + '>' + E(s.est) + '</span></div>' : '') + '</div>' +
       (s.desc ? '<p class="cx-desc"' + K('tDesc') + '>' + E(s.desc) + '</p>' : '<div class="cx-tadd">' + I('doc') + 'Add description<span class="cx-ai-w">' + I('sparkle') + 'Write with AI</span></div>') + subs + check +
-      (subs || check ? '' : '<div class="cx-tchips"><span>' + I('subtask') + 'Add subtask</span><span>' + I('checklist') + 'Checklist</span><span>' + I('clip') + 'Attach file</span></div>') + '</div>' +
+      (s.rel ? '<div class="cx-sec cx-rel"' + K('relSec') + '><b>' + I('link') + 'Relationships</b>' + s.rel.map(r => '<div class="cx-relr t-' + r.t + '"' + K(r.k) + '>' + I(r.t === 'doc' ? 'doc' : r.t === 'link' ? 'link' : 'alert') + '<small>' + ({ link: 'Linked', block: 'Waiting on', blocks: 'Blocking', doc: 'Doc', custom: E(r.f || 'Custom') })[r.t] + '</small><span>' + E(r.n) + '</span></div>').join('') + '<div class="cx-addrow"' + K('addRel') + '>' + I('plus') + '<span>Relate items or add dependencies</span></div></div>' : '') +
+      (s.relPop ? pop('relPop', [['rp-link', 'Link tasks', 'link'], ['rp-wait', 'Waiting on', 'alert'], ['rp-block', 'Blocking', 'x-circle'], ['rp-doc', 'Link Doc', 'doc'], ['rp-custom', 'Custom relationship', 'layers']].map(x => mi(x[0], x[1], x[2], s.relPop === x[0])).join(''), 'top:200px;inset-inline-start:180px;width:210px', 'Add relationship') : '') +
+      (subs || check || s.rel ? '' : '<div class="cx-tchips"><span>' + I('subtask') + 'Add subtask</span><span>' + I('checklist') + 'Checklist</span><span>' + I('clip') + 'Attach file</span></div>') + '</div>' +
       '<div class="cx-tside"><div class="cx-tside-h"><b>Activity</b><span class="cx-watch"' + K('tWatch') + '>' + I('eye') + (s.watch != null ? s.watch : 2) + '</span></div>' + '<small class="cx-act">' + E(['أنشأتَ هذه المهمة', 'You created this task']) + '</small>' + (s.act || []).map((a, i) => '<small class="cx-act"' + K('act' + i) + '>' + E(a) + '</small>').join('') + com +
-      '<div class="cx-in cbox"' + K('cBox') + '>' + E(s.cText || ['اكتب تعليقاً…', 'Write a comment…']) + '</div>' +
-      (s.mention ? pop('mention', ['salim', 'maryam', 'khalid'].map(w => '<div class="cx-mi"' + K('mn-' + w) + '>' + av(w) + '<span>' + esc(who(w)) + '</span></div>').join(''), 'bottom:60px;inset-inline-end:20px;width:170px', '@') : '') + '</div>' + listPop(s) + '</div>', { noSide: true });
+      (s.mailBox ? '<div class="cx-mailbox"' + K('mailBox') + '><div class="cx-mtabs"><span>Comment</span><span class="on"' + K('mTab') + '>' + I('inbox') + 'Email</span></div><div><small>To</small><span' + K('mTo') + '>' + E(s.mailBox.to || '') + '</span></div><div><small>Subject</small><span' + K('mSub') + '>' + E(s.mailBox.sub || '') + '</span></div><p' + K('mBody') + '>' + E(s.mailBox.body || '') + '</p><div class="cx-mf">' + btn('mTpl', 'Templates', '', 'template') + '<span class="cx-gap"></span>' + btn('mSend', 'Send', 'pri', 'send') + '</div></div>'
+        : '<div class="cx-in cbox"' + K('cBox') + '>' + E(s.cText || ['اكتب تعليقاً…', 'Write a comment…']) + (s.recBtn ? '<span class="cx-recb"' + K('recBtn') + '>' + I('play') + '</span>' : '') + '</div>') +
+      (s.mention ? pop('mention', ['salim', 'maryam', 'khalid'].map(w => '<div class="cx-mi"' + K('mn-' + w) + '>' + av(w) + '<span>' + esc(who(w)) + '</span></div>').join(''), 'bottom:60px;inset-inline-end:20px;width:170px', '@') : '') + '</div>' + listPop(s) + '</div>' +
+      (s.rec === 'opts' ? '<div class="cx-dlg cx-recd"' + K('recDlg') + '><b>' + I('play') + 'Clip</b>' + [['ro-screen', 'Entire screen', 'mobile'], ['ro-win', 'Window', 'panel'], ['ro-tab', 'Browser tab', 'globe']].map(x => mi(x[0], x[1], x[2], s.recPick === x[0])).join('') + '<div class="cx-krow">' + tog('ro-mic', s.mic) + 'Microphone</div>' + btn('recGo', 'Start recording', 'pri') + '</div>' : '') +
+      (s.rec === 'on' ? '<div class="cx-recbar"' + K('recBar') + '><i></i><b>' + E(s.recT || '0:12') + '</b><span>' + E(['يسجّل الشاشة…', 'Recording screen…']) + '</span>' + btn('recStop', 'Stop', '', 'pause') + '</div>' : ''), { noSide: true });
   };
 
   SC.chat = s => shell(s, '<div class="cx-chatv"><div class="cx-chs"><small>Channels</small>' + (s.channels || []).map(c => '<div class="cx-ch' + (s.cur === c.k ? ' on' : '') + '"' + K(c.k) + '># ' + E(c.n) + (c.u ? '<em>' + c.u + '</em>' : '') + '</div>').join('') + '<span class="cx-plus"' + K('newCh') + '>+ Channel</span><small>Direct messages</small>' + ['salim', 'maryam'].map(w => '<div class="cx-ch"' + K('dm-' + w) + '>' + av(w) + esc(who(w)) + '</div>').join('') + '</div>' +
@@ -276,7 +290,8 @@ const CX = (() => {
 
   SC.file = s => {
     let body = '';
-    if (s.stage === 'source') body = '<h5>' + E(['استيراد إلى ClickUp', 'Import to ClickUp']) + '</h5><div class="cx-srcs">' + [['xlsx', 'Excel / CSV', 'table', '#1f9d55'], ['trello', 'Trello', 'board', '#0079bf'], ['asana', 'Asana', 'target', '#f06a6a'], ['jira', 'Jira', 'module', '#2684ff']].map(x => '<div class="cx-srct"' + K('src-' + x[0]) + ' style="--c:' + x[3] + '">' + I(x[2]) + '<b>' + x[1] + '</b></div>').join('') + '</div>';
+    if (s.stage === 'token') body = '<h5>' + E(s.tokT || ['اربط حسابك', 'Connect your account']) + '</h5><small class="cx-hint">' + E(['الصق رمز API من إعدادات الأداة الأخرى. لا تشاركه مع أحد.', 'Paste the API token from the other tool’s settings. Never share it.']) + '</small><div class="cx-in wide"' + K('tokIn') + '>' + E(s.tok || '') + '</div>' + btn('tokGo', 'Connect', 'pri') + (s.prog != null ? '<div class="cx-iprog"' + K('impProg') + '><i style="width:' + s.prog + '%"></i><small>' + s.prog + '%</small></div>' : '');
+    else if (s.stage === 'source') body = '<h5>' + E(['استيراد إلى ClickUp', 'Import to ClickUp']) + '</h5><div class="cx-srcs">' + (s.srcs || [['xlsx', 'Excel / CSV', 'table', '#1f9d55'], ['trello', 'Trello', 'board', '#0079bf'], ['asana', 'Asana', 'target', '#f06a6a'], ['jira', 'Jira', 'module', '#2684ff']]).map(x => '<div class="cx-srct"' + K('src-' + x[0]) + ' style="--c:' + x[3] + '">' + I(x[2]) + '<b>' + x[1] + '</b></div>').join('') + '</div>';
     else if (s.stage === 'map') body = '<h5>' + E(['طابق الأعمدة', 'Map your columns']) + '</h5><div class="cx-mapc">' + (s.map || []).map((m, i) => '<div class="cx-mrow' + (m[2] ? ' ok' : '') + '"' + K('mp' + i) + '><span class="cx-tag">' + E(m[0]) + '</span>' + I('arrow-end') + '<span class="cx-b">' + E(m[1]) + '</span></div>').join('') + '</div>' + btn('impGo', 'Import', 'pri');
     else if (s.stage === 'sheet') body = '<div class="cx-xl"' + K('xl') + '><div class="cx-xl-h">' + I('table') + 'requests.xlsx</div>' + (s.sheet || []).map((r, i) => '<div class="cx-tr' + (i ? '' : ' th') + '">' + r.map(v => '<span>' + E(v) + '</span>').join('') + '</div>').join('') + '</div>';
     return shell(s, s.stage === 'list' || !s.stage ? crumbs(s) + tabs(s, 'list') + listBody(s) + (s.exp ? pop('exp', [['csv', 'CSV', 'doc'], ['xlsx', 'Excel', 'table']].map(x => mi('fmt-' + x[0], x[1], x[2])).join('') + (s.file ? '<div class="cx-file"' + K('file') + '>' + I('download') + E(s.file) + '</div>' : ''), 'top:96px;inset-inline-end:16px;width:200px', 'Export view') : '') : '<div class="cx-wiz">' + body + '</div>');
@@ -320,6 +335,40 @@ const CX = (() => {
     '<div class="cx-arun">' + (s.run ? '<div class="cx-card2"' + K('runCard') + '><b>' + E(s.run.n) + '</b><div>' + st(s.run.st || 'todo', 'runSt') + '<span class="cx-gap"></span>' + (s.run.who ? av(s.run.who) : '') + '</div>' + (s.run.check ? '<div class="cx-chk on"><span class="cx-cb on"></span>' + E(s.run.check) + '</div>' : '') + '</div>' : '') +
     (s.log ? '<div class="cx-alog">' + s.log.map((l, i) => '<div' + K('lg' + i) + '>' + I('zap') + E(l) + '</div>').join('') + '</div>' : '') + '</div></div>' +
     (s.pick ? pop('pick', s.pick.map((x, i) => mi('pk' + i, x, 'zap', s.pickOn === i)).join(''), s.pickStyle || 'top:120px;inset-inline-start:250px;width:240px') : ''));
+
+  /* Chrome extension over a web page: create a task, note, screenshot, time, bookmark */
+  SC.browser = s => {
+    const tabsX = [['task', 'checklist', 'Task'], ['note', 'doc', 'Notepad'], ['shot', 'eye', 'Screenshot'], ['time', 'timer', 'Track time'], ['mark', 'bookmark', 'Bookmarks']];
+    let pane = '';
+    if (s.xtab === 'note') pane = '<div class="cx-xnote">' + (s.notes || []).map((n, i) => '<div class="cx-chk"' + K('xn' + i) + '><span class="cx-cb"></span>' + E(n) + '</div>').join('') + '</div>';
+    else if (s.xtab === 'time') pane = '<div class="cx-in"' + K('xTaskPick') + '>' + I('search') + E(s.tpick || ['اختر مهمة', 'Pick a task']) + '</div><span class="cx-timer big' + (s.run ? ' on' : '') + '"' + K('xTimer') + '>' + I(s.run ? 'pause' : 'play') + E(s.timer || '0:00:00') + '</span>';
+    else if (s.xtab === 'mark') pane = (s.marks || []).map((m, i) => '<div class="cx-mi"' + K('bm' + i) + '>' + I('bookmark') + '<span>' + E(m) + '</span></div>').join('') + btn('xMark', 'Bookmark this page', 'pri', 'plus');
+    else if (s.xtab === 'shot') pane = '<div class="cx-shtools">' + [['sh-pen', 'cursor'], ['sh-arrow', 'arrow-end'], ['sh-text', 'tag'], ['sh-blur', 'eye']].map(x => '<span' + K(x[0]) + '>' + I(x[1]) + '</span>').join('') + '</div>' + btn('xAttach', 'Attach to task', 'pri', 'clip');
+    else pane = '<small>Task name</small><div class="cx-in"' + K('xName') + '>' + E(s.xName || '') + '</div><small>List</small><div class="cx-in"' + K('xList') + '>' + I('list') + E(s.xList || ['الطلبات', 'Requests']) + '</div><div class="cx-xrow"><span class="cx-empty"' + K('xWho') + '>' + (s.xWho ? av(s.xWho) : I('user')) + '</span><span class="cx-date"' + K('xDue') + '>' + I('calendar') + E(s.xDue || 'Due date') + '</span></div>' + btn('xCreate', 'Create task', 'pri wide');
+    return '<div class="cx-brw"><div class="cx-brw-top"><span class="cx-dots3"><i></i><i></i><i></i></span><span class="cx-url">' + I('lock') + E(s.url || 'supplier-portal.example.com/orders/4471') + '</span><span class="cx-ext' + (s.ext ? ' on' : '') + '"' + K('ext') + '><span class="cx-logo"></span></span></div>' +
+      '<div class="cx-page"><h4>' + E(s.ptitle || ['طلب شراء رقم 4471', 'Purchase order 4471']) + '</h4><p class="ln w9"></p><p class="ln w7"></p><div class="cx-pcard"><b>' + E(['المورّد: شركة الشبكات المتقدمة', 'Supplier: Advanced Networks LLC']) + '</b><p class="ln w8"></p><p class="ln w5"></p></div><p class="ln w9"></p><p class="ln w6"></p></div>' +
+      (s.shot ? '<div class="cx-shot"' + K('shotArea') + '></div>' : '') +
+      (s.ext ? '<div class="cx-xpop"' + K('xPop') + '><div class="cx-xh"><span class="cx-logo"></span><b>ClickUp</b><span class="cx-gap"></span>' + av('me') + '</div><div class="cx-xtabs">' + tabsX.map(t => '<span class="' + ((s.xtab || 'task') === t[0] ? 'on' : '') + '"' + K('x-' + t[0]) + ' title="' + t[2] + '">' + I(t[1]) + '</span>').join('') + '</div><div class="cx-xb">' + pane + '</div></div>' : '') +
+      (s.toast ? '<div class="cx-toast"' + K('toast') + '>' + I('check') + '<span>' + E(s.toast) + '</span></div>' : '') + '</div>';
+  };
+
+  /* Sprint Folder: a sprint List with its dates, points and progress */
+  const SPR_TREE = [{ k: 'sp-dev', l: 0, t: 'space', n: ['تطوير الموقع', 'Website development'], c: '#ec4899' }, { k: 'fd-spr', l: 1, t: 'folder', n: ['السبرنتات', 'Sprints'] }, { k: 'sp1', l: 2, t: 'list', n: ['Sprint 1 (6/1 - 6/14)', 'Sprint 1 (6/1 - 6/14)'], cnt: 6 }, { k: 'sp2', l: 2, t: 'list', n: ['Sprint 2 (6/15 - 6/28)', 'Sprint 2 (6/15 - 6/28)'], cnt: 0 }, { k: 'blog', l: 2, t: 'list', n: ['Backlog', 'Backlog'], cnt: 12 }];
+  SC.sprint = s => {
+    const sp = s.sprint || {};
+    const banner = '<div class="cx-sprb"' + K('sprBar') + '><div><b>' + E(sp.n || 'Sprint 1') + '</b><small>' + I('calendar') + E(sp.d || '6/1 - 6/14') + '</small></div><div class="cx-sprp"><small>' + E(['التقدم', 'Progress']) + '</small><span><i style="width:' + (sp.p || 0) + '%"></i></span></div><div class="cx-sprpts"' + K('pts') + '><b>' + (sp.pts != null ? sp.pts : 21) + '</b><small>pts</small></div>' + btn('sprGo', sp.btn || 'Start sprint', sp.done ? '' : 'pri') + '</div>';
+    const spill = s.spill ? '<div class="cx-spill"' + K('spill') + '>' + I('alert') + E(s.spill) + '<span class="cx-gap"></span>' + btn('moveNext', 'Move tasks to the next Sprint', 'pri') + '</div>' : '';
+    const dlg = s.dlg ? '<div class="cx-dlg"' + K('sDlg') + '><b>' + I('repeat') + E(s.dlg.t || 'Sprint Folder') + '</b>' + (s.dlg.f || []).map(f => '<small>' + E(f[1]) + '</small><div class="cx-in"' + K(f[0]) + '>' + E(f[2] || '') + '</div>').join('') + btn('sDlgGo', s.dlg.b || 'Create', 'pri') + '</div>' : '';
+    return shell(Object.assign({ tree: SPR_TREE, sel: 'sp1' }, s), crumbs(Object.assign({ title: sp.n || 'Sprint 1', space: ['تطوير الموقع', 'Website development'], spaceC: '#ec4899' }, s)) + banner + spill + tabs(s, 'list') + listBody(Object.assign({ cols: ['assignee', 'due', 'pts'] }, s)) + dlg +
+      (s.menu ? pop('sMenu', s.menu.map((x, i) => mi('sm' + i, x[0], x[1], s.menuOn === i)).join(''), s.menuStyle || 'top:150px;inset-inline-start:40px;width:200px') : ''));
+  };
+
+  /* Personal Priorities (formerly LineUp): my ranked list and the team's */
+  SC.prio = s => shell(s, '<div class="cx-prio"><div class="cx-prio-h"><h5>' + I('star') + 'My Tasks</h5><div class="cx-mwt">' + [['me', 'Personal Priorities'], ['team', 'Teams Hub']].map(t => '<span class="' + ((s.view || 'me') === t[0] ? 'on' : '') + '"' + K('pv-' + t[0]) + '>' + t[1] + '</span>').join('') + '</div></div>' +
+    ((s.view || 'me') === 'team' ? '<div class="cx-pteam">' + (s.team || []).map(m => '<div class="cx-pcol"' + K('tm-' + m.w) + '><b>' + av(m.w) + esc(who(m.w)) + '</b>' + m.items.map((x, i) => '<div class="cx-pi"><span class="cx-prank">' + (i + 1) + '</span><span>' + E(x) + '</span></div>').join('') + '</div>').join('') + '</div>'
+      : '<div class="cx-pcard"' + K('pCard') + '><div class="cx-pch">' + I('star') + '<b>Priorities</b><small>' + (s.items || []).length + '</small><span class="cx-gap"></span><span class="cx-hb"' + K('pAdd') + '>' + I('plus') + 'Add task</span></div>' +
+        (s.items || []).map((x, i) => '<div class="cx-pi big"' + K(x.k) + '><span class="cx-grip">' + I('grip') + '</span><span class="cx-prank">' + (i + 1) + '</span>' + dot(x.st || 'todo') + '<span>' + E(x.n) + '</span>' + (x.due ? '<span class="cx-date">' + E(x.due) + '</span>' : '') + (x.who ? av(x.who) : '') + '</div>').join('') + '</div>') +
+    (s.search ? pop('pSearch', '<div class="cx-in"' + K('pQ') + '>' + I('search') + E(s.search.q || '') + '</div>' + (s.search.res || []).map((r, i) => mi('pr' + i, r, 'checklist', i === 0)).join(''), 'top:110px;inset-inline-end:30px;width:260px', 'Add to priorities') : '') + '</div>');
 
   /* ---------- Player ---------- */
   function mount(host, demo) {

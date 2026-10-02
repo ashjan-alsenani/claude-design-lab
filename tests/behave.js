@@ -193,6 +193,16 @@ const ok = (c, m) => console.log((c ? 'PASS ' : 'FAIL ') + m);
   ok(/clickup4\/structure1$/.test(await p.evaluate(() => location.hash)), 'Next goes to the following topic');
   await p.evaluate(() => { location.hash = '#/courses/clickup4/interview'; }); await p.waitForTimeout(300);
   await p.click('.co-q [data-reveal]'); ok(await p.isVisible('.co-model'), 'role play reveals a model answer');
+  await p.evaluate(() => { location.hash = '#/courses'; }); await p.waitForTimeout(300);
+  ok(await p.$$eval('.cs-card[href]', x => x.length) === 2, 'courses hub lists both courses');
+  await p.evaluate(() => { location.hash = '#/courses/clickup-pro'; }); await p.waitForTimeout(300);
+  ok(await p.$$eval('.co-list a', x => x.length) === 25 && await p.$$eval('details.co-sec', x => x.length) === 7 && !(await p.$('.co-rp')), 'advanced course lists 7 sections, 25 topics and no role play');
+  await p.evaluate(() => { location.hash = '#/courses/clickup-pro/a-rel'; }); await p.waitForTimeout(400);
+  ok(!!(await p.$('.cx-stage .cx-scene *')) && !!(await p.$('.co-art')), 'advanced topic has a demo and an illustration');
+  await p.click('.co-nav .btn-primary'); await p.waitForTimeout(300);
+  ok(/#\/courses\/clickup-pro$/.test(await p.evaluate(() => location.hash)), 'last advanced topic leads back to the course contents');
+  await p.evaluate(() => { location.hash = '#/courses/clickup-pro/interview'; }); await p.waitForTimeout(300);
+  ok(!(await p.$('.co-q')), 'a course without a role play has no role play page');
   // 4g. Clicky chatbot, forum in the header, security
   ok(await p.isVisible('#topForum'), 'forum button in the header');
   ok(!(await p.$('.topbar #soundToggle')), 'sound switch is not in the header');

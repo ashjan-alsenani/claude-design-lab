@@ -5683,6 +5683,481 @@
     "ar",
     "en"
    ]
+  },
+  {
+   "id": "course:a-intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة: من المستوى المتوسط إلى المتقدم",
+    "en": "Introduction: from intermediate to advanced"
+   },
+   "text": {
+    "ar": "أنت تعرف الأساسيات: المهام والقوائم وطرق العرض. هذه الدورة تأخذك إلى ما يستخدمه المحترفون فعلاً: الخرائط الذهنية، والتكاملات مع Zoom والبريد وGoogle Calendar، ومستندات منظمة، والسبرنتات، وميزات خفية لا يعرفها كثيرون.\nYou already know the basics: tasks, Lists and views. This course takes you to what professionals really use: Mind Maps, integrations with Zoom, email and Google Calendar, well-structured Docs, sprints, and hidden features few people know.\nالدورة سبعة أقسام. كل قسم يحل مشكلة حقيقية: كيف ترى المشروع كله في صورة واحدة، كيف تتوقف عن التنقل بين التطبيقات، كيف تحفظ معرفة الفريق في مكان واحد، وكيف تدير العمل في دورات قصيرة منتظمة. بعض الميزات تحتاج تفعيلاً من مسؤول مساحة العمل (ClickApps) أو تختلف حسب الخطة، وسننبهك في كل موضوع.\nThe course has seven sections. Each one solves a real problem: how to see the whole project in one picture, how to stop jumping between apps, how to keep the team’s knowledge in one place, and how to run work in short regular cycles. Some features need a Workspace admin to turn them on (ClickApps) or depend on your plan, and each topic tells you when.\nافتح ClickUp في نافذة بجانب هذه الصفحة.\nتأكد من الميزات المفعّلة: Settings ← ClickApps (أو اسأل المسؤول).\nاختر مساحة تجريبية أو قائمة للتدريب حتى لا تغيّر عمل الفريق.\nأنشئ مساحة باسم «تجارب» وطبّق فيها كل موضوع. احذفها أو أرشفها بعد انتهاء الدورة.\nCreate a Space called “Sandbox” and practise every topic there. Archive it when you finish the course.\nمشرف فريق الدعم الرقمي كان يقضي ساعة يومياً في نسخ رسائل البريد إلى المهام. بعد قسم التكاملات صار يرسل ويستقبل البريد من داخل المهمة نفسها.\nThe digital support supervisor spent an hour a day copying emails into tasks. After the integrations section he sends and receives email from inside the task itself.",
+    "en": "أنت تعرف الأساسيات: المهام والقوائم وطرق العرض. هذه الدورة تأخذك إلى ما يستخدمه المحترفون فعلاً: الخرائط الذهنية، والتكاملات مع Zoom والبريد وGoogle Calendar، ومستندات منظمة، والسبرنتات، وميزات خفية لا يعرفها كثيرون.\nYou already know the basics: tasks, Lists and views. This course takes you to what professionals really use: Mind Maps, integrations with Zoom, email and Google Calendar, well-structured Docs, sprints, and hidden features few people know.\nالدورة سبعة أقسام. كل قسم يحل مشكلة حقيقية: كيف ترى المشروع كله في صورة واحدة، كيف تتوقف عن التنقل بين التطبيقات، كيف تحفظ معرفة الفريق في مكان واحد، وكيف تدير العمل في دورات قصيرة منتظمة. بعض الميزات تحتاج تفعيلاً من مسؤول مساحة العمل (ClickApps) أو تختلف حسب الخطة، وسننبهك في كل موضوع.\nThe course has seven sections. Each one solves a real problem: how to see the whole project in one picture, how to stop jumping between apps, how to keep the team’s knowledge in one place, and how to run work in short regular cycles. Some features need a Workspace admin to turn them on (ClickApps) or depend on your plan, and each topic tells you when.\nOpen ClickUp in a window next to this page.\nCheck which features are on: Settings → ClickApps (or ask your admin).\nPick a practice Space or List so you do not change the team’s real work.\nأنشئ مساحة باسم «تجارب» وطبّق فيها كل موضوع. احذفها أو أرشفها بعد انتهاء الدورة.\nCreate a Space called “Sandbox” and practise every topic there. Archive it when you finish the course.\nمشرف فريق الدعم الرقمي كان يقضي ساعة يومياً في نسخ رسائل البريد إلى المهام. بعد قسم التكاملات صار يرسل ويستقبل البريد من داخل المهمة نفسها.\nThe digital support supervisor spent an hour a day copying emails into tasks. After the integrations section he sends and receives email from inside the task itself."
+   },
+   "url": "#/courses/clickup-pro/a-intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-mm-intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة إلى الخرائط الذهنية",
+    "en": "Intro to Mind Maps"
+   },
+   "text": {
+    "ar": "عرض الخريطة الذهنية (Mind Map) يرسم المساحة والمجلدات والقوائم والمهام كشجرة واحدة. ترى الهيكل كله في نظرة، وتفهم أين يعيش كل شيء، وتستطيع العصف الذهني عليه مباشرة.\nThe Mind Map view draws your Space, Folders, Lists and tasks as one tree. You see the whole structure at a glance, understand where everything lives, and can brainstorm right on it.\nهناك نوعان: خريطة مبنية على المهام (تعرض العناصر الحقيقية في الموقع الذي فتحتها منه) وخريطة فارغة لأفكار حرة. أضف العرض من «+ View» واختر Mind Map. استخدم أدوات التكبير و«ملاءمة الشاشة» حتى تتنقل بسهولة، واطوِ الفروع التي لا تحتاجها الآن.\nThere are two kinds: a task-based map (it shows the real items where you opened it) and a blank map for free ideas. Add it from “+ View” and choose Mind Map. Use zoom and “fit to screen” to move around easily, and collapse branches you do not need right now.\nافتح مساحة أو مجلداً واضغط «+ View».\nاختر Mind Map ثم الخريطة المبنية على المهام.\nاستخدم «ملاءمة الشاشة» وكبّر وصغّر لتتنقل.\nاطوِ الفروع غير المهمة الآن.\nافتح الخريطة من مستوى المجلد لا المساحة كلها، حتى تبقى الصورة واضحة.\nOpen the map at Folder level, not the whole Space, so the picture stays clear.\nمديرة مشروع الموقع الجديد عرضت الخريطة الذهنية في اجتماع الانطلاق. خلال خمس دقائق فهم الفريق كله أين يقع عمل كل شخص.\nThe new website’s project manager showed the Mind Map in the kick-off meeting. In five minutes the whole team understood where everyone’s work sits.",
+    "en": "عرض الخريطة الذهنية (Mind Map) يرسم المساحة والمجلدات والقوائم والمهام كشجرة واحدة. ترى الهيكل كله في نظرة، وتفهم أين يعيش كل شيء، وتستطيع العصف الذهني عليه مباشرة.\nThe Mind Map view draws your Space, Folders, Lists and tasks as one tree. You see the whole structure at a glance, understand where everything lives, and can brainstorm right on it.\nهناك نوعان: خريطة مبنية على المهام (تعرض العناصر الحقيقية في الموقع الذي فتحتها منه) وخريطة فارغة لأفكار حرة. أضف العرض من «+ View» واختر Mind Map. استخدم أدوات التكبير و«ملاءمة الشاشة» حتى تتنقل بسهولة، واطوِ الفروع التي لا تحتاجها الآن.\nThere are two kinds: a task-based map (it shows the real items where you opened it) and a blank map for free ideas. Add it from “+ View” and choose Mind Map. Use zoom and “fit to screen” to move around easily, and collapse branches you do not need right now.\nOpen a Space or Folder and click “+ View”.\nChoose Mind Map, then the task-based map.\nUse “fit to screen” and zoom in and out to move around.\nCollapse branches that do not matter right now.\nافتح الخريطة من مستوى المجلد لا المساحة كلها، حتى تبقى الصورة واضحة.\nOpen the map at Folder level, not the whole Space, so the picture stays clear.\nمديرة مشروع الموقع الجديد عرضت الخريطة الذهنية في اجتماع الانطلاق. خلال خمس دقائق فهم الفريق كله أين يقع عمل كل شخص.\nThe new website’s project manager showed the Mind Map in the kick-off meeting. In five minutes the whole team understood where everyone’s work sits."
+   },
+   "url": "#/courses/clickup-pro/a-mm-intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-mm-amend",
+   "kind": "course",
+   "title": {
+    "ar": "الخرائط الذهنية لتعديل المشروع",
+    "en": "Mind Maps for project amendments"
+   },
+   "text": {
+    "ar": "الخريطة الذهنية ليست للعرض فقط: تستطيع منها تعديل المشروع. غيّر الحالة والأولوية، وأعد تسمية العناصر، وانقل مهمة إلى فرع آخر، وأضف تبعيات ومراقبين، وكل تغيير يُحفظ في المهمة الحقيقية.\nA Mind Map is not just for looking: you can change the project from it. Change status and priority, rename items, move a task to another branch, add dependencies and watchers, and every change is saved on the real task.\nعندما يتغير نطاق المشروع، ترى أثر التغيير بصرياً: نقل مهمة من قائمة إلى أخرى يكون بسحب العقدة إلى الفرع الجديد. لوّن القوائم لتمييزها، وأضف المراقبين (Watchers) حتى يصل الإشعار للمعنيين. بعد التعديلات الكبيرة حدّث الخريطة لترى الشكل النهائي.\nWhen the scope changes, you see the effect visually: moving a task to another List is done by dragging its node onto the new branch. Colour Lists to tell them apart and add watchers so the right people get notified. After big edits, refresh the map to see the final shape.\nافتح Mind Map على مجلد المشروع.\nاضغط على مهمة واختر من القائمة: الحالة أو الأولوية.\nاسحب مهمة إلى فرع قائمة أخرى لنقلها.\nأضف تبعية أو مراقباً من نفس القائمة.\nقبل نقل مهام كثيرة، التقط صورة للخريطة أو صدّر القائمة؛ ستعرف كيف كان الوضع لو احتجت الرجوع.\nBefore moving many tasks, screenshot the map or export the List, so you know how things were if you need to go back.\nتغيّر نطاق مشروع الموقع بعد اجتماع مع الإدارة. نقلت المديرة ست مهام بين القوائم من الخريطة في عشر دقائق بدلاً من فتح كل مهمة على حدة.\nThe website scope changed after a management meeting. The manager moved six tasks between Lists from the map in ten minutes instead of opening each task one by one.",
+    "en": "الخريطة الذهنية ليست للعرض فقط: تستطيع منها تعديل المشروع. غيّر الحالة والأولوية، وأعد تسمية العناصر، وانقل مهمة إلى فرع آخر، وأضف تبعيات ومراقبين، وكل تغيير يُحفظ في المهمة الحقيقية.\nA Mind Map is not just for looking: you can change the project from it. Change status and priority, rename items, move a task to another branch, add dependencies and watchers, and every change is saved on the real task.\nعندما يتغير نطاق المشروع، ترى أثر التغيير بصرياً: نقل مهمة من قائمة إلى أخرى يكون بسحب العقدة إلى الفرع الجديد. لوّن القوائم لتمييزها، وأضف المراقبين (Watchers) حتى يصل الإشعار للمعنيين. بعد التعديلات الكبيرة حدّث الخريطة لترى الشكل النهائي.\nWhen the scope changes, you see the effect visually: moving a task to another List is done by dragging its node onto the new branch. Colour Lists to tell them apart and add watchers so the right people get notified. After big edits, refresh the map to see the final shape.\nOpen the Mind Map on the project Folder.\nClick a task and choose from the menu: status or priority.\nDrag a task onto another List’s branch to move it.\nAdd a dependency or a watcher from the same menu.\nقبل نقل مهام كثيرة، التقط صورة للخريطة أو صدّر القائمة؛ ستعرف كيف كان الوضع لو احتجت الرجوع.\nBefore moving many tasks, screenshot the map or export the List, so you know how things were if you need to go back.\nتغيّر نطاق مشروع الموقع بعد اجتماع مع الإدارة. نقلت المديرة ست مهام بين القوائم من الخريطة في عشر دقائق بدلاً من فتح كل مهمة على حدة.\nThe website scope changed after a management meeting. The manager moved six tasks between Lists from the map in ten minutes instead of opening each task one by one."
+   },
+   "url": "#/courses/clickup-pro/a-mm-amend",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-mm-brain",
+   "kind": "course",
+   "title": {
+    "ar": "الخرائط الذهنية للعصف الذهني والإبداع",
+    "en": "Mind Maps for brainstorming and creativity"
+   },
+   "text": {
+    "ar": "ابدأ بخريطة فارغة وفكرة في الوسط، ثم دع الفريق يضيف فروعاً. عندما تنضج الفكرة حوّل الفروع النهائية إلى مهام حقيقية مع مسؤولين، دون إعادة كتابة.\nStart with a blank map and an idea in the middle, then let the team add branches. When the idea is ready, turn the final branches into real tasks with assignees, without retyping.\nفي الخريطة الفارغة لا قيود: أضف عقدة بالزر «+» أو بمفتاح Tab، وعقدة شقيقة بمفتاح Enter. لوّن الفروع حسب الموضوع. عندما يتفق الفريق، اختر عقدة وحوّلها إلى مهمة واختر القائمة التي ستعيش فيها، ثم أسندها.\nIn a blank map there are no limits: add a node with the “+” button or Tab, and a sibling with Enter. Colour branches by theme. When the team agrees, pick a node, convert it to a task, choose the List it will live in, and assign it.\nأضف عرض Mind Map واختر «Blank».\nاكتب الفكرة الرئيسية في الوسط.\nأضف الفروع بالزر «+» أو Tab، ولوّنها.\nحوّل الفروع النهائية إلى مهام واختر القائمة والمسؤول.\nاجعل أول عشر دقائق للأفكار فقط بلا نقد، ثم خمس دقائق للاختيار والتحويل إلى مهام.\nSpend the first ten minutes on ideas only, no criticism, then five minutes choosing and converting to tasks.\nفريق التسويق الرقمي عقد جلسة عصف ذهني على الخريطة. خرجوا بـ 14 فكرة محتوى، وتحولت 6 منها إلى مهام مسندة قبل نهاية الاجتماع.\nThe digital marketing team held a brainstorm on the map. They came out with 14 content ideas, and 6 became assigned tasks before the meeting ended.",
+    "en": "ابدأ بخريطة فارغة وفكرة في الوسط، ثم دع الفريق يضيف فروعاً. عندما تنضج الفكرة حوّل الفروع النهائية إلى مهام حقيقية مع مسؤولين، دون إعادة كتابة.\nStart with a blank map and an idea in the middle, then let the team add branches. When the idea is ready, turn the final branches into real tasks with assignees, without retyping.\nفي الخريطة الفارغة لا قيود: أضف عقدة بالزر «+» أو بمفتاح Tab، وعقدة شقيقة بمفتاح Enter. لوّن الفروع حسب الموضوع. عندما يتفق الفريق، اختر عقدة وحوّلها إلى مهمة واختر القائمة التي ستعيش فيها، ثم أسندها.\nIn a blank map there are no limits: add a node with the “+” button or Tab, and a sibling with Enter. Colour branches by theme. When the team agrees, pick a node, convert it to a task, choose the List it will live in, and assign it.\nAdd a Mind Map view and choose “Blank”.\nType the main idea in the middle.\nAdd branches with “+” or Tab, and colour them.\nConvert the final branches to tasks and pick a List and assignee.\nاجعل أول عشر دقائق للأفكار فقط بلا نقد، ثم خمس دقائق للاختيار والتحويل إلى مهام.\nSpend the first ten minutes on ideas only, no criticism, then five minutes choosing and converting to tasks.\nفريق التسويق الرقمي عقد جلسة عصف ذهني على الخريطة. خرجوا بـ 14 فكرة محتوى، وتحولت 6 منها إلى مهام مسندة قبل نهاية الاجتماع.\nThe digital marketing team held a brainstorm on the map. They came out with 14 content ideas, and 6 became assigned tasks before the meeting ended."
+   },
+   "url": "#/courses/clickup-pro/a-mm-brain",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-zoom",
+   "kind": "course",
+   "title": {
+    "ar": "تكامل Zoom",
+    "en": "Zoom integration"
+   },
+   "text": {
+    "ar": "اربط Zoom مرة واحدة، ثم ابدأ اجتماعاً من داخل أي مهمة. يظهر رابط الاجتماع ورقمه في تعليق، فيعرف الجميع أين يلتقون وعن أي عمل يتحدثون.\nConnect Zoom once, then start a meeting from inside any task. The meeting link and ID appear in a comment, so everyone knows where to meet and which work it is about.\nالتفعيل: من App Center (أو Integrations) اختر Zoom واضغط Connect، ثم وافق على الأذونات في نافذة Zoom. بعدها في أي مهمة اكتب ‎/zoom في التعليق واضغط Enter. الاجتماع يُربط بالمهمة، فتبقى الملاحظات والقرارات بجانب العمل نفسه. قد يحتاج التفعيل لمسؤول حسب إعدادات شركتك.\nSetup: in App Center (or Integrations) choose Zoom and click Connect, then approve the permissions in the Zoom window. After that, in any task type /zoom in the comment box and press Enter. The meeting is tied to the task, so notes and decisions stay next to the work. Your company may need an admin to allow it.\nافتح App Center واختر Zoom ثم Connect.\nسجّل الدخول إلى Zoom ووافق على الأذونات.\nافتح مهمة واكتب ‎/zoom في التعليق ثم Enter.\nشارك الرابط أو اضغط Join.\nابدأ الاجتماع من المهمة التي سيُناقش عملها، لا من التقويم؛ هكذا يبقى السياق مع الاجتماع.\nStart the meeting from the task whose work you will discuss, not from the calendar; the context stays with the meeting.\nفريق الواجهة الأمامية كان يضيع خمس دقائق قبل كل اجتماع في البحث عن الرابط. الآن يبدأ الاجتماع من المهمة ويجد الجميع الرابط في التعليقات.\nThe front-end team lost five minutes before every meeting looking for the link. Now the meeting starts from the task and everyone finds the link in the comments.",
+    "en": "اربط Zoom مرة واحدة، ثم ابدأ اجتماعاً من داخل أي مهمة. يظهر رابط الاجتماع ورقمه في تعليق، فيعرف الجميع أين يلتقون وعن أي عمل يتحدثون.\nConnect Zoom once, then start a meeting from inside any task. The meeting link and ID appear in a comment, so everyone knows where to meet and which work it is about.\nالتفعيل: من App Center (أو Integrations) اختر Zoom واضغط Connect، ثم وافق على الأذونات في نافذة Zoom. بعدها في أي مهمة اكتب ‎/zoom في التعليق واضغط Enter. الاجتماع يُربط بالمهمة، فتبقى الملاحظات والقرارات بجانب العمل نفسه. قد يحتاج التفعيل لمسؤول حسب إعدادات شركتك.\nSetup: in App Center (or Integrations) choose Zoom and click Connect, then approve the permissions in the Zoom window. After that, in any task type /zoom in the comment box and press Enter. The meeting is tied to the task, so notes and decisions stay next to the work. Your company may need an admin to allow it.\nOpen App Center, choose Zoom, then Connect.\nSign in to Zoom and approve the permissions.\nOpen a task, type /zoom in the comment and press Enter.\nShare the link or click Join.\nابدأ الاجتماع من المهمة التي سيُناقش عملها، لا من التقويم؛ هكذا يبقى السياق مع الاجتماع.\nStart the meeting from the task whose work you will discuss, not from the calendar; the context stays with the meeting.\nفريق الواجهة الأمامية كان يضيع خمس دقائق قبل كل اجتماع في البحث عن الرابط. الآن يبدأ الاجتماع من المهمة ويجد الجميع الرابط في التعليقات.\nThe front-end team lost five minutes before every meeting looking for the link. Now the meeting starts from the task and everyone finds the link in the comments."
+   },
+   "url": "#/courses/clickup-pro/a-zoom",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-email",
+   "kind": "course",
+   "title": {
+    "ar": "تكامل البريد الإلكتروني",
+    "en": "Email integration"
+   },
+   "text": {
+    "ar": "مع ميزة البريد (Email ClickApp) ترسل وتستقبل البريد من داخل المهمة. الرد يعود كتعليق، فتبقى المراسلة كلها بجانب العمل بدل أن تضيع في صندوق بريد شخصي.\nWith the Email ClickApp you send and receive email from inside the task. Replies come back as comments, so the whole conversation stays next to the work instead of getting lost in a personal inbox.\nيجب أن يفعّل المسؤول Email ClickApp، ثم يربط كل شخص حسابه (Gmail أو Outlook أو IMAP). في المهمة اختر «Email» بدل «Comment»، واكتب المستلم والموضوع والنص، أو استخدم قالب بريد محفوظ. يمكنك عرض الردود كتعليقات منفصلة أو كسلسلة واحدة (Threaded). لا ترسل بيانات حساسة إلا وفق سياسة شركتك.\nAn admin must turn on the Email ClickApp, then each person connects their account (Gmail, Outlook or IMAP). In the task choose “Email” instead of “Comment”, write the recipient, subject and body, or use a saved email template. Replies can show as separate comments or as one thread. Do not send sensitive data unless your company policy allows it.\nاطلب من المسؤول تفعيل Email ClickApp.\nاربط حساب بريدك من الإعدادات.\nفي المهمة اختر Email بدل Comment.\nاكتب المستلم والموضوع والنص أو اختر قالباً، ثم Send.\nاحفظ الرسائل المتكررة (مثل «تم استلام طلبك») كقوالب بريد لتوفر الكتابة كل مرة.\nSave repeated messages (like “we received your request”) as email templates so you do not retype them.\nقسم المشتريات صار يرسل بريد المتابعة من المهمة نفسها. عندما غاب الموظف المسؤول، وجد زميله المراسلة كاملة في المهمة وأكمل العمل.\nProcurement now sends follow-up emails from the task itself. When the responsible employee was away, a colleague found the whole conversation in the task and carried on.",
+    "en": "مع ميزة البريد (Email ClickApp) ترسل وتستقبل البريد من داخل المهمة. الرد يعود كتعليق، فتبقى المراسلة كلها بجانب العمل بدل أن تضيع في صندوق بريد شخصي.\nWith the Email ClickApp you send and receive email from inside the task. Replies come back as comments, so the whole conversation stays next to the work instead of getting lost in a personal inbox.\nيجب أن يفعّل المسؤول Email ClickApp، ثم يربط كل شخص حسابه (Gmail أو Outlook أو IMAP). في المهمة اختر «Email» بدل «Comment»، واكتب المستلم والموضوع والنص، أو استخدم قالب بريد محفوظ. يمكنك عرض الردود كتعليقات منفصلة أو كسلسلة واحدة (Threaded). لا ترسل بيانات حساسة إلا وفق سياسة شركتك.\nAn admin must turn on the Email ClickApp, then each person connects their account (Gmail, Outlook or IMAP). In the task choose “Email” instead of “Comment”, write the recipient, subject and body, or use a saved email template. Replies can show as separate comments or as one thread. Do not send sensitive data unless your company policy allows it.\nAsk your admin to turn on the Email ClickApp.\nConnect your email account in Settings.\nIn the task choose Email instead of Comment.\nWrite the recipient, subject and body or pick a template, then Send.\nاحفظ الرسائل المتكررة (مثل «تم استلام طلبك») كقوالب بريد لتوفر الكتابة كل مرة.\nSave repeated messages (like “we received your request”) as email templates so you do not retype them.\nقسم المشتريات صار يرسل بريد المتابعة من المهمة نفسها. عندما غاب الموظف المسؤول، وجد زميله المراسلة كاملة في المهمة وأكمل العمل.\nProcurement now sends follow-up emails from the task itself. When the responsible employee was away, a colleague found the whole conversation in the task and carried on."
+   },
+   "url": "#/courses/clickup-pro/a-email",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-chrome",
+   "kind": "course",
+   "title": {
+    "ar": "إضافة ClickUp لمتصفح Chrome",
+    "en": "ClickUp Chrome extension"
+   },
+   "text": {
+    "ar": "الإضافة تجعل ClickUp معك في أي صفحة ويب: أنشئ مهمة من الصفحة التي تقرؤها، والتقط صورة للشاشة وعلّق عليها، وشغّل مؤقت الوقت، واكتب في المفكرة، واحفظ الصفحة كإشارة مرجعية.\nThe extension brings ClickUp to any web page: create a task from the page you are reading, take an annotated screenshot, run the time tracker, write in your Notepad, and bookmark the page.\nثبّت الإضافة من Chrome Web Store وسجّل الدخول. اضغط أيقونة ClickUp في شريط المتصفح لتظهر تبويبات: مهمة جديدة، المفكرة، لقطة الشاشة (مع أدوات للأسهم والنص والتمويه)، تتبع الوقت، والإشارات المرجعية. في Gmail تستطيع إضافة البريد إلى مهمة. الإضافة متاحة في كل الخطط؛ قد تقيّد شركتك تثبيت الإضافات.\nInstall it from the Chrome Web Store and sign in. Click the ClickUp icon in the browser bar to see tabs: new task, Notepad, screenshot (with arrows, text and blur tools), time tracking, and bookmarks. In Gmail you can add an email to a task. It is available on every plan; your company may restrict installing extensions.\nثبّت ClickUp من Chrome Web Store (إن سمحت شركتك).\nسجّل الدخول من أيقونة الإضافة.\nعلى أي صفحة: اكتب اسم مهمة واختر القائمة ثم Create task.\nجرّب لقطة الشاشة: حدّد جزءاً وأضف سهماً ثم أرفقه بمهمة.\nاستخدم التمويه (Blur) في لقطة الشاشة لإخفاء الأسماء والأرقام قبل إرفاقها.\nUse Blur in screenshots to hide names and numbers before attaching them.\nموظفة المشتريات كانت تنسخ روابط الطلبات إلى ملف ثم تنساها. بالإضافة صارت تنشئ مهمة من صفحة الطلب في ثانيتين، والرابط داخلها.\nA procurement officer used to copy order links into a file and forget them. With the extension she creates a task from the order page in two seconds, with the link inside.",
+    "en": "الإضافة تجعل ClickUp معك في أي صفحة ويب: أنشئ مهمة من الصفحة التي تقرؤها، والتقط صورة للشاشة وعلّق عليها، وشغّل مؤقت الوقت، واكتب في المفكرة، واحفظ الصفحة كإشارة مرجعية.\nThe extension brings ClickUp to any web page: create a task from the page you are reading, take an annotated screenshot, run the time tracker, write in your Notepad, and bookmark the page.\nثبّت الإضافة من Chrome Web Store وسجّل الدخول. اضغط أيقونة ClickUp في شريط المتصفح لتظهر تبويبات: مهمة جديدة، المفكرة، لقطة الشاشة (مع أدوات للأسهم والنص والتمويه)، تتبع الوقت، والإشارات المرجعية. في Gmail تستطيع إضافة البريد إلى مهمة. الإضافة متاحة في كل الخطط؛ قد تقيّد شركتك تثبيت الإضافات.\nInstall it from the Chrome Web Store and sign in. Click the ClickUp icon in the browser bar to see tabs: new task, Notepad, screenshot (with arrows, text and blur tools), time tracking, and bookmarks. In Gmail you can add an email to a task. It is available on every plan; your company may restrict installing extensions.\nInstall ClickUp from the Chrome Web Store (if your company allows).\nSign in from the extension icon.\nOn any page: type a task name, pick the List, then Create task.\nTry a screenshot: select an area, add an arrow, then attach it to a task.\nاستخدم التمويه (Blur) في لقطة الشاشة لإخفاء الأسماء والأرقام قبل إرفاقها.\nUse Blur in screenshots to hide names and numbers before attaching them.\nموظفة المشتريات كانت تنسخ روابط الطلبات إلى ملف ثم تنساها. بالإضافة صارت تنشئ مهمة من صفحة الطلب في ثانيتين، والرابط داخلها.\nA procurement officer used to copy order links into a file and forget them. With the extension she creates a task from the order page in two seconds, with the link inside."
+   },
+   "url": "#/courses/clickup-pro/a-chrome",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-import",
+   "kind": "course",
+   "title": {
+    "ar": "استيراد البيانات من Monday.com وAsana وJira وBasecamp وTodoist وغيرها",
+    "en": "Import data from Monday.com, Asana, Jira, Basecamp, Todoist and more"
+   },
+   "text": {
+    "ar": "تنتقل إلى ClickUp دون إعادة كتابة شيء: المستورِد ينقل المهام والمسؤولين والتواريخ من أدوات مثل Monday.com وAsana وJira وBasecamp وTodoist، أو من ملف Excel/CSV.\nMove to ClickUp without retyping anything: the importer brings tasks, assignees and dates from tools such as Monday.com, Asana, Jira, Basecamp and Todoist, or from an Excel/CSV file.\nأنشئ أولاً مساحة مخصصة للاستيراد حتى تراجع النتيجة قبل خلطها بعملك. من Settings ← Imports اختر الأداة. بعض الأدوات تطلب تسجيل الدخول، وبعضها يطلب رمز API (API token) تنسخه من إعدادات الأداة الأخرى. ثم طابق المستخدمين والحالات. الرمز مثل كلمة المرور: لا تضعه في رسالة أو مستند. الأدوات المتاحة وخطواتها تتغير، فاتبع صفحة الاستيراد في حسابك.\nFirst create a Space just for the import so you can review the result before mixing it with your work. From Settings → Imports choose the tool. Some tools ask you to sign in, others ask for an API token you copy from the other tool’s settings. Then match users and statuses. A token is like a password: never paste it in a message or Doc. The available tools and steps change, so follow the import page in your account.\nأنشئ مساحة باسم «استيراد» للمراجعة.\nافتح Settings ← Imports واختر الأداة.\nسجّل الدخول أو الصق رمز API من الأداة الأخرى.\nطابق المستخدمين والحالات، ثم ابدأ الاستيراد وراجع النتيجة.\nاستورد مشروعاً صغيراً واحداً أولاً كتجربة، ثم الباقي بعد التأكد من الحالات والمسؤولين.\nImport one small project first as a test, then the rest once statuses and assignees look right.\nفريق المشاريع الرقمية انتقل من Asana. استوردوا مشروعاً صغيراً أولاً فاكتشفوا أن حالة «Waiting» تحتاج مطابقة. بعد تصحيحها استوردوا 12 مشروعاً دون مشاكل.\nThe digital projects team moved from Asana. They imported one small project first and found that the “Waiting” status needed matching. After fixing it they imported 12 projects without problems.",
+    "en": "تنتقل إلى ClickUp دون إعادة كتابة شيء: المستورِد ينقل المهام والمسؤولين والتواريخ من أدوات مثل Monday.com وAsana وJira وBasecamp وTodoist، أو من ملف Excel/CSV.\nMove to ClickUp without retyping anything: the importer brings tasks, assignees and dates from tools such as Monday.com, Asana, Jira, Basecamp and Todoist, or from an Excel/CSV file.\nأنشئ أولاً مساحة مخصصة للاستيراد حتى تراجع النتيجة قبل خلطها بعملك. من Settings ← Imports اختر الأداة. بعض الأدوات تطلب تسجيل الدخول، وبعضها يطلب رمز API (API token) تنسخه من إعدادات الأداة الأخرى. ثم طابق المستخدمين والحالات. الرمز مثل كلمة المرور: لا تضعه في رسالة أو مستند. الأدوات المتاحة وخطواتها تتغير، فاتبع صفحة الاستيراد في حسابك.\nFirst create a Space just for the import so you can review the result before mixing it with your work. From Settings → Imports choose the tool. Some tools ask you to sign in, others ask for an API token you copy from the other tool’s settings. Then match users and statuses. A token is like a password: never paste it in a message or Doc. The available tools and steps change, so follow the import page in your account.\nCreate a Space called “Import” for review.\nOpen Settings → Imports and choose the tool.\nSign in, or paste the API token from the other tool.\nMatch users and statuses, then start the import and review the result.\nاستورد مشروعاً صغيراً واحداً أولاً كتجربة، ثم الباقي بعد التأكد من الحالات والمسؤولين.\nImport one small project first as a test, then the rest once statuses and assignees look right.\nفريق المشاريع الرقمية انتقل من Asana. استوردوا مشروعاً صغيراً أولاً فاكتشفوا أن حالة «Waiting» تحتاج مطابقة. بعد تصحيحها استوردوا 12 مشروعاً دون مشاكل.\nThe digital projects team moved from Asana. They imported one small project first and found that the “Waiting” status needed matching. After fixing it they imported 12 projects without problems."
+   },
+   "url": "#/courses/clickup-pro/a-import",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-cal",
+   "kind": "course",
+   "title": {
+    "ar": "مزامنة التقويم مع ClickUp",
+    "en": "Sync your calendar with ClickUp"
+   },
+   "text": {
+    "ar": "اربط Google Calendar بمزامنة في الاتجاهين: مواعيد Google تظهر في ClickUp، ومهامك ذات التواريخ تظهر في Google. لتقويم Apple أو Outlook تتوفر مزامنة في اتجاه واحد عبر رابط iCal.\nConnect Google Calendar with two-way sync: Google events appear in ClickUp, and your dated tasks appear in Google. For Apple or Outlook calendars, one-way sync is available with an iCal link.\nالمزامنة في الاتجاهين تعني أن تغيير موعد مهمة في Google يغيّر تاريخها في ClickUp، والعكس. اختر بعناية أي قوائم تُزامن حتى لا يمتلئ تقويمك. في ClickUp 4.0 يظهر تقويمك أيضاً في Planner لتخطط يومك. قد تختلف الخيارات حسب الخطة وإعدادات المسؤول.\nTwo-way sync means changing a task’s time in Google changes its date in ClickUp, and the other way round. Choose carefully which Lists to sync so your calendar does not overflow. In ClickUp 4.0 your calendar also shows in Planner so you can plan your day. Options can vary by plan and admin settings.\nافتح عرض Calendar أو Planner.\nاضغط Sync calendars واختر Google Calendar.\nفعّل المزامنة في الاتجاهين وسجّل الدخول.\nلتقويم Apple أو Outlook: انسخ رابط iCal وأضفه هناك.\nزامن قوائمك المهمة فقط، لا مساحة العمل كلها؛ التقويم المزدحم لا يقرؤه أحد.\nSync only your important Lists, not the whole Workspace; a crowded calendar is one nobody reads.\nمدير التطوير كان يكتب مواعيد التسليم في تقويمه يدوياً. بعد المزامنة صار كل تغيير في تاريخ التسليم يظهر في تقويمه تلقائياً.\nThe development manager used to copy delivery dates into his calendar by hand. After syncing, every change to a delivery date appears in his calendar automatically.",
+    "en": "اربط Google Calendar بمزامنة في الاتجاهين: مواعيد Google تظهر في ClickUp، ومهامك ذات التواريخ تظهر في Google. لتقويم Apple أو Outlook تتوفر مزامنة في اتجاه واحد عبر رابط iCal.\nConnect Google Calendar with two-way sync: Google events appear in ClickUp, and your dated tasks appear in Google. For Apple or Outlook calendars, one-way sync is available with an iCal link.\nالمزامنة في الاتجاهين تعني أن تغيير موعد مهمة في Google يغيّر تاريخها في ClickUp، والعكس. اختر بعناية أي قوائم تُزامن حتى لا يمتلئ تقويمك. في ClickUp 4.0 يظهر تقويمك أيضاً في Planner لتخطط يومك. قد تختلف الخيارات حسب الخطة وإعدادات المسؤول.\nTwo-way sync means changing a task’s time in Google changes its date in ClickUp, and the other way round. Choose carefully which Lists to sync so your calendar does not overflow. In ClickUp 4.0 your calendar also shows in Planner so you can plan your day. Options can vary by plan and admin settings.\nOpen a Calendar view or Planner.\nClick Sync calendars and choose Google Calendar.\nTurn on two-way sync and sign in.\nFor Apple or Outlook: copy the iCal link and add it there.\nزامن قوائمك المهمة فقط، لا مساحة العمل كلها؛ التقويم المزدحم لا يقرؤه أحد.\nSync only your important Lists, not the whole Workspace; a crowded calendar is one nobody reads.\nمدير التطوير كان يكتب مواعيد التسليم في تقويمه يدوياً. بعد المزامنة صار كل تغيير في تاريخ التسليم يظهر في تقويمه تلقائياً.\nThe development manager used to copy delivery dates into his calendar by hand. After syncing, every change to a delivery date appears in his calendar automatically."
+   },
+   "url": "#/courses/clickup-pro/a-cal",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-docs-intro",
+   "kind": "course",
+   "title": {
+    "ar": "مقدمة إلى مستندات ClickUp",
+    "en": "Intro to ClickUp Docs"
+   },
+   "text": {
+    "ar": "مستندات ClickUp (Docs) تجمع توثيق المشروع في نفس مكان العمل: ملخص المنتج، والكود، والاختبار، والقرارات. المطوّر الجديد يجد كل شيء في مستند واحد مرتبط بالمهام.\nClickUp Docs keep project documentation in the same place as the work: product summary, code, testing and decisions. A new developer finds everything in one Doc linked to the tasks.\nالمستند يمكن أن يعيش في مساحة أو مجلد أو قائمة، أو يُرفق بمهمة. يحتوي صفحات وصفحات فرعية، وجداول، وكتل كود، وروابط لمهام حية تتحدث حالتها تلقائياً. يمكن الكتابة معاً في الوقت نفسه، والتعليق على أي جملة وتحويل التعليق إلى مهمة.\nA Doc can live in a Space, Folder or List, or be attached to a task. It holds pages and subpages, tables, code blocks and links to live tasks whose status updates automatically. People can write together at the same time, comment on any sentence and turn a comment into a task.\nافتح مساحة المشروع واضغط «+» ثم Doc.\nسمِّ المستند باسم المشروع.\nأضف صفحات: الملخص، الواجهة، الكود، الاختبار.\nاربط المهام داخل الصفحات بكتابة @ واسم المهمة.\nضع رابط المستند في وصف القائمة أو ثبّته في المفضلة حتى يجده الجميع.\nPut the Doc link in the List description or pin it in Favorites so everyone finds it.\nمطوّر انضم للفريق في منتصف المشروع قرأ مستند «نموذج الملاحظات» في ساعة واحدة، وبدأ العمل في نفس اليوم دون اجتماع تعريفي طويل.\nA developer who joined mid-project read the “Feedback form” Doc in one hour and started work the same day without a long onboarding meeting.",
+    "en": "مستندات ClickUp (Docs) تجمع توثيق المشروع في نفس مكان العمل: ملخص المنتج، والكود، والاختبار، والقرارات. المطوّر الجديد يجد كل شيء في مستند واحد مرتبط بالمهام.\nClickUp Docs keep project documentation in the same place as the work: product summary, code, testing and decisions. A new developer finds everything in one Doc linked to the tasks.\nالمستند يمكن أن يعيش في مساحة أو مجلد أو قائمة، أو يُرفق بمهمة. يحتوي صفحات وصفحات فرعية، وجداول، وكتل كود، وروابط لمهام حية تتحدث حالتها تلقائياً. يمكن الكتابة معاً في الوقت نفسه، والتعليق على أي جملة وتحويل التعليق إلى مهمة.\nA Doc can live in a Space, Folder or List, or be attached to a task. It holds pages and subpages, tables, code blocks and links to live tasks whose status updates automatically. People can write together at the same time, comment on any sentence and turn a comment into a task.\nOpen the project Space and click “+”, then Doc.\nName the Doc after the project.\nAdd pages: summary, interface, code, testing.\nLink tasks inside pages by typing @ and the task name.\nضع رابط المستند في وصف القائمة أو ثبّته في المفضلة حتى يجده الجميع.\nPut the Doc link in the List description or pin it in Favorites so everyone finds it.\nمطوّر انضم للفريق في منتصف المشروع قرأ مستند «نموذج الملاحظات» في ساعة واحدة، وبدأ العمل في نفس اليوم دون اجتماع تعريفي طويل.\nA developer who joined mid-project read the “Feedback form” Doc in one hour and started work the same day without a long onboarding meeting."
+   },
+   "url": "#/courses/clickup-pro/a-docs-intro",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-docs-struct",
+   "kind": "course",
+   "title": {
+    "ar": "بناء هيكل المستند",
+    "en": "Setting up the Doc structure"
+   },
+   "text": {
+    "ar": "المستند الجيد مقسّم إلى صفحات بترتيب منطقي: ملخص الميزة، الواجهة، الكود الأمامي والخلفي، الأسئلة الشائعة، وحل المشكلات. الصفحات الفرعية تجمع التفاصيل تحت عنوانها.\nA good Doc is split into pages in a logical order: feature summary, interface, front-end and back-end code, FAQs and troubleshooting. Subpages group the details under their heading.\nاضغط «Add page» لإضافة صفحة، واسحبها تحت صفحة أخرى لتصبح فرعية. ابدأ كل صفحة بجملة تشرح لمن هي («للمطورين»، «لفريق الدعم»). صفحة «حل المشكلات» توفر على الفريق تكرار نفس الأسئلة. يمكنك إخفاء صفحات المسودة أو مشاركة صفحات معينة فقط.\nClick “Add page” to add a page, and drag it under another page to make it a subpage. Start each page with a sentence saying who it is for (“for developers”, “for the support team”). A troubleshooting page saves the team from answering the same questions again. You can hide draft pages or share only certain pages.\nافتح المستند واضغط Add page.\nأضف: الملخص، الواجهة، الكود، الأسئلة، حل المشكلات.\nاسحب صفحات الكود تحت صفحة «الكود» لتصبح فرعية.\nاكتب في أول كل صفحة لمن هي.\nاحفظ هذا الهيكل كقالب مستند، واستخدمه لكل ميزة جديدة.\nSave this structure as a Doc template and reuse it for every new feature.\nفريق الدعم كان يسأل المطورين نفس الأسئلة أسبوعياً. بعد إضافة صفحة «حل المشكلات» انخفضت الأسئلة إلى النصف.\nThe support team asked developers the same questions every week. After a troubleshooting page was added, the questions halved.",
+    "en": "المستند الجيد مقسّم إلى صفحات بترتيب منطقي: ملخص الميزة، الواجهة، الكود الأمامي والخلفي، الأسئلة الشائعة، وحل المشكلات. الصفحات الفرعية تجمع التفاصيل تحت عنوانها.\nA good Doc is split into pages in a logical order: feature summary, interface, front-end and back-end code, FAQs and troubleshooting. Subpages group the details under their heading.\nاضغط «Add page» لإضافة صفحة، واسحبها تحت صفحة أخرى لتصبح فرعية. ابدأ كل صفحة بجملة تشرح لمن هي («للمطورين»، «لفريق الدعم»). صفحة «حل المشكلات» توفر على الفريق تكرار نفس الأسئلة. يمكنك إخفاء صفحات المسودة أو مشاركة صفحات معينة فقط.\nClick “Add page” to add a page, and drag it under another page to make it a subpage. Start each page with a sentence saying who it is for (“for developers”, “for the support team”). A troubleshooting page saves the team from answering the same questions again. You can hide draft pages or share only certain pages.\nOpen the Doc and click Add page.\nAdd: summary, interface, code, FAQs, troubleshooting.\nDrag the code pages under a “Code” page to make them subpages.\nWrite at the top of each page who it is for.\nاحفظ هذا الهيكل كقالب مستند، واستخدمه لكل ميزة جديدة.\nSave this structure as a Doc template and reuse it for every new feature.\nفريق الدعم كان يسأل المطورين نفس الأسئلة أسبوعياً. بعد إضافة صفحة «حل المشكلات» انخفضت الأسئلة إلى النصف.\nThe support team asked developers the same questions every week. After a troubleshooting page was added, the questions halved."
+   },
+   "url": "#/courses/clickup-pro/a-docs-struct",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-docs-settings",
+   "kind": "course",
+   "title": {
+    "ar": "التعمق في إعدادات المستندات",
+    "en": "Deep dive into the Docs settings"
+   },
+   "text": {
+    "ar": "قائمة «···» في المستند فيها أدوات قوية: إعادة التسمية، والنسخ، والمشاركة برابط، والحفظ كقالب، والتصدير. ولكل صفحة خيارات: سجل التعديلات، والمرفقات، والعلاقات، والغلاف، والخطوط.\nThe Doc’s “···” menu has powerful tools: rename, duplicate, share with a link, save as template, and export. Each page also has options: page history, attachments, relationships, cover and typography.\nسجل الصفحة (Page history) يعيدك لأي نسخة سابقة إذا حُذف شيء بالخطأ. المشاركة تتيح رابطاً داخلياً أو عاماً؛ لا تجعل مستنداً عاماً إن كان فيه معلومات داخلية. التصدير يعطيك PDF أو Markdown أو HTML. الغلاف والخطوط تجعل المستند أسهل قراءة، والعلاقات تربطه بمهام ومستندات أخرى.\nPage history takes you back to any earlier version if something was deleted by mistake. Sharing gives an internal or public link; never make a Doc public if it holds internal information. Export gives you PDF, Markdown or HTML. Cover and typography make the Doc easier to read, and relationships link it to other tasks and Docs.\nافتح المستند واضغط «···» في الأعلى.\nجرّب Page history وشاهد النسخ السابقة.\nأضف غلافاً واختر خطاً مريحاً من Typography.\nراجع Share & permissions قبل إرسال الرابط.\nقبل تعديل كبير على مستند مهم، استخدم Duplicate لتحتفظ بنسخة، أو اعتمد على Page history.\nBefore a big edit on an important Doc, Duplicate it to keep a copy, or rely on Page history.\nحذف أحد الزملاء فقرة كاملة من مستند الإطلاق بالخطأ. أعادتها قائدة الفريق خلال دقيقة من Page history.\nA colleague deleted a whole section of the launch Doc by mistake. The team lead restored it in a minute from Page history.",
+    "en": "قائمة «···» في المستند فيها أدوات قوية: إعادة التسمية، والنسخ، والمشاركة برابط، والحفظ كقالب، والتصدير. ولكل صفحة خيارات: سجل التعديلات، والمرفقات، والعلاقات، والغلاف، والخطوط.\nThe Doc’s “···” menu has powerful tools: rename, duplicate, share with a link, save as template, and export. Each page also has options: page history, attachments, relationships, cover and typography.\nسجل الصفحة (Page history) يعيدك لأي نسخة سابقة إذا حُذف شيء بالخطأ. المشاركة تتيح رابطاً داخلياً أو عاماً؛ لا تجعل مستنداً عاماً إن كان فيه معلومات داخلية. التصدير يعطيك PDF أو Markdown أو HTML. الغلاف والخطوط تجعل المستند أسهل قراءة، والعلاقات تربطه بمهام ومستندات أخرى.\nPage history takes you back to any earlier version if something was deleted by mistake. Sharing gives an internal or public link; never make a Doc public if it holds internal information. Export gives you PDF, Markdown or HTML. Cover and typography make the Doc easier to read, and relationships link it to other tasks and Docs.\nOpen the Doc and click “···” at the top.\nTry Page history and look at earlier versions.\nAdd a cover and choose a comfortable font in Typography.\nCheck Share & permissions before sending the link.\nقبل تعديل كبير على مستند مهم، استخدم Duplicate لتحتفظ بنسخة، أو اعتمد على Page history.\nBefore a big edit on an important Doc, Duplicate it to keep a copy, or rely on Page history.\nحذف أحد الزملاء فقرة كاملة من مستند الإطلاق بالخطأ. أعادتها قائدة الفريق خلال دقيقة من Page history.\nA colleague deleted a whole section of the launch Doc by mistake. The team lead restored it in a minute from Page history."
+   },
+   "url": "#/courses/clickup-pro/a-docs-settings",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-docs-tpl",
+   "kind": "course",
+   "title": {
+    "ar": "قوالب المستندات",
+    "en": "Docs templates"
+   },
+   "text": {
+    "ar": "لا تبدأ من صفحة فارغة: قوالب المستندات جاهزة لمحاضر الاجتماعات، والفعاليات، وملخصات المنتجات، وخرائط الطريق. اختر قالباً، عدّله، ثم احفظ نسختك كقالب لفريقك.\nDo not start from a blank page: Doc templates are ready for meeting minutes, events, product briefs and roadmaps. Pick one, adjust it, then save your version as a template for your team.\nافتح Template Center وابحث بكلمة مثل «meeting». المعاينة تريك الشكل قبل الاستخدام. بعد التعديل اختر «Save as template» من قائمة «···» وسمِّه بوضوح. يمكنك تحديد من يرى القالب. القوالب توحّد شكل المستندات في الفريق كله.\nOpen Template Center and search a word like “meeting”. The preview shows the layout before you use it. After editing, choose “Save as template” from the “···” menu and name it clearly. You can choose who can see the template. Templates make Docs look the same across the whole team.\nافتح Template Center من «+» أو من المستند الجديد.\nابحث عن «meeting» واختر Meeting Minutes.\nعدّل الأقسام بما يناسب فريقك.\nاحفظه كقالب باسم واضح.\nأضف إلى قالب المحضر قسماً للقرارات وقسماً للمهام؛ ثم حوّل كل سطر مهمة إلى مهمة حقيقية.\nAdd a Decisions section and an Actions section to your minutes template; then turn each action line into a real task.\nكل فرق المشروع صارت تستخدم نفس قالب المحضر. صار المدير يجد القرارات في نفس المكان في كل محضر.\nEvery project team now uses the same minutes template. The manager finds the decisions in the same place in every set of minutes.",
+    "en": "لا تبدأ من صفحة فارغة: قوالب المستندات جاهزة لمحاضر الاجتماعات، والفعاليات، وملخصات المنتجات، وخرائط الطريق. اختر قالباً، عدّله، ثم احفظ نسختك كقالب لفريقك.\nDo not start from a blank page: Doc templates are ready for meeting minutes, events, product briefs and roadmaps. Pick one, adjust it, then save your version as a template for your team.\nافتح Template Center وابحث بكلمة مثل «meeting». المعاينة تريك الشكل قبل الاستخدام. بعد التعديل اختر «Save as template» من قائمة «···» وسمِّه بوضوح. يمكنك تحديد من يرى القالب. القوالب توحّد شكل المستندات في الفريق كله.\nOpen Template Center and search a word like “meeting”. The preview shows the layout before you use it. After editing, choose “Save as template” from the “···” menu and name it clearly. You can choose who can see the template. Templates make Docs look the same across the whole team.\nOpen Template Center from “+” or from a new Doc.\nSearch “meeting” and pick Meeting Minutes.\nAdjust the sections to suit your team.\nSave it as a template with a clear name.\nأضف إلى قالب المحضر قسماً للقرارات وقسماً للمهام؛ ثم حوّل كل سطر مهمة إلى مهمة حقيقية.\nAdd a Decisions section and an Actions section to your minutes template; then turn each action line into a real task.\nكل فرق المشروع صارت تستخدم نفس قالب المحضر. صار المدير يجد القرارات في نفس المكان في كل محضر.\nEvery project team now uses the same minutes template. The manager finds the decisions in the same place in every set of minutes."
+   },
+   "url": "#/courses/clickup-pro/a-docs-tpl",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-sprints",
+   "kind": "course",
+   "title": {
+    "ar": "السبرنتات في ClickUp",
+    "en": "Sprints in ClickUp"
+   },
+   "text": {
+    "ar": "السبرنت دورة عمل قصيرة، غالباً أسبوعان، يلتزم فيها الفريق بمجموعة مهام محددة. في ClickUp يعيش كل سبرنت كقائمة داخل مجلد سبرنتات (Sprint Folder)، بتواريخ ونقاط جهد (Sprint Points) وشريط تقدم.\nA sprint is a short work cycle, often two weeks, where the team commits to a set of tasks. In ClickUp each sprint lives as a List inside a Sprint Folder, with dates, effort points (Sprint Points) and a progress bar.\nفعّل Sprints وSprint Points من ClickApps. نقاط السبرنت تقدير نسبي للجهد (مثل 1، 2، 3، 5، 8) وليست ساعات. مجموع النقاط يخبرك هل حمّلت الفريق أكثر من طاقته. ابدأ السبرنت، تابع التقدم يومياً، وعند نهايته انقل ما لم يكتمل إلى السبرنت التالي.\nTurn on Sprints and Sprint Points in ClickApps. Sprint Points are a relative effort estimate (like 1, 2, 3, 5, 8), not hours. The total tells you if you loaded the team beyond its capacity. Start the sprint, follow progress daily, and at the end move unfinished work to the next sprint.\nفعّل Sprints وSprint Points من ClickApps (أو اطلب من المسؤول).\nافتح Sprint 1 وراجع المهام ونقاطها.\nاضغط Start sprint.\nتابع شريط التقدم في الاجتماع اليومي.\nاحسب متوسط النقاط التي ينجزها الفريق في آخر ثلاثة سبرنتات، ولا تخطط لأكثر منه.\nWork out the average points the team finished in the last three sprints, and do not plan more than that.\nفريق الموقع كان يعمل على 30 مهمة معاً دون نهاية واضحة. مع سبرنتات أسبوعين صار يسلّم ميزة كاملة كل سبرنت.\nThe website team worked on 30 tasks at once with no clear end. With two-week sprints they now ship a complete feature every sprint.",
+    "en": "السبرنت دورة عمل قصيرة، غالباً أسبوعان، يلتزم فيها الفريق بمجموعة مهام محددة. في ClickUp يعيش كل سبرنت كقائمة داخل مجلد سبرنتات (Sprint Folder)، بتواريخ ونقاط جهد (Sprint Points) وشريط تقدم.\nA sprint is a short work cycle, often two weeks, where the team commits to a set of tasks. In ClickUp each sprint lives as a List inside a Sprint Folder, with dates, effort points (Sprint Points) and a progress bar.\nفعّل Sprints وSprint Points من ClickApps. نقاط السبرنت تقدير نسبي للجهد (مثل 1، 2، 3، 5، 8) وليست ساعات. مجموع النقاط يخبرك هل حمّلت الفريق أكثر من طاقته. ابدأ السبرنت، تابع التقدم يومياً، وعند نهايته انقل ما لم يكتمل إلى السبرنت التالي.\nTurn on Sprints and Sprint Points in ClickApps. Sprint Points are a relative effort estimate (like 1, 2, 3, 5, 8), not hours. The total tells you if you loaded the team beyond its capacity. Start the sprint, follow progress daily, and at the end move unfinished work to the next sprint.\nTurn on Sprints and Sprint Points in ClickApps (or ask your admin).\nOpen Sprint 1 and check the tasks and their points.\nClick Start sprint.\nFollow the progress bar in the daily stand-up.\nاحسب متوسط النقاط التي ينجزها الفريق في آخر ثلاثة سبرنتات، ولا تخطط لأكثر منه.\nWork out the average points the team finished in the last three sprints, and do not plan more than that.\nفريق الموقع كان يعمل على 30 مهمة معاً دون نهاية واضحة. مع سبرنتات أسبوعين صار يسلّم ميزة كاملة كل سبرنت.\nThe website team worked on 30 tasks at once with no clear end. With two-week sprints they now ship a complete feature every sprint."
+   },
+   "url": "#/courses/clickup-pro/a-sprints",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-sprints2",
+   "kind": "course",
+   "title": {
+    "ar": "السبرنتات - الجزء 2: أول سبرنت لأسبوعين",
+    "en": "Sprints - Part 2: your first two-week sprint"
+   },
+   "text": {
+    "ar": "أنشئ مجلد السبرنتات واضبط إعداداته مرة واحدة: تاريخ البدء، ومدة السبرنت (أسبوعان)، وعدد السبرنتات التي تُنشأ مقدماً. ينشئ ClickUp السبرنت الأول تلقائياً بتواريخه، ثم تراجع السبرنتات وتسند المواعيد.\nCreate the Sprint Folder and set it up once: start date, sprint length (two weeks) and how many sprints to create ahead. ClickUp creates the first sprint automatically with its dates; then you review the sprints and assign due dates.\nمن المساحة اضغط «+» واختر Sprint Folder. الإعدادات الافتراضية للمجلد (المدة، يوم البدء، أتمتة السبرنتات) تنطبق على كل سبرنت جديد، ويمكن تخصيص سبرنت معين بمدة مختلفة. أبقِ قائمة Backlog داخل المجلد لكل المهام التي لم تُجدول بعد.\nFrom the Space click “+” and choose Sprint Folder. The folder’s default settings (length, start day, sprint automations) apply to every new sprint, and you can give a single sprint a custom length. Keep a Backlog List inside the folder for all work not scheduled yet.\nفي المساحة اضغط «+» ثم Sprint Folder.\nاختر تاريخ البدء والمدة: أسبوعان.\nحدد عدد السبرنتات التي تُنشأ مقدماً.\nاضغط Create وراجع السبرنتات في الشريط الجانبي.\nاجعل السبرنت يبدأ يوم الأحد وينتهي الخميس بعد أسبوعين، ليتوافق مع أسبوع العمل.\nMake sprints start on Sunday and end on Thursday two weeks later, to match the working week.\nفريق تطبيق الجوال أعد ستة سبرنتات مقدماً. صار مدير المنتج يخطط ثلاثة أشهر بنظرة واحدة على الشريط الجانبي.\nThe mobile app team set up six sprints ahead. The product manager now plans three months with one look at the sidebar.",
+    "en": "أنشئ مجلد السبرنتات واضبط إعداداته مرة واحدة: تاريخ البدء، ومدة السبرنت (أسبوعان)، وعدد السبرنتات التي تُنشأ مقدماً. ينشئ ClickUp السبرنت الأول تلقائياً بتواريخه، ثم تراجع السبرنتات وتسند المواعيد.\nCreate the Sprint Folder and set it up once: start date, sprint length (two weeks) and how many sprints to create ahead. ClickUp creates the first sprint automatically with its dates; then you review the sprints and assign due dates.\nمن المساحة اضغط «+» واختر Sprint Folder. الإعدادات الافتراضية للمجلد (المدة، يوم البدء، أتمتة السبرنتات) تنطبق على كل سبرنت جديد، ويمكن تخصيص سبرنت معين بمدة مختلفة. أبقِ قائمة Backlog داخل المجلد لكل المهام التي لم تُجدول بعد.\nFrom the Space click “+” and choose Sprint Folder. The folder’s default settings (length, start day, sprint automations) apply to every new sprint, and you can give a single sprint a custom length. Keep a Backlog List inside the folder for all work not scheduled yet.\nIn the Space click “+”, then Sprint Folder.\nPick the start date and length: two weeks.\nSet how many sprints to create ahead.\nClick Create and review the sprints in the sidebar.\nاجعل السبرنت يبدأ يوم الأحد وينتهي الخميس بعد أسبوعين، ليتوافق مع أسبوع العمل.\nMake sprints start on Sunday and end on Thursday two weeks later, to match the working week.\nفريق تطبيق الجوال أعد ستة سبرنتات مقدماً. صار مدير المنتج يخطط ثلاثة أشهر بنظرة واحدة على الشريط الجانبي.\nThe mobile app team set up six sprints ahead. The product manager now plans three months with one look at the sidebar."
+   },
+   "url": "#/courses/clickup-pro/a-sprints2",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-sprint-add",
+   "kind": "course",
+   "title": {
+    "ar": "إضافة سبرنتات أخرى",
+    "en": "Adding additional sprints"
+   },
+   "text": {
+    "ar": "عندما تقترب من آخر سبرنت، أضف المزيد: من مجلد السبرنتات اضغط «New sprint» واختر تاريخ البدء. ينشئ ClickUp السبرنت السابع والثامن بنفس المدة دون أي إعداد جديد.\nWhen you reach the last sprint, add more: in the Sprint Folder click “New sprint” and choose the start date. ClickUp creates sprint seven and eight with the same length, with no new setup.\nالسبرنت الجديد يأخذ الإعدادات الافتراضية للمجلد. إن احتجت سبرنتاً أطول (مثلاً قبل عطلة)، خصّص مدته وحده. يمكن أيضاً تفعيل أتمتة السبرنتات لتنشئ السبرنت التالي تلقائياً عند انتهاء الحالي.\nA new sprint takes the folder’s default settings. If you need a longer sprint (for example before a holiday), give just that one a custom length. You can also turn on sprint automations so the next sprint is created when the current one ends.\nمرّر على مجلد السبرنتات واضغط «···».\nاختر New sprint.\nحدد تاريخ البدء بعد آخر سبرنت.\nأو فعّل أتمتة السبرنتات لإنشائها تلقائياً.\nفعّل الأتمتة التي تنشئ السبرنت التالي تلقائياً؛ لن تنسى أبداً.\nTurn on the automation that creates the next sprint for you; you will never forget.\nقبل إجازة العيد، أضافت قائدة الفريق سبرنتاً بمدة ثلاثة أسابيع بدل أسبوعين، ثم عادت المدة الافتراضية بعده.\nBefore the Eid holiday, the team lead added a three-week sprint instead of two, then the default length came back after it.",
+    "en": "عندما تقترب من آخر سبرنت، أضف المزيد: من مجلد السبرنتات اضغط «New sprint» واختر تاريخ البدء. ينشئ ClickUp السبرنت السابع والثامن بنفس المدة دون أي إعداد جديد.\nWhen you reach the last sprint, add more: in the Sprint Folder click “New sprint” and choose the start date. ClickUp creates sprint seven and eight with the same length, with no new setup.\nالسبرنت الجديد يأخذ الإعدادات الافتراضية للمجلد. إن احتجت سبرنتاً أطول (مثلاً قبل عطلة)، خصّص مدته وحده. يمكن أيضاً تفعيل أتمتة السبرنتات لتنشئ السبرنت التالي تلقائياً عند انتهاء الحالي.\nA new sprint takes the folder’s default settings. If you need a longer sprint (for example before a holiday), give just that one a custom length. You can also turn on sprint automations so the next sprint is created when the current one ends.\nHover the Sprint Folder and click “···”.\nChoose New sprint.\nSet the start date after the last sprint.\nOr turn on sprint automations to create them automatically.\nفعّل الأتمتة التي تنشئ السبرنت التالي تلقائياً؛ لن تنسى أبداً.\nTurn on the automation that creates the next sprint for you; you will never forget.\nقبل إجازة العيد، أضافت قائدة الفريق سبرنتاً بمدة ثلاثة أسابيع بدل أسبوعين، ثم عادت المدة الافتراضية بعده.\nBefore the Eid holiday, the team lead added a three-week sprint instead of two, then the default length came back after it."
+   },
+   "url": "#/courses/clickup-pro/a-sprint-add",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-sprint-move",
+   "kind": "course",
+   "title": {
+    "ar": "نقل السبرنتات في ClickUp",
+    "en": "Moving sprints in ClickUp"
+   },
+   "text": {
+    "ar": "تستطيع نقل مجلد السبرنتات كاملاً إلى مساحة أخرى بالسحب أو من «···» ← Move. إن كانت المساحة الجديدة لا تفعّل Sprints، تختار: تفعيلها، أو تحويل المجلد إلى مجلد عادي والسبرنتات إلى قوائم.\nYou can move a whole Sprint Folder to another Space by dragging it or with “···” → Move. If the new Space does not have Sprints turned on, you choose: turn it on, or convert the folder to a normal Folder and the sprints to Lists.\nالنقل مفيد عندما يتغير الفريق المسؤول عن المشروع. راجع بعد النقل تواريخ البدء والصلاحيات في المساحة الجديدة، لأن الأعضاء قد يختلفون. نقل مهام مفردة بين السبرنتات موضوع الدرس التالي.\nMoving helps when a different team takes over the project. After the move, check start dates and permissions in the new Space, because members may differ. Moving single tasks between sprints is the next topic.\nمرّر على مجلد السبرنتات واضغط «···» ثم Move.\nاختر المساحة الجديدة.\nإن طُلب منك: فعّل Sprints أو حوّل إلى مجلد عادي.\nراجع التواريخ والصلاحيات بعد النقل.\nاختر «تفعيل Sprints» إن أردت إبقاء النقاط والتقارير؛ التحويل لقوائم عادية يفقدك ميزات السبرنت.\nChoose “turn on Sprints” if you want to keep points and reports; converting to normal Lists loses sprint features.\nانتقلت مسؤولية صفحة الدفع من فريق الموقع إلى فريق التطبيق. نقلوا مجلد السبرنتات كما هو، فبقيت النقاط والتقدم دون فقدان.\nOwnership of the payment page moved from the website team to the app team. They moved the Sprint Folder as it was, so points and progress were kept.",
+    "en": "تستطيع نقل مجلد السبرنتات كاملاً إلى مساحة أخرى بالسحب أو من «···» ← Move. إن كانت المساحة الجديدة لا تفعّل Sprints، تختار: تفعيلها، أو تحويل المجلد إلى مجلد عادي والسبرنتات إلى قوائم.\nYou can move a whole Sprint Folder to another Space by dragging it or with “···” → Move. If the new Space does not have Sprints turned on, you choose: turn it on, or convert the folder to a normal Folder and the sprints to Lists.\nالنقل مفيد عندما يتغير الفريق المسؤول عن المشروع. راجع بعد النقل تواريخ البدء والصلاحيات في المساحة الجديدة، لأن الأعضاء قد يختلفون. نقل مهام مفردة بين السبرنتات موضوع الدرس التالي.\nMoving helps when a different team takes over the project. After the move, check start dates and permissions in the new Space, because members may differ. Moving single tasks between sprints is the next topic.\nHover the Sprint Folder, click “···”, then Move.\nChoose the new Space.\nIf asked: turn on Sprints or convert to a normal Folder.\nCheck dates and permissions after the move.\nاختر «تفعيل Sprints» إن أردت إبقاء النقاط والتقارير؛ التحويل لقوائم عادية يفقدك ميزات السبرنت.\nChoose “turn on Sprints” if you want to keep points and reports; converting to normal Lists loses sprint features.\nانتقلت مسؤولية صفحة الدفع من فريق الموقع إلى فريق التطبيق. نقلوا مجلد السبرنتات كما هو، فبقيت النقاط والتقدم دون فقدان.\nOwnership of the payment page moved from the website team to the app team. They moved the Sprint Folder as it was, so points and progress were kept."
+   },
+   "url": "#/courses/clickup-pro/a-sprint-move",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-sprint-tasks",
+   "kind": "course",
+   "title": {
+    "ar": "نقل المهام بين السبرنتات",
+    "en": "Moving tasks within sprints"
+   },
+   "text": {
+    "ar": "عندما ينتهي السبرنت تبقى أحياناً مهام لم تكتمل (Spillover). اضغط «unfinished tasks» في الشريط أعلى السبرنت، أزل ما لا يلزم، ثم «Move tasks to the next Sprint». ولمهمة واحدة: اسحبها إلى السبرنت الآخر أو استخدم Move.\nWhen a sprint ends, some tasks are often unfinished (spillover). Click “unfinished tasks” in the banner at the top of the sprint, untick what should not move, then “Move tasks to the next Sprint”. For one task: drag it to the other sprint or use Move.\nكل مهمة تنتقل إلى السبرنت التالي حسب قائمتها الأصلية (Home List). راجع لماذا لم تكتمل: هل كانت أكبر من تقديرها؟ هل انتظرت شخصاً آخر؟ هذه المراجعة هي ما يحسّن التخطيط في السبرنت القادم.\nEach task moves to the next sprint based on its home List. Review why it was not finished: was it bigger than estimated? Was it waiting on someone? That review is what improves planning for the next sprint.\nافتح السبرنت المنتهي.\nاضغط «unfinished tasks» في الشريط.\nأزل علامة ما لا يجب نقله.\nاضغط Move tasks to the next Sprint.\nإن انتقلت نفس المهمة ثلاث مرات، قسّمها إلى مهام أصغر؛ غالباً هي أكبر مما تبدو.\nIf the same task spills over three times, split it into smaller tasks; it is usually bigger than it looks.\nفي مراجعة نهاية السبرنت، لاحظ الفريق أن مهام «الاختبار» تنتقل دائماً. أضافوا يوماً للاختبار في كل سبرنت فتوقف الانتقال.\nIn the sprint review the team saw that testing tasks always spilled over. They added a testing day to every sprint and the spillover stopped.",
+    "en": "عندما ينتهي السبرنت تبقى أحياناً مهام لم تكتمل (Spillover). اضغط «unfinished tasks» في الشريط أعلى السبرنت، أزل ما لا يلزم، ثم «Move tasks to the next Sprint». ولمهمة واحدة: اسحبها إلى السبرنت الآخر أو استخدم Move.\nWhen a sprint ends, some tasks are often unfinished (spillover). Click “unfinished tasks” in the banner at the top of the sprint, untick what should not move, then “Move tasks to the next Sprint”. For one task: drag it to the other sprint or use Move.\nكل مهمة تنتقل إلى السبرنت التالي حسب قائمتها الأصلية (Home List). راجع لماذا لم تكتمل: هل كانت أكبر من تقديرها؟ هل انتظرت شخصاً آخر؟ هذه المراجعة هي ما يحسّن التخطيط في السبرنت القادم.\nEach task moves to the next sprint based on its home List. Review why it was not finished: was it bigger than estimated? Was it waiting on someone? That review is what improves planning for the next sprint.\nOpen the finished sprint.\nClick “unfinished tasks” in the banner.\nUntick what should not move.\nClick Move tasks to the next Sprint.\nإن انتقلت نفس المهمة ثلاث مرات، قسّمها إلى مهام أصغر؛ غالباً هي أكبر مما تبدو.\nIf the same task spills over three times, split it into smaller tasks; it is usually bigger than it looks.\nفي مراجعة نهاية السبرنت، لاحظ الفريق أن مهام «الاختبار» تنتقل دائماً. أضافوا يوماً للاختبار في كل سبرنت فتوقف الانتقال.\nIn the sprint review the team saw that testing tasks always spilled over. They added a testing day to every sprint and the spillover stopped."
+   },
+   "url": "#/courses/clickup-pro/a-sprint-tasks",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-sprint-convert",
+   "kind": "course",
+   "title": {
+    "ar": "تحويل قائمة إلى عمل سبرنت",
+    "en": "Convert a List to a Sprint"
+   },
+   "text": {
+    "ar": "كانت إصدارات أقدم من ClickUp تحوي زر «Convert List to Sprint». اليوم السبرنتات تعيش في مجلد سبرنتات، فالطريقة العملية: أنشئ السبرنت ثم انقل مهام القائمة إليه دفعة واحدة باختيارها وMove.\nOlder ClickUp versions had a “Convert List to Sprint” button. Today sprints live in a Sprint Folder, so the practical way is: create the sprint, then move the List’s tasks into it in one go by selecting them and using Move.\nحدد كل مهام القائمة (مربع الاختيار في رأس القائمة)، ثم من شريط الإجراءات الجماعية اختر Move واختر السبرنت. أو أضف المهام إلى السبرنت من Backlog. إن رأيت في حسابك خياراً مباشراً للتحويل فاستخدمه؛ الأسماء والقوائم تتغير بين الإصدارات.\nSelect all the List’s tasks (the checkbox in the List header), then in the bulk action bar choose Move and pick the sprint. Or add tasks to the sprint from the Backlog. If your account shows a direct convert option, use it; names and menus change between versions.\nأنشئ السبرنت في مجلد السبرنتات.\nافتح القائمة القديمة وحدد كل المهام.\nمن الشريط الجماعي اختر Move ثم السبرنت.\nتأكد أن النقاط والتواريخ ظهرت في السبرنت.\nأضف حقل Sprint Points للمهام قبل النقل حتى يكون مجموع السبرنت صحيحاً من أول يوم.\nAdd Sprint Points to the tasks before moving so the sprint total is right from day one.\nفريق الموقع كان يدير العمل بقوائم «مراحل». حوّلوا كل مرحلة إلى سبرنت بنقل مهامها، فصار لكل مرحلة تاريخ نهاية ونقاط واضحة.\nThe website team ran work in “phase” Lists. They turned each phase into a sprint by moving its tasks, so every phase now has an end date and clear points.",
+    "en": "كانت إصدارات أقدم من ClickUp تحوي زر «Convert List to Sprint». اليوم السبرنتات تعيش في مجلد سبرنتات، فالطريقة العملية: أنشئ السبرنت ثم انقل مهام القائمة إليه دفعة واحدة باختيارها وMove.\nOlder ClickUp versions had a “Convert List to Sprint” button. Today sprints live in a Sprint Folder, so the practical way is: create the sprint, then move the List’s tasks into it in one go by selecting them and using Move.\nحدد كل مهام القائمة (مربع الاختيار في رأس القائمة)، ثم من شريط الإجراءات الجماعية اختر Move واختر السبرنت. أو أضف المهام إلى السبرنت من Backlog. إن رأيت في حسابك خياراً مباشراً للتحويل فاستخدمه؛ الأسماء والقوائم تتغير بين الإصدارات.\nSelect all the List’s tasks (the checkbox in the List header), then in the bulk action bar choose Move and pick the sprint. Or add tasks to the sprint from the Backlog. If your account shows a direct convert option, use it; names and menus change between versions.\nCreate the sprint in the Sprint Folder.\nOpen the old List and select all tasks.\nIn the bulk bar choose Move, then the sprint.\nCheck that points and dates show in the sprint.\nأضف حقل Sprint Points للمهام قبل النقل حتى يكون مجموع السبرنت صحيحاً من أول يوم.\nAdd Sprint Points to the tasks before moving so the sprint total is right from day one.\nفريق الموقع كان يدير العمل بقوائم «مراحل». حوّلوا كل مرحلة إلى سبرنت بنقل مهامها، فصار لكل مرحلة تاريخ نهاية ونقاط واضحة.\nThe website team ran work in “phase” Lists. They turned each phase into a sprint by moving its tasks, so every phase now has an end date and clear points."
+   },
+   "url": "#/courses/clickup-pro/a-sprint-convert",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-agile-folders",
+   "kind": "course",
+   "title": {
+    "ar": "هيكل المجلدات لبيئة Agile",
+    "en": "Folder structure for Agile"
+   },
+   "text": {
+    "ar": "نظّم المساحة كبيئة Agile: اسم واضح ورمز قصير للمساحة (مثل WEB)، ثم مجلدات بأسماء صريحة: الواجهة الخلفية، الواجهة الأمامية، السبرنتات، والأخطاء (Bugs).\nOrganise the Space like an Agile environment: a clear name and short code for the Space (such as WEB), then plainly named Folders: Back end, Front end, Sprints and Bugs.\nمجلدات العمل (الخلفية والأمامية) تحمل المهام حسب نوعها، ومجلد السبرنتات يحمل الدورات الزمنية، ومجلد الأخطاء يستقبل البلاغات بنموذج (Form) واحد. المهمة يمكن أن تكون في قائمتها الأصلية وفي سبرنت في نفس الوقت (Tasks in Multiple Lists)، فلا تحتاج نسخها.\nWork Folders (back end and front end) hold tasks by type, the Sprints folder holds the time cycles, and the Bugs folder receives reports through one Form. A task can live in its home List and in a sprint at the same time (Tasks in Multiple Lists), so you never need to copy it.\nأنشئ مساحة «تطوير الموقع» واختر لها لوناً ورمزاً.\nأضف مجلدي «الواجهة الخلفية» و«الواجهة الأمامية».\nأضف مجلد سبرنتات ومجلد «الأخطاء».\nاربط نموذج بلاغ الأخطاء بقائمة في مجلد الأخطاء.\nاكتب في وصف كل مجلد ماذا يدخل فيه وماذا لا يدخل؛ يقل الخلط عند الأعضاء الجدد.\nWrite in each Folder’s description what goes in and what does not; new members get less confused.\nقبل التنظيم كانت أخطاء الموقع تصل بالبريد والهاتف والدردشة. بعد مجلد «الأخطاء» ونموذج واحد، صار كل بلاغ مهمة بأولوية واضحة.\nBefore the setup, website bugs arrived by email, phone and chat. After the Bugs Folder and one Form, every report is a task with a clear priority.",
+    "en": "نظّم المساحة كبيئة Agile: اسم واضح ورمز قصير للمساحة (مثل WEB)، ثم مجلدات بأسماء صريحة: الواجهة الخلفية، الواجهة الأمامية، السبرنتات، والأخطاء (Bugs).\nOrganise the Space like an Agile environment: a clear name and short code for the Space (such as WEB), then plainly named Folders: Back end, Front end, Sprints and Bugs.\nمجلدات العمل (الخلفية والأمامية) تحمل المهام حسب نوعها، ومجلد السبرنتات يحمل الدورات الزمنية، ومجلد الأخطاء يستقبل البلاغات بنموذج (Form) واحد. المهمة يمكن أن تكون في قائمتها الأصلية وفي سبرنت في نفس الوقت (Tasks in Multiple Lists)، فلا تحتاج نسخها.\nWork Folders (back end and front end) hold tasks by type, the Sprints folder holds the time cycles, and the Bugs folder receives reports through one Form. A task can live in its home List and in a sprint at the same time (Tasks in Multiple Lists), so you never need to copy it.\nCreate a “Website development” Space with a colour and code.\nAdd “Back end” and “Front end” Folders.\nAdd a Sprint Folder and a “Bugs” Folder.\nConnect a bug report Form to a List in the Bugs Folder.\nاكتب في وصف كل مجلد ماذا يدخل فيه وماذا لا يدخل؛ يقل الخلط عند الأعضاء الجدد.\nWrite in each Folder’s description what goes in and what does not; new members get less confused.\nقبل التنظيم كانت أخطاء الموقع تصل بالبريد والهاتف والدردشة. بعد مجلد «الأخطاء» ونموذج واحد، صار كل بلاغ مهمة بأولوية واضحة.\nBefore the setup, website bugs arrived by email, phone and chat. After the Bugs Folder and one Form, every report is a task with a clear priority."
+   },
+   "url": "#/courses/clickup-pro/a-agile-folders",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-agile-tpl",
+   "kind": "course",
+   "title": {
+    "ar": "انطلق بسرعة: قالب إدارة Agile",
+    "en": "Go full speed: the Agile Management template"
+   },
+   "text": {
+    "ar": "بدل بناء كل شيء بيدك، استخدم قالب Agile من Template Center: مجلدات ومنتج وسبرنتات وحالات وحقول جاهزة. استورده ثم خصص المجلدات، مثل إدارة المنتج والمخاطر والاختبار.\nInstead of building everything by hand, use an Agile template from Template Center: folders, product, sprints, statuses and fields ready to go. Import it, then customise the folders, such as product, risk and test management.\nابحث عن «agile» واقرأ وصف القالب ومحتواه قبل استخدامه. عند الاستخدام اختر ما يُستورد: المهام، الحالات، الحقول، الأتمتة، العروض. ثم احذف ما لا تحتاجه وأضف مجلداتك. القوالب المتاحة وأسماؤها تتغير؛ اختر الأقرب لعمل فريقك.\nSearch “agile” and read the template’s description and contents before using it. When applying it, choose what to import: tasks, statuses, fields, automations, views. Then delete what you do not need and add your own folders. Available templates and their names change; pick the closest to your team’s work.\nافتح Template Center وابحث عن «agile».\nعاين القالب واقرأ ما يحتويه.\nاختر ما تريد استيراده واضغط Use template.\nخصص المجلدات: المنتج، المخاطر، الاختبار.\nطبّق القالب أولاً في مساحة تجريبية، وبعد أن يناسبك احفظ نسختك المعدلة كقالب للشركة.\nApply the template in a sandbox Space first, and once it suits you, save your edited version as a company template.\nفريق التطبيق أعد بيئة Agile كاملة في 20 دقيقة باستخدام القالب، بعد أن استغرق الإعداد اليدوي في مشروع سابق يومين.\nThe app team set up a full Agile environment in 20 minutes with the template; the manual setup on a previous project had taken two days.",
+    "en": "بدل بناء كل شيء بيدك، استخدم قالب Agile من Template Center: مجلدات ومنتج وسبرنتات وحالات وحقول جاهزة. استورده ثم خصص المجلدات، مثل إدارة المنتج والمخاطر والاختبار.\nInstead of building everything by hand, use an Agile template from Template Center: folders, product, sprints, statuses and fields ready to go. Import it, then customise the folders, such as product, risk and test management.\nابحث عن «agile» واقرأ وصف القالب ومحتواه قبل استخدامه. عند الاستخدام اختر ما يُستورد: المهام، الحالات، الحقول، الأتمتة، العروض. ثم احذف ما لا تحتاجه وأضف مجلداتك. القوالب المتاحة وأسماؤها تتغير؛ اختر الأقرب لعمل فريقك.\nSearch “agile” and read the template’s description and contents before using it. When applying it, choose what to import: tasks, statuses, fields, automations, views. Then delete what you do not need and add your own folders. Available templates and their names change; pick the closest to your team’s work.\nOpen Template Center and search “agile”.\nPreview the template and read what it contains.\nChoose what to import and click Use template.\nCustomise the folders: product, risk, testing.\nطبّق القالب أولاً في مساحة تجريبية، وبعد أن يناسبك احفظ نسختك المعدلة كقالب للشركة.\nApply the template in a sandbox Space first, and once it suits you, save your edited version as a company template.\nفريق التطبيق أعد بيئة Agile كاملة في 20 دقيقة باستخدام القالب، بعد أن استغرق الإعداد اليدوي في مشروع سابق يومين.\nThe app team set up a full Agile environment in 20 minutes with the template; the manual setup on a previous project had taken two days."
+   },
+   "url": "#/courses/clickup-pro/a-agile-tpl",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-lineup",
+   "kind": "course",
+   "title": {
+    "ar": "الأولويات الشخصية (LineUp سابقاً)",
+    "en": "Personal Priorities (formerly LineUp)"
+   },
+   "text": {
+    "ar": "ميزة LineUp أصبح اسمها Personal Priorities. ترتّب فيها أهم مهامك بالترتيب، فيعرف فريقك ومديرك ما تركز عليه الآن من ملفك وفي Teams Hub.\nLineUp is now called Personal Priorities. You rank your most important tasks in order, and your team and manager see what you are focusing on from your profile and in Teams Hub.\nمن صفحة My Tasks (Home سابقاً) افتح بطاقة Priorities واضغط Add task لتبحث عن مهمة أو تنشئ جديدة. اسحب المهام لترتيبها. المدير يرى أولويات كل شخص في Teams Hub، فيعيد ترتيب العمل إن لزم دون اجتماع. اجعل القائمة قصيرة: ثلاث إلى خمس مهام.\nOn the My Tasks page (formerly Home) open the Priorities card and click Add task to search for a task or create one. Drag tasks to rank them. A manager sees everyone’s priorities in Teams Hub and can rebalance work without a meeting. Keep the list short: three to five tasks.\nافتح My Tasks وابحث عن بطاقة Priorities.\nاضغط Add task وابحث عن مهمة.\nاسحب المهام لترتيبها حسب الأهمية.\nافتح Teams Hub لترى أولويات الفريق.\nحدّث أولوياتك كل صباح في دقيقة؛ يقل سؤال «على ماذا تعمل؟» في الاجتماعات.\nUpdate your priorities every morning in one minute; you will hear “what are you working on?” less in meetings.\nمدير التطوير كان يعقد اجتماعاً يومياً ليعرف من يعمل على ماذا. بعد Personal Priorities صار يفتح Teams Hub ويختصر الاجتماع إلى عشر دقائق.\nThe development manager held a daily meeting just to learn who was working on what. With Personal Priorities he opens Teams Hub and the meeting is down to ten minutes.",
+    "en": "ميزة LineUp أصبح اسمها Personal Priorities. ترتّب فيها أهم مهامك بالترتيب، فيعرف فريقك ومديرك ما تركز عليه الآن من ملفك وفي Teams Hub.\nLineUp is now called Personal Priorities. You rank your most important tasks in order, and your team and manager see what you are focusing on from your profile and in Teams Hub.\nمن صفحة My Tasks (Home سابقاً) افتح بطاقة Priorities واضغط Add task لتبحث عن مهمة أو تنشئ جديدة. اسحب المهام لترتيبها. المدير يرى أولويات كل شخص في Teams Hub، فيعيد ترتيب العمل إن لزم دون اجتماع. اجعل القائمة قصيرة: ثلاث إلى خمس مهام.\nOn the My Tasks page (formerly Home) open the Priorities card and click Add task to search for a task or create one. Drag tasks to rank them. A manager sees everyone’s priorities in Teams Hub and can rebalance work without a meeting. Keep the list short: three to five tasks.\nOpen My Tasks and find the Priorities card.\nClick Add task and search for a task.\nDrag tasks to rank them by importance.\nOpen Teams Hub to see the team’s priorities.\nحدّث أولوياتك كل صباح في دقيقة؛ يقل سؤال «على ماذا تعمل؟» في الاجتماعات.\nUpdate your priorities every morning in one minute; you will hear “what are you working on?” less in meetings.\nمدير التطوير كان يعقد اجتماعاً يومياً ليعرف من يعمل على ماذا. بعد Personal Priorities صار يفتح Teams Hub ويختصر الاجتماع إلى عشر دقائق.\nThe development manager held a daily meeting just to learn who was working on what. With Personal Priorities he opens Teams Hub and the meeting is down to ten minutes."
+   },
+   "url": "#/courses/clickup-pro/a-lineup",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-clip",
+   "kind": "course",
+   "title": {
+    "ar": "التواصل بتسجيل الشاشة (Clip)",
+    "en": "Communicate with screen recording (Clip)"
+   },
+   "text": {
+    "ar": "بدل كتابة شرح طويل، سجّل شاشتك وصوتك بأداة Clip وأرسل التسجيل في تعليق على المهمة. زميلك في منطقة زمنية أخرى يشاهده متى شاء.\nInstead of writing a long explanation, record your screen and voice with Clip and send it in a task comment. A colleague in another time zone watches it whenever they like.\nاختر ما تسجّله: الشاشة كلها، أو نافذة، أو تبويب متصفح، وفعّل الميكروفون. بعد الإيقاف يُحفظ المقطع ويمكن إضافته لتعليق والإشارة لزميل بـ @. التسجيلات تُحفظ في Clips Hub. لا تسجّل شاشة فيها بيانات عملاء أو كلمات مرور.\nChoose what to record: the entire screen, a window or a browser tab, and turn on the microphone. When you stop, the clip is saved and can go into a comment with an @mention. Recordings are kept in the Clips Hub. Never record a screen showing customer data or passwords.\nفي مربع التعليق اضغط زر التسجيل (Clip).\nاختر Browser tab أو Entire screen وفعّل الميكروفون.\nاشرح وأنت تنقر، ثم Stop.\nأرسل التعليق وأشر لزميلك بـ @.\nاجعل المقطع أقل من دقيقتين: موضوع واحد لكل تسجيل.\nKeep clips under two minutes: one topic per recording.\nمصممة في مسقط ومطور يعمل من منطقة زمنية أخرى. بدل انتظار اجتماع مشترك، ترسل له مقطع Clip دقيقة واحدة، فيصلح التصميم قبل أن تبدأ يومها.\nA designer in Muscat works with a developer in another time zone. Instead of waiting for a shared meeting, she sends a one-minute Clip, and he fixes the design before her day starts.",
+    "en": "بدل كتابة شرح طويل، سجّل شاشتك وصوتك بأداة Clip وأرسل التسجيل في تعليق على المهمة. زميلك في منطقة زمنية أخرى يشاهده متى شاء.\nInstead of writing a long explanation, record your screen and voice with Clip and send it in a task comment. A colleague in another time zone watches it whenever they like.\nاختر ما تسجّله: الشاشة كلها، أو نافذة، أو تبويب متصفح، وفعّل الميكروفون. بعد الإيقاف يُحفظ المقطع ويمكن إضافته لتعليق والإشارة لزميل بـ @. التسجيلات تُحفظ في Clips Hub. لا تسجّل شاشة فيها بيانات عملاء أو كلمات مرور.\nChoose what to record: the entire screen, a window or a browser tab, and turn on the microphone. When you stop, the clip is saved and can go into a comment with an @mention. Recordings are kept in the Clips Hub. Never record a screen showing customer data or passwords.\nIn the comment box click the record (Clip) button.\nChoose Browser tab or Entire screen and turn on the microphone.\nExplain while you click, then Stop.\nSend the comment and @mention your colleague.\nاجعل المقطع أقل من دقيقتين: موضوع واحد لكل تسجيل.\nKeep clips under two minutes: one topic per recording.\nمصممة في مسقط ومطور يعمل من منطقة زمنية أخرى. بدل انتظار اجتماع مشترك، ترسل له مقطع Clip دقيقة واحدة، فيصلح التصميم قبل أن تبدأ يومها.\nA designer in Muscat works with a developer in another time zone. Instead of waiting for a shared meeting, she sends a one-minute Clip, and he fixes the design before her day starts."
+   },
+   "url": "#/courses/clickup-pro/a-clip",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-nested",
+   "kind": "course",
+   "title": {
+    "ar": "المهام الفرعية المتداخلة",
+    "en": "Nested subtasks"
+   },
+   "text": {
+    "ar": "المهمة الفرعية يمكن أن تحوي مهاماً فرعية أيضاً. مع ميزة Nested Subtasks تبني شجرة عمل بمستويات: الافتراضي ثلاثة، ويمكن للمسؤول رفعها حتى سبعة.\nA subtask can have subtasks too. With the Nested Subtasks ClickApp you build a tree of work in levels: the default is three, and an admin can raise it up to seven.\nيفعّلها المالك أو المسؤول من ClickApps، وهي متاحة في كل الخطط. لإنشاء مستوى أعمق اضغط «+» بجانب مهمة فرعية، أو أثناء الكتابة اضغط Tab للإزاحة للداخل وShift+Tab للخارج. لا تبالغ في العمق: بعد ثلاثة مستويات يصعب رؤية الصورة؛ فكّر حينها في قائمة أو قائمة تحقق (Checklist).\nAn owner or admin turns it on in ClickApps, and it is available on all plans. To create a deeper level click “+” next to a subtask, or while typing press Tab to indent and Shift+Tab to outdent. Do not go too deep: after three levels the picture gets hard to see; then think about a List or a Checklist.\nاطلب تفعيل Nested Subtasks من ClickApps.\nافتح مهمة وأضف مهمة فرعية.\nاضغط «+» بجانب المهمة الفرعية لإضافة مستوى أعمق.\nفي القائمة استخدم Tab وShift+Tab للإزاحة.\nإن احتجت أكثر من ثلاثة مستويات، غالباً تحتاج قائمة جديدة لا مهمة أعمق.\nIf you need more than three levels, you probably need a new List, not a deeper task.\nمشروع الإطلاق كان قائمة طويلة مسطحة من 40 مهمة. بعد التداخل صار ثلاث مهام رئيسية، وكل فريق يفتح فرعه فقط.\nThe launch project was a flat list of 40 tasks. After nesting it became three parent tasks, and each team opens only its own branch.",
+    "en": "المهمة الفرعية يمكن أن تحوي مهاماً فرعية أيضاً. مع ميزة Nested Subtasks تبني شجرة عمل بمستويات: الافتراضي ثلاثة، ويمكن للمسؤول رفعها حتى سبعة.\nA subtask can have subtasks too. With the Nested Subtasks ClickApp you build a tree of work in levels: the default is three, and an admin can raise it up to seven.\nيفعّلها المالك أو المسؤول من ClickApps، وهي متاحة في كل الخطط. لإنشاء مستوى أعمق اضغط «+» بجانب مهمة فرعية، أو أثناء الكتابة اضغط Tab للإزاحة للداخل وShift+Tab للخارج. لا تبالغ في العمق: بعد ثلاثة مستويات يصعب رؤية الصورة؛ فكّر حينها في قائمة أو قائمة تحقق (Checklist).\nAn owner or admin turns it on in ClickApps, and it is available on all plans. To create a deeper level click “+” next to a subtask, or while typing press Tab to indent and Shift+Tab to outdent. Do not go too deep: after three levels the picture gets hard to see; then think about a List or a Checklist.\nAsk for Nested Subtasks to be turned on in ClickApps.\nOpen a task and add a subtask.\nClick “+” next to the subtask to add a deeper level.\nIn List view use Tab and Shift+Tab to indent and outdent.\nإن احتجت أكثر من ثلاثة مستويات، غالباً تحتاج قائمة جديدة لا مهمة أعمق.\nIf you need more than three levels, you probably need a new List, not a deeper task.\nمشروع الإطلاق كان قائمة طويلة مسطحة من 40 مهمة. بعد التداخل صار ثلاث مهام رئيسية، وكل فريق يفتح فرعه فقط.\nThe launch project was a flat list of 40 tasks. After nesting it became three parent tasks, and each team opens only its own branch."
+   },
+   "url": "#/courses/clickup-pro/a-nested",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "id": "course:a-rel",
+   "kind": "course",
+   "title": {
+    "ar": "العلاقات في ClickUp",
+    "en": "Relationships in ClickUp"
+   },
+   "text": {
+    "ar": "العلاقات (Relationships) تربط المهمة بما يتصل بها: مهام مرتبطة، وتبعيات (تنتظر أو تعطّل)، ومستندات، وعلاقات مخصصة. مثال: مهمة «تهيئة موظف جديد» مرتبطة بدليل التهيئة ومهام الحساب والجهاز.\nRelationships link a task to what it connects with: related tasks, dependencies (waiting on or blocking), Docs, and custom relationships. Example: a “New hire onboarding” task linked to the onboarding guide and the account and laptop tasks.\nمن قسم Related في المهمة اضغط «Relate items or add dependencies». الرابط (Link) لعلاقة عامة، و«Waiting on» تعني أن هذه المهمة لا تبدأ قبل غيرها، و«Blocking» أن غيرها ينتظرها. العلاقات المخصصة تربط بين قوائم كقاعدة بيانات بسيطة (مثل «الموظف» و«الجهاز»). يمكن إضافة علاقة تلقائياً بالأتمتة.\nIn the task’s Related section click “Relate items or add dependencies”. A link is a general connection, “Waiting on” means this task cannot start before another, and “Blocking” means another is waiting on it. Custom relationships connect Lists like a simple database (such as “Employee” and “Laptop”). An automation can add a relationship for you.\nافتح مهمة وانزل إلى قسم Related.\nاضغط Relate items or add dependencies.\nاختر Link tasks أو Waiting on أو Link Doc.\nابحث عن العنصر واختره.\nاربط مستند التهيئة بكل مهام التهيئة؛ الموظف الجديد يجد الدليل من أي مهمة يفتحها.\nLink the onboarding Doc to every onboarding task; the new hire finds the guide from any task they open.\nالموارد البشرية ربطت دليل التهيئة ومهام تقنية المعلومات بكل مهمة تهيئة. صارت نورة تعرف من أول يوم ما ينتظرها ومن تسأل.\nHR linked the onboarding guide and the IT tasks to every onboarding task. Noura knew from day one what was coming and whom to ask.",
+    "en": "العلاقات (Relationships) تربط المهمة بما يتصل بها: مهام مرتبطة، وتبعيات (تنتظر أو تعطّل)، ومستندات، وعلاقات مخصصة. مثال: مهمة «تهيئة موظف جديد» مرتبطة بدليل التهيئة ومهام الحساب والجهاز.\nRelationships link a task to what it connects with: related tasks, dependencies (waiting on or blocking), Docs, and custom relationships. Example: a “New hire onboarding” task linked to the onboarding guide and the account and laptop tasks.\nمن قسم Related في المهمة اضغط «Relate items or add dependencies». الرابط (Link) لعلاقة عامة، و«Waiting on» تعني أن هذه المهمة لا تبدأ قبل غيرها، و«Blocking» أن غيرها ينتظرها. العلاقات المخصصة تربط بين قوائم كقاعدة بيانات بسيطة (مثل «الموظف» و«الجهاز»). يمكن إضافة علاقة تلقائياً بالأتمتة.\nIn the task’s Related section click “Relate items or add dependencies”. A link is a general connection, “Waiting on” means this task cannot start before another, and “Blocking” means another is waiting on it. Custom relationships connect Lists like a simple database (such as “Employee” and “Laptop”). An automation can add a relationship for you.\nOpen a task and scroll to the Related section.\nClick Relate items or add dependencies.\nChoose Link tasks, Waiting on or Link Doc.\nSearch for the item and pick it.\nاربط مستند التهيئة بكل مهام التهيئة؛ الموظف الجديد يجد الدليل من أي مهمة يفتحها.\nLink the onboarding Doc to every onboarding task; the new hire finds the guide from any task they open.\nالموارد البشرية ربطت دليل التهيئة ومهام تقنية المعلومات بكل مهمة تهيئة. صارت نورة تعرف من أول يوم ما ينتظرها ومن تسأل.\nHR linked the onboarding guide and the IT tasks to every onboarding task. Noura knew from day one what was coming and whom to ask."
+   },
+   "url": "#/courses/clickup-pro/a-rel",
+   "refs": [],
+   "reviewed": "2026-09-30",
+   "langs": [
+    "ar",
+    "en"
+   ]
   }
  ]
 }

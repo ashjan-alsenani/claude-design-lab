@@ -195,6 +195,16 @@ A separate section of the site, with its own sidebar group **Courses for beginne
 - **Role play** (`#/courses/clickup4/interview`): five interview questions with model answers and self-rating.
 - **Progress** is saved per course on this device (`omantel-clickup-hub:course:<id>`). It is migrated from the earlier single-course key.
 
+### Courses in the section
+
+1. **ClickUp 4.0 for Beginners** (`clickup4`): 11 sections, 65 topics and a role play. Content is in `src/content/course.js` and `c4-deep-1..3.js`.
+2. **ClickUp: The Intermediate to Advanced Training Course** (`clickup-pro`): 7 sections and 25 topics, with no role play. Content is in `src/content/adv-1..3.js`.
+   - **Sections:** Getting started, Mind Maps, Integrations and import, ClickUp Docs, Sprints, Setting up for Agile, Hidden pro features.
+   - **Topics follow the user's outline.** Where a lecture name is from an older ClickUp version, the topic teaches today's name and mentions the old one: LineUp is now **Personal Priorities**, sprints live in **Sprint Folders**, and "Convert List to Sprint" is shown as moving a List's tasks into a sprint.
+   - **Facts were checked against ClickUp Help:** Sprint Folders, Sprint Points, spillover, moving Sprint Folders, Personal Priorities, nested subtasks (3 levels by default, up to 7), Clip, the Email ClickApp, Zoom (`/zoom`), the Chrome extension, Google Calendar two-way sync with iCal for others, imports and Relationships.
+
+A course without `interview` has no role play. Its overview hides the role-play card, and its last topic's Next button returns to the course contents.
+
 ### The "Watch how" engine (`src/app/cx.js`, `src/cx.css`)
 
 - **ClickUp 4.0 layout.** Screens follow the published ClickUp 4.0 layout (Intro to ClickUp 4.0, Global Navigation, Spaces Sidebar, List view, grouping, and task layouts in ClickUp Help):
@@ -214,6 +224,15 @@ A separate section of the site, with its own sidebar group **Courses for beginne
   - text can be typed in.
 - **Playback and accessibility.** It autoplays once when scrolled into view. With reduced motion it changes instantly and never autoplays. The stage is 820×470, scaled to fit, and mirrors in Arabic.
 - `CX.states(demo)` returns every step's state, for tests.
+- **Screens added for the advanced course:**
+  - `browser`: a web page with the ClickUp Chrome extension (task, Notepad, screenshot, time, bookmarks);
+  - `sprint`: a Sprint List with dates, points, progress, a spillover banner, a setup dialog and a folder menu;
+  - `prio`: Personal Priorities and Teams Hub.
+- **Existing screens extended:**
+  - the task view gained Relationships, an email composer, Zoom meeting cards and Clip recording;
+  - the List view gained nested subtask levels and a Sprint Points column;
+  - Calendar gained sync, Doc gained a page tree, settings menu and cover, and import gained an API-token step;
+  - mind-map nodes gained colours, status and assignee.
 
 ### Content
 
