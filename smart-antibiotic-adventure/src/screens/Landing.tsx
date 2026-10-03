@@ -8,13 +8,21 @@ import { Aleen } from '../art/Aleen'
 import { Baktoro } from '../art/Baktoro'
 import { SoundToggle } from '../components/Hud'
 import { Bursts, centerOf, Speech, useBursts } from '../components/fx'
+import { ACTIVITY_IDS } from '../data/activities'
 import './landing.css'
 
+const ITEM = {
+  hidden: { opacity: 0, y: 18, scale: 0.97 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring' as const, duration: 0.6, bounce: 0.35 } },
+}
+
 export function Landing() {
-  const { go, env, sfx, completed } = useGame()
+  const { go, env, sfx, completed, activities } = useGame()
   const [launching, setLaunching] = useState(false)
   const { bursts, burst, done } = useBursts()
-  const started = Object.keys(completed).length > 0
+  const missions = Object.keys(completed).length
+  const started = missions > 0
+  const stickers = ACTIVITY_IDS.filter((id) => (activities[id] ?? 0) > 0).length
   const floaters = env.lowPower || env.reducedMotion ? CITY_FLOATERS.slice(0, 6) : CITY_FLOATERS
   const aleenH = env.portrait ? Math.min(330, window.innerHeight * 0.42) : Math.min(560, window.innerHeight * 0.7)
 
@@ -70,38 +78,77 @@ export function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
           >
-            هل تستطيع حماية مدينة الصحة
-            <br />
-            من البكتيريا المقاومة؟
+            هل تستطيع حماية مدينة الصحة من البكتيريا المقاومة؟
           </motion.p>
-          <motion.div
-            className="landing-cta"
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.9, type: 'spring', duration: 0.6, bounce: 0.4 }}
+          <motion.nav
+            className="landing-menu"
+            aria-label="ماذا تريد أن تفعل؟"
+            initial="hidden"
+            animate="show"
+            variants={{ hidden: {}, show: { transition: { delayChildren: 0.85, staggerChildren: env.reducedMotion ? 0 : 0.08 } } }}
           >
-            <button type="button" className={`btn3d big pulse ${launching ? 'launching' : ''}`} onClick={start} disabled={launching}>
-              {started ? 'تابع المغامرة' : 'ابدأ المغامرة'}
-              <span className="rocket" aria-hidden>
-                🚀
+            <motion.button
+              type="button"
+              className={`menu-card menu-main ${launching ? 'launching' : ''}`}
+              onClick={start}
+              disabled={launching}
+              variants={ITEM}
+              aria-label={`${started ? 'تابع' : 'ابدأ'} المغامرة الكبرى — أنهيت ${ar(missions)} من ٥ مهمات`}
+            >
+              <span className="menu-badge" aria-hidden>
+                🏙️
               </span>
-            </button>
-            <button
-              type="button"
-              className="btn3d pink film-btn"
-              onClick={(e) => go({ name: 'film' }, { color: '#ff5fa8', origin: centerOf(e.currentTarget), kind: 'portal' })}
-            >
-              🎬 شاهد فيلم ألين
-            </button>
-            <button
-              type="button"
-              className="btn3d green play-btn"
-              onClick={(e) => go({ name: 'activities' }, { color: '#3cc46a', origin: centerOf(e.currentTarget), kind: 'bubbles' })}
-            >
-              🎪 ساحة الألعاب
-            </button>
-            {started && <span className="landing-progress">أنهيت {ar(Object.keys(completed).length)} من ٥ مهمات ⭐</span>}
-          </motion.div>
+              <span className="menu-text">
+                <span className="menu-title">المغامرة الكبرى</span>
+                <span className="menu-desc">٥ مهمات لحماية مدينة الصحة</span>
+                <span className="menu-progress">
+                  <span className="menu-bar">
+                    <span style={{ transform: `scaleX(${missions / 5})` }} />
+                  </span>
+                  <b>
+                    {ar(missions)} / ٥
+                  </b>
+                </span>
+              </span>
+              <span className="menu-go btn3d big pulse" aria-hidden>
+                {started ? 'تابع' : 'ابدأ'}
+                <span className="rocket">🚀</span>
+              </span>
+            </motion.button>
+
+            <div className="menu-row">
+              <motion.button
+                type="button"
+                className="menu-card menu-play"
+                onClick={(e) => go({ name: 'activities' }, { color: '#3cc46a', origin: centerOf(e.currentTarget), kind: 'bubbles' })}
+                variants={ITEM}
+              >
+                <span className="menu-badge" aria-hidden>
+                  🎪
+                </span>
+                <span className="menu-text">
+                  <span className="menu-title">ساحة الألعاب</span>
+                  <span className="menu-desc">٧ ألعاب قصيرة</span>
+                  <span className="menu-chip">🏅 {ar(stickers)} / {ar(ACTIVITY_IDS.length)} ملصقات</span>
+                </span>
+              </motion.button>
+              <motion.button
+                type="button"
+                className="menu-card menu-film"
+                onClick={(e) => go({ name: 'film' }, { color: '#ff5fa8', origin: centerOf(e.currentTarget), kind: 'portal' })}
+                variants={ITEM}
+              >
+                <span className="menu-badge" aria-hidden>
+                  🎬
+                </span>
+                <span className="menu-text">
+                  <span className="menu-title">فيلم ألين</span>
+                  <span className="menu-desc">فيلم متحرك قصير</span>
+                  <span className="menu-chip">▶ أقل من ٣ دقائق</span>
+                </span>
+              </motion.button>
+            </div>
+          </motion.nav>
         </section>
 
         <div className="landing-hero">

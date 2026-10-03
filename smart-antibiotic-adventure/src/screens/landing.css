@@ -22,7 +22,7 @@
   gap: 24px;
   width: min(1240px, 100%);
   margin: 0 auto;
-  padding: 72px 32px 40px;
+  padding: 64px 32px 32px;
 }
 .landing-copy {
   position: relative;
@@ -56,7 +56,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0 0.28em;
-  font-size: clamp(3rem, 1.6rem + 5.6vw, 6.4rem);
+  font-size: clamp(3rem, 1.6rem + 4.6vw, 5.4rem);
   line-height: 1.12;
   perspective: 800px;
 }
@@ -83,31 +83,108 @@
 }
 .landing-sub {
   margin: 0;
-  max-width: 30ch;
-  padding: 14px 22px 16px;
+  max-width: 36ch;
+  text-wrap: balance;
+  padding: 12px 22px 14px;
   border-radius: 26px;
   background: rgb(255 255 255 / 0.86);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
   font-weight: 700;
   line-height: 1.6;
   color: var(--ink);
   box-shadow: var(--shadow-soft);
 }
-.landing-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 10px; }
-.landing-progress {
-  font-weight: 800;
-  color: var(--deep);
-  background: rgb(255 255 255 / 0.75);
-  padding: 4px 14px 6px;
-  border-radius: 999px;
+/* ---------- the menu: one main adventure card + two side cards ---------- */
+.landing-menu { display: grid; gap: 14px; width: min(600px, 100%); margin-top: 4px; }
+.menu-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.menu-card {
+  --m1: #fff3c4;
+  --m2: #ff9f2e;
+  --m3: #c4501c;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 28px;
+  text-align: start;
+  cursor: pointer;
+  background: linear-gradient(160deg, #fff 40%, var(--m1));
+  box-shadow:
+    inset 0 3px 0 #fff,
+    inset 0 0 0 3px color-mix(in srgb, var(--m2) 30%, white),
+    0 7px 0 color-mix(in srgb, var(--m2) 55%, white),
+    0 20px 30px -16px rgb(23 32 107 / 0.55);
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+  touch-action: manipulation;
 }
+@media (hover: hover) and (pointer: fine) {
+  .menu-card:hover:not(:disabled) { transform: translateY(-4px); }
+  .menu-card:hover .menu-badge { transform: rotate(-8deg) scale(1.06); }
+  .menu-card:hover .rocket { transform: translate(-4px, -4px) rotate(-8deg); }
+}
+.menu-card:active:not(:disabled) { transform: translateY(3px) scale(0.98); }
+.menu-card:disabled { cursor: default; }
+.menu-play { --m1: #d4f7dc; --m2: #3cc46a; --m3: #1f8a43; }
+.menu-film { --m1: #ffd8e8; --m2: #ff5fa8; --m3: #c42f75; }
+.menu-badge {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
+  font-size: 2.1rem;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--m1) 55%, color-mix(in srgb, var(--m2) 45%, white));
+  border: 4px solid #fff;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--m2) 70%, #17206b), 0 10px 16px -8px rgb(23 32 107 / 0.5);
+  transition: transform 260ms var(--ease-spring);
+}
+.menu-text { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.menu-title { font-size: 1.35rem; font-weight: 800; line-height: 1.25; color: var(--ink); }
+.menu-desc { font-size: 0.98rem; font-weight: 600; color: var(--ink-soft); line-height: 1.4; }
+.menu-chip {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 2px 12px 4px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--m3);
+  background: color-mix(in srgb, var(--m1) 80%, white);
+}
+/* the main adventure card */
+.menu-main { padding: 18px 20px; border-radius: 32px; }
+.menu-main .menu-badge { width: 76px; height: 76px; font-size: 2.6rem; border-radius: 24px; }
+.menu-main .menu-title { font-size: clamp(1.4rem, 1.15rem + 0.7vw, 1.75rem); white-space: nowrap; }
+.menu-progress { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.menu-progress b { font-size: 1rem; color: var(--m3); white-space: nowrap; }
+.menu-bar {
+  flex: 1;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #fff1d6;
+  box-shadow: inset 0 2px 3px rgb(23 32 107 / 0.15);
+}
+.menu-bar span {
+  display: block;
+  height: 100%;
+  transform-origin: right center;
+  background: linear-gradient(90deg, #ffd23f, #ff9f2e);
+  transition: transform 700ms var(--ease-out);
+}
+.menu-go { flex: none; pointer-events: none; padding-inline: 1em; }
+.menu-go.btn3d.big { font-size: 1.45rem; min-height: 60px; }
 .rocket { display: inline-block; transition: transform 300ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
   .btn3d:hover .rocket { transform: translate(-4px, -4px) rotate(-8deg); }
 }
-.btn3d.launching .rocket { animation: rocket-off 0.5s var(--ease-in-out) forwards; }
+.launching .rocket { animation: rocket-off 0.5s var(--ease-in-out) forwards; }
 @keyframes rocket-off {
   40% { transform: translate(4px, 4px) rotate(10deg); }
   100% { transform: translate(-120px, -120px) rotate(-20deg) scale(1.4); opacity: 0; }
@@ -146,7 +223,17 @@
   }
   .landing-copy { justify-items: center; }
   .landing-title { justify-content: center; }
-  .landing-cta { justify-content: center; }
+  .landing-menu { margin-inline: auto; text-align: start; }
+  .menu-main { flex-wrap: wrap; padding: 14px; }
+  .menu-main .menu-badge { width: 64px; height: 64px; font-size: 2.1rem; }
+  .menu-main .menu-go { width: 100%; }
+  .menu-row { gap: 10px; }
+  .menu-row .menu-card { flex-direction: column; align-items: center; text-align: center; padding: 12px 8px 14px; gap: 6px; }
+  .menu-row .menu-text { justify-items: center; }
+  .menu-row .menu-chip { justify-self: center; }
+  .menu-row .menu-badge { width: 56px; height: 56px; font-size: 1.8rem; }
+  .menu-title { font-size: 1.15rem; }
+  .menu-desc { font-size: 0.88rem; }
   .landing-hero { align-self: end; padding-bottom: 0; margin-top: 4px; }
   .hero-bubble { right: 4px; left: auto; top: 6%; max-width: 150px; }
   .hero-bubble .speech { font-size: 0.95rem; padding: 10px 14px 12px; }
