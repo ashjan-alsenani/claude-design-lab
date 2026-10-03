@@ -23,42 +23,65 @@ const GREY = '#8a94a6';
 const RED = '#e04848';
 const PURPLE = '#7a3fc4';
 
-/* ---------- grid geometry (matches illustrations/math.tsx Grid + .xmath padding) ---------- */
+/* ---------- squared grid drawn with pills (so moving shapes can sit on top of it) ---------- */
 interface GSpec {
   cols: number;
   rows: number;
+  /** coordinate axes with numbers (then y grows upwards) */
   axes?: boolean;
-  /** centre of the drawing on the stage (%) and its width (%) */
+  /** centre of the squared area on the stage (%) and one square in stage pixels */
   x: number;
   y: number;
-  w: number;
+  u: number;
+}
+interface GDraw {
+  shapes?: { points: P[]; color: string; label?: string }[];
+  lines?: { from: P; to: P; color?: string }[];
+  dots?: P[];
 }
 function grid(g: GSpec) {
-  const off = g.axes ? 28 : 6;
-  const VW = g.cols * 34 + off + 10;
-  const VH = g.rows * 34 + off + 10;
-  const boxW = (g.w / 100) * WS;
-  const k = (boxW - 8) / VW;
-  const boxH = k * VH + 8;
-  const left = (g.x / 100) * WS - boxW / 2 + 4;
-  const top = (g.y / 100) * HS - boxH / 2 + 4;
-  /** stage pixel of grid point (i, j) — y grows upwards when axes are shown, downwards otherwise */
-  const pt = (i: number, j: number): P => [left + k * (off + 34 * i), top + k * (g.axes ? 6 + (g.rows - j) * 34 : 6 + j * 34)];
-  /** one grid square in stage pixels */
-  const u = 34 * k;
-  /** the grid drawing itself */
-  const draw = (id: string, extra: Record<string, unknown> = {}, inAt = 0): Actor => ({
-    id,
-    kind: 'math',
-    math: { type: 'grid', cols: g.cols, rows: g.rows, axes: g.axes, ...extra } as Extract<Actor, { kind: 'math' }>['math'],
-    x: g.x,
-    y: g.y,
-    w: g.w,
-    in: inAt,
-  });
-  /** stage % of grid point (i, j), optionally nudged by (dx, dy) pixels */
+  const u = g.u;
+  const x0 = (g.x / 100) * WS - (g.cols * u) / 2;
+  const yTop = (g.y / 100) * HS - (g.rows * u) / 2;
+  const pt = (i: number, j: number): P => [x0 + i * u, g.axes ? yTop + (g.rows - j) * u : yTop + j * u];
   const at = (i: number, j: number, dx = 0, dy = 0) => pc([pt(i, j)[0] + dx, pt(i, j)[1] + dy]);
-  return { pt, u, draw, at, up: g.axes ? -1 : 1 };
+  const draw = (id: string, d: GDraw = {}, inAt = 0.1): Actor[] => {
+    const out: Actor[] = [];
+    const L = '#d9e2f2';
+    for (let i = 0; i <= g.cols; i++) out.push(seg(`${id}v${i}`, pt(i, 0), pt(i, g.rows), L, inAt, [], 2));
+    for (let j = 0; j <= g.rows; j++) out.push(seg(`${id}h${j}`, pt(0, j), pt(g.cols, j), L, inAt, [], 2));
+    if (g.axes) {
+      out.push(seg(`${id}ax`, pt(0, 0), pt(g.cols, 0), '#1f2a4d', inAt, [], 3));
+      out.push(seg(`${id}ay`, pt(0, 0), pt(0, g.rows), '#1f2a4d', inAt, [], 3));
+      const AR = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', '١٠', '١١', '١٢', '١٣', '١٤', '١٥'];
+      for (let i = 0; i <= g.cols; i++) out.push(tx(`${id}nx${i}`, AR[i], at(i, 0, 0, 13), inAt, { size: 2, color: '#1f2a4d' }));
+      for (let j = 1; j <= g.rows; j++) out.push(tx(`${id}ny${j}`, AR[j], at(0, j, -12, 0), inAt, { size: 2, color: '#1f2a4d' }));
+    }
+    (d.lines ?? []).forEach((l, k) => {
+      // dashed mirror line: short pills along the line
+      const A = pt(...l.from);
+      const B = pt(...l.to);
+      const len = Math.hypot(B[0] - A[0], B[1] - A[1]);
+      const n = Math.round(len / (u * 0.5));
+      for (let m = 0; m < n; m += 1) {
+        if (m % 2) continue;
+        const a = m / n;
+        const b = Math.min(1, (m + 1) / n);
+        out.push(seg(`${id}l${k}-${m}`, [A[0] + (B[0] - A[0]) * a, A[1] + (B[1] - A[1]) * a], [A[0] + (B[0] - A[0]) * b, A[1] + (B[1] - A[1]) * b], l.color ?? RED, inAt, [], 4));
+      }
+    });
+    (d.shapes ?? []).forEach((sh, k) => {
+      const ps = sh.points.map(([i, j]) => pt(i, j));
+      out.push(...poly(`${id}s${k}-`, ps, sh.color, inAt, [], 8));
+      if (sh.label) {
+        const c: P = [ps.reduce((a, q) => a + q[0], 0) / ps.length, ps.reduce((a, q) => a + q[1], 0) / ps.length];
+        out.push(tx(`${id}sl${k}`, sh.label, pc(c), inAt, { size: 3, color: sh.color }));
+      }
+    });
+    (d.dots ?? []).forEach((q, k) => out.push(dot(`${id}d${k}`, pt(...q), '#222', inAt, [], 14)));
+    return out;
+  };
+  return { pt, u, draw, at };
 }
 
 /* ---------- rigid motions in stage pixels ---------- */
@@ -206,28 +229,28 @@ function lineFans(o: P, parts: { a: number; color: string; inAt: number; id: str
 
 /* =================================================================== */
 /* m10-1 */
-const G1 = grid({ cols: 15, rows: 7, x: 50, y: 52, w: 72 });
+const G1 = grid({ cols: 15, rows: 7, x: 50, y: 52, u: 36 });
 const MTRI: P[] = [
   [0, 0],
   [1, 2],
   [4, 2],
 ];
-const G2 = grid({ cols: 7, rows: 4, x: 50, y: 50, w: 56 });
-const G3 = grid({ cols: 10, rows: 4, x: 50, y: 50, w: 62 });
-const G4 = grid({ cols: 12, rows: 5, axes: true, x: 50, y: 50, w: 70 });
+const G2 = grid({ cols: 7, rows: 4, x: 50, y: 50, u: 52 });
+const G3 = grid({ cols: 10, rows: 4, x: 50, y: 50, u: 42 });
+const G4 = grid({ cols: 12, rows: 5, axes: true, x: 50, y: 50, u: 38 });
 const QUAD: P[] = [
   [5, 1],
   [7, 1],
   [7, 4],
   [5, 2],
 ];
-const G5 = grid({ cols: 8, rows: 7, axes: true, x: 33, y: 53, w: 38 });
+const G5 = grid({ cols: 8, rows: 7, axes: true, x: 33, y: 53, u: 32 });
 const TA: P[] = [
   [2, 4],
   [4, 4],
   [3, 6],
 ];
-const G6 = grid({ cols: 10, rows: 5, x: 50, y: 45, w: 56 });
+const G6 = grid({ cols: 10, rows: 5, x: 50, y: 45, u: 38 });
 const TRAP6: P[] = [
   [1, 4],
   [3, 4],
@@ -236,15 +259,15 @@ const TRAP6: P[] = [
 ];
 
 /* m10-2 */
-const R1 = grid({ cols: 8, rows: 6, x: 50, y: 52, w: 45 });
+const R1 = grid({ cols: 8, rows: 6, x: 50, y: 52, u: 38 });
 const RT: P[] = [
   [5, 5],
   [7, 5],
   [5, 1],
 ];
 const RT_IMG: P[] = RT.map(([x, y]) => [8 - x, y]);
-const R2 = grid({ cols: 8, rows: 4, x: 50, y: 48, w: 60 });
-const R5 = grid({ cols: 7, rows: 7, axes: true, x: 32, y: 53, w: 34 });
+const R2 = grid({ cols: 8, rows: 4, x: 50, y: 48, u: 50 });
+const R5 = grid({ cols: 7, rows: 7, axes: true, x: 32, y: 53, u: 31 });
 const RQ: P[] = [
   [4, 4],
   [6, 6],
@@ -257,23 +280,23 @@ const RQ_IMG: P[] = [
   [3, 6],
   [3, 4],
 ];
-const R6 = grid({ cols: 8, rows: 6, x: 31, y: 53, w: 42 });
+const R6 = grid({ cols: 8, rows: 6, x: 31, y: 53, u: 34 });
 
 /* m10-3 */
-const D3 = grid({ cols: 6, rows: 6, axes: true, x: 34, y: 53, w: 34 });
+const D3 = grid({ cols: 6, rows: 6, axes: true, x: 34, y: 53, u: 36 });
 const DTRI: P[] = [
   [2, 3],
   [4, 3],
   [3, 6],
 ];
-const D5 = grid({ cols: 10, rows: 10, axes: true, x: 34, y: 53, w: 34 });
+const D5 = grid({ cols: 10, rows: 10, axes: true, x: 34, y: 53, u: 22 });
 const DTRAP: P[] = [
   [2, 9],
   [4, 8],
   [4, 6],
   [2, 6],
 ];
-const D6 = grid({ cols: 6, rows: 6, axes: true, x: 50, y: 53, w: 34 });
+const D6 = grid({ cols: 6, rows: 6, axes: true, x: 50, y: 53, u: 36 });
 
 const px = (g: ReturnType<typeof grid>, pts: P[]) => pts.map(([i, j]) => g.pt(i, j));
 const CLOCK_C: P = [238, 236];
@@ -424,7 +447,7 @@ const explainers: Explainer[] = [
         duration: 11,
         bg: 'paper',
         actors: [
-          G1.draw('g', { shapes: [{ points: MTRI, color: '#8fd3ff' }] }),
+          ...G1.draw('g', { shapes: [{ points: MTRI, color: '#8fd3ff' }] }),
           ...[1, 2, 3, 4, 5].flatMap((k) => poly(`s${k}-`, px(G1, MTRI.map(([x, y]) => [x + 2 * k, y + k])), BLUE, 1.2 + k * 1.3 - 0.35, [], 5)),
           ...poly(
             'm',
@@ -442,7 +465,7 @@ const explainers: Explainer[] = [
         duration: 12,
         bg: 'paper',
         actors: [
-          G2.draw('g', { shapes: [{ points: MTRI, color: '#8fd3ff' }] }),
+          ...G2.draw('g', { shapes: [{ points: MTRI, color: '#8fd3ff' }] }),
           ...poly('m', px(G2, MTRI), ORANGE, 0.5, [slide(1.6, 0.8, G2.u, 0), slide(2.8, 0.8, G2.u, 0), slide(4.4, 0.8, 0, G2.u)]),
           dot('v', G2.pt(0, 0), RED, 0.9, [slide(1.6, 0.8, G2.u, 0), slide(2.8, 0.8, G2.u, 0), slide(4.4, 0.8, 0, G2.u)], 17),
           tx('c1', '١', G2.at(0.5, 0, 0, -16), 2.4, { color: RED, size: 3.4 }),
@@ -458,7 +481,7 @@ const explainers: Explainer[] = [
         duration: 12,
         bg: 'paper',
         actors: [
-          G3.draw('g', { shapes: [{ points: MTRI.map(([x, y]) => [x, y + 1]), color: '#8fd3ff' }] }),
+          ...G3.draw('g', { shapes: [{ points: MTRI.map(([x, y]) => [x, y + 1]), color: '#8fd3ff' }] }),
           ...(() => {
             const pts = px(G3, MTRI.map(([x, y]) => [x, y + 1]));
             const c: P = [(pts[0][0] + pts[1][0] + pts[2][0]) / 3, (pts[0][1] + pts[1][1] + pts[2][1]) / 3];
@@ -479,7 +502,7 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'paper',
         actors: [
-          G4.draw('g', { shapes: [{ points: QUAD, color: MINT }] }),
+          ...G4.draw('g', { shapes: [{ points: QUAD, color: MINT }] }),
           ...poly('m', px(G4, QUAD), ORANGE, 0.6, [0, 1, 2, 3].map((k) => slide(1.4 + k * 1, 0.7, G4.u, 0))),
           dot('v', G4.pt(5, 1), RED, 1, [0, 1, 2, 3].map((k) => slide(1.4 + k * 1, 0.7, G4.u, 0)), 15),
           ...[0, 1, 2, 3].map((k) => tx(`c${k}`, ['١', '٢', '٣', '٤'][k], G4.at(7.5 + k, 4, 0, -16), 2.1 + k, { color: RED, size: 3.2 })),
@@ -495,7 +518,7 @@ const explainers: Explainer[] = [
         duration: 14,
         bg: 'paper',
         actors: [
-          G5.draw('g', { shapes: [{ points: TA, color: MINT, label: 'أ' }] }),
+          ...G5.draw('g', { shapes: [{ points: TA, color: MINT, label: 'أ' }] }),
           ...poly('m', px(G5, TA), ORANGE, 0.6, [slide(1.6, 1.6, 3 * G5.u, 0)]),
           dot('v', G5.pt(2, 4), RED, 1, [slide(1.6, 1.6, 3 * G5.u, 0)], 13),
           tx('b', 'ب', G5.at(6, 4.7), 3.4, { size: 3.4, color: ORANGE }),
@@ -511,7 +534,7 @@ const explainers: Explainer[] = [
         duration: 11,
         bg: 'paper',
         actors: [
-          G6.draw('g', { shapes: [{ points: TRAP6, color: MINT }] }),
+          ...G6.draw('g', { shapes: [{ points: TRAP6, color: MINT }] }),
           ...poly('m', px(G6, TRAP6), ORANGE, 0.5, [slide(1.4, 1.8, 4 * G6.u, 0), slide(3.8, 0.8, 0, -G6.u)]),
           tx('a', 'بمقدار معيّن', pc([560, 370]), 5, { size: 3.2, box: true, color: 'accent' }),
           tx('b', 'باتجاه معيّن', pc([350, 370]), 5.8, { size: 3.2, box: true, color: 'accent' }),
@@ -532,7 +555,7 @@ const explainers: Explainer[] = [
         duration: 12,
         bg: 'paper',
         actors: [
-          R1.draw('g', { lines: [{ from: [4, 0], to: [4, 6], dashed: true }], shapes: [{ points: RT, color: MINT }] }),
+          ...R1.draw('g', { lines: [{ from: [4, 0], to: [4, 6] }], shapes: [{ points: RT, color: MINT }] }),
           { id: 'mir', kind: 'emoji', emoji: '🪞', ...R1.at(4, 0, 0, -22), size: 6, in: 0.6 },
           ...RT.map((p, i) => dot(`d${i}`, R1.pt(p[0], p[1]), ORANGE, 1.4 + i * 0.3, [slide(2.4 + i * 0.6, 1.2, (RT_IMG[i][0] - p[0]) * R1.u, 0)], 14)),
           ...poly('img', px(R1, RT_IMG), ORANGE, 5.2),
@@ -547,7 +570,7 @@ const explainers: Explainer[] = [
         duration: 12,
         bg: 'paper',
         actors: [
-          R2.draw('g', { lines: [{ from: [4, 0], to: [4, 4], dashed: true }] }),
+          ...R2.draw('g', { lines: [{ from: [4, 0], to: [4, 4] }] }),
           dot('o', R2.pt(6, 2), MINT, 0.4, [], 18),
           tx('lo', 'الأصل', R2.at(6, 2, 0, -30), 0.8, { size: 3.2, color: MINT }),
           tx('a1', '١', R2.at(5.5, 2, 0, 22), 1.6, { color: MINT, size: 3.6 }),
@@ -565,7 +588,7 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'paper',
         actors: [
-          R1.draw('g', { lines: [{ from: [4, 0], to: [4, 6], dashed: true }], shapes: [{ points: RT, color: MINT }] }),
+          ...R1.draw('g', { lines: [{ from: [4, 0], to: [4, 6] }], shapes: [{ points: RT, color: MINT }] }),
           ...(() => {
             const out: Actor[] = [];
             const order = [2, 0, 1];
@@ -591,7 +614,7 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'paper',
         actors: [
-          R1.draw('g', { lines: [{ from: [4, 0], to: [4, 6], dashed: true }], shapes: [{ points: RT, color: MINT }] }),
+          ...R1.draw('g', { lines: [{ from: [4, 0], to: [4, 6] }], shapes: [{ points: RT, color: MINT }] }),
           ...poly('bad', px(R1, RT), RED, 0.6, [slide(1.2, 1.6, -4 * R1.u, 0)], 7, 6),
           tx('bx', 'ليست صورة ✗', pc([110, 230]), 3.2, { size: 3.4, box: true, color: 'bad', out: 6, anim: [{ at: 3.6, effect: 'shake' }] }),
           tx('far', '٣', R1.at(2.5, 3), 4, { size: 4, color: RED, out: 6 }),
@@ -607,7 +630,7 @@ const explainers: Explainer[] = [
         duration: 14,
         bg: 'paper',
         actors: [
-          R5.draw('g', { lines: [{ from: [0, 0], to: [7, 7], dashed: true }], shapes: [{ points: RQ, color: PINK }] }),
+          ...R5.draw('g', { lines: [{ from: [0, 0], to: [7, 7] }], shapes: [{ points: RQ, color: PINK }] }),
           dot('a', R5.pt(6, 3), ORANGE, 1, [slide(2, 1.4, R5.pt(3, 6)[0] - R5.pt(6, 3)[0], R5.pt(3, 6)[1] - R5.pt(6, 3)[1])], 13),
           dot('b', R5.pt(4, 3), ORANGE, 3.6, [slide(4.4, 1, R5.pt(3, 4)[0] - R5.pt(4, 3)[0], R5.pt(3, 4)[1] - R5.pt(4, 3)[1])], 13),
           ...poly('img', px(R5, RQ_IMG), ORANGE, 6),
@@ -625,7 +648,7 @@ const explainers: Explainer[] = [
         duration: 10,
         bg: 'paper',
         actors: [
-          R6.draw('g', { lines: [{ from: [4, 0], to: [4, 6], dashed: true }], shapes: [{ points: RT, color: MINT }] }),
+          ...R6.draw('g', { lines: [{ from: [4, 0], to: [4, 6] }], shapes: [{ points: RT, color: MINT }] }),
           ...poly('img', px(R6, RT_IMG), ORANGE, 1),
           tx('a', '🪞 الانعكاس: ما تُظهره المرآة', pc([515, 120]), 2, { size: 3, box: true, color: 'accent' }),
           tx('b', 'الصورة: الشكل الناتج', pc([515, 210]), 4, { size: 3, box: true, color: ORANGE }),
@@ -684,7 +707,7 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'paper',
         actors: [
-          D3.draw('g', { shapes: [{ points: DTRI, color: MINT }], dots: [{ x: 3, y: 3, color: '#222' }] }),
+          ...D3.draw('g', { shapes: [{ points: DTRI, color: MINT }], dots: [[3, 3]] }),
           ...poly('m', px(D3, DTRI), ORANGE, 0.8, [turn(2.4, 2.8, D3.pt(3, 3), 90)]),
           dot('c', D3.pt(3, 3), '#222', 0.4, [], 14),
           tx('a', '٩٠° مع عقارب الساعة', pc([515, 110]), 5.6, { size: 3.4, box: true, color: ORANGE }),
@@ -698,7 +721,7 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'paper',
         actors: [
-          D3.draw('g', { shapes: [{ points: DTRI, color: MINT }], dots: [{ x: 3, y: 3, color: '#222' }] }),
+          ...D3.draw('g', { shapes: [{ points: DTRI, color: MINT }], dots: [[3, 3]] }),
           ...poly('s1', px(D3, DTRI).map((p) => rot(p, D3.pt(3, 3), 90)), ORANGE, 0.3, [], 6),
           ...poly('s2', px(D3, DTRI).map((p) => rot(p, D3.pt(3, 3), 180)), BLUE, 4.4, [], 6),
           ...poly('s3', px(D3, DTRI).map((p) => rot(p, D3.pt(3, 3), 270)), PINK, 7.6, [], 6),
@@ -714,7 +737,7 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'paper',
         actors: [
-          D5.draw('g', { shapes: [{ points: DTRAP, color: MINT }] }),
+          ...D5.draw('g', { shapes: [{ points: DTRAP, color: MINT }] }),
           ...poly('m', px(D5, DTRAP), ORANGE, 0.8, [turn(2.4, 3, D5.pt(4, 6), 90)], 6),
           dot('v', D5.pt(2, 9), RED, 1.2, [turn(2.4, 3, D5.pt(4, 6), 90)], 13),
           dot('a', D5.pt(4, 6), '#222', 0.4, [], 14),
@@ -729,7 +752,7 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'paper',
         actors: [
-          D6.draw('g', { shapes: [{ points: DTRI, color: MINT }], dots: [{ x: 3, y: 3, color: '#222' }] }),
+          ...D6.draw('g', { shapes: [{ points: DTRI, color: MINT }], dots: [[3, 3]] }),
           ...poly('cw', px(D6, DTRI), ORANGE, 0.8, [turn(1.6, 2.4, D6.pt(3, 3), 90)]),
           ...poly('acw', px(D6, DTRI), BLUE, 5.4, [turn(6, 2.4, D6.pt(3, 3), -90)]),
           dot('c', D6.pt(3, 3), '#222', 0.4, [], 14),
