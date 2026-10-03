@@ -30,6 +30,8 @@ import {
   type Icon,
 } from "@phosphor-icons/react";
 import { useBridal } from "./state";
+import { Clicky } from "@/components/brand/Clicky";
+import { Confetti } from "@/components/ui/Confetti";
 import { diffDays, notifications, search } from "../model/engine";
 import { Badge, IconButton, Sheet, cx, inputCls } from "../ui/kit";
 
@@ -117,7 +119,7 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
       </button>
     ) : (
       <span className="inline-flex items-center gap-1.5 text-[12px] text-bj-muted" role="status">
-        <CloudCheckIcon size={15} weight="light" />
+        <CloudCheckIcon size={15} weight="regular" />
         {saveState === "saving" ? t.top.saving : t.top.saved}
       </span>
     );
@@ -125,10 +127,10 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
   return (
     <div className="bj min-h-dvh" dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
       {mode === "demo" && (
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-bj-ink px-4 py-2 text-center text-[12.5px] text-bj-ivory">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-[#ffc23d] px-4 py-2 text-center text-[12.5px] font-medium text-bj-ink">
           <span>{t.top.demo}</span>
           {buyHref && (
-            <Link href={buyHref} className="font-medium text-[#e9d5ac] underline underline-offset-4">
+            <Link href={buyHref} className="font-bold text-bj-ink underline underline-offset-4">
               {t.brand} →
             </Link>
           )}
@@ -137,9 +139,12 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
       <div className="mx-auto flex max-w-[1440px]">
         {/* Desktop sidebar */}
         <aside className="sticky top-0 hidden h-dvh w-[252px] shrink-0 flex-col border-e border-bj-line bg-bj-paper/70 px-4 py-6 backdrop-blur lg:flex">
-          <Link href={href()} className="px-3">
-            <span className="bj-serif block text-[1.7rem] leading-none text-bj-ink">{t.brand}</span>
+          <Link href={href()} className="flex items-center gap-2.5 px-3">
+            <Clicky size={40} mood="love" />
+            <span>
+            <span className="bj-serif block text-[1.35rem] leading-none text-bj-ink">{t.brand}</span>
             <span className="mt-1.5 block text-[11px] tracking-[0.16em] text-bj-gold-ink uppercase">{lang === "ar" ? "ون كليك" : "by One Click"}</span>
+            </span>
           </Link>
           <nav aria-label={t.brand} className="mt-7 flex-1 overflow-y-auto">
             <ul className="space-y-0.5">
@@ -176,7 +181,8 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
         <div className="min-w-0 flex-1">
           {/* Top bar */}
           <header className="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-bj-line/70 bg-bj-ivory/85 px-4 backdrop-blur-md sm:px-6 lg:px-10">
-            <Link href={href()} className="bj-serif text-[1.35rem] text-bj-ink lg:hidden">
+            <Link href={href()} className="bj-serif flex items-center gap-2 text-[1.2rem] text-bj-ink lg:hidden">
+              <Clicky size={30} mood="love" sparkle={false} color="#14B7A7" />
               {t.brand}
             </Link>
             <button
@@ -193,10 +199,10 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
             <span className="hidden flex-1 lg:block" />
             <span className="hidden sm:inline-flex">{save}</span>
             <IconButton label={t.top.search} onClick={() => setSearchOpen(true)} className="ms-auto md:hidden">
-              <MagnifyingGlassIcon size={20} weight="light" />
+              <MagnifyingGlassIcon size={20} weight="regular" />
             </IconButton>
             <IconButton label={t.top.notifications} onClick={() => setBellOpen(true)} className="relative">
-              <BellIcon size={20} weight="light" />
+              <BellIcon size={20} weight="regular" />
               {notes.length > 0 && <span className="absolute end-2 top-2 size-2 rounded-full bg-bj-rose ring-2 ring-bj-ivory" />}
             </IconButton>
             <Link href={switchHref} className="rounded-full px-3 py-1.5 text-[13px] text-bj-ink-soft hover:bg-bj-cream" hrefLang={otherLocale}>
@@ -248,11 +254,12 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-4 bottom-24 z-50 mx-auto flex max-w-sm items-center gap-4 rounded-[22px] border border-[#e9d9b8] bg-bj-paper px-5 py-4 shadow-[0_24px_60px_-24px_rgba(46,39,36,.45)] lg:bottom-10"
+            className="fixed inset-x-4 bottom-24 z-50 mx-auto flex max-w-sm items-center gap-4 rounded-[22px] border border-[#a8e6de] bg-bj-paper px-5 py-4 shadow-[0_24px_60px_-24px_rgba(30,27,58,.3)] lg:bottom-10"
             onClick={dismissCelebration}
           >
-            <span className="relative grid size-12 shrink-0 place-items-center rounded-full bg-[#f6eedd] text-bj-gold">
-              <SparkleIcon size={22} weight="fill" className="bj-sparkle" />
+            <span className="relative grid size-14 shrink-0 place-items-center">
+              <Confetti pieces={30} />
+              <Clicky size={52} mood="celebrate" />
             </span>
             <span>
               <span className="block text-[11px] uppercase tracking-[0.16em] text-bj-gold-ink">{t.celebrate}</span>

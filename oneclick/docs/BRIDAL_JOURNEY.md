@@ -73,11 +73,10 @@ until the database and a payment provider are approved.
   - Load the sample wedding.
 
 ## Design
-- **Palette:** ivory, warm white, champagne, soft beige, very soft blush, muted rose, taupe, with small gold accents.
-- **Fonts:** self-hosted, under the SIL OFL licence.
-  - Cormorant Garamond: Latin headings.
-  - Amiri: Arabic headings.
-  - IBM Plex Sans Arabic: interface text in both languages.
+- **Style (owner choice, 2026-10-03): colorful and joyful, like the One Click site.** Teal,
+  sunshine yellow, coral and lilac; Rubik for all text; bouncy 3D buttons; Clicky the mascot in
+  the hero, header, welcome screen and milestone celebrations (with confetti).
+  (A first "quiet luxury" ivory/champagne version was replaced at the owner's request.)
 - **Layout:**
   - Mobile first, with a bottom bar: Home, Checklist, Budget, Calendar, More.
   - Desktop sidebar.
@@ -86,7 +85,7 @@ until the database and a payment provider are approved.
   - Page fades, progress ring and bar fills, count-ups.
   - A drawn check when a task is done.
   - Smooth accordions and a gentle milestone toast.
-- **Images:** fine-line gold artwork stands in for photos; brides can add their own (resized in the browser).
+- **Images:** colorful line illustrations stand in for photos; brides can add their own (resized in the browser).
 
 ## Architecture
 ```

@@ -48,7 +48,7 @@ export function Vendors() {
         }
       />
       {ws.vendors.length === 0 ? (
-        <EmptyState icon={<StorefrontIcon size={24} weight="light" />} title={V.empty} sub={V.emptySub} action={<Button onClick={() => setEdit({ status: "considering", cat: "other" })}>{V.emptyCta}</Button>} />
+        <EmptyState icon={<StorefrontIcon size={24} weight="regular" />} title={V.empty} sub={V.emptySub} action={<Button onClick={() => setEdit({ status: "considering", cat: "other" })}>{V.emptyCta}</Button>} />
       ) : (
         <>
           <div className="max-w-md">

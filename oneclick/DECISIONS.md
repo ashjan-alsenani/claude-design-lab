@@ -7,8 +7,8 @@ Format: decision, why, alternatives considered, how to reverse. Newest first.
 **D24. First product = Bridal Journey (رحلة العروس), slug kept as `bride-planner`** so links and
 the license stay stable. Arabic is the primary experience.
 
-**D25. Own luxury visual language inside the product** (ivory, champagne, blush, gold; editorial
-serif) while the One Click site keeps its friendly style. Self-hosted OFL fonts.
+**D25. Same colorful, joyful One Click style inside the product** (owner preferred it over a
+first "quiet luxury" ivory/champagne version): teal, sunshine, coral, lilac, Rubik, Clicky.
 
 **D26. One private document per bride, validated operations, optimistic UI.** Fast on phones,
 simple to move to Postgres (`product_data` with license-checked RLS). Checklist templates live

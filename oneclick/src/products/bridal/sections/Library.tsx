@@ -44,7 +44,7 @@ export function Moodboard() {
         />
       )}
       {ws.mood.length === 0 ? (
-        <EmptyState icon={<ImagesIcon size={24} weight="light" />} title={M.empty} action={<Button onClick={() => setEdit({ cat: "dress", tone: 0 })}>{M.add}</Button>} />
+        <EmptyState icon={<ImagesIcon size={24} weight="regular" />} title={M.empty} action={<Button onClick={() => setEdit({ cat: "dress", tone: 0 })}>{M.add}</Button>} />
       ) : (
         <ul className="columns-2 gap-4 md:columns-3 xl:columns-4">
           {shown.map((m, i) => (
@@ -128,7 +128,7 @@ export function Documents() {
       </p>
       {cats.length > 1 && <Chips label={t.common.category} value={cat} onChange={setCat} options={[{ value: "all", label: t.common.all }, ...cats.map((c) => ({ value: c, label: Dc.cats[c] }))]} />}
       {ws.docs.length === 0 ? (
-        <EmptyState icon={<FileTextIcon size={24} weight="light" />} title={Dc.empty} action={<Button onClick={() => setEdit({ cat: "contract" })}>{Dc.add}</Button>} />
+        <EmptyState icon={<FileTextIcon size={24} weight="regular" />} title={Dc.empty} action={<Button onClick={() => setEdit({ cat: "contract" })}>{Dc.add}</Button>} />
       ) : (
         <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {shown.map((d) => (

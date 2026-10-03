@@ -6,8 +6,8 @@ import { XIcon } from "@phosphor-icons/react";
 import { useBridal } from "../app/state";
 
 /**
- * Bridal Journey design system: quiet luxury. Ivory paper, fine lines, soft shadows,
- * editorial serif headings, restrained motion (all of it respects reduced-motion).
+ * Bridal Journey design system in the One Click style: colorful, friendly and joyful.
+ * Rounded cards, bouncy 3D buttons, Rubik headings, playful motion (respects reduced-motion).
  */
 const cx = (...c: (string | false | null | undefined)[]) => c.filter(Boolean).join(" ");
 
@@ -17,12 +17,12 @@ export function Button({ variant = "primary", size = "md", className, children, 
     <button
       type="button"
       className={cx(
-        "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-[background-color,box-shadow,transform,color] duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45",
+        "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-[background-color,box-shadow,transform,color] duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] active:scale-[0.97] disabled:pointer-events-none disabled:opacity-45",
         size === "sm" && "h-9 px-4 text-[13px]",
         size === "md" && "h-11 px-5 text-sm",
         size === "lg" && "h-[52px] px-7 text-[15px]",
-        variant === "primary" && "bg-bj-ink text-bj-ivory shadow-[0_8px_20px_-10px_rgba(46,39,36,.55)] hover:bg-[#3d3430]",
-        variant === "secondary" && "border border-bj-line bg-bj-paper text-bj-ink hover:border-bj-taupe/50",
+        variant === "primary" && "bg-bj-gold-ink text-white shadow-[0_5px_0_-1px_#075a52] hover:-translate-y-0.5 hover:bg-[#0a6b62] active:translate-y-0 active:shadow-none",
+        variant === "secondary" && "border-2 border-bj-beige bg-bj-paper text-bj-ink hover:-translate-y-0.5 hover:border-bj-taupe",
         variant === "soft" && "bg-bj-cream text-bj-ink hover:bg-bj-champagne/70",
         variant === "ghost" && "text-bj-ink-soft hover:bg-bj-cream",
         variant === "danger" && "text-bj-alert hover:bg-bj-alert-soft",
@@ -45,7 +45,7 @@ export function IconButton({ label, className, children, ...rest }: { label: str
 
 export function Card({ className, children, as: As = "div", ...rest }: { className?: string; children: ReactNode; as?: "div" | "section" | "li" | "article" } & Record<string, unknown>) {
   return (
-    <As className={cx("rounded-[20px] border border-bj-line bg-bj-paper shadow-[0_1px_2px_rgba(46,39,36,.03),0_14px_34px_-24px_rgba(46,39,36,.22)]", className)} {...rest}>
+    <As className={cx("rounded-[24px] border border-bj-line bg-bj-paper shadow-[0_1px_2px_rgba(30,27,58,.03),0_14px_34px_-24px_rgba(30,27,58,.14)]", className)} {...rest}>
       {children}
     </As>
   );
@@ -71,16 +71,16 @@ const tones: Record<Tone, string> = {
   sage: "bg-bj-sage-soft text-bj-sage",
   amber: "bg-bj-amber-soft text-bj-amber",
   alert: "bg-bj-alert-soft text-bj-alert",
-  gold: "bg-[#f3ead8] text-bj-gold-ink",
+  gold: "bg-[#ddf6f3] text-bj-gold-ink",
   rose: "bg-bj-blush text-bj-rose",
-  ink: "bg-bj-ink text-bj-ivory",
+  ink: "bg-bj-gold-ink text-white",
 };
 export function Badge({ tone = "neutral", children, className }: { tone?: Tone; children: ReactNode; className?: string }) {
   return <span className={cx("inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-[3px] text-[11.5px] font-medium", tones[tone], className)}>{children}</span>;
 }
 
 /** Animated circular progress. */
-export function ProgressRing({ value, size = 120, stroke = 7, children, color = "#b8955a" }: { value: number; size?: number; stroke?: number; children?: ReactNode; color?: string }) {
+export function ProgressRing({ value, size = 120, stroke = 7, children, color = "#12B5A6" }: { value: number; size?: number; stroke?: number; children?: ReactNode; color?: string }) {
   const reduce = useReducedMotion();
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
@@ -88,7 +88,7 @@ export function ProgressRing({ value, size = 120, stroke = 7, children, color = 
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90" aria-hidden="true">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#efe6da" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#eee8f4" strokeWidth={stroke} />
         <motion.circle
           cx={size / 2}
           cy={size / 2}
@@ -112,7 +112,7 @@ export function Bar({ value, tone = "gold", className }: { value: number; tone?:
   const reduce = useReducedMotion();
   const color = { gold: "bg-bj-gold", sage: "bg-bj-sage", alert: "bg-bj-alert", rose: "bg-bj-rose" }[tone];
   return (
-    <div className={cx("h-1.5 overflow-hidden rounded-full bg-[#efe6da]", className)}>
+    <div className={cx("h-1.5 overflow-hidden rounded-full bg-[#eee8f4]", className)}>
       <motion.div className={cx("h-full rounded-full", color)} initial={{ width: reduce ? `${value * 100}%` : 0 }} animate={{ width: `${Math.min(1, Math.max(0, value)) * 100}%` }} transition={{ duration: reduce ? 0 : 1, ease: [0.16, 1, 0.3, 1] }} />
     </div>
   );
@@ -161,14 +161,14 @@ export function Sheet({ open, onClose, title, children, footer }: { open: boolea
       aria-labelledby={titleId}
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
-      className="bj m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 bg-bj-paper p-0 text-bj-ink shadow-[0_-20px_60px_-20px_rgba(46,39,36,.35)] open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:w-[440px] sm:rounded-none sm:rounded-s-[26px]"
+      className="bj m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 bg-bj-paper p-0 text-bj-ink shadow-[0_-20px_60px_-20px_rgba(30,27,58,.3)] open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:w-[440px] sm:rounded-none sm:rounded-s-[26px]"
     >
       <div className="flex items-center justify-between gap-3 border-b border-bj-line px-5 py-4">
         <h2 id={titleId} className="bj-serif text-[1.35rem] text-bj-ink">
           {title}
         </h2>
         <IconButton label="✕" onClick={onClose}>
-          <XIcon size={18} weight="light" />
+          <XIcon size={18} weight="regular" />
         </IconButton>
       </div>
       <div className="flex-1 overflow-y-auto px-5 py-5">{children}</div>
@@ -234,7 +234,7 @@ export function Segmented<T extends string>({ value, onChange, options, label }:
           role="radio"
           aria-checked={value === o.value}
           onClick={() => onChange(o.value)}
-          className={cx("h-8 shrink-0 whitespace-nowrap rounded-full px-3.5 text-[13px] transition-colors", value === o.value ? "bg-bj-ink text-bj-ivory" : "text-bj-ink-soft hover:bg-bj-cream")}
+          className={cx("h-8 shrink-0 whitespace-nowrap rounded-full px-3.5 text-[13px] transition-colors", value === o.value ? "bg-bj-gold-ink text-white" : "text-bj-ink-soft hover:bg-bj-cream")}
         >
           {o.label}
         </button>
@@ -255,7 +255,7 @@ export function Chips<T extends string>({ value, onChange, options, label }: { v
           onClick={() => onChange(o.value)}
           className={cx(
             "h-9 shrink-0 whitespace-nowrap rounded-full border px-3.5 text-[13px] transition-colors",
-            value === o.value ? "border-bj-ink bg-bj-ink text-bj-ivory" : "border-bj-line bg-bj-paper text-bj-ink-soft hover:border-bj-taupe/50"
+            value === o.value ? "border-bj-gold-ink bg-bj-gold-ink text-white" : "border-bj-line bg-bj-paper text-bj-ink-soft hover:border-bj-taupe/50"
           )}
         >
           {o.label}
@@ -287,7 +287,7 @@ export function ChoiceCard({ selected, onClick, children, icon, multi }: { selec
       onClick={onClick}
       className={cx(
         "flex min-h-14 w-full items-center gap-3 rounded-[16px] border px-4 py-3 text-start text-[15px] transition-[border-color,background-color,box-shadow] duration-200",
-        selected ? "border-bj-gold bg-[#fbf5ea] shadow-[0_0_0_3px_rgba(184,149,90,.14)]" : "border-bj-line bg-bj-paper hover:border-bj-taupe/40"
+        selected ? "border-bj-gold bg-[#e8faf7] shadow-[0_0_0_3px_rgba(18,181,166,.18)]" : "border-bj-line bg-bj-paper hover:border-bj-taupe/40"
       )}
     >
       {icon && <span className={cx("grid size-9 shrink-0 place-items-center rounded-full", selected ? "bg-bj-gold text-white" : "bg-bj-cream text-bj-gold-ink")}>{icon}</span>}

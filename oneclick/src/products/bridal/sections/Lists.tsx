@@ -76,7 +76,7 @@ export function ItemList({ list, title, sub, header = true, compact = false }: {
       </div>
       {cats.length > 1 && <Chips label={t.common.category} value={cat} onChange={setCat} options={[{ value: "all", label: I.filterAll }, ...cats.map((c) => ({ value: c, label: catLabel(c), count: items.filter((i) => i.cat === c && i.status === "need").length }))]} />}
       {items.length === 0 ? (
-        <EmptyState icon={<ShoppingBagIcon size={24} weight="light" />} title={I.empty} action={<Button onClick={() => setEdit({ status: "need", cat: listCats[list][0] })}>{I.add}</Button>} />
+        <EmptyState icon={<ShoppingBagIcon size={24} weight="regular" />} title={I.empty} action={<Button onClick={() => setEdit({ status: "need", cat: listCats[list][0] })}>{I.add}</Button>} />
       ) : (
         <ul className={cx("grid gap-2", !compact && "md:grid-cols-2")}>
           {shown.map((it) => {
@@ -127,7 +127,7 @@ export function Shopping() {
 
 export function NewHome() {
   const { t, ws } = useBridal();
-  if (ws.profile?.home === "no") return <EmptyState icon={<ShoppingBagIcon size={24} weight="light" />} title={t.homeMod.off} />;
+  if (ws.profile?.home === "no") return <EmptyState icon={<ShoppingBagIcon size={24} weight="regular" />} title={t.homeMod.off} />;
   return <ItemList list="home" title={t.homeMod.title} sub={t.homeMod.sub} />;
 }
 
@@ -165,7 +165,7 @@ export function Closet() {
       />
       {cats.length > 1 && <Chips label={t.common.category} value={cat} onChange={setCat} options={[{ value: "all", label: t.common.all }, ...cats.map((c) => ({ value: c, label: t.itemCats[c] }))]} />}
       {items.length === 0 ? (
-        <EmptyState icon={<CoatHangerIcon size={24} weight="light" />} title={C.empty} action={<Button onClick={() => setEdit({ status: "need", cat: "wedding" })}>{C.emptyCta}</Button>} />
+        <EmptyState icon={<CoatHangerIcon size={24} weight="regular" />} title={C.empty} action={<Button onClick={() => setEdit({ status: "need", cat: "wedding" })}>{C.emptyCta}</Button>} />
       ) : (
         <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
           {shown.map((it, i) => (

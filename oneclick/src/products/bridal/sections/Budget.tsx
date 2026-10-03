@@ -77,22 +77,22 @@ export function Budget() {
             </div>
           ))}
         </dl>
-        <div className="mt-6 flex h-2.5 overflow-hidden rounded-full bg-[#efe6da]" aria-hidden="true">
+        <div className="mt-6 flex h-2.5 overflow-hidden rounded-full bg-[#eee8f4]" aria-hidden="true">
           <span className="h-full bg-bj-sage transition-[width] duration-700" style={{ width: pct(b.paid) }} />
           <span className="h-full bg-bj-gold transition-[width] duration-700" style={{ width: pct(b.committed) }} />
-          <span className="h-full bg-[#e2d2b4] transition-[width] duration-700" style={{ width: pct(b.planned) }} />
+          <span className="h-full bg-[#c9c0f2] transition-[width] duration-700" style={{ width: pct(b.planned) }} />
         </div>
         <p className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-bj-muted">
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-bj-sage" />{B.paid}</span>
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-bj-gold" />{B.committed}</span>
-          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#e2d2b4]" />{B.planned} · {money(b.planned)}</span>
+          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#c9c0f2]" />{B.planned} · {money(b.planned)}</span>
         </p>
       </Card>
 
       <Segmented label={B.title} value={tab} onChange={setTab} options={[{ value: "overview", label: B.byCategory }, { value: "expenses", label: B.expenses }, { value: "payments", label: B.payments }]} />
 
       {tab === "overview" && (
-        <div className="grid gap-7 xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+        <div className="grid grid-cols-1 gap-7 xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
           <Card as="section" className="p-5">
             <h2 className="bj-serif mb-4 text-[1.4rem]">{B.byCategory}</h2>
             <ul className="divide-y divide-bj-line">
@@ -106,7 +106,7 @@ export function Budget() {
                       <span className="flex items-center gap-1 tabular-nums text-bj-muted">
                         <span className={over ? "text-bj-alert" : "text-bj-ink"}>{money(used)}</span> / {money(c.allocated)}
                         <IconButton label={`${B.allocated}: ${t.budgetCats[c.cat]}`} onClick={() => setAlloc(c.cat)} className="size-8">
-                          <PencilSimpleIcon size={14} weight="light" />
+                          <PencilSimpleIcon size={14} weight="regular" />
                         </IconButton>
                       </span>
                     </div>
@@ -133,7 +133,7 @@ export function Budget() {
                 ))}
               </ul>
             ) : (
-              <EmptyState icon={<WalletIcon size={24} weight="light" />} title={B.emptyPayments} />
+              <EmptyState icon={<WalletIcon size={24} weight="regular" />} title={B.emptyPayments} />
             )}
           </section>
         </div>
@@ -179,7 +179,7 @@ export function Budget() {
             })}
           </ul>
         ) : (
-          <EmptyState icon={<ReceiptIcon size={24} weight="light" />} title={B.emptyExpenses} action={<Button onClick={() => setExp({ status: "planned", cat: "misc" })}>{B.addExpense}</Button>} />
+          <EmptyState icon={<ReceiptIcon size={24} weight="regular" />} title={B.emptyExpenses} action={<Button onClick={() => setExp({ status: "planned", cat: "misc" })}>{B.addExpense}</Button>} />
         ))}
 
       {tab === "payments" &&
@@ -192,7 +192,7 @@ export function Budget() {
             ))}
           </ul>
         ) : (
-          <EmptyState icon={<WalletIcon size={24} weight="light" />} title={B.emptyPayments} action={<Button onClick={() => setPay({ due: today })}>{B.addPayment}</Button>} />
+          <EmptyState icon={<WalletIcon size={24} weight="regular" />} title={B.emptyPayments} action={<Button onClick={() => setPay({ due: today })}>{B.addPayment}</Button>} />
         ))}
 
       <EntitySheet

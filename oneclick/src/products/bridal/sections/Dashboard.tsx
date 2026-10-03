@@ -9,7 +9,10 @@ import { NoticeList } from "../app/Shell";
 import { alerts, budgetSummary, diffDays, focusTasks, groupTasks, paymentStatus, progress, progressMessage, type AreaKey } from "../model/engine";
 import { AppointmentCard, PaymentCard } from "../ui/cards";
 import { Bar, Button, Card, CountUp, ProgressRing } from "../ui/kit";
+import { Clicky } from "@/components/brand/Clicky";
 import { NewTaskSheet, TaskList } from "../ui/tasks";
+
+const statColors = [["#ddf6f2", "#0b7d73"], ["#fff1cc", "#a86b00"], ["#ffe4e6", "#d6455d"], ["#ece8ff", "#6a59e6"], ["#e0eeff", "#2f66d9"], ["#ffe3ee", "#c93b70"]];
 
 export function Dashboard() {
   const { t, ws, tasks, today, num, pct, money, date, href, lang } = useBridal();
@@ -53,9 +56,10 @@ export function Dashboard() {
   return (
     <div className="space-y-8">
       {/* Hero */}
-      <motion.section {...rise(0)} className="relative overflow-hidden rounded-[28px] border border-bj-line bg-[linear-gradient(150deg,#fffdf9_0%,#f6efe4_55%,#f3e4e0_100%)] px-6 py-7 sm:px-9 sm:py-9">
-        <div className="pointer-events-none absolute -end-16 -top-16 size-64 rounded-full border border-[#e9dcc6]" />
-        <div className="pointer-events-none absolute -end-6 -top-6 size-40 rounded-full border border-[#efe4d3]" />
+      <motion.section {...rise(0)} className="relative overflow-hidden rounded-[28px] border border-bj-line bg-[linear-gradient(135deg,#ddf6f2_0%,#fff3d1_55%,#ffe0e6_100%)] px-6 py-7 sm:px-9 sm:py-9">
+        <div className="pointer-events-none absolute -end-16 -top-16 size-64 rounded-full bg-white/40" />
+        <div className="pointer-events-none absolute -bottom-10 start-1/3 size-32 rounded-full bg-[#d9d1ff]/50" />
+        <Clicky size={86} mood={prog.overall >= 0.5 ? "celebrate" : "love"} body wave animate className="pointer-events-none absolute bottom-2 end-[215px] hidden md:block" />
         <div className="relative flex items-start justify-between gap-4 sm:items-center">
           <div>
             <p className="text-[14px] text-bj-muted" suppressHydrationWarning>
@@ -98,7 +102,7 @@ export function Dashboard() {
         </motion.section>
       )}
 
-      <div className="grid gap-8 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+      <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         {/* Focus */}
         <motion.section {...rise(2)} aria-labelledby="focus-h">
           <div className="mb-4 flex items-end justify-between gap-3">
@@ -173,11 +177,13 @@ export function Dashboard() {
           {t.dash.overview}
         </h2>
         <ul className="grid grid-cols-2 gap-3 md:grid-cols-3">
-          {stats.map((s) => (
+          {stats.map((s, i) => (
             <li key={s.key}>
-              <Link href={href(s.key)} className="flex h-full flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(46,39,36,.4)]">
+              <Link href={href(s.key)} className="flex h-full flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(30,27,58,.25)]">
                 <span className="flex items-center gap-2 text-[12.5px] text-bj-muted">
-                  <s.icon size={16} weight="light" className="text-bj-gold-ink" />
+                  <span className="grid size-8 place-items-center rounded-full" style={{ background: statColors[i % 6][0], color: statColors[i % 6][1] }}>
+                    <s.icon size={17} weight="bold" />
+                  </span>
                   {s.label}
                 </span>
                 <span className="mt-2 text-[1.3rem] font-medium tabular-nums leading-tight text-bj-ink" dir={lang === "ar" ? "rtl" : "ltr"}>

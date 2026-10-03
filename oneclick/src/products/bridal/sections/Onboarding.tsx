@@ -9,6 +9,8 @@ import { addDays, diffDays, resolveTasks } from "../model/engine";
 import { applyOp } from "../model/reducer";
 import { emptyWorkspace, type Currency, type EventKey, type Profile } from "../model/types";
 import { HeroArt } from "../ui/Art";
+import { Clicky } from "@/components/brand/Clicky";
+import { Confetti } from "@/components/ui/Confetti";
 import { Button, ChoiceCard, Field, ProgressRing, inputCls } from "../ui/kit";
 
 const currencies: Currency[] = ["OMR", "AED", "SAR", "QAR", "KWD", "BHD", "USD"];
@@ -125,9 +127,10 @@ export function Onboarding({ onCancel }: { onCancel: () => void }) {
       <div className="bj grid min-h-dvh place-items-center px-6 text-center" dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
         <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} className="max-w-md">
           <div className="mx-auto w-fit">
-            <ProgressRing value={1} size={132} stroke={4}>
-              <SparkleIcon size={34} weight="light" className="bj-sparkle text-bj-gold" />
-            </ProgressRing>
+            <div className="relative">
+              <Confetti pieces={40} />
+              <Clicky size={150} mood="celebrate" body wave animate />
+            </div>
           </div>
           <h1 className="bj-serif mt-8 text-[2.4rem] leading-tight text-bj-ink">
             {o.ready} <span aria-hidden="true">🤍</span>
@@ -240,7 +243,7 @@ export function Onboarding({ onCancel }: { onCancel: () => void }) {
               <>
                 <Q title={o.q.guests} />
                 <input aria-label={o.q.guests} type="number" inputMode="numeric" min={0} dir="ltr" value={p.guests || ""} onChange={(e) => set("guests", Math.max(0, Math.round(Number(e.target.value))))} className={`${inputCls} h-14 text-start text-lg`} />
-                <input type="range" min={20} max={1000} step={10} value={Math.min(1000, p.guests)} onChange={(e) => set("guests", Number(e.target.value))} aria-label={o.q.guests} className="mt-6 w-full accent-[#b8955a]" />
+                <input type="range" min={20} max={1000} step={10} value={Math.min(1000, p.guests)} onChange={(e) => set("guests", Number(e.target.value))} aria-label={o.q.guests} className="mt-6 w-full accent-[#12B5A6]" />
                 <p className="bj-serif mt-3 text-center text-[1.8rem] text-bj-gold-ink">{num(p.guests)}</p>
               </>
             )}

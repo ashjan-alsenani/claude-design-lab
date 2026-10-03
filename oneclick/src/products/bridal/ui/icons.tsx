@@ -79,5 +79,5 @@ export const vendorIcon: Record<VendorCat, Icon> = {
 
 export function CatIcon({ cat, size = 18 }: { cat: CategoryKey; size?: number }) {
   const I = catIcon[cat];
-  return <I size={size} weight="light" />;
+  return <I size={size} weight="regular" />;
 }

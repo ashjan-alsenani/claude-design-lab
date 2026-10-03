@@ -69,7 +69,7 @@ export function Calendar() {
     }
     if (e.kind === "payment") return <PaymentCard pay={ws.payments.find((x) => x.id === e.id)!} compact />;
     return (
-      <div className={cx("flex items-center gap-3 rounded-[16px] border px-4 py-3 text-[14.5px]", e.kind === "event" ? "border-[#e6d3ae] bg-[#fbf5ea]" : "border-bj-line bg-bj-paper")}>
+      <div className={cx("flex items-center gap-3 rounded-[16px] border px-4 py-3 text-[14.5px]", e.kind === "event" ? "border-[#a8e6de] bg-[#e8faf7]" : "border-bj-line bg-bj-paper")}>
         <span className={cx("size-2 rounded-full", e.kind === "event" ? "bg-bj-gold" : "bg-bj-taupe")} />
         {e.label}
         <Badge className="ms-auto">{C.legend[e.kind]}</Badge>
@@ -97,8 +97,8 @@ export function Calendar() {
       </div>
 
       {view === "month" ? (
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
-          <section className="rounded-[22px] border border-bj-line bg-bj-paper p-4 sm:p-5">
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
+          <section className="min-w-0 rounded-[22px] border border-bj-line bg-bj-paper p-3 sm:p-5">
             <div className="mb-4 flex items-center justify-between">
               <IconButton label={C.prev} onClick={() => shift(-1)}>
                 <CaretLeftIcon size={18} className="rtl:rotate-180" />
@@ -115,7 +115,7 @@ export function Calendar() {
                 </span>
               ))}
             </div>
-            <div className="grid grid-cols-7 gap-1" role="grid" aria-label={date(first, "month")}>
+            <div className="grid grid-cols-7 gap-0.5 sm:gap-1" role="grid" aria-label={date(first, "month")}>
               {cells.map((c, i) => {
                 if (!c) return <span key={i} />;
                 const es = byDate.get(c) ?? [];
@@ -130,13 +130,13 @@ export function Calendar() {
                     aria-label={`${date(c, "weekday")}${es.length ? `, ${num(es.length)}` : ""}`}
                     onClick={() => setDay(c)}
                     className={cx(
-                      "flex aspect-square flex-col items-center justify-center gap-1 rounded-[12px] text-[14px] transition-colors",
-                      selected ? "bg-bj-ink text-bj-ivory" : isWedding ? "bg-[#f6ead2] text-bj-gold-ink" : c === today ? "border border-bj-gold text-bj-ink" : "text-bj-ink hover:bg-bj-cream"
+                      "flex aspect-square min-w-0 flex-col items-center justify-center gap-1 rounded-[12px] text-[14px] transition-colors",
+                      selected ? "bg-bj-gold-ink text-white" : isWedding ? "bg-[#fff1cc] text-bj-gold-ink" : c === today ? "border border-bj-gold text-bj-ink" : "text-bj-ink hover:bg-bj-cream"
                     )}
                   >
                     <span className="tabular-nums">{new Intl.DateTimeFormat(lang === "ar" ? "ar-OM" : "en-GB", { day: "numeric", timeZone: "UTC" }).format(new Date(`${c}T00:00:00Z`))}</span>
                     <span className="flex h-1.5 gap-0.5">
-                      {es.some((e) => e.kind === "appt") && <span className={cx("size-1.5 rounded-full", selected ? "bg-[#f0c9cc]" : "bg-bj-rose")} />}
+                      {es.some((e) => e.kind === "appt") && <span className={cx("size-1.5 rounded-full", selected ? "bg-[#ffd3da]" : "bg-bj-rose")} />}
                       {es.some((e) => e.kind === "payment") && <span className="size-1.5 rounded-full bg-bj-gold" />}
                       {es.some((e) => e.kind === "task") && <span className={cx("size-1.5 rounded-full", selected ? "bg-bj-beige" : "bg-bj-taupe/60")} />}
                     </span>
@@ -150,7 +150,7 @@ export function Calendar() {
               <span className="inline-flex items-center gap-1.5"><span className="size-1.5 rounded-full bg-bj-taupe/60" />{C.legend.task}</span>
             </p>
           </section>
-          <section aria-live="polite">
+          <section aria-live="polite" className="min-w-0">
             <h2 className="bj-serif mb-3 text-[1.4rem]">{date(day, "weekday")}</h2>
             {dayEntries.length ? (
               <ul className="space-y-2">
@@ -202,7 +202,7 @@ export function Calendar() {
           ))}
         </ol>
       ) : (
-        <EmptyState icon={<CalendarBlankIcon size={24} weight="light" />} title={C.emptyUpcoming} />
+        <EmptyState icon={<CalendarBlankIcon size={24} weight="regular" />} title={C.emptyUpcoming} />
       )}
       {ws.payments.some((x) => paymentStatus(x, today) === "overdue") && <span className="sr-only">{t.budget.payStatus.overdue}</span>}
 

@@ -80,7 +80,7 @@ export function EntitySheet({
           <>
             {onDelete && (
               <Button variant="danger" size="md" onClick={() => confirm.ask(t.common.confirmDelete, () => (onDelete(), onClose()))}>
-                <TrashIcon size={17} weight="light" />
+                <TrashIcon size={17} weight="regular" />
                 {t.common.delete}
               </Button>
             )}
@@ -106,7 +106,7 @@ export function EntitySheet({
             if (f.kind === "check")
               return (
                 <label key={f.key} className={`${span} flex items-center gap-3 rounded-[14px] border border-bj-line px-3.5 py-3 text-[15px]`}>
-                  <input type="checkbox" checked={!!v} onChange={(e) => set(f.key, e.target.checked)} className="size-5 accent-[#5f7f63]" />
+                  <input type="checkbox" checked={!!v} onChange={(e) => set(f.key, e.target.checked)} className="size-5 accent-[#1f9e57]" />
                   {f.label}
                 </label>
               );
@@ -186,7 +186,7 @@ export function ImageInput({ label, value, onChange }: { label: string; value?: 
           // eslint-disable-next-line @next/next/no-img-element
           <img src={value} alt="" className="size-full object-cover" />
         ) : (
-          <ImageSquareIcon size={26} weight="light" className="text-bj-taupe" />
+          <ImageSquareIcon size={26} weight="regular" className="text-bj-taupe" />
         )}
       </div>
       <div className="flex flex-wrap gap-2">

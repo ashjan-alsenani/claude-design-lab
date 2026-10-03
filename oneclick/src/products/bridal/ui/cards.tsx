@@ -34,10 +34,10 @@ export function VendorCard({ v, onClick }: { v: Vendor; onClick: () => void }) {
   const I = vendorIcon[v.cat];
   const price = v.final ?? v.quoted;
   return (
-    <div className="flex min-w-0 flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(46,39,36,.4)]">
+    <div className="flex min-w-0 flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(30,27,58,.25)]">
       <button type="button" onClick={onClick} className="flex items-start gap-3 text-start">
         <span className="grid size-11 shrink-0 place-items-center rounded-full bg-bj-cream text-bj-gold-ink">
-          <I size={20} weight="light" />
+          <I size={20} weight="regular" />
         </span>
         <span className="min-w-0 flex-1">
           <span className="block truncate text-[15.5px] font-medium text-bj-ink">{v.name}</span>
@@ -54,7 +54,7 @@ export function VendorCard({ v, onClick }: { v: Vendor; onClick: () => void }) {
         )}
         {v.status === "booked" && !v.contractSigned && (
           <span className="inline-flex items-center gap-1 text-bj-amber">
-            <WarningCircleIcon size={14} weight="light" />
+            <WarningCircleIcon size={14} weight="regular" />
             {t.vendors.noContract}
           </span>
         )}
@@ -63,13 +63,13 @@ export function VendorCard({ v, onClick }: { v: Vendor; onClick: () => void }) {
         <div className="mt-3 flex gap-2 border-t border-bj-line pt-3">
           {v.phone && (
             <a href={`tel:${v.phone.replace(/\s/g, "")}`} className="inline-flex h-8 items-center gap-1.5 rounded-full bg-bj-cream px-3 text-[12.5px] text-bj-ink" dir="ltr">
-              <PhoneIcon size={14} weight="light" />
+              <PhoneIcon size={14} weight="regular" />
               {t.vendors.call}
             </a>
           )}
           {v.instagram && (
             <a href={`https://instagram.com/${v.instagram.replace(/^@/, "")}`} target="_blank" rel="noopener noreferrer" className="inline-flex h-8 items-center gap-1.5 rounded-full bg-bj-cream px-3 text-[12.5px] text-bj-ink" dir="ltr">
-              <InstagramLogoIcon size={14} weight="light" />
+              <InstagramLogoIcon size={14} weight="regular" />
               {v.instagram}
             </a>
           )}
@@ -92,13 +92,13 @@ export function AppointmentCard({ a, onClick }: { a: Appointment; onClick?: () =
         <span className="block truncate text-[15px] text-bj-ink">{a.title}</span>
         <span className="mt-0.5 flex flex-wrap items-center gap-x-2.5 text-[12.5px] text-bj-muted">
           <span className="inline-flex items-center gap-1">
-            <CalendarBlankIcon size={13} weight="light" />
+            <CalendarBlankIcon size={13} weight="regular" />
             {rel(a.date) === date(a.date) ? date(a.date, "weekday") : rel(a.date)}
             {a.time && <span dir="ltr">· {fmtTime(a.time, lang)}</span>}
           </span>
           {a.place && (
             <span className="inline-flex min-w-0 items-center gap-1 truncate">
-              <MapPinIcon size={13} weight="light" />
+              <MapPinIcon size={13} weight="regular" />
               {a.place}
             </span>
           )}

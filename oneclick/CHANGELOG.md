@@ -8,8 +8,8 @@
 - Runs as a licensed product (`/app/bride-planner`): server-authorized, saved per account.
 - Public demo with a fictional sample wedding (`/demo/bride-planner`), nothing saved.
 - New editorial landing page; product renamed "Bridal Journey / رحلة العروس".
-- Luxury bridal design system (ivory/champagne/blush, Cormorant Garamond, Amiri, IBM Plex
-  Sans Arabic). Tests: 72 unit, 42 browser.
+- Colorful, joyful One Click design (teal, sunshine, coral, lilac, Rubik, Clicky mascot,
+  confetti celebrations). Tests: 72 unit, 42 browser.
 
 ## 0.4.0 — 2026-10-03 — Licensing, delivery & access engine
 - Reusable licensing engine: licenses bound to verified accounts, central

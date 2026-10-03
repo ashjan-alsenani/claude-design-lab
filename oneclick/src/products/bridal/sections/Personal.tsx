@@ -93,7 +93,7 @@ export function Honeymoon() {
   const [draft, setDraft] = useState<HoneymoonT>(h);
   const [saved, setSaved] = useState(false);
   const [bk, setBk] = useState<Partial<TravelBooking> | null>(null);
-  if (ws.profile?.honeymoon === "no") return <EmptyState icon={<AirplaneTiltIcon size={24} weight="light" />} title={H.off} />;
+  if (ws.profile?.honeymoon === "no") return <EmptyState icon={<AirplaneTiltIcon size={24} weight="regular" />} title={H.off} />;
   const set = <K extends keyof HoneymoonT>(k: K, v: HoneymoonT[K]) => (setDraft((d) => ({ ...d, [k]: v })), setSaved(false));
   const passportRisk = draft.passportExpiry && diffDays(draft.to ?? draft.from ?? ws.profile!.weddingDate, draft.passportExpiry) < 183;
   const open = tasks.filter((x) => x.cat === "honeymoon" && x.status !== "done" && x.status !== "skip");
@@ -103,7 +103,7 @@ export function Honeymoon() {
   return (
     <div className="space-y-7">
       <SectionHeader title={H.title} sub={H.sub} />
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <Card as="section" className="p-5 sm:p-6">
           <h2 className="bj-serif mb-5 text-[1.45rem]">{H.trip}</h2>
           <form
@@ -229,12 +229,12 @@ export function WeddingDay() {
           </Button>
         }
       />
-      <div className="grid gap-8 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <section aria-labelledby="tl-h">
           <h2 id="tl-h" className="bj-serif mb-4 text-[1.45rem]">
             {D.timeline}
           </h2>
-          <ol className="relative space-y-1 border-s border-[#e6d3ae] ps-6">
+          <ol className="relative space-y-1 border-s border-[#a8e6de] ps-6">
             {items.map((it) => (
               <li key={it.id} className="relative">
                 <span className={cx("absolute -start-[31px] top-4 size-3 rounded-full border-2 border-bj-ivory", it.done ? "bg-bj-sage" : "bg-bj-gold")} />

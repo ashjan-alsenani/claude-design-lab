@@ -34,13 +34,13 @@ export function TaskCard({ task, compact = false }: { task: Task; compact?: bool
             </span>
           )}
           <span className={cx("inline-flex items-center gap-1", overdue && "font-medium text-bj-alert")}>
-            <CalendarBlankIcon size={13} weight="light" />
+            <CalendarBlankIcon size={13} weight="regular" />
             {rel(task.due)}
           </span>
           {!done && (task.priority === "urgent" || task.priority === "high") && <Badge tone={priorityTone[task.priority]}>{t.priority[task.priority]}</Badge>}
           {!done && !compact && (
             <span className="inline-flex items-center gap-1">
-              <ClockIcon size={13} weight="light" />
+              <ClockIcon size={13} weight="regular" />
               {t.effort[task.effort]}
             </span>
           )}
@@ -51,7 +51,7 @@ export function TaskCard({ task, compact = false }: { task: Task; compact?: bool
         </span>
         {!done && blockers.length > 0 && (
           <span className="mt-1 flex items-center gap-1 text-[12px] text-bj-amber">
-            <HourglassIcon size={13} weight="light" />
+            <HourglassIcon size={13} weight="regular" />
             {t.task.waitingOn} {blockers.join("، ")}
           </span>
         )}
