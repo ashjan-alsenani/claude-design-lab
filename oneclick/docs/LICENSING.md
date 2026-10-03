@@ -193,7 +193,11 @@ licensing code is written per product.
 
 ## To go live (needs owner approval)
 1. Create the Supabase project, apply both migrations, and implement `SupabaseLicensingStore` (same engine, SQL storage).
-2. Set `LICENSING_SECRET` (32+ random characters) and `ONECLICK_ADMIN_EMAILS` in the hosting secrets.
+2. Set `LICENSING_SECRET` (32+ random characters) and `ONECLICK_OWNER_EMAILS` (the owner's
+   sign-in email) in the hosting secrets. Optional: `ONECLICK_ADMIN_EMAILS` for staff.
+   - Owner: admin panel, plus every product opens without a purchase (role `owner`). Sign-in,
+     email verification and trusted devices still apply; downloads still need a license.
+   - Admin: admin panel only. Neither address is ever written in the code.
 3. Connect the email provider. Codes and claim emails are already written in Arabic and English.
 4. Connect the payment provider through `PaymentProvider`. Its webhook calls `handlePaymentEvent`.
 5. Move rate limits to a shared store, and put download files in a private storage bucket.

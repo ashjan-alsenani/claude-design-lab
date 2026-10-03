@@ -52,7 +52,9 @@ function build() {
     mail: async (to, content, meta) => {
       await sendEmail(to, content, { kind: meta.kind });
     },
-    adminEmails: (process.env.ONECLICK_ADMIN_EMAILS ?? (mode === "sandbox" ? "owner@example.com" : "")).split(",").filter(Boolean),
+    adminEmails: (process.env.ONECLICK_ADMIN_EMAILS ?? "").split(",").map((x) => x.trim()).filter(Boolean),
+    // The owner's real address lives only in the environment (Vercel settings), never in the code.
+    ownerEmails: (process.env.ONECLICK_OWNER_EMAILS ?? (mode === "sandbox" ? "owner@example.com" : "")).split(",").map((x) => x.trim()).filter(Boolean),
   });
   return { engine, store, sandboxProvider: mode === "sandbox" ? new SandboxProvider(s) : null };
 }

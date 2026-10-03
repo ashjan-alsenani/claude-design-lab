@@ -6,7 +6,8 @@ import { isLocale, tr } from "@/i18n/config";
 import { fill, licensingCopy } from "@/i18n/licensing";
 import { licensing } from "@/lib/licensing/server";
 import { formatDate, requireAccount } from "@/lib/licensing/page";
-import { opensInteractive } from "@/lib/licensing/policy";
+import { defaultSecurity, opensInteractive } from "@/lib/licensing/policy";
+import { products } from "@/content/products";
 import { productFiles } from "@/lib/licensing/files";
 import { pageMetadata } from "@/lib/seo";
 import { ProductArt } from "@/components/art/ProductArt";
@@ -33,6 +34,8 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
   const t = licensingCopy[locale];
   const items = await licensing().engine.myProducts(ctx.user.id);
   const name = ctx.user.name ?? ctx.user.email.split("@")[0];
+  const isOwner = ctx.roles.includes("owner");
+  const ownerApps = isOwner ? products.filter((p) => !p.includes?.length && opensInteractive(defaultSecurity(p).accessType)) : [];
 
   return (
     <AccountShell locale={locale} current="products" sandbox={sandbox} email={ctx.user.email}>
@@ -42,6 +45,32 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
           {fill(t.products.hello, { name })} · {t.products.sub}
         </p>
       </header>
+
+      {isOwner && (
+        <section aria-labelledby="owner-h" className="mt-6 rounded-[var(--radius-xl)] border border-line bg-surface p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 id="owner-h" className="text-lg font-semibold text-ink">
+                {t.products.ownerTitle}
+              </h2>
+              <p className="mt-1 text-sm text-ink-soft">{t.products.ownerBody}</p>
+            </div>
+            <ButtonLink href={`/${locale}/admin`} variant="secondary">
+              {t.products.ownerAdmin}
+            </ButtonLink>
+          </div>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {ownerApps.map((p) => (
+              <li key={p.id}>
+                <Link href={`/${locale}/app/${p.slug}`} className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-medium text-ink hover:border-primary">
+                  {p.name[locale]}
+                  <ArrowRightIcon size={14} className="rtl:rotate-180" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {ctx.session.deviceState === "pending" && (
         <p role="alert" className="mt-6 flex flex-wrap items-center gap-3 rounded-[var(--radius-md)] bg-accent-soft px-4 py-3 text-sm text-ink">
@@ -58,7 +87,7 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
         </p>
       )}
 
-      {items.length === 0 ? (
+      {items.length === 0 && isOwner ? null : items.length === 0 ? (
         <div className="mt-10 flex flex-col items-center rounded-[var(--radius-xl)] border-2 border-dashed border-line-strong px-6 py-14 text-center">
           <Clicky size={96} mood="think" />
           <h2 className="mt-4 text-xl font-semibold text-ink">{t.products.empty}</h2>

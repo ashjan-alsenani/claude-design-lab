@@ -54,6 +54,10 @@ const en = {
     },
   },
   products: {
+    ownerTitle: "Owner account",
+    ownerBody: "Every product opens for you without buying it, and the admin panel is yours.",
+    ownerAdmin: "Admin panel",
+    ownerOpen: "Open",
     title: "My Products",
     hello: "Hello, {name}",
     sub: "Everything you own is here, on any trusted device. Just sign in and open.",
@@ -267,6 +271,10 @@ const ar: LicensingCopy = {
     },
   },
   products: {
+    ownerTitle: "حساب المالك",
+    ownerBody: "كل المنتجات تنفتح لك بدون شراء، ولوحة الإدارة لك.",
+    ownerAdmin: "لوحة الإدارة",
+    ownerOpen: "افتح",
     title: "منتجاتي",
     hello: "أهلًا {name}",
     sub: "كل اللي تملكه هنا، على أي جهاز موثوق. سجّل دخولك وافتح.",

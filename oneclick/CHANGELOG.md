@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.3 — 2026-10-03 — Owner account
+- `ONECLICK_OWNER_EMAILS`: signing in with the owner's email gives the admin panel and opens
+  every product without buying it; an "Owner account" panel lists them in My Products.
+
 ## 0.5.2 — 2026-10-03 — Bridal Journey "Soft Modern"
 - Redesign from the owner's reference: top menu bar, terrace hero with the bride seen from
   behind, glass countdown and readiness cards, quick cards, focus / appointments / budget cards.

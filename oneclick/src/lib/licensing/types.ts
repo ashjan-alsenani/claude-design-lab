@@ -272,5 +272,5 @@ export type DenyReason =
   | "download_limit";
 
 export type AccessDecision =
-  | { allowed: true; reason: "licensed" | "public_free"; license?: License; settings: ProductSecuritySettings }
+  | { allowed: true; reason: "licensed" | "public_free" | "owner"; license?: License; settings: ProductSecuritySettings }
   | { allowed: false; reason: DenyReason; settings?: ProductSecuritySettings };

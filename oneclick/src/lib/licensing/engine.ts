@@ -65,6 +65,8 @@ export type EngineDeps = {
   baseUrl: string;
   mail: Mailer;
   adminEmails?: string[];
+  /** Owner emails: admin rights plus opening every product without buying it. */
+  ownerEmails?: string[];
   now?: () => Date;
 };
 
@@ -103,7 +105,15 @@ const DAY = 24 * 3600 * 1000;
 export function canUserAccessProduct(
   db: Readonly<LicensingDb>,
   products: Product[],
-  input: { userId: string | null | undefined; productId: string; sessionId?: string; deviceId?: string | null; purpose?: "open" | "download" },
+  input: {
+    userId: string | null | undefined;
+    productId: string;
+    sessionId?: string;
+    deviceId?: string | null;
+    purpose?: "open" | "download";
+    /** Normalized owner emails: the site owner opens every product without a license. */
+    owners?: ReadonlySet<string>;
+  },
   now = new Date()
 ): AccessDecision {
   const purpose = input.purpose ?? "open";
@@ -130,6 +140,9 @@ export function canUserAccessProduct(
   }
 
   const mine = db.licenses.filter((l) => l.userId === user.id && l.productId === product.id);
+  // The owner still needs a verified account, a live session and a trusted device (above);
+  // only the purchase requirement is waived. Downloads keep their per-license accounting.
+  if (purpose === "open" && input.owners?.has(normalizeEmail(user.email))) return { allowed: true, reason: "owner", settings };
   if (mine.length === 0) return { allowed: false, reason: "no_license", settings };
   const rank: Record<LicenseStatus, number> = { active: 0, suspended: 1, pending: 2, expired: 3, revoked: 4 };
   const license = [...mine].sort((a, b) => rank[effectiveStatus(a, now)] - rank[effectiveStatus(b, now)])[0];
@@ -162,7 +175,11 @@ export function createLicensingEngine(deps: EngineDeps) {
   const h = (v: string) => hmac(deps.secret, v);
   const admins = new Set((deps.adminEmails ?? []).map(normalizeEmail));
   const productById = (id: string) => deps.products.find((p) => p.id === id);
-  const rolesFor = (u: User): Role[] => (admins.has(u.email) ? ["customer", "admin"] : ["customer"]);
+  const owners: ReadonlySet<string> = new Set((deps.ownerEmails ?? []).map(normalizeEmail));
+  const rolesFor = (u: User): Role[] => {
+    const email = normalizeEmail(u.email);
+    return owners.has(email) ? ["customer", "admin", "owner"] : admins.has(email) ? ["customer", "admin"] : ["customer"];
+  };
   const url = (path: string) => `${deps.baseUrl.replace(/\/$/, "")}${path}`;
 
   function log(db: LicensingDb, e: Omit<AccessLog, "id" | "at">) {
@@ -745,10 +762,10 @@ export function createLicensingEngine(deps: EngineDeps) {
   async function checkAccess(ctx: SessionContext | null, productId: string, purpose: "open" | "download" = "open"): Promise<AccessDecision> {
     if (deps.store.mode === "unavailable") {
       // No database: decide read-only (fails closed for everything except free products).
-      return deps.store.read((db) => canUserAccessProduct(db, deps.products, { userId: ctx?.user.id, productId, purpose }, now()));
+      return deps.store.read((db) => canUserAccessProduct(db, deps.products, { userId: ctx?.user.id, productId, purpose, owners }, now()));
     }
     return deps.store.write((db) => {
-      const decision = canUserAccessProduct(db, deps.products, { userId: ctx?.user.id, productId, sessionId: ctx?.session.id, deviceId: ctx?.session.deviceId, purpose }, now());
+      const decision = canUserAccessProduct(db, deps.products, { userId: ctx?.user.id, productId, sessionId: ctx?.session.id, deviceId: ctx?.session.deviceId, purpose, owners }, now());
       const base = { userId: ctx?.user.id ?? null, productId, deviceId: ctx?.session.deviceId ?? null };
       if (decision.allowed) {
         const l = decision.license && db.licenses.find((x) => x.id === decision.license!.id);
@@ -1061,7 +1078,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     handlePaymentEvent,
     checkAccess,
     canUserAccessProduct: (userId: string | null, productId: string, opts: { sessionId?: string; deviceId?: string | null; purpose?: "open" | "download" } = {}) =>
-      deps.store.read((db) => canUserAccessProduct(db, deps.products, { userId, productId, ...opts }, now())),
+      deps.store.read((db) => canUserAccessProduct(db, deps.products, { userId, productId, ...opts, owners }, now())),
     myProducts,
     myPurchases,
     myDevices,

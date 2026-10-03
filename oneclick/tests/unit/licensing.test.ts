@@ -30,6 +30,7 @@ beforeEach(() => {
     baseUrl: "https://oneclick.test",
     mail: async (to, content, meta) => void mails.push({ to, content, kind: meta.kind }),
     adminEmails: ["owner@example.com"],
+    ownerEmails: ["Boss@Example.com"],
     now: () => clock,
   });
 });
@@ -166,6 +167,25 @@ describe("purchase -> license -> access", () => {
     expect((await engine.checkAccess(a.ctx, GROCERY)).allowed).toBe(true);
     clock = new Date(clock.getTime() + 8 * 24 * 3600 * 1000);
     expect((await engine.checkAccess(a.ctx, GROCERY)).reason).toBe("license_expired");
+  });
+});
+
+describe("site owner", () => {
+  it("the owner email opens every product without buying, and gets the admin role", async () => {
+    const o = await signIn("boss@example.com");
+    expect(o.ctx.roles).toEqual(expect.arrayContaining(["owner", "admin"]));
+    expect(await engine.checkAccess(o.ctx, BRIDE)).toMatchObject({ allowed: true, reason: "owner" });
+    expect(await engine.checkAccess(o.ctx, GROCERY)).toMatchObject({ allowed: true, reason: "owner" });
+    // Owner rights cover opening, not unlicensed downloads.
+    expect((await engine.checkAccess(o.ctx, BRIDE, "download")).allowed).toBe(false);
+  });
+
+  it("nobody else becomes owner: admins and customers still need a license", async () => {
+    const admin = await signIn("owner@example.com");
+    expect(admin.ctx.roles).not.toContain("owner");
+    expect(await engine.checkAccess(admin.ctx, GROCERY)).toMatchObject({ allowed: false, reason: "no_license" });
+    const c = await signIn("boss.example@example.com", { userAgent: ua.mac });
+    expect(await engine.checkAccess(c.ctx, GROCERY)).toMatchObject({ allowed: false, reason: "no_license" });
   });
 });
 

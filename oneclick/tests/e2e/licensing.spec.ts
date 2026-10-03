@@ -165,7 +165,7 @@ test("trusted device signs in with password, no code needed", async ({ page }) =
   await expect(page.locator('li[data-kind="access_code"]')).toHaveCount(1); // only the first sign-in
 });
 
-test("admin suspends a license and access stops", async ({ page, browser, baseURL, isMobile }) => {
+test("admin suspends a license and access stops; the owner is recognized", async ({ page, browser, baseURL, isMobile }) => {
   const buyer = email("admin-case");
   await signInWithCode(page, buyer);
   await buy(page, "budget-planner", "Simulate successful payment");
@@ -186,6 +186,13 @@ test("admin suspends a license and access stops", async ({ page, browser, baseUR
   await expect(page.getByRole("heading", { name: "This license is paused" })).toBeVisible();
   await admin.goto("/en/admin/licensing?tab=activity");
   await expect(admin.getByText("license suspend").first()).toBeVisible();
+
+  // The owner email is recognized: an owner panel with every product and the admin link.
+  await admin.goto("/en/account/products");
+  const panel = admin.locator("section", { has: admin.getByRole("heading", { name: "Owner account" }) });
+  await expect(panel).toBeVisible();
+  await expect(panel.getByRole("link", { name: "Admin panel" })).toBeVisible();
+  await expect(panel.getByRole("link", { name: /Bridal Journey/ })).toHaveAttribute("href", "/en/app/bride-planner");
 });
 
 test("customers cannot open admin licensing", async ({ page }) => {
