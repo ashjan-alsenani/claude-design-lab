@@ -413,14 +413,14 @@ const raw: Explainer[] = [
         duration: 12,
         bg: 'board',
         actors: [
-          T('s1', '١ نجزّئ', 78, 30, 4.4, 'sun', 0.4, { box: true }),
-          Q('e1', '١٠٠ + ٦٠ + ٤', 78, 46, 3.8, 'white', 1),
-          { id: 'a1', kind: 'arrow', from: [66, 30], to: [61, 30], color: 'sun', in: 2 },
-          T('s2', '٢ نضرب', 50, 30, 4.4, 'sun', 2.4, { box: true }),
-          Q('e2', '× ٥', 50, 46, 3.8, 'white', 3),
-          { id: 'a2', kind: 'arrow', from: [39, 30], to: [34, 30], color: 'sun', in: 4 },
-          T('s3', '٣ نجمع', 22, 30, 4.4, 'sun', 4.4, { box: true }),
-          Q('e3', '٥٠٠ + ٣٠٠ + ٢٠', 22, 46, 3.8, 'white', 5),
+          T('s1', '١ نجزّئ', 80, 30, 3.8, 'sun', 0.4, { box: true }),
+          Q('e1', '١٠٠ + ٦٠ + ٤', 80, 46, 3.4, 'white', 1),
+          { id: 'a1', kind: 'arrow', from: [69, 30], to: [61, 30], color: 'sun', in: 2 },
+          T('s2', '٢ نضرب', 50, 30, 3.8, 'sun', 2.4, { box: true }),
+          Q('e2', '× ٥', 50, 46, 3.4, 'white', 3),
+          { id: 'a2', kind: 'arrow', from: [39, 30], to: [31, 30], color: 'sun', in: 4 },
+          T('s3', '٣ نجمع', 20, 30, 3.8, 'sun', 4.4, { box: true }),
+          Q('e3', '٥٠٠ + ٣٠٠ + ٢٠', 20, 46, 3.4, 'white', 5),
           Q('fin', '١٦٤ × ٥ = ٨٢٠', 50, 66, 5.4, LG, 6.4, { anim: [{ at: 6.8, effect: 'glow' }] }),
           T('est', '🎯 نقدّر أولًا لنتحقق', 50, 86, 3.8, 'good', 8.4, { box: true }),
         ],
@@ -439,13 +439,14 @@ const raw: Explainer[] = [
         duration: 13,
         bg: 'board',
         actors: [
-          Q('n', '٦٦٦', 50, 22, 8, 'white', 0.3),
-          Q('s', '٦ + ٦ + ٦ = ١٨', 50, 40, 5, 'sun', 2),
-          Q('d', '٦٦٦ ÷ ١٨ = ٣٧', 50, 56, 5.5, 'white', 4, { anim: [{ at: 4.4, effect: 'pulse' }] }),
-          Q('o1', '١١١ ÷ ٣ = ٣٧', 76, 73, 4, 'white', 6.6),
-          Q('o2', '٣٣٣ ÷ ٩ = ٣٧', 50, 73, 4, 'white', 7.2),
-          Q('o3', '٥٥٥ ÷ ١٥ = ٣٧', 24, 73, 4, 'white', 7.8),
-          T('res', 'دائمًا ٣٧! 🎉', 50, 88, 4.4, 'good', 9, { box: true, anim: [{ at: 9.4, effect: 'glow' }] }),
+          Q('n', '٦٦٦', 68, 24, 8, 'white', 0.3),
+          Q('s', '٦ + ٦ + ٦ = ١٨', 68, 42, 4.4, 'sun', 2),
+          Q('d', '٦٦٦ ÷ ١٨ = ٣٧', 68, 58, 4.4, 'white', 4, { anim: [{ at: 4.4, effect: 'pulse' }] }),
+          rect('sep', 44, 44, 0.4, 44, 'rgba(255,255,255,0.3)', 6.2),
+          Q('o1', '١١١ ÷ ٣ = ٣٧', 24, 28, 3.6, 'white', 6.6),
+          Q('o2', '٣٣٣ ÷ ٩ = ٣٧', 24, 44, 3.6, 'white', 7.2),
+          Q('o3', '٥٥٥ ÷ ١٥ = ٣٧', 24, 60, 3.6, 'white', 7.8),
+          T('res', 'دائمًا ٣٧! 🎉', 50, 82, 4.4, 'good', 9, { box: true, anim: [{ at: 9.4, effect: 'glow' }] }),
         ],
       },
       {
@@ -489,7 +490,8 @@ const raw: Explainer[] = [
           }),
           ...[0, 1, 2, 3].map((i): Actor => ({ id: `g${i}`, kind: 'shape', shape: 'pill', x: 68 + i * 6.5, y: 37, w: 5.4, h: 20, color: 'rgba(255,255,255,0.12)', in: 2.8 })),
           T('rl', 'الباقي ٢', 77, 79, 3.4, 'orange', 5.2),
-          Q('note', '١٠ ÷ ٤ = ٢ والباقي ٢', 40, 84, 4.2, 'sun', 5.6),
+          Q('note', '١٠ ÷ ٤ = ٢', 46, 84, 4.4, 'sun', 5.6),
+          T('notr', 'والباقي ٢', 25, 84, 4.4, 'orange', 6),
           T('q2', '٢', DX[1], QY, 8, LG, 7.2, { anim: [{ at: 7.3, effect: 'pulse' }] }),
           T('cy', '٢', DX[2] - 4.2, DY - 3.5, 3.6, 'orange', 9, { anim: [{ at: 9.1, effect: 'bounce' }] }),
           { id: 'ca', kind: 'arrow', from: [70, 74], to: [52, 54], curve: 6, color: 'orange', dashed: true, in: 8.6 },
@@ -506,8 +508,8 @@ const raw: Explainer[] = [
           T('cy', '٢', DX[2] - 4.2, DY - 3.5, 3.6, 'orange'),
           { id: 'rg', kind: 'shape', shape: 'pill', x: DX[2] - 1.6, y: DY + 0.6, w: 11, h: 15, color: 'sun', outline: true, in: 0.8 },
           Q('n24', '٢٤', 78, 22, 5, 'sun', 1.4),
-          ...Array.from({ length: 24 }, (_, i) => dot(`a${i}`, 67 + (i % 6) * 4.4, 36 + Math.floor(i / 6) * 9, 2.2 + Math.floor(i / 6) * 0.5, 'sun', 2.8)),
-          ...[0, 1, 2, 3].map((r): Actor => Q(`rl${r}`, '٦', 93 - 4, 36 + r * 9, 3, 'white', 4.4 + r * 0.2)),
+          ...Array.from({ length: 24 }, (_, i) => dot(`a${i}`, 64 + (i % 6) * 4.2, 36 + Math.floor(i / 6) * 9, 2.2 + Math.floor(i / 6) * 0.5, 'sun', 2.8)),
+          ...[0, 1, 2, 3].map((r): Actor => Q(`rl${r}`, '٦', 90, 36 + r * 9, 3, 'white', 4.4 + r * 0.2)),
           Q('note', '٢٤ ÷ ٤ = ٦', 40, 84, 4.6, 'sun', 5.6),
           T('q6', '٦', DX[2], QY, 8, LG, 7, { anim: [{ at: 7.1, effect: 'pulse' }] }),
         ],
@@ -522,8 +524,8 @@ const raw: Explainer[] = [
           T('q2', '٢', DX[1], QY, 8, LG),
           T('q6', '٦', DX[2], QY, 8, LG),
           T('cy', '٢', DX[2] - 4.2, DY - 3.5, 3.6, 'orange'),
-          Q('eq', '١٠٤ ÷ ٤ = ٢٦', 77, 32, 5, 'white', 0.8, { anim: [{ at: 1.2, effect: 'glow' }] }),
-          T('est', '🎯 قريب من ٢٥', 77, 50, 3.8, 'sun', 2.6),
+          Q('eq', '١٠٤ ÷ ٤ = ٢٦', 76, 32, 4.2, 'white', 0.8, { anim: [{ at: 1.2, effect: 'glow' }] }),
+          T('est', '🎯 قريب من ٢٥', 76, 48, 3.6, 'sun', 2.6),
           Q('chk', '٢٦ × ٤ = ١٠٤', 50, 82, 5, LG, 4.6),
           T('ok', '✓', 70, 82, 6, 'good', 5.4, { anim: [{ at: 5.5, effect: 'bounce' }] }),
         ],
@@ -536,15 +538,17 @@ const raw: Explainer[] = [
         actors: [
           ...busStop('٩', ['٥', '٠', '٩']),
           { id: 'rg1', kind: 'shape', shape: 'pill', x: 40.5, y: DY + 0.6, w: 16, h: 15, color: 'sun', outline: true, in: 1, out: 5.4 },
-          Q('n1', '٥٠ ÷ ٩ = ٥ والباقي ٥', 46, 84, 4.2, 'sun', 1.6, { out: 6.2 }),
+          Q('n1', '٥٠ ÷ ٩ = ٥', 52, 84, 4.4, 'sun', 1.6, { out: 6.2 }),
+          T('n1r', 'والباقي ٥', 30, 84, 4.4, 'orange', 2, { out: 6.2 }),
           T('q5', '٥', DX[1], QY, 8, LG, 3.2, { anim: [{ at: 3.3, effect: 'pulse' }] }),
           T('cy', '٥', DX[2] - 4.2, DY - 3.5, 3.6, 'orange', 4.4, { anim: [{ at: 4.5, effect: 'bounce' }] }),
           { id: 'rg2', kind: 'shape', shape: 'pill', x: DX[2] - 1.6, y: DY + 0.6, w: 11, h: 15, color: 'sun', outline: true, in: 6 },
-          Q('n2', '٥٩ ÷ ٩ = ٦ والباقي ٥', 46, 84, 4.2, 'sun', 6.6),
+          Q('n2', '٥٩ ÷ ٩ = ٦', 52, 84, 4.4, 'sun', 6.6, { out: 11 }),
+          T('n2r', 'والباقي ٥', 30, 84, 4.4, 'orange', 7, { out: 11 }),
           T('q6', '٦', DX[2], QY, 8, LG, 8.4, { anim: [{ at: 8.5, effect: 'pulse' }] }),
           T('rm', 'والباقي ٥', 72, QY, 4.4, 'orange', 9.6, { box: true, anim: [{ at: 10, effect: 'glow' }] }),
-          Q('chk', '٥٦ × ٩ + ٥ = ٥٠٩', 78, 62, 3.6, 'white', 11.4),
-          T('ok', 'نتحقّق ✓', 78, 72, 3.4, 'good', 12),
+          Q('chk', '٥٦ × ٩ + ٥ = ٥٠٩', 46, 84, 4.4, 'white', 11.4),
+          T('ok', 'نتحقّق ✓', 80, 84, 3.6, LG, 12),
         ],
       },
       {
@@ -553,14 +557,16 @@ const raw: Explainer[] = [
         duration: 15,
         bg: 'board',
         actors: [
-          Q('w', '٢٥٤ ÷ ٩ = ٢٧ والباقي ١١', 50, 20, 4.6, 'white', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
-          T('x', '✗', 82, 20, 6, 'red', 2.2),
+          Q('w', '٢٥٤ ÷ ٩ = ٢٧', 62, 20, 4.6, 'white', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
+          T('wr', 'والباقي ١١', 36, 20, 4.6, 'orange', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
+          T('x', '✗', 18, 20, 6, 'red', 2.2),
           ...Array.from({ length: 11 }, (_, i): Actor => dot(`c${i}`, 24 + i * 5.2, 46, 3.4 + i * 0.1, i < 9 ? 'sun' : 'orange', 3.6)),
-          T('cl', 'الباقي ١١', 50, 36, 3.4, 'orange', 3.6),
+          T('cl', 'الباقي ١١', 50, 33, 3.4, 'orange', 3.6),
           { id: 'grp', kind: 'shape', shape: 'pill', x: 44.8, y: 46, w: 46, h: 13, color: 'good', outline: true, in: 5.4, anim: [{ at: 5.6, effect: 'pulse' }] },
           T('gl', 'مجموعة أخرى من ٩!', 44.8, 60, 3.6, 'good', 6),
           T('rl', 'يبقى ٢', 80, 60, 3.4, 'orange', 7),
-          Q('r', '٢٥٤ ÷ ٩ = ٢٨ والباقي ٢', 50, 76, 4.6, LG, 9.4, { anim: [{ at: 9.8, effect: 'glow' }] }),
+          Q('r', '٢٥٤ ÷ ٩ = ٢٨', 62, 76, 4.6, LG, 9.4, { anim: [{ at: 9.8, effect: 'glow' }] }),
+          T('rr', 'والباقي ٢ ✓', 36, 76, 4.6, LG, 9.6, { anim: [{ at: 9.8, effect: 'glow' }] }),
           T('rule', 'الباقي أصغر من المقسوم عليه', 50, 89, 3.6, 'sun', 11.2, { box: true }),
         ],
       },
@@ -611,7 +617,7 @@ const raw: Explainer[] = [
         bg: 'board',
         actors: [
           ...[0, 1, 2].map((i): Actor => dot(`a${i}`, 46, 30 + i * 13, 0.4 + i * 0.3, 'orange', 5)),
-          Q('l3', '٣', 46, 78, 5, 'orange', 1.4),
+          Q('l3', '٣', 46, 78, 5, 'orange', 1.4, { out: 5 }),
           T('odd', 'فردي', 26, 50, 4, 'orange', 2, { box: true, out: 7 }),
           { id: 'pr', kind: 'shape', shape: 'pill', x: 46, y: 37, w: 8, h: 26, color: 'rgba(255,255,255,0.14)', in: 2.6, out: 4.8 },
           T('al', 'بلا شريك', 30, 69, 3.4, 'white', 3, { out: 4.8 }),
@@ -633,9 +639,9 @@ const raw: Explainer[] = [
             const prime = [2, 3, 5, 7, 11, 13, 17, 19].includes(n);
             const r = i < 10 ? 0 : 1;
             const c = i % 10;
-            return T(`n${n}`, String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)]), 86 - c * 8, 28 + r * 18, 4.6, 'white', 0.2 + i * 0.05, {
+            return T(`n${n}`, String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)]), 86 - c * 8, 28 + r * 18, 4.2, 'white', 0.2 + i * 0.05, {
               ltr: true,
-              anim: prime ? [{ at: 3.4, to: { scale: 1.3 }, dur: 0.5 }, { at: 4, effect: 'pulse' }] : [dim(3)],
+              anim: prime ? [{ at: 3.4, to: { scale: 1.2 }, dur: 0.5 }, { at: 4, effect: 'pulse' }] : [dim(3)],
             });
           }),
           T('def', 'عاملان فقط: ١ والعدد نفسه', 50, 68, 3.8, 'sun', 1.4, { box: true }),
@@ -660,10 +666,11 @@ const raw: Explainer[] = [
                 const isNew = r === n - 1 || c === n - 1;
                 dots.push(dot(`d${n}-${r}${c}`, cx + (c - (n - 1) / 2) * sx, 44 + (r - (n - 1) / 2) * sy, t + (isNew && n > 1 ? 0.6 : 0), isNew && n > 1 ? 'orange' : 'sun', 3.2));
               }
-            const eq = ['١ × ١ = ١', '٢ × ٢ = ٤', '٣ × ٣ = ٩', '٤ × ٤ = ١٦'][k];
-            return [...dots, Q(`e${n}`, eq, cx, 70, 3.4, 'white', t + 1)];
+            const eq = ['١ × ١', '٢ × ٢', '٣ × ٣', '٤ × ٤'][k];
+            const res = ['١', '٤', '٩', '١٦'][k];
+            return [...dots, Q(`e${n}`, eq, cx, 68, 3.2, 'white', t + 1), Q(`r${n}`, res, cx, 77, 5, 'sun', t + 1.4)];
           }),
-          T('sq', 'أعداد مربّعة: ١ ، ٤ ، ٩ ، ١٦', 50, 86, 4, 'sun', 10, { box: true, anim: [{ at: 10.4, effect: 'glow' }] }),
+          T('sq', 'أعداد مربّعة: ١، ٤، ٩، ١٦', 50, 89, 3.8, 'sun', 10, { box: true, anim: [{ at: 10.4, effect: 'glow' }] }),
         ],
       },
       {
@@ -704,8 +711,8 @@ const raw: Explainer[] = [
         actors: [
           ...Array.from({ length: 11 }, (_, i): Actor => {
             const n = 10 + i;
-            const anim: Anim[] = n % 2 === 1 ? [dim(4.6)] : n % 4 !== 0 ? [dim(7.6)] : n === 16 ? [dim(10.6)] : [{ at: 11.2, to: { scale: 1.45, y: 44 }, dur: 0.6 }, { at: 12, effect: 'glow' }];
-            return Q(`n${n}`, String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)]), 86 - i * 7.2, 46, 4.6, 'white', 0.8 + i * 0.1, { anim });
+            const anim: Anim[] = n % 2 === 1 ? [dim(4.6)] : n % 4 !== 0 ? [dim(7.6)] : n === 16 ? [dim(10.6)] : [{ at: 11.2, to: { scale: 1.3, y: 44 }, dur: 0.6 }, { at: 12, effect: 'glow' }];
+            return Q(`n${n}`, String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)]), 87 - i * 7.4, 46, 4, 'white', 0.8 + i * 0.1, { anim });
           }),
           T('c1', '١ زوجي', 50, 22, 3.8, 'good', 3.6, { box: true, out: 6.8 }),
           T('c2', '٢ من مضاعفات ٤', 50, 22, 3.8, 'sun', 7, { box: true, out: 9.8 }),
@@ -738,18 +745,18 @@ const raw: Explainer[] = [
         actors: [
           ...(
             [
-              ['زوجي', '٢ ٤ ٦ ٨', 'good'],
-              ['فردي', '١ ٣ ٥ ٧', 'orange'],
-              ['أولي', '٢ ٣ ٥ ٧ ١١', 'accent'],
-              ['مربّع', '١ ٤ ٩ ١٦ ٣٦', 'sun'],
-              ['مضاعفات ٤', '٤ ٨ ١٢ ١٦', 'blue'],
-              ['عوامل ٢٤', '١ ٢ ٣ ٤ ٦ ٨ ١٢ ٢٤', 'purple'],
+              ['زوجي', '٢، ٤، ٦، ٨', 'good'],
+              ['فردي', '١، ٣، ٥، ٧', 'orange'],
+              ['أولي', '٢، ٣، ٥، ٧، ١١', 'accent'],
+              ['مربّع', '١، ٤، ٩، ١٦، ٣٦', 'sun'],
+              ['مضاعفات ٤', '٤، ٨، ١٢، ١٦', 'blue'],
+              ['عوامل ٢٤', '١، ٢، ٣، ٤، ٦، ٨، ١٢، ٢٤', 'purple'],
             ] as const
           ).flatMap(([name, ex, col], i): Actor[] => {
-            const x = [78, 50, 22][i % 3];
+            const x = [80, 50, 20][i % 3];
             const y = i < 3 ? 26 : 60;
             const t = 0.4 + i * 1.4;
-            return [T(`h${i}`, name, x, y, 4, col, t, { box: true }), Q(`x${i}`, ex, x, y + 13, i === 5 ? 2.9 : 3.6, 'white', t + 0.4)];
+            return [T(`h${i}`, name, x, y, 3.6, col, t, { box: true }), T(`x${i}`, ex, x, y + 13, i === 5 ? 2.8 : 3.4, 'white', t + 0.4)];
           }),
           T('two', '٢ هو الأولي الزوجي الوحيد', 50, 89, 3.6, 'sun', 9.6),
         ],
