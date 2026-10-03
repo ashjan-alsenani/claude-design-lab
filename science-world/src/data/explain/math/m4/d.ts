@@ -560,7 +560,7 @@ const raw: Explainer[] = [
           Q('w', '٢٥٤ ÷ ٩ = ٢٧', 67, 20, 4.6, 'white', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
           T('wr', 'والباقي ١١', 34, 20, 4.6, 'orange', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
           T('x', '✗', 14, 20, 6, 'red', 2.2),
-          ...Array.from({ length: 11 }, (_, i): Actor => dot(`c${i}`, 24 + i * 5.2, 46, 3.4 + i * 0.1, i < 9 ? 'sun' : 'orange', 3.6)),
+          ...Array.from({ length: 11 }, (_, i): Actor => dot(`c${i}`, 24 + i * 5.2 + (i >= 9 ? 3 : 0), 46, 3.4 + i * 0.1, i < 9 ? 'sun' : 'orange', 3.6)),
           T('cl', 'الباقي ١١', 50, 33, 3.4, 'orange', 3.6),
           { id: 'grp', kind: 'shape', shape: 'pill', x: 44.8, y: 46, w: 46, h: 13, color: 'good', outline: true, in: 5.4, anim: [{ at: 5.6, effect: 'pulse' }] },
           T('gl', 'مجموعة أخرى من ٩!', 44.8, 60, 3.6, 'good', 6),
