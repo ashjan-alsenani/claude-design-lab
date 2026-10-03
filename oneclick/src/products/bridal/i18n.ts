@@ -63,7 +63,7 @@ const ar = {
   },
   welcome: {
     eyebrow: "رحلة العروس",
-    title: "من هنا تبدأ رحلتك إلى يوم العمر.",
+    title: "يا عروسة، رحلتك إلى يوم العمر تبدأ من هنا.",
     sub: "مساعدتك الشخصية لكل مهمة وموعد ودفعة وتفصيلة جميلة حتى يوم زفافك. أخبرينا عن زفافك مرة واحدة، ونرتّب لك كل شيء في وقته.",
     cta: "ابدئي رحلتي",
     demo: "استكشفي زفافًا تجريبيًا",
@@ -97,7 +97,7 @@ const ar = {
       stage: "إلى أين وصلتِ في التحضيرات؟",
       stageHint: "نعلّم ما أنجزتِه مسبقًا، وتقدرين تعدّلين أي مهمة لاحقًا.",
     },
-    ready: "رحلتك جاهزة",
+    ready: "رحلتك جاهزة يا عروسة",
     readySub: (n: string, d: string) => `${n} مهمة مرتبة حسب موعدك، تبدأ بما يهمّ هذا الأسبوع. باقي ${d} يومًا.`,
     readyCta: "ادخلي إلى رحلتك",
     errors: { name: "اكتبي اسمك من فضلك.", date: "اختاري تاريخًا قادمًا.", budget: "اكتبي رقمًا تقريبيًا.", events: "اختاري مناسبة واحدة على الأقل." },
@@ -115,10 +115,10 @@ const ar = {
     married: "مبارك الزواج",
     ready: "جاهزة",
     messages: {
-      ontrack: "تقدّم جميل. أنتِ في المسار الصحيح.",
+      ontrack: "تقدّم جميل يا عروسة، أنتِ في المسار الصحيح.",
       focus: "لنهتم بعدة أشياء مهمة هذا الأسبوع.",
-      start: "خطوة بخطوة، وكل شيء في وقته.",
-      almost: "اقتربتِ كثيرًا. استمتعي بالأيام الأخيرة.",
+      start: "خطوة بخطوة يا عروسة، وكل شيء في وقته.",
+      almost: "اقترب يومك الكبير. استمتعي بكل لحظة يا عروسة.",
     },
     focus: "تركيزك هذا الأسبوع",
     focusSub: "بضع خطوات فقط. الباقي في وقته.",
@@ -396,7 +396,7 @@ const ar = {
   },
   more: { title: "المزيد" },
   search: { placeholder: "مصورة، أحذية، حناء، دفعة، جواز…", empty: "لا نتائج. جربي كلمة أخرى.", kinds: { task: "مهمة", vendor: "مورد", appointment: "موعد", item: "قائمة", document: "مستند", guest: "مدعو", payment: "دفعة" } },
-  celebrate: "إنجاز جميل",
+  celebrate: "مبروك يا عروسة",
   itemCats: {
     clothes: "ملابس", abayas: "عبايات", nightwear: "ملابس نوم", lingerie: "ملابس داخلية", shoes: "أحذية", bags: "حقائب", accessories: "إكسسوارات", perfumes: "عطور", makeup: "مكياج", skincare: "عناية بالبشرة", haircare: "عناية بالشعر", travel: "ملابس سفر", homewear: "ملابس بيت", occasion: "ملابس مناسبات", prayer: "ملابس صلاة", storage: "منظمات",
     bedroom: "غرفة النوم", bathroom: "الحمام", kitchen: "المطبخ", living: "الصالة", dining: "السفرة", laundry: "الغسيل", cleaning: "التنظيف", fragrance: "البخور والمعطرات", bedding: "المفارش", towels: "المناشف", tools: "أدوات", cookware: "أواني الطبخ", appliances: "الأجهزة", dinnerware: "أطقم التقديم", glassware: "الكاسات", organisation: "التنظيم", personal: "شخصي",
@@ -421,7 +421,7 @@ const en: BridalCopy = {
   },
   welcome: {
     eyebrow: "Bridal Journey",
-    title: "Your wedding journey begins here.",
+    title: "Dear bride, your journey to the big day begins here.",
     sub: "Your personal planner for every task, appointment, payment and beautiful detail leading to your wedding day. Tell us about your wedding once, and we'll place everything at the right time.",
     cta: "Start My Bridal Journey",
     demo: "Explore a sample wedding",
@@ -557,7 +557,7 @@ const en: BridalCopy = {
   },
   more: { title: "More" },
   search: { placeholder: "photographer, shoes, henna, payment, passport…", empty: "No results. Try another word.", kinds: { task: "Task", vendor: "Vendor", appointment: "Appointment", item: "List", document: "Document", guest: "Guest", payment: "Payment" } },
-  celebrate: "Beautiful milestone",
+  celebrate: "Congratulations, bride-to-be",
   itemCats: {
     clothes: "Clothes", abayas: "Abayas", nightwear: "Nightwear", lingerie: "Lingerie", shoes: "Shoes", bags: "Bags", accessories: "Accessories", perfumes: "Perfumes", makeup: "Makeup", skincare: "Skincare", haircare: "Haircare", travel: "Travel clothes", homewear: "Home clothes", occasion: "Occasion wear", prayer: "Prayer wear", storage: "Storage organisers",
     bedroom: "Bedroom", bathroom: "Bathroom", kitchen: "Kitchen", living: "Living room", dining: "Dining", laundry: "Laundry", cleaning: "Cleaning", fragrance: "Home fragrance", bedding: "Bedding", towels: "Towels", tools: "Kitchen tools", cookware: "Cookware", appliances: "Appliances", dinnerware: "Dinnerware", glassware: "Glassware", organisation: "Organisation", personal: "Personal items",

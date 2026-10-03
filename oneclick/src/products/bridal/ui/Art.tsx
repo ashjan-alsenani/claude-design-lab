@@ -1,8 +1,7 @@
-import { Clicky } from "@/components/brand/Clicky";
-
 /**
- * Colorful, friendly artwork used instead of stock photos: bright tints, a bold line motif
- * that gently bobs, and a twinkling sparkle. One Click style; motion respects reduced-motion.
+ * Bridal artwork ("Pearl & Rose") used where photos would go: pearl and blush tints, a
+ * rose-gold line motif, a small rose sprig and a pearl. Real photos can replace any tile
+ * (brides add their own). Motion is CSS only and stops under reduced-motion.
  */
 export type Motif = "ring" | "rose" | "dress" | "arch" | "cake" | "envelope" | "suitcase" | "camera" | "home" | "henna" | "lips" | "comb" | "table" | "pearl" | "shoe" | "bag" | "abaya" | "doc" | "star";
 
@@ -29,58 +28,145 @@ const paths: Record<Motif, string> = {
 };
 
 const palettes = [
-  ["#ddf6f2", "#bfede6", "#0b9e91"], // teal
-  ["#fff1cc", "#ffe09a", "#c98a00"], // sunshine
-  ["#ffe4e6", "#ffc9cf", "#e5484d"], // coral
-  ["#ece8ff", "#d9d1ff", "#7c6cf0"], // lilac
-  ["#e0eeff", "#c7deff", "#3d7bff"], // sky
-  ["#ffe3ee", "#ffc6dc", "#e0457b"], // pink
-  ["#dff5e7", "#c2ebd2", "#1f9e57"], // green
-  ["#ffebdd", "#ffd3b5", "#e07a2e"], // peach
+  ["#fdf3f5", "#f6dde4"], // blush
+  ["#fbf6f2", "#f1e1d8"], // champagne
+  ["#fbf7f9", "#ece3ea"], // pearl
+  ["#fcf1ef", "#f3d9d3"], // rose quartz
+  ["#f9f3f6", "#ead9e3"], // mauve
+  ["#fdf8f4", "#f4e5dc"], // silk
 ];
+const ROSE_GOLD = "url(#bj-rg)";
+
+/** Shared SVG gradient for rose-gold strokes (render once per svg). */
+function RoseGoldDefs({ id = "bj-rg" }: { id?: string }) {
+  return (
+    <defs>
+      <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor="#b97968" />
+        <stop offset=".5" stopColor="#dcae9c" />
+        <stop offset="1" stopColor="#a8644f" />
+      </linearGradient>
+    </defs>
+  );
+}
+
+const sprig = "M14 86c6-10 14-14 24-14M20 80c-6-2-8-8-4-12 4 2 6 6 4 12zm8-6c-2-6 2-10 6-10 0 4-2 8-6 10z";
 
 export function ArtTile({ motif, tone = 0, className = "", label }: { motif: Motif; tone?: number; className?: string; label?: string }) {
-  const [a, b, ink] = palettes[((tone % palettes.length) + palettes.length) % palettes.length];
+  const [a, b] = palettes[((tone % palettes.length) + palettes.length) % palettes.length];
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ background: `linear-gradient(150deg, ${a}, ${b})` }} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
-      <svg viewBox="0 0 100 100" className="absolute inset-0 m-auto h-[72%] w-[72%]" fill="none" stroke={ink} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 56 C12 30 40 14 62 20 C86 26 92 50 84 70 C76 90 46 92 30 84 C20 79 20 68 18 56 Z" fill="#ffffff" fillOpacity=".7" stroke="none" />
-        <g className="art-bob">
-          <path d={paths[motif]} />
-        </g>
-        <path d="M82 18l2 5.5 5.5 2-5.5 2-2 5.5-2-5.5-5.5-2 5.5-2z" fill="#ffc23d" stroke="none" className="clicky-twinkle" />
-        <circle cx="16" cy="84" r="3.5" fill={ink} fillOpacity=".5" stroke="none" className="art-bob-2" />
+    <div className={`relative overflow-hidden ${className}`} style={{ background: `radial-gradient(120% 90% at 30% 10%, ${a}, ${b})` }} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
+      <svg viewBox="0 0 100 100" className="absolute inset-0 m-auto h-[74%] w-[74%]" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <RoseGoldDefs />
+        <circle cx="50" cy="54" r="33" fill="#ffffff" fillOpacity=".55" />
+        <circle cx="50" cy="54" r="36" stroke={ROSE_GOLD} strokeWidth=".6" strokeDasharray="1 3" />
+        <path d={paths[motif]} stroke={ROSE_GOLD} strokeWidth="1.8" />
+        <path d={sprig} stroke="#c9909b" strokeWidth="1.2" fill="#f2c9d2" fillOpacity=".6" />
+        <circle cx="82" cy="22" r="3.2" fill="#ffffff" stroke="#e2c6bd" strokeWidth=".8" className="bj-sparkle" />
       </svg>
     </div>
   );
 }
 
-/** Joyful hero: Clicky in a colorful wedding arch with hearts, rings and sparkles. */
+/** A small ornamental divider: rose-gold line, pearl, line. */
+export function Flourish({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 160 14" className={`h-3.5 w-40 ${className}`} fill="none" aria-hidden="true">
+      <RoseGoldDefs id="bj-rg-fl" />
+      <path d="M2 7h58M100 7h58" stroke="url(#bj-rg-fl)" strokeWidth="1" />
+      <path d="M66 7c4-5 10-5 14 0-4 5-10 5-14 0zm14 0c4-5 10-5 14 0-4 5-10 5-14 0z" stroke="url(#bj-rg-fl)" strokeWidth="1" />
+      <circle cx="80" cy="7" r="2.6" fill="#fff" stroke="url(#bj-rg-fl)" strokeWidth=".8" />
+    </svg>
+  );
+}
+
+/** Rose garland for card corners (decorative). */
+export function RoseCorner({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 160 120" className={className} fill="none" aria-hidden="true">
+      <RoseGoldDefs id="bj-rg-rc" />
+      <g strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 112C30 70 70 40 152 20" stroke="url(#bj-rg-rc)" strokeWidth="1.2" />
+        <path d="M44 74c-10-2-16-12-10-20 8 4 12 12 10 20zm22-16c-2-10 6-18 14-16 0 8-6 14-14 16zm32-14c4-10 14-12 20-6-4 6-12 8-20 6z" fill="#f4d2dc" stroke="#c9909b" strokeWidth="1" />
+        <circle cx="118" cy="30" r="13" fill="#f7dbe2" stroke="#c98d9b" strokeWidth="1.1" />
+        <path d="M118 22c-5 0-8 4-6 8 3-2 7-2 9 1 2-4 0-9-3-9zm-6 8c-2 5 2 9 7 9 4 0 7-4 5-8" stroke="#b5707f" strokeWidth="1" />
+        <circle cx="72" cy="46" r="9" fill="#fbe7ed" stroke="#c98d9b" strokeWidth="1" />
+        <path d="M72 40c-3 0-5 3-4 5 2-1 5-1 6 1 1-3-0-6-2-6z" stroke="#b5707f" strokeWidth=".9" />
+        <circle cx="30" cy="96" r="3" fill="#fff" stroke="#e2c6bd" />
+        <circle cx="140" cy="16" r="2.4" fill="#fff" stroke="#e2c6bd" />
+        <circle cx="96" cy="50" r="2" fill="#fff" stroke="#e2c6bd" />
+      </g>
+    </svg>
+  );
+}
+
+/** Rose petals drifting down: the celebration effect (reduced motion: nothing). */
+export function Petals({ count = 18 }: { count?: number }) {
+  return (
+    <div aria-hidden="true" className="bj-petals absolute inset-0 overflow-visible">
+      {Array.from({ length: count }, (_, i) => (
+        <span
+          key={i}
+          className="bj-petal absolute top-0 block h-3 w-2.5 rounded-[60%_10%_60%_10%]"
+          style={{ insetInlineStart: `${(i * 53) % 100}%`, background: i % 3 === 0 ? "#f4c9d3" : i % 3 === 1 ? "#ecb6c2" : "#f7dde3", animationDelay: `${(i % 6) * 0.18}s`, animationDuration: `${2.2 + (i % 5) * 0.35}s` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/** Hero: a floral arch framing a gown with a flowing veil, pearls and soft light. */
 export function HeroArt({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative aspect-[400/460] ${className}`} aria-hidden="true">
-      <svg viewBox="0 0 400 460" className="absolute inset-0 h-full w-full" fill="none">
-        <circle cx="310" cy="96" r="74" fill="#ffe09a" />
-        <circle cx="62" cy="330" r="46" fill="#d9d1ff" />
-        <circle cx="352" cy="372" r="34" fill="#ffc9cf" />
-        <path d="M78 450V210a122 122 0 0 1 244 0v240z" fill="#bfede6" />
-        <path d="M104 450V214a96 96 0 0 1 192 0v236" stroke="#12b5a6" strokeWidth="5" strokeLinecap="round" strokeDasharray="2 14" />
-        <g strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M96 216c-16-10-18-30-4-38 12 10 14 24 4 38zm0 0c16-4 30 2 30 18-16 0-26-6-30-18z" fill="#ff8fab" stroke="#e0457b" />
-          <path d="M304 216c16-10 18-30 4-38-12 10-14 24-4 38zm0 0c-16-4-30 2-30 18 16 0 26-6 30-18z" fill="#ffc23d" stroke="#c98a00" />
-          <path d="M200 96c-14 0-22-9-20-20 7 5 13 5 20 0 7 5 13 5 20 0 2 11-6 20-20 20z" fill="#ff6b6b" stroke="#e5484d" />
-        </g>
-        <path d="M60 120c0-9 12-12 16-4 4-8 16-5 16 4 0 10-16 18-16 18s-16-8-16-18z" fill="#ff6b6b" className="art-bob" />
-        <path d="M330 250c0-7 9-9 12-3 3-6 12-4 12 3 0 8-12 14-12 14s-12-6-12-14z" fill="#e0457b" className="art-bob-2" />
-        <circle cx="70" cy="420" r="14" stroke="#7c6cf0" strokeWidth="5" />
-        <circle cx="86" cy="420" r="14" stroke="#ffc23d" strokeWidth="5" />
-        <path d="M352 168l4 11 11 4-11 4-4 11-4-11-11-4 11-4z" fill="#ffc23d" className="clicky-twinkle" />
-        <path d="M44 210l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#12b5a6" className="clicky-twinkle" style={{ animationDelay: "-1s" }} />
-      </svg>
-      <div className="absolute left-1/2 top-[44%] w-[46%] -translate-x-1/2">
-        <Clicky size={180} mood="love" body wave animate className="h-auto w-full" />
-      </div>
-    </div>
+    <svg viewBox="0 0 400 480" className={className} fill="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="bj-h-arch" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#fdf2f5" />
+          <stop offset="1" stopColor="#f5dfe5" />
+        </linearGradient>
+        <linearGradient id="bj-h-veil" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#ffffff" stopOpacity=".95" />
+          <stop offset="1" stopColor="#fbe9ee" stopOpacity=".55" />
+        </linearGradient>
+        <linearGradient id="bj-h-rg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#b97968" />
+          <stop offset=".5" stopColor="#e2b8a6" />
+          <stop offset="1" stopColor="#a8644f" />
+        </linearGradient>
+        <radialGradient id="bj-h-glow" cx=".5" cy=".35" r=".6">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="200" cy="210" r="190" fill="url(#bj-h-glow)" />
+      <path d="M70 470V210a130 130 0 0 1 260 0v260z" fill="url(#bj-h-arch)" />
+      <path d="M90 470V214a110 110 0 0 1 220 0v256" stroke="url(#bj-h-rg)" strokeWidth="1.6" />
+      <path d="M104 470V218a96 96 0 0 1 192 0v252" stroke="url(#bj-h-rg)" strokeWidth=".7" strokeDasharray="1 5" />
+      {/* gown */}
+      <path d="M186 168c4 10 24 10 28 0l6 32c-12 6-28 6-40 0z" fill="#ffffff" stroke="#d9b3a6" strokeWidth="1.2" />
+      <path d="M180 200c14 6 26 6 40 0l46 220c-44 22-88 22-132 0z" fill="#ffffff" stroke="#d9b3a6" strokeWidth="1.2" />
+      <path d="M180 200c14 6 26 6 40 0" stroke="url(#bj-h-rg)" strokeWidth="2.2" />
+      <path d="M170 260c20 10 40 10 60 0M160 320c26 12 54 12 80 0M150 380c32 14 68 14 100 0" stroke="#efd9d2" strokeWidth="1" />
+      {/* veil */}
+      <path d="M200 140c-30 30-70 120-96 300 40 18 70 22 96 20" fill="url(#bj-h-veil)" stroke="#ead0c7" strokeWidth="1" />
+      <path d="M200 140c30 30 70 120 96 300-40 18-70 22-96 20" fill="url(#bj-h-veil)" stroke="#ead0c7" strokeWidth="1" opacity=".7" />
+      <circle cx="200" cy="140" r="6" fill="#fff" stroke="url(#bj-h-rg)" strokeWidth="1.4" />
+      {/* garland of roses */}
+      <g strokeLinecap="round" strokeLinejoin="round">
+        <path d="M84 214c30-80 70-112 116-118 46 6 86 38 116 118" stroke="#c9909b" strokeWidth="1.1" />
+        {[[96, 176, 15], [128, 128, 12], [168, 102, 13], [232, 102, 13], [272, 128, 12], [304, 176, 15], [200, 92, 16]].map(([x, y, r], i) => (
+          <g key={i}>
+            <circle cx={x} cy={y} r={r} fill={i % 2 ? "#f7dbe2" : "#fbe7ed"} stroke="#c98d9b" strokeWidth="1.1" />
+            <path d={`M${x} ${y - r * 0.55}c-${r * 0.4} 0-${r * 0.6} ${r * 0.35}-${r * 0.45} ${r * 0.6} ${r * 0.25}-${r * 0.15} ${r * 0.55}-${r * 0.15} ${r * 0.7} ${r * 0.1} ${r * 0.15}-${r * 0.35}-${r * 0.05}-${r * 0.7}-${r * 0.25}-${r * 0.7}z`} stroke="#b5707f" strokeWidth="1" />
+          </g>
+        ))}
+        <path d="M108 160c-12-4-18-14-12-22 10 4 14 14 12 22zm184 0c12-4 18-14 12-22-10 4-14 14-12 22zM148 112c-10-6-12-16-4-22 8 6 8 16 4 22zm104 0c10-6 12-16 4-22-8 6-8 16-4 22z" fill="#e9c9c0" stroke="#c49a8c" strokeWidth=".9" />
+      </g>
+      {/* pearls */}
+      {[[60, 300], [342, 260], [330, 420], [74, 420], [48, 360]].map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r={i % 2 ? 4 : 5.5} fill="#ffffff" stroke="#e2c6bd" strokeWidth="1" className="bj-sparkle" style={{ animationDelay: `${-i * 0.6}s` }} />
+      ))}
+    </svg>
   );
 }
 

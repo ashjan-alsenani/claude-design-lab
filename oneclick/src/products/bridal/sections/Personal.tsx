@@ -234,7 +234,7 @@ export function WeddingDay() {
           <h2 id="tl-h" className="bj-serif mb-4 text-[1.45rem]">
             {D.timeline}
           </h2>
-          <ol className="relative space-y-1 border-s border-[#a8e6de] ps-6">
+          <ol className="relative space-y-1 border-s border-[#e6c2b6] ps-6">
             {items.map((it) => (
               <li key={it.id} className="relative">
                 <span className={cx("absolute -start-[31px] top-4 size-3 rounded-full border-2 border-bj-ivory", it.done ? "bg-bj-sage" : "bg-bj-gold")} />

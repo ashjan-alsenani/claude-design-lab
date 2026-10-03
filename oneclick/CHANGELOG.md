@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 — 2026-10-03 — Bridal Journey "Pearl & Rose"
+- Luxury wedding redesign: blush and pearl, wine and rose gold, calligraphic headings,
+  roses-and-pearls artwork, falling petals on milestones, warmer bridal copy.
+- One Click logo kept in the app header and sidebar.
+
 ## 0.5.0 — 2026-10-03 — Bridal Journey, the first product
 - Full bilingual bridal planning app (Arabic first): onboarding, smart dashboard, ~210-task
   checklist with dependencies, budget and payments, vendors, calendar, guests and seating,

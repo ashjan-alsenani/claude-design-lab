@@ -6,8 +6,8 @@ import { XIcon } from "@phosphor-icons/react";
 import { useBridal } from "../app/state";
 
 /**
- * Bridal Journey design system in the One Click style: colorful, friendly and joyful.
- * Rounded cards, bouncy 3D buttons, Rubik headings, playful motion (respects reduced-motion).
+ * Bridal Journey design system "Pearl & Rose": pearl white, blush and rose gold with a deep
+ * wine accent, calligraphic Arabic headings, soft shadows and graceful motion (reduced-motion safe).
  */
 const cx = (...c: (string | false | null | undefined)[]) => c.filter(Boolean).join(" ");
 
@@ -17,12 +17,12 @@ export function Button({ variant = "primary", size = "md", className, children, 
     <button
       type="button"
       className={cx(
-        "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-[background-color,box-shadow,transform,color] duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] active:scale-[0.97] disabled:pointer-events-none disabled:opacity-45",
+        "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-[background-color,box-shadow,transform,color,filter] duration-300 ease-[cubic-bezier(.16,1,.3,1)] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45",
         size === "sm" && "h-9 px-4 text-[13px]",
         size === "md" && "h-11 px-5 text-sm",
         size === "lg" && "h-[52px] px-7 text-[15px]",
-        variant === "primary" && "bg-bj-gold-ink text-white shadow-[0_5px_0_-1px_#075a52] hover:-translate-y-0.5 hover:bg-[#0a6b62] active:translate-y-0 active:shadow-none",
-        variant === "secondary" && "border-2 border-bj-beige bg-bj-paper text-bj-ink hover:-translate-y-0.5 hover:border-bj-taupe",
+        variant === "primary" && "bg-[linear-gradient(135deg,#8e3456_0%,#a8466b_100%)] text-white shadow-[0_10px_24px_-12px_rgba(142,52,86,.65)] hover:shadow-[0_14px_28px_-12px_rgba(142,52,86,.7)] hover:brightness-[1.06]",
+        variant === "secondary" && "border border-bj-beige bg-bj-paper text-bj-ink hover:border-bj-taupe",
         variant === "soft" && "bg-bj-cream text-bj-ink hover:bg-bj-champagne/70",
         variant === "ghost" && "text-bj-ink-soft hover:bg-bj-cream",
         variant === "danger" && "text-bj-alert hover:bg-bj-alert-soft",
@@ -45,7 +45,7 @@ export function IconButton({ label, className, children, ...rest }: { label: str
 
 export function Card({ className, children, as: As = "div", ...rest }: { className?: string; children: ReactNode; as?: "div" | "section" | "li" | "article" } & Record<string, unknown>) {
   return (
-    <As className={cx("rounded-[24px] border border-bj-line bg-bj-paper shadow-[0_1px_2px_rgba(30,27,58,.03),0_14px_34px_-24px_rgba(30,27,58,.14)]", className)} {...rest}>
+    <As className={cx("rounded-[24px] border border-bj-line bg-bj-paper shadow-[0_1px_2px_rgba(90,30,55,.03),0_14px_34px_-24px_rgba(90,30,55,.12)]", className)} {...rest}>
       {children}
     </As>
   );
@@ -71,7 +71,7 @@ const tones: Record<Tone, string> = {
   sage: "bg-bj-sage-soft text-bj-sage",
   amber: "bg-bj-amber-soft text-bj-amber",
   alert: "bg-bj-alert-soft text-bj-alert",
-  gold: "bg-[#ddf6f3] text-bj-gold-ink",
+  gold: "bg-[#f8ebe6] text-bj-gold-ink",
   rose: "bg-bj-blush text-bj-rose",
   ink: "bg-bj-gold-ink text-white",
 };
@@ -80,7 +80,7 @@ export function Badge({ tone = "neutral", children, className }: { tone?: Tone; 
 }
 
 /** Animated circular progress. */
-export function ProgressRing({ value, size = 120, stroke = 7, children, color = "#12B5A6" }: { value: number; size?: number; stroke?: number; children?: ReactNode; color?: string }) {
+export function ProgressRing({ value, size = 120, stroke = 7, children, color = "#c48b78" }: { value: number; size?: number; stroke?: number; children?: ReactNode; color?: string }) {
   const reduce = useReducedMotion();
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
@@ -88,7 +88,7 @@ export function ProgressRing({ value, size = 120, stroke = 7, children, color = 
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90" aria-hidden="true">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#eee8f4" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#f4e6ea" strokeWidth={stroke} />
         <motion.circle
           cx={size / 2}
           cy={size / 2}
@@ -112,7 +112,7 @@ export function Bar({ value, tone = "gold", className }: { value: number; tone?:
   const reduce = useReducedMotion();
   const color = { gold: "bg-bj-gold", sage: "bg-bj-sage", alert: "bg-bj-alert", rose: "bg-bj-rose" }[tone];
   return (
-    <div className={cx("h-1.5 overflow-hidden rounded-full bg-[#eee8f4]", className)}>
+    <div className={cx("h-1.5 overflow-hidden rounded-full bg-[#f4e6ea]", className)}>
       <motion.div className={cx("h-full rounded-full", color)} initial={{ width: reduce ? `${value * 100}%` : 0 }} animate={{ width: `${Math.min(1, Math.max(0, value)) * 100}%` }} transition={{ duration: reduce ? 0 : 1, ease: [0.16, 1, 0.3, 1] }} />
     </div>
   );
@@ -161,7 +161,7 @@ export function Sheet({ open, onClose, title, children, footer }: { open: boolea
       aria-labelledby={titleId}
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
-      className="bj m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 bg-bj-paper p-0 text-bj-ink shadow-[0_-20px_60px_-20px_rgba(30,27,58,.3)] open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:w-[440px] sm:rounded-none sm:rounded-s-[26px]"
+      className="bj m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 bg-bj-paper p-0 text-bj-ink shadow-[0_-20px_60px_-20px_rgba(90,30,55,.22)] open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:w-[440px] sm:rounded-none sm:rounded-s-[26px]"
     >
       <div className="flex items-center justify-between gap-3 border-b border-bj-line px-5 py-4">
         <h2 id={titleId} className="bj-serif text-[1.35rem] text-bj-ink">
@@ -287,7 +287,7 @@ export function ChoiceCard({ selected, onClick, children, icon, multi }: { selec
       onClick={onClick}
       className={cx(
         "flex min-h-14 w-full items-center gap-3 rounded-[16px] border px-4 py-3 text-start text-[15px] transition-[border-color,background-color,box-shadow] duration-200",
-        selected ? "border-bj-gold bg-[#e8faf7] shadow-[0_0_0_3px_rgba(18,181,166,.18)]" : "border-bj-line bg-bj-paper hover:border-bj-taupe/40"
+        selected ? "border-bj-gold bg-[#fdf3f0] shadow-[0_0_0_3px_rgba(196,139,120,.22)]" : "border-bj-line bg-bj-paper hover:border-bj-taupe/40"
       )}
     >
       {icon && <span className={cx("grid size-9 shrink-0 place-items-center rounded-full", selected ? "bg-bj-gold text-white" : "bg-bj-cream text-bj-gold-ink")}>{icon}</span>}

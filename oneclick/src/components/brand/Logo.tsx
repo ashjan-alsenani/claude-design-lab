@@ -1,8 +1,8 @@
 import { Clicky } from "./Clicky";
 
 /** Logo mark = Clicky. `animated` adds the gentle float + twinkle. */
-export function LogoMark({ size = 32, className = "", animated = false }: { size?: number; className?: string; animated?: boolean }) {
-  return <Clicky size={size} className={className} animate={animated} />;
+export function LogoMark({ size = 32, className = "", animated = false, color }: { size?: number; className?: string; animated?: boolean; color?: string }) {
+  return <Clicky size={size} className={className} animate={animated} color={color} />;
 }
 
 /** Primary lockup: Clicky + "One Click". Always left-to-right. */

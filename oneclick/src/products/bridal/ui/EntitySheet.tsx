@@ -106,7 +106,7 @@ export function EntitySheet({
             if (f.kind === "check")
               return (
                 <label key={f.key} className={`${span} flex items-center gap-3 rounded-[14px] border border-bj-line px-3.5 py-3 text-[15px]`}>
-                  <input type="checkbox" checked={!!v} onChange={(e) => set(f.key, e.target.checked)} className="size-5 accent-[#1f9e57]" />
+                  <input type="checkbox" checked={!!v} onChange={(e) => set(f.key, e.target.checked)} className="size-5 accent-[#4f8762]" />
                   {f.label}
                 </label>
               );

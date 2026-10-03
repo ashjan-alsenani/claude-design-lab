@@ -7,8 +7,11 @@ Format: decision, why, alternatives considered, how to reverse. Newest first.
 **D24. First product = Bridal Journey (رحلة العروس), slug kept as `bride-planner`** so links and
 the license stay stable. Arabic is the primary experience.
 
-**D25. Same colorful, joyful One Click style inside the product** (owner preferred it over a
-first "quiet luxury" ivory/champagne version): teal, sunshine, coral, lilac, Rubik, Clicky.
+**D25. "Pearl & Rose" bridal luxury inside the product, with the One Click logo kept**
+(owner's third and current choice, after a quiet ivory version and a colorful one): blush and
+pearl backgrounds, wine and rose-gold accents, calligraphic Aref Ruqaa / Playfair headings,
+roses and pearls artwork. The One Click logo stays at the top of the app because the product
+lives inside the One Click store.
 
 **D26. One private document per bride, validated operations, optimistic UI.** Fast on phones,
 simple to move to Postgres (`product_data` with license-checked RLS). Checklist templates live

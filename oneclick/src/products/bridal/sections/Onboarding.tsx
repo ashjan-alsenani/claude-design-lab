@@ -3,15 +3,14 @@
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useMemo, useState } from "react";
-import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, SparkleIcon } from "@phosphor-icons/react";
+import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from "@phosphor-icons/react";
 import { useBridal } from "../app/state";
 import { addDays, diffDays, resolveTasks } from "../model/engine";
 import { applyOp } from "../model/reducer";
 import { emptyWorkspace, type Currency, type EventKey, type Profile } from "../model/types";
-import { HeroArt } from "../ui/Art";
-import { Clicky } from "@/components/brand/Clicky";
-import { Confetti } from "@/components/ui/Confetti";
-import { Button, ChoiceCard, Field, ProgressRing, inputCls } from "../ui/kit";
+import { Flourish, HeroArt, Petals } from "../ui/Art";
+
+import { Button, ChoiceCard, Field, inputCls } from "../ui/kit";
 
 const currencies: Currency[] = ["OMR", "AED", "SAR", "QAR", "KWD", "BHD", "USD"];
 const countries = [
@@ -128,13 +127,14 @@ export function Onboarding({ onCancel }: { onCancel: () => void }) {
         <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} className="max-w-md">
           <div className="mx-auto w-fit">
             <div className="relative">
-              <Confetti pieces={40} />
-              <Clicky size={150} mood="celebrate" body wave animate />
+              <Petals count={22} />
+              <HeroArt className="w-44" />
             </div>
           </div>
           <h1 className="bj-serif mt-8 text-[2.4rem] leading-tight text-bj-ink">
-            {o.ready} <span aria-hidden="true">🤍</span>
+            {o.ready}
           </h1>
+          <Flourish className="mx-auto mt-3" />
           <p className="mt-3 leading-relaxed text-bj-ink-soft">{o.readySub(num(preview.filter((x) => x.status !== "done").length), num(days))}</p>
           <Button size="lg" className="mt-8" onClick={() => dispatch({ t: "setup", profile: { ...p, brideName: p.brideName.trim(), planStart: today }, lang })}>
             {o.readyCta}
@@ -243,7 +243,7 @@ export function Onboarding({ onCancel }: { onCancel: () => void }) {
               <>
                 <Q title={o.q.guests} />
                 <input aria-label={o.q.guests} type="number" inputMode="numeric" min={0} dir="ltr" value={p.guests || ""} onChange={(e) => set("guests", Math.max(0, Math.round(Number(e.target.value))))} className={`${inputCls} h-14 text-start text-lg`} />
-                <input type="range" min={20} max={1000} step={10} value={Math.min(1000, p.guests)} onChange={(e) => set("guests", Number(e.target.value))} aria-label={o.q.guests} className="mt-6 w-full accent-[#12B5A6]" />
+                <input type="range" min={20} max={1000} step={10} value={Math.min(1000, p.guests)} onChange={(e) => set("guests", Number(e.target.value))} aria-label={o.q.guests} className="mt-6 w-full accent-[#c48b78]" />
                 <p className="bj-serif mt-3 text-center text-[1.8rem] text-bj-gold-ink">{num(p.guests)}</p>
               </>
             )}

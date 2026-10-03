@@ -73,10 +73,17 @@ until the database and a payment provider are approved.
   - Load the sample wedding.
 
 ## Design
-- **Style (owner choice, 2026-10-03): colorful and joyful, like the One Click site.** Teal,
-  sunshine yellow, coral and lilac; Rubik for all text; bouncy 3D buttons; Clicky the mascot in
-  the hero, header, welcome screen and milestone celebrations (with confetti).
-  (A first "quiet luxury" ivory/champagne version was replaced at the owner's request.)
+- **Style (owner choice, 2026-10-03): "Pearl & Rose", wedding luxury that makes the bride feel
+  like a bride.**
+  - Colors: blush and pearl backgrounds, wine (#8e3456) for actions, rose gold (#c48b78) for
+    ornaments and gradient headings.
+  - Type: Aref Ruqaa (Arabic) and Playfair Display (Latin) for headings; IBM Plex Sans Arabic for
+    text and numbers. All self-hosted (SIL OFL) in `src/fonts/bridal`.
+  - Artwork: floral arch with gown and veil, rose garlands, pearls, a flourish divider and soft
+    falling petals for celebrations (`ui/Art.tsx`).
+  - Copy speaks to her warmly ("يا عروسة", "يا عروستنا").
+  - The One Click logo stays visible (sidebar top, mobile header), linking back to the store.
+  - Earlier versions (quiet ivory, then colorful) were replaced at the owner's request.
 - **Layout:**
   - Mobile first, with a bottom bar: Home, Checklist, Budget, Calendar, More.
   - Desktop sidebar.
@@ -85,7 +92,7 @@ until the database and a payment provider are approved.
   - Page fades, progress ring and bar fills, count-ups.
   - A drawn check when a task is done.
   - Smooth accordions and a gentle milestone toast.
-- **Images:** colorful line illustrations stand in for photos; brides can add their own (resized in the browser).
+- **Images:** rose-gold line illustrations stand in for photos; brides can add their own (resized in the browser).
 
 ## Architecture
 ```

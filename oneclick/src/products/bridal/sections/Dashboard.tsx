@@ -9,10 +9,10 @@ import { NoticeList } from "../app/Shell";
 import { alerts, budgetSummary, diffDays, focusTasks, groupTasks, paymentStatus, progress, progressMessage, type AreaKey } from "../model/engine";
 import { AppointmentCard, PaymentCard } from "../ui/cards";
 import { Bar, Button, Card, CountUp, ProgressRing } from "../ui/kit";
-import { Clicky } from "@/components/brand/Clicky";
+import { Flourish, RoseCorner } from "../ui/Art";
 import { NewTaskSheet, TaskList } from "../ui/tasks";
 
-const statColors = [["#ddf6f2", "#0b7d73"], ["#fff1cc", "#a86b00"], ["#ffe4e6", "#d6455d"], ["#ece8ff", "#6a59e6"], ["#e0eeff", "#2f66d9"], ["#ffe3ee", "#c93b70"]];
+const statColors = [["#fbe9ee", "#8e3456"], ["#f8ebe3", "#9a6a4f"], ["#fbe7ed", "#a1405f"], ["#f1e7ee", "#7d4a6b"], ["#f3ebe7", "#8a5d52"], ["#f9e4ea", "#8e3456"]];
 
 export function Dashboard() {
   const { t, ws, tasks, today, num, pct, money, date, href, lang } = useBridal();
@@ -56,14 +56,14 @@ export function Dashboard() {
   return (
     <div className="space-y-8">
       {/* Hero */}
-      <motion.section {...rise(0)} className="relative overflow-hidden rounded-[28px] border border-bj-line bg-[linear-gradient(135deg,#ddf6f2_0%,#fff3d1_55%,#ffe0e6_100%)] px-6 py-7 sm:px-9 sm:py-9">
-        <div className="pointer-events-none absolute -end-16 -top-16 size-64 rounded-full bg-white/40" />
-        <div className="pointer-events-none absolute -bottom-10 start-1/3 size-32 rounded-full bg-[#d9d1ff]/50" />
-        <Clicky size={86} mood={prog.overall >= 0.5 ? "celebrate" : "love"} body wave animate className="pointer-events-none absolute bottom-2 end-[215px] hidden md:block" />
+      <motion.section {...rise(0)} className="relative overflow-hidden rounded-[28px] border border-bj-line bg-[radial-gradient(120%_120%_at_85%_0%,#fbe3ea_0%,#fdf6f7_45%,#ffffff_70%,#f8e8e3_100%)] shadow-[0_30px_60px_-40px_rgba(142,52,86,.35)] px-6 py-7 sm:px-9 sm:py-9">
+        <RoseCorner className="pointer-events-none absolute -top-2 end-0 w-28 opacity-50 rtl:-scale-x-100 sm:w-56 sm:opacity-90 lg:w-72" />
+        <RoseCorner className="pointer-events-none absolute -bottom-6 start-0 hidden w-48 rotate-180 opacity-60 rtl:-scale-x-100 md:block" />
         <div className="relative flex items-start justify-between gap-4 sm:items-center">
           <div>
-            <p className="text-[14px] text-bj-muted" suppressHydrationWarning>
-              {greet}, {p.brideName} <span aria-hidden="true">🤍</span>
+            <p className="text-[15px] text-bj-ink-soft" suppressHydrationWarning>
+              {greet}{lang === "ar" ? " يا عروستنا " : ", "}
+              <span className="bj-serif bj-rosegold text-[1.35rem]">{p.brideName}</span>
             </p>
             {days > 0 ? (
               <h1 className="mt-2 flex flex-wrap items-baseline gap-x-3">
@@ -76,7 +76,8 @@ export function Dashboard() {
               <h1 className="bj-serif mt-2 text-[2.6rem] leading-tight text-bj-ink">{days === 0 ? t.dash.weddingToday : t.dash.married}</h1>
             )}
             <p className="mt-2 text-[14px] text-bj-muted">{date(p.weddingDate, "long")}{p.city ? ` · ${p.city}` : ""}</p>
-            <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-bj-ink">{msg}</p>
+            <Flourish className="mt-4" />
+            <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-bj-ink">{msg}</p>
           </div>
           <div className="-mb-11 -ms-11 shrink-0 origin-top-right scale-[0.68] sm:m-0 sm:scale-100 rtl:origin-top-left">
             <ProgressRing value={prog.overall} size={136} stroke={6}>
@@ -179,7 +180,7 @@ export function Dashboard() {
         <ul className="grid grid-cols-2 gap-3 md:grid-cols-3">
           {stats.map((s, i) => (
             <li key={s.key}>
-              <Link href={href(s.key)} className="flex h-full flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(30,27,58,.25)]">
+              <Link href={href(s.key)} className="flex h-full flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(90,30,55,.2)]">
                 <span className="flex items-center gap-2 text-[12.5px] text-bj-muted">
                   <span className="grid size-8 place-items-center rounded-full" style={{ background: statColors[i % 6][0], color: statColors[i % 6][1] }}>
                     <s.icon size={17} weight="bold" />

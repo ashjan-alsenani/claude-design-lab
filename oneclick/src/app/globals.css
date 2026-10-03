@@ -157,31 +157,31 @@
   --color-info: var(--oc-info);
 
   --font-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
-  --font-bj-serif: "Rubik", ui-sans-serif, system-ui, sans-serif;
-  --font-bj-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
+  --font-bj-serif: "BJ Display", "BJ Display Arabic", Georgia, serif;
+  --font-bj-sans: "BJ Sans", ui-sans-serif, system-ui, sans-serif;
 
-  /* Bridal Journey palette: One Click colors (teal, sunshine, coral, lilac), joyful and friendly */
-  --color-bj-ivory: #fff9f4;
+  /* Bridal Journey palette "Pearl & Rose": pearl white, blush, rose gold, deep wine (light only) */
+  --color-bj-ivory: #fdf8f9;
   --color-bj-paper: #ffffff;
-  --color-bj-cream: #f1faf8;
-  --color-bj-champagne: #ffe6a6;
-  --color-bj-beige: #e6e0f2;
-  --color-bj-blush: #ffe4e6;
-  --color-bj-rose: #d6455d;
-  --color-bj-rose-soft: #ffd3da;
-  --color-bj-taupe: #9b8fd8;
-  --color-bj-ink: #1e1b3a;
-  --color-bj-ink-soft: #46416c;
-  --color-bj-muted: #6c6790;
-  --color-bj-line: #efe8f1;
-  --color-bj-gold: #12b5a6;
-  --color-bj-gold-ink: #0b7d73;
-  --color-bj-sage: #1f9e57;
-  --color-bj-sage-soft: #ddf3e6;
-  --color-bj-amber: #b7791f;
-  --color-bj-amber-soft: #fff1cc;
-  --color-bj-alert: #e5484d;
-  --color-bj-alert-soft: #ffe5e5;
+  --color-bj-cream: #fbeff2;
+  --color-bj-champagne: #f7e4dc;
+  --color-bj-beige: #ecd6dd;
+  --color-bj-blush: #fbe7ed;
+  --color-bj-rose: #a1405f;
+  --color-bj-rose-soft: #f4d2dc;
+  --color-bj-taupe: #c39aa6;
+  --color-bj-ink: #3a1f2b;
+  --color-bj-ink-soft: #5c4250;
+  --color-bj-muted: #7b6270;
+  --color-bj-line: #f1e1e6;
+  --color-bj-gold: #c48b78;
+  --color-bj-gold-ink: #8e3456;
+  --color-bj-sage: #4f8762;
+  --color-bj-sage-soft: #e4f0e7;
+  --color-bj-amber: #a96f22;
+  --color-bj-amber-soft: #fbefdc;
+  --color-bj-alert: #bf3b4c;
+  --color-bj-alert-soft: #fbe3e6;
 
   --radius-sm: 10px;
   --radius-md: 16px;
@@ -367,11 +367,30 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 @keyframes parade { to { transform: translateX(-50%); } }
 
 
+/* ---------- Bridal Journey fonts (SIL OFL 1.1, self-hosted) ---------- */
+@font-face { font-family: "BJ Display"; src: url("../fonts/bridal/playfair-display-latin-600-normal.woff2") format("woff2"); font-weight: 500 700; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "BJ Display"; src: url("../fonts/bridal/playfair-display-latin-500-italic.woff2") format("woff2"); font-weight: 400 700; font-style: italic; font-display: swap; unicode-range: U+0000-00FF; }
+@font-face { font-family: "BJ Display Arabic"; src: url("../fonts/bridal/aref-ruqaa-arabic-700-normal.woff2") format("woff2"); font-weight: 500 700; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: "BJ Display Arabic"; src: url("../fonts/bridal/aref-ruqaa-arabic-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: "BJ Sans"; src: url("../fonts/bridal/ibm-plex-sans-arabic-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "BJ Sans"; src: url("../fonts/bridal/ibm-plex-sans-arabic-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "BJ Sans"; src: url("../fonts/bridal/ibm-plex-sans-arabic-latin-600-normal.woff2") format("woff2"); font-weight: 600 700; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "BJ Sans"; src: url("../fonts/bridal/ibm-plex-sans-arabic-arabic-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+@font-face { font-family: "BJ Sans"; src: url("../fonts/bridal/ibm-plex-sans-arabic-arabic-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+@font-face { font-family: "BJ Sans"; src: url("../fonts/bridal/ibm-plex-sans-arabic-arabic-600-normal.woff2") format("woff2"); font-weight: 600 700; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+
 .bj { font-family: var(--font-bj-sans); color: var(--color-bj-ink); background: var(--color-bj-ivory); -webkit-tap-highlight-color: transparent; }
 .bj :focus-visible { outline: 3px solid color-mix(in oklab, var(--color-bj-gold) 55%, transparent); outline-offset: 2px; border-radius: 10px; }
-.bj .bj-serif { font-family: var(--font-bj-serif); font-weight: 700; letter-spacing: -0.02em; }
-.bj[dir="rtl"] .bj-serif { letter-spacing: 0; line-height: 1.35; }
-.bj-skeleton { background: linear-gradient(90deg, #eef6f5 0%, #f8fbfb 50%, #eef6f5 100%); background-size: 200% 100%; }
+.bj .bj-serif { font-family: var(--font-bj-serif); font-weight: 600; letter-spacing: -0.01em; }
+.bj[dir="rtl"] .bj-serif { letter-spacing: 0; line-height: 1.45; font-weight: 700; }
+.bj .bj-rosegold { background: linear-gradient(120deg, #b97968, #e7bfae 45%, #b77866 70%, #dcae9c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bj-petals { pointer-events: none; }
+.bj-petal { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .bj-petal { animation-name: bj-petal; animation-timing-function: ease-in; animation-fill-mode: both; }
+}
+@keyframes bj-petal { 0% { opacity: 0; transform: translateY(-20px) rotate(0deg); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(180px) translateX(24px) rotate(260deg); } }
+.bj-skeleton { background: linear-gradient(90deg, #f8edf0 0%, #fdf7f8 50%, #f8edf0 100%); background-size: 200% 100%; }
 @media (prefers-reduced-motion: no-preference) {
   .bj-skeleton { animation: bj-shimmer 1.4s ease-in-out infinite; }
   .bj-float { animation: bj-float 7s ease-in-out infinite; }
@@ -381,4 +400,4 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 @keyframes bj-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @keyframes bj-sparkle { 0%, 100% { opacity: 0.25; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1); } }
 .bj-scroll-x { scrollbar-width: none; } .bj-scroll-x::-webkit-scrollbar { display: none; }
-.bj dialog::backdrop { background: rgb(30 27 58 / 0.35); backdrop-filter: blur(3px); }
+.bj dialog::backdrop { background: rgb(58 31 43 / 0.32); backdrop-filter: blur(3px); }

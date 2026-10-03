@@ -71,21 +71,21 @@ export function Budget() {
           {tiles.map((x) => (
             <div key={x.label}>
               <dt className="text-[12.5px] text-bj-muted">{x.label}</dt>
-              <dd className={cx("bj-serif mt-1 text-[1.7rem] leading-none tabular-nums", x.tone)}>
+              <dd className={cx("mt-1 text-[1.4rem] font-semibold leading-tight tabular-nums", x.tone)}>
                 <CountUp value={x.value} format={(n) => money(n)} />
               </dd>
             </div>
           ))}
         </dl>
-        <div className="mt-6 flex h-2.5 overflow-hidden rounded-full bg-[#eee8f4]" aria-hidden="true">
+        <div className="mt-6 flex h-2.5 overflow-hidden rounded-full bg-[#f4e6ea]" aria-hidden="true">
           <span className="h-full bg-bj-sage transition-[width] duration-700" style={{ width: pct(b.paid) }} />
           <span className="h-full bg-bj-gold transition-[width] duration-700" style={{ width: pct(b.committed) }} />
-          <span className="h-full bg-[#c9c0f2] transition-[width] duration-700" style={{ width: pct(b.planned) }} />
+          <span className="h-full bg-[#ead0d8] transition-[width] duration-700" style={{ width: pct(b.planned) }} />
         </div>
         <p className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-bj-muted">
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-bj-sage" />{B.paid}</span>
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-bj-gold" />{B.committed}</span>
-          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#c9c0f2]" />{B.planned} · {money(b.planned)}</span>
+          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#ead0d8]" />{B.planned} · {money(b.planned)}</span>
         </p>
       </Card>
 

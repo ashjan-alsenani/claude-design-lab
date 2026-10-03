@@ -188,7 +188,7 @@ export function More() {
           const I = navIcons[k];
           return (
             <li key={k}>
-              <Link href={href(k)} className="flex h-28 flex-col justify-between rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(30,27,58,.25)]">
+              <Link href={href(k)} className="flex h-28 flex-col justify-between rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(90,30,55,.2)]">
                 <I size={24} weight="regular" className="text-bj-gold-ink" />
                 <span className="text-[15px] text-bj-ink">{label(k)}</span>
               </Link>
