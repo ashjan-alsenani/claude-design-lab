@@ -24,6 +24,8 @@ const T = (id: string, text: string, x: number, y: number, size: number, color =
 const Q = (id: string, text: string, x: number, y: number, size: number, color = 'white', inAt = 0, more: Partial<TextActor> = {}): Actor =>
   T(id, text, x, y, size, color, inAt, { ltr: true, ...more });
 
+/** light chalk green (readable on the board) */
+const LG = '#7be3a4';
 const dim = (t: number): Anim => ({ at: t, to: { opacity: 0.22 }, dur: 0.5 });
 
 /** a round counter (16:10 stage → h = w × 1.6) */
@@ -44,7 +46,7 @@ const rect = (id: string, x: number, y: number, w: number, h: number, color: str
 
 /** x of every character of a number written digit by digit (a space = small gap). */
 const digitXs = (s: string, cx: number, size: number) => {
-  const w = size * 0.6;
+  const w = size * 0.66;
   const ws = [...s].map((c) => (c === ' ' ? w * 0.45 : w));
   const total = ws.reduce((a, b) => a + b, 0);
   let x = cx - total / 2;
@@ -181,13 +183,13 @@ const raw: Explainer[] = [
         actors: [
           ...digits('a', '٣٢٤', 78, 32, 8, 0.3, 1),
           ring('ra', '٣٢٤', 78, 32, 8, 1, 2, 'sun', 1.4),
-          { id: 'aa', kind: 'arrow', from: [66, 32], to: [56, 32], color: 'sun', in: 2.4 },
-          Q('ae', '٢٤ ÷ ٤ = ٦', 38, 32, 5, 'white', 3),
-          T('av', 'يقبل ✓', 16, 32, 3.8, 'good', 4.4, { box: true }),
+          { id: 'aa', kind: 'arrow', from: [66, 32], to: [58, 32], color: 'sun', in: 2.4 },
+          Q('ae', '٢٤ ÷ ٤ = ٦', 40, 32, 5, 'white', 3),
+          T('av', 'يقبل القسمة على ٤ ✓', 40, 44, 3.4, LG, 4.4),
           ...digits('b', '١٤٢', 78, 62, 8, 6, 1),
           ring('rb', '١٤٢', 78, 62, 8, 1, 2, 'sun', 7),
-          { id: 'ba', kind: 'arrow', from: [66, 62], to: [56, 62], color: 'sun', in: 7.8 },
-          T('be', '٤٢ ليس مضاعفًا لـ ٤', 34, 62, 3.6, 'bad', 8.4, { box: true, anim: [{ at: 8.8, effect: 'shake' }] }),
+          { id: 'ba', kind: 'arrow', from: [66, 62], to: [58, 62], color: 'sun', in: 7.8 },
+          T('be', '٤٢ ليس مضاعفًا لـ ٤', 38, 62, 3.4, 'bad', 8.4, { box: true, anim: [{ at: 8.8, effect: 'shake' }] }),
           T('rule', '👀 ننظر إلى آخر رقمين', 50, 86, 4, 'sun', 10.2),
         ],
       },
@@ -198,18 +200,18 @@ const raw: Explainer[] = [
         bg: 'board',
         actors: [
           Q('h25', '÷ ٢٥', 84, 24, 4.6, 'sun', 0.2),
-          ...['٠٠', '٢٥', '٥٠', '٧٥'].map((s, i) => T(`e${i}`, s, 66 - i * 13, 24, 4.4, 'green', 0.8 + i * 0.4, { box: true, ltr: true })),
+          ...['٠٠', '٢٥', '٥٠', '٧٥'].map((s, i) => T(`e${i}`, s, 66 - i * 13, 24, 4.4, 'good', 0.8 + i * 0.4, { box: true, ltr: true })),
           Q('h100', '÷ ١٠٠', 84, 42, 4.6, 'sun', 3.2),
-          T('f0', '٠٠', 66, 42, 4.4, 'green', 3.8, { box: true, ltr: true }),
+          T('f0', '٠٠', 66, 42, 4.4, 'good', 3.8, { box: true, ltr: true }),
           rect('sep', 50, 52, 72, 0.4, 'rgba(255,255,255,0.3)', 4.4),
           ...digits('a', '٧٧٥', 76, 66, 6.5, 5.2, 1),
           ring('ra', '٧٧٥', 76, 66, 6.5, 1, 2, 'sun', 6.2),
-          { id: 'aa', kind: 'arrow', from: [65, 66], to: [56, 66], color: 'good', in: 6.8 },
-          T('av', 'يقبل القسمة على ٢٥ ✓', 34, 66, 3.6, 'good', 7.2, { box: true }),
+          { id: 'aa', kind: 'arrow', from: [64, 66], to: [52, 66], color: 'good', in: 6.8 },
+          T('av', 'يقبل القسمة على ٢٥ ✓', 30, 66, 3.2, 'good', 7.2, { box: true }),
           ...digits('b', '٢ ٠٠٥', 76, 84, 6.5, 8.8, 2),
           ring('rb', '٢ ٠٠٥', 76, 84, 6.5, 3, 4, 'red', 9.8),
-          { id: 'ba', kind: 'arrow', from: [63, 84], to: [56, 84], color: 'red', in: 10.4 },
-          T('bv', 'لا يقبل القسمة على ١٠٠', 34, 84, 3.6, 'bad', 10.8, { box: true, anim: [{ at: 11.2, effect: 'shake' }] }),
+          { id: 'ba', kind: 'arrow', from: [62, 84], to: [52, 84], color: 'red', in: 10.4 },
+          T('bv', 'لا يقبل القسمة على ١٠٠', 30, 84, 3.2, 'bad', 10.8, { box: true, anim: [{ at: 11.2, effect: 'shake' }] }),
         ],
       },
       {
@@ -228,7 +230,7 @@ const raw: Explainer[] = [
           }),
           T('s1', 'على ٢ و٥: آحاده ٠', 50, 70, 3.8, 'white', 3.4, { box: true, out: 6.6 }),
           T('s2', 'على ٤: يبقى ٢٠ و٤٠ و٦٠', 50, 70, 3.8, 'white', 7.2, { box: true, out: 10.2 }),
-          T('s3', 'على ٣: ٦٠ = ٣ × ٢٠', 50, 70, 3.8, 'white', 10.6, { box: true }),
+          T('s3', 'على ٣: يبقى ٦٠ فقط', 50, 70, 3.8, 'white', 10.6, { box: true }),
           T('res', 'أصغر عدد هو ٦٠ 🎉', 50, 87, 4.4, 'good', 12.2, { box: true }),
         ],
       },
@@ -249,17 +251,17 @@ const raw: Explainer[] = [
             ] as const
           ).flatMap(([d, r], i): Actor[] => [
             Q(`rd${i}`, d, 84, 40 + i * 18, 4.6, 'white', 1 + i * 1.2),
-            T(`rr${i}`, r, 64, 40 + i * 18, 4.2, 'green', 1.4 + i * 1.2),
+            T(`rr${i}`, r, 64, 40 + i * 18, 4.2, LG, 1.4 + i * 1.2),
           ]),
           ...(
             [
-              ['÷ ٤', 'يقبل القسمة على ٤'],
+              ['÷ ٤', 'مضاعف للعدد ٤'],
               ['÷ ٢٥', '٠٠ ٢٥ ٥٠ ٧٥'],
               ['÷ ١٠٠', '٠٠'],
             ] as const
           ).flatMap(([d, r], i): Actor[] => [
             Q(`ld${i}`, d, 40, 40 + i * 18, 4.6, 'white', 6 + i * 1.2),
-            T(`lr${i}`, r, 20, 40 + i * 18, i === 0 ? 3 : 4, 'green', 6.4 + i * 1.2, i === 1 ? { ltr: true } : {}),
+            T(`lr${i}`, r, 20, 40 + i * 18, i === 0 ? 3.4 : 4, LG, 6.4 + i * 1.2),
           ]),
         ],
       },
@@ -339,8 +341,8 @@ const raw: Explainer[] = [
           T('pl2', '+', 47.5, 86, 5, 'white', 2.6),
           Q('m2', '٢٠', GX[2], GY[1], 5, 'sun', 2.4, { anim: [{ at: 2.6, to: { x: 54.5, y: 86 }, dur: 0.9 }] }),
           T('eqs', '=', 61.5, 86, 5, 'white', 3.8),
-          Q('sum', '٨٢٠', 70, 86, 6, 'green', 4.4, { anim: [{ at: 4.8, effect: 'glow' }] }),
-          Q('top', '١٦٤ × ٥ = ٨٢٠', 50, 18, 5.5, 'green', 6.4, { anim: [{ at: 6.8, effect: 'glow' }] }),
+          Q('sum', '٨٢٠', 70, 86, 6, LG, 4.4, { anim: [{ at: 4.8, effect: 'glow' }] }),
+          Q('top', '١٦٤ × ٥ = ٨٢٠', 50, 18, 5.5, LG, 6.4, { anim: [{ at: 6.8, effect: 'glow' }] }),
         ],
       },
       {
@@ -360,7 +362,7 @@ const raw: Explainer[] = [
           Q('r0', '٢ ٤٠٠', GX[0], GY[1], 4.6, 'white', 4, { anim: [{ at: 4.1, effect: 'pulse' }] }),
           Q('r1', '١٦٠', GX[1], GY[1], 5, 'white', 5.4, { anim: [{ at: 5.5, effect: 'pulse' }] }),
           Q('r2', '٥٦', GX[2], GY[1], 5, 'white', 6.8, { anim: [{ at: 6.9, effect: 'pulse' }] }),
-          Q('sum', '٢ ٤٠٠ + ١٦٠ + ٥٦ = ٢ ٦١٦', 50, 86, 4.6, 'green', 8.6, { anim: [{ at: 9.2, effect: 'glow' }] }),
+          Q('sum', '٢ ٤٠٠ + ١٦٠ + ٥٦ = ٢ ٦١٦', 50, 86, 4.6, LG, 8.6, { anim: [{ at: 9.2, effect: 'glow' }] }),
         ],
       },
       {
@@ -395,13 +397,13 @@ const raw: Explainer[] = [
           T('u7', '٧', 56, 46, 7, 'white', 0.2, { anim: [{ at: 1, effect: 'pulse' }] }),
           rect('bar', 46, 55, 26, 0.7, 'white', 0.2),
           Q('n1', '٦ × ٧ = ٤٢', 80, 34, 4.4, 'sun', 1.4, { out: 6 }),
-          T('w2', '٢', 56, 66, 7, 'green', 3, { anim: [{ at: 3.1, effect: 'pulse' }] }),
+          T('w2', '٢', 56, 66, 7, LG, 3, { anim: [{ at: 3.1, effect: 'pulse' }] }),
           T('c4', '٤', 48, 19, 3.8, 'orange', 4, { anim: [{ at: 4.1, effect: 'bounce' }] }),
           T('c4l', 'نحمل ٤', 32, 19, 3.2, 'orange', 4.4, { out: 6 }),
           Q('n2', '٨ × ٧ = ٥٦', 80, 34, 4.4, 'sun', 6.4),
           Q('n3', '٥٦ + ٤ = ٦٠', 80, 48, 4.4, 'orange', 8),
-          T('w0', '٠', 48, 66, 7, 'green', 9.4),
-          T('w6', '٦', 40, 66, 7, 'green', 9.6),
+          T('w0', '٠', 48, 66, 7, LG, 9.4),
+          T('w6', '٦', 40, 66, 7, LG, 9.6),
           T('res', '٦٠٢ قريب من ٦٣٠ ✓', 50, 86, 4, 'good', 11, { box: true, anim: [{ at: 11.4, effect: 'glow' }] }),
         ],
       },
@@ -419,7 +421,7 @@ const raw: Explainer[] = [
           { id: 'a2', kind: 'arrow', from: [39, 30], to: [34, 30], color: 'sun', in: 4 },
           T('s3', '٣ نجمع', 22, 30, 4.4, 'sun', 4.4, { box: true }),
           Q('e3', '٥٠٠ + ٣٠٠ + ٢٠', 22, 46, 3.8, 'white', 5),
-          Q('fin', '١٦٤ × ٥ = ٨٢٠', 50, 66, 5.4, 'green', 6.4, { anim: [{ at: 6.8, effect: 'glow' }] }),
+          Q('fin', '١٦٤ × ٥ = ٨٢٠', 50, 66, 5.4, LG, 6.4, { anim: [{ at: 6.8, effect: 'glow' }] }),
           T('est', '🎯 نقدّر أولًا لنتحقق', 50, 86, 3.8, 'good', 8.4, { box: true }),
         ],
       },
@@ -488,7 +490,7 @@ const raw: Explainer[] = [
           ...[0, 1, 2, 3].map((i): Actor => ({ id: `g${i}`, kind: 'shape', shape: 'pill', x: 68 + i * 6.5, y: 37, w: 5.4, h: 20, color: 'rgba(255,255,255,0.12)', in: 2.8 })),
           T('rl', 'الباقي ٢', 77, 79, 3.4, 'orange', 5.2),
           Q('note', '١٠ ÷ ٤ = ٢ والباقي ٢', 40, 84, 4.2, 'sun', 5.6),
-          T('q2', '٢', DX[1], QY, 8, 'green', 7.2, { anim: [{ at: 7.3, effect: 'pulse' }] }),
+          T('q2', '٢', DX[1], QY, 8, LG, 7.2, { anim: [{ at: 7.3, effect: 'pulse' }] }),
           T('cy', '٢', DX[2] - 4.2, DY - 3.5, 3.6, 'orange', 9, { anim: [{ at: 9.1, effect: 'bounce' }] }),
           { id: 'ca', kind: 'arrow', from: [70, 74], to: [52, 54], curve: 6, color: 'orange', dashed: true, in: 8.6 },
         ],
@@ -500,14 +502,14 @@ const raw: Explainer[] = [
         bg: 'board',
         actors: [
           ...busStop('٤', ['١', '٠', '٤']),
-          T('q2', '٢', DX[1], QY, 8, 'green'),
+          T('q2', '٢', DX[1], QY, 8, LG),
           T('cy', '٢', DX[2] - 4.2, DY - 3.5, 3.6, 'orange'),
           { id: 'rg', kind: 'shape', shape: 'pill', x: DX[2] - 1.6, y: DY + 0.6, w: 11, h: 15, color: 'sun', outline: true, in: 0.8 },
           Q('n24', '٢٤', 78, 22, 5, 'sun', 1.4),
           ...Array.from({ length: 24 }, (_, i) => dot(`a${i}`, 67 + (i % 6) * 4.4, 36 + Math.floor(i / 6) * 9, 2.2 + Math.floor(i / 6) * 0.5, 'sun', 2.8)),
           ...[0, 1, 2, 3].map((r): Actor => Q(`rl${r}`, '٦', 93 - 4, 36 + r * 9, 3, 'white', 4.4 + r * 0.2)),
           Q('note', '٢٤ ÷ ٤ = ٦', 40, 84, 4.6, 'sun', 5.6),
-          T('q6', '٦', DX[2], QY, 8, 'green', 7, { anim: [{ at: 7.1, effect: 'pulse' }] }),
+          T('q6', '٦', DX[2], QY, 8, LG, 7, { anim: [{ at: 7.1, effect: 'pulse' }] }),
         ],
       },
       {
@@ -517,12 +519,12 @@ const raw: Explainer[] = [
         bg: 'board',
         actors: [
           ...busStop('٤', ['١', '٠', '٤']),
-          T('q2', '٢', DX[1], QY, 8, 'green'),
-          T('q6', '٦', DX[2], QY, 8, 'green'),
+          T('q2', '٢', DX[1], QY, 8, LG),
+          T('q6', '٦', DX[2], QY, 8, LG),
           T('cy', '٢', DX[2] - 4.2, DY - 3.5, 3.6, 'orange'),
           Q('eq', '١٠٤ ÷ ٤ = ٢٦', 77, 32, 5, 'white', 0.8, { anim: [{ at: 1.2, effect: 'glow' }] }),
           T('est', '🎯 قريب من ٢٥', 77, 50, 3.8, 'sun', 2.6),
-          Q('chk', '٢٦ × ٤ = ١٠٤', 50, 82, 5, 'green', 4.6),
+          Q('chk', '٢٦ × ٤ = ١٠٤', 50, 82, 5, LG, 4.6),
           T('ok', '✓', 70, 82, 6, 'good', 5.4, { anim: [{ at: 5.5, effect: 'bounce' }] }),
         ],
       },
@@ -535,11 +537,11 @@ const raw: Explainer[] = [
           ...busStop('٩', ['٥', '٠', '٩']),
           { id: 'rg1', kind: 'shape', shape: 'pill', x: 40.5, y: DY + 0.6, w: 16, h: 15, color: 'sun', outline: true, in: 1, out: 5.4 },
           Q('n1', '٥٠ ÷ ٩ = ٥ والباقي ٥', 46, 84, 4.2, 'sun', 1.6, { out: 6.2 }),
-          T('q5', '٥', DX[1], QY, 8, 'green', 3.2, { anim: [{ at: 3.3, effect: 'pulse' }] }),
+          T('q5', '٥', DX[1], QY, 8, LG, 3.2, { anim: [{ at: 3.3, effect: 'pulse' }] }),
           T('cy', '٥', DX[2] - 4.2, DY - 3.5, 3.6, 'orange', 4.4, { anim: [{ at: 4.5, effect: 'bounce' }] }),
           { id: 'rg2', kind: 'shape', shape: 'pill', x: DX[2] - 1.6, y: DY + 0.6, w: 11, h: 15, color: 'sun', outline: true, in: 6 },
           Q('n2', '٥٩ ÷ ٩ = ٦ والباقي ٥', 46, 84, 4.2, 'sun', 6.6),
-          T('q6', '٦', DX[2], QY, 8, 'green', 8.4, { anim: [{ at: 8.5, effect: 'pulse' }] }),
+          T('q6', '٦', DX[2], QY, 8, LG, 8.4, { anim: [{ at: 8.5, effect: 'pulse' }] }),
           T('rm', 'والباقي ٥', 72, QY, 4.4, 'orange', 9.6, { box: true, anim: [{ at: 10, effect: 'glow' }] }),
           Q('chk', '٥٦ × ٩ + ٥ = ٥٠٩', 78, 62, 3.6, 'white', 11.4),
           T('ok', 'نتحقّق ✓', 78, 72, 3.4, 'good', 12),
@@ -558,7 +560,7 @@ const raw: Explainer[] = [
           { id: 'grp', kind: 'shape', shape: 'pill', x: 44.8, y: 46, w: 46, h: 13, color: 'good', outline: true, in: 5.4, anim: [{ at: 5.6, effect: 'pulse' }] },
           T('gl', 'مجموعة أخرى من ٩!', 44.8, 60, 3.6, 'good', 6),
           T('rl', 'يبقى ٢', 80, 60, 3.4, 'orange', 7),
-          Q('r', '٢٥٤ ÷ ٩ = ٢٨ والباقي ٢', 50, 76, 4.6, 'green', 9.4, { anim: [{ at: 9.8, effect: 'glow' }] }),
+          Q('r', '٢٥٤ ÷ ٩ = ٢٨ والباقي ٢', 50, 76, 4.6, LG, 9.4, { anim: [{ at: 9.8, effect: 'glow' }] }),
           T('rule', 'الباقي أصغر من المقسوم عليه', 50, 89, 3.6, 'sun', 11.2, { box: true }),
         ],
       },
@@ -592,7 +594,7 @@ const raw: Explainer[] = [
         bg: 'board',
         actors: [
           Q('n', '٣٦', 50, 50, 14, 'white', 0.2, { anim: [{ at: 1, effect: 'float' }] }),
-          T('t1', 'زوجي', 76, 26, 4.2, 'green', 2.2, { box: true }),
+          T('t1', 'زوجي', 76, 26, 4.2, 'good', 2.2, { box: true }),
           T('t2', 'عدد مربّع', 24, 26, 4.2, 'sun', 3.4, { box: true }),
           T('t3', 'له ٩ عوامل', 76, 76, 4.2, 'purple', 4.8, { box: true }),
           T('t4', 'مجموع أرقامه ٩', 24, 76, 4.2, 'orange', 6.2, { box: true }),
@@ -615,7 +617,7 @@ const raw: Explainer[] = [
           T('al', 'بلا شريك', 30, 69, 3.4, 'white', 3, { out: 4.8 }),
           ...[0, 1, 2].map((i): Actor => dot(`b${i}`, 46, 30 + i * 13, 5, 'sun', 5, [{ at: 5.2, to: { x: 56 }, dur: 0.8 }])),
           ...[0, 1, 2].map((i): Actor => ({ id: `p${i}`, kind: 'shape', shape: 'pill', x: 51, y: 30 + i * 13, w: 15, h: 11, color: 'good', outline: true, in: 6.6 + i * 0.3 })),
-          Q('dbl', '٣ × ٢ = ٦', 51, 78, 5, 'green', 7.6, { anim: [{ at: 8, effect: 'pulse' }] }),
+          Q('dbl', '٣ × ٢ = ٦', 51, 78, 5, LG, 7.6, { anim: [{ at: 8, effect: 'pulse' }] }),
           T('even', 'زوجي', 78, 50, 4.4, 'good', 8.2, { box: true }),
           Q('ex', '٧ × ٢ = ١٤', 78, 66, 3.8, 'white', 9.6),
         ],
@@ -686,11 +688,11 @@ const raw: Explainer[] = [
             return [Q(`n${i}`, n, x, 46, 6, 'white', 1.6 + i * 0.4, { anim }), Q(`e${i}`, e, x, 58, 2.8, 'sun', 1.8 + i * 0.4, { anim: i === 2 ? [] : [dim(odd ? 6.4 : 9.6)] })];
           }),
           T('c1', '١ مربّع بين ١٠ و٩٩', 50, 22, 3.8, 'sun', 0.4, { box: true, out: 5.6 }),
-          T('c2', '٢ زوجي', 50, 22, 3.8, 'green', 5.8, { box: true, out: 8.8 }),
+          T('c2', '٢ زوجي', 50, 22, 3.8, 'good', 5.8, { box: true, out: 8.8 }),
           T('c3', '٣ مجموع أرقامه ٩', 50, 22, 3.8, 'orange', 9, { box: true }),
           Q('s16', '١ + ٦ = ٧', 84, 72, 3.4, 'grey', 9.2, { out: 12 }),
           Q('s64', '٦ + ٤ = ١٠', 29.6, 72, 3.4, 'grey', 9.2, { out: 12 }),
-          Q('s36', '٣ + ٦ = ٩ ✓', 56.8, 72, 3.8, 'green', 10),
+          Q('s36', '٣ + ٦ = ٩ ✓', 56.8, 72, 3.8, LG, 10),
           T('res', 'إنه ٣٦ 🔍', 50, 87, 4.4, 'good', 12, { box: true }),
         ],
       },
@@ -705,11 +707,11 @@ const raw: Explainer[] = [
             const anim: Anim[] = n % 2 === 1 ? [dim(4.6)] : n % 4 !== 0 ? [dim(7.6)] : n === 16 ? [dim(10.6)] : [{ at: 11.2, to: { scale: 1.45, y: 44 }, dur: 0.6 }, { at: 12, effect: 'glow' }];
             return Q(`n${n}`, String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)]), 86 - i * 7.2, 46, 4.6, 'white', 0.8 + i * 0.1, { anim });
           }),
-          T('c1', '١ زوجي', 50, 22, 3.8, 'green', 3.6, { box: true, out: 6.8 }),
+          T('c1', '١ زوجي', 50, 22, 3.8, 'good', 3.6, { box: true, out: 6.8 }),
           T('c2', '٢ من مضاعفات ٤', 50, 22, 3.8, 'sun', 7, { box: true, out: 9.8 }),
           Q('m4', '٤ × ٣ = ١٢     ٤ × ٤ = ١٦', 50, 64, 3.6, 'sun', 7.6, { out: 9.8 }),
           T('c3', '٣ عامل للعدد ٢٤', 50, 22, 3.8, 'orange', 10, { box: true }),
-          Q('f', '٢ × ١٢ = ٢٤', 50, 66, 4.6, 'green', 11),
+          Q('f', '٢ × ١٢ = ٢٤', 50, 66, 4.6, LG, 11),
           T('res', 'إنه ١٢ 🔍', 50, 85, 4.4, 'good', 12.6, { box: true }),
         ],
       },
@@ -736,7 +738,7 @@ const raw: Explainer[] = [
         actors: [
           ...(
             [
-              ['زوجي', '٢ ٤ ٦ ٨', 'green'],
+              ['زوجي', '٢ ٤ ٦ ٨', 'good'],
               ['فردي', '١ ٣ ٥ ٧', 'orange'],
               ['أولي', '٢ ٣ ٥ ٧ ١١', 'accent'],
               ['مربّع', '١ ٤ ٩ ١٦ ٣٦', 'sun'],
