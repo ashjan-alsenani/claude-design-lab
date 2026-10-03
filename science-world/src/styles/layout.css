@@ -241,6 +241,11 @@
   color: var(--accent-deep);
   box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 30%, white);
 }
-@media (max-width: 520px) {
+@media (max-width: 520px), (min-width: 1100px) and (max-width: 1439px) {
   .subject-switch__name { display: none; }
+}
+/* desktop with the top nav: keep the bar on one line */
+@media (min-width: 1100px) and (max-width: 1439px) {
+  .nav--top .nav__item { padding: 8px 10px; font-size: 0.92rem; }
+  .topbar__stats .stat-pill--fire { display: none; }
 }

@@ -36,7 +36,7 @@ export const subjects: Subject[] = personalise<Subject[]>([
     title: 'اللغة الإنجليزية',
     short: 'الإنجليزية',
     emoji: '🔤',
-    tagline: 'الهوايات، التقنية، الأماكن — Team Together',
+    tagline: 'الهوايات والتقنية والأماكن',
     theme: 'sky',
     // Semester 1 Class Book (parts 1 and 2), in book order.
     units: [englishWelcome, englishUnit1, englishUnit2, englishUnit3, englishLearningClub1].filter((u) => u.lessons.length > 0),
