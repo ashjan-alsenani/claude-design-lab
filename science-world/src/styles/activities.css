@@ -1295,7 +1295,7 @@
 
 /* English text reads left-to-right inside the Arabic page:
    every paragraph takes the direction of its own first letter. */
-[data-subject='english'] :is(h1, h2, h3, h4, p, li, td, th, dt, dd, blockquote, .choice__text, .flip__word, .flip__back, .token, .chip-btn, .bubble, .blank) {
+[data-subject='english'] :is(h1, h2, h3, h4, p, li, td, th, dd, blockquote, .choice__text, .flip__word, .flip__back, .token, .chip-btn, .bubble, .blank) {
   unicode-bidi: plaintext;
 }
 

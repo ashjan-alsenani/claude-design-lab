@@ -280,6 +280,7 @@
    ============================================================ */
 .journey__head {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--s-3);
   margin-bottom: var(--s-5);
 }
@@ -1021,6 +1022,9 @@ a.lesson-card:active {
 /* ============================================================
    ZONES (challenges, games, rewards)
    ============================================================ */
+.zone-hero > div {
+  min-width: 0;
+}
 .zone-hero {
   display: flex;
   align-items: center;
@@ -1390,6 +1394,8 @@ a.lesson-card:active {
 }
 .glossary__item dt {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
   font-family: var(--font-display);
@@ -1645,6 +1651,8 @@ a.lesson-card:active {
   font-size: 0.9rem;
 }
 .page-head {
+  min-width: 0;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

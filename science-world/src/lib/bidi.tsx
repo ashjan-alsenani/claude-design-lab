@@ -1,7 +1,7 @@
 import { Fragment, type ReactNode } from 'react';
 
 /** A run of English inside Arabic text: words, digits and the punctuation between them. */
-const LATIN_RUN = /[A-Za-z][A-Za-z0-9'’.,:;/+\- ]*[A-Za-z0-9'’!?)]|[A-Za-z]/g;
+const LATIN_RUN = /[A-Za-z][A-Za-z0-9'’.,:;/+\- ]*[A-Za-z0-9'’!?.)]|[A-Za-z]/g;
 const ARABIC = /[؀-ۿ]/;
 
 /**
