@@ -63,7 +63,7 @@ const explainers: Explainer[] = [
           { id: 't1', kind: 'text', text: 'where people prayed', x: 24, y: 76, size: 2.5, box: true, ltr: true, color: 'orange', in: 1 },
           { id: 'a1', kind: 'arrow', from: [30, 46], to: [40, 46], color: 'ink', in: 2.8 },
           { id: 'mus', kind: 'emoji', emoji: '🖼️', x: 50, y: 46, size: 14, in: 3.2 },
-          { id: 't2', kind: 'text', text: 'a museum', x: 50, y: 70, size: 3.2, box: true, ltr: true, color: 'blue', in: 3.6 },
+          { id: 't2', kind: 'text', text: 'a museum', x: 52, y: 68, size: 3.2, box: true, ltr: true, color: 'blue', in: 3.6 },
           { id: 'a2', kind: 'arrow', from: [60, 46], to: [70, 46], color: 'ink', in: 5.4 },
           { id: 'fest', kind: 'emoji', emoji: '🎻', x: 81, y: 46, size: 14, in: 5.8, anim: [{ at: 6, effect: 'bounce' }] },
           { id: 'notes', kind: 'flow', path: [[74, 34], [81, 24], [90, 32]], emoji: '🎶', count: 3, speed: 2.4, showPath: false, in: 6.2 },
@@ -695,11 +695,11 @@ const explainers: Explainer[] = [
         actors: [
           { id: 'b1', kind: 'emoji', emoji: '📗', x: 26, y: 40, size: 18, in: 0.3, anim: [{ at: 0.6, effect: 'float' }] },
           { id: 'i1', kind: 'emoji', emoji: '👷🏽‍♀️', x: 26, y: 40, size: 8, in: 0.8 },
-          { id: 't1', kind: 'text', text: '‘Be an Architect’ Day', x: 26, y: 64, size: 3, box: true, ltr: true, color: 'green', in: 1.2 },
-          { id: 'b2', kind: 'emoji', emoji: '📘', x: 72, y: 40, size: 18, in: 3.6, anim: [{ at: 3.9, effect: 'float' }] },
-          { id: 'i2', kind: 'emoji', emoji: '🏢', x: 72, y: 40, size: 8, in: 4 },
-          { id: 't2', kind: 'text', text: 'The Amazing Apartment Building', x: 70, y: 64, size: 2.8, box: true, ltr: true, color: 'blue', in: 4.4 },
-          { id: 'go', kind: 'text', text: 'Let’s retell them in panels 🎞️', x: 50, y: 84, size: 3.6, ltr: true, color: 'accent', in: 7 },
+          { id: 't1', kind: 'text', text: '‘Be an Architect’ Day', x: 28, y: 64, size: 3, box: true, ltr: true, color: 'green', in: 1.2 },
+          { id: 'b2', kind: 'emoji', emoji: '📘', x: 72, y: 44, size: 18, in: 3.6, anim: [{ at: 3.9, effect: 'float' }] },
+          { id: 'i2', kind: 'emoji', emoji: '🏢', x: 72, y: 44, size: 8, in: 4 },
+          { id: 't2', kind: 'text', text: 'The Amazing Apartment Building', x: 68, y: 75, size: 2.8, box: true, ltr: true, color: 'blue', in: 4.4 },
+          { id: 'go', kind: 'text', text: 'Let’s retell them in panels 🎞️', x: 50, y: 89, size: 3.6, ltr: true, color: 'accent', in: 7 },
         ],
       },
       {
@@ -766,7 +766,7 @@ const explainers: Explainer[] = [
           { id: 'gift1', kind: 'emoji', emoji: '🎁', x: 76, y: 56, size: 5, in: 7, anim: [{ at: 7.2, to: { x: 32, y: 74 }, dur: 1 }] },
           { id: 'gift2', kind: 'emoji', emoji: '🎁', x: 76, y: 56, size: 5, in: 7.6, anim: [{ at: 7.8, to: { x: 50, y: 74 }, dur: 1 }] },
           { id: 'gift3', kind: 'emoji', emoji: '🎁', x: 76, y: 56, size: 5, in: 8.2, anim: [{ at: 8.4, to: { x: 68, y: 74 }, dur: 1 }] },
-          { id: 'all', kind: 'text', text: 'for everyone!', x: 82, y: 64, size: 3, ltr: true, color: 'purple', in: 9.4 },
+          { id: 'all', kind: 'text', text: 'for everyone!', x: 80, y: 66, size: 2.8, ltr: true, color: 'purple', in: 9.4 },
         ],
       },
       {
@@ -832,7 +832,7 @@ const explainers: Explainer[] = [
           { id: 'lift', kind: 'emoji', emoji: '🛗', x: 74, y: 52, size: 15, in: 3.4 },
           { id: 'ok', kind: 'emoji', emoji: '✅', x: 84, y: 40, size: 7, in: 4.4, anim: [{ at: 4.6, effect: 'pulse' }] },
           { id: 'w', kind: 'text', text: 'The lift was working!', x: 72, y: 72, size: 3.2, box: true, ltr: true, color: 'good', in: 4.8 },
-          { id: 'b', kind: 'text', text: 'We should take the stairs every day!', x: 40, y: 83, size: 3.2, box: true, ltr: true, color: 'accent', in: 7.4, anim: [{ at: 7.8, effect: 'glow' }] },
+          { id: 'b', kind: 'text', text: 'We should take the stairs every day!', x: 40, y: 82, size: 3.2, box: true, ltr: true, color: 'accent', in: 7.4, anim: [{ at: 7.8, effect: 'glow' }] },
         ],
       },
       {
