@@ -12,6 +12,11 @@ import { Breadcrumbs } from "@/components/ui/PageHeader";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import { NotifyForm } from "@/components/product/NotifyForm";
 import { CheckoutTracker } from "@/components/product/CheckoutTracker";
+import { buttonClass } from "@/components/ui/Button";
+import { inputClass } from "@/components/ui/Field";
+import { fill, licensingCopy } from "@/i18n/licensing";
+import { currentContext, licensingMode } from "@/lib/licensing/server";
+import { sandboxPayAction } from "../actions";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -29,6 +34,9 @@ export default async function CheckoutPage({ params }: Props) {
   const d = getDictionary(locale);
   const provider = getPaymentProvider();
   const name = tr(product.name, locale);
+  const sandbox = licensingMode() === "sandbox";
+  const ctx = sandbox ? await currentContext() : null;
+  const t = licensingCopy[locale].checkout;
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-10 pt-10 sm:px-6 md:pt-14">
@@ -46,6 +54,39 @@ export default async function CheckoutPage({ params }: Props) {
               </p>
               <p className="mt-3 leading-relaxed text-ink-soft">{d.checkout.body}</p>
             </div>
+          )}
+          {sandbox && (
+            <section aria-labelledby="sandbox-pay" className="mt-8 rounded-[var(--radius-lg)] border-2 border-dashed border-lilac/60 bg-surface p-6">
+              <h2 id="sandbox-pay" className="text-sm font-bold tracking-wide text-ink">
+                {t.sandboxTitle}
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t.sandboxBody}</p>
+              <form action={sandboxPayAction} className="mt-5 space-y-4">
+                <input type="hidden" name="locale" value={locale} />
+                <input type="hidden" name="slug" value={product.slug} />
+                {ctx ? (
+                  <p className="text-sm text-ink">{fill(t.signedInAs, { email: "\u2068" + ctx.user.email + "\u2069" })}</p>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="sandbox-email" className="text-sm font-medium text-ink">
+                      {t.email}
+                    </label>
+                    <input id="sandbox-email" name="email" type="email" required autoComplete="email" dir="ltr" className={inputClass} />
+                  </div>
+                )}
+                <div className="flex flex-wrap gap-2">
+                  <button name="outcome" value="succeeded" className={buttonClass("primary", "md")}>
+                    {t.succeed}
+                  </button>
+                  <button name="outcome" value="pending" className={buttonClass("secondary", "md")}>
+                    {t.pending}
+                  </button>
+                  <button name="outcome" value="failed" className={buttonClass("ghost", "md")}>
+                    {t.fail}
+                  </button>
+                </div>
+              </form>
+            </section>
           )}
           <div className="mt-8 rounded-[var(--radius-lg)] border border-line bg-surface p-6">
             <h2 className="text-lg font-semibold text-ink">{d.checkout.notify}</h2>

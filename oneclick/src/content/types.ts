@@ -55,6 +55,8 @@ export type Product = {
   art?: ArtId;
   featured: boolean;
   isNew: boolean;
+  /** Bundles only: product ids a bundle license unlocks. */
+  includes?: string[];
   demo?: DemoId;
   faqs: { q: Localized; a: Localized }[];
   disclaimer?: Localized;

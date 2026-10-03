@@ -23,11 +23,30 @@ email exists). Do not open public issues for security problems.
 - **Payments**: no card data is collected; the placeholder provider rejects all webhooks.
 - **Customer-safe errors**: error boundary shows a friendly message; details go to logs.
 
+## Licensing & access (BUILT LOCALLY + TESTED, see docs/LICENSING.md)
+- Ownership = license bound to a verified account. URLs, links, cookies or storage alone prove
+  nothing; every product page/download is authorized server-side by `canUserAccessProduct()`.
+- One-time codes: 6 digits, 10 min, single use, 5 tries then locked, 5/hour per email + per-IP
+  limits, stored as HMAC only, never logged or sent to the browser.
+- Sessions and device identities are random tokens in HttpOnly, `Secure` (production),
+  `SameSite=Lax` cookies; only HMAC digests are stored. Passwords use scrypt.
+- Device limit (default 2) with verify -> remove old -> authorize flow; new-device alert email;
+  session cap; sign out everywhere; no fingerprinting.
+- Licenses change only from verified, idempotent payment events (amount/currency/provider/order
+  must match) or audited admin actions. Refund/chargeback/cancel rules are configurable.
+- Download links: signed, 120 s, bound to user + session, license re-checked, logged, optional
+  limits, personalized watermark (deters sharing; does not prevent copying).
+- Personal pages are `Cache-Control: private, no-store` + `noindex`; claim page uses
+  `no-referrer`; post-sign-in redirects accept only same-site paths.
+- Logs never contain codes, tokens, passwords or hashes (enforced + unit-tested).
+- Production fails closed until the database is connected; the SANDBOX provider and
+  development mailbox exist only in local demo mode.
+
 ## Required when Supabase is connected (PLANNED, schema ready)
-- Auth via `@supabase/ssr` with HTTP-only, `Secure`, `SameSite=Lax` cookies.
+- Implement `SupabaseLicensingStore` (same engine) and set `LICENSING_SECRET` (32+ chars) in hosting secrets.
 - Row Level Security on all tables (written in `supabase/migrations`, verified on Postgres 16).
 - Admin writes only through server actions using the service role key after `has_role('admin')`.
-- Paid files in a **private** bucket; downloads via short-lived signed URLs after `canAccess()`.
+- Paid files in a **private** bucket; downloads via short-lived signed URLs after `canUserAccessProduct()`.
 - `verified_purchase` set by a database trigger, never by the client.
 - Webhooks: verify provider signature, store raw event in `payment_events` (idempotent by
   provider event id), then fulfil.

@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — 2026-10-03 — Licensing, delivery & access engine
+- Reusable licensing engine: licenses bound to verified accounts, central
+  `canUserAccessProduct()`, statuses pending/active/suspended/revoked/expired, bundles.
+- Purchase flow with signed SANDBOX payments (no real money), guest purchases with
+  "Claim / open my product" email, verification codes, My Products, My Purchases, My Devices,
+  Security & settings (password, email change, activity).
+- Trusted devices (default 2), new-device flow, sessions, sign out everywhere, alerts.
+- Protected product route `/app/{slug}` with friendly denied page; secure, personalized,
+  session-bound downloads.
+- Admin licensing: licenses, customers, product security settings, rules, activity, audit log.
+- Database migration with RLS and column privileges (verified on PostgreSQL 16).
+- Tests: 57 unit, 36 browser.
+
 ## 0.3.0 — 2026-10-02 — One Click, Clicky v3, pricing, more products
 - Brand name simplified to **One Click**.
 - Clicky v3: cuter mascot/logo with big shiny eyes, rosy cheeks and a twinkling sparkle; all logo,

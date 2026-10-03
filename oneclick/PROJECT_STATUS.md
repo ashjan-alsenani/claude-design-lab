@@ -1,6 +1,6 @@
 # Project status
 
-Last updated: 2026-10-02. Labels: PLANNED · DESIGNED · BUILT LOCALLY · TESTED · MOCK CONNECTED ·
+Last updated: 2026-10-03. Labels: PLANNED · DESIGNED · BUILT LOCALLY · TESTED · MOCK CONNECTED ·
 SANDBOX CONNECTED · PRODUCTION CONNECTION REQUIRES OWNER · LIVE. **Nothing is LIVE.**
 
 | Area | Status | Notes |
@@ -16,12 +16,15 @@ SANDBOX CONNECTED · PRODUCTION CONNECTION REQUIRES OWNER · LIVE. **Nothing is 
 | About, Guides (3 real guides) | BUILT LOCALLY | |
 | Legal framework (7 pages AR/EN) | DESIGNED | Drafts, lawyer review required |
 | Favorites (guest, on device) | TESTED | Account sync planned |
-| Accounts / auth | MOCK CONNECTED | Demo session in dev only; Supabase PRODUCTION CONNECTION REQUIRES OWNER |
-| Customer dashboard | MOCK CONNECTED | Sample entitlements |
+| Licensing & access engine (licenses, claim, verification codes, devices, sessions, downloads) | TESTED (SANDBOX) | docs/LICENSING.md. Production fails closed until the database is connected |
+| Accounts / auth (email code + optional password, HttpOnly sessions, trusted devices) | SANDBOX CONNECTED | Local file store; Supabase PRODUCTION CONNECTION REQUIRES OWNER |
+| Customer area: My Products, My Purchases, My Devices, Security | TESTED (SANDBOX) | EN + AR, desktop + mobile |
+| Protected product route /app/{slug} + friendly denied page | TESTED | Shared URLs and forwarded links give no access |
+| Admin licensing (licenses, customers, product security, rules, activity, audit) | TESTED (SANDBOX) | Every change audit-logged |
 | Admin / Business command center | MOCK CONNECTED | Read-only preview; real alerts; saving needs DB |
-| Payments | MOCK CONNECTED | Provider-independent interface; "PAYMENT PROVIDER NOT YET CONNECTED" |
+| Payments | MOCK CONNECTED | Provider-independent interface; "PAYMENT PROVIDER NOT YET CONNECTED". Signed SANDBOX provider for local testing only |
 | Orders, entitlements, discounts logic | TESTED | Unit tests |
-| Database schema + RLS | TESTED | Applied on local Postgres 16; not on Supabase yet |
+| Database schema + RLS (incl. licensing migration) | TESTED | Both migrations applied on local Postgres 16; RLS checks pass; not on Supabase yet |
 | Email templates (7, bilingual) | BUILT LOCALLY | Provider PRODUCTION CONNECTION REQUIRES OWNER |
 | SEO (meta, canonical, hreflang, sitemap, robots, OG, JSON-LD) | TESTED | |
 | Analytics + consent | BUILT LOCALLY | No provider connected |
@@ -30,7 +33,8 @@ SANDBOX CONNECTED · PRODUCTION CONNECTION REQUIRES OWNER · LIVE. **Nothing is 
 | Security baseline | TESTED | Headers, validation, rate limit, honeypot, prod guards |
 | Deployment | PLANNED | Needs hosting approval |
 
-## Test results (2026-10-02)
-- Unit (Vitest): 33/33 passing.
-- Browser (Playwright, desktop + Pixel 7, EN + AR): 20/20 passing.
+## Test results (2026-10-03)
+- Unit (Vitest): 57/57 passing (24 for the licensing engine).
+- Browser (Playwright, desktop + Pixel 7, EN + AR): 36/36 passing (16 licensing end-to-end).
+- Database: both migrations applied to PostgreSQL 16; RLS/privilege checks pass.
 - Production build: passing; production guards verified (admin 404, dashboard redirect, no demo).

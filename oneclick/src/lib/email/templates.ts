@@ -135,6 +135,86 @@ export const emailTemplates = {
       }),
     };
   },
+  /** One-time code. The code appears only in the email body, never in the subject or logs. */
+  accessCode(locale: Locale, p: { code: string; minutes: number }): EmailContent {
+    const spaced = `${p.code.slice(0, 3)} ${p.code.slice(3)}`;
+    return {
+      subject: pick({ en: "Your One Click verification code", ar: "رمز التحقق من ون كليك" }, locale),
+      ...layout(locale, {
+        preheader: pick({ en: `Expires in ${p.minutes} minutes.`, ar: `ينتهي خلال ${p.minutes} دقائق.` }, locale),
+        title: pick({ en: "Your verification code", ar: "رمز التحقق" }, locale),
+        paragraphs: [
+          spaced,
+          pick({ en: `Enter this code on One Click to continue. It works once and expires in ${p.minutes} minutes.`, ar: `اكتب هذا الرمز في ون كليك للمتابعة. يشتغل مرة وحدة وينتهي خلال ${p.minutes} دقائق.` }, locale),
+          pick({ en: "We will never ask for this code by phone, chat or Instagram. If you didn't ask for it, you can ignore this email.", ar: "ما راح نطلب منك هذا الرمز بالهاتف أو الدردشة أو إنستغرام. إذا ما طلبته، تجاهل الرسالة." }, locale),
+        ],
+        footer: footer[locale],
+      }),
+    };
+  },
+  /** Guest purchase: the link opens a page that sends a code to THIS address. It is not a key. */
+  claimProduct(locale: Locale, p: { orderRef: string; productNames: string[]; url: string; sandbox: boolean }): EmailContent {
+    return {
+      subject: (p.sandbox ? "[SANDBOX] " : "") + pick({ en: "Your product is ready: claim it in your account", ar: "منتجك جاهز: أضفه لحسابك" }, locale),
+      ...layout(locale, {
+        preheader: pick({ en: "Verify your email once and it's yours.", ar: "تحقق من بريدك مرة وحدة ويصير لك." }, locale),
+        title: pick({ en: "Open my product", ar: "افتح منتجي" }, locale),
+        paragraphs: [
+          ...(p.sandbox ? [pick({ en: "SANDBOX TEST ORDER: no real payment was made.", ar: "طلب تجريبي (SANDBOX): ما تم أي دفع حقيقي." }, locale)] : []),
+          p.productNames.join(" · "),
+          pick({ en: `Order ${p.orderRef}. Tap the button, and we'll send a one-time code to this email address. Your product is then saved in your One Click account and you can open it any time from My Products.`, ar: `الطلب ${p.orderRef}. اضغط الزر، وبنرسل رمز تحقق لهذا البريد. بعدها يُحفظ المنتج في حسابك على ون كليك وتقدر تفتحه أي وقت من «منتجاتي».` }, locale),
+          pick({ en: "Your license is personal and belongs to your account. Forwarding this email does not give anyone else access.", ar: "رخصتك شخصية ومرتبطة بحسابك. إعادة توجيه هذي الرسالة ما تعطي أحد ثاني صلاحية." }, locale),
+        ],
+        cta: { label: pick({ en: "Claim / open my product", ar: "أضف منتجي وافتحه" }, locale), url: p.url },
+        footer: footer[locale],
+      }),
+    };
+  },
+  productsReady(locale: Locale, p: { orderRef: string; productNames: string[]; url: string; sandbox: boolean }): EmailContent {
+    return {
+      subject: (p.sandbox ? "[SANDBOX] " : "") + pick({ en: "Your product is in your account", ar: "منتجك صار في حسابك" }, locale),
+      ...layout(locale, {
+        preheader: pick({ en: "Open it from My Products.", ar: "افتحه من «منتجاتي»." }, locale),
+        title: pick({ en: "Ready when you are", ar: "جاهز متى ما حبيت" }, locale),
+        paragraphs: [
+          ...(p.sandbox ? [pick({ en: "SANDBOX TEST ORDER: no real payment was made.", ar: "طلب تجريبي (SANDBOX): ما تم أي دفع حقيقي." }, locale)] : []),
+          p.productNames.join(" · "),
+          pick({ en: "Sign in to One Click and open it from My Products.", ar: "سجّل دخولك في ون كليك وافتحه من «منتجاتي»." }, locale),
+        ],
+        cta: { label: pick({ en: "Go to My Products", ar: "روح لمنتجاتي" }, locale), url: p.url },
+        footer: footer[locale],
+      }),
+    };
+  },
+  newDeviceAlert(locale: Locale, p: { deviceName: string; devicesUrl: string }): EmailContent {
+    return {
+      subject: pick({ en: "New device added to your One Click account", ar: "جهاز جديد أُضيف لحسابك في ون كليك" }, locale),
+      ...layout(locale, {
+        preheader: p.deviceName,
+        title: pick({ en: "A new device can open your products", ar: "جهاز جديد يقدر يفتح منتجاتك" }, locale),
+        paragraphs: [
+          p.deviceName,
+          pick({ en: "If this was you, there's nothing to do. If not, remove the device and change your password.", ar: "إذا كان أنت، ما تحتاج تسوي شي. وإذا مو أنت، احذف الجهاز وغيّر كلمة المرور." }, locale),
+        ],
+        cta: { label: pick({ en: "Review my devices", ar: "راجع أجهزتي" }, locale), url: p.devicesUrl },
+        footer: footer[locale],
+      }),
+    };
+  },
+  emailChanged(locale: Locale, p: { newEmail: string }): EmailContent {
+    return {
+      subject: pick({ en: "Your One Click email was changed", ar: "تم تغيير بريدك في ون كليك" }, locale),
+      ...layout(locale, {
+        preheader: p.newEmail,
+        title: pick({ en: "Your sign-in email changed", ar: "تغيّر بريد تسجيل الدخول" }, locale),
+        paragraphs: [
+          pick({ en: `Your account now uses ${p.newEmail}. Your products stay in your account.`, ar: `حسابك صار يستخدم ${p.newEmail}. منتجاتك باقية في حسابك.` }, locale),
+          pick({ en: "If you didn't make this change, contact support right away.", ar: "إذا ما سويت هذا التغيير، تواصل مع الدعم فورًا." }, locale),
+        ],
+        footer: footer[locale],
+      }),
+    };
+  },
   ownerNotification(p: { kind: string; reference: string; summary: string; adminUrl: string }): EmailContent {
     return {
       subject: `[One Click] New ${p.kind}: ${p.reference}`,

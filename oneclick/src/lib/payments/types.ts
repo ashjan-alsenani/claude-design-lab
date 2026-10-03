@@ -28,8 +28,23 @@ export type CheckoutSession =
   | { kind: "redirect"; url: string; providerReference: string }
   | { kind: "unavailable"; reason: "provider_not_connected" | "provider_error" };
 
+export type PaymentEventType =
+  | "payment.succeeded"
+  | "payment.pending"
+  | "payment.failed"
+  | "payment.cancelled"
+  | "payment.refunded"
+  | "payment.chargeback";
+
+/**
+ * A payment confirmation that has ALREADY been verified by the provider adapter
+ * (signature checked). Licenses are created or changed only from these events,
+ * never from a browser redirect, URL parameter or client request.
+ */
 export type PaymentEvent = {
-  type: "payment.succeeded" | "payment.failed" | "payment.refunded";
+  /** Provider's unique event id: used for idempotency (each event is applied once). */
+  eventId: string;
+  type: PaymentEventType;
   orderId: string;
   providerReference: string;
   amount: Money;
@@ -41,6 +56,8 @@ export interface PaymentProvider {
   readonly id: string;
   readonly displayName: string;
   readonly live: boolean;
+  /** True only for the clearly labeled local SANDBOX (never available in production). */
+  readonly sandbox?: boolean;
   createCheckout(req: CheckoutRequest): Promise<CheckoutSession>;
   /** Verify signature and parse a webhook. Must throw on invalid signatures. */
   parseWebhook(rawBody: string, headers: Headers): Promise<PaymentEvent>;

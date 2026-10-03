@@ -2,6 +2,27 @@
 
 Format: decision, why, alternatives considered, how to reverse. Newest first.
 
+## 2026-10-03 — Licensing & access engine
+
+**D18. One engine for all paid products.** Licenses bound to verified accounts; one central
+`canUserAccessProduct()`; per-product behaviour is data editable in Admin. No per-product code.
+
+**D19. Passwordless first, password optional.** Email one-time codes for first access, claims,
+new devices and recovery; 30-day sessions on trusted devices; optional password for returning
+customers on trusted devices. Fewer support issues than password-only, no code every visit.
+
+**D20. Device limit default 2, no fingerprinting.** A device is a random HttpOnly cookie. Above the
+limit the customer removes an old device themselves (no support ticket). Concurrent use is
+logged, not punished.
+
+**D21. Refund = revoke, chargeback = suspend for review, cancel = revoke** (configurable in Admin).
+
+**D22. Fail closed in production until the database exists**; a clearly labeled local SANDBOX
+(signed simulated payments + development mailbox) is used to build and test the full flow.
+
+**D23. Existing `entitlements` table is the license table** (with `product_licenses` view) to keep
+one source of truth for RLS, reviews and product data.
+
 ## 2026-10-02 — Name "One Click", Clicky v3, real prices, more products
 
 **D17.** Owner instruction: brand name is simply **One Click** (Arabic: ون كليك); "Digital Hub"

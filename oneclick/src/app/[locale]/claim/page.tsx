@@ -1,0 +1,68 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { GiftIcon, LinkBreakIcon } from "@phosphor-icons/react/dist/ssr";
+import { isLocale, tr } from "@/i18n/config";
+import { fill, licensingCopy } from "@/i18n/licensing";
+import { products } from "@/content/products";
+import { licensing, licensingMode } from "@/lib/licensing/server";
+import { pageMetadata } from "@/lib/seo";
+import { ButtonLink, buttonClass } from "@/components/ui/Button";
+import { SandboxBanner } from "@/components/account/SandboxBanner";
+import { startClaimAction } from "../account/actions";
+
+/**
+ * "Claim / open my product" page reached from the purchase email. The link token only
+ * identifies the order so we can show what's inside; the verification code is always
+ * sent to the purchase email on the order, so forwarding the link transfers nothing.
+ */
+type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | undefined>> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return { ...pageMetadata({ locale, path: "/claim", title: licensingCopy[locale].claim.title, noindex: true }), referrer: "no-referrer" };
+}
+
+export default async function ClaimPage({ params, searchParams }: Props) {
+  const { locale } = await params;
+  if (!isLocale(locale) || licensingMode() === "unavailable") notFound();
+  const sp = await searchParams;
+  const t = licensingCopy[locale];
+  const claim = sp.e ? { status: "invalid" as const } : await licensing().engine.getClaim(sp.t);
+
+  return (
+    <div className="mx-auto max-w-lg px-4 pb-10 pt-8">
+      <SandboxBanner locale={locale} />
+      <section className="rounded-[var(--radius-xl)] border border-line bg-surface p-6 shadow-soft sm:p-8">
+        {claim.status !== "ok" ? (
+          <>
+            <LinkBreakIcon size={40} weight="duotone" className="text-warning" />
+            <h1 className="mt-4 text-2xl font-bold text-ink">{t.claim.invalidTitle}</h1>
+            <p className="mt-2 text-ink-soft">{t.claim.invalidBody}</p>
+            <ButtonLink href={`/${locale}/account`} className="mt-6">
+              {t.claim.signIn}
+            </ButtonLink>
+          </>
+        ) : (
+          <>
+            <GiftIcon size={40} weight="duotone" className="text-primary" />
+            <h1 className="mt-4 text-2xl font-bold text-ink">{t.claim.title}</h1>
+            <p className="mt-2 leading-relaxed text-ink-soft">{fill(t.claim.body, { email: "⁨" + claim.maskedEmail + "⁩" })}</p>
+            <p className="mt-5 text-sm font-semibold text-muted">{t.claim.products}</p>
+            <ul className="mt-1 list-inside list-disc text-ink">
+              {claim.productIds.map((id) => (
+                <li key={id}>{tr(products.find((p) => p.id === id)?.name, locale)}</li>
+              ))}
+            </ul>
+            <form action={startClaimAction} className="mt-6">
+              <input type="hidden" name="locale" value={locale} />
+              <input type="hidden" name="token" value={sp.t} />
+              <button className={buttonClass("primary", "lg", "w-full")}>{t.claim.send}</button>
+            </form>
+            <p className="mt-4 text-sm text-muted">{t.claim.note}</p>
+          </>
+        )}
+      </section>
+    </div>
+  );
+}

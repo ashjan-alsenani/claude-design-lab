@@ -1,30 +1,34 @@
 import "server-only";
-import { isDemoMode, isSupabaseConfigured } from "@/lib/env";
+import { currentContext, licensingMode } from "@/lib/licensing/server";
+import type { Role } from "@/lib/licensing/types";
 
 /**
- * Authentication & authorization foundation.
+ * Authentication & authorization.
  *
- * Target: Supabase Auth (email + password, magic link optional) with HTTP-only secure
- * cookies via @supabase/ssr, and role checks enforced server-side AND by Postgres
- * Row Level Security (see supabase/migrations). Paid content is never protected by
- * hidden URLs: every protected page/download calls requireCustomer()/canAccess().
+ * Accounts, sessions and devices are handled by the licensing & access engine
+ * (src/lib/licensing): email verification codes, optional password for returning
+ * customers, HttpOnly session cookies, trusted devices. Every protected page and
+ * download is authorized server-side through canUserAccessProduct.
  *
- * STATUS: Supabase NOT CONNECTED. In development, demo mode returns a clearly labeled
- * sample session so the dashboards can be designed and tested. Demo mode is forced
- * off in production (see isDemoMode), so production returns no session.
+ * STATUS: database NOT CONNECTED. Locally the engine runs in SANDBOX mode with
+ * fictional data; in production it fails closed (nobody can sign in) until Supabase
+ * is connected.
  */
-export type Role = "customer" | "admin" | "owner";
-export type Session = { userId: string; email: string; name: string; roles: Role[]; demo: boolean };
-
-const demoSession: Session = { userId: "demo-user", email: "demo@example.com", name: "Demo", roles: ["customer", "admin"], demo: true };
+export type { Role };
+export type Session = { userId: string; sessionId: string; email: string; name: string; roles: Role[]; demo: boolean; deviceState: "trusted" | "pending" };
 
 export async function getSession(): Promise<Session | null> {
-  if (isSupabaseConfigured()) {
-    // TODO(supabase): read the session with createServerClient() from @supabase/ssr
-    // and load roles from public.user_roles. Not implemented until the project exists.
-    return null;
-  }
-  return isDemoMode() ? demoSession : null;
+  const ctx = await currentContext();
+  if (!ctx) return null;
+  return {
+    userId: ctx.user.id,
+    sessionId: ctx.session.id,
+    email: ctx.user.email,
+    name: ctx.user.name ?? ctx.user.email.split("@")[0],
+    roles: ctx.roles,
+    demo: licensingMode() === "sandbox",
+    deviceState: ctx.session.deviceState,
+  };
 }
 
 export function hasRole(session: Session | null, role: Role) {
@@ -32,6 +36,5 @@ export function hasRole(session: Session | null, role: Role) {
 }
 
 export function authStatus(): "connected" | "demo" | "not_connected" {
-  if (isSupabaseConfigured()) return "connected";
-  return isDemoMode() ? "demo" : "not_connected";
+  return licensingMode() === "sandbox" ? "demo" : "not_connected";
 }

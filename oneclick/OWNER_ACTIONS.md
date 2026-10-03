@@ -13,7 +13,8 @@ Only things that genuinely need you. Everything else is handled by Claude.
 - Send back: just tell me it's done. Supabase and Vercel are connected to this workspace, so I can
   create the project, apply the database schema and deploy a private preview myself.
 - Cost: 0 OMR on free plans (limits in COSTS.md).
-- Blocks: real accounts, admin saving, and an online preview. The site itself keeps progressing.
+- Blocks: real accounts, admin saving, real product licensing (the engine is built and tested
+  locally; online it stays locked until the database exists). The site itself keeps progressing.
 
 ## LATER (before public launch)
 

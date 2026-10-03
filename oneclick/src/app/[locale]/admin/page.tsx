@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircleIcon, WarningCircleIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale, tr } from "@/i18n/config";
@@ -35,7 +36,7 @@ export default async function AdminPage({ params }: Props) {
 
   const alerts = [
     { ok: payment.live, label: "Payment provider", detail: payment.live ? payment.displayName : "Not connected. Waiting for owner's bank decision." },
-    { ok: authStatus() === "connected", label: "Customer accounts & database", detail: authStatus() === "connected" ? "Connected" : "Supabase project not created yet." },
+    { ok: authStatus() === "connected", label: "Customer accounts & database", detail: authStatus() === "connected" ? "Connected" : "Supabase project not created yet. Licensing engine runs in local SANDBOX only; production is locked (fails closed)." },
     { ok: isEmailConfigured(), label: "Transactional email", detail: isEmailConfigured() ? "Connected" : "No email provider yet. Confirmations are not sent." },
     { ok: businessSettings.showLegalIdentity, label: "Business identity (CR, address)", detail: "Hidden until owner provides final details." },
     { ok: false, label: "Legal pages", detail: "Drafts. Lawyer review required before launch." },
@@ -58,6 +59,11 @@ export default async function AdminPage({ params }: Props) {
       )}
       <h1 className="text-3xl font-semibold tracking-tight text-ink">Business command center</h1>
       <p className="mt-1 text-ink-soft">What needs your attention, at a glance.</p>
+      <p className="mt-4">
+        <Link href={`/${locale}/admin/licensing`} className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-semibold text-on-primary">
+          Licensing & access
+        </Link>
+      </p>
 
       <section aria-labelledby="h-kpi" className="mt-8">
         <h2 id="h-kpi" className="sr-only">Key numbers</h2>

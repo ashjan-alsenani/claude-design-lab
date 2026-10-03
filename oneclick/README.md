@@ -49,7 +49,8 @@ tests/                 unit (Vitest) and e2e (Playwright)
 - [SECURITY.md](SECURITY.md) · [DEPLOYMENT.md](DEPLOYMENT.md)
 - docs: [product strategy](docs/PRODUCT_STRATEGY.md), [marketing packages](docs/MARKETING_PACKAGES.md),
   [Instagram](docs/INSTAGRAM.md), [video](docs/VIDEO_SYSTEM.md), [analytics](docs/ANALYTICS_EVENTS.md),
-  [data model](docs/DATA_MODEL.md), [backups](docs/BACKUPS.md), [customer journey](docs/CUSTOMER_JOURNEY.md)
+  [data model](docs/DATA_MODEL.md), [backups](docs/BACKUPS.md), [customer journey](docs/CUSTOMER_JOURNEY.md),
+  [licensing & access](docs/LICENSING.md)
 
 ## Honesty rules
 No fake reviews, sales, downloads or customer counts. Payment is **not connected**. Sample content

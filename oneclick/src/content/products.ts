@@ -392,6 +392,7 @@ function idea(p: {
   hue: Hue;
   art: ArtId;
   kind?: Product["kind"];
+  includes?: string[];
   disclaimer?: Localized;
 }): Product {
   return {
@@ -418,6 +419,7 @@ function idea(p: {
     art: p.art,
     featured: false,
     isNew: false,
+    includes: p.includes,
     faqs: [],
     disclaimer: p.disclaimer,
     sample: true,
@@ -549,7 +551,7 @@ function ideas(): Product[] {
       categories: ["travel"], tags: ["umrah", "travel", "family"],
     }),
     idea({
-      id: "prd_bundle", slug: "life-starter-bundle", art: "bundle", hue: "brand", price: 12, kind: "bundle",
+      id: "prd_bundle", slug: "life-starter-bundle", art: "bundle", hue: "brand", price: 12, kind: "bundle", includes: ["prd_planner", "prd_grocery", "prd_budget"],
       name: { en: "Life Starter Bundle", ar: "حزمة بداية مرتبة" },
       tagline: { en: "Planner + Grocery + Budget, together for less.", ar: "المخطط + المقاضي + الميزانية، مع بعض بسعر أقل." },
       summary: { en: "The three everyday essentials in one bundle: 12 OMR instead of 17.5 OMR when bought separately.", ar: "الأساسيات اليومية الثلاث في حزمة وحدة: ١٢ ر.ع بدل ١٧٫٥ ر.ع لو اشتريتها منفصلة." },
