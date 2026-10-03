@@ -1,631 +1,540 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>رحلة العروس · Bridal Journey</title>
-<meta name="description" content="رحلة العروس: مساعدتك الشخصية لتخطيط زفافك. كل ما تحتاجينه.. ولا شيء يُنسى.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>رحلة العروس</title>
 <link rel="icon" href="assets/logo-mark.svg">
 <style>
-/* Fonts: self-hosted (SIL OFL). Alexandria for Arabic and Latin UI, Cormorant Garamond for the English signature lines. */
-@font-face{font-family:"BJ Sans";src:url(assets/fonts/alexandria-arabic-variable.woff2) format("woff2");font-weight:300 700;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
-@font-face{font-family:"BJ Sans";src:url(assets/fonts/alexandria-latin-variable.woff2) format("woff2");font-weight:300 700;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212}
+/* Layout: editorial bridal dashboard. Hero (copy + photo), five summary cards, three panels, phone showcase.
+   One light, warm world on purpose (ivory, muted rose, sage for progress); every color is a token. */
+@font-face{font-family:"BJ Body";src:url(assets/fonts/ibm-plex-sans-arabic-arabic-400.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:"BJ Body";src:url(assets/fonts/ibm-plex-sans-arabic-arabic-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:"BJ Body";src:url(assets/fonts/ibm-plex-sans-arabic-arabic-600.woff2) format("woff2");font-weight:600 700;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:"BJ Body";src:url(assets/fonts/ibm-plex-sans-arabic-latin-400.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2190-2193}
+@font-face{font-family:"BJ Body";src:url(assets/fonts/ibm-plex-sans-arabic-latin-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2190-2193}
+@font-face{font-family:"BJ Body";src:url(assets/fonts/ibm-plex-sans-arabic-latin-600.woff2) format("woff2");font-weight:600 700;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2190-2193}
+@font-face{font-family:"BJ Display";src:url(assets/fonts/alexandria-arabic-variable.woff2) format("woff2");font-weight:200 700;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:"BJ Display";src:url(assets/fonts/alexandria-latin-variable.woff2) format("woff2");font-weight:200 700;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122}
 @font-face{font-family:"BJ Serif";src:url(assets/fonts/cormorant-garamond-latin-italic.woff2) format("woff2");font-weight:400 600;font-style:italic;font-display:swap}
+@property --p{syntax:"<number>";inherits:false;initial-value:0}
 
 :root{
-  /* DESIGN.md tokens */
-  --bg:#fbf7f2;--bg2:#f8f0e9;--card:#fffaf6;--line:#eadbd1;--ink:#5c3c35;--muted:#9b7f76;
-  --rose:#ad6758;--rose-ink:#9a5a4c;--rose-soft:#f2ddd6;--gold:#b88d58;--sage:#71816e;--sage-soft:#e8eee7;
-  --track:#ece4de;--shadow:0 1px 2px rgba(92,60,53,.04),0 14px 34px -22px rgba(92,60,53,.28);
-  --ease:cubic-bezier(.22,1,.36,1);--fast:160ms;--mid:240ms;
-  --sans:"BJ Sans",Tahoma,system-ui,sans-serif;--serif:"BJ Serif",Georgia,serif;
+  color-scheme:light;
+  --bg:#fbf7f2;--bg2:#f8efe9;--surface:#fffaf6;--surface-strong:#ffffff;--surface2:#f8efe9;
+  --line:#eadbd1;--line-soft:#f2e6df;--ink:#5c3c35;--ink-soft:#765c55;--muted:#9b7f76;
+  --rose:#ad6758;--rose-ink:#9b5b4e;--rose-soft:#f2ddd6;--rose-wash:#f7e9e3;
+  --sage:#71816e;--sage-soft:#e8eee7;--gold:#b88d58;--track:#ece4de;--placeholder:#efe3dc;
+  --shadow:0 1px 2px rgba(92,60,53,.04),0 16px 38px -26px rgba(92,60,53,.32);
+  --shadow-lift:0 1px 2px rgba(92,60,53,.05),0 24px 44px -26px rgba(92,60,53,.42);
+  --font:"BJ Body",Tahoma,"Segoe UI",sans-serif;--display:"BJ Display","BJ Body",Tahoma,sans-serif;--serif:"BJ Serif",Georgia,"Times New Roman",serif;
+  --ease:cubic-bezier(.22,1,.36,1);--t-fast:140ms;--t:240ms;
+  --gutter:34px;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;font-family:var(--sans);color:var(--ink);background:var(--bg)}
-body{margin:0;min-height:100dvh;background:linear-gradient(180deg,#fffaf6 0%,var(--bg) 40%,var(--bg2) 100%);-webkit-tap-highlight-color:transparent}
+html{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%}
+body{margin:0;background:linear-gradient(180deg,#fffaf6 0%,var(--bg) 35%,var(--bg2) 100%);color:var(--ink);min-height:100%;-webkit-tap-highlight-color:transparent}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
 a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-:focus-visible{outline:2px solid color-mix(in oklab,var(--rose) 70%,transparent);outline-offset:3px;border-radius:12px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:12px}
 .num{font-variant-numeric:tabular-nums}
-.en{direction:ltr;unicode-bidi:isolate}
+svg.i{width:20px;height:20px;flex:0 0 auto}
 
-/* ---------- Header ---------- */
-.top{position:sticky;top:0;z-index:30;background:rgba(255,250,246,.9);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border-bottom:1px solid rgba(173,103,88,.14)}
-.top-in{max-width:1400px;margin:auto;height:84px;display:flex;align-items:center;gap:20px;padding:0 34px}
-.brand{display:flex;align-items:center;gap:11px;flex:0 0 auto}
+/* ---------------- Header ---------------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;height:84px;display:flex;align-items:center;gap:24px;padding:0 var(--gutter);background:rgba(255,250,246,.92);border-bottom:1px solid rgba(173,103,88,.14);backdrop-filter:blur(16px) saturate(1.15);-webkit-backdrop-filter:blur(16px) saturate(1.15)}
+.brand{display:flex;align-items:center;gap:11px;min-width:210px}
 .brand img{width:44px;height:44px}
-.brand b{display:block;font-weight:400;font-size:25px;line-height:1.1;color:var(--rose-ink)}
-.brand small{display:block;font:italic 500 14px/1 var(--serif);letter-spacing:.06em;color:#ae8478;margin-top:3px}
-.nav{display:flex;align-items:stretch;gap:4px;margin-inline:auto;height:100%}
-.nav a{position:relative;display:flex;align-items:center;padding:0 12px;font-size:14px;color:#7a5f58;transition:color var(--fast) var(--ease)}
+.brand b{display:block;font:300 27px/1.15 var(--display);color:var(--rose-ink)}
+.brand small{display:block;font:italic 500 14px/1 var(--serif);letter-spacing:.08em;color:#ad8377;margin-top:3px}
+.nav{display:flex;gap:6px;margin:auto;align-self:stretch}
+.nav a{position:relative;display:flex;align-items:center;padding:0 11px;color:var(--ink-soft);font-size:14px;transition:color var(--t-fast) var(--ease)}
 .nav a:hover{color:var(--rose-ink)}
-.nav a[aria-current]{color:var(--rose-ink);font-weight:600}
-.nav a[aria-current]::after{content:"";position:absolute;inset-inline:12px;bottom:18px;height:2px;border-radius:2px;background:var(--rose)}
-.tools{display:flex;align-items:center;gap:8px;flex:0 0 auto}
-.lang{display:inline-flex;align-items:center;border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px;font-size:12px}
-.lang span{padding:5px 10px;border-radius:999px;color:var(--muted)}
-.lang span[aria-current]{background:var(--rose-soft);color:var(--rose-ink);font-weight:600}
-.icon-btn{position:relative;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;color:#8c6a61;transition:background var(--fast) var(--ease),color var(--fast) var(--ease)}
-.icon-btn:hover{background:var(--rose-soft);color:var(--rose-ink)}
-.icon-btn svg{width:21px;height:21px}
-.icon-btn .badge{position:absolute;top:9px;inset-inline-end:10px;width:7px;height:7px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 2px #fffaf6}
-.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:15px;font-weight:500;color:var(--rose-ink);background:linear-gradient(140deg,#f6e6de,#e8cfc4);box-shadow:0 0 0 2px #fff,0 0 0 3px var(--line)}
+.nav a.on{color:var(--rose-ink);font-weight:600}
+.nav a.on:after{content:"";position:absolute;bottom:17px;inset-inline:11px;height:2px;background:var(--rose);border-radius:99px}
+.tools{display:flex;gap:6px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);background:var(--surface-strong);border-radius:99px;padding:3px;font-size:12px;color:var(--muted)}
+.pill span{padding:5px 10px;border-radius:99px}
+.pill span.on{background:var(--rose-soft);color:var(--rose-ink);font-weight:600}
+.circle{position:relative;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;color:#8c6a61;transition:background var(--t-fast) var(--ease),color var(--t-fast) var(--ease)}
+.circle:hover{background:var(--rose-wash);color:var(--rose-ink)}
+.circle .badge{position:absolute;top:9px;inset-inline-end:10px;width:7px;height:7px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 2px var(--surface)}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:500 16px var(--display);color:var(--rose-ink);background:linear-gradient(140deg,#f6e6de,#e8cfc4);box-shadow:0 0 0 2px var(--surface-strong),0 0 0 3px var(--line)}
 .m-only{display:none}
 
-/* ---------- Layout ---------- */
-main{max-width:1400px;margin:auto;padding:28px 34px 56px}
+/* ---------------- Page ---------------- */
+main{max-width:1400px;margin:auto;padding:28px var(--gutter) 56px}
 
-/* ---------- Hero ---------- */
-.hero{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);min-height:430px;background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow)}
-.copy{position:relative;display:flex;flex-direction:column;justify-content:center;padding:44px 46px 40px;isolation:isolate}
-.copy .bloom{position:absolute;top:-34px;inset-inline-start:-26px;width:132px;opacity:.85;z-index:-1;pointer-events:none}
-.copy .bloom2{position:absolute;bottom:-14px;inset-inline-end:-10px;width:120px;opacity:.6;z-index:-1;pointer-events:none;transform:scaleY(-1)}
+/* ---------------- Hero ---------------- */
+.hero{display:grid;grid-template-columns:minmax(0,.93fr) minmax(0,1.07fr);min-height:440px;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow)}
+/* Reference: copy on the right, the bride on the left. */
+.photo{order:2;position:relative;min-height:440px;background:var(--placeholder);overflow:hidden}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 26%}
+.photo:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to left,rgba(255,250,246,.5) 0%,rgba(255,250,246,0) 16%)}
+.photo .ph{position:absolute;inset:0;width:100%;height:100%;display:none}
+.photo.temp img{display:none}
+.photo.temp .ph{display:block}
+.copy{position:relative;display:flex;flex-direction:column;justify-content:center;padding:46px 48px 42px;isolation:isolate}
+.copy .bloom{position:absolute;top:-30px;inset-inline-start:-24px;width:150px;z-index:-1;pointer-events:none;opacity:.9}
+.copy .bloom.low{top:auto;bottom:-26px;inset-inline-start:auto;inset-inline-end:-18px;width:118px;transform:rotate(180deg);opacity:.55}
 .eyebrow{font:italic 500 15px/1 var(--serif);letter-spacing:.08em;color:var(--gold)}
-.copy h1{margin:10px 0 0;font-weight:300;font-size:clamp(42px,5vw,68px);line-height:1.12;color:var(--rose-ink);letter-spacing:0}
-.tagline{margin:10px 0 0;font-size:18px;font-weight:400;color:#7a5a52}
-.tagline-en{margin:4px 0 0;font:italic 500 17px/1.3 var(--serif);color:#b08578}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;max-width:560px}
-.kpi{position:relative;overflow:hidden;min-height:150px;padding:18px 20px;border-radius:20px;border:1px solid rgba(234,219,209,.9);background:rgba(255,255,255,.78);box-shadow:0 12px 30px -22px rgba(92,60,53,.35)}
-.kpi.days{display:flex;flex-direction:column;justify-content:center}
-.kpi.days .line1{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:19px}
-.kpi.days strong{font-weight:500;font-size:46px;line-height:1;color:var(--ink)}
-.kpi.days .line2{font-size:19px;margin-top:6px}
-.kpi.days .date{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;color:var(--muted)}
-.kpi.days .date svg{width:15px;height:15px;color:var(--rose)}
-.kpi.days .sprig{position:absolute;bottom:6px;inset-inline-end:8px;width:56px;opacity:.9}
-.kpi.ready{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
-.ring{position:relative;width:104px;height:104px}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring .trk{stroke:var(--track)}
-.ring .val{stroke:var(--sage);stroke-linecap:round;transition:stroke-dashoffset 700ms var(--ease)}
-.ring .lbl{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
-.ring .lbl b{font-size:26px;font-weight:500;line-height:1;color:var(--ink)}
-.ring .lbl small{font-size:12px;color:var(--muted);margin-top:3px}
-.kpi.ready p{margin:0;font-size:12.5px;line-height:1.6;color:#86675f}
-.kpi.ready p .heart{color:#d39a8a}
-/* Light sweep on the KPI cards, now and then. */
-.shine::after{content:"";position:absolute;top:-20%;bottom:-20%;width:40%;inset-inline-start:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-16deg);pointer-events:none;opacity:0}
+.copy h1{font:300 clamp(46px,5.2vw,72px)/1.12 var(--display);color:var(--rose-ink);margin:10px 0 0;text-wrap:balance}
+.copy .ar{font-size:18px;margin:10px 0 0;color:#74554e}
+.copy .en{font:italic 500 17px/1.35 var(--serif);color:#b08578;margin:4px 0 28px}
+.heroCards{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:580px}
+.heroCard{position:relative;overflow:hidden;min-height:156px;border:1px solid rgba(234,219,209,.95);background:rgba(255,255,255,.8);border-radius:20px;padding:18px 20px;box-shadow:0 14px 30px -24px rgba(92,60,53,.4)}
+.heroCard.days{display:flex;flex-direction:column;justify-content:center}
+.days .l1{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;font-size:19px}
+.days strong{font:500 48px/1 var(--display);color:var(--ink)}
+.days .l2{font-size:19px;margin-top:6px}
+.days small{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;color:var(--muted)}
+.days small svg{width:15px;height:15px;color:var(--rose)}
+.days .sprig{position:absolute;bottom:4px;inset-inline-end:6px;width:62px;opacity:.95}
+.heroCard.ready{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center}
+.ring{--p:0;--size:104px;--w:8px;position:relative;width:var(--size);height:var(--size);border-radius:50%;background:conic-gradient(var(--sage) calc(var(--p)*1%),var(--track) 0);display:grid;place-items:center;flex:0 0 auto;transition:--p 900ms var(--ease)}
+.ring:before{content:"";position:absolute;inset:var(--w);border-radius:50%;background:var(--surface-strong)}
+.ring>*{position:relative}
+.ring b{display:block;font:500 26px/1 var(--display);color:var(--ink)}
+.ring small{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.ringText{margin:0;font-size:12.5px;line-height:1.6;color:#86675f}
+.ringText .h{color:#d39a8a}
+.shine:after{content:"";position:absolute;top:-20%;bottom:-20%;width:38%;inset-inline-start:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-16deg);pointer-events:none;opacity:0}
 
-.photo{position:relative;min-height:430px;background:#efe4dc;overflow:hidden}
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 28%}
-.photo .fallback{position:absolute;inset:0;width:100%;height:100%;display:none}
-.photo.lowres img{display:none}
-.photo.lowres .fallback{display:block}
-/* Soft blend where the photo meets the copy. */
-.photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to left,rgba(255,250,246,.55) 0%,rgba(255,250,246,0) 18%)}
+/* ---------------- Summary ---------------- */
+.summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:16px}
+.summary article{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;min-height:150px;padding:20px 14px 30px;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),border-color var(--t) var(--ease)}
+.summary article:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);border-color:#e2c9bd}
+.ic{width:54px;height:54px;border-radius:16px;background:linear-gradient(150deg,#fbefe9,#f4e2da);display:grid;place-items:center;margin-bottom:9px;flex:0 0 auto}
+.ic img{width:32px;height:32px;transition:transform var(--t) var(--ease)}
+.summary article:hover .ic img{transform:translateY(-2px) rotate(-6deg) scale(1.06)}
+.summary b{display:block;font-size:16px;font-weight:600}
+.summary small{color:var(--muted);font-size:13px}
+.arr{position:absolute;bottom:12px;inset-inline-end:14px;color:#c09588;display:grid;transition:transform var(--t) var(--ease)}
+.arr svg{width:16px;height:16px}
+.summary article:hover .arr{transform:translateX(-3px)}
+.summary a.cover{position:absolute;inset:0;border-radius:inherit}
 
-/* ---------- Summary cards ---------- */
-.summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:16px;padding:0;list-style:none}
-.sum{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 14px 16px;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);transition:transform var(--mid) var(--ease),box-shadow var(--mid) var(--ease),border-color var(--mid) var(--ease)}
-.sum:hover{transform:translateY(-2px);border-color:#e2c9bd;box-shadow:0 1px 2px rgba(92,60,53,.04),0 22px 40px -26px rgba(92,60,53,.4)}
-.sum .ic{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(150deg,#fbefe9,#f4e2da);margin-bottom:8px}
-.sum .ic img{width:30px;height:30px;transition:transform var(--mid) var(--ease)}
-.sum:hover .ic img{transform:translateY(-2px) rotate(-6deg) scale(1.06)}
-.sum b{font-size:16px;font-weight:500}
-.sum small{font-size:13px;color:var(--muted)}
-.sum .chev{position:absolute;bottom:12px;inset-inline-end:14px;width:16px;height:16px;color:#c09588;transition:transform var(--mid) var(--ease)}
-.sum:hover .chev{transform:translateX(-3px)}
-
-/* ---------- Panels ---------- */
+/* ---------------- Panels ---------------- */
 .panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:22px 22px 14px}
-.ph{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
-.ph h2{margin:0;font-size:19px;font-weight:500}
-.chip{border-radius:999px;padding:7px 12px;font-size:12px;color:var(--rose-ink);background:#f6e8e2;transition:background var(--fast) var(--ease)}
-.chip:hover{background:var(--rose-soft)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:22px 22px 12px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.head h2{font:500 19px/1.3 var(--display);margin:0;color:var(--ink)}
+.head button,.head a.btn{border-radius:99px;padding:7px 12px;font-size:12px;color:var(--rose-ink);background:var(--rose-wash);transition:background var(--t-fast) var(--ease)}
+.head button:hover,.head a.btn:hover{background:var(--rose-soft)}
+.head .circle{width:36px;height:36px}
 
-.tasks{list-style:none;margin:0;padding:0}
-.task{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 2px;border-bottom:1px solid #f2e6df}
+.task{display:flex;align-items:center;gap:12px;min-height:54px;padding:6px 2px;border-bottom:1px solid var(--line-soft)}
 .task:last-child{border-bottom:0}
-.task .t-ic{display:none;width:26px;height:26px;flex:0 0 auto}
-.task .t-txt{font-size:15px;transition:color var(--mid) var(--ease)}
-.task .t-due{font-size:12px;color:#b19188}
-.task .dot{width:7px;height:7px;border-radius:50%;background:#d6b1a4;margin-inline-start:auto;flex:0 0 auto}
-.check{position:relative;width:26px;height:26px;flex:0 0 auto;border-radius:50%;border:1.6px solid #c8aea5;display:grid;place-items:center;transition:background var(--mid) var(--ease),border-color var(--mid) var(--ease),transform var(--fast) var(--ease)}
-.check:active{transform:scale(.9)}
-.check svg{width:14px;height:14px;stroke:#fff;stroke-width:3;fill:none;stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset var(--mid) var(--ease) 60ms}
-.task.done .check{background:var(--sage);border-color:var(--sage)}
-.task.done .check svg{stroke-dashoffset:0}
-.task.done .t-txt{color:#a48e87}
-.task.done .dot{background:var(--sage)}
-/* A 44px tap area around the 26px circle. */
-.check::before{content:"";position:absolute;inset:-9px}
+.task .t-ic{display:none;width:28px;height:28px;flex:0 0 auto}
+.task span.t{order:1;font-size:15px;transition:color var(--t) var(--ease)}
+.task .chk{order:2}
+.task time{order:3;margin-inline-start:auto;color:#b19188;font-size:12px}
+.task .dot{order:4;width:7px;height:7px;border-radius:50%;background:#d6b1a4;flex:0 0 auto}
+.chk{position:relative;width:26px;height:26px;flex:0 0 auto;border-radius:50%;border:1.6px solid #c8aea5;display:grid;place-items:center;transition:background var(--t) var(--ease),border-color var(--t) var(--ease),transform var(--t-fast) var(--ease)}
+.chk:before{content:"";position:absolute;inset:-9px}
+.chk:active{transform:scale(.9)}
+.chk svg{width:14px;height:14px;fill:none;stroke:var(--surface-strong);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset var(--t) var(--ease) 60ms}
+.done .chk{background:var(--sage);border-color:var(--sage)}
+.done .chk svg{stroke-dashoffset:0}
+.done span.t{color:#a48e87}
+.done .dot{background:var(--sage)}
 
-.appts{list-style:none;margin:0;padding:0}
-.appt{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #f2e6df}
-.appt:last-child{border-bottom:0}
-.appt .thumb{width:64px;height:64px;flex:0 0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#f3e7e0}
-.appt .thumb img{width:100%;height:100%;object-fit:cover}
-.appt .a-txt{min-width:0}
-.appt small{display:block;font-size:12px;color:#ae9289}
-.appt b{display:block;font-size:15px;font-weight:500;margin-top:2px}
-.appt time{margin-inline-start:auto;display:flex;align-items:center;gap:5px;font-size:12.5px;color:#8c6f67;white-space:nowrap}
-.appt time svg{width:15px;height:15px;color:#bf9a8e}
+.apt{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+.apt:last-child{border:0}
+.apt img{width:64px;height:64px;border-radius:14px;object-fit:cover;border:1px solid var(--line);background:var(--placeholder)}
+.apt div{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:10px;align-items:center}
+.apt small{grid-column:1;font-size:12px;color:#ae9289}
+.apt b{grid-column:1;font-size:15px;font-weight:500;margin-top:2px;min-width:0}
+.apt span{grid-column:2;grid-row:1/span 2;display:flex;align-items:center;gap:5px;font-size:12.5px;color:#8c6f67;white-space:nowrap}
+.apt span svg{width:15px;height:15px;color:#bf9a8e}
 
-.total{font-size:30px;font-weight:500;line-height:1.2}
-.of{font-size:13px;color:var(--muted);margin-top:2px}
-.barrow{display:flex;align-items:center;gap:12px;margin:14px 0 6px}
-.bar{flex:1;height:8px;border-radius:99px;background:var(--track);overflow:hidden}
-.bar i{display:block;height:100%;width:0;border-radius:inherit;background:var(--sage);transition:width 800ms var(--ease)}
-.barrow span{font-size:13px;color:var(--muted)}
-.cats{list-style:none;margin:0;padding:0}
-.cat{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f2e6df}
-.cat:last-child{border-bottom:0}
-.cat .c-ic{width:34px;height:34px;flex:0 0 auto;display:grid;place-items:center;border-radius:11px;background:#f8ece6}
-.cat .c-ic img,.cat .c-ic svg{width:22px;height:22px}
-.cat .c-name{font-size:14px}
-.cat .c-amt{margin-inline-start:auto;font-size:14px;color:#6f5048}
-.cat .c-bar{display:none}
-.ring-sm{display:none}
+.bsum{display:flex;align-items:center;gap:18px}
+.bsum .ring{display:none;--size:96px;--w:9px}
+.bsum .ring b{font-size:22px}
+.total{font:500 31px/1.2 var(--display);color:var(--ink)}
+.sub{font-size:13px;color:var(--muted);margin-top:2px}
+.barRow{display:flex;align-items:center;gap:12px;margin:14px 0 6px}
+.bar,.mini{flex:1;height:8px;border-radius:99px;background:var(--track);overflow:hidden}
+.bar i,.mini i{display:block;height:100%;border-radius:inherit;width:0;transition:width 900ms var(--ease)}
+.bar i{background:var(--sage)}
+.barRow span{font-size:13px;color:var(--muted)}
+.brow{padding:9px 0;border-bottom:1px solid var(--line-soft)}
+.brow:last-child{border-bottom:0}
+.btop{display:flex;align-items:center;gap:12px;font-size:14px}
+.btop .b-ic{width:34px;height:34px;flex:0 0 auto;display:grid;place-items:center;border-radius:11px;background:var(--rose-wash)}
+.btop .b-ic img,.btop .b-ic svg{width:22px;height:22px}
+.btop b{margin-inline-start:auto;font-weight:500;color:#6f5048}
+.bmini{display:flex;align-items:center;gap:8px;margin-top:6px;padding-inline-start:46px}
+.mini{height:4px}
+.mini i{background:#c98e7d}
+.bmini span{font-size:11px;color:var(--muted);min-width:30px;text-align:end}
+/* Desktop budget rows are compact like the reference; the per-category bars belong to the phone layout. */
+#budget .bmini{display:none}
 
-/* ---------- On the phone (desktop showcase, like the reference) ---------- */
-.showcase{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
-.scard{display:flex;align-items:center;gap:26px;padding:26px 30px;border-radius:26px;border:1px solid var(--line);background:linear-gradient(140deg,#f4e7e0,#fffaf6 65%)}
-.scard h3{margin:0;font-weight:300;font-size:30px;color:var(--rose-ink)}
-.scard p{margin:8px 0 0;font-size:14px;line-height:1.8;color:#856a62}
-.phone{flex:0 0 auto;width:230px;padding:8px;border-radius:38px;background:#1d1a19;box-shadow:0 26px 50px -24px rgba(49,33,28,.45)}
-.phone .scr{position:relative;height:440px;overflow:hidden;border-radius:31px;background:#fffaf7;padding:30px 14px 12px}
-.phone .notch{position:absolute;top:8px;inset-inline:0;margin:auto;width:80px;height:20px;border-radius:12px;background:#1d1a19}
-.phone .pb{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--rose-ink);font-size:13px}
-.phone .pb img{width:22px}
-.phone h4{margin:14px 0 8px;font-size:19px;font-weight:500}
+/* ---------------- Phone showcase (desktop) ---------------- */
+.mobile{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.mcard{display:flex;align-items:center;gap:28px;padding:26px 30px;border-radius:26px;border:1px solid var(--line);background:linear-gradient(140deg,#f4e7e0,var(--surface) 65%)}
+.phone{width:236px;flex:0 0 auto;padding:8px;border-radius:40px;background:#1d1a19;box-shadow:0 28px 52px -26px rgba(49,33,28,.5)}
+.screen{position:relative;height:470px;overflow:hidden;border-radius:33px;background:#fffaf7;padding:32px 14px 12px}
+.notch{position:absolute;top:8px;inset-inline:0;margin:auto;width:84px;height:21px;border-radius:12px;background:#1d1a19}
+.mbar{display:flex;align-items:center;justify-content:space-between;color:#9c7c73}
+.mbar svg{width:18px;height:18px}
+.mbrand{display:flex;align-items:center;gap:6px;font:300 15px var(--display);color:var(--rose-ink)}
+.mbrand img{width:22px}
+.mtitle{font:500 21px var(--display);margin:16px 0 10px;color:var(--ink)}
 .tabs{display:flex;gap:6px;margin-bottom:6px}
-.tabs button{white-space:nowrap;border-radius:999px;padding:6px 8px;font-size:10.5px;background:#f4ebe6;color:#8f7169;transition:background var(--fast) var(--ease),color var(--fast) var(--ease)}
-.tabs button[aria-selected="true"]{background:var(--rose-soft);color:var(--rose-ink);font-weight:600}
-.phone .task{min-height:40px;gap:8px}
-.phone .task .t-ic{display:block;width:22px;height:22px}
-.phone .task .t-txt{font-size:11.5px}
-.phone .task .dot{display:none}
-.phone .check{width:18px;height:18px;margin-inline-start:auto}
-.phone .check svg{width:10px;height:10px}
-.phone .ring{width:96px;height:96px;margin:10px auto 4px}
-.phone .ring .lbl b{font-size:21px}
-.phone .ptotal{text-align:center;font-weight:500}
-.phone .pof{text-align:center;font-size:10px;color:var(--muted)}
-.phone .cat{padding:7px 0;gap:8px}
-.phone .cat .c-ic{width:26px;height:26px;border-radius:8px}
-.phone .cat .c-ic img,.phone .cat .c-ic svg{width:16px;height:16px}
-.phone .cat .c-name{font-size:10.5px}
-.phone .cat .c-amt{font-size:10.5px}
+.tabs button{white-space:nowrap;border-radius:99px;background:#f4ebe6;color:#8f7169;padding:6px 9px;font-size:10.5px;transition:background var(--t-fast) var(--ease),color var(--t-fast) var(--ease)}
+.tabs button.on{background:var(--rose-soft);color:var(--rose-ink);font-weight:600}
+.mgroup{font:500 12px var(--display);color:var(--ink);margin:12px 0 2px}
+.mtask{display:flex;align-items:center;gap:8px;min-height:38px;border-bottom:1px solid var(--line-soft);font-size:11.5px}
+.mtask img{width:22px;height:22px}
+.mcheck{position:relative;width:18px;height:18px;border-radius:50%;border:1.4px solid #c8aea5;margin-inline-start:auto;display:grid;place-items:center;transition:background var(--t) var(--ease),border-color var(--t) var(--ease)}
+.mcheck svg{width:10px;height:10px;fill:none;stroke:var(--surface-strong);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset var(--t) var(--ease)}
+.mcheck.on{background:var(--sage);border-color:var(--sage)}
+.mcheck.on svg{stroke-dashoffset:0}
+.mring-row{display:flex;align-items:center;gap:12px;margin:14px 0 8px}
+.mring{--size:92px;--w:9px}
+.mring b{font-size:20px}
+.mring-row .mt{font:500 16px var(--display)}
+.mring-row .ms{font-size:10px;color:var(--muted)}
+.mbrow{padding:7px 0;border-bottom:1px solid var(--line-soft)}
+.mbrow .btop{font-size:10.5px;gap:8px}
+.mbrow .b-ic{width:26px;height:26px;border-radius:8px}
+.mbrow .b-ic img,.mbrow .b-ic svg{width:16px;height:16px}
+.mbrow .bmini{padding-inline-start:34px;margin-top:4px}
+.mbrow .bmini span{font-size:9px}
+.mcopy h3{font:300 30px/1.3 var(--display);color:var(--rose-ink);margin:0 0 8px}
+.mcopy p{font-size:14px;color:#836a62;line-height:1.85;margin:0 0 12px}
+.tag{display:inline-block;border:1px solid var(--line);background:var(--surface-strong);border-radius:99px;padding:6px 11px;font-size:11px;color:#9b6a5f}
+footer{text-align:center;color:#aa8f86;font-size:12.5px;padding:30px 0 6px}
 
-footer{text-align:center;font-size:12.5px;color:#a88b82;padding:30px 0 6px}
-
-/* ---------- Bottom bar (phones) ---------- */
+/* ---------------- Phone bottom bar ---------------- */
 .bottom{display:none}
 
-/* ---------- Responsive ---------- */
+/* ---------------- Responsive ---------------- */
 @media (max-width:1180px){
   .nav{display:none}
   .summary{grid-template-columns:repeat(3,minmax(0,1fr))}
   .panels{grid-template-columns:1fr 1fr}
   .panels .panel:first-child{grid-column:1/-1}
-  .showcase{grid-template-columns:1fr}
+  .mobile{grid-template-columns:1fr}
 }
 @media (max-width:760px){
-  .top-in{height:64px;padding:0 12px;gap:6px}
-  .brand{margin-inline:auto}
+  :root{--gutter:16px}
+  .top{height:64px;gap:8px}
+  .brand{min-width:0;margin-inline:auto}
   .brand img{width:34px;height:34px}
-  .brand b{font-size:19px}
+  .brand b{font-size:21px}
   .brand small{font-size:12px}
-  .tools .lang,.tools .d-only{display:none}
+  .tools .pill,.tools .d-only{display:none}
   .m-only{display:grid}
-  main{padding:14px 12px calc(96px + env(safe-area-inset-bottom))}
-  .hero{display:flex;flex-direction:column;border-radius:24px}
-  .photo{order:-1;min-height:250px}
-  .photo::after{background:linear-gradient(to top,rgba(255,250,246,.6) 0%,rgba(255,250,246,0) 22%)}
+  main{padding:14px var(--gutter) calc(96px + env(safe-area-inset-bottom,0px))}
+  .hero{display:flex;flex-direction:column;border-radius:24px;min-height:0}
+  .photo{order:-1;min-height:260px}
+  .photo:after{background:linear-gradient(to top,rgba(255,250,246,.6) 0%,rgba(255,250,246,0) 20%)}
   .copy{padding:22px 18px 18px}
-  .copy .bloom{width:96px}
-  .copy .bloom2{display:none}
-  .tagline{font-size:15.5px}
-  .tagline-en{font-size:15px}
-  .kpis{gap:10px;margin-top:18px}
-  .kpi{min-height:0;padding:14px}
-  .kpi.days .line1,.kpi.days .line2{font-size:15px}
-  .kpi.days strong{font-size:32px}
-  .kpi.days .line1{gap:2px 5px}
-  .kpi.days .sprig{width:40px}
-  .ring{width:84px;height:84px}
-  .ring .lbl b{font-size:21px}
-  .kpi.ready p{font-size:11.5px}
-  .summary{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-inline:-12px;padding:2px 12px 4px;scrollbar-width:none}
+  .copy .bloom{display:none}
+  .copy .bloom.low{display:none}
+  .copy h1{font-size:44px}
+  .copy .ar{font-size:15.5px}
+  .copy .en{font-size:15px;margin-bottom:18px}
+  .heroCards{gap:10px}
+  .heroCard{min-height:0;padding:14px}
+  .days .l1,.days .l2{font-size:15px}
+  .days strong{font-size:34px}
+  .days .sprig{width:44px}
+  .heroCard .ring{--size:84px}
+  .heroCard .ring b{font-size:21px}
+  .ringText{font-size:11.5px}
+  .summary{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-inline:calc(var(--gutter)*-1);padding:2px var(--gutter) 4px;scrollbar-width:none}
   .summary::-webkit-scrollbar{display:none}
-  .summary li{flex:0 0 40%;scroll-snap-align:start}
-  .sum{height:100%}
+  .summary article{flex:0 0 42%;scroll-snap-align:start;min-height:138px}
   .panels{grid-template-columns:1fr;gap:12px}
   .panels .panel:first-child{grid-column:auto}
   .panel{padding:18px 16px 10px;border-radius:20px}
   /* Phone task list: icon beside each task, circle at the end. */
   .task .t-ic{display:block}
-  .task .dot{display:none}
-  .task .check{margin-inline-start:auto}
-  .task .t-due{display:none}
-  /* Phone budget: circular progress, then categories with their own bars. */
-  .ring-sm{display:flex;align-items:center;gap:16px;margin:4px 0 10px}
-  .ring-sm .ring{width:92px;height:92px}
-  .budget-lg .barrow,.budget-lg .d-total{display:none}
-  .cat{flex-wrap:wrap;row-gap:6px}
-  .cat .c-bar{display:flex;align-items:center;gap:8px;flex-basis:100%;padding-inline-start:46px}
-  .cat .c-bar .bar{height:5px}
-  .cat .c-bar .bar i{background:#c98e7d}
-  .cat .c-bar span{font-size:11px;color:var(--muted);min-width:30px;text-align:end}
-  .showcase{display:none}
-  .bottom{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;inset-inline:0;bottom:0;z-index:30;padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(255,250,246,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(173,103,88,.14)}
-  .bottom a{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px;justify-content:center;font-size:11px;color:#9a7f77}
-  .bottom a span{display:grid;place-items:center;width:46px;height:30px;border-radius:999px;transition:background var(--mid) var(--ease)}
+  .task .dot,.task time{display:none}
+  .task .chk{order:5;margin-inline-start:auto}
+  /* Phone budget: circular progress beside the total, bars per category. */
+  .bsum .ring{display:grid}
+  #budget .barRow{display:none}
+  #budget .bmini{display:flex}
+  .mobile{display:none}
+  .bottom{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;inset-inline:0;bottom:0;z-index:20;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:rgba(255,250,246,.96);border-top:1px solid rgba(173,103,88,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .bottom a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;font-size:11px;color:#9a7f77}
+  .bottom a span{display:grid;place-items:center;width:46px;height:30px;border-radius:99px;transition:background var(--t) var(--ease)}
   .bottom a svg{width:22px;height:22px}
-  .bottom a[aria-current]{color:var(--rose-ink);font-weight:600}
-  .bottom a[aria-current] span{background:var(--rose-soft)}
+  .bottom a.on{color:var(--rose-ink);font-weight:600}
+  .bottom a.on span{background:var(--rose-soft)}
 }
-@media (max-width:380px){
-  .kpis{grid-template-columns:1fr}
-  .summary li{flex-basis:46%}
+@media (max-width:370px){
+  .heroCards{grid-template-columns:1fr}
+  .summary article{flex-basis:46%}
 }
 
-/* ---------- Motion (only when welcome) ---------- */
+/* ---------------- Motion ---------------- */
 @media (prefers-reduced-motion:no-preference){
   .rise{animation:rise 520ms var(--ease) both}
-  .shine::after{animation:shine 7s var(--ease) infinite;animation-delay:var(--d,1.2s)}
-  .twinkle{transform-box:fill-box;transform-origin:center;animation:twinkle 3s ease-in-out infinite}
-  .bottom a[aria-current] svg{animation:pop 380ms var(--ease) both}
-  .task.just .check{animation:pop 300ms var(--ease)}
+  .shine:after{animation:shine 7s var(--ease) infinite;animation-delay:var(--d,1.2s)}
+  .tw{transform-box:fill-box;transform-origin:center;animation:tw 3s ease-in-out infinite}
+  .bottom a.on svg{animation:pop 360ms var(--ease) both}
+  .pop .chk,.pop.mcheck{animation:pop 280ms var(--ease)}
 }
-@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes shine{0%{inset-inline-start:-60%;opacity:0}6%{opacity:1}24%{inset-inline-start:130%;opacity:0}100%{inset-inline-start:130%;opacity:0}}
-@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
-@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.18)}100%{transform:scale(1)}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:1ms!important;animation:none!important}}
-</style>
-</head>
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.16)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:1ms!important}}
+</style></head>
 <body>
 
-<!-- Inline icon sprite (UI glyphs only; bridal icons come from assets/) -->
+<!-- UI glyphs (bridal icons are the supplied files in assets/) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></symbol>
-  <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
-  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></symbol>
-  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
-  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
-  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5z"/></symbol>
-  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="m8 9 1.5 1.5L12 8M8 15l1.5 1.5L12 14M14.5 9.5H17M14.5 15.5H17"/></symbol>
-  <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2.5"/><circle cx="16" cy="13.5" r="1.2" fill="currentColor"/></symbol>
-  <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.6 2.8-5.5 5.5-5.5s4.9 1.9 5.5 5.5"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M15.5 13.6c2.5.2 4.3 2 4.8 5.4"/></symbol>
-  <symbol id="i-dots" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></symbol>
-  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.4 6.6 11.3 12.5 5"/></symbol>
-  <!-- Same style as the supplied icons, for the two categories without one. -->
+  <symbol id="g-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></symbol>
+  <symbol id="g-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="g-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="g-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="g-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></symbol>
+  <symbol id="g-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="g-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="g-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="g-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="g-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5z"/></symbol>
+  <symbol id="g-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="m8 9 1.5 1.5L12 8M8 15l1.5 1.5L12 14M14.5 9.5H17M14.5 15.5H17"/></symbol>
+  <symbol id="g-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2.5"/><circle cx="16" cy="13.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="g-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.6 2.8-5.5 5.5-5.5s4.9 1.9 5.5 5.5"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M15.5 13.6c2.5.2 4.3 2 4.8 5.4"/></symbol>
+  <symbol id="g-dots" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></symbol>
+  <symbol id="g-check" viewBox="0 0 16 16"><path d="M3.5 8.4 6.6 11.3 12.5 5"/></symbol>
+  <!-- Category icons drawn in the same style as the supplied set, for the two categories without a file. -->
   <symbol id="c-camera" viewBox="0 0 48 48" fill="none"><rect x="7" y="15" width="34" height="23" rx="5" fill="#f7e8e1" stroke="#ae6e5c" stroke-width="2"/><path d="M17 15l3-5h8l3 5" stroke="#ae6e5c" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26.5" r="6" fill="#fffaf6" stroke="#ae6e5c" stroke-width="2"/></symbol>
   <symbol id="c-spark" viewBox="0 0 48 48" fill="none"><path d="M24 8c1.6 8.4 7.6 14.4 16 16-8.4 1.6-14.4 7.6-16 16-1.6-8.4-7.6-14.4-16-16 8.4-1.6 14.4-7.6 16-16Z" fill="#f4e5cf" stroke="#b08758" stroke-width="2" stroke-linejoin="round"/></symbol>
-  <!-- A blossom branch for the hero corners. -->
+  <!-- Blossom branch: hero corners and the countdown card. -->
   <symbol id="bloom" viewBox="0 0 160 120" fill="none">
     <path d="M6 10C40 18 70 34 92 64s40 46 64 52" stroke="#c9a395" stroke-width="1.2" stroke-linecap="round"/>
-    <g fill="#f6dbd3" stroke="#cf9d8f" stroke-width=".9">
-      <path d="M30 18c-6-8-2-15 4-14 5 1 6 8-4 14Z"/><path d="M30 18c9-3 15 2 13 7-2 4-9 4-13-7Z"/><path d="M30 18c-3 9-10 11-13 6-2-4 3-9 13-6Z"/>
-      <path d="M72 44c-7-6-5-14 1-14 5 0 7 7-1 14Z"/><path d="M72 44c9-1 14 5 11 9-3 4-9 2-11-9Z"/><path d="M72 44c-1 9-8 12-11 8-3-4 2-9 11-8Z"/>
-    </g>
+    <g fill="#f6dbd3" stroke="#cf9d8f" stroke-width=".9"><path d="M30 18c-6-8-2-15 4-14 5 1 6 8-4 14Z"/><path d="M30 18c9-3 15 2 13 7-2 4-9 4-13-7Z"/><path d="M30 18c-3 9-10 11-13 6-2-4 3-9 13-6Z"/><path d="M72 44c-7-6-5-14 1-14 5 0 7 7-1 14Z"/><path d="M72 44c9-1 14 5 11 9-3 4-9 2-11-9Z"/><path d="M72 44c-1 9-8 12-11 8-3-4 2-9 11-8Z"/></g>
     <circle cx="30" cy="18" r="2.4" fill="#e7b9a8"/><circle cx="72" cy="44" r="2.4" fill="#e7b9a8"/>
     <g fill="#dde3d6" stroke="#a7b29f" stroke-width=".8"><path d="M52 30c-2-7 3-11 8-9-1 5-4 8-8 9Z"/><path d="M98 72c1-7 7-9 11-6-2 5-6 7-11 6Z"/><path d="M14 12c-5-4-4-9 1-10 2 4 1 7-1 10Z"/></g>
     <g fill="#fffaf6" stroke="#e2c3b7" stroke-width=".8"><circle cx="112" cy="84" r="3"/><circle cx="124" cy="92" r="2.2"/><circle cx="46" cy="38" r="2"/></g>
   </symbol>
+  <symbol id="spark4" viewBox="0 0 20 20"><path d="M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z"/></symbol>
 </svg>
 
 <header class="top">
-  <div class="top-in">
-    <button class="icon-btn m-only" type="button" aria-label="القائمة"><svg><use href="#i-menu"/></svg></button>
-    <a class="brand" href="#" aria-label="رحلة العروس، الرئيسية">
-      <img src="assets/logo-mark.svg" alt="" width="44" height="44">
-      <span><b>رحلة العروس</b><small><bdi>Bridal Journey</bdi></small></span>
-    </a>
-    <nav class="nav" aria-label="الأقسام">
-      <a href="#" aria-current="page">الرئيسية</a>
-      <a href="#focus">قائمة المهام</a>
-      <a href="#budget">الميزانية</a>
-      <a href="#vendors">الموردون</a>
-      <a href="#appointments">المواعيد</a>
-      <a href="#guests">قائمة الضيوف</a>
-      <a href="#tips">مقالات ونصائح</a>
-    </nav>
-    <div class="tools">
-      <a class="lang" href="#" hreflang="en" aria-label="Switch to English"><span class="en">EN</span><span aria-current="true">العربية</span></a>
-      <button class="icon-btn d-only" type="button" aria-label="المفضلة"><svg><use href="#i-heart"/></svg></button>
-      <button class="icon-btn" type="button" aria-label="التنبيهات، يوجد جديد"><svg><use href="#i-bell"/></svg><span class="badge"></span></button>
-      <span class="avatar d-only" aria-label="حساب ليان" role="img">ل</span>
-      <button class="icon-btn m-only" type="button" aria-label="إضافة مهمة"><svg><use href="#i-plus"/></svg></button>
-    </div>
+  <button class="circle m-only" type="button" aria-label="القائمة"><svg class="i"><use href="#g-menu"/></svg></button>
+  <a class="brand" href="#" aria-label="رحلة العروس، الرئيسية"><img src="assets/logo-mark.svg" alt="" width="44" height="44"><div><b>رحلة العروس</b><small><bdi>Bridal Journey</bdi></small></div></a>
+  <nav class="nav" aria-label="الأقسام"><a class="on" href="#" aria-current="page">الرئيسية</a><a href="#focus">قائمة المهام</a><a href="#budget">الميزانية</a><a href="#vendors">الموردون</a><a href="#appointments">المواعيد</a><a href="#guests">قائمة الضيوف</a><a href="#tips">مقالات ونصائح</a></nav>
+  <div class="tools">
+    <a class="pill" href="#" hreflang="en" aria-label="Switch to English"><span>EN</span><span class="on">العربية</span></a>
+    <button class="circle d-only" type="button" aria-label="المفضلة"><svg class="i"><use href="#g-heart"/></svg></button>
+    <button class="circle" type="button" aria-label="التنبيهات، يوجد جديد"><svg class="i"><use href="#g-bell"/></svg><span class="badge"></span></button>
+    <!-- Image slot: an avatar photo can replace the initial later. -->
+    <div class="avatar d-only" role="img" aria-label="حساب ليان">ل</div>
+    <button class="circle m-only" type="button" aria-label="إضافة مهمة"><svg class="i"><use href="#g-plus"/></svg></button>
   </div>
 </header>
 
-<main id="main">
-  <!-- Hero: copy (start) and the bride photo (end), like the reference -->
-  <section class="hero rise" aria-labelledby="hero-title">
-    <div class="copy">
-      <svg class="bloom" aria-hidden="true"><use href="#bloom"/></svg>
-      <svg class="bloom2" aria-hidden="true"><use href="#bloom"/></svg>
-      <span class="eyebrow"><bdi>Your personal bridal planner</bdi></span>
-      <h1 id="hero-title">رحلة العروس</h1>
-      <p class="tagline">كل ما تحتاجينه.. ولا شيء يُنسى</p>
-      <p class="tagline-en"><bdi>Everything you need. Nothing forgotten.</bdi></p>
-      <div class="kpis">
-        <article class="kpi days shine" style="--d:.8s" aria-label="العد التنازلي للزفاف">
-          <div class="line1"><span>باقي</span><strong class="num" id="days">0</strong><span>يومًا</span></div>
-          <div class="line2">على زفافك</div>
-          <div class="date"><svg aria-hidden="true"><use href="#i-cal"/></svg><span id="wdate"></span></div>
-          <svg class="sprig" viewBox="0 0 160 120" aria-hidden="true"><use href="#bloom"/></svg>
-        </article>
-        <article class="kpi ready shine" style="--d:3.4s" aria-label="نسبة الجاهزية">
-          <div class="ring" data-ring="ready">
-            <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="44" fill="none" stroke-width="7"/><circle class="val" cx="50" cy="50" r="44" fill="none" stroke-width="7"/></svg>
-            <div class="lbl"><b class="num" id="readyPct">0%</b><small>جاهزة</small></div>
-          </div>
-          <p><span class="heart">♥</span> رحلة جميلة.. وأنتِ على الطريق الصحيح</p>
-        </article>
-      </div>
+<main>
+<section class="hero rise" aria-labelledby="hero-title">
+  <!-- Image slot: assets/bride-hero.jpg. A full-resolution photo replaces the soft placeholder automatically. -->
+  <div class="photo" id="photo">
+    <img id="heroImg" src="assets/bride-hero.jpg" alt="العروس من الخلف بطرحتها وتاج الشعر، في شرفة بأقواس بيضاء وزهور" fetchpriority="high">
+    <svg class="ph" viewBox="0 0 700 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="phSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e7e0"/><stop offset="1" stop-color="#fbf5f0"/></linearGradient>
+        <linearGradient id="phWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fcf8f5"/><stop offset="1" stop-color="#f2e7e0"/></linearGradient>
+        <radialGradient id="phSun" cx=".62" cy=".3" r=".55"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="700" height="440" fill="url(#phSky)"/>
+      <path d="M0 262l90-48 70 28 110-72 100 62 80-32 120 66 130-52v276H0z" fill="#e7dad5"/>
+      <path d="M0 292l120-38 100 24 120-46 120 46 120-26 120 36v152H0z" fill="#ddcdc8"/>
+      <rect y="312" width="700" height="26" fill="#e6e6e3"/>
+      <rect y="338" width="700" height="102" fill="#f4ebe6"/>
+      <rect width="700" height="440" fill="url(#phSun)"/>
+      <path fill-rule="evenodd" fill="url(#phWall)" d="M0 0H700V440H0ZM150 440V196A200 200 0 0 1 550 196V440Z"/>
+      <path d="M150 440V196A200 200 0 0 1 550 196V440" fill="none" stroke="#e7dbd3" stroke-width="2"/>
+      <path d="M128 440V194A222 222 0 0 1 572 194V440" fill="none" stroke="#efe5df" stroke-width="1.2"/>
+      <use href="#bloom" x="-20" y="-16" width="320" height="240"/>
+      <use href="#bloom" x="380" y="250" width="300" height="225" transform="rotate(180 530 362)"/>
+      <g fill="#ffffff"><use class="tw" href="#spark4" x="470" y="110" width="18" height="18"/><use class="tw" href="#spark4" x="240" y="250" width="12" height="12" style="animation-delay:-1.2s"/><use class="tw" href="#spark4" x="520" y="300" width="14" height="14" style="animation-delay:-2s"/></g>
+    </svg>
+  </div>
+  <div class="copy">
+    <svg class="bloom" aria-hidden="true"><use href="#bloom"/></svg>
+    <svg class="bloom low" aria-hidden="true"><use href="#bloom"/></svg>
+    <span class="eyebrow"><bdi>Your personal bridal planner</bdi></span>
+    <h1 id="hero-title">رحلة العروس</h1>
+    <p class="ar">كل ما تحتاجينه .. ولا شيء يُنسى</p>
+    <p class="en"><bdi>Everything you need. Nothing forgotten.</bdi></p>
+    <div class="heroCards">
+      <article class="heroCard days shine" style="--d:.8s" aria-label="العد التنازلي للزفاف">
+        <div class="l1"><span>باقي</span><strong class="num" id="days">187</strong><span>يومًا</span></div>
+        <div class="l2">على زفافك</div>
+        <small><svg aria-hidden="true"><use href="#g-cal"/></svg><span id="wdate">8 أبريل 2027</span></small>
+        <svg class="sprig" viewBox="0 0 160 120" aria-hidden="true"><use href="#bloom"/></svg>
+      </article>
+      <article class="heroCard ready shine" style="--d:3.4s" aria-label="نسبة الجاهزية">
+        <div class="ring" data-ring="ready"><div><b class="num" data-bind="ready">42%</b><small>جاهزة</small></div></div>
+        <p class="ringText"><span class="h">♥</span> رحلة جميلة .. وأنتِ على الطريق الصحيح</p>
+      </article>
     </div>
-    <div class="photo" id="photo">
-      <img id="heroImg" src="assets/bride-hero.jpg" alt="العروس من الخلف بطرحتها وتاج الشعر، في شرفة بأقواس بيضاء وزهور" fetchpriority="high">
-      <!-- Shown only until a full-resolution photo replaces assets/bride-hero.jpg -->
-      <svg class="fallback" viewBox="0 0 700 430" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4e9e2"/><stop offset="1" stop-color="#fbf5f0"/></linearGradient>
-          <linearGradient id="fwall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf6f2"/><stop offset="1" stop-color="#f1e6df"/></linearGradient>
-          <radialGradient id="fsun" cx=".7" cy=".25" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-        </defs>
-        <rect width="700" height="430" fill="url(#fsky)"/><rect width="700" height="430" fill="url(#fsun)"/>
-        <path d="M0 250l80-44 70 26 110-70 100 60 80-30 120 64 140-50v234H0z" fill="#e6d8d3"/>
-        <path d="M0 280l120-36 100 22 120-44 120 44 120-24 120 34v184H0z" fill="#dccbc6"/>
-        <rect y="300" width="700" height="28" fill="#e5e6e4"/>
-        <rect y="328" width="700" height="102" fill="#f4ebe6"/>
-        <path fill-rule="evenodd" fill="url(#fwall)" d="M0 0H700V430H0ZM40 430V190A120 120 0 0 1 280 190V430ZM380 430V190A120 120 0 0 1 620 190V430Z"/>
-        <path d="M40 430V190A120 120 0 0 1 280 190V430M380 430V190A120 120 0 0 1 620 190V430" fill="none" stroke="#e8dcd5" stroke-width="2"/>
-        <use href="#bloom" x="-30" y="-10" width="300" height="225"/>
-        <use href="#bloom" x="430" y="300" width="280" height="210" transform="rotate(180 570 405)"/>
-      </svg>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Five summary cards -->
-  <ul class="summary" aria-label="نظرة سريعة" id="summary"></ul>
+<section class="summary" aria-label="نظرة سريعة">
+  <article id="tasks-sum"><span class="ic"><img src="assets/icon-invite.svg" alt=""></span><div><b>قائمة المهام</b><small class="num" data-bind="tasksSum">28 من 67 مكتملة</small></div><span class="arr" aria-hidden="true"><svg><use href="#g-chev"/></svg></span><a class="cover" href="#focus" aria-label="قائمة المهام"></a></article>
+  <article><span class="ic"><img src="assets/icon-calendar.svg" alt=""></span><div><b>المواعيد</b><small class="num">5 مواعيد قادمة</small></div><span class="arr" aria-hidden="true"><svg><use href="#g-chev"/></svg></span><a class="cover" href="#appointments" aria-label="المواعيد"></a></article>
+  <article id="vendors"><span class="ic"><img src="assets/icon-vendors.svg" alt=""></span><div><b>الموردون</b><small class="num">12 موردًا محفوظًا</small></div><span class="arr" aria-hidden="true"><svg><use href="#g-chev"/></svg></span><a class="cover" href="#vendors" aria-label="الموردون"></a></article>
+  <article><span class="ic"><img src="assets/icon-budget.svg" alt=""></span><div><b>الميزانية</b><small class="num"><bdi>3,250</bdi> من <bdi>8,000 OMR</bdi></small></div><span class="arr" aria-hidden="true"><svg><use href="#g-chev"/></svg></span><a class="cover" href="#budget" aria-label="الميزانية"></a></article>
+  <article id="guests"><span class="ic"><img src="assets/icon-guests.svg" alt=""></span><div><b>قائمة الضيوف</b><small class="num">120 ضيفًا</small></div><span class="arr" aria-hidden="true"><svg><use href="#g-chev"/></svg></span><a class="cover" href="#guests" aria-label="قائمة الضيوف"></a></article>
+</section>
 
-  <!-- Three panels -->
-  <section class="panels">
-    <article class="panel rise" id="focus" aria-labelledby="focus-h" style="animation-delay:80ms">
-      <div class="ph"><h2 id="focus-h">تركيزك هذا الأسبوع</h2><a class="chip" href="#">عرض الكل</a></div>
-      <ul class="tasks" id="focusList"></ul>
-    </article>
-    <article class="panel rise" id="appointments" aria-labelledby="appt-h" style="animation-delay:140ms">
-      <div class="ph"><h2 id="appt-h">مواعيد قادمة</h2><a class="chip" href="#">عرض الكل</a></div>
-      <ul class="appts" id="apptList"></ul>
-    </article>
-    <article class="panel budget-lg rise" id="budget" aria-labelledby="budget-h" style="animation-delay:200ms">
-      <div class="ph"><h2 id="budget-h">نظرة على الميزانية</h2><a class="icon-btn" href="#" aria-label="تفاصيل الميزانية"><svg><use href="#i-arrow"/></svg></a></div>
-      <div class="ring-sm">
-        <div class="ring" data-ring="budget">
-          <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="44" fill="none" stroke-width="8"/><circle class="val" cx="50" cy="50" r="44" fill="none" stroke-width="8"/></svg>
-          <div class="lbl"><b class="num" data-bind="budgetPct"></b></div>
-        </div>
-        <div><div class="total num"><bdi data-bind="spent"></bdi></div><div class="of" data-bind="ofTotal"></div></div>
-      </div>
-      <div class="d-total"><div class="total num"><bdi data-bind="spent"></bdi></div><div class="of" data-bind="ofTotal"></div></div>
-      <div class="barrow"><div class="bar"><i id="budgetBar"></i></div><span class="num" data-bind="budgetPct"></span></div>
-      <ul class="cats" id="catList"></ul>
-    </article>
-  </section>
+<section class="panels">
+<article class="panel rise" id="focus" aria-labelledby="focus-h" style="animation-delay:80ms">
+  <div class="head"><h2 id="focus-h">تركيزك هذا الأسبوع</h2><button type="button">عرض الكل</button></div>
+  <div class="task" data-id="venue"><span class="dot"></span><img class="t-ic" src="assets/icon-venue.svg" alt=""><button class="chk" type="button" role="checkbox" aria-checked="false" aria-label="تأكيد قاعة الحفل"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></button><span class="t">تأكيد قاعة الحفل</span><time>اليوم</time></div>
+  <div class="task done" data-id="florist"><span class="dot"></span><img class="t-ic" src="assets/icon-flower.svg" alt=""><button class="chk" type="button" role="checkbox" aria-checked="true" aria-label="مقابلة منسقة الزهور"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></button><span class="t">مقابلة منسقة الزهور</span><time>تم</time></div>
+  <div class="task" data-id="invites"><span class="dot"></span><img class="t-ic" src="assets/icon-invite.svg" alt=""><button class="chk" type="button" role="checkbox" aria-checked="false" aria-label="اختيار تصميم الدعوات"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></button><span class="t">اختيار تصميم الدعوات</span><time>الخميس</time></div>
+  <div class="task done" data-id="guests"><span class="dot"></span><img class="t-ic" src="assets/icon-guests.svg" alt=""><button class="chk" type="button" role="checkbox" aria-checked="true" aria-label="مراجعة قائمة الضيوف"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></button><span class="t">مراجعة قائمة الضيوف</span><time>تم</time></div>
+  <div class="task" data-id="dress"><span class="dot"></span><img class="t-ic" src="assets/icon-dress.svg" alt=""><button class="chk" type="button" role="checkbox" aria-checked="false" aria-label="تجربة فستان الزفاف الثانية"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></button><span class="t">تجربة فستان الزفاف الثانية</span><time>السبت</time></div>
+</article>
 
-  <!-- How it looks on the phone (desktop only, mirrors the reference composition) -->
-  <section class="showcase" aria-label="على الجوال">
-    <article class="scard">
-      <div class="phone" aria-hidden="true"><div class="scr"><span class="notch"></span>
-        <div class="pb"><img src="assets/logo-mark.svg" alt="">رحلة العروس</div>
-        <h4>قائمة المهام</h4>
-        <div class="tabs" role="tablist"><button role="tab" aria-selected="true" class="num">الكل 67</button><button role="tab" aria-selected="false">قيد التنفيذ</button><button role="tab" aria-selected="false">مكتملة</button></div>
-        <ul class="tasks" id="phoneTasks"></ul>
-      </div></div>
-      <div><h3>كل مهامك في يدك</h3><p>على الجوال تشوفين بس اللي يهمك الحين، وكل مهمة بأيقونتها. علّمي عليها وخلاص.</p></div>
-    </article>
-    <article class="scard">
-      <div class="phone" aria-hidden="true"><div class="scr"><span class="notch"></span>
-        <div class="pb"><img src="assets/logo-mark.svg" alt="">رحلة العروس</div>
-        <h4>الميزانية</h4>
-        <div class="tabs" role="tablist"><button role="tab" aria-selected="true">نظرة عامة</button><button role="tab" aria-selected="false">التفاصيل</button><button role="tab" aria-selected="false">المدفوعات</button></div>
-        <div class="ring" data-ring="budget"><svg viewBox="0 0 100 100"><circle class="trk" cx="50" cy="50" r="44" fill="none" stroke-width="8"/><circle class="val" cx="50" cy="50" r="44" fill="none" stroke-width="8"/></svg><div class="lbl"><b class="num" data-bind="budgetPct"></b></div></div>
-        <div class="ptotal num"><bdi data-bind="spent"></bdi></div><div class="pof" data-bind="ofTotal"></div>
-        <ul class="cats" id="phoneCats"></ul>
-      </div></div>
-      <div><h3>ميزانية واضحة وهادئة</h3><p>المصروف والمتبقي وكل بند بنسبته، بالريال العماني أو أي عملة خليجية.</p></div>
-    </article>
-  </section>
+<article class="panel rise" id="appointments" aria-labelledby="appt-h" style="animation-delay:140ms">
+  <div class="head"><h2 id="appt-h">مواعيد قادمة</h2><button type="button">عرض الكل</button></div>
+  <!-- Image slots: assets/appointment-*.jpg -->
+  <div class="apt"><img src="assets/appointment-flowers.jpg" alt="" loading="lazy"><div><small>السبت، 10 أكتوبر</small><b>مقابلة منسقة الزهور</b><span><svg aria-hidden="true"><use href="#g-clock"/></svg>10:00 صباحًا</span></div></div>
+  <div class="apt"><img src="assets/appointment-dress.jpg" alt="" loading="lazy"><div><small>الخميس، 15 أكتوبر</small><b>تجربة فستان الزفاف</b><span><svg aria-hidden="true"><use href="#g-clock"/></svg>4:00 مساءً</span></div></div>
+  <div class="apt"><img src="assets/appointment-table.jpg" alt="" loading="lazy"><div><small>السبت، 17 أكتوبر</small><b>مناقشة قائمة الطعام</b><span><svg aria-hidden="true"><use href="#g-clock"/></svg>11:30 صباحًا</span></div></div>
+</article>
 
-  <footer>رحلة العروس · <span class="en">Bridal Journey</span> · من One Click</footer>
+<article class="panel rise" id="budget" aria-labelledby="budget-h" style="animation-delay:200ms">
+  <div class="head"><h2 id="budget-h">نظرة على الميزانية</h2><a class="circle" href="#" aria-label="تفاصيل الميزانية"><svg class="i"><use href="#g-arrow"/></svg></a></div>
+  <div class="bsum">
+    <div class="ring" data-ring="budget"><b class="num" data-bind="budgetPct">41%</b></div>
+    <div><div class="total num"><bdi>3,250 OMR</bdi></div><div class="sub">من أصل <bdi class="num">8,000 OMR</bdi></div></div>
+  </div>
+  <div class="barRow"><div class="bar"><i data-w="41"></i></div><span class="num" data-bind="budgetPct">41%</span></div>
+  <div class="brow"><div class="btop"><span class="b-ic"><img src="assets/icon-venue.svg" alt=""></span><span>قاعة الحفل</span><b class="num"><bdi>1,200 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="38"></i></div><span class="num">38%</span></div></div>
+  <div class="brow"><div class="btop"><span class="b-ic"><img src="assets/icon-flower.svg" alt=""></span><span>الزهور والديكور</span><b class="num"><bdi>850 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="26"></i></div><span class="num">26%</span></div></div>
+  <div class="brow"><div class="btop"><span class="b-ic"><svg aria-hidden="true"><use href="#c-camera"/></svg></span><span>التصوير</span><b class="num"><bdi>600 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="18"></i></div><span class="num">18%</span></div></div>
+  <div class="brow"><div class="btop"><span class="b-ic"><img src="assets/icon-dress.svg" alt=""></span><span>الأزياء والجمال</span><b class="num"><bdi>400 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="12"></i></div><span class="num">12%</span></div></div>
+  <div class="brow"><div class="btop"><span class="b-ic"><svg aria-hidden="true"><use href="#c-spark"/></svg></span><span>أخرى</span><b class="num"><bdi>200 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="6"></i></div><span class="num">6%</span></div></div>
+</article>
+</section>
+
+<section class="mobile" aria-label="على الجوال">
+<article class="mcard"><div class="phone" aria-hidden="true"><div class="screen"><div class="notch"></div>
+  <div class="mbar"><svg><use href="#g-plus"/></svg><span class="mbrand"><img src="assets/logo-mark.svg" alt="">رحلة العروس</span><svg><use href="#g-menu"/></svg></div>
+  <div class="mtitle">قائمة المهام</div>
+  <div class="tabs"><button class="on" type="button" tabindex="-1">الكل 67</button><button type="button" tabindex="-1">قيد التنفيذ</button><button type="button" tabindex="-1">مكتملة 28</button></div>
+  <div class="mgroup">الأكثر أهمية</div>
+  <div class="mtask" data-id="venue"><img src="assets/icon-venue.svg" alt=""><span>تأكيد قاعة الحفل</span><span class="mcheck"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></span></div>
+  <div class="mtask" data-id="florist"><img src="assets/icon-flower.svg" alt=""><span>حجز منسقة الزهور</span><span class="mcheck on"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></span></div>
+  <div class="mtask" data-id="dress"><img src="assets/icon-dress.svg" alt=""><span>اختيار فستان الزفاف</span><span class="mcheck"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></span></div>
+  <div class="mtask" data-id="invites"><img src="assets/icon-invite.svg" alt=""><span>تصميم الدعوات</span><span class="mcheck"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></span></div>
+  <div class="mgroup">التجهيزات</div>
+  <div class="mtask"><img src="assets/icon-dress.svg" alt=""><span>جلسة تجربة المكياج</span><span class="mcheck"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></span></div>
+  <div class="mtask"><img src="assets/icon-flower.svg" alt=""><span>اختيار إكسسوارات الشعر</span><span class="mcheck"><svg viewBox="0 0 16 16"><use href="#g-check"/></svg></span></div>
+</div></div><div class="mcopy"><span class="tag">Mobile-first RTL</span><h3>كل مهامها في يدها</h3><p>واجهة هاتف واضحة وناعمة تعرض ما يهم العروس الآن بدل إغراقها بكل المهام.</p></div></article>
+
+<article class="mcard"><div class="phone" aria-hidden="true"><div class="screen"><div class="notch"></div>
+  <div class="mbar"><svg><use href="#g-back"/></svg><span class="mbrand"><img src="assets/logo-mark.svg" alt="">رحلة العروس</span><svg><use href="#g-menu"/></svg></div>
+  <div class="mtitle">الميزانية</div>
+  <div class="tabs"><button class="on" type="button" tabindex="-1">نظرة عامة</button><button type="button" tabindex="-1">التفاصيل</button><button type="button" tabindex="-1">المدفوعات</button></div>
+  <div class="mring-row"><div class="ring mring" data-ring="budget"><b class="num" data-bind="budgetPct">41%</b></div><div><div class="mt num"><bdi>3,250 OMR</bdi></div><div class="ms">من أصل <bdi>8,000 OMR</bdi></div></div></div>
+  <div class="mbrow"><div class="btop"><span class="b-ic"><img src="assets/icon-venue.svg" alt=""></span><span>قاعة الحفل</span><b class="num"><bdi>1,200 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="38"></i></div><span>38%</span></div></div>
+  <div class="mbrow"><div class="btop"><span class="b-ic"><img src="assets/icon-flower.svg" alt=""></span><span>الزهور والديكور</span><b class="num"><bdi>850 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="26"></i></div><span>26%</span></div></div>
+  <div class="mbrow"><div class="btop"><span class="b-ic"><svg><use href="#c-camera"/></svg></span><span>التصوير</span><b class="num"><bdi>600 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="18"></i></div><span>18%</span></div></div>
+  <div class="mbrow"><div class="btop"><span class="b-ic"><img src="assets/icon-dress.svg" alt=""></span><span>الأزياء والجمال</span><b class="num"><bdi>400 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="12"></i></div><span>12%</span></div></div>
+  <div class="mbrow"><div class="btop"><span class="b-ic"><svg><use href="#c-spark"/></svg></span><span>أخرى</span><b class="num"><bdi>200 OMR</bdi></b></div><div class="bmini"><div class="mini"><i data-w="6"></i></div><span>6%</span></div></div>
+</div></div><div class="mcopy"><span class="tag"><bdi>OMR + GCC currencies</bdi></span><h3>ميزانية واضحة وهادئة</h3><p>إجمالي الميزانية والمدفوع والمتبقي والفئات في نفس الهوية البصرية الفاخرة.</p></div></article>
+</section>
+
+<footer>رحلة العروس · <bdi>Bridal Journey</bdi> · من One Click</footer>
 </main>
 
 <nav class="bottom" aria-label="التنقل">
-  <a href="#" aria-current="page"><span><svg><use href="#i-home"/></svg></span>الرئيسية</a>
-  <a href="#focus"><span><svg><use href="#i-list"/></svg></span>المهام</a>
-  <a href="#budget"><span><svg><use href="#i-wallet"/></svg></span>الميزانية</a>
-  <a href="#vendors"><span><svg><use href="#i-people"/></svg></span>الموردون</a>
-  <a href="#more"><span><svg><use href="#i-dots"/></svg></span>المزيد</a>
+  <a class="on" href="#" aria-current="page"><span><svg><use href="#g-home"/></svg></span>الرئيسية</a>
+  <a href="#focus"><span><svg><use href="#g-list"/></svg></span>المهام</a>
+  <a href="#budget"><span><svg><use href="#g-wallet"/></svg></span>الميزانية</a>
+  <a href="#vendors"><span><svg><use href="#g-people"/></svg></span>الموردون</a>
+  <a href="#more"><span><svg><use href="#g-dots"/></svg></span>المزيد</a>
 </nav>
 
 <script>
-/* Sample data (fictional). In the product this comes from the bride's saved plan. */
-const plan = {
-  wedding: "2027-04-08",
-  tasks: { total: 67, doneElsewhere: 26 },
-  focus: [
-    { id: "venue", title: "تأكيد قاعة الحفل", icon: "assets/icon-venue.svg", due: "اليوم", done: false },
-    { id: "florist", title: "مقابلة منسقة الزهور", icon: "assets/icon-flower.svg", due: "تم", done: true },
-    { id: "invites", title: "اختيار تصميم الدعوات", icon: "assets/icon-invite.svg", due: "الخميس", done: false },
-    { id: "guests", title: "مراجعة قائمة الضيوف", icon: "assets/icon-guests.svg", due: "تم", done: true },
-    { id: "dress", title: "تجربة فستان الزفاف الثانية", icon: "assets/icon-dress.svg", due: "السبت", done: false },
-  ],
-  appointments: [
-    { title: "مقابلة منسقة الزهور", date: "2026-10-10", time: "10:00", img: "assets/appointment-flowers.jpg" },
-    { title: "تجربة فستان الزفاف", date: "2026-10-15", time: "16:00", img: "assets/appointment-dress.jpg" },
-    { title: "مناقشة قائمة الطعام", date: "2026-10-17", time: "11:30", img: "assets/appointment-table.jpg" },
-  ],
-  upcomingAppointments: 5,
-  vendors: { saved: 12 },
-  guests: 120,
-  budget: {
-    total: 8000, currency: "OMR",
-    cats: [
-      { name: "قاعة الحفل", amount: 1200, icon: "assets/icon-venue.svg" },
-      { name: "الزهور والديكور", amount: 850, icon: "assets/icon-flower.svg" },
-      { name: "التصوير", amount: 600, sym: "c-camera" },
-      { name: "الأزياء والجمال", amount: 400, icon: "assets/icon-dress.svg" },
-      { name: "أخرى", amount: 200, sym: "c-spark" },
-    ],
-  },
-};
-
-const fmt = (n) => new Intl.NumberFormat("en-US").format(n);
-const money = (n) => `${fmt(n)} ${plan.budget.currency}`;
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* Sample plan (fictional). The product reads these from the bride's saved data. */
+const plan = { wedding: "2027-04-08", tasksTotal: 67, doneElsewhere: 26, budgetTotal: 8000, spent: 3250 };
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fmt = (n) => new Intl.NumberFormat("en-US").format(n);
 
-function daysLeft() {
-  const t = new Date(); t.setHours(0, 0, 0, 0);
-  return Math.max(0, Math.round((new Date(plan.wedding + "T00:00:00") - t) / 864e5));
-}
-const doneCount = () => plan.tasks.doneElsewhere + plan.focus.filter((t) => t.done).length;
-const readiness = () => Math.round((doneCount() / plan.tasks.total) * 100);
-const spent = () => plan.budget.cats.reduce((s, c) => s + c.amount, 0);
-const budgetPct = () => Math.round((spent() / plan.budget.total) * 100);
+const doneTasks = () => plan.doneElsewhere + $$("#focus .task.done").length;
+const readyPct = () => Math.round((doneTasks() / plan.tasksTotal) * 100);
+const budgetPct = () => Math.round((plan.spent / plan.budgetTotal) * 100);
 
 function countTo(el, to, suffix = "") {
-  if (reduce) { el.textContent = fmt(to) + suffix; return; }
-  const from = Number(el.dataset.v || 0), t0 = performance.now(), dur = 700;
+  const from = Number(el.dataset.v ?? 0);
+  el.dataset.v = to;
+  if (reduce || from === to) { el.textContent = fmt(to) + suffix; return; }
+  const t0 = performance.now(), dur = 650;
   const step = (now) => {
     const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
     el.textContent = fmt(Math.round(from + (to - from) * e)) + suffix;
     if (p < 1) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
-  el.dataset.v = to;
 }
-function setRings(name, pct) {
-  $$(`[data-ring="${name}"] .val`).forEach((c) => {
-    const len = 2 * Math.PI * 44;
-    c.style.strokeDasharray = len;
-    if (!c.style.strokeDashoffset) c.style.strokeDashoffset = len;
-    requestAnimationFrame(() => requestAnimationFrame(() => (c.style.strokeDashoffset = len * (1 - pct / 100))));
-  });
-}
-const icon = (c, cls) => c.icon ? `<img class="${cls}" src="${c.icon}" alt="">` : `<svg class="${cls}" aria-hidden="true"><use href="#${c.sym}"/></svg>`;
+const setRing = (name, pct) => $$(`[data-ring="${name}"]`).forEach((r) => r.style.setProperty("--p", pct));
 
-function renderSummary() {
-  const items = [
-    { t: "قائمة المهام", s: `${fmt(doneCount())} من ${fmt(plan.tasks.total)} مكتملة`, i: "assets/icon-invite.svg", href: "#focus", id: "sumTasks" },
-    { t: "المواعيد", s: `${fmt(plan.upcomingAppointments)} مواعيد قادمة`, i: "assets/icon-calendar.svg", href: "#appointments" },
-    { t: "الموردون", s: `${fmt(plan.vendors.saved)} موردًا محفوظًا`, i: "assets/icon-vendors.svg", href: "#vendors" },
-    { t: "الميزانية", s: `${fmt(spent())} من ${money(plan.budget.total)}`, i: "assets/icon-budget.svg", href: "#budget" },
-    { t: "قائمة الضيوف", s: `${fmt(plan.guests)} ضيفًا`, i: "assets/icon-guests.svg", href: "#guests" },
-  ];
-  $("#summary").innerHTML = items.map((x, n) => `
-    <li><a class="sum rise" style="animation-delay:${40 + n * 40}ms" href="${x.href}">
-      <span class="ic"><img src="${x.i}" alt=""></span>
-      <b>${x.t}</b><small class="num" ${x.id ? `id="${x.id}"` : ""}>${x.s}</small>
-      <svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg>
-    </a></li>`).join("");
+function refresh() {
+  $$('[data-bind="ready"]').forEach((e) => countTo(e, readyPct(), "%"));
+  setRing("ready", readyPct());
+  $$('[data-bind="tasksSum"]').forEach((e) => (e.textContent = `${fmt(doneTasks())} من ${fmt(plan.tasksTotal)} مكتملة`));
 }
 
-function taskRow(t) {
-  return `<li class="task${t.done ? " done" : ""}" data-id="${t.id}">
-    <img class="t-ic" src="${t.icon}" alt="">
-    <span class="t-txt">${esc(t.title)}</span>
-    <button class="check" type="button" role="checkbox" aria-checked="${t.done}" aria-label="${esc(t.title)}"><svg viewBox="0 0 16 16"><use href="#i-check"/></svg></button>
-    <span class="dot" aria-hidden="true"></span>
-  </li>`;
-}
-function renderTasks() {
-  $("#focusList").innerHTML = plan.focus.map(taskRow).join("");
-  $("#phoneTasks").innerHTML = plan.focus.slice(0, 5).map(taskRow).join("");
-}
-
-function renderAppts() {
-  const d = new Intl.DateTimeFormat("ar-u-nu-latn", { weekday: "long", day: "numeric", month: "long" });
-  const time = (hm) => {
-    const [h, m] = hm.split(":").map(Number);
-    return `${(h % 12) || 12}:${String(m).padStart(2, "0")} ${h < 12 ? "صباحًا" : "مساءً"}`;
-  };
-  $("#apptList").innerHTML = plan.appointments.map((a) => `
-    <li class="appt">
-      <span class="thumb"><img src="${a.img}" alt="" loading="lazy"></span>
-      <span class="a-txt"><small>${d.format(new Date(a.date + "T00:00:00"))}</small><b>${esc(a.title)}</b></span>
-      <time datetime="${a.date}T${a.time}"><svg aria-hidden="true"><use href="#i-clock"/></svg>${time(a.time)}</time>
-    </li>`).join("");
-}
-
-function renderBudget() {
-  const rows = (withBar) => plan.budget.cats.map((c) => {
-    const p = Math.round((c.amount / plan.budget.total) * 100);
-    return `<li class="cat">
-      <span class="c-ic">${icon(c, "")}</span>
-      <span class="c-name">${esc(c.name)}</span>
-      <span class="c-amt num"><bdi>${money(c.amount)}</bdi></span>
-      ${withBar ? `<span class="c-bar"><span class="bar"><i style="width:${p}%"></i></span><span class="num">${p}%</span></span>` : ""}
-    </li>`;
-  }).join("");
-  $("#catList").innerHTML = rows(true);
-  $("#phoneCats").innerHTML = rows(false);
-  $$('[data-bind="spent"]').forEach((e) => (e.textContent = money(spent())));
-  $$('[data-bind="ofTotal"]').forEach((e) => (e.textContent = `من أصل ${money(plan.budget.total)}`));
-  $$('[data-bind="budgetPct"]').forEach((e) => (e.textContent = budgetPct() + "%"));
-  requestAnimationFrame(() => requestAnimationFrame(() => ($("#budgetBar").style.width = budgetPct() + "%")));
-  setRings("budget", budgetPct());
-}
-
-function refreshProgress() {
-  countTo($("#readyPct"), readiness(), "%");
-  setRings("ready", readiness());
-  const s = $("#sumTasks");
-  if (s) s.textContent = `${fmt(doneCount())} من ${fmt(plan.tasks.total)} مكتملة`;
-}
-
-/* Checklist: works in both lists and keeps them in sync. */
-document.addEventListener("click", (e) => {
-  const b = e.target.closest(".check");
-  if (!b) return;
-  const t = plan.focus.find((x) => x.id === b.closest(".task").dataset.id);
-  t.done = !t.done;
-  $$(`.task[data-id="${t.id}"]`).forEach((row) => {
-    row.classList.toggle("done", t.done);
-    row.classList.remove("just"); void row.offsetWidth; row.classList.add("just");
-    $(".check", row).setAttribute("aria-checked", String(t.done));
-  });
-  refreshProgress();
-});
-
-/* Tabs: active state follows the tap. */
-$$(".tabs").forEach((g) => g.addEventListener("click", (e) => {
-  const b = e.target.closest("button");
-  if (!b) return;
-  $$("button", g).forEach((x) => x.setAttribute("aria-selected", String(x === b)));
-}));
-
-/* Bottom bar: active state follows the tap. */
-$$(".bottom a").forEach((a) => a.addEventListener("click", () => {
-  $$(".bottom a").forEach((x) => x.removeAttribute("aria-current"));
-  a.setAttribute("aria-current", "page");
-}));
-
-/* Hero photo: show the soft placeholder scene while the supplied photo is too small or damaged.
-   Replacing assets/bride-hero.jpg with a full-resolution photo switches this off automatically. */
+/* Days to the wedding, counted from today. */
 (function () {
-  const img = $("#heroImg"), box = $("#photo");
-  const check = () => { if (!img.naturalWidth || img.naturalWidth < 1000) box.classList.add("lowres"); };
-  if (img.complete) check(); else { img.addEventListener("load", check); img.addEventListener("error", () => box.classList.add("lowres")); }
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  const days = Math.max(0, Math.round((new Date(plan.wedding + "T00:00:00") - t) / 864e5));
+  const el = $("#days"); el.dataset.v = 0; countTo(el, days);
+  $("#wdate").textContent = new Intl.DateTimeFormat("ar-u-nu-latn", { day: "numeric", month: "long", year: "numeric" }).format(new Date(plan.wedding + "T00:00:00"));
 })();
 
-$("#wdate").textContent = new Intl.DateTimeFormat("ar-u-nu-latn", { day: "numeric", month: "long", year: "numeric" }).format(new Date(plan.wedding + "T00:00:00"));
-renderSummary(); renderTasks(); renderAppts(); renderBudget();
-countTo($("#days"), daysLeft());
-refreshProgress();
+/* Checklist: the focus list and the phone preview stay in sync. */
+$$("#focus .chk").forEach((b) => b.addEventListener("click", () => {
+  const row = b.closest(".task"), on = !row.classList.contains("done");
+  row.classList.toggle("done", on);
+  b.setAttribute("aria-checked", String(on));
+  row.classList.remove("pop"); void row.offsetWidth; row.classList.add("pop");
+  $$(`.mtask[data-id="${row.dataset.id}"] .mcheck`).forEach((m) => m.classList.toggle("on", on));
+  refresh();
+}));
+
+/* Tabs and bottom bar: the active state follows the tap. */
+$$(".tabs").forEach((g) => g.addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  $$("button", g).forEach((x) => x.classList.toggle("on", x === b));
+}));
+$$(".bottom a").forEach((a) => a.addEventListener("click", () => {
+  $$(".bottom a").forEach((x) => { x.classList.remove("on"); x.removeAttribute("aria-current"); });
+  a.classList.add("on"); a.setAttribute("aria-current", "page");
+}));
+
+/* Hero photo slot: the starter crop is too small, so a soft placeholder shows until a photo
+   at least 1000px wide replaces assets/bride-hero.jpg. No code change is needed then. */
+(function () {
+  const img = $("#heroImg"), box = $("#photo");
+  const check = () => box.classList.toggle("temp", !img.naturalWidth || img.naturalWidth < 1000);
+  if (img.complete) check(); else { img.addEventListener("load", check); img.addEventListener("error", () => box.classList.add("temp")); }
+})();
+
+/* Progress visuals fill in once the page is shown. */
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  setRing("budget", budgetPct());
+  $$("[data-w]").forEach((i) => (i.style.width = i.dataset.w + "%"));
+  $$('[data-bind="ready"]').forEach((e) => (e.dataset.v = 0));
+  refresh();
+}));
 </script>
 </body>
 </html>
