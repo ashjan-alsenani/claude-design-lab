@@ -146,6 +146,7 @@
   color: var(--accent-deep);
   white-space: nowrap;
   direction: rtl;
+  unicode-bidi: plaintext;
   animation: xpop 0.4s var(--ease-out) both;
 }
 .xstage__svg { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: visible; }
