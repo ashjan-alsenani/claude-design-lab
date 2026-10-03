@@ -449,7 +449,7 @@ const explainers: Explainer[] = [
           { id: 'stl', kind: 'text', text: 'stairs', x: 80, y: 84, size: 3, ltr: true, color: 'accent', in: 6.6 },
           { id: 'cor', kind: 'shape', shape: 'pill', x: 52, y: 46, w: 46, h: 8, color: '#efe4cf', in: 8.2 },
           { id: 'corl', kind: 'text', text: 'corridor · first floor', x: 52, y: 34, size: 3, ltr: true, color: 'accent', in: 8.6 },
-          { id: 'kids', kind: 'emoji', emoji: '👫🏻', x: 10, y: 70, size: 8, in: 0.2, anim: [{ at: 1, to: { x: 28 }, dur: 1 }, { at: 3.4, to: { x: 52 }, dur: 1.2 }, { at: 6.6, to: { x: 72 }, dur: 0.8 }, { at: 7.4, to: { y: 44 }, dur: 1 }, { at: 8.6, to: { x: 44 }, dur: 1.4 }] },
+          { id: 'kids', kind: 'emoji', emoji: '👫🏻', x: 10, y: 79, size: 8, in: 0.2, anim: [{ at: 1, to: { x: 28 }, dur: 1 }, { at: 3.4, to: { x: 52 }, dur: 1.2 }, { at: 6.6, to: { x: 72 }, dur: 0.8 }, { at: 7.4, to: { y: 44 }, dur: 1 }, { at: 8.6, to: { x: 44 }, dur: 1.4 }] },
         ],
       },
       {
