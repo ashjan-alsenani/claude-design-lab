@@ -12,8 +12,8 @@ export const products: Product[] = [
   {
     id: "prd_bride",
     slug: "bride-planner",
-    name: { en: "Bride Planner", ar: "مخطط العروس" },
-    tagline: { en: "Your whole wedding, calmly in one place.", ar: "عرسك كله، بهدوء في مكان واحد." },
+    name: { en: "Bridal Journey", ar: "رحلة العروس" },
+    tagline: { en: "Everything you need. Nothing forgotten.", ar: "كل ما تحتاجينه. ولا شيء يُنسى." },
     summary: {
       en: "An interactive wedding planner with a live countdown, guided checklist, budget tracker, guest list and vendor notes. Built around how weddings in the Gulf are actually planned.",
       ar: "مخطط عرس تفاعلي فيه عدّ تنازلي، قائمة مهام مرتبة، متابعة للميزانية، قائمة ضيوف وملاحظات للموردين. مصمم على طريقة تجهيز الأعراس في الخليج.",

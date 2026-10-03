@@ -19,6 +19,7 @@ SANDBOX CONNECTED · PRODUCTION CONNECTION REQUIRES OWNER · LIVE. **Nothing is 
 | Licensing & access engine (licenses, claim, verification codes, devices, sessions, downloads) | TESTED (SANDBOX) | docs/LICENSING.md. Production fails closed until the database is connected |
 | Accounts / auth (email code + optional password, HttpOnly sessions, trusted devices) | SANDBOX CONNECTED | Local file store; Supabase PRODUCTION CONNECTION REQUIRES OWNER |
 | Customer area: My Products, My Purchases, My Devices, Security | TESTED (SANDBOX) | EN + AR, desktop + mobile |
+| Bridal Journey (first product: full planner app, demo, landing) | TESTED (SANDBOX) | docs/BRIDAL_JOURNEY.md. Online: demo + landing; saving needs the database |
 | Protected product route /app/{slug} + friendly denied page | TESTED | Shared URLs and forwarded links give no access |
 | Admin licensing (licenses, customers, product security, rules, activity, audit) | TESTED (SANDBOX) | Every change audit-logged |
 | Admin / Business command center | MOCK CONNECTED | Read-only preview; real alerts; saving needs DB |
@@ -34,7 +35,7 @@ SANDBOX CONNECTED · PRODUCTION CONNECTION REQUIRES OWNER · LIVE. **Nothing is 
 | Deployment | PLANNED | Needs hosting approval |
 
 ## Test results (2026-10-03)
-- Unit (Vitest): 57/57 passing (24 for the licensing engine).
-- Browser (Playwright, desktop + Pixel 7, EN + AR): 36/36 passing (16 licensing end-to-end).
+- Unit (Vitest): 72/72 passing (24 licensing, 15 Bridal Journey).
+- Browser (Playwright, desktop + Pixel 7, EN + AR): 42/42 passing (16 licensing, 6 Bridal Journey).
 - Database: both migrations applied to PostgreSQL 16; RLS/privilege checks pass.
 - Production build: passing; production guards verified (admin 404, dashboard redirect, no demo).

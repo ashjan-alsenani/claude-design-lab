@@ -6,7 +6,7 @@ how long and how often the product is used, and comparable digital planners in t
 
 | Product | Price (OMR) | Why this price |
 |---|---|---|
-| Bride Planner | **18** | Used for 6-12 months around a very high-value event; replaces notebooks, spreadsheets and chats. Premium product. |
+| Bridal Journey (Bride Planner) | **18** | Used for 6-12 months around a very high-value event; replaces notebooks, spreadsheets and chats. Premium product. |
 | Business Organizer | **15** | A work tool that helps a seller earn money; customers are buying for their business. |
 | Baby Tracker | **9** | Used daily for many months by tired new parents; strong emotional value; popular gift. |
 | Event Planner | **9** | Per-occasion value similar to a small wedding planner, used many times a year. |

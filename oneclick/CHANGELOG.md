@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 — 2026-10-03 — Bridal Journey, the first product
+- Full bilingual bridal planning app (Arabic first): onboarding, smart dashboard, ~210-task
+  checklist with dependencies, budget and payments, vendors, calendar, guests and seating,
+  bride preparation, trousseau, bridal closet, new home, honeymoon, wedding-day timeline and
+  SOS kit, inspiration board, documents, search, notifications, settings.
+- Runs as a licensed product (`/app/bride-planner`): server-authorized, saved per account.
+- Public demo with a fictional sample wedding (`/demo/bride-planner`), nothing saved.
+- New editorial landing page; product renamed "Bridal Journey / رحلة العروس".
+- Luxury bridal design system (ivory/champagne/blush, Cormorant Garamond, Amiri, IBM Plex
+  Sans Arabic). Tests: 72 unit, 42 browser.
+
 ## 0.4.0 — 2026-10-03 — Licensing, delivery & access engine
 - Reusable licensing engine: licenses bound to verified accounts, central
   `canUserAccessProduct()`, statuses pending/active/suspended/revoked/expired, bundles.

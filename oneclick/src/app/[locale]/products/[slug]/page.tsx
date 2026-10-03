@@ -20,6 +20,7 @@ import { ProductArt } from "@/components/art/ProductArt";
 import { FavoriteButton } from "@/components/product/FavoriteButton";
 import { ProductViewTracker } from "@/components/product/ProductViewTracker";
 import { JsonLd } from "@/components/JsonLd";
+import { BridalLanding } from "@/products/bridal/landing/BridalLanding";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -64,6 +65,18 @@ export default async function ProductPage({ params }: Props) {
     { icon: DevicesIcon, label: d.product.devices, value: tr(product.devices, locale) },
     { icon: GlobeHemisphereEastIcon, label: d.product.languages, value: product.languages.map((l) => d.product.langNames[l]).join(locale === "ar" ? " و" : " & ") },
   ];
+
+  if (product.slug === "bride-planner") {
+    // Bridal Journey has its own editorial landing page.
+    return (
+      <article>
+        <ProductViewTracker productId={product.id} />
+        <BridalLanding locale={locale} price={priceLabel} />
+        <JsonLd data={{ "@context": "https://schema.org", "@type": "Product", name, description: tr(product.summary, locale), brand: { "@type": "Brand", name: "One Click" }, image: `${siteUrl}/brand/og-default.png`, url: localeUrl(locale, `/products/${product.slug}`) }} />
+        <JsonLd data={breadcrumbJsonLd([{ name: home, url: localeUrl(locale) }, { name: d.catalog.title, url: localeUrl(locale, "/products") }, { name, url: localeUrl(locale, `/products/${product.slug}`) }])} />
+      </article>
+    );
+  }
 
   return (
     <article>

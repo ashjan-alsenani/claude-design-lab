@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ConsentBanner } from "@/components/layout/ConsentBanner";
 import { JsonLd } from "@/components/JsonLd";
+import { ChromeGate } from "@/components/layout/ChromeGate";
 import { organizationJsonLd, pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -49,12 +50,16 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         >
           {d.a11y.skip}
         </a>
-        <Header locale={locale} d={{ nav: d.nav, a11y: d.a11y }} />
+        <ChromeGate>
+          <Header locale={locale} d={{ nav: d.nav, a11y: d.a11y }} />
+        </ChromeGate>
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>
-        <Footer locale={locale} d={d} />
-        <ConsentBanner d={{ consent: d.consent }} />
+        <ChromeGate>
+          <Footer locale={locale} d={d} />
+          <ConsentBanner d={{ consent: d.consent }} />
+        </ChromeGate>
         <JsonLd data={organizationJsonLd(locale)} />
       </body>
     </html>

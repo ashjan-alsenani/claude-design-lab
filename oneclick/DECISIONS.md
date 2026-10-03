@@ -2,6 +2,21 @@
 
 Format: decision, why, alternatives considered, how to reverse. Newest first.
 
+## 2026-10-03 — Bridal Journey
+
+**D24. First product = Bridal Journey (رحلة العروس), slug kept as `bride-planner`** so links and
+the license stay stable. Arabic is the primary experience.
+
+**D25. Own luxury visual language inside the product** (ivory, champagne, blush, gold; editorial
+serif) while the One Click site keeps its friendly style. Self-hosted OFL fonts.
+
+**D26. One private document per bride, validated operations, optimistic UI.** Fast on phones,
+simple to move to Postgres (`product_data` with license-checked RLS). Checklist templates live
+in code so improvements reach every bride.
+
+**D27. Public demo with fictional data, never saved**, so anyone can try before buying without
+weakening the license.
+
 ## 2026-10-03 — Licensing & access engine
 
 **D18. One engine for all paid products.** Licenses bound to verified accounts; one central
