@@ -163,10 +163,10 @@ function tearScene(tri: [P, P, P], o: P, colors: [string, string, string], label
     const c = corner(v, tri[(i + 1) % 3], tri[(i + 2) % 3]);
     const turnBy = wrap(next - c.start);
     const mv = carry(t0 + i * 1.6, 1.4, v, o, turnBy);
-    actors.push(...fan(`f${i}`, v, c.start, c.sweep, colors[i], 0.6 + i * 0.3, [mv]));
+    actors.push(...fan(`f${i}`, v, c.start, c.sweep, colors[i], 0.6 + i * 0.3, [mv], 64));
     if (labels) {
-      const from = along(v, c.start + c.sweep / 2, 78);
-      const to = along(o, next + c.sweep / 2, 82);
+      const from = along(v, c.start + c.sweep / 2, 90);
+      const to = along(o, next + c.sweep / 2, 92);
       actors.push({ id: `fl${i}`, kind: 'text', text: labels[i], ...pc(from), size: 3, color: colors[i], ltr: true, in: 1 + i * 0.3, anim: [{ at: t0 + i * 1.6, to: pc(to), dur: 1.4 }] });
     }
     next += c.sweep;
@@ -188,9 +188,9 @@ const T1: [P, P, P] = [
 ];
 // right triangle 90° / 40° / 50°: right angle at A
 const T2: [P, P, P] = [
-  [95, 350],
-  [355, 350],
-  [95, 132],
+  [95, 322],
+  [355, 322],
+  [95, 104],
 ];
 const LINE_O: P = [525, 330];
 
@@ -331,7 +331,7 @@ const explainers: Explainer[] = [
         bg: 'board',
         actors: [
           ...tearScene(T2, LINE_O, ['#7be3a4', '#8fd3ff', '#ffd166'], ['٩٠°', '٤٠°', '٥٠°'], 1.6, 6.4),
-          tx('eq', '٩٠° + ٤٠° + ٥٠° = ١٨٠°', pc([LINE_O[0], 385]), 7.4, { size: 4.2, color: 'white', ltr: true, anim: [{ at: 7.8, effect: 'glow' }] }),
+          tx('eq', '٩٠° + ٤٠° + ٥٠° = ١٨٠°', pc([350, 392]), 7.4, { size: 4.2, color: 'white', ltr: true, anim: [{ at: 7.8, effect: 'glow' }] }),
         ],
       },
       {
@@ -406,8 +406,8 @@ const explainers: Explainer[] = [
             { id: 'c', a: 70, color: '#ff9a8a', inAt: 1.3 },
           ]),
           tx('d', '١٨٠°', pc([205, 340]), 2, { size: 5, color: 'sun', ltr: true }),
-          tx('r1', 'مجموع زوايا المثلث = ١٨٠°', pc([510, 170]), 2.6, { size: 3.6, box: true, color: 'accent', anim: [{ at: 3, effect: 'glow' }] }),
-          tx('r2', 'الثالثة = ١٨٠ − الزاويتين', pc([510, 270]), 6, { size: 3.4, color: 'white' }),
+          tx('r1', 'مجموع زوايا المثلث = ١٨٠°', pc([520, 170]), 2.6, { size: 3, box: true, color: 'accent', anim: [{ at: 3, effect: 'glow' }] }),
+          tx('r2', 'الثالثة = ١٨٠ − الزاويتين', pc([520, 270]), 6, { size: 3.2, color: 'white' }),
         ],
       },
     ],
