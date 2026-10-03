@@ -55,6 +55,17 @@ const CROSS: [number, number][] = [
   [1, 3],
 ];
 
+/** Right-angle marks at the two lower corners of the shape in «المسمّى الأكثر دقة». */
+const RIGHT_MARKS: GridV['lines'] = sides(
+  [
+    [[1, 3.55], [1.45, 3.55]],
+    [[1.45, 3.55], [1.45, 4]],
+    [[4, 3.55], [3.55, 3.55]],
+    [[3.55, 3.55], [3.55, 4]],
+  ],
+  RED,
+);
+
 /* ---------- octagonal pyramid drawn on a grid (lesson 8-2, «لنستكشف») ---------- */
 const APEX: Point = [5, 0.6];
 const oct = (cx: number, cy: number, rx: number, ry: number): Point[] =>
@@ -259,17 +270,16 @@ const explainers: Explainer[] = [
         bg: 'paper',
         actors: [
           grid('s', { cols: 6, rows: 5, shapes: [{ points: [[1, 4], [4, 4], [4, 2], [1, 1]], color: PINK }] }, 70, 46, 34, 0.3),
+          grid('sA', { cols: 6, rows: 5, shapes: [{ points: [[1, 4], [4, 4], [4, 2], [1, 1]], color: PINK }], lines: RIGHT_MARKS }, 70, 46, 34, 2.4),
           { id: 'c1', kind: 'text', text: 'الزوايا القائمة: ٢', x: 28, y: 28, size: 3.6, box: true, color: 'red', in: 3.4 },
           grid(
             'sH',
-            { cols: 6, rows: 5, shapes: [{ points: [[1, 4], [4, 4], [4, 2], [1, 1]], color: PINK }], lines: sides([[[1, 1], [1, 4]], [[4, 2], [4, 4]]], BLUE) },
+            { cols: 6, rows: 5, shapes: [{ points: [[1, 4], [4, 4], [4, 2], [1, 1]], color: PINK }], lines: [...RIGHT_MARKS, ...sides([[[1, 1], [1, 4]], [[4, 2], [4, 4]]], BLUE)] },
             70,
             46,
             34,
             6,
           ),
-          { id: 'ra1', kind: 'shape', shape: 'rect', x: 61.3, y: 55, w: 3, h: 4.8, color: 'red', outline: true, in: 2.4, anim: [{ at: 2.6, effect: 'pulse' }] },
-          { id: 'ra2', kind: 'shape', shape: 'rect', x: 73.1, y: 55, w: 3, h: 4.8, color: 'red', outline: true, in: 2.8, anim: [{ at: 3, effect: 'pulse' }] },
           { id: 'c2', kind: 'text', text: 'أزواج متوازية: ١', x: 28, y: 46, size: 3.6, box: true, color: 'blue', in: 6.6 },
           { id: 'ar', kind: 'arrow', from: [28, 54], to: [28, 66], color: 'ink', in: 8.6 },
           { id: 'res', kind: 'text', text: 'شبه منحرف ✓', x: 28, y: 78, size: 5, box: true, color: 'accent', in: 9.2, anim: [{ at: 9.6, effect: 'glow' }] },
@@ -319,16 +329,17 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'board',
         actors: [
-          { id: 'cube', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 30, y: 50, w: 36, in: 0.2 },
-          { id: 'fh', kind: 'shape', shape: 'rect', x: 28.2, y: 58.3, w: 12, h: 19, color: 'rgba(255, 200, 61, 0.55)', in: 1.2, anim: [{ at: 1.4, effect: 'pulse' }] },
-          { id: 'fl', kind: 'text', text: 'الوجه: سطح مستوٍ', x: 74, y: 26, size: 3.4, box: true, color: 'sun', in: 1 },
-          { id: 'fa', kind: 'arrow', from: [58, 28], to: [33, 52], curve: -4, color: 'sun', in: 1.6 },
-          { id: 'el', kind: 'text', text: 'الحافة: يلتقي فيها وجهان', x: 72, y: 46, size: 3.4, box: true, color: 'good', in: 3.6 },
-          { id: 'ea', kind: 'arrow', from: [55, 46], to: [40.5, 42], color: '#7be3a4', in: 4.2 },
-          { id: 'vd', kind: 'shape', shape: 'circle', x: 37.4, y: 71.3, w: 3, h: 4.8, color: 'red', in: 6, anim: [{ at: 6.3, effect: 'pulse' }] },
-          { id: 'vl', kind: 'text', text: 'الرأس: تلتقي فيه الحواف', x: 72, y: 66, size: 3.4, box: true, color: 'red', in: 5.8 },
-          { id: 'va', kind: 'arrow', from: [55, 68], to: [40, 71], color: 'red', in: 6.4 },
-          { id: 'cnt', kind: 'text', text: '٦ أوجه • ١٢ حافة • ٨ رؤوس', x: 50, y: 88, size: 4, color: 'white', in: 8.8, anim: [{ at: 9.2, effect: 'glow' }] },
+          { id: 'cube', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 28, y: 52, w: 34, in: 0.2 },
+          { id: 'ft', kind: 'text', text: 'الوجه', x: 78, y: 21, size: 3.6, box: true, color: 'sun', in: 1 },
+          { id: 'fd', kind: 'text', text: 'سطح مستوٍ', x: 78, y: 30.5, size: 3, color: 'white', in: 1.4 },
+          { id: 'fa', kind: 'arrow', from: [64, 24], to: [27, 56], curve: -6, color: 'sun', in: 1.8 },
+          { id: 'et', kind: 'text', text: 'الحافة', x: 78, y: 43, size: 3.6, box: true, color: 'good', in: 3.6 },
+          { id: 'ed', kind: 'text', text: 'يلتقي فيها وجهان', x: 78, y: 52.5, size: 3, color: 'white', in: 4 },
+          { id: 'ea', kind: 'arrow', from: [64, 45], to: [37.5, 42.5], color: '#7be3a4', in: 4.4 },
+          { id: 'vt', kind: 'text', text: 'الرأس', x: 78, y: 65, size: 3.6, box: true, color: 'red', in: 5.8 },
+          { id: 'vd', kind: 'text', text: 'تلتقي فيه الحواف', x: 78, y: 74.5, size: 3, color: 'white', in: 6.2 },
+          { id: 'va', kind: 'arrow', from: [64, 68], to: [34.5, 69.5], color: '#ff7b7b', in: 6.6 },
+          { id: 'cnt', kind: 'text', text: '٦ أوجه • ١٢ حافة • ٨ رؤوس', x: 50, y: 88, size: 3.8, color: 'sun', in: 8.8, anim: [{ at: 9.2, effect: 'glow' }] },
         ],
       },
       {
@@ -337,13 +348,13 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'board',
         actors: [
-          { id: 'pr', kind: 'math', math: { type: 'solid', name: 'triangularPrism' }, x: 30, y: 50, w: 38, in: 0.2 },
-          { id: 't1', kind: 'shape', shape: 'circle', x: 26.5, y: 59, w: 4, h: 6.4, color: 'sun', in: 1.4, anim: [{ at: 1.6, effect: 'pulse' }] },
-          { id: 't2', kind: 'shape', shape: 'circle', x: 40.5, y: 53, w: 4, h: 6.4, color: 'sun', in: 1.8, anim: [{ at: 2, effect: 'pulse' }] },
-          { id: 'l1', kind: 'text', text: 'وجهان متطابقان ومتوازيان', x: 72, y: 24, size: 3.3, box: true, color: 'sun', in: 1 },
-          { id: 'l2', kind: 'text', text: 'الأوجه الأخرى مستطيلة', x: 72, y: 40, size: 3.3, box: true, color: 'accent', in: 4.2 },
-          { id: 'cnt', kind: 'text', text: '٥ أوجه • ٩ حواف • ٦ رؤوس', x: 72, y: 60, size: 3.6, color: 'white', in: 7.4 },
-          { id: 'res', kind: 'text', text: 'منشور ثلاثي', x: 72, y: 80, size: 4.6, box: true, color: 'good', in: 9, anim: [{ at: 9.4, effect: 'glow' }] },
+          { id: 'pr', kind: 'math', math: { type: 'solid', name: 'triangularPrism' }, x: 27, y: 50, w: 34, in: 0.2 },
+          { id: 't1', kind: 'text', text: '١', x: 23, y: 58, size: 4.2, color: 'orange', in: 1.4, anim: [{ at: 1.6, effect: 'pulse' }] },
+          { id: 't2', kind: 'text', text: '٢', x: 36, y: 53, size: 4.2, color: 'orange', in: 1.8, anim: [{ at: 2, effect: 'pulse' }] },
+          { id: 'l1', kind: 'text', text: 'وجهان متطابقان ومتوازيان', x: 71, y: 24, size: 2.8, box: true, color: 'orange', in: 1 },
+          { id: 'l2', kind: 'text', text: 'الأوجه الأخرى مستطيلة', x: 71, y: 40, size: 2.8, box: true, color: 'accent', in: 4.2 },
+          { id: 'cnt', kind: 'text', text: '٥ أوجه • ٩ حواف • ٦ رؤوس', x: 71, y: 59, size: 3, color: 'white', in: 7.4 },
+          { id: 'res', kind: 'text', text: 'منشور ثلاثي', x: 71, y: 78, size: 4.4, box: true, color: 'good', in: 9, anim: [{ at: 9.4, effect: 'glow' }] },
         ],
       },
       {
@@ -352,14 +363,14 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'board',
         actors: [
-          { id: 'py', kind: 'math', math: { type: 'solid', name: 'squarePyramid' }, x: 30, y: 52, w: 38, in: 0.2 },
-          { id: 'top', kind: 'shape', shape: 'circle', x: 30, y: 33.5, w: 3, h: 4.8, color: 'red', in: 3.6, anim: [{ at: 3.8, effect: 'pulse' }] },
-          { id: 'l1', kind: 'text', text: 'وجه واحد مضلّع', x: 72, y: 24, size: 3.4, box: true, color: 'sun', in: 1 },
-          { id: 'l2', kind: 'text', text: 'الباقي مثلثات', x: 72, y: 40, size: 3.4, box: true, color: 'accent', in: 2.6 },
-          { id: 'l3', kind: 'text', text: 'تلتقي في رأس واحد', x: 72, y: 56, size: 3.4, box: true, color: 'red', in: 3.6 },
-          { id: 'ta', kind: 'arrow', from: [56, 54], to: [33, 35], curve: 4, color: 'red', in: 4 },
-          { id: 'cnt', kind: 'text', text: '٥ أوجه • ٨ حواف • ٥ رؤوس', x: 72, y: 72, size: 3.6, color: 'white', in: 7.6 },
-          { id: 'res', kind: 'text', text: 'هرم قاعدته مربعة', x: 72, y: 87, size: 4, box: true, color: 'good', in: 9.4, anim: [{ at: 9.8, effect: 'glow' }] },
+          { id: 'py', kind: 'math', math: { type: 'solid', name: 'squarePyramid' }, x: 27, y: 52, w: 34, in: 0.2 },
+          { id: 'top', kind: 'text', text: '●', x: 27, y: 35.6, size: 3, color: 'red', in: 3.6, anim: [{ at: 3.8, effect: 'pulse' }] },
+          { id: 'l1', kind: 'text', text: 'وجه واحد مضلّع', x: 71, y: 22, size: 3, box: true, color: 'sun', in: 1 },
+          { id: 'l2', kind: 'text', text: 'الباقي مثلثات', x: 71, y: 36, size: 3, box: true, color: 'accent', in: 2.6 },
+          { id: 'l3', kind: 'text', text: 'تلتقي في رأس واحد', x: 71, y: 50, size: 3, box: true, color: 'red', in: 3.6 },
+          { id: 'ta', kind: 'arrow', from: [55, 50], to: [30, 36], curve: 4, color: '#ff7b7b', in: 4 },
+          { id: 'cnt', kind: 'text', text: '٥ أوجه • ٨ حواف • ٥ رؤوس', x: 71, y: 67, size: 3, color: 'white', in: 7.6 },
+          { id: 'res', kind: 'text', text: 'هرم قاعدته مربعة', x: 71, y: 84, size: 3.8, box: true, color: 'good', in: 9.4, anim: [{ at: 9.8, effect: 'glow' }] },
         ],
       },
       {
@@ -368,14 +379,14 @@ const explainers: Explainer[] = [
         duration: 13,
         bg: 'board',
         actors: [
-          { id: 'girl', kind: 'emoji', emoji: '🧕', x: 84, y: 24, size: 11, in: 0.2 },
-          { id: 'say', kind: 'text', text: '«٦ حواف و٤ أوجه متطابقة»', x: 50, y: 24, size: 3.8, box: true, color: 'accent', in: 0.8 },
-          { id: 'a', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 76, y: 60, w: 18, in: 2.4, anim: [{ at: 5.6, to: { opacity: 0.3 }, dur: 0.5 }] },
-          { id: 'b', kind: 'math', math: { type: 'solid', name: 'triangularPyramid' }, x: 50, y: 60, w: 18, in: 2.8, anim: [{ at: 9.6, to: { scale: 1.15 }, dur: 0.6 }] },
-          { id: 'c', kind: 'math', math: { type: 'solid', name: 'triangularPrism' }, x: 24, y: 60, w: 18, in: 3.2, anim: [{ at: 7.4, to: { opacity: 0.3 }, dur: 0.5 }] },
-          { id: 'ax', kind: 'text', text: '٦ أوجه ✗', x: 76, y: 82, size: 3.4, color: 'bad', in: 5.6 },
-          { id: 'cx', kind: 'text', text: 'غير متطابقة ✗', x: 24, y: 82, size: 3.4, color: 'bad', in: 7.4 },
-          { id: 'ok', kind: 'text', text: 'هرم ثلاثي ✓', x: 50, y: 86, size: 4.4, box: true, color: 'good', in: 9.8, anim: [{ at: 10.2, effect: 'glow' }] },
+          { id: 'girl', kind: 'emoji', emoji: '🧕', x: 86, y: 25, size: 10, in: 0.2 },
+          { id: 'say', kind: 'text', text: '«٦ حواف و٤ أوجه متطابقة»', x: 46, y: 24, size: 3.6, box: true, color: 'accent', in: 0.8 },
+          { id: 'a', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 76, y: 54, w: 18, in: 2.4, anim: [{ at: 5.6, to: { opacity: 0.3 }, dur: 0.5 }] },
+          { id: 'b', kind: 'math', math: { type: 'solid', name: 'triangularPyramid' }, x: 50, y: 54, w: 18, in: 2.8, anim: [{ at: 9.6, to: { scale: 1.15 }, dur: 0.6 }] },
+          { id: 'c', kind: 'math', math: { type: 'solid', name: 'triangularPrism' }, x: 24, y: 54, w: 18, in: 3.2, anim: [{ at: 7.4, to: { opacity: 0.3 }, dur: 0.5 }] },
+          { id: 'ax', kind: 'text', text: '٦ أوجه ✗', x: 76, y: 75, size: 3.4, color: 'bad', in: 5.6 },
+          { id: 'cx', kind: 'text', text: 'غير متطابقة ✗', x: 24, y: 75, size: 3.4, color: 'bad', in: 7.4 },
+          { id: 'ok', kind: 'text', text: 'هرم ثلاثي ✓', x: 50, y: 87, size: 4.4, box: true, color: 'good', in: 9.8, anim: [{ at: 10.2, effect: 'glow' }] },
         ],
       },
       {
@@ -418,10 +429,10 @@ const explainers: Explainer[] = [
           { id: 'd2', kind: 'text', text: 'الحافة: يلتقي فيها وجهان', x: 70, y: 37, size: 3.4, box: true, color: 'good', in: 1.4 },
           { id: 'd3', kind: 'text', text: 'الرأس: تلتقي فيه الحواف', x: 70, y: 52, size: 3.4, box: true, color: 'red', in: 2.6 },
           { id: 'pr', kind: 'math', math: { type: 'solid', name: 'triangularPrism' }, x: 24, y: 28, w: 15, in: 5 },
-          { id: 'prl', kind: 'text', text: 'منشور: + مستطيلات', x: 24, y: 46, size: 3, color: 'white', in: 5.4 },
+          { id: 'prl', kind: 'text', text: 'المنشور ← مستطيلات', x: 24, y: 46, size: 3, color: 'white', in: 5.4 },
           { id: 'py', kind: 'math', math: { type: 'solid', name: 'squarePyramid' }, x: 24, y: 64, w: 15, in: 7 },
-          { id: 'pyl', kind: 'text', text: 'هرم: + مثلثات', x: 24, y: 83, size: 3, color: 'white', in: 7.4 },
-          { id: 'cut', kind: 'text', text: '🔪 المقطع يعتمد على اتجاه القطع', x: 70, y: 74, size: 3.2, box: true, color: 'accent', in: 9.4, anim: [{ at: 9.8, effect: 'glow' }] },
+          { id: 'pyl', kind: 'text', text: 'الهرم ← مثلثات', x: 24, y: 83, size: 3, color: 'white', in: 7.4 },
+          { id: 'cut', kind: 'text', text: '🔪 المقطع يعتمد على اتجاه القطع', x: 64, y: 74, size: 2.8, box: true, color: 'accent', in: 9.4, anim: [{ at: 9.8, effect: 'glow' }] },
         ],
       },
     ],
@@ -441,8 +452,8 @@ const explainers: Explainer[] = [
           { id: 'box', kind: 'emoji', emoji: '📦', x: 74, y: 46, size: 20, in: 0.2, anim: [{ at: 1, effect: 'wiggle' }] },
           { id: 'ar', kind: 'arrow', from: [60, 46], to: [42, 46], color: 'sun', in: 2.6 },
           ...CROSS.map(([c, r], i) => face(`n${i}`, 20 + c * 7, 22 + r * 11.2, 3.4 + i * 0.25, '#e8b878', 6.6)),
-          { id: 'nl', kind: 'text', text: 'الشبكة', x: 27, y: 82, size: 4.6, box: true, color: 'sun', in: 6, anim: [{ at: 6.4, effect: 'glow' }] },
-          { id: 'fl', kind: 'text', text: 'شكل مسطّح', x: 74, y: 76, size: 3.6, color: 'white', in: 5 },
+          { id: 'nl', kind: 'text', text: 'الشبكة', x: 27, y: 84, size: 4.6, box: true, color: 'sun', in: 6, anim: [{ at: 6.4, effect: 'glow' }] },
+          { id: 'fl', kind: 'text', text: 'شكل مسطّح', x: 27, y: 71, size: 3.4, color: 'white', in: 5 },
         ],
       },
       {
@@ -451,12 +462,12 @@ const explainers: Explainer[] = [
         duration: 12,
         bg: 'board',
         actors: [
-          { id: 'cube', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 50, y: 46, w: 22, in: 0.2, out: 2.6 },
+          { id: 'cube', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 34, y: 46, w: 22, in: 0.2, out: 2.6 },
           ...CROSS.map(([c, r], i) =>
-            face(`f${i}`, 50, 46, 2.6, MINT, 8.6, [{ at: 3.2 + i * 0.45, to: { x: 41 + c * 9, y: 24 + r * 14.4 }, dur: 0.9 }]),
+            face(`f${i}`, 34, 46, 2.6, MINT, 8.6, [{ at: 3.2 + i * 0.45, to: { x: 25 + c * 9, y: 24 + r * 14.4 }, dur: 0.9 }]),
           ),
-          { id: 'six', kind: 'text', text: '٦ مربعات متطابقة', x: 78, y: 40, size: 3.6, box: true, color: 'good', in: 7.4 },
-          { id: 'nl', kind: 'text', text: 'شبكة المكعب', x: 78, y: 58, size: 4.2, box: true, color: 'sun', in: 8.8, anim: [{ at: 9.2, effect: 'glow' }] },
+          { id: 'six', kind: 'text', text: '٦ مربعات متطابقة', x: 72, y: 40, size: 3.6, box: true, color: 'good', in: 7.4 },
+          { id: 'nl', kind: 'text', text: 'شبكة المكعب', x: 72, y: 58, size: 4.2, box: true, color: 'sun', in: 8.8, anim: [{ at: 9.2, effect: 'glow' }] },
         ],
       },
       {
@@ -467,13 +478,20 @@ const explainers: Explainer[] = [
         actors: [
           ...CROSS.map(([c, r], i) => {
             const centre = c === 1 && r === 1;
-            return face(`f${i}`, 41 + c * 9, 24 + r * 14.4, 0, MINT, 8.6, [
-              { at: centre ? 6.2 : 2 + i * 0.7, to: { x: 50, y: 46, scale: 0.5, opacity: 0 }, dur: 0.9 },
-            ]);
-          }),
-          { id: 'a1', kind: 'arrow', from: [32, 38], to: [44, 30], curve: -5, color: 'sun', in: 0.8 },
-          { id: 'a2', kind: 'arrow', from: [68, 38], to: [56, 30], curve: 5, color: 'sun', in: 1 },
-          { id: 'cube', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 50, y: 46, w: 24, in: 6.8, anim: [{ at: 7.4, effect: 'glow' }] },
+            const order = [0, 1, 0, 2, 3, 4][i];
+            return face(
+              `f${i}`,
+              41 + c * 9,
+              24 + r * 14.4,
+              0,
+              MINT,
+              8.6,
+              centre ? [] : [{ at: 1.8 + order * 0.9, to: { x: 50 + (c - 1) * 3, y: 38.4 + (r - 1) * 4.5, scale: 0.75, opacity: 0.75 }, dur: 1 }],
+            );
+          }).map((a) => ({ ...a, out: 6.4 })),
+          { id: 'a1', kind: 'arrow', from: [32, 30], to: [44, 24], curve: -5, color: 'sun', in: 0.8, out: 6.4 },
+          { id: 'a2', kind: 'arrow', from: [68, 30], to: [56, 24], curve: 5, color: 'sun', in: 1, out: 6.4 },
+          { id: 'cube', kind: 'math', math: { type: 'solid', name: 'cube' }, x: 50, y: 44, w: 24, in: 6.8, anim: [{ at: 7.4, effect: 'glow' }] },
           { id: 'res', kind: 'text', text: 'كل جزء ← وجه', x: 50, y: 85, size: 4.4, box: true, color: 'sun', in: 8 },
         ],
       },

@@ -320,7 +320,7 @@ const explainers: Explainer[] = [
         bg: 'garden',
         actors: [
           { id: 'owl', kind: 'emoji', emoji: '🦉', x: 24, y: 32, size: 13, anim: [{ at: 0.4, effect: 'float' }, { at: 8.6, to: { x: 64, y: 62 }, dur: 0.7 }] },
-          { id: 'lo', kind: 'text', text: 'مفترس 🦅', x: 24, y: 56, size: 4, box: true, color: 'red', in: 1.2, out: 8.4 },
+          { id: 'lo', kind: 'text', text: 'مفترس', x: 24, y: 56, size: 4, box: true, color: 'red', in: 1.2, out: 8.4 },
           { id: 'mouse', kind: 'emoji', emoji: '🐁', x: 82, y: 72, size: 10, in: 3.6, anim: [{ at: 4, to: { x: 70, y: 72 }, dur: 2 }], out: 9.4 },
           { id: 'lm', kind: 'text', text: 'فريسة', x: 72, y: 88, size: 4, box: true, color: 'blue', in: 5 },
           { id: 'arr', kind: 'arrow', from: [62, 66], to: [34, 40], curve: -6, color: 'ink', dashed: true, in: 6.6, out: 8.4 },
@@ -334,8 +334,8 @@ const explainers: Explainer[] = [
         bg: 'garden',
         actors: [
           { id: 'frog', kind: 'emoji', emoji: '🐸', x: 28, y: 60, size: 16 },
-          { id: 'fly', kind: 'emoji', emoji: '🪰', x: 72, y: 34, size: 7, anim: [{ at: 0.2, effect: 'float' }, { at: 3.4, to: { x: 34, y: 56, scale: 0.5 }, dur: 0.4 }], out: 3.9 },
-          { id: 'tongue', kind: 'arrow', from: [36, 56], to: [68, 36], color: '#ff6b8b', in: 2.6, out: 3.6 },
+          { id: 'fly', kind: 'emoji', emoji: '🪰', x: 72, y: 34, size: 7, anim: [{ at: 0.2, effect: 'float' }, { at: 4, to: { x: 34, y: 56, scale: 0.5 }, dur: 0.5 }], out: 4.6 },
+          { id: 'tongue', kind: 'arrow', from: [36, 56], to: [68, 36], color: '#ff6b8b', in: 2.4, out: 4.4 },
           { id: 'tl', kind: 'text', text: 'لسان مغطّى بمخاط', x: 70, y: 58, size: 3.4, box: true, color: 'red', in: 3 },
           { id: 'l1', kind: 'text', text: 'الضفدع: مفترس', x: 28, y: 86, size: 3.6, box: true, color: 'red', in: 5 },
           { id: 'l2', kind: 'text', text: 'الحشرة: فريسة', x: 72, y: 86, size: 3.6, box: true, color: 'blue', in: 5.6 },
