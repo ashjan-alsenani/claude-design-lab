@@ -1,0 +1,4144 @@
+{
+ "subject": "english",
+ "unit": "e1",
+ "concepts": [
+  {
+   "id": "e1b-story-genre",
+   "label": "Picture stories: pictures, events & order",
+   "lesson": "e1-4",
+   "skill": "reading"
+  },
+  {
+   "id": "e1b-story-characters",
+   "label": "NO WI-FI! characters",
+   "lesson": "e1-4",
+   "skill": "reading"
+  },
+  {
+   "id": "e1b-story-listening",
+   "label": "Listening: the NO WI-FI! show",
+   "lesson": "e1-4",
+   "skill": "listening"
+  },
+  {
+   "id": "e1b-story-words",
+   "label": "Story words: show, invitations, instrument",
+   "lesson": "e1-4",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "e1b-story-grammar",
+   "label": "Story grammar: now or every day? + but",
+   "lesson": "e1-4",
+   "skill": "grammar"
+  },
+  {
+   "id": "e1b-hobby-words",
+   "label": "Hobbies vocabulary",
+   "lesson": "e1-5",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "e1b-hobby-verbs",
+   "label": "do / play / make / collect / watch / write",
+   "lesson": "e1-5",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "e1b-state-ing",
+   "label": "like / love / hate / prefer / enjoy + -ing",
+   "lesson": "e1-5",
+   "skill": "grammar"
+  },
+  {
+   "id": "e1b-state-simple",
+   "label": "State verbs: not in continuous tenses",
+   "lesson": "e1-5",
+   "skill": "grammar"
+  },
+  {
+   "id": "e1b-hobby-listening",
+   "label": "Listening: who likes which hobby?",
+   "lesson": "e1-5",
+   "skill": "listening"
+  },
+  {
+   "id": "e1b-hobby-reading",
+   "label": "Reading: a family of hobbies",
+   "lesson": "e1-5",
+   "skill": "reading"
+  },
+  {
+   "id": "e1b-culture-countries",
+   "label": "Sports around the world: which country?",
+   "lesson": "e1-6",
+   "skill": "reading"
+  },
+  {
+   "id": "e1b-culture-details",
+   "label": "Culture texts: details & reasons",
+   "lesson": "e1-6",
+   "skill": "reading"
+  },
+  {
+   "id": "e1b-culture-words",
+   "label": "Culture words: snorkelling, windsurfing, keep fit",
+   "lesson": "e1-6",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "e1b-culture-listening",
+   "label": "Listening: activities around the world",
+   "lesson": "e1-6",
+   "skill": "listening"
+  },
+  {
+   "id": "e1b-minibook",
+   "label": "Mini-book phrases & writing",
+   "lesson": "e1-6",
+   "skill": "writing"
+  }
+ ],
+ "passages": [
+  {
+   "id": "e1b-diary",
+   "title": "Samar's diary: The rainy day show",
+   "text": "Dear Diary,\nToday was a rainy day and there was no Wi-Fi in our street. At first, I was bored, so I played the piano in the living room. Then Nawal knocked on the door. She heard my music from next door! Nawal can't play a musical instrument, but she sings songs every Friday. Soon Rasha and Amani came, too. Rasha doesn't like singing. She prefers acting. Amani loves making things, so she made the invitations. We practised for two hours and then we put on a show for Mum. Mum said it was fantastic! Now I think a rainy day with no Wi-Fi can be the best day of the week.",
+   "glossary": [
+    {
+     "word": "bored",
+     "meaning": "not interested; you have nothing fun to do",
+     "ar": "ملول / أشعر بالملل"
+    },
+    {
+     "word": "knocked",
+     "meaning": "hit the door with your hand so people inside hear you",
+     "ar": "طرقت"
+    },
+    {
+     "word": "practised",
+     "meaning": "did something again and again to get better",
+     "ar": "تدرّبنا"
+    }
+   ]
+  },
+  {
+   "id": "e1b-family",
+   "title": "My family's free time",
+   "text": "Hi! I'm Maryam and I'm eleven. In my family, everyone has a different hobby. My brother Salim loves playing video games, but my mum prefers board games because we can all play together. My dad enjoys doing the gardening. He grows tomatoes and flowers behind our house. I like doing photography. I take photos of my dad's flowers and of birds in the garden. My little sister, Reem, collects cards. She has more than two hundred football cards! She also watches cartoons every afternoon. I don't like watching cartoons. I think they're boring. And my grandma? She writes a diary every night. She says, 'I know every day is special, so I write it down.'",
+   "glossary": [
+    {
+     "word": "grows",
+     "meaning": "plants and looks after plants so they get bigger",
+     "ar": "يزرع"
+    },
+    {
+     "word": "special",
+     "meaning": "different and important",
+     "ar": "مميّز"
+    },
+    {
+     "word": "write it down",
+     "meaning": "write it on paper so you remember it",
+     "ar": "تدوّنه"
+    }
+   ]
+  },
+  {
+   "id": "e1b-email",
+   "title": "An email from Canada",
+   "text": "Hi Nawal,\nHow are you? It's winter here in Canada and there is snow everywhere! Every Saturday my family goes cross-country skiing in the park near our house. My dad says it helps you keep fit, and it's true. I'm always tired after it! Cross-country skiing is a very good way of travelling in the snow. It's different from downhill skiing because you can ski uphill, too. My little brother hates going uphill. He prefers going down! What do you do in Oman in your free time? Do you go snorkelling? I'd love to see the colourful fish under the water.\nWrite soon,\nEmma",
+   "glossary": [
+    {
+     "word": "everywhere",
+     "meaning": "in all places",
+     "ar": "في كل مكان"
+    },
+    {
+     "word": "uphill",
+     "meaning": "going up a hill",
+     "ar": "صعودًا"
+    },
+    {
+     "word": "travelling",
+     "meaning": "going from one place to another",
+     "ar": "التنقّل"
+    }
+   ]
+  },
+  {
+   "id": "e1b-minibook",
+   "title": "Our class mini-book",
+   "text": "Snorkelling\nIn Oman, snorkelling is very popular. Lots of people enjoy it in summer. It's great fun and you can see amazing fish of different colours under the water. But you have to be good at swimming!\nWindsurfing\nEvery year, lots of people go windsurfing at Oman's beautiful beaches. You can go very fast, but only when it is windy.\nHiking\nHiking is a popular sport in Oman. Lots of people enjoy it in the mountains. It helps you keep fit, but it can be dangerous, so only go with your family and friends. You have to have good shoes!",
+   "glossary": [
+    {
+     "word": "popular",
+     "meaning": "liked by lots of people",
+     "ar": "شائع / محبوب"
+    },
+    {
+     "word": "dangerous",
+     "meaning": "it can hurt you",
+     "ar": "خطير"
+    },
+    {
+     "word": "amazing",
+     "meaning": "very, very good; surprising",
+     "ar": "مدهش"
+    }
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": "ENG-E1-B-001",
+   "lesson": "e1-4",
+   "concept": "e1b-story-genre",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "prompt": "Which sentence describes a picture story?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Pictures tell the story, and there are many characters."
+    },
+    {
+     "id": "b",
+     "text": "There are no pictures, only long paragraphs."
+    },
+    {
+     "id": "c",
+     "text": "Only a narrator tells the story."
+    },
+    {
+     "id": "d",
+     "text": "It is a song with music and no words."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "A picture story has lots of pictures; long paragraphs with no pictures are a different kind of text.",
+    "c": "A narrator tells the story from outside. In a picture story many characters speak in speech bubbles.",
+    "d": "That describes a song, not a story you read in pictures."
+   },
+   "explanation": "In a picture story, the pictures tell the story and many characters talk, like Nawal, Samar, Rasha and Amani.",
+   "explanationAr": "في القصة المصوّرة الرسوم تحكي القصة، وفيها شخصيات كثيرة تتكلّم.",
+   "tip": "Picture story = pictures + many characters",
+   "hints": [
+    "Think about the NO WI-FI! story. What did you look at?",
+    "How many people speak in it?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-002",
+   "lesson": "e1-4",
+   "concept": "e1b-story-genre",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "order",
+   "prompt": "Put the events of the NO WI-FI! story in the correct order.",
+   "items": [
+    {
+     "id": "e1",
+     "text": "Nawal hears music from next door.",
+     "emoji": "🎵"
+    },
+    {
+     "id": "e2",
+     "text": "Samar asks Nawal to sing while she plays the piano.",
+     "emoji": "🎹"
+    },
+    {
+     "id": "e3",
+     "text": "Rasha says she prefers acting.",
+     "emoji": "🎭"
+    },
+    {
+     "id": "e4",
+     "text": "Nawal says, \"Let's put on a show!\"",
+     "emoji": "💡"
+    },
+    {
+     "id": "e5",
+     "text": "The girls sing their song.",
+     "emoji": "🎤"
+    },
+    {
+     "id": "e6",
+     "text": "Mum says, \"That was fantastic!\"",
+     "emoji": "👏"
+    }
+   ],
+   "explanation": "The story starts with the music next door, then the girls meet, Nawal has the idea of a show, they sing, and Mum praises the show at the end.",
+   "explanationAr": "تبدأ القصة بموسيقى من البيت المجاور، ثم تجتمع البنات، ثم فكرة العرض، ثم الأغنية، وفي النهاية تمدح الأم العرض.",
+   "tip": "Beginning → middle → end",
+   "hints": [
+    "What brings Nawal to Samar's house?",
+    "Mum speaks at the very end."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-003",
+   "lesson": "e1-4",
+   "concept": "e1b-story-genre",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "prompt": "Why is there no Wi-Fi in the NO WI-FI! story?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Because it is a rainy day.",
+     "emoji": "🌧️"
+    },
+    {
+     "id": "b",
+     "text": "Because Samar turned it off to play the piano.",
+     "emoji": "🎹"
+    },
+    {
+     "id": "c",
+     "text": "Because Mum doesn't like the internet.",
+     "emoji": "👩🏽"
+    },
+    {
+     "id": "d",
+     "text": "Because the girls are at the beach.",
+     "emoji": "🏖️"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Samar plays the piano because there is no Wi-Fi, not to stop it.",
+    "c": "Mum doesn't talk about the internet. She only says the show was fantastic.",
+    "d": "The girls are at home in Samar's house, not at the beach."
+   },
+   "explanation": "It is a rainy day, so there is no Wi-Fi. That is why the girls find other things to do.",
+   "explanationAr": "اليوم ممطر، لذلك لا يوجد إنترنت، فوجدت البنات أشياء أخرى يفعلنها.",
+   "tip": "Look at the weather in the pictures!",
+   "hints": [
+    "Look at the first picture of the story.",
+    "What is the weather like?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-004",
+   "lesson": "e1-4",
+   "concept": "e1b-story-genre",
+   "skill": "reading",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "prompt": "Were the children happier before or after the rainy day? Which answer uses the story as evidence?",
+   "options": [
+    {
+     "id": "a",
+     "text": "After: they put on a show together and Mum said it was fantastic."
+    },
+    {
+     "id": "b",
+     "text": "Before: they all hate singing and acting."
+    },
+    {
+     "id": "c",
+     "text": "After: because the Wi-Fi came back very quickly."
+    },
+    {
+     "id": "d",
+     "text": "Before: because Samar can't play the piano."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Not all of them hate singing: Nawal sings every Friday and Rasha prefers acting.",
+    "c": "The story never says the Wi-Fi came back. The fun came from the show.",
+    "d": "Samar CAN play the piano. She plays while Nawal sings."
+   },
+   "explanation": "A good opinion uses evidence from the story. They found new hobbies together, and the show was a success.",
+   "explanationAr": "الرأي الجيد يعتمد على دليل من القصة: قدّمن عرضًا معًا وقالت الأم إنه رائع.",
+   "tip": "Opinion + evidence from the story",
+   "hints": [
+    "Which answer has true facts from the story?",
+    "What did Mum say at the end?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-005",
+   "lesson": "e1-4",
+   "concept": "e1b-story-genre",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "passage": "e1b-diary",
+   "prompt": "Read Samar's diary. What did Samar do FIRST, before Nawal came?",
+   "options": [
+    {
+     "id": "a",
+     "text": "She played the piano.",
+     "emoji": "🎹"
+    },
+    {
+     "id": "b",
+     "text": "She made the invitations.",
+     "emoji": "💌"
+    },
+    {
+     "id": "c",
+     "text": "She put on a show for Mum.",
+     "emoji": "🎭"
+    },
+    {
+     "id": "d",
+     "text": "She knocked on Nawal's door.",
+     "emoji": "🚪"
+    }
+   ],
+   "answer": "a",
+   "evidence": "At first, I was bored, so I played the piano",
+   "wrongWhy": {
+    "b": "Amani made the invitations, and that happened later.",
+    "c": "The show was at the end of the day, after they practised.",
+    "d": "Nawal knocked on Samar's door, not the other way round."
+   },
+   "explanation": "Samar writes 'At first' and then says she played the piano. That music brought Nawal to the door.",
+   "explanationAr": "كتبت سمر At first ثم قالت إنها عزفت البيانو، وهذه الموسيقى جعلت نوال تأتي.",
+   "tip": "At first → then → soon → in the end",
+   "hints": [
+    "Find the words 'At first' in the diary."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-006",
+   "lesson": "e1-4",
+   "concept": "e1b-story-genre",
+   "skill": "writing",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "type": "writing",
+   "task": "story",
+   "minWords": 50,
+   "prompt": "Write a picture story. Look at the pictures and tell the story in 50 words or more.",
+   "pictures": [
+    {
+     "emoji": "🌧️🏠📶❌",
+     "caption": "A rainy day. No Wi-Fi!"
+    },
+    {
+     "emoji": "👦🏽🎲",
+     "caption": "Ahmed finds an old board game."
+    },
+    {
+     "emoji": "👨‍👩‍👧‍👦🎲",
+     "caption": "The family plays together."
+    },
+    {
+     "emoji": "👵🏽🏆😄",
+     "caption": "Grandma wins!"
+    }
+   ],
+   "words": [
+    "rainy",
+    "Wi-Fi",
+    "bored",
+    "board game",
+    "together",
+    "love",
+    "prefer",
+    "fantastic"
+   ],
+   "guide": [
+    "Who is in the story?",
+    "Where are they? What is the weather like?",
+    "What happens first?",
+    "What happens next?",
+    "How does the story end? How do they feel?"
+   ],
+   "starter": "It was a rainy day and there was no Wi-Fi in Ahmed's house.",
+   "explanation": "A good picture story says who, where and what happens first, next and at the end, and uses words like first, then and in the end.",
+   "explanationAr": "القصة الجيدة تذكر الشخصيات والمكان وما يحدث أولًا ثم بعد ذلك وفي النهاية.",
+   "tip": "First… Then… In the end…",
+   "model": "It was a rainy day and there was no Wi-Fi in Ahmed's house. At first, Ahmed was bored. Then he found an old board game under his bed. He asked his family, \"Do you want to play?\" His sister doesn't like board games, but she played too. They played together all afternoon. In the end, Grandma won! Everyone laughed. Ahmed said, \"We don't need any Wi-Fi!\""
+  },
+  {
+   "id": "ENG-E1-B-007",
+   "lesson": "e1-4",
+   "concept": "e1b-story-characters",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "knowledge",
+   "type": "match",
+   "prompt": "Who says it? Match each character to her words.",
+   "pairs": [
+    {
+     "id": "n",
+     "left": "Nawal",
+     "leftEmoji": "👧🏽",
+     "right": "\"Let's put on a show!\""
+    },
+    {
+     "id": "r",
+     "left": "Rasha",
+     "leftEmoji": "🎭",
+     "right": "\"Hmm, no. I prefer acting.\""
+    },
+    {
+     "id": "a",
+     "left": "Amani",
+     "leftEmoji": "✂️",
+     "right": "\"I love making things.\""
+    },
+    {
+     "id": "s",
+     "left": "Samar",
+     "leftEmoji": "🎹",
+     "right": "\"Do you want to sing while I play the piano?\""
+    },
+    {
+     "id": "m",
+     "left": "Mum",
+     "leftEmoji": "👩🏽",
+     "right": "\"That was fantastic!\""
+    }
+   ],
+   "explanation": "Each character has her own voice: Nawal has the idea, Rasha prefers acting, Amani makes things, Samar plays the piano and Mum loves the show.",
+   "explanationAr": "لكل شخصية كلامها: نوال صاحبة الفكرة، ورشا تفضّل التمثيل، وأماني تصنع الأشياء، وسمر تعزف، والأم أعجبها العرض.",
+   "tip": "Characters show who they are by what they say",
+   "hints": [
+    "Who plays the piano?",
+    "Who watches the show at the end?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-008",
+   "lesson": "e1-4",
+   "concept": "e1b-story-characters",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "prompt": "Why does Nawal tell Amani, \"You can make the invitations\"?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Because Amani loves making things."
+    },
+    {
+     "id": "b",
+     "text": "Because Amani can play the piano."
+    },
+    {
+     "id": "c",
+     "text": "Because Amani prefers acting."
+    },
+    {
+     "id": "d",
+     "text": "Because Amani sings songs every Friday."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Samar plays the piano, not Amani.",
+    "c": "Rasha prefers acting, not Amani.",
+    "d": "Nawal sings every Friday. Amani doesn't like singing."
+   },
+   "explanation": "Amani says she doesn't like singing but loves making things, so making the invitations is the perfect job for her.",
+   "explanationAr": "أماني قالت إنها لا تحب الغناء لكنها تحب صنع الأشياء، فصنع الدعوات يناسبها.",
+   "tip": "Give each friend a job she loves",
+   "hints": [
+    "What does Amani say she loves?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-009",
+   "lesson": "e1-4",
+   "concept": "e1b-story-characters",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "multi",
+   "prompt": "Choose ALL the things Nawal says in the story.",
+   "options": [
+    {
+     "id": "a",
+     "text": "\"I can't play a musical instrument.\""
+    },
+    {
+     "id": "b",
+     "text": "\"I sing songs every Friday.\""
+    },
+    {
+     "id": "c",
+     "text": "\"I prefer acting.\""
+    },
+    {
+     "id": "d",
+     "text": "\"I love making things.\""
+    },
+    {
+     "id": "e",
+     "text": "\"I heard music from next door.\""
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "e"
+   ],
+   "explanation": "Nawal heard music from next door, can't play an instrument, but sings every Friday. Rasha prefers acting and Amani loves making things.",
+   "explanationAr": "نوال سمعت الموسيقى، ولا تعزف، لكنها تغنّي كل جمعة. التمثيل لرشا وصنع الأشياء لأماني.",
+   "tip": "Check WHO says each line",
+   "hints": [
+    "Three sentences are Nawal's.",
+    "Who prefers acting? Who loves making things?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-010",
+   "lesson": "e1-4",
+   "concept": "e1b-story-characters",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "prompt": "Which girl from the story would probably enjoy making models most?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Amani",
+     "emoji": "✂️"
+    },
+    {
+     "id": "b",
+     "text": "Rasha",
+     "emoji": "🎭"
+    },
+    {
+     "id": "c",
+     "text": "Nawal",
+     "emoji": "🎤"
+    },
+    {
+     "id": "d",
+     "text": "Samar",
+     "emoji": "🎹"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Rasha prefers acting, so she would probably choose a show.",
+    "c": "Nawal loves singing songs, not making things.",
+    "d": "Samar plays the piano. The story doesn't say she likes making things."
+   },
+   "explanation": "Making models is making things with your hands, and Amani says, 'I love making things.'",
+   "explanationAr": "صنع المجسّمات يعني صنع الأشياء باليد، وأماني قالت إنها تحب صنع الأشياء.",
+   "tip": "Match the hobby to what the character loves",
+   "hints": [
+    "Making models = making things.",
+    "Who loves making things?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-011",
+   "lesson": "e1-4",
+   "concept": "e1b-story-characters",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "sort",
+   "prompt": "Sort: does the character like it or not?",
+   "buckets": [
+    {
+     "id": "yes",
+     "label": "Likes it",
+     "emoji": "👍"
+    },
+    {
+     "id": "no",
+     "label": "Doesn't like it",
+     "emoji": "👎"
+    }
+   ],
+   "items": [
+    {
+     "id": "i1",
+     "text": "Rasha: acting",
+     "emoji": "🎭",
+     "bucket": "yes"
+    },
+    {
+     "id": "i2",
+     "text": "Rasha: singing songs",
+     "emoji": "🎤",
+     "bucket": "no"
+    },
+    {
+     "id": "i3",
+     "text": "Amani: singing",
+     "emoji": "🎵",
+     "bucket": "no"
+    },
+    {
+     "id": "i4",
+     "text": "Amani: making things",
+     "emoji": "✂️",
+     "bucket": "yes"
+    },
+    {
+     "id": "i5",
+     "text": "Mum: the show",
+     "emoji": "👏",
+     "bucket": "yes"
+    }
+   ],
+   "explanation": "Rasha says 'Hmm, no. I prefer acting.' Amani says 'I don't like singing, but I love making things.' Mum says the show was fantastic.",
+   "explanationAr": "رشا تفضّل التمثيل ولا تحب الغناء، وأماني لا تحب الغناء وتحب صنع الأشياء، والأم أعجبها العرض.",
+   "tip": "prefer / love = 👍 · don't like = 👎",
+   "hints": [
+    "Look for like, love, prefer and don't like in the story."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-012",
+   "lesson": "e1-4",
+   "concept": "e1b-story-characters",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "type": "choice",
+   "prompt": "Complete what Amani says in the story.",
+   "sentence": "I don't like singing, but I ___ making things.",
+   "options": [
+    {
+     "id": "a",
+     "text": "love"
+    },
+    {
+     "id": "b",
+     "text": "loves"
+    },
+    {
+     "id": "c",
+     "text": "am loving"
+    },
+    {
+     "id": "d",
+     "text": "to love"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "We add -s only with he / she / it. With I we say love.",
+    "c": "Love is a state verb, so we don't use it in the continuous form.",
+    "d": "After I we need a verb, not to + verb."
+   },
+   "explanation": "With I we use love without -s, and love is a state verb, so it stays in the present simple: I love making things.",
+   "explanationAr": "مع I نستخدم love بدون s، وهو فعل حالة فلا يأتي مع ing هنا.",
+   "tip": "I love… · She loves…",
+   "hints": [
+    "Who is speaking? I or she?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-013",
+   "lesson": "e1-4",
+   "concept": "e1b-story-listening",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "audio": "Rasha: I don't want to sing in the show. I prefer acting. Can I be the princess?",
+   "prompt": "Listen. What does Rasha want to do in the show?",
+   "options": [
+    {
+     "id": "a",
+     "text": "act",
+     "emoji": "🎭"
+    },
+    {
+     "id": "b",
+     "text": "sing",
+     "emoji": "🎤"
+    },
+    {
+     "id": "c",
+     "text": "play the piano",
+     "emoji": "🎹"
+    },
+    {
+     "id": "d",
+     "text": "make invitations",
+     "emoji": "💌"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I prefer acting",
+   "wrongWhy": {
+    "b": "Rasha says she doesn't want to sing.",
+    "c": "Rasha doesn't talk about the piano. Samar plays it.",
+    "d": "Making invitations is Amani's job."
+   },
+   "explanation": "Rasha says 'I prefer acting' and wants to be the princess in the show.",
+   "explanationAr": "رشا قالت إنها تفضّل التمثيل وتريد أن تكون الأميرة.",
+   "tip": "prefer = like more",
+   "hints": [
+    "Listen for the word after 'I prefer'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-014",
+   "lesson": "e1-4",
+   "concept": "e1b-story-listening",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "audio": "Amani: Look! I made ten invitations this morning. Now I'm giving them to our neighbours.",
+   "prompt": "Listen. How many invitations did Amani make?",
+   "options": [
+    {
+     "id": "a",
+     "text": "two"
+    },
+    {
+     "id": "b",
+     "text": "five"
+    },
+    {
+     "id": "c",
+     "text": "ten"
+    },
+    {
+     "id": "d",
+     "text": "twelve"
+    }
+   ],
+   "answer": "c",
+   "keepOrder": true,
+   "evidence": "I made ten invitations",
+   "wrongWhy": {
+    "a": "Amani doesn't say two. Listen again for the number before 'invitations'.",
+    "b": "Five is half of the number Amani says.",
+    "d": "Twelve sounds a little like the answer, but Amani says a smaller number."
+   },
+   "explanation": "Amani says, 'I made ten invitations this morning.'",
+   "explanationAr": "أماني قالت إنها صنعت عشر بطاقات دعوة.",
+   "tip": "Listen for the number before the noun",
+   "hints": [
+    "The number comes just before the word 'invitations'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-015",
+   "lesson": "e1-4",
+   "concept": "e1b-story-listening",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "type": "choice",
+   "audio": "Nawal: Our show is on Friday at five o'clock, in Samar's living room. Please come!",
+   "prompt": "Listen. Where is the show?",
+   "options": [
+    {
+     "id": "a",
+     "text": "in a living room",
+     "emoji": "🛋️"
+    },
+    {
+     "id": "b",
+     "text": "in a garden",
+     "emoji": "🌻"
+    },
+    {
+     "id": "c",
+     "text": "at school",
+     "emoji": "🏫"
+    },
+    {
+     "id": "d",
+     "text": "at the beach",
+     "emoji": "🏖️"
+    }
+   ],
+   "answer": "a",
+   "evidence": "in Samar's living room",
+   "wrongWhy": {
+    "b": "Nobody talks about a garden. It's raining, so they stay inside.",
+    "c": "The show isn't at school. It's at Samar's house.",
+    "d": "The beach isn't in the message."
+   },
+   "explanation": "Nawal says the show is 'in Samar's living room', inside the house.",
+   "explanationAr": "نوال قالت إن العرض في غرفة الجلوس في بيت سمر.",
+   "tip": "Where? → listen for in / at + place",
+   "hints": [
+    "Listen for the word 'in' and a place."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-016",
+   "lesson": "e1-4",
+   "concept": "e1b-story-listening",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "audio": "Mum: I'm in the kitchen, girls, but I can hear the piano and the singing. It sounds wonderful!",
+   "prompt": "Listen. How does Mum feel about the music?",
+   "options": [
+    {
+     "id": "a",
+     "text": "She likes it.",
+     "emoji": "😊"
+    },
+    {
+     "id": "b",
+     "text": "She hates it.",
+     "emoji": "😠"
+    },
+    {
+     "id": "c",
+     "text": "She can't hear it.",
+     "emoji": "🙉"
+    },
+    {
+     "id": "d",
+     "text": "She wants the Wi-Fi back.",
+     "emoji": "📶"
+    }
+   ],
+   "answer": "a",
+   "evidence": "It sounds wonderful!",
+   "wrongWhy": {
+    "b": "'Wonderful' is a very good word, so she doesn't hate it.",
+    "c": "Mum says 'I can hear the piano and the singing'.",
+    "d": "Mum doesn't talk about the Wi-Fi."
+   },
+   "explanation": "'It sounds wonderful!' means Mum thinks the music is very good.",
+   "explanationAr": "It sounds wonderful تعني أن الأم ترى الموسيقى جميلة جدًا.",
+   "tip": "It sounds + adjective = my opinion",
+   "hints": [
+    "Listen to the last sentence.",
+    "Is 'wonderful' a good word or a bad word?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-017",
+   "lesson": "e1-4",
+   "concept": "e1b-story-listening",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "tf",
+   "audio": "Amani: I can't sing, but I can draw. Look at my invitations! They've got flowers and stars on them.",
+   "prompt": "Listen. True or false? Amani says she can sing.",
+   "answer": false,
+   "evidence": "I can't sing, but I can draw",
+   "wrongWhy": "Amani says 'I can't sing'. She can draw, so she decorates the invitations.",
+   "explanation": "Amani can't sing, but she can draw, so she drew flowers and stars on the invitations.",
+   "explanationAr": "أماني لا تستطيع الغناء لكنها تستطيع الرسم، فرسمت على الدعوات.",
+   "tip": "can't = cannot ❌",
+   "hints": [
+    "Listen carefully: can or can't?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-018",
+   "lesson": "e1-4",
+   "concept": "e1b-story-listening",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "audio": "Rasha: Is the Wi-Fi back? Samar: Yes, it is! Nawal: Great, but let's do another show next Friday!",
+   "prompt": "Listen. What does Nawal want to do next Friday?",
+   "options": [
+    {
+     "id": "a",
+     "text": "put on another show",
+     "emoji": "🎭"
+    },
+    {
+     "id": "b",
+     "text": "play video games",
+     "emoji": "🎮"
+    },
+    {
+     "id": "c",
+     "text": "go swimming",
+     "emoji": "🏊"
+    },
+    {
+     "id": "d",
+     "text": "watch cartoons",
+     "emoji": "📺"
+    }
+   ],
+   "answer": "a",
+   "evidence": "let's do another show next Friday",
+   "wrongWhy": {
+    "b": "The Wi-Fi is back, but Nawal doesn't say anything about video games.",
+    "c": "Swimming is not in the dialogue.",
+    "d": "Nobody talks about cartoons."
+   },
+   "explanation": "Even with the Wi-Fi back, Nawal says 'let's do another show next Friday'. She loved the show!",
+   "explanationAr": "مع أن الإنترنت عاد، اقترحت نوال عرضًا آخر يوم الجمعة القادم.",
+   "tip": "Let's… = a suggestion",
+   "hints": [
+    "Don't stop listening after 'Yes, it is!'",
+    "Listen for 'let's'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-019",
+   "lesson": "e1-4",
+   "concept": "e1b-story-listening",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "multi",
+   "audio": "Samar: For our show we need three things: the piano, some songs and the invitations. We don't need any Wi-Fi!",
+   "prompt": "Listen. Choose ALL the things the girls need for their show.",
+   "options": [
+    {
+     "id": "a",
+     "text": "the piano",
+     "emoji": "🎹"
+    },
+    {
+     "id": "b",
+     "text": "some songs",
+     "emoji": "🎵"
+    },
+    {
+     "id": "c",
+     "text": "the invitations",
+     "emoji": "💌"
+    },
+    {
+     "id": "d",
+     "text": "Wi-Fi",
+     "emoji": "📶"
+    },
+    {
+     "id": "e",
+     "text": "video games",
+     "emoji": "🎮"
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "evidence": "the piano, some songs and the invitations",
+   "explanation": "Samar lists three things: the piano, some songs and the invitations. She says they don't need any Wi-Fi.",
+   "explanationAr": "سمر ذكرت ثلاثة أشياء: البيانو والأغاني وبطاقات الدعوة، ولا يحتجن إلى إنترنت.",
+   "tip": "Count the things in a list",
+   "hints": [
+    "Samar says 'three things'.",
+    "Listen for 'don't need'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-020",
+   "lesson": "e1-4",
+   "concept": "e1b-story-words",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "visual": {
+    "emoji": "🎹",
+    "alt": "a musical instrument with black and white keys"
+   },
+   "prompt": "Look at the picture. What is it?",
+   "options": [
+    {
+     "id": "a",
+     "text": "a piano"
+    },
+    {
+     "id": "b",
+     "text": "an invitation"
+    },
+    {
+     "id": "c",
+     "text": "a show"
+    },
+    {
+     "id": "d",
+     "text": "a diary"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "An invitation is a card that asks people to come to something.",
+    "c": "A show is something people watch, like a play or a concert.",
+    "d": "A diary is a book where you write about your day."
+   },
+   "explanation": "This is a piano, a musical instrument with black and white keys. Samar plays it in the story.",
+   "explanationAr": "هذا بيانو، آلة موسيقية بمفاتيح بيضاء وسوداء، وسمر تعزف عليه.",
+   "tip": "🎹 piano = a musical instrument",
+   "hints": [
+    "It's a musical instrument.",
+    "Samar plays it in the story."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-021",
+   "lesson": "e1-4",
+   "concept": "e1b-story-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Amani made cards to ask people to come to the show. Complete the word.",
+   "pattern": "i n v _ t _ t i o n s",
+   "answer": "invitations",
+   "mistakes": [
+    {
+     "answer": "invetations",
+     "why": "The second letter we need is i, not e: inv-i-tations."
+    }
+   ],
+   "explanation": "Invitations are cards that ask people to come to an event, like the girls' show.",
+   "explanationAr": "Invitations بطاقات تدعو الناس إلى حفل أو عرض.",
+   "tip": "in-vi-ta-tions: four parts",
+   "hints": [
+    "The word starts with 'invite'.",
+    "Say it slowly: in-vi-ta-tions."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-022",
+   "lesson": "e1-4",
+   "concept": "e1b-story-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "prompt": "What is a character?",
+   "options": [
+    {
+     "id": "a",
+     "text": "a person or animal in a story"
+    },
+    {
+     "id": "b",
+     "text": "the person who tells the story but is not in it"
+    },
+    {
+     "id": "c",
+     "text": "the title of a story"
+    },
+    {
+     "id": "d",
+     "text": "a picture in a book"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "That is a narrator.",
+    "c": "The title is the name of the story, like NO WI-FI!",
+    "d": "A picture can show characters, but a picture is not a character."
+   },
+   "explanation": "Characters are the people or animals in a story. In NO WI-FI! the characters are Nawal, Samar, Rasha, Amani and Mum.",
+   "explanationAr": "الشخصية هي شخص أو حيوان في القصة، مثل نوال وسمر.",
+   "tip": "character = who is in the story",
+   "hints": [
+    "Nawal and Samar are examples."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-023",
+   "lesson": "e1-4",
+   "concept": "e1b-story-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Rasha prefers this hobby to singing. Unscramble the letters.",
+   "scrambled": "tginac",
+   "answer": "acting",
+   "explanation": "Acting means playing a part in a show or play. Rasha says, 'I prefer acting.'",
+   "explanationAr": "Acting يعني التمثيل، ورشا تفضّله على الغناء.",
+   "tip": "act → acting 🎭",
+   "hints": [
+    "It starts with a.",
+    "It ends with -ing."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-024",
+   "lesson": "e1-4",
+   "concept": "e1b-story-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Type the missing word in Nawal's idea: \"Hey! Let's put ___ a show!\"",
+   "answer": "on",
+   "explanation": "The phrase is 'put on a show', which means to prepare a show and do it for people.",
+   "explanationAr": "العبارة الصحيحة put on a show وتعني تقديم عرض.",
+   "tip": "put ON a show 🎭",
+   "hints": [
+    "Remember the song: 'To put a good show ___!'"
+   ],
+   "mistakes": [
+    {
+     "answer": "in",
+     "why": "We don't say 'put in a show'. The phrase is put ON a show."
+    },
+    {
+     "answer": "up",
+     "why": "'Put up' is for pictures on a wall. For shows we say put on."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-B-025",
+   "lesson": "e1-4",
+   "concept": "e1b-story-words",
+   "skill": "vocabulary",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "choice",
+   "prompt": "Which word is the odd one out?",
+   "options": [
+    {
+     "id": "a",
+     "text": "singing"
+    },
+    {
+     "id": "b",
+     "text": "acting"
+    },
+    {
+     "id": "c",
+     "text": "invitations"
+    },
+    {
+     "id": "d",
+     "text": "playing the piano"
+    }
+   ],
+   "answer": "c",
+   "wrongWhy": {
+    "a": "Singing is an activity in the show, like the others.",
+    "b": "Acting is an activity you do, like singing.",
+    "d": "Playing the piano is an activity, too."
+   },
+   "explanation": "Singing, acting and playing the piano are activities. Invitations are things (cards), not an activity.",
+   "explanationAr": "الغناء والتمثيل والعزف أنشطة، أما الدعوات فهي أشياء وليست نشاطًا.",
+   "tip": "Odd one out: find the group first",
+   "hints": [
+    "Three of them end in -ing.",
+    "Which one is a thing you can hold?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-026",
+   "lesson": "e1-4",
+   "concept": "e1b-story-words",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "type": "match",
+   "prompt": "Match each word to its meaning.",
+   "pairs": [
+    {
+     "id": "m",
+     "left": "musical instrument",
+     "leftEmoji": "🎹",
+     "right": "something you play to make music"
+    },
+    {
+     "id": "i",
+     "left": "invitation",
+     "leftEmoji": "💌",
+     "right": "a card that asks people to come"
+    },
+    {
+     "id": "s",
+     "left": "show",
+     "leftEmoji": "🎭",
+     "right": "something people watch, with acting or songs"
+    },
+    {
+     "id": "n",
+     "left": "narrator",
+     "leftEmoji": "🗣️",
+     "right": "the person who tells the story"
+    }
+   ],
+   "explanation": "A piano is a musical instrument, an invitation asks people to come, a show is for people to watch, and a narrator tells the story.",
+   "explanationAr": "الآلة الموسيقية للعزف، والدعوة تطلب من الناس الحضور، والعرض يشاهده الناس، والراوي يحكي القصة.",
+   "tip": "Learn words with their meanings",
+   "hints": [
+    "Which one does Amani make?",
+    "Which one does Samar play?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-027",
+   "lesson": "e1-4",
+   "concept": "e1b-story-grammar",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "type": "choice",
+   "prompt": "Choose the correct verb.",
+   "sentence": "Nawal ___ songs every Friday.",
+   "options": [
+    {
+     "id": "a",
+     "text": "sings"
+    },
+    {
+     "id": "b",
+     "text": "is singing"
+    },
+    {
+     "id": "c",
+     "text": "sing"
+    },
+    {
+     "id": "d",
+     "text": "singing"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "'Every Friday' is a habit, so we use the present simple, not the present continuous.",
+    "c": "With he / she / Nawal we add -s: sings.",
+    "d": "A sentence needs a full verb. 'Nawal singing' is not complete."
+   },
+   "explanation": "'Every Friday' tells us it is a habit, so we use the present simple. Nawal = she, so we add -s: sings.",
+   "explanationAr": "every Friday عادة، فنستخدم المضارع البسيط، ومع she نضيف s.",
+   "tip": "every day / every Friday → present simple",
+   "hints": [
+    "Is this a habit or happening now?",
+    "Nawal = she."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-028",
+   "lesson": "e1-4",
+   "concept": "e1b-story-grammar",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Type the missing word in Amani's question: \"What ___ you all doing?\"",
+   "answer": "are",
+   "explanation": "Amani asks about now, so it's the present continuous: What are you doing? With 'you' we use 'are'.",
+   "explanationAr": "أماني تسأل عمّا يحدث الآن، فنستخدم المضارع المستمر: What are you doing?",
+   "tip": "are + you + -ing → now",
+   "hints": [
+    "Look at 'doing'. Which helping verb goes with -ing?"
+   ],
+   "mistakes": [
+    {
+     "answer": "do",
+     "why": "'Do' doesn't go with 'doing'. With -ing we need am / is / are."
+    },
+    {
+     "answer": "is",
+     "why": "'Is' goes with he / she / it. With 'you' we use 'are'."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-B-029",
+   "lesson": "e1-4",
+   "concept": "e1b-story-grammar",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "text",
+   "prompt": "Find the mistake and write the correct sentence: \"Samar is playing the piano every day.\"",
+   "answer": "Samar plays the piano every day.",
+   "accept": [
+    "Samar plays the piano every day"
+   ],
+   "mistakes": [
+    {
+     "answer": "Samar play the piano every day.",
+     "why": "Good change of tense, but with Samar (she) we add -s: plays."
+    },
+    {
+     "answer": "Samar is playing the piano now.",
+     "why": "That is correct English, but you changed 'every day'. Keep the habit and change the verb."
+    }
+   ],
+   "explanation": "'Every day' is a habit, so we need the present simple: Samar plays the piano every day.",
+   "explanationAr": "every day عادة، فنستخدم المضارع البسيط: Samar plays.",
+   "tip": "Habit → plays · Now → is playing",
+   "hints": [
+    "Look at 'every day'.",
+    "Which tense do we use for habits?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-030",
+   "lesson": "e1-4",
+   "concept": "e1b-story-grammar",
+   "skill": "writing",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "order",
+   "prompt": "Put the words in order to make a sentence.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "Amani doesn't like"
+    },
+    {
+     "id": "w2",
+     "text": "singing,"
+    },
+    {
+     "id": "w3",
+     "text": "but"
+    },
+    {
+     "id": "w4",
+     "text": "she loves"
+    },
+    {
+     "id": "w5",
+     "text": "making things."
+    }
+   ],
+   "explanation": "We use 'but' to join two different ideas: Amani doesn't like singing, but she loves making things.",
+   "explanationAr": "نستخدم but لنربط فكرتين مختلفتين.",
+   "tip": "don't like… , but… love…",
+   "hints": [
+    "Start with the capital letter.",
+    "'but' joins the two ideas."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-031",
+   "lesson": "e1-4",
+   "concept": "e1b-story-grammar",
+   "skill": "writing",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "prompt": "Choose the best linking word.",
+   "sentence": "Rasha doesn't like singing, ___ she loves acting.",
+   "options": [
+    {
+     "id": "a",
+     "text": "but"
+    },
+    {
+     "id": "b",
+     "text": "and"
+    },
+    {
+     "id": "c",
+     "text": "because"
+    },
+    {
+     "id": "d",
+     "text": "so"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "'And' joins similar ideas. Here the ideas are different (doesn't like / loves).",
+    "c": "'Because' gives a reason. Loving acting is not the reason she doesn't like singing.",
+    "d": "'So' gives a result. Loving acting is not a result of not liking singing."
+   },
+   "explanation": "'But' joins two different or opposite ideas: doesn't like singing ↔ loves acting.",
+   "explanationAr": "but تربط بين فكرتين متعاكستين.",
+   "tip": "but = different ideas",
+   "hints": [
+    "Are the two ideas the same or different?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-032",
+   "lesson": "e1-4",
+   "concept": "e1b-story-grammar",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "choice",
+   "prompt": "Which sentence is about something happening NOW?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Look! The girls are putting on a show."
+    },
+    {
+     "id": "b",
+     "text": "Nawal sings songs every Friday."
+    },
+    {
+     "id": "c",
+     "text": "Samar plays the piano after school."
+    },
+    {
+     "id": "d",
+     "text": "Rasha prefers acting."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "'Every Friday' is a habit (present simple).",
+    "c": "'After school' tells us about a routine, not now.",
+    "d": "'Prefers' tells us how Rasha feels in general. It's a state verb."
+   },
+   "explanation": "'Look!' and 'are putting' show an action happening now, so it is the present continuous.",
+   "explanationAr": "Look! وare putting تدلّان على شيء يحدث الآن.",
+   "tip": "Look! / now → am / is / are + -ing",
+   "hints": [
+    "Look for am / is / are + -ing."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-033",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-words",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "visual": {
+    "emoji": "🧩",
+    "alt": "a hobby with many small pieces that fit together"
+   },
+   "prompt": "Look at the picture. Which hobby is it?",
+   "options": [
+    {
+     "id": "a",
+     "text": "do puzzles"
+    },
+    {
+     "id": "b",
+     "text": "do photography"
+    },
+    {
+     "id": "c",
+     "text": "play board games"
+    },
+    {
+     "id": "d",
+     "text": "make models"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Photography is taking photos with a camera 📷.",
+    "c": "Board games are played on a board with pieces or dice 🎲.",
+    "d": "Making models is building small planes or boats 🛩️."
+   },
+   "explanation": "🧩 shows puzzle pieces, so the hobby is 'do puzzles'.",
+   "explanationAr": "🧩 قطع أحجية، فالهواية do puzzles.",
+   "tip": "🧩 do puzzles",
+   "hints": [
+    "The pieces fit together."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-034",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "📷 Complete the hobby: do ___",
+   "pattern": "p h _ t _ g r a p h y",
+   "answer": "photography",
+   "mistakes": [
+    {
+     "answer": "fotography",
+     "why": "The 'f' sound is spelled ph in this word: photography."
+    }
+   ],
+   "explanation": "Photography is taking photos. We say 'do photography'.",
+   "explanationAr": "Photography التصوير، ونقول do photography.",
+   "tip": "ph sounds like f: photo, photography",
+   "hints": [
+    "It starts with 'photo'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-035",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "🧩 Unscramble the letters to find a hobby word: do ___",
+   "scrambled": "zlzuesp",
+   "answer": "puzzles",
+   "explanation": "Puzzles have pieces that fit together. We say 'do puzzles'.",
+   "explanationAr": "Puzzles الأحاجي، ونقول do puzzles.",
+   "tip": "puzzles has double z",
+   "hints": [
+    "It has two z's.",
+    "It starts with p."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-036",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "choice",
+   "prompt": "Choose the best hobby.",
+   "sentence": "Salim builds small planes and boats from wood and paper. His hobby is ___.",
+   "options": [
+    {
+     "id": "a",
+     "text": "making models"
+    },
+    {
+     "id": "b",
+     "text": "making videos"
+    },
+    {
+     "id": "c",
+     "text": "collecting cards"
+    },
+    {
+     "id": "d",
+     "text": "doing the gardening"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Making videos means filming things with a camera or phone.",
+    "c": "Collecting cards means keeping lots of cards, not building things.",
+    "d": "Gardening is looking after plants and flowers."
+   },
+   "explanation": "Small planes and boats you build are models, so his hobby is making models.",
+   "explanationAr": "الطائرات والقوارب الصغيرة مجسّمات، فهوايته صنع المجسّمات.",
+   "tip": "🛩️ small copy of a big thing = model",
+   "hints": [
+    "What do we call a small copy of a plane?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-037",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-words",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "type": "match",
+   "prompt": "Match each hobby to what you do.",
+   "pairs": [
+    {
+     "id": "g",
+     "left": "do the gardening",
+     "leftEmoji": "🌻",
+     "right": "plant flowers and water them"
+    },
+    {
+     "id": "b",
+     "left": "play board games",
+     "leftEmoji": "🎲",
+     "right": "move pieces on a board with friends"
+    },
+    {
+     "id": "v",
+     "left": "make videos",
+     "leftEmoji": "🎬",
+     "right": "film things with a camera or phone"
+    },
+    {
+     "id": "c",
+     "left": "watch cartoons",
+     "leftEmoji": "📺",
+     "right": "look at funny animated films"
+    },
+    {
+     "id": "d",
+     "left": "write a diary",
+     "leftEmoji": "📔",
+     "right": "write about your day in a notebook"
+    }
+   ],
+   "explanation": "Each hobby phrase describes an activity: gardening = plants, board games = pieces on a board, videos = filming, cartoons = animated films, diary = writing about your day.",
+   "explanationAr": "كل هواية تصف نشاطًا: الحديقة للنباتات، وألعاب الطاولة على لوح، والفيديو للتصوير، والرسوم المتحركة للمشاهدة، والمذكّرات للكتابة.",
+   "tip": "Hobby = verb + noun",
+   "hints": [
+    "Look at the emoji next to each hobby."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-038",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-words",
+   "skill": "vocabulary",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "choice",
+   "prompt": "Which hobby is the odd one out?",
+   "options": [
+    {
+     "id": "a",
+     "text": "do the gardening",
+     "emoji": "🌻"
+    },
+    {
+     "id": "b",
+     "text": "play video games",
+     "emoji": "🎮"
+    },
+    {
+     "id": "c",
+     "text": "make videos",
+     "emoji": "🎬"
+    },
+    {
+     "id": "d",
+     "text": "watch cartoons",
+     "emoji": "📺"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "You need a screen to play video games, like the other two.",
+    "c": "You need a screen or camera to make videos, like the other two.",
+    "d": "You need a screen to watch cartoons, like the other two."
+   },
+   "explanation": "Video games, videos and cartoons all need a screen. Gardening happens outside with plants. No screen!",
+   "explanationAr": "ألعاب الفيديو والفيديوهات والرسوم المتحركة تحتاج إلى شاشة، أما الحديقة فلا.",
+   "tip": "Find what three of them share",
+   "hints": [
+    "Which three need a screen?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-039",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-words",
+   "skill": "vocabulary",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "prompt": "Huda loves birds and flowers, but she doesn't like planting. She loves taking pictures with her camera. Which new hobby is best for her?",
+   "options": [
+    {
+     "id": "a",
+     "text": "do photography",
+     "emoji": "📷"
+    },
+    {
+     "id": "b",
+     "text": "do the gardening",
+     "emoji": "🌻"
+    },
+    {
+     "id": "c",
+     "text": "play video games",
+     "emoji": "🎮"
+    },
+    {
+     "id": "d",
+     "text": "collect cards",
+     "emoji": "🃏"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Gardening means planting, and Huda doesn't like planting.",
+    "c": "Video games have nothing to do with birds, flowers or her camera.",
+    "d": "Collecting cards doesn't use her camera or nature."
+   },
+   "explanation": "Huda loves nature and taking pictures, so photography of birds and flowers is perfect for her.",
+   "explanationAr": "هدى تحب الطبيعة والتقاط الصور، فالتصوير يناسبها.",
+   "tip": "Match the hobby to what the person loves",
+   "hints": [
+    "What does she use her camera for?",
+    "What does she NOT like?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-040",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-verbs",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "prompt": "Choose the correct verb.",
+   "sentence": "My brother likes to ___ models of planes.",
+   "options": [
+    {
+     "id": "a",
+     "text": "make"
+    },
+    {
+     "id": "b",
+     "text": "do"
+    },
+    {
+     "id": "c",
+     "text": "play"
+    },
+    {
+     "id": "d",
+     "text": "watch"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "We say do photography / do puzzles, but not 'do models'.",
+    "c": "We play games and instruments, not models.",
+    "d": "We watch cartoons, not models."
+   },
+   "explanation": "The hobby is 'make models': you build them yourself.",
+   "explanationAr": "نقول make models أي يصنع مجسّمات.",
+   "tip": "make models · make videos",
+   "hints": [
+    "You build them with your hands."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-041",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-verbs",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "tf",
+   "prompt": "True or false? We say 'play photography'.",
+   "answer": false,
+   "wrongWhy": "We play games and instruments. With photography we say 'do': do photography.",
+   "explanation": "We say 'do photography', like 'do puzzles' and 'do the gardening'.",
+   "explanationAr": "نقول do photography مثل do puzzles وdo the gardening.",
+   "tip": "do: photography, puzzles, the gardening",
+   "hints": [
+    "Think of 'do puzzles'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-042",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-verbs",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "📔 Which verb goes with 'a diary'? Type the verb: ___ a diary",
+   "answer": "write",
+   "mistakes": [
+    {
+     "answer": "read",
+     "why": "You can read a diary, but the hobby is to write one about your day."
+    },
+    {
+     "answer": "do",
+     "why": "We don't say 'do a diary'. The hobby is write a diary."
+    }
+   ],
+   "explanation": "The hobby is 'write a diary': you write about your day every evening.",
+   "explanationAr": "الهواية write a diary أي يكتب مذكّرات يومية.",
+   "tip": "write a diary 📔",
+   "hints": [
+    "What do you do with a pen?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-043",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-verbs",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "type": "match",
+   "prompt": "Match the verb to the rest of the hobby.",
+   "pairs": [
+    {
+     "id": "c",
+     "left": "collect",
+     "right": "cards"
+    },
+    {
+     "id": "w",
+     "left": "watch",
+     "right": "cartoons"
+    },
+    {
+     "id": "p",
+     "left": "play",
+     "right": "board games"
+    },
+    {
+     "id": "o",
+     "left": "put on",
+     "right": "shows"
+    },
+    {
+     "id": "d",
+     "left": "do",
+     "right": "the gardening"
+    }
+   ],
+   "explanation": "Hobbies are fixed phrases: collect cards, watch cartoons, play board games, put on shows, do the gardening.",
+   "explanationAr": "الهوايات عبارات ثابتة: collect cards وwatch cartoons وplay board games وput on shows وdo the gardening.",
+   "tip": "Learn the verb + noun together",
+   "hints": [
+    "Which verb do we use with TV?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-044",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-verbs",
+   "skill": "vocabulary",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "choice",
+   "prompt": "Three students wrote about their hobbies. Who is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Ali: \"I play the gardening.\""
+    },
+    {
+     "id": "b",
+     "text": "Mona: \"I do puzzles.\""
+    },
+    {
+     "id": "c",
+     "text": "Sara: \"I do video games.\""
+    },
+    {
+     "id": "d",
+     "text": "Omar: \"I collect cartoons.\""
+    }
+   ],
+   "answer": "b",
+   "wrongWhy": {
+    "a": "We say do the gardening, not play.",
+    "c": "We say play video games, not do.",
+    "d": "We watch cartoons. We collect cards."
+   },
+   "explanation": "'Do puzzles' is the correct phrase.",
+   "explanationAr": "العبارة الصحيحة do puzzles.",
+   "tip": "do puzzles · play video games · watch cartoons",
+   "hints": [
+    "Check the verb in each sentence."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-045",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-verbs",
+   "skill": "vocabulary",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Find the mistake and write the correct sentence: \"On rainy days we do board games.\"",
+   "answer": "On rainy days we play board games.",
+   "accept": [
+    "On rainy days, we play board games."
+   ],
+   "mistakes": [
+    {
+     "answer": "On rainy days we make board games.",
+     "why": "We play board games. 'Make' means you build the game yourself."
+    }
+   ],
+   "explanation": "With games we use 'play': play board games, play video games.",
+   "explanationAr": "مع الألعاب نستخدم play.",
+   "tip": "games → play",
+   "hints": [
+    "Which verb do we use with games?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-046",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "type": "choice",
+   "prompt": "Choose the correct word.",
+   "sentence": "My grandma loves ___ the gardening.",
+   "options": [
+    {
+     "id": "a",
+     "text": "doing"
+    },
+    {
+     "id": "b",
+     "text": "do"
+    },
+    {
+     "id": "c",
+     "text": "does"
+    },
+    {
+     "id": "d",
+     "text": "is doing"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "After love we use the -ing form, not the base verb.",
+    "c": "'Does' can't come straight after 'loves'.",
+    "d": "We can't put 'is doing' after 'loves'."
+   },
+   "explanation": "After like / love / hate / prefer / enjoy we use verb + -ing: loves doing.",
+   "explanationAr": "بعد love وأخواتها نضع الفعل مع ing.",
+   "tip": "love / like / hate / prefer + -ing",
+   "hints": [
+    "What form comes after 'loves'?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-047",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "prompt": "Which sentence is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "He likes art."
+    },
+    {
+     "id": "b",
+     "text": "He likes do art."
+    },
+    {
+     "id": "c",
+     "text": "He is liking art."
+    },
+    {
+     "id": "d",
+     "text": "He like art."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "After likes we use a noun (art) or verb + -ing, not 'do'.",
+    "c": "Like is a state verb, so we don't use it in the continuous.",
+    "d": "With he we add -s: likes."
+   },
+   "explanation": "He + likes + noun: He likes art. Like is a state verb in the present simple.",
+   "explanationAr": "He likes art: فعل حالة في المضارع البسيط مع s.",
+   "tip": "He / She likes + noun / -ing",
+   "hints": [
+    "Check the -s and the -ing."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-048",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Find the mistake and write the correct sentence: \"I enjoy make videos.\"",
+   "answer": "I enjoy making videos.",
+   "mistakes": [
+    {
+     "answer": "I enjoy to make videos.",
+     "why": "After enjoy we use -ing, not to + verb."
+    },
+    {
+     "answer": "I am enjoying make videos.",
+     "why": "Keep 'I enjoy' and change 'make' to 'making'."
+    }
+   ],
+   "explanation": "After enjoy we use verb + -ing: I enjoy making videos.",
+   "explanationAr": "بعد enjoy نضع الفعل مع ing: making.",
+   "tip": "enjoy + -ing",
+   "hints": [
+    "Look at the verb after 'enjoy'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-049",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Write the correct form of 'love': \"She ___ playing outdoors.\"",
+   "answer": "loves",
+   "explanation": "She + loves + -ing: She loves playing outdoors.",
+   "explanationAr": "She loves playing: مع she نضيف s.",
+   "tip": "She loves… / They love…",
+   "hints": [
+    "Who? She. Add -s."
+   ],
+   "mistakes": [
+    {
+     "answer": "love",
+     "why": "With she we add -s: loves."
+    },
+    {
+     "answer": "is loving",
+     "why": "Love is a state verb, so we don't use the continuous."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-B-050",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "type": "order",
+   "prompt": "Put the words in order to make a sentence.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "My sister"
+    },
+    {
+     "id": "w2",
+     "text": "doesn't like"
+    },
+    {
+     "id": "w3",
+     "text": "watching"
+    },
+    {
+     "id": "w4",
+     "text": "cartoons."
+    }
+   ],
+   "explanation": "Subject + doesn't like + verb-ing + noun: My sister doesn't like watching cartoons.",
+   "explanationAr": "الفاعل + doesn't like + فعل ing + اسم.",
+   "tip": "doesn't like + -ing",
+   "hints": [
+    "Who? Start with the person."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-051",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "grammar",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "type": "multi",
+   "prompt": "Choose ALL the correct sentences.",
+   "options": [
+    {
+     "id": "a",
+     "text": "They love playing outdoors."
+    },
+    {
+     "id": "b",
+     "text": "She prefers doing photography."
+    },
+    {
+     "id": "c",
+     "text": "He hates make models."
+    },
+    {
+     "id": "d",
+     "text": "I am liking board games."
+    },
+    {
+     "id": "e",
+     "text": "We enjoy doing puzzles."
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "e"
+   ],
+   "explanation": "State verbs stay in the present simple and are followed by -ing: love playing, prefers doing, enjoy doing.",
+   "explanationAr": "أفعال الحالة في المضارع البسيط وبعدها فعل مع ing.",
+   "tip": "Check the -ing AND the tense",
+   "hints": [
+    "Two sentences have a mistake.",
+    "Look for 'make' without -ing and 'am liking'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-052",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "tf",
+   "prompt": "True or false? This sentence is correct: \"She doesn't likes collecting cards.\"",
+   "answer": false,
+   "wrongWhy": "After doesn't we use the base verb without -s: She doesn't like collecting cards.",
+   "explanation": "'Doesn't' already shows he / she / it, so the verb has no -s: doesn't like.",
+   "explanationAr": "بعد doesn't يأتي الفعل بدون s.",
+   "tip": "doesn't + like (no -s!)",
+   "hints": [
+    "Look at the verb after doesn't."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-053",
+   "lesson": "e1-5",
+   "concept": "e1b-state-ing",
+   "skill": "writing",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "type": "writing",
+   "task": "message",
+   "minWords": 40,
+   "prompt": "Write a message to a new friend about the hobbies in your family. Use like, love, prefer, enjoy and hate + -ing.",
+   "words": [
+    "loves",
+    "likes",
+    "prefers",
+    "enjoys",
+    "hates",
+    "doing puzzles",
+    "collecting cards",
+    "making models",
+    "doing the gardening"
+   ],
+   "guide": [
+    "Who are you?",
+    "What does each person in your family like doing?",
+    "What do you prefer?",
+    "What do you hate doing?",
+    "Ask your friend a question."
+   ],
+   "starter": "Hi! My name is … and my family has lots of hobbies.",
+   "explanation": "A good message says who you are, uses state verbs + -ing for each person, and ends with a question for your friend.",
+   "explanationAr": "الرسالة الجيدة تعرّف بك، وتستخدم أفعال الحالة مع ing، وتنتهي بسؤال.",
+   "tip": "love / like / prefer / hate + -ing",
+   "model": "Hi! My name is Aleen and my family has lots of hobbies. My dad loves doing the gardening. My mum enjoys doing puzzles. My brother likes playing video games, but I prefer making models. I hate watching cartoons because they are boring. What do you like doing in your free time?"
+  },
+  {
+   "id": "ENG-E1-B-054",
+   "lesson": "e1-5",
+   "concept": "e1b-state-simple",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "choice",
+   "prompt": "Your friend shows you a new board game. What do you say?",
+   "options": [
+    {
+     "id": "a",
+     "text": "It looks interesting!"
+    },
+    {
+     "id": "b",
+     "text": "It look interesting!"
+    },
+    {
+     "id": "c",
+     "text": "It is look interesting!"
+    },
+    {
+     "id": "d",
+     "text": "It looking interesting!"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "With it we add -s: looks.",
+    "c": "We don't put 'is' before 'look' here.",
+    "d": "The sentence needs a full verb, and look is a state verb: looks."
+   },
+   "explanation": "Look is a state verb when it gives an opinion: It looks interesting.",
+   "explanationAr": "look فعل حالة هنا: It looks interesting.",
+   "tip": "It looks / It sounds + adjective",
+   "hints": [
+    "It = he / she / it → add -s."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-055",
+   "lesson": "e1-5",
+   "concept": "e1b-state-simple",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "choice",
+   "prompt": "Choose the correct verb.",
+   "sentence": "Listen! That song ___ good.",
+   "options": [
+    {
+     "id": "a",
+     "text": "sounds"
+    },
+    {
+     "id": "b",
+     "text": "is sounding"
+    },
+    {
+     "id": "c",
+     "text": "sound"
+    },
+    {
+     "id": "d",
+     "text": "sounding"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "'Listen!' often means present continuous, but sound is a state verb, so we don't use -ing.",
+    "c": "With 'that song' (it) we add -s.",
+    "d": "The sentence needs a full verb: sounds."
+   },
+   "explanation": "Even after 'Listen!', sound is a state verb, so we use the present simple: That song sounds good.",
+   "explanationAr": "حتى بعد Listen! الفعل sound فعل حالة، فنقول sounds.",
+   "tip": "State verbs: no -ing, even now!",
+   "hints": [
+    "Is 'sound' an action or a state verb?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-056",
+   "lesson": "e1-5",
+   "concept": "e1b-state-simple",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Find the mistake and write the correct sentence: \"I'm not knowing the answer.\"",
+   "answer": "I don't know the answer.",
+   "accept": [
+    "I do not know the answer."
+   ],
+   "mistakes": [
+    {
+     "answer": "I'm not know the answer.",
+     "why": "Remove 'am' too: in the present simple we say I don't know."
+    }
+   ],
+   "explanation": "Know is a state verb, so we use the present simple: I don't know the answer.",
+   "explanationAr": "know فعل حالة، فنقول I don't know.",
+   "tip": "know → never 'knowing' in a sentence like this",
+   "hints": [
+    "Know is a state verb.",
+    "Use don't."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-057",
+   "lesson": "e1-5",
+   "concept": "e1b-state-simple",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "analysis",
+   "type": "sort",
+   "prompt": "Sort the verbs: state verb or action verb?",
+   "buckets": [
+    {
+     "id": "state",
+     "label": "State verb (think / feel)",
+     "emoji": "💭"
+    },
+    {
+     "id": "action",
+     "label": "Action verb",
+     "emoji": "🏃"
+    }
+   ],
+   "items": [
+    {
+     "id": "v1",
+     "text": "like",
+     "bucket": "state"
+    },
+    {
+     "id": "v2",
+     "text": "know",
+     "bucket": "state"
+    },
+    {
+     "id": "v3",
+     "text": "prefer",
+     "bucket": "state"
+    },
+    {
+     "id": "v4",
+     "text": "hate",
+     "bucket": "state"
+    },
+    {
+     "id": "v5",
+     "text": "play",
+     "bucket": "action"
+    },
+    {
+     "id": "v6",
+     "text": "collect",
+     "bucket": "action"
+    },
+    {
+     "id": "v7",
+     "text": "make",
+     "bucket": "action"
+    },
+    {
+     "id": "v8",
+     "text": "write",
+     "bucket": "action"
+    }
+   ],
+   "explanation": "State verbs say how we think or feel (like, know, prefer, hate). Action verbs say what we do (play, collect, make, write).",
+   "explanationAr": "أفعال الحالة للتفكير والشعور، وأفعال الحركة لما نفعله.",
+   "tip": "💭 think / feel = state verb",
+   "hints": [
+    "Can you see someone doing it with their hands or body?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-058",
+   "lesson": "e1-5",
+   "concept": "e1b-state-simple",
+   "skill": "grammar",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "prompt": "Which sentence uses BOTH verbs correctly?",
+   "options": [
+    {
+     "id": "a",
+     "text": "I'm doing a puzzle now and I love it."
+    },
+    {
+     "id": "b",
+     "text": "I do a puzzle now and I'm loving it."
+    },
+    {
+     "id": "c",
+     "text": "I'm doing a puzzle now and I'm loving it."
+    },
+    {
+     "id": "d",
+     "text": "I do a puzzle now and I love it."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Both verbs are wrong: 'now' needs I'm doing, and love is a state verb (I love).",
+    "c": "'I'm doing' is right, but love is a state verb, so not 'I'm loving'.",
+    "d": "'I love' is right, but an action happening now needs 'I'm doing'."
+   },
+   "explanation": "Do is an action happening now → I'm doing. Love is a state verb → I love it.",
+   "explanationAr": "do فعل حركة يحدث الآن فنقول I'm doing، وlove فعل حالة فنقول I love.",
+   "tip": "Action now → -ing · State → simple",
+   "hints": [
+    "Check each verb separately.",
+    "Which verb is a state verb?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-059",
+   "lesson": "e1-5",
+   "concept": "e1b-state-simple",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "choice",
+   "prompt": "Complete the question.",
+   "sentence": "___ your brother know this board game?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Does"
+    },
+    {
+     "id": "b",
+     "text": "Is"
+    },
+    {
+     "id": "c",
+     "text": "Do"
+    },
+    {
+     "id": "d",
+     "text": "Are"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "'Is' would need 'knowing', and know is a state verb.",
+    "c": "'Do' goes with I / you / we / they. 'Your brother' = he.",
+    "d": "'Are' goes with you / we / they and an -ing verb."
+   },
+   "explanation": "Know is a state verb, so the question is in the present simple. Your brother = he → Does.",
+   "explanationAr": "know فعل حالة، فالسؤال بالمضارع البسيط، ومع he نستخدم Does.",
+   "tip": "he / she / it → Does … know?",
+   "hints": [
+    "Your brother = he.",
+    "Know is a state verb."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-060",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-listening",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "audio": "Hi, I'm Khalid. I don't like sports very much. I prefer making models. Last week I made a model plane.",
+   "prompt": "Listen. Which hobby does Khalid prefer?",
+   "options": [
+    {
+     "id": "a",
+     "text": "making models",
+     "emoji": "🛩️"
+    },
+    {
+     "id": "b",
+     "text": "playing football",
+     "emoji": "⚽"
+    },
+    {
+     "id": "c",
+     "text": "playing video games",
+     "emoji": "🎮"
+    },
+    {
+     "id": "d",
+     "text": "doing photography",
+     "emoji": "📷"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I prefer making models",
+   "wrongWhy": {
+    "b": "Khalid says he doesn't like sports very much.",
+    "c": "Khalid doesn't talk about video games.",
+    "d": "Khalid doesn't talk about photos or cameras."
+   },
+   "explanation": "Khalid says 'I prefer making models' and he made a model plane.",
+   "explanationAr": "خالد قال إنه يفضّل صنع المجسّمات.",
+   "tip": "prefer = like more",
+   "hints": [
+    "Listen for 'I prefer…'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-061",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-listening",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "type": "choice",
+   "audio": "Maha: I love doing puzzles, but I hate playing video games. They're boring!",
+   "prompt": "Listen. Which hobby does Maha hate?",
+   "options": [
+    {
+     "id": "a",
+     "text": "playing video games",
+     "emoji": "🎮"
+    },
+    {
+     "id": "b",
+     "text": "doing puzzles",
+     "emoji": "🧩"
+    },
+    {
+     "id": "c",
+     "text": "playing board games",
+     "emoji": "🎲"
+    },
+    {
+     "id": "d",
+     "text": "watching cartoons",
+     "emoji": "📺"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I hate playing video games",
+   "wrongWhy": {
+    "b": "Maha loves doing puzzles. She says it first.",
+    "c": "Maha doesn't talk about board games.",
+    "d": "Maha doesn't talk about cartoons."
+   },
+   "explanation": "Maha loves puzzles, but she says 'I hate playing video games'.",
+   "explanationAr": "مها تحب الأحاجي لكنها تكره ألعاب الفيديو.",
+   "tip": "but = the next idea is different",
+   "hints": [
+    "Listen after 'but'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-062",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-listening",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "audio": "Fatma: My hobby is collecting cards. I've got ninety cards now, and my sister gives me five more every week.",
+   "prompt": "Listen. How many cards has Fatma got now?",
+   "options": [
+    {
+     "id": "a",
+     "text": "five"
+    },
+    {
+     "id": "b",
+     "text": "nineteen"
+    },
+    {
+     "id": "c",
+     "text": "ninety"
+    },
+    {
+     "id": "d",
+     "text": "ninety-five"
+    }
+   ],
+   "answer": "c",
+   "keepOrder": true,
+   "evidence": "I've got ninety cards now",
+   "wrongWhy": {
+    "a": "Five is how many more her sister gives her every week.",
+    "b": "Nineteen sounds similar, but Fatma says ninety (90).",
+    "d": "Ninety-five is ninety plus five. Fatma has ninety now."
+   },
+   "explanation": "Fatma says 'I've got ninety cards now'. The five are extra cards every week.",
+   "explanationAr": "فاطمة قالت إن عندها تسعين بطاقة الآن.",
+   "tip": "nineteen (19) ≠ ninety (90)",
+   "hints": [
+    "Listen for the word 'now'.",
+    "nineteen or ninety?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-063",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-listening",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "type": "match",
+   "audio": "Teacher: In our class, Ali enjoys doing the gardening. Sara prefers making videos. And Omar loves writing a diary.",
+   "prompt": "Listen. Match each child to the hobby.",
+   "pairs": [
+    {
+     "id": "a",
+     "left": "Ali",
+     "right": "doing the gardening"
+    },
+    {
+     "id": "s",
+     "left": "Sara",
+     "right": "making videos"
+    },
+    {
+     "id": "o",
+     "left": "Omar",
+     "right": "writing a diary"
+    }
+   ],
+   "evidence": "Ali enjoys doing the gardening",
+   "explanation": "The teacher says Ali enjoys gardening, Sara prefers making videos and Omar loves writing a diary.",
+   "explanationAr": "علي يحب البستنة، وسارة تفضّل صنع الفيديو، وعمر يحب كتابة المذكّرات.",
+   "tip": "Listen for each name, then the hobby",
+   "hints": [
+    "Listen to the name first, then the hobby after it."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-064",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-listening",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "tf",
+   "audio": "Dad: Do you know this board game, Noor? Noor: No, I don't. But it looks fun! Let's play.",
+   "prompt": "Listen. True or false? Noor knows the board game.",
+   "answer": false,
+   "evidence": "No, I don't.",
+   "wrongWhy": "Noor says 'No, I don't.' She doesn't know the game, but she thinks it looks fun.",
+   "explanation": "Dad asks 'Do you know this board game?' and Noor answers 'No, I don't.'",
+   "explanationAr": "نور قالت No, I don't أي لا تعرف اللعبة.",
+   "tip": "Do you know…? → Yes, I do. / No, I don't.",
+   "hints": [
+    "Listen to Noor's short answer."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-065",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-listening",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "audio": "Yousef: I like watching cartoons, but I prefer doing photography. I take photos of birds at the beach.",
+   "prompt": "Listen. Which hobby does Yousef like MORE?",
+   "options": [
+    {
+     "id": "a",
+     "text": "doing photography",
+     "emoji": "📷"
+    },
+    {
+     "id": "b",
+     "text": "watching cartoons",
+     "emoji": "📺"
+    },
+    {
+     "id": "c",
+     "text": "going to the beach",
+     "emoji": "🏖️"
+    },
+    {
+     "id": "d",
+     "text": "making videos",
+     "emoji": "🎬"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I prefer doing photography",
+   "wrongWhy": {
+    "b": "He likes cartoons, but 'prefer' tells us he likes photography more.",
+    "c": "The beach is where he takes photos, not his hobby.",
+    "d": "He takes photos, not videos."
+   },
+   "explanation": "'Prefer' means 'like more', and Yousef says 'I prefer doing photography'.",
+   "explanationAr": "prefer تعني يحب أكثر، ويوسف يفضّل التصوير.",
+   "tip": "like < prefer",
+   "hints": [
+    "Which verb means 'like more'?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-066",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-listening",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "multi",
+   "audio": "Mum: In our family, Ahmed plays musical instruments, Laila does the gardening and I write a diary. Nobody plays video games!",
+   "prompt": "Listen. Choose ALL the hobbies in this family.",
+   "options": [
+    {
+     "id": "a",
+     "text": "play musical instruments",
+     "emoji": "🎸"
+    },
+    {
+     "id": "b",
+     "text": "do the gardening",
+     "emoji": "🌻"
+    },
+    {
+     "id": "c",
+     "text": "write a diary",
+     "emoji": "📔"
+    },
+    {
+     "id": "d",
+     "text": "play video games",
+     "emoji": "🎮"
+    },
+    {
+     "id": "e",
+     "text": "collect cards",
+     "emoji": "🃏"
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "evidence": "Nobody plays video games!",
+   "explanation": "Ahmed plays musical instruments, Laila does the gardening and Mum writes a diary. 'Nobody' means no person plays video games.",
+   "explanationAr": "أحمد يعزف، وليلى تعتني بالحديقة، والأم تكتب المذكّرات. لا أحد يلعب ألعاب الفيديو.",
+   "tip": "nobody = no person",
+   "hints": [
+    "Three people, three hobbies.",
+    "Listen to the last sentence carefully."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-067",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-reading",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "passage": "e1b-family",
+   "prompt": "What is the text mainly about?",
+   "options": [
+    {
+     "id": "a",
+     "text": "the different hobbies in Maryam's family"
+    },
+    {
+     "id": "b",
+     "text": "Maryam's school"
+    },
+    {
+     "id": "c",
+     "text": "how to grow tomatoes"
+    },
+    {
+     "id": "d",
+     "text": "a football match"
+    }
+   ],
+   "answer": "a",
+   "evidence": "everyone has a different hobby",
+   "wrongWhy": {
+    "b": "Maryam doesn't write about her school.",
+    "c": "Tomatoes are only one small detail about Dad's gardening.",
+    "d": "Football is only on Reem's cards. There is no match."
+   },
+   "explanation": "Maryam tells us about each person's hobby. The main idea is: everyone in her family has a different hobby.",
+   "explanationAr": "الفكرة الرئيسة: لكل فرد في عائلة مريم هواية مختلفة.",
+   "tip": "Main idea = what the WHOLE text is about",
+   "hints": [
+    "Read the second sentence again."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-068",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-reading",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "type": "choice",
+   "passage": "e1b-family",
+   "prompt": "Why does Maryam's mum prefer board games?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Because the whole family can play together."
+    },
+    {
+     "id": "b",
+     "text": "Because she hates computers."
+    },
+    {
+     "id": "c",
+     "text": "Because board games are cheap."
+    },
+    {
+     "id": "d",
+     "text": "Because Salim is good at them."
+    }
+   ],
+   "answer": "a",
+   "evidence": "because we can all play together",
+   "wrongWhy": {
+    "b": "The text doesn't say she hates computers.",
+    "c": "The text doesn't talk about money.",
+    "d": "Salim loves video games. The text doesn't say he's good at board games."
+   },
+   "explanation": "Maryam writes that Mum prefers board games 'because we can all play together'.",
+   "explanationAr": "الأم تفضّل ألعاب الطاولة لأن العائلة كلها تلعب معًا.",
+   "tip": "Why? → look for 'because'",
+   "hints": [
+    "Find the word 'because'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-069",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-reading",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "match",
+   "passage": "e1b-family",
+   "prompt": "Match each person to their hobby.",
+   "pairs": [
+    {
+     "id": "s",
+     "left": "Salim",
+     "right": "playing video games"
+    },
+    {
+     "id": "d",
+     "left": "Dad",
+     "right": "doing the gardening"
+    },
+    {
+     "id": "r",
+     "left": "Reem",
+     "right": "collecting cards"
+    },
+    {
+     "id": "g",
+     "left": "Grandma",
+     "right": "writing a diary"
+    },
+    {
+     "id": "m",
+     "left": "Maryam",
+     "right": "doing photography"
+    }
+   ],
+   "explanation": "Salim loves video games, Dad enjoys gardening, Reem collects cards, Grandma writes a diary and Maryam likes photography.",
+   "explanationAr": "سالم لألعاب الفيديو، والأب للحديقة، وريم للبطاقات، والجدة للمذكّرات، ومريم للتصوير.",
+   "tip": "Underline names, then hobbies",
+   "hints": [
+    "Find each name in the text."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-070",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-reading",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "tf",
+   "passage": "e1b-family",
+   "prompt": "True or false? Maryam likes watching cartoons.",
+   "answer": false,
+   "evidence": "I think they're boring",
+   "wrongWhy": "Maryam says she doesn't like watching cartoons. Reem is the one who watches them every afternoon.",
+   "explanation": "Maryam writes 'I don't like watching cartoons. I think they're boring.'",
+   "explanationAr": "مريم لا تحب الرسوم المتحركة وتراها مملّة.",
+   "tip": "Check WHO does what",
+   "hints": [
+    "Be careful: Reem and Maryam are different people."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-071",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-reading",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "type": "choice",
+   "passage": "e1b-family",
+   "prompt": "Grandma says, 'I know every day is special, so I write it down.' What does 'write it down' mean here?",
+   "options": [
+    {
+     "id": "a",
+     "text": "write about it on paper"
+    },
+    {
+     "id": "b",
+     "text": "stop writing"
+    },
+    {
+     "id": "c",
+     "text": "write it very fast"
+    },
+    {
+     "id": "d",
+     "text": "read it again"
+    }
+   ],
+   "answer": "a",
+   "evidence": "so I write it down",
+   "wrongWhy": {
+    "b": "Grandma writes every night, so she doesn't stop.",
+    "c": "Nothing in the text is about speed.",
+    "d": "'Write' is not 'read'."
+   },
+   "explanation": "'Write it down' means write it on paper so you remember it. That's what a diary is for.",
+   "explanationAr": "write it down تعني تدوّنه على الورق لتتذكّره.",
+   "tip": "Use the words around a new word",
+   "hints": [
+    "What does Grandma write every night?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-072",
+   "lesson": "e1-5",
+   "concept": "e1b-hobby-reading",
+   "skill": "reading",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "type": "multi",
+   "passage": "e1b-family",
+   "prompt": "Choose ALL the sentences that are TRUE.",
+   "options": [
+    {
+     "id": "a",
+     "text": "Reem has more than two hundred cards."
+    },
+    {
+     "id": "b",
+     "text": "Dad grows tomatoes."
+    },
+    {
+     "id": "c",
+     "text": "Maryam takes photos of birds."
+    },
+    {
+     "id": "d",
+     "text": "Salim prefers board games."
+    },
+    {
+     "id": "e",
+     "text": "Maryam watches cartoons every afternoon."
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "evidence": "She has more than two hundred football cards!",
+   "explanation": "Reem has more than 200 cards, Dad grows tomatoes and flowers, and Maryam photographs flowers and birds. Mum prefers board games, and Reem watches cartoons.",
+   "explanationAr": "ريم عندها أكثر من ٢٠٠ بطاقة، والأب يزرع الطماطم، ومريم تصوّر الطيور. الأم هي التي تفضّل ألعاب الطاولة، وريم هي التي تشاهد الرسوم.",
+   "tip": "Check every sentence in the text",
+   "hints": [
+    "Two sentences mix up the people."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-073",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-countries",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "visual": {
+    "emoji": "⛷️❄️",
+    "alt": "a person moving on skis across the snow"
+   },
+   "prompt": "In the culture text, this activity helps you keep fit and is a good way of travelling in the snow. Which country is it from?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Canada",
+     "emoji": "🇨🇦"
+    },
+    {
+     "id": "b",
+     "text": "New Zealand",
+     "emoji": "🇳🇿"
+    },
+    {
+     "id": "c",
+     "text": "Oman",
+     "emoji": "🇴🇲"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "In New Zealand, the text is about Rippa Rugby.",
+    "c": "In Oman, the text is about snorkelling and windsurfing at the beaches."
+   },
+   "explanation": "The Canada text is about cross-country skiing: it helps you keep fit and is a very good way of travelling in the snow.",
+   "explanationAr": "نص كندا عن التزلّج الريفي في الثلج.",
+   "tip": "❄️ snow → Canada",
+   "hints": [
+    "Which country has lots of snow in the text?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-074",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-countries",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "tf",
+   "passage": "e1b-email",
+   "prompt": "Read Emma's email. True or false? Emma lives in Oman.",
+   "answer": false,
+   "evidence": "It's winter here in Canada",
+   "wrongWhy": "Nawal lives in Oman. Emma writes 'It's winter here in Canada'.",
+   "explanation": "Emma writes 'It's winter here in Canada'.",
+   "explanationAr": "إيما كتبت أنها في كندا.",
+   "tip": "'here in…' tells you where",
+   "hints": [
+    "Look for the word 'here'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-075",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-countries",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "choice",
+   "prompt": "Which sentence is true for BOTH Rippa Rugby and cross-country skiing?",
+   "options": [
+    {
+     "id": "a",
+     "text": "It keeps you fit."
+    },
+    {
+     "id": "b",
+     "text": "You do it in the snow."
+    },
+    {
+     "id": "c",
+     "text": "Players often don't wear shoes."
+    },
+    {
+     "id": "d",
+     "text": "You have to be good at swimming."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Only skiing is in the snow.",
+    "c": "Only Rippa Rugby players often don't wear shoes.",
+    "d": "You have to be good at swimming for snorkelling, in the Oman text."
+   },
+   "explanation": "The text says Rippa Rugby 'keeps you fit' and cross-country skiing 'helps you keep fit'. That's the same!",
+   "explanationAr": "النص يقول إن الرياضتين تحافظان على اللياقة.",
+   "tip": "Same = in BOTH texts",
+   "hints": [
+    "Check each sentence against both texts."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-076",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-countries",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "match",
+   "prompt": "Match each activity to its country in the culture text.",
+   "pairs": [
+    {
+     "id": "r",
+     "left": "Rippa Rugby",
+     "leftEmoji": "🏉",
+     "right": "New Zealand"
+    },
+    {
+     "id": "w",
+     "left": "windsurfing",
+     "leftEmoji": "🏄",
+     "right": "Oman"
+    },
+    {
+     "id": "s",
+     "left": "cross-country skiing",
+     "leftEmoji": "⛷️",
+     "right": "Canada"
+    }
+   ],
+   "explanation": "New Zealand: Rippa Rugby. Oman: snorkelling and windsurfing. Canada: cross-country skiing.",
+   "explanationAr": "نيوزيلندا: Rippa Rugby، عُمان: ركوب الأمواج الشراعي، كندا: التزلّج الريفي.",
+   "tip": "🏉 NZ · 🏄 Oman · ⛷️ Canada",
+   "hints": [
+    "Which country has beaches? Which has snow?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-077",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-countries",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "multi",
+   "prompt": "Choose ALL the facts about Oman in the culture text.",
+   "options": [
+    {
+     "id": "a",
+     "text": "You can see amazing fish of different colours."
+    },
+    {
+     "id": "b",
+     "text": "People go windsurfing at beautiful beaches."
+    },
+    {
+     "id": "c",
+     "text": "Players often don't wear shoes."
+    },
+    {
+     "id": "d",
+     "text": "Lots of families enjoy skiing together."
+    }
+   ],
+   "answers": [
+    "a",
+    "b"
+   ],
+   "explanation": "The Oman text is about snorkelling (amazing fish) and windsurfing at Oman's beaches. Shoes are about Rippa Rugby, and skiing is about Canada.",
+   "explanationAr": "نص عُمان عن الغطس والأسماك وركوب الأمواج الشراعي على الشواطئ.",
+   "tip": "Oman = sea 🌊",
+   "hints": [
+    "Two facts are about the sea."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-078",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-countries",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "audio": "I live in a country with lots of snow. In winter, my family and I travel through the forest on skis. We even ski uphill!",
+   "prompt": "Listen. Using the culture text, which country could this child be from?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Canada",
+     "emoji": "🇨🇦"
+    },
+    {
+     "id": "b",
+     "text": "Oman",
+     "emoji": "🇴🇲"
+    },
+    {
+     "id": "c",
+     "text": "New Zealand",
+     "emoji": "🇳🇿"
+    }
+   ],
+   "answer": "a",
+   "evidence": "travel through the forest on skis",
+   "wrongWhy": {
+    "b": "The Oman text is about the sea and beaches, not snow and skis.",
+    "c": "The New Zealand text is about Rippa Rugby, not skiing."
+   },
+   "explanation": "Skiing, snow and skiing uphill match the Canada text about cross-country skiing.",
+   "explanationAr": "الثلج والتزلّج صعودًا يطابقان نص كندا.",
+   "tip": "Use clues: snow + skis + uphill",
+   "hints": [
+    "What sport does the child talk about?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-079",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-details",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "sort",
+   "prompt": "Sort the activities: in the water or on land and snow?",
+   "buckets": [
+    {
+     "id": "water",
+     "label": "In the water",
+     "emoji": "🌊"
+    },
+    {
+     "id": "land",
+     "label": "On land or snow",
+     "emoji": "🏔️"
+    }
+   ],
+   "items": [
+    {
+     "id": "a1",
+     "text": "snorkelling",
+     "emoji": "🤿",
+     "bucket": "water"
+    },
+    {
+     "id": "a2",
+     "text": "windsurfing",
+     "emoji": "🏄",
+     "bucket": "water"
+    },
+    {
+     "id": "a3",
+     "text": "Rippa Rugby",
+     "emoji": "🏉",
+     "bucket": "land"
+    },
+    {
+     "id": "a4",
+     "text": "cross-country skiing",
+     "emoji": "⛷️",
+     "bucket": "land"
+    },
+    {
+     "id": "a5",
+     "text": "hiking",
+     "emoji": "🥾",
+     "bucket": "land"
+    }
+   ],
+   "explanation": "Snorkelling and windsurfing happen in the sea. Rugby and hiking are on land, and skiing is on snow.",
+   "explanationAr": "الغطس وركوب الأمواج في البحر، والرغبي والمشي على الأرض، والتزلّج على الثلج.",
+   "tip": "Think: where do you do it?",
+   "hints": [
+    "Where do you see fish?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-080",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-details",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "text",
+   "passage": "e1b-minibook",
+   "prompt": "Read the mini-book. In which season do lots of people enjoy snorkelling? Type the season.",
+   "answer": "summer",
+   "evidence": "Lots of people enjoy it in summer.",
+   "explanation": "The snorkelling page says 'Lots of people enjoy it in summer.'",
+   "explanationAr": "صفحة الغطس تقول إن الناس يستمتعون به في الصيف.",
+   "tip": "When? → in summer / in winter",
+   "hints": [
+    "Read the snorkelling page."
+   ],
+   "accept": [
+    "in summer",
+    "the summer",
+    "in the summer"
+   ],
+   "mistakes": [
+    {
+     "answer": "winter",
+     "why": "Winter is in Emma's email about skiing in Canada. Snorkelling is in summer."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-B-081",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-details",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "tf",
+   "passage": "e1b-minibook",
+   "prompt": "True or false? The mini-book says hiking can be dangerous, so you should go alone.",
+   "answer": false,
+   "evidence": "so only go with your family and friends",
+   "wrongWhy": "Because hiking can be dangerous, the mini-book says to go with your family and friends, not alone.",
+   "explanation": "Hiking can be dangerous, so the mini-book says 'only go with your family and friends'.",
+   "explanationAr": "المشي في الجبال قد يكون خطرًا، فاذهبي مع العائلة والأصدقاء.",
+   "tip": "Dangerous? → go with others",
+   "hints": [
+    "Read the hiking page again."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-082",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-details",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "passage": "e1b-email",
+   "prompt": "Emma says she is always tired after skiing. What does this show?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Skiing is good exercise, so it helps you keep fit."
+    },
+    {
+     "id": "b",
+     "text": "Skiing is boring."
+    },
+    {
+     "id": "c",
+     "text": "Emma doesn't sleep at night."
+    },
+    {
+     "id": "d",
+     "text": "Emma's dad hates skiing."
+    }
+   ],
+   "answer": "a",
+   "evidence": "My dad says it helps you keep fit, and it's true",
+   "wrongWhy": {
+    "b": "Being tired after sport doesn't mean it is boring.",
+    "c": "The email doesn't talk about sleep.",
+    "d": "Her dad goes skiing with the family and says it helps you keep fit."
+   },
+   "explanation": "Emma says Dad is right that skiing helps you keep fit. She is tired because her body works hard.",
+   "explanationAr": "التعب بعد التزلّج يعني أنه تمرين جيد يحافظ على اللياقة.",
+   "tip": "Hard exercise → tired → fit",
+   "hints": [
+    "Read the sentence before 'I'm always tired'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-083",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-details",
+   "skill": "reading",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "passage": "e1b-email",
+   "prompt": "Emma's brother hates going uphill and prefers going down. Which kind of skiing would he probably prefer?",
+   "options": [
+    {
+     "id": "a",
+     "text": "downhill skiing"
+    },
+    {
+     "id": "b",
+     "text": "cross-country skiing"
+    },
+    {
+     "id": "c",
+     "text": "skiing uphill"
+    },
+    {
+     "id": "d",
+     "text": "no skiing at all"
+    }
+   ],
+   "answer": "a",
+   "evidence": "He prefers going down!",
+   "wrongWhy": {
+    "b": "In cross-country skiing you also ski uphill, and he hates that.",
+    "c": "He hates going uphill.",
+    "d": "He prefers going down, so he does like some skiing."
+   },
+   "explanation": "Downhill skiing means skiing down. He prefers going down, so downhill skiing suits him.",
+   "explanationAr": "التزلّج نزولًا يناسبه لأنه يفضّل النزول ويكره الصعود.",
+   "tip": "downhill ⬇️ · uphill ⬆️",
+   "hints": [
+    "What does 'downhill' mean?",
+    "Can you ski uphill in cross-country skiing?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-084",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-details",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "passage": "e1b-minibook",
+   "prompt": "Choose the best title for the class mini-book.",
+   "options": [
+    {
+     "id": "a",
+     "text": "Popular free-time activities in Oman"
+    },
+    {
+     "id": "b",
+     "text": "Skiing in Canada"
+    },
+    {
+     "id": "c",
+     "text": "How to play Rippa Rugby"
+    },
+    {
+     "id": "d",
+     "text": "Our school trip"
+    }
+   ],
+   "answer": "a",
+   "evidence": "In Oman, snorkelling is very popular.",
+   "wrongWhy": {
+    "b": "Skiing in Canada is in Emma's email, not the mini-book.",
+    "c": "Rippa Rugby is not in the mini-book.",
+    "d": "The mini-book doesn't talk about a school trip."
+   },
+   "explanation": "All three pages (snorkelling, windsurfing, hiking) are popular activities in Oman.",
+   "explanationAr": "الصفحات الثلاث عن أنشطة شائعة في عُمان.",
+   "tip": "Best title covers ALL the pages",
+   "hints": [
+    "What do the three pages have in common?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-085",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-words",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "visual": {
+    "emoji": "🤿🐠",
+    "alt": "swimming with a mask and looking at fish under the water"
+   },
+   "prompt": "Look at the picture. Which activity is it?",
+   "options": [
+    {
+     "id": "a",
+     "text": "snorkelling"
+    },
+    {
+     "id": "b",
+     "text": "windsurfing"
+    },
+    {
+     "id": "c",
+     "text": "skiing"
+    },
+    {
+     "id": "d",
+     "text": "hiking"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Windsurfing is on top of the water, on a board with a sail.",
+    "c": "Skiing is on snow.",
+    "d": "Hiking is walking in the mountains."
+   },
+   "explanation": "With a mask, you swim and look at fish under the water: that is snorkelling.",
+   "explanationAr": "السباحة بقناع ومشاهدة الأسماك = snorkelling.",
+   "tip": "🤿 snorkelling = fish under the water",
+   "hints": [
+    "Look at the mask and the fish."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-086",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-words",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "🏄 Complete the activity people do at Oman's beaches when it is windy.",
+   "pattern": "w i n d _ u r f i _ g",
+   "answer": "windsurfing",
+   "explanation": "Windsurfing = wind + surfing. You stand on a board with a sail and the wind moves you.",
+   "explanationAr": "windsurfing = ريح + ركوب الأمواج.",
+   "tip": "wind + surfing = windsurfing",
+   "hints": [
+    "The first part is 'wind'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-087",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "choice",
+   "prompt": "Rippa Rugby is great fun and it keeps you fit. What does 'keeps you fit' mean?",
+   "options": [
+    {
+     "id": "a",
+     "text": "It makes your body healthy and strong."
+    },
+    {
+     "id": "b",
+     "text": "It makes you tired and ill."
+    },
+    {
+     "id": "c",
+     "text": "It keeps you inside the house."
+    },
+    {
+     "id": "d",
+     "text": "It makes your shoes fit."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Sport can make you tired for a short time, but 'fit' means healthy, not ill.",
+    "c": "Rugby is played outside, and 'keep fit' is about your body.",
+    "d": "'Fit' here is about your body, not your shoes."
+   },
+   "explanation": "'Keep fit' means stay healthy and strong by doing exercise.",
+   "explanationAr": "keep fit تعني تحافظ على لياقتك وصحتك.",
+   "tip": "fit = healthy and strong 💪",
+   "hints": [
+    "Think about sport and your body."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-088",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "🥾⛰️ Lots of people enjoy this in Oman's mountains. Unscramble the letters.",
+   "scrambled": "kignih",
+   "answer": "hiking",
+   "explanation": "Hiking is walking a long way in the mountains or countryside.",
+   "explanationAr": "hiking المشي لمسافات في الجبال.",
+   "tip": "hike → hiking 🥾",
+   "hints": [
+    "It starts with h.",
+    "It ends with -ing."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-089",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "match",
+   "prompt": "Match each activity to its meaning.",
+   "pairs": [
+    {
+     "id": "s",
+     "left": "snorkelling",
+     "leftEmoji": "🤿",
+     "right": "swimming with a mask to look at fish"
+    },
+    {
+     "id": "w",
+     "left": "windsurfing",
+     "leftEmoji": "🏄",
+     "right": "standing on a board with a sail on the sea"
+    },
+    {
+     "id": "h",
+     "left": "hiking",
+     "leftEmoji": "🥾",
+     "right": "walking a long way in the mountains"
+    },
+    {
+     "id": "c",
+     "left": "cross-country skiing",
+     "leftEmoji": "⛷️",
+     "right": "moving on skis across the snow"
+    }
+   ],
+   "explanation": "Snorkelling and windsurfing are in the sea, hiking is in the mountains, and cross-country skiing is across the snow.",
+   "explanationAr": "الغطس وركوب الأمواج في البحر، والمشي في الجبال، والتزلّج الريفي على الثلج.",
+   "tip": "Picture the place for each word",
+   "hints": [
+    "Which one needs a mask? Which one needs snow?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-090",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-words",
+   "skill": "vocabulary",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "type": "choice",
+   "prompt": "\"Hiking can be dangerous, so only go with your family and friends.\" What does 'dangerous' mean?",
+   "options": [
+    {
+     "id": "a",
+     "text": "It can hurt you."
+    },
+    {
+     "id": "b",
+     "text": "It is very easy."
+    },
+    {
+     "id": "c",
+     "text": "It is very boring."
+    },
+    {
+     "id": "d",
+     "text": "It is only for children."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "If it were very easy, you wouldn't need family and friends with you.",
+    "c": "The mini-book says activities are great fun, not boring.",
+    "d": "Families go hiking together, so it's not only for children."
+   },
+   "explanation": "'Dangerous' means something can hurt you. That's why you should go with your family and friends.",
+   "explanationAr": "dangerous تعني خطير قد يؤذيك.",
+   "tip": "dangerous ⚠️ = can hurt you",
+   "hints": [
+    "Why should you go with other people?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-091",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-listening",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "type": "text",
+   "audio": "Hi, I'm Tom from New Zealand. At school, I play Rippa Rugby every Wednesday. I never wear shoes when I play!",
+   "prompt": "Listen. On which day does Tom play Rippa Rugby? Type the day.",
+   "answer": "Wednesday",
+   "evidence": "every Wednesday",
+   "explanation": "Tom says 'I play Rippa Rugby every Wednesday.'",
+   "explanationAr": "توم يلعب كل يوم أربعاء.",
+   "tip": "When? → listen for days",
+   "hints": [
+    "Listen for a day of the week."
+   ],
+   "accept": [
+    "every Wednesday",
+    "on Wednesday",
+    "on Wednesdays",
+    "Wednesdays"
+   ],
+   "mistakes": [
+    {
+     "answer": "Wensday",
+     "why": "Right day! Spelling: W-e-d-n-e-s-d-a-y (the d is silent)."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-B-092",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-listening",
+   "skill": "listening",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "audio": "Laila: Let's go windsurfing today! Ahmed: Look at the sea. There's no wind today. Let's go snorkelling instead.",
+   "prompt": "Listen. What are Laila and Ahmed probably going to do today?",
+   "options": [
+    {
+     "id": "a",
+     "text": "go snorkelling",
+     "emoji": "🤿"
+    },
+    {
+     "id": "b",
+     "text": "go windsurfing",
+     "emoji": "🏄"
+    },
+    {
+     "id": "c",
+     "text": "go hiking",
+     "emoji": "🥾"
+    },
+    {
+     "id": "d",
+     "text": "play Rippa Rugby",
+     "emoji": "🏉"
+    }
+   ],
+   "answer": "a",
+   "evidence": "Let's go snorkelling instead",
+   "wrongWhy": {
+    "b": "Laila wants to, but there is no wind, and you can only windsurf when it is windy.",
+    "c": "Nobody talks about hiking.",
+    "d": "Nobody talks about rugby."
+   },
+   "explanation": "You can only go windsurfing when it is windy. There's no wind, so Ahmed suggests snorkelling instead.",
+   "explanationAr": "ركوب الأمواج الشراعي يحتاج إلى ريح، ولا توجد ريح، فاقترح أحمد الغطس بدلًا منه.",
+   "tip": "instead = in place of",
+   "hints": [
+    "What do you need for windsurfing?",
+    "Listen to Ahmed's last sentence."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-093",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-listening",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "knowledge",
+   "type": "choice",
+   "audio": "Welcome to the Summer Sea Club! This summer you can go snorkelling every morning at nine o'clock. Please remember: you have to be good at swimming!",
+   "prompt": "Listen. What time is snorkelling at the club?",
+   "options": [
+    {
+     "id": "a",
+     "text": "7 o'clock",
+     "emoji": "🕖"
+    },
+    {
+     "id": "b",
+     "text": "9 o'clock",
+     "emoji": "🕘"
+    },
+    {
+     "id": "c",
+     "text": "10 o'clock",
+     "emoji": "🕙"
+    },
+    {
+     "id": "d",
+     "text": "5 o'clock",
+     "emoji": "🕔"
+    }
+   ],
+   "answer": "b",
+   "keepOrder": true,
+   "evidence": "every morning at nine o'clock",
+   "wrongWhy": {
+    "a": "Seven is not in the announcement.",
+    "c": "Ten is not in the announcement.",
+    "d": "Five is not in the announcement."
+   },
+   "explanation": "The announcement says 'every morning at nine o'clock'.",
+   "explanationAr": "الإعلان يقول الساعة التاسعة صباحًا.",
+   "tip": "at + time: at nine o'clock",
+   "hints": [
+    "Listen for 'at' and a number."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-094",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-listening",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "type": "tf",
+   "audio": "Emma: In winter, my whole family goes cross-country skiing. We even ski uphill!",
+   "prompt": "Listen. True or false? Emma's family only skis downhill.",
+   "answer": false,
+   "evidence": "We even ski uphill!",
+   "wrongWhy": "Emma says 'We even ski uphill!' In cross-country skiing you can go up, too.",
+   "explanation": "In cross-country skiing you can ski uphill, too, and Emma's family does.",
+   "explanationAr": "في التزلّج الريفي يمكن التزلّج صعودًا أيضًا.",
+   "tip": "uphill ⬆️ ≠ downhill ⬇️",
+   "hints": [
+    "Listen for 'uphill' or 'downhill'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-095",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-listening",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "type": "choice",
+   "audio": "Guide: Today we're hiking in the mountains. Please wear good shoes and stay with your family.",
+   "prompt": "Listen. What must the hikers wear?",
+   "options": [
+    {
+     "id": "a",
+     "text": "good shoes",
+     "emoji": "🥾"
+    },
+    {
+     "id": "b",
+     "text": "a swimming mask",
+     "emoji": "🤿"
+    },
+    {
+     "id": "c",
+     "text": "skis",
+     "emoji": "⛷️"
+    },
+    {
+     "id": "d",
+     "text": "no shoes",
+     "emoji": "🦶"
+    }
+   ],
+   "answer": "a",
+   "evidence": "Please wear good shoes",
+   "wrongWhy": {
+    "b": "A mask is for snorkelling in the sea.",
+    "c": "Skis are for snow, not mountains in Oman.",
+    "d": "Rippa Rugby players often don't wear shoes, but hikers need good shoes."
+   },
+   "explanation": "The guide says 'Please wear good shoes'. You need them to walk up hills.",
+   "explanationAr": "المرشد قال: البسوا أحذية جيدة.",
+   "tip": "Hiking → good shoes 🥾",
+   "hints": [
+    "Listen after the word 'wear'."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-096",
+   "lesson": "e1-6",
+   "concept": "e1b-culture-listening",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "type": "multi",
+   "audio": "Reporter: People in Oman love the sea. In summer they go snorkelling, and when it's windy they go windsurfing. In the mountains, many families go hiking.",
+   "prompt": "Listen. Choose ALL the activities the reporter talks about.",
+   "options": [
+    {
+     "id": "a",
+     "text": "snorkelling",
+     "emoji": "🤿"
+    },
+    {
+     "id": "b",
+     "text": "windsurfing",
+     "emoji": "🏄"
+    },
+    {
+     "id": "c",
+     "text": "hiking",
+     "emoji": "🥾"
+    },
+    {
+     "id": "d",
+     "text": "Rippa Rugby",
+     "emoji": "🏉"
+    },
+    {
+     "id": "e",
+     "text": "cross-country skiing",
+     "emoji": "⛷️"
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "evidence": "In the mountains, many families go hiking.",
+   "explanation": "The reporter talks about snorkelling, windsurfing and hiking in Oman. Rugby and skiing are not in the report.",
+   "explanationAr": "المراسل تحدّث عن الغطس وركوب الأمواج الشراعي والمشي في الجبال.",
+   "tip": "Listen to the end!",
+   "hints": [
+    "There are three activities.",
+    "Don't forget the mountains."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-097",
+   "lesson": "e1-6",
+   "concept": "e1b-minibook",
+   "skill": "writing",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "type": "order",
+   "prompt": "Put the words in order to make a sentence for your mini-book.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "In Oman,"
+    },
+    {
+     "id": "w2",
+     "text": "windsurfing"
+    },
+    {
+     "id": "w3",
+     "text": "is very"
+    },
+    {
+     "id": "w4",
+     "text": "popular."
+    }
+   ],
+   "explanation": "Mini-book phrase: In Oman, … is very popular.",
+   "explanationAr": "عبارة الكتيّب: In Oman, … is very popular.",
+   "tip": "In Oman, + activity + is very popular.",
+   "hints": [
+    "Start with the place."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-098",
+   "lesson": "e1-6",
+   "concept": "e1b-minibook",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Type the missing word: \"You have to ___ good at swimming.\"",
+   "answer": "be",
+   "explanation": "After 'have to' we use the base form of the verb: have to be.",
+   "explanationAr": "بعد have to نضع الفعل في صيغته الأصلية: be.",
+   "tip": "have to + base verb",
+   "hints": [
+    "What comes after 'to'?"
+   ],
+   "mistakes": [
+    {
+     "answer": "is",
+     "why": "After 'have to' we use the base verb: be."
+    },
+    {
+     "answer": "are",
+     "why": "After 'have to' the verb doesn't change: be."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-B-099",
+   "lesson": "e1-6",
+   "concept": "e1b-minibook",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "choice",
+   "prompt": "Choose the correct word.",
+   "sentence": "Hiking ___ you keep fit.",
+   "options": [
+    {
+     "id": "a",
+     "text": "helps"
+    },
+    {
+     "id": "b",
+     "text": "help"
+    },
+    {
+     "id": "c",
+     "text": "helping"
+    },
+    {
+     "id": "d",
+     "text": "is help"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Hiking = it, so we add -s: helps.",
+    "c": "The sentence needs a full verb: helps.",
+    "d": "We don't put 'is' before 'help' here."
+   },
+   "explanation": "Hiking is one activity (it), so the verb has -s: Hiking helps you keep fit.",
+   "explanationAr": "Hiking مفرد (it)، فنضيف s: helps.",
+   "tip": "Activity = it → helps",
+   "hints": [
+    "Hiking = it."
+   ]
+  },
+  {
+   "id": "ENG-E1-B-100",
+   "lesson": "e1-6",
+   "concept": "e1b-minibook",
+   "skill": "writing",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "tf",
+   "prompt": "True or false? This sentence has correct capital letters: \"In oman, lots of people enjoy hiking.\"",
+   "answer": false,
+   "wrongWhy": "Oman is the name of a country, so it needs a capital O: In Oman, lots of people enjoy hiking.",
+   "explanation": "Capital letters go at the start of a sentence and on names of countries: In Oman.",
+   "explanationAr": "الحرف الكبير في بداية الجملة وفي أسماء الدول.",
+   "tip": "Capital: start of sentence + country names",
+   "hints": [
+    "Check the first letter of every name.",
+    "Is Oman a name?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-101",
+   "lesson": "e1-6",
+   "concept": "e1b-minibook",
+   "skill": "writing",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "type": "choice",
+   "prompt": "Which sentence is the best FIRST sentence for a mini-book page about windsurfing?",
+   "options": [
+    {
+     "id": "a",
+     "text": "In Oman, windsurfing is very popular."
+    },
+    {
+     "id": "b",
+     "text": "But it can be dangerous."
+    },
+    {
+     "id": "c",
+     "text": "You have to have good shoes."
+    },
+    {
+     "id": "d",
+     "text": "Lots of families enjoy skiing together."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "'But' joins to an idea before it, so it can't come first.",
+    "c": "Good shoes are for hiking, not windsurfing.",
+    "d": "This sentence is about skiing, not windsurfing."
+   },
+   "explanation": "A good first sentence names the activity and the place: In Oman, windsurfing is very popular.",
+   "explanationAr": "الجملة الأولى الجيدة تذكر النشاط والمكان.",
+   "tip": "First sentence = activity + place",
+   "hints": [
+    "Which sentence tells the reader the topic?"
+   ]
+  },
+  {
+   "id": "ENG-E1-B-102",
+   "lesson": "e1-6",
+   "concept": "e1b-minibook",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "type": "text",
+   "prompt": "Write the correct form of 'hike': \"Lots of people enjoy ___ in the mountains.\"",
+   "answer": "hiking",
+   "explanation": "Enjoy is followed by verb + -ing: enjoy hiking.",
+   "explanationAr": "بعد enjoy نضع الفعل مع ing.",
+   "tip": "enjoy + -ing",
+   "hints": [
+    "Remember: like / love / enjoy + -ing."
+   ],
+   "mistakes": [
+    {
+     "answer": "hike",
+     "why": "After enjoy we need -ing: hiking."
+    },
+    {
+     "answer": "hikeing",
+     "why": "Drop the e before -ing: hike → hiking."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-B-103",
+   "lesson": "e1-6",
+   "concept": "e1b-minibook",
+   "skill": "writing",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "type": "writing",
+   "task": "paragraph",
+   "minWords": 50,
+   "prompt": "Write a page for your class mini-book about a popular free-time activity in Oman (for example: snorkelling, windsurfing or hiking).",
+   "words": [
+    "popular",
+    "enjoy",
+    "great fun",
+    "keep fit",
+    "dangerous",
+    "have to",
+    "be good at",
+    "in summer",
+    "in winter"
+   ],
+   "guide": [
+    "What is the activity?",
+    "When and where do people do it?",
+    "Why is it fun or good for you?",
+    "Is it dangerous? What do you have to have or be good at?"
+   ],
+   "starter": "In Oman, … is very popular.",
+   "frame": [
+    "In Oman, … is very popular.",
+    "Lots of people enjoy … in summer / winter.",
+    "It's great fun and you can …",
+    "… can be dangerous / helps you keep fit / is a good way of …",
+    "You have to have / be good at …"
+   ],
+   "explanation": "A good mini-book page says what the activity is, when and where people do it, why it's fun, and what you need.",
+   "explanationAr": "صفحة الكتيّب الجيدة تذكر النشاط ومكانه ووقته ولماذا هو ممتع وما تحتاجينه.",
+   "tip": "What? When? Where? Why fun? What do you need?",
+   "model": "In Oman, snorkelling is very popular. Lots of people enjoy it in summer at the beaches. It's great fun and you can see amazing fish of different colours under the water. It helps you keep fit, too! But it can be dangerous, so only go with your family. You have to be good at swimming and you have to have a mask."
+  }
+ ]
+}

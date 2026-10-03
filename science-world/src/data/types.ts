@@ -18,6 +18,8 @@ export interface Visual {
   asset?: string;
   /** A parametric math drawing (number line, place value, grid, shape…). */
   math?: MathVisual;
+  /** with `art`: highlight one region of the diagram and dim the rest (e.g. 'heart' on 'body') */
+  highlight?: string;
   alt: string;
 }
 

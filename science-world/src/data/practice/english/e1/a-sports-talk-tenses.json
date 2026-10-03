@@ -1,0 +1,4259 @@
+{
+ "subject": "english",
+ "unit": "e1",
+ "concepts": [
+  {
+   "id": "sports-words",
+   "label": "Sports words",
+   "lesson": "e1-1",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "go-play-do",
+   "label": "go, play or do?",
+   "lesson": "e1-1",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "indoor-outdoor",
+   "label": "Indoors or outdoors?",
+   "lesson": "e1-1",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "sport-groups",
+   "label": "Team, winter and wheel sports",
+   "lesson": "e1-1",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "sport-clues",
+   "label": "Guess the sport",
+   "lesson": "e1-1",
+   "skill": "reading"
+  },
+  {
+   "id": "team-talk",
+   "label": "Team Talk: Arlo and Sultan",
+   "lesson": "e1-2",
+   "skill": "reading"
+  },
+  {
+   "id": "how-often",
+   "label": "How often…?",
+   "lesson": "e1-2",
+   "skill": "grammar"
+  },
+  {
+   "id": "expressions",
+   "label": "Really? / I don't believe it! / You're so funny!",
+   "lesson": "e1-2",
+   "skill": "listening"
+  },
+  {
+   "id": "sports-interview",
+   "label": "A sports interview",
+   "lesson": "e1-2",
+   "skill": "reading"
+  },
+  {
+   "id": "writing-sentences",
+   "label": "Writing sentences and questions",
+   "lesson": "e1-2",
+   "skill": "writing"
+  },
+  {
+   "id": "tense-use",
+   "label": "Habits or now?",
+   "lesson": "e1-3",
+   "skill": "grammar"
+  },
+  {
+   "id": "time-words",
+   "label": "Time words",
+   "lesson": "e1-3",
+   "skill": "grammar"
+  },
+  {
+   "id": "simple-forms",
+   "label": "Present simple forms",
+   "lesson": "e1-3",
+   "skill": "grammar"
+  },
+  {
+   "id": "continuous-forms",
+   "label": "Present continuous forms",
+   "lesson": "e1-3",
+   "skill": "grammar"
+  },
+  {
+   "id": "tense-questions",
+   "label": "Questions and short answers",
+   "lesson": "e1-3",
+   "skill": "grammar"
+  }
+ ],
+ "passages": [
+  {
+   "id": "e1a-p1",
+   "title": "Julia's Winter Week",
+   "text": "Hi, WOW! readers! I'm Julia. Every winter, my family visits my grandma in the mountains. It's very cold there, and there is lots of snow. We go skiing every morning. I wear warm clothes, gloves and a helmet. My little brother, Leo, can't ski yet, so he goes ice skating with Grandma on the frozen lake. In the afternoon, we sometimes play table tennis indoors because it's too cold outside. At home, I go cycling to school every day, but in the mountains I can't ride my bike on the snowy roads. My favourite winter sport is skiing because it's fast and exciting! What's your favourite winter sport? Write and tell me!",
+   "glossary": [
+    {
+     "word": "gloves",
+     "meaning": "things you wear on your hands to keep them warm",
+     "ar": "قفازات"
+    },
+    {
+     "word": "frozen",
+     "meaning": "so cold that the water is now ice",
+     "ar": "متجمّد"
+    },
+    {
+     "word": "snowy",
+     "meaning": "covered with snow",
+     "ar": "مغطّى بالثلج"
+    }
+   ]
+  },
+  {
+   "id": "e1a-p2",
+   "title": "WOW! Interview: Reem's Favourite Sport",
+   "text": "WOW!: Hi, Reem. What's your favourite sport?\nReem: It's table tennis. I play with a partner, my cousin Hala.\nWOW!: How often do you play?\nReem: We play every Sunday and Tuesday at the sports centre near my school.\nWOW!: Do you do any other sports?\nReem: Yes, I do athletics outdoors in the summer. I run every morning before school.\nWOW!: Why do you like table tennis?\nReem: Because it's fast, and it helps me focus. You have to watch the ball all the time!\nWOW!: Are you learning anything new at the moment?\nReem: Yes, I'm learning to play badminton, but I don't play very often.\nWOW!: Thanks, Reem, and good luck!",
+   "glossary": [
+    {
+     "word": "cousin",
+     "meaning": "the child of your aunt or uncle",
+     "ar": "ابن/ابنة العم أو الخال"
+    },
+    {
+     "word": "focus",
+     "meaning": "think carefully about one thing",
+     "ar": "يركّز"
+    },
+    {
+     "word": "good luck",
+     "meaning": "words we say to wish someone success",
+     "ar": "بالتوفيق"
+    }
+   ]
+  },
+  {
+   "id": "e1a-p3",
+   "title": "An Email from the Sports Centre",
+   "text": "Hi Amani,\nHow are you? I'm writing this email at the sports centre. It's Saturday, and I'm waiting for my gymnastics class. I do gymnastics every Saturday morning. My brother Faisal usually plays football on Saturdays, but he isn't playing today because he's ill. He's at home, and he's watching cartoons! Right now, my friend Samar is swimming in the big pool. She goes swimming every day before school. Mum is sitting next to me. She doesn't do sports, but she walks in the park every evening. Oh! My teacher is calling my name now. I have to go!\nLove,\nNawal",
+   "glossary": [
+    {
+     "word": "ill",
+     "meaning": "sick, not well",
+     "ar": "مريض"
+    },
+    {
+     "word": "pool",
+     "meaning": "a place with water for swimming",
+     "ar": "مسبح"
+    },
+    {
+     "word": "cartoons",
+     "meaning": "funny films with drawings",
+     "ar": "رسوم متحركة"
+    }
+   ]
+  },
+  {
+   "id": "e1a-p4",
+   "title": "Sports Day at Our School",
+   "text": "Today is Sports Day at our school, and it's very exciting! At the moment, I'm sitting with my class under a big tree. Our teacher, Miss Salma, is helping the younger children with their race. My best friend, Lina, is running in a race now. She does athletics every afternoon, so she's very fast. I don't usually do athletics because I prefer indoor sports. I play table tennis once a week, and I do karate every Wednesday. Oh, look! Our volleyball match is starting now. We're playing against Class 6B, and we don't play volleyball very often, so we're a bit nervous! Wish us luck!\nMuna",
+   "glossary": [
+    {
+     "word": "race",
+     "meaning": "a competition to see who is the fastest",
+     "ar": "سباق"
+    },
+    {
+     "word": "younger",
+     "meaning": "not as old as you",
+     "ar": "أصغر سنًّا"
+    },
+    {
+     "word": "match",
+     "meaning": "a game between two teams",
+     "ar": "مباراة"
+    }
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": "ENG-E1-A-001",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sports-words",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Look at the picture. Which sport is it?",
+   "visual": {
+    "emoji": "🏑",
+    "alt": "A player with a long stick and a small ball"
+   },
+   "options": [
+    {
+     "id": "a",
+     "text": "play hockey"
+    },
+    {
+     "id": "b",
+     "text": "play badminton"
+    },
+    {
+     "id": "c",
+     "text": "play table tennis"
+    },
+    {
+     "id": "d",
+     "text": "play volleyball"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Look at what the player is holding.",
+    "Which sport uses a long stick?"
+   ],
+   "explanation": "In hockey, players hit a small ball with a long stick.",
+   "explanationAr": "في الهوكي يضرب اللاعبون كرة صغيرة بعصا طويلة 🏑.",
+   "tip": "🏑 long stick + small ball = hockey",
+   "wrongWhy": {
+    "b": "Badminton uses a light racket and a net 🏸, not a long stick.",
+    "c": "Table tennis uses small bats and a big table 🏓.",
+    "d": "Volleyball uses your hands and a big ball over a net 🏐."
+   }
+  },
+  {
+   "id": "ENG-E1-A-002",
+   "type": "text",
+   "lesson": "e1-1",
+   "concept": "sports-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "knowledge",
+   "prompt": "🤸 Write the missing letters to make the sport: do g y m _ a s t _ c s",
+   "answer": "gymnastics",
+   "pattern": "g y m _ a s t _ c s",
+   "mistakes": [
+    {
+     "answer": "gymnastecs",
+     "why": "The last part is -tics with i, like athletics."
+    },
+    {
+     "answer": "gymmastics",
+     "why": "After gym comes n: gym-nas-tics."
+    }
+   ],
+   "hints": [
+    "Say it slowly: gym … nas … tics.",
+    "The last part is like the end of athletics."
+   ],
+   "explanation": "The word is gymnastics: gym + nas + tics. We say do gymnastics.",
+   "explanationAr": "الكلمة gymnastics وتعني الجمباز، ونقول do gymnastics.",
+   "tip": "gym-nas-tics: three parts 🤸"
+  },
+  {
+   "id": "ENG-E1-A-003",
+   "type": "text",
+   "lesson": "e1-1",
+   "concept": "sports-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "⛸️ Unscramble the letters to finish the sport: go ice ________",
+   "answer": "skating",
+   "scrambled": "kitsang",
+   "mistakes": [
+    {
+     "answer": "skiing",
+     "why": "Skiing is on snow with two long skis ⛷️. On ice we go ice skating."
+    }
+   ],
+   "hints": [
+    "The word starts with s and ends with -ing.",
+    "It is the sport in the picture ⛸️."
+   ],
+   "explanation": "We go ice skating on ice ⛸️. The word is skating: s-k-a-t-i-n-g.",
+   "explanationAr": "نقول go ice skating أي التزلّج على الجليد ⛸️.",
+   "tip": "ice ⛸️ → ice skating · snow ⛷️ → skiing"
+  },
+  {
+   "id": "ENG-E1-A-004",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sports-words",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "analysis",
+   "prompt": "Odd one out! Three words are sports. Which word is NOT a sport?",
+   "options": [
+    {
+     "id": "a",
+     "text": "badminton",
+     "emoji": "🏸"
+    },
+    {
+     "id": "b",
+     "text": "athletics",
+     "emoji": "🏃"
+    },
+    {
+     "id": "c",
+     "text": "helmet",
+     "emoji": "⛑️"
+    },
+    {
+     "id": "d",
+     "text": "hockey",
+     "emoji": "🏑"
+    }
+   ],
+   "answer": "c",
+   "hints": [
+    "Can you play or do every word?",
+    "One word is something you wear."
+   ],
+   "explanation": "A helmet is something we wear on our head to stay safe, for example when we go cycling. It is not a sport.",
+   "explanationAr": "الخوذة (helmet) نلبسها على الرأس للحماية، وليست رياضة.",
+   "tip": "helmet = something you wear, not a sport ⛑️",
+   "wrongWhy": {
+    "a": "Badminton is a sport: we play badminton.",
+    "b": "Athletics is a sport: we do athletics.",
+    "d": "Hockey is a sport: we play hockey."
+   }
+  },
+  {
+   "id": "ENG-E1-A-005",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sports-words",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Listen. Which sport does the speaker's sister do?",
+   "audio": "My sister loves the water. She goes swimming every Saturday.",
+   "options": [
+    {
+     "id": "a",
+     "text": "swimming",
+     "emoji": "🏊"
+    },
+    {
+     "id": "b",
+     "text": "skiing",
+     "emoji": "⛷️"
+    },
+    {
+     "id": "c",
+     "text": "cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "d",
+     "text": "ice skating",
+     "emoji": "⛸️"
+    }
+   ],
+   "answer": "a",
+   "evidence": "She goes swimming",
+   "hints": [
+    "Where does she love to be?",
+    "Which sport happens in water?"
+   ],
+   "explanation": "The speaker says his sister loves the water and goes swimming every Saturday.",
+   "explanationAr": "قال إن أخته تحب الماء وتذهب للسباحة كل سبت 🏊.",
+   "tip": "water 💧 → go swimming 🏊",
+   "wrongWhy": {
+    "b": "Skiing is on snow, but she loves the water.",
+    "c": "Cycling is on a bike, not in water.",
+    "d": "Ice skating is on ice, not in water."
+   }
+  },
+  {
+   "id": "ENG-E1-A-006",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sports-words",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen. What is Hamed's favourite sport?",
+   "audio": "My favourite sport is badminton. I play it with my dad in the garden.",
+   "options": [
+    {
+     "id": "a",
+     "text": "badminton",
+     "emoji": "🏸"
+    },
+    {
+     "id": "b",
+     "text": "table tennis",
+     "emoji": "🏓"
+    },
+    {
+     "id": "c",
+     "text": "volleyball",
+     "emoji": "🏐"
+    },
+    {
+     "id": "d",
+     "text": "hockey",
+     "emoji": "🏑"
+    }
+   ],
+   "answer": "a",
+   "evidence": "My favourite sport is badminton",
+   "hints": [
+    "Listen for the words 'favourite sport'.",
+    "The sport goes with play."
+   ],
+   "explanation": "Hamed says: My favourite sport is badminton. He plays it with his dad.",
+   "explanationAr": "حامد قال إن رياضته المفضّلة هي الريشة الطائرة 🏸 ويلعبها مع أبيه.",
+   "tip": "🏸 badminton = الريشة الطائرة",
+   "wrongWhy": {
+    "b": "Table tennis is played at a big table. Hamed doesn't say table tennis.",
+    "c": "Volleyball is a team sport. Hamed plays with his dad.",
+    "d": "Hockey is played with long sticks. Hamed doesn't say hockey."
+   }
+  },
+  {
+   "id": "ENG-E1-A-007",
+   "type": "match",
+   "lesson": "e1-1",
+   "concept": "sports-words",
+   "skill": "vocabulary",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "prompt": "Match each sport with the things you need for it.",
+   "pairs": [
+    {
+     "id": "p1",
+     "left": "go skiing",
+     "leftEmoji": "⛷️",
+     "right": "snow, warm clothes and two long skis"
+    },
+    {
+     "id": "p2",
+     "left": "go cycling",
+     "leftEmoji": "🚴",
+     "right": "a bike with two wheels and a helmet"
+    },
+    {
+     "id": "p3",
+     "left": "play table tennis",
+     "leftEmoji": "🏓",
+     "right": "small bats, a small ball and a big table"
+    },
+    {
+     "id": "p4",
+     "left": "play volleyball",
+     "leftEmoji": "🏐",
+     "right": "a team, a big ball and a net"
+    }
+   ],
+   "hints": [
+    "Start with the easiest one: which sport needs a table?",
+    "Which sport needs wheels?"
+   ],
+   "explanation": "Each sport needs different things: skis for skiing, a bike for cycling, bats and a table for table tennis, and a team with a net for volleyball.",
+   "explanationAr": "كل رياضة تحتاج أدوات مختلفة: زلاجات للتزلّج، دراجة للدراجة، مضارب وطاولة لكرة الطاولة، وفريق وشبكة للكرة الطائرة.",
+   "tip": "Think: What do I hold? Where do I play?"
+  },
+  {
+   "id": "ENG-E1-A-008",
+   "type": "sort",
+   "lesson": "e1-1",
+   "concept": "go-play-do",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Sort the sports. Do we say go, play or do?",
+   "items": [
+    {
+     "id": "i1",
+     "text": "ice skating",
+     "emoji": "⛸️",
+     "bucket": "go"
+    },
+    {
+     "id": "i2",
+     "text": "scooting",
+     "emoji": "🛴",
+     "bucket": "go"
+    },
+    {
+     "id": "i3",
+     "text": "table tennis",
+     "emoji": "🏓",
+     "bucket": "play"
+    },
+    {
+     "id": "i4",
+     "text": "basketball",
+     "emoji": "🏀",
+     "bucket": "play"
+    },
+    {
+     "id": "i5",
+     "text": "karate",
+     "emoji": "🥋",
+     "bucket": "do"
+    },
+    {
+     "id": "i6",
+     "text": "athletics",
+     "emoji": "🏃",
+     "bucket": "do"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "go",
+     "label": "go",
+     "emoji": "🚴"
+    },
+    {
+     "id": "play",
+     "label": "play",
+     "emoji": "🏐"
+    },
+    {
+     "id": "do",
+     "label": "do",
+     "emoji": "🥋"
+    }
+   ],
+   "hints": [
+    "Look at the end of the word: does it end in -ing?",
+    "Is there a ball in the game?"
+   ],
+   "explanation": "go + sports ending in -ing (go scooting). play + games with a ball (play basketball). do + karate, gymnastics and athletics.",
+   "explanationAr": "go مع الرياضات المنتهية بـ ing، وplay مع ألعاب الكرة، وdo مع karate وgymnastics وathletics.",
+   "tip": "-ing → go · ball game → play · karate/gymnastics/athletics → do"
+  },
+  {
+   "id": "ENG-E1-A-009",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "go-play-do",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the correct word.",
+   "sentence": "Julia and her brother ___ ice skating in the winter.",
+   "options": [
+    {
+     "id": "a",
+     "text": "go"
+    },
+    {
+     "id": "b",
+     "text": "play"
+    },
+    {
+     "id": "c",
+     "text": "do"
+    },
+    {
+     "id": "d",
+     "text": "goes"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Look at the end of the word skating.",
+    "How many people are in the sentence?"
+   ],
+   "explanation": "Skating ends in -ing, so we say go ice skating. Julia and her brother = they, so we use go.",
+   "explanationAr": "skating تنتهي بـ ing فنقول go، والفاعل اثنان (they) فلا نضيف es.",
+   "tip": "go + -ing sport: go ice skating ⛸️",
+   "wrongWhy": {
+    "b": "We use play with ball games, like play hockey.",
+    "c": "We use do with karate, gymnastics and athletics.",
+    "d": "goes is for one person (he/she). Julia and her brother are two people."
+   }
+  },
+  {
+   "id": "ENG-E1-A-010",
+   "type": "tf",
+   "lesson": "e1-1",
+   "concept": "go-play-do",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "analysis",
+   "prompt": "True or false? This sentence is correct: 'I do swimming every Saturday.'",
+   "answer": false,
+   "hints": [
+    "Look at the end of the word swimming.",
+    "Which verb goes with -ing sports?"
+   ],
+   "explanation": "The correct sentence is: I go swimming every Saturday. We use go with sports that end in -ing.",
+   "explanationAr": "الصحيح: I go swimming every Saturday، لأن swimming تنتهي بـ ing فنستخدم go.",
+   "tip": "go swimming 🏊 · go cycling 🚴 · go skiing ⛷️",
+   "wrongWhy": "Swimming ends in -ing, so we say go swimming, not do swimming."
+  },
+  {
+   "id": "ENG-E1-A-011",
+   "type": "text",
+   "lesson": "e1-1",
+   "concept": "go-play-do",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Find the mistake and write the correct word: 'We play gymnastics at school on Tuesdays.'",
+   "answer": "do",
+   "mistakes": [
+    {
+     "answer": "go",
+     "why": "We use go with -ing sports, like go cycling. Gymnastics doesn't end in -ing."
+    },
+    {
+     "answer": "does",
+     "why": "We is more than one person, so we use do, not does."
+    }
+   ],
+   "hints": [
+    "The mistake is a verb.",
+    "Gymnastics is in the same group as karate."
+   ],
+   "explanation": "We say do gymnastics. The correct sentence is: We do gymnastics at school on Tuesdays.",
+   "explanationAr": "نقول do gymnastics، فالصحيح: We do gymnastics at school on Tuesdays.",
+   "tip": "do karate 🥋 · do gymnastics 🤸 · do athletics 🏃"
+  },
+  {
+   "id": "ENG-E1-A-012",
+   "type": "multi",
+   "lesson": "e1-1",
+   "concept": "go-play-do",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Which sports go with play? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "volleyball",
+     "emoji": "🏐"
+    },
+    {
+     "id": "b",
+     "text": "hockey",
+     "emoji": "🏑"
+    },
+    {
+     "id": "c",
+     "text": "cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "d",
+     "text": "badminton",
+     "emoji": "🏸"
+    },
+    {
+     "id": "e",
+     "text": "karate",
+     "emoji": "🥋"
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "d"
+   ],
+   "hints": [
+    "Which ones are games with a ball?",
+    "Cycling ends in -ing."
+   ],
+   "explanation": "We play volleyball, play hockey and play badminton. But we go cycling and do karate.",
+   "explanationAr": "نقول play volleyball وplay hockey وplay badminton، لكن go cycling وdo karate.",
+   "tip": "Ball or shuttle game → play"
+  },
+  {
+   "id": "ENG-E1-A-013",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "go-play-do",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. Which verb does Samar use with her sport?",
+   "audio": "Hi, I'm Samar. Every Tuesday, I do gymnastics in the big gym at school.",
+   "options": [
+    {
+     "id": "a",
+     "text": "do"
+    },
+    {
+     "id": "b",
+     "text": "go"
+    },
+    {
+     "id": "c",
+     "text": "play"
+    },
+    {
+     "id": "d",
+     "text": "make"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I do gymnastics",
+   "hints": [
+    "First, find Samar's sport.",
+    "Listen to the word just before the sport."
+   ],
+   "explanation": "Samar says: I do gymnastics. We always use do with gymnastics.",
+   "explanationAr": "سمر قالت I do gymnastics، ونستخدم do دائمًا مع الجمباز.",
+   "tip": "do gymnastics 🤸",
+   "wrongWhy": {
+    "b": "go is for -ing sports like go cycling. Samar's sport is gymnastics.",
+    "c": "play is for ball games. Gymnastics is not a ball game.",
+    "d": "make is not used with sports in this unit."
+   }
+  },
+  {
+   "id": "ENG-E1-A-014",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "go-play-do",
+   "skill": "vocabulary",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Four friends talk about their sports. Who is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Arwa: I go volleyball."
+    },
+    {
+     "id": "b",
+     "text": "Majid: I play karate."
+    },
+    {
+     "id": "c",
+     "text": "Razan: I go cycling."
+    },
+    {
+     "id": "d",
+     "text": "Jood: I do table tennis."
+    }
+   ],
+   "answer": "c",
+   "hints": [
+    "Check each sport: does it end in -ing?",
+    "Which sports are ball games?"
+   ],
+   "explanation": "Cycling ends in -ing, so go cycling is correct.",
+   "explanationAr": "cycling تنتهي بـ ing فنقول go cycling، وهذه الجملة الصحيحة.",
+   "tip": "go + -ing · play + ball · do + karate",
+   "wrongWhy": {
+    "a": "Volleyball is a ball game, so we say play volleyball.",
+    "b": "We say do karate, not play karate.",
+    "d": "Table tennis is a ball game, so we say play table tennis."
+   }
+  },
+  {
+   "id": "ENG-E1-A-015",
+   "type": "sort",
+   "lesson": "e1-1",
+   "concept": "indoor-outdoor",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Read what each child says. Is the sport indoors or outdoors?",
+   "items": [
+    {
+     "id": "i1",
+     "text": "We play with small bats on a big table.",
+     "bucket": "in"
+    },
+    {
+     "id": "i2",
+     "text": "I need lots of snow on the mountains.",
+     "bucket": "out"
+    },
+    {
+     "id": "i3",
+     "text": "I ride my bike on the road to school.",
+     "bucket": "out"
+    },
+    {
+     "id": "i4",
+     "text": "I wear white clothes and no shoes in the sports hall.",
+     "bucket": "in"
+    },
+    {
+     "id": "i5",
+     "text": "I push my scooter along the street.",
+     "bucket": "out"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "in",
+     "label": "indoors",
+     "emoji": "🏠"
+    },
+    {
+     "id": "out",
+     "label": "outdoors",
+     "emoji": "🌳"
+    }
+   ],
+   "hints": [
+    "Find a place word in each sentence: table, mountains, road, hall, street.",
+    "Is that place inside a building?"
+   ],
+   "explanation": "Table tennis and karate happen inside a building. Skiing, cycling and scooting happen outside.",
+   "explanationAr": "كرة الطاولة والكاراتيه داخل المبنى، أما التزلّج والدراجة والسكوتر ففي الخارج.",
+   "tip": "🏠 indoors = inside · 🌳 outdoors = outside"
+  },
+  {
+   "id": "ENG-E1-A-016",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "indoor-outdoor",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "It's raining today 🌧️. Arwa wants to do a sport inside. Which sport can she do?",
+   "options": [
+    {
+     "id": "a",
+     "text": "do gymnastics",
+     "emoji": "🤸"
+    },
+    {
+     "id": "b",
+     "text": "go cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "c",
+     "text": "go skiing",
+     "emoji": "⛷️"
+    },
+    {
+     "id": "d",
+     "text": "go scooting",
+     "emoji": "🛴"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "She wants to stay inside.",
+    "Which sport do we usually do in a gym?"
+   ],
+   "explanation": "Gymnastics is an indoor sport. We usually do it in a gym, so the rain is not a problem.",
+   "explanationAr": "الجمباز رياضة داخلية نمارسها في الصالة، فالمطر لا يمنعها.",
+   "tip": "Rainy day 🌧️ → indoor sport 🏠",
+   "wrongWhy": {
+    "b": "Cycling is usually outdoors on the road, so she gets wet.",
+    "c": "Skiing is outdoors on snowy mountains.",
+    "d": "Scooting is outdoors on the street."
+   }
+  },
+  {
+   "id": "ENG-E1-A-017",
+   "type": "tf",
+   "lesson": "e1-1",
+   "concept": "indoor-outdoor",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Think about Arlo's WOW! Quiz clue. True or false? Arlo plays his other team sport only indoors.",
+   "answer": false,
+   "hints": [
+    "Where does Arlo play in the winter?",
+    "And where in the summer?"
+   ],
+   "explanation": "Arlo's team sport is volleyball. He plays it indoors in winter and outdoors on the beach in summer.",
+   "explanationAr": "رياضة آرلو هي الكرة الطائرة، يلعبها في الصالة شتاءً وعلى الشاطئ صيفًا، فليست داخلية فقط.",
+   "tip": "Volleyball 🏐: indoors in winter, outdoors in summer",
+   "wrongWhy": "Arlo plays it indoors in the gym in the winter, but outdoors on the beach in the summer. So it is not only indoors."
+  },
+  {
+   "id": "ENG-E1-A-018",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "indoor-outdoor",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. Where is Majid's sport today?",
+   "audio": "It's very hot outside today, so I'm not going cycling. I'm playing table tennis at the sports centre.",
+   "options": [
+    {
+     "id": "a",
+     "text": "indoors",
+     "emoji": "🏠"
+    },
+    {
+     "id": "b",
+     "text": "outdoors",
+     "emoji": "🌳"
+    }
+   ],
+   "answer": "a",
+   "evidence": "at the sports centre",
+   "hints": [
+    "Is Majid going cycling today?",
+    "Where is he playing?"
+   ],
+   "explanation": "Majid is playing table tennis at the sports centre. That is inside a building, so it is indoors.",
+   "explanationAr": "ماجد يلعب كرة الطاولة في المركز الرياضي، أي في الداخل.",
+   "tip": "sports centre / gym → indoors 🏠",
+   "wrongWhy": {
+    "b": "Majid is not going cycling outside today because it's very hot."
+   }
+  },
+  {
+   "id": "ENG-E1-A-019",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "indoor-outdoor",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Choose the correct word.",
+   "sentence": "In the summer, we play volleyball ___ on the beach.",
+   "options": [
+    {
+     "id": "a",
+     "text": "outdoors"
+    },
+    {
+     "id": "b",
+     "text": "indoors"
+    },
+    {
+     "id": "c",
+     "text": "in the gym"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Is the beach inside or outside?"
+   ],
+   "explanation": "The beach is outside, so we play volleyball outdoors there.",
+   "explanationAr": "الشاطئ في الخارج، لذلك نقول outdoors.",
+   "tip": "beach 🏖️ = outdoors",
+   "wrongWhy": {
+    "b": "indoors means inside a building. The beach is outside.",
+    "c": "A gym is a building. The sentence says on the beach."
+   }
+  },
+  {
+   "id": "ENG-E1-A-020",
+   "type": "text",
+   "lesson": "e1-1",
+   "concept": "indoor-outdoor",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "knowledge",
+   "prompt": "🏠 Unscramble the word to complete the sentence.",
+   "sentence": "We usually do karate and gymnastics ___ in a sports hall.",
+   "answer": "indoors",
+   "scrambled": "sdoorin",
+   "mistakes": [
+    {
+     "answer": "outdoors",
+     "why": "outdoors means outside. A sports hall is inside a building."
+    }
+   ],
+   "hints": [
+    "The word starts with in-.",
+    "A sports hall is inside a building."
+   ],
+   "explanation": "A sports hall is inside a building, so the word is indoors.",
+   "explanationAr": "الصالة الرياضية داخل مبنى، فالكلمة indoors أي في الداخل.",
+   "tip": "in + doors = inside 🏠"
+  },
+  {
+   "id": "ENG-E1-A-021",
+   "type": "multi",
+   "lesson": "e1-1",
+   "concept": "sport-groups",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Which sports have wheels? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "go cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "b",
+     "text": "go scooting",
+     "emoji": "🛴"
+    },
+    {
+     "id": "c",
+     "text": "go ice skating",
+     "emoji": "⛸️"
+    },
+    {
+     "id": "d",
+     "text": "go skiing",
+     "emoji": "⛷️"
+    },
+    {
+     "id": "e",
+     "text": "play badminton",
+     "emoji": "🏸"
+    }
+   ],
+   "answers": [
+    "a",
+    "b"
+   ],
+   "hints": [
+    "Look at the pictures. Can you see wheels?",
+    "Two answers are correct."
+   ],
+   "explanation": "A bike and a scooter have wheels. Skates and skis go on ice and snow without wheels.",
+   "explanationAr": "الدراجة والسكوتر لهما عجلات، أما التزلّج فعلى الجليد والثلج.",
+   "tip": "🚴 🛴 = wheels"
+  },
+  {
+   "id": "ENG-E1-A-022",
+   "type": "sort",
+   "lesson": "e1-1",
+   "concept": "sport-groups",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Sort the sports: team sport or winter sport?",
+   "items": [
+    {
+     "id": "i1",
+     "text": "volleyball",
+     "emoji": "🏐",
+     "bucket": "team"
+    },
+    {
+     "id": "i2",
+     "text": "hockey",
+     "emoji": "🏑",
+     "bucket": "team"
+    },
+    {
+     "id": "i3",
+     "text": "basketball",
+     "emoji": "🏀",
+     "bucket": "team"
+    },
+    {
+     "id": "i4",
+     "text": "skiing",
+     "emoji": "⛷️",
+     "bucket": "winter"
+    },
+    {
+     "id": "i5",
+     "text": "ice skating",
+     "emoji": "⛸️",
+     "bucket": "winter"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "team",
+     "label": "team sport",
+     "emoji": "👥"
+    },
+    {
+     "id": "winter",
+     "label": "winter sport",
+     "emoji": "❄️"
+    }
+   ],
+   "hints": [
+    "Which sports need snow or ice?",
+    "Which sports need many players?"
+   ],
+   "explanation": "Volleyball, hockey and basketball are played by teams. Skiing and ice skating need snow or ice, so they are winter sports.",
+   "explanationAr": "الكرة الطائرة والهوكي وكرة السلة رياضات جماعية، والتزلّج على الثلج والجليد رياضات شتوية.",
+   "tip": "👥 team = many players together · ❄️ winter = snow or ice"
+  },
+  {
+   "id": "ENG-E1-A-023",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sport-groups",
+   "skill": "vocabulary",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Odd one out! Which sport is different from the other three?",
+   "options": [
+    {
+     "id": "a",
+     "text": "volleyball",
+     "emoji": "🏐"
+    },
+    {
+     "id": "b",
+     "text": "hockey",
+     "emoji": "🏑"
+    },
+    {
+     "id": "c",
+     "text": "football",
+     "emoji": "⚽"
+    },
+    {
+     "id": "d",
+     "text": "karate",
+     "emoji": "🥋"
+    }
+   ],
+   "answer": "d",
+   "hints": [
+    "What is the same about three of them?",
+    "Think: team, ball, play."
+   ],
+   "explanation": "Volleyball, hockey and football are team sports with a ball. Karate is not a team sport and has no ball.",
+   "explanationAr": "الكرة الطائرة والهوكي وكرة القدم رياضات جماعية بالكرة، أما الكاراتيه فليست كذلك.",
+   "tip": "Find the group first, then the odd one.",
+   "wrongWhy": {
+    "a": "Volleyball is a team sport, like hockey and football.",
+    "b": "Hockey is a team sport, like volleyball and football.",
+    "c": "Football is a team sport, like volleyball and hockey."
+   }
+  },
+  {
+   "id": "ENG-E1-A-024",
+   "type": "text",
+   "lesson": "e1-1",
+   "concept": "sport-groups",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Read the clue and write the sport: 'I am a winter sport. You go down a snowy mountain on two long skis.'",
+   "answer": "skiing",
+   "pattern": "s k _ _ n g",
+   "mistakes": [
+    {
+     "answer": "skating",
+     "why": "Skating is on ice with skates. On a snowy mountain with skis we go skiing."
+    },
+    {
+     "answer": "sking",
+     "why": "Skiing has two i's: ski + ing."
+    }
+   ],
+   "hints": [
+    "The word comes from ski.",
+    "Add -ing to the end."
+   ],
+   "explanation": "Skis + snow + mountain = skiing. We say go skiing.",
+   "explanationAr": "الزلاجات والثلج والجبل = skiing، ونقول go skiing.",
+   "tip": "ski + ing = skiing (two i's) ⛷️"
+  },
+  {
+   "id": "ENG-E1-A-025",
+   "type": "tf",
+   "lesson": "e1-1",
+   "concept": "sport-groups",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "True or false? Ice skating is a winter sport.",
+   "visual": {
+    "emoji": "⛸️",
+    "alt": "ice skates"
+   },
+   "answer": true,
+   "hints": [
+    "What do you need for ice skating?"
+   ],
+   "explanation": "Ice skating happens on ice, so it is a winter sport, like skiing.",
+   "explanationAr": "التزلّج على الجليد رياضة شتوية مثل التزلّج على الثلج.",
+   "tip": "❄️ winter sports: skiing, ice skating",
+   "wrongWhy": "Ice skating needs ice, and ice comes with cold winter weather, so it is a winter sport."
+  },
+  {
+   "id": "ENG-E1-A-026",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sport-groups",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Listen to Samar's clue. What is her favourite sport?",
+   "audio": "My favourite sport is a team sport. We play it outdoors on grass. We use long sticks and a small ball.",
+   "options": [
+    {
+     "id": "a",
+     "text": "hockey",
+     "emoji": "🏑"
+    },
+    {
+     "id": "b",
+     "text": "badminton",
+     "emoji": "🏸"
+    },
+    {
+     "id": "c",
+     "text": "volleyball",
+     "emoji": "🏐"
+    },
+    {
+     "id": "d",
+     "text": "table tennis",
+     "emoji": "🏓"
+    }
+   ],
+   "answer": "a",
+   "evidence": "We use long sticks and a small ball",
+   "hints": [
+    "Listen for what they use.",
+    "Which sport uses sticks?"
+   ],
+   "explanation": "A team sport with long sticks and a small ball is hockey.",
+   "explanationAr": "رياضة جماعية بعصي طويلة وكرة صغيرة = الهوكي 🏑.",
+   "tip": "long sticks + small ball = hockey 🏑",
+   "wrongWhy": {
+    "b": "Badminton is not usually a team sport, and we don't use long sticks.",
+    "c": "Volleyball is a team sport, but we use our hands and a big ball.",
+    "d": "Table tennis uses small bats and a table, not long sticks."
+   }
+  },
+  {
+   "id": "ENG-E1-A-027",
+   "type": "tf",
+   "lesson": "e1-1",
+   "concept": "sport-clues",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p1",
+   "prompt": "True or false? Julia's brother goes skiing every morning.",
+   "answer": false,
+   "evidence": "can't ski yet, so he goes ice skating",
+   "hints": [
+    "Find the name of Julia's brother.",
+    "What can't he do yet?"
+   ],
+   "explanation": "Julia says Leo can't ski yet, so he goes ice skating on the frozen lake.",
+   "explanationAr": "جوليا قالت إن أخاها لا يستطيع التزلّج بعد، لذلك يتزلّج على الجليد مع جدّته.",
+   "tip": "Read about the right person!",
+   "wrongWhy": "Leo can't ski yet. He goes ice skating with Grandma. Julia's family goes skiing."
+  },
+  {
+   "id": "ENG-E1-A-028",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sport-clues",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p1",
+   "prompt": "Why do they sometimes play table tennis indoors?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Because it's too cold outside."
+    },
+    {
+     "id": "b",
+     "text": "Because Leo can't ski."
+    },
+    {
+     "id": "c",
+     "text": "Because Grandma likes table tennis."
+    },
+    {
+     "id": "d",
+     "text": "Because there is no snow."
+    }
+   ],
+   "answer": "a",
+   "evidence": "because it's too cold outside",
+   "hints": [
+    "Find the words table tennis in the text.",
+    "Read the words after 'because'."
+   ],
+   "explanation": "Julia says they play table tennis indoors because it's too cold outside.",
+   "explanationAr": "لأن الجو بارد جدًّا في الخارج.",
+   "tip": "Why? → look for 'because'",
+   "wrongWhy": {
+    "b": "Leo can't ski, but that is why he goes ice skating, not why they play indoors.",
+    "c": "The text doesn't say what Grandma likes.",
+    "d": "There is lots of snow in the mountains."
+   }
+  },
+  {
+   "id": "ENG-E1-A-029",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sport-clues",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "analysis",
+   "passage": "e1a-p1",
+   "prompt": "What is the best title for Julia's post?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Fun in the Snow"
+    },
+    {
+     "id": "b",
+     "text": "My School Sports Day"
+    },
+    {
+     "id": "c",
+     "text": "Summer on the Beach"
+    },
+    {
+     "id": "d",
+     "text": "How to Play Hockey"
+    }
+   ],
+   "answer": "a",
+   "evidence": "My favourite winter sport is skiing",
+   "hints": [
+    "Where is Julia, and what is the weather like?",
+    "Which title is about the whole text?"
+   ],
+   "explanation": "The post is about winter sports in the snowy mountains, so 'Fun in the Snow' is the best title.",
+   "explanationAr": "النص عن رياضات الشتاء في الجبال المثلجة، فأفضل عنوان Fun in the Snow.",
+   "tip": "Best title = what the whole text is about",
+   "wrongWhy": {
+    "b": "Julia is on holiday in the mountains, not at school.",
+    "c": "It's winter and it's very cold, not summer on the beach.",
+    "d": "Julia doesn't talk about hockey."
+   }
+  },
+  {
+   "id": "ENG-E1-A-030",
+   "type": "multi",
+   "lesson": "e1-1",
+   "concept": "sport-clues",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "passage": "e1a-p1",
+   "prompt": "Which sports does Julia do in the mountains? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "skiing",
+     "emoji": "⛷️"
+    },
+    {
+     "id": "b",
+     "text": "table tennis",
+     "emoji": "🏓"
+    },
+    {
+     "id": "c",
+     "text": "ice skating",
+     "emoji": "⛸️"
+    },
+    {
+     "id": "d",
+     "text": "cycling",
+     "emoji": "🚴"
+    }
+   ],
+   "answers": [
+    "a",
+    "b"
+   ],
+   "evidence": "We go skiing every morning",
+   "hints": [
+    "Who goes ice skating?",
+    "Where does Julia go cycling?"
+   ],
+   "explanation": "Julia goes skiing every morning, and they sometimes play table tennis. Leo goes ice skating, and Julia can't cycle on the snowy roads.",
+   "explanationAr": "جوليا تتزلّج على الثلج وتلعب كرة الطاولة أحيانًا. التزلّج على الجليد لأخيها، والدراجة في بلدها فقط.",
+   "tip": "Who does it? Where? Read carefully!"
+  },
+  {
+   "id": "ENG-E1-A-031",
+   "type": "choice",
+   "lesson": "e1-1",
+   "concept": "sport-clues",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "reasoning",
+   "prompt": "Listen to the clue. What sport is it?",
+   "audio": "This sport has wheels. You stand on it and push with one foot. Don't forget your helmet!",
+   "options": [
+    {
+     "id": "a",
+     "text": "go scooting",
+     "emoji": "🛴"
+    },
+    {
+     "id": "b",
+     "text": "go cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "c",
+     "text": "go skiing",
+     "emoji": "⛷️"
+    },
+    {
+     "id": "d",
+     "text": "do gymnastics",
+     "emoji": "🤸"
+    }
+   ],
+   "answer": "a",
+   "evidence": "You stand on it and push with one foot",
+   "hints": [
+    "Which sports have wheels?",
+    "Do you sit or stand?"
+   ],
+   "explanation": "You stand on a scooter and push with one foot. It has wheels and you wear a helmet.",
+   "explanationAr": "نقف على السكوتر وندفعه بقدم واحدة، وله عجلات ونلبس خوذة.",
+   "tip": "stand + push + wheels = scooter 🛴",
+   "wrongWhy": {
+    "b": "A bike has wheels, but you sit on it and use pedals.",
+    "c": "Skiing has no wheels. You go on snow.",
+    "d": "Gymnastics has no wheels and no helmet."
+   }
+  },
+  {
+   "id": "ENG-E1-A-032",
+   "type": "match",
+   "lesson": "e1-1",
+   "concept": "sport-clues",
+   "skill": "reading",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "prompt": "Read each clue and match it with the sport.",
+   "pairs": [
+    {
+     "id": "p1",
+     "left": "I wear white clothes and no shoes. I don't need a ball.",
+     "right": "karate"
+    },
+    {
+     "id": "p2",
+     "left": "I run and jump outdoors in the summer.",
+     "right": "athletics"
+    },
+    {
+     "id": "p3",
+     "left": "I hit a light ball with feathers over a high net with a racket.",
+     "right": "badminton"
+    },
+    {
+     "id": "p4",
+     "left": "I wear warm clothes and go fast on the ice.",
+     "right": "ice skating"
+    }
+   ],
+   "hints": [
+    "Find the key word in each clue.",
+    "Which clue has the word ice?"
+   ],
+   "explanation": "Karate: white clothes, no shoes. Athletics: running and jumping. Badminton: racket and net. Ice skating: on the ice.",
+   "explanationAr": "الكاراتيه: ملابس بيضاء بلا حذاء. ألعاب القوى: جري وقفز. الريشة: مضرب وشبكة. التزلّج على الجليد: على الجليد.",
+   "tip": "Look for the key words: clothes, net, ice, run."
+  },
+  {
+   "id": "ENG-E1-A-033",
+   "type": "order",
+   "lesson": "e1-2",
+   "concept": "team-talk",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Put the events of Team Talk in order.",
+   "items": [
+    {
+     "id": "o1",
+     "text": "Sultan is reading the WOW! Quiz in the park."
+    },
+    {
+     "id": "o2",
+     "text": "Arlo says he goes scooting every day."
+    },
+    {
+     "id": "o3",
+     "text": "Sultan says he plays football at the weekends."
+    },
+    {
+     "id": "o4",
+     "text": "Sultan remembers it's Monday, his karate day."
+    },
+    {
+     "id": "o5",
+     "text": "Arlo starts doing karate in the park."
+    }
+   ],
+   "hints": [
+    "What is Sultan doing at the start?",
+    "What happens at the very end?"
+   ],
+   "explanation": "First Sultan reads the quiz, then Arlo talks about his sports, then Sultan talks about his sports, then he remembers karate, and at the end Arlo does karate.",
+   "explanationAr": "سلطان يقرأ المسابقة، ثم يتكلم آرلو عن رياضاته، ثم سلطان عن رياضاته، ثم يتذكّر الكاراتيه، وأخيرًا يمارس آرلو الكاراتيه.",
+   "tip": "Order: start → middle → end"
+  },
+  {
+   "id": "ENG-E1-A-034",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "team-talk",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "In Team Talk, why does Sultan say 'I have to go'?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Because it's Monday, and he does karate every Monday."
+    },
+    {
+     "id": "b",
+     "text": "Because he plays football at the weekends."
+    },
+    {
+     "id": "c",
+     "text": "Because he doesn't like Arlo's jokes."
+    },
+    {
+     "id": "d",
+     "text": "Because he wants to go swimming."
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "What does Sultan do every Monday?",
+    "What day is it today?"
+   ],
+   "explanation": "Sultan does karate every Monday, and he says 'That's today!' So he has to go to karate.",
+   "explanationAr": "سلطان يمارس الكاراتيه كل يوم اثنين، واليوم هو الاثنين، فيجب أن يذهب.",
+   "tip": "'That's today!' = it's karate day 🥋",
+   "wrongWhy": {
+    "b": "Football is at the weekends. Today is Monday.",
+    "c": "Sultan likes Arlo. He laughs and says he's so funny.",
+    "d": "Swimming is Arlo's sport, not Sultan's."
+   }
+  },
+  {
+   "id": "ENG-E1-A-035",
+   "type": "tf",
+   "lesson": "e1-2",
+   "concept": "team-talk",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "True or false? In Team Talk, Sultan prefers outdoor sports.",
+   "answer": false,
+   "hints": [
+    "Which sports does Sultan prefer?",
+    "Are karate and gymnastics indoors or outdoors?"
+   ],
+   "explanation": "Sultan says: I prefer indoor sports like karate and gymnastics.",
+   "explanationAr": "سلطان قال إنه يفضّل الرياضات الداخلية مثل الكاراتيه والجمباز.",
+   "tip": "prefer = like more",
+   "wrongWhy": "Sultan plays football at the weekends, but he prefers indoor sports like karate and gymnastics."
+  },
+  {
+   "id": "ENG-E1-A-036",
+   "type": "multi",
+   "lesson": "e1-2",
+   "concept": "team-talk",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Which sports does Arlo do? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "basketball",
+     "emoji": "🏀"
+    },
+    {
+     "id": "b",
+     "text": "karate",
+     "emoji": "🥋"
+    },
+    {
+     "id": "c",
+     "text": "swimming",
+     "emoji": "🏊"
+    },
+    {
+     "id": "d",
+     "text": "football",
+     "emoji": "⚽"
+    },
+    {
+     "id": "e",
+     "text": "gymnastics",
+     "emoji": "🤸"
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "hints": [
+    "Which sports are Sultan's?",
+    "Arlo says 'I do karate, too.'"
+   ],
+   "explanation": "Arlo plays basketball every week, sometimes goes swimming, and does karate too. Football and gymnastics are Sultan's sports.",
+   "explanationAr": "آرلو يلعب كرة السلة ويسبح أحيانًا ويمارس الكاراتيه. كرة القدم والجمباز رياضات سلطان.",
+   "tip": "Arlo = many sports! 🏀🏐🛴🏊🏑🥋"
+  },
+  {
+   "id": "ENG-E1-A-037",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "team-talk",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Listen to Arlo. Where does he go swimming?",
+   "audio": "I sometimes go swimming indoors at the sports centre.",
+   "options": [
+    {
+     "id": "a",
+     "text": "at the sports centre",
+     "emoji": "🏢"
+    },
+    {
+     "id": "b",
+     "text": "on the beach",
+     "emoji": "🏖️"
+    },
+    {
+     "id": "c",
+     "text": "in the park",
+     "emoji": "🏞️"
+    },
+    {
+     "id": "d",
+     "text": "at school",
+     "emoji": "🏫"
+    }
+   ],
+   "answer": "a",
+   "evidence": "at the sports centre",
+   "hints": [
+    "Is it indoors or outdoors?",
+    "Listen for the word 'at'."
+   ],
+   "explanation": "Arlo says he goes swimming indoors at the sports centre.",
+   "explanationAr": "آرلو قال إنه يسبح في الداخل في المركز الرياضي.",
+   "tip": "Listen for the place after 'at'.",
+   "wrongWhy": {
+    "b": "The beach is where Arlo plays volleyball in the summer.",
+    "c": "Arlo and Sultan talk in the park, but Arlo doesn't swim there.",
+    "d": "Arlo goes to school by scooter. He doesn't say he swims there."
+   }
+  },
+  {
+   "id": "ENG-E1-A-038",
+   "type": "tf",
+   "lesson": "e1-2",
+   "concept": "team-talk",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "True or false? Sultan says 'You're so funny!' because Arlo starts doing karate in the park.",
+   "answer": true,
+   "hints": [
+    "What does Arlo say just before?",
+    "What is Arlo doing now?"
+   ],
+   "explanation": "Arlo does karate right there in the park, so Sultan laughs and says: You're so funny!",
+   "explanationAr": "آرلو بدأ يمارس الكاراتيه في الحديقة، فضحك سلطان وقال: You're so funny!",
+   "tip": "Something makes you laugh → You're so funny! 😄",
+   "wrongWhy": "Arlo says 'Look! I'm doing it now!' and does karate in the park. That makes Sultan laugh."
+  },
+  {
+   "id": "ENG-E1-A-039",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen to Sultan. How often does he do gymnastics?",
+   "audio": "I do gymnastics once a week and I do karate every Monday.",
+   "options": [
+    {
+     "id": "a",
+     "text": "once a week"
+    },
+    {
+     "id": "b",
+     "text": "every day"
+    },
+    {
+     "id": "c",
+     "text": "every Monday"
+    },
+    {
+     "id": "d",
+     "text": "at the weekends"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I do gymnastics once a week",
+   "hints": [
+    "Two sports are in the sentence.",
+    "Listen to the words after gymnastics."
+   ],
+   "explanation": "Sultan says: I do gymnastics once a week.",
+   "explanationAr": "سلطان قال: أمارس الجمباز مرة في الأسبوع.",
+   "tip": "once a week = مرة في الأسبوع",
+   "wrongWhy": {
+    "b": "Sultan doesn't say every day.",
+    "c": "Every Monday is for karate, not gymnastics.",
+    "d": "At the weekends is when Sultan plays football."
+   }
+  },
+  {
+   "id": "ENG-E1-A-040",
+   "type": "order",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make a question.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "How"
+    },
+    {
+     "id": "w2",
+     "text": "often"
+    },
+    {
+     "id": "w3",
+     "text": "do"
+    },
+    {
+     "id": "w4",
+     "text": "you"
+    },
+    {
+     "id": "w5",
+     "text": "go"
+    },
+    {
+     "id": "w6",
+     "text": "cycling?"
+    }
+   ],
+   "hints": [
+    "The question starts with How.",
+    "After How often comes do."
+   ],
+   "explanation": "How often + do + you + verb …? → How often do you go cycling?",
+   "explanationAr": "نكوّن السؤال: How often + do + you + الفعل: How often do you go cycling?",
+   "tip": "How often + do/does + person + verb?"
+  },
+  {
+   "id": "ENG-E1-A-041",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Choose the best question word.",
+   "sentence": "A: ___ do you play football?  B: At the weekends.",
+   "options": [
+    {
+     "id": "a",
+     "text": "How often"
+    },
+    {
+     "id": "b",
+     "text": "What"
+    },
+    {
+     "id": "c",
+     "text": "Where"
+    },
+    {
+     "id": "d",
+     "text": "Who"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Look at the answer B gives.",
+    "Is the answer a place, a person or a time?"
+   ],
+   "explanation": "The answer 'At the weekends' tells us when and how many times, so the question is How often.",
+   "explanationAr": "الإجابة At the weekends تخبرنا كم مرة، فالسؤال How often.",
+   "tip": "How often? → every day / once a week / at the weekends",
+   "wrongWhy": {
+    "b": "What asks about a thing, like 'What sport do you play?'",
+    "c": "Where asks about a place, like 'In the park.'",
+    "d": "Who asks about a person, like 'With my brother.'"
+   }
+  },
+  {
+   "id": "ENG-E1-A-042",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "analysis",
+   "prompt": "Which is the best answer to this question?",
+   "sentence": "How often do you go cycling? ___",
+   "options": [
+    {
+     "id": "a",
+     "text": "Every day."
+    },
+    {
+     "id": "b",
+     "text": "In the park."
+    },
+    {
+     "id": "c",
+     "text": "With my brother."
+    },
+    {
+     "id": "d",
+     "text": "Yes, I do."
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "What does How often ask about?",
+    "Find the answer with a time word."
+   ],
+   "explanation": "How often asks how many times, so 'Every day' is the right answer.",
+   "explanationAr": "How often تسأل عن عدد المرات، فالإجابة Every day.",
+   "tip": "How often → a time answer ⏰",
+   "wrongWhy": {
+    "b": "'In the park' answers Where? not How often?",
+    "c": "'With my brother' answers Who with? not How often?",
+    "d": "'Yes, I do' answers a Do you…? question, not How often?"
+   }
+  },
+  {
+   "id": "ENG-E1-A-043",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Look at Samar's table. How often does Samar do karate?",
+   "table": {
+    "caption": "Samar's sports week",
+    "columns": [
+     "Day",
+     "Sports"
+    ],
+    "rows": [
+     [
+      "Sunday",
+      "swimming, karate"
+     ],
+     [
+      "Monday",
+      "swimming"
+     ],
+     [
+      "Tuesday",
+      "swimming"
+     ],
+     [
+      "Wednesday",
+      "swimming"
+     ],
+     [
+      "Thursday",
+      "swimming"
+     ],
+     [
+      "Friday",
+      "swimming, volleyball"
+     ],
+     [
+      "Saturday",
+      "swimming, volleyball"
+     ]
+    ]
+   },
+   "options": [
+    {
+     "id": "a",
+     "text": "once a week"
+    },
+    {
+     "id": "b",
+     "text": "every day"
+    },
+    {
+     "id": "c",
+     "text": "at the weekends"
+    },
+    {
+     "id": "d",
+     "text": "every Friday"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Find karate in the table.",
+    "Count the days."
+   ],
+   "explanation": "Karate is only on Sunday, one day in the week. So Samar does karate once a week.",
+   "explanationAr": "الكاراتيه يوم الأحد فقط، أي مرة واحدة في الأسبوع.",
+   "tip": "1 day a week = once a week",
+   "wrongWhy": {
+    "b": "Swimming is every day. Karate is only on Sunday.",
+    "c": "Volleyball is at the weekends (Friday and Saturday).",
+    "d": "There is no karate on Friday."
+   }
+  },
+  {
+   "id": "ENG-E1-A-044",
+   "type": "text",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Look at Samar's table again. Complete the sentence with one word: Samar goes swimming every ___.",
+   "table": {
+    "caption": "Samar's sports week",
+    "columns": [
+     "Day",
+     "Sports"
+    ],
+    "rows": [
+     [
+      "Sunday",
+      "swimming, karate"
+     ],
+     [
+      "Monday",
+      "swimming"
+     ],
+     [
+      "Tuesday",
+      "swimming"
+     ],
+     [
+      "Wednesday",
+      "swimming"
+     ],
+     [
+      "Thursday",
+      "swimming"
+     ],
+     [
+      "Friday",
+      "swimming, volleyball"
+     ],
+     [
+      "Saturday",
+      "swimming, volleyball"
+     ]
+    ]
+   },
+   "answer": "day",
+   "mistakes": [
+    {
+     "answer": "week",
+     "why": "Look again: swimming is on all seven days, not one day a week."
+    },
+    {
+     "answer": "sunday",
+     "why": "Swimming is on Sunday, but also on all the other days."
+    }
+   ],
+   "hints": [
+    "Count the days with swimming.",
+    "How many days are in a week?"
+   ],
+   "explanation": "Swimming is on every day from Sunday to Saturday, so Samar goes swimming every day.",
+   "explanationAr": "السباحة في كل أيام الأسبوع السبعة، أي every day.",
+   "tip": "7 days = every day"
+  },
+  {
+   "id": "ENG-E1-A-045",
+   "type": "text",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "One word is missing. Write it: 'How often ___ you go swimming?'",
+   "answer": "do",
+   "mistakes": [
+    {
+     "answer": "does",
+     "why": "We use does with he, she or it. With you we use do."
+    },
+    {
+     "answer": "are",
+     "why": "This is a Present simple question about a habit, so we use do."
+    }
+   ],
+   "hints": [
+    "Look at the person: you.",
+    "It's a question about a habit."
+   ],
+   "explanation": "How often do you go swimming? With you we use do.",
+   "explanationAr": "مع you نستخدم do: How often do you go swimming?",
+   "tip": "I/you/we/they → do · he/she/it → does"
+  },
+  {
+   "id": "ENG-E1-A-046",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "listening",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Listen. How often does Hamed play basketball?",
+   "audio": "Girl: How often do you play badminton, Hamed? Hamed: Not very often. I prefer basketball. I play it every day after school.",
+   "options": [
+    {
+     "id": "a",
+     "text": "every day"
+    },
+    {
+     "id": "b",
+     "text": "not very often"
+    },
+    {
+     "id": "c",
+     "text": "once a week"
+    },
+    {
+     "id": "d",
+     "text": "at the weekends"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I play it every day after school",
+   "hints": [
+    "Two sports are in the dialogue.",
+    "What does 'it' mean in 'I play it'?"
+   ],
+   "explanation": "Hamed prefers basketball and plays it every day after school.",
+   "explanationAr": "حامد يفضّل كرة السلة ويلعبها كل يوم بعد المدرسة.",
+   "tip": "Listen to the whole answer, not only the first words!",
+   "wrongWhy": {
+    "b": "'Not very often' is about badminton, not basketball.",
+    "c": "Hamed doesn't say once a week.",
+    "d": "Hamed plays after school, not only at the weekends."
+   }
+  },
+  {
+   "id": "ENG-E1-A-047",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "how-often",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen to Nawal. How often does she go to the sports centre?",
+   "audio": "I go to the sports centre every Tuesday. I do gymnastics there with my friends.",
+   "options": [
+    {
+     "id": "a",
+     "text": "every Tuesday"
+    },
+    {
+     "id": "b",
+     "text": "every day"
+    },
+    {
+     "id": "c",
+     "text": "at the weekends"
+    },
+    {
+     "id": "d",
+     "text": "sometimes"
+    }
+   ],
+   "answer": "a",
+   "evidence": "every Tuesday",
+   "hints": [
+    "Listen for a day of the week."
+   ],
+   "explanation": "Nawal says she goes to the sports centre every Tuesday.",
+   "explanationAr": "نوال تذهب إلى المركز الرياضي كل يوم ثلاثاء.",
+   "tip": "every + day name = once a week on that day",
+   "wrongWhy": {
+    "b": "Nawal names one day, not every day.",
+    "c": "Tuesday is not at the weekend.",
+    "d": "Nawal gives an exact day, so it's not just sometimes."
+   }
+  },
+  {
+   "id": "ENG-E1-A-048",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "expressions",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Your friend says: 'I can ski, skate and swim, and I'm only six!' You are very surprised. What do you say?",
+   "options": [
+    {
+     "id": "a",
+     "text": "I don't believe it!"
+    },
+    {
+     "id": "b",
+     "text": "Yes, I do."
+    },
+    {
+     "id": "c",
+     "text": "How often do you go?"
+    },
+    {
+     "id": "d",
+     "text": "That's today!"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "How do you feel?",
+    "Which expression shows big surprise?"
+   ],
+   "explanation": "We say 'I don't believe it!' when something is very surprising.",
+   "explanationAr": "نقول I don't believe it! عندما نسمع شيئًا مفاجئًا جدًّا.",
+   "tip": "😲 very surprised → I don't believe it!",
+   "wrongWhy": {
+    "b": "'Yes, I do' answers a question like 'Do you…?'. Your friend didn't ask a question.",
+    "c": "This asks about times. It doesn't show you are surprised.",
+    "d": "Sultan says this about karate day. It doesn't fit here."
+   }
+  },
+  {
+   "id": "ENG-E1-A-049",
+   "type": "match",
+   "lesson": "e1-2",
+   "concept": "expressions",
+   "skill": "vocabulary",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Match each situation with the best expression.",
+   "pairs": [
+    {
+     "id": "p1",
+     "left": "Your friend tells a joke and does a silly dance.",
+     "right": "You're so funny!"
+    },
+    {
+     "id": "p2",
+     "left": "Your friend says something strange, and you want to check.",
+     "right": "Really?"
+    },
+    {
+     "id": "p3",
+     "left": "Your friend says something amazing, and you are very, very surprised.",
+     "right": "I don't believe it!"
+    }
+   ],
+   "hints": [
+    "Which one is about laughing?",
+    "Which one is a short question?"
+   ],
+   "explanation": "You're so funny! = something makes you laugh. Really? = you want to check. I don't believe it! = big surprise.",
+   "explanationAr": "You're so funny! عند الضحك، وReally? للتأكّد والاستغراب، وI don't believe it! للمفاجأة الكبيرة.",
+   "tip": "😄 funny · 🤔 Really? · 😲 I don't believe it!"
+  },
+  {
+   "id": "ENG-E1-A-050",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "expressions",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Listen to Hamed. What can his sister say to him?",
+   "audio": "Look at me! I'm doing karate in my pyjamas, and I'm singing a song!",
+   "options": [
+    {
+     "id": "a",
+     "text": "You're so funny!"
+    },
+    {
+     "id": "b",
+     "text": "How often?"
+    },
+    {
+     "id": "c",
+     "text": "Yes, I do."
+    },
+    {
+     "id": "d",
+     "text": "I have to go."
+    }
+   ],
+   "answer": "a",
+   "evidence": "I'm doing karate in my pyjamas",
+   "hints": [
+    "Is Hamed serious or silly?",
+    "Which expression is for laughing?"
+   ],
+   "explanation": "Hamed is doing something silly, so his sister laughs and says: You're so funny!",
+   "explanationAr": "حامد يفعل شيئًا مضحكًا، فتقول أخته: You're so funny!",
+   "tip": "Silly → You're so funny! 😄",
+   "wrongWhy": {
+    "b": "Hamed isn't talking about a habit, so How often? doesn't fit.",
+    "c": "Hamed didn't ask a Do you…? question.",
+    "d": "This doesn't answer what Hamed is doing."
+   }
+  },
+  {
+   "id": "ENG-E1-A-051",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "expressions",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "What does 'I don't believe it!' show?",
+   "options": [
+    {
+     "id": "a",
+     "text": "I'm very surprised."
+    },
+    {
+     "id": "b",
+     "text": "I'm very tired."
+    },
+    {
+     "id": "c",
+     "text": "I'm very sad."
+    },
+    {
+     "id": "d",
+     "text": "I'm sorry."
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Sultan says it when Arlo says he does karate, too."
+   ],
+   "explanation": "'I don't believe it!' means something is so surprising that it's hard to believe.",
+   "explanationAr": "I don't believe it! تعني: لا أصدّق! أي أنا مندهش جدًّا.",
+   "tip": "I don't believe it! = لا أصدّق! 😲",
+   "wrongWhy": {
+    "b": "Tired means you want to rest. The expression is about surprise.",
+    "c": "Sad means unhappy. The expression is about surprise.",
+    "d": "We say I'm sorry when we do something wrong."
+   }
+  },
+  {
+   "id": "ENG-E1-A-052",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "expressions",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "In Team Talk, who says 'Really?' and why?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Sultan, because Arlo says he goes scooting every day."
+    },
+    {
+     "id": "b",
+     "text": "Arlo, because Sultan does karate every Monday."
+    },
+    {
+     "id": "c",
+     "text": "Sultan, because Arlo is doing karate now."
+    },
+    {
+     "id": "d",
+     "text": "Arlo, because Sultan prefers indoor sports."
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Who reads the quiz and asks the questions?",
+    "What does Arlo say just before 'Really?'?"
+   ],
+   "explanation": "Arlo says 'I go scooting every day.' Sultan is surprised and says 'Really?' Then Arlo explains: he goes to school by scooter.",
+   "explanationAr": "آرلو قال إنه يركب السكوتر كل يوم، فاستغرب سلطان وقال Really?",
+   "tip": "Really? = are you sure? 🤔",
+   "wrongWhy": {
+    "b": "Arlo doesn't say Really?. When he hears about karate, he says he does karate too.",
+    "c": "When Arlo does karate, Sultan says 'You're so funny!'",
+    "d": "Arlo doesn't say Really? after this."
+   }
+  },
+  {
+   "id": "ENG-E1-A-053",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "expressions",
+   "skill": "listening",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Listen. Why does Julia's friend say 'Really?'?",
+   "audio": "Julia: Guess what! I'm learning to ski, and my teacher is my grandma! Friend: Really? Your grandma?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Because Julia's ski teacher is her grandma."
+    },
+    {
+     "id": "b",
+     "text": "Because Julia is tired."
+    },
+    {
+     "id": "c",
+     "text": "Because Julia tells a joke."
+    },
+    {
+     "id": "d",
+     "text": "Because it's raining."
+    }
+   ],
+   "answer": "a",
+   "evidence": "my teacher is my grandma",
+   "hints": [
+    "Listen to the words after 'Really?'.",
+    "What is surprising?"
+   ],
+   "explanation": "The friend is surprised that Julia's teacher is her grandma, so she says 'Really? Your grandma?'",
+   "explanationAr": "الصديقة استغربت أن معلّمة جوليا هي جدّتها.",
+   "tip": "Really? + the surprising thing",
+   "wrongWhy": {
+    "b": "Julia doesn't say she is tired.",
+    "c": "Julia isn't joking. Her friend is surprised, not laughing.",
+    "d": "There is nothing about the weather."
+   }
+  },
+  {
+   "id": "ENG-E1-A-054",
+   "type": "tf",
+   "lesson": "e1-2",
+   "concept": "expressions",
+   "skill": "vocabulary",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "True or false? We say 'You're so funny!' when someone makes us laugh.",
+   "answer": true,
+   "hints": [
+    "What does funny mean?"
+   ],
+   "explanation": "Funny means it makes you laugh. Sultan says it when Arlo does karate in the park.",
+   "explanationAr": "funny تعني مضحك، فنقولها عندما يضحكنا أحد.",
+   "tip": "funny = مضحك 😄",
+   "wrongWhy": "'You're so funny!' is for when someone makes us laugh, like Arlo doing karate in the park."
+  },
+  {
+   "id": "ENG-E1-A-055",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "sports-interview",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p2",
+   "prompt": "How often does Reem play table tennis?",
+   "options": [
+    {
+     "id": "a",
+     "text": "every Sunday and Tuesday"
+    },
+    {
+     "id": "b",
+     "text": "once a week"
+    },
+    {
+     "id": "c",
+     "text": "every day"
+    },
+    {
+     "id": "d",
+     "text": "at the weekends"
+    }
+   ],
+   "answer": "a",
+   "evidence": "We play every Sunday and Tuesday",
+   "hints": [
+    "Find the question 'How often do you play?'",
+    "Read Reem's answer."
+   ],
+   "explanation": "Reem says: We play every Sunday and Tuesday at the sports centre.",
+   "explanationAr": "ريم تلعب كل يوم أحد وثلاثاء.",
+   "tip": "How often? → look for every…",
+   "wrongWhy": {
+    "b": "Reem plays on two days, not one.",
+    "c": "Reem runs every morning, but she plays table tennis on two days.",
+    "d": "Sunday and Tuesday are not weekend days in Oman."
+   }
+  },
+  {
+   "id": "ENG-E1-A-056",
+   "type": "tf",
+   "lesson": "e1-2",
+   "concept": "sports-interview",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p2",
+   "prompt": "True or false? Reem plays badminton very often.",
+   "answer": false,
+   "evidence": "but I don't play very often",
+   "hints": [
+    "Find the word badminton.",
+    "Read to the end of the sentence."
+   ],
+   "explanation": "Reem says: I'm learning to play badminton, but I don't play very often.",
+   "explanationAr": "ريم تتعلّم الريشة الطائرة لكنها لا تلعبها كثيرًا.",
+   "tip": "don't … very often = not many times",
+   "wrongWhy": "Reem is learning badminton, but she says she doesn't play very often."
+  },
+  {
+   "id": "ENG-E1-A-057",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "sports-interview",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p2",
+   "prompt": "Why does Reem like table tennis?",
+   "options": [
+    {
+     "id": "a",
+     "text": "It's fast, and it helps her focus."
+    },
+    {
+     "id": "b",
+     "text": "She can play it outdoors in the summer."
+    },
+    {
+     "id": "c",
+     "text": "It's a team sport."
+    },
+    {
+     "id": "d",
+     "text": "Her cousin is a teacher."
+    }
+   ],
+   "answer": "a",
+   "evidence": "Because it's fast, and it helps me focus",
+   "hints": [
+    "Find the question with Why.",
+    "Read the answer that starts with Because."
+   ],
+   "explanation": "Reem says she likes table tennis because it's fast and it helps her focus.",
+   "explanationAr": "لأنها سريعة وتساعدها على التركيز.",
+   "tip": "Why? → Because …",
+   "wrongWhy": {
+    "b": "Reem does athletics outdoors in the summer, not table tennis.",
+    "c": "Reem plays with one partner, not a team.",
+    "d": "The text doesn't say Hala is a teacher."
+   }
+  },
+  {
+   "id": "ENG-E1-A-058",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "sports-interview",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "passage": "e1a-p2",
+   "prompt": "In the interview, what does 'partner' mean?",
+   "options": [
+    {
+     "id": "a",
+     "text": "a person who plays with you"
+    },
+    {
+     "id": "b",
+     "text": "a teacher at the sports centre"
+    },
+    {
+     "id": "c",
+     "text": "a team of many players"
+    },
+    {
+     "id": "d",
+     "text": "a small bat"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I play with a partner, my cousin Hala",
+   "hints": [
+    "Who is Reem's partner?",
+    "Is it a person or a thing?"
+   ],
+   "explanation": "Reem plays with her cousin Hala. A partner is one person who plays with you.",
+   "explanationAr": "partner تعني الشريك: شخص واحد يلعب معكِ.",
+   "tip": "partner = شريك (one person) 👭",
+   "wrongWhy": {
+    "b": "Hala is Reem's cousin, not a teacher.",
+    "c": "A partner is one person, not a whole team.",
+    "d": "A bat is a thing, but a partner is a person."
+   }
+  },
+  {
+   "id": "ENG-E1-A-059",
+   "type": "tf",
+   "lesson": "e1-2",
+   "concept": "sports-interview",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "passage": "e1a-p2",
+   "prompt": "True or false? Reem does athletics indoors.",
+   "answer": false,
+   "evidence": "I do athletics outdoors in the summer",
+   "hints": [
+    "Find the word athletics."
+   ],
+   "explanation": "Reem says: I do athletics outdoors in the summer.",
+   "explanationAr": "ريم تمارس ألعاب القوى في الخارج صيفًا.",
+   "tip": "Read the place word: indoors or outdoors?",
+   "wrongWhy": "Reem does athletics outdoors in the summer. Table tennis is her indoor sport."
+  },
+  {
+   "id": "ENG-E1-A-060",
+   "type": "writing",
+   "lesson": "e1-2",
+   "concept": "sports-interview",
+   "skill": "writing",
+   "difficulty": "challenge",
+   "cognitive": "application",
+   "prompt": "Write an interview with a friend about their favourite sport. Write the questions and the answers.",
+   "task": "interview",
+   "minWords": 50,
+   "words": [
+    "favourite",
+    "How often",
+    "every week",
+    "once a week",
+    "indoors",
+    "outdoors",
+    "because",
+    "learning"
+   ],
+   "guide": [
+    "What's your favourite sport?",
+    "How often do you do it?",
+    "Where do you do it?",
+    "Why do you like it?",
+    "Are you learning anything new?"
+   ],
+   "starter": "Me: Hi, Sara. What's your favourite sport?",
+   "frame": [
+    "Me: What's your favourite sport?",
+    "Friend: It's …",
+    "Me: How often do you …?",
+    "Friend: I … every … / once a week.",
+    "Me: Where do you …?",
+    "Friend: I … indoors / outdoors at …",
+    "Me: Why do you like it?",
+    "Friend: Because …"
+   ],
+   "model": "Me: Hi, Sara. What's your favourite sport?\nSara: It's volleyball. I play in a team with my friends.\nMe: How often do you play?\nSara: I play every Monday and Wednesday after school.\nMe: Where do you play?\nSara: I play indoors in the gym in the winter and outdoors on the beach in the summer.\nMe: Why do you like it?\nSara: Because it's fun and it's important to be healthy.\nMe: Are you learning anything new?\nSara: Yes, I'm learning to play badminton!",
+   "hints": [
+    "Use the guide questions in order.",
+    "Answer with a full sentence."
+   ],
+   "explanation": "A good interview has questions with How often, Where and Why, and full answers with time words like every week.",
+   "explanationAr": "المقابلة الجيدة فيها أسئلة How often وWhere وWhy وإجابات كاملة بكلمات الوقت.",
+   "tip": "Interview = question → answer → question → answer"
+  },
+  {
+   "id": "ENG-E1-A-061",
+   "type": "order",
+   "lesson": "e1-2",
+   "concept": "writing-sentences",
+   "skill": "writing",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make a sentence.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "I"
+    },
+    {
+     "id": "w2",
+     "text": "play"
+    },
+    {
+     "id": "w3",
+     "text": "football"
+    },
+    {
+     "id": "w4",
+     "text": "at the weekends."
+    }
+   ],
+   "hints": [
+    "Start with the person.",
+    "The time words go at the end."
+   ],
+   "explanation": "Person + verb + sport + time: I play football at the weekends.",
+   "explanationAr": "الترتيب: الشخص + الفعل + الرياضة + الوقت.",
+   "tip": "Who? → does what? → when?"
+  },
+  {
+   "id": "ENG-E1-A-062",
+   "type": "tf",
+   "lesson": "e1-2",
+   "concept": "writing-sentences",
+   "skill": "writing",
+   "difficulty": "medium",
+   "cognitive": "analysis",
+   "prompt": "True or false? This sentence has the correct capital letters: 'sultan does karate every monday.'",
+   "answer": false,
+   "hints": [
+    "Look at the name.",
+    "Look at the day of the week."
+   ],
+   "explanation": "We use capital letters for the start of a sentence, names (Sultan) and days of the week (Monday).",
+   "explanationAr": "نكتب الحرف الكبير في أول الجملة وفي الأسماء وأيام الأسبوع: Sultan, Monday.",
+   "tip": "Capitals: Start · Names · Days",
+   "wrongWhy": "Names and days of the week need capital letters: Sultan does karate every Monday."
+  },
+  {
+   "id": "ENG-E1-A-063",
+   "type": "multi",
+   "lesson": "e1-2",
+   "concept": "writing-sentences",
+   "skill": "writing",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Look at this question: 'how often you go cycling.' Which mistakes can you find? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "It needs a capital letter at the start: How."
+    },
+    {
+     "id": "b",
+     "text": "The word do is missing."
+    },
+    {
+     "id": "c",
+     "text": "It needs a question mark (?) at the end."
+    },
+    {
+     "id": "d",
+     "text": "cycling is spelled wrong."
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "hints": [
+    "Check the first letter.",
+    "Check the end.",
+    "Read it aloud: is a word missing?"
+   ],
+   "explanation": "The correct question is: How often do you go cycling? Capital letter, the word do and a question mark. cycling is spelled correctly.",
+   "explanationAr": "الصحيح: How often do you go cycling? حرف كبير وdo وعلامة استفهام. كلمة cycling صحيحة.",
+   "tip": "Question: Capital … do … ?"
+  },
+  {
+   "id": "ENG-E1-A-064",
+   "type": "text",
+   "lesson": "e1-2",
+   "concept": "writing-sentences",
+   "skill": "writing",
+   "difficulty": "challenge",
+   "cognitive": "application",
+   "prompt": "Write the question for this answer. Use How often. Answer: 'I go swimming once a week.'",
+   "answer": "How often do you go swimming?",
+   "accept": [
+    "How often do you go swimming",
+    "how often do you go swimming ?"
+   ],
+   "mistakes": [
+    {
+     "answer": "How often you go swimming?",
+     "why": "Don't forget do: How often do you go swimming?"
+    },
+    {
+     "answer": "How often does you go swimming?",
+     "why": "With you we use do, not does."
+    }
+   ],
+   "hints": [
+    "Start with How often.",
+    "The answer says I, so the question says you."
+   ],
+   "explanation": "The answer is about how many times, so the question is: How often do you go swimming?",
+   "explanationAr": "السؤال: How often do you go swimming?",
+   "tip": "How often + do + you + go swimming?"
+  },
+  {
+   "id": "ENG-E1-A-065",
+   "type": "choice",
+   "lesson": "e1-2",
+   "concept": "writing-sentences",
+   "skill": "writing",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the best linking word.",
+   "sentence": "I like football, ___ I prefer karate.",
+   "options": [
+    {
+     "id": "a",
+     "text": "but"
+    },
+    {
+     "id": "b",
+     "text": "because"
+    },
+    {
+     "id": "c",
+     "text": "and"
+    },
+    {
+     "id": "d",
+     "text": "or"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Are the two ideas the same or different?"
+   ],
+   "explanation": "The two ideas are different: I like football, but I like karate more. We use but for different ideas.",
+   "explanationAr": "الفكرتان مختلفتان، فنستخدم but للتضاد.",
+   "tip": "but = different ideas · because = reason",
+   "wrongWhy": {
+    "b": "because gives a reason. 'I prefer karate' is not a reason for liking football.",
+    "c": "and adds the same kind of idea. Here the two ideas are different.",
+    "d": "or gives a choice, like 'football or karate?'"
+   }
+  },
+  {
+   "id": "ENG-E1-A-066",
+   "type": "text",
+   "lesson": "e1-2",
+   "concept": "writing-sentences",
+   "skill": "writing",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Find the mistake and write the correct word: 'Sultan play football at the weekends.'",
+   "answer": "plays",
+   "mistakes": [
+    {
+     "answer": "playing",
+     "why": "This is a habit (at the weekends), so we need Present simple, not -ing."
+    },
+    {
+     "answer": "play",
+     "why": "Sultan = he, so the verb needs -s."
+    }
+   ],
+   "hints": [
+    "Who is Sultan: I, you or he?",
+    "What do we add to the verb after he?"
+   ],
+   "explanation": "Sultan = he. In the Present simple, he/she/it + verb + s: Sultan plays football at the weekends.",
+   "explanationAr": "سلطان = he، فنضيف s للفعل: Sultan plays football.",
+   "tip": "he/she/it → plays, does, goes"
+  },
+  {
+   "id": "ENG-E1-A-067",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen to three children. Who is talking about a habit?",
+   "audio": "Arlo: I'm wearing my new helmet. Julia: I go cycling every Friday. Reem: Look! I'm doing athletics.",
+   "options": [
+    {
+     "id": "a",
+     "text": "Julia",
+     "emoji": "👧🏼"
+    },
+    {
+     "id": "b",
+     "text": "Arlo",
+     "emoji": "🧒🏻"
+    },
+    {
+     "id": "c",
+     "text": "Reem",
+     "emoji": "🧕🏽"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I go cycling every Friday",
+   "hints": [
+    "Listen for a time word like every.",
+    "Who doesn't use -ing?"
+   ],
+   "explanation": "Julia says 'I go cycling every Friday.' That is a habit, so she uses the Present simple.",
+   "explanationAr": "جوليا تتكلم عن عادة: تذهب بالدراجة كل جمعة (Present simple).",
+   "tip": "every Friday 🔁 = habit",
+   "wrongWhy": {
+    "b": "Arlo says I'm wearing… That is happening now.",
+    "c": "Reem says Look! I'm doing… That is happening now."
+   }
+  },
+  {
+   "id": "ENG-E1-A-068",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the correct form.",
+   "sentence": "Arlo ___ to school by scooter every day.",
+   "options": [
+    {
+     "id": "a",
+     "text": "goes"
+    },
+    {
+     "id": "b",
+     "text": "is going"
+    },
+    {
+     "id": "c",
+     "text": "go"
+    },
+    {
+     "id": "d",
+     "text": "going"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Find the time words.",
+    "Arlo is he."
+   ],
+   "explanation": "'every day' shows a habit, so we use the Present simple. Arlo = he → goes.",
+   "explanationAr": "every day تدل على عادة، وArlo = he فنقول goes.",
+   "tip": "every day 🔁 → Present simple",
+   "wrongWhy": {
+    "b": "is going is for now. 'every day' shows a habit.",
+    "c": "Arlo = he, so we add -es: goes.",
+    "d": "going needs is before it, and this is a habit."
+   }
+  },
+  {
+   "id": "ENG-E1-A-069",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. Is Dad talking about a habit or about now?",
+   "audio": "Mum: Where's Faisal? Dad: He's in the garden. He's playing football with his friends.",
+   "options": [
+    {
+     "id": "a",
+     "text": "about now",
+     "emoji": "⏱️"
+    },
+    {
+     "id": "b",
+     "text": "about a habit",
+     "emoji": "🔁"
+    }
+   ],
+   "answer": "a",
+   "evidence": "He's playing football",
+   "hints": [
+    "Listen to the verb: does it end in -ing?"
+   ],
+   "explanation": "Dad says 'He's playing football.' is + -ing = the Present continuous, for things happening now.",
+   "explanationAr": "He's playing = Present continuous، أي ما يحدث الآن.",
+   "tip": "am/is/are + -ing = now ⏱️",
+   "wrongWhy": {
+    "b": "Dad doesn't use every or once a week. He says He's playing… with -ing."
+   }
+  },
+  {
+   "id": "ENG-E1-A-070",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "listening",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Listen. What is the speaker doing today?",
+   "audio": "I usually go cycling on Thursdays, but today I'm playing badminton because my bike is broken.",
+   "options": [
+    {
+     "id": "a",
+     "text": "playing badminton",
+     "emoji": "🏸"
+    },
+    {
+     "id": "b",
+     "text": "going cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "c",
+     "text": "playing table tennis",
+     "emoji": "🏓"
+    },
+    {
+     "id": "d",
+     "text": "going scooting",
+     "emoji": "🛴"
+    }
+   ],
+   "answer": "a",
+   "evidence": "today I'm playing badminton",
+   "hints": [
+    "Two sports are in the sentence.",
+    "Which one is with 'today'?"
+   ],
+   "explanation": "Usually = cycling (habit). Today = playing badminton (now) because the bike is broken.",
+   "explanationAr": "عادةً يركب الدراجة، لكن اليوم يلعب الريشة لأن دراجته معطّلة.",
+   "tip": "usually 🔁 vs today ⏱️",
+   "wrongWhy": {
+    "b": "Cycling is what the speaker usually does, but the bike is broken today.",
+    "c": "The speaker doesn't say table tennis.",
+    "d": "The speaker doesn't say scooting."
+   }
+  },
+  {
+   "id": "ENG-E1-A-071",
+   "type": "sort",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "passage": "e1a-p3",
+   "prompt": "Read Nawal's email. Is each sentence about a habit or about now?",
+   "items": [
+    {
+     "id": "i1",
+     "text": "Nawal does gymnastics every Saturday morning.",
+     "bucket": "habit"
+    },
+    {
+     "id": "i2",
+     "text": "Mum walks in the park every evening.",
+     "bucket": "habit"
+    },
+    {
+     "id": "i3",
+     "text": "Samar is swimming in the big pool.",
+     "bucket": "now"
+    },
+    {
+     "id": "i4",
+     "text": "Nawal is waiting for her class.",
+     "bucket": "now"
+    },
+    {
+     "id": "i5",
+     "text": "Samar goes swimming every day.",
+     "bucket": "habit"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "habit",
+     "label": "habit (Present simple)",
+     "emoji": "🔁"
+    },
+    {
+     "id": "now",
+     "label": "now (Present continuous)",
+     "emoji": "⏱️"
+    }
+   ],
+   "hints": [
+    "Look for every.",
+    "Look for is + -ing."
+   ],
+   "explanation": "Sentences with every… and no -ing are habits. Sentences with is + -ing are happening now.",
+   "explanationAr": "الجمل التي فيها every بدون ing عادات، والتي فيها is + ing تحدث الآن.",
+   "tip": "every 🔁 · is + -ing ⏱️"
+  },
+  {
+   "id": "ENG-E1-A-072",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "reading",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "passage": "e1a-p4",
+   "prompt": "Why is Muna's class a bit nervous?",
+   "options": [
+    {
+     "id": "a",
+     "text": "They don't play volleyball very often."
+    },
+    {
+     "id": "b",
+     "text": "Lina is running in a race."
+    },
+    {
+     "id": "c",
+     "text": "Miss Salma is helping the younger children."
+    },
+    {
+     "id": "d",
+     "text": "They do karate every Wednesday."
+    }
+   ],
+   "answer": "a",
+   "evidence": "we don't play volleyball very often, so we're a bit nervous",
+   "hints": [
+    "Find the word nervous.",
+    "Read the words just before it."
+   ],
+   "explanation": "Muna says they don't play volleyball very often, so they're a bit nervous about the match.",
+   "explanationAr": "لأنهم لا يلعبون الكرة الطائرة كثيرًا، فهم قلقون قليلًا.",
+   "tip": "so = the result · because = the reason",
+   "wrongWhy": {
+    "b": "Lina is running, but that is not why the class is nervous.",
+    "c": "Miss Salma is helping, but that is not why they are nervous.",
+    "d": "Muna does karate every Wednesday, but this is not about the match."
+   }
+  },
+  {
+   "id": "ENG-E1-A-073",
+   "type": "multi",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "grammar",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "passage": "e1a-p4",
+   "prompt": "Which sentences from Muna's blog are about her habits or routines? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "I play table tennis once a week."
+    },
+    {
+     "id": "b",
+     "text": "I do karate every Wednesday."
+    },
+    {
+     "id": "c",
+     "text": "I'm sitting with my class under a big tree."
+    },
+    {
+     "id": "d",
+     "text": "Miss Salma is helping the younger children."
+    },
+    {
+     "id": "e",
+     "text": "I don't usually do athletics."
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "e"
+   ],
+   "hints": [
+    "A negative sentence can also be a habit.",
+    "Which sentences have am/is + -ing?"
+   ],
+   "explanation": "Habits use the Present simple: play, do, don't usually do. The -ing sentences are happening now on Sports Day.",
+   "explanationAr": "العادات بـ Present simple: play وdo وdon't usually do. أما جمل ing فتحدث الآن.",
+   "tip": "Habit = Present simple (also negative: don't …)"
+  },
+  {
+   "id": "ENG-E1-A-074",
+   "type": "writing",
+   "lesson": "e1-3",
+   "concept": "tense-use",
+   "skill": "writing",
+   "difficulty": "challenge",
+   "cognitive": "application",
+   "prompt": "Write a message to a friend. Tell her about your sports routine and what you are doing right now.",
+   "task": "message",
+   "minWords": 45,
+   "words": [
+    "every week",
+    "once a week",
+    "at the weekends",
+    "now",
+    "at the moment",
+    "today",
+    "I'm …ing",
+    "I usually"
+   ],
+   "guide": [
+    "Which sports do you do?",
+    "How often do you do them?",
+    "Where are you now?",
+    "What are you doing at the moment?",
+    "What is your family doing now?"
+   ],
+   "starter": "Hi Reem, I'm writing this message at home.",
+   "model": "Hi Reem,\nI'm writing this message at home. I usually go swimming once a week at the sports centre, and I play volleyball at the weekends. I also do karate every Monday. But today I'm not doing sports because it's raining. At the moment I'm sitting in my room, and my brother is watching cartoons. What are you doing now?\nLove,\nAleen",
+   "hints": [
+    "First write about your routine.",
+    "Then write what you are doing now."
+   ],
+   "explanation": "A good message uses the Present simple for routines (I go swimming once a week) and the Present continuous for now (I'm sitting in my room).",
+   "explanationAr": "استخدمي Present simple للروتين وPresent continuous لما يحدث الآن.",
+   "tip": "Routine 🔁 + now ⏱️ = both tenses!"
+  },
+  {
+   "id": "ENG-E1-A-075",
+   "type": "sort",
+   "lesson": "e1-3",
+   "concept": "time-words",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Sort the time words. Which tense do they usually go with?",
+   "items": [
+    {
+     "id": "i1",
+     "text": "every Monday",
+     "bucket": "ps"
+    },
+    {
+     "id": "i2",
+     "text": "once a week",
+     "bucket": "ps"
+    },
+    {
+     "id": "i3",
+     "text": "after school",
+     "bucket": "ps"
+    },
+    {
+     "id": "i4",
+     "text": "at the weekends",
+     "bucket": "ps"
+    },
+    {
+     "id": "i5",
+     "text": "now",
+     "bucket": "pc"
+    },
+    {
+     "id": "i6",
+     "text": "at the moment",
+     "bucket": "pc"
+    },
+    {
+     "id": "i7",
+     "text": "today",
+     "bucket": "pc"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "ps",
+     "label": "Present simple",
+     "emoji": "🔁"
+    },
+    {
+     "id": "pc",
+     "label": "Present continuous",
+     "emoji": "⏱️"
+    }
+   ],
+   "hints": [
+    "Which words tell us something happens again and again?",
+    "Which words mean 'at this time'?"
+   ],
+   "explanation": "Habit words (every, once a week, after school, at the weekends) go with the Present simple. now, at the moment and today go with the Present continuous.",
+   "explanationAr": "كلمات العادة مع Present simple، وnow وat the moment وtoday مع Present continuous.",
+   "tip": "🔁 every… · ⏱️ now / at the moment / today"
+  },
+  {
+   "id": "ENG-E1-A-076",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "time-words",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the best time words.",
+   "sentence": "Reem isn't playing table tennis ___. She's ill.",
+   "options": [
+    {
+     "id": "a",
+     "text": "today"
+    },
+    {
+     "id": "b",
+     "text": "every week"
+    },
+    {
+     "id": "c",
+     "text": "once a week"
+    },
+    {
+     "id": "d",
+     "text": "after school every day"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Look at the verb: isn't playing.",
+    "Which time word is about now?"
+   ],
+   "explanation": "isn't playing is the Present continuous, so we need a 'now' word: today.",
+   "explanationAr": "isn't playing زمن Present continuous، فنحتاج كلمة today.",
+   "tip": "isn't …ing → today / now / at the moment",
+   "wrongWhy": {
+    "b": "every week is a habit word. It goes with the Present simple.",
+    "c": "once a week is a habit word. It goes with the Present simple.",
+    "d": "after school every day is a routine, so it goes with the Present simple."
+   }
+  },
+  {
+   "id": "ENG-E1-A-077",
+   "type": "text",
+   "lesson": "e1-3",
+   "concept": "time-words",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Complete the time words. Shh! The baby is sleeping at the ___.",
+   "answer": "moment",
+   "pattern": "m _ m _ n t",
+   "mistakes": [
+    {
+     "answer": "momant",
+     "why": "The end is -ment: mo-ment."
+    }
+   ],
+   "hints": [
+    "It means now.",
+    "It starts with m."
+   ],
+   "explanation": "at the moment means now. The baby is sleeping now.",
+   "explanationAr": "at the moment تعني في هذه اللحظة.",
+   "tip": "at the moment = now ⏱️"
+  },
+  {
+   "id": "ENG-E1-A-078",
+   "type": "multi",
+   "lesson": "e1-3",
+   "concept": "time-words",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Which time words go with the Present simple? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "every day"
+    },
+    {
+     "id": "b",
+     "text": "once a week"
+    },
+    {
+     "id": "c",
+     "text": "at the weekends"
+    },
+    {
+     "id": "d",
+     "text": "now"
+    },
+    {
+     "id": "e",
+     "text": "at the moment"
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "hints": [
+    "Which words happen again and again?",
+    "now and at the moment are about this time."
+   ],
+   "explanation": "every day, once a week and at the weekends show habits, so they go with the Present simple.",
+   "explanationAr": "every day وonce a week وat the weekends كلمات عادة.",
+   "tip": "habit words → Present simple 🔁"
+  },
+  {
+   "id": "ENG-E1-A-079",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "time-words",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen to Faisal. Which word tells you the action is happening at this time?",
+   "audio": "I'm sorry, I can't talk now. I'm watching the volleyball match on TV.",
+   "options": [
+    {
+     "id": "a",
+     "text": "now"
+    },
+    {
+     "id": "b",
+     "text": "sometimes"
+    },
+    {
+     "id": "c",
+     "text": "every week"
+    },
+    {
+     "id": "d",
+     "text": "after school"
+    }
+   ],
+   "answer": "a",
+   "evidence": "now",
+   "hints": [
+    "Which of these words do you hear?"
+   ],
+   "explanation": "Faisal says 'I can't talk now.' now shows he is watching the match at this time.",
+   "explanationAr": "فيصل قال now، فهو يشاهد المباراة الآن.",
+   "tip": "now ⏱️ → am/is/are + -ing",
+   "wrongWhy": {
+    "b": "Faisal doesn't say sometimes. It's a habit word.",
+    "c": "Faisal doesn't say every week. It's a habit word.",
+    "d": "Faisal doesn't say after school."
+   }
+  },
+  {
+   "id": "ENG-E1-A-080",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "time-words",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p3",
+   "prompt": "How often does Nawal do gymnastics?",
+   "options": [
+    {
+     "id": "a",
+     "text": "every Saturday morning"
+    },
+    {
+     "id": "b",
+     "text": "every day before school"
+    },
+    {
+     "id": "c",
+     "text": "every evening"
+    },
+    {
+     "id": "d",
+     "text": "on Saturdays and Sundays"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I do gymnastics every Saturday morning",
+   "hints": [
+    "Find the word gymnastics.",
+    "Read the time words after it."
+   ],
+   "explanation": "Nawal writes: I do gymnastics every Saturday morning.",
+   "explanationAr": "نوال تمارس الجمباز كل سبت صباحًا.",
+   "tip": "Who? Check the person before the time words.",
+   "wrongWhy": {
+    "b": "Every day before school is when Samar goes swimming.",
+    "c": "Every evening is when Mum walks in the park.",
+    "d": "Nawal only says Saturday morning."
+   }
+  },
+  {
+   "id": "ENG-E1-A-081",
+   "type": "text",
+   "lesson": "e1-3",
+   "concept": "simple-forms",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "prompt": "Write the correct form of play: 'Arlo ___ basketball every week.'",
+   "answer": "plays",
+   "mistakes": [
+    {
+     "answer": "play",
+     "why": "Arlo = he, so we add -s: plays."
+    },
+    {
+     "answer": "playing",
+     "why": "every week is a habit, so we use the Present simple, not -ing."
+    }
+   ],
+   "hints": [
+    "Find the time words.",
+    "Arlo = he."
+   ],
+   "explanation": "every week is a habit → Present simple. Arlo = he → plays.",
+   "explanationAr": "عادة كل أسبوع، وArlo = he فنقول plays.",
+   "tip": "he/she/it + verb + s"
+  },
+  {
+   "id": "ENG-E1-A-082",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "simple-forms",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "prompt": "Choose the correct negative.",
+   "sentence": "Sultan ___ volleyball.",
+   "options": [
+    {
+     "id": "a",
+     "text": "doesn't play"
+    },
+    {
+     "id": "b",
+     "text": "don't play"
+    },
+    {
+     "id": "c",
+     "text": "doesn't plays"
+    },
+    {
+     "id": "d",
+     "text": "isn't play"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Sultan = he.",
+    "After doesn't, look at the verb."
+   ],
+   "explanation": "he/she/it + doesn't + verb (no -s): Sultan doesn't play volleyball.",
+   "explanationAr": "مع he نستخدم doesn't ثم الفعل بدون s.",
+   "tip": "doesn't + play (no -s!)",
+   "wrongWhy": {
+    "b": "don't is for I, you, we and they. Sultan = he.",
+    "c": "After doesn't, the verb has no -s: doesn't play.",
+    "d": "isn't goes with -ing (isn't playing), not with play."
+   }
+  },
+  {
+   "id": "ENG-E1-A-083",
+   "type": "text",
+   "lesson": "e1-3",
+   "concept": "simple-forms",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Find the mistake and write the correct word: 'Reem do athletics outdoors in the summer.'",
+   "answer": "does",
+   "mistakes": [
+    {
+     "answer": "doing",
+     "why": "This is a habit (in the summer), so we need the Present simple, not -ing."
+    },
+    {
+     "answer": "plays",
+     "why": "We say do athletics, not play athletics. Reem = she → does."
+    }
+   ],
+   "hints": [
+    "Who is Reem: I, you or she?",
+    "What happens to do after she?"
+   ],
+   "explanation": "Reem = she, so do becomes does: Reem does athletics outdoors in the summer.",
+   "explanationAr": "ريم = she، فنقول does.",
+   "tip": "do → does with he/she/it"
+  },
+  {
+   "id": "ENG-E1-A-084",
+   "type": "order",
+   "lesson": "e1-3",
+   "concept": "simple-forms",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make a sentence.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "My brother"
+    },
+    {
+     "id": "w2",
+     "text": "doesn't"
+    },
+    {
+     "id": "w3",
+     "text": "go"
+    },
+    {
+     "id": "w4",
+     "text": "skiing"
+    },
+    {
+     "id": "w5",
+     "text": "in the summer."
+    }
+   ],
+   "hints": [
+    "Start with the person.",
+    "doesn't goes before go."
+   ],
+   "explanation": "Person + doesn't + verb + sport + time: My brother doesn't go skiing in the summer.",
+   "explanationAr": "الشخص + doesn't + الفعل + الرياضة + الوقت.",
+   "tip": "doesn't comes before the verb"
+  },
+  {
+   "id": "ENG-E1-A-085",
+   "type": "multi",
+   "lesson": "e1-3",
+   "concept": "simple-forms",
+   "skill": "grammar",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Which sentences are correct? Choose all.",
+   "options": [
+    {
+     "id": "a",
+     "text": "He plays hockey every week."
+    },
+    {
+     "id": "b",
+     "text": "They does gymnastics every Monday."
+    },
+    {
+     "id": "c",
+     "text": "She doesn't go swimming."
+    },
+    {
+     "id": "d",
+     "text": "I plays volleyball after school."
+    },
+    {
+     "id": "e",
+     "text": "We go cycling at the weekends."
+    }
+   ],
+   "answers": [
+    "a",
+    "c",
+    "e"
+   ],
+   "hints": [
+    "Check the person in each sentence.",
+    "Only he, she and it take -s."
+   ],
+   "explanation": "He plays ✔, She doesn't go ✔, We go ✔. They does ✘ (they do) and I plays ✘ (I play).",
+   "explanationAr": "الصحيح: He plays وShe doesn't go وWe go. أما They does وI plays فخطأ.",
+   "tip": "I/you/we/they → play, do · he/she/it → plays, does"
+  },
+  {
+   "id": "ENG-E1-A-086",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "simple-forms",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen to Reem. What does her dad do every morning?",
+   "audio": "My dad doesn't play table tennis. He goes cycling every morning.",
+   "options": [
+    {
+     "id": "a",
+     "text": "goes cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "b",
+     "text": "plays table tennis",
+     "emoji": "🏓"
+    },
+    {
+     "id": "c",
+     "text": "goes swimming",
+     "emoji": "🏊"
+    },
+    {
+     "id": "d",
+     "text": "does karate",
+     "emoji": "🥋"
+    }
+   ],
+   "answer": "a",
+   "evidence": "He goes cycling every morning",
+   "hints": [
+    "One sport is with doesn't.",
+    "Listen for every morning."
+   ],
+   "explanation": "Reem says: He goes cycling every morning. He doesn't play table tennis.",
+   "explanationAr": "أبو ريم يركب الدراجة كل صباح، ولا يلعب كرة الطاولة.",
+   "tip": "Listen for doesn't — it means NOT!",
+   "wrongWhy": {
+    "b": "Reem says her dad doesn't play table tennis.",
+    "c": "Reem doesn't say swimming.",
+    "d": "Reem doesn't say karate."
+   }
+  },
+  {
+   "id": "ENG-E1-A-087",
+   "type": "tf",
+   "lesson": "e1-3",
+   "concept": "simple-forms",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p4",
+   "prompt": "True or false? Muna does athletics every afternoon.",
+   "answer": false,
+   "evidence": "She does athletics every afternoon",
+   "hints": [
+    "Who is 'she' in this sentence?",
+    "What does Muna say about athletics?"
+   ],
+   "explanation": "'She does athletics every afternoon' is about Lina. Muna doesn't usually do athletics.",
+   "explanationAr": "لينا هي التي تمارس ألعاب القوى كل مساء، أما منى فلا.",
+   "tip": "She = who? Look at the sentence before.",
+   "wrongWhy": "Lina does athletics every afternoon. Muna says: I don't usually do athletics."
+  },
+  {
+   "id": "ENG-E1-A-088",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "prompt": "Choose the correct words.",
+   "sentence": "Look! Julia ___ her new helmet.",
+   "options": [
+    {
+     "id": "a",
+     "text": "is wearing"
+    },
+    {
+     "id": "b",
+     "text": "wears"
+    },
+    {
+     "id": "c",
+     "text": "are wearing"
+    },
+    {
+     "id": "d",
+     "text": "wearing"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "What does Look! tell you?",
+    "Julia = she."
+   ],
+   "explanation": "Look! shows it's happening now → Present continuous: Julia is wearing her new helmet.",
+   "explanationAr": "Look! تعني الآن، فنقول is wearing.",
+   "tip": "Look! → is + -ing",
+   "wrongWhy": {
+    "b": "wears is for habits. Look! shows it's happening now.",
+    "c": "are is for you, we and they. Julia = she → is.",
+    "d": "We need is before wearing."
+   }
+  },
+  {
+   "id": "ENG-E1-A-089",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the correct words.",
+   "sentence": "It's raining. The children ___ football today.",
+   "options": [
+    {
+     "id": "a",
+     "text": "aren't playing"
+    },
+    {
+     "id": "b",
+     "text": "isn't playing"
+    },
+    {
+     "id": "c",
+     "text": "don't playing"
+    },
+    {
+     "id": "d",
+     "text": "aren't play"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "The children = he or they?",
+    "today → -ing verb."
+   ],
+   "explanation": "The children = they → aren't + playing: The children aren't playing football today.",
+   "explanationAr": "the children = they، فنقول aren't playing.",
+   "tip": "they → are / aren't + -ing",
+   "wrongWhy": {
+    "b": "isn't is for he, she or it. The children = they.",
+    "c": "don't goes with the Present simple, not with -ing.",
+    "d": "After aren't we need the -ing verb: playing."
+   }
+  },
+  {
+   "id": "ENG-E1-A-090",
+   "type": "text",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "prompt": "Write the correct form of swim: 'Look! Samar is ___ in the pool.'",
+   "answer": "swimming",
+   "mistakes": [
+    {
+     "answer": "swiming",
+     "why": "swim has a double m before -ing: swimming."
+    },
+    {
+     "answer": "swims",
+     "why": "After is we need the -ing form: swimming."
+    }
+   ],
+   "hints": [
+    "After is, add -ing.",
+    "Remember the spelling in go swimming."
+   ],
+   "explanation": "is + -ing: Samar is swimming. Remember the double m: swim → swimming.",
+   "explanationAr": "بعد is نضيف ing، ونضاعف حرف m: swimming.",
+   "tip": "swim → swimming (mm!) 🏊"
+  },
+  {
+   "id": "ENG-E1-A-091",
+   "type": "order",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make a sentence.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "We"
+    },
+    {
+     "id": "w2",
+     "text": "are"
+    },
+    {
+     "id": "w3",
+     "text": "watching"
+    },
+    {
+     "id": "w4",
+     "text": "a hockey match"
+    },
+    {
+     "id": "w5",
+     "text": "at the moment."
+    }
+   ],
+   "hints": [
+    "Start with the person.",
+    "are comes before watching."
+   ],
+   "explanation": "Person + are + -ing verb + … + time: We are watching a hockey match at the moment.",
+   "explanationAr": "الشخص + are + الفعل مع ing + الوقت.",
+   "tip": "We + are + …ing"
+  },
+  {
+   "id": "ENG-E1-A-092",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Three students describe a photo of Arlo. Who is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Sara: Look! Arlo is do karate."
+    },
+    {
+     "id": "b",
+     "text": "Hamed: Look! Arlo is doing karate."
+    },
+    {
+     "id": "c",
+     "text": "Lina: Look! Arlo doing karate."
+    }
+   ],
+   "answer": "b",
+   "hints": [
+    "Check two parts: is and -ing.",
+    "Which sentence has both?"
+   ],
+   "explanation": "Present continuous = is + verb-ing: Arlo is doing karate.",
+   "explanationAr": "Present continuous = is + الفعل مع ing.",
+   "tip": "is + doing (both parts!)",
+   "wrongWhy": {
+    "a": "After is we need the -ing form: doing, not do.",
+    "c": "The word is is missing: Arlo is doing."
+   }
+  },
+  {
+   "id": "ENG-E1-A-093",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "listening",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen. What is Julia looking for?",
+   "audio": "Mum: Julia, what are you doing? Julia: I'm looking for my helmet. I'm going cycling with Leo.",
+   "options": [
+    {
+     "id": "a",
+     "text": "her helmet",
+     "emoji": "⛑️"
+    },
+    {
+     "id": "b",
+     "text": "her bike",
+     "emoji": "🚲"
+    },
+    {
+     "id": "c",
+     "text": "her scooter",
+     "emoji": "🛴"
+    },
+    {
+     "id": "d",
+     "text": "her ball",
+     "emoji": "⚽"
+    }
+   ],
+   "answer": "a",
+   "evidence": "I'm looking for my helmet",
+   "hints": [
+    "Listen after 'I'm looking for'."
+   ],
+   "explanation": "Julia says: I'm looking for my helmet.",
+   "explanationAr": "جوليا تبحث عن خوذتها.",
+   "tip": "looking for = searching 🔍",
+   "wrongWhy": {
+    "b": "Julia is going cycling, but she is looking for something to wear on her head.",
+    "c": "Julia doesn't say scooter.",
+    "d": "Julia doesn't say ball."
+   }
+  },
+  {
+   "id": "ENG-E1-A-094",
+   "type": "tf",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "reading",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "passage": "e1a-p3",
+   "prompt": "True or false? Faisal is playing football today.",
+   "answer": false,
+   "evidence": "he isn't playing today because he's ill",
+   "hints": [
+    "What does Faisal usually do?",
+    "What about today?"
+   ],
+   "explanation": "Nawal writes: he isn't playing today because he's ill.",
+   "explanationAr": "فيصل لا يلعب اليوم لأنه مريض.",
+   "tip": "usually 🔁 ≠ today ⏱️",
+   "wrongWhy": "Faisal usually plays football on Saturdays, but today he isn't playing because he's ill."
+  },
+  {
+   "id": "ENG-E1-A-095",
+   "type": "text",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "passage": "e1a-p3",
+   "prompt": "What is Faisal watching at home? Write one word.",
+   "answer": "cartoons",
+   "accept": [
+    "cartoon"
+   ],
+   "mistakes": [
+    {
+     "answer": "football",
+     "why": "Faisal isn't playing football today. Read what he is doing at home."
+    }
+   ],
+   "evidence": "he's watching cartoons",
+   "hints": [
+    "Find the word home."
+   ],
+   "explanation": "Nawal writes: He's at home, and he's watching cartoons!",
+   "explanationAr": "فيصل يشاهد الرسوم المتحركة في البيت.",
+   "tip": "he's = he is"
+  },
+  {
+   "id": "ENG-E1-A-096",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "continuous-forms",
+   "skill": "reading",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "passage": "e1a-p4",
+   "prompt": "What is Lina doing now?",
+   "options": [
+    {
+     "id": "a",
+     "text": "She's running in a race.",
+     "emoji": "🏃‍♀️"
+    },
+    {
+     "id": "b",
+     "text": "She's sitting under a tree.",
+     "emoji": "🌳"
+    },
+    {
+     "id": "c",
+     "text": "She's playing table tennis.",
+     "emoji": "🏓"
+    },
+    {
+     "id": "d",
+     "text": "She's helping the younger children.",
+     "emoji": "🧒"
+    }
+   ],
+   "answer": "a",
+   "evidence": "is running in a race now",
+   "hints": [
+    "Find the name Lina."
+   ],
+   "explanation": "Muna writes: My best friend, Lina, is running in a race now.",
+   "explanationAr": "لينا تجري في سباق الآن.",
+   "tip": "Find the name, then the -ing verb.",
+   "wrongWhy": {
+    "b": "Muna is sitting under the tree with her class.",
+    "c": "Muna plays table tennis once a week.",
+    "d": "Miss Salma is helping the younger children."
+   }
+  },
+  {
+   "id": "ENG-E1-A-097",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-questions",
+   "skill": "grammar",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "prompt": "Choose the correct word to start the question.",
+   "sentence": "___ Sultan play football at the weekends?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Does"
+    },
+    {
+     "id": "b",
+     "text": "Do"
+    },
+    {
+     "id": "c",
+     "text": "Is"
+    },
+    {
+     "id": "d",
+     "text": "Are"
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Is the verb play or playing?",
+    "Sultan = he."
+   ],
+   "explanation": "Present simple question with he: Does + Sultan + play …?",
+   "explanationAr": "سؤال Present simple مع he يبدأ بـ Does.",
+   "tip": "Does + he/she/it + verb?",
+   "wrongWhy": {
+    "b": "Do is for I, you, we and they. Sultan = he.",
+    "c": "Is goes with an -ing verb: Is Sultan playing…?",
+    "d": "Are is for you, we and they with -ing."
+   }
+  },
+  {
+   "id": "ENG-E1-A-098",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-questions",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the correct short answer.",
+   "sentence": "Does Sultan play volleyball? ___",
+   "options": [
+    {
+     "id": "a",
+     "text": "No, he doesn't."
+    },
+    {
+     "id": "b",
+     "text": "Yes, he does."
+    },
+    {
+     "id": "c",
+     "text": "No, he isn't."
+    },
+    {
+     "id": "d",
+     "text": "No, he don't."
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "Which sports does Sultan do?",
+    "The answer uses the same helper as the question."
+   ],
+   "explanation": "Sultan doesn't play volleyball, and a Does question gets a does/doesn't answer: No, he doesn't.",
+   "explanationAr": "سلطان لا يلعب الكرة الطائرة، والسؤال بـ Does فالجواب No, he doesn't.",
+   "tip": "Does…? → Yes, he does. / No, he doesn't.",
+   "wrongWhy": {
+    "b": "Sultan plays football, karate and gymnastics. Volleyball is Arlo's sport.",
+    "c": "The question starts with Does, so the answer uses does/doesn't.",
+    "d": "With he we say doesn't, not don't."
+   }
+  },
+  {
+   "id": "ENG-E1-A-099",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-questions",
+   "skill": "grammar",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Look at the picture of Reem right now. Is Reem playing table tennis now?",
+   "visual": {
+    "emoji": "🏃‍♀️",
+    "alt": "Reem on a running track"
+   },
+   "options": [
+    {
+     "id": "a",
+     "text": "No, she isn't."
+    },
+    {
+     "id": "b",
+     "text": "No, she doesn't."
+    },
+    {
+     "id": "c",
+     "text": "Yes, she is."
+    },
+    {
+     "id": "d",
+     "text": "Yes, she does."
+    }
+   ],
+   "answer": "a",
+   "hints": [
+    "What is Reem doing in the picture?",
+    "The question starts with Is."
+   ],
+   "explanation": "Reem is running now, not playing table tennis. An Is question gets an is/isn't answer: No, she isn't.",
+   "explanationAr": "ريم تجري الآن، والسؤال بـ Is فالجواب No, she isn't.",
+   "tip": "Is…? → Yes, she is. / No, she isn't.",
+   "wrongWhy": {
+    "b": "The question starts with Is, so the answer uses is/isn't, not doesn't.",
+    "c": "In the picture Reem is running, not playing table tennis.",
+    "d": "Reem isn't playing table tennis now, and an Is question needs is/isn't."
+   }
+  },
+  {
+   "id": "ENG-E1-A-100",
+   "type": "order",
+   "lesson": "e1-3",
+   "concept": "tense-questions",
+   "skill": "grammar",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make a question.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "Are"
+    },
+    {
+     "id": "w2",
+     "text": "they"
+    },
+    {
+     "id": "w3",
+     "text": "doing"
+    },
+    {
+     "id": "w4",
+     "text": "gymnastics"
+    },
+    {
+     "id": "w5",
+     "text": "at the moment?"
+    }
+   ],
+   "hints": [
+    "A question starts with the helper.",
+    "The time words go at the end."
+   ],
+   "explanation": "Present continuous question: Are + they + verb-ing …? → Are they doing gymnastics at the moment?",
+   "explanationAr": "سؤال Present continuous: Are + they + الفعل مع ing.",
+   "tip": "Are + they + …ing?"
+  },
+  {
+   "id": "ENG-E1-A-101",
+   "type": "match",
+   "lesson": "e1-3",
+   "concept": "tense-questions",
+   "skill": "grammar",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Match each question with the correct short answer.",
+   "pairs": [
+    {
+     "id": "p1",
+     "left": "Does she play hockey?",
+     "right": "Yes, she does."
+    },
+    {
+     "id": "p2",
+     "left": "Is she playing hockey now?",
+     "right": "Yes, she is."
+    },
+    {
+     "id": "p3",
+     "left": "Do they go skiing in winter?",
+     "right": "Yes, they do."
+    },
+    {
+     "id": "p4",
+     "left": "Are they skiing now?",
+     "right": "Yes, they are."
+    }
+   ],
+   "hints": [
+    "Look at the first word of each question.",
+    "Find the answer with the same word."
+   ],
+   "explanation": "The short answer uses the same helper as the question: Does → does, Is → is, Do → do, Are → are.",
+   "explanationAr": "الإجابة القصيرة تستخدم نفس الفعل المساعد في السؤال.",
+   "tip": "Same helper in the answer!"
+  },
+  {
+   "id": "ENG-E1-A-102",
+   "type": "choice",
+   "lesson": "e1-3",
+   "concept": "tense-questions",
+   "skill": "listening",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. What is the boy's brother doing?",
+   "audio": "Girl: Is your brother playing football now? Boy: No, he isn't. He's doing his homework.",
+   "options": [
+    {
+     "id": "a",
+     "text": "his homework",
+     "emoji": "📚"
+    },
+    {
+     "id": "b",
+     "text": "playing football",
+     "emoji": "⚽"
+    },
+    {
+     "id": "c",
+     "text": "doing karate",
+     "emoji": "🥋"
+    },
+    {
+     "id": "d",
+     "text": "going swimming",
+     "emoji": "🏊"
+    }
+   ],
+   "answer": "a",
+   "evidence": "He's doing his homework",
+   "hints": [
+    "The first answer is No.",
+    "Listen to the next sentence."
+   ],
+   "explanation": "The boy says: No, he isn't. He's doing his homework.",
+   "explanationAr": "أخوه لا يلعب كرة القدم، بل يكتب واجبه.",
+   "tip": "No, he isn't. → then listen for what he IS doing",
+   "wrongWhy": {
+    "b": "The boy says: No, he isn't playing football.",
+    "c": "The boy says doing, but doing his homework, not karate.",
+    "d": "Swimming isn't in the dialogue."
+   }
+  },
+  {
+   "id": "ENG-E1-A-103",
+   "type": "text",
+   "lesson": "e1-3",
+   "concept": "tense-questions",
+   "skill": "grammar",
+   "difficulty": "challenge",
+   "cognitive": "application",
+   "prompt": "Make a Present simple question with these words: Sultan / do karate / every Monday",
+   "answer": "Does Sultan do karate every Monday?",
+   "accept": [
+    "Does Sultan do karate every Monday"
+   ],
+   "mistakes": [
+    {
+     "answer": "Do Sultan do karate every Monday?",
+     "why": "Sultan = he, so we start with Does, not Do."
+    },
+    {
+     "answer": "Does Sultan does karate every Monday?",
+     "why": "After Does, the verb goes back to do: Does Sultan do…?"
+    },
+    {
+     "answer": "Is Sultan doing karate every Monday?",
+     "why": "every Monday is a habit, so we use the Present simple with Does."
+    }
+   ],
+   "hints": [
+    "Start with Does.",
+    "After Sultan, use do, not does."
+   ],
+   "explanation": "Does + Sultan + do + karate + every Monday? (Yes, he does.)",
+   "explanationAr": "Does + Sultan + do karate + every Monday?",
+   "tip": "Does + he + verb (no -s)?"
+  }
+ ]
+}

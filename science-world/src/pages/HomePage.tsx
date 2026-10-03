@@ -7,6 +7,7 @@ import { useProgress } from '../state/ProgressContext';
 import { levelInfo, nextStop, nextStopPath, overallPercent, stopPath, totalStars } from '../state/journey';
 import { Mascot } from '../components/Mascot';
 import { ProgressBar } from '../components/ProgressBar';
+import { Ring } from '../components/Ring';
 import { play } from '../lib/sound';
 
 /** Little things that float around each subject's world card. */
@@ -21,21 +22,6 @@ const moods: MascotMood[] = ['happy', 'excited', 'surprised', 'celebrating', 'th
 function greeting() {
   const h = new Date().getHours();
   return h >= 4 && h < 12 ? { icon: '☀️', text: 'صباح الخير' } : { icon: '🌙', text: 'مساء الخير' };
-}
-
-/** Circular progress: fills once when it appears. */
-function Ring({ value, label }: { value: number; label: string }) {
-  const r = 26;
-  const c = 2 * Math.PI * r;
-  return (
-    <div className="ring" role="img" aria-label={label}>
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r={r} className="ring__track" />
-        <circle cx="32" cy="32" r={r} className="ring__fill" style={{ strokeDasharray: c, '--ring-off': c * (1 - value / 100), '--ring-c': c } as CSSProperties} />
-      </svg>
-      <span className="ring__value">{value}%</span>
-    </div>
-  );
 }
 
 export function HomePage() {
@@ -192,7 +178,7 @@ export function HomePage() {
           { to: '/lessons', icon: '📚', title: 'الدروس', text: 'كل دروس الكتب', tone: 'primary' },
           { to: '/challenges', icon: '🎯', title: 'التحديات', text: 'سباقات وألغاز', tone: 'coral' },
           { to: '/games', icon: '🎮', title: 'الألعاب', text: 'عجلة وبطاقات وذاكرة', tone: 'leaf' },
-          { to: '/challenges#review', icon: '📝', title: 'المراجعة', text: 'اختبار شامل', tone: 'grape' },
+          { to: '/practice', icon: '🏋️‍♀️', title: 'تدرّبي', text: 'تدرّبي واختبري نفسكِ', tone: 'grape' },
           { to: '/rewards', icon: '🏆', title: 'جوائزي', text: `${state.badges.length} وسام`, tone: 'sun' },
           { to: '/progress', icon: '📊', title: 'تقدّمي', text: `${Object.keys(state.lessons).length} درس مكتمل`, tone: 'aqua' },
         ].map((t, i) => (

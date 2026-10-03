@@ -137,8 +137,13 @@
   font-size: 1.2rem;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .hide-sm { display: none; }
+  .topbar { gap: var(--s-2); padding-inline: var(--s-3); }
+  .topbar__stats { gap: 4px; }
+  .topbar__stats .stat-pill { padding: 4px 10px; }
+}
+@media (max-width: 420px) {
   .brand__name { display: none; }
 }
 
@@ -174,7 +179,7 @@
 .nav--top {
   display: none;
 }
-@media (min-width: 1100px) {
+@media (min-width: 1280px) {
   .nav--top {
     display: flex;
     margin-inline-start: var(--s-4);
@@ -218,7 +223,7 @@
 .nav--bottom .nav__icon {
   font-size: 1.45rem;
 }
-@media (min-width: 1100px) {
+@media (min-width: 1280px) {
   .nav--bottom {
     display: none;
   }
@@ -241,11 +246,14 @@
   color: var(--accent-deep);
   box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 30%, white);
 }
-@media (max-width: 520px), (min-width: 1100px) and (max-width: 1439px) {
+@media (max-width: 520px), (min-width: 1280px) and (max-width: 1599px) {
   .subject-switch__name { display: none; }
 }
 /* desktop with the top nav: keep the bar on one line */
-@media (min-width: 1100px) and (max-width: 1439px) {
-  .nav--top .nav__item { padding: 8px 10px; font-size: 0.92rem; }
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .nav--top .nav__item { padding: 8px 9px; font-size: 0.9rem; gap: 4px; }
   .topbar__stats .stat-pill--fire { display: none; }
+}
+@media (min-width: 1280px) and (max-width: 1379px) {
+  .brand__name { display: none; }
 }

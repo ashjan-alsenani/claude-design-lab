@@ -63,3 +63,7 @@ One codebase serves several children. Set these environment variables at build t
 - `VITE_LEARNER_FULL_NAME` — optional full name
 
 Lesson texts write the child's name as `{name}`; it is filled in when the site loads. Each site keeps its own saved progress (it lives in that site's browser storage).
+
+## Practice & Master («تدرّب واختبر نفسك»)
+
+A mastery-practice section with instant teaching feedback, hints, similar questions, concept mastery, «أخطائي» and «كلماتي». See [docs/practice.md](docs/practice.md); question writing rules in [docs/practice-authoring.md](docs/practice-authoring.md). Template units: Science u1 (318 questions), Math m1 (341), English e1 (316).

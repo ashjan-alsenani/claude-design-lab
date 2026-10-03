@@ -81,7 +81,7 @@ export function VisualView({ visual, className = '' }: { visual: Visual; classNa
   if (visual.art) {
     return (
       <div className={`visual ${className}`}>
-        <Art name={visual.art} />
+        <Art name={visual.art} highlight={visual.highlight} />
       </div>
     );
   }

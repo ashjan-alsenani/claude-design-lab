@@ -2,6 +2,7 @@ import { Suspense, useEffect } from 'react';
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
 import { ProgressProvider, useProgress } from './state/ProgressContext';
+import { PracticeProvider } from './practice/store';
 import { TopBar } from './components/TopBar';
 import { Navigation } from './components/Navigation';
 import { AchievementPopup } from './components/AchievementPopup';
@@ -24,6 +25,12 @@ const GamesPage = lazyPage(() => import('./pages/GamesPage').then((m) => ({ defa
 const ChallengesPage = lazyPage(() => import('./pages/ChallengesPage').then((m) => ({ default: m.ChallengesPage })));
 const RewardsPage = lazyPage(() => import('./pages/RewardsPage').then((m) => ({ default: m.RewardsPage })));
 const ProgressPage = lazyPage(() => import('./pages/ProgressPage').then((m) => ({ default: m.ProgressPage })));
+const PracticeHomePage = lazyPage(() => import('./pages/practice/PracticeHomePage').then((m) => ({ default: m.PracticeHomePage })));
+const PracticeSubjectPage = lazyPage(() => import('./pages/practice/PracticeSubjectPage').then((m) => ({ default: m.PracticeSubjectPage })));
+const PracticeUnitPage = lazyPage(() => import('./pages/practice/PracticeUnitPage').then((m) => ({ default: m.PracticeUnitPage })));
+const PracticeRunPage = lazyPage(() => import('./pages/practice/PracticeRunPage').then((m) => ({ default: m.PracticeRunPage })));
+const PracticeMistakesPage = lazyPage(() => import('./pages/practice/PracticeMistakesPage').then((m) => ({ default: m.PracticeMistakesPage })));
+const PracticeWordsPage = lazyPage(() => import('./pages/practice/PracticeWordsPage').then((m) => ({ default: m.PracticeWordsPage })));
 const GlossaryPage = lazyPage(() => import('./pages/GlossaryPage').then((m) => ({ default: m.GlossaryPage })));
 
 function ScrollTop() {
@@ -45,7 +52,7 @@ function Shell() {
   const location = useLocation();
   const { pathname } = location;
   // lesson & challenge screens are focused: no bottom navigation
-  const focused = /^\/(lesson|quiz|boss)\//.test(pathname);
+  const focused = /^\/(lesson|quiz|boss)\//.test(pathname) || /^\/practice\/(words$|[^/]+\/[^/]+\/run)/.test(pathname);
   const { state } = useProgress();
   return (
     <div className={`app ${focused ? 'app--focused' : ''}`} data-subject={state.subject}>
@@ -67,6 +74,12 @@ function Shell() {
             <Route path="/challenges" element={<ChallengesPage />} />
             <Route path="/rewards" element={<RewardsPage />} />
             <Route path="/progress" element={<ProgressPage />} />
+            <Route path="/practice" element={<PracticeHomePage />} />
+            <Route path="/practice/mistakes" element={<PracticeMistakesPage />} />
+            <Route path="/practice/words" element={<PracticeWordsPage />} />
+            <Route path="/practice/:subject" element={<PracticeSubjectPage />} />
+            <Route path="/practice/:subject/:unit" element={<PracticeUnitPage />} />
+            <Route path="/practice/:subject/:unit/run" element={<PracticeRunPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </Suspense>
@@ -84,7 +97,9 @@ export function App() {
       <MotionConfig reducedMotion="user">
         <HashRouter>
           <ScrollTop />
-          <Shell />
+          <PracticeProvider>
+            <Shell />
+          </PracticeProvider>
         </HashRouter>
       </MotionConfig>
     </ProgressProvider>

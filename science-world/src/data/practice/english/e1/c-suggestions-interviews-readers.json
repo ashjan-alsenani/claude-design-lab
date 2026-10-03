@@ -1,0 +1,4245 @@
+{
+ "subject": "english",
+ "unit": "e1",
+ "concepts": [
+  {
+   "id": "e17-suggest-forms",
+   "label": "Making suggestions (You could / Why don't you / How about …ing)",
+   "lesson": "e1-7",
+   "skill": "grammar"
+  },
+  {
+   "id": "e17-respond",
+   "label": "Responding to suggestions",
+   "lesson": "e1-7",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "e17-new-hobby",
+   "label": "Dialogue: a new hobby",
+   "lesson": "e1-7",
+   "skill": "listening"
+  },
+  {
+   "id": "e17-can-pron",
+   "label": "Weak and strong can",
+   "lesson": "e1-7",
+   "skill": "listening"
+  },
+  {
+   "id": "e18-henry",
+   "label": "Reading: interview with Henry Wilson",
+   "lesson": "e1-8",
+   "skill": "reading"
+  },
+  {
+   "id": "e18-words",
+   "label": "Words in context (freedom, altitude, hostel…)",
+   "lesson": "e1-8",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "e18-qwords",
+   "label": "Question words",
+   "lesson": "e1-8",
+   "skill": "grammar"
+  },
+  {
+   "id": "e18-interview",
+   "label": "Writing a good interview",
+   "lesson": "e1-8",
+   "skill": "writing"
+  },
+  {
+   "id": "e19-comments",
+   "label": "Over to you! Readers' comments",
+   "lesson": "e1-9",
+   "skill": "reading"
+  },
+  {
+   "id": "e19-cloze",
+   "label": "Exam skills: choose the word for each gap",
+   "lesson": "e1-9",
+   "skill": "grammar"
+  },
+  {
+   "id": "e19-opinions",
+   "label": "I like … because … (giving reasons)",
+   "lesson": "e1-9",
+   "skill": "writing"
+  },
+  {
+   "id": "e110-volleyball",
+   "label": "Reader: Let's Play Volleyball!",
+   "lesson": "e1-10",
+   "skill": "reading"
+  },
+  {
+   "id": "e110-butterfly",
+   "label": "Reader: The Blue Butterfly",
+   "lesson": "e1-10",
+   "skill": "reading"
+  },
+  {
+   "id": "e110-words",
+   "label": "Story words (stretching, eraser, badge…)",
+   "lesson": "e1-10",
+   "skill": "vocabulary"
+  },
+  {
+   "id": "e110-can",
+   "label": "can / can't for ability in the stories",
+   "lesson": "e1-10",
+   "skill": "grammar"
+  }
+ ],
+ "passages": [
+  {
+   "id": "e1c-henry",
+   "title": "WOW! interview: Henry Wilson",
+   "text": "Henry Wilson is a keen cyclist. He and his friend, Cody, are cycling in Argentina now.\nWOW!: Why do you like long cycling trips?\nHenry: I love the feeling of freedom, and being outdoors. Also, we meet a lot of interesting people!\nWOW!: What's the most difficult thing about this trip?\nHenry: The altitude. We're going to cycle over the Andes mountains to Chile. It isn't easy cycling above 4,000 metres because there isn't much oxygen.\nWOW!: Where do you sleep?\nHenry: Tonight we're sleeping in a hostel. We usually carry a tent so we can camp if there aren't any hostels.\nWOW!: What do you do in the evenings?\nHenry: We read, write our diaries, eat, relax and plan our route. We also write blog posts and emails to tell people at home about our adventures.\nWOW!: Are you planning any more trips?\nHenry: No, but we have lots of ideas. I want to cycle in the Himalayas, Oman and North America!",
+   "glossary": [
+    {
+     "word": "keen",
+     "meaning": "liking something very much",
+     "ar": "متحمّس"
+    },
+    {
+     "word": "altitude",
+     "meaning": "how high a place is",
+     "ar": "الارتفاع"
+    },
+    {
+     "word": "hostel",
+     "meaning": "a cheap place where travellers sleep",
+     "ar": "نُزُل"
+    },
+    {
+     "word": "route",
+     "meaning": "the way you plan to travel",
+     "ar": "خط السير"
+    }
+   ]
+  },
+  {
+   "id": "e1c-noor",
+   "title": "Meet Noor, a young photographer",
+   "text": "Noor is eleven and she lives in Muscat. She loves photography. We asked her some questions.\nWhy do you like photography?\nIt's fun and it's relaxing. I love being outdoors with my camera.\nWhen did you start this hobby?\nI started when I was eight. My uncle gave me his old camera.\nWhat is your best photo?\nIt's a photo of a turtle on the beach. It's in my bedroom now!\nWho helps you?\nMy uncle helps me. He's very good at taking photos of birds.\nWhat's the most difficult thing about photography?\nBirds! They don't stay still.\nAre you taking any photos at the moment?\nYes, I'm taking photos of the flowers in our garden for a school project.",
+   "glossary": [
+    {
+     "word": "photographer",
+     "meaning": "a person who takes photos",
+     "ar": "مصوّرة"
+    },
+    {
+     "word": "stay still",
+     "meaning": "not move",
+     "ar": "يبقى ساكنًا"
+    },
+    {
+     "word": "project",
+     "meaning": "a piece of school work",
+     "ar": "مشروع"
+    }
+   ]
+  },
+  {
+   "id": "e1c-comments",
+   "title": "Over to you! More comments",
+   "text": "Laila (10 minutes ago): I loved the interview about cycling! I can't ride a bike yet, but my sister is teaching me in the park every Friday.\nOmar (1 hour ago): I play board games with my grandfather every evening. It's quiet and relaxing, but it isn't boring! Last week I won my first game.\nReem (2 days ago): I'm learning to make models. At the moment, I'm making a model of a boat. It's difficult, but my dad helps me.\nSami (1 week ago): After reading the story about gymnastics, I wanted to try something new. Now I go to a gymnastics class on Tuesdays. I think it's important to keep fit.",
+   "glossary": [
+    {
+     "word": "yet",
+     "meaning": "until now",
+     "ar": "حتى الآن"
+    },
+    {
+     "word": "won",
+     "meaning": "was the best in a game (past of win)",
+     "ar": "فاز"
+    },
+    {
+     "word": "keep fit",
+     "meaning": "stay healthy and strong",
+     "ar": "يحافظ على لياقته"
+    }
+   ]
+  },
+  {
+   "id": "e1c-volleyball",
+   "title": "Let's Play Volleyball!",
+   "text": "It's Saturday, and Maryam, Arwa and Huda are at the sports centre. Today, they are trying some new sports. 'Let's play volleyball!' Maryam says. Huda always misses the ball. 'I don't like playing volleyball,' she says. Maryam can play volleyball well, but Arwa and Huda want to try something else.\n'We can do karate!' Arwa says. The karate room is loud, and everyone is wearing white clothes and belts. Arwa can kick really well. But when Huda tries, she falls over. 'I'll go and get some water,' she says.\nHuda sees her mum. 'What's the matter, Huda?' her mum asks. 'Maryam can play volleyball, and Arwa can do karate. I can't do anything!' 'You can do lots of things, Huda!' her mum says.\nThen Huda sees some girls on mats. Music is playing. 'They're doing gymnastics,' her mum says. 'You can try it!' Huda tries gymnastics and she loves it. 'You can do gymnastics well, Huda!' her friends say happily.",
+   "glossary": [
+    {
+     "word": "misses",
+     "meaning": "does not hit or catch",
+     "ar": "تُخطئ"
+    },
+    {
+     "word": "falls over",
+     "meaning": "drops to the ground by accident",
+     "ar": "تقع أرضًا"
+    },
+    {
+     "word": "mats",
+     "meaning": "soft floor covers for sport",
+     "ar": "بُسُط"
+    }
+   ]
+  },
+  {
+   "id": "e1c-butterfly",
+   "title": "The Blue Butterfly",
+   "text": "Jood and Hassan are at the park. Today, they are doing photography. 'I want to take a photo of a blue butterfly,' says Hassan happily. 'I can take good photos!'\nSome girls are doing puzzles. 'Look, Jood! There's a blue butterfly on that puzzle book!' says Hassan. 'Oh! Sorry, Hassan,' says Jood. 'It isn't a butterfly. It's an eraser.'\nThen Hassan sees a group of boys. They are putting on a show. They are wearing costumes and crowns. 'There's a blue butterfly on that boy's costume!' he says. 'Sorry, Hassan. It isn't a butterfly. It's a badge.'\nHassan goes over to the children. 'Can I play with you?' he asks. 'Yes, of course you can. You can use one of our bats.' Hassan picks up a table tennis bat. He sees something on the top of the bat. 'It's a blue butterfly! Quickly, Jood! Give me my camera!'",
+   "glossary": [
+    {
+     "word": "eraser",
+     "meaning": "a thing that removes pencil marks",
+     "ar": "ممحاة"
+    },
+    {
+     "word": "costumes",
+     "meaning": "special clothes for a show",
+     "ar": "أزياء"
+    },
+    {
+     "word": "badge",
+     "meaning": "a small sign you wear on clothes",
+     "ar": "شارة"
+    },
+    {
+     "word": "bat",
+     "meaning": "you hit the ball with it",
+     "ar": "مضرب"
+    }
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": "ENG-E1-C-001",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Choose the correct word to complete the suggestion.",
+   "sentence": "Why don't you ___ to play chess?",
+   "options": [
+    {
+     "id": "learn",
+     "text": "learn"
+    },
+    {
+     "id": "learning",
+     "text": "learning"
+    },
+    {
+     "id": "learns",
+     "text": "learns"
+    }
+   ],
+   "answer": "learn",
+   "wrongWhy": {
+    "learning": "-ing comes after How about, not after Why don't you.",
+    "learns": "We don't add -s after you: you learn, not you learns."
+   },
+   "explanation": "After Why don't you … we use the verb without -ing: Why don't you learn …?",
+   "explanationAr": "بعد Why don't you نستخدم الفعل بدون ing: Why don't you learn …?",
+   "tip": "Why don't you + verb (no -ing)",
+   "hints": [
+    "Look at the words before the gap: Why don't you …",
+    "Is this like How about …ing? Or different?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-002",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "grammar",
+   "type": "text",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "prompt": "Type the correct form of play: \"How about ___ board games after school?\"",
+   "explanation": "After How about we use the verb + -ing: How about playing board games?",
+   "explanationAr": "بعد How about يأتي الفعل مع ing: How about playing board games?",
+   "tip": "How about + …ing",
+   "hints": [
+    "Remember the Say it! box: How about …?",
+    "What ending does the verb need?"
+   ],
+   "answer": "playing",
+   "mistakes": [
+    {
+     "answer": "play",
+     "why": "After How about the verb needs -ing."
+    },
+    {
+     "answer": "plays",
+     "why": "plays is for he/she/it; after How about we need -ing."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-C-003",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "grammar",
+   "type": "text",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Find the mistake. Type the correct word: \"How about make models this weekend?\"",
+   "answer": "making",
+   "mistakes": [
+    {
+     "answer": "make",
+     "why": "That is the word with the mistake: after How about it needs -ing."
+    },
+    {
+     "answer": "makeing",
+     "why": "Verbs ending in e drop the e before -ing: make → making."
+    }
+   ],
+   "explanation": "After How about the verb takes -ing, so make becomes making: How about making models this weekend?",
+   "explanationAr": "بعد How about يجب أن يأخذ الفعل ing، فتصبح make ← making.",
+   "tip": "How about + …ing",
+   "hints": [
+    "Which word comes straight after How about?",
+    "Does that verb need an ending?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-004",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Three suggestions are correct. Which one has a mistake?",
+   "options": [
+    {
+     "id": "a",
+     "text": "You could do photography."
+    },
+    {
+     "id": "b",
+     "text": "Why don't you join the art club?"
+    },
+    {
+     "id": "c",
+     "text": "How about to go cycling?"
+    },
+    {
+     "id": "d",
+     "text": "How about going swimming?"
+    }
+   ],
+   "answer": "c",
+   "wrongWhy": {
+    "a": "Correct: You could + verb (do).",
+    "b": "Correct: Why don't you + verb (join).",
+    "d": "Correct: How about + -ing (going)."
+   },
+   "explanation": "After How about we use -ing, not to + verb. The correct sentence is How about going cycling?",
+   "explanationAr": "بعد How about نستخدم ing وليس to: How about going cycling?",
+   "tip": "You could + verb · How about + …ing",
+   "hints": [
+    "Check the verb after each suggestion phrase.",
+    "Which phrase needs -ing?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-005",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "writing",
+   "type": "order",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make a suggestion.",
+   "items": [
+    {
+     "id": "w1",
+     "text": "Why"
+    },
+    {
+     "id": "w2",
+     "text": "don't"
+    },
+    {
+     "id": "w3",
+     "text": "you"
+    },
+    {
+     "id": "w4",
+     "text": "try"
+    },
+    {
+     "id": "w5",
+     "text": "gymnastics?"
+    }
+   ],
+   "explanation": "A suggestion with Why don't you is a question: Why don't you try gymnastics?",
+   "explanationAr": "الاقتراح بـ Why don't you سؤال: Why don't you try gymnastics?",
+   "tip": "Why don't you + verb …?",
+   "hints": [
+    "Start with the question word.",
+    "The verb comes after you."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-006",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "grammar",
+   "type": "multi",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Choose ALL the sentences that make a suggestion.",
+   "options": [
+    {
+     "id": "a",
+     "text": "You could go to the video club."
+    },
+    {
+     "id": "b",
+     "text": "How about playing hockey?"
+    },
+    {
+     "id": "c",
+     "text": "That sounds good."
+    },
+    {
+     "id": "d",
+     "text": "Why don't you learn the guitar?"
+    },
+    {
+     "id": "e",
+     "text": "I can play the piano."
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "d"
+   ],
+   "explanation": "You could…, How about…ing? and Why don't you…? all suggest an idea. That sounds good. answers a suggestion, and I can play the piano. talks about ability.",
+   "explanationAr": "العبارات You could وHow about وWhy don't you تقدّم اقتراحًا. أما That sounds good فهي رد، وI can play فتتحدث عن القدرة.",
+   "tip": "Suggest: could · Why don't you · How about",
+   "hints": [
+    "Look for the three phrases from the Say it! box.",
+    "A reply to an idea is not a suggestion."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-007",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "grammar",
+   "type": "match",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Match the beginning with the correct ending. Look at the verb and the punctuation.",
+   "pairs": [
+    {
+     "id": "p1",
+     "left": "You could",
+     "right": "go to the art club."
+    },
+    {
+     "id": "p2",
+     "left": "Why don't you",
+     "right": "join the karate club?"
+    },
+    {
+     "id": "p3",
+     "left": "How about",
+     "right": "doing photography?"
+    },
+    {
+     "id": "p4",
+     "left": "That's a",
+     "right": "good idea."
+    }
+   ],
+   "explanation": "You could + verb + full stop; Why don't you + verb + question mark; How about + -ing + question mark; That's a + good idea.",
+   "explanationAr": "You could + فعل + نقطة، Why don't you + فعل + علامة استفهام، How about + ing، That's a good idea.",
+   "tip": "Check the verb form and the ? or .",
+   "hints": [
+    "Which beginning needs an -ing verb?",
+    "Which beginnings make questions?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-008",
+   "lesson": "e1-7",
+   "concept": "e17-suggest-forms",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Your friend says, \"I'm bored. I want to do something outdoors.\" Which is the best suggestion?",
+   "options": [
+    {
+     "id": "a",
+     "text": "How about going cycling in the park?",
+     "emoji": "🚴"
+    },
+    {
+     "id": "b",
+     "text": "Why don't you watch TV?",
+     "emoji": "📺"
+    },
+    {
+     "id": "c",
+     "text": "You could do a puzzle in your room.",
+     "emoji": "🧩"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Watching TV is an indoor activity, but your friend wants to go outdoors.",
+    "c": "A puzzle in your room is indoors, not outdoors."
+   },
+   "explanation": "Cycling in the park is an outdoor activity, so it fits what your friend wants.",
+   "explanationAr": "ركوب الدراجة في الحديقة نشاط خارج المنزل، وهذا ما تريده صديقتك.",
+   "tip": "Listen to what your friend wants first!",
+   "hints": [
+    "Find the key word in what your friend says.",
+    "Outdoors = outside, not in the house."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-009",
+   "lesson": "e1-7",
+   "concept": "e17-respond",
+   "skill": "vocabulary",
+   "type": "sort",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Sort the replies: do they say YES or NO to a suggestion?",
+   "buckets": [
+    {
+     "id": "yes",
+     "label": "Yes",
+     "emoji": "👍"
+    },
+    {
+     "id": "no",
+     "label": "No",
+     "emoji": "👎"
+    }
+   ],
+   "items": [
+    {
+     "id": "i1",
+     "text": "That's a good idea.",
+     "bucket": "yes"
+    },
+    {
+     "id": "i2",
+     "text": "That sounds good!",
+     "bucket": "yes"
+    },
+    {
+     "id": "i3",
+     "text": "Yes, I could.",
+     "bucket": "yes"
+    },
+    {
+     "id": "i4",
+     "text": "I don't think so.",
+     "bucket": "no"
+    },
+    {
+     "id": "i5",
+     "text": "No, I don't like team sports.",
+     "bucket": "no"
+    }
+   ],
+   "explanation": "That's a good idea, That sounds good and Yes, I could say yes. I don't think so and No, I don't like… say no politely.",
+   "explanationAr": "That's a good idea وThat sounds good وYes, I could موافقة. أما I don't think so فرفض لطيف.",
+   "tip": "Yes: good idea / sounds good · No: I don't think so",
+   "hints": [
+    "Which replies sound happy about the idea?",
+    "don't usually shows a no."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-010",
+   "lesson": "e1-7",
+   "concept": "e17-respond",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "prompt": "Your friend says, \"How about playing table tennis?\" You love table tennis. What do you say?",
+   "options": [
+    {
+     "id": "a",
+     "text": "That sounds good!",
+     "emoji": "👍"
+    },
+    {
+     "id": "b",
+     "text": "I don't think so.",
+     "emoji": "👎"
+    },
+    {
+     "id": "c",
+     "text": "Why don't you play table tennis?",
+     "emoji": "💡"
+    },
+    {
+     "id": "d",
+     "text": "Yes, I can!",
+     "emoji": "💪"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "I don't think so. says no, but you love table tennis.",
+    "c": "This is a new suggestion, not a reply to your friend's idea.",
+    "d": "Yes, I can! answers a Can you…? question about ability, not a suggestion."
+   },
+   "explanation": "That sounds good! says yes to a suggestion, and you love table tennis.",
+   "explanationAr": "That sounds good! رد بالموافقة على الاقتراح، وأنتِ تحبين تنس الطاولة.",
+   "tip": "Like the idea? Say: That sounds good!",
+   "hints": [
+    "You like the idea, so you agree.",
+    "Is your friend asking about ability or making a suggestion?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-011",
+   "lesson": "e1-7",
+   "concept": "e17-respond",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. Which club does the girl like?",
+   "audio": "Why don't you join the karate club? I don't think so. I don't like karate. OK. How about going to the art club? That's a good idea! I love painting.",
+   "evidence": "That's a good idea! I love painting.",
+   "options": [
+    {
+     "id": "art",
+     "text": "the art club",
+     "emoji": "🎨"
+    },
+    {
+     "id": "karate",
+     "text": "the karate club",
+     "emoji": "🥋"
+    },
+    {
+     "id": "video",
+     "text": "the video club",
+     "emoji": "📹"
+    }
+   ],
+   "answer": "art",
+   "wrongWhy": {
+    "karate": "She says I don't think so. I don't like karate.",
+    "video": "Nobody talks about the video club in this dialogue."
+   },
+   "explanation": "She says no to karate, but when her friend suggests the art club she says That's a good idea! I love painting.",
+   "explanationAr": "رفضت نادي الكاراتيه، لكنها قالت That's a good idea! عن نادي الفن لأنها تحب الرسم.",
+   "tip": "That's a good idea = YES",
+   "hints": [
+    "She hears two suggestions.",
+    "Listen for the reply that says yes."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-012",
+   "lesson": "e1-7",
+   "concept": "e17-respond",
+   "skill": "vocabulary",
+   "type": "tf",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "True or false? \"I don't think so.\" is a polite way to say YES to a suggestion.",
+   "answer": false,
+   "wrongWhy": "It says no politely. To say yes we use That's a good idea. or That sounds good.",
+   "explanation": "I don't think so. is a polite way to say NO to a suggestion.",
+   "explanationAr": "العبارة I don't think so طريقة لطيفة لقول «لا» للاقتراح.",
+   "tip": "I don't think so = a polite NO",
+   "hints": [
+    "Look for the word don't.",
+    "In the lesson, the boy said this about hockey."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-013",
+   "lesson": "e1-7",
+   "concept": "e17-respond",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Complete the dialogue. A: \"You could go swimming on Saturday.\" B: \"___ I can't swim very well.\"",
+   "options": [
+    {
+     "id": "a",
+     "text": "I don't think so."
+    },
+    {
+     "id": "b",
+     "text": "That's a good idea."
+    },
+    {
+     "id": "c",
+     "text": "That sounds good!"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "This says yes, but B can't swim very well, so it doesn't fit.",
+    "c": "This says yes, but the reason after it shows B doesn't want to go."
+   },
+   "explanation": "B gives a reason for not liking the idea (I can't swim very well), so the reply must say no: I don't think so.",
+   "explanationAr": "الجملة بعد الفراغ سبب للرفض (لا أجيد السباحة)، فالرد المناسب I don't think so.",
+   "tip": "Read what comes AFTER the gap too!",
+   "hints": [
+    "Read the sentence after the gap.",
+    "Is B happy with the idea or not?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-014",
+   "lesson": "e1-7",
+   "concept": "e17-respond",
+   "skill": "vocabulary",
+   "type": "text",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Complete the reply to a suggestion: \"That ______ good!\"",
+   "pattern": "s _ _ n d s",
+   "answer": "sounds",
+   "mistakes": [
+    {
+     "answer": "sound",
+     "why": "With That (he/she/it) we add -s: That sounds."
+    }
+   ],
+   "explanation": "We say That sounds good! to agree with a suggestion.",
+   "explanationAr": "نقول That sounds good! للموافقة على الاقتراح.",
+   "tip": "That sounds good! = 👍",
+   "hints": [
+    "It starts with s and ends with s.",
+    "It is about how something seems when you hear it."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-015",
+   "lesson": "e1-7",
+   "concept": "e17-respond",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. What hobby will the boy try?",
+   "audio": "I want to start a new hobby. You could make models. Yes, I could! My grandad is good at making things.",
+   "evidence": "You could make models. Yes, I could!",
+   "options": [
+    {
+     "id": "models",
+     "text": "making models",
+     "emoji": "✈️"
+    },
+    {
+     "id": "photo",
+     "text": "photography",
+     "emoji": "📷"
+    },
+    {
+     "id": "games",
+     "text": "board games",
+     "emoji": "🎲"
+    }
+   ],
+   "answer": "models",
+   "wrongWhy": {
+    "photo": "Photography is not suggested in this dialogue.",
+    "games": "Board games are not suggested in this dialogue."
+   },
+   "explanation": "His friend suggests making models and he answers Yes, I could! so he agrees.",
+   "explanationAr": "اقترحت صديقته صنع المجسّمات فقال Yes, I could! أي وافق.",
+   "tip": "Yes, I could. = I agree!",
+   "hints": [
+    "Listen for the suggestion.",
+    "Does he say yes or no?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-016",
+   "lesson": "e1-7",
+   "concept": "e17-new-hobby",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. When does the music club finish?",
+   "audio": "The music club is at four o'clock on Mondays. It finishes at half past five.",
+   "evidence": "It finishes at half past five.",
+   "options": [
+    {
+     "id": "a",
+     "text": "at half past five",
+     "emoji": "🕠"
+    },
+    {
+     "id": "b",
+     "text": "at four o'clock",
+     "emoji": "🕓"
+    },
+    {
+     "id": "c",
+     "text": "at five o'clock",
+     "emoji": "🕔"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Four o'clock is when the club starts, not when it finishes.",
+    "c": "The speaker says half past five, not five o'clock."
+   },
+   "explanation": "The speaker says It finishes at half past five. Four o'clock is when it starts.",
+   "explanationAr": "النادي يبدأ في الرابعة وينتهي في الخامسة والنصف.",
+   "tip": "start = begin · finish = end",
+   "hints": [
+    "You will hear two times.",
+    "Which time goes with finishes?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-017",
+   "lesson": "e1-7",
+   "concept": "e17-new-hobby",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen to the boy. What does he want?",
+   "audio": "No, I can't play the piano. But I can play the guitar. I want to do something different, not music.",
+   "evidence": "I want to do something different, not music.",
+   "options": [
+    {
+     "id": "a",
+     "text": "a new hobby that isn't music"
+    },
+    {
+     "id": "b",
+     "text": "piano lessons"
+    },
+    {
+     "id": "c",
+     "text": "a new guitar"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "He can't play the piano, but he doesn't ask for lessons; he wants something different.",
+    "c": "He already plays the guitar, and he wants something that isn't music."
+   },
+   "explanation": "He says I want to do something different – not music, so he wants a new hobby that isn't music.",
+   "explanationAr": "قال إنه يريد شيئًا مختلفًا، ليس موسيقى.",
+   "tip": "not music = something different",
+   "hints": [
+    "He talks about two instruments first.",
+    "Listen to the last sentence."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-018",
+   "lesson": "e1-7",
+   "concept": "e17-new-hobby",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Listen. Which hobby will he choose?",
+   "audio": "Why don't you play basketball? No, I don't think so. I don't like team sports. You could go cycling, then! That sounds good!",
+   "evidence": "You could go cycling, then! That sounds good!",
+   "options": [
+    {
+     "id": "a",
+     "text": "cycling",
+     "emoji": "🚴"
+    },
+    {
+     "id": "b",
+     "text": "basketball",
+     "emoji": "🏀"
+    },
+    {
+     "id": "c",
+     "text": "hockey",
+     "emoji": "🏑"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "He says I don't think so to basketball: he doesn't like team sports.",
+    "c": "Hockey isn't suggested here, and it is a team sport too."
+   },
+   "explanation": "He says no to basketball because he doesn't like team sports, then That sounds good! to cycling.",
+   "explanationAr": "رفض كرة السلة لأنه لا يحب الرياضات الجماعية، ثم وافق على ركوب الدراجة.",
+   "tip": "Find the idea that gets a YES",
+   "hints": [
+    "There are two suggestions.",
+    "Which one gets That sounds good!?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-019",
+   "lesson": "e1-7",
+   "concept": "e17-new-hobby",
+   "skill": "listening",
+   "type": "tf",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "prompt": "Listen. True or false? The boy says no because he can't play hockey.",
+   "audio": "Well, you could play hockey. No, I don't think so. I don't like team sports.",
+   "evidence": "I don't like team sports.",
+   "explanation": "He explains: I don't like team sports. Hockey is a team sport.",
+   "explanationAr": "قال: I don't like team sports، والهوكي رياضة جماعية.",
+   "tip": "Saying no? Give a reason!",
+   "hints": [
+    "Listen to the sentence after I don't think so.",
+    "Hockey is played in a team."
+   ],
+   "answer": false,
+   "wrongWhy": "He never says he can't play. His reason is: I don't like team sports."
+  },
+  {
+   "id": "ENG-E1-C-020",
+   "lesson": "e1-7",
+   "concept": "e17-new-hobby",
+   "skill": "writing",
+   "type": "order",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Put the dialogue in the correct order.",
+   "items": [
+    {
+     "id": "d1",
+     "text": "I want to start a new hobby, but I don't know what to do."
+    },
+    {
+     "id": "d2",
+     "text": "How about going to the photography club?"
+    },
+    {
+     "id": "d3",
+     "text": "That sounds good! When is it?"
+    },
+    {
+     "id": "d4",
+     "text": "It's on Tuesdays at four o'clock."
+    },
+    {
+     "id": "d5",
+     "text": "Great. I'll ask my parents!"
+    }
+   ],
+   "explanation": "First the problem, then a suggestion, a yes reply with a question, the answer, and finally a plan.",
+   "explanationAr": "أولًا المشكلة، ثم الاقتراح، ثم الموافقة مع سؤال، ثم الجواب، وأخيرًا الخطة.",
+   "tip": "Problem → suggestion → reply → plan",
+   "hints": [
+    "Who needs help first?",
+    "When is it? must come after the suggestion."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-021",
+   "lesson": "e1-7",
+   "concept": "e17-new-hobby",
+   "skill": "listening",
+   "type": "tf",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Listen. True or false? The club finishes at half past three.",
+   "audio": "You could go to the video club this week! That's a good idea. What time does it finish? At five o'clock.",
+   "evidence": "At five o'clock.",
+   "answer": false,
+   "wrongWhy": "It finishes at five o'clock. Half past three is the start time.",
+   "explanation": "The answer to What time does it finish? is At five o'clock. Half past three is when it starts.",
+   "explanationAr": "جواب سؤال وقت الانتهاء: At five o'clock. أما الثالثة والنصف فوقت البداية.",
+   "tip": "finish = the end time",
+   "hints": [
+    "Listen for the question with finish.",
+    "What time is in the answer?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-022",
+   "lesson": "e1-7",
+   "concept": "e17-can-pron",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen. Is can weak or strong in this question?",
+   "audio": "Can you play the drums?",
+   "options": [
+    {
+     "id": "weak",
+     "text": "weak",
+     "emoji": "🔉"
+    },
+    {
+     "id": "strong",
+     "text": "strong",
+     "emoji": "🔊"
+    }
+   ],
+   "answer": "weak",
+   "keepOrder": true,
+   "wrongWhy": {
+    "strong": "can is strong at the end of a short answer, like Yes, I can! Here it starts a question."
+   },
+   "explanation": "In a question, can is in the middle and quick, so it is weak: /kən/.",
+   "explanationAr": "في السؤال تكون can في الوسط وسريعة، فهي ضعيفة.",
+   "tip": "Middle = weak · End = strong",
+   "hints": [
+    "Where is can in the sentence?",
+    "Is it at the end?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-023",
+   "lesson": "e1-7",
+   "concept": "e17-can-pron",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Listen. Which word always sounds strong and clear?",
+   "audio": "I can't ride a horse, but I can ride a bike.",
+   "options": [
+    {
+     "id": "cant",
+     "text": "can't"
+    },
+    {
+     "id": "can",
+     "text": "can"
+    },
+    {
+     "id": "but",
+     "text": "but"
+    }
+   ],
+   "answer": "cant",
+   "wrongWhy": {
+    "can": "can in the middle of a sentence is weak and quick.",
+    "but": "but is a small linking word; it isn't the strong word here."
+   },
+   "explanation": "can't is always strong. can in I can ride a bike is in the middle, so it is weak.",
+   "explanationAr": "can't تُنطق دائمًا بقوة، أما can في وسط الجملة فضعيفة.",
+   "tip": "can't is always strong",
+   "hints": [
+    "One word is negative.",
+    "Think about the pronunciation box."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-024",
+   "lesson": "e1-7",
+   "concept": "e17-can-pron",
+   "skill": "grammar",
+   "type": "multi",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Choose ALL the sentences where can is STRONG.",
+   "options": [
+    {
+     "id": "a",
+     "text": "Yes, I can!"
+    },
+    {
+     "id": "b",
+     "text": "Can you swim?"
+    },
+    {
+     "id": "c",
+     "text": "I can play chess."
+    },
+    {
+     "id": "d",
+     "text": "Of course I can!"
+    },
+    {
+     "id": "e",
+     "text": "She can dance well."
+    }
+   ],
+   "answers": [
+    "a",
+    "d"
+   ],
+   "explanation": "can is strong at the end of a short answer: Yes, I can! / Of course I can! In questions and in the middle of sentences it is weak.",
+   "explanationAr": "تكون can قوية في آخر الجواب القصير، وضعيفة في الأسئلة ووسط الجملة.",
+   "tip": "can at the END = strong",
+   "hints": [
+    "Look where can is in each sentence.",
+    "Is anything after can?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-025",
+   "lesson": "e1-7",
+   "concept": "e17-can-pron",
+   "skill": "listening",
+   "type": "tf",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Listen. True or false? The word can sounds short and weak here.",
+   "audio": "Can you sing?",
+   "answer": true,
+   "wrongWhy": "can is strong only at the end, like Yes, I can! In a question it is weak.",
+   "explanation": "In the question Can you sing? can is quick and weak: /kən/.",
+   "explanationAr": "في السؤال Can you sing? تكون can سريعة وضعيفة.",
+   "tip": "Questions: weak can",
+   "hints": [
+    "Is this a question or a short answer?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-026",
+   "lesson": "e1-7",
+   "concept": "e17-can-pron",
+   "skill": "grammar",
+   "type": "tf",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "True or false? can is strong at the START of a question, like \"Can you swim?\"",
+   "explanation": "When can is the last word, as in a short answer (Yes, I can!), we say it strongly: /kæn/.",
+   "explanationAr": "عندما تكون can آخر كلمة، كما في الجواب القصير، تُنطق بقوة.",
+   "tip": "Last word = strong word",
+   "hints": [
+    "Think of Yes, I can! Look at me!",
+    "What comes after can in that answer?"
+   ],
+   "answer": false,
+   "wrongWhy": "At the start of a question can is weak. It is strong at the end: Yes, I can!"
+  },
+  {
+   "id": "ENG-E1-C-027",
+   "lesson": "e1-7",
+   "concept": "e17-can-pron",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Listen. What CAN she do?",
+   "audio": "Can you do gymnastics? No, I can't. But I can do karate!",
+   "evidence": "But I can do karate!",
+   "options": [
+    {
+     "id": "karate",
+     "text": "karate",
+     "emoji": "🥋"
+    },
+    {
+     "id": "gym",
+     "text": "gymnastics",
+     "emoji": "🤸"
+    },
+    {
+     "id": "volley",
+     "text": "volleyball",
+     "emoji": "🏐"
+    }
+   ],
+   "answer": "karate",
+   "wrongWhy": {
+    "gym": "She says No, I can't about gymnastics.",
+    "volley": "Volleyball is not in the dialogue."
+   },
+   "explanation": "She says No, I can't to gymnastics, but But I can do karate!",
+   "explanationAr": "قالت إنها لا تستطيع الجمباز، لكنها تستطيع الكاراتيه.",
+   "tip": "can = yes 💪 · can't = no 🙅",
+   "hints": [
+    "Listen for can and can't.",
+    "Which sport comes after but?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-028",
+   "lesson": "e1-7",
+   "concept": "e17-can-pron",
+   "skill": "grammar",
+   "type": "text",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Complete the short answer: \"Can you ski?\" \"No, I ____.\"",
+   "answer": "can't",
+   "accept": [
+    "can’t",
+    "cannot",
+    "can not"
+   ],
+   "mistakes": [
+    {
+     "answer": "can",
+     "why": "After No we need the negative: can't."
+    },
+    {
+     "answer": "don't",
+     "why": "The question uses Can, so the answer uses can't, not don't."
+    }
+   ],
+   "explanation": "The negative short answer is No, I can't. (can't is always strong).",
+   "explanationAr": "الجواب القصير المنفي: No, I can't.",
+   "tip": "Yes, I can. / No, I can't.",
+   "hints": [
+    "The answer starts with No.",
+    "Use the negative of can."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-029",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Read the interview. Why does Henry like long cycling trips?",
+   "passage": "e1c-henry",
+   "evidence": "I love the feeling of freedom, and being outdoors.",
+   "options": [
+    {
+     "id": "a",
+     "text": "He loves the feeling of freedom and being outdoors."
+    },
+    {
+     "id": "b",
+     "text": "He likes cycling in cold weather."
+    },
+    {
+     "id": "c",
+     "text": "He wants to win a race."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Henry never talks about cold weather.",
+    "c": "There is no race in the interview; it is a long trip."
+   },
+   "explanation": "Henry says he loves the feeling of freedom and being outdoors.",
+   "explanationAr": "قال هنري إنه يحب الشعور بالحرية والبقاء في الهواء الطلق.",
+   "tip": "Why? → look for the reason",
+   "hints": [
+    "Find the first question in the interview.",
+    "Read Henry's first answer."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-030",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "reading",
+   "type": "tf",
+   "difficulty": "medium",
+   "cognitive": "reasoning",
+   "prompt": "True or false? Henry and Cody always sleep in a tent.",
+   "passage": "e1c-henry",
+   "evidence": "We usually carry a tent so we can camp if there aren't any hostels.",
+   "answer": false,
+   "wrongWhy": "They camp only if there aren't any hostels. Tonight they are sleeping in a hostel.",
+   "explanation": "They usually sleep in hostels and carry a tent only for when there aren't any hostels. Tonight they are in a hostel.",
+   "explanationAr": "ينامان عادة في النُّزُل، ويحملان خيمة فقط إن لم يجدا نُزُلًا.",
+   "tip": "if = only sometimes",
+   "hints": [
+    "Where are they sleeping tonight?",
+    "When do they use the tent?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-031",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Where are Henry and Cody sleeping tonight?",
+   "passage": "e1c-henry",
+   "evidence": "Tonight we're sleeping in a hostel.",
+   "options": [
+    {
+     "id": "hostel",
+     "text": "in a hostel",
+     "emoji": "🏨"
+    },
+    {
+     "id": "tent",
+     "text": "in a tent",
+     "emoji": "⛺"
+    },
+    {
+     "id": "home",
+     "text": "at home",
+     "emoji": "🏠"
+    }
+   ],
+   "answer": "hostel",
+   "wrongWhy": {
+    "tent": "They use a tent only if there aren't any hostels; tonight there is one.",
+    "home": "They are in Argentina on a trip, far from home."
+   },
+   "explanation": "Henry says Tonight we're sleeping in a hostel.",
+   "explanationAr": "قال هنري: الليلة ننام في نُزُل.",
+   "tip": "Tonight + -ing = a plan for today",
+   "hints": [
+    "Find the word Tonight in the interview."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-032",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "reading",
+   "type": "multi",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "What do Henry and Cody do in the evenings? Choose ALL the correct answers.",
+   "passage": "e1c-henry",
+   "evidence": "We read, write our diaries, eat, relax and plan our route.",
+   "options": [
+    {
+     "id": "a",
+     "text": "read"
+    },
+    {
+     "id": "b",
+     "text": "write their diaries"
+    },
+    {
+     "id": "c",
+     "text": "plan their route"
+    },
+    {
+     "id": "d",
+     "text": "watch films"
+    },
+    {
+     "id": "e",
+     "text": "play football"
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "c"
+   ],
+   "explanation": "Henry says: We read, write our diaries, eat, relax and plan our route. Films and football are not in his answer.",
+   "explanationAr": "قال هنري: نقرأ، ونكتب مذكّراتنا، ونأكل، ونرتاح، ونخطّط طريقنا.",
+   "tip": "Read the whole answer, not just one word",
+   "hints": [
+    "Find the question about the evenings.",
+    "Check each option against Henry's list."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-033",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "reading",
+   "type": "multi",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Which places are Henry's ideas for FUTURE trips? Choose ALL the correct answers.",
+   "passage": "e1c-henry",
+   "evidence": "I want to cycle in the Himalayas, Oman and North America!",
+   "explanation": "Henry wants to cycle in the Himalayas, Oman and North America. Argentina and Chile are part of the trip they are on now.",
+   "explanationAr": "أفكاره المستقبلية: الهيمالايا وعُمان وأمريكا الشمالية. أما الأرجنتين وتشيلي فهما رحلتهما الحالية.",
+   "tip": "now trip ≠ future ideas",
+   "hints": [
+    "Read the last question: Are you planning any more trips?",
+    "Which place belongs to this trip?"
+   ],
+   "options": [
+    {
+     "id": "a",
+     "text": "Chile"
+    },
+    {
+     "id": "b",
+     "text": "the Himalayas"
+    },
+    {
+     "id": "c",
+     "text": "Oman"
+    },
+    {
+     "id": "d",
+     "text": "North America"
+    },
+    {
+     "id": "e",
+     "text": "Argentina"
+    }
+   ],
+   "answers": [
+    "b",
+    "c",
+    "d"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-034",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "What is the best title for this interview?",
+   "passage": "e1c-henry",
+   "evidence": "He and his friend, Cody, are cycling in Argentina now.",
+   "options": [
+    {
+     "id": "a",
+     "text": "A cycling adventure in South America"
+    },
+    {
+     "id": "b",
+     "text": "How to fix a bike"
+    },
+    {
+     "id": "c",
+     "text": "The best hostels in Chile"
+    },
+    {
+     "id": "d",
+     "text": "Learning to camp"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Nobody talks about fixing bikes.",
+    "c": "Hostels are only one small part, and they are in Argentina tonight.",
+    "d": "Camping is mentioned once; it isn't the main idea."
+   },
+   "explanation": "The whole interview is about Henry and Cody's long cycling trip in Argentina and over the Andes.",
+   "explanationAr": "المقابلة كلها عن رحلة هنري وكودي الطويلة بالدراجة في أمريكا الجنوبية.",
+   "tip": "Best title = about the WHOLE text",
+   "hints": [
+    "What is every answer about?",
+    "A title about one small detail is not the best."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-035",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "reading",
+   "type": "order",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Put the interviewer's questions in the order they come in the interview.",
+   "passage": "e1c-henry",
+   "items": [
+    {
+     "id": "q1",
+     "text": "Why do you like long cycling trips?"
+    },
+    {
+     "id": "q2",
+     "text": "What's the most difficult thing about this trip?"
+    },
+    {
+     "id": "q3",
+     "text": "Where do you sleep?"
+    },
+    {
+     "id": "q4",
+     "text": "What do you do in the evenings?"
+    },
+    {
+     "id": "q5",
+     "text": "Are you planning any more trips?"
+    }
+   ],
+   "explanation": "The interview goes: why he likes trips → the most difficult thing → where they sleep → the evenings → more trips.",
+   "explanationAr": "ترتيب الأسئلة: لماذا يحب الرحلات ← أصعب شيء ← أين ينامون ← المساء ← رحلات أخرى.",
+   "tip": "Scan for the question lines",
+   "hints": [
+    "Look at the lines that start with WOW!",
+    "The last question is about the future."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-036",
+   "lesson": "e1-8",
+   "concept": "e18-henry",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "\"Henry Wilson is a keen cyclist.\" What does keen mean here?",
+   "passage": "e1c-henry",
+   "evidence": "Henry Wilson is a keen cyclist.",
+   "options": [
+    {
+     "id": "a",
+     "text": "He likes cycling very much."
+    },
+    {
+     "id": "b",
+     "text": "He is a new cyclist."
+    },
+    {
+     "id": "c",
+     "text": "He is a tired cyclist."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Henry has done long trips; keen is about liking, not being new.",
+    "c": "keen is a happy, interested word, not a tired one."
+   },
+   "explanation": "A keen cyclist likes cycling very much: Henry loves going on long trips.",
+   "explanationAr": "keen تعني متحمّس ويحب الشيء كثيرًا.",
+   "tip": "keen = very interested 😍",
+   "hints": [
+    "How does Henry feel about cycling in his answers?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-037",
+   "lesson": "e1-8",
+   "concept": "e18-words",
+   "skill": "vocabulary",
+   "type": "match",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "prompt": "Match each word from the interview with its meaning.",
+   "pairs": [
+    {
+     "id": "m1",
+     "left": "freedom",
+     "leftEmoji": "🕊️",
+     "right": "being free to go where you want"
+    },
+    {
+     "id": "m2",
+     "left": "altitude",
+     "leftEmoji": "🏔️",
+     "right": "how high a place is"
+    },
+    {
+     "id": "m3",
+     "left": "oxygen",
+     "leftEmoji": "💨",
+     "right": "the gas we breathe"
+    },
+    {
+     "id": "m4",
+     "left": "energy",
+     "leftEmoji": "⚡",
+     "right": "the power your body needs to move"
+    },
+    {
+     "id": "m5",
+     "left": "hostel",
+     "leftEmoji": "🏨",
+     "right": "a cheap place where travellers sleep"
+    },
+    {
+     "id": "m6",
+     "left": "route",
+     "leftEmoji": "🗺️",
+     "right": "the way you plan to travel"
+    }
+   ],
+   "explanation": "freedom = being free; altitude = how high a place is; oxygen = what we breathe; energy = power to move; hostel = cheap place for travellers; route = the way you travel.",
+   "explanationAr": "freedom الحرية، altitude الارتفاع، oxygen الأكسجين، energy الطاقة، hostel نُزُل، route خط السير.",
+   "tip": "Use the interview to guess meanings",
+   "hints": [
+    "Start with the words you know best.",
+    "Think about where each word is in the interview."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-038",
+   "lesson": "e1-8",
+   "concept": "e18-words",
+   "skill": "vocabulary",
+   "type": "text",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Unscramble the letters. It's a cheap place where travellers sleep.",
+   "scrambled": "letsoh",
+   "answer": "hostel",
+   "mistakes": [
+    {
+     "answer": "hotel",
+     "why": "Close! But the letters make hostel – there is an s."
+    }
+   ],
+   "explanation": "A hostel is a cheap place where travellers can sleep. Henry and Cody are sleeping in one tonight.",
+   "explanationAr": "hostel نُزُل رخيص للمسافرين.",
+   "tip": "hostel = 🏨 for travellers",
+   "hints": [
+    "It has 6 letters.",
+    "It starts with h."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-039",
+   "lesson": "e1-8",
+   "concept": "e18-words",
+   "skill": "vocabulary",
+   "type": "text",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Complete the word. High in the mountains there isn't much of this, so it's hard to breathe.",
+   "pattern": "o x _ g _ n",
+   "answer": "oxygen",
+   "explanation": "Henry says there isn't much oxygen above 4,000 metres.",
+   "explanationAr": "قال هنري إن الأكسجين قليل فوق ٤٠٠٠ متر.",
+   "tip": "high up = less oxygen 💨",
+   "hints": [
+    "We breathe it.",
+    "It starts with ox."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-040",
+   "lesson": "e1-8",
+   "concept": "e18-words",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the best word.",
+   "sentence": "Let's plan our ___ before we start cycling. Which roads will we take?",
+   "options": [
+    {
+     "id": "route",
+     "text": "route"
+    },
+    {
+     "id": "energy",
+     "text": "energy"
+    },
+    {
+     "id": "freedom",
+     "text": "freedom"
+    },
+    {
+     "id": "altitude",
+     "text": "altitude"
+    }
+   ],
+   "answer": "route",
+   "wrongWhy": {
+    "energy": "energy is the power your body needs; you don't plan it with roads.",
+    "freedom": "freedom is a feeling of being free, not a way to travel.",
+    "altitude": "altitude is how high a place is, not which roads you take."
+   },
+   "explanation": "Your route is the way you plan to travel, like which roads you will take.",
+   "explanationAr": "route هو خط السير والطرق التي ستسلكينها.",
+   "tip": "route = 🗺️ the way you go",
+   "hints": [
+    "The second sentence talks about roads.",
+    "Which word is about the way you travel?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-041",
+   "lesson": "e1-8",
+   "concept": "e18-words",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the best word.",
+   "sentence": "I'm so hungry! Swimming uses a lot of ___.",
+   "options": [
+    {
+     "id": "energy",
+     "text": "energy"
+    },
+    {
+     "id": "oxygen",
+     "text": "oxygen"
+    },
+    {
+     "id": "altitude",
+     "text": "altitude"
+    },
+    {
+     "id": "hostel",
+     "text": "hostel"
+    }
+   ],
+   "answer": "energy",
+   "wrongWhy": {
+    "oxygen": "We breathe oxygen, but being hungry is about energy.",
+    "altitude": "altitude is about height; swimming doesn't use it.",
+    "hostel": "A hostel is a place to sleep."
+   },
+   "explanation": "Sport uses a lot of energy, so you get hungry – just like Henry when he is cycling.",
+   "explanationAr": "الرياضة تستهلك طاقة كثيرة فنجوع، مثل هنري عندما يقود الدراجة.",
+   "tip": "food → energy ⚡",
+   "hints": [
+    "Why are you hungry after sport?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-042",
+   "lesson": "e1-8",
+   "concept": "e18-words",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Which word is the odd one out?",
+   "options": [
+    {
+     "id": "route",
+     "text": "route",
+     "emoji": "🗺️"
+    },
+    {
+     "id": "hostel",
+     "text": "hostel",
+     "emoji": "🏨"
+    },
+    {
+     "id": "tent",
+     "text": "tent",
+     "emoji": "⛺"
+    }
+   ],
+   "answer": "route",
+   "wrongWhy": {
+    "hostel": "A hostel is a place to sleep, like a tent.",
+    "tent": "A tent is a place to sleep, like a hostel."
+   },
+   "explanation": "A hostel and a tent are places to sleep. A route is the way you travel.",
+   "explanationAr": "hostel وtent أماكن للنوم، أما route فهو خط السير.",
+   "tip": "Odd one out = different group",
+   "hints": [
+    "Two words are places to sleep."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-043",
+   "lesson": "e1-8",
+   "concept": "e18-words",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Listen. Which word from the interview is the cyclist talking about?",
+   "audio": "We're cycling over the mountains. We're very high now, and it's hard to breathe.",
+   "evidence": "We're very high now",
+   "options": [
+    {
+     "id": "altitude",
+     "text": "altitude",
+     "emoji": "🏔️"
+    },
+    {
+     "id": "energy",
+     "text": "energy",
+     "emoji": "⚡"
+    },
+    {
+     "id": "freedom",
+     "text": "freedom",
+     "emoji": "🕊️"
+    }
+   ],
+   "answer": "altitude",
+   "wrongWhy": {
+    "energy": "The cyclist doesn't talk about being hungry or tired.",
+    "freedom": "freedom is a nice feeling; here the problem is being very high."
+   },
+   "explanation": "Being very high in the mountains is about altitude, and high altitude makes breathing hard.",
+   "explanationAr": "الحديث عن الارتفاع العالي في الجبال، أي altitude.",
+   "tip": "very high = altitude 🏔️",
+   "hints": [
+    "Where is the cyclist?",
+    "What is difficult there?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-044",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "grammar",
+   "type": "match",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Match each question word with a good answer.",
+   "pairs": [
+    {
+     "id": "w1",
+     "left": "Who?",
+     "right": "My sister."
+    },
+    {
+     "id": "w2",
+     "left": "Where?",
+     "right": "At the sports centre."
+    },
+    {
+     "id": "w3",
+     "left": "When?",
+     "right": "On Saturday mornings."
+    },
+    {
+     "id": "w4",
+     "left": "Why?",
+     "right": "Because it's fun."
+    },
+    {
+     "id": "w5",
+     "left": "How?",
+     "right": "By bike."
+    }
+   ],
+   "explanation": "Who → a person, Where → a place, When → a time, Why → a reason (because), How → a way (by bike).",
+   "explanationAr": "Who شخص، Where مكان، When وقت، Why سبب، How طريقة.",
+   "tip": "Who 👤 Where 📍 When ⏰ Why ❓ How 🚲",
+   "hints": [
+    "Is the answer a person, a place or a time?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-045",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "application",
+   "prompt": "Choose the question word.",
+   "sentence": "___ do you practise karate? – At the sports centre.",
+   "options": [
+    {
+     "id": "where",
+     "text": "Where"
+    },
+    {
+     "id": "when",
+     "text": "When"
+    },
+    {
+     "id": "who",
+     "text": "Who"
+    },
+    {
+     "id": "why",
+     "text": "Why"
+    }
+   ],
+   "answer": "where",
+   "wrongWhy": {
+    "when": "When asks about a time, but the answer is a place.",
+    "who": "Who asks about a person.",
+    "why": "Why asks for a reason with because."
+   },
+   "explanation": "The answer is a place (at the sports centre), so the question starts with Where.",
+   "explanationAr": "الجواب مكان، فنسأل بـ Where.",
+   "tip": "Where → a place 📍",
+   "hints": [
+    "Look at the answer.",
+    "Is it a time, a person or a place?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-046",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the question word.",
+   "sentence": "___ did you start doing karate? – When I was seven.",
+   "options": [
+    {
+     "id": "when",
+     "text": "When"
+    },
+    {
+     "id": "where",
+     "text": "Where"
+    },
+    {
+     "id": "who",
+     "text": "Who"
+    },
+    {
+     "id": "how",
+     "text": "How"
+    }
+   ],
+   "answer": "when",
+   "wrongWhy": {
+    "where": "Where needs a place in the answer.",
+    "who": "Who needs a person in the answer.",
+    "how": "How asks about the way, e.g. by bike."
+   },
+   "explanation": "When I was seven is a time, so we ask When did you start …?",
+   "explanationAr": "الجواب وقت (عندما كنت في السابعة)، فنسأل بـ When.",
+   "tip": "When → a time ⏰",
+   "hints": [
+    "What kind of information is in the answer?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-047",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "grammar",
+   "type": "text",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Type the missing question word: \"____ do you like skiing?\" \"Because it's exciting!\"",
+   "answer": "Why",
+   "mistakes": [
+    {
+     "answer": "What",
+     "why": "What asks for a thing; an answer with because needs Why."
+    },
+    {
+     "answer": "How",
+     "why": "How asks about the way; because gives a reason, so use Why."
+    }
+   ],
+   "explanation": "An answer with Because gives a reason, so the question word is Why.",
+   "explanationAr": "الجواب يبدأ بـ Because أي سبب، فالسؤال بـ Why.",
+   "tip": "Why? → Because …",
+   "hints": [
+    "Look at the first word of the answer."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-048",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Read the answer: \"I go swimming twice a week.\" Which question is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "How often do you go swimming?"
+    },
+    {
+     "id": "b",
+     "text": "Where do you go swimming?"
+    },
+    {
+     "id": "c",
+     "text": "Who goes swimming?"
+    },
+    {
+     "id": "d",
+     "text": "Why do you go swimming?"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "The answer has no place in it.",
+    "c": "The answer doesn't name a person.",
+    "d": "The answer gives no reason (because)."
+   },
+   "explanation": "twice a week tells us how often, so the question is How often do you go swimming?",
+   "explanationAr": "twice a week تدل على عدد المرات، فنسأل How often.",
+   "tip": "How often? → once / twice a week",
+   "hints": [
+    "What information is in the answer: a place, a person or how many times?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-049",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Find the correct question.",
+   "options": [
+    {
+     "id": "a",
+     "text": "Where do you sleep?"
+    },
+    {
+     "id": "b",
+     "text": "Where you sleep?"
+    },
+    {
+     "id": "c",
+     "text": "Where you do sleep?"
+    },
+    {
+     "id": "d",
+     "text": "Where sleep you?"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "It needs do: Where do you …?",
+    "c": "do must come before you, not after.",
+    "d": "We need do, and you comes before the verb."
+   },
+   "explanation": "In Present simple questions we put do before you: Where do you sleep?",
+   "explanationAr": "في أسئلة المضارع البسيط نضع do قبل you: Where do you sleep?",
+   "tip": "Question word + do + you + verb?",
+   "hints": [
+    "Which helping word do we need in questions?",
+    "Where does it go?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-050",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "writing",
+   "type": "order",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make an interview question.",
+   "items": [
+    {
+     "id": "o1",
+     "text": "What"
+    },
+    {
+     "id": "o2",
+     "text": "is"
+    },
+    {
+     "id": "o3",
+     "text": "the"
+    },
+    {
+     "id": "o4",
+     "text": "best"
+    },
+    {
+     "id": "o5",
+     "text": "thing"
+    },
+    {
+     "id": "o6",
+     "text": "about"
+    },
+    {
+     "id": "o7",
+     "text": "karate?"
+    }
+   ],
+   "explanation": "Asking about the best thing finds out interesting information: What is the best thing about karate?",
+   "explanationAr": "السؤال عن «الأفضل» يكشف معلومات ممتعة: What is the best thing about karate?",
+   "tip": "Question word first, ? at the end",
+   "hints": [
+    "Start with the question word.",
+    "Ask about the best …"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-051",
+   "lesson": "e1-8",
+   "concept": "e18-qwords",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen to the reporter. Which question word does she use?",
+   "audio": "When do you go to the karate club? On Mondays and Thursdays, after school.",
+   "evidence": "When do you go to the karate club?",
+   "options": [
+    {
+     "id": "when",
+     "text": "When"
+    },
+    {
+     "id": "where",
+     "text": "Where"
+    },
+    {
+     "id": "who",
+     "text": "Who"
+    }
+   ],
+   "answer": "when",
+   "wrongWhy": {
+    "where": "Where would give a place, but the answer gives days.",
+    "who": "Who would give a person, but the answer gives days."
+   },
+   "explanation": "The reporter asks When do you go to the karate club? and the girl answers with days and a time.",
+   "explanationAr": "سألت المراسلة بـ When، فأجابت الفتاة بالأيام والوقت.",
+   "tip": "When → days and times",
+   "hints": [
+    "Listen to the first word of the question.",
+    "The answer is about days."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-052",
+   "lesson": "e1-8",
+   "concept": "e18-interview",
+   "skill": "reading",
+   "type": "number",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Read the interview with Noor. How old was Noor when she started photography? Type the number.",
+   "passage": "e1c-noor",
+   "evidence": "I started when I was eight.",
+   "explanation": "Noor says I started when I was eight. She is eleven now.",
+   "explanationAr": "قالت نور إنها بدأت عندما كانت في الثامنة، وعمرها الآن أحد عشر عامًا.",
+   "tip": "When did …? → a time in the past",
+   "hints": [
+    "Find the question When did you start this hobby?"
+   ],
+   "answer": "8",
+   "mistakes": [
+    {
+     "answer": "11",
+     "why": "Noor is eleven now; she started earlier."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-C-053",
+   "lesson": "e1-8",
+   "concept": "e18-interview",
+   "skill": "reading",
+   "type": "tf",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "True or false? Noor finds it easy to take photos of birds.",
+   "passage": "e1c-noor",
+   "evidence": "Birds! They don't stay still.",
+   "answer": false,
+   "wrongWhy": "Her uncle is good at bird photos, but for Noor birds are the most difficult thing.",
+   "explanation": "Noor says birds are the most difficult thing because they don't stay still.",
+   "explanationAr": "قالت نور إن الطيور أصعب شيء لأنها لا تبقى ساكنة.",
+   "tip": "most difficult ≠ easy",
+   "hints": [
+    "Find the question about the most difficult thing."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-054",
+   "lesson": "e1-8",
+   "concept": "e18-interview",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "A good interview asks about the biggest, the best, the most interesting… Which question in Noor's interview does this?",
+   "passage": "e1c-noor",
+   "evidence": "What is your best photo?",
+   "options": [
+    {
+     "id": "a",
+     "text": "What is your best photo?"
+    },
+    {
+     "id": "b",
+     "text": "When did you start this hobby?"
+    },
+    {
+     "id": "c",
+     "text": "Who helps you?"
+    },
+    {
+     "id": "d",
+     "text": "Why do you like photography?"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "This asks about a time, not the best thing.",
+    "c": "This asks about a person.",
+    "d": "This asks for a reason."
+   },
+   "explanation": "What is your best photo? asks about the best, which finds out interesting information.",
+   "explanationAr": "السؤال What is your best photo? يسأل عن «الأفضل» كما تنصح قواعد المقابلة الجيدة.",
+   "tip": "Ask about the best / biggest / most …",
+   "hints": [
+    "Read the tip in the question again.",
+    "Does each question ask about a time, a person, a reason… or the top one?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-055",
+   "lesson": "e1-8",
+   "concept": "e18-interview",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "What is Noor doing at the moment?",
+   "passage": "e1c-noor",
+   "evidence": "I'm taking photos of the flowers in our garden for a school project.",
+   "options": [
+    {
+     "id": "a",
+     "text": "taking photos of flowers for a school project",
+     "emoji": "🌸"
+    },
+    {
+     "id": "b",
+     "text": "taking photos of birds with her uncle",
+     "emoji": "🐦"
+    },
+    {
+     "id": "c",
+     "text": "taking photos of turtles on the beach",
+     "emoji": "🐢"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Her uncle is good at bird photos, but that isn't what Noor is doing now.",
+    "c": "The turtle photo is her best photo from before; it's in her bedroom now."
+   },
+   "explanation": "At the moment she is taking photos of the flowers in her garden for a school project.",
+   "explanationAr": "الآن تلتقط نور صورًا للزهور في الحديقة لمشروع مدرسي.",
+   "tip": "at the moment = now (am/is/are + -ing)",
+   "hints": [
+    "Find the last question.",
+    "Look for I'm …ing."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-056",
+   "lesson": "e1-8",
+   "concept": "e18-interview",
+   "skill": "writing",
+   "type": "writing",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "prompt": "Write an interview with a friend about her favourite sport or hobby. Write four questions and answers.",
+   "task": "interview",
+   "minWords": 45,
+   "words": [
+    "Why",
+    "When",
+    "Where",
+    "Who",
+    "the best",
+    "the most difficult",
+    "because",
+    "every week"
+   ],
+   "guide": [
+    "Who are you interviewing? What is her hobby?",
+    "Why does she like it?",
+    "When and where does she do it?",
+    "Who helps her?",
+    "What is the best or most difficult thing about it?"
+   ],
+   "starter": "Interview with my friend Maha about karate.",
+   "model": "Interview with my friend Maha about karate.\nWhy do you like karate? I like it because it's exciting and it helps me keep fit.\nWhen did you start? I started when I was seven.\nWhere do you practise? At the sports centre, every Monday and Wednesday.\nWhat's the most difficult thing about karate? Kicking really high! But my teacher helps me.",
+   "explanation": "A good interview uses different question words and asks about the best or most interesting things.",
+   "explanationAr": "المقابلة الجيدة تستخدم كلمات سؤال مختلفة وتسأل عن الأفضل والأكثر إثارة.",
+   "tip": "what · when · where · who · why · how",
+   "hints": [
+    "Choose a friend and a hobby.",
+    "Use a different question word for each question.",
+    "Ask one question about the best or most difficult thing."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-057",
+   "lesson": "e1-8",
+   "concept": "e18-interview",
+   "skill": "writing",
+   "type": "writing",
+   "difficulty": "challenge",
+   "cognitive": "application",
+   "prompt": "You are a reporter for WOW! Magazine. Write an interview with Huda about gymnastics. Use your ideas and the story.",
+   "task": "interview",
+   "minWords": 50,
+   "words": [
+    "Why",
+    "When",
+    "Who",
+    "What",
+    "mat",
+    "stretching",
+    "music",
+    "at the moment"
+   ],
+   "guide": [
+    "Why do you like gymnastics?",
+    "When did you start?",
+    "Who watches you or helps you?",
+    "What's the most difficult thing?",
+    "Are you learning anything new at the moment?"
+   ],
+   "starter": "WOW!: Why do you like gymnastics, Huda?",
+   "model": "WOW!: Why do you like gymnastics, Huda?\nHuda: It's fun, and I love the music!\nWOW!: When did you start?\nHuda: I started on a Saturday at the sports centre. First I tried volleyball and karate, but I didn't like them.\nWOW!: Who helps you?\nHuda: My mum. She told me to try it!\nWOW!: What's the most difficult thing?\nHuda: Stretching on my mat every day. But my friends say I'm good at it!",
+   "explanation": "Use a variety of question words and interesting questions, and give Huda full answers.",
+   "explanationAr": "استخدمي كلمات سؤال متنوعة وأسئلة ممتعة، وأعطي هدى إجابات كاملة.",
+   "tip": "Interesting questions = interesting answers",
+   "hints": [
+    "Ask why she likes gymnastics.",
+    "Ask about the most difficult thing.",
+    "Ask what she is doing at the moment."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-058",
+   "lesson": "e1-8",
+   "concept": "e18-interview",
+   "skill": "writing",
+   "type": "multi",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Which tips help you write a good interview? Choose ALL the good tips.",
+   "options": [
+    {
+     "id": "a",
+     "text": "Use lots of question words like what, why and who."
+    },
+    {
+     "id": "b",
+     "text": "Ask about the biggest, the best, the most interesting…"
+    },
+    {
+     "id": "c",
+     "text": "Ask only yes/no questions."
+    },
+    {
+     "id": "d",
+     "text": "Write the most interesting questions and answers neatly."
+    },
+    {
+     "id": "e",
+     "text": "Ask the same question two times."
+    }
+   ],
+   "answers": [
+    "a",
+    "b",
+    "d"
+   ],
+   "explanation": "Good interviews use lots of question words, ask about the biggest/best/most interesting things and show the most interesting questions neatly.",
+   "explanationAr": "المقابلة الجيدة: كلمات سؤال كثيرة، أسئلة عن الأفضل والأكبر، وكتابة أجمل الأسئلة بخط مرتّب.",
+   "tip": "Many question words + interesting answers",
+   "hints": [
+    "Remember the How to write… box.",
+    "Do yes/no questions give interesting information?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-059",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "reading",
+   "type": "match",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Match each reader with what they write about.",
+   "passage": "e1c-comments",
+   "evidence": "I can't ride a bike yet, but my sister is teaching me",
+   "explanation": "Laila is learning to ride a bike, Omar plays board games, Reem is making a model boat and Sami goes to gymnastics.",
+   "explanationAr": "ليلى تتعلّم ركوب الدراجة، وعمر يلعب ألعاب الطاولة، وريم تصنع مجسّم قارب، وسامي يذهب إلى صف الجمباز.",
+   "tip": "Scan for each name, then read its comment",
+   "hints": [
+    "Look for bike in the comments."
+   ],
+   "pairs": [
+    {
+     "id": "r1",
+     "left": "Laila",
+     "right": "learning to ride a bike"
+    },
+    {
+     "id": "r2",
+     "left": "Omar",
+     "right": "board games with his grandfather"
+    },
+    {
+     "id": "r3",
+     "left": "Reem",
+     "right": "making a model boat"
+    },
+    {
+     "id": "r4",
+     "left": "Sami",
+     "right": "a gymnastics class"
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-C-060",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "prompt": "What does Omar think about board games?",
+   "passage": "e1c-comments",
+   "evidence": "It's quiet and relaxing, but it isn't boring!",
+   "options": [
+    {
+     "id": "a",
+     "text": "They are relaxing and not boring."
+    },
+    {
+     "id": "b",
+     "text": "They are boring."
+    },
+    {
+     "id": "c",
+     "text": "They are too difficult."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Omar says it isn't boring.",
+    "c": "Omar never says difficult; Reem says that about models."
+   },
+   "explanation": "Omar says board games are quiet and relaxing, but they aren't boring.",
+   "explanationAr": "قال عمر إن ألعاب الطاولة هادئة ومريحة لكنها ليست مملة.",
+   "tip": "but + isn't = careful, it's a NOT!",
+   "hints": [
+    "Read Omar's adjectives carefully.",
+    "Watch out for isn't."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-061",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "reading",
+   "type": "tf",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "True or false? Reem's dad helps her make models.",
+   "passage": "e1c-comments",
+   "evidence": "my dad helps me",
+   "answer": true,
+   "wrongWhy": "Reem writes my dad helps me.",
+   "explanation": "Reem says It's difficult, but my dad helps me.",
+   "explanationAr": "قالت ريم: إنه صعب لكن أبي يساعدني.",
+   "tip": "Find the name, then read the details",
+   "hints": [
+    "Find Reem's comment."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-062",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "vocabulary",
+   "type": "multi",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Which readers write about a SPORT? Choose ALL the correct names.",
+   "passage": "e1c-comments",
+   "options": [
+    {
+     "id": "laila",
+     "text": "Laila"
+    },
+    {
+     "id": "omar",
+     "text": "Omar"
+    },
+    {
+     "id": "reem",
+     "text": "Reem"
+    },
+    {
+     "id": "sami",
+     "text": "Sami"
+    }
+   ],
+   "answers": [
+    "laila",
+    "sami"
+   ],
+   "explanation": "Cycling (Laila) and gymnastics (Sami) are sports. Board games (Omar) and making models (Reem) are hobbies, not sports.",
+   "explanationAr": "ركوب الدراجة والجمباز رياضتان، أما ألعاب الطاولة وصنع المجسّمات فهوايات.",
+   "tip": "Sport = you move your body 🏃",
+   "hints": [
+    "Which activities make you move a lot?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-063",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "prompt": "Why did Sami start going to a gymnastics class? Choose the best answer.",
+   "passage": "e1c-comments",
+   "evidence": "I wanted to try something new",
+   "options": [
+    {
+     "id": "a",
+     "text": "He read a story about gymnastics and wanted to try something new."
+    },
+    {
+     "id": "b",
+     "text": "His sister teaches gymnastics."
+    },
+    {
+     "id": "c",
+     "text": "He didn't like board games."
+    },
+    {
+     "id": "d",
+     "text": "He won a gymnastics game last week."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "The sister is in Laila's comment, not Sami's.",
+    "c": "Omar writes about board games, not Sami.",
+    "d": "Omar won a game; Sami never says he won anything."
+   },
+   "explanation": "After reading the story, Sami wanted to try something new, and he thinks it's important to keep fit.",
+   "explanationAr": "بعد قراءة القصة أراد سامي تجربة شيء جديد، ويرى أن الحفاظ على اللياقة مهم.",
+   "tip": "Look for after, because, wanted",
+   "hints": [
+    "What did Sami read?",
+    "What did he want after that?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-064",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Listen. What is Basma's hobby?",
+   "audio": "Hi! I'm Basma. I'm taking art classes with my friends. Painting makes me relaxed, and I love using different colours.",
+   "evidence": "Painting makes me relaxed",
+   "options": [
+    {
+     "id": "paint",
+     "text": "painting",
+     "emoji": "🎨"
+    },
+    {
+     "id": "karate",
+     "text": "karate",
+     "emoji": "🥋"
+    },
+    {
+     "id": "cycle",
+     "text": "cycling",
+     "emoji": "🚴"
+    }
+   ],
+   "answer": "paint",
+   "wrongWhy": {
+    "karate": "Karate is Cedric's sport, not Basma's.",
+    "cycle": "John writes about cycling."
+   },
+   "explanation": "Basma says painting makes her relaxed and she loves using different colours.",
+   "explanationAr": "قالت بسمة إن الرسم يريحها وتحب استخدام الألوان.",
+   "tip": "colours → painting 🎨",
+   "hints": [
+    "Listen for the activity word."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-065",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "listening",
+   "type": "number",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen to Cedric. How many friends are in the karate club now? Type the number.",
+   "audio": "First there were just three friends. Now there are thirteen, and we go to classes every Saturday.",
+   "evidence": "Now there are thirteen",
+   "explanation": "First there were three friends; now there are thirteen.",
+   "explanationAr": "في البداية كانوا ثلاثة، والآن صاروا ثلاثة عشر.",
+   "tip": "first … now … = it changed",
+   "hints": [
+    "You hear two numbers.",
+    "Which one goes with now?"
+   ],
+   "answer": "13",
+   "mistakes": [
+    {
+     "answer": "3",
+     "why": "Three was at the start (First…). Listen for now."
+    },
+    {
+     "answer": "30",
+     "why": "Listen again: thirteen (13), not thirty (30)."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-C-066",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen to John. Where did he find the book?",
+   "audio": "I enjoyed the interview about cycling. I found a book about cycling in the library, and I'm reading it now.",
+   "evidence": "in the library",
+   "options": [
+    {
+     "id": "lib",
+     "text": "in the library",
+     "emoji": "📚"
+    },
+    {
+     "id": "class",
+     "text": "in the classroom",
+     "emoji": "🏫"
+    },
+    {
+     "id": "shop",
+     "text": "in a shop",
+     "emoji": "🏪"
+    }
+   ],
+   "answer": "lib",
+   "wrongWhy": {
+    "class": "John doesn't mention his classroom.",
+    "shop": "He didn't buy it; he found it in the library."
+   },
+   "explanation": "John says I found a book about cycling in the library.",
+   "explanationAr": "قال جون إنه وجد كتابًا عن ركوب الدراجة في المكتبة.",
+   "tip": "Where? → listen for in/at + a place",
+   "hints": [
+    "Listen for the place after in the."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-067",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen to Malik. What is he going to do in the summer?",
+   "audio": "I can swim, but I'd like to be very good at swimming. Then I'm going to go snorkelling in the summer!",
+   "evidence": "I'm going to go snorkelling in the summer!",
+   "options": [
+    {
+     "id": "snork",
+     "text": "go snorkelling",
+     "emoji": "🤿"
+    },
+    {
+     "id": "ski",
+     "text": "go skiing",
+     "emoji": "⛷️"
+    },
+    {
+     "id": "cycle",
+     "text": "go cycling",
+     "emoji": "🚴"
+    }
+   ],
+   "answer": "snork",
+   "wrongWhy": {
+    "ski": "Skiing is in Henry's comment, not Malik's.",
+    "cycle": "Malik doesn't talk about cycling."
+   },
+   "explanation": "Malik says Then I'm going to go snorkelling in the summer!",
+   "explanationAr": "قال مالك إنه سيذهب للغطس في الصيف.",
+   "tip": "going to = a plan for the future",
+   "hints": [
+    "Listen for in the summer."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-068",
+   "lesson": "e1-9",
+   "concept": "e19-comments",
+   "skill": "listening",
+   "type": "tf",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Listen to Henry's comment. True or false? Henry often does winter sports.",
+   "audio": "It doesn't snow here often, so we don't really do winter sports. But I'd like to learn to ski.",
+   "evidence": "we don't really do winter sports",
+   "answer": false,
+   "wrongWhy": "He says we don't really do winter sports; skiing is something he'd like to learn.",
+   "explanation": "It doesn't snow there often, so they don't really do winter sports. He would like to learn to ski.",
+   "explanationAr": "لا يتساقط الثلج كثيرًا عنده، لذلك لا يمارسون الرياضات الشتوية، لكنه يريد تعلّم التزلّج.",
+   "tip": "I'd like to = I want to (not yet!)",
+   "hints": [
+    "Does it snow a lot where Henry lives?",
+    "Can he ski now?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-069",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "tf",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "True or false? In the exam, you should read the whole text before you choose the words for the gaps.",
+   "explanation": "Read the whole text first, then try each option in your head to hear which one sounds correct.",
+   "explanationAr": "اقرئي النص كله أولًا، ثم جرّبي كل خيار في رأسك.",
+   "tip": "Read ALL first, then choose",
+   "hints": [
+    "Think about the exam box in the lesson."
+   ],
+   "answer": true,
+   "wrongWhy": "The exam tip says: read the whole text first, then try each option in your head."
+  },
+  {
+   "id": "ENG-E1-C-070",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the correct word for the gap.",
+   "sentence": "There are lots of different games ___ you can play with a ball.",
+   "options": [
+    {
+     "id": "which",
+     "text": "which"
+    },
+    {
+     "id": "who",
+     "text": "who"
+    },
+    {
+     "id": "where",
+     "text": "where"
+    }
+   ],
+   "answer": "which",
+   "wrongWhy": {
+    "who": "who is for people, but games are things.",
+    "where": "where is for places, but games are things."
+   },
+   "explanation": "We are talking about things (games), so we use which.",
+   "explanationAr": "نتحدث عن أشياء (ألعاب)، فنستخدم which.",
+   "tip": "which → things · who → people · where → places",
+   "hints": [
+    "Is the word before the gap a person, a thing or a place?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-071",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the correct word for the gap.",
+   "sentence": "Some girls at my school ___ volleyball every Tuesday.",
+   "options": [
+    {
+     "id": "play",
+     "text": "play"
+    },
+    {
+     "id": "plays",
+     "text": "plays"
+    },
+    {
+     "id": "playing",
+     "text": "playing"
+    }
+   ],
+   "answer": "play",
+   "wrongWhy": {
+    "plays": "plays is for he/she/it; girls is plural.",
+    "playing": "playing needs are before it; the sentence needs a full verb."
+   },
+   "explanation": "Some girls is plural and it's a habit (every Tuesday), so we use the Present simple: play.",
+   "explanationAr": "الفاعل جمع والكلام عن عادة، فنستخدم play.",
+   "tip": "they / girls + play (no -s)",
+   "hints": [
+    "Is the subject one person or many?",
+    "Is it a habit or happening now?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-072",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "prompt": "Choose the correct word for the gap.",
+   "sentence": "You ___ have to be very tall to play basketball. Anyone can try!",
+   "options": [
+    {
+     "id": "dont",
+     "text": "don't"
+    },
+    {
+     "id": "arent",
+     "text": "aren't"
+    },
+    {
+     "id": "mustnt",
+     "text": "mustn't"
+    }
+   ],
+   "answer": "dont",
+   "wrongWhy": {
+    "arent": "aren't goes with adjectives or -ing, not with have to.",
+    "mustnt": "mustn't means it's not allowed, but the text says anyone can try."
+   },
+   "explanation": "We say you don't have to … when something isn't necessary. Anyone can try, so you don't need to be tall.",
+   "explanationAr": "نقول you don't have to عندما يكون الشيء غير ضروري.",
+   "tip": "don't have to = not necessary",
+   "hints": [
+    "Which word goes with have to?",
+    "The next sentence says anyone can try."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-073",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Choose the correct word for the gap.",
+   "sentence": "Some people don't like ___ in cold water.",
+   "options": [
+    {
+     "id": "swimming",
+     "text": "swimming"
+    },
+    {
+     "id": "swim",
+     "text": "swim"
+    },
+    {
+     "id": "swam",
+     "text": "swam"
+    }
+   ],
+   "answer": "swimming",
+   "wrongWhy": {
+    "swim": "After like we need the -ing form in this exam text.",
+    "swam": "swam is the past; the sentence is about now in general."
+   },
+   "explanation": "After like we use the verb + -ing: don't like swimming.",
+   "explanationAr": "بعد like نستخدم الفعل مع ing.",
+   "tip": "like / love / hate + …ing",
+   "hints": [
+    "What form comes after like?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-074",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Choose the correct word for the gap.",
+   "sentence": "You can go to the sports centre ___ learn karate.",
+   "options": [
+    {
+     "id": "for",
+     "text": "for"
+    },
+    {
+     "id": "to",
+     "text": "to"
+    },
+    {
+     "id": "where",
+     "text": "where"
+    }
+   ],
+   "answer": "to",
+   "wrongWhy": {
+    "for": "for goes before a noun (for a class), not before the verb learn.",
+    "where": "where starts a place clause; it doesn't show purpose."
+   },
+   "explanation": "to shows why you go there (the purpose): go to the sports centre to learn karate.",
+   "explanationAr": "to تعبّر عن الهدف: نذهب لكي نتعلم الكاراتيه.",
+   "tip": "to + verb = the reason you go",
+   "hints": [
+    "Why do you go to the sports centre?",
+    "Which word goes before a verb to show purpose?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-075",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Choose the correct word for the gap.",
+   "sentence": "Painting is relaxing ___ you can use lots of beautiful colours.",
+   "options": [
+    {
+     "id": "because",
+     "text": "because"
+    },
+    {
+     "id": "but",
+     "text": "but"
+    },
+    {
+     "id": "that",
+     "text": "that"
+    }
+   ],
+   "answer": "because",
+   "wrongWhy": {
+    "but": "but shows a contrast, but here the colours are a reason.",
+    "that": "that doesn't join a reason to the sentence here."
+   },
+   "explanation": "The second part gives the reason why painting is relaxing, so we use because.",
+   "explanationAr": "الجزء الثاني يعطي السبب، فنستخدم because.",
+   "tip": "because = the reason",
+   "hints": [
+    "Is the second part a reason or a surprise?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-076",
+   "lesson": "e1-9",
+   "concept": "e19-cloze",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Choose the correct word for the gap.",
+   "sentence": "My brother likes music ___ he can't sing!",
+   "options": [
+    {
+     "id": "but",
+     "text": "but"
+    },
+    {
+     "id": "because",
+     "text": "because"
+    },
+    {
+     "id": "that",
+     "text": "that"
+    }
+   ],
+   "answer": "but",
+   "wrongWhy": {
+    "because": "can't sing is not the reason he likes music.",
+    "that": "that doesn't join these two ideas."
+   },
+   "explanation": "Liking music but not being able to sing is a surprise (a contrast), so we use but.",
+   "explanationAr": "حب الموسيقى مع عدم القدرة على الغناء أمر متعاكس، فنستخدم but.",
+   "tip": "but = something different / a surprise",
+   "hints": [
+    "Does the second part explain the first, or is it different?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-077",
+   "lesson": "e1-9",
+   "concept": "e19-opinions",
+   "skill": "vocabulary",
+   "type": "sort",
+   "difficulty": "easy",
+   "cognitive": "understanding",
+   "prompt": "Sort the adjectives: do they say something good or not so good about a hobby?",
+   "buckets": [
+    {
+     "id": "good",
+     "label": "Good",
+     "emoji": "😀"
+    },
+    {
+     "id": "bad",
+     "label": "Not so good",
+     "emoji": "😕"
+    }
+   ],
+   "items": [
+    {
+     "id": "a1",
+     "text": "interesting",
+     "bucket": "good"
+    },
+    {
+     "id": "a2",
+     "text": "exciting",
+     "bucket": "good"
+    },
+    {
+     "id": "a3",
+     "text": "fun",
+     "bucket": "good"
+    },
+    {
+     "id": "a4",
+     "text": "relaxing",
+     "bucket": "good"
+    },
+    {
+     "id": "a5",
+     "text": "boring",
+     "bucket": "bad"
+    },
+    {
+     "id": "a6",
+     "text": "difficult",
+     "bucket": "bad"
+    }
+   ],
+   "explanation": "interesting, exciting, fun and relaxing are good; boring and difficult are not so good.",
+   "explanationAr": "interesting وexciting وfun وrelaxing صفات إيجابية، أما boring وdifficult فسلبية.",
+   "tip": "Use adjectives to give reasons",
+   "hints": [
+    "How do you feel when something is boring?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-078",
+   "lesson": "e1-9",
+   "concept": "e19-opinions",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "reasoning",
+   "prompt": "Choose the best reason.",
+   "sentence": "I like swimming because ___",
+   "options": [
+    {
+     "id": "a",
+     "text": "it helps me keep fit."
+    },
+    {
+     "id": "b",
+     "text": "I don't like water."
+    },
+    {
+     "id": "c",
+     "text": "it's boring."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Not liking water doesn't explain why you like swimming.",
+    "c": "boring is a reason for NOT liking something."
+   },
+   "explanation": "After I like swimming because… we need a good reason: it helps me keep fit.",
+   "explanationAr": "بعد I like … because نحتاج سببًا يناسب الحب: يساعدني على اللياقة.",
+   "tip": "I like … because + a good reason",
+   "hints": [
+    "The reason must match like.",
+    "Which one is a good thing?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-079",
+   "lesson": "e1-9",
+   "concept": "e19-opinions",
+   "skill": "vocabulary",
+   "type": "text",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Complete the adjective: \"Skiing down a mountain very fast is e x _ i t _ n g!\"",
+   "pattern": "e x _ i t _ n g",
+   "answer": "exciting",
+   "mistakes": [
+    {
+     "answer": "exiting",
+     "why": "Don't forget the c: ex-c-iting."
+    }
+   ],
+   "explanation": "exciting describes something that makes you feel happy and full of energy.",
+   "explanationAr": "exciting تعني مثير وممتع.",
+   "tip": "exciting = 🤩",
+   "hints": [
+    "It means very fun and fast."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-080",
+   "lesson": "e1-9",
+   "concept": "e19-opinions",
+   "skill": "writing",
+   "type": "order",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Put the words in order to make a sentence with a reason.",
+   "items": [
+    {
+     "id": "s1",
+     "text": "I"
+    },
+    {
+     "id": "s2",
+     "text": "like"
+    },
+    {
+     "id": "s3",
+     "text": "doing"
+    },
+    {
+     "id": "s4",
+     "text": "puzzles"
+    },
+    {
+     "id": "s5",
+     "text": "because"
+    },
+    {
+     "id": "s6",
+     "text": "they"
+    },
+    {
+     "id": "s7",
+     "text": "are"
+    },
+    {
+     "id": "s8",
+     "text": "interesting."
+    }
+   ],
+   "explanation": "I like + -ing, then because + the reason: I like doing puzzles because they are interesting.",
+   "explanationAr": "I like + فعل ing ثم because + السبب.",
+   "tip": "I like …ing because …",
+   "hints": [
+    "Start with I like.",
+    "because comes before the reason."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-081",
+   "lesson": "e1-9",
+   "concept": "e19-opinions",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Listen. Which hobby does the boy NOT like?",
+   "audio": "Do you think karate is fun? Yes, I do. I like it because it's exciting. But I don't like chess because it's difficult.",
+   "evidence": "I don't like chess because it's difficult.",
+   "options": [
+    {
+     "id": "chess",
+     "text": "chess",
+     "emoji": "♟️"
+    },
+    {
+     "id": "karate",
+     "text": "karate",
+     "emoji": "🥋"
+    },
+    {
+     "id": "both",
+     "text": "karate and chess",
+     "emoji": "🤷"
+    }
+   ],
+   "answer": "chess",
+   "wrongWhy": {
+    "karate": "He likes karate because it's exciting.",
+    "both": "He only says don't like about chess."
+   },
+   "explanation": "He likes karate because it's exciting, but he doesn't like chess because it's difficult.",
+   "explanationAr": "يحب الكاراتيه لأنه مثير، ولا يحب الشطرنج لأنه صعب.",
+   "tip": "I don't like … because …",
+   "hints": [
+    "He talks about two hobbies.",
+    "Listen for don't like."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-082",
+   "lesson": "e1-9",
+   "concept": "e19-opinions",
+   "skill": "writing",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Which sentence giving a reason is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "I like painting because it's relaxing."
+    },
+    {
+     "id": "b",
+     "text": "I like painting because relaxing."
+    },
+    {
+     "id": "c",
+     "text": "I like painting because it relaxing."
+    },
+    {
+     "id": "d",
+     "text": "I like paint because it's relaxing."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "It needs it's: because it's relaxing.",
+    "c": "It needs the verb is: it's (it is) relaxing.",
+    "d": "After like we use -ing: painting, not paint."
+   },
+   "explanation": "We need a subject and a verb after because: because it's relaxing. After like we use -ing: painting.",
+   "explanationAr": "بعد because نحتاج فاعلًا وفعلًا: because it's relaxing.",
+   "tip": "because + it's + adjective",
+   "hints": [
+    "Check the words after because.",
+    "Check the verb after like."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-083",
+   "lesson": "e1-9",
+   "concept": "e19-opinions",
+   "skill": "writing",
+   "type": "writing",
+   "difficulty": "challenge",
+   "cognitive": "application",
+   "prompt": "Look at the pictures. Write the story. Write 50 words or more.",
+   "task": "story",
+   "minWords": 50,
+   "pictures": [
+    {
+     "emoji": "🏠😕",
+     "caption": "Saturday at home"
+    },
+    {
+     "emoji": "👧🏻💡📷",
+     "caption": "A friend's idea"
+    },
+    {
+     "emoji": "🌳🐦📸",
+     "caption": "In the park"
+    },
+    {
+     "emoji": "📰😃",
+     "caption": "WOW! Magazine"
+    }
+   ],
+   "words": [
+    "bored",
+    "How about …ing?",
+    "That's a good idea!",
+    "camera",
+    "park",
+    "birds",
+    "magazine",
+    "happy"
+   ],
+   "guide": [
+    "Who is in the story? Where is she?",
+    "First: how does she feel?",
+    "Next: what does her friend suggest? What does she say?",
+    "Then: what does she do in the park?",
+    "In the end: what happens?"
+   ],
+   "starter": "It's Saturday, and Salma is at home. She is bored.",
+   "model": "It's Saturday, and Salma is at home. She is bored. Her friend Jana comes to her house. 'How about doing photography?' Jana says. 'That's a good idea!' says Salma. The girls go to the park with a camera. Salma takes photos of birds and flowers. Birds don't stay still, but she is patient. In the end, WOW! Magazine puts her best photo on a page. Salma is very happy!",
+   "explanation": "A good story says who, where and what happens first, next and at the end, with linking words.",
+   "explanationAr": "القصة الجيدة تذكر الشخصيات والمكان وما يحدث أولًا ثم بعد ذلك وفي النهاية.",
+   "tip": "First → Then → In the end",
+   "hints": [
+    "Who is in the story and how does she feel?",
+    "What does her friend suggest?",
+    "How does the story end?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-084",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Where are Maryam, Arwa and Huda?",
+   "passage": "e1c-volleyball",
+   "evidence": "are at the sports centre",
+   "options": [
+    {
+     "id": "centre",
+     "text": "at the sports centre",
+     "emoji": "🏟️"
+    },
+    {
+     "id": "park",
+     "text": "at the park",
+     "emoji": "🌳"
+    },
+    {
+     "id": "school",
+     "text": "at school",
+     "emoji": "🏫"
+    }
+   ],
+   "answer": "centre",
+   "wrongWhy": {
+    "park": "The park is in the other story, The Blue Butterfly.",
+    "school": "It's Saturday and they are at the sports centre, not school."
+   },
+   "explanation": "The story starts: Maryam, Arwa and Huda are at the sports centre.",
+   "explanationAr": "تبدأ القصة: البنات في المركز الرياضي.",
+   "tip": "Where? → read the first sentence",
+   "hints": [
+    "Read the first sentence of the story."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-085",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "reading",
+   "type": "tf",
+   "difficulty": "hard",
+   "cognitive": "understanding",
+   "prompt": "True or false? Huda doesn't like volleyball because she falls over.",
+   "passage": "e1c-volleyball",
+   "evidence": "Huda always misses the ball.",
+   "explanation": "Huda always misses the ball, so she doesn't enjoy playing volleyball.",
+   "explanationAr": "هدى تُخطئ الكرة دائمًا، لذلك لا تحب الكرة الطائرة.",
+   "tip": "misses = doesn't hit",
+   "hints": [
+    "What happens when Huda plays volleyball?"
+   ],
+   "answer": false,
+   "wrongWhy": "In volleyball she always misses the ball. She falls over in karate."
+  },
+  {
+   "id": "ENG-E1-C-086",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "reading",
+   "type": "tf",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "True or false? The karate room is quiet.",
+   "passage": "e1c-volleyball",
+   "evidence": "The karate room is loud",
+   "answer": false,
+   "wrongWhy": "It's loud, not quiet.",
+   "explanation": "The story says the karate room is loud.",
+   "explanationAr": "تقول القصة إن غرفة الكاراتيه صاخبة loud.",
+   "tip": "loud ≠ quiet",
+   "hints": [
+    "Find the sentence about the karate room."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-087",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "reading",
+   "type": "order",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Put what the people say in the order of the story.",
+   "passage": "e1c-volleyball",
+   "items": [
+    {
+     "id": "v1",
+     "text": "'Let's play volleyball!'",
+     "emoji": "🏐"
+    },
+    {
+     "id": "v2",
+     "text": "'We can do karate!'",
+     "emoji": "🥋"
+    },
+    {
+     "id": "v3",
+     "text": "'I can't do anything!'",
+     "emoji": "😞"
+    },
+    {
+     "id": "v4",
+     "text": "'You can try it!'",
+     "emoji": "👩"
+    },
+    {
+     "id": "v5",
+     "text": "'You can do gymnastics well, Huda!'",
+     "emoji": "🤸"
+    }
+   ],
+   "explanation": "Maryam suggests volleyball, Arwa suggests karate, Huda feels she can't do anything, Mum suggests gymnastics, and her friends praise her.",
+   "explanationAr": "مريم تقترح الكرة الطائرة، ثم أروى الكاراتيه، ثم تحزن هدى، ثم تقترح الأم الجمباز، وأخيرًا تمدحها صديقتاها.",
+   "tip": "Follow the sports: volleyball → karate → gymnastics",
+   "hints": [
+    "Which sport do they try first?",
+    "What does Mum say before Huda tries gymnastics?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-088",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "How does Huda feel when she says \"I can't do anything!\"?",
+   "passage": "e1c-volleyball",
+   "evidence": "'What's the matter, Huda?'",
+   "options": [
+    {
+     "id": "sad",
+     "text": "sad",
+     "emoji": "😞"
+    },
+    {
+     "id": "excited",
+     "text": "excited",
+     "emoji": "🤩"
+    },
+    {
+     "id": "bored",
+     "text": "bored",
+     "emoji": "😴"
+    }
+   ],
+   "answer": "sad",
+   "wrongWhy": {
+    "excited": "The girls were excited at the start, but now Huda thinks she can't do anything.",
+    "bored": "She isn't bored; she is upset because she isn't good at the sports."
+   },
+   "explanation": "Her mum asks What's the matter? and Huda thinks she isn't good at any sport, so she feels sad.",
+   "explanationAr": "سألتها أمها: ما بكِ؟ لأن هدى حزينة وتظن أنها لا تجيد شيئًا.",
+   "tip": "What's the matter? = Why are you sad?",
+   "hints": [
+    "What does Mum ask her?",
+    "Is Huda happy with volleyball and karate?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-089",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "What is the message of the story?",
+   "passage": "e1c-volleyball",
+   "evidence": "You can do lots of things, Huda!",
+   "options": [
+    {
+     "id": "a",
+     "text": "Everyone can find something they do well."
+    },
+    {
+     "id": "b",
+     "text": "Volleyball is the best sport."
+    },
+    {
+     "id": "c",
+     "text": "Karate is dangerous."
+    },
+    {
+     "id": "d",
+     "text": "Always drink water after sport."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "Huda doesn't like volleyball; the story doesn't say it's the best.",
+    "c": "Huda falls over, but the story isn't about danger.",
+    "d": "Water is only a small detail in the story."
+   },
+   "explanation": "Mum says You can do lots of things, and Huda finds gymnastics: everyone can find something they do well.",
+   "explanationAr": "رسالة القصة: كل شخص يستطيع أن يجد شيئًا يجيده.",
+   "tip": "Keep trying – you'll find YOUR thing!",
+   "hints": [
+    "What does Mum tell Huda?",
+    "What happens at the end?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-090",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. Which sport are the girls doing?",
+   "audio": "The girls are on mats and music is playing. Look, they're stretching!",
+   "evidence": "on mats and music is playing",
+   "options": [
+    {
+     "id": "gym",
+     "text": "gymnastics",
+     "emoji": "🤸"
+    },
+    {
+     "id": "karate",
+     "text": "karate",
+     "emoji": "🥋"
+    },
+    {
+     "id": "volley",
+     "text": "volleyball",
+     "emoji": "🏐"
+    }
+   ],
+   "answer": "gym",
+   "wrongWhy": {
+    "karate": "In karate everyone wears white clothes and belts; nothing about mats and music.",
+    "volley": "Volleyball needs a ball, not mats and music."
+   },
+   "explanation": "Mats, music and stretching are all part of gymnastics in the story.",
+   "explanationAr": "البُسُط والموسيقى والتمدد كلها من الجمباز في القصة.",
+   "tip": "mats + music = gymnastics 🤸",
+   "hints": [
+    "Listen for where they are.",
+    "What are they doing on the mats?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-091",
+   "lesson": "e1-10",
+   "concept": "e110-volleyball",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. Where are they?",
+   "audio": "Everyone in this room is wearing white clothes and belts. It's very loud!",
+   "evidence": "wearing white clothes and belts",
+   "options": [
+    {
+     "id": "karate",
+     "text": "in the karate room",
+     "emoji": "🥋"
+    },
+    {
+     "id": "gym",
+     "text": "in the gymnastics room",
+     "emoji": "🤸"
+    },
+    {
+     "id": "court",
+     "text": "on the volleyball court",
+     "emoji": "🏐"
+    }
+   ],
+   "answer": "karate",
+   "wrongWhy": {
+    "gym": "The gymnastics room has mats and music.",
+    "court": "Belts and white clothes are for karate, not volleyball."
+   },
+   "explanation": "White clothes, belts and a loud room describe the karate room.",
+   "explanationAr": "الملابس البيضاء والأحزمة والغرفة الصاخبة تصف غرفة الكاراتيه.",
+   "tip": "white clothes + belts = karate 🥋",
+   "hints": [
+    "What are the people wearing?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-092",
+   "lesson": "e1-10",
+   "concept": "e110-butterfly",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "What does Hassan want to do?",
+   "passage": "e1c-butterfly",
+   "evidence": "I want to take a photo of a blue butterfly",
+   "options": [
+    {
+     "id": "a",
+     "text": "take a photo of a blue butterfly",
+     "emoji": "🦋"
+    },
+    {
+     "id": "b",
+     "text": "play table tennis",
+     "emoji": "🏓"
+    },
+    {
+     "id": "c",
+     "text": "do puzzles",
+     "emoji": "🧩"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "He plays with the boys later, but that isn't what he wants at the start.",
+    "c": "Some girls are doing puzzles, not Hassan."
+   },
+   "explanation": "Hassan says I want to take a photo of a blue butterfly.",
+   "explanationAr": "قال حسن: أريد أن ألتقط صورة لفراشة زرقاء.",
+   "tip": "I want to … = my wish",
+   "hints": [
+    "Look for I want to in the story."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-093",
+   "lesson": "e1-10",
+   "concept": "e110-butterfly",
+   "skill": "reading",
+   "type": "match",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Match the people in the park with what they are doing.",
+   "passage": "e1c-butterfly",
+   "explanation": "Some girls are doing puzzles, the boys are putting on a show, and Jood and Hassan are doing photography.",
+   "explanationAr": "البنات يحللن الألغاز، والأولاد يقدّمون عرضًا، وجود وحسن يمارسان التصوير.",
+   "tip": "Read who does each activity",
+   "hints": [
+    "Find the word puzzles."
+   ],
+   "pairs": [
+    {
+     "id": "k1",
+     "left": "some girls",
+     "right": "doing puzzles"
+    },
+    {
+     "id": "k2",
+     "left": "a group of boys",
+     "right": "putting on a show"
+    },
+    {
+     "id": "k3",
+     "left": "Jood and Hassan",
+     "right": "doing photography"
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-C-094",
+   "lesson": "e1-10",
+   "concept": "e110-butterfly",
+   "skill": "reading",
+   "type": "tf",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "True or false? The boys in the show are wearing costumes and crowns.",
+   "passage": "e1c-butterfly",
+   "evidence": "They are wearing costumes and crowns.",
+   "answer": true,
+   "wrongWhy": "The story says the boys are wearing costumes and crowns.",
+   "explanation": "The story says They are wearing costumes and crowns.",
+   "explanationAr": "تقول القصة إن الأولاد يلبسون أزياء وتيجانًا.",
+   "tip": "costume + crown = a show 🎭",
+   "hints": [
+    "Find the boys in the story."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-095",
+   "lesson": "e1-10",
+   "concept": "e110-butterfly",
+   "skill": "reading",
+   "type": "order",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Put the events of The Blue Butterfly in order.",
+   "passage": "e1c-butterfly",
+   "items": [
+    {
+     "id": "b1",
+     "text": "Hassan sees something blue on a puzzle book.",
+     "emoji": "🧩"
+    },
+    {
+     "id": "b2",
+     "text": "Hassan sees something blue on a boy's costume.",
+     "emoji": "🎭"
+    },
+    {
+     "id": "b3",
+     "text": "Hassan asks the children, 'Can I play with you?'",
+     "emoji": "🙋🏽‍♂️"
+    },
+    {
+     "id": "b4",
+     "text": "Hassan picks up a table tennis bat.",
+     "emoji": "🏓"
+    },
+    {
+     "id": "b5",
+     "text": "Hassan asks Jood for his camera.",
+     "emoji": "📷"
+    }
+   ],
+   "explanation": "Hassan sees blue on a puzzle book, then on a costume, then asks to play, picks up a bat and asks for his camera.",
+   "explanationAr": "رأى حسن الأزرق على كتاب الألغاز، ثم على الزيّ، ثم طلب اللعب، ثم أمسك المضرب وطلب الكاميرا.",
+   "tip": "eraser → badge → real butterfly",
+   "hints": [
+    "What does Hassan see first?",
+    "When does he ask for his camera?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-096",
+   "lesson": "e1-10",
+   "concept": "e110-butterfly",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "reasoning",
+   "prompt": "Why does Jood say \"Sorry, Hassan\"?",
+   "passage": "e1c-butterfly",
+   "evidence": "It isn't a butterfly.",
+   "options": [
+    {
+     "id": "a",
+     "text": "The blue thing isn't a butterfly."
+    },
+    {
+     "id": "b",
+     "text": "She broke his camera."
+    },
+    {
+     "id": "c",
+     "text": "She is late."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "The camera is fine; Hassan asks for it at the end.",
+    "c": "Nothing in the story says Jood is late."
+   },
+   "explanation": "Jood is sorry because the blue thing isn't a butterfly – first it is an eraser, then a badge.",
+   "explanationAr": "جود تعتذر لأن الشيء الأزرق ليس فراشة، بل ممحاة ثم شارة.",
+   "tip": "Sorry = bad news for Hassan",
+   "hints": [
+    "What does Jood say after Sorry?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-097",
+   "lesson": "e1-10",
+   "concept": "e110-butterfly",
+   "skill": "reading",
+   "type": "choice",
+   "difficulty": "challenge",
+   "cognitive": "reasoning",
+   "prompt": "What do you think happens next?",
+   "passage": "e1c-butterfly",
+   "evidence": "Give me my camera!",
+   "options": [
+    {
+     "id": "a",
+     "text": "Hassan takes a photo of the butterfly.",
+     "emoji": "📸"
+    },
+    {
+     "id": "b",
+     "text": "Hassan goes home to do puzzles.",
+     "emoji": "🧩"
+    },
+    {
+     "id": "c",
+     "text": "Jood puts on a show.",
+     "emoji": "🎭"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "He wanted a butterfly photo all day; he wouldn't leave now.",
+    "c": "The boys put on the show, and Jood is helping Hassan."
+   },
+   "explanation": "Hassan finally finds a real blue butterfly and asks for his camera, so he probably takes a photo of it.",
+   "explanationAr": "وجد حسن أخيرًا فراشة حقيقية وطلب الكاميرا، فغالبًا سيلتقط صورتها.",
+   "tip": "Predict from the last sentence",
+   "hints": [
+    "What did Hassan want from the start?",
+    "What does he ask for at the end?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-098",
+   "lesson": "e1-10",
+   "concept": "e110-butterfly",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "reasoning",
+   "prompt": "Listen to Hassan. In the story, what is the blue thing really?",
+   "audio": "Look, Jood! There's a blue butterfly on that boy's costume!",
+   "evidence": "on that boy's costume",
+   "options": [
+    {
+     "id": "badge",
+     "text": "a badge"
+    },
+    {
+     "id": "eraser",
+     "text": "an eraser"
+    },
+    {
+     "id": "real",
+     "text": "a real butterfly"
+    }
+   ],
+   "answer": "badge",
+   "wrongWhy": {
+    "eraser": "The eraser was on the puzzle book.",
+    "real": "The real butterfly was on the table tennis bat."
+   },
+   "explanation": "The blue thing on the boy's costume is a badge, not a butterfly.",
+   "explanationAr": "الشيء الأزرق على زيّ الولد شارة badge وليس فراشة.",
+   "tip": "costume → badge",
+   "hints": [
+    "Where does Hassan see the blue thing?",
+    "What do people wear on costumes?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-099",
+   "lesson": "e1-10",
+   "concept": "e110-words",
+   "skill": "vocabulary",
+   "type": "match",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Match the words from The Blue Butterfly with their meanings.",
+   "pairs": [
+    {
+     "id": "e1",
+     "left": "eraser",
+     "right": "removes pencil marks"
+    },
+    {
+     "id": "e2",
+     "left": "badge",
+     "right": "a small sign you wear on clothes"
+    },
+    {
+     "id": "e3",
+     "left": "bat",
+     "right": "you hit the ball with it"
+    },
+    {
+     "id": "e4",
+     "left": "costume",
+     "right": "special clothes for a show"
+    }
+   ],
+   "explanation": "An eraser removes pencil marks, a badge is worn on clothes, a bat hits the ball, and a costume is special clothes for a show.",
+   "explanationAr": "eraser ممحاة، badge شارة، bat مضرب، costume زيّ.",
+   "tip": "Think of the story pictures",
+   "hints": [
+    "Which one do you use at school?",
+    "Which one is for table tennis?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-100",
+   "lesson": "e1-10",
+   "concept": "e110-words",
+   "skill": "vocabulary",
+   "type": "text",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Look at the picture. Type the word.",
+   "visual": {
+    "emoji": "🦋",
+    "alt": "an insect with big blue wings"
+   },
+   "explanation": "This is a butterfly – Hassan wants to take a photo of a blue one.",
+   "explanationAr": "هذه فراشة butterfly.",
+   "tip": "butterfly = 🦋",
+   "hints": [
+    "It has colourful wings."
+   ],
+   "answer": "butterfly",
+   "mistakes": [
+    {
+     "answer": "buterfly",
+     "why": "butterfly has double t: bu-tt-erfly."
+    }
+   ]
+  },
+  {
+   "id": "ENG-E1-C-101",
+   "lesson": "e1-10",
+   "concept": "e110-words",
+   "skill": "vocabulary",
+   "type": "text",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "Complete the word: \"Huda is s t _ _ t c h i n g on her mat.\"",
+   "pattern": "s t _ _ t c h i n g",
+   "answer": "stretching",
+   "explanation": "Huda is stretching: making her body long to warm up in gymnastics.",
+   "explanationAr": "stretching تعني تمدّد العضلات.",
+   "tip": "stretch = make your body long 🤸",
+   "hints": [
+    "It's something you do before or in gymnastics.",
+    "It starts with str."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-102",
+   "lesson": "e1-10",
+   "concept": "e110-words",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Which phrase means \"drops to the ground by accident\"?",
+   "options": [
+    {
+     "id": "a",
+     "text": "falls over"
+    },
+    {
+     "id": "b",
+     "text": "misses the ball"
+    },
+    {
+     "id": "c",
+     "text": "picks up"
+    },
+    {
+     "id": "d",
+     "text": "puts on"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "misses the ball means doesn't hit it.",
+    "c": "picks up means takes something in your hand.",
+    "d": "puts on is for clothes or a show."
+   },
+   "explanation": "falls over means you drop to the ground by accident, like Huda in karate.",
+   "explanationAr": "falls over تعني يقع أرضًا دون قصد.",
+   "tip": "falls over = 🤕 down!",
+   "hints": [
+    "What happens to Huda in karate?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-103",
+   "lesson": "e1-10",
+   "concept": "e110-words",
+   "skill": "vocabulary",
+   "type": "choice",
+   "difficulty": "hard",
+   "cognitive": "application",
+   "prompt": "Choose the correct phrase.",
+   "sentence": "The boys are ___ a show in the park.",
+   "options": [
+    {
+     "id": "a",
+     "text": "putting on"
+    },
+    {
+     "id": "b",
+     "text": "picking up"
+    },
+    {
+     "id": "c",
+     "text": "falling over"
+    },
+    {
+     "id": "d",
+     "text": "missing"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "picking up is for taking something in your hand, like a bat.",
+    "c": "falling over is dropping to the ground.",
+    "d": "missing is used with a ball, not a show."
+   },
+   "explanation": "We say put on a show when people perform for others.",
+   "explanationAr": "نقول put on a show أي يقدّمون عرضًا.",
+   "tip": "put on a show = perform 🎭",
+   "hints": [
+    "The boys are wearing costumes for people to watch."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-104",
+   "lesson": "e1-10",
+   "concept": "e110-words",
+   "skill": "vocabulary",
+   "type": "text",
+   "difficulty": "easy",
+   "cognitive": "knowledge",
+   "prompt": "Unscramble the word. You use it when you make a mistake with a pencil.",
+   "scrambled": "sreare",
+   "answer": "eraser",
+   "explanation": "An eraser removes pencil marks. The first blue thing Hassan sees is an eraser.",
+   "explanationAr": "eraser ممحاة.",
+   "tip": "eraser = removes pencil mistakes",
+   "hints": [
+    "It has 6 letters.",
+    "It starts with e."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-105",
+   "lesson": "e1-10",
+   "concept": "e110-can",
+   "skill": "grammar",
+   "type": "tf",
+   "difficulty": "medium",
+   "cognitive": "knowledge",
+   "prompt": "True or false? \"Arwa can kicks really well.\" is correct English.",
+   "explanation": "can + verb (no to, no -s) shows ability: Arwa can kick really well.",
+   "explanationAr": "can + فعل بدون to وبدون s: Arwa can kick.",
+   "tip": "can + verb (no to, no -s)",
+   "hints": [
+    "How do we talk about ability?"
+   ],
+   "answer": false,
+   "wrongWhy": "After can the verb has no -s: Arwa can kick really well."
+  },
+  {
+   "id": "ENG-E1-C-106",
+   "lesson": "e1-10",
+   "concept": "e110-can",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "analysis",
+   "prompt": "Which sentence about Maryam is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Maryam can play volleyball well."
+    },
+    {
+     "id": "b",
+     "text": "Maryam cans play volleyball well."
+    },
+    {
+     "id": "c",
+     "text": "Maryam can plays volleyball well."
+    },
+    {
+     "id": "d",
+     "text": "Maryam can to play volleyball well."
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "can doesn't take -s.",
+    "c": "The verb after can doesn't take -s: play, not plays.",
+    "d": "There is no to after can."
+   },
+   "explanation": "After can we use the base verb: Maryam can play volleyball well.",
+   "explanationAr": "بعد can نستخدم الفعل في صيغته الأساسية.",
+   "tip": "can + base verb",
+   "hints": [
+    "Check the verb after can.",
+    "Does can change with Maryam?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-107",
+   "lesson": "e1-10",
+   "concept": "e110-can",
+   "skill": "grammar",
+   "type": "text",
+   "difficulty": "hard",
+   "cognitive": "analysis",
+   "prompt": "Find the mistake. Type the correct word: \"Hassan can takes good photos.\"",
+   "answer": "take",
+   "mistakes": [
+    {
+     "answer": "takes",
+     "why": "That's the mistake: after can we don't add -s."
+    },
+    {
+     "answer": "cans",
+     "why": "can itself never takes -s; the mistake is in the verb after it."
+    }
+   ],
+   "explanation": "After can we use the base verb without -s: Hassan can take good photos.",
+   "explanationAr": "بعد can يأتي الفعل بدون s: can take.",
+   "tip": "can + verb (no -s)",
+   "hints": [
+    "Look at the verb after can."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-108",
+   "lesson": "e1-10",
+   "concept": "e110-can",
+   "skill": "grammar",
+   "type": "sort",
+   "difficulty": "medium",
+   "cognitive": "application",
+   "prompt": "What can they do well? Sort each activity to the right person.",
+   "buckets": [
+    {
+     "id": "maryam",
+     "label": "Maryam",
+     "emoji": "👧🏻"
+    },
+    {
+     "id": "arwa",
+     "label": "Arwa",
+     "emoji": "👧🏽"
+    },
+    {
+     "id": "huda",
+     "label": "Huda",
+     "emoji": "👧"
+    },
+    {
+     "id": "hassan",
+     "label": "Hassan",
+     "emoji": "👦🏽"
+    }
+   ],
+   "items": [
+    {
+     "id": "x1",
+     "text": "play volleyball well",
+     "emoji": "🏐",
+     "bucket": "maryam"
+    },
+    {
+     "id": "x2",
+     "text": "kick really well",
+     "emoji": "🥋",
+     "bucket": "arwa"
+    },
+    {
+     "id": "x3",
+     "text": "do gymnastics well",
+     "emoji": "🤸",
+     "bucket": "huda"
+    },
+    {
+     "id": "x4",
+     "text": "take good photos",
+     "emoji": "📷",
+     "bucket": "hassan"
+    }
+   ],
+   "explanation": "Maryam can play volleyball well, Arwa can kick really well in karate, Huda can do gymnastics well, and Hassan can take good photos.",
+   "explanationAr": "مريم تجيد الكرة الطائرة، وأروى الكاراتيه، وهدى الجمباز، وحسن التصوير.",
+   "tip": "can = what you are good at",
+   "hints": [
+    "Remember both stories.",
+    "Who loves gymnastics at the end?"
+   ]
+  },
+  {
+   "id": "ENG-E1-C-109",
+   "lesson": "e1-10",
+   "concept": "e110-can",
+   "skill": "listening",
+   "type": "choice",
+   "difficulty": "medium",
+   "cognitive": "understanding",
+   "prompt": "Listen. What can Hassan use?",
+   "audio": "Can I play with you? Yes, of course you can. You can use one of our bats.",
+   "evidence": "You can use one of our bats.",
+   "options": [
+    {
+     "id": "bat",
+     "text": "a bat",
+     "emoji": "🏓"
+    },
+    {
+     "id": "camera",
+     "text": "a camera",
+     "emoji": "📷"
+    },
+    {
+     "id": "crown",
+     "text": "a crown",
+     "emoji": "👑"
+    }
+   ],
+   "answer": "bat",
+   "wrongWhy": {
+    "camera": "The camera is Hassan's own; the children offer a bat.",
+    "crown": "The crowns are part of the boys' costumes."
+   },
+   "explanation": "The children say You can use one of our bats.",
+   "explanationAr": "قال الأطفال: يمكنك استخدام أحد مضاربنا.",
+   "tip": "You can use … = permission ✔",
+   "hints": [
+    "Listen to the children's answer."
+   ]
+  },
+  {
+   "id": "ENG-E1-C-110",
+   "lesson": "e1-10",
+   "concept": "e110-can",
+   "skill": "grammar",
+   "type": "choice",
+   "difficulty": "challenge",
+   "cognitive": "analysis",
+   "prompt": "Which question is correct?",
+   "options": [
+    {
+     "id": "a",
+     "text": "Can I play with you?"
+    },
+    {
+     "id": "b",
+     "text": "Do I can play with you?"
+    },
+    {
+     "id": "c",
+     "text": "I can play with you?"
+    },
+    {
+     "id": "d",
+     "text": "Can I playing with you?"
+    }
+   ],
+   "answer": "a",
+   "wrongWhy": {
+    "b": "We don't use do with can.",
+    "c": "For a question, can moves to the start.",
+    "d": "After can we use play, not playing."
+   },
+   "explanation": "In questions, can comes first, then the person, then the base verb: Can I play with you?",
+   "explanationAr": "في السؤال تأتي can أولًا، ثم الشخص، ثم الفعل: Can I play with you?",
+   "tip": "Can + I/you + verb …?",
+   "hints": [
+    "Which word starts a can question?",
+    "Is the verb after I a base verb?"
+   ]
+  }
+ ]
+}

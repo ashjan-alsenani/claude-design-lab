@@ -1,0 +1,822 @@
+{
+ "e1": {
+  "subject": "english",
+  "total": 316,
+  "concepts": [
+   {
+    "id": "sports-words",
+    "label": "Sports words",
+    "lesson": "e1-1",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "go-play-do",
+    "label": "go, play or do?",
+    "lesson": "e1-1",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "indoor-outdoor",
+    "label": "Indoors or outdoors?",
+    "lesson": "e1-1",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "sport-groups",
+    "label": "Team, winter and wheel sports",
+    "lesson": "e1-1",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "sport-clues",
+    "label": "Guess the sport",
+    "lesson": "e1-1",
+    "skill": "reading"
+   },
+   {
+    "id": "team-talk",
+    "label": "Team Talk: Arlo and Sultan",
+    "lesson": "e1-2",
+    "skill": "reading"
+   },
+   {
+    "id": "how-often",
+    "label": "How often…?",
+    "lesson": "e1-2",
+    "skill": "grammar"
+   },
+   {
+    "id": "expressions",
+    "label": "Really? / I don't believe it! / You're so funny!",
+    "lesson": "e1-2",
+    "skill": "listening"
+   },
+   {
+    "id": "sports-interview",
+    "label": "A sports interview",
+    "lesson": "e1-2",
+    "skill": "reading"
+   },
+   {
+    "id": "writing-sentences",
+    "label": "Writing sentences and questions",
+    "lesson": "e1-2",
+    "skill": "writing"
+   },
+   {
+    "id": "tense-use",
+    "label": "Habits or now?",
+    "lesson": "e1-3",
+    "skill": "grammar"
+   },
+   {
+    "id": "time-words",
+    "label": "Time words",
+    "lesson": "e1-3",
+    "skill": "grammar"
+   },
+   {
+    "id": "simple-forms",
+    "label": "Present simple forms",
+    "lesson": "e1-3",
+    "skill": "grammar"
+   },
+   {
+    "id": "continuous-forms",
+    "label": "Present continuous forms",
+    "lesson": "e1-3",
+    "skill": "grammar"
+   },
+   {
+    "id": "tense-questions",
+    "label": "Questions and short answers",
+    "lesson": "e1-3",
+    "skill": "grammar"
+   },
+   {
+    "id": "e1b-story-genre",
+    "label": "Picture stories: pictures, events & order",
+    "lesson": "e1-4",
+    "skill": "reading"
+   },
+   {
+    "id": "e1b-story-characters",
+    "label": "NO WI-FI! characters",
+    "lesson": "e1-4",
+    "skill": "reading"
+   },
+   {
+    "id": "e1b-story-listening",
+    "label": "Listening: the NO WI-FI! show",
+    "lesson": "e1-4",
+    "skill": "listening"
+   },
+   {
+    "id": "e1b-story-words",
+    "label": "Story words: show, invitations, instrument",
+    "lesson": "e1-4",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "e1b-story-grammar",
+    "label": "Story grammar: now or every day? + but",
+    "lesson": "e1-4",
+    "skill": "grammar"
+   },
+   {
+    "id": "e1b-hobby-words",
+    "label": "Hobbies vocabulary",
+    "lesson": "e1-5",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "e1b-hobby-verbs",
+    "label": "do / play / make / collect / watch / write",
+    "lesson": "e1-5",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "e1b-state-ing",
+    "label": "like / love / hate / prefer / enjoy + -ing",
+    "lesson": "e1-5",
+    "skill": "grammar"
+   },
+   {
+    "id": "e1b-state-simple",
+    "label": "State verbs: not in continuous tenses",
+    "lesson": "e1-5",
+    "skill": "grammar"
+   },
+   {
+    "id": "e1b-hobby-listening",
+    "label": "Listening: who likes which hobby?",
+    "lesson": "e1-5",
+    "skill": "listening"
+   },
+   {
+    "id": "e1b-hobby-reading",
+    "label": "Reading: a family of hobbies",
+    "lesson": "e1-5",
+    "skill": "reading"
+   },
+   {
+    "id": "e1b-culture-countries",
+    "label": "Sports around the world: which country?",
+    "lesson": "e1-6",
+    "skill": "reading"
+   },
+   {
+    "id": "e1b-culture-details",
+    "label": "Culture texts: details & reasons",
+    "lesson": "e1-6",
+    "skill": "reading"
+   },
+   {
+    "id": "e1b-culture-words",
+    "label": "Culture words: snorkelling, windsurfing, keep fit",
+    "lesson": "e1-6",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "e1b-culture-listening",
+    "label": "Listening: activities around the world",
+    "lesson": "e1-6",
+    "skill": "listening"
+   },
+   {
+    "id": "e1b-minibook",
+    "label": "Mini-book phrases & writing",
+    "lesson": "e1-6",
+    "skill": "writing"
+   },
+   {
+    "id": "e17-suggest-forms",
+    "label": "Making suggestions (You could / Why don't you / How about …ing)",
+    "lesson": "e1-7",
+    "skill": "grammar"
+   },
+   {
+    "id": "e17-respond",
+    "label": "Responding to suggestions",
+    "lesson": "e1-7",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "e17-new-hobby",
+    "label": "Dialogue: a new hobby",
+    "lesson": "e1-7",
+    "skill": "listening"
+   },
+   {
+    "id": "e17-can-pron",
+    "label": "Weak and strong can",
+    "lesson": "e1-7",
+    "skill": "listening"
+   },
+   {
+    "id": "e18-henry",
+    "label": "Reading: interview with Henry Wilson",
+    "lesson": "e1-8",
+    "skill": "reading"
+   },
+   {
+    "id": "e18-words",
+    "label": "Words in context (freedom, altitude, hostel…)",
+    "lesson": "e1-8",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "e18-qwords",
+    "label": "Question words",
+    "lesson": "e1-8",
+    "skill": "grammar"
+   },
+   {
+    "id": "e18-interview",
+    "label": "Writing a good interview",
+    "lesson": "e1-8",
+    "skill": "writing"
+   },
+   {
+    "id": "e19-comments",
+    "label": "Over to you! Readers' comments",
+    "lesson": "e1-9",
+    "skill": "reading"
+   },
+   {
+    "id": "e19-cloze",
+    "label": "Exam skills: choose the word for each gap",
+    "lesson": "e1-9",
+    "skill": "grammar"
+   },
+   {
+    "id": "e19-opinions",
+    "label": "I like … because … (giving reasons)",
+    "lesson": "e1-9",
+    "skill": "writing"
+   },
+   {
+    "id": "e110-volleyball",
+    "label": "Reader: Let's Play Volleyball!",
+    "lesson": "e1-10",
+    "skill": "reading"
+   },
+   {
+    "id": "e110-butterfly",
+    "label": "Reader: The Blue Butterfly",
+    "lesson": "e1-10",
+    "skill": "reading"
+   },
+   {
+    "id": "e110-words",
+    "label": "Story words (stretching, eraser, badge…)",
+    "lesson": "e1-10",
+    "skill": "vocabulary"
+   },
+   {
+    "id": "e110-can",
+    "label": "can / can't for ability in the stories",
+    "lesson": "e1-10",
+    "skill": "grammar"
+   }
+  ],
+  "byLesson": {
+   "e1-1": 32,
+   "e1-2": 34,
+   "e1-3": 37,
+   "e1-4": 32,
+   "e1-5": 40,
+   "e1-6": 31,
+   "e1-7": 28,
+   "e1-8": 30,
+   "e1-9": 25,
+   "e1-10": 27
+  },
+  "byDifficulty": {
+   "easy": 81,
+   "medium": 127,
+   "hard": 79,
+   "challenge": 29
+  }
+ },
+ "m1": {
+  "subject": "math",
+  "total": 341,
+  "concepts": [
+   {
+    "id": "pv-digit-value",
+    "label": "قيمة الرقم حسب منزلته",
+    "lesson": "m1-1"
+   },
+   {
+    "id": "pv-write-symbols",
+    "label": "كتابة الأعداد بالرموز",
+    "lesson": "m1-1"
+   },
+   {
+    "id": "pv-read-words",
+    "label": "قراءة الأعداد بالكلمات",
+    "lesson": "m1-1"
+   },
+   {
+    "id": "pv-expanded",
+    "label": "العدد مجموعًا لقيم منازله",
+    "lesson": "m1-1"
+   },
+   {
+    "id": "pv-digit-cards",
+    "label": "تكوين أعداد من بطاقات الأرقام",
+    "lesson": "m1-1"
+   },
+   {
+    "id": "compare-numbers",
+    "label": "مقارنة الأعداد",
+    "lesson": "m1-2"
+   },
+   {
+    "id": "order-numbers",
+    "label": "ترتيب الأعداد",
+    "lesson": "m1-2"
+   },
+   {
+    "id": "number-line-position",
+    "label": "الأعداد على خط الأعداد",
+    "lesson": "m1-2"
+   },
+   {
+    "id": "round-10-100",
+    "label": "التقريب إلى أقرب ١٠ و١٠٠",
+    "lesson": "m1-2"
+   },
+   {
+    "id": "round-1000",
+    "label": "التقريب إلى أقرب ألف",
+    "lesson": "m1-2"
+   },
+   {
+    "id": "round-decimal",
+    "label": "تقريب العدد العشري إلى أقرب عدد كامل",
+    "lesson": "m1-2"
+   },
+   {
+    "id": "multiples",
+    "label": "المضاعفات",
+    "lesson": "m2-1"
+   },
+   {
+    "id": "factors",
+    "label": "العوامل",
+    "lesson": "m2-1"
+   },
+   {
+    "id": "factor-or-multiple",
+    "label": "عامل أم مضاعف؟",
+    "lesson": "m2-1"
+   },
+   {
+    "id": "venn-carroll",
+    "label": "مخطط ڤن ومخطط كارول",
+    "lesson": "m2-1"
+   },
+   {
+    "id": "factor-puzzles",
+    "label": "ألغاز العوامل والمضاعفات",
+    "lesson": "m2-1"
+   },
+   {
+    "id": "units-digit",
+    "label": "رقم الآحاد يحدّد الفردي والزوجي",
+    "lesson": "m2-2"
+   },
+   {
+    "id": "even-divide-2",
+    "label": "الزوجي يقبل القسمة على ٢",
+    "lesson": "m2-2"
+   },
+   {
+    "id": "carroll-odd-even",
+    "label": "مخطط كارول للفردي والزوجي",
+    "lesson": "m2-2"
+   },
+   {
+    "id": "odd-even-digit-puzzles",
+    "label": "تكوين أعداد فردية وزوجية",
+    "lesson": "m2-2"
+   },
+   {
+    "id": "odd-even-conditions",
+    "label": "ألغاز الشروط",
+    "lesson": "m2-2"
+   },
+   {
+    "id": "prime-meaning",
+    "label": "معنى العدد الأولي",
+    "lesson": "m2-3"
+   },
+   {
+    "id": "prime-identify",
+    "label": "تمييز الأعداد الأولية حتى ٦٠",
+    "lesson": "m2-3"
+   },
+   {
+    "id": "prime-two-odd",
+    "label": "العدد ٢ والأعداد الفردية",
+    "lesson": "m2-3"
+   },
+   {
+    "id": "prime-sum",
+    "label": "مجموع عددين أوليين",
+    "lesson": "m2-3"
+   },
+   {
+    "id": "prime-product",
+    "label": "حاصل ضرب أعداد أولية",
+    "lesson": "m2-3"
+   },
+   {
+    "id": "prime-puzzles",
+    "label": "ألغاز الأعداد الأولية",
+    "lesson": "m2-3"
+   },
+   {
+    "id": "times-10-100-1000",
+    "label": "الضرب في ١٠ و١٠٠ و١٠٠٠",
+    "lesson": "m3-1"
+   },
+   {
+    "id": "divide-10-100-1000",
+    "label": "القسمة على ١٠ و١٠٠ و١٠٠٠",
+    "lesson": "m3-1"
+   },
+   {
+    "id": "place-shift",
+    "label": "حركة الأرقام بين المنازل",
+    "lesson": "m3-1"
+   },
+   {
+    "id": "missing-number-10",
+    "label": "العدد المفقود والعملية العكسية",
+    "lesson": "m3-1"
+   },
+   {
+    "id": "decimals-10-100-1000",
+    "label": "الأعداد العشرية مع ١٠ و١٠٠ و١٠٠٠",
+    "lesson": "m3-1"
+   },
+   {
+    "id": "operation-chains",
+    "label": "سلاسل الضرب والقسمة",
+    "lesson": "m3-1"
+   },
+   {
+    "id": "m32-double-half",
+    "label": "الضعف والنصف",
+    "lesson": "m3-2"
+   },
+   {
+    "id": "m32-tens",
+    "label": "حقائق الضرب ومضاعفات ١٠",
+    "lesson": "m3-2"
+   },
+   {
+    "id": "m32-near",
+    "label": "الضرب في عدد قريب من مضاعف ١٠",
+    "lesson": "m3-2"
+   },
+   {
+    "id": "m32-factors",
+    "label": "ثلاثة أعداد وناتج ضربها",
+    "lesson": "m3-2"
+   },
+   {
+    "id": "m41-align",
+    "label": "الفاصلة تحت الفاصلة",
+    "lesson": "m4-1"
+   },
+   {
+    "id": "m41-add",
+    "label": "جمع الأعداد العشرية",
+    "lesson": "m4-1"
+   },
+   {
+    "id": "m41-money",
+    "label": "مسائل حياتية بالجمع",
+    "lesson": "m4-1"
+   },
+   {
+    "id": "m41-puzzle",
+    "label": "ألغاز الأعداد العشرية",
+    "lesson": "m4-1"
+   },
+   {
+    "id": "m42-remainder",
+    "label": "القسمة مع الباقي",
+    "lesson": "m4-2"
+   },
+   {
+    "id": "m42-short",
+    "label": "القسمة المختصرة",
+    "lesson": "m4-2"
+   },
+   {
+    "id": "m42-check",
+    "label": "التحقق من القسمة",
+    "lesson": "m4-2"
+   },
+   {
+    "id": "m42-context",
+    "label": "تفسير الباقي في المسائل",
+    "lesson": "m4-2"
+   },
+   {
+    "id": "m42-rem-size",
+    "label": "الباقي أصغر من المقسوم عليه",
+    "lesson": "m4-2"
+   },
+   {
+    "id": "m43-rule",
+    "label": "القاعدة والخطوة",
+    "lesson": "m4-3"
+   },
+   {
+    "id": "m43-next",
+    "label": "الحدود التالية من القاعدة",
+    "lesson": "m4-3"
+   },
+   {
+    "id": "m43-missing",
+    "label": "الحد الناقص والحد الخطأ",
+    "lesson": "m4-3"
+   },
+   {
+    "id": "m43-negdec",
+    "label": "متتاليات عشرية وسالبة",
+    "lesson": "m4-3"
+   }
+  ],
+  "byLesson": {
+   "m1-1": 37,
+   "m1-2": 41,
+   "m2-1": 32,
+   "m2-2": 33,
+   "m2-3": 37,
+   "m3-1": 41,
+   "m3-2": 28,
+   "m4-1": 29,
+   "m4-2": 33,
+   "m4-3": 30
+  },
+  "byDifficulty": {
+   "easy": 83,
+   "medium": 138,
+   "hard": 86,
+   "challenge": 34
+  }
+ },
+ "u1": {
+  "subject": "science",
+  "total": 318,
+  "concepts": [
+   {
+    "id": "organs-systems",
+    "label": "الأعضاء وأجهزة الجسم",
+    "lesson": "1-1"
+   },
+   {
+    "id": "organ-names",
+    "label": "أسماء الأعضاء الرئيسية",
+    "lesson": "1-1"
+   },
+   {
+    "id": "organ-regions",
+    "label": "الأعضاء في الرأس والصدر والبطن",
+    "lesson": "1-1"
+   },
+   {
+    "id": "organ-positions",
+    "label": "مواقع الأعضاء بدقة",
+    "lesson": "1-1"
+   },
+   {
+    "id": "liver",
+    "label": "الكبد ووظيفتاه",
+    "lesson": "1-1"
+   },
+   {
+    "id": "organ-protection",
+    "label": "حماية الأعضاء",
+    "lesson": "1-1"
+   },
+   {
+    "id": "heart-location",
+    "label": "موقع القلب وحجمه",
+    "lesson": "1-2"
+   },
+   {
+    "id": "heart-function",
+    "label": "وظيفة القلب والدورة الدموية",
+    "lesson": "1-2"
+   },
+   {
+    "id": "heartbeat",
+    "label": "دقات القلب",
+    "lesson": "1-2"
+   },
+   {
+    "id": "heart-sides",
+    "label": "جانبا القلب",
+    "lesson": "1-2"
+   },
+   {
+    "id": "blood-path",
+    "label": "رحلة الدم بين القلب والرئتين",
+    "lesson": "1-2"
+   },
+   {
+    "id": "blood-job",
+    "label": "الدم وما يحمله",
+    "lesson": "1-2"
+   },
+   {
+    "id": "circulatory-system",
+    "label": "الجهاز الدوري والأوعية الدموية",
+    "lesson": "1-2"
+   },
+   {
+    "id": "heart-stops",
+    "label": "ماذا لو توقف القلب؟",
+    "lesson": "1-2"
+   },
+   {
+    "id": "pulse-what",
+    "label": "ما النبض؟ وما سببه؟",
+    "lesson": "1-3"
+   },
+   {
+    "id": "pulse-measure",
+    "label": "قياس النبض",
+    "lesson": "1-3"
+   },
+   {
+    "id": "pulse-rates",
+    "label": "معدلات النبض المختلفة",
+    "lesson": "1-3"
+   },
+   {
+    "id": "pulse-exercise",
+    "label": "النشاط والرياضة والنبض",
+    "lesson": "1-3"
+   },
+   {
+    "id": "pulse-repeat",
+    "label": "تكرار القياس والقياسات غير الدقيقة",
+    "lesson": "1-3"
+   },
+   {
+    "id": "pulse-data",
+    "label": "قراءة الجداول والرسوم والاستنتاج",
+    "lesson": "1-3"
+   },
+   {
+    "id": "pulse-fair",
+    "label": "العوامل والاختبار العادل",
+    "lesson": "1-3"
+   },
+   {
+    "id": "breath-organs",
+    "label": "أعضاء التنفس وموقعها",
+    "lesson": "1-4"
+   },
+   {
+    "id": "breath-in-out",
+    "label": "الشهيق والزفير",
+    "lesson": "1-4"
+   },
+   {
+    "id": "breath-path",
+    "label": "مسار الهواء في الجسم",
+    "lesson": "1-4"
+   },
+   {
+    "id": "breath-gases",
+    "label": "الأكسجين وثاني أكسيد الكربون",
+    "lesson": "1-4"
+   },
+   {
+    "id": "breath-diaphragm",
+    "label": "الحجاب الحاجز",
+    "lesson": "1-4"
+   },
+   {
+    "id": "breath-exercise",
+    "label": "معدل التنفس والرياضة",
+    "lesson": "1-4"
+   },
+   {
+    "id": "breath-importance",
+    "label": "أهمية التنفس والرئتين",
+    "lesson": "1-4"
+   },
+   {
+    "id": "dig-why",
+    "label": "لماذا نهضم الطعام؟",
+    "lesson": "1-5"
+   },
+   {
+    "id": "dig-organs",
+    "label": "أعضاء الجهاز الهضمي ومواقعها",
+    "lesson": "1-5"
+   },
+   {
+    "id": "dig-mouth",
+    "label": "الفم والأسنان واللعاب والمريء",
+    "lesson": "1-5"
+   },
+   {
+    "id": "dig-stomach",
+    "label": "وظيفة المعدة",
+    "lesson": "1-5"
+   },
+   {
+    "id": "dig-intestines",
+    "label": "الأمعاء ونقل الطعام بالدم",
+    "lesson": "1-5"
+   },
+   {
+    "id": "dig-journey",
+    "label": "رحلة الطعام بالترتيب",
+    "lesson": "1-5"
+   },
+   {
+    "id": "kid-place",
+    "label": "موقع الكليتين وشكلهما",
+    "lesson": "1-6"
+   },
+   {
+    "id": "kid-job",
+    "label": "تنقية الدم والإخراج",
+    "lesson": "1-6"
+   },
+   {
+    "id": "kid-numbers",
+    "label": "أرقام الكليتين والقياس",
+    "lesson": "1-6"
+   },
+   {
+    "id": "kid-water",
+    "label": "الماء وصحة الكليتين",
+    "lesson": "1-6"
+   },
+   {
+    "id": "kid-fail",
+    "label": "عندما تتوقف الكليتان",
+    "lesson": "1-6"
+   },
+   {
+    "id": "brain-what",
+    "label": "الدماغ وحمايته",
+    "lesson": "1-7"
+   },
+   {
+    "id": "brain-nerves",
+    "label": "الأعصاب والجهاز العصبي",
+    "lesson": "1-7"
+   },
+   {
+    "id": "brain-cerebrum",
+    "label": "أجزاء المخ ووظائفها",
+    "lesson": "1-7"
+   },
+   {
+    "id": "brain-auto",
+    "label": "المخيخ وجذع الدماغ",
+    "lesson": "1-7"
+   },
+   {
+    "id": "brain-damage",
+    "label": "تضرّر الدماغ",
+    "lesson": "1-7"
+   },
+   {
+    "id": "brain-sleep",
+    "label": "الدماغ أثناء النوم",
+    "lesson": "1-7"
+   }
+  ],
+  "byLesson": {
+   "1-1": 42,
+   "1-2": 60,
+   "1-3": 46,
+   "1-4": 50,
+   "1-5": 42,
+   "1-6": 38,
+   "1-7": 40
+  },
+  "byDifficulty": {
+   "easy": 74,
+   "medium": 138,
+   "hard": 76,
+   "challenge": 30
+  }
+ }
+}

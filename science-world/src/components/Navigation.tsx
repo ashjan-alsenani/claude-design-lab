@@ -5,6 +5,7 @@ const items = [
   { to: '/', label: 'الرئيسية', icon: '🏠', mobile: true },
   { to: '/journey', label: 'رحلة التعلم', short: 'الرحلة', icon: '🗺️', mobile: true },
   { to: '/lessons', label: 'الدروس', icon: '📚', mobile: true },
+  { to: '/practice', label: 'تدرّبي', icon: '🏋️‍♀️', mobile: true },
   { to: '/games', label: 'الألعاب', icon: '🎮', mobile: true },
   { to: '/challenges', label: 'التحديات', icon: '🎯', mobile: false },
   { to: '/rewards', label: 'جوائزي', icon: '🏆', mobile: true },
