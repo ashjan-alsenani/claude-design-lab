@@ -20,7 +20,7 @@ export function SubjectTabs({ compact = false }: { compact?: boolean }) {
             setSubject(s.id);
           }}
         >
-          <span aria-hidden="true">{s.emoji}</span> {s.title}
+          <span aria-hidden="true">{s.emoji}</span> {s.short ?? s.title}
         </button>
       ))}
     </div>

@@ -1146,6 +1146,7 @@ a.lesson-card:active {
 }
 .challenge-run__bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--s-3);
   margin-bottom: var(--s-4);
@@ -1608,6 +1609,9 @@ a.lesson-card:active {
 /* ---------- Subjects ---------- */
 .subject-tabs {
   display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
   gap: 6px;
   padding: 5px;
   border-radius: var(--r-pill);
@@ -1615,6 +1619,8 @@ a.lesson-card:active {
   box-shadow: 0 3px 0 var(--line);
 }
 .subject-tab {
+  flex-shrink: 0;
+  white-space: nowrap;
   min-height: 44px;
   padding: 6px 16px;
   border: 0;

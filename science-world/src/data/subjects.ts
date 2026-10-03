@@ -31,6 +31,7 @@ export const subjects: Subject[] = [
   {
     id: 'english',
     title: 'اللغة الإنجليزية',
+    short: 'الإنجليزية',
     emoji: '🔤',
     tagline: 'الهوايات والرياضة، التقنية، والمزيد — Team Together',
     theme: 'sky',

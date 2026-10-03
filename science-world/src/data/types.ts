@@ -339,6 +339,8 @@ export interface Unit {
 export interface Subject {
   id: SubjectId;
   title: string; // العلوم
+  /** short name for tabs, e.g. الإنجليزية */
+  short?: string;
   emoji: string;
   /** short line under the title */
   tagline: string;
