@@ -31,4 +31,11 @@ Goal: a child who did not understand the lesson by READING understands it by WAT
 - Colours: 'accent' | 'good' | 'bad' | 'ink' | 'sun' | 'blue' | 'red' | 'green' | 'purple' | 'orange' | 'white' | 'grey'.
 - On the `board` background use white/sun/green text colours.
 
+## Known renderer behaviour (read before writing)
+- `ltr: true` text is shown strictly left → right by the renderer (equations like «٨ ÷ ٢ = ٤» included). Do NOT add your own invisible marks (U+200E) — just write the text with spaces around operators.
+- `out: t` fades an actor out and it stays hidden. Arrow heads appear after their line is drawn.
+- `math` visuals with light cells (placeValue, grid, hundredSquare, cards) are hard to read on `board`; use `paper` for those scenes.
+- Scene titles: Arabic titles are fine with «؟». For English titles avoid a trailing `?`/`!`.
+- Several units already have finished explainers you can study for ideas: `src/data/explain/{science/u1,math/m1,english/e1}/*.ts`.
+
 Reply with: file(s), lessons covered, scene count per lesson, and anything you were unsure about.
