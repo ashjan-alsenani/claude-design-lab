@@ -86,6 +86,12 @@ Every line in `src/film/dialogue.json` has a caption (`text`) and a speech text 
 - **Visuals on cue.** Scene beats are anchored to the words that introduce them (`cue()` in `scenes.tsx`), so they stay in place when lines are regenerated.
 - **Regenerating.** After editing dialogue, run `pip install edge-tts numpy && python tools/generate_voices.py [line ids…]`, then `python tools/build_music.py`. This uses Microsoft Edge's online neural voices at build time and needs network access and ffmpeg. `--meta-only` refreshes durations and lip-sync data from the existing files.
 
+**Word-level pronunciation fixes.** Two words were corrected in place without regenerating the lines:
+- micro-2: «كَبْسُول»;
+- resist-3: «أُوه، لا!».
+
+Only the MP3 frames that cover each word were replaced; every other frame is byte-identical to the approved recording, and both lines keep their exact length. The `say` texts carry the fixed spelling. Regenerating either line from scratch would change its length, and with it the timeline.
+
 ## Film music
 
 `source-art/music/` holds an original underscore composed for the film: D major, 96 BPM; piano, Rhodes, strings, pizzicato, celesta, soft brushes. It comes with its MIDI and the scripts that render it with the MIT-licensed FluidR3_GM soundfont. `tools/build_music.py` mixes it against the dialogue timeline into `public/music/film-music.mp3`:
