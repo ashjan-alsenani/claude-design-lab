@@ -20,6 +20,12 @@ const islandDecor: Record<string, string[]> = {
   violet: ['💻', '📱', '🎧', '📷'],
 };
 
+/** Units that share a theme with another subject get their own decorations. */
+const unitDecor: Record<string, string[]> = {
+  e3: ['🏛️', '🏢', '🛗', '🗺️'],
+  elc1: ['🧭', '🚒', '🌉', '🔬'],
+};
+
 export function JourneyPage() {
   const { state } = useProgress();
   const subject = getSubject(state.subject);
@@ -51,7 +57,7 @@ export function JourneyPage() {
         return (
           <section key={u.id} className={`island island--${u.theme}`} data-theme={u.theme} aria-labelledby={`island-${u.id}`}>
             <div className="island__decor" aria-hidden="true">
-              {islandDecor[u.theme].map((d, i) => (
+              {(unitDecor[u.id] ?? islandDecor[u.theme]).map((d, i) => (
                 <span key={i} style={{ animationDelay: `${i * 0.8}s` }}>
                   {d}
                 </span>

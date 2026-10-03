@@ -144,6 +144,7 @@ export const characters: { id: string; name: string; outfit: Outfit; howTo: stri
   { id: 'crown', name: 'نوري ملك الرياضيات', outfit: 'crown', unitId: 'm4', howTo: 'أنهي آخر وحدة في الرياضيات', unlocked: (s) => Boolean(s.bosses.m4) },
   { id: 'headband', name: 'نوري الرياضي', outfit: 'headband', unitId: 'e1', howTo: 'أنهي وحدة Free-time fun في الإنجليزي', unlocked: (s) => Boolean(s.bosses.e1) },
   { id: 'headphones', name: 'نوري التقني', outfit: 'headphones', unitId: 'e2', howTo: 'أنهي وحدة Technology في الإنجليزي', unlocked: (s) => Boolean(s.bosses.e2) },
+  { id: 'hardhat', name: 'نوري المهندس', outfit: 'hardhat', unitId: 'e3', howTo: 'أنهي وحدة Places في الإنجليزي', unlocked: (s) => Boolean(s.bosses.e3) },
 ];
 
 export function newlyEarned(s: ProgressState): Achievement[] {

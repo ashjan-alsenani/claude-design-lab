@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { MascotMood } from '../data/types';
 import { play } from '../lib/sound';
 
-export type Outfit = 'none' | 'doctor' | 'ranger' | 'chemist' | 'cap' | 'crown' | 'headband' | 'headphones';
+export type Outfit = 'none' | 'doctor' | 'ranger' | 'chemist' | 'cap' | 'crown' | 'headband' | 'headphones' | 'hardhat';
 
 interface Props {
   mood?: MascotMood;
@@ -127,6 +127,16 @@ function OutfitLayer({ outfit }: { outfit: Outfit }) {
         {/* sporty headband */}
         <path d="M46 58 Q100 40 154 58 L152 70 Q100 52 48 70Z" fill="#ff6b6b" stroke="#1f2a4d" strokeWidth="3" strokeLinejoin="round" />
         <path d="M70 56 L74 66 M130 56 L126 66" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+      </g>
+    );
+  if (outfit === 'hardhat')
+    return (
+      <g>
+        {/* architect's hard hat */}
+        <path d="M50 58 Q50 20 100 20 Q150 20 150 58Z" fill="#ffc83d" stroke="#1f2a4d" strokeWidth="3" strokeLinejoin="round" />
+        <path d="M38 58 L162 58" stroke="#1f2a4d" strokeWidth="9" strokeLinecap="round" />
+        <path d="M38 58 L162 58" stroke="#f2a900" strokeWidth="5" strokeLinecap="round" />
+        <path d="M100 20 V50" stroke="#e09a00" strokeWidth="6" strokeLinecap="round" />
       </g>
     );
   if (outfit === 'headphones')
