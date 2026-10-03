@@ -15,6 +15,7 @@ import { Mascot } from '../components/Mascot';
 import { play } from '../lib/sound';
 import { LockedNotice } from './LockedNotice';
 import { mixed } from '../lib/bidi';
+import { hasExplainer } from '../explain/registry';
 
 type Phase = 'intro' | 'steps' | 'quiz' | 'reward';
 
@@ -77,6 +78,11 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
           </div>
           <ProgressBar value={progress} label="تقدّم الدرس" />
         </div>
+        {hasExplainer(lesson.id) && phase !== 'intro' && (
+          <Link to={`/explain/${lesson.id}`} className="icon-btn" aria-label="شاهدي الشرح المتحرك" title="الشرح المتحرك">
+            🎬
+          </Link>
+        )}
         <span className="chip">{phase === 'steps' ? `${i + 1}/${total}` : phase === 'quiz' ? 'التحدي 🎯' : phase === 'reward' ? '🏁' : '👋'}</span>
       </header>
 
@@ -93,6 +99,15 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
               <h1>{lesson.title}</h1>
               {lesson.verse && <p className="verse">{lesson.verse}</p>}
             </div>
+            {hasExplainer(lesson.id) && (
+              <Link to={`/explain/${lesson.id}`} className="explain-cta">
+                <span className="explain-cta__icon" aria-hidden="true">🎬</span>
+                <span>
+                  <strong>شاهدي الشرح المتحرك أولًا</strong>
+                  <span>دقيقة واحدة بالصور المتحركة تفهّمكِ فكرة الدرس</span>
+                </span>
+              </Link>
+            )}
             <div className="lesson-intro__grid">
               <div className="card">
                 <h2 className="card-title">🎯 في نهاية الدرس أستطيع أن…</h2>

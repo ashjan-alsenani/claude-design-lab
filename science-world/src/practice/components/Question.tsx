@@ -4,6 +4,8 @@
  * → similar question or next.
  */
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { hasExplainer } from '../../explain/registry';
 import { motion } from 'framer-motion';
 import { mixed } from '../../lib/bidi';
 import { VisualView } from '../../illustrations/registry';
@@ -301,6 +303,12 @@ export function FeedbackPanel({ q, bank, result, answer, onNext, onSimilar, onAd
       <div className="pq-fb__tip" dir="auto">
         {L.tip} {mixed(q.tip)}
       </div>
+
+      {!result.ok && hasExplainer(q.lesson) && (
+        <Link to={`/explain/${q.lesson}`} className="pq-fb__explain">
+          🎬 {en ? 'Watch the animated lesson' : 'ما زالت الفكرة صعبة؟ شاهدي الشرح المتحرك للدرس'}
+        </Link>
+      )}
 
       {/* spelling: practise the right spelling straight away */}
       {!result.ok && q.type === 'text' && en && (

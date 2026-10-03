@@ -1092,3 +1092,13 @@ mark.evidence {
 @media (prefers-reduced-motion: reduce) {
   mark.evidence, .pq-audio__play.is-on { animation: none; }
 }
+
+.pq-fb__explain {
+  justify-self: start;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: #2b2d6e;
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}

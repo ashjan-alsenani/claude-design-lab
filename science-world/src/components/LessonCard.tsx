@@ -5,6 +5,7 @@ import { useProgress } from '../state/ProgressContext';
 import { isLessonDone, isLessonUnlocked, previousLesson } from '../state/journey';
 import { lessonLabel } from '../data/units';
 import { Stars } from './Stars';
+import { hasExplainer } from '../explain/registry';
 
 export function LessonCard({ lesson }: { lesson: Lesson }) {
   const { state } = useProgress();
@@ -21,7 +22,7 @@ export function LessonCard({ lesson }: { lesson: Lesson }) {
         <span className="lesson-card__num">الدرس {lessonNo(lessonLabel(lesson))}</span>
         <span className="lesson-card__title">{lesson.title}</span>
         <span className="lesson-card__meta">
-          {open ? `🎮 ${activities} أنشطة · 🎯 ${lesson.quiz.length} أسئلة` : prev ? `أكملي الدرس ${lessonNo(lessonLabel(prev))} لفتحه` : ''}
+          {open ? `🎮 ${activities} أنشطة · 🎯 ${lesson.quiz.length} أسئلة${hasExplainer(lesson.id) ? ' · 🎬 شرح متحرك' : ''}` : prev ? `أكملي الدرس ${lessonNo(lessonLabel(prev))} لفتحه` : ''}
         </span>
       </span>
       <span className="lesson-card__end">

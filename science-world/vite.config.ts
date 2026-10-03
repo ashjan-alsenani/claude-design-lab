@@ -16,6 +16,8 @@ export default defineConfig({
           const bank = id.match(/\/src\/data\/practice\/(\w+)\/(\w+)\//);
           if (bank) return `practice-${bank[1]}-${bank[2]}`;
           if (id.includes('/src/data/practice/index.json')) return 'practice-index';
+          const ex = id.match(/\/src\/data\/explain\/(\w+)\/(\w+)\//);
+          if (ex) return `explain-${ex[1]}-${ex[2]}`;
           if (id.includes('/src/data/')) return 'content';
           if (id.includes('framer-motion') || id.includes('motion-dom') || id.includes('motion-utils')) return 'motion';
           if (id.includes('node_modules/react') || id.includes('react-router')) return 'vendor';

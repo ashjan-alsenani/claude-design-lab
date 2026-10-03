@@ -31,6 +31,7 @@ const PracticeUnitPage = lazyPage(() => import('./pages/practice/PracticeUnitPag
 const PracticeRunPage = lazyPage(() => import('./pages/practice/PracticeRunPage').then((m) => ({ default: m.PracticeRunPage })));
 const PracticeMistakesPage = lazyPage(() => import('./pages/practice/PracticeMistakesPage').then((m) => ({ default: m.PracticeMistakesPage })));
 const PracticeWordsPage = lazyPage(() => import('./pages/practice/PracticeWordsPage').then((m) => ({ default: m.PracticeWordsPage })));
+const ExplainPage = lazyPage(() => import('./pages/ExplainPage').then((m) => ({ default: m.ExplainPage })));
 const GlossaryPage = lazyPage(() => import('./pages/GlossaryPage').then((m) => ({ default: m.GlossaryPage })));
 
 function ScrollTop() {
@@ -52,7 +53,7 @@ function Shell() {
   const location = useLocation();
   const { pathname } = location;
   // lesson & challenge screens are focused: no bottom navigation
-  const focused = /^\/(lesson|quiz|boss)\//.test(pathname) || /^\/practice\/(words$|[^/]+\/[^/]+\/run)/.test(pathname);
+  const focused = /^\/(lesson|quiz|boss|explain)\//.test(pathname) || /^\/practice\/(words$|[^/]+\/[^/]+\/run)/.test(pathname);
   const { state } = useProgress();
   return (
     <div className={`app ${focused ? 'app--focused' : ''}`} data-subject={state.subject}>
@@ -74,6 +75,7 @@ function Shell() {
             <Route path="/challenges" element={<ChallengesPage />} />
             <Route path="/rewards" element={<RewardsPage />} />
             <Route path="/progress" element={<ProgressPage />} />
+            <Route path="/explain/:lessonId" element={<ExplainPage />} />
             <Route path="/practice" element={<PracticeHomePage />} />
             <Route path="/practice/mistakes" element={<PracticeMistakesPage />} />
             <Route path="/practice/words" element={<PracticeWordsPage />} />

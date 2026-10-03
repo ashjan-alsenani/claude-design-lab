@@ -9,6 +9,7 @@ import './styles/components.css';
 import './styles/activities.css';
 import './styles/pages.css';
 import './styles/practice.css';
+import './styles/explain.css';
 
 document.title = `مغامرة ${learner.name} مع نوري`;
 
