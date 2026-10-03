@@ -11,7 +11,7 @@ All paths are relative to `bridal-journey/`.
 | assets/appointment-table.jpg | appointment thumb | menu/table appointment |
 | assets/avatar.jpg | profile photo | header avatar |
 | assets/sprig.png | decoration | flower sprig in the countdown card (transparent) |
-| assets/blossom-corner.png | decoration | blossom branch in the hero corner (transparent) |
+| assets/blossom-corner.jpg | decoration | blossom branch in the hero corner (multiply blend, soft mask) |
 | assets/logo-mark.svg | brand mark | header/logo |
 | assets/icon-venue.svg | line icon | venue tasks/cards |
 | assets/icon-flower.svg | line icon | flowers/decor |
@@ -29,4 +29,4 @@ All paths are relative to `bridal-journey/`.
 - If higher-resolution source photos are later provided, overwrite the same filenames so code does not need to change.
 
 ## Source of the current photos
-`bride-hero.jpg`, the three appointment photos, `avatar.jpg`, `sprig.png` and `blossom-corner.png` were cropped from the owner's reference mockup (2026-10-03) and enlarged. The hero patches a small area on its right edge, which fades into the sky in the layout. Replace any of them with full-resolution originals under the same filenames; no code change is needed.
+`bride-hero.jpg`, the three appointment photos, `avatar.jpg`, `sprig.png` and `blossom-corner.png` were cropped from the owner's reference mockup (2026-10-03) and upscaled 4x with Real-ESRGAN (open-source, run locally), with a little of the original texture and fine grain blended back in. The hero patches a small area on its right edge, which fades into the sky in the layout. Replace any of them with full-resolution originals under the same filenames; no code change is needed.
