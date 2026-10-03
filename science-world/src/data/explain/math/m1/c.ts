@@ -78,7 +78,8 @@ function cookies(dealt: number, extra: (i: number) => Partial<Actor> = () => ({}
 }
 
 /* Frog hops on a number line (lesson m4-3) */
-function hops(id: string, x: number, w: number, min: number, max: number, values: number[], lineY: number, t0: number, gap: number, label: string, labelColor = 'sun', arcY = lineY - 2): Actor[] {
+function hops(id: string, x: number, w: number, min: number, max: number, values: number[], lineY: number, t0: number, gap: number, label: string, labelColor = 'sun', firstLabelOnly = false): Actor[] {
+  const arcY = lineY - 2;
   const X = (v: number) => nlX(x, w, min, max, v);
   const frogY = lineY - 6;
   const anim = values.slice(1).flatMap((v, i) => {
@@ -93,10 +94,11 @@ function hops(id: string, x: number, w: number, min: number, max: number, values
     const a = values[i];
     const t = t0 + i * gap + 0.6;
     const dir = v > a ? -1 : 1;
-    return [
+    const arc = [
       { id: `${id}-arc${i}`, kind: 'arrow', from: [X(a), arcY], to: [X(v), arcY], curve: dir * Math.min(7, Math.abs(X(v) - X(a)) / 2.4), color: labelColor, in: t } as Actor,
       { id: `${id}-lab${i}`, kind: 'text', text: label, x: (X(a) + X(v)) / 2, y: arcY - Math.min(13, Math.abs(X(v) - X(a)) / 1.2) - 3, size: 3, color: labelColor, ltr: true, in: t } as Actor,
     ];
+    return firstLabelOnly && i > 0 ? arc.slice(0, 1) : arc;
   });
   return [{ id, kind: 'emoji', emoji: '🐸', x: X(values[0]), y: frogY, size: 7, in: t0 - 0.6, anim }, ...arcs];
 }
@@ -248,9 +250,9 @@ const explainers: Explainer[] = [
         actors: [
           { id: 'rope', kind: 'emoji', emoji: '🪢', x: 50, y: 22, size: 10 },
           { id: 'b1', kind: 'shape', shape: 'pill', x: 30, y: 44, w: 30, h: 7, color: '#ffc83d', in: 0.8, anim: [{ at: 4.5, to: { x: 30, y: 66 }, dur: 1 }] },
-          { id: 'l1', kind: 'text', text: '٩٣,٧ م', x: 30, y: 54, size: 4, color: 'white', in: 1, anim: [fade(4.2)] },
+          { id: 'l1', kind: 'text', text: '٩٣,٧ م', x: 30, y: 54, size: 4, color: 'white', in: 1, anim: [{ at: 4.5, to: { y: 57 }, dur: 1 }] },
           { id: 'b2', kind: 'shape', shape: 'pill', x: 60, y: 44, w: 40, h: 7, color: '#7fd3ff', in: 2, anim: [{ at: 4.5, to: { x: 65, y: 66 }, dur: 1 }] },
-          { id: 'l2', kind: 'text', text: '١٢٥,٩ م', x: 64, y: 54, size: 4, color: 'white', in: 2.2, anim: [fade(4.2)] },
+          { id: 'l2', kind: 'text', text: '١٢٥,٩ م', x: 64, y: 54, size: 4, color: 'white', in: 2.2, anim: [{ at: 4.5, to: { x: 65, y: 57 }, dur: 1 }] },
           { id: 'br', kind: 'shape', shape: 'rect', x: 47.5, y: 76, w: 70, h: 1, color: 'white', in: 5.8 },
           { id: 'q', kind: 'text', text: '؟ م', x: 47.5, y: 86, size: 5.5, color: 'sun', in: 6.2, anim: [{ at: 6.6, effect: 'pulse' }] },
         ],
@@ -507,7 +509,7 @@ const explainers: Explainer[] = [
         duration: 11,
         actors: [
           { id: 'nl', kind: 'math', math: { type: 'numberLine', min: 50, max: 220, step: 10, labelEvery: 5, points: [{ value: 60 }, { value: 110 }, { value: 160 }, { value: 210 }] }, x: 50, y: 58, w: 84 },
-          ...[60, 110, 160, 210].map((v, i) => ({ id: `t${i}`, kind: 'text', text: ['٦٠', '١١٠', '١٦٠', '٢١٠'][i], x: nlX(50, 84, 50, 220, v), y: 79, size: 4.4, box: true, color: 'sun', in: 0.5 + i * 0.4 }) as Actor),
+          ...[60, 110, 160, 210].map((v, i) => ({ id: `t${i}`, kind: 'text', text: ['٦٠', '١١٠', '١٦٠', '٢١٠'][i], x: nlX(50, 84, 50, 220, v), y: 81, size: 4.4, box: true, color: 'sun', in: 0.5 + i * 0.4 }) as Actor),
           ...[60, 110, 160, 210].map((v, i) => ({ id: `h${i}`, kind: 'text', text: 'حد', x: nlX(50, 84, 50, 220, v), y: 90, size: 3.2, color: '#7dffb0', in: 2.6 + i * 0.3 }) as Actor),
           ...[60, 110, 160].map((v, i) => ({ id: `a${i}`, kind: 'arrow', from: [nlX(50, 84, 50, 220, v), 56], to: [nlX(50, 84, 50, 220, v + 50), 56], curve: -7, color: 'sun', in: 5.5 + i * 0.5 }) as Actor),
           ...[60, 110, 160].map((v, i) => ({ id: `al${i}`, kind: 'text', text: '+٥٠', x: nlX(50, 84, 50, 220, v + 25), y: 38, size: 3.6, color: 'sun', ltr: true, in: 5.8 + i * 0.5 }) as Actor),
@@ -564,7 +566,7 @@ const explainers: Explainer[] = [
         duration: 13,
         actors: [
           { id: 'nl', kind: 'math', math: { type: 'numberLine', min: -40, max: 200, step: 10, labelEvery: 4 }, x: 50, y: 54, w: 86 },
-          ...hops('frog', 50, 86, -40, 200, [200, 170, 140, 110, 80, 50, 20, -10], nlY(54, 86), 1.5, 1, '−٣٠', 'sun'),
+          ...hops('frog', 50, 86, -40, 200, [200, 170, 140, 110, 80, 50, 20, -10], nlY(54, 86), 1.5, 1, '−٣٠', 'sun', true),
           { id: 'rule', kind: 'text', text: 'اطرح ٣٠', x: 22, y: 20, size: 4, box: true, color: 'good', in: 0.5 },
           { id: 'neg', kind: 'text', text: '−١٠', x: nlX(50, 86, -40, 200, -10) + 8, y: 84, size: 4.6, box: true, color: 'red', ltr: true, in: 9, anim: [{ at: 9.4, effect: 'glow' }] },
           { id: 'lab', kind: 'text', text: 'أقل من صفر', x: 52, y: 84, size: 3.4, color: 'white', in: 9.6 },
