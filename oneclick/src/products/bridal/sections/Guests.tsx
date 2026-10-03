@@ -121,7 +121,7 @@ export function Guests() {
 
             <div className="overflow-hidden rounded-[20px] border border-bj-line bg-bj-paper">
               <div className="flex items-center gap-3 border-b border-bj-line px-4 py-2.5 text-[12.5px] text-bj-muted">
-                <input type="checkbox" aria-label={G.selectAll} checked={list.length > 0 && list.every((g) => sel.has(g.id))} onChange={(e) => setSel(e.target.checked ? new Set(list.map((g) => g.id)) : new Set())} className="size-4 accent-[#c48b78]" />
+                <input type="checkbox" aria-label={G.selectAll} checked={list.length > 0 && list.every((g) => sel.has(g.id))} onChange={(e) => setSel(e.target.checked ? new Set(list.map((g) => g.id)) : new Set())} className="size-4 accent-[#c9a49a]" />
                 {G.selectAll} · {num(list.length)}
               </div>
               <ul className="divide-y divide-bj-line">
@@ -129,7 +129,7 @@ export function Guests() {
                   const tb = ws.tables.find((x) => x.id === g.tableId);
                   return (
                     <li key={g.id} className={cx("flex items-center gap-3 px-4 py-3", sel.has(g.id) && "bg-bj-cream/50")}>
-                      <input type="checkbox" aria-label={g.name} checked={sel.has(g.id)} onChange={() => setSel((s) => (s.has(g.id) ? (s.delete(g.id), new Set(s)) : new Set(s.add(g.id))))} className="size-4 shrink-0 accent-[#c48b78]" />
+                      <input type="checkbox" aria-label={g.name} checked={sel.has(g.id)} onChange={() => setSel((s) => (s.has(g.id) ? (s.delete(g.id), new Set(s)) : new Set(s.add(g.id))))} className="size-4 shrink-0 accent-[#c9a49a]" />
                       <button type="button" onClick={() => setEdit(g)} className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 text-start">
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-[15px] text-bj-ink">{g.name}</span>
@@ -167,7 +167,7 @@ export function Guests() {
                     <li key={tb.id}>
                       <Card className="flex h-full flex-col p-4">
                         <button type="button" onClick={() => setTable(tb)} className="flex items-center gap-3 text-start">
-                          <span className="bj-serif grid size-12 shrink-0 place-items-center rounded-full border border-[#e6c2b6] bg-[#fdf3f0] text-[1.3rem] text-bj-gold-ink">{num(tb.number)}</span>
+                          <span className="bj-serif grid size-12 shrink-0 place-items-center rounded-full border border-[#e3cfc6] bg-[#f9f1ed] text-[1.3rem] text-bj-gold-ink">{num(tb.number)}</span>
                           <span className="min-w-0 flex-1">
                             <span className="block truncate text-[15px] text-bj-ink">{tb.name || `${G.fields.table} ${num(tb.number)}`}</span>
                             <span className={cx("text-[12.5px]", left < 0 ? "text-bj-alert" : "text-bj-muted")}>{left <= 0 ? G.full : G.seatsLeft(num(left))}</span>

@@ -110,6 +110,12 @@ const ar = {
   stages: ["بدأت للتو", "حجزت القاعة", "حجزت بعض الموردين", "حجزت معظم الأشياء", "أوشكت على الانتهاء"],
   greeting: { morning: "صباح الخير", afternoon: "مساء الخير", evening: "مساء النور" },
   dash: {
+    left: "باقي",
+    daysWord: "يومًا",
+    untilWedding: "على زفافك",
+    upcoming: "مواعيد قادمة",
+    budgetGlance: "نظرة على الميزانية",
+    viewAll: "عرض الكل",
     daysUntil: "يومًا على زفافك",
     weddingToday: "اليوم يوم زفافك",
     married: "مبارك الزواج",
@@ -454,6 +460,8 @@ const en: BridalCopy = {
   stages: ["Just started", "Venue booked", "Some vendors booked", "Most things booked", "Almost ready"],
   greeting: { morning: "Good morning", afternoon: "Good afternoon", evening: "Good evening" },
   dash: {
+    left: "", daysWord: "days", untilWedding: "until your wedding",
+    upcoming: "Upcoming appointments", budgetGlance: "Budget at a glance", viewAll: "View all",
     daysUntil: "days until your wedding", weddingToday: "Today is your wedding day", married: "Congratulations", ready: "Ready",
     messages: { ontrack: "Beautiful progress. You're right on track.", focus: "Let's take care of a few important things this week.", start: "One step at a time, everything in its moment.", almost: "Nearly there. Enjoy these last days." },
     focus: "Your focus this week", focusSub: "Just a few things. Everything else waits for its moment.", urgent: "Needs your attention", overview: "At a glance",

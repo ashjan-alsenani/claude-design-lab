@@ -69,7 +69,7 @@ export function Calendar() {
     }
     if (e.kind === "payment") return <PaymentCard pay={ws.payments.find((x) => x.id === e.id)!} compact />;
     return (
-      <div className={cx("flex items-center gap-3 rounded-[16px] border px-4 py-3 text-[14.5px]", e.kind === "event" ? "border-[#e6c2b6] bg-[#fdf3f0]" : "border-bj-line bg-bj-paper")}>
+      <div className={cx("flex items-center gap-3 rounded-[16px] border px-4 py-3 text-[14.5px]", e.kind === "event" ? "border-[#e3cfc6] bg-[#f9f1ed]" : "border-bj-line bg-bj-paper")}>
         <span className={cx("size-2 rounded-full", e.kind === "event" ? "bg-bj-gold" : "bg-bj-taupe")} />
         {e.label}
         <Badge className="ms-auto">{C.legend[e.kind]}</Badge>
@@ -131,12 +131,12 @@ export function Calendar() {
                     onClick={() => setDay(c)}
                     className={cx(
                       "flex aspect-square min-w-0 flex-col items-center justify-center gap-1 rounded-[12px] text-[14px] transition-colors",
-                      selected ? "bg-bj-gold-ink text-white" : isWedding ? "bg-[#f8ebe3] text-bj-gold-ink" : c === today ? "border border-bj-gold text-bj-ink" : "text-bj-ink hover:bg-bj-cream"
+                      selected ? "bg-bj-gold-ink text-white" : isWedding ? "bg-[#f3e6df] text-bj-gold-ink" : c === today ? "border border-bj-gold text-bj-ink" : "text-bj-ink hover:bg-bj-cream"
                     )}
                   >
                     <span className="tabular-nums">{new Intl.DateTimeFormat(lang === "ar" ? "ar-OM" : "en-GB", { day: "numeric", timeZone: "UTC" }).format(new Date(`${c}T00:00:00Z`))}</span>
                     <span className="flex h-1.5 gap-0.5">
-                      {es.some((e) => e.kind === "appt") && <span className={cx("size-1.5 rounded-full", selected ? "bg-[#f4d2dc]" : "bg-bj-rose")} />}
+                      {es.some((e) => e.kind === "appt") && <span className={cx("size-1.5 rounded-full", selected ? "bg-[#efdcd4]" : "bg-bj-rose")} />}
                       {es.some((e) => e.kind === "payment") && <span className="size-1.5 rounded-full bg-bj-gold" />}
                       {es.some((e) => e.kind === "task") && <span className={cx("size-1.5 rounded-full", selected ? "bg-bj-beige" : "bg-bj-taupe/60")} />}
                     </span>

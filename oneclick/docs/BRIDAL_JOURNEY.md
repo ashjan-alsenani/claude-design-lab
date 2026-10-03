@@ -73,26 +73,28 @@ until the database and a payment provider are approved.
   - Load the sample wedding.
 
 ## Design
-- **Style (owner choice, 2026-10-03): "Pearl & Rose", wedding luxury that makes the bride feel
-  like a bride.**
-  - Colors: blush and pearl backgrounds, wine (#8e3456) for actions, rose gold (#c48b78) for
-    ornaments and gradient headings.
-  - Type: Aref Ruqaa (Arabic) and Playfair Display (Latin) for headings; IBM Plex Sans Arabic for
-    text and numbers. All self-hosted (SIL OFL) in `src/fonts/bridal`.
-  - Artwork: floral arch with gown and veil, rose garlands, pearls, a flourish divider and soft
-    falling petals for celebrations (`ui/Art.tsx`).
+- **Style (owner choice, 2026-10-03): "Soft Modern", built from the owner's reference mockup.**
+  - Colors: warm white `#faf7f5`, nude `#f3e8e3` / `#c9a49a`, cocoa `#7d564d` for accents,
+    charcoal `#3b3432` for primary buttons, sage `#7f9a7c` for progress.
+  - Type: Alexandria (variable 300-700) for Arabic and Latin; Cormorant Garamond italic only for
+    the "Bridal Journey" signature. Both self-hosted (SIL OFL) in `src/fonts/bridal`.
+  - Artwork (`ui/Art.tsx`): a terrace with arches, mountains, sea and blossoms; the bride drawn
+    from behind (hair bun, pearl comb, pearl buttons, swaying veil), so her face never shows;
+    a lotus brand mark; twinkling sparkles; hearts drifting up.
+  - Motion: shimmer sweeps on glass cards and primary buttons, glitter on names, the active
+    bottom-bar icon hops, icons wiggle on hover, gentle "breathing" on card icons. All off under
+    reduced motion.
   - Copy speaks to her warmly ("يا عروسة", "يا عروستنا").
-  - The One Click logo stays visible (sidebar top, mobile header), linking back to the store.
-  - Earlier versions (quiet ivory, then colorful) were replaced at the owner's request.
+  - The One Click logo stays beside the brand in the header and in the footer, linking to the store.
 - **Layout:**
   - Mobile first, with a bottom bar: Home, Checklist, Budget, Calendar, More.
-  - Desktop sidebar.
+  - Desktop top menu bar: Home, Checklist, Budget, Vendors, Calendar, Guests, then "More".
   - Edit forms open as sheets: a bottom sheet on phones, a side panel on larger screens.
 - **Motion:** subtle, and off when reduced motion is requested.
   - Page fades, progress ring and bar fills, count-ups.
   - A drawn check when a task is done.
   - Smooth accordions and a gentle milestone toast.
-- **Images:** rose-gold line illustrations stand in for photos; brides can add their own (resized in the browser).
+- **Images:** soft nude line illustrations stand in for photos; brides can add their own (resized in the browser).
 
 ## Architecture
 ```

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
-import { ArtTile, HeroArt, type Motif } from "../ui/Art";
+import { ArtTile, HeroArt, Sparkles, type Motif } from "../ui/Art";
 
 /**
  * Marketing landing page for Bridal Journey (public, server-rendered, indexable).
@@ -69,22 +69,22 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
   const c = copy[locale];
   const demo = `/${locale}/demo/bride-planner`;
   const buy = `/${locale}/checkout/bride-planner`;
-  const btn = "inline-flex h-[52px] items-center justify-center rounded-full px-7 text-[15px] font-semibold transition-all duration-200";
+  const btn = "inline-flex h-[52px] items-center justify-center rounded-full px-7 text-[15px] font-medium transition-all duration-300";
   return (
     <div className="bj" dir={locale === "ar" ? "rtl" : "ltr"}>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#fdf8f9_0%,#fbf1ed_55%,#f7e0e7_100%)]">
+      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#faf7f5_0%,#fbf1ed_55%,#f3e6e0_100%)]">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-10 sm:px-8 md:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:pb-24">
           <div>
             <p className="text-[12px] uppercase tracking-[0.22em] text-bj-gold-ink">{c.eyebrow}</p>
-            <h1 className="bj-serif mt-5 text-[2.7rem] leading-[1.1] text-bj-ink sm:text-[3.6rem]">
+            <h1 className="mt-5 text-[2.5rem] font-light leading-[1.2] text-bj-ink sm:text-[3.4rem]">
               {c.title[0]}
               <br />
-              <em className="text-bj-rose not-italic">{c.title[1]}</em>
+              <em className="bj-glitter font-normal not-italic">{c.title[1]}</em>
             </h1>
             <p className="mt-6 max-w-xl text-[16.5px] leading-relaxed text-bj-ink-soft">{c.sub}</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link href={buy} className={`${btn} bg-bj-gold-ink text-white shadow-[0_5px_0_-1px_#6b2340] hover:-translate-y-0.5 hover:bg-[#7a2b49] active:translate-y-0 active:shadow-none`}>
+              <Link href={buy} className={`${btn} bj-shine bg-bj-ink text-white shadow-[0_14px_30px_-14px_rgba(59,52,50,.6)] hover:-translate-y-0.5 hover:bg-[#4a413e] active:translate-y-0`}>
                 {c.cta}
               </Link>
               <Link href={demo} className={`${btn} border-2 border-bj-beige bg-bj-paper text-bj-ink hover:border-bj-taupe`}>
@@ -98,7 +98,8 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
             </p>
           </div>
           <div className="relative mx-auto w-full max-w-[320px] lg:max-w-[420px]">
-            <HeroArt className="bj-float w-full" />
+            <HeroArt className="w-full" />
+            <Sparkles className="absolute inset-0 h-full w-full" />
             <PreviewCard locale={locale} />
           </div>
         </div>
@@ -144,12 +145,12 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
             <h2 className="bj-serif text-[2rem] text-bj-ink">{c.privacyTitle}</h2>
             <p className="mt-4 max-w-lg text-[15.5px] leading-relaxed text-bj-ink-soft">{c.privacy}</p>
           </div>
-          <div className="rounded-[26px] border border-[#e6c2b6] bg-bj-paper p-7 text-center shadow-[0_24px_60px_-36px_rgba(90,30,55,.22)]">
+          <div className="rounded-[26px] border border-[#e3cfc6] bg-bj-paper p-7 text-center shadow-[0_24px_60px_-36px_rgba(80,50,40,.22)]">
             <p className="text-[12px] uppercase tracking-[0.2em] text-bj-gold-ink">{c.price}</p>
             <p className="bj-serif mt-2 text-[3rem] leading-none text-bj-ink">{price}</p>
             <p className="mt-2 text-[13.5px] text-bj-muted">{c.once}</p>
             <div className="mt-6 flex flex-col gap-2.5">
-              <Link href={buy} className={`${btn} bg-bj-gold-ink text-white shadow-[0_5px_0_-1px_#6b2340] hover:-translate-y-0.5 hover:bg-[#7a2b49] active:translate-y-0 active:shadow-none`}>
+              <Link href={buy} className={`${btn} bj-shine bg-bj-ink text-white shadow-[0_14px_30px_-14px_rgba(59,52,50,.6)] hover:-translate-y-0.5 hover:bg-[#4a413e] active:translate-y-0`}>
                 {c.cta}
               </Link>
               <Link href={demo} className={`${btn} border border-bj-line text-bj-ink hover:border-bj-taupe/50`}>
@@ -163,7 +164,7 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
 
       <section className="px-5 py-20 text-center">
         <h2 className="bj-serif text-[2.2rem] text-bj-ink">{c.finalTitle}</h2>
-        <Link href={demo} className={`${btn} mt-7 bg-bj-gold-ink text-white shadow-[0_5px_0_-1px_#6b2340] hover:-translate-y-0.5 hover:bg-[#7a2b49] active:translate-y-0 active:shadow-none`}>
+        <Link href={demo} className={`${btn} mt-7 bj-shine bg-bj-ink text-white shadow-[0_14px_30px_-14px_rgba(59,52,50,.6)] hover:-translate-y-0.5 hover:bg-[#4a413e] active:translate-y-0`}>
           {c.demo}
         </Link>
       </section>
@@ -176,7 +177,7 @@ function PreviewCard({ locale }: { locale: Locale }) {
   const ar = locale === "ar";
   const items = ar ? ["تأكيد قائمة المصورات", "حجز تجربة المكياج", "مراجعة تصميم الدعوة"] : ["Confirm photographer shortlist", "Book makeup trial", "Review invitation design"];
   return (
-    <div aria-hidden="true" className="absolute -bottom-6 start-[-6%] w-[78%] rounded-[20px] border border-bj-line bg-bj-paper/95 p-4 shadow-[0_24px_50px_-28px_rgba(90,30,55,.22)] backdrop-blur sm:start-[-14%]">
+    <div aria-hidden="true" className="absolute -bottom-6 start-[-6%] w-[78%] rounded-[20px] border border-bj-line bg-bj-paper/95 p-4 shadow-[0_24px_50px_-28px_rgba(80,50,40,.22)] backdrop-blur sm:start-[-14%]">
       <p className="text-[11px] text-bj-muted">{ar ? "صباح الخير، ليان" : "Good morning, Layan"}</p>
       <p className="bj-serif text-[1.9rem] leading-tight text-bj-ink">
         {new Intl.NumberFormat(ar ? "ar-OM" : "en").format(255)} <span className="text-[1rem] text-bj-ink-soft">{ar ? "يومًا على زفافك" : "days to go"}</span>

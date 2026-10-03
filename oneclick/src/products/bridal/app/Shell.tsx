@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   AirplaneTiltIcon,
   BellIcon,
@@ -21,19 +21,19 @@ import {
   ImagesIcon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
-  SparkleIcon,
   StorefrontIcon,
   SunHorizonIcon,
   UsersThreeIcon,
   WalletIcon,
-  ArrowLeftIcon,
+  CaretDownIcon,
   DiamondIcon,
+  SignOutIcon,
   type Icon,
 } from "@phosphor-icons/react";
 import { useBridal } from "./state";
-import { Logo, LogoMark } from "@/components/brand/Logo";
-import { Flourish, Petals } from "../ui/Art";
-import { diffDays, notifications, search } from "../model/engine";
+import { LogoMark } from "@/components/brand/Logo";
+import { BrandMark, Petals } from "../ui/Art";
+import { notifications, search } from "../model/engine";
 import { Badge, IconButton, Sheet, cx, inputCls } from "../ui/kit";
 
 export type SectionKey = "" | "checklist" | "calendar" | "budget" | "vendors" | "guests" | "bride" | "closet" | "shopping" | "home" | "honeymoon" | "inspiration" | "documents" | "day" | "settings" | "more";
@@ -79,20 +79,22 @@ export function useNavLabel() {
     })[k];
 }
 
-const sidebar: Exclude<SectionKey, "more">[] = ["", "checklist", "calendar", "budget", "vendors", "guests", "bride", "closet", "shopping", "home", "honeymoon", "day", "inspiration", "documents", "settings"];
+const topNav: Exclude<SectionKey, "more">[] = ["", "checklist", "budget", "vendors", "calendar", "guests"];
+const moreNav: Exclude<SectionKey, "more">[] = ["bride", "closet", "shopping", "home", "honeymoon", "day", "inspiration", "documents", "settings"];
 const bottom: SectionKey[] = ["", "checklist", "budget", "calendar", "more"];
 
 export function Shell({ section, children, exitHref, buyHref }: { section: SectionKey; children: ReactNode; exitHref: string; buyHref?: string }) {
-  const { t, href, ws, today, num, mode, saveState, retry, lang, tasks, celebration, dismissCelebration, locale } = useBridal();
+  const { t, href, ws, today, mode, saveState, retry, lang, tasks, celebration, dismissCelebration, locale } = useBridal();
   const label = useNavLabel();
   const reduce = useReducedMotion();
   const [searchOpen, setSearchOpen] = useState(false);
   const [bellOpen, setBellOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
   const otherLocale = locale === "ar" ? "en" : "ar";
   const switchHref = pathname.replace(`/${locale}/`, `/${otherLocale}/`);
   const notes = useMemo(() => notifications(ws, tasks, today), [ws, tasks, today]);
-  const days = ws.profile ? diffDays(today, ws.profile.weddingDate) : 0;
   const moreActive = !bottom.includes(section);
 
   useEffect(() => {
@@ -100,6 +102,20 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
     const id = setTimeout(dismissCelebration, 3600);
     return () => clearTimeout(id);
   }, [celebration, dismissCelebration]);
+
+  useEffect(() => setMoreOpen(false), [section]);
+  useEffect(() => {
+    if (!moreOpen) return;
+    const close = (e: Event) => {
+      if (e instanceof KeyboardEvent ? e.key === "Escape" : !moreRef.current?.contains(e.target as Node)) setMoreOpen(false);
+    };
+    window.addEventListener("keydown", close);
+    window.addEventListener("pointerdown", close);
+    return () => {
+      window.removeEventListener("keydown", close);
+      window.removeEventListener("pointerdown", close);
+    };
+  }, [moreOpen]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -128,7 +144,7 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
   return (
     <div className="bj min-h-dvh" dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
       {mode === "demo" && (
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-[#f6e1e7] px-4 py-2 text-center text-[12.5px] font-medium text-bj-ink">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-bj-champagne px-4 py-2 text-center text-[12.5px] font-medium text-bj-ink">
           <span>{t.top.demo}</span>
           {buyHref && (
             <Link href={buyHref} className="font-bold text-bj-ink underline underline-offset-4">
@@ -137,95 +153,112 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
           )}
         </div>
       )}
-      <div className="mx-auto flex max-w-[1440px]">
-        {/* Desktop sidebar */}
-        <aside className="sticky top-0 hidden h-dvh w-[252px] shrink-0 flex-col border-e border-bj-line bg-bj-paper/70 px-4 py-6 backdrop-blur lg:flex">
-          <Link href={`/${locale}`} className="mb-5 flex items-center justify-center" aria-label="One Click">
-            <span className="origin-center scale-[0.8]">
-              <Logo />
-            </span>
+      {/* Top bar: brand, main sections, then language, search, alerts and the bride */}
+      <header className="sticky top-0 z-30 border-b border-bj-line/80 bg-bj-paper/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-[68px] max-w-[1320px] items-center gap-3 px-4 sm:px-6 lg:h-[76px] lg:px-8">
+          <Link href={href()} className="shrink-0" aria-label={t.brand}>
+            <BrandMark />
           </Link>
-          <Link href={href()} className="block px-3 text-center">
-            <span className="bj-serif bj-rosegold block text-[2rem] leading-tight">{t.brand}</span>
-            <Flourish className="mx-auto mt-1" />
+          <span className="h-7 w-px shrink-0 bg-bj-line max-[359px]:hidden" aria-hidden="true" />
+          <Link href={`/${locale}`} aria-label="One Click" title="One Click" className="shrink-0 transition-transform duration-300 hover:-rotate-6 hover:scale-110">
+            <LogoMark size={26} />
           </Link>
-          <nav aria-label={t.brand} className="mt-7 flex-1 overflow-y-auto">
-            <ul className="space-y-0.5">
-              {sidebar.map((k) => {
-                const I = navIcons[k];
+
+          <nav aria-label={t.brand} className="mx-auto hidden h-full items-stretch xl:flex">
+            <ul className="flex items-stretch gap-1">
+              {topNav.map((k) => {
                 const active = section === k;
                 return (
-                  <li key={k || "overview"}>
+                  <li key={k || "overview"} className="flex">
                     <Link
                       href={href(k)}
                       aria-current={active ? "page" : undefined}
-                      className={cx("flex items-center gap-3 rounded-[12px] px-3 py-2.5 text-[14px] transition-colors", active ? "bg-bj-cream font-medium text-bj-ink" : "text-bj-ink-soft hover:bg-bj-cream/60")}
+                      className={cx("relative flex items-center px-3 text-[14px] transition-colors", active ? "font-medium text-bj-gold-ink" : "text-bj-ink-soft hover:text-bj-ink")}
                     >
-                      <I size={19} weight={active ? "regular" : "light"} className={active ? "text-bj-gold-ink" : ""} />
-                      {label(k)}
+                      {k === "" ? t.nav.home : label(k)}
+                      {active && <motion.span layoutId="bj-nav-line" className="absolute inset-x-3 bottom-0 h-[2px] rounded-full bg-bj-gold-ink" />}
                     </Link>
                   </li>
                 );
               })}
+              <li ref={moreRef} className="relative flex">
+                <button
+                  type="button"
+                  aria-expanded={moreOpen}
+                  onClick={() => setMoreOpen((v) => !v)}
+                  className={cx("flex items-center gap-1 px-3 text-[14px] transition-colors", moreActive && section !== "more" ? "font-medium text-bj-gold-ink" : "text-bj-ink-soft hover:text-bj-ink")}
+                >
+                  {t.nav.more}
+                  <CaretDownIcon size={13} className={cx("transition-transform duration-300", moreOpen && "rotate-180")} />
+                </button>
+                <AnimatePresence>
+                  {moreOpen && (
+                    <motion.div
+                      initial={reduce ? false : { opacity: 0, y: -6, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute end-0 top-[calc(100%-6px)] z-40 grid w-[440px] grid-cols-2 gap-1 rounded-[20px] border border-bj-line bg-bj-paper p-2 shadow-[0_30px_60px_-30px_rgba(80,50,40,.3)]"
+                    >
+                      {moreNav.map((k) => {
+                        const I = navIcons[k];
+                        return (
+                          <Link key={k} href={href(k)} onClick={() => setMoreOpen(false)} className="bj-icon-hover flex items-center gap-3 rounded-[14px] px-3 py-2.5 text-[14px] text-bj-ink hover:bg-bj-cream">
+                            <span className="grid size-9 place-items-center rounded-full bg-bj-cream text-bj-gold-ink">
+                              <I size={18} className="bj-icon" />
+                            </span>
+                            {label(k)}
+                          </Link>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
             </ul>
           </nav>
-          {ws.profile && (
-            <div className="mt-4 rounded-[16px] border border-bj-line bg-bj-ivory px-4 py-3">
-              <p className="bj-serif text-[1.6rem] leading-none text-bj-ink">{num(Math.max(0, days))}</p>
-              <p className="mt-1 text-[12px] text-bj-muted">{t.dash.daysUntil}</p>
-            </div>
-          )}
-          <Link href={exitHref} className="mt-3 inline-flex items-center gap-2 px-3 text-[13px] text-bj-muted hover:text-bj-ink">
-            <ArrowLeftIcon size={15} className="rtl:rotate-180" />
-            {t.top.exit}
-          </Link>
-        </aside>
 
-        <div className="min-w-0 flex-1">
-          {/* Top bar */}
-          <header className="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-bj-line/70 bg-bj-ivory/85 px-4 backdrop-blur-md sm:px-6 lg:px-10">
-            <Link href={`/${locale}`} aria-label="One Click" className="shrink-0 lg:hidden">
-              {/* Distinct color: the sidebar Logo (hidden on mobile) owns the default gradient id. */}
-              <LogoMark size={30} color="#13B6A7" />
+          <div className="ms-auto flex items-center gap-1 xl:ms-0">
+            <span className="hidden me-2 lg:inline-flex">{save}</span>
+            <Link href={switchHref} hrefLang={otherLocale} className="hidden items-center rounded-full border border-bj-line bg-bj-ivory p-0.5 text-[12px] sm:inline-flex">
+              <span className={cx("rounded-full px-2.5 py-1", lang === "en" ? "bg-bj-paper font-medium text-bj-ink shadow-sm" : "text-bj-muted")}>EN</span>
+              <span className={cx("rounded-full px-2.5 py-1", lang === "ar" ? "bg-bj-paper font-medium text-bj-ink shadow-sm" : "text-bj-muted")}>العربية</span>
             </Link>
-            <Link href={href()} className="bj-serif bj-rosegold text-[1.45rem] leading-none lg:hidden">
-              {t.brand}
-            </Link>
-            <button
-              type="button"
-              onClick={() => setSearchOpen(true)}
-              className="ms-auto hidden h-10 w-72 items-center gap-2 rounded-full border border-bj-line bg-bj-paper px-4 text-[13.5px] text-bj-muted hover:border-bj-taupe/40 md:flex lg:ms-0"
-            >
-              <MagnifyingGlassIcon size={16} />
-              {t.top.search}
-              <kbd className="ms-auto rounded border border-bj-line px-1.5 text-[10px]" dir="ltr">
-                ⌘K
-              </kbd>
-            </button>
-            <span className="hidden flex-1 lg:block" />
-            <span className="hidden sm:inline-flex">{save}</span>
-            <IconButton label={t.top.search} onClick={() => setSearchOpen(true)} className="ms-auto md:hidden">
-              <MagnifyingGlassIcon size={20} weight="regular" />
+            <IconButton label={t.top.search} onClick={() => setSearchOpen(true)} className="bj-icon-hover">
+              <MagnifyingGlassIcon size={20} className="bj-icon" />
             </IconButton>
-            <IconButton label={t.top.notifications} onClick={() => setBellOpen(true)} className="relative">
-              <BellIcon size={20} weight="regular" />
-              {notes.length > 0 && <span className="absolute end-2 top-2 size-2 rounded-full bg-bj-rose ring-2 ring-bj-ivory" />}
+            <IconButton label={t.top.notifications} onClick={() => setBellOpen(true)} className="bj-icon-hover relative">
+              <BellIcon size={20} className="bj-icon" />
+              {notes.length > 0 && <span className="absolute end-2 top-2 size-2 rounded-full bg-bj-rose ring-2 ring-bj-paper" />}
             </IconButton>
-            <Link href={switchHref} className="rounded-full px-3 py-1.5 text-[13px] text-bj-ink-soft hover:bg-bj-cream" hrefLang={otherLocale}>
-              {t.top.switchLang}
+            {ws.profile && (
+              <Link href={href("settings")} aria-label={label("settings")} className="ms-1 hidden size-10 place-items-center rounded-full bg-[linear-gradient(135deg,#f3e2db,#e6cbc0)] text-[15px] font-medium text-bj-gold-ink ring-2 ring-bj-paper sm:grid">
+                {ws.profile.brideName.slice(0, 1)}
+              </Link>
+            )}
+            <Link href={exitHref} aria-label={t.top.exit} title={t.top.exit} className="hidden size-10 place-items-center rounded-full text-bj-muted hover:bg-bj-cream hover:text-bj-ink xl:grid">
+              <SignOutIcon size={19} className="rtl:rotate-180" />
             </Link>
-          </header>
-
-          <div className="px-4 pb-32 pt-6 sm:px-6 lg:px-10 lg:pb-16 lg:pt-9">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div key={section} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={reduce ? undefined : { opacity: 0, y: -6 }} transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}>
-                {children}
-              </motion.div>
-            </AnimatePresence>
-            <div className="mt-10 sm:hidden">{save}</div>
           </div>
         </div>
-      </div>
+      </header>
+
+      <main className="mx-auto max-w-[1320px] px-4 pb-32 pt-6 sm:px-6 lg:px-8 lg:pb-16 lg:pt-8">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div key={section} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={reduce ? undefined : { opacity: 0, y: -6 }} transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}>
+            {children}
+          </motion.div>
+        </AnimatePresence>
+        <div className="mt-10 sm:hidden">{save}</div>
+        <footer className="mt-14 flex flex-wrap items-center justify-center gap-2 text-[12.5px] text-bj-muted">
+          <span>{t.brand}</span>
+          <span aria-hidden="true">·</span>
+          <Link href={`/${locale}`} className="inline-flex items-center gap-1.5 hover:text-bj-ink" dir="ltr">
+            <LogoMark size={18} color="#13B6A7" />
+            One Click
+          </Link>
+        </footer>
+      </main>
 
       {/* Mobile bottom navigation */}
       <nav aria-label={t.brand} className="fixed inset-x-0 bottom-0 z-40 border-t border-bj-line bg-bj-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden">
@@ -236,8 +269,8 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
             return (
               <li key={k || "overview"}>
                 <Link href={href(k)} aria-current={active ? "page" : undefined} className={cx("flex h-16 flex-col items-center justify-center gap-1 text-[11px]", active ? "text-bj-ink" : "text-bj-muted")}>
-                  <span className={cx("grid h-8 w-12 place-items-center rounded-full transition-colors", active && "bg-bj-cream")}>
-                    <I size={21} weight={active ? "regular" : "light"} className={active ? "text-bj-gold-ink" : ""} />
+                  <span className={cx("grid h-8 w-12 place-items-center rounded-full transition-colors duration-300", active && "bg-bj-champagne")}>
+                    <I key={String(active)} size={21} weight={active ? "fill" : "light"} className={active ? "bj-icon-pop text-bj-gold-ink" : ""} />
                   </span>
                   {k === "" ? t.nav.home : label(k)}
                 </Link>
@@ -260,12 +293,12 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-4 bottom-24 z-50 mx-auto flex max-w-sm items-center gap-4 rounded-[22px] border border-[#e6c2b6] bg-bj-paper px-5 py-4 shadow-[0_24px_60px_-24px_rgba(90,30,55,.22)] lg:bottom-10"
+            className="fixed inset-x-4 bottom-24 z-50 mx-auto flex max-w-sm items-center gap-4 rounded-[22px] border border-bj-beige bg-bj-paper px-5 py-4 shadow-[0_24px_60px_-24px_rgba(80,50,40,.25)] lg:bottom-10"
             onClick={dismissCelebration}
           >
-            <span className="relative grid size-14 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,#fbe7ed,#f4d2dc)] text-bj-gold-ink">
+            <span className="relative grid size-14 shrink-0 place-items-center rounded-full bj-shine bg-[linear-gradient(135deg,#f6ebe6,#e9d3ca)] text-bj-gold-ink">
               <Petals count={14} />
-              <DiamondIcon size={24} weight="duotone" />
+              <DiamondIcon size={24} weight="duotone" className="bj-icon-breathe" />
             </span>
             <span>
               <span className="block text-[11px] uppercase tracking-[0.16em] text-bj-gold-ink">{t.celebrate}</span>
@@ -337,7 +370,7 @@ export function NoticeList({ notes, onPick }: { notes: ReturnType<typeof notific
         const urgent = n.kind === "payment_overdue" || n.kind === "task_overdue" || n.kind === "passport";
         return (
           <li key={n.id}>
-            <Link href={href(n.section)} onClick={onPick} className={cx("flex items-start gap-3 rounded-[14px] border px-3.5 py-3 text-[14px] leading-snug", urgent ? "border-[#ecd2d4] bg-[#fdf2f4] text-bj-ink" : "border-bj-line bg-bj-paper text-bj-ink")}>
+            <Link href={href(n.section)} onClick={onPick} className={cx("flex items-start gap-3 rounded-[14px] border px-3.5 py-3 text-[14px] leading-snug", urgent ? "border-[#ecd6d2] bg-[#fbf0ee] text-bj-ink" : "border-bj-line bg-bj-paper text-bj-ink")}>
               <span className={cx("mt-1.5 size-2 shrink-0 rounded-full", urgent ? "bg-bj-alert" : "bg-bj-gold")} />
               {text(n)}
             </Link>

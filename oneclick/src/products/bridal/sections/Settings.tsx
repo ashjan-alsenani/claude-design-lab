@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRightIcon, CheckIcon, DownloadSimpleIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon, CheckIcon, DownloadSimpleIcon, TranslateIcon } from "@phosphor-icons/react";
+import { usePathname } from "next/navigation";
 import { useBridal } from "../app/state";
 import { navIcons, useNavLabel, type SectionKey } from "../app/Shell";
 import type { Currency, EventKey, Profile } from "../model/types";
@@ -177,8 +178,10 @@ export function Settings({ accountHref }: { accountHref: string }) {
 }
 
 export function More() {
-  const { t, href } = useBridal();
+  const { t, href, locale } = useBridal();
   const label = useNavLabel();
+  const pathname = usePathname();
+  const otherLocale = locale === "ar" ? "en" : "ar";
   const keys: Exclude<SectionKey, "" | "more">[] = ["vendors", "guests", "bride", "closet", "shopping", "home", "honeymoon", "day", "inspiration", "documents", "settings"];
   return (
     <div className="space-y-6">
@@ -188,13 +191,23 @@ export function More() {
           const I = navIcons[k];
           return (
             <li key={k}>
-              <Link href={href(k)} className="flex h-28 flex-col justify-between rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(90,30,55,.2)]">
-                <I size={24} weight="regular" className="text-bj-gold-ink" />
+              <Link href={href(k)} className="bj-icon-hover flex h-28 flex-col justify-between rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-28px_rgba(80,50,40,.3)]">
+                <span className="grid size-10 place-items-center rounded-2xl bg-[linear-gradient(145deg,#f7ece7,#efdcd4)] text-bj-gold-ink">
+                  <I size={21} weight="duotone" className="bj-icon" />
+                </span>
                 <span className="text-[15px] text-bj-ink">{label(k)}</span>
               </Link>
             </li>
           );
         })}
+        <li>
+          <Link href={pathname.replace(`/${locale}/`, `/${otherLocale}/`)} hrefLang={otherLocale} className="bj-icon-hover flex h-28 flex-col justify-between rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5">
+            <span className="grid size-10 place-items-center rounded-2xl bg-[linear-gradient(145deg,#f7ece7,#efdcd4)] text-bj-gold-ink">
+              <TranslateIcon size={21} weight="duotone" className="bj-icon" />
+            </span>
+            <span className="text-[15px] text-bj-ink">{t.top.switchLang}</span>
+          </Link>
+        </li>
       </ul>
     </div>
   );

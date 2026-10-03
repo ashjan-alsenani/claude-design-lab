@@ -61,7 +61,7 @@ export function Welcome({ onStart, exitHref }: { onStart: () => void; exitHref: 
           )}
         </motion.div>
         <motion.div initial={reduce ? false : { opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} className="order-1 mx-auto w-full max-w-[300px] lg:order-2 lg:max-w-[420px]">
-          <HeroArt className="bj-float w-full" />
+          <HeroArt className="w-full" />
         </motion.div>
       </div>
     </div>
@@ -243,7 +243,7 @@ export function Onboarding({ onCancel }: { onCancel: () => void }) {
               <>
                 <Q title={o.q.guests} />
                 <input aria-label={o.q.guests} type="number" inputMode="numeric" min={0} dir="ltr" value={p.guests || ""} onChange={(e) => set("guests", Math.max(0, Math.round(Number(e.target.value))))} className={`${inputCls} h-14 text-start text-lg`} />
-                <input type="range" min={20} max={1000} step={10} value={Math.min(1000, p.guests)} onChange={(e) => set("guests", Number(e.target.value))} aria-label={o.q.guests} className="mt-6 w-full accent-[#c48b78]" />
+                <input type="range" min={20} max={1000} step={10} value={Math.min(1000, p.guests)} onChange={(e) => set("guests", Number(e.target.value))} aria-label={o.q.guests} className="mt-6 w-full accent-[#c9a49a]" />
                 <p className="bj-serif mt-3 text-center text-[1.8rem] text-bj-gold-ink">{num(p.guests)}</p>
               </>
             )}

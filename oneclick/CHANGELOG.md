@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.2 — 2026-10-03 — Bridal Journey "Soft Modern"
+- Redesign from the owner's reference: top menu bar, terrace hero with the bride seen from
+  behind, glass countdown and readiness cards, quick cards, focus / appointments / budget cards.
+- Alexandria font, nude and charcoal palette, shimmer, sparkles, swaying veil, moving icons.
+- One Click logo beside the brand and in the footer; language switch added to "More".
+
 ## 0.5.1 — 2026-10-03 — Bridal Journey "Pearl & Rose"
 - Luxury wedding redesign: blush and pearl, wine and rose gold, calligraphic headings,
   roses-and-pearls artwork, falling petals on milestones, warmer bridal copy.

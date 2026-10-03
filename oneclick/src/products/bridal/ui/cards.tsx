@@ -34,7 +34,7 @@ export function VendorCard({ v, onClick }: { v: Vendor; onClick: () => void }) {
   const I = vendorIcon[v.cat];
   const price = v.final ?? v.quoted;
   return (
-    <div className="flex min-w-0 flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(90,30,55,.2)]">
+    <div className="flex min-w-0 flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(80,50,40,.2)]">
       <button type="button" onClick={onClick} className="flex items-start gap-3 text-start">
         <span className="grid size-11 shrink-0 place-items-center rounded-full bg-bj-cream text-bj-gold-ink">
           <I size={20} weight="regular" />

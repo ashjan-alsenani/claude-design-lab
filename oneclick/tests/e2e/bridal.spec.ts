@@ -37,7 +37,7 @@ test("landing page presents the product in both languages", async ({ page }) => 
 test("public demo: Layan's wedding is alive and interactive (nothing saved)", async ({ page, isMobile }) => {
   await page.goto("/en/demo/bride-planner");
   await expect(page.getByText("Sample wedding: changes are not saved")).toBeVisible();
-  await expect(page.locator("h1").getByText("days until your wedding")).toBeVisible();
+  await expect(page.getByText("until your wedding", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Your focus this week" })).toBeVisible();
   const focus = page.locator("section", { has: page.getByRole("heading", { name: "Your focus this week" }) });
   const first = focus.getByRole("checkbox").first();
