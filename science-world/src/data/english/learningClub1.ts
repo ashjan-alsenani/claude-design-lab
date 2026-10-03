@@ -37,7 +37,7 @@ const lessons: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'أهلًا بكِ في نادي التعلّم يا ألين! 🗺️ اليوم نتعلّم أسماء أماكن في المدينة، وكيف نصل إليها بالاتجاهات الصحيحة.',
+        mascot: 'أهلًا بكِ في نادي التعلّم يا {name}! 🗺️ اليوم نتعلّم أسماء أماكن في المدينة، وكيف نصل إليها بالاتجاهات الصحيحة.',
         hook: 'How many places in a town can you name?',
         visual: { emoji: '🏙️', alt: 'مدينة' },
       },
@@ -619,7 +619,7 @@ export const englishLearningClub1: Unit = {
   ],
   boss: {
     title: 'رحلة فريق WOW! إلى متحف التقنية',
-    story: 'فريق مجلة WOW! مدعوّ إلى متحف التقنية الجديد في المدينة 🏛️، لكن الخريطة ضاعت! ساعدي ألين وسلطان وريم في إيجاد الطريق، ثم في ترتيب قاعات المتحف قبل الافتتاح.',
+    story: 'فريق مجلة WOW! مدعوّ إلى متحف التقنية الجديد في المدينة 🏛️، لكن الخريطة ضاعت! ساعدي {name} وسلطان وريم في إيجاد الطريق، ثم في ترتيب قاعات المتحف قبل الافتتاح.',
     treasure: 'شارة المستكشفة الذكية 🧭',
     missions: [
       {
@@ -710,6 +710,6 @@ export const englishLearningClub1: Unit = {
         },
       },
     ],
-    ending: 'أحسنتِ يا ألين! 🎉 وجد الفريق طريقه في المدينة، وترتّبت قاعات متحف التقنية في الوقت المناسب. سلطان يقول: Thank you! You can give directions and classify technology like a real scientist!',
+    ending: 'أحسنتِ يا {name}! 🎉 وجد الفريق طريقه في المدينة، وترتّبت قاعات متحف التقنية في الوقت المناسب. سلطان يقول: Thank you! You can give directions and classify technology like a real scientist!',
   },
 };

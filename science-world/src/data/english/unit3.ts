@@ -62,7 +62,7 @@ const e3LessonsPart2: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'مرحبًا يا ألين! 🏛️ اليوم نسافر عبر الزمن إلى مدن عمرها أكثر من ألفي سنة في منطقتنا العربية. هل في عُمان مدن قديمة؟',
+        mascot: 'مرحبًا يا {name}! 🏛️ اليوم نسافر عبر الزمن إلى مدن عمرها أكثر من ألفي سنة في منطقتنا العربية. هل في عُمان مدن قديمة؟',
         hook: 'Are there any ancient cities in your country? How old are they?',
         visual: { emoji: '🏛️', alt: 'مبنى أثري' },
       },
@@ -311,7 +311,7 @@ const e3LessonsPart2: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'أهلًا يا ألين! 🧭 هل ضعتِ يومًا في مركز تسوّق كبير؟ اليوم نتعلّم كيف نسأل عن الطريق داخل مبنى وكيف نرشد غيرنا.',
+        mascot: 'أهلًا يا {name}! 🧭 هل ضعتِ يومًا في مركز تسوّق كبير؟ اليوم نتعلّم كيف نسأل عن الطريق داخل مبنى وكيف نرشد غيرنا.',
         hook: 'Can you tell me where the shoe shop is, please?',
         visual: { emoji: '🛍️', alt: 'مركز تسوّق' },
       },
@@ -556,7 +556,7 @@ const e3LessonsPart2: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'مرحبًا يا ألين! 📖 اليوم نقرأ القصص القصيرة ونتعلّم كيف نكتب قصة لها بداية ووسط ونهاية.',
+        mascot: 'مرحبًا يا {name}! 📖 اليوم نقرأ القصص القصيرة ونتعلّم كيف نكتب قصة لها بداية ووسط ونهاية.',
         hook: 'Where does a story take place? Who is in it? What happens?',
         visual: { emoji: '✍️', alt: 'كتابة' },
       },
@@ -805,7 +805,7 @@ const e3LessonsPart2: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'أهلًا يا ألين! 💬 هذه صفحتك في مجلة WOW! الأطفال كتبوا عن أماكن مهمّة لهم. هل تتذكّرين سؤال ريم؟',
+        mascot: 'أهلًا يا {name}! 💬 هذه صفحتك في مجلة WOW! الأطفال كتبوا عن أماكن مهمّة لهم. هل تتذكّرين سؤال ريم؟',
         hook: 'Why are some places and buildings important to us?',
         visual: { emoji: '📰', alt: 'مجلة' },
       },
@@ -1062,7 +1062,7 @@ const e3LessonsPart2: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'مرحبًا يا ألين! 🏗️ عندنا قصتان: بنات يصنعن مجسّمات مبانٍ مع مهندسة معمارية، وصديقان يصعدان الدرج إلى الطابق الخامس. هيا نقرأ!',
+        mascot: 'مرحبًا يا {name}! 🏗️ عندنا قصتان: بنات يصنعن مجسّمات مبانٍ مع مهندسة معمارية، وصديقان يصعدان الدرج إلى الطابق الخامس. هيا نقرأ!',
         hook: 'What building would you like to make a model of?',
         visual: { emoji: '🏢', alt: 'مبنى' },
       },
@@ -1548,6 +1548,6 @@ export const englishUnit3: Unit = {
         },
       },
     ],
-    ending: 'رائع يا ألين! 🎉 فتحتِ الغرفة السرّية ووجدتِ لوحات قديمة جميلة. ريم تقول: Places and buildings are important because they tell us about the past!',
+    ending: 'رائع يا {name}! 🎉 فتحتِ الغرفة السرّية ووجدتِ لوحات قديمة جميلة. ريم تقول: Places and buildings are important because they tell us about the past!',
   },
 };

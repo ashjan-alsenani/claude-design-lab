@@ -1,4 +1,5 @@
 import type { Subject, SubjectId } from './types';
+import { personalise } from './learner';
 import { unit1 } from './unit1';
 import { unit2 } from './unit2';
 import { unit3 } from './unit3';
@@ -13,7 +14,7 @@ import { englishUnit3 } from './english/unit3';
 import { englishLearningClub1 } from './english/learningClub1';
 
 /** Every subject in the learning world. Add a subject = add an entry here. */
-export const subjects: Subject[] = [
+export const subjects: Subject[] = personalise<Subject[]>([
   {
     id: 'science',
     title: 'العلوم',
@@ -40,7 +41,7 @@ export const subjects: Subject[] = [
     // Semester 1 Class Book (parts 1 and 2), in book order.
     units: [englishWelcome, englishUnit1, englishUnit2, englishUnit3, englishLearningClub1].filter((u) => u.lessons.length > 0),
   },
-];
+]);
 
 export function getSubject(id: SubjectId | string | undefined): Subject {
   return subjects.find((s) => s.id === id) ?? subjects[0];

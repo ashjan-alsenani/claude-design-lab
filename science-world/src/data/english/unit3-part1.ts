@@ -50,7 +50,7 @@ export const e3LessonsPart1: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'أهلًا يا ألين! 🏰 الوحدة الثالثة عن الأماكن «Places». ريم تحب السفر والنظر إلى المباني وزيارة أماكن مختلفة، وعندها سؤال لكِ.',
+        mascot: 'أهلًا يا {name}! 🏰 الوحدة الثالثة عن الأماكن «Places». ريم تحب السفر والنظر إلى المباني وزيارة أماكن مختلفة، وعندها سؤال لكِ.',
         hook: 'Why are some places and buildings important to us?',
         visual: { emoji: '🏙️', alt: 'مدينة' },
       },

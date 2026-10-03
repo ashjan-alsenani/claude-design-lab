@@ -54,3 +54,12 @@ src/
 - The only network request is for Google Fonts. If it fails, the system fonts are used.
 
 Optional AI illustrations are described in [ASSETS.md](ASSETS.md).
+
+## Personalising for another child
+
+One codebase serves several children. Set these environment variables at build time (e.g. in the Vercel project settings):
+
+- `VITE_LEARNER_NAME` — the name used in messages (default `ألين`)
+- `VITE_LEARNER_FULL_NAME` — optional full name
+
+Lesson texts write the child's name as `{name}`; it is filled in when the site loads. Each site keeps its own saved progress (it lives in that site's browser storage).

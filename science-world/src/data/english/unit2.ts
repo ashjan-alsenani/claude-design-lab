@@ -46,7 +46,7 @@ export const englishUnit2Lessons: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'أهلًا يا ألين! 🤖 الوحدة الثانية عن التقنية. سلطان يحب مادة تقنية المعلومات، وعنده سؤال لكِ في مجلة WOW!',
+        mascot: 'أهلًا يا {name}! 🤖 الوحدة الثانية عن التقنية. سلطان يحب مادة تقنية المعلومات، وعنده سؤال لكِ في مجلة WOW!',
         hook: 'How can technology help us at home and at school?',
         visual: { emoji: '💻', alt: 'حاسوب محمول' },
       },
@@ -1809,7 +1809,7 @@ export const englishUnit2Lessons: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'هذه صفحتكِ يا ألين! 💬 القرّاء أرسلوا تعليقاتهم إلى مجلة WOW!. لنقرأها ونعرف كيف يستخدمون التقنية، ثم نعود إلى سؤال سلطان.',
+        mascot: 'هذه صفحتكِ يا {name}! 💬 القرّاء أرسلوا تعليقاتهم إلى مجلة WOW!. لنقرأها ونعرف كيف يستخدمون التقنية، ثم نعود إلى سؤال سلطان.',
         hook: 'How can technology help us at home and at school?',
         visual: { emoji: '💬', alt: 'تعليقات' },
       },
@@ -2037,7 +2037,7 @@ export const englishUnit2Lessons: Lesson[] = [
     steps: [
       {
         type: 'intro',
-        mascot: 'استعدّي للاختبار يا ألين! 📝 في هذا الجزء نقرأ تعريفًا قصيرًا ونختار الكلمة التي يصفها من صندوق الكلمات.',
+        mascot: 'استعدّي للاختبار يا {name}! 📝 في هذا الجزء نقرأ تعريفًا قصيرًا ونختار الكلمة التي يصفها من صندوق الكلمات.',
         hook: 'This is a sport that you play indoors. You use a small bat and a small ball. What is it?',
         visual: { emoji: '🏓', alt: 'تنس الطاولة' },
       },
@@ -2686,7 +2686,7 @@ export const englishUnit2: Unit = {
   ],
   boss: {
     title: 'مهمّة إنقاذ موقع WOW!',
-    story: 'توقّف موقع مجلة WOW! عن العمل قبل نشر عدد التقنية! 😱 سلطان يحتاج مساعدتكِ يا ألين: أنجزي خمس مهام تقنية لتعيدي الموقع إلى الحياة.',
+    story: 'توقّف موقع مجلة WOW! عن العمل قبل نشر عدد التقنية! 😱 سلطان يحتاج مساعدتكِ يا {name}: أنجزي خمس مهام تقنية لتعيدي الموقع إلى الحياة.',
     treasure: 'شارة خبيرة التقنية 💻',
     missions: [
       {
@@ -2777,6 +2777,6 @@ export const englishUnit2: Unit = {
         },
       },
     ],
-    ending: 'رائع يا ألين! 🎉 عاد موقع WOW! يعمل، ونُشر عدد التقنية. سلطان يقول: Thank you! You can use technology better than anyone!',
+    ending: 'رائع يا {name}! 🎉 عاد موقع WOW! يعمل، ونُشر عدد التقنية. سلطان يقول: Thank you! You can use technology better than anyone!',
   },
 };
