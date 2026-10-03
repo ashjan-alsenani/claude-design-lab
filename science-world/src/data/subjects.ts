@@ -9,6 +9,8 @@ import { mathUnit4 } from './math/unit4';
 import { englishWelcome } from './english/welcome';
 import { englishUnit1 } from './english/unit1';
 import { englishUnit2 } from './english/unit2';
+import { englishUnit3 } from './english/unit3';
+import { englishLearningClub1 } from './english/learningClub1';
 
 /** Every subject in the learning world. Add a subject = add an entry here. */
 export const subjects: Subject[] = [
@@ -33,11 +35,10 @@ export const subjects: Subject[] = [
     title: 'اللغة الإنجليزية',
     short: 'الإنجليزية',
     emoji: '🔤',
-    tagline: 'الهوايات والرياضة، التقنية، والمزيد — Team Together',
+    tagline: 'الهوايات، التقنية، الأماكن — Team Together',
     theme: 'sky',
-    // Semester 1 part 1: Welcome, Unit 1 and Unit 2 (lessons 1–8).
-    // Part 2 of the book appends lessons to englishUnit2 and adds Unit 3.
-    units: [englishWelcome, englishUnit1, englishUnit2].filter((u) => u.lessons.length > 0),
+    // Semester 1 Class Book (parts 1 and 2), in book order.
+    units: [englishWelcome, englishUnit1, englishUnit2, englishUnit3, englishLearningClub1].filter((u) => u.lessons.length > 0),
   },
 ];
 

@@ -11,7 +11,7 @@ All educational content comes from the book. The book's three units become a pla
 
 **Mathematics** (4 worlds, 35 lessons): الأعداد (1-1 … 4-3) · القياس (5-1 … 7-1) · الهندسة (8-1 … 10-3) · الأعداد والعمليات (11-1 … 16-1), each with a review quiz and a final challenge. Math adds typed answers on an on-screen keypad (Arabic-Indic digits) and parametric drawings (number lines, place-value tables, grids for area and transformations, polygons, triangles, 3D solids, rulers, clocks, thermometers).
 
-**English** (Team Together Grade 6, Class Book Semester 1, part 1 — 3 worlds, 20 lessons): Welcome (W-1, W-2) · Free-time fun (1-1 … 1-10, incl. graded readers) · Technology (2-1 … 2-8). English adds chat-style dialogues and stories (`dialogue` step), 🔊 read-aloud with the browser's built-in speech (slow 🐢 mode, no keys or paid services), listening questions (`say`), and a «سباق الاستماع» challenge. English text runs left-to-right inside the Arabic page. Part 2 of the book appends lessons to `englishUnit2Lessons` in `data/english/unit2.ts` and adds Unit 3.
+**English** (Team Together Grade 6, Class Book Semester 1 — 5 worlds, 36 lessons): Welcome (W-1, W-2) · Free-time fun (1-1 … 1-10) · Technology (2-1 … 2-11) · Places (3-1 … 3-10) · WOW! Learning Club 1 (LC-1 directions in a town, LC-2 classifying technology), with the graded readers inside each unit. English adds chat-style dialogues and stories (`dialogue` step), 🔊 read-aloud with the browser's built-in speech (slow 🐢 mode, no keys or paid services), listening questions (`say`), and a «سباق الاستماع» challenge. English text runs left-to-right inside the Arabic page.
 
 ## Run it
 ```bash
@@ -37,7 +37,7 @@ npm run build    # production build in dist/ (static, works from any folder)
 ## Architecture
 ```
 src/
-  data/          types.ts (content schema) · subjects.ts · unit1–3.ts (science) · math/unit1–4.ts · english/ (welcome, unit1, unit2) · glossary.ts · rewards.ts · learner.ts · assets.ts
+  data/          types.ts (content schema) · subjects.ts · unit1–3.ts (science) · math/unit1–4.ts · english/ (welcome, unit1, unit2, unit3, learningClub1) · glossary.ts · rewards.ts · learner.ts · assets.ts
   state/         model.ts · ProgressContext.tsx · storage.ts (swap for a server later) · journey.ts (unlock rules)
   activities/    QuestionCard, Discover (reveal/hotspot/process/flip/think), Play (sort/match/order/memory/data/experiment), StepView
   illustrations/ hand-drawn SVG diagrams (body, environment, matter) + math.tsx (parametric math drawings) + registry
