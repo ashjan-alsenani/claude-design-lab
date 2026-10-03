@@ -210,9 +210,9 @@ const raw: Explainer[] = [
           bg: 'board' as const,
           actors: [
             { id: 'boy', kind: 'emoji', emoji: '🤔', x: 86, y: 84, size: 9, in: 0.2 },
-            { id: 'c1', kind: 'text', text: 'أقل من ٢٠', x: 76, y: 22, size: 3, box: true, color: 'white', in: 0.6 },
-            { id: 'c2', kind: 'text', text: 'من مضاعفات ٣', x: 50, y: 22, size: 3, box: true, color: 'sun', in: 1 },
-            { id: 'c3', kind: 'text', text: 'من مضاعفات ٥', x: 24, y: 22, size: 3, box: true, color: 'blue', in: 1.4 },
+            { id: 'c1', kind: 'text', text: 'أقل من ٢٠', x: 79, y: 22, size: 2.9, box: true, color: 'white', in: 0.6 },
+            { id: 'c2', kind: 'text', text: 'من مضاعفات ٣', x: 52, y: 22, size: 2.9, box: true, color: 'sun', in: 1 },
+            { id: 'c3', kind: 'text', text: 'من مضاعفات ٥', x: 22, y: 22, size: 2.9, box: true, color: 'blue', in: 1.4 },
             ...L.actors,
             ...frog('a', L, range(0, 18, 3), 2.6, 1, 'sun', 4, 'dot', -1.8, 2.2),
             ...frog('b', L, range(0, 15, 5), 2.6, 5 / 3, '#8fd3ff', 9, 'ring', 1.8, 2.2),
