@@ -5,6 +5,16 @@ Use fictional/sample data. Do not read or modify sibling projects, workplace doc
 Do not install skills globally, add automatic hooks, deploy, or change GitHub visibility without an explicit user request.
 Keep normal tool permission prompts enabled. These instructions are scope guidance, not a security sandbox.
 
+## Active project on this branch: Bridal Journey
+When the user's request is about the bridal website, work in `bridal-journey/` and read these files first:
+1. `bridal-journey/CLAUDE.md`
+2. `bridal-journey/DESIGN.md`
+3. `bridal-journey/ASSET_MANIFEST.md`
+4. `bridal-journey/PRODUCT.md`
+5. `bridal-journey/IMPLEMENTATION_CHECKLIST.md`
+
+The visual reference and the required starter image assets are already stored in `bridal-journey/assets/`. Do not tell the user to upload the same images again. Start by opening `bridal-journey/index.html` and improve that implementation.
+
 ## Design skills
 - Use `design-taste-frontend` for landing-page and portfolio direction.
 - Use `emil-design-eng` for interface details and motion.
