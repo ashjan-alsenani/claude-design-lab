@@ -489,12 +489,12 @@ const raw: Explainer[] = [
             return dot(`c${i}`, 66 + (i % 5) * 5.5, i < 5 ? 26 : 34, 1.6 + i * 0.08, left ? 'orange' : 'sun', 3.4, [{ at: 3 + i * 0.12, to, dur: 0.7 }]);
           }),
           ...[0, 1, 2, 3].map((i): Actor => ({ id: `g${i}`, kind: 'shape', shape: 'pill', x: 68 + i * 6.5, y: 37, w: 5.4, h: 20, color: 'rgba(255,255,255,0.12)', in: 2.8 })),
-          T('rl', 'الباقي ٢', 77, 79, 3.4, 'orange', 5.2),
-          Q('note', '١٠ ÷ ٤ = ٢', 46, 84, 4.4, 'sun', 5.6),
-          T('notr', 'والباقي ٢', 25, 84, 4.4, 'orange', 6),
+          T('rl', 'الباقي ٢', 78, 56, 3.2, 'orange', 5.2),
+          Q('note', '١٠ ÷ ٤ = ٢', 62, 84, 4.4, 'sun', 5.6),
+          T('notr', 'والباقي ٢', 31, 84, 4.4, 'orange', 6),
           T('q2', '٢', DX[1], QY, 8, LG, 7.2, { anim: [{ at: 7.3, effect: 'pulse' }] }),
           T('cy', '٢', DX[2] - 4.2, DY - 3.5, 3.6, 'orange', 9, { anim: [{ at: 9.1, effect: 'bounce' }] }),
-          { id: 'ca', kind: 'arrow', from: [70, 74], to: [52, 54], curve: 6, color: 'orange', dashed: true, in: 8.6 },
+          { id: 'ca', kind: 'arrow', from: [71, 68], to: [52, 54], curve: 5, color: 'orange', dashed: true, in: 8.6 },
         ],
       },
       {
@@ -538,13 +538,13 @@ const raw: Explainer[] = [
         actors: [
           ...busStop('٩', ['٥', '٠', '٩']),
           { id: 'rg1', kind: 'shape', shape: 'pill', x: 40.5, y: DY + 0.6, w: 16, h: 15, color: 'sun', outline: true, in: 1, out: 5.4 },
-          Q('n1', '٥٠ ÷ ٩ = ٥', 52, 84, 4.4, 'sun', 1.6, { out: 6.2 }),
-          T('n1r', 'والباقي ٥', 30, 84, 4.4, 'orange', 2, { out: 6.2 }),
+          Q('n1', '٥٠ ÷ ٩ = ٥', 62, 84, 4.4, 'sun', 1.6, { out: 6.2 }),
+          T('n1r', 'والباقي ٥', 31, 84, 4.4, 'orange', 2, { out: 6.2 }),
           T('q5', '٥', DX[1], QY, 8, LG, 3.2, { anim: [{ at: 3.3, effect: 'pulse' }] }),
           T('cy', '٥', DX[2] - 4.2, DY - 3.5, 3.6, 'orange', 4.4, { anim: [{ at: 4.5, effect: 'bounce' }] }),
           { id: 'rg2', kind: 'shape', shape: 'pill', x: DX[2] - 1.6, y: DY + 0.6, w: 11, h: 15, color: 'sun', outline: true, in: 6 },
-          Q('n2', '٥٩ ÷ ٩ = ٦', 52, 84, 4.4, 'sun', 6.6, { out: 11 }),
-          T('n2r', 'والباقي ٥', 30, 84, 4.4, 'orange', 7, { out: 11 }),
+          Q('n2', '٥٩ ÷ ٩ = ٦', 62, 84, 4.4, 'sun', 6.6, { out: 11 }),
+          T('n2r', 'والباقي ٥', 31, 84, 4.4, 'orange', 7, { out: 11 }),
           T('q6', '٦', DX[2], QY, 8, LG, 8.4, { anim: [{ at: 8.5, effect: 'pulse' }] }),
           T('rm', 'والباقي ٥', 72, QY, 4.4, 'orange', 9.6, { box: true, anim: [{ at: 10, effect: 'glow' }] }),
           Q('chk', '٥٦ × ٩ + ٥ = ٥٠٩', 46, 84, 4.4, 'white', 11.4),
@@ -557,16 +557,16 @@ const raw: Explainer[] = [
         duration: 15,
         bg: 'board',
         actors: [
-          Q('w', '٢٥٤ ÷ ٩ = ٢٧', 62, 20, 4.6, 'white', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
-          T('wr', 'والباقي ١١', 36, 20, 4.6, 'orange', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
-          T('x', '✗', 18, 20, 6, 'red', 2.2),
+          Q('w', '٢٥٤ ÷ ٩ = ٢٧', 67, 20, 4.6, 'white', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
+          T('wr', 'والباقي ١١', 34, 20, 4.6, 'orange', 0.3, { anim: [{ at: 2.4, effect: 'shake' }, { at: 9, to: { opacity: 0.3 }, dur: 0.5 }] }),
+          T('x', '✗', 14, 20, 6, 'red', 2.2),
           ...Array.from({ length: 11 }, (_, i): Actor => dot(`c${i}`, 24 + i * 5.2, 46, 3.4 + i * 0.1, i < 9 ? 'sun' : 'orange', 3.6)),
           T('cl', 'الباقي ١١', 50, 33, 3.4, 'orange', 3.6),
           { id: 'grp', kind: 'shape', shape: 'pill', x: 44.8, y: 46, w: 46, h: 13, color: 'good', outline: true, in: 5.4, anim: [{ at: 5.6, effect: 'pulse' }] },
           T('gl', 'مجموعة أخرى من ٩!', 44.8, 60, 3.6, 'good', 6),
           T('rl', 'يبقى ٢', 80, 60, 3.4, 'orange', 7),
-          Q('r', '٢٥٤ ÷ ٩ = ٢٨', 62, 76, 4.6, LG, 9.4, { anim: [{ at: 9.8, effect: 'glow' }] }),
-          T('rr', 'والباقي ٢ ✓', 36, 76, 4.6, LG, 9.6, { anim: [{ at: 9.8, effect: 'glow' }] }),
+          Q('r', '٢٥٤ ÷ ٩ = ٢٨', 67, 76, 4.6, LG, 9.4, { anim: [{ at: 9.8, effect: 'glow' }] }),
+          T('rr', 'والباقي ٢ ✓', 32, 76, 4.6, LG, 9.6, { anim: [{ at: 9.8, effect: 'glow' }] }),
           T('rule', 'الباقي أصغر من المقسوم عليه', 50, 89, 3.6, 'sun', 11.2, { box: true }),
         ],
       },
@@ -664,13 +664,13 @@ const raw: Explainer[] = [
             for (let r = 0; r < n; r++)
               for (let c = 0; c < n; c++) {
                 const isNew = r === n - 1 || c === n - 1;
-                dots.push(dot(`d${n}-${r}${c}`, cx + (c - (n - 1) / 2) * sx, 44 + (r - (n - 1) / 2) * sy, t + (isNew && n > 1 ? 0.6 : 0), isNew && n > 1 ? 'orange' : 'sun', 3.2));
+                dots.push(dot(`d${n}-${r}${c}`, cx + (c - (n - 1) / 2) * sx, 39 + (r - (n - 1) / 2) * sy, t + (isNew && n > 1 ? 0.6 : 0), isNew && n > 1 ? 'orange' : 'sun', 3.2));
               }
             const eq = ['١ × ١', '٢ × ٢', '٣ × ٣', '٤ × ٤'][k];
             const res = ['١', '٤', '٩', '١٦'][k];
-            return [...dots, Q(`e${n}`, eq, cx, 68, 3.2, 'white', t + 1), Q(`r${n}`, res, cx, 77, 5, 'sun', t + 1.4)];
+            return [...dots, Q(`e${n}`, eq, cx, 62, 3.2, 'white', t + 1), Q(`r${n}`, res, cx, 71, 5, 'sun', t + 1.4)];
           }),
-          T('sq', 'أعداد مربّعة: ١، ٤، ٩، ١٦', 50, 89, 3.8, 'sun', 10, { box: true, anim: [{ at: 10.4, effect: 'glow' }] }),
+          T('sq', 'أعداد مربّعة: ١، ٤، ٩، ١٦', 50, 87, 3.8, 'sun', 10, { box: true, anim: [{ at: 10.4, effect: 'glow' }] }),
         ],
       },
       {

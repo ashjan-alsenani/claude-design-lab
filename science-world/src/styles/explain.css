@@ -4,6 +4,7 @@
 .explain-page { max-width: 980px; }
 .xplayer {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--s-3);
 }
 .xplayer__bar {
