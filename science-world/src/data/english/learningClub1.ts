@@ -164,7 +164,7 @@ const lessons: Lesson[] = [
           { id: 's5', text: 'Take the second right.', emoji: '➡️' },
           { id: 's6', text: "You'll see the stadium.", emoji: '🏟️' },
         ],
-        explain: 'Go across the road → go over the bridge → turn left → walk along the river → take the second right → you\'ll see the stadium.',
+        explain: 'الترتيب: Go across the road → go over the bridge → turn left → walk along the river → take the second right → you\'ll see the stadium.',
       },
       {
         type: 'think',
@@ -318,9 +318,9 @@ const lessons: Lesson[] = [
         mascot: 'مخطط الشجرة يبدأ بكلمة Technology ثم يتفرّع. اضغطي «التالي» لتتبّعي كل فرع.',
         steps: [
           { title: 'Technology', text: 'في أعلى الشجرة: Technology، ثم ثلاثة فروع: uses the internet · transport technology · machines in the home.', emoji: '🌳' },
-          { title: 'uses the internet', text: 'you can carry it → phone 📱 · you can\'t carry it → computer 🖥️', emoji: '🌐' },
-          { title: 'transport technology', text: 'goes on roads → car 🚗 · goes in the air → plane ✈️', emoji: '🚦' },
-          { title: 'machines in the home', text: 'used for cooking → oven · used for cleaning → vacuum cleaner', emoji: '🏠' },
+          { title: 'uses the internet', text: 'فرع الإنترنت: you can carry it → phone 📱 · you can\'t carry it → computer 🖥️', emoji: '🌐' },
+          { title: 'transport technology', text: 'فرع النقل: goes on roads → car 🚗 · goes in the air → plane ✈️', emoji: '🚦' },
+          { title: 'machines in the home', text: 'فرع البيت: used for cooking → oven · used for cleaning → vacuum cleaner', emoji: '🏠' },
         ],
       },
       {

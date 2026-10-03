@@ -1861,7 +1861,7 @@ export const englishUnit2Lessons: Lesson[] = [
           { who: 'Katya', text: "I liked the poem about the smartphone. I can remember new vocabulary more easily when it's in a poem.", ar: 'أعجبتني قصيدة الهاتف الذكي. أتذكّر الكلمات الجديدة بسهولة أكبر عندما تكون في قصيدة.' },
           { who: 'Katya', text: 'I like making videos, so I changed the last verse.', ar: 'أحب صنع الفيديوهات، فغيّرت المقطع الأخير من القصيدة.' },
           { who: '', text: "The beginning of Carlos's comment is missing. Here is the end:", ar: 'بداية تعليق كارلوس مفقودة. هذه نهايته:' },
-          { who: 'Carlos', text: '"… very well and it is great that technology is making life easier for people like me."', ar: '«… جيدًا جدًا، ومن الرائع أن التقنية تجعل الحياة أسهل لأشخاص مثلي.»' },
+          { who: 'Carlos', text: '"… very well and it is great that technology is making life easier for people like me."', ar: 'نهاية التعليق: «… جيدًا جدًا، ومن الرائع أن التقنية تجعل الحياة أسهل لأشخاص مثلي.»' },
         ],
       },
       {
