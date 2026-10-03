@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "practice": "node scripts/practice-index.mjs --report",
-    "prebuild": "node scripts/practice-index.mjs",
+    "prebuild": "node scripts/practice-index.mjs && node scripts/explain-index.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b"

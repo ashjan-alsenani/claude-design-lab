@@ -5,15 +5,15 @@
 import type { Explainer } from './types';
 import { getLesson } from '../data/units';
 import { personalise } from '../data/learner';
+import lessonsWithExplainer from '../data/explain/lessons.json';
 
 const files = import.meta.glob<{ default: Explainer[] }>('../data/explain/*/*/*.ts');
 const unitOf = (path: string) => path.split('/').slice(-2)[0];
-const units = new Set(Object.keys(files).map(unitOf));
+const ready = new Set<string>(lessonsWithExplainer as string[]);
 
-/** Units that have explainers (every lesson of such a unit is expected to have one). */
+/** Lessons that have an explainer (list written by scripts/explain-index.mjs before every build). */
 export function hasExplainer(lessonId: string): boolean {
-  const l = getLesson(lessonId);
-  return Boolean(l && units.has(l.unitId));
+  return ready.has(lessonId);
 }
 
 export async function loadExplainer(lessonId: string): Promise<Explainer | undefined> {
