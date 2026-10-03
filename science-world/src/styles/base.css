@@ -135,6 +135,11 @@ a {
 .btn--block {
   width: 100%;
 }
+.btn--sm {
+  min-height: 40px;
+  padding: 6px 14px;
+  font-size: var(--fs-sm);
+}
 
 .icon-btn {
   display: inline-grid;

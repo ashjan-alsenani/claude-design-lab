@@ -1649,6 +1649,9 @@ a.lesson-card:active {
 .island--sunset { background: linear-gradient(180deg, #ffe7d4, #fff6ee 70%, #ffdcc2); }
 .island--mint { background: linear-gradient(180deg, #d5f5f0, #effcf9 70%, #c5eee7); }
 .island--berry { background: linear-gradient(180deg, #ffe0ec, #fff3f8 70%, #ffd2e3); }
+.island--sky { background: linear-gradient(180deg, #d8f1fd, #f0faff 70%, #c6e9fa); }
+.island--lemon { background: linear-gradient(180deg, #fff1c4, #fffaea 70%, #ffe7a3); }
+.island--violet { background: linear-gradient(180deg, #ebe2ff, #f7f3ff 70%, #dfd2ff); }
 
 .subjects {
   display: grid;

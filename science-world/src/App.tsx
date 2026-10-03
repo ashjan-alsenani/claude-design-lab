@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
-import { ProgressProvider } from './state/ProgressContext';
+import { ProgressProvider, useProgress } from './state/ProgressContext';
 import { TopBar } from './components/TopBar';
 import { Navigation } from './components/Navigation';
 import { AchievementPopup } from './components/AchievementPopup';
@@ -46,8 +46,9 @@ function Shell() {
   const { pathname } = location;
   // lesson & challenge screens are focused: no bottom navigation
   const focused = /^\/(lesson|quiz|boss)\//.test(pathname);
+  const { state } = useProgress();
   return (
-    <div className={`app ${focused ? 'app--focused' : ''}`}>
+    <div className={`app ${focused ? 'app--focused' : ''}`} data-subject={state.subject}>
       <SkyBackground />
       {!focused && <TopBar />}
       <main id="main" className="app__main">

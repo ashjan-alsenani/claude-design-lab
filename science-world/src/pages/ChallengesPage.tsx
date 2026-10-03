@@ -13,6 +13,7 @@ import { SpeedChallenge } from '../challenges/SpeedChallenge';
 import { BubblePop, type Statement } from '../challenges/BubblePop';
 import { Mystery } from '../challenges/Mystery';
 import { TablesSprint } from '../challenges/TablesSprint';
+import { WordListen } from '../challenges/WordListen';
 import { MemoryGame } from '../activities/Play';
 import { QuizRunner } from '../components/QuizRunner';
 import { MascotMessage } from '../components/MascotMessage';
@@ -20,10 +21,11 @@ import { Mascot } from '../components/Mascot';
 import { play } from '../lib/sound';
 import { celebrate } from '../lib/confetti';
 
-type Mode = 'speed' | 'bubbles' | 'memory' | 'mystery' | 'review' | 'tables';
+type Mode = 'speed' | 'bubbles' | 'memory' | 'mystery' | 'review' | 'tables' | 'listen';
 
-const cards: { id: Mode; icon: string; title: string; text: string; tone: string; need: number; only?: 'math' }[] = [
+const cards: { id: Mode; icon: string; title: string; text: string; tone: string; need: number; only?: 'math' | 'english' }[] = [
   { id: 'tables', icon: '✖️', title: 'سباق جدول الضرب', text: 'كم ناتج ضرب تحلّين في 60 ثانية؟', tone: 'grape', need: 0, only: 'math' },
+  { id: 'listen', icon: '👂', title: 'سباق الاستماع', text: 'استمعي للكلمة الإنجليزية واختاري معناها في 60 ثانية!', tone: 'aqua', need: 1, only: 'english' },
   { id: 'speed', icon: '⏱️', title: 'تحدي الدقيقة', text: 'أجب عن أكبر عدد من الأسئلة في 60 ثانية!', tone: 'coral', need: 1 },
   { id: 'bubbles', icon: '🫧', title: 'فرقع الصحيح', text: 'جد 5 عبارات صحيحة بين الفقاعات.', tone: 'aqua', need: 2 },
   { id: 'memory', icon: '🧠', title: 'تحدي الذاكرة', text: 'طابق كل مصطلح مع معناه.', tone: 'grape', need: 1 },
@@ -95,6 +97,7 @@ export function ChallengesPage() {
         {mode === 'bubbles' && <BubblePop key={round} statements={statements} onFinish={(s) => finish('bubbles', s)} />}
         {mode === 'memory' && <MemoryGame key={round} step={memoryStep} compact onComplete={() => window.setTimeout(() => finish('memory', 1), 1200)} />}
         {mode === 'mystery' && <Mystery key={round} entries={glossaryPool} onFinish={(s) => finish('mystery', s)} />}
+        {mode === 'listen' && <WordListen key={round} words={learnedLessons(state).flatMap((l) => l.vocab)} onFinish={(s) => finish('listen', s)} />}
         {mode === 'tables' && <TablesSprint key={round} onFinish={(s) => finish('tables', s)} />}
         {mode === 'review' && <QuizRunner key={round} questions={sample(pool, Math.min(10, pool.length))} title="اختبار المراجعة الشامل" onFinish={(s) => finish('review', s)} />}
       </div>
@@ -206,7 +209,7 @@ export function ChallengesPage() {
             <div key={u.id} className="boss-card boss-card--locked" data-theme={u.theme}>
               <span className="boss-card__icon">🔒</span>
               <span>
-                <strong>{u.boss.title || `التحدي النهائي ${u.number}`}</strong>
+                <strong>{u.boss.title || `التحدي النهائي ${u.numberLabel ?? u.number}`}</strong>
                 <small>أنهِ اختبار وحدة «{u.title}» لفتحه</small>
               </span>
             </div>

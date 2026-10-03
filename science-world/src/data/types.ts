@@ -4,9 +4,9 @@
  * Add a new lesson by adding data, never by writing a new page component.
  */
 
-export type UnitId = string; // science: u1–u3 · math: m1–m4
-export type SubjectId = 'science' | 'math';
-export type UnitTheme = 'coral' | 'leaf' | 'grape' | 'ocean' | 'sunset' | 'mint' | 'berry';
+export type UnitId = string; // science: u1–u3 · math: m1–m4 · english: e0–e2
+export type SubjectId = 'science' | 'math' | 'english';
+export type UnitTheme = 'coral' | 'leaf' | 'grape' | 'ocean' | 'sunset' | 'mint' | 'berry' | 'sky' | 'lemon' | 'violet';
 export type MascotMood = 'happy' | 'excited' | 'thinking' | 'surprised' | 'celebrating' | 'encouraging';
 
 /** A visual: an illustration key from the SVG library, or an emoji fallback. */
@@ -63,6 +63,8 @@ interface QuestionBase {
   explain: string;
   /** shown after a wrong answer: a gentle hint that points back to the lesson */
   hint: string;
+  /** English: a word or sentence read aloud with a 🔊 button (listening questions) */
+  say?: string;
 }
 
 export interface McqQuestion extends QuestionBase {
@@ -250,6 +252,19 @@ export interface ExperimentStep {
   conclusion: string;
 }
 
+/** A short conversation or story read line by line (English dialogues, picture stories).
+ *  Every English line has a 🔊 button; `ar` is an optional Arabic help line. */
+export interface DialogueStep {
+  type: 'dialogue';
+  title: string;
+  mascot?: string;
+  /** emoji that sets the scene, e.g. '🏞️' */
+  scene?: string;
+  cast: { name: string; emoji: string }[];
+  /** `who` is a cast name; leave it empty for a narrator line */
+  lines: { who: string; text: string; ar?: string }[];
+}
+
 export type LessonStep =
   | IntroStep
   | RevealStep
@@ -263,7 +278,8 @@ export type LessonStep =
   | MemoryStep
   | DataStep
   | ThinkStep
-  | ExperimentStep;
+  | ExperimentStep
+  | DialogueStep;
 
 export interface VocabWord {
   word: string;
@@ -300,6 +316,8 @@ export interface BossMission {
 export interface Unit {
   id: UnitId;
   number: number;
+  /** replaces "الوحدة {number}" (e.g. 'Welcome') */
+  numberLabel?: string;
   title: string;
   world: string; // name of the map world
   emoji: string;

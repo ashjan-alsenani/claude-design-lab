@@ -1,4 +1,5 @@
 import type { ProgressState } from '../state/model';
+import type { Outfit } from '../components/Mascot';
 import { lessonsOf, subjects, units } from './units';
 
 export interface Achievement {
@@ -116,7 +117,7 @@ export const achievements: Achievement[] = [
     .map<Achievement>((sub) => ({
       id: sub.id === 'science' ? 'hero' : `hero-${sub.id}`,
       title: `بطلة ${sub.title}`,
-      emoji: sub.id === 'science' ? '🦸' : '🦸‍♀️',
+      emoji: sub.id === 'science' ? '🦸' : sub.id === 'math' ? '🦸‍♀️' : '🧚‍♀️',
       description: `أكملتِ كل دروس كتاب ${sub.title}!`,
       howTo: `أكملي كل دروس ${sub.title} الـ ${lessonsOf(sub.id).length}`,
       kind: 'trophy',
@@ -134,13 +135,15 @@ export const achievements: Achievement[] = [
 ];
 
 /** Outfits for Nouri, unlocked by finishing units. */
-export const characters: { id: string; name: string; outfit: 'none' | 'doctor' | 'ranger' | 'chemist' | 'cap' | 'crown'; howTo: string; unitId?: string; unlocked: (s: ProgressState) => boolean }[] = [
+export const characters: { id: string; name: string; outfit: Outfit; howTo: string; unitId?: string; unlocked: (s: ProgressState) => boolean }[] = [
   { id: 'nouri', name: 'نوري المستكشف', outfit: 'none', howTo: 'معك من البداية', unlocked: () => true },
   { id: 'doctor', name: 'نوري الطبيب', outfit: 'doctor', unitId: 'u1', howTo: 'أنهي وحدة جسم الإنسان', unlocked: (s) => Boolean(s.bosses.u1) },
   { id: 'ranger', name: 'نوري حارس الغابة', outfit: 'ranger', unitId: 'u2', howTo: 'أنهي وحدة الكائنات الحية في البيئة', unlocked: (s) => Boolean(s.bosses.u2) },
   { id: 'chemist', name: 'نوري الكيميائي', outfit: 'chemist', unitId: 'u3', howTo: 'أنهي وحدة تغيرات المادة', unlocked: (s) => Boolean(s.bosses.u3) },
   { id: 'cap', name: 'نوري عبقري الأعداد', outfit: 'cap', unitId: 'm1', howTo: 'أنهي أول وحدة في الرياضيات', unlocked: (s) => Boolean(s.bosses.m1) },
   { id: 'crown', name: 'نوري ملك الرياضيات', outfit: 'crown', unitId: 'm4', howTo: 'أنهي آخر وحدة في الرياضيات', unlocked: (s) => Boolean(s.bosses.m4) },
+  { id: 'headband', name: 'نوري الرياضي', outfit: 'headband', unitId: 'e1', howTo: 'أنهي وحدة Free-time fun في الإنجليزي', unlocked: (s) => Boolean(s.bosses.e1) },
+  { id: 'headphones', name: 'نوري التقني', outfit: 'headphones', unitId: 'e2', howTo: 'أنهي وحدة Technology في الإنجليزي', unlocked: (s) => Boolean(s.bosses.e2) },
 ];
 
 export function newlyEarned(s: ProgressState): Achievement[] {

@@ -4,6 +4,7 @@ import { MascotMessage } from '../components/MascotMessage';
 import { FlipCards, HotspotExplorer, ProcessPlayer, RevealCards, ThinkTalk } from './Discover';
 import { DataReader, ExperimentLab, MatchGame, MemoryGame, OrderGame, SortGame } from './Play';
 import { QuestionCard, type AnswerResult } from './QuestionCard';
+import { DialoguePlayer } from './Dialogue';
 
 interface Props {
   step: LessonStep;
@@ -26,6 +27,7 @@ export const stepTitle: Record<LessonStep['type'], string> = {
   data: 'اقرأ البيانات',
   think: 'تحدّث عن!',
   experiment: 'مختبر التجارب',
+  dialogue: 'اقرئي واستمعي',
 };
 
 export const stepIcon: Record<LessonStep['type'], string> = {
@@ -42,6 +44,7 @@ export const stepIcon: Record<LessonStep['type'], string> = {
   data: '📊',
   think: '💬',
   experiment: '🧪',
+  dialogue: '💬',
 };
 
 /** Picks the right activity component for a lesson step. */
@@ -79,6 +82,8 @@ export function StepView({ step, onComplete, onAnswer }: Props) {
       return <ThinkTalk step={step} onComplete={onComplete} />;
     case 'experiment':
       return <ExperimentLab step={step} onComplete={onComplete} />;
+    case 'dialogue':
+      return <DialoguePlayer step={step} onComplete={onComplete} />;
     case 'question':
       return <QuestionCard question={step.question} onDone={onAnswer} />;
   }

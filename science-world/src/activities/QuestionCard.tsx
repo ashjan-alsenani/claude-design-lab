@@ -8,6 +8,8 @@ import { VisualView } from '../illustrations/registry';
 import { Feedback } from '../components/Feedback';
 import { NumberPad } from './NumberPad';
 import { sameNumber, toArabicDigits } from '../lib/digits';
+import { Say } from '../components/Say';
+import { speak } from '../lib/speech';
 
 export interface AnswerResult {
   correct: boolean; // eventually answered correctly
@@ -61,6 +63,13 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
     setStatus('answering');
     setMsg('');
     setTyped('');
+  }, [q]);
+
+  // listening questions: read the word/sentence once when the question appears
+  useEffect(() => {
+    if (!q.say) return;
+    const t = window.setTimeout(() => speak(q.say!), 350);
+    return () => window.clearTimeout(t);
   }, [q]);
 
   const correctIds = q.kind === 'tf' ? [String(q.answer)] : q.kind === 'tapAll' ? q.answers : q.kind === 'number' ? [] : [q.answer];
@@ -133,19 +142,31 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
     return '';
   };
 
-  const sentence = q.kind === 'fill' ? q.sentence.split('___') : null;
+  const rawSentence = q.kind === 'fill' ? q.sentence : '';
+  const sentence = q.kind === 'fill' ? rawSentence.split('___') : null;
   const filled = q.kind === 'fill' && done ? choices.find((c) => c.id === q.answer)?.text : null;
 
   return (
     <div className={`qcard qcard--${q.kind}`}>
       {q.visual && <VisualView visual={q.visual} className="qcard__visual" />}
-      <h3 className="qcard__prompt">{q.prompt}</h3>
+      <h3 className="qcard__prompt">
+        {q.prompt}
+        {!q.say && q.kind !== 'fill' && <Say text={q.prompt} />}
+      </h3>
+      {q.say && (
+        <div className="qcard__listen">
+          <Say text={q.say} big label="استمعي" />
+        </div>
+      )}
       {sentence && (
-        <p className="qcard__sentence">
-          {sentence[0]}
-          <span className={`blank ${filled ? 'blank--filled' : ''}`}>{filled ?? '؟'}</span>
-          {sentence[1]}
-        </p>
+        <div className="qcard__sentence-row">
+          <p className="qcard__sentence">
+            {sentence[0]}
+            <span className={`blank ${filled ? 'blank--filled' : ''}`}>{filled ?? (/[A-Za-z]/.test(rawSentence) ? '?' : '؟')}</span>
+            {sentence[1]}
+          </p>
+          <Say text={filled ? `${sentence[0]}${filled}${sentence[1]}` : rawSentence} />
+        </div>
       )}
       {q.kind === 'number' && (
         <>

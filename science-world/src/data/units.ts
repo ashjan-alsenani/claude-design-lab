@@ -47,3 +47,8 @@ export const questionPool: PooledQuestion[] = units.flatMap((u) => [
   ...u.lessons.flatMap((l) => l.quiz.map((q) => ({ question: q, unitId: u.id, lessonId: l.id }))),
   ...u.unitQuiz.map((q) => ({ question: q, unitId: u.id })),
 ]);
+
+/** "الوحدة 2" or a custom label such as "Welcome". */
+export function unitName(u: Unit): string {
+  return u.numberLabel ?? `الوحدة ${u.number}`;
+}

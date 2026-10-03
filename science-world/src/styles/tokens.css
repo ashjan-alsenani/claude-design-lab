@@ -91,3 +91,6 @@
 [data-theme='sunset'] { --accent: #ff8a3d; --accent-deep: #d9661c; --accent-soft: #ffeedd; }
 [data-theme='mint'] { --accent: #14b8a6; --accent-deep: #0e8f81; --accent-soft: #d8f6f2; }
 [data-theme='berry'] { --accent: #e64980; --accent-deep: #c2255c; --accent-soft: #ffe3ee; }
+[data-theme='sky'] { --accent: #0ea5e9; --accent-deep: #0377b0; --accent-soft: #dcf3fd; }
+[data-theme='lemon'] { --accent: #f2a900; --accent-deep: #b97c00; --accent-soft: #fff4d1; }
+[data-theme='violet'] { --accent: #8b5cf6; --accent-deep: #6d3fd8; --accent-soft: #efe7ff; }

@@ -9,6 +9,7 @@ import { Art, SceneView, VisualView } from '../illustrations/registry';
 import { MathView } from '../illustrations/math';
 import { play } from '../lib/sound';
 import { MascotMessage } from '../components/MascotMessage';
+import { Say } from '../components/Say';
 
 export interface ActivityProps<S> {
   step: S;
@@ -36,7 +37,10 @@ export function RevealCards({ step, onComplete }: ActivityProps<RevealStep>) {
           >
             {c.visual && <VisualView visual={c.visual} className="reveal-card__visual" />}
             <div>
-              <h3>{c.title}</h3>
+              <h3>
+                {c.title}
+                <Say text={c.title} />
+              </h3>
               <p>{c.text}</p>
             </div>
           </motion.article>
@@ -211,25 +215,27 @@ export function FlipCards({ step, onComplete }: ActivityProps<FlipStep>) {
         {step.cards.map((c, i) => {
           const on = flipped.includes(i);
           return (
-            <button
-              key={i}
-              type="button"
-              className={`flip ${on ? 'flip--on' : ''}`}
-              onClick={() => {
-                play('flip');
-                setFlipped((f) => (f.includes(i) ? f : [...f, i]));
-              }}
-              aria-label={on ? `${c.front}: ${c.back}` : `اقلب بطاقة ${c.front}`}
-            >
-              <span className="flip__inner">
-                <span className="flip__face flip__front">
-                  {c.emoji && <span className="flip__emoji">{c.emoji}</span>}
-                  <span className="flip__word">{c.front}</span>
-                  <span className="flip__tap">اضغط لتقلب 🔄</span>
+            <div className="flip-wrap" key={i}>
+              <button
+                type="button"
+                className={`flip ${on ? 'flip--on' : ''}`}
+                onClick={() => {
+                  play('flip');
+                  setFlipped((f) => (f.includes(i) ? f : [...f, i]));
+                }}
+                aria-label={on ? `${c.front}: ${c.back}` : `اقلب بطاقة ${c.front}`}
+              >
+                <span className="flip__inner">
+                  <span className="flip__face flip__front">
+                    {c.emoji && <span className="flip__emoji">{c.emoji}</span>}
+                    <span className="flip__word">{c.front}</span>
+                    <span className="flip__tap">اضغط لتقلب 🔄</span>
+                  </span>
+                  <span className="flip__face flip__back">{c.back}</span>
                 </span>
-                <span className="flip__face flip__back">{c.back}</span>
-              </span>
-            </button>
+              </button>
+              <Say text={c.front} className="flip__say" />
+            </div>
           );
         })}
       </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { MascotMood } from '../data/types';
 import { play } from '../lib/sound';
 
-export type Outfit = 'none' | 'doctor' | 'ranger' | 'chemist' | 'cap' | 'crown';
+export type Outfit = 'none' | 'doctor' | 'ranger' | 'chemist' | 'cap' | 'crown' | 'headband' | 'headphones';
 
 interface Props {
   mood?: MascotMood;
@@ -119,6 +119,23 @@ function OutfitLayer({ outfit }: { outfit: Outfit }) {
         <circle cx="100" cy="40" r="5" fill="#ff6b6b" />
         <circle cx="76" cy="44" r="4" fill="#2f7ff0" />
         <circle cx="124" cy="44" r="4" fill="#2fbf71" />
+      </g>
+    );
+  if (outfit === 'headband')
+    return (
+      <g>
+        {/* sporty headband */}
+        <path d="M46 58 Q100 40 154 58 L152 70 Q100 52 48 70Z" fill="#ff6b6b" stroke="#1f2a4d" strokeWidth="3" strokeLinejoin="round" />
+        <path d="M70 56 L74 66 M130 56 L126 66" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+      </g>
+    );
+  if (outfit === 'headphones')
+    return (
+      <g>
+        <path d="M42 92 Q42 18 100 18 Q158 18 158 92" fill="none" stroke="#1f2a4d" strokeWidth="8" strokeLinecap="round" />
+        <path d="M42 92 Q42 18 100 18 Q158 18 158 92" fill="none" stroke="#8b5cf6" strokeWidth="4" strokeLinecap="round" />
+        <rect x="28" y="78" width="22" height="36" rx="10" fill="#8b5cf6" stroke="#1f2a4d" strokeWidth="3" />
+        <rect x="150" y="78" width="22" height="36" rx="10" fill="#8b5cf6" stroke="#1f2a4d" strokeWidth="3" />
       </g>
     );
   return null;

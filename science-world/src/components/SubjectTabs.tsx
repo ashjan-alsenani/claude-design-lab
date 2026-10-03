@@ -2,7 +2,7 @@ import { subjects } from '../data/subjects';
 import { useProgress } from '../state/ProgressContext';
 import { play } from '../lib/sound';
 
-/** Switch between العلوم and الرياضيات (remembered for the whole site). */
+/** Switch between the subjects (remembered for the whole site). */
 export function SubjectTabs({ compact = false }: { compact?: boolean }) {
   const { state, setSubject } = useProgress();
   return (

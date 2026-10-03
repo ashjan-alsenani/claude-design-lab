@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getUnit, subjectOfUnit } from '../data/units';
+import { getUnit, subjectOfUnit, unitName } from '../data/units';
 import { useProgress } from '../state/ProgressContext';
 import { isUnitQuizUnlocked } from '../state/journey';
 import { QuizRunner } from '../components/QuizRunner';
@@ -31,7 +31,7 @@ export function UnitQuizPage() {
         </Link>
         <div className="lesson__bar-mid">
           <div className="lesson__bar-title">
-            {unit.emoji} الوحدة {unit.number}: {unit.title}
+            {unit.emoji} {unitName(unit)}: {unit.title}
           </div>
         </div>
         <span className="chip">🎓 اختبار</span>

@@ -2,7 +2,7 @@ import { lessonNo } from '../lib/format';
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { getLesson, lessonLabel, subjectOfLesson, unitOfLesson } from '../data/units';
+import { getLesson, lessonLabel, subjectOfLesson, unitName, unitOfLesson } from '../data/units';
 import type { Lesson } from '../data/types';
 import { useProgress } from '../state/ProgressContext';
 import { isLessonUnlocked, isUnitQuizUnlocked, nextLessonInSubject } from '../state/journey';
@@ -87,7 +87,7 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
                 {lesson.emoji}
               </div>
               <div className="eyebrow">
-                {unit.emoji} الوحدة {unit.number}: {unit.title}
+                {unit.emoji} {unitName(unit)}: {unit.title}
               </div>
               <h1>{lesson.title}</h1>
               {lesson.verse && <p className="verse">{lesson.verse}</p>}

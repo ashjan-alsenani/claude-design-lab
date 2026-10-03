@@ -1,4 +1,4 @@
-import { getSubject } from '../data/units';
+import { getSubject, unitName } from '../data/units';
 import { SubjectTabs } from '../components/SubjectTabs';
 import { useProgress } from '../state/ProgressContext';
 import { isUnitComplete, unitLessonsDone } from '../state/journey';
@@ -14,6 +14,9 @@ const islandDecor: Record<string, string[]> = {
   sunset: ['📏', '⏰', '📅', '🧭'],
   mint: ['🔷', '📐', '🔺', '🧊'],
   berry: ['➗', '✖️', '🔟', '🌡️'],
+  sky: ['💬', '🌟', '📖', '🎈'],
+  lemon: ['⚽', '🏸', '🎨', '🛹'],
+  violet: ['💻', '📱', '🎧', '📷'],
 };
 
 export function JourneyPage() {
@@ -58,7 +61,7 @@ export function JourneyPage() {
                 {u.emoji}
               </span>
               <div className="island__title">
-                <div className="eyebrow">الوحدة {u.number}</div>
+                <div className="eyebrow">{unitName(u)}</div>
                 <h2 id={`island-${u.id}`}>{u.world}</h2>
                 <p>{u.title}</p>
               </div>

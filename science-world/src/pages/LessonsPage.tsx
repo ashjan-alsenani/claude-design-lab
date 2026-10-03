@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getSubject } from '../data/units';
+import { getSubject, unitName } from '../data/units';
 import { SubjectTabs } from '../components/SubjectTabs';
 import { useProgress } from '../state/ProgressContext';
 import { isBossUnlocked, isUnitQuizUnlocked } from '../state/journey';
@@ -23,7 +23,7 @@ export function LessonsPage() {
               {u.emoji}
             </span>
             <div>
-              <div className="eyebrow">الوحدة {u.number}</div>
+              <div className="eyebrow">{unitName(u)}</div>
               <h2>{u.title}</h2>
             </div>
           </div>

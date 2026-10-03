@@ -2,7 +2,7 @@ import { learner } from '../data/learner';
 import { lessonNo } from '../lib/format';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { allLessons, lessonLabel, subjects } from '../data/units';
+import { allLessons, lessonLabel, subjects, unitName } from '../data/units';
 import { useProgress } from '../state/ProgressContext';
 import { levelInfo, maxStarsFor, nextStop, nextStopPath, overallPercent, totalStars, unitLessonsDone } from '../state/journey';
 import { ProgressBar, ProgressRing } from '../components/ProgressBar';
@@ -82,7 +82,7 @@ export function ProgressPage() {
             <div className="unit-progress__head">
               <span className="unit-block__emoji">{u.emoji}</span>
               <div>
-                <div className="eyebrow">الوحدة {u.number}</div>
+                <div className="eyebrow">{unitName(u)}</div>
                 <h2>{u.title}</h2>
               </div>
               <ProgressRing value={u.lessons.length ? (d / u.lessons.length) * 100 : 0} size={64} stroke={9}>

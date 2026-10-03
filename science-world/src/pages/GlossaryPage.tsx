@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { glossaryFor } from '../data/glossary';
-import { getSubject, units } from '../data/units';
+import { getLesson, getSubject, lessonLabel, units } from '../data/units';
+import { Say } from '../components/Say';
 import { useProgress } from '../state/ProgressContext';
 import { SubjectTabs } from '../components/SubjectTabs';
 
@@ -11,7 +12,7 @@ export function GlossaryPage() {
   const { state } = useProgress();
   const subject = getSubject(state.subject);
   const glossary = useMemo(() => glossaryFor(subject.id), [subject.id]);
-  const norm = (s: string) => s.replace(/[ً-ْ]/g, '').replace(/[أإآ]/g, 'ا').replace(/^ال/, '');
+  const norm = (s: string) => s.toLowerCase().replace(/[ً-ْ]/g, '').replace(/[أإآ]/g, 'ا').replace(/^ال/, '');
   const list = useMemo(() => {
     const n = norm(q.trim());
     return glossary.filter((g) => !n || norm(g.term).includes(n) || norm(g.definition).includes(n));
@@ -27,7 +28,7 @@ export function GlossaryPage() {
       </div>
       <label className="search">
         <span aria-hidden="true">🔎</span>
-        <input type="search" placeholder="ابحث عن كلمة… مثل: القلب" value={q} onChange={(e) => setQ(e.target.value)} aria-label="ابحث في القاموس" />
+        <input type="search" placeholder={subject.id === 'english' ? 'ابحثي عن كلمة… مثل: karate' : subject.id === 'math' ? 'ابحثي عن كلمة… مثل: المحيط' : 'ابحثي عن كلمة… مثل: القلب'} value={q} onChange={(e) => setQ(e.target.value)} aria-label="ابحث في القاموس" />
       </label>
       <p className="page-sub">{list.length} مصطلحًا</p>
       <dl className="glossary">
@@ -36,7 +37,10 @@ export function GlossaryPage() {
           return (
             <div key={g.term + g.page} className="glossary__item" data-theme={u.theme}>
               <dt>
-                {g.term} <span className="chip">{u.emoji} {g.lessonId ? `درس ${g.lessonId.replace(/^m/, '')}` : `ص ${g.page}`}</span>
+                {g.term} <Say text={g.term} />
+                <span className="chip">
+                  {u.emoji} {g.lessonId ? `درس ${lessonLabel(getLesson(g.lessonId)!)}` : `ص ${g.page}`}
+                </span>
               </dt>
               <dd>{g.definition}</dd>
             </div>

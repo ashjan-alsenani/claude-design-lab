@@ -9,7 +9,9 @@ import { Navigation } from './Navigation';
 export function TopBar() {
   const { state, toggleSound, setSubject } = useProgress();
   const current = getSubject(state.subject);
-  const other = subjects.find((s) => s.id !== current.id && s.units.length > 0);
+  // the pill cycles through the subjects: العلوم → الرياضيات → الإنجليزية → …
+  const list = subjects.filter((s) => s.units.length > 0);
+  const other = list.length > 1 ? list[(list.findIndex((s) => s.id === current.id) + 1) % list.length] : undefined;
   return (
     <header className="topbar">
       <Link to="/" className="brand" aria-label={`مغامرة ${learner.name} — الصفحة الرئيسية`}>
