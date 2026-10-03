@@ -178,7 +178,7 @@ const explainers: Explainer[] = [
           { id: 'asst', kind: 'emoji', emoji: '🧑🏽‍💼', x: 76, y: 60, size: 16, in: 0.6 },
           { id: 'b1', kind: 'text', text: 'Is this your first visit?', x: 72, y: 24, size: 3.2, box: true, ltr: true, in: 1.2, out: 5.4 },
           { id: 'b2', kind: 'text', text: 'Yes, it is!', x: 24, y: 30, size: 3.4, box: true, ltr: true, in: 3, out: 5.4 },
-          { id: 'q', kind: 'text', text: 'Can you tell me where the shoe shop is, please?', x: 50, y: 22, size: 3.4, box: true, ltr: true, color: 'accent', in: 5.6, anim: [{ at: 6, effect: 'pulse' }] },
+          { id: 'q', kind: 'text', text: 'Can you tell me where the shoe shop is, please?', x: 50, y: 22, size: 2.6, box: true, ltr: true, color: 'accent', in: 5.6, anim: [{ at: 6, effect: 'pulse' }] },
           { id: 'shoe', kind: 'emoji', emoji: '👟', x: 50, y: 84, size: 9, in: 6.6, anim: [{ at: 6.8, effect: 'bounce' }] },
         ],
       },

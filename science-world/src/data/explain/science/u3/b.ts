@@ -160,7 +160,7 @@ const explainers: Explainer[] = [
           glass('g', 50, 58, 22, 44),
           { id: 'tint', kind: 'shape', shape: 'rect', x: 50, y: 58, w: 22, h: 44, color: DRINK, anim: [{ at: 0, to: { opacity: 0 }, dur: 0.01 }, { at: 6.2, to: { opacity: 1 }, dur: 1.2 }] },
           ...grains('p', { n: 15, cx: 50, bottom: 76, color: POWDER, spread: { x0: 41, x1: 59, y0: 40, y1: 78 }, at: 1.2, step: 0.35, shrink: 0.7 }),
-          { id: 'l', kind: 'text', text: 'تنتشر بين جزيئات الماء', x: 80, y: 30, size: 3.2, box: true, color: 'orange', in: 2.4 },
+          { id: 'l', kind: 'text', text: 'تنتشر بين جزيئات الماء', x: 72, y: 30, size: 3.2, box: true, color: 'orange', in: 2.4 },
           { id: 'a', kind: 'arrow', from: [76, 38], to: [61, 50], curve: 4, color: 'orange', in: 2.8 },
           { id: 'sw', kind: 'emoji', emoji: '🌀', x: 20, y: 56, size: 10, in: 1.4, anim: [{ at: 1.6, effect: 'spin' }] },
         ],

@@ -70,7 +70,7 @@ const explainers: Explainer[] = [
           { id: 's1', kind: 'text', text: 'How about going…?', x: 70, y: 22, size: 4, box: true, color: 'accent', ltr: true, in: 0.6 },
           { id: 'club', kind: 'emoji', emoji: '🎬', x: 50, y: 50, size: 12, in: 1.6 },
           { id: 'cl', kind: 'text', text: 'video club', x: 50, y: 64, size: 3.6, color: 'ink', ltr: true, in: 2 },
-          { id: 'yes', kind: 'text', text: 'That sounds good! ✔', x: 26, y: 38, size: 3.8, box: true, color: 'good', ltr: true, in: 4.2, anim: [{ at: 4.6, effect: 'pulse' }] },
+          { id: 'yes', kind: 'text', text: 'That sounds good! ✔', x: 30, y: 36, size: 3.2, box: true, color: 'good', ltr: true, in: 4.2, anim: [{ at: 4.6, effect: 'pulse' }] },
           { id: 'time', kind: 'text', text: '🕞 Wednesdays 3:30', x: 50, y: 84, size: 3.6, box: true, color: 'blue', ltr: true, in: 7 },
         ],
       },
