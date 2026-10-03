@@ -5,6 +5,7 @@ import { isUnitComplete, unitLessonsDone } from '../state/journey';
 import { LevelMap } from '../components/LevelMap';
 import { MascotMessage } from '../components/MascotMessage';
 import { ProgressBar } from '../components/ProgressBar';
+import { mixed } from '../lib/bidi';
 
 const islandDecor: Record<string, string[]> = {
   coral: ['🏖️', '🌴', '🐚', '🦀'],
@@ -63,7 +64,7 @@ export function JourneyPage() {
               <div className="island__title">
                 <div className="eyebrow">{unitName(u)}</div>
                 <h2 id={`island-${u.id}`}>{u.world}</h2>
-                <p>{u.title}</p>
+                <p>{mixed(u.title)}</p>
               </div>
               <div className="island__progress">
                 <ProgressBar value={u.lessons.length ? (done / u.lessons.length) * 100 : 0} label={`تقدم ${u.title}`} />

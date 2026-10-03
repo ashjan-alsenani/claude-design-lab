@@ -10,6 +10,7 @@ import { NumberPad } from './NumberPad';
 import { sameNumber, toArabicDigits } from '../lib/digits';
 import { Say } from '../components/Say';
 import { speak } from '../lib/speech';
+import { mixed } from '../lib/bidi';
 
 export interface AnswerResult {
   correct: boolean; // eventually answered correctly
@@ -194,7 +195,7 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
                 {c.emoji}
               </span>
             )}
-            <span className="choice__text">{c.text}</span>
+            <span className="choice__text">{mixed(c.text)}</span>
             {stateOf(c.id) === 'right' && <span className="choice__mark" aria-label="صحيح">✓</span>}
           </button>
         ))}
@@ -206,7 +207,7 @@ export function QuestionCard({ question: q, onDone, mode = 'learn', continueLabe
       )}
       {status !== 'answering' && (
         <Feedback tone={status === 'right' ? 'good' : status === 'oops' ? 'oops' : 'reveal'} title={msg}>
-          {status === 'right' || status === 'revealed' ? q.explain : q.hint}
+          {status === 'right' || status === 'revealed' ? mixed(q.explain) : mixed(q.hint)}
         </Feedback>
       )}
       {done && mode === 'learn' && !embedded && (

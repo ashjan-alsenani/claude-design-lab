@@ -10,6 +10,7 @@ import { canSpeak, isEnglish, speak, stopSpeaking } from '../lib/speech';
 import { MascotMessage } from '../components/MascotMessage';
 import { Say } from '../components/Say';
 import type { ActivityProps } from './Discover';
+import { mixed } from '../lib/bidi';
 
 export function DialoguePlayer({ step, onComplete }: ActivityProps<DialogueStep>) {
   const [shown, setShown] = useState(1);
@@ -55,7 +56,7 @@ export function DialoguePlayer({ step, onComplete }: ActivityProps<DialogueStep>
 
   return (
     <div className="activity dialogue">
-      {step.mascot && <MascotMessage mood="happy">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="happy">{mixed(step.mascot)}</MascotMessage>}
       <div className="dialogue__bar">
         <div className="dialogue__cast" aria-label="الشخصيات">
           {step.scene && <span className="dialogue__scene" aria-hidden="true">{step.scene}</span>}
@@ -104,7 +105,7 @@ export function DialoguePlayer({ step, onComplete }: ActivityProps<DialogueStep>
                 </div>
                 {help && l.ar && (
                   <p className="line__ar" dir="rtl" lang="ar">
-                    {l.ar}
+                    {mixed(l.ar)}
                   </p>
                 )}
               </div>

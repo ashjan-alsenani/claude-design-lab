@@ -12,6 +12,7 @@ import { Mascot } from '../components/Mascot';
 import { play } from '../lib/sound';
 import { celebrate } from '../lib/confetti';
 import { LockedNotice } from './LockedNotice';
+import { mixed } from '../lib/bidi';
 
 /** The unit's FINAL CHALLENGE: a story where each correct answer earns a key. */
 export function BossPage() {
@@ -71,7 +72,7 @@ function BossRun({ unitId }: { unitId: string }) {
           ✕
         </Link>
         <div className="lesson__bar-mid">
-          <div className="lesson__bar-title">👑 {unit.boss.title}</div>
+          <div className="lesson__bar-title">👑 {mixed(unit.boss.title)}</div>
           <div className="keys" aria-label={`المفاتيح: ${keys.length} من ${total}`}>
             {keySlots.map((id) => (
               <span key={id} className={`key ${keys.includes(id) ? 'key--on' : ''}`} aria-hidden="true">
@@ -90,13 +91,13 @@ function BossRun({ unitId }: { unitId: string }) {
           <motion.section key="story" className="boss-story card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
             <div className="boss-story__badge">التحدي النهائي</div>
             <Mascot mood="surprised" size={140} />
-            <h1>{unit.boss.title}</h1>
-            <p className="boss-story__text">{unit.boss.story}</p>
+            <h1>{mixed(unit.boss.title)}</h1>
+            <p className="boss-story__text">{mixed(unit.boss.story)}</p>
             <div className="chest chest--closed" aria-hidden="true">
               🧰
             </div>
             <p className="boss-story__goal">
-              اجمع {total} مفاتيح 🔑 لتفتح: <strong>{unit.boss.treasure}</strong>
+              اجمع {total} مفاتيح 🔑 لتفتح: <strong>{mixed(unit.boss.treasure)}</strong>
             </p>
             <button type="button" className="btn btn--sun btn--lg" onClick={() => setPhase('play')} autoFocus>
               أنا مستعد للتحدي! ⚔️
@@ -107,7 +108,7 @@ function BossRun({ unitId }: { unitId: string }) {
           <motion.section key={`${mission.id}-${attempt}`} className="boss-mission" initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24, transition: { duration: 0.15 } }}>
             <MascotMessage mood={retryNote ? 'encouraging' : 'thinking'} size={80}>
               {retryNote && <strong>لا بأس يا {learner.name}! سنعود لتلك المهمة لاحقًا 💪 </strong>}
-              {mission.story}
+              {mixed(mission.story)}
             </MascotMessage>
             <div className="card">
               <QuestionCard question={mission.question} continueLabel="تابع المغامرة" onDone={(r) => answered(r.correct)} />
@@ -120,8 +121,8 @@ function BossRun({ unitId }: { unitId: string }) {
               <span className="chest__shine" />
               💎
             </div>
-            <h1>فتحت {unit.boss.treasure}! 🎉</h1>
-            <p className="boss-story__text">{unit.boss.ending}</p>
+            <h1>فتحت {mixed(unit.boss.treasure)}! 🎉</h1>
+            <p className="boss-story__text">{mixed(unit.boss.ending)}</p>
             <button type="button" className="btn btn--sun btn--lg" onClick={() => navigate(`/complete/${unit.id}`)} autoFocus>
               استلم جائزتك 🏆
             </button>

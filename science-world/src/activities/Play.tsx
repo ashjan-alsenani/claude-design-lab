@@ -13,6 +13,7 @@ import { Feedback } from '../components/Feedback';
 import { Art } from '../illustrations/registry';
 import { QuestionCard } from './QuestionCard';
 import type { ActivityProps } from './Discover';
+import { mixed } from '../lib/bidi';
 
 function useCelebrateWhen(done: boolean, onComplete: () => void) {
   const fired = useRef(false);
@@ -91,7 +92,7 @@ export function SortGame({ step, onComplete }: ActivityProps<SortStep>) {
 
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="excited">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="excited">{mixed(step.mascot)}</MascotMessage>}
       <p className="activity__hint">اسحب كل بطاقة إلى مكانها الصحيح — أو اضغط على البطاقة ثم على المجموعة 👆</p>
       <div className="sort-tray" aria-label="البطاقات">
         {items
@@ -191,7 +192,7 @@ export function MatchGame({ step, onComplete }: ActivityProps<MatchStep>) {
 
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="happy">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="happy">{mixed(step.mascot)}</MascotMessage>}
       <p className="activity__hint">اضغط على بطاقة من اليمين، ثم على ما يناسبها من اليسار 🔗</p>
       <div className="match">
         <div className="match__col">
@@ -276,7 +277,7 @@ export function OrderGame({ step, onComplete }: ActivityProps<OrderStep>) {
 
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="thinking">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="thinking">{mixed(step.mascot)}</MascotMessage>}
       <div className={`order-slots ${chain ? 'order-slots--chain' : ''}`} aria-label="الترتيب">
         {step.items.map((it, i) => {
           const isPlaced = i < placed.length;
@@ -362,7 +363,7 @@ export function MemoryGame({ step, onComplete, compact }: ActivityProps<MemorySt
 
   return (
     <div className="activity">
-      {step.mascot && !compact && <MascotMessage mood="happy">{step.mascot}</MascotMessage>}
+      {step.mascot && !compact && <MascotMessage mood="happy">{mixed(step.mascot)}</MascotMessage>}
       <p className="activity__hint">
         اقلب بطاقتين متطابقتين 🧠 — الأزواج: {found.length}/{step.pairs.length} · المحاولات: {moves}
       </p>
@@ -404,7 +405,7 @@ export function DataReader({ step, onComplete }: ActivityProps<DataStep>) {
   const max = col !== undefined ? Math.max(...step.rows.map((r) => Number(r[col]) || 0)) : 0;
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="thinking">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="thinking">{mixed(step.mascot)}</MascotMessage>}
       <div className="data">
         <div className="card data__table-wrap">
           {step.caption && <div className="eyebrow">{step.caption}</div>}
@@ -488,7 +489,7 @@ export function ExperimentLab({ step, onComplete }: ActivityProps<ExperimentStep
 
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="excited">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="excited">{mixed(step.mascot)}</MascotMessage>}
       <div className="lab card">
         <div className="eyebrow">🧪 سؤال التجربة</div>
         <h3>{step.question}</h3>

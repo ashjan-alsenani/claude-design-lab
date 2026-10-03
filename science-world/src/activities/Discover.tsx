@@ -10,6 +10,7 @@ import { MathView } from '../illustrations/math';
 import { play } from '../lib/sound';
 import { MascotMessage } from '../components/MascotMessage';
 import { Say } from '../components/Say';
+import { mixed } from '../lib/bidi';
 
 export interface ActivityProps<S> {
   step: S;
@@ -25,7 +26,7 @@ export function RevealCards({ step, onComplete }: ActivityProps<RevealStep>) {
 
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="happy">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="happy">{mixed(step.mascot)}</MascotMessage>}
       <div className="reveal-list">
         {step.cards.slice(0, open).map((c, i) => (
           <motion.article
@@ -41,7 +42,7 @@ export function RevealCards({ step, onComplete }: ActivityProps<RevealStep>) {
                 {c.title}
                 <Say text={c.title} />
               </h3>
-              <p>{c.text}</p>
+              <p>{mixed(c.text)}</p>
             </div>
           </motion.article>
         ))}
@@ -76,7 +77,7 @@ export function HotspotExplorer({ step, onComplete }: ActivityProps<HotspotStep>
 
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="excited">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="excited">{mixed(step.mascot)}</MascotMessage>}
       <div className="hotspot-layout">
         <div className="hotspot-stage">
           <div className="hotspot-canvas">
@@ -106,7 +107,7 @@ export function HotspotExplorer({ step, onComplete }: ActivityProps<HotspotStep>
           {activeSpot ? (
             <motion.div key={activeSpot.id} className="card hotspot-card" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22 }}>
               <h3>{activeSpot.label}</h3>
-              <p>{activeSpot.text}</p>
+              <p>{mixed(activeSpot.text)}</p>
             </motion.div>
           ) : (
             <div className="card hotspot-card hotspot-card--empty">👆 اضغط على النقاط المضيئة لتكتشف!</div>
@@ -145,7 +146,7 @@ export function ProcessPlayer({ step, onComplete }: ActivityProps<ProcessStep>) 
 
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="excited">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="excited">{mixed(step.mascot)}</MascotMessage>}
       <div className="process">
         <div className="process__stage card">
           {cur.math ? (
@@ -209,7 +210,7 @@ export function FlipCards({ step, onComplete }: ActivityProps<FlipStep>) {
   }, [all, onComplete]);
   return (
     <div className="activity">
-      {step.mascot && <MascotMessage mood="happy">{step.mascot}</MascotMessage>}
+      {step.mascot && <MascotMessage mood="happy">{mixed(step.mascot)}</MascotMessage>}
       <p className="activity__hint">اقلب كل البطاقات ({flipped.length}/{step.cards.length})</p>
       <div className="flip-grid">
         {step.cards.map((c, i) => {
@@ -231,7 +232,7 @@ export function FlipCards({ step, onComplete }: ActivityProps<FlipStep>) {
                     <span className="flip__word">{c.front}</span>
                     <span className="flip__tap">اضغط لتقلب 🔄</span>
                   </span>
-                  <span className="flip__face flip__back">{c.back}</span>
+                  <span className="flip__face flip__back">{mixed(c.back)}</span>
                 </span>
               </button>
               <Say text={c.front} className="flip__say" />
@@ -270,7 +271,7 @@ export function ThinkTalk({ step, onComplete }: ActivityProps<ThinkStep>) {
         <MascotMessage mood="thinking">
           <ul className="think__ideas">
             {step.ideas.map((idea, i) => (
-              <li key={i}>{idea}</li>
+              <li key={i}>{mixed(idea)}</li>
             ))}
           </ul>
         </MascotMessage>

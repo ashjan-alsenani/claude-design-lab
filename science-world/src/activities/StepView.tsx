@@ -5,6 +5,7 @@ import { FlipCards, HotspotExplorer, ProcessPlayer, RevealCards, ThinkTalk } fro
 import { DataReader, ExperimentLab, MatchGame, MemoryGame, OrderGame, SortGame } from './Play';
 import { QuestionCard, type AnswerResult } from './QuestionCard';
 import { DialoguePlayer } from './Dialogue';
+import { mixed } from '../lib/bidi';
 
 interface Props {
   step: LessonStep;
@@ -55,7 +56,7 @@ export function StepView({ step, onComplete, onAnswer }: Props) {
         <div className="activity intro-step">
           {step.visual && <VisualView visual={step.visual} className="intro-step__visual" />}
           <MascotMessage mood="excited" size={110}>
-            <p>{step.mascot}</p>
+            <p>{mixed(step.mascot)}</p>
             {step.hook && <p className="intro-step__hook">🤔 {step.hook}</p>}
           </MascotMessage>
         </div>

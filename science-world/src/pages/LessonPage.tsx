@@ -14,6 +14,7 @@ import { MascotMessage } from '../components/MascotMessage';
 import { Mascot } from '../components/Mascot';
 import { play } from '../lib/sound';
 import { LockedNotice } from './LockedNotice';
+import { mixed } from '../lib/bidi';
 
 type Phase = 'intro' | 'steps' | 'quiz' | 'reward';
 
@@ -97,7 +98,7 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
                 <h2 className="card-title">🎯 في نهاية الدرس أستطيع أن…</h2>
                 <ul className="checklist">
                   {lesson.objectives.map((o) => (
-                    <li key={o}>{o}</li>
+                    <li key={o}>{mixed(o)}</li>
                   ))}
                 </ul>
               </div>
@@ -107,8 +108,8 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
                   <div className="vocab">
                     {lesson.vocab.map((v) => (
                       <details key={v.word} className="vocab__item">
-                        <summary>{v.word}</summary>
-                        <p>{v.meaning}</p>
+                        <summary><bdi>{v.word}</bdi></summary>
+                        <p>{mixed(v.meaning)}</p>
                       </details>
                     ))}
                   </div>
@@ -210,7 +211,7 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
                 <h2 className="card-title">📝 ماذا تعلّمتُ؟</h2>
                 <ul className="checklist">
                   {lesson.summary.map((s) => (
-                    <li key={s}>{s}</li>
+                    <li key={s}>{mixed(s)}</li>
                   ))}
                 </ul>
               </div>
