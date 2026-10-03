@@ -94,6 +94,9 @@ const delay = (t: number, seek: number) => `${(t - seek).toFixed(3)}s`;
 const outStyle = (out: number | undefined, seek: number): CSSProperties | undefined =>
   out === undefined ? undefined : { animation: `xout 0.3s ease ${delay(out, seek)} both` };
 
+/** Arabic-Indic digits make spaces/operators resolve right-to-left even in an LTR span; LRMs pin them. */
+const ltrText = (t: string) => '\u200E' + t.replace(/ /g, '\u200E \u200E');
+
 export function Stage({ scene, seek = 0, paused = false, clock }: { scene: Scene; seek?: number; paused?: boolean; clock: () => number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ W: 800, H: 500 });
@@ -243,7 +246,7 @@ function ActorBody({ a, W, H, fs, clock, paused }: { a: Actor; W: number; H: num
           dir={a.ltr ? 'ltr' : 'auto'}
           style={{ fontSize: fs(a.size ?? 4), color: a.box ? undefined : color(a.color, 'var(--ink)'), borderColor: a.box ? color(a.color, 'var(--accent)') : undefined }}
         >
-          {a.ltr ? a.text : mixed(a.text)}
+          {a.ltr ? ltrText(a.text) : mixed(a.text)}
         </span>
       );
     case 'art':
