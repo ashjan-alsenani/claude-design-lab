@@ -128,12 +128,12 @@ const raw: Explainer[] = [
         actors: [
           { id: 'n1', kind: 'text', text: '٧ ٦٨', x: 28.4, y: 34, size: 8, color: 'white', ltr: true, in: 0.4 },
           { id: 'd1', kind: 'text', text: '٩', x: 42, y: 34, size: 8, color: 'orange', ltr: true, in: 0.4, anim: [{ at: 1.6, effect: 'pulse' }] },
-          { id: 'r1', kind: 'shape', shape: 'circle', x: 42, y: 35, w: 9, h: 15, color: 'orange', outline: true, in: 1.4 },
+          { id: 'r1', kind: 'shape', shape: 'circle', x: 42, y: 35, w: 7.5, h: 13, color: 'orange', outline: true, in: 1.4 },
           { id: 'a1', kind: 'arrow', from: [48, 34], to: [60, 34], color: 'orange', in: 2.2 },
           { id: 'l1', kind: 'text', text: 'عدد فردي', x: 74, y: 34, size: 4.4, box: true, color: 'orange', in: 2.8 },
           { id: 'n2', kind: 'text', text: '٦ ٥٧', x: 28.4, y: 68, size: 8, color: 'white', ltr: true, in: 5 },
           { id: 'd2', kind: 'text', text: '٨', x: 42, y: 68, size: 8, color: '#7be3a4', ltr: true, in: 5, anim: [{ at: 6.2, effect: 'pulse' }] },
-          { id: 'r2', kind: 'shape', shape: 'circle', x: 42, y: 69, w: 9, h: 15, color: 'good', outline: true, in: 6 },
+          { id: 'r2', kind: 'shape', shape: 'circle', x: 42, y: 69, w: 7.5, h: 13, color: 'good', outline: true, in: 6 },
           { id: 'a2', kind: 'arrow', from: [48, 68], to: [60, 68], color: 'good', in: 6.8 },
           { id: 'l2', kind: 'text', text: 'عدد زوجي', x: 74, y: 68, size: 4.4, box: true, color: 'good', in: 7.4 },
         ],
@@ -318,7 +318,7 @@ const raw: Explainer[] = [
         bg: 'board',
         actors: [
           { id: 'f', kind: 'emoji', emoji: '🤔', x: 50, y: 32, size: 16, in: 0.2, anim: [{ at: 1, effect: 'float' }] },
-          { id: 'q', kind: 'text', text: '؟', x: 18, y: 62, size: 6, color: 'sun', in: 1.2, anim: [{ at: 9, effect: 'pulse' }] },
+          { id: 'q', kind: 'text', text: '؟', x: 20, y: 62, size: 6, color: 'sun', in: 1.2, anim: [{ at: 9, effect: 'pulse' }] },
           { id: 'o1', kind: 'text', text: '× ١٠٠', x: 35, y: 62, size: 4.6, color: 'white', ltr: true, in: 2.2 },
           { id: 'o2', kind: 'text', text: '÷ ١٠', x: 51, y: 62, size: 4.6, color: 'white', ltr: true, in: 3.6 },
           { id: 'o3', kind: 'text', text: '× ١ ٠٠٠', x: 69, y: 62, size: 4.6, color: 'white', ltr: true, in: 5 },
@@ -338,7 +338,7 @@ const raw: Explainer[] = [
         ],
       },
       {
-        title: '× ١٠',
+        title: 'الضرب في ١٠',
         say: 'عندما نضرب في ١٠ تتحرك الأرقام منزلة واحدة إلى اليسار، ونضع صفرًا في الآحاد. ٢٥ × ١٠ = ٢٥٠',
         duration: 10,
         bg: 'board',
@@ -352,7 +352,7 @@ const raw: Explainer[] = [
         ],
       },
       {
-        title: '× ١٠٠',
+        title: 'الضرب في ١٠٠',
         say: 'وعندما نضرب في ١٠٠ تتحرك الأرقام منزلتين إلى اليسار، ونضع صفرين. ٢٥ × ١٠٠ = ٢ ٥٠٠',
         duration: 10,
         bg: 'board',
@@ -367,7 +367,7 @@ const raw: Explainer[] = [
         ],
       },
       {
-        title: '× ١٠٠٠',
+        title: 'الضرب في ١٠٠٠',
         say: 'وعندما نضرب في ١٠٠٠ تتحرك الأرقام ثلاث منازل إلى اليسار، ونضع ثلاثة أصفار. ٢٥ × ١٠٠٠ = ٢٥ ٠٠٠',
         duration: 10,
         bg: 'board',

@@ -42,7 +42,8 @@ function timeline(a: Actor & { x?: number; y?: number }, D: number): Frame[] {
   }
   if (a.out !== undefined) {
     push({ ...cur, t: a.out });
-    push({ ...cur, t: a.out + 0.3, o: 0, s: cur.s * 0.9 });
+    cur = { ...cur, t: a.out + 0.3, o: 0, s: cur.s * 0.9 };
+    push(cur);
   }
   push({ ...cur, t: D });
   // keep increasing times only
@@ -89,6 +90,10 @@ function arrowD(from: XY, to: XY, curve: number, W: number, H: number) {
 /** delays relative to the seek point, so a paused stage can show any moment */
 const delay = (t: number, seek: number) => `${(t - seek).toFixed(3)}s`;
 
+/** fade out at `out` (arrows, flows) */
+const outStyle = (out: number | undefined, seek: number): CSSProperties | undefined =>
+  out === undefined ? undefined : { animation: `xout 0.3s ease ${delay(out, seek)} both` };
+
 export function Stage({ scene, seek = 0, paused = false, clock }: { scene: Scene; seek?: number; paused?: boolean; clock: () => number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ W: 800, H: 500 });
@@ -125,22 +130,32 @@ export function Stage({ scene, seek = 0, paused = false, clock }: { scene: Scene
       {/* arrows and flows live in one SVG layer in stage pixels */}
       <svg className="xstage__svg" width={W} height={H} viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
         <defs>
-          <marker id={`xh-${uid}`} viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 z" fill="context-stroke" />
-          </marker>
         </defs>
         {scene.actors.map((a, i) => {
           if (a.kind === 'arrow') {
-            const { d } = arrowD(a.from, a.to, a.curve ?? 0, W, H);
+            const { d, end, angle } = arrowD(a.from, a.to, a.curve ?? 0, W, H);
             const c = color(a.color, 'var(--ink)');
+            const sw = Math.max(3, W / 160);
+            const hs = sw * 3.2;
             return (
-              <g key={a.id} className="xarrow" style={{ animationDelay: delay(a.in ?? 0, seek) }}>
-                <path d={d} pathLength={1} className={`xarrow__line ${a.dashed ? 'is-dashed' : ''}`} stroke={c} style={{ animationDelay: delay(a.in ?? 0, seek), strokeWidth: Math.max(3, W / 160) }} markerEnd={`url(#xh-${uid})`} />
+              <g key={a.id} style={outStyle(a.out, seek)}>
+                <path d={d} pathLength={1} className={`xarrow__line ${a.dashed ? 'is-dashed' : ''}`} stroke={c} style={{ animationDelay: delay(a.in ?? 0, seek), strokeWidth: sw }} />
+                <polygon
+                  points={`0,0 ${-hs},${-hs * 0.6} ${-hs},${hs * 0.6}`}
+                  fill={c}
+                  className="xarrow__head"
+                  transform={`translate(${end[0]} ${end[1]}) rotate(${angle})`}
+                  style={{ animationDelay: delay((a.in ?? 0) + 0.75, seek) }}
+                />
               </g>
             );
           }
           if (a.kind === 'flow' && a.showPath !== false) {
-            return <path key={a.id + i} d={pathD(a.path, W, H, a.smooth !== false)} className="xflow__path" stroke={color(a.color, 'var(--accent)')} style={{ animationDelay: delay(a.in ?? 0, seek) }} />;
+            return (
+              <g key={a.id + i} style={outStyle(a.out, seek)}>
+                <path d={pathD(a.path, W, H, a.smooth !== false)} className="xflow__path" stroke={color(a.color, 'var(--accent)')} style={{ animationDelay: delay(a.in ?? 0, seek) }} />
+              </g>
+            );
           }
           return null;
         })}
@@ -162,6 +177,7 @@ export function Stage({ scene, seek = 0, paused = false, clock }: { scene: Scene
         const n = a.count ?? 4;
         const sp = a.speed ?? 4;
         return Array.from({ length: n }, (_, k) => (
+          <span style={outStyle(a.out, seek)} key={`${a.id}-w${k}`} className="xtraveller-wrap">
           <span
             key={`${a.id}-${k}`}
             className={`xtraveller ${a.emoji ? '' : 'xtraveller--dot'}`}
@@ -178,6 +194,7 @@ export function Stage({ scene, seek = 0, paused = false, clock }: { scene: Scene
             }
           >
             {a.emoji}
+          </span>
           </span>
         ));
       })}
