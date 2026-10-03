@@ -483,11 +483,11 @@ const raw: Explainer[] = [
         bg: 'board',
         actors: [
           ...[
-            { t: '١,٠١', from: 82, to: 34 },
-            { t: '١,١', from: 66, to: 18 },
-            { t: '٠,١', from: 50, to: 66 },
-            { t: '٠,١١', from: 34, to: 50 },
-            { t: '٠,٠١', from: 18, to: 82 },
+            { t: '١,٠١', from: 84, to: 31 },
+            { t: '١,١', from: 67, to: 14 },
+            { t: '٠,١', from: 50, to: 67 },
+            { t: '٠,١١', from: 33, to: 50 },
+            { t: '٠,٠١', from: 16, to: 85 },
           ].map(
             (c, i): Actor => ({
               id: `c${i}`,
@@ -503,8 +503,8 @@ const raw: Explainer[] = [
             }),
           ),
           { id: 'g0', kind: 'text', text: 'الجزء الكامل ٠', x: 66, y: 45, size: 3, color: '#9fc4ff', in: 3.2 },
-          { id: 'g1', kind: 'text', text: 'الجزء الكامل ١', x: 26, y: 45, size: 3, color: '#d6b8ff', in: 3.6 },
-          { id: 'sep', kind: 'shape', shape: 'rect', x: 42, y: 56, w: 0.5, h: 26, color: 'rgba(255,255,255,0.35)', in: 7 },
+          { id: 'g1', kind: 'text', text: 'الجزء الكامل ١', x: 22, y: 45, size: 3, color: '#d6b8ff', in: 3.6 },
+          { id: 'sep', kind: 'shape', shape: 'rect', x: 40.5, y: 56, w: 0.5, h: 26, color: 'rgba(255,255,255,0.35)', in: 7 },
           { id: 'ar', kind: 'arrow', from: [88, 80], to: [12, 80], color: 'sun', in: 8.4 },
           { id: 'al', kind: 'text', text: 'من الأصغر إلى الأكبر', x: 50, y: 89, size: 3.4, color: 'sun', in: 8.8 },
         ],
@@ -548,12 +548,12 @@ const raw: Explainer[] = [
             const x = 16 + i * 22.6;
             const t = 0.4 + i * 1.4;
             return [
-              { id: `v${i}`, kind: 'text', text: c.v, x, y: 30, size: 5.2, box: true, color: ['sun', 'orange', 'red', 'purple'][i], in: t },
-              { id: `n${i}`, kind: 'text', text: c.n, x, y: 44, size: 2.6, color: 'white', in: t + 0.3 },
+              { id: `v${i}`, kind: 'text', text: c.v, x, y: 38, size: 5.2, box: true, color: ['sun', 'orange', 'red', 'purple'][i], in: t },
+              { id: `n${i}`, kind: 'text', text: c.n, x, y: 51, size: 2.6, color: 'white', in: t + 0.3 },
             ];
           }),
-          ...[0, 1, 2].map((i): Actor => ({ id: `ar${i}`, kind: 'arrow', from: [22 + i * 22.6, 22], to: [32.6 + i * 22.6, 22], curve: -3, color: 'sun', in: 1.4 + i * 1.4 })),
-          ...[0, 1, 2].map((i): Actor => ({ id: `al${i}`, kind: 'text', text: '÷ ١٠', x: 27.3 + i * 22.6, y: 13.5, size: 2.6, color: 'sun', ltr: true, in: 1.6 + i * 1.4 })),
+          ...[0, 1, 2].map((i): Actor => ({ id: `ar${i}`, kind: 'arrow', from: [22.5 + i * 22.6, 29], to: [31.6 + i * 22.6, 29], curve: -3, color: 'sun', in: 1.4 + i * 1.4 })),
+          ...[0, 1, 2].map((i): Actor => ({ id: `al${i}`, kind: 'text', text: '÷ ١٠', x: 27.3 + i * 22.6, y: 20, size: 2.6, color: 'sun', ltr: true, in: 1.6 + i * 1.4 })),
           { id: 'm', kind: 'text', text: '× ١٠٠ ← منزلتان إلى اليسار', x: 50, y: 66, size: 3.8, box: true, color: 'blue', in: 7.6 },
           { id: 'd', kind: 'text', text: '÷ ١٠٠ ← منزلتان إلى اليمين', x: 50, y: 82, size: 3.8, box: true, color: 'good', in: 9.6, anim: [{ at: 10, effect: 'glow' }] },
         ],
