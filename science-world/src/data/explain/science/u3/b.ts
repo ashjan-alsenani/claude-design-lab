@@ -222,7 +222,7 @@ const explainers: Explainer[] = [
             [
               ['🧂 الملح', '💧 الماء', '🌊 ماء البحر'],
               ['🧃 المسحوق', '💧 الماء', '🥤 مشروب بارد'],
-              ['🍬 السكر', '🍵 الشاي', '🍵 شاي حلو'],
+              ['🍬 السكر', '🍵 الشاي', '🍵 محلول'],
             ] as const
           ).flatMap(([a, b, c], r): Actor[] => {
             const y = 48 + r * 15;
@@ -268,7 +268,7 @@ const explainers: Explainer[] = [
           ...grains('s', { n: 15, cx: 38, bottom: 74, inAt: 0.8 }),
           { id: 'l', kind: 'text', text: 'السكر لم يذب بعد', x: 78, y: 72, size: 3.4, box: true, color: 'bad', in: 2.2, anim: [{ at: 2.4, effect: 'shake' }] },
           { id: 'a', kind: 'arrow', from: [60, 74], to: [48, 74], color: 'bad', in: 2.6 },
-          { id: 'q', kind: 'text', text: 'أحلى دون سكر إضافي؟', x: 76, y: 30, size: 3.4, box: true, color: 'accent', in: 5, anim: [{ at: 5.4, effect: 'pulse' }] },
+          { id: 'q', kind: 'text', text: 'أحلى دون سكر إضافي؟', x: 72, y: 30, size: 3.4, box: true, color: 'accent', in: 5, anim: [{ at: 5.4, effect: 'pulse' }] },
         ],
       },
       {
