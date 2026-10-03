@@ -296,7 +296,7 @@ const DTRAP: P[] = [
   [4, 6],
   [2, 6],
 ];
-const D6 = grid({ cols: 6, rows: 6, axes: true, x: 50, y: 53, u: 36 });
+const D6 = grid({ cols: 6, rows: 6, axes: true, x: 50, y: 49, u: 36 });
 
 const px = (g: ReturnType<typeof grid>, pts: P[]) => pts.map(([i, j]) => g.pt(i, j));
 const CLOCK_C: P = [238, 236];
@@ -488,9 +488,9 @@ const explainers: Explainer[] = [
             const bad: Motion = { at: 1.2, dur: 2, f: (p, s) => { const q = rot(p, c, 90 * s); return [q[0] + 5 * G3.u * s, q[1]]; }, steps: 8 };
             return [
               ...poly('bad', pts, RED, 0.6, [bad], 7, 5.6),
-              tx('bx', 'دار! ليس انسحابًا ✗', pc([350, 82]), 3.4, { size: 3.4, box: true, color: 'bad', out: 5.6, anim: [{ at: 3.8, effect: 'shake' }] }),
+              tx('bx', 'دار! ليس انسحابًا ✗', pc([350, 98]), 3.4, { size: 3.4, box: true, color: 'bad', out: 5.6, anim: [{ at: 3.8, effect: 'shake' }] }),
               ...poly('ok', pts, MINT, 6, [slide(6.6, 1.6, 5 * G3.u, 0)]),
-              tx('ok', 'انسحاب ✓', pc([350, 82]), 8.4, { size: 3.6, box: true, color: 'good', anim: [{ at: 8.8, effect: 'glow' }] }),
+              tx('ok', 'انسحاب ✓', pc([350, 98]), 8.4, { size: 3.6, box: true, color: 'good', anim: [{ at: 8.8, effect: 'glow' }] }),
               tx('k', 'الحجم نفسه، الاتجاه نفسه', pc([350, 375]), 9.4, { size: 3.2, color: 'ink' }),
             ];
           })(),
@@ -509,12 +509,12 @@ const explainers: Explainer[] = [
           tx('from', 'من (٥، ١)', pc([480, 400]), 6.2, { size: 3.4, box: true, color: MINT }),
           { id: 'ar', kind: 'arrow', from: [59, 91.4], to: [44, 91.4], color: 'ink', in: 6.8 },
           tx('to', 'إلى (٩، ١)', pc([220, 400]), 7.4, { size: 3.4, box: true, color: ORANGE }),
-          tx('x', 'يتغيّر العدد الأول (س)', pc([350, 62]), 9, { size: 3.2, box: true, color: 'accent', anim: [{ at: 9.4, effect: 'pulse' }] }),
+          tx('x', 'يتغيّر العدد الأول (س)', pc([350, 92]), 9, { size: 3, box: true, color: 'accent', anim: [{ at: 9.4, effect: 'pulse' }] }),
         ],
       },
       {
         title: 'نصف الانسحاب بالأعداد',
-        say: 'انسحب المثلث (أ) إلى (ب): الرأس (٢، ٤) صار (٥، ٤). نطرح ٥ − ٢ = ٣، إذن +٣ في اتجاه (س)، و٠ في اتجاه (ص) لأنه لم يصعد ولم ينزل.',
+        say: 'انسحب المثلث (أ) إلى (ب): الرأس (٢، ٤) صار (٥، ٤). و٥ − ٢ = ٣، إذن +٣ في اتجاه (س)، و٠ في اتجاه (ص) لأنه لم يصعد ولم ينزل.',
         duration: 14,
         bg: 'paper',
         actors: [
@@ -636,7 +636,7 @@ const explainers: Explainer[] = [
           ...poly('img', px(R5, RQ_IMG), ORANGE, 6),
           dot('s1', R5.pt(4, 4), MINT, 9.4, [], 15),
           dot('s2', R5.pt(6, 6), MINT, 9.6, [], 15),
-          tx('l', 'ص = س', R5.at(7, 7, 8, -14), 0.6, { size: 3, color: 'red', ltr: true }),
+          tx('l', 'ص = س', R5.at(6, 1.3), 0.6, { size: 3, color: 'red' }),
           tx('c', 'الرأس (٦، ٣) ← (٣، ٦)', pc([500, 120]), 3.6, { size: 3.4, color: 'ink' }),
           tx('sw', 'يتبادل العددان', pc([500, 200]), 6.6, { size: 3.8, box: true, color: 'accent', anim: [{ at: 7, effect: 'pulse' }] }),
           tx('st', 'على الخط: لا يتحرّك', pc([500, 300]), 9.8, { size: 3.4, box: true, color: 'good' }),
@@ -677,8 +677,8 @@ const explainers: Explainer[] = [
               ...poly('o', tri, GREY, 1.2, [], 5),
               ...poly('m', tri, PURPLE, 1.6, [turn(3, 2.4, C, 90)]),
               dot('c', C, '#222', 1.4, [], 18),
-              { id: 'ca', kind: 'arrow', from: [17, 86], to: [28, 69.5], color: 'ink', in: 6 } as Actor,
-              tx('cl', 'مركز الدوران', pc([90, 395]), 6.4, { size: 3.4, box: true, color: 'ink' }),
+              { id: 'ca', kind: 'arrow', from: [21, 83], to: [28.5, 70.5], color: 'ink', in: 6 } as Actor,
+              tx('cl', 'مركز الدوران', pc([140, 395]), 6.4, { size: 3.4, box: true, color: 'ink' }),
             ];
           })(),
         ],
@@ -696,9 +696,9 @@ const explainers: Explainer[] = [
           }),
           seg('hand', CLOCK_C, along(CLOCK_C, -90 + 300, 58), 'ink', 0.6, [turn(2.4, 2.4, CLOCK_C, 90)], 8),
           dot('hub', CLOCK_C, '#222', 0.6, [], 14),
-          tx('cw', '🔃 اتجاه عقارب الساعة', pc([520, 110]), 1.4, { size: 3.2, box: true, color: 'good' }),
+          tx('cw', '🔃 اتجاه عقارب الساعة', pc([510, 110]), 1.4, { size: 3, box: true, color: 'good' }),
           tx('q', '٩٠° = ربع دورة', pc([520, 200]), 5.4, { size: 3.6, color: 'ink' }),
-          tx('acw', '🔄 عكس اتجاه عقارب الساعة', pc([520, 300]), 8, { size: 3.2, box: true, color: 'orange' }),
+          tx('acw', '🔄 عكس اتجاه عقارب الساعة', pc([510, 300]), 8, { size: 2.8, box: true, color: 'orange' }),
         ],
       },
       {
@@ -727,8 +727,8 @@ const explainers: Explainer[] = [
           ...poly('s3', px(D3, DTRI).map((p) => rot(p, D3.pt(3, 3), 270)), PINK, 7.6, [], 6),
           ...poly('m', px(D3, DTRI).map((p) => rot(p, D3.pt(3, 3), 90)), PURPLE, 0.8, [turn(1.6, 2.6, D3.pt(3, 3), 90), turn(4.8, 2.6, D3.pt(3, 3), 90)], 7, 7.6),
           dot('c', D3.pt(3, 3), '#222', 0.4, [], 14),
-          tx('e', '٩٠° + ٩٠° = ١٨٠°', pc([515, 120]), 4.6, { size: 4.2, color: 'blue', ltr: true }),
-          tx('star', 'نجمة رباعية الرؤوس ⭐', pc([515, 240]), 8.4, { size: 3.6, box: true, color: 'accent', anim: [{ at: 8.8, effect: 'glow' }] }),
+          tx('e', '٩٠° + ٩٠° = ١٨٠°', pc([545, 120]), 4.6, { size: 4.2, color: 'blue', ltr: true }),
+          tx('star', 'نجمة رباعية الرؤوس ⭐', pc([545, 240]), 8.4, { size: 3.2, box: true, color: 'accent', anim: [{ at: 8.8, effect: 'glow' }] }),
         ],
       },
       {
@@ -756,8 +756,8 @@ const explainers: Explainer[] = [
           ...poly('cw', px(D6, DTRI), ORANGE, 0.8, [turn(1.6, 2.4, D6.pt(3, 3), 90)]),
           ...poly('acw', px(D6, DTRI), BLUE, 5.4, [turn(6, 2.4, D6.pt(3, 3), -90)]),
           dot('c', D6.pt(3, 3), '#222', 0.4, [], 14),
-          tx('lc', '↻ مع عقارب الساعة', pc([598, 200]), 4.2, { size: 3, box: true, color: ORANGE }),
-          tx('la', '↺ عكس عقارب الساعة', pc([102, 200]), 8.6, { size: 3, box: true, color: BLUE }),
+          tx('lc', '↻ مع عقارب الساعة', pc([505, 402]), 4.2, { size: 2.8, box: true, color: ORANGE }),
+          tx('la', '↺ عكس عقارب الساعة', pc([195, 402]), 8.6, { size: 2.8, box: true, color: BLUE }),
         ],
       },
       {
