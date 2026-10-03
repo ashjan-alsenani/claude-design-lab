@@ -93,6 +93,13 @@ export function Landing() {
             >
               🎬 شاهد فيلم ألين
             </button>
+            <button
+              type="button"
+              className="btn3d green play-btn"
+              onClick={(e) => go({ name: 'activities' }, { color: '#3cc46a', origin: centerOf(e.currentTarget), kind: 'bubbles' })}
+            >
+              🎪 ساحة الألعاب
+            </button>
             {started && <span className="landing-progress">أنهيت {ar(Object.keys(completed).length)} من ٥ مهمات ⭐</span>}
           </motion.div>
         </section>

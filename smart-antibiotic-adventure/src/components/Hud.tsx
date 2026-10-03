@@ -26,12 +26,14 @@ export function Hud({
   label,
   onBack,
   backLabel = 'الخريطة',
+  backIcon = '🗺️',
 }: {
   /** 0..1 progress shown in the bar */
   progress?: number
   label?: string
   onBack?: (e: React.MouseEvent) => void
   backLabel?: string
+  backIcon?: string
 }) {
   const { score, completed, scoreTarget } = useGame()
   const done = Object.keys(completed).length
@@ -41,7 +43,7 @@ export function Hud({
       <div className="hud-side">
         {onBack && (
           <button type="button" className="icon-btn hud-back" onClick={onBack} aria-label={`العودة إلى ${backLabel}`} title={backLabel}>
-            <span aria-hidden>🗺️</span>
+            <span aria-hidden>{backIcon}</span>
           </button>
         )}
       </div>

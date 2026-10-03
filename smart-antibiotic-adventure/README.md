@@ -26,6 +26,22 @@ npm run lint      # oxlint
 | Final | Confetti, score count-up, badge spin, golden rules recap, printable certificate with the child's name |
 | Film (`#film`) | ~2.5-minute animated cartoon in 8 chapters: the microscopic world, bacteria vs viruses, the doctor, correct use, how resistance develops, how everyone helps, and the finale. Aleen (a young girl's voice), Dr. Huda and Kabsool the antibiotic hero speak natural Arabic with fixed character voices, lip-sync to their own audio, gesture, blink, look at each other, listen and react, over soft background music. Arabic captions are always on. `public/aleen-film.mp4` is the captioned film with the character voices, for download |
 
+### Play park «ساحة الألعاب» (`#play`)
+
+Seven short, replayable activities in three colour-coded corners. Every finished activity earns a sticker for the album and up to 3 stars. Progress is saved in the browser and kept when the adventure is restarted.
+
+| Corner | Activity | What the child does |
+| --- | --- | --- |
+| 🧠 Thinking | Memory «لعبة الذاكرة» | Flip cards to find 6 pairs; each match teaches a short fact |
+| | True or false «صح أم خطأ؟» | 8 random statements, ✅ / ❌, with a kind explanation after each |
+| | Steps «رتّب الخطوات» | Tap steps in order: «when I feel sick» and «how to wash my hands» |
+| ⚡ Moving | Hand washing «اغسل يديك!» | Wet → soap → scrub for a real 20 seconds while the germs fade → rinse → dry |
+| | Catch «اصطد العادات الصحية» | Steer the shield to catch helpful things (soap, vaccine, doctor…) and avoid old medicine, sharing and germs. Plays by finger, mouse, arrow keys or on-screen buttons; never «game over» |
+| 🎨 Creating & noticing | Detective «المحقق الصغير» | Find the 4 wrong behaviours among 9 photos; right behaviours are praised, never punished |
+| | Colouring «لوّن كبسول» | Two colouring pages (Kabsool and the shield), 12 colours, save the picture as PNG |
+
+Aleen guides every activity: she explains, cheers and gives hints. All activities share one shell: intro card → play → reward card with the sticker, stars and points. The content lives in `src/data/activities.ts` and the games in `src/activities/`.
+
 Every drag interaction has a tap/keyboard alternative. Wrong answers never punish: the card wiggles, Baktoro gloats, and Aleen gives a hint with a light bulb.
 
 ## Structure
@@ -35,8 +51,9 @@ src/
   art/          SVG art kit (objects, icons, scenes), Aleen and Baktoro
   components/   HUD, parallax, transitions, flying stars, confetti, cursor sparkles, tilt cards
   data/         mission content (all text lives here)
-  games/        Quiz, Clock, Sort, Lab, Compare, Shield mini-games
-  screens/      Landing, Mission map, Mission shell, Final, Film player
+  games/        Quiz, Clock, Sort, Lab, Compare, Shield mini-games (adventure missions)
+  activities/   play-park shell + Memory, TrueFalse, Sequence, HandWash, Catch, Detective, Coloring
+  screens/      Landing, Mission map, Mission shell, Final, Film player, Play park hub
   film/         film characters (Aleen rig, doctor, capsule hero), 8 scenes, dialogue.json (script),
                 voice-meta.json (generated: durations + lip-sync envelopes), timeline.ts
 public/voices/  one pre-recorded MP3 per dialogue line (generated)

@@ -153,6 +153,13 @@ export function MissionMap() {
         >
           🎬 الفيلم
         </button>
+        <button
+          type="button"
+          className="btn3d small green"
+          onClick={(e) => go({ name: 'activities' }, { color: '#3cc46a', origin: centerOf(e.currentTarget), kind: 'bubbles' })}
+        >
+          🎪 ساحة الألعاب
+        </button>
         {allDone && (
           <motion.button
             type="button"

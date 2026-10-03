@@ -8,6 +8,8 @@ export type Screen =
   | { name: 'mission'; id: number }
   | { name: 'final' }
   | { name: 'film' }
+  | { name: 'activities' }
+  | { name: 'activity'; id: string }
 
 export type TransitionKind = 'portal' | 'bubbles' | 'clouds'
 
@@ -19,10 +21,12 @@ type Saved = {
   sound: boolean
   mapNode: number
   name: string
+  /** play-park activities: best stars (1–3) per activity id; a finished activity earns its sticker */
+  activities: Record<string, number>
 }
 
 const KEY = 'smart-antibiotic-adventure:v1'
-const EMPTY: Saved = { completed: {}, score: 0, sound: false, mapNode: 1, name: '' }
+const EMPTY: Saved = { completed: {}, score: 0, sound: false, mapNode: 1, name: '', activities: {} }
 
 export type Flight = { id: number; from: Point; delay: number }
 
@@ -33,6 +37,7 @@ type Game = {
   sound: boolean
   mapNode: number
   name: string
+  activities: Record<string, number>
   env: ReturnType<typeof useEnv>
   transition: { active: boolean; color: string; origin: Point; kind: TransitionKind; phase: 'in' | 'out' }
   flights: Flight[]
@@ -40,6 +45,7 @@ type Game = {
   go: (screen: Screen, opts?: { color?: string; origin?: Point; kind?: TransitionKind }) => void
   addScore: (points: number, from?: Point, stars?: number) => void
   completeMission: (id: number, stars: number) => void
+  completeActivity: (id: string, stars: number) => void
   setMapNode: (n: number) => void
   setName: (n: string) => void
   toggleSound: () => void
@@ -69,11 +75,24 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const env = useEnv()
   const [saved, setSaved] = useState<Saved>(() => ({ ...EMPTY, ...storage.get<Saved>(KEY, EMPTY) }))
   const [screen, setScreen] = useState<Screen>(() =>
-    typeof location !== 'undefined' && (location.hash === '#film' || new URLSearchParams(location.search).has('record')) ? { name: 'film' } : { name: 'landing' },
+    typeof location !== 'undefined' && (location.hash === '#film' || new URLSearchParams(location.search).has('record'))
+      ? { name: 'film' }
+      : typeof location !== 'undefined' && location.hash === '#play'
+        ? { name: 'activities' }
+        : { name: 'landing' },
   )
+  // follow #film / #play when the address changes (shared links, back button)
+  useEffect(() => {
+    const onHash = () => {
+      if (location.hash === '#film') setScreen({ name: 'film' })
+      else if (location.hash === '#play') setScreen((cur) => (cur.name === 'activity' || cur.name === 'activities' ? cur : { name: 'activities' }))
+    }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
   // keep a shareable #film link for the movie page
   useEffect(() => {
-    const want = screen.name === 'film' ? '#film' : ''
+    const want = screen.name === 'film' ? '#film' : screen.name === 'activities' || screen.name === 'activity' ? '#play' : ''
     if (location.hash !== want) history.replaceState(null, '', location.pathname + location.search + want)
   }, [screen.name])
   const [transition, setTransition] = useState<Game['transition']>({
@@ -141,6 +160,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setSaved((s) => ({ ...s, completed: { ...s.completed, [id]: Math.max(stars, s.completed[id] ?? 0) } }))
   }, [])
 
+  const completeActivity = useCallback((id: string, stars: number) => {
+    setSaved((s) => ({ ...s, activities: { ...s.activities, [id]: Math.max(stars, s.activities?.[id] ?? 0) } }))
+  }, [])
+
   const value = useMemo<Game>(
     () => ({
       screen,
@@ -149,6 +172,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       sound: saved.sound,
       mapNode: saved.mapNode,
       name: saved.name,
+      activities: saved.activities ?? {},
       env,
       transition,
       flights,
@@ -156,6 +180,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       go,
       addScore,
       completeMission,
+      completeActivity,
       landFlight,
       sfx,
       setMapNode: (n) => setSaved((s) => ({ ...s, mapNode: n })),
@@ -167,9 +192,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
           if (on) play('click')
           return { ...s, sound: on }
         }),
-      reset: () => setSaved((s) => ({ ...EMPTY, sound: s.sound, name: s.name })),
+      reset: () => setSaved((s) => ({ ...EMPTY, sound: s.sound, name: s.name, activities: s.activities ?? {} })),
     }),
-    [screen, saved, env, transition, flights, go, addScore, completeMission, landFlight, sfx],
+    [screen, saved, env, transition, flights, go, addScore, completeMission, completeActivity, landFlight, sfx],
   )
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
