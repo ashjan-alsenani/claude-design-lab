@@ -73,8 +73,8 @@ const explainers: Explainer[] = [
         actors: [
           { id: 'p1', kind: 'emoji', emoji: '👧🏽', x: 12, y: 28, size: 9, in: 0.3 },
           { id: 'n1', kind: 'text', text: 'Omaima', x: 26, y: 28, size: 3.2, ltr: true, in: 0.3 },
-          { id: 'a1', kind: 'arrow', from: [35, 28], to: [54, 28], color: 'blue', in: 1.2 },
-          { id: 't1', kind: 'text', text: '💻 ICT and technology', x: 76, y: 28, size: 3.2, box: true, ltr: true, color: 'blue', in: 1.8 },
+          { id: 'a1', kind: 'arrow', from: [35, 28], to: [49, 28], color: 'blue', in: 1.2 },
+          { id: 't1', kind: 'text', text: '💻 ICT and technology', x: 72, y: 28, size: 3, box: true, ltr: true, color: 'blue', in: 1.8 },
           { id: 'p2', kind: 'emoji', emoji: '👧🏻', x: 12, y: 56, size: 9, in: 4.2 },
           { id: 'n2', kind: 'text', text: 'Rahaf', x: 26, y: 56, size: 3.2, ltr: true, in: 4.2 },
           { id: 'mus', kind: 'emoji', emoji: '🏛️', x: 41, y: 56, size: 7, in: 4.8 },
@@ -157,14 +157,14 @@ const explainers: Explainer[] = [
         bg: 'sky',
         duration: 10,
         actors: [
-          { id: 'mag', kind: 'emoji', emoji: '📰', x: 50, y: 28, size: 13, anim: [{ at: 0.3, effect: 'float' }] },
+          { id: 'mag', kind: 'emoji', emoji: '📰', x: 44, y: 28, size: 13, anim: [{ at: 0.3, effect: 'float' }] },
           { id: 'about', kind: 'text', text: 'About Us', x: 50, y: 44, size: 4.4, color: 'accent', ltr: true, in: 0.6 },
           { id: 'm1', kind: 'emoji', emoji: '🧕🏽', x: 22, y: 68, size: 13, in: 1.4 },
           { id: 'm2', kind: 'emoji', emoji: '👧🏼', x: 50, y: 68, size: 13, in: 1.8 },
           { id: 'm3', kind: 'emoji', emoji: '👦🏽', x: 78, y: 68, size: 13, in: 2.2 },
           { id: 'n2', kind: 'text', text: 'Julia', x: 50, y: 86, size: 3.4, ltr: true, in: 2.6 },
           { id: 'n3', kind: 'text', text: 'Sultan', x: 78, y: 86, size: 3.4, ltr: true, in: 2.8 },
-          { id: 'q', kind: 'text', text: 'Who designed it? 🤔', x: 76, y: 28, size: 3.2, box: true, ltr: true, color: 'purple', in: 5, anim: [{ at: 5.4, effect: 'pulse' }] },
+          { id: 'q', kind: 'text', text: 'Who designed it? 🤔', x: 77, y: 30, size: 3.2, box: true, ltr: true, color: 'purple', in: 5, anim: [{ at: 5.4, effect: 'pulse' }] },
         ],
       },
       {

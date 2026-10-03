@@ -125,7 +125,7 @@ const explainers: Explainer[] = [
         bg: 'paper',
         duration: 12,
         actors: [
-          { id: 'col1', kind: 'shape', shape: 'rect', x: 32, y: 56, w: 40, h: 58, color: 'good', outline: true },
+          { id: 'col1', kind: 'shape', shape: 'rect', x: 32, y: 56, w: 44, h: 58, color: 'good', outline: true },
           { id: 'col2', kind: 'shape', shape: 'rect', x: 74, y: 56, w: 28, h: 58, color: 'purple', outline: true },
           { id: 'h1', kind: 'text', text: 'learning 📚', x: 32, y: 20, size: 3.6, ltr: true, color: 'good' },
           { id: 'h2', kind: 'text', text: 'a hobby 📷', x: 74, y: 20, size: 3.6, ltr: true, color: 'purple' },
@@ -215,6 +215,7 @@ const explainers: Explainer[] = [
         duration: 11,
         actors: [
           { id: 'box', kind: 'shape', shape: 'rect', x: 50, y: 33, w: 86, h: 34, color: 'accent', outline: true, out: 4.2 },
+          { id: 'sorth', kind: 'text', text: 'Sort the words! 🗂️', x: 50, y: 28, size: 4.4, color: 'purple', ltr: true, in: 8.8, anim: [{ at: 9, effect: 'pulse' }] },
           { id: 'hp', kind: 'text', text: 'places 📍', x: 20, y: 56, size: 3.6, color: 'accent', ltr: true, in: 3.6 },
           { id: 'ht', kind: 'text', text: 'things 🔧', x: 50, y: 56, size: 3.6, color: 'accent', ltr: true, in: 3.6 },
           { id: 'hs', kind: 'text', text: 'sports 🏅', x: 80, y: 56, size: 3.6, color: 'accent', ltr: true, in: 3.6 },

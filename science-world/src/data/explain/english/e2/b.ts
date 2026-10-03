@@ -205,7 +205,7 @@ const explainers: Explainer[] = [
         actors: [
           { id: 'flag', kind: 'emoji', emoji: '🇬🇧', x: 14, y: 22, size: 8 },
           { id: 'bed', kind: 'emoji', emoji: '🛌', x: 30, y: 66, size: 20, in: 0.3, out: 7.2 },
-          { id: 'mute', kind: 'emoji', emoji: '🔇', x: 34, y: 40, size: 8, in: 1.2 },
+          { id: 'mute', kind: 'emoji', emoji: '🔇', x: 34, y: 40, size: 8, in: 1.2, out: 7 },
           { id: 'no', kind: 'text', text: 'cannot hear', x: 36, y: 26, size: 3.4, color: 'white', ltr: true, in: 1.4 },
           { id: 'clock', kind: 'emoji', emoji: '⏰', x: 68, y: 58, size: 15, in: 3, anim: [{ at: 4, effect: 'shake' }] },
           { id: 'light', kind: 'emoji', emoji: '💡', x: 84, y: 34, size: 9, in: 4.4, anim: [{ at: 4.6, effect: 'glow' }] },
@@ -431,7 +431,7 @@ const explainers: Explainer[] = [
         bg: 'city',
         duration: 11,
         actors: [
-          { id: 'name', kind: 'text', text: 'TopCity', x: 50, y: 22, size: 7, box: true, ltr: true, color: 'accent', in: 0.3 },
+          { id: 'name', kind: 'text', text: 'TopCity', x: 50, y: 25, size: 6.5, box: true, ltr: true, color: 'accent', in: 0.3 },
           { id: 'game', kind: 'emoji', emoji: '🎮', x: 50, y: 48, size: 16, in: 0.8, anim: [{ at: 1.2, effect: 'float' }] },
           { id: 'r1', kind: 'emoji', emoji: '🤩', x: 18, y: 46, size: 11, in: 2.6 },
           { id: 'n1', kind: 'text', text: 'GameFan', x: 18, y: 62, size: 3.4, box: true, ltr: true, in: 2.8 },
