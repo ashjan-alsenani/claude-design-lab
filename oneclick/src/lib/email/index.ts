@@ -36,7 +36,10 @@ export async function sendEmail(to: string, content: EmailContent, meta: { kind?
       signal: AbortSignal.timeout(10_000),
     });
     if (!res.ok) {
-      console.error(`email: Resend responded ${res.status} (${meta.kind ?? "general"})`);
+      // Resend's error name and message describe configuration problems (sender, key, domain), never
+      // the message content, so they are safe to log and make failures diagnosable.
+      const err = (await res.json().catch(() => ({}))) as { name?: string; message?: string };
+      console.error(`email: Resend responded ${res.status} (${meta.kind ?? "general"}) ${err.name ?? ""}: ${(err.message ?? "").slice(0, 200)}`);
       return { sent: false, reason: "error" };
     }
     const body = (await res.json().catch(() => ({}))) as { id?: string };
