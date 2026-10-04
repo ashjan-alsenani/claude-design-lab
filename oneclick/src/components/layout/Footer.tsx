@@ -43,7 +43,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
           <div className="max-w-sm">
-            <Logo />
+            <Logo locale={locale} />
             <p className="mt-4 text-ink-soft leading-relaxed">{d.footer.tagline}</p>
             <p className="mt-3 text-sm font-medium text-primary">{tr(brand.slogan, locale)}</p>
             <div className="mt-8">
