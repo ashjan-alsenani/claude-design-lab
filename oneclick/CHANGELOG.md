@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.1 — 2026-10-04 — Same protection for every product
+- Every product screen goes through one guard (`openProduct`) and every read or save of customer product data
+  through `productDataFor` (src/lib/licensing/guard.ts). Pages check ownership themselves, not via their layout.
+- Catalog-wide tests: every product, including future ones, is run through the ownership rules (unit and browser).
+- Guard-rail tests block unguarded product pages, direct product-data access, unreviewed API routes and files
+  in the public folder.
+
 ## 0.9.0 — 2026-10-04 — Ownership review and direct-to-product
 - Security review of ownership and access before changes: docs/SECURITY_REVIEW_2026-10-04.md.
 - After payment, one email to the purchase address: confirmation (product, order, amount, date) with an

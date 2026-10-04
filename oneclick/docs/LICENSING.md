@@ -29,6 +29,29 @@ Checkout (purchase email, normalized)  ->  Order (pending) + order items
 A forwarded email or copied link gives nothing: the code always goes to the purchase address,
 and the product route checks the signed-in account's license.
 
+## Adding a new product (protection is automatic)
+Add the product to the catalog (`src/content/products.ts`) with a price. With no other code:
+- **Its delivery type is derived:** a paid product opens inside One Click (`INTERACTIVE_PRIVATE`), a file
+  product is a protected download (`SECURE_DOWNLOAD`), and a custom service can't be bought online. Admin can
+  change this per product.
+- **It is checked on the server:** `/{locale}/app/{slug}` opens it only for the signed-in, verified account
+  that owns an active license for it, on a trusted device. Shared links show "Access Denied".
+- **Purchases, emails and records work automatically:** checkout by email, the license after a verified
+  payment, the "Open My Product" email, refunds and revocation, last-access and device records.
+- **It is tested:** `tests/unit/all-products.test.ts` and `tests/e2e/all-products.spec.ts` run every product
+  in the catalog through the ownership rules, so a new product is covered without new tests.
+
+If the product gets its own screens (like Bridal Journey):
+- Every page and layout under `src/app/[locale]/app/**` must call `openProduct()`.
+- Every read or save of the customer's data must use `productDataFor()` (both in `src/lib/licensing/guard.ts`).
+- `tests/unit/structure.test.ts` fails if any page skips this, if product data is read any other way, if an
+  API route is added without review, or if a file is put in the public folder.
+
+**Two rules to keep:**
+- A product with **no price** is free and public by design.
+- If the catalog moves to the database, the licensing engine must read the same product list (it is passed
+  in `src/lib/licensing/server.ts`). Unknown product IDs are always denied.
+
 ## canUserAccessProduct(userId, productId)
 This function runs the checks below in order, and the first failure decides the result:
 

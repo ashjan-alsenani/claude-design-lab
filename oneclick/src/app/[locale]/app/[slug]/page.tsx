@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { ArrowLeftIcon, SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale, tr } from "@/i18n/config";
 import { fill, licensingCopy } from "@/i18n/licensing";
 import { products } from "@/content/products";
 import { hueVar } from "@/lib/hues";
-import { currentContext, licensing } from "@/lib/licensing/server";
+import { openProduct } from "@/lib/licensing/guard";
 import { pageMetadata } from "@/lib/seo";
 import { ProductArt } from "@/components/art/ProductArt";
 import { DemoById } from "@/components/demos/DemoById";
@@ -36,15 +36,9 @@ export default async function ProductAppPage({ params }: Props) {
   const product = products.find((p) => p.slug === slug);
   if (!product) notFound();
   const t = licensingCopy[locale];
-  const ctx = await currentContext();
-  const decision = await licensing().engine.checkAccess(ctx, product.id, "open");
-
-  if (!decision.allowed) {
-    if (decision.reason === "not_signed_in" || decision.reason === "session_invalid") {
-      redirect(`/${locale}/account?next=${encodeURIComponent(`/${locale}/app/${slug}`)}`);
-    }
-    return <AccessDenied locale={locale} reason={decision.reason} productSlug={product.slug} />;
-  }
+  const access = await openProduct(locale, product.id, `/${locale}/app/${slug}`);
+  if (!access.allowed) return <AccessDenied locale={locale} reason={access.decision.reason} productSlug={product.slug} />;
+  const { ctx, decision } = access;
 
   const color = hueVar(product.hue);
   return (
