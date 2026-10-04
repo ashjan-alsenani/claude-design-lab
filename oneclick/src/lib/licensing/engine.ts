@@ -54,7 +54,8 @@ import type {
  *   verification or carry a short-lived signature bound to the signed-in session.
  * - Codes and tokens are stored as HMAC digests; nothing secret is logged.
  */
-export type Mailer = (to: string, content: EmailContent, meta: { kind: string }) => Promise<void>;
+/** Resolves to `{ sent: false }` when the provider refused or could not be reached. */
+export type Mailer = (to: string, content: EmailContent, meta: { kind: string }) => Promise<void | { sent: boolean }>;
 
 export type EngineDeps = {
   store: LicensingStore;
@@ -220,7 +221,17 @@ export function createLicensingEngine(deps: EngineDeps) {
       log(db, { event: "verification_sent", outcome: "info", userId: input.userId ?? null, meta: { purpose: input.purpose } });
       return { ok: true as const, challengeId: id, minutes: policy.otpTtlMinutes };
     });
-    if (result.ok) await deps.mail(email, emailTemplates.accessCode(input.locale, { code, minutes: result.minutes }), { kind: "access_code" });
+    if (!result.ok) return result;
+    const sent = await deps.mail(email, emailTemplates.accessCode(input.locale, { code, minutes: result.minutes }), { kind: "access_code" });
+    if (sent && !sent.sent) {
+      // The code never reached the person: withdraw it so it neither counts toward the hourly
+      // limit nor leaves them waiting for an email that is not coming.
+      await deps.store.write((db) => {
+        db.challenges = db.challenges.filter((c) => c.id !== result.challengeId);
+        log(db, { event: "verification_email_failed", outcome: "info", userId: input.userId ?? null, meta: { purpose: input.purpose } });
+      });
+      return { ok: false as const, reason: "email_failed" as const };
+    }
     return result;
   }
 
@@ -231,7 +242,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     if (c.consumedAt) return { ok: false, reason: "used" };
     if (new Date(c.expiresAt) <= now()) return { ok: false, reason: "expired" };
     const policy = resolvePolicy(db);
-    const clean = code.replace(/[\s-]/g, "").replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x660));
+    const clean = code.replace(/[\s-]/g, "").replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x660)).replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x6f0));
     if (!/^\d{6}$/.test(clean) || !safeEqual(h(`${c.id}:${clean}`), c.codeHash)) {
       c.attempts += 1;
       if (c.attempts >= policy.otpMaxAttempts) {

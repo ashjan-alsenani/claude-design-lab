@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { LockSimpleIcon, PlugsIcon } from "@phosphor-icons/react/dist/ssr";
+import { EnvelopeSimpleIcon, LockSimpleIcon, PlugsIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale, tr } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { catalog } from "@/lib/data/catalog";
@@ -35,7 +35,7 @@ export default async function CheckoutPage({ params }: Props) {
   const provider = getPaymentProvider();
   const name = tr(product.name, locale);
   const sandbox = licensingMode() === "sandbox";
-  const ctx = sandbox ? await currentContext() : null;
+  const ctx = licensingMode() === "unavailable" ? null : await currentContext();
   const t = licensingCopy[locale].checkout;
 
   return (
@@ -111,6 +111,15 @@ export default async function CheckoutPage({ params }: Props) {
             <span className="text-ink-soft">{d.checkout.total}</span>
             <span className="text-xl font-semibold tabular text-ink">{formatMoney(product.price, locale)}</span>
           </div>
+          {!ctx && (
+            <div className="mt-6 rounded-[var(--radius-md)] bg-primary-soft p-4">
+              <p className="flex items-center gap-2 text-sm font-semibold text-ink">
+                <EnvelopeSimpleIcon size={18} weight="duotone" className="shrink-0 text-primary" />
+                {t.guestTitle}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-ink-soft">{t.guestBody}</p>
+            </div>
+          )}
           <p className="mt-4 flex items-start gap-2 text-xs text-muted">
             <LockSimpleIcon size={14} className="mt-0.5 shrink-0" />
             {d.common.priceNote}

@@ -76,8 +76,7 @@ export default async function VerifyPage({ params, searchParams }: Props) {
                   required
                   inputMode="numeric"
                   autoComplete="one-time-code"
-                  pattern="[0-9٠-٩ ]{6,7}"
-                  maxLength={7}
+                  maxLength={12}
                   dir="ltr"
                   className={`${inputClass} text-center text-2xl font-semibold tracking-[0.5em]`}
                 />

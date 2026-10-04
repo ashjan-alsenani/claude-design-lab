@@ -322,6 +322,31 @@ describe("verification codes", () => {
     expect((await engine.completeVerification({ challengeId: b.challengeId, code: arabic, client: {}, locale: "ar" })).kind).toBe("signed_in");
   });
 
+  it("accepts Persian digits and a pasted code with spaces", async () => {
+    const a = await engine.startVerification({ email: "mona@example.com", purpose: "signin", locale: "ar" });
+    if (!a.ok) throw new Error();
+    const persian = lastCode("mona@example.com").replace(/\d/g, (d) => String.fromCharCode(0x6f0 + Number(d)));
+    expect((await engine.completeVerification({ challengeId: a.challengeId, code: ` ${persian.slice(0, 3)} ${persian.slice(3)} `, client: {}, locale: "ar" })).kind).toBe("signed_in");
+  });
+
+  it("a code whose email failed to send is withdrawn and does not count toward the hourly limit", async () => {
+    let failing = true;
+    const e2 = createLicensingEngine({
+      store,
+      products,
+      secret: SECRET,
+      baseUrl: "https://oneclick.test",
+      mail: async (to, content, meta) => (failing ? { sent: false } : void mails.push({ to, content, kind: meta.kind })),
+      now: () => clock,
+    });
+    for (let i = 0; i < 8; i++) expect(await e2.startVerification({ email: "noor@example.com", purpose: "signin", locale: "ar" })).toEqual({ ok: false, reason: "email_failed" });
+    expect(await store.read((db) => db.challenges.filter((c) => c.email === "noor@example.com").length)).toBe(0);
+    failing = false;
+    const ok = await e2.startVerification({ email: "noor@example.com", purpose: "signin", locale: "ar" });
+    if (!ok.ok) throw new Error("should not be rate limited after failed sends");
+    expect((await e2.completeVerification({ challengeId: ok.challengeId, code: lastCode("noor@example.com"), client: {}, locale: "ar" })).kind).toBe("signed_in");
+  });
+
   it("logs never contain codes, tokens or passwords", async () => {
     const a = await signIn("sara@example.com");
     await engine.setPassword(a.ctx, { next: "correct horse battery" });

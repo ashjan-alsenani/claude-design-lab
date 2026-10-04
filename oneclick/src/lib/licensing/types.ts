@@ -170,6 +170,7 @@ export type AccessEvent =
   | "signin_failed"
   | "signout"
   | "verification_sent"
+  | "verification_email_failed"
   | "verification_failed"
   | "verification_locked"
   | "device_added"

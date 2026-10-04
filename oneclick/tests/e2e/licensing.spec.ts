@@ -51,7 +51,11 @@ async function signInWithCode(page: Page, address: string, locale = "en") {
 async function buy(page: Page, slug: string, outcome: "Simulate successful payment" | "Simulate failed payment", guestEmail?: string) {
   await page.goto(`/en/checkout/${slug}`);
   await expect(page.getByText("PAYMENT PROVIDER NOT YET CONNECTED")).toBeVisible();
-  if (guestEmail) await page.locator("#sandbox-email").fill(guestEmail);
+  if (guestEmail) {
+    // Buying needs no account: a guest sees that up front and only gives an email.
+    await expect(page.getByText("No account needed")).toBeVisible();
+    await page.locator("#sandbox-email").fill(guestEmail);
+  }
   await page.getByRole("button", { name: outcome }).click();
 }
 

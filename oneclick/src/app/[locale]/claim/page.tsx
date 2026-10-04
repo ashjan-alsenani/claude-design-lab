@@ -28,7 +28,9 @@ export default async function ClaimPage({ params, searchParams }: Props) {
   if (!isLocale(locale) || licensingMode() === "unavailable") notFound();
   const sp = await searchParams;
   const t = licensingCopy[locale];
-  const claim = sp.e ? { status: "invalid" as const } : await licensing().engine.getClaim(sp.t);
+  const retryable = sp.e === "rate_limited" || sp.e === "email_failed";
+  const claim = sp.e && !retryable ? { status: "invalid" as const } : await licensing().engine.getClaim(sp.t);
+  const notice = sp.e === "rate_limited" ? t.signin.errors.rate_limited : sp.e === "email_failed" ? t.signin.errors.email_failed : null;
 
   return (
     <div className="mx-auto max-w-lg px-4 pb-10 pt-8">
@@ -47,6 +49,11 @@ export default async function ClaimPage({ params, searchParams }: Props) {
           <>
             <GiftIcon size={40} weight="duotone" className="text-primary" />
             <h1 className="mt-4 text-2xl font-bold text-ink">{t.claim.title}</h1>
+            {notice && (
+              <p role="alert" className="mt-4 rounded-[var(--radius-md)] bg-[color-mix(in_oklab,var(--oc-error)_10%,transparent)] px-4 py-3 text-sm font-medium text-error">
+                {notice}
+              </p>
+            )}
             <p className="mt-2 leading-relaxed text-ink-soft">{fill(t.claim.body, { email: "⁨" + claim.maskedEmail + "⁩" })}</p>
             <p className="mt-5 text-sm font-semibold text-muted">{t.claim.products}</p>
             <ul className="mt-1 list-inside list-disc text-ink">

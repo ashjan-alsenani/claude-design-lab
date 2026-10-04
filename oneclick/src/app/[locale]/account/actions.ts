@@ -100,16 +100,19 @@ export async function resendCodeAction(fd: FormData) {
   if (!id) redirect(`/${locale}/account`);
   if (await ipLimited("code", 10)) redirect(withNext(`/${locale}/account/verify?e=too_many_attempts`, next));
   const r = await licensing().engine.resendVerification(id, locale);
-  if (!r.ok) redirect(withNext(`/${locale}/account/verify?e=${r.reason === "rate_limited" ? "too_many_attempts" : "expired"}`, next));
+  if (!r.ok) redirect(withNext(`/${locale}/account/verify?e=${r.reason === "rate_limited" ? "too_many_attempts" : r.reason === "email_failed" ? "email_failed" : "expired"}`, next));
   await setChallenge(r.challengeId);
   redirect(withNext(`/${locale}/account/verify?resent=1`, next));
 }
 
 export async function startClaimAction(fd: FormData) {
   const locale = localeOf(fd);
-  if (await ipLimited("code", 10)) redirect(`/${locale}/account?e=rate_limited`);
-  const r = await licensing().engine.startClaim(str(fd, "token", 200), locale);
-  if (!r.ok) redirect(`/${locale}/claim?e=${r.reason}`);
+  const token = str(fd, "token", 200);
+  // Keep the token on temporary failures so the page can still show the order and let them retry.
+  const back = (reason: string) => `/${locale}/claim?t=${encodeURIComponent(token)}&e=${reason}`;
+  if (await ipLimited("code", 10)) redirect(back("rate_limited"));
+  const r = await licensing().engine.startClaim(token, locale);
+  if (!r.ok) redirect(r.reason === "rate_limited" || r.reason === "email_failed" ? back(r.reason) : `/${locale}/claim?e=${r.reason}`);
   await setChallenge(r.challengeId);
   redirect(`/${locale}/account/verify`);
 }
