@@ -36,8 +36,8 @@ export default async function AdminPage({ params }: Props) {
 
   const alerts = [
     { ok: payment.live, label: "Payment provider", detail: payment.live ? payment.displayName : "Not connected. Waiting for owner's bank decision." },
-    { ok: authStatus() === "connected", label: "Customer accounts & database", detail: authStatus() === "connected" ? "Connected" : "Supabase project not created yet. Licensing engine runs in local SANDBOX only; production is locked (fails closed)." },
-    { ok: isEmailConfigured(), label: "Transactional email", detail: isEmailConfigured() ? "Connected" : "No email provider yet. Confirmations are not sent." },
+    { ok: authStatus() === "connected", label: "Customer accounts & database", detail: authStatus() === "connected" ? "Connected (Supabase)" : authStatus() === "demo" ? "Local SANDBOX (demo mode). Production uses Supabase." : "Not connected: set SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY and LICENSING_SECRET. Sign-in stays locked until then." },
+    { ok: isEmailConfigured(), label: "Transactional email", detail: isEmailConfigured() ? "Connected (Resend)" : "Not connected: set EMAIL_PROVIDER=resend, RESEND_API_KEY and EMAIL_FROM. Sign-in codes cannot be delivered until then." },
     { ok: businessSettings.showLegalIdentity, label: "Business identity (CR, address)", detail: "Hidden until owner provides final details." },
     { ok: false, label: "Legal pages", detail: "Drafts. Lawyer review required before launch." },
     { ok: false, label: "Analytics", detail: "Consent-ready. No provider connected." },

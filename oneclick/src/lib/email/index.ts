@@ -7,9 +7,10 @@ import type { EmailContent } from "./templates";
 export type SendResult = { sent: true; id: string } | { sent: false; reason: "not_connected" | "error" };
 
 /**
- * Email adapter. STATUS: NOT CONNECTED (provider to be approved, see COSTS.md).
- * Until connected, emails are not sent; in development the subject line is logged
- * (never the body, which may contain personal data).
+ * Email adapter: Resend (https://resend.com) when EMAIL_PROVIDER=resend, RESEND_API_KEY and
+ * EMAIL_FROM are set. Without a provider, demo mode writes to the development mailbox and
+ * production sends nothing. Failures are reported by status only; message bodies (which can hold
+ * sign-in codes and personal data) are never logged.
  */
 export async function sendEmail(to: string, content: EmailContent, meta: { kind?: string } = {}): Promise<SendResult> {
   if (!isEmailConfigured()) {
@@ -19,37 +20,55 @@ export async function sendEmail(to: string, content: EmailContent, meta: { kind?
     }
     return { sent: false, reason: "not_connected" };
   }
-  // Provider implementation goes here (e.g. Resend/Postmark/SES adapter).
-  void to;
-  return { sent: false, reason: "not_connected" };
+  try {
+    const res = await fetch(`${(process.env.RESEND_API_URL || "https://api.resend.com").replace(/\/+$/, "")}/emails`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: process.env.EMAIL_FROM,
+        to: [to],
+        subject: content.subject,
+        html: content.html,
+        text: content.text,
+        ...(process.env.EMAIL_REPLY_TO ? { reply_to: process.env.EMAIL_REPLY_TO } : {}),
+        tags: [{ name: "kind", value: (meta.kind ?? "general").replace(/[^A-Za-z0-9_-]/g, "_") }],
+      }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!res.ok) {
+      console.error(`email: Resend responded ${res.status} (${meta.kind ?? "general"})`);
+      return { sent: false, reason: "error" };
+    }
+    const body = (await res.json().catch(() => ({}))) as { id?: string };
+    return { sent: true, id: body.id ?? "" };
+  } catch {
+    console.error(`email: Resend request failed (${meta.kind ?? "general"})`);
+    return { sent: false, reason: "error" };
+  }
 }
 
 export { emailTemplates } from "./templates";
 
 export type OutboxMessage = { id: string; at: string; to: string; kind: string; subject: string; text: string; html: string };
-const OUTBOX = path.join(process.cwd(), ".data", "outbox.json");
-let outboxQueue: Promise<unknown> = Promise.resolve();
+const OUTBOX = path.join(process.cwd(), ".data", "outbox.jsonl");
 
 /**
  * DEVELOPMENT MAILBOX (demo mode only): stands in for a real inbox so the full
  * purchase -> email -> verification flow can be tested locally. Git-ignored, never
- * used in production. Nothing is printed to the server log.
+ * used in production. Nothing is printed to the server log. Messages are appended one per line,
+ * so emails sent at the same moment from different server workers never overwrite each other.
  */
 async function writeOutbox(to: string, content: EmailContent, kind: string) {
-  const run = outboxQueue.then(async () => {
-    const all = await readOutbox();
-    all.push({ id: Math.random().toString(36).slice(2), at: new Date().toISOString(), to, kind, ...content });
-    await fs.mkdir(path.dirname(OUTBOX), { recursive: true });
-    await fs.writeFile(OUTBOX, JSON.stringify(all.slice(-200)));
-  });
-  outboxQueue = run.catch(() => undefined);
-  return run;
+  const msg: OutboxMessage = { id: Math.random().toString(36).slice(2), at: new Date().toISOString(), to, kind, ...content };
+  await fs.mkdir(path.dirname(OUTBOX), { recursive: true });
+  await fs.appendFile(OUTBOX, JSON.stringify(msg) + "\n");
 }
 
 export async function readOutbox(): Promise<OutboxMessage[]> {
   if (!isDemoMode()) return [];
   try {
-    return JSON.parse(await fs.readFile(OUTBOX, "utf8"));
+    const lines = (await fs.readFile(OUTBOX, "utf8")).split("\n").filter(Boolean);
+    return lines.slice(-500).map((l) => JSON.parse(l) as OutboxMessage);
   } catch {
     return [];
   }

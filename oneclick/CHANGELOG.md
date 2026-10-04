@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 — 2026-10-04 — Database and email
+- Supabase-backed storage for accounts, sessions, devices, orders, licenses (atomic compare-and-swap writes),
+  activity history, product data and form submissions. Server-only access; anon key denied (tested).
+- Resend email adapter: sign-in codes, purchase and security emails.
+- Production mode switches on with SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY and LICENSING_SECRET; stays locked otherwise.
+- Private pages always render per request. Development mailbox is append-only (no lost messages).
+- Owner setup guide in Arabic: docs/SETUP_DATABASE_EMAIL.md. Integration test: tests/db-integration/run.sh.
+
 ## 0.5.3 — 2026-10-03 — Owner account
 - `ONECLICK_OWNER_EMAILS`: signing in with the owner's email gives the admin panel and opens
   every product without buying it; an "Owner account" panel lists them in My Products.

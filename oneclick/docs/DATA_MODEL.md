@@ -1,5 +1,8 @@
 # Data model
 
+**Running today (2026-10-04):** `supabase/migrations/20261004000000_server_store.sql` (oc_licensing_state,
+oc_licensing_events, oc_product_data, oc_leads; server-only). The normalized schema below is the future target.
+
 Schema: `supabase/migrations/20261002000000_initial_schema.sql` (verified by applying it to
 PostgreSQL 16 with a stub `auth` schema: 33 tables, triggers working). Not yet applied to a
 Supabase project.

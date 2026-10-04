@@ -201,3 +201,18 @@ licensing code is written per product.
 3. Connect the email provider. Codes and claim emails are already written in Arabic and English.
 4. Connect the payment provider through `PaymentProvider`. Its webhook calls `handlePaymentEvent`.
 5. Move rate limits to a shared store, and put download files in a private storage bucket.
+
+
+## Production storage (2026-10-04)
+- `SupabaseLicensingStore` (`src/lib/licensing/store.ts`) keeps the engine's record set in `oc_licensing_state`
+  and commits each change with a compare-and-swap on `version` (retries on a clash), so writes are atomic across
+  serverless instances. New access/audit entries are also appended to `oc_licensing_events` (full history); the
+  working record keeps the latest 1000 of each.
+- Product data (`oc_product_data`) and form submissions (`oc_leads`) use the same server-only REST client
+  (`src/lib/supabase/rest.ts`). RLS is on with no policies and all grants are revoked from `anon`/`authenticated`.
+- Mode is chosen at runtime: demo mode → sandbox; `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` + `LICENSING_SECRET`
+  → database; otherwise unavailable (fails closed). Private routes are forced dynamic so they never use a copy
+  rendered at build time.
+- Email: Resend adapter in `src/lib/email/index.ts`. Bodies are never logged.
+- Verified by `tests/db-integration/run.sh`: PostgreSQL 16 + PostgREST + mock Resend against a production build
+  (owner sign-in by emailed code, admin, planner save, custom request; anon key denied).

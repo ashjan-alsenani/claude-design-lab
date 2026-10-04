@@ -3,12 +3,13 @@ import path from "node:path";
 import { cache } from "react";
 import { cookies, headers } from "next/headers";
 import { products } from "@/content/products";
-import { isDemoMode, isSupabaseConfigured } from "@/lib/env";
+import { isDemoMode, isLicensingSecretSet, supabaseServerConfig } from "@/lib/env";
+import { createRest } from "@/lib/supabase/rest";
 import { sendEmail } from "@/lib/email";
 import { siteUrl } from "@/lib/seo";
 import { SandboxProvider } from "@/lib/payments/sandbox";
 import { createLicensingEngine, type ClientInfo, type LicensingEngine, type SessionContext } from "./engine";
-import { FileLicensingStore, UnavailableLicensingStore, type LicensingStore } from "./store";
+import { FileLicensingStore, SupabaseLicensingStore, UnavailableLicensingStore, type LicensingStore } from "./store";
 
 /**
  * Server wiring for the licensing engine (never imported by client components).
@@ -16,16 +17,16 @@ import { FileLicensingStore, UnavailableLicensingStore, type LicensingStore } fr
  * Modes:
  * - "sandbox": local development / demo. Data in .data/licensing.json, emails go to the
  *   development mailbox, payments are simulated by the clearly labeled SandboxProvider.
- * - "unavailable": production until the database is connected. Fails closed: no sign-in,
- *   every protected product and download is denied.
- * (Next step: a Supabase-backed store implementing the same engine; see DATA_MODEL.md.)
+ * - "database": production. Supabase Postgres via the service role (server only). Needs
+ *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY and LICENSING_SECRET.
+ * - "unavailable": any of those missing. Fails closed: no sign-in, every protected product and
+ *   download is denied.
  */
-export type LicensingMode = "sandbox" | "unavailable";
+export type LicensingMode = "sandbox" | "database" | "unavailable";
 
 export function licensingMode(): LicensingMode {
   if (isDemoMode()) return "sandbox";
-  // TODO(supabase): return "database" once SupabaseLicensingStore is implemented.
-  void isSupabaseConfigured;
+  if (supabaseServerConfig() && isLicensingSecretSet()) return "database";
   return "unavailable";
 }
 
@@ -42,8 +43,10 @@ const g = globalThis as unknown as { __ocLicensing?: { engine: LicensingEngine; 
 
 function build() {
   const mode = licensingMode();
-  const store: LicensingStore = mode === "sandbox" ? new FileLicensingStore(path.join(process.cwd(), ".data", "licensing.json")) : new UnavailableLicensingStore();
-  const s = mode === "sandbox" ? secret() : "unavailable";
+  const db = supabaseServerConfig();
+  const store: LicensingStore =
+    mode === "sandbox" ? new FileLicensingStore(path.join(process.cwd(), ".data", "licensing.json")) : mode === "database" && db ? new SupabaseLicensingStore(createRest(db)) : new UnavailableLicensingStore();
+  const s = mode === "unavailable" ? "unavailable" : secret();
   const engine = createLicensingEngine({
     store,
     products,

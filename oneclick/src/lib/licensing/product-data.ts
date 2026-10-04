@@ -1,12 +1,13 @@
 import "server-only";
 import fs from "node:fs";
 import path from "node:path";
+import { supabaseServerConfig } from "@/lib/env";
+import { createRest, eq, expectOk, type Rest } from "@/lib/supabase/rest";
 import { licensingMode } from "./server";
 
 /**
  * Per-customer, per-product private data (e.g. a bride's whole planner).
- * Production target: Supabase table `product_data` (user_id, product_id, data, version),
- * whose RLS policy already requires an active license (has_active_license).
+ * Production: Supabase table `oc_product_data` (server only, service role).
  * Sandbox: one git-ignored JSON file per customer and product.
  * Callers MUST authorize with the licensing engine first.
  */
@@ -45,6 +46,24 @@ class FileProductDataStore implements ProductDataStore {
   }
 }
 
+export class SupabaseProductDataStore implements ProductDataStore {
+  constructor(private rest: Rest) {}
+  async get<T>(u: string, p: string): Promise<Stored<T>> {
+    const r = await this.rest(`oc_product_data?user_id=${eq(u)}&product_id=${eq(p)}&select=data,version`);
+    expectOk(r, "PRODUCT_DATA_READ");
+    const row = (r.data as { data: T | null; version: number }[])[0];
+    return row ? { version: Number(row.version), data: row.data } : { version: 0, data: null };
+  }
+  async put<T>(u: string, p: string, data: T, version: number) {
+    const r = await this.rest("oc_product_data?on_conflict=user_id,product_id", {
+      method: "POST",
+      body: { user_id: u, product_id: p, data, version, updated_at: new Date().toISOString() },
+      prefer: "resolution=merge-duplicates,return=minimal",
+    });
+    expectOk(r, "PRODUCT_DATA_WRITE");
+  }
+}
+
 class UnavailableProductDataStore implements ProductDataStore {
   async get<T>(): Promise<Stored<T>> {
     return { version: 0, data: null };
@@ -56,6 +75,9 @@ class UnavailableProductDataStore implements ProductDataStore {
 
 const g = globalThis as unknown as { __ocProductData?: ProductDataStore };
 export function productData(): ProductDataStore {
-  g.__ocProductData ??= licensingMode() === "sandbox" ? new FileProductDataStore() : new UnavailableProductDataStore();
+  if (!g.__ocProductData) {
+    const mode = licensingMode(), db = supabaseServerConfig();
+    g.__ocProductData = mode === "sandbox" ? new FileProductDataStore() : mode === "database" && db ? new SupabaseProductDataStore(createRest(db)) : new UnavailableProductDataStore();
+  }
   return g.__ocProductData;
 }

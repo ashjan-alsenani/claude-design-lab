@@ -36,5 +36,6 @@ export function hasRole(session: Session | null, role: Role) {
 }
 
 export function authStatus(): "connected" | "demo" | "not_connected" {
-  return licensingMode() === "sandbox" ? "demo" : "not_connected";
+  const mode = licensingMode();
+  return mode === "database" ? "connected" : mode === "sandbox" ? "demo" : "not_connected";
 }
