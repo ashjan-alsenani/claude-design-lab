@@ -13,8 +13,9 @@ import { launchPlan, utmLink } from "@/content/social";
 import { formatMoney } from "@/lib/money";
 import { isEmailConfigured } from "@/lib/env";
 import { pageMetadata, siteUrl } from "@/lib/seo";
+import { createTestLinkAction } from "./licensing/actions";
 
-type Props = { params: Promise<{ locale: string }> };
+type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | undefined>> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -23,8 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // Admin uses plain business language. English-first for now (owner preference to confirm).
-export default async function AdminPage({ params }: Props) {
+export default async function AdminPage({ params, searchParams }: Props) {
   const { locale } = await params;
+  const sp = await searchParams;
   if (!isLocale(locale)) notFound();
   const session = await getSession();
   // Server-side authorization: no admin role, no admin page (404 hides its existence).
@@ -64,6 +66,32 @@ export default async function AdminPage({ params }: Props) {
           Licensing & access
         </Link>
       </p>
+
+      <section id="test-journey" aria-labelledby="h-test" className="mt-8 rounded-[var(--radius-lg)] border-2 border-dashed border-lilac/60 bg-surface p-5">
+        <h2 id="h-test" className="text-lg font-semibold text-ink">
+          Test the customer journey (no real payment)
+        </h2>
+        <p className="mt-1 max-w-3xl text-sm text-ink-soft">
+          Creates a link that works for 2 hours. Open it in a private window, signed out, like a new visitor: browse, press Buy, enter an email you can read,
+          and simulate the payment. Then follow the real email, code and product. Test orders are marked SANDBOX; revoke them in Licensing &amp; access when done.
+        </p>
+        {sp.testlink ? (
+          <div className="mt-4 space-y-2">
+            <p className="text-sm font-medium text-ink">Your test link (valid 2 hours, don&apos;t share it):</p>
+            <p className="break-all rounded-[var(--radius-md)] bg-bg-sunken px-3 py-2 font-mono text-xs text-ink" data-testid="test-link">
+              {`${siteUrl.replace(/\/$/, "")}/api/test-purchase?t=${encodeURIComponent(sp.testlink)}&locale=ar`}
+            </p>
+            <p className="text-xs text-muted">To end test mode early in that window, open {`${siteUrl.replace(/\/$/, "")}/api/test-purchase?end=1&locale=ar`}</p>
+          </div>
+        ) : sp.test === "sandbox" ? (
+          <p className="mt-4 text-sm text-ink-soft">Local sandbox: every checkout already offers simulated payment.</p>
+        ) : (
+          <form action={createTestLinkAction} className="mt-4">
+            <input type="hidden" name="locale" value={locale} />
+            <button className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-semibold text-on-primary">Create a test-purchase link</button>
+          </form>
+        )}
+      </section>
 
       <section aria-labelledby="h-kpi" className="mt-8">
         <h2 id="h-kpi" className="sr-only">Key numbers</h2>

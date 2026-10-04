@@ -176,6 +176,7 @@ test("failed payment creates no product", async ({ page }) => {
 });
 
 test("a fourth device must replace a trusted device before opening products", async ({ page, browser, baseURL }) => {
+  test.setTimeout(120_000); // four separate sign-ins
   const me = email("devices");
   await signInWithCode(page, me); // device 1
   await buy(page, "fitness-tracker", "Simulate successful payment");

@@ -1156,6 +1156,12 @@ export function createLicensingEngine(deps: EngineDeps) {
     return deps.store.read((db) => resolvePolicy(db));
   }
 
+  /** Records an admin action that changes no data (e.g. creating a test-purchase link) in the audit log. */
+  async function adminNote(ctxIn: SessionContext | null, action: string) {
+    const ctx = requireAdmin(ctxIn);
+    await deps.store.write((db) => audit(db, { actorId: ctx.user.id, action, entity: "policy", entityId: "global" }));
+  }
+
   async function adminUpdatePolicy(ctxIn: SessionContext | null, patch: Partial<LicensingPolicy>) {
     const ctx = requireAdmin(ctxIn);
     await deps.store.write((db) => {
@@ -1208,6 +1214,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     adminUpdateProductSecurity,
     policy,
     adminUpdatePolicy,
+    adminNote,
   };
 }
 

@@ -101,3 +101,60 @@ test("custom request is stored in the database", async ({ page }) => {
   await page.getByRole("button", { name: "Send request" }).click();
   await expect(page.getByText("Request received")).toBeVisible();
 });
+
+test("owner test link: a signed-out visitor buys, gets the email, verifies, and lands in the product", async ({ page, browser }) => {
+  await page.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
+  const base = "http://localhost:3600";
+
+  // Without the link the live checkout can't simulate anything.
+  const plain = await (await browser.newContext({ baseURL: base })).newPage();
+  await plain.goto("/en/checkout/grocery-list");
+  await expect(plain.getByText("PAYMENT PROVIDER NOT YET CONNECTED")).toBeVisible();
+  await expect(plain.getByRole("button", { name: "Simulate successful payment" })).toHaveCount(0);
+  // A forged link changes nothing.
+  await plain.goto("/api/test-purchase?t=forged.token&locale=en");
+  await plain.goto("/en/checkout/grocery-list");
+  await expect(plain.getByRole("button", { name: "Simulate successful payment" })).toHaveCount(0);
+
+  // The owner creates a test link in Admin.
+  await signIn(page, "owner@oneclick.test");
+  await page.goto("/en/admin");
+  await page.getByRole("button", { name: "Create a test-purchase link" }).click();
+  const link = new URL(((await page.getByTestId("test-link").textContent()) ?? "").replace("locale=ar", "locale=en"));
+
+  // A brand-new visitor (separate browser, signed out) opens it and shops.
+  const visitor = await (await browser.newContext({ baseURL: base })).newPage();
+  await visitor.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
+  await visitor.goto(link.pathname + link.search);
+  await expect(visitor).toHaveURL(/\/en\/products$/);
+  await visitor.goto("/en/checkout/grocery-list");
+  await expect(visitor.getByText("No account needed")).toBeVisible();
+  await visitor.locator("#sandbox-email").fill("visitor@oneclick.test");
+  await visitor.getByRole("button", { name: "Simulate successful payment" }).click();
+  await expect(visitor.getByText(/Check your email/)).toBeVisible();
+
+  // The real email (via the mail provider) with "Open My Product".
+  let text = "";
+  for (let i = 0; i < 40 && !text; i++) {
+    text = (await inbox()).filter((m) => m.to[0] === "visitor@oneclick.test" && /Purchase confirmed/.test(m.subject)).at(-1)?.text ?? "";
+    if (!text) await visitor.waitForTimeout(250);
+  }
+  expect(text).toContain("Open My Product");
+  const claim = new URL(text.match(/https?:\/\/\S+\/claim\?t=\S+/)![0]);
+  await visitor.goto(claim.pathname + claim.search);
+  await visitor.getByRole("button", { name: "Send my code" }).click();
+  await expect(visitor).toHaveURL(/\/en\/account\/verify\?next=%2Fen%2Fapp%2Fgrocery-list/);
+  let code = "";
+  for (let i = 0; i < 40 && !code; i++) {
+    code = (await inbox()).filter((m) => m.to[0] === "visitor@oneclick.test").at(-1)?.text.match(/\b(\d{6})\b/)?.[1] ?? "";
+    if (!code) await visitor.waitForTimeout(250);
+  }
+  await visitor.locator("#code").fill(code);
+  await visitor.locator("form:has(#code) button").click();
+  await expect(visitor).toHaveURL(/\/en\/app\/grocery-list$/);
+  await expect(visitor.getByTestId("product-app")).toBeVisible();
+
+  // The plain browser still can't open it.
+  await plain.goto("/en/app/grocery-list");
+  await expect(plain.getByTestId("product-app")).toHaveCount(0);
+});

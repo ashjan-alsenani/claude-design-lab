@@ -35,7 +35,7 @@ describe("ownership guard rails", () => {
 
   it("every API route has been reviewed for access control", () => {
     // Adding a route? Review it (who may call it, what it returns) and then add it here.
-    const reviewed = ["src/app/api/avatar/[userId]/route.ts", "src/app/api/download/[token]/route.ts", "src/app/api/payments/webhook/[provider]/route.ts"];
+    const reviewed = ["src/app/api/avatar/[userId]/route.ts", "src/app/api/download/[token]/route.ts", "src/app/api/payments/webhook/[provider]/route.ts", "src/app/api/test-purchase/route.ts"];
     const routes = walk(path.join(root, "src", "app")).filter((f) => /route\.ts$/.test(f)).map(rel).sort();
     expect(routes).toEqual(reviewed.sort());
   });

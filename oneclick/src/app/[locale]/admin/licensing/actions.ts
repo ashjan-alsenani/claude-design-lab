@@ -3,7 +3,8 @@
 import { notFound, redirect } from "next/navigation";
 import { z } from "zod";
 import { isLocale, type Locale } from "@/i18n/config";
-import { currentContext, licensing } from "@/lib/licensing/server";
+import { currentContext, licensing, licensingMode } from "@/lib/licensing/server";
+import { createTestPurchaseToken } from "@/lib/licensing/test-purchase";
 
 /**
  * Admin licensing actions. Each one: re-checks the admin role on the server (engine
@@ -110,4 +111,13 @@ export async function policyAction(fd: FormData) {
   if (!parsed.success) redirect(back("tab=policy&e=invalid"));
   await licensing().engine.adminUpdatePolicy(ctx, parsed.data);
   redirect(back("tab=policy&ok=saved"));
+}
+
+/** Creates a 2-hour owner test-purchase link (see src/lib/licensing/test-purchase.ts). Admin only. */
+export async function createTestLinkAction(fd: FormData) {
+  const { ctx, locale } = await admin(fd);
+  if (licensingMode() !== "database") redirect(`/${locale}/admin?test=sandbox`);
+  const token = createTestPurchaseToken(ctx.user.id);
+  await licensing().engine.adminNote(ctx, "test_purchase_link_created");
+  redirect(`/${locale}/admin?testlink=${encodeURIComponent(token)}#test-journey`);
 }

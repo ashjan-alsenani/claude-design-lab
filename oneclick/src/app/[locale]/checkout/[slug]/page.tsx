@@ -17,6 +17,7 @@ import { inputClass } from "@/components/ui/Field";
 import { fill, licensingCopy } from "@/i18n/licensing";
 import { currentContext, licensingMode } from "@/lib/licensing/server";
 import { sandboxPayAction } from "../actions";
+import { testPurchasesEnabled } from "@/lib/licensing/test-purchase";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -34,7 +35,8 @@ export default async function CheckoutPage({ params }: Props) {
   const d = getDictionary(locale);
   const provider = getPaymentProvider();
   const name = tr(product.name, locale);
-  const sandbox = licensingMode() === "sandbox";
+  // Local sandbox, or an owner test link opened in this browser: show "simulate payment".
+  const sandbox = await testPurchasesEnabled();
   const ctx = licensingMode() === "unavailable" ? null : await currentContext();
   const t = licensingCopy[locale].checkout;
 

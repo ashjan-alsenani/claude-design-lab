@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.2 — 2026-10-04 — Owner test purchases on the live site
+- Admin → "Test the customer journey": creates a signed link valid for 2 hours. Opened in any browser (e.g. a
+  private window), it lets that browser simulate payment at checkout; the order, license, email, code, account
+  and product are all real. Orders are marked SANDBOX. Without the link the checkout is unchanged.
+
 ## 0.9.1 — 2026-10-04 — Same protection for every product
 - Every product screen goes through one guard (`openProduct`) and every read or save of customer product data
   through `productDataFor` (src/lib/licensing/guard.ts). Pages check ownership themselves, not via their layout.

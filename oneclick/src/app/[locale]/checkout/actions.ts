@@ -6,7 +6,8 @@ import { isLocale } from "@/i18n/config";
 import { products } from "@/content/products";
 import { clientKey, rateLimit } from "@/lib/security/rate-limit";
 import { randomToken } from "@/lib/licensing/crypto";
-import { currentContext, licensing, licensingMode } from "@/lib/licensing/server";
+import { currentContext, licensing } from "@/lib/licensing/server";
+import { testPaymentProvider, testPurchasesEnabled } from "@/lib/licensing/test-purchase";
 
 const outcomes = { succeeded: "payment.succeeded", failed: "payment.failed", pending: "payment.pending" } as const;
 
@@ -20,8 +21,10 @@ export async function sandboxPayAction(fd: FormData) {
   const locale = isLocale(l) ? l : "en";
   const slug = String(fd.get("slug") ?? "");
   const outcome = String(fd.get("outcome") ?? "") as keyof typeof outcomes;
-  const { engine, sandboxProvider } = licensing();
-  if (licensingMode() !== "sandbox" || !sandboxProvider || !(outcome in outcomes)) redirect(`/${locale}/checkout/${slug}`);
+  const { engine } = licensing();
+  // Only in the local sandbox, or in a browser that opened a valid owner test link.
+  if (!(await testPurchasesEnabled()) || !(outcome in outcomes)) redirect(`/${locale}/checkout/${slug}`);
+  const sandboxProvider = testPaymentProvider();
   if (!rateLimit(`sandbox-pay:${clientKey(await headers())}`, 60, 10 * 60 * 1000).ok) redirect(`/${locale}/checkout/${slug}?e=rate_limited`);
   const product = products.find((p) => p.slug === slug);
   if (!product) redirect(`/${locale}/products`);

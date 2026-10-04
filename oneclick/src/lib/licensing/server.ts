@@ -32,6 +32,11 @@ export function licensingMode(): LicensingMode {
 
 export const COOKIE = { session: "oc_session", device: "oc_device", challenge: "oc_challenge" } as const;
 
+/** The server-only signing secret (LICENSING_SECRET). Never sent to the browser. */
+export function licensingSecret() {
+  return secret();
+}
+
 function secret() {
   const s = process.env.LICENSING_SECRET;
   if (s && s.length >= 32) return s;
