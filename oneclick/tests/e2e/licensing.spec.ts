@@ -32,7 +32,7 @@ async function latestMail(page: Page, to: string, kind: string) {
 
 async function codeFor(page: Page, to: string) {
   const text = await latestMail(page, to, "access_code");
-  return text.match(/(\d{3}) (\d{3})/)!.slice(1).join("");
+  return text.match(/\b(\d{6})\b/)![1];
 }
 
 async function signInWithCode(page: Page, address: string, locale = "en") {

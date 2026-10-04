@@ -137,14 +137,16 @@ export const emailTemplates = {
   },
   /** One-time code. The code appears only in the email body, never in the subject or logs. */
   accessCode(locale: Locale, p: { code: string; minutes: number }): EmailContent {
-    const spaced = `${p.code.slice(0, 3)} ${p.code.slice(3)}`;
+    // One unbroken run of digits: a spaced "123 456" is reordered to "456 123" by right-to-left
+    // (Arabic) mail clients, and the reader then types the halves the wrong way round.
+    const code = p.code;
     return {
       subject: pick({ en: "Your One Click verification code", ar: "رمز التحقق من ون كليك" }, locale),
       ...layout(locale, {
         preheader: pick({ en: `Expires in ${p.minutes} minutes.`, ar: `ينتهي خلال ${p.minutes} دقائق.` }, locale),
         title: pick({ en: "Your verification code", ar: "رمز التحقق" }, locale),
         paragraphs: [
-          spaced,
+          code,
           pick({ en: `Enter this code on One Click to continue. It works once and expires in ${p.minutes} minutes.`, ar: `اكتب هذا الرمز في ون كليك للمتابعة. يشتغل مرة وحدة وينتهي خلال ${p.minutes} دقائق.` }, locale),
           pick({ en: "We will never ask for this code by phone, chat or Instagram. If you didn't ask for it, you can ignore this email.", ar: "ما راح نطلب منك هذا الرمز بالهاتف أو الدردشة أو إنستغرام. إذا ما طلبته، تجاهل الرسالة." }, locale),
         ],

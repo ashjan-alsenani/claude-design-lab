@@ -16,7 +16,7 @@ async function signIn(page: Page, address: string) {
   for (let i = 0; i < 20 && !code; i++) {
     await page.goto(`/en/dev/mailbox?to=${encodeURIComponent(address)}`);
     const txt = (await page.locator('li[data-kind="access_code"] pre').first().textContent().catch(() => "")) ?? "";
-    code = txt.match(/(\d{3}) (\d{3})/)?.slice(1).join("") ?? "";
+    code = txt.match(/\b(\d{6})\b/)?.[1] ?? "";
   }
   await page.goto("/en/account/verify");
   await page.locator("#code").fill(code);

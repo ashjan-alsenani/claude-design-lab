@@ -10,7 +10,7 @@ async function signIn(page: Page, address: string) {
   let code = "";
   for (let i = 0; i < 40 && !code; i++) {
     const m = (await inbox()).filter((x) => x.to[0] === address).at(-1);
-    code = m?.text.match(/(\d{3}) (\d{3})/)?.slice(1).join("") ?? "";
+    code = m?.text.match(/\b(\d{6})\b/)?.[1] ?? "";
     if (!code) await page.waitForTimeout(250);
   }
   expect(code).toMatch(/^\d{6}$/);

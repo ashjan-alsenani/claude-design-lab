@@ -94,7 +94,7 @@ describe("Supabase licensing store", () => {
     });
     const ch = await engine.startVerification({ email: "owner@example.com", purpose: "signin", locale: "en" });
     if (!ch.ok) throw new Error(ch.reason);
-    const code = mails.at(-1)!.content.text.match(/(\d{3}) (\d{3})/)!.slice(1).join("");
+    const code = mails.at(-1)!.content.text.match(/\b(\d{6})\b/)![1];
     const r = await engine.completeVerification({ challengeId: ch.challengeId, code, client: { userAgent: "Mozilla/5.0 (Macintosh) Chrome/130" }, locale: "en" });
     expect(r.kind).toBe("signed_in");
     const ctx = (await engine.getSessionContext((r as { sessionToken: string }).sessionToken)) as SessionContext;

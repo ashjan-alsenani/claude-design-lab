@@ -37,7 +37,7 @@ beforeEach(() => {
 
 const lastCode = (to: string) => {
   const m = [...mails].reverse().find((x) => x.to === normalizeEmail(to) && x.kind === "access_code");
-  return m!.content.text.match(/(\d{3}) (\d{3})/)!.slice(1).join("");
+  return m!.content.text.match(/\b(\d{6})\b/)![1];
 };
 const claimToken = (to: string) => {
   const m = [...mails].reverse().find((x) => x.to === to && x.kind === "claim_product");
