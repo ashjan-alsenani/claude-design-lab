@@ -60,7 +60,7 @@ export default async function AdminCustomerPage({ params, searchParams }: Props)
               <li key={d.id} className="py-2">
                 <div className="flex items-center justify-between gap-2">
                   <span>
-                    {d.name} <span className="text-xs text-muted">last used {when(d.lastUsedAt)}</span>
+                    {d.name} <span className="text-xs text-muted">first used {when(d.firstVerifiedAt)} · last used {when(d.lastUsedAt)}{d.lastSessionId ? ` · session ${d.lastSessionId.slice(0, 10)}…` : ""}</span>
                   </span>
                   <StatusPill tone={d.status === "trusted" ? "good" : "muted"}>{d.status}</StatusPill>
                 </div>

@@ -44,6 +44,14 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
         <p className="mt-1 text-ink-soft">
           {fill(t.products.hello, { name })} · {t.products.sub}
         </p>
+        {!ctx.user.profileCompletedAt && (
+          <p className="mt-3 text-sm text-muted">
+            {t.products.profileHint}{" "}
+            <Link href={`/${locale}/account/profile`} className="font-medium text-primary underline underline-offset-4">
+              {t.products.profileLink}
+            </Link>
+          </p>
+        )}
       </header>
 
       {isOwner && (

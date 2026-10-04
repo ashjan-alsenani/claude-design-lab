@@ -7,13 +7,11 @@ import { COUNTRIES } from "@/lib/profile";
 
 /**
  * For customer pages: the signed-in context, or a redirect to sign in that returns here.
- * Until the profile is filled in (first sign-in), every account page sends to /account/welcome first.
+ * The profile is optional: an empty profile never blocks a page or a purchased product.
  */
 export async function requireAccount(locale: Locale, here: string) {
   const ctx = await currentContext();
-  const back = encodeURIComponent(`/${locale}${here}`);
-  if (!ctx) redirect(`/${locale}/account?next=${back}`);
-  if (!ctx.user.profileCompletedAt) redirect(`/${locale}/account/welcome?next=${back}`);
+  if (!ctx) redirect(`/${locale}/account?next=${encodeURIComponent(`/${locale}${here}`)}`);
   return { ctx, sandbox: licensingMode() === "sandbox" };
 }
 

@@ -17,7 +17,12 @@ let clock: Date;
 let engine: ReturnType<typeof createLicensingEngine>;
 const provider = new SandboxProvider(SECRET);
 
-const ua = { iphone: "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Safari/604.1", mac: "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) Chrome/130 Safari/537.36", win: "Mozilla/5.0 (Windows NT 10.0) Chrome/130 Safari/537.36" };
+const ua = {
+  iphone: "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Safari/604.1",
+  mac: "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) Chrome/130 Safari/537.36",
+  win: "Mozilla/5.0 (Windows NT 10.0) Chrome/130 Safari/537.36",
+  android: "Mozilla/5.0 (Linux; Android 14; Pixel 8) Chrome/130 Mobile Safari/537.36",
+};
 
 beforeEach(() => {
   store = new MemoryLicensingStore();
@@ -237,27 +242,69 @@ describe("devices and sessions", () => {
     const one = await signIn("sara@example.com", { userAgent: ua.iphone });
     await engine.setPassword(one.ctx, { next: "correct horse battery" });
     await pay("sara@example.com", [GROCERY], { userId: one.userId });
-    await signIn("sara@example.com", { userAgent: ua.mac }); // 2nd device: trusted (limit 2), alert email sent
+    await signIn("sara@example.com", { userAgent: ua.mac }); // 2nd device: trusted, alert email sent
     expect(mails.some((m) => m.kind === "new_device")).toBe(true);
+    await signIn("sara@example.com", { userAgent: ua.win }); // 3rd device: trusted (limit 3)
 
-    // 3rd device with the right password: must verify by email first.
-    const pw = await engine.passwordSignIn({ email: "sara@example.com", password: "correct horse battery", client: { userAgent: ua.win }, locale: "en" });
+    // 4th device with the right password: must verify by email first.
+    const pw = await engine.passwordSignIn({ email: "sara@example.com", password: "correct horse battery", client: { userAgent: ua.android }, locale: "en" });
     expect(pw).toMatchObject({ ok: false, reason: "device_verification_required" });
     const challengeId = (pw as { challengeId: string }).challengeId;
-    const done = await engine.completeVerification({ challengeId, code: lastCode("sara@example.com"), client: { userAgent: ua.win }, locale: "en" });
+    const done = await engine.completeVerification({ challengeId, code: lastCode("sara@example.com"), client: { userAgent: ua.android }, locale: "en" });
     expect(done).toMatchObject({ kind: "signed_in", deviceState: "pending" });
     const ctx3 = (await engine.getSessionContext((done as { sessionToken: string }).sessionToken))!;
     expect((await engine.checkAccess(ctx3, GROCERY)).reason).toBe("device_not_authorized");
 
     // Show devices -> remove an old one -> authorize.
     const { devices } = await engine.myDevices(one.userId);
-    expect(devices).toHaveLength(2);
+    expect(devices).toHaveLength(3);
     expect(await engine.authorizePendingDevice(ctx3, null)).toMatchObject({ ok: false, reason: "choose_device" });
     expect((await engine.authorizePendingDevice(ctx3, devices[0].id)).ok).toBe(true);
     const ctx3b = (await engine.getSessionContext((done as { sessionToken: string }).sessionToken))!;
     expect((await engine.checkAccess(ctx3b, GROCERY)).allowed).toBe(true);
     // The removed device's session no longer works.
     expect(await engine.getSessionContext(one.sessionToken)).toBeNull();
+  });
+
+  it("unusually many new devices in a week pauses new devices without locking out the old ones", async () => {
+    // Spread the sign-ins over the week (codes are limited to 5 per email per hour).
+    const later = async (agent: string) => {
+      clock = new Date(clock.getTime() + 3 * 3600 * 1000);
+      return signIn("huda@example.com", { userAgent: agent });
+    };
+    const first = await signIn("huda@example.com", { userAgent: ua.iphone });
+    await pay("huda@example.com", [GROCERY], { userId: first.userId });
+    // Five new devices in a week (three, then two swaps) are fine.
+    await later(ua.mac);
+    await later(ua.win);
+    for (const agent of [ua.android, ua.android]) {
+      const r = await later(agent);
+      const ctx = r.ctx;
+      const { devices } = await engine.myDevices(first.userId);
+      expect((await engine.authorizePendingDevice(ctx, devices.find((d) => d.id !== first.ctx.session.deviceId)!.id)).ok).toBe(true);
+    }
+    // The sixth is held back, and logged as suspicious.
+    const sixth = await later(ua.android);
+    expect(sixth.deviceState).toBe("pending");
+    const { devices, newDevicesPaused } = await engine.myDevices(first.userId);
+    expect(newDevicesPaused).toBe(true);
+    expect(await engine.authorizePendingDevice(sixth.ctx, devices[1].id)).toMatchObject({ ok: false, reason: "too_many_new_devices" });
+    expect(await store.read((db) => db.accessLogs.some((l) => l.event === "too_many_devices" && l.outcome === "suspicious"))).toBe(true);
+    // A device already in use keeps working.
+    expect((await engine.checkAccess(first.ctx, GROCERY)).allowed).toBe(true);
+    // A week later, new devices can be added again.
+    clock = new Date(clock.getTime() + 8 * 24 * 3600 * 1000);
+    expect((await engine.myDevices(first.userId)).newDevicesPaused).toBe(false);
+  });
+
+  it("records the last access on the license and the device", async () => {
+    const a = await signIn("noor@example.com");
+    await pay("noor@example.com", [GROCERY], { userId: a.userId });
+    clock = new Date(clock.getTime() + 60_000);
+    expect((await engine.checkAccess(a.ctx, GROCERY)).allowed).toBe(true);
+    const [lic, dev] = await store.read((db) => [db.licenses.find((l) => l.userId === a.userId)!, db.devices.find((d) => d.userId === a.userId)!] as const);
+    expect(lic.lastAccessedAt).toBe(clock.toISOString());
+    expect(dev).toMatchObject({ lastUsedAt: clock.toISOString(), lastSessionId: a.ctx.session.id });
   });
 
   it("per-product device limit", async () => {

@@ -25,16 +25,16 @@ async function codeSignIn(page: Page, address: string, locale: "en" | "ar") {
   await page.locator("form:has(#code) button").click();
 }
 
-test("Arabic first sign-in: welcome form with initials, then photo upload on the profile page", async ({ page, browser, baseURL }) => {
+test("Arabic: the profile is optional; filling it in later, with a photo", async ({ page, browser, baseURL }) => {
   const address = `sara-${uid()}@example.com`;
   await codeSignIn(page, address, "ar");
-  await expect(page).toHaveURL(/\/ar\/account\/welcome/);
-  await expect(page.getByRole("heading", { name: "أهلًا فيك في ون كليك" })).toBeVisible();
+  // No profile form after sign-in: straight to the account, every page open.
+  await expect(page).toHaveURL(/\/ar\/account\/products$/);
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
-
-  // Every account page waits for the profile first.
   await page.goto("/ar/account/purchases");
-  await expect(page).toHaveURL(/\/ar\/account\/welcome\?next=%2Far%2Faccount%2Fpurchases/);
+  await expect(page).toHaveURL(/\/ar\/account\/purchases$/);
+
+  await page.goto("/ar/account/profile");
 
   // Bad phone is refused with a clear message, and nothing is saved.
   await page.locator("#name").fill("سارة الهنائي");
@@ -46,11 +46,10 @@ test("Arabic first sign-in: welcome form with initials, then photo upload on the
   await page.locator("#phone").fill("+968 9123 4567");
   await page.getByRole("radio").nth(3).click();
   await page.locator('form:has(#name) button:not([type="button"])').click();
-  await expect(page).toHaveURL(/\/ar\/account\/purchases$/);
+  await expect(page.getByRole("status")).toContainText("انحفظ");
   await expect(page.getByText("سارة الهنائي").first()).toBeVisible();
 
-  // Profile page: upload a photo; it is shown back and only this account can load it.
-  await page.goto("/ar/account/profile");
+  // Upload a photo; it is shown back and only this account can load it.
   await expect(page.locator("#phone")).toHaveValue("+96891234567");
   await page.locator('input[type="file"][name="photo"]').setInputFiles({ name: "me.png", mimeType: "image/png", buffer: PNG });
   await expect(page.locator('form img[src^="blob:"]')).toBeVisible();
@@ -78,7 +77,8 @@ test("Arabic first sign-in: welcome form with initials, then photo upload on the
 test("profile shows the sign-in email and a plain Language choice", async ({ page }) => {
   const address = `nada-${uid()}@example.com`;
   await codeSignIn(page, address, "ar");
-  await expect(page).toHaveURL(/\/ar\/account\/welcome/);
+  await page.waitForURL(/\/ar\/account\/products$/);
+  await page.goto("/ar/account/profile");
   await expect(page.locator("#account-email")).toHaveValue(address);
   await expect(page.locator("#account-email")).toHaveAttribute("readonly", "");
   await expect(page.locator('label[for="lang"]')).toHaveText("اللغة");

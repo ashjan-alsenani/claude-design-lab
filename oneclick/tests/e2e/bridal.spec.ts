@@ -82,10 +82,15 @@ test("licensed app: buy, onboard, plan, and the data persists in the account", a
   await page.goto("/en/account/products");
   await page.getByRole("listitem").filter({ hasText: "Bridal Journey" }).getByRole("link", { name: "Open product" }).click();
   await expect(page).toHaveURL(/\/en\/app\/bride-planner$/);
-  await page.getByRole("button", { name: "Start My Bridal Journey" }).click();
+  // On a busy dev server the first tap can land before the app's script has loaded; tap until it opens.
+  const nameBox = page.getByRole("textbox", { name: "What's your name?" });
+  await expect(async () => {
+    await page.getByRole("button", { name: "Start My Bridal Journey" }).click();
+    await expect(nameBox).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 30_000 });
 
   // Step 1..8
-  await page.getByRole("textbox", { name: "What's your name?" }).fill("Noor");
+  await nameBox.fill("Noor");
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Continue" }).click(); // default date (in ~10 months)
   await page.locator("#ob-city").fill("Muscat");
@@ -122,6 +127,6 @@ test("licensed app: buy, onboard, plan, and the data persists in the account", a
   await other.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
   await signIn(other, `friend-${uid()}@example.com`);
   await other.goto("/en/app/bride-planner/vendors");
-  await expect(other.getByRole("heading", { name: "This product isn't available in your account" })).toBeVisible();
+  await expect(other.getByRole("heading", { name: "Access Denied — You do not own this product." })).toBeVisible();
   await expect(other.getByText("Lumière Studio")).toHaveCount(0);
 });

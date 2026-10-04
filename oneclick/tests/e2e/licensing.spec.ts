@@ -68,39 +68,69 @@ async function buy(page: Page, slug: string, outcome: "Simulate successful payme
     await page.locator("#sandbox-email").fill(guestEmail);
   }
   await page.getByRole("button", { name: outcome }).click();
+  // Wait for the payment result before the test moves on.
+  await page.waitForURL(/\/en\/checkout\/done/);
 }
 
-test("guest purchase -> claim email -> verify -> My Products -> open", async ({ page }) => {
+test("guest purchase -> Open My Product email -> code -> straight into the product", async ({ page }) => {
   const buyer = email("buyer");
   await buy(page, "grocery-list", "Simulate successful payment", buyer);
   await expect(page.getByRole("heading", { name: "Payment confirmed (sandbox)" })).toBeVisible();
 
-  // The purchase email contains a claim link; it only starts verification.
+  // One email: the purchase confirmation with an "Open My Product" link. The link only starts verification.
   const mail = await latestMail(page, buyer, "claim_product");
+  expect(mail).toContain("Thank you, your purchase is confirmed");
+  expect(mail).toMatch(/Order: OC-/);
+  expect(mail).toMatch(/Paid: .*4\.5|Paid: .*4\.500/);
+  expect(mail).toContain("Open My Product");
   const link = new URL(mail.match(/https?:\/\/\S+\/claim\?t=\S+/)![0]);
   await page.goto(link.pathname + link.search);
   await expect(page.getByRole("heading", { name: "Add your product to your account" })).toBeVisible();
   await expect(page.getByText("Grocery List")).toBeVisible();
   await expect(page.getByText(buyer)).toHaveCount(0); // email is masked
   await page.getByRole("button", { name: "Send my code" }).click();
-  await expect(page).toHaveURL(/\/en\/account\/verify/);
+  await expect(page).toHaveURL(/\/en\/account\/verify\?next=%2Fen%2Fapp%2Fgrocery-list/);
+  const verifyUrl = page.url();
   const code = await codeFor(page, buyer);
-  await page.goto("/en/account/verify");
+  await page.goto(verifyUrl);
   await page.locator("#code").fill(code);
   await page.getByRole("button", { name: "Verify" }).click();
 
-  // A first-time buyer is asked for a name and picture once, then lands on their products.
-  await expect(page).toHaveURL(/\/en\/account\/welcome/);
-  await expect(page.getByRole("heading", { name: "Welcome to One Click" })).toBeVisible();
-  await finishWelcome(page, "Guest Buyer");
-  await expect(page).toHaveURL(/\/en\/account\/products$/);
-  await expect(page.getByText("Guest Buyer").first()).toBeVisible();
+  // The account is created and the product opens straight away: no profile form in the way.
+  await expect(page).toHaveURL(/\/en\/app\/grocery-list$/);
+  await expect(page.getByTestId("product-app")).toBeVisible();
+
+  // It's listed in My Products, with an optional (never required) profile hint.
+  await page.goto("/en/account/products");
+  await expect(page.getByRole("link", { name: "Complete my profile" })).toBeVisible();
   const card = page.getByRole("listitem").filter({ hasText: "Grocery List" });
   await expect(card.getByText("Active")).toBeVisible();
   await card.getByRole("link", { name: "Open product" }).click();
   await expect(page).toHaveURL(/\/en\/app\/grocery-list$/);
   await expect(page.getByTestId("product-app")).toBeVisible();
   await expect(page.getByText(`Licensed to`)).toBeVisible();
+});
+
+test("returning customer: the purchase email opens the product itself, and a signed-in owner skips the code", async ({ page }) => {
+  const me = email("returning");
+  await signInWithCode(page, me);
+  await buy(page, "grocery-list", "Simulate successful payment");
+  await expect(page.getByRole("heading", { name: "Payment confirmed (sandbox)" })).toBeVisible();
+  const mail = await latestMail(page, me, "products_ready");
+  expect(mail).toContain("Open My Product");
+  const open = new URL(mail.match(/https?:\/\/\S+\/en\/app\/grocery-list/)![0]);
+  await page.goto(open.pathname);
+  await expect(page.getByTestId("product-app")).toBeVisible();
+});
+
+test("a guest who is already signed in with the purchase email goes straight from the email link to the product", async ({ page }) => {
+  const me = email("guestfirst");
+  await buy(page, "grocery-list", "Simulate successful payment", me);
+  const link = new URL((await latestMail(page, me, "claim_product")).match(/https?:\/\/\S+\/claim\?t=\S+/)![0]);
+  await signInWithCode(page, me);
+  await page.goto(link.pathname + link.search);
+  await expect(page).toHaveURL(/\/en\/app\/grocery-list$/);
+  await expect(page.getByTestId("product-app")).toBeVisible();
 });
 
 test("shared URL and forwarded link give no access to another account", async ({ page, browser, baseURL }) => {
@@ -115,7 +145,7 @@ test("shared URL and forwarded link give no access to another account", async ({
   await signInWithCode(friendPage, friend);
   await expect(friendPage).toHaveURL(/\/en\/account\/products$/);
   await friendPage.goto("/en/app/bride-planner");
-  await expect(friendPage.getByRole("heading", { name: "This product isn't available in your account" })).toBeVisible();
+  await expect(friendPage.getByRole("heading", { name: "Access Denied — You do not own this product." })).toBeVisible();
   await expect(friendPage.getByRole("link", { name: "Explore product" })).toBeVisible();
   await expect(friendPage.getByRole("link", { name: "Go to My Products" })).toBeVisible();
   await expect(friendPage.getByRole("link", { name: "Contact support" })).toBeVisible();
@@ -142,16 +172,18 @@ test("failed payment creates no product", async ({ page }) => {
   await page.goto("/en/account/products");
   await expect(page.getByText("No products yet.")).toBeVisible();
   await page.goto("/en/app/weekly-planner");
-  await expect(page.getByRole("heading", { name: "This product isn't available in your account" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Access Denied — You do not own this product." })).toBeVisible();
 });
 
-test("third device must replace a trusted device before opening products", async ({ page, browser, baseURL }) => {
+test("a fourth device must replace a trusted device before opening products", async ({ page, browser, baseURL }) => {
   const me = email("devices");
   await signInWithCode(page, me); // device 1
   await buy(page, "fitness-tracker", "Simulate successful payment");
-  const second = await newDevice(browser, baseURL);
-  await signInWithCode(second, me); // device 2 (within limit of 2)
-  await expect(second).toHaveURL(/\/en\/account\/products$/);
+  for (let i = 2; i <= 3; i++) {
+    const d = await newDevice(browser, baseURL);
+    await signInWithCode(d, me); // devices 2 and 3 (within the limit of 3)
+    await expect(d).toHaveURL(/\/en\/account\/products$/);
+  }
 
   const third = await newDevice(browser, baseURL);
   await signInWithCode(third, me);

@@ -17,11 +17,14 @@ Checkout (purchase email, normalized)  ->  Order (pending) + order items
      currency, provider and order must match)
   -> Licenses: active (paid) / pending (payment pending) / none (failed or invalid)
      bundles create one license per included product
-  -> Email: "Your product is in your account" (already verified account with that email)
-            or "Claim / open my product" link (guest)
-  -> Claim link opens a page that sends a one-time code TO THE PURCHASE EMAIL
-  -> Code verified -> account created or signed in -> pending licenses bound to it
-  -> My Products -> Open (/{locale}/app/{slug}, authorized on every request)
+  -> ONE email to the purchase address: purchase confirmation (product, order, amount, date)
+     with an "Open My Product" button
+       - existing verified account with that email: the button opens /{locale}/app/{slug}
+       - guest: the button opens the claim page, which sends a one-time code TO THE PURCHASE EMAIL
+         (already signed in with that email? straight to the product, no second code)
+  -> Code verified -> account created or signed in -> licenses bound to it
+  -> Straight into the product (/{locale}/app/{slug}, authorized on every request).
+     No password and no profile form; the profile is optional and can be filled in later.
 ```
 A forwarded email or copied link gives nothing: the code always goes to the purchase address,
 and the product route checks the signed-in account's license.
@@ -74,8 +77,9 @@ Planner default to HYBRID. Admin can override for any product:
   a new email creates the account when its code is verified; purchases made with that email attach to it.
 - **Returning customers:** a 30-day HttpOnly session cookie, so opening products never asks for a code.
 - **Devices:**
-  - 2 trusted devices per customer by default (configurable).
-  - A device is a random HttpOnly cookie, stored as an HMAC. The record holds only a friendly name ("Chrome on iPhone"), the platform, when it was first verified, when it was last used, and its status.
+  - 3 trusted devices per customer by default (configurable).
+  - A device is a random HttpOnly cookie, stored as an HMAC. The record holds only a friendly name ("Chrome on iPhone"), the platform, when it was first verified, when it was last used, its most recent session, and its status.
+  - Unusually many new devices: after 5 new devices in 7 days (including replacements), further new devices are not trusted until the week passes or support helps. Devices already in use keep working, and the event is logged as suspicious.
   - No fingerprinting, location or IP tracking.
   - A new device beyond the limit goes through: verify email, show devices, remove an old one, authorize this device.
   - The customer gets an alert email when a new device is added.

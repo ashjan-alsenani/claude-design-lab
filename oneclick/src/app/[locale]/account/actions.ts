@@ -30,10 +30,12 @@ async function ipLimited(bucket: string, limit: number) {
 
 const withNext = (path: string, next: string | null) => (next ? `${path}${path.includes("?") ? "&" : "?"}next=${encodeURIComponent(next)}` : path);
 
-/** First sign-in goes through /account/welcome (name, picture, details), then on to where they were heading. */
-async function afterSignIn(userId: string, locale: Locale, next: string | null) {
-  const dest = next ?? `/${locale}/account/products`;
-  return (await licensing().engine.profileComplete(userId)) ? dest : `/${locale}/account/welcome?next=${encodeURIComponent(dest)}`;
+/**
+ * After a verified sign-in, go straight to where they were heading (usually the product they
+ * bought). The profile form is optional and never stands between a customer and a paid product.
+ */
+async function afterSignIn(_userId: string, locale: Locale, next: string | null) {
+  return next ?? `/${locale}/account/products`;
 }
 
 async function setChallenge(id: string) {
@@ -104,7 +106,8 @@ export async function startClaimAction(fd: FormData) {
   const r = await licensing().engine.startClaim(token, locale);
   if (!r.ok) redirect(r.reason === "rate_limited" || r.reason === "email_failed" ? back(r.reason) : `/${locale}/claim?e=${r.reason}`);
   await setChallenge(r.challengeId);
-  redirect(`/${locale}/account/verify`);
+  // After the code, open the purchased product directly.
+  redirect(withNext(`/${locale}/account/verify`, safeNext(r.next, locale)));
 }
 
 export async function signOutAction(fd: FormData) {

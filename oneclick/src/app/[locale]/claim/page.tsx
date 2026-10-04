@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { GiftIcon, LinkBreakIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale, tr } from "@/i18n/config";
 import { fill, licensingCopy } from "@/i18n/licensing";
 import { products } from "@/content/products";
-import { licensing, licensingMode } from "@/lib/licensing/server";
+import { currentContext, licensing, licensingMode } from "@/lib/licensing/server";
 import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, buttonClass } from "@/components/ui/Button";
 import { SandboxBanner } from "@/components/account/SandboxBanner";
@@ -29,7 +29,10 @@ export default async function ClaimPage({ params, searchParams }: Props) {
   const sp = await searchParams;
   const t = licensingCopy[locale];
   const retryable = sp.e === "rate_limited" || sp.e === "email_failed";
-  const claim = sp.e && !retryable ? { status: "invalid" as const } : await licensing().engine.getClaim(sp.t);
+  const ctx = await currentContext();
+  const claim = sp.e && !retryable ? { status: "invalid" as const } : await licensing().engine.getClaim(sp.t, locale, ctx?.user.id);
+  // Already signed in with the purchase email: no second code, straight to the product.
+  if (claim.status === "ok" && claim.mine) redirect(claim.next);
   const notice = sp.e === "rate_limited" ? t.signin.errors.rate_limited : sp.e === "email_failed" ? t.signin.errors.email_failed : null;
 
   return (

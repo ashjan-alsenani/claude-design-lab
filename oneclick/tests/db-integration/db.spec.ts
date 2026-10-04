@@ -36,8 +36,9 @@ test("owner signs in with an emailed code and controls the site; data lands in t
   const mail = (await inbox()).at(-1)!;
   expect(mail.from).toBe("One Click <hello@oneclick.test>");
 
-  // First sign-in went through the welcome form; a profile photo is stored in the database and served privately.
+  // No profile form after sign-in. Filled in later from My profile; the photo is stored in the database and served privately.
   await page.goto("/en/account/profile");
+  await page.locator("#name").fill("Site Owner");
   const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKklEQVR4nGM4EVVBU8QwasGoBaMWjFowasGoBaMWjFowasGoBaMWDBULABLmaFswJ2EyAAAAAElFTkSuQmCC", "base64");
   await page.locator('input[type="file"][name="photo"]').setInputFiles({ name: "me.png", mimeType: "image/png", buffer: png });
   await expect(page.locator('form img[src^="blob:"]')).toBeVisible();

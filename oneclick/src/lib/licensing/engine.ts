@@ -2,6 +2,7 @@ import type { Locale } from "@/i18n/config";
 import type { Product } from "@/content/types";
 import { emailTemplates, type EmailContent } from "@/lib/email/templates";
 import { newReference } from "@/lib/commerce/types";
+import { formatMoney } from "@/lib/money";
 import { defaultAvatarColor, validateProfile, type ProfileInput } from "@/lib/profile";
 import type { PaymentEvent } from "@/lib/payments/types";
 import {
@@ -326,7 +327,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     else {
       if (!verifiedNow) return { ok: false as const, reason: "device_verification_required" as const };
       const trusted = db.devices.filter((d) => d.userId === user.id && d.status === "trusted");
-      if (trusted.length < policy.defaultDeviceLimit) {
+      if (trusted.length < policy.defaultDeviceLimit && !tooManyNewDevicesTx(db, user.id, policy)) {
         device = addDeviceTx(db, user, tokenHash, client.userAgent);
         if (trusted.length > 0) alert = { name: device.name };
       } else {
@@ -349,6 +350,7 @@ export function createLicensingEngine(deps: EngineDeps) {
       pendingDeviceTokenHash: deviceState === "pending" ? tokenHash : undefined,
     };
     db.sessions.push(session);
+    if (device) device.lastSessionId = session.id;
     const live = db.sessions.filter((s) => s.userId === user.id && isSessionLive(s, now())).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
     while (live.length > policy.maxActiveSessions) {
       const old = live.shift()!;
@@ -481,6 +483,19 @@ export function createLicensingEngine(deps: EngineDeps) {
     });
   }
 
+  /**
+   * Unusually many new devices on one account in a week (sharing, or a stolen inbox): new devices
+   * stop being trusted automatically until the week passes or support helps. Logged as suspicious.
+   */
+  function tooManyNewDevicesTx(db: LicensingDb, userId: string, policy: ReturnType<typeof resolvePolicy>) {
+    const since = now().getTime() - 7 * DAY;
+    const recent = db.devices.filter((d) => d.userId === userId && new Date(d.firstVerifiedAt).getTime() > since).length;
+    if (recent < policy.maxNewDevicesPerWeek) return false;
+    const flagged = db.accessLogs.some((l) => l.userId === userId && l.event === "too_many_devices" && new Date(l.at).getTime() > now().getTime() - DAY);
+    if (!flagged) log(db, { event: "too_many_devices", outcome: "suspicious", userId, meta: { newDevicesThisWeek: recent } });
+    return true;
+  }
+
   function removeDeviceTx(db: LicensingDb, userId: string, deviceId: string, actorId: string, reason: string) {
     const d = db.devices.find((x) => x.id === deviceId && x.userId === userId && x.status === "trusted");
     if (!d) return false;
@@ -506,6 +521,7 @@ export function createLicensingEngine(deps: EngineDeps) {
       if (!s || !user || s.deviceState !== "pending" || !s.pendingDeviceTokenHash || !isSessionLive(s, now())) return { ok: false as const, reason: "not_pending" as const };
       if (!s.verifiedAt || now().getTime() - new Date(s.verifiedAt).getTime() > 30 * 60 * 1000) return { ok: false as const, reason: "verification_expired" as const };
       const policy = resolvePolicy(db);
+      if (tooManyNewDevicesTx(db, user.id, policy)) return { ok: false as const, reason: "too_many_new_devices" as const };
       const trusted = () => db.devices.filter((d) => d.userId === user.id && d.status === "trusted");
       if (trusted().length >= policy.defaultDeviceLimit) {
         if (!removeDeviceId || !removeDeviceTx(db, user.id, removeDeviceId, user.id, "replaced_by_new_device")) return { ok: false as const, reason: "choose_device" as const };
@@ -513,6 +529,7 @@ export function createLicensingEngine(deps: EngineDeps) {
       const device = addDeviceTx(db, user, s.pendingDeviceTokenHash, null);
       device.name = ctx.device?.name ?? device.name;
       s.deviceId = device.id;
+      device.lastSessionId = s.id;
       s.deviceState = "trusted";
       s.pendingDeviceTokenHash = undefined;
       audit(db, { actorId: user.id, action: "device_authorized", entity: "device", entityId: device.id });
@@ -596,7 +613,11 @@ export function createLicensingEngine(deps: EngineDeps) {
   }
 
   // ---------------------------------------------------------------- claim links
-  async function getClaim(token: string | null | undefined) {
+  /**
+   * `signedInUserId`: when the person opening the link is already signed in with the purchase email,
+   * `mine` is true and they can go straight to the product (`next`) without another code.
+   */
+  async function getClaim(token: string | null | undefined, locale: Locale = "en", signedInUserId?: string | null) {
     if (!token) return { status: "invalid" as const };
     const hash = h(token);
     return deps.store.read((db) => {
@@ -604,7 +625,9 @@ export function createLicensingEngine(deps: EngineDeps) {
       if (!c) return { status: "invalid" as const };
       if (new Date(c.expiresAt) <= now()) return { status: "expired" as const };
       const items = db.orderItems.filter((i) => i.orderId === c.orderId).map((i) => i.productId);
-      return { status: "ok" as const, maskedEmail: maskEmail(c.purchaseEmail), productIds: items, claimId: c.id };
+      const me = signedInUserId ? db.users.find((u) => u.id === signedInUserId) : undefined;
+      const mine = !!me && me.email === c.purchaseEmail && !!me.emailVerifiedAt;
+      return { status: "ok" as const, maskedEmail: maskEmail(c.purchaseEmail), productIds: items, claimId: c.id, mine, next: productPathTx(db, c.orderId, locale) };
     });
   }
 
@@ -619,11 +642,11 @@ export function createLicensingEngine(deps: EngineDeps) {
       const c = db.claims.find((x) => x.tokenHash === hash);
       if (!c || new Date(c.expiresAt) <= now()) return null;
       c.lastUsedAt = iso();
-      return { email: c.purchaseEmail };
+      return { email: c.purchaseEmail, next: productPathTx(db, c.orderId, locale) };
     });
     if (!claim) return { ok: false as const, reason: "invalid" as const };
     const r = await startVerification({ email: claim.email, purpose: "claim", locale });
-    return r.ok ? { ok: true as const, challengeId: r.challengeId, maskedEmail: maskEmail(claim.email) } : r;
+    return r.ok ? { ok: true as const, challengeId: r.challengeId, maskedEmail: maskEmail(claim.email), next: claim.next } : r;
   }
 
   // ---------------------------------------------------------------- orders & payments
@@ -724,12 +747,34 @@ export function createLicensingEngine(deps: EngineDeps) {
     return token;
   }
 
+  /**
+   * Where "Open My Product" leads: the product itself when the order is one product that opens
+   * inside One Click, otherwise My Products (bundles, downloads). The address grants nothing:
+   * the product page checks the signed-in account's license on the server.
+   */
+  function productPathTx(db: Readonly<LicensingDb>, orderId: string, locale: Locale) {
+    const ids = db.orderItems.filter((i) => i.orderId === orderId).map((i) => i.productId);
+    const p = ids.length === 1 ? productById(ids[0]) : undefined;
+    return p && !p.includes?.length && opensInteractive(resolveSecurity(db, p).accessType) ? `/${locale}/app/${p.slug}` : `/${locale}/account/products`;
+  }
+
+  /** One email after a confirmed payment: the purchase confirmation with an "Open My Product" button. */
   async function sendAccessEmail(order: LOrder, bound: boolean, claimToken: string | null) {
-    const names = await deps.store.read((db) => productNames(db.orderItems.filter((i) => i.orderId === order.id).map((i) => i.productId), order.locale));
     const loc = order.locale;
+    const { names, path } = await deps.store.read((db) => ({
+      names: productNames(db.orderItems.filter((i) => i.orderId === order.id).map((i) => i.productId), loc),
+      path: productPathTx(db, order.id, loc),
+    }));
+    const receipt = {
+      orderRef: order.id,
+      productNames: names,
+      sandbox: order.sandbox,
+      total: formatMoney({ amountMinor: order.totalMinor, currency: order.currency }, loc),
+      date: new Intl.DateTimeFormat(loc === "ar" ? "ar-OM" : "en-GB", { dateStyle: "long" }).format(new Date(order.paidAt ?? order.createdAt)),
+    };
     const content = bound
-      ? emailTemplates.productsReady(loc, { orderRef: order.id, productNames: names, url: url(`/${loc}/account/products`), sandbox: order.sandbox })
-      : emailTemplates.claimProduct(loc, { orderRef: order.id, productNames: names, url: url(`/${loc}/claim?t=${claimToken}`), sandbox: order.sandbox });
+      ? emailTemplates.productsReady(loc, { ...receipt, url: url(path) })
+      : emailTemplates.claimProduct(loc, { ...receipt, url: url(`/${loc}/claim?t=${claimToken}`) });
     await deps.mail(order.purchaseEmail, content, { kind: bound ? "products_ready" : "claim_product" });
   }
 
@@ -820,6 +865,12 @@ export function createLicensingEngine(deps: EngineDeps) {
       if (decision.allowed) {
         const l = decision.license && db.licenses.find((x) => x.id === decision.license!.id);
         if (l && ctx?.session.deviceId && !l.deviceIds.includes(ctx.session.deviceId)) l.deviceIds.push(ctx.session.deviceId);
+        if (l) l.lastAccessedAt = iso();
+        const dev = ctx?.session.deviceId ? db.devices.find((d) => d.id === ctx.session.deviceId) : undefined;
+        if (dev) {
+          dev.lastUsedAt = iso();
+          dev.lastSessionId = ctx!.session.id;
+        }
         if (purpose === "open") {
           log(db, { ...base, event: "product_open", outcome: "allowed", licenseId: l?.id, reason: decision.reason });
           if (l) {
@@ -871,6 +922,8 @@ export function createLicensingEngine(deps: EngineDeps) {
       devices: db.devices.filter((d) => d.userId === userId && d.status === "trusted").map(({ tokenHash: _t, ...d }) => d),
       sessions: db.sessions.filter((s) => s.userId === userId && isSessionLive(s, now())).map(({ tokenHash: _t, pendingDeviceTokenHash: _p, ...s }) => s),
       limit: resolvePolicy(db).defaultDeviceLimit,
+      newDevicesPaused:
+        db.devices.filter((d) => d.userId === userId && new Date(d.firstVerifiedAt).getTime() > now().getTime() - 7 * DAY).length >= resolvePolicy(db).maxNewDevicesPerWeek,
     }));
   }
 
@@ -928,10 +981,13 @@ export function createLicensingEngine(deps: EngineDeps) {
       db.licenses
         .map((l) => {
           const user = l.userId ? db.users.find((u) => u.id === l.userId) : undefined;
+          const order = l.orderId ? db.orders.find((o) => o.id === l.orderId) : undefined;
           return {
             license: { ...l, status: effectiveStatus(l, now()) },
             accountEmail: user?.email ?? null,
             userId: user?.id ?? null,
+            paymentStatus: order?.status ?? (l.source === "admin_grant" ? "granted" : null),
+            purchasedAt: order?.paidAt ?? l.activatedAt ?? l.createdAt,
             productName: productById(l.productId)?.name.en ?? l.productId,
             devices: l.userId ? db.devices.filter((d) => d.userId === l.userId && d.status === "trusted").length : 0,
           };

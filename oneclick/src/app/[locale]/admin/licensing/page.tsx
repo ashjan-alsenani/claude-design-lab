@@ -116,7 +116,7 @@ async function LicensesTab({ locale, sp, back }: { locale: string; sp: Record<st
                 <th className="px-3 py-2 font-medium">Product</th>
                 <th className="px-3 py-2 font-medium">Owner</th>
                 <th className="px-3 py-2 font-medium">Status</th>
-                <th className="px-3 py-2 font-medium">Order / created</th>
+                <th className="px-3 py-2 font-medium">Order / payment</th>
                 <th className="px-3 py-2 font-medium">Action (reason required)</th>
               </tr>
             </thead>
@@ -154,7 +154,9 @@ async function LicensesTab({ locale, sp, back }: { locale: string; sp: Record<st
                   </td>
                   <td className="px-3 py-3 text-xs text-ink-soft">
                     <p>{r.license.orderId ?? "manual"}</p>
-                    <p className="text-muted">{when(r.license.createdAt)}</p>
+                    <p>Payment: {r.paymentStatus ?? "-"}</p>
+                    <p className="text-muted">Purchased {when(r.purchasedAt)}</p>
+                    <p className="text-muted">Last opened {r.license.lastAccessedAt ? when(r.license.lastAccessedAt) : "never"}</p>
                   </td>
                   <td className="px-3 py-3">
                     <form action={licenseAction} className="flex flex-col gap-2">

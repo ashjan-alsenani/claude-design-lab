@@ -3,7 +3,8 @@ import type { AccessType, LicensingDb, LicensingPolicy, ProductSecuritySettings 
 
 /** Defaults for the global business rules. Admin overrides are stored in the database. */
 export const defaultPolicy: LicensingPolicy = {
-  defaultDeviceLimit: 2,
+  defaultDeviceLimit: 3,
+  maxNewDevicesPerWeek: 5,
   maxActiveSessions: 5,
   sessionDays: 30,
   otpTtlMinutes: 10,

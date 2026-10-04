@@ -41,6 +41,11 @@ export type ProductSecuritySettings = {
 /** Global business rules, editable in Admin. */
 export type LicensingPolicy = {
   defaultDeviceLimit: number;
+  /**
+   * New devices an account may add in 7 days (including replacements). Past this, a new device is
+   * not trusted automatically until the week passes or support helps.
+   */
+  maxNewDevicesPerWeek: number;
   maxActiveSessions: number;
   sessionDays: number;
   otpTtlMinutes: number;
@@ -108,6 +113,8 @@ export type License = {
   revokedAt?: string;
   expiresAt?: string;
   claimedAt?: string;
+  /** Last time the product was opened or downloaded with this license. */
+  lastAccessedAt?: string;
   statusReason?: string;
   /** Devices this license was opened on (for per-product device limits). */
   deviceIds: string[];
@@ -122,6 +129,8 @@ export type Device = {
   platform: "ios" | "android" | "mac" | "windows" | "linux" | "other";
   firstVerifiedAt: string;
   lastUsedAt: string;
+  /** The most recent session on this device. */
+  lastSessionId?: string;
   status: "trusted" | "removed";
 };
 
@@ -188,6 +197,7 @@ export type AccessEvent =
   | "license_activated"
   | "payment_event"
   | "concurrent_use"
+  | "too_many_devices"
   | "repeated_denials"
   | "rate_limited"
   | "email_changed"

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0 — 2026-10-04 — Ownership review and direct-to-product
+- Security review of ownership and access before changes: docs/SECURITY_REVIEW_2026-10-04.md.
+- After payment, one email to the purchase address: confirmation (product, order, amount, date) with an
+  "Open My Product" button. Verifying the code opens the product directly; a signed-in owner skips the code.
+- The profile form is no longer required before a product (optional hint in My Products).
+- Licenses record when they were last opened; devices record their most recent session.
+- 3 trusted devices by default; at most 5 new devices per 7 days, then new devices pause (logged as suspicious).
+- Denial page: "Access Denied — You do not own this product." Admin shows payment status, purchase date and last access.
+
 ## 0.8.0 — 2026-10-04 — Email code only
 - Sign-in and sign-up are one flow: enter your email, receive a code, enter it. A new email
   creates the account; a known email signs in. Purchases made with that email are attached to it.

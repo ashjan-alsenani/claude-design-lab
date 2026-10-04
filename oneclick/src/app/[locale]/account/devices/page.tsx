@@ -26,7 +26,7 @@ export default async function DevicesPage({ params, searchParams }: Props) {
   const sp = await searchParams;
   const next = safeNext(sp.next, locale);
   const t = licensingCopy[locale];
-  const { devices, sessions, limit } = await licensing().engine.myDevices(ctx.user.id);
+  const { devices, sessions, limit, newDevicesPaused } = await licensing().engine.myDevices(ctx.user.id);
   const pending = ctx.session.deviceState === "pending";
   const Icon = (p: string) => (p === "ios" || p === "android" ? DeviceMobileIcon : DesktopIcon);
   const notice = sp.ok === "removed" ? t.devices.removed : sp.ok === "authorized" ? t.devices.authorized : null;
@@ -48,8 +48,8 @@ export default async function DevicesPage({ params, searchParams }: Props) {
             <WarningCircleIcon size={22} className="text-warning" />
             {t.devices.pendingTitle}
           </h2>
-          <p className="mt-2 text-ink-soft">{fill(t.devices.pendingBody, { n: limit })}</p>
-          {sp.e && <p className="mt-2 text-sm font-medium text-error">{t.verify.noChallenge}</p>}
+          <p className="mt-2 text-ink-soft">{newDevicesPaused ? t.devices.paused : fill(t.devices.pendingBody, { n: limit })}</p>
+          {sp.e && sp.e !== "too_many_new_devices" && <p className="mt-2 text-sm font-medium text-error">{t.verify.noChallenge}</p>}
         </section>
       )}
 

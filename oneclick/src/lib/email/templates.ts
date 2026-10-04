@@ -45,6 +45,33 @@ const footer = {
 type T = { en: string; ar: string };
 const pick = (t: T, l: Locale) => t[l];
 
+type PurchaseMail = { orderRef: string; productNames: string[]; url: string; sandbox: boolean; total?: string; date?: string };
+
+function purchaseEmail(locale: Locale, p: PurchaseMail, copy: { preheader: T; how: T }): EmailContent {
+  const lines = [
+    ...(p.sandbox ? [pick({ en: "SANDBOX TEST ORDER: no real payment was made.", ar: "طلب تجريبي (SANDBOX): ما تم أي دفع حقيقي." }, locale)] : []),
+    `${pick({ en: "Product", ar: "المنتج" }, locale)}: ${p.productNames.join(" · ")}`,
+    ...(p.orderRef !== "-" ? [`${pick({ en: "Order", ar: "رقم الطلب" }, locale)}: ${p.orderRef}`] : []),
+    ...(p.total ? [`${pick({ en: "Paid", ar: "المبلغ المدفوع" }, locale)}: ${p.total}`] : []),
+    ...(p.date ? [`${pick({ en: "Date", ar: "التاريخ" }, locale)}: ${p.date}`] : []),
+    pick(copy.how, locale),
+    pick(
+      { en: "Your product is personal and tied to this email. Forwarding this message or the link gives no one else access.", ar: "منتجك شخصي ومرتبط بهذا البريد. إعادة توجيه الرسالة أو الرابط ما تعطي أحد ثاني صلاحية." },
+      locale,
+    ),
+  ];
+  return {
+    subject: (p.sandbox ? "[SANDBOX] " : "") + pick({ en: `Purchase confirmed: ${p.productNames.join(", ")}`, ar: `تم تأكيد الشراء: ${p.productNames.join("، ")}` }, locale),
+    ...layout(locale, {
+      preheader: pick(copy.preheader, locale),
+      title: pick({ en: "Thank you, your purchase is confirmed", ar: "شكرًا لك، تم تأكيد شرائك" }, locale),
+      paragraphs: lines,
+      cta: { label: pick({ en: "Open My Product", ar: "افتح منتجي" }, locale), url: p.url },
+      footer: footer[locale],
+    }),
+  };
+}
+
 export const emailTemplates = {
   welcome(locale: Locale, p: { name: string; dashboardUrl: string }): EmailContent {
     const title = pick({ en: `Welcome to One Click, ${p.name}`, ar: `أهلًا بك في ون كليك، ${p.name}` }, locale);
@@ -155,38 +182,28 @@ export const emailTemplates = {
     };
   },
   /** Guest purchase: the link opens a page that sends a code to THIS address. It is not a key. */
-  claimProduct(locale: Locale, p: { orderRef: string; productNames: string[]; url: string; sandbox: boolean }): EmailContent {
-    return {
-      subject: (p.sandbox ? "[SANDBOX] " : "") + pick({ en: "Your product is ready: claim it in your account", ar: "منتجك جاهز: أضفه لحسابك" }, locale),
-      ...layout(locale, {
-        preheader: pick({ en: "Verify your email once and it's yours.", ar: "تحقق من بريدك مرة وحدة ويصير لك." }, locale),
-        title: pick({ en: "Open my product", ar: "افتح منتجي" }, locale),
-        paragraphs: [
-          ...(p.sandbox ? [pick({ en: "SANDBOX TEST ORDER: no real payment was made.", ar: "طلب تجريبي (SANDBOX): ما تم أي دفع حقيقي." }, locale)] : []),
-          p.productNames.join(" · "),
-          pick({ en: `Order ${p.orderRef}. Tap the button, and we'll send a one-time code to this email address. Your product is then saved in your One Click account and you can open it any time from My Products.`, ar: `الطلب ${p.orderRef}. اضغط الزر، وبنرسل رمز تحقق لهذا البريد. بعدها يُحفظ المنتج في حسابك على ون كليك وتقدر تفتحه أي وقت من «منتجاتي».` }, locale),
-          pick({ en: "Your license is personal and belongs to your account. Forwarding this email does not give anyone else access.", ar: "رخصتك شخصية ومرتبطة بحسابك. إعادة توجيه هذي الرسالة ما تعطي أحد ثاني صلاحية." }, locale),
-        ],
-        cta: { label: pick({ en: "Claim / open my product", ar: "أضف منتجي وافتحه" }, locale), url: p.url },
-        footer: footer[locale],
-      }),
-    };
+  /**
+   * Purchase confirmation + "Open My Product" for a buyer whose email isn't verified yet. The button
+   * leads to a page that sends a one-time code to this same address; the link alone grants nothing.
+   */
+  claimProduct(locale: Locale, p: PurchaseMail): EmailContent {
+    return purchaseEmail(locale, p, {
+      preheader: { en: "Your purchase is confirmed. Open your product with one code.", ar: "تم تأكيد شرائك. افتح منتجك برمز واحد." },
+      how: {
+        en: "Tap the button and we'll send a one-time code to this email address. Enter it, and your product opens. Your account is created for you, with no password and no forms.",
+        ar: "اضغط الزر، وبنرسل رمز لمرة وحدة لهذا البريد. اكتبه ويفتح منتجك. ونسوي لك حسابك تلقائيًا، بدون كلمة مرور وبدون نماذج.",
+      },
+    });
   },
-  productsReady(locale: Locale, p: { orderRef: string; productNames: string[]; url: string; sandbox: boolean }): EmailContent {
-    return {
-      subject: (p.sandbox ? "[SANDBOX] " : "") + pick({ en: "Your product is in your account", ar: "منتجك صار في حسابك" }, locale),
-      ...layout(locale, {
-        preheader: pick({ en: "Open it from My Products.", ar: "افتحه من «منتجاتي»." }, locale),
-        title: pick({ en: "Ready when you are", ar: "جاهز متى ما حبيت" }, locale),
-        paragraphs: [
-          ...(p.sandbox ? [pick({ en: "SANDBOX TEST ORDER: no real payment was made.", ar: "طلب تجريبي (SANDBOX): ما تم أي دفع حقيقي." }, locale)] : []),
-          p.productNames.join(" · "),
-          pick({ en: "Sign in to One Click and open it from My Products.", ar: "سجّل دخولك في ون كليك وافتحه من «منتجاتي»." }, locale),
-        ],
-        cta: { label: pick({ en: "Go to My Products", ar: "روح لمنتجاتي" }, locale), url: p.url },
-        footer: footer[locale],
-      }),
-    };
+  /** Purchase confirmation + "Open My Product" for a buyer who already has an account with this email. */
+  productsReady(locale: Locale, p: PurchaseMail): EmailContent {
+    return purchaseEmail(locale, p, {
+      preheader: { en: "Your purchase is confirmed and in your account.", ar: "تم تأكيد شرائك وصار في حسابك." },
+      how: {
+        en: "It's already in your One Click account. Tap the button to open it; if you're signed out, we'll send a one-time code to this email address.",
+        ar: "صار في حسابك على ون كليك. اضغط الزر لتفتحه، وإذا كنت مسجل خروج بنرسل رمز لمرة وحدة لهذا البريد.",
+      },
+    });
   },
   newDeviceAlert(locale: Locale, p: { deviceName: string; devicesUrl: string }): EmailContent {
     return {
