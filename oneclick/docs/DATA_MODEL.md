@@ -1,7 +1,9 @@
 # Data model
 
 **Running today (2026-10-04):** `supabase/migrations/20261004000000_server_store.sql` (oc_licensing_state,
-oc_licensing_events, oc_product_data, oc_leads; server-only). The normalized schema below is the future target.
+oc_licensing_events, oc_product_data, oc_leads; server-only). Profile fields (name, avatar choice, country, phone,
+newsletter opt-in, profileCompletedAt) live on the user record; an uploaded profile photo is stored in oc_product_data
+under the reserved product id `_profile_avatar`. The normalized schema below is the future target.
 
 Schema: `supabase/migrations/20261002000000_initial_schema.sql` (verified by applying it to
 PostgreSQL 16 with a stub `auth` schema: 33 tables, triggers working). Not yet applied to a

@@ -6,6 +6,7 @@ import { isLocale, type Locale } from "@/i18n/config";
 import { isDemoMode } from "@/lib/env";
 import { clientKey, rateLimit } from "@/lib/security/rate-limit";
 import { COOKIE, clientInfo, cookieOptions, currentContext, licensing, licensingMode, safeNext } from "@/lib/licensing/server";
+import { deleteAvatarPhoto, saveAvatarPhoto } from "@/lib/licensing/avatar";
 
 /**
  * Account, verification and device actions. Every action re-reads the session from the
@@ -28,6 +29,12 @@ async function ipLimited(bucket: string, limit: number) {
 }
 
 const withNext = (path: string, next: string | null) => (next ? `${path}${path.includes("?") ? "&" : "?"}next=${encodeURIComponent(next)}` : path);
+
+/** First sign-in goes through /account/welcome (name, picture, details), then on to where they were heading. */
+async function afterSignIn(userId: string, locale: Locale, next: string | null) {
+  const dest = next ?? `/${locale}/account/products`;
+  return (await licensing().engine.profileComplete(userId)) ? dest : `/${locale}/account/welcome?next=${encodeURIComponent(dest)}`;
+}
 
 async function setChallenge(id: string) {
   (await cookies()).set(COOKIE.challenge, id, cookieOptions(15 * 60));
@@ -52,7 +59,7 @@ export async function passwordSignInAction(fd: FormData) {
   const r = await licensing().engine.passwordSignIn({ email: str(fd, "email", 254), password: str(fd, "password", 200), client: await clientInfo(), locale });
   if (r.ok) {
     await setSessionCookies(r.sessionToken, r.deviceToken);
-    redirect(next ?? `/${locale}/account/products`);
+    redirect(await afterSignIn(r.userId, locale, next));
   }
   if (r.reason === "device_verification_required" && r.challengeId) {
     await setChallenge(r.challengeId);
@@ -90,7 +97,7 @@ export async function verifyCodeAction(fd: FormData) {
   }
   await setSessionCookies(r.sessionToken, r.deviceToken);
   if (r.deviceState === "pending") redirect(withNext(`/${locale}/account/devices?authorize=1`, next));
-  redirect(next ?? `/${locale}/account/products`);
+  redirect(await afterSignIn(r.userId, locale, next));
 }
 
 export async function resendCodeAction(fd: FormData) {
@@ -183,4 +190,38 @@ export async function downloadAction(fd: FormData) {
   const r = await licensing().engine.createDownloadLink(ctx, str(fd, "productId", 60), str(fd, "fileId", 60));
   if (!r.ok) redirect(`/${locale}/account/products?e=${r.reason}`);
   redirect(r.url);
+}
+
+/**
+ * Saves the profile from /account/welcome (first sign-in) and /account/profile.
+ * A new photo is checked and stored first; choosing a color instead removes any old photo.
+ */
+export async function saveProfileAction(fd: FormData) {
+  const locale = localeOf(fd);
+  const from = str(fd, "from", 10) === "welcome" ? "welcome" : "profile";
+  const next = safeNext(str(fd, "next"), locale);
+  const ctx = await requireCtx(locale);
+  const back = (e: string) => withNext(`/${locale}/account/${from}?e=${e}`, next);
+  if (await ipLimited("profile", 30)) redirect(back("generic"));
+
+  const photo = fd.get("photo");
+  const choice = str(fd, "avatar", 20); // "photo" keeps/sets a photo, otherwise a color name
+  const hasNewPhoto = photo instanceof File && photo.size > 0;
+  if (hasNewPhoto) {
+    const saved = await saveAvatarPhoto(ctx.user.id, photo);
+    if (!saved.ok) redirect(back(saved.reason));
+  }
+  const keepPhoto = hasNewPhoto || (choice === "photo" && ctx.user.avatar?.kind === "photo");
+  const r = await licensing().engine.updateProfile(ctx, {
+    name: str(fd, "name", 200),
+    country: str(fd, "country", 10),
+    phone: str(fd, "phone", 40),
+    locale: str(fd, "lang", 5) === "ar" ? "ar" : "en",
+    marketingOptIn: fd.get("marketing") === "on",
+    avatarColor: keepPhoto ? undefined : choice,
+  });
+  if (!r.ok) redirect(back(r.reason));
+  if (hasNewPhoto) await licensing().engine.setAvatarPhoto(ctx);
+  else if (!keepPhoto && ctx.user.avatar?.kind === "photo") await deleteAvatarPhoto(ctx.user.id);
+  redirect(from === "welcome" ? (next ?? `/${locale}/account/products`) : `/${locale}/account/profile?ok=1`);
 }

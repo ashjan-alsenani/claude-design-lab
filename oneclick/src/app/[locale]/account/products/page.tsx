@@ -38,7 +38,7 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
   const ownerApps = isOwner ? products.filter((p) => !p.includes?.length && opensInteractive(defaultSecurity(p).accessType)) : [];
 
   return (
-    <AccountShell locale={locale} current="products" sandbox={sandbox} email={ctx.user.email}>
+    <AccountShell locale={locale} current="products" sandbox={sandbox} user={ctx.user}>
       <header>
         <h1 className="text-3xl font-bold tracking-tight text-ink">{t.products.title}</h1>
         <p className="mt-1 text-ink-soft">

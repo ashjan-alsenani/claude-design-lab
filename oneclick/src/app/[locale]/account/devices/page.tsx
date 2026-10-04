@@ -32,7 +32,7 @@ export default async function DevicesPage({ params, searchParams }: Props) {
   const notice = sp.ok === "removed" ? t.devices.removed : sp.ok === "authorized" ? t.devices.authorized : null;
 
   return (
-    <AccountShell locale={locale} current="devices" sandbox={sandbox} email={ctx.user.email}>
+    <AccountShell locale={locale} current="devices" sandbox={sandbox} user={ctx.user}>
       <h1 className="text-3xl font-bold tracking-tight text-ink">{t.devices.title}</h1>
       <p className="mt-1 max-w-2xl text-ink-soft">{fill(t.devices.sub, { n: limit })}</p>
       {notice && (

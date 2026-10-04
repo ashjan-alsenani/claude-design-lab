@@ -27,7 +27,7 @@ export default async function PurchasesPage({ params }: Props) {
   const tone = (s: string) => (s === "paid" ? "good" : s === "pending" ? "warn" : s === "failed" || s === "cancelled" ? "muted" : "bad") as "good" | "warn" | "bad" | "muted";
 
   return (
-    <AccountShell locale={locale} current="purchases" sandbox={sandbox} email={ctx.user.email}>
+    <AccountShell locale={locale} current="purchases" sandbox={sandbox} user={ctx.user}>
       <h1 className="text-3xl font-bold tracking-tight text-ink">{t.purchases.title}</h1>
       {orders.length === 0 ? (
         <p className="mt-6 text-ink-soft">{t.purchases.empty}</p>

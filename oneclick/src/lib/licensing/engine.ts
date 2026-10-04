@@ -2,6 +2,7 @@ import type { Locale } from "@/i18n/config";
 import type { Product } from "@/content/types";
 import { emailTemplates, type EmailContent } from "@/lib/email/templates";
 import { newReference } from "@/lib/commerce/types";
+import { defaultAvatarColor, validateProfile, type ProfileInput } from "@/lib/profile";
 import type { PaymentEvent } from "@/lib/payments/types";
 import {
   generateCode,
@@ -537,6 +538,44 @@ export function createLicensingEngine(deps: EngineDeps) {
       log(db, { event: "password_set", outcome: "info", userId: u.id });
     });
     return { ok: true as const };
+  }
+
+  // ---------------------------------------------------------------- profile
+  /** Saves the profile. The first save completes onboarding. Keeps an uploaded photo unless a color is chosen. */
+  async function updateProfile(ctx: SessionContext, input: ProfileInput) {
+    const v = validateProfile(input);
+    if (!v.ok) return { ok: false as const, reason: v.error };
+    const user = await deps.store.write((db) => {
+      const u = db.users.find((x) => x.id === ctx.user.id);
+      if (!u) return null;
+      const first = !u.profileCompletedAt;
+      u.name = v.value.name;
+      u.country = v.value.country;
+      u.phone = v.value.phone;
+      u.locale = v.value.locale;
+      u.marketingOptIn = v.value.marketingOptIn;
+      if (v.value.avatarColor) u.avatar = { kind: "initials", color: v.value.avatarColor };
+      else if (!u.avatar) u.avatar = { kind: "initials", color: defaultAvatarColor(u.id) };
+      u.profileCompletedAt ??= iso();
+      audit(db, { actorId: u.id, action: first ? "profile_completed" : "profile_updated", entity: "user", entityId: u.id });
+      return structuredClone(u);
+    });
+    return user ? { ok: true as const, user } : { ok: false as const, reason: "not_found" as const };
+  }
+
+  async function profileComplete(userId: string) {
+    return deps.store.read((db) => !!db.users.find((u) => u.id === userId)?.profileCompletedAt);
+  }
+
+  /** Call after the photo bytes are stored; bumps the version so browsers fetch the new picture. */
+  async function setAvatarPhoto(ctx: SessionContext) {
+    return deps.store.write((db) => {
+      const u = db.users.find((x) => x.id === ctx.user.id);
+      if (!u) return null;
+      u.avatar = { kind: "photo", v: (u.avatar?.kind === "photo" ? u.avatar.v : 0) + 1 };
+      audit(db, { actorId: u.id, action: "avatar_photo_set", entity: "user", entityId: u.id });
+      return u.avatar;
+    });
   }
 
   async function requestEmailChange(ctx: SessionContext, newEmail: string, locale: Locale) {
@@ -1082,6 +1121,9 @@ export function createLicensingEngine(deps: EngineDeps) {
     removeDevice,
     authorizePendingDevice,
     setPassword,
+    updateProfile,
+    profileComplete,
+    setAvatarPhoto,
     requestEmailChange,
     getClaim,
     startClaim,

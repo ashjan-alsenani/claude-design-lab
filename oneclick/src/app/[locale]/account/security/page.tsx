@@ -34,7 +34,7 @@ export default async function SecurityPage({ params, searchParams }: Props) {
   const card = "rounded-[var(--radius-lg)] border border-line bg-surface p-5 sm:p-6";
 
   return (
-    <AccountShell locale={locale} current="security" sandbox={sandbox} email={ctx.user.email}>
+    <AccountShell locale={locale} current="security" sandbox={sandbox} user={ctx.user}>
       <h1 className="text-3xl font-bold tracking-tight text-ink">{s.title}</h1>
       {ok && (
         <p role="status" className="mt-4 flex items-center gap-2 text-sm font-medium text-success">

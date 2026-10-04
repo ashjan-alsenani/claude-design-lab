@@ -1,20 +1,25 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { DeviceMobileIcon, HeadsetIcon, HeartIcon, ReceiptIcon, ShieldCheckIcon, SignOutIcon, SquaresFourIcon } from "@phosphor-icons/react/dist/ssr";
+import { DeviceMobileIcon, HeadsetIcon, HeartIcon, ReceiptIcon, ShieldCheckIcon, SignOutIcon, SquaresFourIcon, UserCircleIcon } from "@phosphor-icons/react/dist/ssr";
 import type { Locale } from "@/i18n/config";
 import { licensingCopy } from "@/i18n/licensing";
 import { signOutAction } from "@/app/[locale]/account/actions";
+import type { Avatar } from "@/lib/profile";
 import { SandboxBanner } from "./SandboxBanner";
+import { UserAvatar } from "./UserAvatar";
 
-export type AccountSection = "products" | "purchases" | "devices" | "security";
+export type AccountSection = "products" | "purchases" | "devices" | "profile" | "security";
 
 /** Customer area layout: My Products, My Purchases, My Devices, Security & settings. */
-export function AccountShell({ locale, current, sandbox, email, children }: { locale: Locale; current: AccountSection; sandbox: boolean; email: string; children: ReactNode }) {
+type ShellUser = { id: string; email: string; name?: string; avatar?: Avatar };
+
+export function AccountShell({ locale, current, sandbox, user, children }: { locale: Locale; current: AccountSection; sandbox: boolean; user: ShellUser; children: ReactNode }) {
   const t = licensingCopy[locale];
   const nav = [
     { key: "products", icon: SquaresFourIcon, label: t.nav.products, href: `/${locale}/account/products` },
     { key: "purchases", icon: ReceiptIcon, label: t.nav.purchases, href: `/${locale}/account/purchases` },
     { key: "devices", icon: DeviceMobileIcon, label: t.nav.devices, href: `/${locale}/account/devices` },
+    { key: "profile", icon: UserCircleIcon, label: t.nav.profile, href: `/${locale}/account/profile` },
     { key: "security", icon: ShieldCheckIcon, label: t.nav.security, href: `/${locale}/account/security` },
     { key: "favorites", icon: HeartIcon, label: t.nav.favorites, href: `/${locale}/favorites` },
     { key: "support", icon: HeadsetIcon, label: t.nav.support, href: `/${locale}/contact?topic=order` },
@@ -24,9 +29,15 @@ export function AccountShell({ locale, current, sandbox, email, children }: { lo
       {sandbox && <SandboxBanner locale={locale} />}
       <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)]">
         <nav aria-label={t.nav.account} className="min-w-0 lg:sticky lg:top-24 lg:self-start">
-          <p className="mb-3 hidden truncate px-3 text-sm text-muted lg:block" dir="ltr">
-            {email}
-          </p>
+          <Link href={`/${locale}/account/profile`} className="mb-4 flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 hover:bg-bg-sunken">
+            <UserAvatar user={user} size={44} />
+            <span className="min-w-0">
+              {user.name && <span className="block truncate font-semibold text-ink">{user.name}</span>}
+              <span className="block truncate text-sm text-muted" dir="ltr">
+                {user.email}
+              </span>
+            </span>
+          </Link>
           <ul className="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 lg:mx-0 lg:flex-col lg:px-0">
             {nav.map((n) => (
               <li key={n.key}>

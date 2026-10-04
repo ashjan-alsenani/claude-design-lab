@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.7.0 — 2026-10-04 — Profiles and sign-in fixes
+- First sign-in opens a short welcome form: name, profile picture, country, email language,
+  optional mobile number and an optional newsletter opt-in. Account pages wait until it's saved.
+- Profile picture: initials on one of six colors by default (one letter for Arabic names), or an
+  uploaded photo. The browser crops it to a 256 px square (dropping location data); the server
+  accepts only real JPEG, PNG or WebP bytes and serves it only to its owner and admins.
+- "My profile" page in the account menu; the menu shows the picture and name.
+- Sign-in codes are one unbroken run of digits (a spaced code was reversed in Arabic mail apps).
+- A code whose email could not be sent is withdrawn and doesn't count toward the hourly limit.
+- Checkout says plainly that no account is needed: buy with an email.
+
 ## 0.6.0 — 2026-10-04 — Database and email
 - Supabase-backed storage for accounts, sessions, devices, orders, licenses (atomic compare-and-swap writes),
   activity history, product data and form submissions. Server-only access; anon key denied (tested).

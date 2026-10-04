@@ -347,6 +347,23 @@ describe("verification codes", () => {
     expect((await e2.completeVerification({ challengeId: ok.challengeId, code: lastCode("noor@example.com"), client: {}, locale: "ar" })).kind).toBe("signed_in");
   });
 
+  it("a new account has no profile until the welcome form is saved; the profile is audited", async () => {
+    const { ctx } = await signIn("lina@example.com");
+    expect(await engine.profileComplete(ctx.user.id)).toBe(false);
+    expect((await engine.updateProfile(ctx, { name: "x", country: "OM", locale: "ar", marketingOptIn: false })).ok).toBe(false);
+    const r = await engine.updateProfile(ctx, { name: "Lina Said", country: "OM", phone: "+96891234567", locale: "ar", marketingOptIn: true });
+    if (!r.ok) throw new Error(r.reason);
+    expect(r.user).toMatchObject({ name: "Lina Said", country: "OM", phone: "+96891234567", marketingOptIn: true, avatar: { kind: "initials" } });
+    expect(await engine.profileComplete(ctx.user.id)).toBe(true);
+    expect(await engine.setAvatarPhoto(ctx)).toEqual({ kind: "photo", v: 1 });
+    expect(await engine.setAvatarPhoto(ctx)).toEqual({ kind: "photo", v: 2 });
+    // Saving again without choosing a color keeps the photo.
+    const again = await engine.updateProfile(ctx, { name: "Lina Said", country: "AE", locale: "en", marketingOptIn: false });
+    expect(again.ok && again.user.avatar).toEqual({ kind: "photo", v: 2 });
+    const actions = await store.read((db) => db.audit.filter((a) => a.entityId === ctx.user.id).map((a) => a.action));
+    expect(actions).toEqual(expect.arrayContaining(["profile_completed", "profile_updated", "avatar_photo_set"]));
+  });
+
   it("logs never contain codes, tokens or passwords", async () => {
     const a = await signIn("sara@example.com");
     await engine.setPassword(a.ctx, { next: "correct horse battery" });

@@ -22,7 +22,16 @@ async function signIn(page: Page, address: string) {
   await page.locator("#code").fill(code);
   await page.locator("form:has(#code) button").click();
   await page.waitForURL((u) => !u.pathname.endsWith("/verify"));
+  await finishWelcome(page);
 }
+/** First sign-in asks for a name and picture; fill it in when it appears. */
+async function finishWelcome(page: Page, name = "Test Customer") {
+  if (!/\/account\/welcome/.test(new URL(page.url()).pathname)) return;
+  await page.locator("#name").fill(name);
+  await page.locator('form:has(#name) button:not([type="button"])').click();
+  await page.waitForURL((u) => !u.pathname.endsWith("/welcome"));
+}
+
 
 test("landing page presents the product in both languages", async ({ page }) => {
   await page.goto("/en/products/bride-planner");

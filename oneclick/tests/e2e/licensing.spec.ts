@@ -46,7 +46,16 @@ async function signInWithCode(page: Page, address: string, locale = "en") {
   await page.locator("#code").fill(code);
   await page.locator("form:has(#code) button").click();
   await page.waitForURL((u) => !u.pathname.endsWith("/verify"));
+  await finishWelcome(page);
 }
+/** First sign-in asks for a name and picture; fill it in when it appears. */
+async function finishWelcome(page: Page, name = "Test Customer") {
+  if (!/\/account\/welcome/.test(new URL(page.url()).pathname)) return;
+  await page.locator("#name").fill(name);
+  await page.locator('form:has(#name) button:not([type="button"])').click();
+  await page.waitForURL((u) => !u.pathname.endsWith("/welcome"));
+}
+
 
 async function buy(page: Page, slug: string, outcome: "Simulate successful payment" | "Simulate failed payment", guestEmail?: string) {
   await page.goto(`/en/checkout/${slug}`);
@@ -78,7 +87,12 @@ test("guest purchase -> claim email -> verify -> My Products -> open", async ({ 
   await page.locator("#code").fill(code);
   await page.getByRole("button", { name: "Verify" }).click();
 
+  // A first-time buyer is asked for a name and picture once, then lands on their products.
+  await expect(page).toHaveURL(/\/en\/account\/welcome/);
+  await expect(page.getByRole("heading", { name: "Welcome to One Click" })).toBeVisible();
+  await finishWelcome(page, "Guest Buyer");
   await expect(page).toHaveURL(/\/en\/account\/products$/);
+  await expect(page.getByText("Guest Buyer").first()).toBeVisible();
   const card = page.getByRole("listitem").filter({ hasText: "Grocery List" });
   await expect(card.getByText("Active")).toBeVisible();
   await card.getByRole("link", { name: "Open product" }).click();

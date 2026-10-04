@@ -1,3 +1,4 @@
+import type { Avatar } from "@/lib/profile";
 /**
  * One Click Digital Product Licensing & Access Engine: domain model.
  *
@@ -64,6 +65,12 @@ export type User = {
   createdAt: string;
   /** Previous addresses; every change is verified and audit-logged. */
   emailHistory: { email: string; changedAt: string }[];
+  /** Profile, collected on first sign-in (see /account/welcome). Absent until then. */
+  profileCompletedAt?: string;
+  avatar?: Avatar;
+  country?: string;
+  phone?: string;
+  marketingOptIn?: boolean;
 };
 
 export type LOrder = {

@@ -17,13 +17,32 @@ async function signIn(page: Page, address: string) {
   await page.locator("#code").fill(code);
   await page.locator("form:has(#code) button").click();
   await page.waitForURL((u) => !u.pathname.endsWith("/verify"));
+  await finishWelcome(page);
 }
+/** First sign-in asks for a name and picture; fill it in when it appears. */
+async function finishWelcome(page: Page, name = "Test Customer") {
+  if (!/\/account\/welcome/.test(new URL(page.url()).pathname)) return;
+  await page.locator("#name").fill(name);
+  await page.locator('form:has(#name) button:not([type="button"])').click();
+  await page.waitForURL((u) => !u.pathname.endsWith("/welcome"));
+}
+
 
 test("owner signs in with an emailed code and controls the site; data lands in the database", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
   await signIn(page, "owner@oneclick.test");
   const mail = (await inbox()).at(-1)!;
   expect(mail.from).toBe("One Click <hello@oneclick.test>");
+
+  // First sign-in went through the welcome form; a profile photo is stored in the database and served privately.
+  await page.goto("/en/account/profile");
+  const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKklEQVR4nGM4EVVBU8QwasGoBaMWjFowasGoBaMWjFowasGoBaMWDBULABLmaFswJ2EyAAAAAElFTkSuQmCC", "base64");
+  await page.locator('input[type="file"][name="photo"]').setInputFiles({ name: "me.png", mimeType: "image/png", buffer: png });
+  await expect(page.locator('form img[src^="blob:"]')).toBeVisible();
+  await page.locator('form:has(#name) button:not([type="button"])').click();
+  await expect(page.getByRole("status")).toContainText("Your profile is saved.");
+  const src = (await page.locator('nav img[src^="/api/avatar/"]').first().getAttribute("src"))!;
+  expect((await page.request.get(src)).headers()["content-type"]).toBe("image/jpeg");
 
   await page.goto("/en/account/products");
   await expect(page.getByRole("heading", { name: "Owner account" })).toBeVisible();
