@@ -23,7 +23,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}/en`,
     reuseExistingServer: true,
     timeout: 120_000,
-    // Fake Google credentials: the button shows and the hand-off can be checked; no real Google call is made.
-    env: { ONECLICK_DEMO_MODE: "true", GOOGLE_CLIENT_ID: "e2e-client.apps.googleusercontent.com", GOOGLE_CLIENT_SECRET: "e2e-secret" },
+    env: { ONECLICK_DEMO_MODE: "true" },
   },
 });

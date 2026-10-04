@@ -1,11 +1,10 @@
 # Changelog
 
-## 0.8.0 — 2026-10-04 — Continue with Google / Apple
-- Sign-in buttons for Google and Apple (OpenID Connect, authorization code; PKCE for Google).
-  ID tokens are verified against the provider's keys (issuer, audience, expiry, nonce); state is
-  sealed in a short-lived cookie. Only a provider-verified email creates or links an account; a
-  linked identity keeps working if the account email changes. Each button appears only when its
-  credentials are set (see docs/SETUP_DATABASE_EMAIL.md, section 5).
+## 0.8.0 — 2026-10-04 — Email code only
+- Sign-in and sign-up are one flow: enter your email, receive a code, enter it. A new email
+  creates the account; a known email signs in. Purchases made with that email are attached to it.
+- Removed the password option and the Google / Apple sign-in work (never switched on), so the
+  emailed code is the only way in.
 - Profile: the sign-in email is shown (read-only, changed from Security); "Language" label.
 
 ## 0.7.0 — 2026-10-04 — Profiles and sign-in fixes

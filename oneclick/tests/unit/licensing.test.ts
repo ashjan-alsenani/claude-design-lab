@@ -364,34 +364,6 @@ describe("verification codes", () => {
     expect(actions).toEqual(expect.arrayContaining(["profile_completed", "profile_updated", "avatar_photo_set"]));
   });
 
-  it("Continue with Google/Apple: creates, links by verified email, and never trusts an unverified email", async () => {
-    const client = { userAgent: ua.mac };
-    const g = await engine.providerSignIn({ provider: "google", subject: "g-1", email: "Huda@Gmail.com", emailVerified: true, name: "Huda", client, locale: "ar" });
-    if (!g.ok) throw new Error(g.reason);
-    const user = await store.read((db) => db.users.find((u) => u.id === g.userId)!);
-    expect(user).toMatchObject({ email: "huda@gmail.com", name: "Huda", identities: [{ provider: "google", subject: "g-1" }] });
-    expect(user.profileCompletedAt).toBeUndefined();
-
-    // An existing code-sign-in account is linked when Apple vouches for the same email.
-    const code = await signIn("mona@example.com");
-    const a = await engine.providerSignIn({ provider: "apple", subject: "a-9", email: "mona@example.com", emailVerified: true, client, locale: "en" });
-    expect(a.ok && a.userId).toBe(code.userId);
-
-    // Unverified email: refused, nothing created.
-    const before = await store.read((db) => db.users.length);
-    expect(await engine.providerSignIn({ provider: "google", subject: "g-2", email: "victim@example.com", emailVerified: false, client, locale: "en" })).toEqual({ ok: false, reason: "invalid_credentials" });
-    expect(await store.read((db) => db.users.length)).toBe(before);
-
-    // A linked identity keeps working after the account's email changes (Apple may hide the email).
-    await store.write((db) => void (db.users.find((u) => u.id === code.userId)!.email = "mona.new@example.com"));
-    const again = await engine.providerSignIn({ provider: "apple", subject: "a-9", emailVerified: false, client, locale: "en" });
-    expect(again.ok && again.userId).toBe(code.userId);
-
-    // Suspended accounts stay out.
-    await store.write((db) => void (db.users.find((u) => u.id === g.userId)!.accountStatus = "suspended"));
-    expect(await engine.providerSignIn({ provider: "google", subject: "g-1", emailVerified: true, email: "huda@gmail.com", client, locale: "ar" })).toEqual({ ok: false, reason: "account_suspended" });
-  });
-
   it("logs never contain codes, tokens or passwords", async () => {
     const a = await signIn("sara@example.com");
     await engine.setPassword(a.ctx, { next: "correct horse battery" });

@@ -75,27 +75,6 @@ test("Arabic first sign-in: welcome form with initials, then photo upload on the
   expect((await page.request.get(src)).status()).toBe(404);
 });
 
-test("Continue with Google hands off safely, and a forged callback is refused", async ({ page }) => {
-  await page.goto("/ar/account");
-  const google = page.getByRole("link", { name: "المتابعة مع Google" });
-  await expect(google).toBeVisible();
-  await expect(page.getByRole("link", { name: "المتابعة مع Apple" })).toHaveCount(0); // not configured
-
-  const start = await page.request.get((await google.getAttribute("href"))!, { maxRedirects: 0 });
-  expect(start.status()).toBe(303);
-  const to = new URL(start.headers()["location"]);
-  expect(to.origin).toBe("https://accounts.google.com");
-  expect(to.searchParams.get("client_id")).toBe("e2e-client.apps.googleusercontent.com");
-  expect(to.searchParams.get("code_challenge_method")).toBe("S256");
-  expect(to.searchParams.get("redirect_uri")).toMatch(/\/api\/auth\/google\/callback$/);
-  expect(to.searchParams.get("state")).toBeTruthy();
-
-  // Someone else's code with a made-up state: refused before anything is sent to Google.
-  await page.goto(`/api/auth/google/callback?code=stolen&state=${"x".repeat(43)}`);
-  await expect(page).toHaveURL(/\/ar\/account\?e=oauth_failed/); // back in the language they started in
-  await expect(page.locator("p[role=alert]")).toBeVisible();
-});
-
 test("profile shows the sign-in email and a plain Language choice", async ({ page }) => {
   const address = `nada-${uid()}@example.com`;
   await codeSignIn(page, address, "ar");

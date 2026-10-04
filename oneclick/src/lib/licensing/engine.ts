@@ -298,7 +298,7 @@ export function createLicensingEngine(deps: EngineDeps) {
    * Creates a session. `verifiedNow` = the person just proved control of the email
    * (one-time code). Without it, only an already-trusted device may sign in.
    */
-  function signInTx(db: LicensingDb, email: string, client: ClientInfo, verifiedNow: boolean, locale: Locale, method: "code" | "password" | "google" | "apple" = verifiedNow ? "code" : "password") {
+  function signInTx(db: LicensingDb, email: string, client: ClientInfo, verifiedNow: boolean, locale: Locale) {
     const policy = resolvePolicy(db);
     let user = db.users.find((u) => u.email === email);
     if (!user) {
@@ -356,7 +356,7 @@ export function createLicensingEngine(deps: EngineDeps) {
       old.revokedReason = "session_limit";
       log(db, { event: "session_revoked", outcome: "info", userId: user.id, reason: "session_limit" });
     }
-    log(db, { event: "signin", outcome: "allowed", userId: user.id, deviceId: device?.id ?? null, meta: { method, deviceState } });
+    log(db, { event: "signin", outcome: "allowed", userId: user.id, deviceId: device?.id ?? null, meta: { method: verifiedNow ? "code" : "password", deviceState } });
     return { ok: true as const, userId: user.id, sessionToken, deviceToken, deviceState, alert, email: user.email };
   }
 
@@ -398,39 +398,6 @@ export function createLicensingEngine(deps: EngineDeps) {
       return { kind: "signed_in", ok: true, userId: r.userId, sessionToken: r.sessionToken, deviceToken: r.deviceToken, deviceState: r.deviceState };
     }
     return r;
-  }
-
-  /**
-   * "Continue with Google / Apple". The provider has already proven the person controls the
-   * account (its signed ID token was verified by the caller). An identity already linked signs in
-   * to its account; otherwise a provider-VERIFIED email signs in to (and links) the account with
-   * that email, or creates one. Unverified emails never link or create anything.
-   */
-  async function providerSignIn(input: { provider: "google" | "apple"; subject: string; email?: string; emailVerified: boolean; name?: string; client: ClientInfo; locale: Locale }): Promise<SignInResult> {
-    const r = await deps.store.write((db) => {
-      const linked = db.users.find((u) => u.identities?.some((i) => i.provider === input.provider && i.subject === input.subject));
-      let email = linked?.email;
-      if (!email) {
-        if (!input.email || !input.emailVerified || !isValidEmail(normalizeEmail(input.email))) {
-          log(db, { event: "signin_failed", outcome: "denied", userId: null, reason: "provider_email_unverified", meta: { provider: input.provider } });
-          return { ok: false as const, reason: "invalid_credentials" as const };
-        }
-        email = normalizeEmail(input.email);
-      }
-      const res = signInTx(db, email, input.client, true, input.locale, input.provider);
-      if (!res.ok) return res;
-      const user = db.users.find((u) => u.id === res.userId)!;
-      if (!user.identities?.some((i) => i.provider === input.provider && i.subject === input.subject)) {
-        (user.identities ??= []).push({ provider: input.provider, subject: input.subject, linkedAt: iso() });
-        audit(db, { actorId: user.id, action: "identity_linked", entity: "user", entityId: user.id, details: { provider: input.provider } });
-      }
-      const name = input.name?.replace(/\s+/g, " ").trim().slice(0, 60);
-      if (!user.name && name && name.length >= 2) user.name = name;
-      return res;
-    });
-    if (!r.ok) return r;
-    if (r.alert) await sendNewDeviceAlert(r.email, input.locale, r.alert.name);
-    return { ok: true, userId: r.userId, sessionToken: r.sessionToken, deviceToken: r.deviceToken, deviceState: r.deviceState };
   }
 
   /** Returning customers on a trusted device: password only, no code. */
@@ -1155,7 +1122,6 @@ export function createLicensingEngine(deps: EngineDeps) {
     authorizePendingDevice,
     setPassword,
     updateProfile,
-    providerSignIn,
     profileComplete,
     setAvatarPhoto,
     requestEmailChange,

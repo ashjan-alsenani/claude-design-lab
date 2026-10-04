@@ -25,6 +25,8 @@ async function finishWelcome(page: Page, name = "Test Customer") {
   await page.locator("#name").fill(name);
   await page.locator('form:has(#name) button:not([type="button"])').click();
   await page.waitForURL((u) => !u.pathname.endsWith("/welcome"));
+  // Let the redirect after saving finish before the test navigates elsewhere.
+  await page.waitForLoadState("networkidle");
 }
 
 

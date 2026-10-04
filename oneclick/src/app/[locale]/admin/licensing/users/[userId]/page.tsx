@@ -32,7 +32,7 @@ export default async function AdminCustomerPage({ params, searchParams }: Props)
       <h1 className="mt-2 break-all text-3xl font-semibold tracking-tight text-ink">{user.email}</h1>
       <p className="mt-1 flex flex-wrap items-center gap-2 text-sm text-ink-soft">
         <StatusPill tone={user.accountStatus === "active" ? "good" : "bad"}>{user.accountStatus}</StatusPill>
-        Joined {when(user.createdAt)} · email verified {when(user.emailVerifiedAt)} · password {user.hasPassword ? "set" : "not set"}
+        Joined {when(user.createdAt)} · email verified {when(user.emailVerifiedAt)}
         {user.emailHistory.length > 0 && <> · previous emails: {user.emailHistory.map((h) => h.email).join(", ")}</>}
       </p>
       <Flash sp={sp} />

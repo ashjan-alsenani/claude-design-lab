@@ -8,7 +8,6 @@ import { createRest } from "@/lib/supabase/rest";
 import { sendEmail } from "@/lib/email";
 import { siteUrl } from "@/lib/seo";
 import { SandboxProvider } from "@/lib/payments/sandbox";
-import { signPayload, verifySignedPayload } from "./crypto";
 import { createLicensingEngine, type ClientInfo, type LicensingEngine, type SessionContext } from "./engine";
 import { FileLicensingStore, SupabaseLicensingStore, UnavailableLicensingStore, type LicensingStore } from "./store";
 
@@ -90,23 +89,4 @@ export const currentContext = cache(async (): Promise<SessionContext | null> => 
 export function safeNext(next: unknown, locale: string) {
   if (typeof next !== "string") return null;
   return next.startsWith(`/${locale}/`) && !next.startsWith("//") && !next.includes("\\") && !/[\r\n]/.test(next) ? next : null;
-}
-
-/** Short-lived values the server hands to the browser and must get back untampered (e.g. sign-in state). */
-export function sealValue(payload: Record<string, string | number>) {
-  return signPayload(secret(), payload);
-}
-export function unsealValue<T>(token: string | undefined | null): T | null {
-  return token ? verifySignedPayload<T>(secret(), token) : null;
-}
-
-/** Finishes any sign-in: session + device cookies, then the welcome form on first sign-in. */
-export async function startSession(r: { userId: string; sessionToken: string; deviceToken: string }, locale: string, next: string | null) {
-  const c = await cookies();
-  const days = (await licensing().engine.policy()).sessionDays;
-  c.set(COOKIE.session, r.sessionToken, cookieOptions(days * 24 * 3600));
-  c.set(COOKIE.device, r.deviceToken, cookieOptions(400 * 24 * 3600));
-  c.delete(COOKIE.challenge);
-  const dest = next ?? `/${locale}/account/products`;
-  return (await licensing().engine.profileComplete(r.userId)) ? dest : `/${locale}/account/welcome?next=${encodeURIComponent(dest)}`;
 }

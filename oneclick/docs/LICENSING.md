@@ -69,10 +69,10 @@ Planner default to HYBRID. Admin can override for any product:
   - 6 digits, valid for 10 minutes and usable once.
   - Locked after 5 wrong tries; at most 5 codes per email per hour, plus a per-IP limit.
   - Stored only as an HMAC; never logged and never sent to the browser.
-  - Only the newest code for an email and purpose works. Arabic-Indic digits are accepted.
+  - Only the newest code for an email and purpose works. Arabic-Indic and Persian digits are accepted.
+- **Sign-in is the emailed code only** (no passwords, no Google/Apple). The same flow signs up:
+  a new email creates the account when its code is verified; purchases made with that email attach to it.
 - **Returning customers:** a 30-day HttpOnly session cookie, so opening products never asks for a code.
-  - An optional password allows sign-in on a trusted device without a code.
-  - On a new device, the password alone is not enough: an email code is required.
 - **Devices:**
   - 2 trusted devices per customer by default (configurable).
   - A device is a random HttpOnly cookie, stored as an HMAC. The record holds only a friendly name ("Chrome on iPhone"), the platform, when it was first verified, when it was last used, and its status.

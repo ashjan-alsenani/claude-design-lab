@@ -51,23 +51,6 @@ export async function requestCodeAction(fd: FormData) {
   redirect(withNext(`/${locale}/account/verify`, next));
 }
 
-export async function passwordSignInAction(fd: FormData) {
-  const locale = localeOf(fd);
-  const next = safeNext(str(fd, "next"), locale);
-  if (licensingMode() === "unavailable") redirect(`/${locale}/account`);
-  if (await ipLimited("password", 10)) redirect(withNext(`/${locale}/account?mode=password&e=rate_limited`, next));
-  const r = await licensing().engine.passwordSignIn({ email: str(fd, "email", 254), password: str(fd, "password", 200), client: await clientInfo(), locale });
-  if (r.ok) {
-    await setSessionCookies(r.sessionToken, r.deviceToken);
-    redirect(await afterSignIn(r.userId, locale, next));
-  }
-  if (r.reason === "device_verification_required" && r.challengeId) {
-    await setChallenge(r.challengeId);
-    redirect(withNext(`/${locale}/account/verify?device=new`, next));
-  }
-  redirect(withNext(`/${locale}/account?mode=password&e=${r.reason}`, next));
-}
-
 async function setSessionCookies(sessionToken: string, deviceToken: string) {
   const c = await cookies();
   const days = (await licensing().engine.policy()).sessionDays;
@@ -165,13 +148,6 @@ export async function authorizeDeviceAction(fd: FormData) {
   const r = await licensing().engine.authorizePendingDevice(ctx, str(fd, "removeDeviceId", 80) || null);
   if (!r.ok) redirect(withNext(`/${locale}/account/devices?authorize=1&e=${r.reason}`, next));
   redirect(next ?? `/${locale}/account/devices?ok=authorized`);
-}
-
-export async function setPasswordAction(fd: FormData) {
-  const locale = localeOf(fd);
-  const ctx = await requireCtx(locale);
-  const r = await licensing().engine.setPassword(ctx, { current: str(fd, "current", 200) || undefined, next: str(fd, "password", 300) });
-  redirect(`/${locale}/account/security?${r.ok ? "ok=password" : "pe=" + r.reason}`);
 }
 
 export async function requestEmailChangeAction(fd: FormData) {

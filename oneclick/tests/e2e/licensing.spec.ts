@@ -54,6 +54,8 @@ async function finishWelcome(page: Page, name = "Test Customer") {
   await page.locator("#name").fill(name);
   await page.locator('form:has(#name) button:not([type="button"])').click();
   await page.waitForURL((u) => !u.pathname.endsWith("/welcome"));
+  // Let the redirect after saving finish before the test navigates elsewhere.
+  await page.waitForLoadState("networkidle");
 }
 
 
@@ -162,25 +164,6 @@ test("third device must replace a trusted device before opening products", async
   await expect(third.getByText("This device is now trusted.")).toBeVisible();
   await third.goto("/en/app/fitness-tracker");
   await expect(third.getByTestId("product-app")).toBeVisible();
-});
-
-test("trusted device signs in with password, no code needed", async ({ page }) => {
-  const me = email("trusted");
-  await signInWithCode(page, me);
-  await page.goto("/en/account/security");
-  await page.locator("#password").fill("a long sandbox password");
-  await page.getByRole("button", { name: "Save password" }).click();
-  await expect(page.getByText("Password saved.")).toBeVisible();
-  await page.getByRole("button", { name: "Sign out" }).first().click();
-  await expect(page).toHaveURL(/\/en\/account$/);
-
-  await page.goto("/en/account?mode=password");
-  await page.locator("#email").fill(me);
-  await page.locator("#password").fill("a long sandbox password");
-  await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page).toHaveURL(/\/en\/account\/products$/);
-  await page.goto(`/en/dev/mailbox?to=${encodeURIComponent(me)}`);
-  await expect(page.locator('li[data-kind="access_code"]')).toHaveCount(1); // only the first sign-in
 });
 
 test("admin suspends a license and access stops; the owner is recognized", async ({ page, browser, baseURL, isMobile }) => {
