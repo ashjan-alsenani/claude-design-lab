@@ -71,6 +71,8 @@ export type User = {
   country?: string;
   phone?: string;
   marketingOptIn?: boolean;
+  /** Linked "Continue with Google / Apple" identities (provider + its stable subject id). */
+  identities?: { provider: "google" | "apple"; subject: string; linkedAt: string }[];
 };
 
 export type LOrder = {

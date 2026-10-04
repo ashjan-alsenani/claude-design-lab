@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { EnvelopeSimpleIcon, LockKeyIcon } from "@phosphor-icons/react/dist/ssr";
+import { AppleLogoIcon, EnvelopeSimpleIcon, GoogleLogoIcon, LockKeyIcon } from "@phosphor-icons/react/dist/ssr";
+import { enabledProviders } from "@/lib/auth/oidc";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { licensingCopy } from "@/i18n/licensing";
@@ -31,6 +32,7 @@ export default async function AccountPage({ params, searchParams }: Props) {
   const t = licensingCopy[locale];
   const mode = licensingMode();
   const usePassword = sp.mode === "password";
+  const providers = enabledProviders();
   const error = sp.e && sp.e in t.signin.errors ? t.signin.errors[sp.e as keyof typeof t.signin.errors] : sp.e === "expired" ? t.verify.noChallenge : sp.e ? t.signin.errors.generic : null;
 
   if (mode === "unavailable") {
@@ -62,7 +64,27 @@ export default async function AccountPage({ params, searchParams }: Props) {
               {error}
             </p>
           )}
-          <form action={usePassword ? passwordSignInAction : requestCodeAction} className="mt-6 space-y-5">
+          {providers.length > 0 && (
+            <div className="mt-6 space-y-3">
+              {providers.includes("google") && (
+                <a href={`/api/auth/google/start?locale=${locale}${next ? `&next=${encodeURIComponent(next)}` : ""}`} className={buttonClass("secondary", "lg", "w-full")}>
+                  <GoogleLogoIcon size={20} weight="bold" />
+                  {t.signin.withGoogle}
+                </a>
+              )}
+              {providers.includes("apple") && (
+                <a
+                  href={`/api/auth/apple/start?locale=${locale}${next ? `&next=${encodeURIComponent(next)}` : ""}`}
+                  className="inline-flex h-13 w-full items-center justify-center gap-2 rounded-full bg-black px-6 font-semibold text-white transition-transform duration-150 hover:bg-neutral-800 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  <AppleLogoIcon size={20} weight="fill" />
+                  {t.signin.withApple}
+                </a>
+              )}
+              <p className="flex items-center gap-3 pt-2 text-sm text-muted before:h-px before:flex-1 before:bg-line after:h-px after:flex-1 after:bg-line">{t.signin.or}</p>
+            </div>
+          )}
+          <form action={usePassword ? passwordSignInAction : requestCodeAction} className={`${providers.length ? "mt-3" : "mt-6"} space-y-5`}>
             <input type="hidden" name="locale" value={locale} />
             {next && <input type="hidden" name="next" value={next} />}
             <div className="flex flex-col gap-2">

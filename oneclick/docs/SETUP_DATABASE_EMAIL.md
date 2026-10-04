@@ -49,3 +49,39 @@
 ## ملاحظات
 - **الدفع:** للحين غير مربوط. الشراء الحقيقي ما يشتغل لين نختار مزوّد الدفع مع البنك. أنتِ كمالكة تفتحين كل المنتجات بدون شراء.
 - **الأمان:** كل البيانات تمر من السيرفر فقط. المفتاح العام ما يقدر يقرأ أو يكتب أي شي في الجداول (جرّبناها). ورموز الدخول تنحفظ مشفّرة، مو كنص.
+
+## 5) الدخول بـ Google و Apple (اختياري)
+الأزرار ما تظهر في صفحة الدخول إلا بعد ما تضيفين مفاتيحها في Vercel. والدخول برمز الإيميل يظل شغّال دايمًا.
+
+### Google (مجاني)
+1. افتحي https://console.cloud.google.com وسوّي مشروع جديد باسم `OneClick`.
+2. من **Google Auth Platform**:
+   - **Branding**: اسم التطبيق `One Click`، وإيميل الدعم، وفي **Authorized domains** أضيفي `oneclick.computer`.
+   - **Audience**: اختاري **External**، واضغطي **Publish app**. الصلاحيات اللي نطلبها (الاسم والإيميل بس) ما تحتاج مراجعة من Google.
+3. من **Clients** ← **Create client** ← النوع **Web application**:
+   - **Authorized JavaScript origins**: `https://www.oneclick.computer`
+   - **Authorized redirect URIs**: `https://www.oneclick.computer/api/auth/google/callback`
+4. انسخي **Client ID** و **Client secret** وحطيهم في Vercel (Production):
+
+| الاسم | القيمة |
+|---|---|
+| `GOOGLE_CLIENT_ID` | الـ Client ID (ينتهي بـ `.apps.googleusercontent.com`) |
+| `GOOGLE_CLIENT_SECRET` | الـ Client secret ⚠️ سري |
+
+### Apple (يحتاج اشتراك Apple Developer المدفوع: ٩٩ دولار بالسنة)
+1. من https://developer.apple.com/account ← **Certificates, Identifiers & Profiles**:
+   - **Identifiers** ← App ID جديد، وفعّلي **Sign in with Apple**.
+   - **Identifiers** ← **Services IDs** ← جديد (مثل `computer.oneclick.web`)، فعّلي **Sign in with Apple** ← **Configure**:
+     - Domains: `www.oneclick.computer`
+     - Return URLs: `https://www.oneclick.computer/api/auth/apple/callback`
+   - **Keys** ← مفتاح جديد مع **Sign in with Apple** ← نزّلي ملف `.p8` (ينزل مرة وحدة بس) واحفظي الـ **Key ID**.
+2. حطيهم في Vercel (Production):
+
+| الاسم | القيمة |
+|---|---|
+| `APPLE_CLIENT_ID` | الـ Services ID (مثل `computer.oneclick.web`) |
+| `APPLE_TEAM_ID` | الـ Team ID (فوق يمين صفحة حساب المطوّر) |
+| `APPLE_KEY_ID` | الـ Key ID |
+| `APPLE_PRIVATE_KEY` | محتوى ملف `.p8` كامل ⚠️ سري |
+
+بعد الإضافة قولي لي وأنا أنشر الموقع، أو سوّي **Redeploy**.

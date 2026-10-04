@@ -44,7 +44,7 @@ export default async function WelcomePage({ params, searchParams }: Props) {
           </p>
         )}
         <div className="mt-6">
-          <ProfileForm locale={locale} t={t} user={profileUser(ctx.user)} countries={countryOptions(locale, t.other)} from="welcome" next={next} />
+          <ProfileForm locale={locale} t={t} securityLabel={licensingCopy[locale].nav.security} user={profileUser(ctx.user)} countries={countryOptions(locale, t.other)} from="welcome" next={next} />
         </div>
       </section>
     </div>

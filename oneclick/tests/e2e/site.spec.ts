@@ -22,8 +22,14 @@ test("English is LTR and Arabic is RTL", async ({ page }) => {
 
 test("language switch keeps the current page", async ({ page, isMobile }) => {
   await page.goto("/en/products/bride-planner");
-  if (isMobile) await page.getByRole("button", { name: "Menu" }).click();
-  await page.getByRole("link", { name: isMobile ? "العربية" : "Switch language" }).first().click();
+  const target = page.getByRole("link", { name: isMobile ? "العربية" : "Switch language" }).first();
+  // On a busy dev server the first tap can land before the menu's script has loaded; tap until it opens.
+  if (isMobile)
+    await expect(async () => {
+      await page.getByRole("button", { name: "Menu" }).click();
+      await expect(target).toBeVisible({ timeout: 2000 });
+    }).toPass({ timeout: 30_000 });
+  await target.click();
   await expect(page).toHaveURL(/\/ar\/products\/bride-planner$/);
 });
 

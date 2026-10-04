@@ -12,7 +12,7 @@ import { saveProfileAction } from "@/app/[locale]/account/actions";
 
 type User = { id: string; email: string; name?: string; avatar?: Avatar; country?: string; phone?: string; locale: Locale; marketingOptIn?: boolean };
 /** Country names come from the server so the first render matches exactly (ICU data differs between Node and browsers). */
-type Props = { locale: Locale; t: LicensingCopy["profile"]; user: User; from: "welcome" | "profile"; next?: string | null; countries: { code: string; name: string }[] };
+type Props = { locale: Locale; t: LicensingCopy["profile"]; securityLabel: string; user: User; from: "welcome" | "profile"; next?: string | null; countries: { code: string; name: string }[] };
 
 const RAW_LIMIT = 5 * 1024 * 1024;
 
@@ -29,7 +29,7 @@ async function shrink(file: File): Promise<File> {
   return new File([blob], "avatar.jpg", { type: "image/jpeg" });
 }
 
-export function ProfileForm({ locale, t, user, from, next, countries }: Props) {
+export function ProfileForm({ locale, t, securityLabel, user, from, next, countries }: Props) {
   const startColor = user.avatar?.kind === "initials" ? user.avatar.color : defaultAvatarColor(user.id);
   const hasPhoto = user.avatar?.kind === "photo";
   const [mode, setMode] = useState<"photo" | "color">(hasPhoto ? "photo" : "color");
@@ -135,6 +135,27 @@ export function ProfileForm({ locale, t, user, from, next, countries }: Props) {
         </label>
         <input id="name" name="name" required minLength={2} maxLength={60} autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} />
         <p className="text-xs text-muted">{t.nameHelp}</p>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="account-email" className={label}>
+          {t.email}
+        </label>
+        <input id="account-email" type="email" value={user.email} readOnly aria-describedby="account-email-help" dir="ltr" className={`${inputClass} cursor-default bg-bg-sunken text-ink-soft`} />
+        <p id="account-email-help" className="text-xs text-muted">
+          {t.emailHelp.split("{link}").map((part, i) =>
+            i === 0 ? (
+              part
+            ) : (
+              <span key={i}>
+                <Link href={`/${locale}/account/security`} className="underline underline-offset-4">
+                  {securityLabel}
+                </Link>
+                {part}
+              </span>
+            ),
+          )}
+        </p>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">

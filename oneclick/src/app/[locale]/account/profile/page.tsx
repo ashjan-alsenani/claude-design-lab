@@ -40,7 +40,7 @@ export default async function ProfilePage({ params, searchParams }: Props) {
         </p>
       )}
       <div className="mt-6 max-w-2xl rounded-[var(--radius-lg)] border border-line bg-surface p-5 sm:p-6">
-        <ProfileForm locale={locale} t={t} user={profileUser(ctx.user)} countries={countryOptions(locale, t.other)} from="profile" />
+        <ProfileForm locale={locale} t={t} securityLabel={licensingCopy[locale].nav.security} user={profileUser(ctx.user)} countries={countryOptions(locale, t.other)} from="profile" />
       </div>
     </AccountShell>
   );
