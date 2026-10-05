@@ -324,7 +324,7 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
       </section>
       <p class="dd-hint">${h("zoom-in",16)}<span>${a(i?"اضغطي على أي رقم أو جزء من الرسوم لعرض أسماء الموظفين.":"Select any number or chart part to see the employees.")}</span></p><p class="pct-note" id="pctNote">${h("info",14)}<span></span><span class="result-count" id="dcount" role="status" aria-live="polite"></span></p>
       <section class="charts">
-        ${(u=Dc(u)).map(g=>`<article class="chart-card${g.span?" chart-"+g.span:""}${g.custom?" chart-custom":""}" data-dk="${g.id}" data-field="${g.key}" ${g.hid?"data-hidden":""} aria-labelledby="ch-${g.id}">${r.isAdmin()?Dtl("chart",g):""}
+        ${(u=Dc(u).filter(g=>!g.restricted)).map(g=>`<article class="chart-card${g.span?" chart-"+g.span:""}${g.custom?" chart-custom":""}" data-dk="${g.id}" data-field="${g.key}" ${g.hid?"data-hidden":""} aria-labelledby="ch-${g.id}">${r.isAdmin()?Dtl("chart",g):""}
           <header><h2 id="ch-${g.id}">${h(g.ic,20)}<span>${a(g.title)}</span></h2><span class="chart-field">${a(q(g.key))}</span></header>
           <div class="chart-body" id="cb-${g.id}">${g.restricted?`<p class="np-block restricted">${h("lock",16)} ${a(t("chartRestricted"))}</p>`:""}</div>
         </article>`).join("")}${window.__dkEdit&&r.isAdmin()?`<button type="button" class="chart-card chart-add" data-dk-act="add"><span class="chart-add-ic">${h("plus",28)}</span><strong>${a(i?"إضافة رسم بياني":"Add a chart")}</strong><small>${a(i?"اختاري البيانات ونوع الرسم وحجمه":"Pick the data, chart type and size")}</small></button>`:""}
