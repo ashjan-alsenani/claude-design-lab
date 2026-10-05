@@ -1685,3 +1685,68 @@ body { font-family: var(--font); }
 /* greys a touch stronger */
 :root { --muted: #3F4B60; --faint: #4F5B70; }
 [data-theme="dark"] { --muted: #BCC6D6; --faint: #A6B2C5; }
+
+/* =====================================================================
+   v10 — livelier: colour wash, brighter banners, tinted cards, solid icon tiles
+   ===================================================================== */
+body { background:
+  radial-gradient(1100px 700px at 100% -10%, rgba(20,184,166,.13), transparent 60%),
+  radial-gradient(900px 600px at -5% 30%, rgba(124,58,237,.09), transparent 60%),
+  radial-gradient(900px 700px at 60% 110%, rgba(249,115,22,.08), transparent 60%),
+  var(--canvas); background-attachment: fixed; }
+.main-col { background: transparent; }
+[data-theme="dark"] body { background:
+  radial-gradient(1100px 700px at 100% -10%, rgba(45,212,191,.12), transparent 60%),
+  radial-gradient(900px 600px at -5% 30%, rgba(139,92,246,.12), transparent 60%),
+  radial-gradient(900px 700px at 60% 110%, rgba(251,146,60,.07), transparent 60%),
+  var(--canvas); background-attachment: fixed; }
+
+/* brighter three-colour banners */
+.page.page-directory > .page-head:not(.page-head-tight) { background: linear-gradient(120deg, #0D9488 0%, #0E7490 45%, #4F46E5 100%); }
+.page.page-dashboard > .page-head:not(.page-head-tight) { background: linear-gradient(120deg, #6D28D9 0%, #4F46E5 50%, #0284C7 100%); }
+.page.page-talent > .page-head:not(.page-head-tight) { background: linear-gradient(120deg, #D97706 0%, #EA580C 50%, #DB2777 100%); }
+.page.page-seniority > .page-head:not(.page-head-tight) { background: linear-gradient(120deg, #DB2777 0%, #9333EA 55%, #4F46E5 100%); }
+.page.page-org > .page-head:not(.page-head-tight) { background: linear-gradient(120deg, #0284C7 0%, #0891B2 50%, #0D9488 100%); }
+.page.page-manage > .page-head:not(.page-head-tight), .page.page-fields > .page-head:not(.page-head-tight), .page.page-users > .page-head:not(.page-head-tight), .page.page-activity > .page-head:not(.page-head-tight), .page.page-hier > .page-head:not(.page-head-tight), .page.page-import > .page-head:not(.page-head-tight) { background: linear-gradient(120deg, #EA580C 0%, #DB2777 55%, #9333EA 100%); }
+
+/* employee cards pick up a hint of their person's colour */
+.card { background: linear-gradient(155deg, color-mix(in srgb, var(--tone, var(--teal)) 9%, var(--paper)) 0%, var(--paper) 42%); border-color: color-mix(in srgb, var(--tone, var(--teal)) 16%, var(--line)); }
+.card-leader { background: linear-gradient(150deg, color-mix(in srgb, var(--tone, var(--sun)) 12%, var(--paper)) 0%, var(--paper) 50%); }
+.card:hover { border-color: color-mix(in srgb, var(--tone, var(--teal)) 45%, var(--line)); }
+.card::before { background: radial-gradient(420px circle at var(--mx) var(--my), color-mix(in srgb, var(--tone, var(--teal)) 14%, transparent), transparent 45%); }
+.card-link { border-color: color-mix(in srgb, var(--tone, var(--navy-txt)) 60%, var(--navy-txt)) !important; }
+.card:hover .card-link { background: var(--tone, var(--navy-txt)) !important; border-color: var(--tone, var(--navy-txt)) !important; color: #fff !important; }
+
+/* solid, colourful icon tiles */
+.section-h .ic, .panel-title .ic { background: linear-gradient(140deg, color-mix(in srgb, var(--teal) 75%, #fff), var(--teal)); color: #fff; box-shadow: 0 8px 16px -10px var(--teal); }
+#sec-lead .ic { background: linear-gradient(140deg, #FBBF24, #D97706); color: #fff; box-shadow: 0 8px 16px -10px #D97706; }
+#sec-team .ic { background: linear-gradient(140deg, #A78BFA, #7C3AED); color: #fff; box-shadow: 0 8px 16px -10px #7C3AED; }
+#ps-emp .ic, #fs-employment .ic, #fs-responsibilities .ic { background: linear-gradient(140deg, #60A5FA, #2563EB); color: #fff; box-shadow: 0 8px 16px -10px #2563EB; }
+#ps-skilldet .ic, #fs-skills .ic, #ps-skills .ic { background: linear-gradient(140deg, #A78BFA, #7C3AED); color: #fff; box-shadow: 0 8px 16px -10px #7C3AED; }
+#ps-extra .ic, #fs-career .ic { background: linear-gradient(140deg, #FB923C, #EA580C); color: #fff; box-shadow: 0 8px 16px -10px #EA580C; }
+#ps-edu .ic, #fs-education .ic { background: linear-gradient(140deg, #FBBF24, #D97706); color: #fff; box-shadow: 0 8px 16px -10px #D97706; }
+#ps-certs .ic, #fs-training .ic, #ps-hist .ic { background: linear-gradient(140deg, #F472B6, #DB2777); color: #fff; box-shadow: 0 8px 16px -10px #DB2777; }
+.chart-card h2 .ic { color: var(--violet); }
+.kpi-ic { width: 26px; height: 26px; padding: 9px; box-sizing: content-box; border-radius: 14px; background: var(--kc); color: #fff !important; box-shadow: 0 10px 18px -10px var(--kc); margin: 4px 0 6px !important; }
+.sy-stat-ic, .cf-ic { color: #fff !important; background: linear-gradient(140deg, color-mix(in srgb, var(--c, var(--teal)) 70%, #fff), var(--c, var(--teal))) !important; box-shadow: 0 10px 18px -10px var(--c, var(--teal)); }
+.sy-teal { --c: #0D9488; } .sy-violet { --c: #7C3AED; } .sy-sun { --c: #D97706; } .sy-coral { --c: #EA580C; }
+.cf-t-text { --c: #0D9488; } .cf-t-textarea { --c: #2563EB; } .cf-t-number { --c: #7C3AED; } .cf-t-date { --c: #EA580C; } .cf-t-yesno { --c: #16A34A; } .cf-t-category { --c: #D97706; }
+
+/* richer chips, buttons and active states */
+.chips li { background: color-mix(in srgb, var(--teal) 14%, var(--paper)); border-color: color-mix(in srgb, var(--teal) 28%, transparent); }
+.chips li:nth-child(4n+2) { background: color-mix(in srgb, var(--violet) 15%, var(--paper)); border-color: color-mix(in srgb, var(--violet) 30%, transparent); }
+.chips li:nth-child(4n+3) { background: color-mix(in srgb, var(--sky) 15%, var(--paper)); border-color: color-mix(in srgb, var(--sky) 30%, transparent); }
+.chips li:nth-child(4n+4) { background: color-mix(in srgb, var(--sun) 18%, var(--paper)); border-color: color-mix(in srgb, var(--sun) 35%, transparent); }
+.btn-primary { background: linear-gradient(120deg, #0D9488, #0E7490 60%, #4F46E5) !important; color: #fff; box-shadow: 0 12px 22px -12px #4F46E5; }
+.btn-primary:hover:not(:disabled) { filter: brightness(1.07); }
+.sidenav a.active { background: linear-gradient(120deg, color-mix(in srgb, var(--teal) 16%, var(--paper)), color-mix(in srgb, #4F46E5 10%, var(--paper))); }
+.sidenav a.active .ic { background: linear-gradient(140deg, #14B8A6, #4F46E5) !important; color: #fff !important; }
+.sidenav a.active::before { background: linear-gradient(180deg, #14B8A6, #4F46E5); }
+.tabs [role=tab][aria-selected="true"] { background: linear-gradient(180deg, color-mix(in srgb, var(--teal) 14%, var(--paper)), transparent); }
+.mini-stat:nth-child(1) .mini-ic { background: linear-gradient(140deg, rgba(255,255,255,.35), rgba(255,255,255,.15)) !important; }
+.pill-gov { background: color-mix(in srgb, var(--sky) 16%, var(--paper)); }
+.completion-bar span, .tz-hi { --c: #0D9488; }
+.completion-bar span { background: linear-gradient(90deg, #14B8A6, #4F46E5); }
+[dir="rtl"] .completion-bar span { background: linear-gradient(270deg, #14B8A6, #4F46E5); }
+.page > .page-head:not(.page-head-tight) .btn-primary { background: #fff !important; color: var(--b1) !important; box-shadow: 0 10px 20px -12px rgba(0,0,0,.4); }
+.section-h .ic, .panel-title .ic { color: #fff !important; }
