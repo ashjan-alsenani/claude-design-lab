@@ -759,14 +759,14 @@ document.addEventListener("click",async x=>{let b=x.target.closest("[data-copy]"
     <a class="skip-link" href="#main">${a(t("skipToContent"))}</a>
     <div class="shell">
       <aside class="sidebar" aria-label="${a(t("appName"))}">
-        <a class="brand" href="#/directory" dir="ltr">${pt}
-          <span class="brand-text"><strong>Digital &amp;<br>Technology</strong><span dir="${r?"rtl":"ltr"}">${a(r?"\u062F\u0644\u064A\u0644 \u0645\u0648\u0638\u0641\u064A \u0627\u0644\u0631\u0642\u0645\u064A\u0629 \u0648\u0627\u0644\u062A\u0642\u0646\u064A\u0629":"Employee directory")}</span></span></a>
+        <a class="brand" href="#/directory">${pt}
+          <span class="brand-text"><strong>${a(r?"الرقمية والتقنية":"Digital & Technology")}</strong><span dir="${r?"ltr":"rtl"}">${a(r?"Digital & Technology":"الرقمية والتقنية")}</span></span></a>
         <nav class="sidenav">
-          ${n.map(l=>`<a href="${l.href}" data-nav="${l.key}">${h(l.ic,21)}<span>${a(l.label)}</span></a>`).join("")}
+          ${[["",["directory","structure"]],[r?"التحليلات":"Insights",["dashboard","talent","seniority"]],[r?"الإدارة":"Administration",["manage"]]].map(([g,ks])=>{let it=n.filter(l=>ks.includes(l.key));return it.length?`<div class="sidenav-group">${g?`<p class="sidenav-label">${a(g)}</p>`:""}${it.map(l=>`<a href="${l.href}" data-nav="${l.key}">${h(l.ic,20)}<span>${a(l.label)}</span></a>`).join("")}</div>`:""}).join("")}
         </nav>
         <div class="side-user">
-          <span class="side-avatar" aria-hidden="true">${h("user",20)}</span>
-          <span class="side-user-meta"><strong>${a(e.name)}</strong><span>${a(e.role==="admin"?t("roleAdmin"):t("roleViewer"))}</span></span>
+          <span class="side-avatar" aria-hidden="true">${o}</span>
+          <span class="side-user-meta"><strong dir="auto">${a(e.name)}</strong><span>${a(e.role==="admin"?t("roleAdmin"):t("roleViewer"))}</span></span>
           <button class="icon-btn side-logout" data-act="logout" aria-label="${a(t("signOut"))}" title="${a(t("signOut"))}">${h("log-out",19)}</button>
         </div>
       </aside>
