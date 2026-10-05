@@ -3006,3 +3006,20 @@ html.tp-open { overflow: hidden; }
 .cr-st { display: inline-flex; align-items: center; gap: 4px; width: fit-content; padding: 2px 9px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: var(--c); background: color-mix(in srgb, var(--c) 12%, var(--paper)); }
 .pf-actions .btn-sm { height: 44px; }
 .modal [data-cr-add] { width: auto; margin-bottom: 12px; }
+
+/* ===== v27: confirm details by email ===== */
+.v-pick { display: grid; gap: 10px; }
+.v-opt { display: grid; grid-template-columns: auto 1fr; grid-template-areas: "ic t" "ic s"; gap: 2px 12px; align-items: center; padding: 14px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--ink); font: inherit; text-align: start; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.v-opt:hover { border-color: var(--teal); background: color-mix(in srgb, var(--teal) 5%, var(--paper)); }
+.v-opt .ic { grid-area: ic; color: var(--teal-strong); } .v-opt strong { grid-area: t; } .v-opt small { grid-area: s; color: var(--muted); font-size: 13.5px; }
+.v-stat { border: 0; font: inherit; text-align: start; cursor: pointer; color: var(--ink); }
+.v-stat[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--c), var(--sh-1); }
+.v-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 12px; padding: 10px 12px; border-radius: 14px; background: var(--canvas); }
+.v-n { color: var(--muted); font-size: 14px; margin-inline-end: auto; }
+.v-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.v-list li { display: grid; grid-template-columns: auto minmax(180px, 1.4fr) auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); animation: card-in .35s var(--ease-out) both; animation-delay: calc(var(--i) * 20ms); }
+.v-list input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--teal); }
+.v-st { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--c); background: color-mix(in srgb, var(--c) 12%, var(--paper)); white-space: nowrap; }
+.v-at { color: var(--muted); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.v-acts { display: flex; gap: 4px; } .v-okb { color: #16A34A; } .v-upb { color: #D97706; }
+@media (max-width: 760px) { .v-list li { grid-template-columns: auto minmax(0, 1fr) auto; } .v-at { display: none; } .v-acts { grid-column: 2 / -1; } }
