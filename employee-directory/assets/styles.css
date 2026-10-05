@@ -1248,3 +1248,17 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),
 @media (max-width: 640px) { .org-tier { padding: 14px; } .org-grid { grid-template-columns: minmax(0, 1fr); } }
 /* Sample-data popover opens into the page, not under the sidebar */
 .demo-pop { inset-inline-end: auto; inset-inline-start: 0; width: 300px; max-width: calc(100vw - 32px); }
+
+/* ===== Add a field from inside the employee form ===== */
+.add-field-inline { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 16px; padding: 11px 14px; border-radius: 12px; border: 1.5px dashed color-mix(in srgb, var(--teal) 45%, var(--line-strong)); background: transparent; color: var(--teal-strong); font-weight: 600; font-size: 14px; cursor: pointer; transition: background-color .2s ease, border-color .2s ease, transform .16s var(--ease-out); }
+.add-field-inline:hover { background: var(--teal-soft); border-color: var(--teal); }
+.add-field-inline:active { transform: scale(.98); }
+.field-new { border-radius: 12px; animation: field-new 2.4s var(--ease-out) both; }
+@keyframes field-new { 0%, 35% { background: var(--sun-soft); box-shadow: 0 0 0 8px var(--sun-soft); } 100% { background: transparent; box-shadow: 0 0 0 8px transparent; } }
+.cf-types-compact { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.cf-types-compact .cf-type-card { flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 10px 6px; }
+.cf-types-compact .cf-ic { width: 32px; height: 32px; border-radius: 10px; }
+.cf-types-compact strong { font-size: 13px; }
+.modal-body .field { display: grid; gap: 6px; }
+@media (max-width: 480px) { .cf-types-compact { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#nf_opts, #cf_opts { unicode-bidi: plaintext; text-align: start; }
