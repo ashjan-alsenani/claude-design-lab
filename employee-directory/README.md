@@ -20,7 +20,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 | `index.html` | الصفحة الرئيسية |
 | `assets/app.js` | التطبيق والبيانات التجريبية (حزمة مبنية مسبقًا) |
 | `assets/styles.css` | التنسيقات |
-| `assets/fonts/` | خط IBM Plex Sans Arabic (رخصة SIL OFL)، أوزان 400–700 |
+| `assets/fonts/` | الإنجليزية بخط Calibri إذا كان مثبتًا على الجهاز، وإلا Carlito (مطابق له في المقاسات)، والعربية بخط Noto Sans Arabic. الخطان المرفقان برخصة SIL OFL، ونصّ الرخص في `assets/fonts/licenses/` |
 
 ## ملاحظات
 
