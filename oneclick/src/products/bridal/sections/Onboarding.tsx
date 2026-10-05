@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useMemo, useState } from "react";
@@ -8,7 +9,8 @@ import { useBridal } from "../app/state";
 import { addDays, diffDays, resolveTasks } from "../model/engine";
 import { applyOp } from "../model/reducer";
 import { emptyWorkspace, type Currency, type EventKey, type Profile } from "../model/types";
-import { Flourish, HeroArt, Petals } from "../ui/Art";
+import { Flourish, Petals } from "../ui/Art";
+import heroPhoto from "../assets/bride-hero.jpg";
 
 import { Button, ChoiceCard, Field, inputCls } from "../ui/kit";
 
@@ -60,10 +62,19 @@ export function Welcome({ onStart, exitHref }: { onStart: () => void; exitHref: 
             </Link>
           )}
         </motion.div>
-        <motion.div initial={reduce ? false : { opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} className="order-1 mx-auto w-full max-w-[300px] lg:order-2 lg:max-w-[420px]">
-          <HeroArt className="w-full" />
+        <motion.div initial={reduce ? false : { opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} className="order-1 mx-auto w-full max-w-[220px] sm:max-w-[300px] lg:order-2 lg:max-w-[420px]">
+          <BridePhoto alt={t.dash.heroAlt} sizes="(min-width: 1024px) 420px, 300px" priority />
         </motion.div>
       </div>
+    </div>
+  );
+}
+
+/** The approved bride photograph inside an arch, echoing the dashboard hero. */
+function BridePhoto({ alt, sizes, priority, className = "w-full" }: { alt: string; sizes: string; priority?: boolean; className?: string }) {
+  return (
+    <div className={`relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[28px] border-4 border-bj-paper shadow-[0_30px_60px_-30px_rgba(110,70,60,.45)] ${className}`}>
+      <Image src={heroPhoto} alt={alt} fill priority={priority} sizes={sizes} placeholder="blur" className="object-cover object-[32%_30%] ltr:-scale-x-100" />
     </div>
   );
 }
@@ -128,7 +139,7 @@ export function Onboarding({ onCancel }: { onCancel: () => void }) {
           <div className="mx-auto w-fit">
             <div className="relative">
               <Petals count={22} />
-              <HeroArt className="w-44" />
+              <BridePhoto alt="" sizes="176px" className="w-44" />
             </div>
           </div>
           <h1 className="bj-serif mt-8 text-[2.4rem] leading-tight text-bj-ink">

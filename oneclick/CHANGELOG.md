@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.0 — 2026-10-05 — Bridal Journey: the approved photo design in the real product
+- Dashboard hero: the bride photograph fades into the page (edge to edge on computers), with the title,
+  frosted countdown and readiness cards beside it; the six summary cards overlap the photo.
+- Upcoming appointments show photos (dress, flowers, table) where they fit.
+- New wheat brand mark in the app header.
+- Public product page and the first-time setup screen use the same photograph instead of the drawn bride.
+- Removed the old drawn bride, terrace scene and their animations.
+
 ## 0.10.0 — 2026-10-05 — Site scan and a complete admin
 - Live scan: all 92 sitemap pages and 136 internal links work; no script errors, broken images or
   sideways scrolling on computer or phone.

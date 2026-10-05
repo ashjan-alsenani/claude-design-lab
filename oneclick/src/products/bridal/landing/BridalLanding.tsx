@@ -1,6 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
-import { ArtTile, HeroArt, Sparkles, type Motif } from "../ui/Art";
+import { ArtTile, type Motif } from "../ui/Art";
+import heroPhoto from "../assets/bride-hero.jpg";
+import blossom from "../assets/blossom-corner.jpg";
 
 /**
  * Marketing landing page for Bridal Journey (public, server-rendered, indexable).
@@ -9,6 +12,7 @@ import { ArtTile, HeroArt, Sparkles, type Motif } from "../ui/Art";
 const copy = {
   ar: {
     eyebrow: "رحلة العروس · من ون كليك",
+    heroAlt: "العروس من الخلف بطرحتها الطويلة وتاج الشعر، تحمل باقة ورد بين الأقواس البيضاء",
     title: ["خطّطي لزفافك بأناقة،", "دون أن يفوتك شيء."],
     sub: "مساعدتك الشخصية لكل مهمة وموعد ودفعة وتفصيلة جميلة حتى يوم زفافك. تُدخلين تفاصيل زفافك مرة واحدة، فتُرتَّب رحلتك كلها في وقتها.",
     cta: "ابدئي رحلتي",
@@ -37,6 +41,7 @@ const copy = {
   },
   en: {
     eyebrow: "Bridal Journey · by One Click",
+    heroAlt: "The bride from behind in a long veil and hair crown, holding a bouquet between white arches",
     title: ["Plan your wedding beautifully.", "Without forgetting a thing."],
     sub: "Your personal bridal planner for every task, appointment, payment and beautiful detail leading to your wedding day. Tell us about your wedding once; your whole journey arranges itself.",
     cta: "Start My Bridal Journey",
@@ -73,9 +78,14 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
   return (
     <div className="bj" dir={locale === "ar" ? "rtl" : "ltr"}>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#faf7f5_0%,#fbf1ed_55%,#f3e6e0_100%)]">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-10 sm:px-8 md:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:pb-24">
-          <div>
+      {/* The same photograph as the bride's dashboard, fading into the page beside the copy */}
+      <section className="bj-hero overflow-hidden">
+        <div className="bj-hero-photo">
+          <Image src={heroPhoto} alt={c.heroAlt} fill priority sizes="(min-width: 1024px) 62vw, 100vw" className="object-cover" placeholder="blur" />
+        </div>
+        <Image src={blossom} alt="" className="bj-hero-blossom h-auto" aria-hidden="true" />
+        <div className="relative mx-auto max-w-6xl px-5 pb-14 sm:px-8 lg:flex lg:min-h-[600px] lg:flex-col lg:justify-center lg:py-20">
+          <div className="-mt-8 lg:mt-0 lg:w-[min(560px,48%)]">
             <p className="text-[12px] uppercase tracking-[0.22em] text-bj-gold-ink">{c.eyebrow}</p>
             <h1 className="mt-5 text-[2.5rem] font-light leading-[1.2] text-bj-ink sm:text-[3.4rem]">
               {c.title[0]}
@@ -97,13 +107,8 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
               </Link>
             </p>
           </div>
-          <div className="relative mx-auto w-full max-w-[320px] lg:max-w-[420px]">
-            <HeroArt className="w-full" />
-            <Sparkles className="absolute inset-0 h-full w-full" />
-            <PreviewCard locale={locale} />
-          </div>
         </div>
-        <div className="border-y border-bj-line bg-bj-paper/70">
+        <div className="relative border-y border-bj-line bg-bj-paper/70">
           <ul className="mx-auto flex max-w-6xl flex-wrap justify-center gap-x-10 gap-y-2 px-5 py-4 text-[13.5px] text-bj-ink-soft">
             {c.strip.map((s) => (
               <li key={s} className="flex items-center gap-2">
@@ -168,34 +173,6 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
           {c.demo}
         </Link>
       </section>
-    </div>
-  );
-}
-
-/** A small static glimpse of the dashboard (decorative). */
-function PreviewCard({ locale }: { locale: Locale }) {
-  const ar = locale === "ar";
-  const items = ar ? ["تأكيد قائمة المصورات", "حجز تجربة المكياج", "مراجعة تصميم الدعوة"] : ["Confirm photographer shortlist", "Book makeup trial", "Review invitation design"];
-  return (
-    <div aria-hidden="true" className="absolute -bottom-6 start-[-6%] w-[78%] rounded-[20px] border border-bj-line bg-bj-paper/95 p-4 shadow-[0_24px_50px_-28px_rgba(80,50,40,.22)] backdrop-blur sm:start-[-14%]">
-      <p className="text-[11px] text-bj-muted">{ar ? "صباح الخير، ليان" : "Good morning, Layan"}</p>
-      <p className="bj-serif text-[1.9rem] leading-tight text-bj-ink">
-        {new Intl.NumberFormat(ar ? "ar-OM" : "en").format(255)} <span className="text-[1rem] text-bj-ink-soft">{ar ? "يومًا على زفافك" : "days to go"}</span>
-      </p>
-      <ul className="mt-2 space-y-1.5">
-        {items.map((x, i) => (
-          <li key={x} className="flex items-center gap-2 text-[12.5px] text-bj-ink">
-            <span className={`grid size-4 place-items-center rounded-full border ${i === 0 ? "border-bj-sage bg-bj-sage" : "border-bj-beige"}`}>
-              {i === 0 && (
-                <svg viewBox="0 0 12 12" className="size-2.5">
-                  <path d="M2.5 6.2l2.2 2.2 4.8-4.9" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
-                </svg>
-              )}
-            </span>
-            <span className={i === 0 ? "text-bj-muted line-through" : ""}>{x}</span>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

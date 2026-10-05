@@ -1,7 +1,6 @@
 /**
- * Bridal artwork ("Soft Modern"): warm white and nude tints, cocoa line motifs and twinkling
- * sparkles. The bride is drawn from behind (her face is never shown): hair bun, pearl buttons,
- * a full skirt and a veil that sways. Real photos can replace any tile (brides add their own).
+ * Bridal artwork: line motifs on warm nude tiles, the wheat brand mark and the petal celebration.
+ * Photography (assets/) carries the hero; these fill in where no photo exists.
  * Motion is CSS only and stops under reduced-motion.
  */
 import type { CSSProperties } from "react";
@@ -70,38 +69,6 @@ export function Flourish({ className = "" }: { className?: string }) {
   );
 }
 
-/** A loose field of twinkling sparkles to lay over a card (decorative). */
-export function Sparkles({ className = "", count = 9 }: { className?: string; count?: number }) {
-  const spots = [[12, 18, 5], [84, 12, 7], [70, 40, 4], [92, 64, 5], [26, 70, 4], [52, 16, 3], [8, 48, 3], [60, 82, 5], [38, 34, 3], [78, 88, 3]];
-  return (
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className={`pointer-events-none ${className}`} aria-hidden="true">
-      {spots.slice(0, count).map(([x, y, r], i) => (
-        <Twinkle key={i} x={x} y={y} r={r} delay={-i * 0.45} fill={i % 3 ? "#dcbfb2" : "#ffffff"} />
-      ))}
-    </svg>
-  );
-}
-
-/** Tiny hearts and sparkles drifting up (decorative). */
-export function Floaters({ className = "", count = 6 }: { className?: string; count?: number }) {
-  return (
-    <div aria-hidden="true" className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
-      {Array.from({ length: count }, (_, i) => {
-        const style: CSSProperties = { insetInlineStart: `${8 + ((i * 37) % 84)}%`, bottom: `${(i * 13) % 30}%`, animationDelay: `${-i * 1.15}s`, animationDuration: `${6 + (i % 3)}s` };
-        return (
-          <span key={i} className="bj-rise absolute block opacity-0" style={style}>
-            {i % 2 ? (
-              <svg width="10" height="10" viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z" fill="#e7c6ba" /></svg>
-            ) : (
-              <svg width="10" height="10" viewBox="0 0 24 24"><path d={sparklePath(12, 12, 11)} fill="#d6b4a6" /></svg>
-            )}
-          </span>
-        );
-      })}
-    </div>
-  );
-}
-
 /** Rose petals drifting down: the celebration effect (reduced motion: nothing). */
 export function Petals({ count = 18 }: { count?: number }) {
   return (
@@ -117,201 +84,31 @@ export function Petals({ count = 18 }: { count?: number }) {
   );
 }
 
-/**
- * The bride, seen from behind so her face never shows: a soft arch, her hair in a bun with a
- * pearl comb, an off-shoulder gown with pearl buttons down the back, a small bouquet at her side
- * and a long veil that sways. `arch={false}` drops the backdrop for use inside busy cards.
- */
-export function BrideArt({ className = "", arch = true, sparkles = true }: { className?: string; arch?: boolean; sparkles?: boolean }) {
-  const skin = "#e9c6b5";
-  const hair = "#7a5548";
+/** The approved Bridal Journey mark (assets/logo-mark.svg), drawn in currentColor. */
+function WheatMark({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 300 400" className={className} fill="none" aria-hidden="true">
-      <defs>
-        <linearGradient id="bj-b-skirt" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#f3e9e4" />
-        </linearGradient>
-        <linearGradient id="bj-b-veil" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" stopOpacity=".85" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity=".45" />
-        </linearGradient>
-        <radialGradient id="bj-b-glow" cx=".5" cy=".4" r=".55">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      {arch && (
-        <>
-          <path d="M46 396V172a104 104 0 0 1 208 0v224z" fill="#f3e8e3" />
-          <path d="M60 396V176a90 90 0 0 1 180 0v220" stroke="#e3cfc6" strokeWidth="1" />
-          <circle cx="150" cy="190" r="150" fill="url(#bj-b-glow)" opacity=".8" />
-        </>
-      )}
-      <ellipse cx="150" cy="390" rx="112" ry="7" fill="#e3d0c8" opacity=".55" />
-
-      {/* veil, back layer */}
-      <g className="bj-sway">
-        <path d="M150 70C116 124 70 250 34 392h232C230 250 184 124 150 70z" fill="#ffffff" opacity=".5" />
-      </g>
-
-      {/* skirt */}
-      <path d="M124 206c16 6 36 6 52 0 24 54 56 114 76 168-52 18-152 18-204 0 20-54 52-114 76-168z" fill="url(#bj-b-skirt)" stroke="#e7dad3" strokeWidth="1.2" />
-      <path d="M140 214c-10 66-28 116-40 166M160 214c8 66 26 116 38 168M150 214v172" stroke="#ecdfd9" strokeWidth="1.1" strokeLinecap="round" />
-
-      {/* arms */}
-      <path d="M110 152c-10 20-13 44-9 70l10 1c0-22 3-44 9-62z" fill={skin} />
-      <path d="M190 152c10 20 13 44 9 70l-10 1c0-22-3-44-9-62z" fill={skin} />
-
-      {/* bouquet at her side */}
-      <g>
-        <path d="M200 230l14-6M200 230l10 6" stroke="#9fae92" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="198" cy="222" r="7" fill="#efd5cb" />
-        <circle cx="208" cy="230" r="6" fill="#fbf1ec" stroke="#e7d2c9" />
-        <circle cx="193" cy="233" r="5.5" fill="#dcb3a5" />
-        <circle cx="205" cy="217" r="4" fill="#fbf1ec" stroke="#e7d2c9" />
-      </g>
-
-      {/* shoulders and back */}
-      <path d="M106 152c8-16 26-22 44-22s36 6 44 22l-6 8H112z" fill={skin} />
-      <path d="M110 152c20-6 60-6 80 0l-14 56c-16 4-36 4-52 0z" fill="#ffffff" stroke="#e7dad3" strokeWidth="1.2" />
-      <path d="M122 204c18 8 38 8 56 0l-1 9c-17 7-37 7-54 0z" fill="#ead3ca" />
-      <path d="M150 208c-8-8-20-6-18 2 2 6 12 4 18-2zm0 0c8-8 20-6 18 2-2 6-12 4-18-2z" fill="#e2c3b8" />
-      {[160, 170, 180, 190].map((y) => (
-        <circle key={y} cx="150" cy={y} r="1.8" fill="#e2cfc6" />
-      ))}
-
-      {/* veil, front layer */}
-      <g className="bj-sway" style={{ animationDelay: "-1.5s" }}>
-        <path d="M140 98c-24 56-48 160-74 296 54 10 118 10 172 0-26-136-56-240-78-296z" fill="url(#bj-b-veil)" />
-        <path d="M66 394c54 10 118 10 172 0" stroke="#e6d3ca" strokeWidth="1" strokeDasharray="1 4" strokeLinecap="round" />
-      </g>
-
-      {/* neck and hair from behind: no face */}
-      <rect x="142" y="104" width="16" height="30" rx="7" fill={skin} />
-      <ellipse cx="150" cy="86" rx="27" ry="30" fill={hair} />
-      <path d="M131 76c7-12 25-15 37-4" stroke="#9b7365" strokeWidth="2.2" strokeLinecap="round" opacity=".7" />
-      <path d="M136 70c-4 12-4 26 4 40M146 64c-3 16-2 32 3 50M156 64c3 16 2 32-3 50M165 70c4 12 4 26-4 40" stroke="#664539" strokeWidth="1.3" strokeLinecap="round" opacity=".55" />
-      <circle cx="150" cy="62" r="15" fill="#6c4a3f" />
-      <path d="M140 60c4-7 15-8 20 0M143 66c4 4 10 4 14 0" stroke="#8d685b" strokeWidth="1.6" strokeLinecap="round" />
-      {[-60, -30, 0, 30, 60].map((a, i) => {
-        const r = (a * Math.PI) / 180;
-        return <circle key={i} cx={150 + Math.sin(r) * 19} cy={74 - Math.cos(r) * 3 + Math.abs(Math.sin(r)) * 4} r="2.4" fill="#ffffff" stroke="#e6d3ca" strokeWidth=".6" />;
-      })}
-
-      {sparkles && (
-        <>
-          <Twinkle x={64} y={128} r={9} delay={0} />
-          <Twinkle x={238} y={96} r={11} delay={-0.9} fill="#ffffff" />
-          <Twinkle x={252} y={250} r={7} delay={-1.6} />
-          <Twinkle x={44} y={276} r={6} delay={-2.2} fill="#ffffff" />
-          <Twinkle x={200} y={54} r={5} delay={-0.4} />
-          <Twinkle x={98} y={58} r={4} delay={-1.2} />
-        </>
-      )}
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M32 54c0-15 0-30 0-44" />
+      <path d="M32 27C18 26 10 19 9 8c12 0 21 6 23 19Z" />
+      <path d="M32 27C46 26 54 19 55 8c-12 0-21 6-23 19Z" />
+      <path d="M32 38c-11 0-18-5-21-14 10 0 17 4 21 14Z" />
+      <path d="M32 38c11 0 18-5 21-14-10 0-17 4-21 14Z" />
+      <path d="M32 49c-8 0-13-3-16-9 8 0 13 2 16 9Z" />
+      <path d="M32 49c8 0 13-3 16-9-8 0-13 2-16 9Z" />
     </svg>
   );
 }
 
-/**
- * The hero backdrop: a terrace with white arches opening onto soft mountains and the sea, with
- * blossoms climbing the columns. The bride stands on the "end" side (drawn separately).
- * The scene is drawn bride-on-the-left; flip it in LTR so she always faces the text.
- */
-export function TerraceScene({ className = "" }: { className?: string }) {
-  const arches = [0, 300, 600, 900];
-  const blossom = (x: number, y: number, k: number) => (
-    <g key={`${x}-${y}`}>
-      {[[0, 0, 9], [12, -6, 7], [-10, 8, 6], [6, 12, 5], [-14, -8, 5]].map(([dx, dy, r], i) => (
-        <circle key={i} cx={x + dx} cy={y + dy} r={r} fill={(i + k) % 3 === 0 ? "#f1cfd0" : (i + k) % 3 === 1 ? "#fbeeee" : "#e8b9bd"} stroke="#ead6d4" strokeWidth=".6" />
-      ))}
-      <path d={`M${x - 18} ${y + 4}c-8-2-12-8-10-14 6 2 10 8 10 14zM${x + 16} ${y + 10}c8 0 12-6 12-12-6 0-10 6-12 12z`} fill="#b9c6ad" />
-    </g>
-  );
-  return (
-    <svg viewBox="0 0 1200 480" preserveAspectRatio="xMidYMax slice" className={className} aria-hidden="true">
-      <defs>
-        <linearGradient id="bj-t-sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#f3e9e4" />
-          <stop offset=".6" stopColor="#f9f1ec" />
-          <stop offset="1" stopColor="#fbf6f2" />
-        </linearGradient>
-        <linearGradient id="bj-t-sea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#dfe3e4" />
-          <stop offset="1" stopColor="#ece9e6" />
-        </linearGradient>
-        <radialGradient id="bj-t-sun" cx=".25" cy=".25" r=".5">
-          <stop offset="0" stopColor="#ffffff" stopOpacity=".95" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id="bj-t-wall" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fbf7f4" />
-          <stop offset="1" stopColor="#f3ebe6" />
-        </linearGradient>
-      </defs>
-      <rect width="1200" height="480" fill="url(#bj-t-sky)" />
-      <rect width="1200" height="480" fill="url(#bj-t-sun)" />
-      <path d="M0 262l90-58 70 34 120-92 110 76 80-40 150 86 120-70 130 64 90-40 240 66v62H0z" fill="#e4d6d3" />
-      <path d="M0 290l140-46 110 30 140-60 130 58 120-30 160 52 140-36 260 48v40H0z" fill="#d9c8c5" />
-      <rect y="300" width="1200" height="34" fill="url(#bj-t-sea)" />
-      <path d="M120 312h60M320 320h90M560 310h50M760 322h80M980 314h60" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" opacity=".8" />
-      {/* balustrade */}
-      <rect y="334" width="1200" height="146" fill="#f5ede8" />
-      <rect y="330" width="1200" height="10" fill="#fbf7f4" stroke="#eadfd8" />
-      {Array.from({ length: 40 }, (_, i) => (
-        <path key={i} d={`M${i * 30 + 10} 340h10v6c-4 4-4 14 0 18v14h-10v-14c4-4 4-14 0-18z`} fill="#fbf7f4" stroke="#ebe0da" strokeWidth=".8" />
-      ))}
-      <rect y="378" width="1200" height="8" fill="#fbf7f4" stroke="#eadfd8" />
-      {/* arcade with arched openings */}
-      <path fillRule="evenodd" fill="url(#bj-t-wall)" d={`M0 0H1200V480H0Z${arches.map((x) => `M${x + 40} 480V190A110 110 0 0 1 ${x + 260} 190V480Z`).join("")}`} />
-      {arches.map((x) => (
-        <g key={x}>
-          <path d={`M${x + 40} 480V190A110 110 0 0 1 ${x + 260} 190V480`} fill="none" stroke="#e8ddd6" strokeWidth="2" />
-          <path d={`M${x + 28} 480V188A122 122 0 0 1 ${x + 272} 188V480`} fill="none" stroke="#efe6e1" strokeWidth="1" />
-        </g>
-      ))}
-      {/* blossoms climbing the arches, heavier on the bride's side */}
-      {[[40, 200], [52, 150], [74, 108], [108, 84], [28, 260], [36, 330], [262, 170], [252, 230], [280, 120], [330, 100], [344, 220], [550, 120], [560, 180]].map(([x, y], i) => blossom(x, y, i))}
-      {[[880, 130], [900, 190], [1160, 160], [1170, 240]].map(([x, y], i) => (
-        <g key={i} opacity=".55">{blossom(x, y, i)}</g>
-      ))}
-      {/* blossoms on the terrace floor */}
-      {[[18, 430], [60, 452], [300, 446], [340, 464]].map(([x, y], i) => blossom(x, y, i + 2))}
-    </svg>
-  );
-}
-
-/** A line lotus: the Bridal Journey mark. */
-export function Lotus({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 36" className={className} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" strokeLinecap="round" aria-hidden="true">
-      <path d="M24 4c-5 6-6 15 0 26 6-11 5-20 0-26z" />
-      <path d="M24 30c-7-2-12-8-12-17 6 1 10 5 12 10" />
-      <path d="M24 30c7-2 12-8 12-17-6 1-10 5-12 10" />
-      <path d="M24 30C15 31 7 27 3 19c6-1 11 1 15 5" />
-      <path d="M24 30c9 1 17-3 21-11-6-1-11 1-15 5" />
-      <path d="M12 33h24" />
-    </svg>
-  );
-}
-
-/** Lotus + "رحلة العروس" over "Bridal Journey". */
 export function BrandMark({ className = "" }: { className?: string }) {
   return (
     <span className={`group inline-flex items-center gap-2.5 ${className}`}>
-      <Lotus className="h-8 w-10 text-bj-taupe transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-translate-y-0.5 group-hover:scale-110" />
+      <WheatMark className="size-9 text-[#b87962] transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-translate-y-0.5 group-hover:scale-110" />
       <span className="leading-none">
         <span className="bj-glitter block text-[1.25rem] font-medium" lang="ar">رحلة العروس</span>
         <span className="bj-latin mt-1 block text-[0.82rem] italic text-bj-muted" lang="en" dir="ltr">Bridal Journey</span>
       </span>
     </span>
   );
-}
-
-/** Kept for the landing and welcome screens: the bride inside her arch, floating gently. */
-export function HeroArt({ className = "" }: { className?: string }) {
-  return <BrideArt className={className} />;
 }
 
 export const moodMotif: Record<string, Motif> = { dress: "dress", makeup: "lips", hair: "comb", kosha: "arch", flowers: "rose", tables: "table", invitation: "envelope", cake: "cake", photo: "camera", henna: "henna", home: "home", honeymoon: "suitcase" };
