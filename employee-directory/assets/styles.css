@@ -891,3 +891,17 @@ body { color: var(--navy-txt); }
 .demo-roles button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
 .demo-reset{display:inline-flex;align-items:center;gap:6px;border:0;background:none;color:var(--teal-strong);font-weight:600;cursor:pointer;padding:4px 0}
 .topbar{top:env(safe-area-inset-top,0px)}
+
+/* ===== Sidebar toggle (focus mode) ===== */
+.side-toggle { display: none; }
+@media (min-width: 961px) {
+  .side-toggle { display: inline-grid; }
+  .sidebar { transition: transform .28s cubic-bezier(.2,.8,.2,1), visibility .28s; }
+  .main-col { transition: margin-inline-start .28s cubic-bezier(.2,.8,.2,1); }
+  .side-hidden .sidebar { transform: translateX(-100%); visibility: hidden; }
+  [dir="rtl"].side-hidden .sidebar { transform: translateX(100%); }
+  .side-hidden .main-col { margin-inline-start: 0; }
+}
+.side-toggle-arrow { transition: transform .28s; transform-origin: 14.5px 12px; }
+[dir="rtl"] .side-toggle svg { transform: scaleX(-1); }
+.side-hidden .side-toggle-arrow { transform: scaleX(-1); }
