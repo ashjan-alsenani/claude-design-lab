@@ -2929,3 +2929,25 @@ html.tp-open { overflow: hidden; }
   .user-pop { inset-inline-end: 0; min-width: 230px; }
 }
 .dx-row.dx-row-one { grid-template-columns: minmax(0, 1fr); }
+
+/* ===== v24: organisation logo & credit ===== */
+.brand-logo { display: block; margin: 0 4px 10px; padding: 10px 12px; border-radius: 14px; background: #fff; border: 1px solid var(--line); text-align: center; }
+.brand-logo .org-logo { display: block; max-width: 100%; max-height: 54px; margin: 0 auto; object-fit: contain; }
+.credit { display: grid; gap: 1px; margin: 8px 6px 10px; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--teal) 6%, var(--canvas)); font-size: 12.5px; line-height: 1.45; color: var(--muted); text-align: left; }
+.credit strong { color: var(--navy-txt); font-weight: 700; }
+.login-art .credit { margin: 28px 0 0; background: rgba(255,255,255,.1); color: rgba(255,255,255,.82); border: 1px solid rgba(255,255,255,.18); width: fit-content; }
+.login-art .credit strong { color: #fff; }
+.login-logo { display: inline-block; margin-bottom: 22px; padding: 14px 18px; border-radius: 18px; background: #fff; box-shadow: 0 18px 40px -24px rgba(0,0,0,.6); }
+.login-logo .org-logo { display: block; max-width: 240px; max-height: 90px; object-fit: contain; }
+.rp-foot .credit { margin: 0 auto 8px; width: fit-content; text-align: center; }
+.rp-logo-img { width: auto; height: auto; padding: 10px 14px; background: #fff; }
+.rp-logo-img .org-logo { display: block; max-width: 180px; max-height: 60px; object-fit: contain; }
+.lg-box { display: grid; place-items: center; min-height: 120px; margin-bottom: 12px; padding: 16px; border-radius: 16px; background: #fff; border: 1px dashed var(--line-strong); }
+.lg-box img { max-width: 100%; max-height: 110px; object-fit: contain; }
+.lg-empty { display: grid; justify-items: center; gap: 4px; color: #94A3B8; }
+.lg-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.lg-actions label { cursor: pointer; }
+@media (max-width: 900px) { .sidebar .credit { display: none; } }
+@media print { .rp-foot .credit { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+.h2-foot { display: none; }
+@media (max-width: 900px) { .h2-foot { display: block; } .h2-foot .credit { margin: 4px auto 0; width: fit-content; text-align: center; } }
