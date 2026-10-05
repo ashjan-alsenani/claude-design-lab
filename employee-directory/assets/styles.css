@@ -1682,3 +1682,6 @@ body { font-family: var(--font); }
 .hero-fact > :not(svg):not(.ic) { grid-column: 2; }
 .hero-fact dt { font-size: 15px; color: var(--muted); font-weight: 500; }
 .hero-fact dd { font-size: 17px; color: var(--ink); font-weight: 700; }
+/* greys a touch stronger */
+:root { --muted: #3F4B60; --faint: #4F5B70; }
+[data-theme="dark"] { --muted: #BCC6D6; --faint: #A6B2C5; }
