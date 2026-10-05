@@ -1663,3 +1663,4 @@ kbd { display: inline-grid; place-items: center; min-width: 26px; height: 24px; 
 .page-directory .dir-toolbar .filter { flex: 0 1 210px; min-width: 170px; }
 @media (max-width: 640px) { .page.page-directory > .page-head:not(.page-head-tight) { padding-bottom: 84px; } .page-directory .dir-toolbar { margin-top: -56px; } }
 @media (max-width: 760px) { .page-directory .dir-toolbar .filter, .page-directory .dir-toolbar .search { flex: 1 1 100%; min-width: 0; } }
+.page > .page-head:not(.page-head-tight) .org-legend b { background: #fff; color: var(--b1) !important; }
