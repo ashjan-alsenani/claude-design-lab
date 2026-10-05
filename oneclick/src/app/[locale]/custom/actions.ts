@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { customRequestSchema, formDataToObject, zodFieldErrors, type FieldErrors } from "@/lib/forms/schemas";
-import { getLeadStore } from "@/lib/data/leads";
+import { getLeadStore, ownerNotifyAddress } from "@/lib/data/leads";
 import { newReference } from "@/lib/commerce/types";
 import { clientKey, rateLimit } from "@/lib/security/rate-limit";
 import { isDemoMode } from "@/lib/env";
@@ -43,18 +43,19 @@ export async function submitCustomRequest(_prev: CustomRequestState, formData: F
     return { status: "error" };
   }
 
-  // Notifications (not connected yet: these no-op safely and are logged in dev).
+  // Confirmation to the customer, and a heads-up to the owner.
   await Promise.allSettled([
     sendEmail(data.email, emailTemplates.customRequestConfirmation(data.locale, { name: data.name, reference })),
-    process.env.OWNER_NOTIFICATION_EMAIL
+    ownerNotifyAddress()
       ? sendEmail(
-          process.env.OWNER_NOTIFICATION_EMAIL,
+          ownerNotifyAddress()!,
           emailTemplates.ownerNotification({
             kind: "custom solution request",
             reference,
             summary: `${data.solutionType} · budget ${data.budget} · ${data.name}`,
-            adminUrl: localeUrl("en", "/admin/requests"),
-          })
+            adminUrl: localeUrl("en", "/admin/inbox?tab=custom"),
+          }),
+          { kind: "owner_notification" }
         )
       : Promise.resolve(),
   ]);

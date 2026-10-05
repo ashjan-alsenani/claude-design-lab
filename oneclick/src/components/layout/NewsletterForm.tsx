@@ -4,14 +4,14 @@ import { useState } from "react";
 import type { Dictionary } from "@/i18n/get-dictionary";
 import { Button } from "@/components/ui/Button";
 import { track } from "@/lib/analytics/track";
+import { subscribe } from "@/app/actions/subscribe";
 
-// Newsletter sign-up: consent required. Email provider is NOT connected yet, so the
-// form tells the truth and stores nothing (see OWNER_ACTIONS.md: email provider).
-export function NewsletterForm({ d }: { d: Pick<Dictionary, "newsletter" | "form"> }) {
-  const [state, setState] = useState<"idle" | "done" | "error">("idle");
+// Newsletter sign-up: stored only with explicit consent (the consent text and time are kept).
+export function NewsletterForm({ d, locale }: { d: Pick<Dictionary, "newsletter" | "form">; locale: "ar" | "en" }) {
+  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = String(form.get("email") || "");
@@ -24,14 +24,21 @@ export function NewsletterForm({ d }: { d: Pick<Dictionary, "newsletter" | "form
       return;
     }
     setError(null);
-    track("newsletter_signup", { connected: false });
+    setState("sending");
+    const r = await subscribe({ email, consent: true, consentText: d.newsletter.consent, locale });
+    if (!r.ok) {
+      setState("idle");
+      setError(r.reason === "invalid" ? d.form.invalidEmail : d.form.tryAgain);
+      return;
+    }
+    track("newsletter_signup", { connected: true });
     setState("done");
   }
 
   if (state === "done") {
     return (
       <p role="status" className="rounded-[var(--radius-md)] bg-primary-soft p-4 text-sm text-ink">
-        {d.newsletter.notConnected}
+        {d.newsletter.success}
       </p>
     );
   }
@@ -57,7 +64,9 @@ export function NewsletterForm({ d }: { d: Pick<Dictionary, "newsletter" | "form
             aria-describedby={error ? "nl-error" : undefined}
             className="h-11 min-w-0 flex-1 rounded-full border border-line-strong bg-bg px-4 text-ink placeholder:text-muted focus:border-primary focus:outline-none"
           />
-          <Button type="submit">{d.newsletter.submit}</Button>
+          <Button type="submit" disabled={state === "sending"}>
+            {d.newsletter.submit}
+          </Button>
         </div>
         <label className="mt-1 flex items-start gap-2 text-sm text-ink-soft">
           <input type="checkbox" name="consent" className="mt-1 size-4 accent-[var(--oc-primary)]" required />

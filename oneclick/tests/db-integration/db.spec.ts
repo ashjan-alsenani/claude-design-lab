@@ -158,3 +158,68 @@ test("owner test link: a signed-out visitor buys, gets the email, verifies, and 
   await plain.goto("/en/app/grocery-list");
   await expect(plain.getByTestId("product-app")).toHaveCount(0);
 });
+
+test("admin tools: inbox with owner email, newsletter saved, orders/customers/subscribers, strict security header", async ({ page, browser }) => {
+  const base = "http://localhost:3600";
+  await page.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
+  const errors: string[] = [];
+  page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+
+  // Security header is on every page, and the pages still work under it.
+  const res = await page.goto("/ar");
+  expect(res!.headers()["content-security-policy"]).toContain("default-src 'self'");
+  expect(res!.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
+
+  // A visitor sends a support message; the owner gets an email about it.
+  const visitor = await (await browser.newContext({ baseURL: base })).newPage();
+  await visitor.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
+  await visitor.goto("/en/contact");
+  await visitor.locator("#cname").fill("Huda Visitor");
+  await visitor.locator("#cemail").fill("huda.visitor@oneclick.test");
+  await visitor.locator("#message").fill("Hello, I have a question about the bridal planner.");
+  await visitor.locator('input[name="privacy"]').check();
+  await visitor.getByRole("button", { name: /send/i }).click();
+  await expect(visitor.getByText(/SUP-/).first()).toBeVisible();
+  let ownerMail;
+  for (let i = 0; i < 40 && !ownerMail; i++) {
+    ownerMail = (await inbox()).find((m) => m.to[0] === "owner@oneclick.test" && /support message/.test(m.subject + m.text));
+    if (!ownerMail) await visitor.waitForTimeout(250);
+  }
+  expect(ownerMail).toBeTruthy();
+
+  // The visitor joins the newsletter from the footer: stored with consent.
+  await visitor.goto("/en");
+  await visitor.locator("#nl-email").fill("news.reader@oneclick.test");
+  await visitor.locator('form[aria-labelledby="nl-title"] input[name="consent"]').check();
+  await visitor.locator('form[aria-labelledby="nl-title"] button[type="submit"]').click();
+  await expect(visitor.getByText("You're on the list")).toBeVisible();
+
+  // Owner: inbox shows the message and its status can be changed.
+  await signIn(page, "owner@oneclick.test");
+  await page.goto("/en/admin/inbox");
+  const card = page.locator("li", { hasText: "Huda Visitor" }).first();
+  await expect(card).toContainText("I have a question");
+  await card.locator("select[name=status]").selectOption("resolved");
+  await card.getByRole("button", { name: "Save" }).click();
+  await expect(page.getByText("Nothing waiting here.")).toBeVisible();
+  await page.goto("/en/admin/inbox?show=all");
+  await expect(page.locator("li", { hasText: "Huda Visitor" }).first()).toContainText("resolved");
+
+  // Subscribers list and CSV.
+  await page.goto("/en/admin/subscribers");
+  await expect(page.getByRole("cell", { name: "news.reader@oneclick.test" })).toBeVisible();
+  const href = (await page.getByRole("link", { name: /Download CSV/ }).getAttribute("href"))!;
+  expect(decodeURIComponent(href)).toContain("news.reader@oneclick.test,newsletter");
+
+  // Orders and customers (the earlier test purchase is labelled TEST and isn't revenue).
+  await page.goto("/en/admin/licensing?tab=orders");
+  await expect(page.getByRole("cell", { name: /visitor@oneclick.test/ }).first()).toBeVisible();
+  await expect(page.getByText("TEST", { exact: true }).first()).toBeVisible();
+  await page.goto("/en/admin/licensing?tab=customers&q=visitor");
+  await expect(page.getByRole("link", { name: "visitor@oneclick.test" })).toBeVisible();
+  await page.goto("/en/admin");
+  await expect(page.getByText("Revenue (30 days)")).toBeVisible();
+  await expect(page.getByText(/test order\(s\) not counted/)).toBeVisible();
+
+  expect(errors.filter((e) => /Content Security Policy|Refused to/.test(e))).toEqual([]);
+});

@@ -19,6 +19,7 @@ alter default privileges in schema public grant all on tables to anon, authentic
 alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
 SQL
 psql -h /tmp -p 54329 -U postgres -v ON_ERROR_STOP=1 -q -f "$APP/supabase/migrations/20261004000000_server_store.sql"
+psql -h /tmp -p 54329 -U postgres -v ON_ERROR_STOP=1 -q -f "$APP/supabase/migrations/20261005000000_subscribers.sql"
 [ -x "$W/postgrest" ] || { curl -sL -o "$W/p.tar.xz" https://github.com/PostgREST/postgrest/releases/download/v12.2.3/postgrest-v12.2.3-linux-static-x64.tar.xz; tar xf "$W/p.tar.xz" -C "$W"; }
 printf 'db-uri = "postgres://authenticator:auth@localhost:54329/postgres"\ndb-schemas = "public"\ndb-anon-role = "anon"\njwt-secret = "%s"\nserver-port = 54340\n' "$JWT_SECRET" > "$W/pgrst.conf"
 "$W/postgrest" "$W/pgrst.conf" > "$W/pgrst.log" 2>&1 &

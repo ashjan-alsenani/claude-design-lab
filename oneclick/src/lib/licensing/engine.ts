@@ -1156,6 +1156,75 @@ export function createLicensingEngine(deps: EngineDeps) {
     return deps.store.read((db) => resolvePolicy(db));
   }
 
+  /** Business numbers for the admin home. Test (SANDBOX) orders never count as revenue. */
+  async function adminBusiness(ctxIn: SessionContext | null) {
+    requireAdmin(ctxIn);
+    return deps.store.read((db) => {
+      const real = db.orders.filter((o) => !o.sandbox);
+      const paid = real.filter((o) => o.status === "paid");
+      const since = now().getTime() - 30 * DAY;
+      const recent = paid.filter((o) => new Date(o.paidAt ?? o.createdAt).getTime() > since);
+      const sum = (list: LOrder[]) => list.reduce((n, o) => n + o.totalMinor, 0);
+      return {
+        revenueMinor30d: sum(recent),
+        revenueMinorAll: sum(paid),
+        paidOrders30d: recent.length,
+        paidOrdersAll: paid.length,
+        refunded: real.filter((o) => o.status === "refunded" || o.status === "chargeback").length,
+        testOrders: db.orders.filter((o) => o.sandbox).length,
+        customers: db.users.length,
+        newCustomers30d: db.users.filter((u) => new Date(u.createdAt).getTime() > since).length,
+      };
+    });
+  }
+
+  /** Orders, newest first. `q` matches order number, email or product; test orders are labelled, and can be hidden. */
+  async function adminOrders(ctxIn: SessionContext | null, filter: { q?: string; status?: string; hideTests?: boolean } = {}) {
+    requireAdmin(ctxIn);
+    const q = filter.q?.trim().toLowerCase();
+    return deps.store.read((db) =>
+      db.orders
+        .filter((o) => !filter.hideTests || !o.sandbox)
+        .filter((o) => !filter.status || filter.status === "all" || o.status === filter.status)
+        .map((o) => {
+          const user = o.userId ? db.users.find((u) => u.id === o.userId) : undefined;
+          const items = db.orderItems.filter((i) => i.orderId === o.id).map((i) => productById(i.productId)?.name.en ?? i.productId);
+          return { order: structuredClone(o), products: items, userId: user?.id ?? null, accountEmail: user?.email ?? null };
+        })
+        .filter((r) => !q || [r.order.id, r.order.purchaseEmail, ...r.products].some((v) => v.toLowerCase().includes(q)))
+        .sort((a, b) => b.order.createdAt.localeCompare(a.order.createdAt))
+        .slice(0, 200)
+    );
+  }
+
+  /** Customer accounts, newest first, with what they own and when they were last seen. */
+  async function adminCustomers(ctxIn: SessionContext | null, filter: { q?: string } = {}) {
+    requireAdmin(ctxIn);
+    const q = filter.q?.trim().toLowerCase();
+    return deps.store.read((db) =>
+      db.users
+        .filter((u) => !q || [u.email, u.name ?? "", u.id].some((v) => v.toLowerCase().includes(q)))
+        .map((u) => {
+          const sessions = db.sessions.filter((s) => s.userId === u.id);
+          const lastSeen = sessions.map((s) => s.lastSeenAt).sort().at(-1) ?? null;
+          return {
+            id: u.id,
+            email: u.email,
+            name: u.name ?? null,
+            status: u.accountStatus,
+            createdAt: u.createdAt,
+            lastSeen,
+            activeLicenses: db.licenses.filter((l) => l.userId === u.id && effectiveStatus(l, now()) === "active").length,
+            paidOrders: db.orders.filter((o) => o.userId === u.id && o.status === "paid" && !o.sandbox).length,
+            devices: db.devices.filter((d) => d.userId === u.id && d.status === "trusted").length,
+            roles: rolesFor(u),
+          };
+        })
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+        .slice(0, 300)
+    );
+  }
+
   /** Records an admin action that changes no data (e.g. creating a test-purchase link) in the audit log. */
   async function adminNote(ctxIn: SessionContext | null, action: string) {
     const ctx = requireAdmin(ctxIn);
@@ -1215,6 +1284,9 @@ export function createLicensingEngine(deps: EngineDeps) {
     policy,
     adminUpdatePolicy,
     adminNote,
+    adminBusiness,
+    adminOrders,
+    adminCustomers,
   };
 }
 

@@ -6,13 +6,14 @@ import { isLocale, tr } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { getSession, hasRole, authStatus } from "@/lib/auth/session";
 import { catalog } from "@/lib/data/catalog";
-import { getLeadStore } from "@/lib/data/leads";
+import { getLeadStore, isOpenLead } from "@/lib/data/leads";
 import { getPaymentProvider } from "@/lib/payments";
 import { businessSettings } from "@/content/site";
 import { launchPlan, utmLink } from "@/content/social";
 import { formatMoney } from "@/lib/money";
 import { isEmailConfigured } from "@/lib/env";
 import { pageMetadata, siteUrl } from "@/lib/seo";
+import { currentContext, licensing } from "@/lib/licensing/server";
 import { createTestLinkAction } from "./licensing/actions";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | undefined>> };
@@ -45,11 +46,13 @@ export default async function AdminPage({ params, searchParams }: Props) {
     { ok: false, label: "Analytics", detail: "Consent-ready. No provider connected." },
   ];
 
+  const biz = await licensing().engine.adminBusiness(await currentContext());
+  const open = (list: typeof requests) => list.filter(isOpenLead).length;
   const kpis = [
-    { label: "Revenue (30 days)", value: formatMoney({ amountMinor: 0, currency: "OMR" }, "en"), note: "No payments possible yet" },
-    { label: "Orders", value: "0", note: "Payment not connected" },
-    { label: "Custom requests", value: String(requests.length), note: store.mode === "local-demo" ? "Local dev store" : "" },
-    { label: "Support messages", value: String(support.length), note: store.mode === "local-demo" ? "Local dev store" : "" },
+    { label: "Revenue (30 days)", value: formatMoney({ amountMinor: biz.revenueMinor30d, currency: "OMR" }, "en"), note: payment.live ? `All time: ${formatMoney({ amountMinor: biz.revenueMinorAll, currency: "OMR" }, "en")}` : "Payments not connected yet" },
+    { label: "Paid orders (30 days)", value: String(biz.paidOrders30d), note: biz.testOrders ? `${biz.testOrders} test order(s) not counted` : "" },
+    { label: "Customers", value: String(biz.customers), note: `${biz.newCustomers30d} new in 30 days` },
+    { label: "Open requests & messages", value: String(open(requests) + open(support)), note: `${requests.length + support.length} in total` },
   ];
 
   return (
@@ -62,9 +65,17 @@ export default async function AdminPage({ params, searchParams }: Props) {
       <h1 className="text-3xl font-semibold tracking-tight text-ink">Business command center</h1>
       <p className="mt-1 text-ink-soft">What needs your attention, at a glance.</p>
       <p className="mt-4">
-        <Link href={`/${locale}/admin/licensing`} className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-semibold text-on-primary">
-          Licensing & access
-        </Link>
+        <span className="flex flex-wrap gap-2">
+          <Link href={`/${locale}/admin/licensing`} className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-semibold text-on-primary">
+            Customers, orders & access
+          </Link>
+          <Link href={`/${locale}/admin/inbox`} className="inline-flex h-10 items-center rounded-full border-2 border-line-strong px-5 text-sm font-semibold text-ink">
+            Inbox
+          </Link>
+          <Link href={`/${locale}/admin/subscribers`} className="inline-flex h-10 items-center rounded-full border-2 border-line-strong px-5 text-sm font-semibold text-ink">
+            Subscribers
+          </Link>
+        </span>
       </p>
 
       <section id="test-journey" aria-labelledby="h-test" className="mt-8 rounded-[var(--radius-lg)] border-2 border-dashed border-lilac/60 bg-surface p-5">
@@ -124,40 +135,30 @@ export default async function AdminPage({ params, searchParams }: Props) {
           </ul>
         </section>
 
-        <section aria-labelledby="h-requests" className="min-w-0">
+        <section aria-labelledby="h-requests" className="rounded-[var(--radius-lg)] border border-line bg-surface p-5">
           <h2 id="h-requests" className="text-lg font-semibold text-ink">
-            Custom project requests
+            Inbox
           </h2>
-          {requests.length === 0 ? (
-            <p className="mt-4 rounded-[var(--radius-md)] border border-dashed border-line-strong p-5 text-sm text-muted">No requests yet. New submissions from the Custom Solutions page appear here.</p>
-          ) : (
-            <div className="mt-4 overflow-x-auto rounded-[var(--radius-lg)] border border-line bg-surface">
-              <table className="w-full min-w-[520px] text-sm">
-                <thead className="bg-bg-sunken text-start text-xs text-muted">
-                  <tr>
-                    <th className="px-4 py-2.5 text-start font-medium">Reference</th>
-                    <th className="px-4 py-2.5 text-start font-medium">Customer</th>
-                    <th className="px-4 py-2.5 text-start font-medium">Type</th>
-                    <th className="px-4 py-2.5 text-start font-medium">Budget</th>
-                    <th className="px-4 py-2.5 text-start font-medium">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-line">
-                  {requests.slice(0, 8).map((r) => (
-                    <tr key={r.reference}>
-                      <td className="px-4 py-3 font-mono text-xs text-ink">{r.reference}</td>
-                      <td className="px-4 py-3 text-ink-soft">{String(r.data.name ?? "")}</td>
-                      <td className="px-4 py-3 text-ink-soft">{String(r.data.solutionType ?? "")}</td>
-                      <td className="px-4 py-3 text-ink-soft">{String(r.data.budget ?? "")}</td>
-                      <td className="px-4 py-3">
-                        <span className="rounded-full bg-primary-soft px-2.5 py-0.5 text-xs font-medium text-primary">{r.status}</span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          <p className="mt-1 text-sm text-ink-soft">Customer messages and custom solution requests. You also get an email for each new one.</p>
+          <ul className="mt-4 space-y-2 text-sm">
+            {[...support.map((r) => ({ r, label: "Message" })), ...requests.map((r) => ({ r, label: "Custom request" }))]
+              .filter(({ r }) => isOpenLead(r))
+              .sort((a, b) => b.r.createdAt.localeCompare(a.r.createdAt))
+              .slice(0, 6)
+              .map(({ r, label }) => (
+                <li key={r.reference} className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-2">
+                  <span className="min-w-0">
+                    <span className="text-muted">{label} · </span>
+                    <span className="text-ink">{String(r.data.name ?? "")}</span>
+                  </span>
+                  <span className="font-mono text-xs text-muted">{r.reference}</span>
+                </li>
+              ))}
+            {open(support) + open(requests) === 0 && <li className="text-muted">Nothing waiting. New messages and requests appear here.</li>}
+          </ul>
+          <Link href={`/${locale}/admin/inbox`} className="mt-4 inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-semibold text-on-primary">
+            Open inbox{open(support) + open(requests) > 0 ? ` (${open(support) + open(requests)})` : ""}
+          </Link>
         </section>
       </div>
 
@@ -191,7 +192,7 @@ export default async function AdminPage({ params, searchParams }: Props) {
             </tbody>
           </table>
         </div>
-        <p className="mt-2 text-xs text-muted">Editing opens when the database is connected. Prices are stored per product and per currency.</p>
+        <p className="mt-2 text-xs text-muted">Names, prices and descriptions are part of the product catalog and change when products are added or edited. To pause a product or change how it is delivered (device limit, downloads, license length), use Customers, orders & access → Product security.</p>
       </section>
 
       <section aria-labelledby="h-social" className="mt-12">

@@ -23,6 +23,7 @@ export default defineConfig({
     url: `http://localhost:${PORT}/en`,
     reuseExistingServer: true,
     timeout: 120_000,
-    env: { ONECLICK_DEMO_MODE: "true" },
+    // A separate owner for each device project, so parallel runs never cancel each other's codes.
+    env: { ONECLICK_DEMO_MODE: "true", ONECLICK_OWNER_EMAILS: "owner@example.com,owner-mobile@example.com" },
   },
 });

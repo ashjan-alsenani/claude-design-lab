@@ -4,16 +4,18 @@ import { useState } from "react";
 import type { Dictionary } from "@/i18n/get-dictionary";
 import { Button } from "@/components/ui/Button";
 import { track } from "@/lib/analytics/track";
+import { subscribe } from "@/app/actions/subscribe";
 
-/** Launch notification sign-up. Honest while email is not connected: nothing is stored. */
-export function NotifyForm({ productId, d }: { productId: string; d: Pick<Dictionary, "newsletter" | "form" | "checkout"> }) {
+/** "Tell me when it's available": stored only with explicit consent. */
+export function NotifyForm({ productId, d, locale }: { productId: string; d: Pick<Dictionary, "newsletter" | "form" | "checkout">; locale: "ar" | "en" }) {
   const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   if (done) {
     return (
       <p role="status" className="mt-4 rounded-[var(--radius-md)] bg-primary-soft p-4 text-sm text-ink">
-        {d.newsletter.notConnected}
+        {d.checkout.notifySuccess}
       </p>
     );
   }
@@ -21,11 +23,17 @@ export function NotifyForm({ productId, d }: { productId: string; d: Pick<Dictio
     <form
       noValidate
       className="mt-4 space-y-3"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         const f = new FormData(e.currentTarget);
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(f.get("email") || ""))) return setError(d.form.invalidEmail);
+        const email = String(f.get("email") || "");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setError(d.form.invalidEmail);
         if (!f.get("consent")) return setError(d.form.required);
+        setError(null);
+        setSending(true);
+        const r = await subscribe({ email, consent: true, consentText: d.newsletter.consent, locale, productId });
+        setSending(false);
+        if (!r.ok) return setError(r.reason === "invalid" ? d.form.invalidEmail : d.form.tryAgain);
         track("notify_me", { product_id: productId });
         setDone(true);
       }}
@@ -53,7 +61,7 @@ export function NotifyForm({ productId, d }: { productId: string; d: Pick<Dictio
           {error}
         </p>
       )}
-      <Button type="submit" className="w-full sm:w-auto">
+      <Button type="submit" className="w-full sm:w-auto" disabled={sending}>
         {d.checkout.notify}
       </Button>
     </form>

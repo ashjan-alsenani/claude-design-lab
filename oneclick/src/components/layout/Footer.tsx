@@ -47,7 +47,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
             <p className="mt-4 text-ink-soft leading-relaxed">{d.footer.tagline}</p>
             <p className="mt-3 text-sm font-medium text-primary">{tr(brand.slogan, locale)}</p>
             <div className="mt-8">
-              <NewsletterForm d={{ newsletter: d.newsletter, form: d.form }} />
+              <NewsletterForm locale={locale} d={{ newsletter: d.newsletter, form: d.form }} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">

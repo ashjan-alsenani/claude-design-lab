@@ -92,7 +92,7 @@ export default async function CheckoutPage({ params }: Props) {
           )}
           <div className="mt-8 rounded-[var(--radius-lg)] border border-line bg-surface p-6">
             <h2 className="text-lg font-semibold text-ink">{d.checkout.notify}</h2>
-            <NotifyForm productId={product.id} d={{ newsletter: d.newsletter, form: d.form, checkout: d.checkout }} />
+            <NotifyForm locale={locale} productId={product.id} d={{ newsletter: d.newsletter, form: d.form, checkout: d.checkout }} />
           </div>
         </section>
 

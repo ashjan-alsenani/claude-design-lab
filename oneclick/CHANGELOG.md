@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.10.0 — 2026-10-05 — Site scan and a complete admin
+- Live scan: all 92 sitemap pages and 136 internal links work; no script errors, broken images or
+  sideways scrolling on computer or phone.
+- Admin home shows real numbers (revenue and paid orders in 30 days, customers, open requests);
+  test orders never count as revenue.
+- New admin tabs: Orders (search, status filter, test orders labelled, resend access email) and Customers
+  (search, products, orders, devices, last seen).
+- Inbox (/admin/inbox): contact messages and custom requests with full details, status, reply by email.
+  The owner gets an email for every new one (OWNER_NOTIFICATION_EMAIL or the owner email).
+- Newsletter and "notify me" sign-ups are now saved with consent proof; Subscribers page with CSV export
+  and unsubscribe. Database migration 20261005000000_subscribers.sql (applied).
+- Content-Security-Policy on every page (production); favicon.ico; Arabic page titles end in «ون كليك».
+
 ## 0.9.2 — 2026-10-04 — Owner test purchases on the live site
 - Admin → "Test the customer journey": creates a signed link valid for 2 hours. Opened in any browser (e.g. a
   private window), it lets that browser simulate payment at checkout; the order, license, email, code, account

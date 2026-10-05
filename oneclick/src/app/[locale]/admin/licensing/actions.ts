@@ -5,6 +5,7 @@ import { z } from "zod";
 import { isLocale, type Locale } from "@/i18n/config";
 import { currentContext, licensing, licensingMode } from "@/lib/licensing/server";
 import { createTestPurchaseToken } from "@/lib/licensing/test-purchase";
+import { CUSTOM_STATUSES, getLeadStore, SUPPORT_STATUSES } from "@/lib/data/leads";
 
 /**
  * Admin licensing actions. Each one: re-checks the admin role on the server (engine
@@ -120,4 +121,25 @@ export async function createTestLinkAction(fd: FormData) {
   const token = createTestPurchaseToken(ctx.user.id);
   await licensing().engine.adminNote(ctx, "test_purchase_link_created");
   redirect(`/${locale}/admin?testlink=${encodeURIComponent(token)}#test-journey`);
+}
+
+/** Changes the status of a support message or custom request (admin only, audit-logged). */
+export async function setLeadStatusAction(fd: FormData) {
+  const { ctx, locale } = await admin(fd);
+  const kind = s(fd, "kind") === "custom_request" ? "custom_request" : "support_request";
+  const status = s(fd, "status");
+  const allowed: readonly string[] = kind === "custom_request" ? CUSTOM_STATUSES : SUPPORT_STATUSES;
+  const tab = kind === "custom_request" ? "custom" : "messages";
+  if (!allowed.includes(status)) redirect(`/${locale}/admin/inbox?tab=${tab}&e=invalid`);
+  const ok = await getLeadStore().setStatus(s(fd, "reference"), status);
+  if (ok) await licensing().engine.adminNote(ctx, `lead_status:${s(fd, "reference")}:${status}`);
+  redirect(`/${locale}/admin/inbox?tab=${tab}&${ok ? "ok=1" : "e=not_found"}#${encodeURIComponent(s(fd, "reference"))}`);
+}
+
+/** Removes a newsletter / notify-me subscriber (e.g. on request). Kept as "unsubscribed" for proof. */
+export async function unsubscribeAction(fd: FormData) {
+  const { ctx, locale } = await admin(fd);
+  const ok = await getLeadStore().setStatus(s(fd, "reference"), "unsubscribed");
+  if (ok) await licensing().engine.adminNote(ctx, `unsubscribed:${s(fd, "reference")}`);
+  redirect(`/${locale}/admin/subscribers?${ok ? "ok=1" : "e=not_found"}`);
 }

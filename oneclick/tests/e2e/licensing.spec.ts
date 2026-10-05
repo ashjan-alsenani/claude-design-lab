@@ -207,8 +207,8 @@ test("admin suspends a license and access stops; the owner is recognized", async
   await expect(page.getByTestId("product-app")).toBeVisible();
 
   const admin = await newDevice(browser, baseURL);
-  await signInWithCode(admin, "owner@example.com");
-  await admin.goto(`/en/admin/licensing?q=${encodeURIComponent(buyer)}`);
+  await signInWithCode(admin, isMobile ? "owner-mobile@example.com" : "owner@example.com");
+  await admin.goto(`/en/admin/licensing?tab=licenses&q=${encodeURIComponent(buyer)}`);
   const row = admin.getByRole("row").filter({ hasText: buyer });
   await row.getByLabel("Action").selectOption("suspend");
   await row.getByLabel("Reason").fill(isMobile ? "mobile e2e check" : "desktop e2e check");

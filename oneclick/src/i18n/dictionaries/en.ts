@@ -101,7 +101,7 @@ export const en = {
     email: "Email address",
     consent: "I agree to receive One Click product updates by email.",
     submit: "Subscribe",
-    success: "You're on the list. Check your inbox to confirm.",
+    success: "You're on the list. We'll email you when something new launches.",
     notConnected: "Thanks! Email sign-up opens at launch. Your address was not stored.",
   },
   catalog: {
@@ -189,6 +189,7 @@ export const en = {
     invalidEmail: "Enter a valid email address.",
     tooShort: "Please add a little more detail.",
     fixErrors: "Please check the highlighted fields.",
+    tryAgain: "Something went wrong. Please try again in a moment.",
   },
   guides: {
     title: "Guides",
@@ -245,6 +246,7 @@ export const en = {
     empty: "Nothing saved yet. Tap the heart on any product to keep it here.",
   },
   checkout: {
+    notifySuccess: "Done. We'll email you as soon as it's available.",
     title: "Checkout",
     notConnected: "PAYMENT PROVIDER NOT YET CONNECTED",
     body: "One Click is preparing its payment connection with a bank in Oman. No payment can be taken and no card details are collected on this site.",

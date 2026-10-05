@@ -2,7 +2,8 @@
 
 import { headers } from "next/headers";
 import { contactSchema, formDataToObject, zodFieldErrors, type FieldErrors } from "@/lib/forms/schemas";
-import { getLeadStore } from "@/lib/data/leads";
+import { getLeadStore, ownerNotifyAddress } from "@/lib/data/leads";
+import { localeUrl } from "@/lib/seo";
 import { newReference } from "@/lib/commerce/types";
 import { clientKey, rateLimit } from "@/lib/security/rate-limit";
 import { isDemoMode } from "@/lib/env";
@@ -36,6 +37,16 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     console.error("[support_request] save failed", (e as Error).message);
     return { status: "error" };
   }
-  await sendEmail(data.email, emailTemplates.supportConfirmation(data.locale, { reference }));
+  const owner = ownerNotifyAddress();
+  await Promise.allSettled([
+    sendEmail(data.email, emailTemplates.supportConfirmation(data.locale, { reference })),
+    owner
+      ? sendEmail(
+          owner,
+          emailTemplates.ownerNotification({ kind: `support message (${data.topic})`, reference, summary: `${data.name}: ${data.message.slice(0, 140)}`, adminUrl: localeUrl("en", "/admin/inbox") }),
+          { kind: "owner_notification" }
+        )
+      : Promise.resolve(),
+  ]);
   return { status: "ok", reference };
 }

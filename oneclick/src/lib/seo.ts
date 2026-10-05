@@ -19,7 +19,9 @@ export function pageMetadata(opts: {
   noindex?: boolean;
 }): Metadata {
   const d = getDictionary(opts.locale);
-  const title = opts.title ? `${opts.title} | One Click` : d.meta.siteTitle;
+  // The brand name follows the page language, like the logo.
+  const brand = opts.locale === "ar" ? "ون كليك" : "One Click";
+  const title = opts.title ? `${opts.title} | ${brand}` : d.meta.siteTitle;
   const description = opts.description ?? d.meta.siteDescription;
   const languages: Record<string, string> = {};
   for (const l of locales) languages[localeMeta[l].htmlLang] = localeUrl(l, opts.path);
@@ -32,13 +34,13 @@ export function pageMetadata(opts: {
     alternates: { canonical: localeUrl(opts.locale, opts.path), languages },
     openGraph: {
       type: "website",
-      siteName: "One Click",
+      siteName: brand,
       title,
       description,
       url: localeUrl(opts.locale, opts.path),
       locale: localeMeta[opts.locale].ogLocale,
       alternateLocale: locales.filter((l) => l !== opts.locale).map((l) => localeMeta[l].ogLocale),
-      images: [{ url: image, width: 1200, height: 630, alt: "One Click" }],
+      images: [{ url: image, width: 1200, height: 630, alt: brand }],
     },
     twitter: { card: "summary_large_image", title, description, images: [image] },
     robots: opts.noindex ? { index: false, follow: false } : undefined,

@@ -7,7 +7,8 @@ import { currentContext, licensing, licensingMode } from "@/lib/licensing/server
 import type { LicenseStatus } from "@/lib/licensing/types";
 import { pageMetadata } from "@/lib/seo";
 import { StatusPill, licenseTone } from "@/components/account/StatusPill";
-import { grantAction, licenseAction, policyAction, productSecurityAction } from "./actions";
+import { grantAction, licenseAction, policyAction, productSecurityAction, resendAccessAction } from "./actions";
+import { formatMoney } from "@/lib/money";
 import { Card, Confirm, Flash, Hidden, btn, field, when } from "./ui";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | undefined>> };
@@ -19,6 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const tabs = [
+  { key: "orders", label: "Orders" },
+  { key: "customers", label: "Customers" },
   { key: "licenses", label: "Licenses" },
   { key: "products", label: "Product security" },
   { key: "activity", label: "Activity & alerts" },
@@ -31,7 +34,7 @@ export default async function AdminLicensingPage({ params, searchParams }: Props
   const ctx = await currentContext();
   if (!ctx?.roles.includes("admin")) notFound();
   const sp = await searchParams;
-  const tab = tabs.find((t) => t.key === sp.tab)?.key ?? "licenses";
+  const tab = tabs.find((t) => t.key === sp.tab)?.key ?? "orders";
   const { engine } = licensing();
   const overview = await engine.adminOverview(ctx);
   const back = `/${locale}/admin/licensing`;
@@ -48,8 +51,8 @@ export default async function AdminLicensingPage({ params, searchParams }: Props
           Command center
         </Link>
       </p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink">Licensing & access</h1>
-      <p className="mt-1 text-ink-soft">Who owns what, on which devices, and everything that happened. Every change here is audit-logged.</p>
+      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink">Customers, orders & access</h1>
+      <p className="mt-1 text-ink-soft">Orders, customers, who owns what, on which devices, and everything that happened. Every change here is audit-logged.</p>
 
       <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-7">
         {[
@@ -83,12 +86,160 @@ export default async function AdminLicensingPage({ params, searchParams }: Props
       <Flash sp={sp} />
 
       <div className="mt-6">
+        {tab === "orders" && <OrdersTab locale={locale} sp={sp} back={back} />}
+        {tab === "customers" && <CustomersTab locale={locale} sp={sp} />}
         {tab === "licenses" && <LicensesTab locale={locale} sp={sp} back={back} />}
         {tab === "products" && <ProductsTab locale={locale} back={back} />}
         {tab === "activity" && <ActivityTab locale={locale} sp={sp} />}
         {tab === "policy" && <PolicyTab locale={locale} back={back} />}
       </div>
     </div>
+  );
+}
+
+const orderTone = (s: string) => (s === "paid" ? "good" : s === "pending" ? "warn" : "bad") as "good" | "warn" | "bad";
+
+async function OrdersTab({ locale, sp, back }: { locale: string; sp: Record<string, string | undefined>; back: string }) {
+  const ctx = await currentContext();
+  const hideTests = sp.tests === "hide";
+  const status = (["all", "paid", "pending", "failed", "refunded", "chargeback", "cancelled"] as const).find((x) => x === sp.status) ?? "all";
+  const rows = await licensing().engine.adminOrders(ctx, { q: sp.q, status, hideTests });
+  return (
+    <Card title="Orders">
+      <form className="flex flex-wrap gap-2" action={back}>
+        <input type="hidden" name="tab" value="orders" />
+        <input name="q" defaultValue={sp.q} placeholder="Order number, email or product" aria-label="Search orders" className={`${field} min-w-0 flex-1`} />
+        <select name="status" defaultValue={status} aria-label="Payment status" className={field}>
+          {["all", "paid", "pending", "failed", "refunded", "chargeback", "cancelled"].map((x) => (
+            <option key={x} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
+        <select name="tests" defaultValue={hideTests ? "hide" : "show"} aria-label="Test orders" className={field}>
+          <option value="show">Include test orders</option>
+          <option value="hide">Real orders only</option>
+        </select>
+        <button className={btn}>Filter</button>
+      </form>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full min-w-[760px] text-left text-sm">
+          <thead className="text-xs text-muted">
+            <tr>
+              <th className="px-3 py-2 font-medium">Order</th>
+              <th className="px-3 py-2 font-medium">Customer</th>
+              <th className="px-3 py-2 font-medium">Products</th>
+              <th className="px-3 py-2 font-medium">Total</th>
+              <th className="px-3 py-2 font-medium">Payment</th>
+              <th className="px-3 py-2 font-medium">Access email</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-line">
+            {rows.length === 0 && (
+              <tr>
+                <td colSpan={6} className="px-3 py-6 text-center text-muted">
+                  No orders yet.
+                </td>
+              </tr>
+            )}
+            {rows.map((r) => (
+              <tr key={r.order.id} className="align-top">
+                <td className="px-3 py-3">
+                  <p className="font-mono text-xs text-ink">{r.order.id}</p>
+                  <p className="text-xs text-muted">{when(r.order.createdAt)}</p>
+                  {r.order.sandbox && <span className="mt-1 inline-block rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-semibold text-warning">TEST</span>}
+                </td>
+                <td className="px-3 py-3">
+                  {r.userId ? (
+                    <Link href={`/${locale}/admin/licensing/users/${r.userId}`} className="text-primary underline underline-offset-4">
+                      {r.accountEmail}
+                    </Link>
+                  ) : (
+                    <span className="text-ink-soft">{r.order.purchaseEmail}</span>
+                  )}
+                  {!r.userId && <p className="text-xs text-muted">Not verified yet</p>}
+                </td>
+                <td className="px-3 py-3 text-ink-soft">{r.products.join(", ")}</td>
+                <td className="px-3 py-3 tabular text-ink">{formatMoney({ amountMinor: r.order.totalMinor, currency: r.order.currency }, "en")}</td>
+                <td className="px-3 py-3">
+                  <StatusPill tone={orderTone(r.order.status)}>{r.order.status}</StatusPill>
+                  {r.order.paidAt && <p className="mt-1 text-xs text-muted">{when(r.order.paidAt)}</p>}
+                </td>
+                <td className="px-3 py-3">
+                  {r.order.status === "paid" ? (
+                    <form action={resendAccessAction}>
+                      <Hidden locale={locale} back={`${back}?tab=orders`} orderId={r.order.id} />
+                      <button className="text-sm font-medium text-primary underline underline-offset-4">Resend</button>
+                    </form>
+                  ) : (
+                    <span className="text-xs text-muted">-</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-3 text-xs text-muted">Showing up to 200 orders. Test orders come from your test-purchase links and never count as revenue.</p>
+    </Card>
+  );
+}
+
+async function CustomersTab({ locale, sp }: { locale: string; sp: Record<string, string | undefined> }) {
+  const ctx = await currentContext();
+  const rows = await licensing().engine.adminCustomers(ctx, { q: sp.q });
+  return (
+    <Card title="Customers">
+      <form className="flex flex-wrap gap-2" action={`/${locale}/admin/licensing`}>
+        <input type="hidden" name="tab" value="customers" />
+        <input name="q" defaultValue={sp.q} placeholder="Email or name" aria-label="Search customers" className={`${field} min-w-0 flex-1`} />
+        <button className={btn}>Search</button>
+      </form>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full min-w-[720px] text-left text-sm">
+          <thead className="text-xs text-muted">
+            <tr>
+              <th className="px-3 py-2 font-medium">Customer</th>
+              <th className="px-3 py-2 font-medium">Status</th>
+              <th className="px-3 py-2 font-medium">Products</th>
+              <th className="px-3 py-2 font-medium">Paid orders</th>
+              <th className="px-3 py-2 font-medium">Devices</th>
+              <th className="px-3 py-2 font-medium">Joined / last seen</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-line">
+            {rows.length === 0 && (
+              <tr>
+                <td colSpan={6} className="px-3 py-6 text-center text-muted">
+                  No customers yet.
+                </td>
+              </tr>
+            )}
+            {rows.map((u) => (
+              <tr key={u.id} className="align-top">
+                <td className="px-3 py-3">
+                  <Link href={`/${locale}/admin/licensing/users/${u.id}`} className="text-primary underline underline-offset-4">
+                    {u.email}
+                  </Link>
+                  {u.name && <p className="text-xs text-ink-soft">{u.name}</p>}
+                  {u.roles.includes("owner") && <p className="text-xs font-semibold text-primary">Owner</p>}
+                </td>
+                <td className="px-3 py-3">
+                  <StatusPill tone={u.status === "active" ? "good" : "bad"}>{u.status}</StatusPill>
+                </td>
+                <td className="px-3 py-3 tabular">{u.activeLicenses}</td>
+                <td className="px-3 py-3 tabular">{u.paidOrders}</td>
+                <td className="px-3 py-3 tabular">{u.devices}</td>
+                <td className="px-3 py-3 text-xs text-ink-soft">
+                  <p>{when(u.createdAt)}</p>
+                  <p className="text-muted">{u.lastSeen ? when(u.lastSeen) : "-"}</p>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
   );
 }
 

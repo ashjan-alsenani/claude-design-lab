@@ -12,12 +12,19 @@ import { createRest, eq, expectOk, type Rest } from "@/lib/supabase/rest";
 export type CustomRequestStatus = "new" | "reviewing" | "need_info" | "quoted" | "accepted" | "in_progress" | "review" | "completed" | "closed";
 export type SupportStatus = "open" | "waiting_customer" | "resolved" | "closed";
 
-export type StoredRecord = { kind: "custom_request" | "support_request"; reference: string; createdAt: string; status: string; data: Record<string, unknown> };
+export type LeadKind = "custom_request" | "support_request" | "newsletter" | "product_notify";
+export type StoredRecord = { kind: LeadKind; reference: string; createdAt: string; status: string; data: Record<string, unknown> };
+
+export const CUSTOM_STATUSES: CustomRequestStatus[] = ["new", "reviewing", "need_info", "quoted", "accepted", "in_progress", "review", "completed", "closed"];
+export const SUPPORT_STATUSES: SupportStatus[] = ["open", "waiting_customer", "resolved", "closed"];
+/** Still needs the owner's attention. */
+export const isOpenLead = (r: StoredRecord) => !["completed", "closed", "resolved", "subscribed", "unsubscribed"].includes(r.status);
 
 export interface LeadStore {
   readonly mode: "local-demo" | "database" | "unavailable";
   save(record: StoredRecord): Promise<void>;
   list(kind: StoredRecord["kind"]): Promise<StoredRecord[]>;
+  setStatus(reference: string, status: string): Promise<boolean>;
 }
 
 const FILE = path.join(process.cwd(), ".data", "leads.json");
@@ -39,6 +46,14 @@ class LocalJsonStore implements LeadStore {
   }
   async list(kind: StoredRecord["kind"]) {
     return (await this.readAll()).filter((r) => r.kind === kind).reverse();
+  }
+  async setStatus(reference: string, status: string) {
+    const all = await this.readAll();
+    const r = all.find((x) => x.reference === reference);
+    if (!r) return false;
+    r.status = status;
+    await fs.writeFile(FILE, JSON.stringify(all, null, 2));
+    return true;
   }
 }
 
@@ -64,6 +79,11 @@ class SupabaseLeadStore implements LeadStore {
       createdAt: x.created_at,
     }));
   }
+  async setStatus(reference: string, status: string) {
+    const r = await this.rest(`oc_leads?reference=${eq(reference)}&select=reference`, { method: "PATCH", body: { status }, prefer: "return=representation" });
+    expectOk(r, "LEAD_UPDATE");
+    return Array.isArray(r.data) && r.data.length > 0;
+  }
 }
 
 class UnavailableStore implements LeadStore {
@@ -74,10 +94,18 @@ class UnavailableStore implements LeadStore {
   async list() {
     return [];
   }
+  async setStatus() {
+    return false;
+  }
 }
 
 export function getLeadStore(): LeadStore {
   if (isDemoMode()) return new LocalJsonStore();
   const db = supabaseServerConfig();
   return db ? new SupabaseLeadStore(createRest(db)) : new UnavailableStore();
+}
+
+/** Where new-request notifications go: OWNER_NOTIFICATION_EMAIL, else the first owner email. */
+export function ownerNotifyAddress() {
+  return process.env.OWNER_NOTIFICATION_EMAIL || (process.env.ONECLICK_OWNER_EMAILS ?? "").split(",").map((x) => x.trim()).find((x) => x.includes("@")) || null;
 }
