@@ -1750,3 +1750,34 @@ body { background:
 [dir="rtl"] .completion-bar span { background: linear-gradient(270deg, #14B8A6, #4F46E5); }
 .page > .page-head:not(.page-head-tight) .btn-primary { background: #fff !important; color: var(--b1) !important; box-shadow: 0 10px 20px -12px rgba(0,0,0,.4); }
 .section-h .ic, .panel-title .ic { color: #fff !important; }
+
+/* v11 — one step stronger colour */
+body { background:
+  radial-gradient(1100px 700px at 100% -10%, rgba(20,184,166,.22), transparent 60%),
+  radial-gradient(900px 600px at -5% 30%, rgba(124,58,237,.16), transparent 60%),
+  radial-gradient(900px 700px at 60% 110%, rgba(249,115,22,.14), transparent 60%),
+  var(--canvas); background-attachment: fixed; }
+[data-theme="dark"] body { background:
+  radial-gradient(1100px 700px at 100% -10%, rgba(45,212,191,.18), transparent 60%),
+  radial-gradient(900px 600px at -5% 30%, rgba(139,92,246,.18), transparent 60%),
+  radial-gradient(900px 700px at 60% 110%, rgba(251,146,60,.11), transparent 60%),
+  var(--canvas); background-attachment: fixed; }
+.page > .page-head:not(.page-head-tight) { filter: saturate(1.18); box-shadow: 0 30px 56px -30px rgba(79,70,229,.55); }
+.card { background: linear-gradient(155deg, color-mix(in srgb, var(--tone, var(--teal)) 16%, var(--paper)) 0%, var(--paper) 48%); border-color: color-mix(in srgb, var(--tone, var(--teal)) 26%, var(--line)); }
+.card-leader { background: linear-gradient(150deg, color-mix(in srgb, var(--tone, var(--sun)) 20%, var(--paper)) 0%, var(--paper) 55%); }
+.chips li { background: color-mix(in srgb, var(--teal) 20%, var(--paper)); border-color: color-mix(in srgb, var(--teal) 38%, transparent); }
+.chips li:nth-child(4n+2) { background: color-mix(in srgb, var(--violet) 21%, var(--paper)); border-color: color-mix(in srgb, var(--violet) 40%, transparent); }
+.chips li:nth-child(4n+3) { background: color-mix(in srgb, var(--sky) 21%, var(--paper)); border-color: color-mix(in srgb, var(--sky) 40%, transparent); }
+.chips li:nth-child(4n+4) { background: color-mix(in srgb, var(--sun) 25%, var(--paper)); border-color: color-mix(in srgb, var(--sun) 45%, transparent); }
+.pill-ok { background: color-mix(in srgb, #16A34A 18%, var(--paper)); }
+.pill-gov { background: color-mix(in srgb, var(--sky) 22%, var(--paper)); }
+.kpi { --kb: color-mix(in srgb, var(--kc) 17%, var(--paper)) !important; border-color: color-mix(in srgb, var(--kc) 34%, transparent) !important; }
+.sidenav a.active { background: linear-gradient(120deg, color-mix(in srgb, var(--teal) 24%, var(--paper)), color-mix(in srgb, #4F46E5 16%, var(--paper))); }
+.tz-top, .sy-stat { background: linear-gradient(160deg, color-mix(in srgb, var(--c, var(--teal)) 10%, var(--paper)), var(--paper) 55%); }
+.tz-rank-1 { background: linear-gradient(180deg, color-mix(in srgb, #F59E0B 22%, var(--paper)), var(--paper) 60%) !important; border-color: color-mix(in srgb, #F59E0B 45%, transparent) !important; }
+.tz-rank-2 { background: linear-gradient(180deg, color-mix(in srgb, #64748B 14%, var(--paper)), var(--paper) 60%); }
+.tz-rank-3 { background: linear-gradient(180deg, color-mix(in srgb, #EA580C 14%, var(--paper)), var(--paper) 60%); }
+.org-tier { background: color-mix(in srgb, var(--oc) 13%, var(--paper)); border-color: color-mix(in srgb, var(--oc) 32%, transparent); }
+.mini-stat { box-shadow: 0 12px 26px -18px rgba(0,0,0,.35); }
+.tabs [role=tab][aria-selected="true"] { background: linear-gradient(180deg, color-mix(in srgb, var(--teal) 22%, var(--paper)), transparent); }
+.h1-ic { background: linear-gradient(140deg, color-mix(in srgb, var(--hc) 30%, var(--paper)), color-mix(in srgb, var(--hc) 14%, var(--paper))); }
