@@ -22,7 +22,7 @@ export function TaskCard({ task, compact = false }: { task: Task; compact?: bool
   const toggle = () => dispatch({ t: "task", id: task.id, patch: { status: done ? "todo" : "done" } });
 
   return (
-    <motion.div layout={!reduce} className={cx("group flex items-start gap-1.5 rounded-[18px] border bg-bj-paper px-2.5 py-2.5 transition-colors", done ? "border-transparent bg-bj-paper/60" : "border-bj-line hover:border-bj-taupe/35")}>
+    <motion.div layout={!reduce} className={cx("group flex items-start gap-1.5 rounded-[18px] border bg-[linear-gradient(180deg,#fffdfc,#fcf8f6)] shadow-[0_12px_30px_-26px_rgba(110,70,60,.35)] px-2.5 py-2.5 transition-colors", done ? "border-transparent bg-bj-paper/60" : "border-bj-line hover:border-bj-taupe/35")}>
       <CheckCircle checked={done} onClick={toggle} label={`${t.task.markDone}: ${task.title}`} />
       <button type="button" onClick={() => setOpen(true)} className="min-w-0 flex-1 py-1.5 text-start">
         <span className={cx("block text-[15px] leading-snug transition-colors", done ? "text-bj-muted line-through decoration-bj-beige" : "text-bj-ink")}>{task.title}</span>

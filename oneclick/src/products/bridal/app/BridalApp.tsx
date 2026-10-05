@@ -1,23 +1,61 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BridalProvider, useBridal, type SyncFn } from "./state";
 import { Shell, type SectionKey } from "./Shell";
 import type { Workspace } from "../model/types";
 import type { Lang } from "../i18n";
 import { sectionKeys } from "../constants";
-import { Welcome, Onboarding } from "../sections/Onboarding";
 import { Dashboard } from "../sections/Dashboard";
-import { Checklist } from "../sections/Checklist";
-import { Budget } from "../sections/Budget";
-import { Vendors } from "../sections/Vendors";
-import { Calendar } from "../sections/Calendar";
-import { Guests } from "../sections/Guests";
-import { Closet, NewHome, Shopping } from "../sections/Lists";
-import { Bride, Honeymoon, WeddingDay } from "../sections/Personal";
-import { Documents, Moodboard } from "../sections/Library";
-import { More, Settings } from "../sections/Settings";
+
+/*
+ * Each section is its own script, so a page downloads only what it shows. The home dashboard stays in
+ * the main bundle (it is the first screen); the rest are fetched in the background once the page is idle,
+ * so moving between sections never waits.
+ */
+const load = {
+  onboarding: () => import("../sections/Onboarding"),
+  checklist: () => import("../sections/Checklist"),
+  budget: () => import("../sections/Budget"),
+  vendors: () => import("../sections/Vendors"),
+  calendar: () => import("../sections/Calendar"),
+  guests: () => import("../sections/Guests"),
+  lists: () => import("../sections/Lists"),
+  personal: () => import("../sections/Personal"),
+  library: () => import("../sections/Library"),
+  settings: () => import("../sections/Settings"),
+};
+const Welcome = dynamic(() => load.onboarding().then((m) => m.Welcome));
+const Onboarding = dynamic(() => load.onboarding().then((m) => m.Onboarding));
+const Checklist = dynamic(() => load.checklist().then((m) => m.Checklist));
+const Budget = dynamic(() => load.budget().then((m) => m.Budget));
+const Vendors = dynamic(() => load.vendors().then((m) => m.Vendors));
+const Calendar = dynamic(() => load.calendar().then((m) => m.Calendar));
+const Guests = dynamic(() => load.guests().then((m) => m.Guests));
+const Closet = dynamic(() => load.lists().then((m) => m.Closet));
+const NewHome = dynamic(() => load.lists().then((m) => m.NewHome));
+const Shopping = dynamic(() => load.lists().then((m) => m.Shopping));
+const Bride = dynamic(() => load.personal().then((m) => m.Bride));
+const Honeymoon = dynamic(() => load.personal().then((m) => m.Honeymoon));
+const WeddingDay = dynamic(() => load.personal().then((m) => m.WeddingDay));
+const Documents = dynamic(() => load.library().then((m) => m.Documents));
+const Moodboard = dynamic(() => load.library().then((m) => m.Moodboard));
+const More = dynamic(() => load.settings().then((m) => m.More));
+const Settings = dynamic(() => load.settings().then((m) => m.Settings));
+
+function usePrefetchSections() {
+  useEffect(() => {
+    const run = () => Object.values(load).forEach((f) => void f().catch(() => {}));
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(run, { timeout: 3000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(run, 1500);
+    return () => clearTimeout(id);
+  }, []);
+}
 
 
 type Props = {
@@ -49,6 +87,7 @@ function Router({ exitHref, buyHref, accountHref, base }: Props) {
   const seg = (usePathname() ?? "").slice(base.length).split("/").filter(Boolean)[0] ?? "";
   const section: SectionKey = (sectionKeys as readonly string[]).includes(seg) ? (seg as SectionKey) : "";
   const [onboarding, setOnboarding] = useState(false);
+  usePrefetchSections();
   if (!ws.profile) return onboarding ? <Onboarding onCancel={() => setOnboarding(false)} /> : <Welcome onStart={() => setOnboarding(true)} exitHref={exitHref} />;
   const view = {
     "": <Dashboard />,

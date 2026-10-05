@@ -13,7 +13,7 @@ export function PaymentCard({ pay, onClick, compact }: { pay: Payment; onClick?:
   const { t, money, rel, today } = useBridal();
   const s = paymentStatus(pay, today);
   return (
-    <button type="button" onClick={onClick} className="flex w-full min-w-0 items-center gap-3 rounded-[16px] border border-bj-line bg-bj-paper px-4 py-3 text-start transition-colors hover:border-bj-taupe/40">
+    <button type="button" onClick={onClick} className="flex w-full min-w-0 items-center gap-3 rounded-[16px] bj-card px-4 py-3 text-start transition-colors hover:border-bj-taupe/40">
       <span className={cx("h-10 w-1 shrink-0 rounded-full", s === "overdue" ? "bg-bj-alert" : s === "soon" ? "bg-bj-amber" : s === "paid" ? "bg-bj-sage" : "bg-bj-beige")} />
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[15px] text-bj-ink">{pay.label}</span>
@@ -34,7 +34,7 @@ export function VendorCard({ v, onClick }: { v: Vendor; onClick: () => void }) {
   const I = vendorIcon[v.cat];
   const price = v.final ?? v.quoted;
   return (
-    <div className="flex min-w-0 flex-col rounded-[20px] border border-bj-line bg-bj-paper p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(80,50,40,.2)]">
+    <div className="flex min-w-0 flex-col rounded-[20px] bj-card p-4 transition-shadow hover:shadow-[0_18px_40px_-28px_rgba(80,50,40,.2)]">
       <button type="button" onClick={onClick} className="flex items-start gap-3 text-start">
         <span className="grid size-11 shrink-0 place-items-center rounded-full bg-bj-cream text-bj-gold-ink">
           <I size={20} weight="regular" />
@@ -83,7 +83,7 @@ export function AppointmentCard({ a, onClick }: { a: Appointment; onClick?: () =
   const { t, date, rel, lang } = useBridal();
   const d = new Date(`${a.date}T00:00:00Z`);
   return (
-    <button type="button" onClick={onClick} className={cx("flex w-full min-w-0 items-center gap-3.5 rounded-[16px] border border-bj-line bg-bj-paper px-3.5 py-3 text-start transition-colors hover:border-bj-taupe/40", a.done && "opacity-60")}>
+    <button type="button" onClick={onClick} className={cx("flex w-full min-w-0 items-center gap-3.5 rounded-[16px] bj-card px-3.5 py-3 text-start transition-colors hover:border-bj-taupe/40", a.done && "opacity-60")}>
       <span className="flex w-12 shrink-0 flex-col items-center rounded-[12px] bg-bj-blush py-1.5 text-bj-rose">
         <span className="text-[10.5px] uppercase tracking-wider">{new Intl.DateTimeFormat(lang === "ar" ? "ar-OM" : "en-GB", { month: "short", timeZone: "UTC" }).format(d)}</span>
         <span className="bj-serif text-[1.35rem] leading-none">{new Intl.DateTimeFormat(lang === "ar" ? "ar-OM" : "en-GB", { day: "numeric", timeZone: "UTC" }).format(d)}</span>

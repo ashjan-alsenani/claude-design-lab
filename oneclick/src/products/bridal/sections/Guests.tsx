@@ -119,7 +119,7 @@ export function Guests() {
               </div>
             )}
 
-            <div className="overflow-hidden rounded-[20px] border border-bj-line bg-bj-paper">
+            <div className="overflow-hidden rounded-[20px] bj-card">
               <div className="flex items-center gap-3 border-b border-bj-line px-4 py-2.5 text-[12.5px] text-bj-muted">
                 <input type="checkbox" aria-label={G.selectAll} checked={list.length > 0 && list.every((g) => sel.has(g.id))} onChange={(e) => setSel(e.target.checked ? new Set(list.map((g) => g.id)) : new Set())} className="size-4 accent-[#c9a49a]" />
                 {G.selectAll} · {num(list.length)}

@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import {
   ArrowRightIcon,
   BowlFoodIcon,
@@ -47,7 +46,6 @@ const apptMotif: Partial<Record<ApptKind, Motif>> = { fitting: "dress", makeup: 
 
 export function Dashboard() {
   const { t, ws, tasks, today, num, pct, money, date, href, lang } = useBridal();
-  const reduce = useReducedMotion();
   const [newTask, setNewTask] = useState(false);
   const p = ws.profile!;
   const days = diffDays(today, p.weddingDate);
@@ -85,14 +83,15 @@ export function Dashboard() {
   const cats = [...budget.perCat].filter((c) => c.allocated > 0).sort((a, b) => b.allocated - a.allocated).slice(0, 5);
 
   const ringSize = useRingSize();
-  const rise = (i: number) => (reduce ? {} : { initial: { opacity: 0, y: 14 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.7, delay: 0.07 * i, ease: [0.16, 1, 0.3, 1] as const } });
+  // CSS entrance (not JS): the server-rendered page is visible at first paint, before the app script loads.
+  const enter = (i: number) => ({ "--bj-enter-delay": `${70 * i}ms` }) as CSSProperties;
 
   return (
     <div className="space-y-6 lg:space-y-7">
       {/* Hero (the approved design): the bride's photo fades into the page, title and two frosted cards beside it */}
-      <motion.section {...rise(0)} className="bj-hero -mx-4 -mt-6 overflow-hidden sm:-mx-6 lg:-mt-8 lg:mx-[calc(50%-50vw)]">
+      <section style={enter(0)} className="bj-enter bj-hero -mx-4 -mt-6 overflow-hidden sm:-mx-6 lg:-mt-8 lg:mx-[calc(50%-50vw)]">
         <div className="bj-hero-photo">
-          <Image src={heroPhoto} alt={t.dash.heroAlt} fill priority sizes="(min-width: 1024px) 62vw, 100vw" className="object-cover" placeholder="blur" />
+          <Image src={heroPhoto} quality={85} alt={t.dash.heroAlt} fill priority sizes="(min-width: 1024px) 62vw, 100vw" className="object-cover" placeholder="blur" />
         </div>
         <Image src={blossom} alt="" className="bj-hero-blossom h-auto" aria-hidden="true" />
         <div className="relative px-4 pb-5 sm:px-6 lg:mx-auto lg:flex lg:min-h-[540px] lg:max-w-[1320px] lg:flex-col lg:px-8 lg:pb-[104px] lg:pt-14 lg:*:w-[min(600px,48%)]">
@@ -150,10 +149,10 @@ export function Dashboard() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Summary cards: frosted, overlapping the hero's lower edge on large screens */}
-      <motion.section {...rise(1)} aria-label={t.dash.overview} className="relative z-[2] lg:-mt-[96px]">
+      <section style={enter(1)} aria-label={t.dash.overview} className="bj-enter relative z-[2] lg:-mt-[96px]">
         <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
           {stats.map((s, i) => (
             <li key={s.key}>
@@ -173,22 +172,22 @@ export function Dashboard() {
             </li>
           ))}
         </ul>
-      </motion.section>
+      </section>
 
       {/* Urgent: only when needed */}
       {urgent.length > 0 && (
-        <motion.section {...rise(2)} aria-labelledby="urgent-h">
+        <section style={enter(2)} className="bj-enter" aria-labelledby="urgent-h">
           <h2 id="urgent-h" className="mb-3 flex items-center gap-2 text-[13px] font-medium text-bj-alert">
             <WarningCircleIcon size={16} className="bj-icon-breathe" />
             {t.dash.urgent}
           </h2>
           <NoticeList notes={urgent.slice(0, 3)} />
-        </motion.section>
+        </section>
       )}
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         {/* Focus this week */}
-        <motion.section {...rise(3)} aria-labelledby="focus-h">
+        <section style={enter(3)} className="bj-enter" aria-labelledby="focus-h">
           <Card className="h-full p-5">
             <div className="mb-3 flex items-center justify-between gap-3">
               <h2 id="focus-h" className="text-[1.15rem] font-medium text-bj-ink">
@@ -205,10 +204,10 @@ export function Dashboard() {
             </div>
             <TaskList tasks={focus} />
           </Card>
-        </motion.section>
+        </section>
 
         {/* Upcoming appointments */}
-        <motion.section {...rise(4)} aria-labelledby="appt-h">
+        <section style={enter(4)} className="bj-enter" aria-labelledby="appt-h">
           <Card className="h-full p-5">
             <div className="mb-3 flex items-center justify-between gap-3">
               <h2 id="appt-h" className="text-[1.15rem] font-medium text-bj-ink">
@@ -245,10 +244,10 @@ export function Dashboard() {
               <p className="rounded-[16px] border border-dashed border-bj-beige px-4 py-4 text-sm text-bj-muted">{t.dash.noAppointment}</p>
             )}
           </Card>
-        </motion.section>
+        </section>
 
         {/* Budget at a glance */}
-        <motion.section {...rise(5)} aria-labelledby="budget-h">
+        <section style={enter(5)} className="bj-enter" aria-labelledby="budget-h">
           <Card className="h-full p-5">
             <div className="mb-3 flex items-center justify-between gap-3">
               <h2 id="budget-h" className="text-[1.15rem] font-medium text-bj-ink">
@@ -281,7 +280,7 @@ export function Dashboard() {
               })}
             </ul>
           </Card>
-        </motion.section>
+        </section>
       </div>
 
       <NewTaskSheet open={newTask} onClose={() => setNewTask(false)} />

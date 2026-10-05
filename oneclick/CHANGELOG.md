@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.12.0 — 2026-10-05 — Bridal Journey: sharper, faster, consistent
+- New high-resolution bride photograph (3200 px, generated to match the approved composition) replaces the
+  enlarged crop that looked blurry; served as AVIF/WebP at higher quality.
+- Faster first screen: content is visible as soon as the page arrives (entrance animations are CSS, not
+  waiting for the app script). The app script is about 72% smaller (sections load on their own, the data
+  checks use the light build of the validation library).
+- Moving between sections is instant with a short fade (no wait for the old page to leave).
+- Every section page has the same blush header band with the blossom, and warm pearl cards instead of
+  plain white boxes.
+
 ## 0.11.0 — 2026-10-05 — Bridal Journey: the approved photo design in the real product
 - Dashboard hero: the bride photograph fades into the page (edge to edge on computers), with the title,
   frosted countdown and readiness cards beside it; the six summary cards overlap the photo.

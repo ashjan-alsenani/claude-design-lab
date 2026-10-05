@@ -28,6 +28,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // AVIF first (smaller and sharper than JPEG at the same size); 85 is used for the large bridal photo.
+  images: { formats: ["image/avif", "image/webp"], qualities: [75, 85] },
   async headers() {
     // Account, product apps, admin and downloads are personal: never cached, never indexed.
     const privateHeaders = [

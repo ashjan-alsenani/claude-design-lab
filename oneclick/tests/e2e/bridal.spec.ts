@@ -73,6 +73,9 @@ test("public demo: Layan's wedding is alive and interactive (nothing saved)", as
 });
 
 test("licensed app: buy, onboard, plan, and the data persists in the account", async ({ page, browser, baseURL }) => {
+  // The longest journey in the suite (purchase, eight setup steps, a second account); the dev server
+  // compiles each section on first visit, so allow more than the default.
+  test.setTimeout(90_000);
   const me = `bride-${uid()}@example.com`;
   await signIn(page, me);
   await page.goto("/en/checkout/bride-planner");
@@ -113,8 +116,13 @@ test("licensed app: buy, onboard, plan, and the data persists in the account", a
 
   // Add a vendor, wait for the save, reload: it is still there (server-side, per account).
   await page.goto("/en/app/bride-planner/vendors");
-  await page.getByRole("button", { name: "Add your first vendor" }).click();
-  await page.getByLabel("Name", { exact: true }).fill("Lumière Studio");
+  // Each section loads its own script; on a busy dev server the first tap can land before it is ready.
+  const vendorName = page.getByLabel("Name", { exact: true });
+  await expect(async () => {
+    await page.getByRole("button", { name: "Add your first vendor" }).click();
+    await expect(vendorName).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 30_000 });
+  await vendorName.fill("Lumière Studio");
   await page.getByRole("dialog").getByRole("button", { name: "Save" }).click();
   await expect(page.getByText("Lumière Studio")).toBeVisible();
   await expect(page.getByRole("status").filter({ hasText: "Saved" }).first()).toBeVisible({ timeout: 10_000 });

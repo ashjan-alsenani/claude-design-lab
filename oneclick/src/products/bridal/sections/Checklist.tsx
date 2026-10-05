@@ -38,7 +38,7 @@ export function Checklist({ cats, title, sub }: { cats?: CategoryKey[]; title?: 
           </Button>
         }
       />
-      <div className="flex flex-wrap items-center gap-5 rounded-[20px] border border-bj-line bg-bj-paper px-5 py-4">
+      <div className="flex flex-wrap items-center gap-5 rounded-[20px] bj-card px-5 py-4">
         <ProgressRing value={weightedProgress(tasks)} size={64} stroke={5}>
           <span className="text-[13px] font-medium tabular-nums">{pct(Math.round(weightedProgress(tasks) * 100))}</span>
         </ProgressRing>

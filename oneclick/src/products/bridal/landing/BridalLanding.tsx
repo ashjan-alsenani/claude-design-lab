@@ -81,7 +81,7 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
       {/* The same photograph as the bride's dashboard, fading into the page beside the copy */}
       <section className="bj-hero overflow-hidden">
         <div className="bj-hero-photo">
-          <Image src={heroPhoto} alt={c.heroAlt} fill priority sizes="(min-width: 1024px) 62vw, 100vw" className="object-cover" placeholder="blur" />
+          <Image src={heroPhoto} quality={85} alt={c.heroAlt} fill priority sizes="(min-width: 1024px) 62vw, 100vw" className="object-cover" placeholder="blur" />
         </div>
         <Image src={blossom} alt="" className="bj-hero-blossom h-auto" aria-hidden="true" />
         <div className="relative mx-auto max-w-6xl px-5 pb-14 sm:px-8 lg:flex lg:min-h-[600px] lg:flex-col lg:justify-center lg:py-20">

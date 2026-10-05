@@ -49,7 +49,7 @@ export function Moodboard() {
         <ul className="columns-2 gap-4 md:columns-3 xl:columns-4">
           {shown.map((m, i) => (
             <li key={m.id} className="mb-4 break-inside-avoid">
-              <div className="group relative overflow-hidden rounded-[18px] border border-bj-line bg-bj-paper">
+              <div className="group relative overflow-hidden rounded-[18px] bj-card">
                 <button type="button" onClick={() => setEdit(m)} className="block w-full text-start">
                   {m.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -133,7 +133,7 @@ export function Documents() {
         <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {shown.map((d) => (
             <li key={d.id}>
-              <button type="button" onClick={() => setEdit(d)} className="flex w-full items-start gap-3 rounded-[18px] border border-bj-line bg-bj-paper p-4 text-start hover:border-bj-taupe/40">
+              <button type="button" onClick={() => setEdit(d)} className="flex w-full items-start gap-3 rounded-[18px] bj-card p-4 text-start hover:border-bj-taupe/40">
                 <ArtTile motif="doc" tone={3} className="size-12 shrink-0 rounded-[12px]" />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[15px] text-bj-ink">{d.name}</span>

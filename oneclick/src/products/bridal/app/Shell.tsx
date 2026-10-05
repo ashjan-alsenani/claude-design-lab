@@ -244,11 +244,10 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
       </header>
 
       <main className="mx-auto max-w-[1320px] px-4 pb-32 pt-6 sm:px-6 lg:px-8 lg:pb-16 lg:pt-8">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div key={section} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={reduce ? undefined : { opacity: 0, y: -6 }} transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}>
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        {/* The new section shows at once with a short CSS fade; no waiting for the old one to leave. */}
+        <div key={section} className="bj-page">
+          {children}
+        </div>
         <div className="mt-10 sm:hidden">{save}</div>
         <footer className="mt-14 flex flex-wrap items-center justify-center gap-2 text-[12.5px] text-bj-muted">
           <span>{t.brand}</span>

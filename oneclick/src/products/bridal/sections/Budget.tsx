@@ -148,7 +148,7 @@ export function Budget() {
               const v = ws.vendors.find((x) => x.id === e.vendorId);
               return (
                 <li key={e.id}>
-                  <button type="button" onClick={() => setExp(e)} className="w-full rounded-[18px] border border-bj-line bg-bj-paper p-4 text-start hover:border-bj-taupe/40">
+                  <button type="button" onClick={() => setExp(e)} className="w-full rounded-[18px] bj-card p-4 text-start hover:border-bj-taupe/40">
                     <span className="flex items-start justify-between gap-3">
                       <span className="min-w-0">
                         <span className="block truncate text-[15px] text-bj-ink">{e.item}</span>

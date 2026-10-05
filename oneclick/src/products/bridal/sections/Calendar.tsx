@@ -98,7 +98,7 @@ export function Calendar() {
 
       {view === "month" ? (
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
-          <section className="min-w-0 rounded-[22px] border border-bj-line bg-bj-paper p-3 sm:p-5">
+          <section className="min-w-0 rounded-[22px] bj-card p-3 sm:p-5">
             <div className="mb-4 flex items-center justify-between">
               <IconButton label={C.prev} onClick={() => shift(-1)}>
                 <CaretLeftIcon size={18} className="rtl:rotate-180" />

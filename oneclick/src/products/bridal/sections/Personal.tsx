@@ -171,7 +171,7 @@ export function Honeymoon() {
             <ul className="space-y-2">
               {ws.bookings.map((b) => (
                 <li key={b.id}>
-                  <button type="button" onClick={() => setBk(b)} className="flex w-full items-center gap-3 rounded-[16px] border border-bj-line bg-bj-paper px-4 py-3 text-start">
+                  <button type="button" onClick={() => setBk(b)} className="flex w-full items-center gap-3 rounded-[16px] bj-card px-4 py-3 text-start">
                     <Badge tone="rose">{H.kinds[b.kind]}</Badge>
                     <span className="min-w-0 flex-1 truncate text-[14.5px]">{b.title}</span>
                     {b.date && <span className="text-[12.5px] text-bj-muted">{date(b.date)}</span>}
