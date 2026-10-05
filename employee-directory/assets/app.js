@@ -1,3 +1,14 @@
+/* Friendly touches: time-of-day greeting and count-up stats. */
+(()=>{let rm=()=>matchMedia("(prefers-reduced-motion: reduce)").matches,esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+let sun='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></svg>',
+moon='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+window.__dtdGreet=(ar,name)=>{let h=new Date().getHours(),day=h>=5&&h<17,first=String(name||"").trim().split(/\s+/)[0]||"",
+txt=ar?(h<12&&h>=5?"صباح الخير":"مساء الخير"):(h>=5&&h<12?"Good morning":h<17&&h>=12?"Good afternoon":"Good evening");
+return`<p class="greet"><span class="greet-ic">${day?sun:moon}</span><span>${esc(txt)}${first?(ar?"، ":", ")+esc(first):""}</span></p>`};
+let count=el=>{if(el.dataset.counted)return;el.dataset.counted="1";let txt=el.textContent.trim();if(!/^\d{1,5}$/.test(txt)||rm())return;let to=+txt,t0=performance.now(),last=txt,dur=700;
+let step=now=>{if(el.textContent!==last)return;let p=Math.min(1,(now-t0)/dur),v=Math.round(to*(1-Math.pow(1-p,3)));last=el.textContent=String(v);if(p<1)requestAnimationFrame(step)};
+last=el.textContent="0";requestAnimationFrame(step)};
+new MutationObserver(()=>document.querySelectorAll(".mini-stat strong:not([data-counted])").forEach(count)).observe(document.documentElement,{childList:!0,subtree:!0})})();
 /* Sidebar toggle (focus mode): state persists per browser. */
 (()=>{let k="dtd-side-hidden",d=document.documentElement;try{localStorage.getItem(k)==="1"&&d.classList.add("side-hidden")}catch{}
 let ar=()=>(d.lang||"ar")!=="en";window.__dtdSideLabel=()=>d.classList.contains("side-hidden")?(ar()?"\u0625\u0638\u0647\u0627\u0631 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u062C\u0627\u0646\u0628\u064A\u0629":"Show sidebar"):(ar()?"\u0625\u062E\u0641\u0627\u0621 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u062C\u0627\u0646\u0628\u064A\u0629":"Hide sidebar");
@@ -56,6 +67,7 @@ Negotiation for Leaders 2016`,"Leading High-Performing Teams 2018","Presentation
       <span class="select-ic">${h(f,18)}<select id="f-${b}" data-filter="${g}" title="${a(t(b))}">${l("",k,Q[g])}${d.map(O=>l(O,S(O),Q[g])).join("")}${s(g)?l("__none",t("notProvided"),Q[g]):""}</select></span></div>`,u=J(o,"department");e.innerHTML=`<div class="page page-directory">
     <header class="page-head">
       <div class="page-title">
+        ${window.__dtdGreet?window.__dtdGreet(c,(()=>{try{return Ra().name}catch{return""}})()):""}
         <h1>${a(t("dirTitle"))}</h1>
         <p class="page-sub">${a(t("dirIntro"))}</p>
       </div>
