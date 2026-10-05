@@ -172,72 +172,69 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
       ${o.stored&&o.id?`<button class="btn btn-xs btn-ghost" data-resolve="${a(o.id)}">${h("check",14)}${a(t("markReviewed"))}</button>`:""}
     </li>`).join("")}</ul>
     ${r.length?`<details class="flag-info"><summary>${a(t("reviewed"))} (${r.length})</summary><ul class="flags">${r.map(o=>`<li class="flag flag-done">${h("circle-check",16)}<span>${a(Oe(o))}</span></li>`).join("")}</ul></details>`:""}
-  </section>`}async function fa(e,{id:n},{store:r,navigate:o}){e.innerHTML=`<div class="page"><div class="loading-block" aria-busy="true">${a(t("loading"))}</div></div>`;let i;try{i=(await P("/api/employees/"+n)).employee}catch(w){if(w.status===404){e.innerHTML=`<div class="page">${he({ic:"user",title:t("profileNotFound"),body:t("profileNotFoundBody"),action:`<a class="btn btn-ghost" href="#/directory">${a(t("backToDirectory"))}</a>`})}</div>`;return}e.innerHTML=`<div class="page">${Z(w.message)}</div>`,m("[data-retry]",e).onclick=()=>fa(e,{id:n},{store:r,navigate:o});return}let c=r.meta,l=r.isAdmin(),s=E()==="ar",p=i.level?i.level[E()]:t("levelUnranked"),u=Ne(i.assignment)?"pill-gov":Pe(i.assignment)?"pill-sec":i.assignment?"pill-neutral":"pill-muted",v=s?"arrow-right":"arrow-left",T=i.tenure&&i.tenure.completed?t("tenureCompleted"):t("tenureCurrent"),$=i.reportingManager?`<a href="#/employee/${i.reportingManager.id}" class="link">${a(I(i.reportingManager))}</a>`:i.reportingTo?`${a(i.reportingTo)} <span class="hint-inline">(${a(t("unmatchedManager"))})</span>`:ee(),b=qe(i.skillSubcat),g=c.fields.map(w=>w.key).filter(w=>!i.restricted.includes(w)),f=g.filter(w=>i[w]!=null&&i[w]!=="").length+["education","certifications","technicalTraining","softTraining"].filter(w=>i[w].length).length+(i.photo?1:0),d=Math.round(f/(g.length+5)*100),S=(w,j,W,K="")=>`<div class="hero-fact">${h(w,24)}<dt>${a(j)}</dt><dd>${W}</dd>${K?`<p class="fact-note">${a(K)}</p>`:""}</div>`,k=[["overview","file-text",s?"\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629":"Overview"],["details","id-card",s?"\u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0634\u062E\u0635\u064A\u0629 \u0648\u0627\u0644\u0648\u0638\u064A\u0641\u064A\u0629":"Personal & employment"],["quals","graduation-cap",s?"\u0627\u0644\u0645\u0624\u0647\u0644\u0627\u062A \u0648\u0627\u0644\u062A\u062F\u0631\u064A\u0628":"Qualifications & training"]];e.innerHTML=`<div class="page page-profile">
-    <header class="page-head page-head-tight"><div class="page-title">
-      <h1>${a(s?"\u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0648\u0638\u064A\u0641\u064A":"Employee profile")}</h1>
-      <a class="back-link" href="#/directory">${h(v,16)}<span>${a(t("backToDirectory"))}</span></a></div></header>
-    <section class="profile-hero" aria-label="${a(I(i))}">
-      <div class="hero-main">
-        ${ne(i,"xl")}
-        <div class="hero-id">
-          <h2 class="hero-name">${a(I(i))}</h2>
-          ${da(i)?`<p class="hero-alt" lang="${s?"en":"ar"}">${a(da(i))}</p>`:""}
-          <p class="hero-title">${G(i.jobTitle)}</p>
-          <p class="hero-dept">${G(i.department)}</p>
+  </section>`}async function fa(e,{id:n},{store:r,navigate:o}){e.innerHTML=`<div class="page"><div class="loading-block" aria-busy="true">${a(t("loading"))}</div></div>`;let i;try{i=(await P("/api/employees/"+n)).employee}catch(w){if(w.status===404){e.innerHTML=`<div class="page">${he({ic:"user",title:t("profileNotFound"),body:t("profileNotFoundBody"),action:`<a class="btn btn-ghost" href="#/directory">${a(t("backToDirectory"))}</a>`})}</div>`;return}e.innerHTML=`<div class="page">${Z(w.message)}</div>`,m("[data-retry]",e).onclick=()=>fa(e,{id:n},{store:r,navigate:o});return}let c=r.meta,l=r.isAdmin(),s=E()==="ar",p=i.level?i.level[E()]:t("levelUnranked"),u=Ne(i.assignment)?"pill-gov":Pe(i.assignment)?"pill-sec":i.assignment?"pill-neutral":"pill-muted",v=s?"arrow-right":"arrow-left",T=i.tenure&&i.tenure.completed?t("tenureCompleted"):t("tenureCurrent"),$=i.reportingManager?`<a href="#/employee/${i.reportingManager.id}" class="link">${a(I(i.reportingManager))}</a>`:i.reportingTo?`${a(i.reportingTo)} <span class="hint-inline">(${a(t("unmatchedManager"))})</span>`:ee(),b=qe(i.skillSubcat),g=c.fields.map(w=>w.key).filter(w=>!i.restricted.includes(w)),f=g.filter(w=>i[w]!=null&&i[w]!=="").length+["education","certifications","technicalTraining","softTraining"].filter(w=>i[w].length).length+(i.photo?1:0),d=Math.round(f/(g.length+5)*100),S=(w,j,W,K="")=>`<div class="hero-fact">${h(w,24)}<dt>${a(j)}</dt><dd>${W}</dd>${K?`<p class="fact-note">${a(K)}</p>`:""}</div>`,k=[["overview","file-text",s?"\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629":"Overview"],["details","id-card",s?"\u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0634\u062E\u0635\u064A\u0629 \u0648\u0627\u0644\u0648\u0638\u064A\u0641\u064A\u0629":"Personal & employment"],["quals","graduation-cap",s?"\u0627\u0644\u0645\u0624\u0647\u0644\u0627\u062A \u0648\u0627\u0644\u062A\u062F\u0631\u064A\u0628":"Qualifications & training"]];e.innerHTML=`<div class="page page-profile pf">
+    <nav class="pf-crumbs" aria-label="${a(s?"مسار التنقل":"Breadcrumb")}"><a href="#/directory">${h("users",16)}<span>${a(t("navDirectory"))}</span></a>${h(s?"chevron-left":"chevron-right",15)}<span aria-current="page">${a(I(i))}</span></nav>
+    ${(()=>{let rs=i.roleStartDate&&i.roleStartDate>=(i.hireDate||"")?i.roleStartDate:i.hireDate,rl=rs?Mt(rs,i.lastWorkingDate):null,sz=Sz(i).s,st=[["clock","#2563EB",i.tenure?Je(i.tenure):ee(),T,i.hireDate?(s?"منذ ":"Since ")+Se(i.hireDate):""],["briefcase","#7C3AED",rl?Je(rl):ee(),s?"في الوظيفة الحالية":"In current role",rs?(s?"منذ ":"Since ")+Se(rs):""],["star","#D97706",`${sz}<small>/100</small>`,s?"درجة الكفاءة":"Talent score",`<a href="#/talent">${a(s?"عرض الترتيب":"See ranking")}</a>`],["list-checks","#0D9488",`${d}%`,s?"اكتمال الملف":"Profile complete",`<span class="pf-mini" role="progressbar" aria-valuenow="${d}" aria-valuemin="0" aria-valuemax="100"><i style="width:${d}%"></i></span>`]];
+     return`<section class="pf-hero" style="--tone:${jt(i)}" aria-label="${a(I(i))}">
+      <div class="pf-cover" aria-hidden="true"></div>
+      <div class="pf-hero-body">
+        <div class="pf-avatar">${ne(i,"xl")}</div>
+        <div class="pf-id">
+          <h1 class="pf-name">${a(I(i))}</h1>
+          ${da(i)?`<p class="pf-alt" lang="${s?"en":"ar"}">${a(da(i))}</p>`:""}
+          <p class="pf-role">${G(i.jobTitle)}<span class="pf-sep">·</span>${G(i.department)}</p>
           <div class="card-tags">
             <span class="pill pill-dot pill-${Le(i.status)}"><span class="sr-only">${a(t("fStatus"))}: </span>${a(B(i.status))}</span>
-            <span class="pill ${u}"><span class="sr-only">${a(t("fAssignment"))}: </span>${i.assignment?a(B(i.assignment)):a(t("fAssignment"))+": "+a(t("notProvided"))}</span>
-          </div>
-          <div class="hero-actions">
-            ${l?`<a class="btn btn-outline" href="#/manage/edit/${i.id}">${h("pencil",16)}<span>${a(s?"\u062A\u0639\u062F\u064A\u0644 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A":"Edit details")}</span></a>`:""}
-            ${l?`<button class="btn btn-danger-outline" id="delEmp">${h("trash-2",16)}<span>${a(s?"\u062D\u0630\u0641 \u0627\u0644\u0645\u0648\u0638\u0641":"Delete employee")}</span></button>`:""}
-            <button class="btn btn-ghost btn-sm" id="copyLink">${h("link",15)}<span>${a(t("copyLink"))}</span></button>
+            ${i.assignment?`<span class="pill ${u}"><span class="sr-only">${a(t("fAssignment"))}: </span>${a(B(i.assignment))}</span>`:""}
+            <span class="pill pill-neutral">${h(i.level&&i.level.leadership?"crown":"layers",14)}${a(p)}</span>
           </div>
         </div>
-      </div>
-      <div class="hero-side">
-        <dl class="hero-facts">
-          ${S("building-2",q("department"),G(i.department))}
-          ${S("users-round",s?"\u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0645\u0628\u0627\u0634\u0631":"Reporting manager",$)}
-          ${S("calendar",q("hireDate"),i.hireDate?a(Se(i.hireDate)):ee())}
-          ${S("clock",T,a(Je(i.tenure)),i.tenure?t("tenureCalc",Se(i.tenure.to)):"")}
-        </dl>
-        <div class="hero-meta">
-          <div class="completion" title="${a(s?"\u0646\u0633\u0628\u0629 \u0627\u0644\u062D\u0642\u0648\u0644 \u0627\u0644\u0645\u0639\u0628\u0623\u0629 \u0641\u064A \u0627\u0644\u0645\u0644\u0641":"Share of profile fields that are filled in")}">
-            <span class="completion-label">${a(s?"\u0627\u0643\u062A\u0645\u0627\u0644 \u0627\u0644\u0645\u0644\u0641":"Profile completeness")}</span>
-            <strong>${d}%</strong>
-            <span class="completion-bar" role="progressbar" aria-valuenow="${d}" aria-valuemin="0" aria-valuemax="100" aria-label="${a(s?"\u0627\u0643\u062A\u0645\u0627\u0644 \u0627\u0644\u0645\u0644\u0641":"Profile completeness")}"><span style="width:${d}%"></span></span>
-          </div>
-          <p class="hero-line">${h("id-card",16)}<span dir="ltr">${Ie(i.empNo)}</span></p>
-          ${"email"in i&&i.email?`<p class="hero-line">${h("mail",16)}<a class="link" href="mailto:${a(i.email)}" dir="ltr">${a(i.email)}</a></p>`:""}
-          ${"age"in i?`<p class="hero-line">${h("user",16)}<span>${a(t("age"))}: ${i.age==null?ee():a(t("years",i.age))}</span></p>`:""}
-          <p class="hero-line">${h(i.level&&i.level.leadership?"crown":"chart-column",16)}<span>${a(p)}</span></p>
+        <div class="pf-actions">
+          ${l?`<a class="btn btn-primary" href="#/manage/edit/${i.id}">${h("pencil",17)}<span>${a(s?"تعديل البيانات":"Edit details")}</span></a>`:""}
+          ${"email"in i&&i.email?`<a class="icon-btn pf-ibtn" href="mailto:${a(i.email)}" title="${a(s?"إرسال بريد":"Send email")}" aria-label="${a(s?"إرسال بريد":"Send email")}">${h("mail",19)}</a>`:""}
+          <button type="button" class="icon-btn pf-ibtn" id="copyLink" title="${a(t("copyLink"))}" aria-label="${a(t("copyLink"))}">${h("link",19)}</button>
+          ${l?`<button type="button" class="icon-btn pf-ibtn pf-del" id="delEmp" title="${a(s?"حذف الموظف":"Delete employee")}" aria-label="${a(s?"حذف الموظف":"Delete employee")}">${h("trash-2",19)}</button>`:""}
         </div>
       </div>
-    </section>
+      <dl class="pf-stats">${st.map(([ic,cl,v,lb,nt],x)=>`<div class="pf-stat" style="--c:${cl};--i:${x}"><span class="pf-stat-ic">${h(ic,20)}</span><div><dt>${a(lb)}</dt><dd>${v}</dd>${nt?`<p>${nt}</p>`:""}</div></div>`).join("")}</dl>
+    </section>`})()}
 
-    <div class="tabs" role="tablist" aria-label="${a(s?"\u0623\u0642\u0633\u0627\u0645 \u0627\u0644\u0645\u0644\u0641":"Profile sections")}">
+    <div class="tabs" role="tablist" aria-label="${a(s?"أقسام الملف":"Profile sections")}">
       ${k.map(([w,j,W],K)=>`<button role="tab" id="tab-${w}" aria-controls="pane-${w}" aria-selected="${K===0}" tabindex="${K===0?0:-1}" data-tab="${w}">${h(j,19)}<span>${a(W)}</span></button>`).join("")}
     </div>
 
     <div class="tab-pane" role="tabpanel" id="pane-overview" aria-labelledby="tab-overview">
-      ${l?Ht(i):""}${window.__idpPanel?window.__idpPanel(i):""}
-      <div class="panel-grid">
-        ${X("skills","star",s?"\u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062A":"Skills",`
-          ${b.length?`<ul class="chips chips-lg">${b.map(w=>`<li>${h("badge-check",15)}${a(w)}</li>`).join("")}</ul>`:`<p class="np-block">${a(t("notProvided"))}</p>`}
-          <dl class="dl dl-2">${R(i,"skillCategory",G)}${R(i,"readiness",G)}${R(i,"upskilling",G)}${R(i,"resourceType",G)}</dl>`)}
-        ${X("resp","clipboard-list",s?"\u0627\u0644\u0645\u0647\u0627\u0645 \u0648\u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064A\u0627\u062A":"Duties & responsibilities",`
+     <div class="pf-layout">
+      <div class="pf-main">
+        ${X("resp","clipboard-list",s?"نبذة والمهام":"About & duties",`
           ${Ka(i.duties)}
           <dl class="dl dl-2">${R(i,"focusArea",G)}${R(i,"functionalCategory",G)}</dl>`)}
-        ${X("trainov","award",je(c,"training"),`
-          <h3 class="sub-h">${a(te("certifications"))}</h3>${Ge(i.certifications)}
-          <h3 class="sub-h">${a(te("technicalTraining"))}</h3>${Ge(i.technicalTraining)}`)}
-        ${X("eduov","graduation-cap",s?"\u0627\u0644\u0645\u0624\u0647\u0644\u0627\u062A \u0627\u0644\u0639\u0644\u0645\u064A\u0629":"Education",Ja(i.education))}
-        ${i.restricted.includes("careerInterest")?"":X("career","compass",je(c,"career"),`<h3 class="sub-h">${a(q("careerInterest"))}</h3>${i.careerInterest?`<p class="prose prose-quote">${a(i.careerInterest).replace(/\n/g,"<br>")}</p>`:ee()}`)}
-        ${X("reports","network",t("directReports"),i.directReports.length?`<ul class="mini-people">${i.directReports.map(w=>`<li><a href="#/employee/${w.id}">${ne(w,"sm")}<span><strong>${a(I(w))}</strong><span>${G(w.jobTitle)}</span></span></a></li>`).join("")}</ul>`:`<p class="np-block">${a(t("noDirectReports"))}</p>`)}
+        ${X("skills","star",s?"المهارات":"Skills",`
+          ${b.length?`<ul class="chips chips-lg">${b.map(w=>`<li>${h("badge-check",15)}${a(w)}</li>`).join("")}</ul>`:`<p class="np-block">${a(t("notProvided"))}</p>`}
+          <dl class="dl dl-2 pf-dl-tiles">${R(i,"skillCategory",G)}${R(i,"readiness",G)}${R(i,"upskilling",G)}${R(i,"resourceType",G)}</dl>`)}
+        ${X("qualov","graduation-cap",s?"المؤهلات والشهادات":"Education & certifications",`<div class="pf-two">
+          <div><h3 class="sub-h">${a(s?"المؤهلات العلمية":"Education")}</h3>${Ja(i.education)}</div>
+          <div><h3 class="sub-h">${a(te("certifications"))}</h3>${Ge(i.certifications)}${i.technicalTraining.length||i.softTraining.length?`<button type="button" class="link-btn pf-more" data-goto="quals">${h("book-open",15)}<span>${a(s?`كل الدورات (${i.technicalTraining.length+i.softTraining.length})`:`All training (${i.technicalTraining.length+i.softTraining.length})`)}</span></button>`:""}</div></div>`)}
+        ${i.restricted.includes("careerInterest")||!i.careerInterest?"":X("career","compass",je(c,"career"),`<p class="prose prose-quote">${a(i.careerInterest).replace(/\n/g,"<br>")}</p>`)}
       </div>
+      <aside class="pf-side">
+        <section class="panel pf-card"><h2 class="panel-title">${h("id-card",20)}<span>${a(s?"معلومات سريعة":"At a glance")}</span></h2>
+          <ul class="pf-facts">
+            <li>${h("users-round",18)}<span><small>${a(s?"المدير المباشر":"Reporting manager")}</small>${$}</span></li>
+            ${"email"in i&&i.email?`<li>${h("mail",18)}<span><small>${a(q("email"))}</small><a class="link" href="mailto:${a(i.email)}" dir="ltr">${a(i.email)}</a></span></li>`:""}
+            ${"phone"in i&&i.phone?`<li>${h("phone",18)}<span><small>${a(q("phone"))}</small><a class="link" href="tel:${a(String(i.phone).replace(/[^\d+]/g,""))}" dir="ltr">${a(i.phone)}</a></span></li>`:""}
+            <li>${h("calendar",18)}<span><small>${a(q("hireDate"))}</small>${i.hireDate?a(Se(i.hireDate)):ee()}</span></li>
+            <li>${h("map-pin",18)}<span><small>${a(q("location"))}</small>${G(i.location)}</span></li>
+            <li>${h("id-card",18)}<span><small>${a(q("empNo"))}</small><span dir="ltr">${Ie(i.empNo)}</span></span></li>
+            ${"age"in i?`<li>${h("user",18)}<span><small>${a(t("age"))}</small>${i.age==null?ee():a(t("years",i.age))}</span></li>`:""}
+          </ul></section>
+        ${l?(()=>{let R2=Asc(i,c).R;return R2.length?`<section class="panel pf-card pf-att"><h2 class="panel-title">${h("flag",20)}<span>${a(s?"نقاط للمتابعة":"Worth a look")}</span></h2><ul class="att-reasons">${R2.map(([k2,w2,ic,lb])=>`<li class="att-r-${k2}">${h(ic,16)}<span>${a(lb)}</span></li>`).join("")}</ul></section>`:""})():""}
+        ${window.__idpPanel?window.__idpPanel(i):""}
+        ${X("reports","network",t("directReports"),i.directReports.length?`<ul class="mini-people">${i.directReports.slice(0,5).map(w=>`<li><a href="#/employee/${w.id}">${ne(w,"sm")}<span><strong>${a(I(w))}</strong><span>${G(w.jobTitle)}</span></span></a></li>`).join("")}</ul>${i.directReports.length>5?`<details class="pf-moreppl"><summary>${a(s?`عرض الكل (${i.directReports.length})`:`Show all (${i.directReports.length})`)}</summary><ul class="mini-people">${i.directReports.slice(5).map(w=>`<li><a href="#/employee/${w.id}">${ne(w,"sm")}<span><strong>${a(I(w))}</strong><span>${G(w.jobTitle)}</span></span></a></li>`).join("")}</ul></details>`:""}`:`<p class="np-block">${a(t("noDirectReports"))}</p>`)}
+        ${l&&(i.flags||[]).some(f=>!f.resolved&&!f.info)?Ht(i):""}
+      </aside>
+     </div>
     </div>
-
     <div class="tab-pane" role="tabpanel" id="pane-details" aria-labelledby="tab-details" hidden>
       <div class="panel-grid">
         ${X("contact","id-card",je(c,"identity"),`<dl class="dl">
@@ -272,7 +269,7 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
       </div>
     </div>
     <p class="updated-note">${h("clock",14)}<span>${a(t("updatedBy",i.updatedBy||"\u2014",ie(i.updatedAt)))}</span></p>
-  </div>`;let O=m("#delEmp",e);O&&(O.onclick=async()=>{if(await fe({title:t("deleteConfirmTitle"),body:t("deleteConfirmBody",I(i)),confirmLabel:t("delete"),danger:!0}))try{await P("/api/employees/"+i.id,{method:"DELETE"}),await r.loadEmployees(!0),L(t("deleted")),o("#/directory",{force:!0})}catch(j){L(j.message,"error")}});let A=N("[role=tab]",e),Y=w=>{A.forEach(j=>{let W=j===w;j.setAttribute("aria-selected",W),j.tabIndex=W?0:-1,m("#pane-"+j.dataset.tab,e).hidden=!W}),w.focus()};A.forEach((w,j)=>{w.onclick=()=>Y(w),w.onkeydown=W=>{if(W.key!=="ArrowLeft"&&W.key!=="ArrowRight")return;let K=W.key==="ArrowRight"==(E()!=="ar")?1:-1;W.preventDefault(),Y(A[(j+K+A.length)%A.length])}}),m("#copyLink",e).onclick=async()=>{let w=location.origin+location.pathname+"#/employee/"+i.id;try{await navigator.clipboard.writeText(w),L(t("linkCopied"))}catch{prompt(t("copyLink"),w)}},N("[data-resolve]",e).forEach(w=>w.onclick=async()=>{w.disabled=!0;try{await P(`/api/employees/${i.id}/flags/${encodeURIComponent(w.dataset.resolve)}/resolve`,{method:"POST"}),await r.loadEmployees(!0),L(t("saved")),fa(e,{id:n},{store:r,navigate:o})}catch(j){L(j.message,"error"),w.disabled=!1}});let H=m("#loadHist",e);H&&(H.onclick=async()=>{H.disabled=!0;try{let w=await P(`/api/employees/${i.id}/history`);m("#histBody",e).innerHTML=`
+  </div>`;let O=m("#delEmp",e);O&&(O.onclick=async()=>{if(await fe({title:t("deleteConfirmTitle"),body:t("deleteConfirmBody",I(i)),confirmLabel:t("delete"),danger:!0}))try{await P("/api/employees/"+i.id,{method:"DELETE"}),await r.loadEmployees(!0),L(t("deleted")),o("#/directory",{force:!0})}catch(j){L(j.message,"error")}});let A=N("[role=tab]",e),Y=w=>{A.forEach(j=>{let W=j===w;j.setAttribute("aria-selected",W),j.tabIndex=W?0:-1,m("#pane-"+j.dataset.tab,e).hidden=!W}),w.focus()};A.forEach((w,j)=>{w.onclick=()=>Y(w),w.onkeydown=W=>{if(W.key!=="ArrowLeft"&&W.key!=="ArrowRight")return;let K=W.key==="ArrowRight"==(E()!=="ar")?1:-1;W.preventDefault(),Y(A[(j+K+A.length)%A.length])}}),N("[data-goto]",e).forEach(w=>w.onclick=()=>{let tb=m("#tab-"+w.dataset.goto,e);tb&&(Y(tb),tb.scrollIntoView({behavior:"smooth",block:"start"}))}),m("#copyLink",e).onclick=async()=>{let w=location.origin+location.pathname+"#/employee/"+i.id;try{await navigator.clipboard.writeText(w),L(t("linkCopied"))}catch{prompt(t("copyLink"),w)}},N("[data-resolve]",e).forEach(w=>w.onclick=async()=>{w.disabled=!0;try{await P(`/api/employees/${i.id}/flags/${encodeURIComponent(w.dataset.resolve)}/resolve`,{method:"POST"}),await r.loadEmployees(!0),L(t("saved")),fa(e,{id:n},{store:r,navigate:o})}catch(j){L(j.message,"error"),w.disabled=!1}});let H=m("#loadHist",e);H&&(H.onclick=async()=>{H.disabled=!0;try{let w=await P(`/api/employees/${i.id}/history`);m("#histBody",e).innerHTML=`
         ${w.imports.map(j=>`<details class="hist"><summary>${h("file-spreadsheet",14)} ${a(j.filename||"")} \xB7 ${a(ie(j.created_at))} \xB7 ${a(j.action)}</summary>
           <p class="hint">${a(t("originalValues"))} \u2014 ${a(t("rows"))} ${a(j.row_number)}</p>
           <dl class="dl dl-raw">${Object.entries(j.raw).filter(([,W])=>String(W).trim()!=="").map(([W,K])=>`<div class="dl-row"><dt>${a(W)}</dt><dd>${a(K).replace(/\n/g,"<br>")}</dd></div>`).join("")}</dl></details>`).join("")}
