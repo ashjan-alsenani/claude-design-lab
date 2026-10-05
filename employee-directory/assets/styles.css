@@ -2753,3 +2753,4 @@ html[dir="ltr"] .oc-node { direction: ltr; }
 .h2-search input, [data-theme="dark"] .h2-search input { border: 0 !important; box-shadow: none !important; background: transparent !important; padding: 0 4px !important; color: #0F172A !important; height: 46px; }
 [data-theme="dark"] .h2 .h2-search input:not([type=checkbox]):not([type=radio]):not([type=range]) { background-color: transparent !important; color: #0F172A !important; }
 [data-theme="dark"] .h2-search input::placeholder { color: #64748B; }
+.us-roles .cf-type-card strong { white-space: nowrap; }
