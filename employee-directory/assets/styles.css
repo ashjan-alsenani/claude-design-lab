@@ -3169,3 +3169,5 @@ html.tp-open { overflow: hidden; }
 .dk-pbar { display: inline-block; width: 70px; height: 6px; border-radius: 99px; background: var(--canvas); overflow: hidden; vertical-align: middle; margin-inline-end: 8px; }
 .dk-pbar i { display: block; height: 100%; border-radius: inherit; }
 .dk-pc { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+.kf-row { align-items: start; }
+.kf-row > .field, .kf-row > .field + .field { margin-top: 0; margin-bottom: 8px; }
