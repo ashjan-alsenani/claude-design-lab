@@ -3234,3 +3234,20 @@ html[data-ws="vendors"] .ws-switch button[aria-pressed="true"] { background: #F5
 html[data-ws="vendors"] .sidebar { box-shadow: inset 0 4px 0 #F59E0B; }
 .sidebar.collapsed .ws-switch span, .side-collapsed .ws-switch span { display: none; }
 html[data-ws="vendors"] .page-dashboard #dxec { display: none; }
+
+/* ---------- v38 lean vendor workspace ---------- */
+html[data-ws="vendors"] .pf-stat:nth-child(3),
+html[data-ws="vendors"] .pf-att,
+html[data-ws="vendors"] section[aria-labelledby="ps-idp"],
+html[data-ws="vendors"] section[aria-labelledby="ps-career"],
+html[data-ws="vendors"] .card-tags .pill-gov, html[data-ws="vendors"] .card-tags .pill-sec, html[data-ws="vendors"] .card-tags .pill-muted,
+html[data-ws="vendors"] .leader-name .pill-gov, html[data-ws="vendors"] .leader-name .pill-sec, html[data-ws="vendors"] .leader-name .pill-muted,
+html[data-ws="vendors"] .pf-hero .card-tags .pill:not(.pill-dot):not(.pill-act):not(.pill-neutral),
+html[data-ws="vendors"] .filter:has(select[data-filter="assignment"]),
+html[data-ws="vendors"] .filter:has(#fAssignment) { display: none !important; }
+.ws-switch { margin: 10px 14px 10px; }
+.ws-switch button { font-size: 13.5px; padding: 8px 6px; }
+html[data-ws="vendors"] .sidebar nav { flex: 0 0 auto; }
+html[data-ws="vendors"] .sidebar nav .sidenav-group, html[data-ws="vendors"] .sidebar nav a { flex: 0 0 auto; }
+html[data-ws="vendors"] .sidebar nav .sidenav-label { display: none; }
+html[data-ws="vendors"] .sidebar .ws-switch { margin-top: auto; }
