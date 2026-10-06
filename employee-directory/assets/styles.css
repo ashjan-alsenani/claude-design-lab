@@ -3182,3 +3182,40 @@ html.tp-open { overflow: hidden; }
 .card-apps svg { flex: none; margin-top: 3px; color: #2563EB; }
 .card-apps b { color: var(--navy-txt); font-weight: 600; }
 .card-apps em { font-style: normal; font-weight: 600; color: #2563EB; }
+
+/* ---------- v36 dashboard motion ---------- */
+/* live insight line in the header */
+.dk-pulse { display: inline-flex; align-items: center; gap: 10px; max-width: 100%; margin: 14px 0 0; padding: 7px 14px 7px 12px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); color: #fff; font-size: 14.5px; backdrop-filter: blur(6px); }
+.dk-pulse[hidden] { display: none; }
+.dk-pulse-dot { position: relative; width: 8px; height: 8px; flex: none; border-radius: 50%; background: #5EEAD4; }
+.dk-pulse-dot::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: inherit; animation: dk-ping 2s cubic-bezier(0.23, 1, 0.32, 1) infinite; }
+@keyframes dk-ping { from { transform: scale(1); opacity: .7; } to { transform: scale(2.8); opacity: 0; } }
+.dk-pulse-k { flex: none; font-size: 12px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; opacity: .85; }
+html[dir="rtl"] .dk-pulse-k { text-transform: none; letter-spacing: 0; }
+.dk-pulse-track { position: relative; display: grid; min-width: 0; flex: 1; }
+.dk-pulse-item { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 7px; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transform: translateY(8px); filter: blur(3px); transition: opacity .32s cubic-bezier(0.23, 1, 0.32, 1), transform .32s cubic-bezier(0.23, 1, 0.32, 1), filter .32s ease; pointer-events: none; }
+.dk-pulse-item > span { overflow: hidden; text-overflow: ellipsis; }
+.dk-pulse-item svg { flex: none; opacity: .9; }
+.dk-pulse-item.on { opacity: 1; transform: none; filter: none; pointer-events: auto; }
+.dk-pulse-item.off { transform: translateY(-8px); transition-duration: .22s; }
+.dk-pulse-n { flex: none; font-size: 11.5px; font-variant-numeric: tabular-nums; opacity: .7; }
+/* KPI share meter (transform only) */
+.kpi-meter { display: block; width: 74%; height: 5px; margin: 8px auto 0; border-radius: 99px; background: color-mix(in srgb, var(--kc) 16%, transparent); overflow: hidden; }
+.kpi-meter[hidden] { display: none; }
+.kpi-meter i { display: block; height: 100%; border-radius: inherit; background: var(--kc); transform: scaleX(0); transform-origin: left center; transition: transform .9s cubic-bezier(0.23, 1, 0.32, 1); }
+html[dir="rtl"] .kpi-meter i { transform-origin: right center; }
+/* press feedback on clickable cards and chart rows */
+.page-dashboard:not(.editing) .kpi[data-dk] { transition: transform .16s ease-out, box-shadow .28s ease; }
+.page-dashboard:not(.editing) .kpi[data-dk]:active { transform: scale(.97); }
+.page-dashboard:not(.editing) .hbar-row[data-dd]:active, .page-dashboard:not(.editing) .dk-table tbody tr:active { transform: scale(.99); }
+/* table share bars grow in when revealed */
+.dk-pbar i { transform-origin: left center; transition: transform .7s cubic-bezier(0.23, 1, 0.32, 1); }
+html[dir="rtl"] .dk-pbar i { transform-origin: right center; }
+@media (prefers-reduced-motion: reduce) {
+  .dk-pulse-dot::after { animation: none; }
+  .dk-pulse-item, .dk-pulse-item.off { transform: none; filter: none; transition: opacity .2s ease; }
+  .kpi-meter i, .dk-pbar i { transition: none; }
+  .page-dashboard:not(.editing) .kpi[data-dk]:active { transform: none; }
+}
+.kpi .kpi-meter { margin: auto auto 0; }
+.kpi .kpi-sub { margin-bottom: 10px; }
