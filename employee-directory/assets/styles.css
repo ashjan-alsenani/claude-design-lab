@@ -3292,3 +3292,14 @@ html[data-ws="vendors"][data-theme="dark"] { --hdr-b1: #7A3F07; --hdr: linear-gr
 .h2-hero h1 span { background: none !important; -webkit-background-clip: border-box; background-clip: border-box; color: #5EEAD4 !important; }
 .hm-card::before { display: none !important; }
 .cr-card { border-inline-start: 1px solid color-mix(in srgb, var(--lc) 25%, var(--line)) !important; }
+
+/* ---------- v40 large screens (QHD / 4K) ---------- */
+/* scale the whole interface proportionally on very wide viewports so
+   type, controls and spacing keep their intended size on 4K screens */
+@media (min-width: 2200px) { html { zoom: 1.2; } }
+@media (min-width: 2800px) { html { zoom: 1.45; } }
+@media (min-width: 3400px) { html { zoom: 1.75; } }
+/* sidebar links stay grouped at the top on tall screens */
+.sidenav { align-content: start; }
+.sidebar .ws-switch { margin-top: auto; }
+.dx-area::after { display: none !important; }
