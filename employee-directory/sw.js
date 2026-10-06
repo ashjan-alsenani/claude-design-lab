@@ -1,5 +1,5 @@
 /* Offline cache for the app shell. Data stays in the browser's localStorage. */
-const CACHE = "dtd-v41";
+const CACHE = "dtd-v42";
 const SHELL = [
   "./",
   "index.html",
@@ -21,7 +21,15 @@ const SHELL = [
   "assets/tour/home.jpg",
   "assets/tour/orgchart.jpg",
   "assets/tour/profile.jpg",
-  "assets/tour/settings.jpg"
+  "assets/tour/settings.jpg",
+  "assets/tour/en/bell.jpg",
+  "assets/tour/en/dashboard.jpg",
+  "assets/tour/en/directory.jpg",
+  "assets/tour/en/drill.jpg",
+  "assets/tour/en/home.jpg",
+  "assets/tour/en/orgchart.jpg",
+  "assets/tour/en/profile.jpg",
+  "assets/tour/en/settings.jpg"
 ];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
