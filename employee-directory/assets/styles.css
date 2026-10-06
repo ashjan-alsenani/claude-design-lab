@@ -3023,3 +3023,13 @@ html.tp-open { overflow: hidden; }
 .v-at { color: var(--muted); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .v-acts { display: flex; gap: 4px; } .v-okb { color: #16A34A; } .v-upb { color: #D97706; }
 @media (max-width: 760px) { .v-list li { grid-template-columns: auto minmax(0, 1fr) auto; } .v-at { display: none; } .v-acts { grid-column: 2 / -1; } }
+
+/* ---------- v28 acting / officer-in-charge ---------- */
+.pill-act { background: #FEF3C7; color: #92400E; border-color: #FCD34D; }
+.pill-act svg { flex: none; }
+.pill-act-sm { font-size: 12.5px; padding: 1px 9px; gap: 4px; }
+.oc-node .pill-act { margin: 2px auto 0; }
+.org-acting { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 4px; font-size: 13px; font-weight: 600; color: #92400E; }
+.org-acting a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+[data-theme="dark"] .pill-act { background: rgba(245,158,11,.16); color: #FCD34D; border-color: rgba(252,211,77,.35); }
+[data-theme="dark"] .org-acting { color: #FCD34D; }
