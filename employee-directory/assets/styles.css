@@ -3251,3 +3251,44 @@ html[data-ws="vendors"] .sidebar nav { flex: 0 0 auto; }
 html[data-ws="vendors"] .sidebar nav .sidenav-group, html[data-ws="vendors"] .sidebar nav a { flex: 0 0 auto; }
 html[data-ws="vendors"] .sidebar nav .sidenav-label { display: none; }
 html[data-ws="vendors"] .sidebar .ws-switch { margin-top: auto; }
+
+/* ==========================================================================
+   v39 visual consistency
+   One brand header for every page (teal → navy, matching the sidebar),
+   neutral surfaces for cards and tiles; colour stays on icons and on
+   meaning (risk, watch, success) instead of on whole surfaces.
+   ========================================================================== */
+:root { --hdr-b1: #0B6E68; --hdr-b2: #17325A; --hdr: linear-gradient(125deg, #0B6E68 0%, #0E5674 52%, #17325A 100%); }
+[data-theme="dark"] { --hdr-b1: #0A5B56; --hdr-b2: #13284A; --hdr: linear-gradient(125deg, #0A5B56 0%, #0D4560 52%, #13284A 100%); }
+html[data-ws="vendors"] { --hdr-b1: #9A4F08; --hdr: linear-gradient(125deg, #9A4F08 0%, #7C4512 46%, #17325A 100%); }
+html[data-ws="vendors"][data-theme="dark"] { --hdr-b1: #7A3F07; --hdr: linear-gradient(125deg, #7A3F07 0%, #5E3A12 46%, #13284A 100%); }
+
+/* page headers: same colour, same motion on every page */
+.page > .page-head:not(.page-head-tight) { --b1: var(--hdr-b1) !important; --b2: var(--hdr-b2) !important; background: var(--hdr) !important; background-size: auto !important; animation: banner-in .6s var(--ease-out) both !important; box-shadow: 0 24px 46px -30px var(--hdr-b2) !important; }
+/* home hero and profile cover follow the same brand colour */
+.h2-hero { background: radial-gradient(60% 90% at 100% 0%, rgba(45,212,191,.28), transparent 60%), var(--hdr) !important; }
+.pf-cover { background: radial-gradient(120% 140% at 85% 0%, rgba(255,255,255,.16) 0%, transparent 55%), var(--hdr) !important; background-size: auto !important; animation: none !important; }
+
+/* employee cards: neutral surface; the avatar keeps each person's colour */
+.card, .card-leader { background: var(--paper) !important; border-color: var(--line) !important; }
+.card:hover { border-color: color-mix(in srgb, var(--teal) 40%, var(--line)) !important; }
+.card::before { background: radial-gradient(420px circle at var(--mx) var(--my), color-mix(in srgb, var(--teal) 9%, transparent), transparent 45%) !important; }
+.card-link { border-color: var(--navy-txt) !important; }
+.card:hover .card-link { background: var(--teal-strong) !important; border-color: var(--teal-strong) !important; color: #fff !important; }
+
+/* stat tiles and KPI cards: white surface, tinted icon chip carries the colour */
+.ay-stat, .rp-kpi, .pf-q, .hm-nums-l a { background: var(--paper) !important; border-color: var(--line) !important; }
+.ay-stat-ic { background: color-mix(in srgb, var(--c) 14%, var(--paper)) !important; color: var(--c) !important; box-shadow: none !important; }
+.kpi { --kb: var(--paper) !important; border-color: var(--line) !important; }
+.kpi-ic { background: color-mix(in srgb, var(--kc) 14%, var(--paper)) !important; color: var(--kc) !important; box-shadow: none !important; }
+.kpi.kpi-add { background: transparent !important; border: 2px dashed var(--line) !important; }
+/* same tinted icon chip in every stat row */
+.sy-stat { background: var(--paper) !important; }
+.sy-stat-ic, .pf-stat-ic { background: color-mix(in srgb, var(--c) 14%, var(--paper)) !important; color: var(--c) !important; box-shadow: none !important; }
+/* profile actions never run off small screens */
+.pf-actions { flex-wrap: wrap; }
+@media (max-width: 640px) { .pf-actions { justify-content: flex-start; } .pf-actions .btn { flex: 0 1 auto; } }
+/* calmer accents: no gradient text, no decorative stripes */
+.h2-hero h1 span { background: none !important; -webkit-background-clip: border-box; background-clip: border-box; color: #5EEAD4 !important; }
+.hm-card::before { display: none !important; }
+.cr-card { border-inline-start: 1px solid color-mix(in srgb, var(--lc) 25%, var(--line)) !important; }
