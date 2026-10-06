@@ -3171,3 +3171,14 @@ html.tp-open { overflow: hidden; }
 .dk-pc { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
 .kf-row { align-items: start; }
 .kf-row > .field, .kf-row > .field + .field { margin-top: 0; margin-bottom: 8px; }
+
+/* ---------- v35 JD & applications ---------- */
+.jd-box { display: grid; gap: 10px; justify-items: start; }
+.jd-link { margin-top: 2px; }
+.jd-sub { display: flex; align-items: center; gap: 8px; margin: 18px 0 8px; font-size: 15.5px; font-weight: 700; color: var(--navy-txt); }
+.jd-sub svg { color: var(--teal-strong); }
+.jd-apps li { background: color-mix(in srgb, #2563EB 9%, var(--paper)); border-color: color-mix(in srgb, #2563EB 25%, transparent); }
+.card-apps { display: flex; align-items: flex-start; gap: 6px; margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+.card-apps svg { flex: none; margin-top: 3px; color: #2563EB; }
+.card-apps b { color: var(--navy-txt); font-weight: 600; }
+.card-apps em { font-style: normal; font-weight: 600; color: #2563EB; }
