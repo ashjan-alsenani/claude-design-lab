@@ -84,9 +84,10 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
       <h3 class="card-name">${a(I(e))}</h3>
       <p class="card-title">${e.jobTitle?a(B(e.jobTitle)):`<span class="muted">${a(t("notProvided"))}</span>`}</p>
       <p class="card-dept">${h("building-2",14)}<span>${a(B(e.department))}</span></p>
-      <div class="card-tags">${ha(e)}${ga(e)}${Lact(e,1)}</div>
+      ${Cfx(e)}
+      <div class="card-tags">${ha(e)}${ga(e)}${Lact(e,1)}${Cmiss(e)}</div>
       ${za(r,2)}
-      <a class="card-link" href="#/employee/${e.id}">${h("user",15)}<span>${a(t("viewProfile"))}</span><span class="sr-only"> \u2014 ${a(I(e))}</span></a>
+      <div class="card-foot"><a class="card-link" href="#/employee/${e.id}">${h("user",15)}<span>${a(t("viewProfile"))}</span><span class="sr-only"> \u2014 ${a(I(e))}</span></a>${Ccon(e)}</div>
     </div>
     ${ne(e,"card")}
   </article>`}function Rt(e,n){let r=qe(e.skillSubcat),o=e.duties?String(e.duties).split(`
@@ -97,11 +98,12 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
       <div>${h("calendar",22)}<span><dt>${a(e.tenure&&e.tenure.completed?t("tenureCompleted"):t("tenureCurrent"))}</dt><dd>${a(Je(e.tenure))}</dd></span></div>
     </dl>
     <div class="leader-body">
-      <div class="leader-name"><h3 class="card-name">${a(I(e))}</h3>${ha(e)}${ga(e)}</div>
+      <div class="leader-name"><h3 class="card-name">${a(I(e))}</h3>${ha(e)}${ga(e)}${Lact(e,1)}${Cmiss(e)}</div>
       <p class="card-title">${e.jobTitle?a(B(e.jobTitle)):`<span class="muted">${a(t("notProvided"))}</span>`}</p>
       ${o?`<p class="leader-summary" dir="auto">${a(o)}</p>`:""}
+      ${Cfx(e,1)}
       ${za(r,4)}
-      <a class="card-link" href="#/employee/${e.id}">${h("user",15)}<span>${a(t("viewProfile"))}</span><span class="sr-only"> \u2014 ${a(I(e))}</span></a>
+      <div class="card-foot"><a class="card-link" href="#/employee/${e.id}">${h("user",15)}<span>${a(t("viewProfile"))}</span><span class="sr-only"> \u2014 ${a(I(e))}</span></a>${Ccon(e)}</div>
     </div>
     ${ne(e,"leader")}
   </article>`}async function Za(e,n,{store:r}){e.innerHTML=`<div class="page"><div class="loading-block" aria-busy="true">${a(t("loading"))}</div></div>`;let o;try{o=await r.loadEmployees()}catch(b){e.innerHTML=`<div class="page">${Z(b.message)}</div>`,m("[data-retry]",e).onclick=()=>Za(e,n,{store:r});return}window.__DTD_SEARCH!==void 0&&(Q.q=window.__DTD_SEARCH,delete window.__DTD_SEARCH);let i=r.meta.levels,c=E()==="ar",l=(b,g,f)=>`<option value="${a(b)}"${f===b?" selected":""}>${a(g)}</option>`,s=b=>o.some(g=>!g[b]),p=(b,g,f,d,S=B,k=t("fAll"))=>`
@@ -734,7 +736,7 @@ document.addEventListener("click",x=>{let b=x.target.closest("#topSearchBtn");b&
 /* page-title icon tiles and quick contact buttons on directory cards */
 new MutationObserver(()=>{let hs=location.hash||"#/directory",map=[[/^#\/(directory)?$/,"users","teal"],[/^#\/dashboard/,"chart-column","violet"],[/^#\/talent/,"star","sun"],[/^#\/seniority/,"clock","rose"],[/^#\/attention/,"flag","coral"],[/^#\/orgchart/,"tree","sky"],[/^#\/skills/,"grid","teal"],[/^#\/plans/,"rocket","violet"],[/^#\/succession/,"crown","sun"],[/^#\/report/,"printer","sky"],[/^#\/structure/,"network","sky"],[/^#\/employee\//,"id-card","teal"],[/^#\/manage\/fields/,"sliders-horizontal","coral"],[/^#\/manage/,"database","coral"]];
  N("#view .page-head h1:not([data-ic])").forEach(h1=>{h1.dataset.ic="1";if(m("svg",h1))return;let r=map.find(([re])=>re.test(hs));r&&h1.insertAdjacentHTML("afterbegin",`<span class="h1-ic h1-ic-${r[2]}" aria-hidden="true">${h(r[1],24)}</span>`)});
- N("#view .card:not([data-tone])").forEach(c=>{let av=m(".avatar-initials",c);c.dataset.tone="1";av&&c.style.setProperty("--tone",av.style.getPropertyValue("--tone"))});if(!de.employees)return;N("#view .card:not([data-qc])").forEach(c=>{c.dataset.qc="1";let l=m(".card-link",c),id=l&&(l.getAttribute("href")||"").match(/#\/employee\/(\d+)/);if(!id)return;let p=de.employees.find(x=>String(x.id)===id[1]);if(!p||!p.email&&!p.phone)return;let ar=E()==="ar";
+ N("#view .card:not([data-tone])").forEach(c=>{let av=m(".avatar-initials",c);c.dataset.tone="1";av&&c.style.setProperty("--tone",av.style.getPropertyValue("--tone"))});if(!de.employees)return;N("#view .card:not([data-qc])").forEach(c=>{c.dataset.qc="1";if(m(".card-act",c))return;let l=m(".card-link",c),id=l&&(l.getAttribute("href")||"").match(/#\/employee\/(\d+)/);if(!id)return;let p=de.employees.find(x=>String(x.id)===id[1]);if(!p||!p.email&&!p.phone)return;let ar=E()==="ar";
   c.insertAdjacentHTML("beforeend",`<div class="card-quick">${p.email?`<a class="qc-btn" href="mailto:${a(p.email)}" title="${a(ar?"إرسال بريد":"Send email")}" aria-label="${a((ar?"إرسال بريد إلى ":"Email ")+I(p))}">${h("mail",17)}</a><button type="button" class="qc-btn" data-copy="${a(p.email)}" title="${a(ar?"نسخ البريد":"Copy email")}" aria-label="${a((ar?"نسخ بريد ":"Copy email of ")+I(p))}">${h("link",17)}</button>`:""}${p.phone?`<a class="qc-btn" href="tel:${a(String(p.phone).replace(/[^\d+]/g,""))}" title="${a(ar?"اتصال":"Call")}" aria-label="${a((ar?"اتصال بـ ":"Call ")+I(p))}">${h("phone",17)}</a>`:""}</div>`)})}).observe(document.documentElement,{childList:!0,subtree:!0});
 document.addEventListener("click",async x=>{let b=x.target.closest("[data-copy]");if(!b)return;x.preventDefault();try{await navigator.clipboard.writeText(b.dataset.copy);L(E()==="ar"?"تم نسخ البريد":"Email copied")}catch{L(b.dataset.copy)}});var Dk=p=>{let c=Uc(),o=c.kpiOrder||[];return p.map((g,i)=>({...g,hid:(c.hiddenKpis||[]).includes(g.id),ord:o.includes(g.id)?o.indexOf(g.id):100+i})).sort((x,y)=>x.ord-y.ord)},
 Dc=u=>{let c=Uc(),o=c.chartOrder||[],ic={hbar:"chart-bar",vbar:"chart-column",donut:"chart-pie"};return u.concat((c.customCharts||[]).map(x=>({...x,ic:ic[x.type]||"chart-bar",custom:!0}))).map((g,i)=>({...g,hid:(c.hiddenCharts||[]).includes(g.id),ord:o.includes(g.id)?o.indexOf(g.id):100+i})).sort((x,y)=>x.ord-y.ord)},
@@ -1836,6 +1838,12 @@ async function Msr(e,n,{store:r}){let T=Tx,ar=E()==="ar",o=await r.loadEmployees
   if(z.target.closest("[data-ms-save]")){c.extras=c.extras.filter(x=>String(x.text||"").trim());let u=Uc();u.msg={...u.msg||{},[E()]:c};ye("settings_update",null,{message:E()});se();dirty=!1;m("#msX",e).innerHTML=xrows();m("#msState",e).textContent=T("محفوظ ✓","Saved ✓");m("#msState",e).dataset.s="saved";L(T("تم حفظ نص الرسالة ✓ — ستُستخدم في كل الرسائل القادمة","Message saved ✓ — used for all upcoming emails"));prev();return}
   if(z.target.closest("[data-ms-reset]")){if(!await fe({title:T("استعادة النص الافتراضي؟","Restore the default text?"),body:T("ستعود الرسالة إلى نصها الأصلي وتُحذف الطلبات الإضافية. لن يُحفظ ذلك حتى تضغطي «حفظ الرسالة».","The message returns to its original text and extra requests are removed. Nothing is saved until you press “Save message”."),confirmLabel:T("نعم، استعادة","Yes, restore")}))return;
    c=JSON.parse(JSON.stringify(Vdef()));N("[data-ms]",e).forEach(x=>x.value=c[x.dataset.ms]||"");N("[data-mss]",e).forEach(x=>x.checked=!!c[x.dataset.mss]);m("#msX",e).innerHTML=xrows();kick();return}}}
+/* ---------- Directory card essentials ---------- */
+function Cfx(e,lead){let T=Tx,mg=e.reportingToId?(de.employees||[]).find(x=>x.id===e.reportingToId):null,mn=mg?I(mg):e.reportingTo||"",lv=e.level?e.level[E()]:"",
+ it2=(ic,l,v,ltr)=>v?`<div><dt>${h(ic,14)}<span>${a(l)}</span></dt><dd${ltr?' dir="ltr"':""}>${a(v)}</dd></div>`:"";
+ return`<dl class="card-facts">${it2("id-card",T("الرقم الوظيفي","Emp. no."),e.empNo,1)}${lead?"":it2("layers",T("المستوى","Level"),lv)}${it2("user",T("المدير المباشر","Manager"),mn)}${lead?"":it2("clock",T("مدة الخدمة","Service"),e.tenure?Je(e.tenure):"")}</dl>`}
+function Ccon(e){let T=Tx,o="";if(e.email)o+=`<a class="card-act" href="mailto:${a(e.email)}" title="${a(e.email)}" aria-label="${a(T(`مراسلة ${I(e)}`,`Email ${I(e)}`))}">${h("mail",16)}</a><button type="button" class="card-act" data-copy="${a(e.email)}" title="${a(T("نسخ البريد","Copy email"))}" aria-label="${a(T(`نسخ بريد ${I(e)}`,`Copy email of ${I(e)}`))}">${h("link",16)}</button>`;if(e.phone)o+=`<a class="card-act" href="tel:${a(String(e.phone).replace(/[^\d+]/g,""))}" title="${a(e.phone)}" aria-label="${a(T(`اتصال بـ ${I(e)}`,`Call ${I(e)}`))}">${h("phone",16)}</a>`;return o}
+function Cmiss(e){if(!de.can||!de.can("edit"))return"";let z;try{z=Qrow(e,Qf())}catch{return""}return z.miss.length?`<span class="pill pill-miss" title="${a(z.miss.map(f=>f.l).join("، "))}">${h("alert-triangle",12)}${a(Tx(`ناقص ${z.miss.length}`,`${z.miss.length} missing`))}</span>`:""}
 var Ma={};be(Ma,{render:()=>st});async function st(e,{tab:n},r){e.innerHTML=`<div class="page"><div class="loading-block" aria-busy="true">${a(t("loading"))}</div></div>`;try{n==="activity"?await Xt(e):n==="fields"?await Fx(e,r):n==="site"?await Sx(e,r):await ct(e,r)}catch(o){e.innerHTML=`<div class="page">${Z(o.message)}</div>`,m("[data-retry]",e).onclick=()=>st(e,{tab:n},r)}}async function ct(e,n){let[{users:r},o]=await Promise.all([P("/api/users"),P("/api/settings")]),i=n.store.meta;e.innerHTML=`<div class="page page-users">
     <header class="page-head"><div><h1>${a(t("manageTitle"))}</h1></div>
       <div class="head-actions"><button class="btn btn-primary" id="addUser">${h("user-plus",18)}<span>${a(t("addUser"))}</span></button></div></header>
