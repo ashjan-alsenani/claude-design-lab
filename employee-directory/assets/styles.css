@@ -3219,3 +3219,18 @@ html[dir="rtl"] .dk-pbar i { transform-origin: right center; }
 }
 .kpi .kpi-meter { margin: auto auto 0; }
 .kpi .kpi-sub { margin-bottom: 10px; }
+
+/* ---------- v37 workspaces (company staff / vendor staff) ---------- */
+.ws-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 4px 14px 12px; padding: 4px; border-radius: 12px; background: var(--canvas); border: 1px solid var(--line); }
+.ws-switch button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 0; padding: 7px 6px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font: inherit; font-size: 12.5px; font-weight: 600; line-height: 1.25; cursor: pointer; transition: background-color .2s ease, color .2s ease, transform .16s ease-out; }
+.ws-switch button span { white-space: normal; text-align: center; }
+.ws-switch button svg { flex: none; }
+.ws-switch button[aria-pressed="true"] { background: var(--paper); color: var(--navy-txt); box-shadow: var(--sh-1); }
+html[data-ws="vendors"] .ws-switch button[aria-pressed="true"] { background: #F59E0B; color: #fff; }
+.ws-switch button:active { transform: scale(.97); }
+.ws-switch button:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 55%, transparent); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .ws-switch button[aria-pressed="false"]:hover { color: var(--navy-txt); background: color-mix(in srgb, var(--paper) 60%, transparent); } }
+/* vendor workspace accent so the two spaces are never confused */
+html[data-ws="vendors"] .sidebar { box-shadow: inset 0 4px 0 #F59E0B; }
+.sidebar.collapsed .ws-switch span, .side-collapsed .ws-switch span { display: none; }
+html[data-ws="vendors"] .page-dashboard #dxec { display: none; }
