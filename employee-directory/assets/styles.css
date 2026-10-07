@@ -3522,3 +3522,18 @@ button.tz-val:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 
 .org-infbtn:hover { background: #F1F5F9 !important; }
 .ua-wrap { max-height: 52vh; overflow: auto; margin-top: 10px; }
 .ua-wrap th:first-child, .ua-wrap td:first-child { width: 40px; }
+
+/* ---------- v49 skills editor ---------- */
+.sk-chips { list-style: none; margin: 4px 0 10px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; border: 1px dashed var(--line-strong); border-radius: 12px; background: #FAFBFD; }
+.sk-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 12px; border-radius: 999px; background: var(--teal-soft); color: var(--teal-strong); font-size: 15px; font-weight: 600; animation: skIn .18s var(--ease); }
+[dir="rtl"] .sk-chip { padding: 3px 12px 3px 4px; }
+.sk-x { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
+.sk-x:hover { background: color-mix(in srgb, var(--teal-strong) 15%, transparent); }
+.sk-x:focus-visible { outline: 2px solid var(--teal-strong); outline-offset: 1px; }
+.sk-none { color: var(--faint); font-size: 14.5px; padding: 4px 6px; }
+.sk-add { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+.sk-add .control { flex: 1 1 260px; }
+.sk-add .control input { width: 100%; }
+@keyframes skIn { from { opacity: 0; transform: scale(.92); } }
+@media (prefers-reduced-motion: reduce) { .sk-chip { animation: none; } }
+[data-theme="dark"] .sk-chips { background: rgba(255,255,255,.03); }
