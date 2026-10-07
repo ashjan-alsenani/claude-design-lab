@@ -3424,7 +3424,6 @@ button.tz-val:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 
 .ec-id-facts dd b { font-size: 19px; font-variant-numeric: tabular-nums; }
 .ec-id-facts dd small { opacity: .75; }
 .ec-id-facts .emp-link { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,.45); text-underline-offset: 3px; }
-.ec-id-facts .pill { background: rgba(255,255,255,.9); }
 .ec-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; align-items: start; }
 .ec-wide { grid-column: 1 / -1; }
 .ec-sec .panel-title small.ec-count { margin-inline-start: auto; font-size: 13.5px; font-weight: 600; color: var(--muted); background: #F1F4F8; padding: 1px 9px; border-radius: 999px; font-variant-numeric: tabular-nums; }
@@ -3486,3 +3485,31 @@ button.tz-val:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 
   .ec-row { break-inside: avoid; grid-template-columns: minmax(90px, .8fr) minmax(0, 1.4fr); }
   .ec-team { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* ---------- v46 neutral employee card, N/A values, bulk edit ---------- */
+.ec-id { background: var(--paper); color: var(--ink); border: 1px solid var(--line); box-shadow: var(--sh-1); }
+.ec-id::after { background: color-mix(in srgb, var(--line) 45%, transparent); }
+.ec-id-org, .ec-id-alt, .ec-id-dep { color: var(--muted); opacity: 1; }
+.ec-name { color: var(--navy); }
+.ec-id-title { color: var(--ink); }
+.ec-id-photo .avatar { box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--line-strong) !important; }
+.ec-id-facts > div { background: #F6F8FA; border-color: var(--line); }
+.ec-id-facts dt { color: var(--muted); opacity: 1; }
+.ec-id-facts dd { color: var(--ink); }
+.ec-id-facts dd b { color: var(--navy); }
+.ec-id-facts dd small { color: var(--faint); opacity: 1; }
+.ec-id-facts .emp-link { color: var(--navy); text-decoration-color: color-mix(in srgb, var(--navy) 35%, transparent); }
+[data-theme="dark"] .ec-id-facts > div { background: rgba(255,255,255,.04); }
+[data-theme="dark"] .ec-name, [data-theme="dark"] .ec-id-facts dd b, [data-theme="dark"] .ec-id-facts .emp-link { color: var(--ink); }
+.na-tag { display: inline-flex; align-items: center; padding: 1px 9px; border-radius: 999px; background: #EEF1F5; color: var(--muted); font-size: 13.5px; font-weight: 600; }
+[data-theme="dark"] .na-tag { background: rgba(255,255,255,.07); }
+.na-chk { margin-top: 6px; font-size: 13.5px; color: var(--muted); gap: 6px; }
+.na-chk input { width: 16px; height: 16px; }
+.be-act { border: 0; padding: 0; margin: 4px 0 12px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.be-act legend { font-weight: 600; margin-bottom: 6px; padding: 0; }
+#be_ctl select, #be_ctl input, #be_ctl textarea { width: 100%; }
+.be-sum { margin-top: 12px; padding: 9px 12px; border-radius: 10px; background: var(--navy-soft); color: var(--navy); font-size: 15px; }
+[data-theme="dark"] .be-sum { background: rgba(255,255,255,.05); color: var(--ink); }
+.field:not(:hover):not(:focus-within) .na-chk:not(:has(input:checked)) { visibility: hidden; }
+.na-chk { min-height: 22px; }
+@media (hover: none) { .field .na-chk { visibility: visible !important; } }
