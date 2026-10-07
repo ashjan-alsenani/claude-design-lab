@@ -1371,9 +1371,9 @@ var Iv=v=>v==null?"":typeof v==="string"?v.trim():v,
  Xcol=i=>{let s2="";for(i++;i>0;i=Math.floor((i-1)/26))s2=String.fromCharCode(65+(i-1)%26)+s2;return s2};
 /* ---------- Parse & validate an uploaded workbook ---------- */
 var Iparse=(sheets)=>{let T=Tx,cols=Icols(),byKey=new Map(cols.map(c2=>[c2.k,c2])),maps=new Map(cols.filter(c2=>c2.opts).map(c2=>[c2.k,Imap(c2)])),emps=de.employees||[],byNo=new Map(emps.map(p=>[String(p.empNo).trim().toLowerCase(),p])),
- keyOf=h2=>{let s2=String(h2??"").trim(),m2=s2.match(/\[([A-Za-z0-9_]+)\]\s*$/);if(m2)return m2[1];let lc=s2.replace(/\s*\*$/,"").trim().toLowerCase();let c2=cols.find(z=>String(z.l).toLowerCase()===lc||(de.meta.fields.find(f=>f.key===z.k)||{}).en?.toLowerCase()===lc||z.k.toLowerCase()===lc);return c2?c2.k:null},
+ keyOf=h2=>{let s2=String(h2??"").trim(),m2=s2.match(/\[([A-Za-z0-9_]+)\]\s*$/);if(m2)return m2[1];let lc=s2.replace(/\s*\*$/,"").trim().toLowerCase();let c2=cols.find(z=>{let mf=de.meta.fields.find(f=>f.key===z.k)||{};return String(z.l).toLowerCase()===lc||mf.en?.toLowerCase()===lc||String(mf.ar||"").trim()===lc||z.k.toLowerCase()===lc});return c2?c2.k:/^(id|emp\.?\s*(no|number|id|#)\.?|employee\s*(no|number|id|#|code)\.?|staff\s*(no|number|id)\.?|الرقم الوظيفي|رقم الموظف|الرقم|رقم وظيفي)$/i.test(lc)?"empNo":null},
  find=re=>sheets.find(s2=>s2.rows[0]&&s2.rows[0].some(h2=>re.test(String(h2||"")))),
- es=sheets.find(s2=>(s2.rows[0]||[]).map(keyOf).includes("empNo")&&(s2.rows[0]||[]).map(keyOf).some(k=>k==="jobTitle"||k==="department"||k==="nameAr"||k==="nameEn"));
+ es=sheets.find(s2=>(s2.rows[0]||[]).map(keyOf).includes("empNo")&&(s2.rows[0]||[]).map(keyOf).some(k=>k==="jobTitle"||k==="department"||k==="nameAr"||k==="nameEn"))||sheets.find(s2=>(s2.rows[0]||[]).map(keyOf).includes("empNo")&&(s2.rows[0]||[]).map(keyOf).some(k=>k&&k!=="empNo"&&byKey.has(k)));
  if(!es)return{err:T("لم نجد ورقة الموظفين. استخدمي القالب المنزّل من هذه الصفحة.","We couldn't find the employees sheet. Please use the template from this page.")};
  let hk=es.rows[0].map(keyOf),rows=[],seen=new Map,nd=new Set,unknownCols=es.rows[0].filter((h2,i)=>h2!=null&&String(h2).trim()&&!hk[i]).map(String);
  es.rows.slice(1).forEach((r2,ri)=>{if(!r2||!r2.some(v=>v!=null&&String(v).trim()!==""))return;let rec={},errs=[],warns=[],line=ri+2;
