@@ -4065,3 +4065,9 @@ a.wc-nm-a:hover { background: var(--canvas); }
 .wc-cov-btn { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); color: var(--ds-act); font: 600 13px var(--font); cursor: pointer; white-space: nowrap; }
 .wc-cov-btn:hover { border-color: var(--ds-act); }
 @media (max-width: 900px) { .wc-top3-l { grid-template-columns: minmax(0, 1fr); } .wc-top3 .panel-title { flex-wrap: wrap; } .wc-top3 .panel-title small { margin-inline-start: 0; width: 100%; } }
+/* v62 photos on top 3 */
+.wc-t3-ph { display: flex; margin-bottom: 6px; }
+.wc-t3-ph .avatar { box-shadow: 0 0 0 3px var(--paper), 0 6px 16px -8px rgba(15,23,42,.45); }
+.wc-t3-stack { display: flex; }
+.wc-t3-stack .avatar + .avatar { margin-inline-start: -14px; }
+.wc-t3-vac { display: grid; place-items: center; background: var(--canvas); color: var(--muted); border: 2px dashed var(--line); box-shadow: none !important; }
