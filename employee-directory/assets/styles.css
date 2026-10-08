@@ -4030,3 +4030,19 @@ a.wc-nm-a:hover { background: var(--canvas); }
 .im-crit p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 14px; }
 @media (max-width: 900px) { .wc-imp-steps { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 640px) { .im-crit { flex-wrap: wrap; } .im-crit .btn { width: 100%; justify-content: center; } }
+/* v60 criticality: compact header actions, names on cards */
+@media (min-width: 900px) {
+  .page-crit > .page-head { position: relative; }
+  .page-crit .wc-head-acts { position: absolute; top: 18px; inset-inline-end: 18px; margin: 0; gap: 6px; }
+  .page-crit > .page-head .page-title { padding-inline-end: 360px; }
+}
+.page-crit .wc-head-acts .btn-sm { min-height: 34px; padding: 4px 12px; font-size: 13px; border-radius: 10px; }
+.wc-kpi-top { list-style: none; margin: 10px 0 0; padding: 10px 0 0; width: 100%; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+.wc-kpi-top li { display: flex; flex-direction: column; line-height: 1.35; }
+.wc-kpi-top b { font-size: 13.5px; color: var(--navy-txt); font-weight: 700; }
+.wc-kpi-top span { font-size: 12px; color: var(--muted); }
+.wc-kpi-top li::before { content: none; }
+.wc-kpi-more { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--c); }
+[data-theme="dark"] .wc-kpi-top b { color: #E2E8F0; }
+.wc-kpi-top-p li { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 10px; }
+.wc-kpi-top-p li span { flex: none; font-variant-numeric: tabular-nums; font-weight: 600; }
