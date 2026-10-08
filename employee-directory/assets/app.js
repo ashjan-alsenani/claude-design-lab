@@ -126,7 +126,7 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
         <div class="search">
           ${h("search",20)}
           <label class="sr-only" for="q">${a(t("searchLabel"))}</label>
-          <input id="q" type="search" placeholder="${a(c?"\u0627\u0644\u0628\u062D\u062B \u0639\u0646 \u0645\u0648\u0638\u0641 \u0628\u0627\u0644\u0627\u0633\u0645 \u0623\u0648 \u0627\u0644\u0645\u0633\u0645\u0649 \u0627\u0644\u0648\u0638\u064A\u0641\u064A \u0623\u0648 \u0627\u0644\u0645\u0647\u0627\u0631\u0629\u2026":"Search by name, job title, number or skill\u2026")}" value="${a(Q.q)}" autocomplete="off">
+          <input id="q" type="search" placeholder="${a(c?"اسم، مسمى، رقم أو مهارة…":"Name, title, number or skill…")}" value="${a(Q.q)}" autocomplete="off">
         </div>
         ${p("fDepartment","department","building-2",u,B,c?"\u062C\u0645\u064A\u0639 \u0627\u0644\u0623\u0642\u0633\u0627\u0645":"All departments")}
         <div class="filter"><label class="sr-only" for="f-fLevel">${a(t("fLevel"))}</label>
@@ -984,7 +984,7 @@ var Acert=p=>{let y=Number(ze().slice(0,4)),ex=0,soon=0;(p.certifications||[]).f
   de.can("plans")&&act.forEach(p=>{let pr=Iprog(Iplan(p.id));pr.od&&L2.push({id:`i:${p.id}:${mo}`,k:"idp",ic:"rocket",p,href:`#/employee/${p.id}`,t:Tx(`خطة ${I(p)}: بنود متأخرة`,`${I(p)}'s plan has overdue items`),s:Tx(`${pr.od} بند تجاوز موعده`,`${pr.od} item(s) past due`)})});
   de.can("attention")&&meta&&act.forEach(p=>{let r2=Asc(p,meta).R.find(z=>z[0]==="prof");r2&&L2.push({id:`p:${p.id}:${mo}`,k:"prof",ic:"file-text",p,href:`#/manage/edit/${p.id}`,t:Tx(`ملف ${I(p)} غير مكتمل`,`${I(p)}'s profile is incomplete`),s:r2[3]})});
   if(de.can("succession")){let ps=Spos(o).filter(p=>Srisk(Ui().succ[p.id])==="none");ps.length&&L2.push({id:`s:${mo}:${ps.length}`,k:"succ",ic:"crown",href:"#/succession",t:Tx(`${ps.length} منصب قيادي بدون خليفة`,`${ps.length} leadership role(s) without a successor`),s:Tx("افتحي خطة الإحلال لاقتراح أسماء","Open the succession plan to suggest names")})}
-  {let pc=Cpend().length;pc&&L2.push({id:`r:${Cpend().map(z=>z.id).join(".")}`,k:"corr",ic:"pencil",href:"#/manage/requests",t:Tx(`${pc} طلب تصحيح بانتظار مراجعتك`,`${pc} correction request(s) awaiting review`),s:Tx("راجعيها واعتمديها أو ارفضيها","Review, approve or reject")});Cmine().filter(z=>z.status!=="pending").forEach(z=>L2.push({id:`rd:${z.id}`,k:"corrdone",ic:z.status==="approved"?"circle-check":"x",href:"#/home",t:z.status==="approved"?Tx("تم اعتماد طلب التصحيح","Your correction was approved"):Tx("تم رفض طلب التصحيح","Your correction was rejected"),s:z.reply||Hrel(z.decidedAt)}))}{let oc=Occ(de.employees||[],0);oc.length&&L2.push({id:`oc:${ze()}`,k:"occ",ic:"sparkles",href:"#/occasions",t:Tx(`مناسبات اليوم: ${oc.length}`,`Today's occasions: ${oc.length}`),s:oc.map(x=>I(x.p)+(x.k==="bday"?" 🎂":" 🏅")).join(" · ")})}if(de.isAdmin()){let bd=Bkdays();(bd==null||bd>7)&&L2.push({id:`b:${ze()}`,k:"backup",ic:"save",href:"#/manage/site",t:Tx("نزّلي نسخة احتياطية من البيانات","Download a data backup"),s:bd==null?Tx("لم تُنزَّل أي نسخة بعد — البيانات في هذا المتصفح فقط","No backup yet — data lives in this browser only"):Tx(`آخر نسخة قبل ${bd} يوم`,`Last backup ${bd} days ago`)})}let dis=Ui().dismissed;return L2.filter(z=>!dis[z.id])},
+  {let pc=Cpend().length;pc&&L2.push({id:`r:${Cpend().map(z=>z.id).join(".")}`,k:"corr",ic:"pencil",href:"#/manage/requests",t:Tx(`${pc} طلب تصحيح بانتظار مراجعتك`,`${pc} correction request(s) awaiting review`),s:Tx("راجعيها واعتمديها أو ارفضيها","Review, approve or reject")});Cmine().filter(z=>z.status!=="pending").forEach(z=>L2.push({id:`rd:${z.id}`,k:"corrdone",ic:z.status==="approved"?"circle-check":"x",href:"#/home",t:z.status==="approved"?Tx("تم اعتماد طلب التصحيح","Your correction was approved"):Tx("تم رفض طلب التصحيح","Your correction was rejected"),s:z.reply||Hrel(z.decidedAt)}))}{let oc=Occ(de.employees||[],0);oc.length&&L2.push({id:`oc:${ze()}`,k:"occ",ic:"sparkles",href:"#/occasions",t:Tx(`مناسبات اليوم: ${oc.length}`,`Today's occasions: ${oc.length}`),s:oc.map(x=>I(x.p)).join(" · ")})}if(de.isAdmin()){let bd=Bkdays();(bd==null||bd>7)&&L2.push({id:`b:${ze()}`,k:"backup",ic:"save",href:"#/manage/site",t:Tx("نزّلي نسخة احتياطية من البيانات","Download a data backup"),s:bd==null?Tx("لم تُنزَّل أي نسخة بعد — البيانات في هذا المتصفح فقط","No backup yet — data lives in this browser only"):Tx(`آخر نسخة قبل ${bd} يوم`,`Last backup ${bd} days ago`)})}let dis=Ui().dismissed;return L2.filter(z=>!dis[z.id])},
  Agrp=()=>[["occ",Tx("مناسبات اليوم","Today's occasions")],["corr",Tx("طلبات التصحيح","Correction requests")],["corrdone",Tx("طلباتي","My requests")],["backup",Tx("النسخ الاحتياطي","Backup")],["anniv",Tx("ذكرى سنوات الخدمة (30 يومًا)","Service anniversaries (30 days)")],["succ",Tx("الإحلال الوظيفي","Succession")],["idp",Tx("خطط التطوير","Development plans")],["cert",Tx("شهادات قد تحتاج تجديد","Certifications to renew")],["prof",Tx("ملفات غير مكتملة","Incomplete profiles")]];
 window.__bell=()=>`<button type="button" class="icon-btn top-icon bell-btn" id="bellBtn" aria-haspopup="true" aria-expanded="false" aria-label="${a(Tx("التنبيهات","Alerts"))}" title="${a(Tx("التنبيهات","Alerts"))}">${h("bell",21)}<span class="bell-badge" id="bellN" hidden></span></button>`;
 var Bref=async()=>{let b=m("#bellN");if(!b||!de.user)return;try{let o=await de.loadEmployees(),n2=Alx(o,de.meta).length;b.textContent=n2>99?"99+":n2;b.hidden=!n2}catch{}},
@@ -1175,17 +1175,19 @@ async function Hr(e,n,{store:r}){let T=Tx,ar=E()==="ar";e.innerHTML=`<div class=
  e.innerHTML=`<div class="page page-home h2">
   <section class="h2-hero">
    <div class="h2-hero-main">
-    <p class="h2-kicker">${h("sparkles",15)}<span>${a(dayW)} · ${a(dayN)} ${a(dayM)}</span></p>
-    <h1>${a(greet)}${a(T("، ",", "))}<span>${a(nm)}</span></h1>
-    <p class="h2-lead">${a(al.length?T(`لديك ${al.length} تنبيه${ann.length?` و${ann.length} مناسبة قريبة`:""} اليوم.`,`You have ${al.length} alert${al.length>1?"s":""}${ann.length?` and ${ann.length} upcoming occasion${ann.length>1?"s":""}`:""} today.`):T("لا شيء معلّق اليوم — يوم هادئ ✨","Nothing pending today — a calm day ✨"))}</p>
-    <form class="h2-search" role="search"><span>${h("search",20)}</span><input id="h2q" type="search" placeholder="${a(T("ابحثي عن موظف بالاسم أو المسمى…","Search for an employee by name or title…"))}" aria-label="${a(T("بحث عن موظف","Search employees"))}"><button type="submit" class="btn btn-primary">${a(T("بحث","Search"))}</button></form>
+    <h1>${a(T(`دليل موظفي ${Uc().siteAr||"الرقمية والتقنية"}`,`${Uc().siteEn||"Digital & Technology"} employee directory`))}</h1>
+    <p class="h2-lead"><b>${a(greet)}${a(T("، ",", "))}${a(nm)}.</b> ${a(T("ابحثي عن أي زميل، واعرفي مهاراته وفريقه، وأبقي بيانات الجميع محدّثة — من مكان واحد.","Find any colleague, see their skills and team, and keep everyone's details up to date — in one place."))}</p>
+    <form class="h2-search" role="search"><span>${h("search",20)}</span><input id="h2q" type="search" placeholder="${a(T("اسم، مسمى أو رقم وظيفي…","Name, title or employee no.…"))}" aria-label="${a(T("بحث عن موظف","Search employees"))}"><button type="submit" class="btn btn-primary">${a(T("بحث","Search"))}</button></form>
+    <div class="h2-acts"><a class="h2-act" href="#/directory">${h("users",17)}<span>${a(T("تصفّح الدليل","Browse the directory"))}</span></a>${r.can("add")?`<a class="h2-act" href="#/manage/new">${h("user-plus",17)}<span>${a(T("إضافة موظف","Add an employee"))}</span></a>`:""}${adm?`<a class="h2-act" href="#/manage/import">${h("upload",17)}<span>${a(T("استيراد من Excel","Import from Excel"))}</span></a>`:`<a class="h2-act" href="#/dashboard">${h("chart-column",17)}<span>${a(T("لوحة المعلومات","Dashboard"))}</span></a>`}</div>
    </div>
-   <div class="h2-hero-side">
-    <div class="h2-ring-wrap">${ring(fpc)}<div class="h2-ring-c"><strong>${fpc}%</strong><small>${a(T("جاهزية","readiness"))}</small></div></div>
-    <ul class="h2-mini"><li><b>${N0}</b><span>${a(T("موظف نشط","active"))}</span></li><li><b>${J(act,"department").length}</b><span>${a(T("قسم","depts"))}</span></li><li><b>${avgT}</b><span>${a(T("سنة متوسط الخدمة","avg. yrs"))}</span></li></ul>
-   </div>
+   <aside class="h2-hero-side" aria-labelledby="h2Today">
+    <h2 id="h2Today">${a(T("اليوم","Today"))}<small>${a(dayW)} ${a(dayN)} ${a(dayM)}</small></h2>
+    <ul class="h2-today">${(()=>{let oc0=typeof Occ==="function"?Occ(o,0):[],oc7=typeof Occ==="function"?Occ(o,7):[],L3=[[al.length?"bell":"circle-check",al.length?T(`${al.length} تنبيه يحتاج انتباهك`,`${al.length} alert${al.length>1?"s":""} need your attention`):T("لا توجد تنبيهات","No alerts"),al.length?"bell":""],[oc0.length?"sparkles":"calendar",oc0.length?T(`${oc0.length} مناسبة اليوم`,`${oc0.length} occasion${oc0.length>1?"s":""} today`):oc7.length?T(`${oc7.length} مناسبة خلال أسبوع`,`${oc7.length} occasion${oc7.length>1?"s":""} this week`):T("لا مناسبات هذا الأسبوع","No occasions this week"),"#/occasions"]];
+     if(adm){let inc=al.filter(z=>z.k==="prof").length;L3.push([inc?"file-text":"circle-check",inc?T(`${inc} ملف غير مكتمل`,`${inc} incomplete profile${inc>1?"s":""}`):T("كل الملفات مكتملة","All profiles complete"),"#/manage/quality"])}
+     return L3.map(([ic,tx,hf])=>`<li>${hf==="bell"?`<button type="button" data-hm-bell>`:hf?`<a href="${hf}">`:"<span>"}${h(ic,17)}<span>${a(tx)}</span>${hf?h(ar?"chevron-left":"chevron-right",15):""}${hf==="bell"?"</button>":hf?"</a>":"</span>"}</li>`).join("")})()}</ul>
+   </aside>
   </section>
-  <div class="h2-stats">${[["users","#0D9488",N0,T("موظف نشط","Active employees"),"#/directory",100],["award","#16A34A",fpc+"%",T("قادرون بالكامل","Fully capable"),"#/dashboard",fpc],["chevrons-up","#D97706",up,T("يحتاجون رفع مهارات","Need upskilling"),"#/dashboard",N0?Math.round(up/N0*100):0],["bell","#E11D48",al.length,T("تنبيه مفتوح","Open alerts"),"#bell",Math.min(100,al.length*5)]].map(([ic,cl,v,l,hf,pc],i)=>`<a class="h2-stat" href="${hf==="#bell"?"#/home":hf}" ${hf==="#bell"?"data-hm-bell":""} style="--c:${cl};--i:${i}"><span class="h2-stat-ic">${h(ic,20)}</span><strong>${v}</strong><span class="h2-stat-l">${a(l)}</span><span class="h2-stat-bar"><i style="width:${pc}%"></i></span></a>`).join("")}</div>
+  <div class="h2-stats">${[["users","#0D9488",N0,T("موظف نشط","Active employees"),"#/directory",null],["award","#16A34A",fpc+"%",T("قادرون بالكامل","Fully capable"),"#/dashboard",fpc],["chevrons-up","#D97706",up,T("يحتاجون رفع مهارات","Need upskilling"),"#/dashboard",N0?Math.round(up/N0*100):0],["building-2","#2563EB",J(act,"department").length,T("قسم","Departments"),"#/structure",null]].map(([ic,cl,v,l,hf,pc],i)=>`<a class="h2-stat" href="${hf==="#bell"?"#/home":hf}" ${hf==="#bell"?"data-hm-bell":""} style="--c:${cl};--i:${i}"><span class="h2-stat-ic">${h(ic,20)}</span><strong>${v}</strong><span class="h2-stat-l">${a(l)}</span>${pc==null?"":`<span class="h2-stat-bar" role="img" aria-label="${pc}%"><i style="width:${pc}%"></i></span>`}</a>`).join("")}</div>
   ${window.__tourCard?window.__tourCard():""}
   <div class="h2-grid">
    <div class="h2-col">
@@ -1196,7 +1198,7 @@ async function Hr(e,n,{store:r}){let T=Tx,ar=E()==="ar";e.innerHTML=`<div class=
    <div class="h2-col h2-side">
     ${window.__crMine?window.__crMine():""}
     ${star?`<section class="h2-star" style="--c:#D97706"><p class="h2-star-k">${h("star",15)}<span>${a(T("نجم الكفاءات","Talent spotlight"))}</span></p><a href="#/employee/${star.p.id}" class="h2-star-p">${ne(star.p,"lg")}<span class="h2-star-ring">${ring(star.s,64)}<b>${star.s}</b></span></a><h3><a href="#/employee/${star.p.id}">${a(I(star.p))}</a></h3><p>${a(star.p.jobTitle||"")}</p><ul class="tz-chips">${star.rs.slice(0,3).map(([c2,l])=>`<li class="tz-c-${c2}">${a(l)}</li>`).join("")}</ul><a class="h2-more" href="#/talent">${a(T("الترتيب الكامل","Full ranking"))}${arw}</a></section>`:""}
-    ${sec("h2-ann","cake","#0D9488",T("مناسبات قريبة","Coming up"),ann.length?`<ul class="h2-list">${ann.slice(0,4).map(z=>`<li class="${z.an.dd?"":"h2-today"}"><a href="#/employee/${z.p.id}">${ne(z.p,"sm")}<span><strong>${a(I(z.p))}</strong><small>${a(z.an.dd?T(`ذكرى ${z.an.yrs} ${z.an.yrs>2&&z.an.yrs<11?"سنوات":"سنة"} · بعد ${z.an.dd} يوم`,`${z.an.yrs} yrs · in ${z.an.dd} days`):T(`ذكرى ${z.an.yrs} سنوات اليوم 🎉`,`${z.an.yrs} years today 🎉`))}</small></span></a></li>`).join("")}</ul>`:calm("cake",T("لا توجد ذكرى خدمة خلال 30 يومًا.","No anniversaries in the next 30 days.")))}
+    ${(()=>{let oc=typeof Occ==="function"?Occ(o,30):[];return sec("h2-ann","cake","#0D9488",T("مناسبات قريبة","Coming up"),oc.length?`<ul class="h2-list">${oc.slice(0,4).map(x=>`<li class="${x.n?"":"h2-today"}"><a href="#/occasions">${ne(x.p,"sm")}<span><strong>${a(I(x.p))}</strong><small>${a((x.k==="bday"?T("عيد ميلاد","Birthday"):T(`${Ocyrs(x.yrs,!0)} في الخدمة`,`${Ocyrs(x.yrs,!1)} of service`))+" · "+Ocwhen(x.n))}</small></span></a></li>`).join("")}</ul>`:calm("calendar",T("لا توجد مناسبات خلال 30 يومًا.","Nothing coming up in the next 30 days.")),`<a class="h2-more" href="#/occasions">${a(T("كل المناسبات","All occasions"))}${arw}</a>`)})()}
     <section class="h2-card h2-links"><header class="h2-ch"><span class="h2-ci" style="--c:#64748B">${h("compass",18)}</span><h2>${a(T("انتقال سريع","Jump to"))}</h2></header><div class="h2-qgrid">${links.map(([hf,ic,cl,l])=>`<a href="${hf}" style="--c:${cl}"><span>${h(ic,18)}</span>${a(l)}</a>`).join("")}</div></section>
    </div>
   </div><footer class="h2-foot">${Credit()}</footer></div>`;
@@ -2255,7 +2257,7 @@ var Ocdob=()=>de.isAdmin()||de.can("sensitive"),
   return["X-Unsent: 1",`To: ${enc(I(x.p))} <${x.p.email||""}>`,`Subject: ${enc(Ocfill(c.subject,x))}`,"MIME-Version: 1.0","Content-Type: text/html; charset=UTF-8","Content-Transfer-Encoding: base64","",b64].join("\r\n")},
  Ocid=x=>`${x.k}:${x.p.id}:${x.d.slice(0,4)}`,
  Ocsent=()=>Uc().greetSent||(Uc().greetSent={}),
- Ocwhen=n2=>n2===0?Tx("اليوم 🎉","Today 🎉"):n2===1?Tx("غدًا","Tomorrow"):Tx(`بعد ${n2} ${n2<11?"أيام":"يومًا"}`,`In ${n2} days`),
+ Ocwhen=n2=>n2===0?Tx("اليوم","Today"):n2===1?Tx("غدًا","Tomorrow"):Tx(`بعد ${n2} ${n2<11?"أيام":"يومًا"}`,`In ${n2} days`),
  Ocsend=async(xs,after)=>{let ok=xs.filter(x=>x.p.email),T=Tx;if(!ok.length){L(T("لا يوجد بريد إلكتروني مسجّل.","No email address recorded."),"error");return}
   ok.length===1?Vdl(new Blob([Oceml(ok[0],Occfg(ok[0].k))],{type:"message/rfc822"}),`greeting-${ok[0].p.empNo}.eml`):Vdl(Vzip(ok.map(x=>[`greeting-${x.k}-${x.p.empNo}.eml`,Oceml(x,Occfg(x.k))])),`greetings-${ze()}.zip`);
   let st=Ocsent();ok.forEach(x=>st[Ocid(x)]=Te());ye("settings_update",null,{greetings:ok.length});se();
@@ -2277,20 +2279,20 @@ async function Occr(e,n,{store:r}){let T=Tx;e.innerHTML=`<div class="page"><div 
  let st=e.__occ||(e.__occ={w:30,k:""}),
  draw=()=>{let all=Occ(o,st.w),L2=all.filter(x=>!st.k||x.k===st.k),sent=Ocsent(),today=L2.filter(x=>x.n===0),
    row=(x,i)=>{let s2=sent[Ocid(x)];return`<li class="oc-row oc-${x.k}${x.n===0?" oc-today":""}" style="--i:${Math.min(i,14)}">
-    <span class="oc-ic" aria-hidden="true">${x.k==="bday"?"🎂":"🏅"}</span>${ne(x.p,"sm")}
+    <span class="oc-ic" aria-hidden="true">${h(x.k==="bday"?"cake":"award",20)}</span>${ne(x.p,"sm")}
     <span class="oc-who"><a class="emp-link" href="#/employee/${x.p.id}">${a(I(x.p))}</a><small>${a(x.p.jobTitle||"")}${x.p.department?` · ${a(B(x.p.department))}`:""}</small></span>
     <span class="oc-what"><b>${a(x.k==="bday"?T("عيد ميلاد","Birthday"):T(`${Ocyrs(x.yrs,!0)} في الخدمة`,`${Ocyrs(x.yrs,!1)} of service`))}</b><small>${a(Se(x.d))}</small></span>
     <span class="oc-when${x.n===0?" oc-when-today":""}">${a(Ocwhen(x.n))}</span>
     <span class="oc-acts">${s2?`<span class="oc-sent" title="${a(ie(s2))}">${h("circle-check",14)}${a(T("أُرسلت","Sent"))}</span>`:""}<button type="button" class="btn ${x.n===0&&!s2?"btn-primary":"btn-ghost"} btn-sm" data-ocg="${i}">${h("mail",15)}<span>${a(T("تهنئة","Greet"))}</span></button></span></li>`};
-  m("#ocStats",e).innerHTML=[["bday","🎂",all.filter(x=>x.k==="bday").length,T("أعياد ميلاد","Birthdays")],["anniv","🏅",all.filter(x=>x.k==="anniv").length,T("ذكرى خدمة","Anniversaries")],["today","🎉",all.filter(x=>x.n===0).length,T("اليوم","Today")]].filter(z=>z[0]!=="bday"||Ocdob()).map(([k,em2,v,l])=>`<div class="oc-stat oc-s-${k}"><span class="oc-stat-e" aria-hidden="true">${em2}</span><span><strong>${v}</strong><small>${a(l)}</small></span></div>`).join("");
-  m("#ocToday",e).innerHTML=today.length?`<div class="oc-banner"><span class="oc-banner-e" aria-hidden="true">🎉</span><div><strong>${a(T(`اليوم ${today.length===1?"مناسبة واحدة":`${today.length} مناسبات`}`,`${today.length} occasion${today.length>1?"s":""} today`))}</strong><p>${today.map(x=>`${a(I(x.p))} ${x.k==="bday"?"🎂":"🏅"}`).join(" · ")}</p></div>${today.length>1?`<button type="button" class="btn btn-primary btn-sm" data-ocall>${h("download",15)}<span>${a(T(`تنزيل كل تهاني اليوم (${today.length})`,`Download all of today's greetings (${today.length})`))}</span></button>`:""}</div>`:"";
+  m("#ocStats",e).innerHTML=[["bday","cake",all.filter(x=>x.k==="bday").length,T("أعياد ميلاد","Birthdays")],["anniv","award",all.filter(x=>x.k==="anniv").length,T("ذكرى خدمة","Anniversaries")],["today","sparkles",all.filter(x=>x.n===0).length,T("اليوم","Today")]].filter(z=>z[0]!=="bday"||Ocdob()).map(([k,em2,v,l])=>`<div class="oc-stat oc-s-${k}"><span class="oc-stat-e" aria-hidden="true">${h(em2,22)}</span><span><strong>${v}</strong><small>${a(l)}</small></span></div>`).join("");
+  m("#ocToday",e).innerHTML=today.length?`<div class="oc-banner"><span class="oc-banner-e" aria-hidden="true">${h("sparkles",26)}</span><div><strong>${a(T(`اليوم ${today.length===1?"مناسبة واحدة":`${today.length} مناسبات`}`,`${today.length} occasion${today.length>1?"s":""} today`))}</strong><p>${today.map(x=>`${a(I(x.p))} (${a(x.k==="bday"?T("عيد ميلاد","birthday"):T(`${Ocyrs(x.yrs,!0)} خدمة`,`${Ocyrs(x.yrs,!1)} of service`))})`).join(" · ")}</p></div>${today.length>1?`<button type="button" class="btn btn-primary btn-sm" data-ocall>${h("download",15)}<span>${a(T(`تنزيل كل تهاني اليوم (${today.length})`,`Download all of today's greetings (${today.length})`))}</span></button>`:""}</div>`:"";
   m("#ocList",e).innerHTML=L2.length?`<ol class="oc-list">${L2.map(row).join("")}</ol>`:`<div class="cf-empty">${h("calendar",28)}<p><strong>${a(T("لا توجد مناسبات في هذه الفترة","No occasions in this period"))}</strong></p><p>${a(T("جرّبي فترة أطول.","Try a longer period."))}</p></div>`;
   e.__occL=L2;e.__occT=today},
  seg=(k,v,l)=>`<button type="button" role="radio" data-ocw="${v}" aria-checked="${st[k]===v}">${a(l)}</button>`;
  e.innerHTML=`<div class="page page-occ"><header class="page-head"><div class="page-title"><h1>${a(T("المناسبات","Occasions"))}</h1><p class="page-sub">${a(T("أعياد ميلاد الموظفين وذكرى سنوات خدمتهم، مع رسالة تهنئة جاهزة تفتح في Outlook.","Employees' birthdays and work anniversaries, with a ready greeting that opens in Outlook."))}</p></div></header>
   <div class="oc-stats" id="ocStats"></div><div id="ocToday"></div>
   <div class="oc-tools"><div class="sy-seg" role="radiogroup" aria-label="${a(T("الفترة","Period"))}">${seg("w",0,T("اليوم","Today"))}${seg("w",7,T("7 أيام","7 days"))}${seg("w",30,T("30 يومًا","30 days"))}${seg("w",90,T("3 أشهر","3 months"))}</div>
-   <div class="sy-seg" role="radiogroup" aria-label="${a(T("النوع","Type"))}"><button type="button" role="radio" data-ock="" aria-checked="${!st.k}">${a(T("الكل","All"))}</button>${Ocdob()?`<button type="button" role="radio" data-ock="bday" aria-checked="${st.k==="bday"}">🎂 ${a(T("أعياد الميلاد","Birthdays"))}</button>`:""}<button type="button" role="radio" data-ock="anniv" aria-checked="${st.k==="anniv"}">🏅 ${a(T("ذكرى الخدمة","Anniversaries"))}</button></div></div>
+   <div class="sy-seg" role="radiogroup" aria-label="${a(T("النوع","Type"))}"><button type="button" role="radio" data-ock="" aria-checked="${!st.k}">${a(T("الكل","All"))}</button>${Ocdob()?`<button type="button" role="radio" data-ock="bday" aria-checked="${st.k==="bday"}">${h("cake",15)} ${a(T("أعياد الميلاد","Birthdays"))}</button>`:""}<button type="button" role="radio" data-ock="anniv" aria-checked="${st.k==="anniv"}">${h("award",15)} ${a(T("ذكرى الخدمة","Anniversaries"))}</button></div></div>
   <section class="panel oc-panel" id="ocList"></section>
   ${Ocdob()?"":`<p class="hint">${a(T("أعياد الميلاد تظهر للمسؤول ومن لديه صلاحية البيانات الحساسة فقط.","Birthdays are shown only to admins and users with sensitive-data access."))}</p>`}</div>`;
  draw();
@@ -2325,6 +2327,60 @@ var Iguess=(n2,vals)=>{let V=vals.map(v=>typeof v==="number"?v:String(v).trim())
   try{await P("/api/custom-fields",{method:"PUT",body:{fields:list}});await de.loadMeta();
    pick.forEach(f=>{if(f.ar!==f.src)st.sheets.forEach(s2=>{let hr=s2.rows&&s2.rows[0];hr&&hr.forEach((h2,i)=>{String(h2??"").trim()===f.src&&(hr[i]=f.ar)})})});
    st.res=Iparse(st.sheets);L(T(`تمت إضافة ${pick.length} حقل جديد ✓ راجعي المعاينة ثم احفظي.`,`${pick.length} new field(s) added ✓ Review the preview, then save.`))}catch(x2){L(x2.message,"error")}};
+/* ---------- Select enhancement: full-text face + wrapping list that escapes every container ---------- */
+var Xs=(()=>{let face=new WeakMap,live=new Set,ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(es=>es.forEach(en=>sync(en.target))):null,pop=null,cur=null,act=-1,items=[],q="",tq=0,qt="",retTo=null;
+ const lbl=s=>{let l=s.labels&&s.labels[0];return(l?l.textContent:s.getAttribute("aria-label")||"").replace(/\s+/g," ").trim()},
+ ok=s=>s.tagName==="SELECT"&&!s.multiple&&!(s.size>1)&&!s.closest("[data-xs-off]")&&!s.dataset.xs,
+ txt=s=>{let o=s.options[s.selectedIndex];return o?o.text:""},
+ sync=s=>{let f=face.get(s);if(!f)return;if(!s.isConnected){f.remove();face.delete(s);live.delete(s);return}
+  let cs=getComputedStyle(s),hide=cs.display==="none"||s.offsetParent===null;f.hidden=hide;if(hide)return;
+  let t=txt(s);f.firstChild.textContent!==t&&(f.firstChild.textContent=t);
+  let bl=parseFloat(cs.borderLeftWidth),bt=parseFloat(cs.borderTopWidth);
+  Object.assign(f.style,{left:s.offsetLeft+bl+"px",top:s.offsetTop+bt+"px",width:s.clientWidth+"px",paddingLeft:cs.paddingLeft,paddingRight:cs.paddingRight,paddingTop:Math.min(8,parseFloat(cs.paddingTop))+"px",paddingBottom:Math.min(8,parseFloat(cs.paddingBottom))+"px",font:cs.font,lineHeight:"1.35",color:s.disabled?"var(--faint)":cs.color,textAlign:cs.textAlign,direction:cs.direction});
+  if(!s.style.height&&s.clientHeight>0)s.dataset.xsMh=s.clientHeight;let base=+s.dataset.xsMh||s.clientHeight;f.style.minHeight=base+"px";
+  let bb=parseFloat(cs.borderBottomWidth),need=f.scrollHeight;s.style.height=need>base+1?need+bt+bb+"px":"";f.dataset.v=s.value;f.dataset.t=t},
+ add=s=>{if(!ok(s))return;s.dataset.xs="1";let p=s.parentElement;if(!p)return;getComputedStyle(p).position==="static"&&(p.style.position="relative");
+  let f=document.createElement("x-sel");f.setAttribute("aria-hidden","true");f.innerHTML="<span></span>";s.after(f);s.classList.add("xs-on");face.set(s,f);live.add(s);ro&&ro.observe(s);sync(s)},
+ scan=root=>{(root.querySelectorAll?root:document).querySelectorAll&&root.querySelectorAll("select").forEach(add);root.tagName==="SELECT"&&add(root)},
+ close=back=>{if(!pop)return;pop.remove();pop=null;if(cur){cur.removeAttribute("aria-expanded");back!==!1&&cur.focus({preventScroll:!0})}cur=null;q="";document.removeEventListener("keydown",keys,!0)},
+ place=()=>{if(!pop||!cur)return;let r=cur.getBoundingClientRect(),vw=innerWidth,vh=innerHeight;
+  if(vw<600){pop.classList.add("xs-sheet");Object.assign(pop.style,{left:"",top:"",width:"",maxHeight:""});return}
+  pop.classList.remove("xs-sheet");let w=Math.min(Math.max(r.width,240),Math.min(520,vw-24));pop.style.width=w+"px";
+  let rtl=getComputedStyle(cur).direction==="rtl",x=rtl?r.right-w:r.left;x=Math.max(12,Math.min(x,vw-w-12));
+  let below=vh-r.bottom-12,above=r.top-12,up=below<240&&above>below,mh=Math.min(380,(up?above:below)-6);
+  Object.assign(pop.style,{left:x+"px",maxHeight:Math.max(160,mh)+"px",top:up?"":r.bottom+6+"px",bottom:up?vh-r.top+6+"px":""})},
+ paint=()=>{let L2=pop.querySelector(".xs-list"),qq=q.trim().toLowerCase();items=[...cur.options].map((o,i)=>({o,i})).filter(z=>!z.o.hidden&&(!qq||z.o.text.toLowerCase().includes(qq)));
+  L2.innerHTML=items.length?items.map((z,k)=>`<div class="xs-opt${z.o.disabled?" xs-dis":""}" role="option" id="xs-o${k}" data-k="${k}" aria-selected="${z.i===cur.selectedIndex}"${z.o.disabled?' aria-disabled="true"':""}><span>${a(z.o.text||" ")}</span>${z.i===cur.selectedIndex?h("check",16):""}</div>`).join(""):`<div class="xs-none">${a(E()==="ar"?"لا توجد نتائج":"No matches")}</div>`;
+  act=Math.max(0,items.findIndex(z=>z.i===cur.selectedIndex));mark(!0)},
+ mark=scroll=>{let L2=pop&&pop.querySelector(".xs-list");if(!L2)return;L2.querySelectorAll(".xs-opt").forEach(el=>el.classList.toggle("xs-act",+el.dataset.k===act));let el=L2.querySelector(`[data-k="${act}"]`);L2.setAttribute("aria-activedescendant",el?el.id:"");scroll&&el&&el.scrollIntoView({block:"nearest"})},
+ pick=k=>{let z=items[k];if(!z||z.o.disabled)return;let s=cur,ch=s.selectedIndex!==z.i;s.selectedIndex=z.i;close();if(ch){s.dispatchEvent(new Event("input",{bubbles:!0}));s.dispatchEvent(new Event("change",{bubbles:!0}))}sync(s)},
+ keys=z=>{if(!pop)return;let k=z.key,inSearch=z.target.classList&&z.target.classList.contains("xs-q");
+  if(k==="Escape"){z.preventDefault();z.stopPropagation();close();return}
+  if(k==="Tab"){close(!1);return}
+  if(k==="ArrowDown"||k==="ArrowUp"){z.preventDefault();let n2=items.length;if(!n2)return;let d=k==="ArrowDown"?1:-1,i=act;do{i=(i+d+n2)%n2}while(items[i].o.disabled&&i!==act);act=i;mark(!0);return}
+  if(k==="Home"&&!inSearch||k==="End"&&!inSearch){z.preventDefault();act=k==="Home"?0:items.length-1;mark(!0);return}
+  if(k==="Enter"||k===" "&&!inSearch){z.preventDefault();pick(act);return}
+  if(!inSearch&&k.length===1&&!z.ctrlKey&&!z.metaKey){clearTimeout(tq);qt+=k.toLowerCase();tq=setTimeout(()=>qt="",600);let i=items.findIndex(y=>y.o.text.toLowerCase().startsWith(qt));i>=0&&(act=i,mark(!0))}},
+ open=s=>{if(pop&&cur===s){close();return}close(!1);if(s.disabled)return;cur=s;q="";let many=s.options.length>12,lab=lbl(s);
+  pop=document.createElement("div");pop.className="xs-pop";pop.dir=getComputedStyle(s).direction;
+  pop.innerHTML=`<div class="xs-head">${lab?`<strong>${a(lab)}</strong>`:""}<button type="button" class="xs-x" aria-label="${a(E()==="ar"?"إغلاق":"Close")}">${h("x",18)}</button></div>${many?`<div class="xs-qw">${h("search",16)}<input class="xs-q" type="search" autocomplete="off" placeholder="${a(E()==="ar"?"ابحثي في الخيارات…":"Search options…")}" aria-label="${a(E()==="ar"?"بحث":"Search")}"></div>`:""}<div class="xs-list" role="listbox" tabindex="-1"${lab?` aria-label="${a(lab)}"`:""}></div>`;
+  document.body.appendChild(pop);paint();place();s.setAttribute("aria-expanded","true");
+  let qi=pop.querySelector(".xs-q");(qi&&innerWidth>=600?qi:pop.querySelector(".xs-list")).focus({preventScroll:!0});
+  qi&&qi.addEventListener("input",()=>{q=qi.value;paint()});
+  pop.addEventListener("click",z=>{if(z.target.closest(".xs-x")){close();return}let o=z.target.closest(".xs-opt");o&&pick(+o.dataset.k)});
+  pop.addEventListener("pointermove",z=>{let o=z.target.closest(".xs-opt");o&&+o.dataset.k!==act&&(act=+o.dataset.k,mark())});
+  document.addEventListener("keydown",keys,!0)};
+ document.addEventListener("pointerdown",z=>{let s=z.target.closest&&z.target.closest("select.xs-on");if(s&&!s.disabled){z.preventDefault();s.focus({preventScroll:!0});if(z.pointerType!=="touch")open(s);else retTo=s;return}pop&&!pop.contains(z.target)&&close(!1)},!0);
+ document.addEventListener("touchend",z=>{let s=z.target.closest&&z.target.closest("select.xs-on");if(s&&retTo===s){z.preventDefault();retTo=null;open(s)}},{capture:!0,passive:!1});
+ document.addEventListener("click",z=>{let s=z.target.closest&&z.target.closest("select.xs-on");s&&z.preventDefault()},!0);
+ document.addEventListener("keydown",z=>{let s=z.target;if(pop||!s.classList||!s.classList.contains("xs-on"))return;if(["Enter"," ","ArrowDown","ArrowUp","F4"].includes(z.key)||z.altKey&&z.key==="ArrowDown"){z.preventDefault();open(s)}},!0);
+ document.addEventListener("change",z=>{z.target.classList&&z.target.classList.contains("xs-on")&&sync(z.target)},!0);
+ addEventListener("resize",()=>{live.forEach(sync);place()});
+ document.addEventListener("scroll",z=>{pop&&!pop.contains(z.target)&&(cur&&cur.isConnected?place():close(!1))},!0);
+ new MutationObserver(ms=>{for(let m2 of ms){m2.addedNodes.forEach(n2=>n2.nodeType===1&&scan(n2));if(m2.type==="childList"&&m2.target.tagName==="SELECT")sync(m2.target)}requestAnimationFrame(()=>live.forEach(sync))}).observe(document.documentElement,{childList:!0,subtree:!0});
+ setInterval(()=>live.forEach(s=>{let f=face.get(s);if(!f||!s.isConnected||f.dataset.v!==s.value||f.dataset.t!==txt(s)||(f.hidden!==(s.offsetParent===null)))sync(s)}),400);
+ document.readyState!=="loading"?scan(document):addEventListener("DOMContentLoaded",()=>scan(document));
+ return{sync,open,close}})();
 var Ma={};be(Ma,{render:()=>st});async function st(e,{tab:n},r){e.innerHTML=`<div class="page"><div class="loading-block" aria-busy="true">${a(t("loading"))}</div></div>`;try{n==="activity"?await Xt(e):n==="fields"?await Fx(e,r):n==="site"?await Sx(e,r):await ct(e,r)}catch(o){e.innerHTML=`<div class="page">${Z(o.message)}</div>`,m("[data-retry]",e).onclick=()=>st(e,{tab:n},r)}}async function ct(e,n){let[{users:r},o]=await Promise.all([P("/api/users"),P("/api/settings")]),i=n.store.meta;e.innerHTML=`<div class="page page-users">
     <header class="page-head"><div><h1>${a(t("manageTitle"))}</h1></div>
       <div class="head-actions"><button class="btn btn-primary" id="addUser">${h("user-plus",18)}<span>${a(t("addUser"))}</span></button></div></header>
