@@ -3996,3 +3996,17 @@ html { scrollbar-color: color-mix(in srgb, var(--muted) 45%, transparent) transp
 [data-theme="dark"] .wc-dec-ic { color: #FCA5A5; }
 [data-theme="dark"] .wc-dec-2 .wc-dec-ic { color: #FDBA74; }
 [data-theme="dark"] .wc-cell strong, [data-theme="dark"] .wc-kpi strong { color: #F1F5F9; }
+/* v58 names behind criticality cards */
+button.wc-qd { font: inherit; text-align: start; cursor: pointer; transition: box-shadow .2s var(--ds-ease), border-color .2s var(--ds-ease); }
+@media (hover: hover) and (pointer: fine) { button.wc-qd:hover, .wc-cell:hover { box-shadow: var(--ds-sh-2); border-color: color-mix(in srgb, var(--c, var(--ds-act)) 45%, var(--line)); } }
+.wc-nm-list { list-style: none; margin: 0; padding: 0; max-height: min(60vh, 520px); overflow: auto; }
+.wc-nm-list li { border-bottom: 1px solid var(--line); }
+.wc-nm-list li:last-child { border-bottom: 0; }
+.wc-nm-a { display: flex; align-items: center; gap: 12px; padding: 10px 4px; color: inherit; text-decoration: none; border-radius: 10px; }
+a.wc-nm-a:hover { background: var(--canvas); }
+.wc-nm-who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.wc-nm-who strong { color: var(--navy-txt); line-height: 1.4; }
+.wc-nm-who small { color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+.wc-nm-h { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 2px; font-size: 13.5px; }
+.wc-nm-end { flex: none; display: flex; align-items: center; gap: 10px; }
+@media (max-width: 560px) { .wc-nm-a { flex-wrap: wrap; } .wc-nm-end { width: 100%; justify-content: flex-start; padding-inline-start: 44px; } }
