@@ -4010,3 +4010,23 @@ a.wc-nm-a:hover { background: var(--canvas); }
 .wc-nm-h { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 2px; font-size: 13.5px; }
 .wc-nm-end { flex: none; display: flex; align-items: center; gap: 10px; }
 @media (max-width: 560px) { .wc-nm-a { flex-wrap: wrap; } .wc-nm-end { width: 100%; justify-content: flex-start; padding-inline-start: 44px; } }
+/* v59 criticality import box */
+.wc-imp { margin: 0 0 18px; padding: 0; overflow: hidden; }
+.wc-imp > summary { display: flex; align-items: center; gap: 10px; padding: 16px 20px; cursor: pointer; list-style: none; font-weight: 700; color: var(--navy-txt); }
+.wc-imp > summary::-webkit-details-marker { display: none; }
+.wc-imp > summary svg:first-child { color: var(--ds-act); }
+.wc-imp > summary small { padding: 2px 8px; border-radius: 999px; background: var(--canvas); color: var(--muted); font-size: 12px; font-weight: 600; }
+.wc-imp > summary svg:last-child { margin-inline-start: auto; transition: transform .2s var(--ds-ease); }
+.wc-imp[open] > summary svg:last-child { transform: rotate(180deg); }
+.wc-imp-steps { list-style: none; margin: 0; padding: 0 20px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.wc-imp-steps li { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: var(--ds-r); background: var(--canvas); }
+.wc-imp-steps li > b { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ds-act); color: #fff; font-size: 14px; }
+.wc-imp-steps strong { display: block; color: var(--navy-txt); margin-bottom: 4px; }
+.wc-imp-steps p { margin: 0 0 10px; color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+.im-crit { display: flex; align-items: center; gap: 14px; margin-top: 16px; }
+.im-crit-ic { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: color-mix(in srgb, var(--ds-act) 10%, var(--paper)); color: var(--ds-act); }
+.im-crit > div { flex: 1; min-width: 0; }
+.im-crit h2 { margin: 0 0 4px; font-size: 17px; color: var(--navy-txt); }
+.im-crit p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 14px; }
+@media (max-width: 900px) { .wc-imp-steps { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .im-crit { flex-wrap: wrap; } .im-crit .btn { width: 100%; justify-content: center; } }
