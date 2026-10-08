@@ -3574,3 +3574,15 @@ button.tz-val:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 
 [data-theme="dark"] .oc-today { background: rgba(251,146,60,.08); border-color: rgba(251,146,60,.25); }
 [data-theme="dark"] .oc-banner { background: rgba(219,39,119,.1); border-color: rgba(219,39,119,.25); }
 [data-theme="dark"] .oc-banner strong, [data-theme="dark"] .oc-banner p { color: var(--ink); }
+
+/* ---------- v51 new columns → new fields ---------- */
+.im-newcols { margin: 12px 0; padding: 16px 18px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--teal) 35%, var(--line)); background: color-mix(in srgb, var(--teal-soft) 55%, var(--paper)); }
+.im-newcols h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-size: 17px; color: var(--teal-strong); }
+.im-newcols > p { font-size: 15px; color: var(--ink); margin-bottom: 12px; }
+.im-newcols-list { display: grid; gap: 10px; margin-bottom: 12px; }
+.im-newcols-row { display: grid; grid-template-columns: 28px minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 6px 12px; align-items: end; padding: 10px 12px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); }
+.im-newcols-row .check { align-self: center; margin-top: 22px; }
+.im-newcols-row .field input, .im-newcols-row .field select { width: 100%; }
+.im-newcols-ex { grid-column: 2 / -1; font-size: 13.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 760px) { .im-newcols-row { grid-template-columns: 28px minmax(0, 1fr); } .im-newcols-row .field { grid-column: 2; } }
+[data-theme="dark"] .im-newcols { background: rgba(43,179,166,.07); }
