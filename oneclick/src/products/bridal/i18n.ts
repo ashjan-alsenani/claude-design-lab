@@ -113,7 +113,6 @@ const ar = {
     left: "باقي",
     daysWord: "يومًا",
     untilWedding: "على زفافك",
-    heroAlt: "العروس من الخلف بطرحتها الطويلة وتاج الشعر، تحمل باقة ورد بين الأقواس البيضاء",
     upcoming: "مواعيد قادمة",
     budgetGlance: "نظرة على الميزانية",
     viewAll: "عرض الكل",
@@ -462,7 +461,6 @@ const en: BridalCopy = {
   greeting: { morning: "Good morning", afternoon: "Good afternoon", evening: "Good evening" },
   dash: {
     left: "", daysWord: "days", untilWedding: "until your wedding",
-    heroAlt: "The bride from behind in a long veil and hair crown, holding a bouquet between white arches",
     upcoming: "Upcoming appointments", budgetGlance: "Budget at a glance", viewAll: "View all",
     daysUntil: "days until your wedding", weddingToday: "Today is your wedding day", married: "Congratulations", ready: "Ready",
     messages: { ontrack: "Beautiful progress. You're right on track.", focus: "Let's take care of a few important things this week.", start: "One step at a time, everything in its moment.", almost: "Nearly there. Enjoy these last days." },

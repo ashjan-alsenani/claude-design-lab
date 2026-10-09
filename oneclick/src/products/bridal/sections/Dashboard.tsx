@@ -13,7 +13,6 @@ import {
   DiamondIcon,
   DressIcon,
   FlowerIcon,
-  HeartIcon,
   PlusIcon,
   ShoppingBagIcon,
   SparkleIcon,
@@ -29,20 +28,12 @@ import { NoticeList } from "../app/Shell";
 import { alerts, budgetSummary, diffDays, focusTasks, groupTasks, paymentStatus, progress, progressMessage, type AreaKey } from "../model/engine";
 import { fmtTime } from "../ui/cards";
 import { Bar, Card, CountUp, IconButton, ProgressRing } from "../ui/kit";
-import Image, { type StaticImageData } from "next/image";
 import { ArtTile, type Motif } from "../ui/Art";
-import heroPhoto from "../assets/bride-hero.jpg";
-import blossom from "../assets/blossom-corner.jpg";
-import sprig from "../assets/sprig.png";
-import apptDress from "../assets/appointment-dress.jpg";
-import apptFlowers from "../assets/appointment-flowers.jpg";
-import apptTable from "../assets/appointment-table.jpg";
 import type { ApptKind, BudgetCat } from "../model/types";
 import { NewTaskSheet, TaskList } from "../ui/tasks";
 
 const catIcons: Partial<Record<BudgetCat, Icon>> = { venue: BuildingsIcon, dress: DressIcon, jewellery: DiamondIcon, beauty: SparkleIcon, photo: CameraIcon, video: CameraIcon, decor: FlowerIcon, catering: BowlFoodIcon };
 // The approved design's photos for the appointment kinds they show; other kinds keep their drawn motif.
-const apptPhoto: Partial<Record<ApptKind, StaticImageData>> = { fitting: apptDress, vendor: apptFlowers, venue: apptFlowers, tasting: apptTable };
 const apptMotif: Partial<Record<ApptKind, Motif>> = { fitting: "dress", makeup: "lips", hair: "comb", salon: "comb", beauty: "lips", facial: "lips", venue: "arch", vendor: "rose", tasting: "cake", photo: "camera", henna: "henna", documents: "doc" };
 
 export function Dashboard() {
@@ -89,89 +80,79 @@ export function Dashboard() {
 
   return (
     <div className="space-y-6 lg:space-y-7">
-      {/* Hero (the approved design): the bride's photo fades into the page, title and two frosted cards beside it */}
-      <section style={enter(0)} className="bj-enter bj-hero -mx-4 -mt-6 overflow-hidden sm:-mx-6 lg:-mt-8 lg:mx-[calc(50%-50vw)]">
-        <div className="bj-hero-photo">
-          <Image src={heroPhoto} quality={85} alt={t.dash.heroAlt} fill priority sizes="(min-width: 1024px) 62vw, 100vw" className="object-cover" placeholder="blur" />
-        </div>
-        <Image src={blossom} alt="" className="bj-hero-blossom h-auto" aria-hidden="true" />
-        <div className="relative px-4 pb-5 sm:px-6 lg:mx-auto lg:flex lg:min-h-[540px] lg:max-w-[1320px] lg:flex-col lg:px-8 lg:pb-[104px] lg:pt-14 lg:*:w-[min(600px,48%)]">
-          <div className="-mt-12 lg:mt-0">
-            <p className="flex items-center gap-2 text-[13px] text-bj-ink-soft sm:text-[15px]" suppressHydrationWarning>
-              <Clicky size={40} mood="love" color="#f0567a" animate className="shrink-0" />
-              <span>
-              {greet}
-              {lang === "ar" ? " يا عروستنا " : ", "}
-              <span className="font-semibold text-[#c8325a]">{p.brideName}</span>
-              </span>
-            </p>
-            <h1 className="mt-2 text-[2.5rem] font-bold leading-[1.2] text-[#c8325a] sm:text-[3.4rem] lg:text-[clamp(3rem,4.6vw,4.1rem)]">{t.brand}</h1>
-            <p className="mt-2 text-[15px] font-medium text-bj-ink-soft sm:text-[1.2rem]">{t.tagline}</p>
-            {lang === "ar" && (
-              <p className="bj-latin mt-1 text-[15px] italic text-bj-muted sm:text-[1.15rem]" dir="ltr" lang="en">
-                Everything you need. Nothing forgotten.
+      {/* Hero in the One Click style: Clicky greets the bride, then the two numbers that matter */}
+      <section style={enter(0)} className="bj-enter relative overflow-hidden rounded-[32px] border border-bj-line bg-[linear-gradient(180deg,#fde7ec_0%,#ffffff_75%)] p-5 shadow-[0_1px_2px_rgba(60,40,120,.05),0_10px_28px_-14px_rgba(60,40,120,.22)] sm:p-8 lg:p-10">
+        <span aria-hidden="true" className="pointer-events-none absolute -end-16 -top-20 size-64 rounded-full bg-[#ffc23d]/25" />
+        <span aria-hidden="true" className="pointer-events-none absolute -bottom-24 end-1/3 size-56 rounded-full border-[3px] border-dashed border-[#f0567a]/30" />
+        <div className="relative grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-10">
+          <div className="flex items-start gap-4 sm:gap-5">
+            <Clicky size={88} body wave animate mood="love" color="#f0567a" className="h-auto w-14 shrink-0 sm:w-[88px]" />
+            <div className="min-w-0">
+              <p className="text-[14px] font-medium text-bj-muted sm:text-[15px]" suppressHydrationWarning>
+                {greet}
               </p>
-            )}
+              <h1 className="mt-1 text-[2rem] font-bold leading-[1.2] text-bj-ink sm:text-[2.6rem]">
+                {lang === "ar" ? "يا عروستنا " : ""}
+                <span className="relative inline-block text-[#c8325a]">
+                  {p.brideName}
+                  <span aria-hidden="true" className="absolute inset-x-0 -bottom-1 h-2 rounded-full bg-[#ffc23d]/70 -z-10" />
+                </span>
+              </h1>
+              <p className="mt-2 text-[15px] text-bj-ink-soft sm:text-[17px]">{t.tagline}</p>
+            </div>
           </div>
 
-          {/* Countdown + readiness */}
-          <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-4 lg:mt-8">
-            <div className="bj-frost relative flex min-h-[150px] flex-col items-center justify-center overflow-hidden rounded-[18px] px-3 py-4 text-center sm:min-h-[168px]">
+          {/* Countdown + readiness, as One Click stat tiles */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="flex min-h-[148px] flex-col justify-between rounded-[20px] bg-[#fbf0e6] p-4 sm:p-5">
+              <p className="text-[13px] font-medium text-bj-muted">{t.dash.untilWedding}</p>
               {days > 0 ? (
-                <>
-                  <p className="flex items-baseline gap-2 text-[15px] font-medium text-bj-ink-soft sm:text-[19px]">
-                    {t.dash.left && <span>{t.dash.left}</span>}
-                    <span className="text-[2.2rem] font-semibold leading-none tabular-nums text-[#1e1b3a] sm:text-[2.7rem]">
-                      <CountUp value={days} format={num} />
-                    </span>
-                    <span>{t.dash.daysWord}</span>
-                  </p>
-                  <p className="mt-1.5 text-[15px] font-medium text-bj-ink-soft sm:text-[18px]">{t.dash.untilWedding}</p>
-                </>
+                <p className="flex items-baseline gap-1.5">
+                  <span className="text-[2.6rem] font-bold leading-none tabular-nums text-bj-ink sm:text-[3rem]">
+                    <CountUp value={days} format={num} />
+                  </span>
+                  <span className="text-[15px] font-semibold text-bj-ink-soft">{t.dash.daysWord}</span>
+                </p>
               ) : (
-                <p className="text-[1.3rem] font-medium leading-tight text-bj-ink">{days === 0 ? t.dash.weddingToday : t.dash.married}</p>
+                <p className="text-[1.3rem] font-bold leading-tight text-bj-ink">{days === 0 ? t.dash.weddingToday : t.dash.married}</p>
               )}
-              <p className="mt-2.5 inline-flex items-center gap-1.5 text-[12px] text-bj-muted sm:text-[13px]">
-                <CalendarBlankIcon size={15} className="text-[#c8325a]" />
+              <p className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-bj-ink-soft">
+                <CalendarBlankIcon size={15} weight="bold" className="text-[#f0567a]" />
                 {date(p.weddingDate, "long")}
               </p>
-              <Image src={sprig} alt="" aria-hidden="true" className="pointer-events-none absolute bottom-1.5 end-2.5 h-auto w-11 opacity-95 sm:w-14" />
             </div>
-            <div className="bj-frost flex min-h-[150px] flex-col items-center justify-center gap-2.5 rounded-[18px] px-3 py-4 text-center sm:min-h-[168px]">
-              <ProgressRing value={prog.overall} size={ringSize} stroke={8} color="#f0567a">
+            <div className="flex min-h-[148px] flex-col items-center justify-center gap-2 rounded-[20px] bg-[#fbf0e6] p-4 text-center sm:p-5">
+              <ProgressRing value={prog.overall} size={ringSize} stroke={9} color="#f0567a">
                 <span>
-                  <span className="block text-[1.45rem] font-semibold leading-none text-[#1e1b3a] sm:text-[1.75rem]">
+                  <span className="block text-[1.4rem] font-bold leading-none text-bj-ink sm:text-[1.7rem]">
                     <CountUp value={Math.round(prog.overall * 100)} format={pct} />
                   </span>
-                  <span className="mt-1 block text-[11.5px] text-bj-ink-soft sm:text-[13px]">{t.dash.ready}</span>
+                  <span className="mt-1 block text-[11.5px] font-medium text-bj-muted sm:text-[12.5px]">{t.dash.ready}</span>
                 </span>
               </ProgressRing>
-              <p className="flex items-start justify-center gap-1.5 text-[11.5px] leading-snug text-bj-muted sm:text-[12.5px]">
-                <HeartIcon size={13} weight="fill" className="mt-0.5 shrink-0 text-[#c56f66]" />
-                <span>{msg}</span>
-              </p>
+              <p className="text-[11.5px] leading-snug text-bj-muted sm:text-[12.5px]">{msg}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Summary cards: frosted, overlapping the hero's lower edge on large screens */}
-      <section style={enter(1)} aria-label={t.dash.overview} className="bj-enter relative z-[2] lg:-mt-[96px]">
+      {/* Summary cards */}
+      <section style={enter(1)} aria-label={t.dash.overview} className="bj-enter">
         <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
           {stats.map((s, i) => (
             <li key={s.key}>
               <Link
                 href={href(s.key)}
-                className="bj-frost bj-icon-hover group relative flex h-full min-h-[66px] items-center gap-3 rounded-[16px] px-3.5 py-2.5 transition-[transform,box-shadow] duration-200 active:scale-[0.98] sm:min-h-[120px] sm:flex-col sm:justify-center sm:gap-1 sm:px-3 sm:pb-6 sm:pt-4 sm:text-center hover:shadow-[0_20px_40px_-24px_rgba(60,40,120,.5)]"
+                className="bj-card bj-icon-hover group relative flex h-full min-h-[66px] items-center gap-3 rounded-[20px] hover:-translate-y-0.5 px-3.5 py-2.5 transition-[transform,box-shadow] duration-200 active:scale-[0.98] sm:min-h-[120px] sm:flex-col sm:justify-center sm:gap-1 sm:px-3 sm:pb-6 sm:pt-4 sm:text-center hover:shadow-[0_20px_40px_-24px_rgba(60,40,120,.5)]"
               >
-                <span className="grid size-10 shrink-0 place-items-center rounded-[12px] bg-[#f3e6df] text-[#c8325a] sm:mb-1 sm:size-11">
+                <span className="grid size-10 shrink-0 place-items-center rounded-[14px] bg-[#fde7ec] text-[#e0456c] sm:mb-1 sm:size-11">
                   <s.icon size={22} weight="duotone" className="bj-icon bj-icon-breathe" style={{ animationDelay: `${-i * 0.5}s` }} />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[14px] font-semibold text-bj-ink sm:text-[15.5px]">{s.label}</span>
                   <span className="block truncate text-[11.5px] tabular-nums text-bj-muted sm:text-[13px]">{s.value}</span>
                 </span>
-                <CaretLeftIcon size={14} className="absolute bottom-3 end-3.5 hidden text-[#9a7e75] transition-transform duration-200 group-hover:-translate-x-0.5 sm:block ltr:rotate-180 ltr:group-hover:translate-x-0.5" />
+                <CaretLeftIcon size={14} className="absolute bottom-3 end-3.5 hidden text-bj-muted transition-transform duration-200 group-hover:-translate-x-0.5 sm:block ltr:rotate-180 ltr:group-hover:translate-x-0.5" />
               </Link>
             </li>
           ))}
@@ -226,11 +207,7 @@ export function Dashboard() {
                 {appts.map((a, i) => (
                   <li key={a.id}>
                     <Link href={href("calendar")} className="flex items-center gap-3 rounded-[16px] border border-bj-line bg-bj-ivory/60 p-2.5 transition-colors hover:bg-bj-cream">
-                      {apptPhoto[a.kind] ? (
-                        <Image src={apptPhoto[a.kind]!} alt="" width={56} height={56} className="size-14 shrink-0 rounded-[12px] object-cover" />
-                      ) : (
-                        <ArtTile motif={apptMotif[a.kind] ?? "star"} tone={i + 1} className="size-14 shrink-0 rounded-[12px]" />
-                      )}
+                      <ArtTile motif={apptMotif[a.kind] ?? "star"} tone={i + 1} className="size-14 shrink-0 rounded-[12px]" />
                       <span className="min-w-0 flex-1">
                         <span className="block text-[11.5px] text-bj-muted">{date(a.date, "weekday")}</span>
                         <span className="block truncate text-[14px] font-medium text-bj-ink">{a.title}</span>

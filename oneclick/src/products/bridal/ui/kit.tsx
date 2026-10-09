@@ -3,8 +3,6 @@
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { XIcon } from "@phosphor-icons/react";
-import Image from "next/image";
-import blossom from "../assets/blossom-corner.jpg";
 import { useBridal } from "../app/state";
 
 /**
@@ -53,34 +51,27 @@ export function Card({ className, children, as: As = "div", ...rest }: { classNa
   );
 }
 
-/**
- * Page title. Level 1 is the editorial band at the top of every section (the same blush light and
- * blossom as the home photo), so inner pages feel like part of one album; level 2 is a plain heading.
- */
+/** Page title in the One Click style (bold ink title, soft subtitle, action at the end); level 2 is a section heading. */
 export function SectionHeader({ eyebrow, title, sub, action, level = 1 }: { eyebrow?: string; title: string; sub?: string; action?: ReactNode; level?: 1 | 2 }) {
   if (level === 2)
     return (
       <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
         <div className="min-w-0">
           {eyebrow && <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.18em] text-bj-gold-ink">{eyebrow}</p>}
-          <h2 className="bj-serif text-[1.5rem] leading-snug text-bj-ink">{title}</h2>
+          <h2 className="text-[1.5rem] font-bold leading-snug text-bj-ink">{title}</h2>
           {sub && <p className="mt-1.5 max-w-xl text-[14px] leading-relaxed text-bj-muted">{sub}</p>}
         </div>
         {action}
       </div>
     );
   return (
-    <header className="bj-band bj-enter -mx-4 -mt-6 sm:-mx-6 lg:-mt-8 lg:mx-[calc(50%-50vw)]">
-      <Image src={blossom} alt="" aria-hidden="true" className="bj-band-blossom h-auto" sizes="220px" />
-      <div className="relative mx-auto flex max-w-[1320px] flex-wrap items-end justify-between gap-x-6 gap-y-4 px-4 pb-5 pt-6 sm:px-6 sm:pb-8 sm:pt-9 lg:px-8 lg:pb-12 lg:pt-14">
-        <div className="min-w-0">
-          {eyebrow && <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-bj-gold-ink">{eyebrow}</p>}
-          <h1 className="text-[2.2rem] font-bold leading-[1.2] text-[#c8325a] sm:text-[2.9rem] lg:text-[3.3rem]">{title}</h1>
-          <span aria-hidden="true" className="mt-3 block h-px w-16 bg-[linear-gradient(90deg,#c9a49a,transparent)] rtl:bg-[linear-gradient(270deg,#c9a49a,transparent)]" />
-          {sub && <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-bj-ink-soft">{sub}</p>}
-        </div>
-        {action && <div className="shrink-0">{action}</div>}
+    <header className="bj-enter flex flex-wrap items-end justify-between gap-x-6 gap-y-4 pt-2 sm:pt-4">
+      <div className="min-w-0">
+        {eyebrow && <p className="mb-2 text-[12px] font-semibold text-[#c8325a]">{eyebrow}</p>}
+        <h1 className="text-[2rem] font-bold leading-[1.2] text-bj-ink sm:text-[2.5rem]">{title}</h1>
+        {sub && <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-bj-ink-soft">{sub}</p>}
       </div>
+      {action && <div className="shrink-0">{action}</div>}
     </header>
   );
 }

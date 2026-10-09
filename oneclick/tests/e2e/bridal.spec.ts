@@ -37,10 +37,11 @@ async function finishWelcome(page: Page, name = "Test Customer") {
 
 test("landing page presents the product in both languages", async ({ page }) => {
   await page.goto("/en/products/bride-planner");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Plan your wedding beautifully.");
-  await expect(page.getByRole("link", { name: "Start My Bridal Journey" }).first()).toBeVisible();
+  // The standard One Click product page: name, price CTA, the live demo and a link to the full sample app.
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Bridal Journey");
+  await expect(page.getByRole("link", { name: "Try the full app with a sample wedding" })).toHaveAttribute("href", "/en/demo/bride-planner");
   await page.goto("/ar/products/bride-planner");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("خطّطي لزفافك بأناقة");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("رحلة العروس");
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });

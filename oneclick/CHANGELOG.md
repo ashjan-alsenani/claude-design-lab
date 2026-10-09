@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.13.0 — 2026-10-09 — Bridal Journey in the One Click design
+- The bridal app now looks like the rest of One Click: Rubik, indigo text on the One Click base, the
+  Bride pink with its deeper shade for text and buttons, white rounded cards, beige stat tiles and
+  One Click's raised buttons.
+- Home: a pink Clicky greets the bride by name next to the countdown and readiness tiles. The
+  bride photograph, blossoms and frosted glass are gone; appointment and mood tiles use One Click hues.
+- Header: Bride-pink heart tile with "رحلة العروس · Bridal Journey · One Click".
+- Setup screens use Clicky instead of the photo.
+- The public product page now uses the standard One Click product template (live demo, price,
+  benefits, FAQ) with a link to the full sample app.
+- Fix: verification-code cleanup measured "two days" from the wall clock instead of the engine's clock.
+
 ## 0.12.0 — 2026-10-05 — Bridal Journey: sharper, faster, consistent
 - New high-resolution bride photograph (3200 px, generated to match the approved composition) replaces the
   enlarged crop that looked blurry; served as AVIF/WebP at higher quality.

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useMemo, useState, type CSSProperties } from "react";
@@ -10,7 +9,7 @@ import { addDays, diffDays, resolveTasks } from "../model/engine";
 import { applyOp } from "../model/reducer";
 import { emptyWorkspace, type Currency, type EventKey, type Profile } from "../model/types";
 import { Flourish, Petals } from "../ui/Art";
-import heroPhoto from "../assets/bride-hero.jpg";
+import { Clicky } from "@/components/brand/Clicky";
 
 import { Button, ChoiceCard, Field, inputCls } from "../ui/kit";
 
@@ -62,18 +61,21 @@ export function Welcome({ onStart, exitHref }: { onStart: () => void; exitHref: 
           )}
         </div>
         <div style={{ "--bj-enter-delay": "120ms" } as CSSProperties} className="bj-enter order-1 mx-auto w-full max-w-[220px] sm:max-w-[300px] lg:order-2 lg:max-w-[420px]">
-          <BridePhoto alt={t.dash.heroAlt} sizes="(min-width: 1024px) 420px, 300px" priority />
+          <WelcomeArt size={180} />
         </div>
       </div>
     </div>
   );
 }
 
-/** The approved bride photograph inside an arch, echoing the dashboard hero. */
-function BridePhoto({ alt, sizes, priority, className = "w-full" }: { alt: string; sizes: string; priority?: boolean; className?: string }) {
+/** Clicky in the Bride hue on a soft One Click backdrop: the welcome illustration. */
+function WelcomeArt({ size = 220, className = "" }: { size?: number; className?: string }) {
   return (
-    <div className={`relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[28px] border-4 border-bj-paper shadow-[0_30px_60px_-30px_rgba(60,40,120,.45)] ${className}`}>
-      <Image src={heroPhoto} quality={85} alt={alt} fill priority={priority} sizes={sizes} placeholder="blur" className="object-cover object-[32%_30%] ltr:-scale-x-100" />
+    <div className={`relative mx-auto grid aspect-square w-full place-items-center ${className}`} aria-hidden="true">
+      <span className="absolute inset-[6%] rounded-full bg-[#fde7ec]" />
+      <span className="absolute end-[4%] top-[6%] size-[30%] rounded-full bg-[#ffc23d]/60" />
+      <span className="absolute inset-[2%] rounded-full border-[3px] border-dashed border-[#f0567a]/35" />
+      <Clicky size={size} body wave animate mood="love" color="#f0567a" className="relative" />
     </div>
   );
 }
@@ -138,7 +140,7 @@ export function Onboarding({ onCancel }: { onCancel: () => void }) {
           <div className="mx-auto w-fit">
             <div className="relative">
               <Petals count={22} />
-              <BridePhoto alt="" sizes="176px" className="w-44" />
+              <WelcomeArt size={110} className="w-44" />
             </div>
           </div>
           <h1 className="bj-serif mt-8 text-[2.4rem] leading-tight text-bj-ink">

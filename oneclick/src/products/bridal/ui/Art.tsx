@@ -1,9 +1,9 @@
 /**
- * Bridal artwork: line motifs on warm nude tiles, the wheat brand mark and the petal celebration.
- * Photography (assets/) carries the hero; these fill in where no photo exists.
- * Motion is CSS only and stops under reduced-motion.
+ * Bridal artwork in the One Click style: line motifs on soft brand-hue tiles, the product mark and the
+ * petal celebration. Motion is CSS only and stops under reduced-motion.
  */
 import type { CSSProperties } from "react";
+import { HeartIcon } from "@phosphor-icons/react";
 
 export type Motif = "ring" | "rose" | "dress" | "arch" | "cake" | "envelope" | "suitcase" | "camera" | "home" | "henna" | "lips" | "comb" | "table" | "pearl" | "shoe" | "bag" | "abaya" | "doc" | "star";
 
@@ -29,13 +29,14 @@ const paths: Record<Motif, string> = {
   star: "M50 28l5 15 15 5-15 5-5 15-5-15-15-5 15-5z",
 };
 
+// One Click's soft hues (bride pink first), with the matching deep line color.
 const palettes = [
-  ["#fbf6f3", "#f1e4de"], // nude
-  ["#fbf8f5", "#efe6dc"], // linen
-  ["#faf6f6", "#ece2e2"], // pearl
-  ["#fcf4f1", "#f2ddd6"], // blush
-  ["#f8f5f2", "#e8e0d8"], // sand
-  ["#fdf8f5", "#f4e7df"], // silk
+  ["#fde7ec", "#fbd0db", "#c8325a"], // bride
+  ["#fff1cc", "#ffe29a", "#8a5a00"], // sunshine
+  ["#ece9fe", "#d9d3fc", "#5b49c9"], // lilac
+  ["#dcf5f1", "#bdeee6", "#0b7d73"], // teal
+  ["#e0f0ff", "#c4e2ff", "#1f6fc2"], // sky
+  ["#ffe3e3", "#ffc9c9", "#c23a3a"], // coral
 ];
 
 /** A 4-point sparkle centered on (x, y). */
@@ -46,14 +47,14 @@ function Twinkle({ x, y, r, delay = 0, fill = "#d9b8a8" }: { x: number; y: numbe
 }
 
 export function ArtTile({ motif, tone = 0, className = "", label }: { motif: Motif; tone?: number; className?: string; label?: string }) {
-  const [a, b] = palettes[((tone % palettes.length) + palettes.length) % palettes.length];
+  const [a, b, ink] = palettes[((tone % palettes.length) + palettes.length) % palettes.length];
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ background: `radial-gradient(120% 90% at 30% 10%, ${a}, ${b})` }} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
+    <div className={`relative overflow-hidden ${className}`} style={{ background: `linear-gradient(160deg, ${a}, ${b})` }} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
       <svg viewBox="0 0 100 100" className="absolute inset-0 m-auto h-[72%] w-[72%]" fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="50" cy="54" r="33" fill="#ffffff" fillOpacity=".6" />
-        <path d={paths[motif]} stroke="#9a6b60" strokeWidth="1.7" />
-        <Twinkle x={80} y={24} r={5} delay={-(tone % 4) * 0.7} />
-        <Twinkle x={22} y={78} r={3} delay={-(tone % 3) * 0.9 - 1.2} fill="#e6cfc5" />
+        <circle cx="50" cy="54" r="33" fill="#ffffff" fillOpacity=".75" />
+        <path d={paths[motif]} stroke={ink} strokeWidth="2.2" />
+        <Twinkle x={80} y={24} r={5} delay={-(tone % 4) * 0.7} fill="#ffc23d" />
+        <Twinkle x={22} y={78} r={3} delay={-(tone % 3) * 0.9 - 1.2} fill="#f0567a" />
       </svg>
     </div>
   );
@@ -84,28 +85,16 @@ export function Petals({ count = 18 }: { count?: number }) {
   );
 }
 
-/** The approved Bridal Journey mark (assets/logo-mark.svg), drawn in currentColor. */
-function WheatMark({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M32 54c0-15 0-30 0-44" />
-      <path d="M32 27C18 26 10 19 9 8c12 0 21 6 23 19Z" />
-      <path d="M32 27C46 26 54 19 55 8c-12 0-21 6-23 19Z" />
-      <path d="M32 38c-11 0-18-5-21-14 10 0 17 4 21 14Z" />
-      <path d="M32 38c11 0 18-5 21-14-10 0-17 4-21 14Z" />
-      <path d="M32 49c-8 0-13-3-16-9 8 0 13 2 16 9Z" />
-      <path d="M32 49c8 0 13-3 16-9-8 0-13 2-16 9Z" />
-    </svg>
-  );
-}
-
+/** Product mark in the One Click style: the Bride-hue tile with a heart, the name, and "One Click". */
 export function BrandMark({ className = "" }: { className?: string }) {
   return (
     <span className={`group inline-flex items-center gap-2.5 ${className}`}>
-      <WheatMark className="size-9 text-[#f0567a] transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-translate-y-0.5 group-hover:scale-110" />
+      <span className="grid size-10 place-items-center rounded-[12px] bg-[#f0567a] text-white shadow-[0_4px_0_-1px_#c8325a] transition-transform duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-rotate-6 group-hover:scale-105">
+        <HeartIcon size={22} weight="fill" />
+      </span>
       <span className="leading-none">
-        <span className="bj-glitter block text-[1.25rem] font-medium" lang="ar">رحلة العروس</span>
-        <span className="bj-latin mt-1 block text-[0.82rem] italic text-bj-muted" lang="en" dir="ltr">Bridal Journey</span>
+        <span className="block text-[1.15rem] font-bold text-bj-ink">رحلة العروس</span>
+        <span className="mt-1 block text-[0.78rem] font-medium text-bj-muted" lang="en" dir="ltr">Bridal Journey · One Click</span>
       </span>
     </span>
   );

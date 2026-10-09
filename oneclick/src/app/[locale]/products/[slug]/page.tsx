@@ -20,9 +20,11 @@ import { ProductArt } from "@/components/art/ProductArt";
 import { FavoriteButton } from "@/components/product/FavoriteButton";
 import { ProductViewTracker } from "@/components/product/ProductViewTracker";
 import { JsonLd } from "@/components/JsonLd";
-import { BridalLanding } from "@/products/bridal/landing/BridalLanding";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
+
+/** Products with a full interactive app also link to its public sample (nothing saved). */
+const fullDemo: Record<string, string> = { "bride-planner": "/demo/bride-planner" };
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => allProducts.filter((p) => p.status !== "archived").map((p) => ({ locale, slug: p.slug })));
@@ -65,18 +67,6 @@ export default async function ProductPage({ params }: Props) {
     { icon: DevicesIcon, label: d.product.devices, value: tr(product.devices, locale) },
     { icon: GlobeHemisphereEastIcon, label: d.product.languages, value: product.languages.map((l) => d.product.langNames[l]).join(locale === "ar" ? " و" : " & ") },
   ];
-
-  if (product.slug === "bride-planner") {
-    // Bridal Journey has its own editorial landing page.
-    return (
-      <article>
-        <ProductViewTracker productId={product.id} />
-        <BridalLanding locale={locale} price={priceLabel} />
-        <JsonLd data={{ "@context": "https://schema.org", "@type": "Product", name, description: tr(product.summary, locale), brand: { "@type": "Brand", name: "One Click" }, image: `${siteUrl}/brand/og-default.png`, url: localeUrl(locale, `/products/${product.slug}`) }} />
-        <JsonLd data={breadcrumbJsonLd([{ name: home, url: localeUrl(locale) }, { name: d.catalog.title, url: localeUrl(locale, "/products") }, { name, url: localeUrl(locale, `/products/${product.slug}`) }])} />
-      </article>
-    );
-  }
 
   return (
     <article>
@@ -124,6 +114,12 @@ export default async function ProductPage({ params }: Props) {
               <p className="mb-3 text-sm font-medium text-ink-soft">{d.product.demo}</p>
               <DemoById id={product.demo} locale={locale} hue={hue} />
               <p className="mt-3 text-xs text-muted">{d.product.demoNote}</p>
+              {fullDemo[product.slug] && (
+                <Link href={`/${locale}${fullDemo[product.slug]}`} className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
+                  {locale === "ar" ? "جرّبي النسخة الكاملة بعرس تجريبي" : "Try the full app with a sample wedding"}
+                  <ArrowRightIcon size={15} className="rtl:rotate-180" />
+                </Link>
+              )}
             </div>
           ) : (
             <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-xl)]" style={{ background: hueSoft(product.hue, 18) }}>
