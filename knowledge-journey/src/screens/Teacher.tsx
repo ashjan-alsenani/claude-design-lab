@@ -1,9 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useRef, useState } from 'react';
+import { confirmAsk } from '../components/Confirm';
 import { Icon } from '../components/Icon';
 import { RichText } from '../components/RichText';
 import { ACTIVITIES } from '../data/activities';
 import { VERSES } from '../data/verses';
+import { EMBEDDED } from '../lib/env';
 import { navigate } from '../lib/router';
 import { validateQuestion } from '../lib/questions';
 import { DIFFICULTY_LABELS, QUESTION_TYPE_LABELS, TOPIC_LABELS, type Difficulty, type Question, type QuestionType, type Topic } from '../lib/types';
@@ -96,7 +98,17 @@ function Bank() {
     [questions, topic, type, query],
   );
 
-  const exportJson = () => {
+  const exportJson = async () => {
+    if (EMBEDDED) {
+      // downloads are blocked in the embedded viewer: hand the JSON over via the clipboard instead
+      try {
+        await navigator.clipboard.writeText(JSON.stringify({ version: 1, lesson: 'من مصادر التشريع الإسلامي (1)', questions }, null, 2));
+        setNotice('نُسخ بنك الأسئلة (JSON) إلى الحافظة. الصقيه في ملف نصي واحفظيه باسم questions.json.');
+      } catch {
+        setNotice('تعذّر النسخ إلى الحافظة في هذا العارض. شغّلي الموقع من نسخته المستقلة لتنزيل الملف.');
+      }
+      return;
+    }
     const blob = new Blob([JSON.stringify({ version: 1, lesson: 'من مصادر التشريع الإسلامي (1)', questions }, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -163,7 +175,7 @@ function Bank() {
           </button>
           <button type="button" className="btn btn-ghost btn-sm" onClick={exportJson}>
             <Icon name="download" size={18} />
-            تصدير JSON
+            {EMBEDDED ? 'نسخ JSON' : 'تصدير JSON'}
           </button>
           <button type="button" className="btn btn-ghost btn-sm" onClick={() => fileRef.current?.click()}>
             <Icon name="upload" size={18} />
@@ -174,8 +186,8 @@ function Bank() {
             <button
               type="button"
               className="btn btn-ghost btn-sm"
-              onClick={() => {
-                if (window.confirm('استعادة بنك الأسئلة الأصلي؟ ستُفقد تعديلاتكِ على هذا الجهاز.')) {
+              onClick={async () => {
+                if (await confirmAsk('استعادة بنك الأسئلة الأصلي؟ ستُفقد تعديلاتكِ على هذا الجهاز.', 'استعادة الأصل')) {
                   restoreDefaultBank();
                   setNotice('تمت استعادة البنك الأصلي.');
                 }
@@ -227,8 +239,8 @@ function Bank() {
               <button
                 type="button"
                 className="btn btn-ghost-ink btn-sm"
-                onClick={() => {
-                  if (window.confirm(`حذف السؤال ${q.id}؟`)) deleteQuestion(q.id);
+                onClick={async () => {
+                  if (await confirmAsk(`حذف السؤال ${q.id}؟`, 'حذف')) deleteQuestion(q.id);
                 }}
               >
                 <Icon name="trash" size={18} />
@@ -450,8 +462,8 @@ function Settings() {
         <button
           type="button"
           className="btn btn-ghost-ink btn-sm"
-          onClick={() => {
-            if (window.confirm('مسح تقدم الطالبة على هذا الجهاز؟')) progressStore.reset();
+          onClick={async () => {
+            if (await confirmAsk('مسح تقدم الطالبة على هذا الجهاز؟', 'مسح التقدم')) progressStore.reset();
           }}
         >
           <Icon name="trash" size={18} />
@@ -502,8 +514,8 @@ function Sessions() {
               <button
                 type="button"
                 className="btn btn-ghost-ink btn-sm"
-                onClick={() => {
-                  if (window.confirm('تصفير نقاط هذه الجلسة؟')) resetSession(s.id);
+                onClick={async () => {
+                  if (await confirmAsk('تصفير نقاط هذه الجلسة؟', 'تصفير')) resetSession(s.id);
                 }}
               >
                 <Icon name="restart" size={18} />
@@ -512,8 +524,8 @@ function Sessions() {
               <button
                 type="button"
                 className="btn btn-ghost-ink btn-sm"
-                onClick={() => {
-                  if (window.confirm('حذف هذه الجلسة؟')) deleteSession(s.id);
+                onClick={async () => {
+                  if (await confirmAsk('حذف هذه الجلسة؟', 'حذف')) deleteSession(s.id);
                 }}
               >
                 <Icon name="trash" size={18} />

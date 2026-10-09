@@ -155,3 +155,15 @@
   gap: 12px;
 }
 .shell-main:focus,.shell-main:focus-visible{outline:none}
+.confirm {
+  width: min(440px, 100%);
+  padding: 26px 24px 22px;
+  display: grid;
+  gap: 18px;
+  text-align: center;
+}
+.confirm p {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 1.08rem;
+}

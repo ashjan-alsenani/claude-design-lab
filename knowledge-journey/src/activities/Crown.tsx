@@ -8,6 +8,7 @@ import { celebrate } from '../components/Confetti';
 import { Icon } from '../components/Icon';
 import { ACTIVITIES } from '../data/activities';
 import { downloadCanvas, drawCertificate } from '../lib/certificate';
+import { EMBEDDED } from '../lib/env';
 import { navigate } from '../lib/router';
 import { accuracy, ACTIVITY_ORDER, BADGES, gemCount, learningActivities, progressStore, tierFor, TIERS, totalXp, useProgress } from '../state/progress';
 import './crown.css';
@@ -194,6 +195,10 @@ export function Crown({ onFinish }: ActivityProps) {
           {certUrl ? <img src={certUrl} alt={`شهادة إنجاز باسم ${p.name} بلقب ${tier.title}`} className="cert-img print-area" /> : <div className="cert-loading">جارٍ تجهيز الشهادة…</div>}
         </div>
         <div className="row-center">
+          {EMBEDDED ? (
+            <p className="cert-save-hint">لحفظ الشهادة: اضغطي مطوّلًا على الصورة في الجوال، أو انقري عليها بالزر الأيمن في الكمبيوتر ثم «حفظ الصورة».</p>
+          ) : (
+            <>
           <button type="button" className="btn btn-gold btn-lg" disabled={!certUrl} onClick={() => canvasRef.current && downloadCanvas(canvasRef.current, 'knowledge-journey-certificate.png')}>
             <Icon name="download" />
             تنزيل الشهادة (PNG)
@@ -202,6 +207,8 @@ export function Crown({ onFinish }: ActivityProps) {
             <Icon name="print" />
             طباعة
           </button>
+            </>
+          )}
           <button type="button" className="btn btn-ghost" onClick={() => navigate({ name: 'map' })}>
             <Icon name="map" />
             العودة للخريطة

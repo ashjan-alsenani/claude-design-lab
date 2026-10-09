@@ -189,8 +189,8 @@ test('teacher edits the bank and runs a class competition', async ({ page }) => 
   await dialog.locator('textarea').nth(1).fill('السنة النبوية هي المصدر الثاني.');
   await dialog.getByRole('button', { name: 'حفظ السؤال' }).click();
   await expect(page.getByText(/61 من 61 سؤالًا/)).toBeVisible();
-  page.once('dialog', (d) => d.accept());
   await page.locator('.q-row', { hasText: 'سؤال تجريبي' }).getByRole('button', { name: 'حذف' }).click();
+  await page.getByRole('alertdialog').getByRole('button', { name: 'حذف' }).click();
   await expect(page.getByText(/60 من 60 سؤالًا/)).toBeVisible();
 
   await page.getByRole('tab', { name: 'الإعدادات' }).click();

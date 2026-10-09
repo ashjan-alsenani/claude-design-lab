@@ -236,6 +236,11 @@
   width: 100%;
   height: auto;
 }
+.cert-save-hint {
+  flex-basis: 100%;
+  text-align: center;
+  color: var(--lav-100);
+}
 .cert-loading {
   aspect-ratio: 1600 / 1131;
   display: grid;

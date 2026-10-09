@@ -4,6 +4,7 @@ import { sfx, sound } from '../audio/sound';
 import { StarSprite } from '../components/art/StarSprite';
 import { celebrate } from '../components/Confetti';
 import { SoundToggles } from '../components/Hud';
+import { confirmAsk } from '../components/Confirm';
 import { Icon } from '../components/Icon';
 import { useReducedMotion } from '../lib/motion';
 import { navigate } from '../lib/router';
@@ -154,8 +155,8 @@ export function Intro() {
                 <button
                   type="button"
                   className="btn btn-ghost-ink btn-sm"
-                  onClick={() => {
-                    if (window.confirm('هل تريدين بدء رحلة جديدة؟ سيُمسح التقدم المحفوظ على هذا الجهاز.')) {
+                  onClick={async () => {
+                    if (await confirmAsk('هل تريدين بدء رحلة جديدة؟ سيُمسح التقدم المحفوظ على هذا الجهاز.', 'رحلة جديدة')) {
                       progressStore.reset();
                       setNameInput('');
                     }
