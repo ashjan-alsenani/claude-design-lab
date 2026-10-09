@@ -50,7 +50,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
               <NewsletterForm locale={locale} d={{ newsletter: d.newsletter, form: d.form }} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 [&>*]:min-w-0">
             {cols.map((c) => (
               <div key={c.title}>
                 <h2 className="text-sm font-semibold text-ink">{c.title}</h2>
@@ -70,7 +70,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
               <ul className="mt-4 space-y-3">
                 {legalPages.map((p) => (
                   <li key={p.slug}>
-                    <Link href={L(`/legal/${p.slug}`)} className="text-sm text-muted hover:text-ink">
+                    <Link href={L(`/legal/${p.slug}`)} className="text-sm text-muted [overflow-wrap:anywhere] hover:text-ink">
                       {tr(p.title, locale)}
                     </Link>
                   </li>

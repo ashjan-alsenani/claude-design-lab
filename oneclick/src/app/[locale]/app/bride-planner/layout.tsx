@@ -14,7 +14,10 @@ import { emptyWorkspace, type Workspace } from "@/products/bridal/model/types";
  * Authorized on the server by the licensing engine before any data is loaded. The URL
  * proves nothing: a shared link shows the friendly "not in your account" page.
  */
-export const metadata: Metadata = { title: "Bride of a Lifetime", robots: { index: false, follow: false } };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return { title: locale === "ar" ? "مفكّرة عروسة العُمر" : "Bride of a Lifetime", robots: { index: false, follow: false } };
+}
 
 export default async function BridalLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;
