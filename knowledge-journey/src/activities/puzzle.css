@@ -1,0 +1,222 @@
+.puzzle {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.pz-board {
+  position: relative;
+  display: grid;
+  gap: clamp(22px, 5vw, 48px);
+  padding: clamp(16px, 3vw, 30px);
+  border-radius: var(--radius-l);
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgb(154 223 245 / 0.18), transparent 70%),
+    rgb(255 255 255 / 0.06);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.18);
+  transition: box-shadow 800ms ease;
+}
+.pz-board[data-complete='true'] {
+  box-shadow:
+    inset 0 0 0 2px var(--gold-300),
+    0 0 70px rgb(255 214 110 / 0.45);
+}
+.pz-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 40%, rgb(255 230 163 / 0.35), transparent 70%);
+  pointer-events: none;
+}
+.pz-lines {
+  position: absolute;
+  inset: clamp(16px, 3vw, 30px);
+  width: calc(100% - 2 * clamp(16px, 3vw, 30px));
+  height: calc(100% - 2 * clamp(16px, 3vw, 30px));
+  pointer-events: none;
+}
+.pz-lines path {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.3);
+  stroke-width: 3;
+  stroke-dasharray: 6 8;
+  transition: stroke 600ms ease;
+}
+.pz-lines g[data-on='true'] path {
+  stroke: var(--gold-300);
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 4px var(--gold-300));
+}
+.pz-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 2vw, 20px);
+}
+.pz-row.root {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+.pz-row.root .pz-slot {
+  width: min(320px, 70%);
+}
+.pz-slot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 72px;
+  padding: 6px;
+  border-radius: 20px;
+  background: rgb(18 11 51 / 0.35);
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.25);
+  border: 2px dashed rgb(255 255 255 / 0.3);
+  transition:
+    box-shadow 200ms ease,
+    background 200ms ease,
+    transform 160ms var(--ease-out);
+}
+.pz-row.defs .pz-slot {
+  min-height: 130px;
+}
+.pz-slot[data-filled='true'] {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.pz-slot[data-armed='true'][data-filled='false'] {
+  border-color: var(--gold-300);
+}
+.pz-slot[data-over='true'] {
+  background: rgb(255 214 110 / 0.2);
+  border-color: var(--gold-300);
+  transform: scale(1.03);
+}
+.pz-slot[data-bounce='true'] .pz-piece {
+  animation: shake 0.45s var(--ease-out);
+  box-shadow: 0 0 0 3px #f19a82;
+}
+.pz-empty {
+  font-size: 0.85rem;
+  color: rgb(255 255 255 / 0.55);
+}
+.pz-tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  min-height: 90px;
+  padding: 16px;
+  margin-top: 6px;
+  border-radius: var(--radius-l);
+  background: rgb(18 11 51 / 0.45);
+  box-shadow: inset 0 2px 10px rgb(0 0 0 / 0.3);
+}
+.pz-tray-empty {
+  align-self: center;
+  color: var(--lav-200);
+}
+.pz-piece {
+  --pc: var(--lav-400);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 60px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-weight: 600;
+  line-height: 1.55;
+  text-align: center;
+  color: var(--ink);
+  background: linear-gradient(170deg, #fff, color-mix(in srgb, var(--pc) 22%, white));
+  box-shadow:
+    0 12px 22px -14px rgb(10 6 40 / 0.9),
+    inset 0 0 0 2px color-mix(in srgb, var(--pc) 60%, white),
+    inset 0 -4px 0 color-mix(in srgb, var(--pc) 35%, white);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+/* jigsaw tab */
+.pz-piece::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 22px;
+  height: 14px;
+  margin-left: -11px;
+  border-radius: 12px 12px 0 0;
+  background: color-mix(in srgb, var(--pc) 60%, white);
+}
+.pz-piece[data-kind='root'] {
+  --pc: var(--gold-400);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+.pz-piece[data-kind='branch'] {
+  --pc: var(--teal-400);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+.pz-piece[data-kind='definition'] {
+  --pc: var(--pink-300);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+.pz-tray .pz-piece {
+  width: auto;
+  max-width: min(320px, 100%);
+}
+.pz-tray .pz-piece[data-kind='branch'],
+.pz-tray .pz-piece[data-kind='root'] {
+  min-width: 130px;
+}
+.pz-piece[data-selected='true'] {
+  box-shadow:
+    0 0 0 4px var(--gold-300),
+    0 0 26px rgb(255 214 110 / 0.7);
+}
+.pz-piece.in-slot {
+  cursor: pointer;
+  height: 100%;
+}
+.pz-slot[data-locked='true'] .pz-piece {
+  cursor: default;
+  box-shadow:
+    0 0 0 3px var(--gold-300),
+    0 0 24px rgb(255 214 110 / 0.55);
+}
+.pz-lock {
+  position: absolute;
+  top: 6px;
+  inset-inline-end: 8px;
+  color: var(--ok);
+}
+.pz-msg {
+  min-height: 2em;
+  margin: 12px auto 4px;
+  text-align: center;
+  color: var(--gold-100);
+  font-weight: 500;
+  max-width: 720px;
+}
+.pz-actions {
+  margin-top: 16px;
+}
+.pz-meta {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--lav-200);
+}
+@media (max-width: 600px) {
+  .pz-piece[data-kind='definition'] {
+    font-size: 0.78rem;
+    padding: 8px;
+  }
+  .pz-row.defs .pz-slot {
+    min-height: 150px;
+  }
+  .pz-piece[data-kind='branch'] {
+    font-size: 0.95rem;
+  }
+}

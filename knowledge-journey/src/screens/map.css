@@ -1,0 +1,218 @@
+.map-screen {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.map-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding: 4px var(--gutter) 0;
+}
+.map-head h1 {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--gold-100);
+  text-shadow: 0 4px 24px rgb(20 10 60 / 0.6);
+}
+.map-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--lav-100);
+  font-size: 0.92rem;
+}
+.map-progress-track {
+  width: clamp(120px, 22vw, 260px);
+  height: 12px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.14);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.3);
+  overflow: hidden;
+}
+.map-progress-fill {
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--teal-300), var(--gold-300));
+  box-shadow: 0 0 14px rgb(255 214 110 / 0.7);
+}
+.map-world {
+  position: relative;
+  flex: 1;
+  margin: 0 var(--gutter);
+}
+.map-world[data-layout='wide'] {
+  min-height: 560px;
+  height: calc(100dvh - var(--hud-h) - 70px);
+}
+.map-world[data-layout='tall'] {
+  flex: none;
+  height: calc(8 * min(62vw, 290px));
+  margin-top: 16px;
+  margin-bottom: 110px;
+}
+.map-route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.route-base {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.35);
+  stroke-width: 4;
+  stroke-dasharray: 2 12;
+  stroke-linecap: round;
+}
+.route-lit {
+  fill: none;
+  stroke: var(--gold-200);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 10 10;
+  animation: route-flow 1.4s linear infinite;
+}
+.route-glow {
+  fill: none;
+  stroke: var(--gold-300);
+  stroke-width: 16;
+  stroke-linecap: round;
+  opacity: 0.25;
+  filter: blur(4px);
+}
+@keyframes route-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.map-islands {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.island-slot {
+  position: absolute;
+  width: clamp(140px, 15.5vw, 240px);
+  transform: translate(-50%, -50%);
+}
+.map-world[data-layout='tall'] .island-slot {
+  width: min(48vw, 220px);
+}
+.island {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.island-art {
+  display: block;
+  aspect-ratio: 200 / 210;
+  animation: float calc(5s + var(--i) * 0.45s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.7s);
+  filter: drop-shadow(0 22px 26px rgb(20 10 60 / 0.45));
+  transition: filter 300ms ease;
+}
+@media (hover: hover) {
+  .island[data-state='open']:hover .island-art,
+  .island[data-state='done']:hover .island-art {
+    filter: drop-shadow(0 22px 26px rgb(20 10 60 / 0.45)) drop-shadow(0 0 22px rgb(255 230 163 / 0.65));
+  }
+}
+.island[data-state='locked'] {
+  cursor: not-allowed;
+}
+.island[data-state='locked'] .island-art {
+  opacity: 0.65;
+}
+.island-beacon {
+  position: absolute;
+  inset: 8% 6% 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 230 163 / 0.55), transparent 65%);
+  animation: pulse-glow 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+.island-plate {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: -18%;
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  background: rgb(253 250 255 / 0.95);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: clamp(0.82rem, 1.05vw, 1rem);
+  line-height: 1.3;
+  box-shadow: var(--shadow-soft);
+  max-width: 100%;
+}
+.island[data-state='locked'] .island-plate {
+  background: rgb(220 205 255 / 0.75);
+  color: var(--lav-800);
+}
+.island-num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--gold-800);
+  background: linear-gradient(180deg, var(--gold-200), var(--gold-400));
+}
+.island-name {
+  text-wrap: balance;
+}
+.island-done {
+  position: absolute;
+  top: 2%;
+  inset-inline-start: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.island-check {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(180deg, #4ad8a8, var(--ok));
+  box-shadow: 0 6px 14px -4px rgb(19 138 108 / 0.8), 0 0 0 3px #fff;
+}
+.island-stars {
+  display: flex;
+  color: rgb(255 255 255 / 0.4);
+}
+.island-stars span[data-on='true'] {
+  color: var(--gold-300);
+}
+.island-stars span[data-on='true'] svg {
+  fill: currentColor;
+}
+.island-cta {
+  position: absolute;
+  top: -6%;
+  left: 50%;
+  translate: -50% 0;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--gold-800);
+  background: linear-gradient(180deg, var(--gold-200), var(--gold-400));
+  box-shadow: 0 8px 20px -8px rgb(181 117 26 / 0.9);
+  animation: float 1.8s ease-in-out infinite;
+}

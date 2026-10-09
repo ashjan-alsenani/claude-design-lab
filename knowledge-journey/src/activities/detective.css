@@ -1,0 +1,183 @@
+.detective {
+  max-width: 920px;
+  margin: 0 auto;
+  perspective: 1400px;
+}
+.case-board {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 18px;
+  flex-wrap: wrap;
+}
+.case-board li {
+  display: grid;
+  justify-items: center;
+  min-width: 64px;
+  padding: 6px 10px;
+  border-radius: 14px 14px 6px 6px;
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.2);
+  color: var(--lav-200);
+  font-size: 0.78rem;
+}
+.case-tab-num {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.case-board li[data-state='active'] {
+  background: linear-gradient(180deg, var(--gold-200), var(--gold-400));
+  color: var(--gold-800);
+}
+.case-board li[data-state='solved'] {
+  background: rgb(57 196 151 / 0.35);
+  color: #d6fff0;
+}
+.case-file {
+  position: relative;
+  transform-origin: right center;
+  padding: 14px;
+  border-radius: 26px;
+  background: linear-gradient(160deg, #c99a62, #8f5f2c);
+  box-shadow: var(--shadow-lift);
+}
+.case-file::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  inset-inline-start: 40px;
+  width: 150px;
+  height: 30px;
+  border-radius: 14px 14px 0 0;
+  background: #c99a62;
+}
+.case-paper {
+  position: relative;
+  padding: clamp(18px, 3.4vw, 34px);
+  border-radius: 16px;
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(180deg, transparent 0 33px, rgb(130 96 220 / 0.08) 33px 34px),
+    linear-gradient(180deg, #fffdf6, #fbf2df);
+  box-shadow: inset 0 0 0 1px rgb(143 95 44 / 0.25);
+  display: grid;
+  gap: 18px;
+  overflow: hidden;
+}
+.case-head h3 {
+  font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+  color: var(--ink);
+}
+.case-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #8f5f2c;
+}
+.case-scenario {
+  font-size: 1.12rem;
+  line-height: 1.9;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.75);
+  box-shadow: inset 0 0 0 1.5px rgb(143 95 44 / 0.2);
+}
+.clues h4,
+.case-q h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: var(--lav-700);
+}
+.clue-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 10px;
+}
+.clue {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 4px 10px;
+  min-height: 56px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  text-align: start;
+  font-weight: 600;
+  color: var(--ink);
+  background: linear-gradient(180deg, #fff9e6, #ffeec2);
+  box-shadow:
+    0 0 0 1.5px var(--gold-300),
+    0 0 18px rgb(255 214 110 / 0.55);
+  animation: pulse-clue 2.4s ease-in-out infinite;
+  transition: transform 160ms var(--ease-out);
+}
+.clue:active {
+  transform: scale(0.98);
+}
+@keyframes pulse-clue {
+  50% {
+    box-shadow:
+      0 0 0 1.5px var(--gold-400),
+      0 0 30px rgb(255 214 110 / 0.8);
+  }
+}
+.clue[data-open='true'] {
+  animation: none;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px var(--lav-200);
+  cursor: default;
+}
+.clue-lens {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--gold-800);
+  background: var(--gold-300);
+}
+.clue[data-open='true'] .clue-lens {
+  background: var(--lav-100);
+  color: var(--lav-700);
+}
+.clue-reveal {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+.case-options {
+  display: grid;
+  gap: 10px;
+}
+@media (min-width: 700px) {
+  .case-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.case-points {
+  align-self: center;
+  font-weight: 700;
+  color: var(--ok);
+}
+.stamp {
+  position: absolute;
+  top: 18px;
+  inset-inline-end: 18px;
+  padding: 8px 18px;
+  border: 4px double #c0392b;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: #c0392b;
+  background: rgb(255 255 255 / 0.4);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}

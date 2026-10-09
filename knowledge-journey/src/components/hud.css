@@ -1,0 +1,126 @@
+.hud {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--hud-h);
+  padding: 8px var(--gutter);
+  padding-top: max(8px, env(safe-area-inset-top));
+  background: linear-gradient(180deg, rgb(28 18 72 / 0.85), rgb(28 18 72 / 0.5) 70%, rgb(28 18 72 / 0));
+}
+.hud-start {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.hud-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--gold-200);
+  white-space: nowrap;
+  min-height: 48px;
+}
+.hud-title {
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  color: var(--pearl);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hud-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hud-gems {
+  display: flex;
+  gap: 2px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.18);
+}
+.hud-gems span {
+  display: inline-flex;
+}
+.hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  background: rgb(255 255 255 / 0.12);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.2);
+  color: var(--pearl);
+}
+.hud-pill svg {
+  color: var(--gold-300);
+}
+.hud-xp {
+  color: var(--gold-100);
+  background: linear-gradient(180deg, rgb(245 192 72 / 0.35), rgb(224 158 44 / 0.25));
+}
+.hud-unit {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.hud-end {
+  display: flex;
+  gap: 8px;
+}
+.icon-btn {
+  position: relative;
+}
+.icon-slash {
+  position: absolute;
+  width: 26px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: rotate(-45deg);
+}
+@media (max-width: 900px) {
+  .hud-gems {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .hud {
+    gap: 6px;
+  }
+  .hud-brand span {
+    display: none;
+  }
+  .hud-back span {
+    display: none;
+  }
+  .hud-back {
+    padding: 0;
+    width: 48px;
+  }
+  .hud-pill:nth-of-type(2) {
+    display: none;
+  }
+  .hud-pill {
+    padding: 0 9px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+  .hud-unit {
+    display: none;
+  }
+  .hud-end .icon-btn {
+    width: 42px;
+    height: 42px;
+  }
+}

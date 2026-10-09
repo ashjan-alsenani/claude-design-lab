@@ -1,0 +1,470 @@
+@import '@fontsource/el-messiri/arabic-500.css';
+@import '@fontsource/el-messiri/arabic-700.css';
+@import '@fontsource/el-messiri/latin-700.css';
+@import '@fontsource/readex-pro/arabic-400.css';
+@import '@fontsource/readex-pro/arabic-500.css';
+@import '@fontsource/readex-pro/arabic-600.css';
+@import '@fontsource/readex-pro/latin-400.css';
+@import '@fontsource/readex-pro/latin-600.css';
+@import '@fontsource/amiri-quran/arabic-400.css';
+
+:root {
+  /* Palette — twilight lavender sky, turquoise water-light, peach horizon, warm gold. */
+  --lav-50: #f7f2ff;
+  --lav-100: #ede4ff;
+  --lav-200: #dccdff;
+  --lav-300: #c2a9fb;
+  --lav-400: #a283f1;
+  --lav-500: #8260dc;
+  --lav-600: #6745bd;
+  --lav-700: #4e3196;
+  --lav-800: #36216d;
+  --lav-900: #20144a;
+  --teal-200: #b5f3ee;
+  --teal-300: #7fe3dc;
+  --teal-400: #3fd0c9;
+  --teal-500: #19b2ae;
+  --teal-600: #0f8a8c;
+  --teal-700: #0b6a6f;
+  --sky-300: #9adff5;
+  --peach-200: #ffdccf;
+  --peach-300: #ffbfa8;
+  --peach-400: #ff9f87;
+  --pink-200: #fdd0e3;
+  --pink-300: #f8a8cb;
+  --pink-400: #ef82b2;
+  --pink-600: #b84a80;
+  --gold-100: #fff4d1;
+  --gold-200: #ffe6a3;
+  --gold-300: #ffd66e;
+  --gold-400: #f5c048;
+  --gold-500: #e09e2c;
+  --gold-600: #b5751a;
+  --gold-800: #5c3a06;
+  --pearl: #fdfaff;
+  --ink: #261750;
+  --ink-soft: #55467e;
+  --ok: #138a6c;
+  --ok-bg: #dcf7ee;
+  --warn: #b04a2f;
+  --warn-bg: #ffe7df;
+
+  --font-display: 'El Messiri', 'Readex Pro', system-ui, sans-serif;
+  --font-body: 'Readex Pro', system-ui, sans-serif;
+  --font-quran: 'Amiri Quran', 'Amiri', serif;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  --radius-s: 12px;
+  --radius-m: 20px;
+  --radius-l: 28px;
+  --shadow-soft: 0 10px 30px -12px rgb(32 20 74 / 0.45), 0 2px 6px rgb(32 20 74 / 0.12);
+  --shadow-lift: 0 22px 50px -18px rgb(32 20 74 / 0.6), 0 4px 12px rgb(32 20 74 / 0.18);
+  --hud-h: 64px;
+  --gutter: clamp(14px, 3.5vw, 32px);
+
+  color-scheme: dark;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--pearl);
+  background: var(--lav-900);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+@media (min-width: 1100px) {
+  :root {
+    font-size: 18px;
+  }
+}
+@media (min-width: 1700px) {
+  /* classroom screens & smart boards */
+  :root {
+    font-size: 21px;
+    --hud-h: 76px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--lav-900);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--gold-300);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold-300);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* themed scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--lav-400) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--lav-400);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ───────────── Buttons ───────────── */
+
+.btn {
+  --btn-bg: var(--pearl);
+  --btn-fg: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  min-height: 52px;
+  padding: 0.7em 1.45em;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  box-shadow: var(--shadow-soft), inset 0 1px 0 rgb(255 255 255 / 0.7);
+  transition:
+    transform 160ms var(--ease-out),
+    box-shadow 200ms var(--ease-out),
+    filter 200ms ease;
+  user-select: none;
+  white-space: nowrap;
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+@media (hover: hover) {
+  .btn:hover:not(:disabled) {
+    box-shadow: var(--shadow-lift), inset 0 1px 0 rgb(255 255 255 / 0.7);
+    filter: brightness(1.04);
+  }
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.btn svg {
+  flex: none;
+}
+
+.btn-gold {
+  --btn-fg: var(--gold-800);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.65), transparent 55%),
+    linear-gradient(180deg, var(--gold-200), var(--gold-400) 55%, var(--gold-500));
+  box-shadow:
+    0 14px 30px -12px rgb(181 117 26 / 0.85),
+    0 0 0 1px rgb(255 240 200 / 0.6) inset,
+    0 -3px 0 rgb(181 117 26 / 0.35) inset;
+}
+.btn-teal {
+  --btn-fg: #fff;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.35), transparent 55%),
+    linear-gradient(180deg, var(--teal-400), var(--teal-600));
+  box-shadow:
+    0 14px 30px -12px rgb(15 138 140 / 0.9),
+    0 -3px 0 rgb(11 106 111 / 0.4) inset;
+}
+.btn-lav {
+  --btn-fg: #fff;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.3), transparent 55%),
+    linear-gradient(180deg, var(--lav-400), var(--lav-600));
+  box-shadow:
+    0 14px 30px -12px rgb(78 49 150 / 0.9),
+    0 -3px 0 rgb(54 33 109 / 0.35) inset;
+}
+.btn-ghost {
+  --btn-fg: var(--pearl);
+  background: rgb(255 255 255 / 0.12);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.35);
+  backdrop-filter: blur(8px);
+}
+.btn-ghost-ink {
+  --btn-fg: var(--ink);
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgb(38 23 80 / 0.25);
+}
+.btn-sm {
+  min-height: 44px;
+  padding: 0.5em 1.05em;
+  font-size: 0.92rem;
+}
+.btn-lg {
+  min-height: 62px;
+  padding: 0.85em 2em;
+  font-size: 1.2rem;
+}
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--pearl);
+  background: rgb(255 255 255 / 0.12);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.28);
+  backdrop-filter: blur(8px);
+  transition:
+    transform 160ms var(--ease-out),
+    background 200ms ease;
+}
+.icon-btn:active {
+  transform: scale(0.94);
+}
+@media (hover: hover) {
+  .icon-btn:hover {
+    background: rgb(255 255 255 / 0.22);
+  }
+}
+.icon-btn[aria-pressed='false'] {
+  opacity: 0.7;
+}
+
+/* ───────────── Surfaces ───────────── */
+
+.panel {
+  color: var(--ink);
+  background:
+    radial-gradient(140% 80% at 100% 0%, rgb(255 255 255 / 0.9), transparent 60%),
+    linear-gradient(160deg, rgb(253 250 255 / 0.97), rgb(240 232 255 / 0.95));
+  border-radius: var(--radius-l);
+  box-shadow:
+    var(--shadow-lift),
+    inset 0 0 0 1px rgb(255 255 255 / 0.8);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.25em 0.8em;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--lav-100);
+  color: var(--lav-700);
+}
+
+/* ───────────── Quran text ───────────── */
+
+.verse {
+  font-family: var(--font-quran);
+  font-size: 1.32em;
+  line-height: 2.1;
+  color: var(--teal-700);
+  font-weight: 400;
+}
+.verse-ref {
+  font-family: var(--font-body);
+  font-size: 0.72em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.on-dark .verse {
+  color: var(--teal-200);
+}
+.on-dark .verse-ref {
+  color: var(--lav-200);
+}
+
+/* ───────────── Ambient keyframes ───────────── */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes drift {
+  from {
+    transform: translate3d(-20vw, 0, 0);
+  }
+  to {
+    transform: translate3d(120vw, 0, 0);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes gem-spin {
+  0%,
+  100% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotateY(180deg);
+  }
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  80% {
+    transform: translateX(4px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-7px);
+  }
+  40%,
+  60% {
+    transform: translateX(7px);
+  }
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible !important;
+  }
+  .print-area {
+    position: fixed !important;
+    inset: 0 !important;
+    margin: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+}
+
+@media (max-width: 420px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+  }
+}
+#root { overflow-x: clip; }
