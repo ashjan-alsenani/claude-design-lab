@@ -6,6 +6,7 @@
 import { chromium } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -14,6 +15,39 @@ const OUT = resolve(process.argv[3] ?? 'public/media/how-to-use.mp4');
 const W = 1280;
 const H = 720;
 const LOCAL = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const VOICE = process.env.TUT_VOICE ?? 'ar-OM-AyshaNeural';
+const SILENT = process.env.TUT_SILENT === '1';
+
+/**
+ * Spoken narration for every caption (diacritics where a voice could misread:
+ * «الفِرَق» = teams, not «الفَرْق» = difference).
+ */
+const SPEECH = {
+  intro: 'مرحبًا بِكُنّ في دليل استخدام «رحلة إلى كنوز المعرفة». إعداد الطالبة: جنى الخاطري.',
+  1: 'افتحي الموقع على السَّبّورة، ثم اضغطي مفتاح F11 لملء الشاشة.',
+  2: 'من هذين الزرّين تُشغِّلين الموسيقى الهادئة والمؤثرات الصوتية، أو تكتمينها.',
+  3: 'اضغطي «لنبدأ المغامرة» لتنفتح البوابة.',
+  4: 'اختاري «جماعي»، لتصبح الرحلة فعاليةً للصفّ كلِّه على السَّبّورة.',
+  5: 'حدّدي الفِرَق المشاركة، واكتبي اسم الصفّ، ثم اضغطي «ابدئي الفعالية».',
+  6: 'هذه خريطة الجُزُر الثماني. في الأعلى لوحةُ نقاط الفِرَق، والفريقُ صاحبُ الدَّور يظهر مُضيئًا.',
+  7: 'تُفتح الجُزُر بالتسلسل. اضغطي «بوابة المعرفة» لنبدأ.',
+  8: 'الفريق صاحب الدَّور يفتح البوابة، ويكشف بطاقات المعلومات بالضغط عليها.',
+  9: 'بعد الشرح سؤالٌ قصير. إذا أجاب الفريق إجابةً صحيحة أخذ النقاط، ثم ينتقل الدَّور إلى الفريق التالي.',
+  10: 'الإجابة الخاطئة تُظهر شرحًا يوضّح السبب، ويمكن المحاولة مرة أخرى.',
+  11: 'في التحدي الأخير تُحدِّد الفِرَق مصدرَ كلِّ عبارة: القرآنَ الكريم، أم السُّنَّةَ النبوية.',
+  12: 'عند إكمال الجزيرة يحصل الصفّ على جوهرة، وتُفتح الجزيرة التالية على الخريطة.',
+  13: 'لوحة المعلّمة تجدينها في الصفحة الأولى، ومنها تُديرين بنك الأسئلة.',
+  14: 'يمكنكِ إضافة الأسئلة وتعديلها وحذفها، وتحديد الإجابة الصحيحة، وكتابة تفسيرها.',
+  15: 'ومن الإعدادات تضبطين المؤقّتات، ويمكنكِ فتح جميع الجُزُر لتشغيل أيّ نشاط مباشرة.',
+  16: 'صندوق الكنوز: اسحبي البطاقة إلى صندوق قسمها، أو اضغطي البطاقة ثم الصندوق.',
+  17: 'عجلة التحديات: اضغطي «أديري العجلة»، ونوعُ التحدي يحدّده مكانُ توقّفها.',
+  18: 'المحقِّقة الذكية: تفحص الفِرَق الأدلّة المضيئة، ثم تحُلّ القضية.',
+  19: 'السينما التفاعلية: فيلمٌ قصير يتوقّف عند أسئلة يُجيب عنها الفريق صاحب الدَّور.',
+  20: 'تحدّي البرق: أسئلةٌ سريعة بمؤقّت، والنقاط بحسب الصواب والسرعة.',
+  21: 'قصر التتويج: ترتيب الفِرَق على المِنَصّة، واللقب، وشهادة الفريق المتصدِّر.',
+  22: 'يمكن تنزيل الشهادة صورةً أو طباعتها. ولبدء صفٍّ جديد، اضغطي «رحلة جديدة» في الصفحة الأولى.',
+  outro: 'استمتِعْنَ بالرحلة!',
+};
 
 const STATEMENT_SOURCE = {
   'كلام الله تعالى المتعبَّد بتلاوته': 'القرآن الكريم',
@@ -93,6 +127,31 @@ const overlay = () => {
   else boot();
 };
 
+/* ───────── narration clips (generated once, cached by text) ───────── */
+const clipDir = resolve('scripts/.tts-cache');
+mkdirSync(clipDir, { recursive: true });
+const clips = {};
+if (!SILENT) {
+  for (const [key, text] of Object.entries(SPEECH)) {
+    const file = join(clipDir, createHash('sha1').update(VOICE + text).digest('hex').slice(0, 16) + '.mp3');
+    if (!existsSync(file)) execFileSync('python3', [resolve('scripts/tts.py'), text, file, VOICE], { stdio: 'inherit' });
+    const dur = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', file]).toString());
+    clips[key] = { file, dur };
+  }
+  console.log(`narration: ${Object.keys(clips).length} clips`);
+}
+const placed = []; // { file, at } — wall-clock seconds, same clock as screencast frames
+let speechEndsAt = 0;
+async function speak(key) {
+  const c = clips[key];
+  if (!c) return;
+  const now = Date.now() / 1000;
+  if (now < speechEndsAt) await new Promise((r) => setTimeout(r, (speechEndsAt - now) * 1000));
+  const at = Date.now() / 1000;
+  placed.push({ file: c.file, at });
+  speechEndsAt = at + c.dur + 0.35;
+}
+
 const browser = await chromium.launch(existsSync(LOCAL) ? { executablePath: LOCAL } : {});
 const context = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 await context.addInitScript(overlay);
@@ -119,13 +178,22 @@ cdp.on('Page.screencastFrame', async ({ data, metadata, sessionId }) => {
 
 const wait = (ms) => page.waitForTimeout(ms);
 const cap = async (n, text, hold = 2600) => {
+  // never cut a sentence off: wait for the previous one before showing the next caption
+  if (clips[n]) {
+    const left = speechEndsAt - Date.now() / 1000;
+    if (left > 0) await wait(left * 1000);
+  }
   await page.evaluate(([a, b]) => window.__cap(a, b), [String(n), text]);
+  await speak(n);
   await wait(hold);
 };
 const hideCap = () => page.evaluate(() => window.__cap());
-const title = async (h, p, hold = 3200) => {
+const title = async (h, p, hold = 3200, key) => {
+  const left = speechEndsAt - Date.now() / 1000;
+  if (left > 0) await wait(left * 1000);
   await page.evaluate(([a, b]) => window.__title(a, b), [h, p]);
-  await wait(hold);
+  if (key) await speak(key);
+  await wait(Math.max(hold, key && clips[key] ? (speechEndsAt - Date.now() / 1000) * 1000 : 0));
   await page.evaluate(() => window.__title());
   await wait(700);
 };
@@ -171,7 +239,7 @@ await page.evaluate(() => document.fonts.ready);
 await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 82, maxWidth: W, maxHeight: H, everyNthFrame: 1 });
 await moveTo(W * 0.7, H * 0.6, 1);
 
-await title('دليل استخدام «رحلة إلى كنوز المعرفة»', 'إعداد الطالبة: جنى الخاطري', 3800);
+await title('دليل استخدام «رحلة إلى كنوز المعرفة»', 'إعداد الطالبة: جنى الخاطري', 3800, 'intro');
 await wait(1800);
 await cap(1, 'افتحي الموقع على السبورة، واضغطي F11 لملء الشاشة.', 3400);
 await point(page.getByRole('button', { name: /تشغيل الموسيقى/ }));
@@ -288,8 +356,12 @@ await wait(3600);
 const cert = await page.locator('.cert-section').boundingBox();
 if (cert) await smoothScroll(cert.y + (await page.evaluate(() => scrollY)) - 40);
 await cap(22, 'يمكن تنزيل الشهادة صورة أو طباعتها. ولبدء صف جديد: «رحلة جديدة» في الصفحة الأولى.', 4800);
+{
+  const left = speechEndsAt - Date.now() / 1000;
+  if (left > 0) await wait(left * 1000);
+}
 await hideCap();
-await title('استمتعن بالرحلة!', 'رحلة إلى كنوز المعرفة · إعداد الطالبة: جنى الخاطري', 3800);
+await title('استمتعن بالرحلة!', 'رحلة إلى كنوز المعرفة · إعداد الطالبة: جنى الخاطري', 3800, 'outro');
 
 await cdp.send('Page.stopScreencast');
 await wait(300);
@@ -306,12 +378,29 @@ const list = frames
 const listFile = join(frameDir, 'list.txt');
 writeFileSync(listFile, `${list}\nfile '${frames[frames.length - 1].file}'\n`);
 mkdirSync(resolve(OUT, '..'), { recursive: true });
+const t0 = frames[0].t;
+const silentMp4 = join(frameDir, 'video.mp4');
 execFileSync(
   'ffmpeg',
-  ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-vf', 'fps=30,format=yuv420p', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-tune', 'animation', '-r', '24', '-movflags', '+faststart', OUT],
+  ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-vf', 'fps=30,format=yuv420p', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-tune', 'animation', '-r', '24', '-movflags', '+faststart', silentMp4],
   { stdio: 'inherit' },
 );
-// WebM/VP9 twin for browsers without H.264 (e.g. open-source Chromium builds)
-execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', OUT, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '42', '-row-mt', '1', '-an', OUT.replace(/\.mp4$/, '.webm')], { stdio: 'inherit' });
+if (placed.length) {
+  // lay every clip at the moment its caption appeared, over a silent bed as long as the video
+  const inputs = placed.flatMap((p) => ['-i', p.file]);
+  const total = frames[frames.length - 1].t - t0 + 1.5;
+  const chains = placed.map((p, i) => `[${i + 1}:a]adelay=${Math.max(0, Math.round((p.at - t0) * 1000))}:all=1[a${i}]`).join(';');
+  const mix = `[0:a]${placed.map((_, i) => `[a${i}]`).join('')}amix=inputs=${placed.length + 1}:normalize=0:dropout_transition=0,loudnorm=I=-16:TP=-1.5:LRA=11[aout]`;
+  execFileSync(
+    'ffmpeg',
+    ['-y', '-loglevel', 'error', '-f', 'lavfi', '-t', total.toFixed(2), '-i', 'anullsrc=r=48000:cl=mono', ...inputs, '-i', silentMp4,
+      '-filter_complex', `${chains};${mix}`, '-map', `${placed.length + 1}:v`, '-map', '[aout]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '96k', '-shortest', '-movflags', '+faststart', OUT],
+    { stdio: 'inherit' },
+  );
+} else {
+  execFileSync('cp', [silentMp4, OUT]);
+}
+// WebM/VP9 + Opus twin for browsers without H.264 (e.g. open-source Chromium builds)
+execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', OUT, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '42', '-row-mt', '1', '-c:a', 'libopus', '-b:a', '64k', OUT.replace(/\.mp4$/, '.webm')], { stdio: 'inherit' });
 rmSync(frameDir, { recursive: true, force: true });
 console.log(`frames: ${frames.length} → ${OUT}`);
