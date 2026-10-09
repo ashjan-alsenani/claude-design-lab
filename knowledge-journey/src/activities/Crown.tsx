@@ -10,12 +10,20 @@ import { ACTIVITIES } from '../data/activities';
 import { downloadCanvas, drawCertificate } from '../lib/certificate';
 import { EMBEDDED } from '../lib/env';
 import { navigate } from '../lib/router';
+import { TeamEmblem } from '../components/TeamEmblem';
+import { rankedTeams, usePlay } from '../state/play';
+import { TEAMS } from '../state/teacher';
 import { accuracy, ACTIVITY_ORDER, BADGES, gemCount, learningActivities, progressStore, tierFor, TIERS, totalXp, useProgress } from '../state/progress';
 import './crown.css';
 
 export function Crown({ onFinish }: ActivityProps) {
   const [phase, setPhase] = useState<'gate' | 'open' | 'results'>('gate');
   const p = useProgress((x) => x);
+  const play = usePlay((x) => x);
+  const group = play.mode === 'group';
+  const ranked = group ? rankedTeams(play) : [];
+  const top = ranked.length ? play.scores[ranked[0]] ?? 0 : 0;
+  const winners = ranked.filter((t) => (play.scores[t] ?? 0) === top).map((t) => TEAMS.find((x) => x.id === t)!.name);
   const recorded = useRef(false);
   const [certUrl, setCertUrl] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -46,7 +54,8 @@ export function Crown({ onFinish }: ActivityProps) {
     let alive = true;
     const s = progressStore.get();
     void drawCertificate({
-      name: s.name,
+      name: group && winners.length ? winners.join(' و') : s.name,
+      recipient: group ? (winners.length > 1 ? 'الفرق المتصدّرة' : 'الفريق المتصدّر') : 'الطالبة',
       title: tierFor(s).title,
       xp: totalXp(s),
       gems: gemCount(s),
@@ -61,7 +70,8 @@ export function Crown({ onFinish }: ActivityProps) {
     return () => {
       alive = false;
     };
-  }, [phase, xp, gems, acc]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, xp, gems, acc, group, winners.join()]);
 
   if (phase !== 'results') {
     return (
@@ -105,10 +115,44 @@ export function Crown({ onFinish }: ActivityProps) {
         </div>
       </motion.section>
 
+      {group && (
+        <section className="crown-podium" aria-label="ترتيب الفرق">
+          <h3>ترتيب الفرق</h3>
+          <div className="podium">
+            {[ranked[1], ranked[0], ranked[2]].filter(Boolean).map((t) => {
+              const info = TEAMS.find((x) => x.id === t)!;
+              const place = ranked.indexOf(t) + 1;
+              return (
+                <motion.div
+                  key={t}
+                  className="podium-col"
+                  data-place={place}
+                  style={{ ['--team' as string]: info.color }}
+                  initial={{ opacity: 0, y: 60 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + (3 - place) * 0.3, type: 'spring', bounce: 0.35 }}
+                >
+                  {place === 1 && <Icon name="crown" size={48} className="podium-crown" />}
+                  <TeamEmblem id={t} size={56} />
+                  <strong>{info.name}</strong>
+                  <span className="num podium-score">{play.scores[t] ?? 0}</span>
+                  <div className="podium-block">{place}</div>
+                </motion.div>
+              );
+            })}
+          </div>
+          {ranked.length > 3 && (
+            <p className="crown-rest num">
+              {TEAMS.find((x) => x.id === ranked[3])!.name}: {play.scores[ranked[3]] ?? 0}
+            </p>
+          )}
+        </section>
+      )}
+
       <section className="crown-board panel" aria-label="لوحة النتائج النهائية">
         <dl className="crown-stats">
           <div>
-            <dt>اسم الطالبة</dt>
+            <dt>{group ? 'الصف' : 'اسم الطالبة'}</dt>
             <dd>{p.name}</dd>
           </div>
           <div>
@@ -190,9 +234,9 @@ export function Crown({ onFinish }: ActivityProps) {
       </section>
 
       <section className="cert-section">
-        <h3>شهادتكِ</h3>
+        <h3>{group ? 'شهادة الفريق المتصدّر' : 'شهادتكِ'}</h3>
         <div className="cert-frame">
-          {certUrl ? <img src={certUrl} alt={`شهادة إنجاز باسم ${p.name} بلقب ${tier.title}`} className="cert-img print-area" /> : <div className="cert-loading">جارٍ تجهيز الشهادة…</div>}
+          {certUrl ? <img src={certUrl} alt={`شهادة إنجاز باسم ${group && winners.length ? winners.join(' و') : p.name} بلقب ${tier.title}`} className="cert-img print-area" /> : <div className="cert-loading">جارٍ تجهيز الشهادة…</div>}
         </div>
         <div className="row-center">
           {EMBEDDED ? (

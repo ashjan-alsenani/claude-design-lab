@@ -5,6 +5,7 @@ import { IslandArt } from '../components/art/Island';
 import { celebrate } from '../components/Confetti';
 import { Hud } from '../components/Hud';
 import { Icon } from '../components/Icon';
+import { TeamBar } from '../components/TeamBar';
 import { ACTIVITIES } from '../data/activities';
 import { navigate } from '../lib/router';
 import type { ActivityId } from '../lib/types';
@@ -99,6 +100,7 @@ export function MapScreen() {
   return (
     <div className="map-screen">
       <Hud />
+      <TeamBar />
       <section className="map-head">
         <h1>خريطة الجزر{progress.name ? ` — رحلة ${progress.name}` : ''}</h1>
         <div className="map-progress" role="progressbar" aria-valuemin={0} aria-valuemax={8} aria-valuenow={gems} aria-label="الجزر المكتملة">

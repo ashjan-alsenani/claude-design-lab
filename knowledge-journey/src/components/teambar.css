@@ -1,0 +1,80 @@
+.teambar {
+  position: sticky;
+  top: calc(var(--hud-h) + env(safe-area-inset-top, 0px));
+  z-index: 29;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px var(--gutter) 10px;
+}
+.tb-team {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 6px 16px 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--pearl);
+  background: rgb(18 11 51 / 0.72);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--team) 45%, transparent);
+  transition:
+    background 300ms ease,
+    box-shadow 300ms ease,
+    transform 300ms var(--ease-out);
+}
+.tb-team[data-active='true'] {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--team) 70%, white);
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 36px color-mix(in srgb, var(--team) 80%, transparent);
+  transform: scale(1.06);
+}
+.tb-score {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.tb-turn {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: #fff;
+  background: var(--ink);
+}
+.tb-gain {
+  position: absolute;
+  inset-inline-end: 10px;
+  top: -6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--gold-300);
+  text-shadow: 0 2px 8px rgb(0 0 0 / 0.5);
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .tb-name {
+    display: none;
+  }
+  .tb-team {
+    padding: 4px 12px 4px 8px;
+  }
+}
+/* the class board: everything a little larger so it reads from the back of the room */
+html.board-mode {
+  font-size: 19px;
+}
+@media (min-width: 1100px) {
+  html.board-mode {
+    font-size: 21px;
+  }
+}
+@media (min-width: 1700px) {
+  html.board-mode {
+    font-size: 24px;
+  }
+}

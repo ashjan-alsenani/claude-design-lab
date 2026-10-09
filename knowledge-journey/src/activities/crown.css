@@ -107,6 +107,18 @@
   gap: 8px;
   margin-top: 8px;
 }
+.crown-podium {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+.crown-podium h3 {
+  font-size: 1.8rem;
+  color: var(--gold-100);
+}
+.crown-rest {
+  color: var(--lav-100);
+}
 .crown-board {
   padding: clamp(18px, 3.4vw, 34px);
   display: grid;

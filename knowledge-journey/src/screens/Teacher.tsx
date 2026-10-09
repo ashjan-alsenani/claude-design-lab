@@ -23,6 +23,7 @@ import {
   useTeacher,
 } from '../state/teacher';
 import { TeamEmblem } from './Arena';
+import { playStore, rankedTeams, usePlay } from '../state/play';
 import './teacher.css';
 
 type Tab = 'bank' | 'settings' | 'competition' | 'results';
@@ -463,7 +464,10 @@ function Settings() {
           type="button"
           className="btn btn-ghost-ink btn-sm"
           onClick={async () => {
-            if (await confirmAsk('مسح تقدم الطالبة على هذا الجهاز؟', 'مسح التقدم')) progressStore.reset();
+            if (await confirmAsk('مسح تقدم الرحلة على هذا الجهاز؟ (الفردية أو الجماعية)', 'مسح التقدم')) {
+              progressStore.reset();
+              playStore.reset();
+            }
           }}
         >
           <Icon name="trash" size={18} />
@@ -543,8 +547,23 @@ function Sessions() {
 
 function Results() {
   const p = useProgress((x) => x);
+  const play = usePlay((x) => x);
   return (
     <section className="t-section panel t-results">
+      {play.mode === 'group' && (
+        <div className="t-group">
+          <h3>الرحلة الجماعية الحالية — نقاط الفرق</h3>
+          <ol className="session-scores">
+            {rankedTeams(play).map((t) => (
+              <li key={t}>
+                <TeamEmblem id={t} size={22} />
+                <span>{TEAMS.find((x) => x.id === t)!.name}</span>
+                <strong className="num">{play.scores[t] ?? 0}</strong>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
       <h3>{p.name ? `رحلة ${p.name}` : 'لم تبدأ أي طالبة رحلة على هذا الجهاز بعد'}</h3>
       <p className="muted num">
         النقاط: {totalXp(p)} · الجواهر: {gemCount(p)} / 8 · نسبة الإجابات الصحيحة: {accuracy(p)}%

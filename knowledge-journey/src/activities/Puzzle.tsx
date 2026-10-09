@@ -9,6 +9,7 @@ import { useDragDrop } from '../lib/drag';
 import { checkBoard, puzzleScore, type Board } from '../lib/puzzle';
 import { shuffle } from '../lib/random';
 import { encourage, praise, say } from '../state/guide';
+import { reportAnswer } from '../state/play';
 import './puzzle.css';
 
 const piece = (id: string) => PUZZLE_PIECES.find((p) => p.id === id)!;
@@ -50,6 +51,8 @@ export function Puzzle({ onFinish }: ActivityProps) {
   const check = () => {
     const { right, wrong } = checkBoard(board, PUZZLE_SLOTS);
     const nowLocked = Array.from(new Set([...locked, ...right]));
+    const fresh = right.filter((s) => !locked.includes(s)).length;
+    if (fresh || wrong.length) reportAnswer(fresh > 0 && wrong.length === 0, fresh * 10);
     setLocked(nowLocked);
     if (wrong.length) {
       sfx('wrong');

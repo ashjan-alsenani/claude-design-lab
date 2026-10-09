@@ -10,6 +10,7 @@ import { ACTIVITY_GEM, Gem } from './art/Gem';
 import { celebrate } from './Confetti';
 import { Hud } from './Hud';
 import { Icon } from './Icon';
+import { TeamBar } from './TeamBar';
 import './shell.css';
 
 export interface ActivityProps {
@@ -46,6 +47,7 @@ export function ActivityShell({ id, Activity }: { id: ActivityId; Activity: Comp
   return (
     <div className="shell" data-activity={id}>
       <Hud title={meta.title} onBack={() => navigate({ name: 'map' })} />
+      <TeamBar />
       <main ref={mainRef} tabIndex={-1} className="shell-main" aria-label={meta.title}>
         <Activity key={runKey} onFinish={finish} />
       </main>

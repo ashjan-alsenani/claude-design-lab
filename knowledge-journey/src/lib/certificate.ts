@@ -1,5 +1,7 @@
 export interface CertificateData {
   name: string;
+  /** «الطالبة» for a solo journey, «فريق الصف الفائز» for group play */
+  recipient?: string;
   title: string;
   xp: number;
   gems: number;
@@ -141,7 +143,7 @@ export async function drawCertificate(d: CertificateData, canvas = document.crea
 
   ctx.fillStyle = '#55467e';
   ctx.font = '400 32px "Readex Pro", sans-serif';
-  ctx.fillText('تشهد «رحلة إلى كنوز المعرفة» بأنّ الطالبة', W / 2, 410);
+  ctx.fillText(`تشهد «رحلة إلى كنوز المعرفة» بأنّ ${d.recipient ?? 'الطالبة'}`, W / 2, 410);
 
   // name
   const name = d.name || 'المستكشفة';
@@ -165,7 +167,7 @@ export async function drawCertificate(d: CertificateData, canvas = document.crea
 
   ctx.fillStyle = '#55467e';
   ctx.font = '400 32px "Readex Pro", sans-serif';
-  ctx.fillText('أتمّت رحلة درس «من مصادر التشريع الإسلامي (1)»، ونالت لقب', W / 2, 625);
+  ctx.fillText(d.recipient && d.recipient !== 'الطالبة' ? 'تصدّر رحلة درس «من مصادر التشريع الإسلامي (1)»، ونال لقب' : 'أتمّت رحلة درس «من مصادر التشريع الإسلامي (1)»، ونالت لقب', W / 2, 625);
 
   // title ribbon
   ctx.font = '700 60px "El Messiri", "Readex Pro", sans-serif';
@@ -214,7 +216,7 @@ export async function drawCertificate(d: CertificateData, canvas = document.crea
   ctx.textAlign = 'center';
   ctx.font = '500 24px "El Messiri", "Readex Pro", sans-serif';
   ctx.fillStyle = '#8260dc';
-  ctx.fillText('مع تحيات «سَنا» نجمة المعرفة', W / 2, 1040);
+  ctx.fillText('إعداد الطالبة: جنى الخاطري', W / 2, 1040);
   return canvas;
 }
 

@@ -11,7 +11,9 @@ import { isFourOption, prepare } from '../lib/questions';
 import { sample } from '../lib/random';
 import { speedScore, useCountdown } from '../lib/useCountdown';
 import { encourage, praise, say } from '../state/guide';
+import { reportAnswer } from '../state/play';
 import { teacherStore } from '../state/teacher';
+import { isGroup } from '../state/play';
 import './lightning.css';
 
 export function Lightning({ onFinish }: ActivityProps) {
@@ -38,8 +40,8 @@ function Lobby({ onSolo }: { onSolo: () => void }) {
       <div className="lobby-modes">
         <button type="button" className="mode-card" onClick={() => { sfx('whoosh'); onSolo(); }}>
           <Icon name="sparkle" size={30} />
-          <strong>تحدٍّ فردي</strong>
-          <span>العبي وحدكِ واجمعي الجوهرة.</span>
+          <strong>{isGroup() ? 'تحدي الفرق' : 'تحدٍّ فردي'}</strong>
+          <span>{isGroup() ? 'الفرق تتناوب على الأسئلة العشرة، ونقاط السرعة تُضاف للفريق.' : 'العبي وحدكِ واجمعي الجوهرة.'}</span>
         </button>
         <button type="button" className="mode-card" onClick={() => navigate({ name: 'arena' })}>
           <Icon name="users" size={30} />
@@ -70,6 +72,7 @@ function Solo({ onFinish }: ActivityProps) {
 
   const remaining = useCountdown(seconds, !answered, i, () => {
     setTimedOut(true);
+    reportAnswer(false);
     setStreak(0);
     sfx('timeout');
     say('انتهت المهلة! انظري إلى الإجابة الصحيحة وتوضيحها.', 'think');
@@ -82,6 +85,7 @@ function Solo({ onFinish }: ActivityProps) {
     const pts = speedScore(ok, remaining, seconds);
     setScore((s) => s + pts);
     setGain(pts);
+    reportAnswer(ok, Math.round(pts / 5));
     if (ok) {
       setCorrect((c) => c + 1);
       setStreak((s) => s + 1);

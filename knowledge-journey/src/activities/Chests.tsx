@@ -9,6 +9,7 @@ import { SUNNAH_KINDS, TREASURE_CARDS, type SunnahKind, type TreasureCard } from
 import { useDragDrop } from '../lib/drag';
 import { shuffle } from '../lib/random';
 import { encourage, praise, say } from '../state/guide';
+import { reportAnswer } from '../state/play';
 import './chests.css';
 
 const KINDS: SunnahKind[] = ['qawliyya', 'filiyya', 'taqririyya'];
@@ -32,6 +33,7 @@ export function Chests({ onFinish }: ActivityProps) {
       if (!kind) return;
       const card = TREASURE_CARDS.find((c) => c.id === cardId)!;
       setSelected(null);
+      reportAnswer(card.kind === kind, 15);
       if (card.kind === kind) {
         sfx('open');
         window.setTimeout(() => sfx('gem'), 250);

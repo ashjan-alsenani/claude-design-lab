@@ -29,7 +29,9 @@ test('a student completes the whole journey from the intro to the coronation', a
   const errors = watchErrors(page);
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'رحلة إلى كنوز المعرفة' })).toBeVisible();
+  await expect(page.getByText('جنى الخاطري')).toBeVisible();
   await page.getByRole('button', { name: 'ابدئي المغامرة' }).click({ force: true });
+  await page.getByRole('button', { name: /^فردي/ }).click();
   await page.getByPlaceholder('اكتبي اسمكِ هنا').fill('نورة');
   await page.getByRole('button', { name: 'انطلقي إلى الخريطة' }).click();
   await expect(page).toHaveURL(/#\/map$/);
@@ -253,4 +255,32 @@ test('drag & drop works with a real touch gesture', async ({ page, context, brow
   await touch('touchEnd', x1, y1);
   await expect(cards).toHaveCount(7);
   await expect(page.locator('.chest-msg[data-ok="true"]')).toBeVisible();
+});
+
+test('group mode: teams take turns and score on the class board', async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto('/');
+  await page.getByRole('button', { name: 'ابدئي المغامرة' }).click({ force: true });
+  await page.getByRole('button', { name: /^جماعي/ }).click();
+  await page.locator('label.team-toggle', { hasText: 'فريق الجواهر' }).click();
+  await page.locator('label.team-toggle', { hasText: 'فريق القمر' }).click();
+  await page.getByPlaceholder(/اسم الصف/).fill('الصف السابع');
+  await page.getByRole('button', { name: 'ابدئي الفعالية' }).click();
+  await expect(page).toHaveURL(/#\/map$/);
+  await expect(page.locator('html')).toHaveClass(/board-mode/);
+  const bar = page.getByRole('region', { name: 'نقاط الفرق' });
+  await expect(bar.locator('.tb-team')).toHaveCount(2);
+  await expect(bar.locator('.tb-team[data-active="true"]')).toContainText('فريق النجوم');
+
+  await page.getByRole('button', { name: /1\. بوابة المعرفة/ }).click();
+  await page.getByRole('button', { name: 'بوابة القرآن الكريم' }).click();
+  const facts = page.locator('.fact');
+  await expect(facts).toHaveCount(5);
+  for (let i = 0; i < 5; i++) await facts.nth(i).click();
+  await page.getByRole('button', { name: 'إلى سؤال البوابة' }).click();
+  // the correct answer for the Quran gate quiz is «سورة الناس»
+  await page.locator('.gate-quiz .qopt', { hasText: 'سورة الناس' }).click();
+  await expect(bar.locator('.tb-team', { hasText: 'فريق النجوم' }).locator('.tb-score')).toHaveText('20');
+  await expect(bar.locator('.tb-team[data-active="true"]')).toContainText('فريق اللؤلؤ');
+  expect(errors).toEqual([]);
 });

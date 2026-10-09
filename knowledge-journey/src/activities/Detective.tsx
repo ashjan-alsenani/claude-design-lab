@@ -8,6 +8,7 @@ import { Feedback } from '../components/QuestionCard';
 import { RichText } from '../components/RichText';
 import { CASES } from '../data/lesson';
 import { encourage, say } from '../state/guide';
+import { reportAnswer } from '../state/play';
 import './detective.css';
 
 interface CaseResult {
@@ -32,6 +33,7 @@ export function Detective({ onFinish }: ActivityProps) {
 
   const choose = (i: number) => {
     if (solved || wrong.includes(i)) return;
+    reportAnswer(i === c.answer, i === c.answer ? casePoints(clues.length, wrong.length) : 0);
     if (i === c.answer) {
       setSolved(true);
       sfx('stamp');

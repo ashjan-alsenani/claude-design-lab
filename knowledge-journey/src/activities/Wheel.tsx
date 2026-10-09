@@ -12,6 +12,7 @@ import { shuffle } from '../lib/random';
 import type { Question, QuestionType } from '../lib/types';
 import { easeOutQuart, segmentAt, spinTarget } from '../lib/wheel';
 import { encourage, praise, say } from '../state/guide';
+import { reportAnswer } from '../state/play';
 import { teacherStore } from '../state/teacher';
 import './wheel.css';
 
@@ -120,6 +121,7 @@ export function Wheel({ onFinish }: ActivityProps) {
       if (left <= 0) {
         window.clearInterval(id);
         setTimedOut(true);
+        reportAnswer(false);
         sfx('timeout');
         setTally((t) => ({ ...t, total: t.total + 1 }));
         setRound((r) => r + 1);
@@ -137,6 +139,7 @@ export function Wheel({ onFinish }: ActivityProps) {
     const bonus = isQuick ? Math.round((remaining / quickSeconds) * 10) : 0;
     setTally((t) => ({ score: t.score + (ok ? 20 + bonus : 0), correct: t.correct + (ok ? 1 : 0), total: t.total + 1 }));
     setRound((r) => r + 1);
+    reportAnswer(ok, 20 + bonus);
     if (ok) {
       sfx('correct');
       celebrate('sparkles', 0.5, 0.55);

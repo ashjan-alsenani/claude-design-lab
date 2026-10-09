@@ -6,13 +6,16 @@ import { celebrate } from '../components/Confetti';
 import { SoundToggles } from '../components/Hud';
 import { confirmAsk } from '../components/Confirm';
 import { Icon } from '../components/Icon';
+import { TeamEmblem } from '../components/TeamEmblem';
 import { useReducedMotion } from '../lib/motion';
 import { navigate } from '../lib/router';
 import { say } from '../state/guide';
+import { startGroup, startSolo } from '../state/play';
 import { progressStore, setName, useProgress } from '../state/progress';
+import { TEAMS, type TeamId } from '../state/teacher';
 import './intro.css';
 
-type Phase = 'idle' | 'opening' | 'zoom' | 'name';
+type Phase = 'idle' | 'opening' | 'zoom' | 'mode' | 'name' | 'teams';
 
 const TITLE = ['رحلة', 'إلى', 'كنوز', 'المعرفة'];
 
@@ -20,14 +23,16 @@ export function Intro() {
   const savedName = useProgress((p) => p.name);
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState<Phase>('idle');
-  const [name, setNameInput] = useState(savedName);
+  const [name, setNameInput] = useState('');
+  const [teams, setTeams] = useState<TeamId[]>(['stars', 'pearls', 'gems', 'moon']);
+  const [className, setClassName] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (phase === 'name') window.setTimeout(() => inputRef.current?.focus(), 350);
   }, [phase]);
 
-  const start = () => {
+  const start = (resume: boolean) => {
     sound.unlock();
     sfx('open');
     setPhase('opening');
@@ -37,7 +42,30 @@ export function Intro() {
       setPhase('zoom');
       celebrate('sparkles', 0.5, 0.5, 1.4);
     }, t1);
-    window.setTimeout(() => setPhase('name'), t1 + (reduced ? 50 : 900));
+    window.setTimeout(() => {
+      if (resume) {
+        say(`أهلًا بعودتكِ يا ${progressStore.get().name}! نكمل الرحلة من حيث توقفنا.`, 'cheer');
+        navigate({ name: 'map' });
+      } else setPhase('mode');
+    }, t1 + (reduced ? 50 : 900));
+  };
+
+  const startFresh = async () => {
+    if (savedName && !(await confirmAsk('بدء رحلة جديدة؟ سيُمسح التقدم المحفوظ على هذا الجهاز.', 'رحلة جديدة'))) return;
+    progressStore.reset();
+    start(false);
+  };
+
+  const submitTeams = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (teams.length < 2) return;
+    const label = className.trim() || 'فرق الصف';
+    startGroup(teams);
+    setName(label);
+    sfx('unlock');
+    const first = TEAMS.find((t) => t.id === TEAMS.map((x) => x.id).find((id) => teams.includes(id)))!;
+    say(`انطلقت الفعالية! يبدأ ${first.name}، ثم تتناوب الفرق على كل سؤال.`, 'cheer');
+    navigate({ name: 'map' });
   };
 
   const submit = (e: React.FormEvent) => {
@@ -47,6 +75,7 @@ export function Intro() {
       inputRef.current?.focus();
       return;
     }
+    startSolo();
     setName(n);
     sfx('unlock');
     say(`أهلًا بكِ يا ${n}! الجزيرة الأولى تنتظركِ، اضغطي عليها لنبدأ.`, 'cheer');
@@ -69,7 +98,7 @@ export function Intro() {
 
       <motion.div
         className="intro-world"
-        animate={phase === 'zoom' || phase === 'name' ? { scale: reduced ? 1 : 3.2, opacity: 0, filter: 'blur(6px)' } : { scale: 1, opacity: 1, filter: 'blur(0px)' }}
+        animate={phase === 'zoom' || phase === 'mode' || phase === 'name' || phase === 'teams' ? { scale: reduced ? 1 : 3.2, opacity: 0, filter: 'blur(6px)' } : { scale: 1, opacity: 1, filter: 'blur(0px)' }}
         transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
         style={{ transformOrigin: '50% 58%' }}
       >
@@ -105,22 +134,119 @@ export function Intro() {
             <motion.p className="intro-lesson" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
               درس «من مصادر التشريع الإسلامي (1)»
             </motion.p>
+            <motion.p className="intro-credit" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}>
+              إعداد الطالبة: <strong>جنى الخاطري</strong>
+            </motion.p>
             <motion.div
               className="intro-cta"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.35, type: 'spring', bounce: 0.4 }}
             >
-              <button type="button" className="btn btn-gold btn-lg intro-start" onClick={start}>
+              <button type="button" className="btn btn-gold btn-lg intro-start" onClick={() => (savedName ? start(true) : void startFresh())}>
                 <Icon name="sparkle" />
                 {savedName ? `تابعي المغامرة يا ${savedName}` : 'ابدئي المغامرة'}
               </button>
+              {savedName && (
+                <button type="button" className="btn btn-ghost btn-sm intro-new" onClick={() => void startFresh()}>
+                  <Icon name="restart" size={18} />
+                  رحلة جديدة
+                </button>
+              )}
             </motion.div>
           </motion.section>
         )}
       </AnimatePresence>
 
       <AnimatePresence>
+        {phase === 'mode' && (
+          <motion.div className="intro-name-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+            <motion.section
+              className="intro-mode"
+              aria-labelledby="mode-title"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: 'spring', duration: 0.7, bounce: 0.3, delay: 0.1 }}
+            >
+              <div className="intro-mode-star">
+                <StarSprite mood="wow" size={100} />
+              </div>
+              <h2 id="mode-title">كيف ستكون الرحلة؟</h2>
+              <div className="mode-cards">
+                <button
+                  type="button"
+                  className="mode-choice"
+                  onClick={() => {
+                    sfx('tap');
+                    setPhase('name');
+                  }}
+                >
+                  <span className="mode-icon">
+                    <Icon name="sparkle" size={34} />
+                  </span>
+                  <strong>فردي</strong>
+                  <span>طالبة واحدة تخوض الرحلة على جهازها، وتحصل على شهادة باسمها.</span>
+                </button>
+                <button
+                  type="button"
+                  className="mode-choice"
+                  onClick={() => {
+                    sfx('tap');
+                    setPhase('teams');
+                  }}
+                >
+                  <span className="mode-icon">
+                    <Icon name="users" size={34} />
+                  </span>
+                  <strong>جماعي</strong>
+                  <span>فعالية صفية على السبورة: الفرق تتناوب على كل سؤال، والنقاط تُجمع لكل فريق.</span>
+                </button>
+              </div>
+            </motion.section>
+          </motion.div>
+        )}
+        {phase === 'teams' && (
+          <motion.div className="intro-name-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+            <motion.form
+              className="intro-name panel intro-teams"
+              onSubmit={submitTeams}
+              initial={{ opacity: 0, y: 40, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ type: 'spring', duration: 0.7, bounce: 0.3, delay: 0.1 }}
+            >
+              <div className="intro-name-star">
+                <StarSprite mood="cheer" size={110} />
+              </div>
+              <h2>فعالية الصف</h2>
+              <p>اختاري الفرق المشاركة (فريقان على الأقل). يتناوب الدور بين الفرق على كل سؤال في الجزر الثماني.</p>
+              <fieldset className="team-pick">
+                <legend className="sr-only">الفرق المشاركة</legend>
+                {TEAMS.map((t) => (
+                  <label key={t.id} className="team-toggle" style={{ ['--team' as string]: t.color }} data-on={teams.includes(t.id)}>
+                    <input
+                      type="checkbox"
+                      checked={teams.includes(t.id)}
+                      onChange={() => setTeams((x) => (x.includes(t.id) ? x.filter((y) => y !== t.id) : [...x, t.id]))}
+                    />
+                    <TeamEmblem id={t.id} />
+                    {t.name}
+                  </label>
+                ))}
+              </fieldset>
+              <label className="field">
+                <span className="sr-only">اسم الصف</span>
+                <input value={className} onChange={(e) => setClassName(e.target.value)} maxLength={40} placeholder="اسم الصف (اختياري)، مثل: الصف السابع ٢" autoComplete="off" />
+              </label>
+              <button type="submit" className="btn btn-gold btn-lg" disabled={teams.length < 2}>
+                ابدئي الفعالية
+                <Icon name="next" />
+              </button>
+              <button type="button" className="btn btn-ghost-ink btn-sm" onClick={() => setPhase('mode')}>
+                رجوع
+              </button>
+            </motion.form>
+          </motion.div>
+        )}
         {phase === 'name' && (
           <motion.div className="intro-name-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
             <motion.form
@@ -151,21 +277,9 @@ export function Intro() {
                 انطلقي إلى الخريطة
                 <Icon name="next" />
               </button>
-              {savedName && (
-                <button
-                  type="button"
-                  className="btn btn-ghost-ink btn-sm"
-                  onClick={async () => {
-                    if (await confirmAsk('هل تريدين بدء رحلة جديدة؟ سيُمسح التقدم المحفوظ على هذا الجهاز.', 'رحلة جديدة')) {
-                      progressStore.reset();
-                      setNameInput('');
-                    }
-                  }}
-                >
-                  <Icon name="restart" size={18} />
-                  بدء رحلة جديدة من الصفر
-                </button>
-              )}
+              <button type="button" className="btn btn-ghost-ink btn-sm" onClick={() => setPhase('mode')}>
+                رجوع
+              </button>
             </motion.form>
           </motion.div>
         )}

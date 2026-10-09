@@ -9,6 +9,7 @@ import { RichText, VerseQuote } from '../components/RichText';
 import { CAPTIONS, CHAPTERS, CUES, FILM_DURATION, NARRATION_SRC } from '../data/film';
 import { easeOut, ramp, useTimeline, window01 } from '../lib/timeline';
 import { encourage, praise, say } from '../state/guide';
+import { reportAnswer } from '../state/play';
 import { BookArt, ScrollArt } from './Gates';
 import './cinema.css';
 
@@ -62,6 +63,7 @@ export function Cinema({ onFinish }: ActivityProps) {
     setPicked(i);
     const ok = i === tl.activeCue.answer;
     setResults((r) => ({ ...r, [tl.activeCue!.id]: ok }));
+    reportAnswer(ok, 20);
     if (ok) {
       sfx('correct');
       praise();

@@ -9,6 +9,7 @@ import { RichText, VerseQuote } from '../components/RichText';
 import { GATES, SOURCE_STATEMENTS, SOURCES_INTRO, type Gate } from '../data/lesson';
 import { shuffle } from '../lib/random';
 import { encourage, praise, say } from '../state/guide';
+import { reportAnswer } from '../state/play';
 import './gates.css';
 
 type GateId = Gate['id'];
@@ -261,6 +262,7 @@ function GateRoom({ gate, onDone }: { gate: Gate; onDone: (firstTry: boolean) =>
                   disabled={correct}
                   onClick={() => {
                     setPicked(i);
+                    reportAnswer(i === gate.quiz.answer, 20);
                     if (i === gate.quiz.answer) {
                       sfx('correct');
                       praise();
@@ -308,6 +310,7 @@ function FinalChallenge({ onDone }: { onDone: (t: Tally) => void }) {
   const choose = (s: 'quran' | 'sunnah') => {
     if (answer) return;
     setAnswer(s);
+    reportAnswer(s === item.source, 15);
     if (s === item.source) {
       sfx('correct');
       setRight((r) => r + 1);

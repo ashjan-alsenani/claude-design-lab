@@ -171,3 +171,84 @@
     width: min(400px, 70vw);
   }
 }
+.intro-credit {
+  font-size: 0.92rem;
+  color: var(--gold-200);
+}
+.intro-credit strong {
+  font-weight: 600;
+  color: var(--gold-100);
+}
+.intro-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.intro-mode {
+  position: relative;
+  width: min(760px, 100%);
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  text-align: center;
+}
+.intro-mode h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--gold-100);
+}
+.intro-mode-star {
+  animation: float 3.4s ease-in-out infinite;
+}
+.mode-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.mode-choice {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 28px 22px;
+  border-radius: var(--radius-l);
+  color: var(--ink);
+  background: linear-gradient(165deg, #fff, var(--lav-50));
+  box-shadow: var(--shadow-lift);
+  transition:
+    transform 160ms var(--ease-out),
+    box-shadow 200ms ease;
+}
+.mode-choice strong {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+}
+.mode-choice span:last-child {
+  color: var(--ink-soft);
+}
+.mode-icon {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  color: var(--gold-800);
+  background: linear-gradient(180deg, var(--gold-200), var(--gold-400));
+}
+.mode-choice:active {
+  transform: scale(0.98);
+}
+@media (hover: hover) {
+  .mode-choice:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 0 3px var(--gold-300),
+      var(--shadow-lift);
+  }
+}
+.intro-teams {
+  width: min(560px, 100%);
+}
+.intro-teams .team-pick {
+  justify-content: center;
+}

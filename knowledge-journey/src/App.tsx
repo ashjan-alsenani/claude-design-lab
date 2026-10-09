@@ -15,10 +15,15 @@ import { MapScreen } from './screens/MapScreen';
 import { Teacher } from './screens/Teacher';
 import { isUnlocked, progressStore } from './state/progress';
 import { teacherStore } from './state/teacher';
+import { usePlay } from './state/play';
 
 export default function App() {
   const reduced = useReducedMotionClass();
   const route = parseHash(useHash());
+  const group = usePlay((p) => p.mode === 'group');
+  useEffect(() => {
+    document.documentElement.classList.toggle('board-mode', group);
+  }, [group]);
 
   // Unlock audio on the first interaction anywhere (never auto-plays music).
   useEffect(() => {
