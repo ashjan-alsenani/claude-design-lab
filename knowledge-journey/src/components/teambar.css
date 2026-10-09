@@ -78,3 +78,28 @@ html.board-mode {
     font-size: 24px;
   }
 }
+
+.turn-banner {
+  position: fixed;
+  top: 28%;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 34px;
+  border-radius: 999px;
+  font-size: clamp(1.3rem, 3vw, 2.2rem);
+  white-space: nowrap;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--team) 75%, white);
+  box-shadow:
+    0 0 0 4px #fff,
+    0 0 80px color-mix(in srgb, var(--team) 90%, transparent),
+    0 30px 60px -20px rgb(0 0 0 / 0.6);
+  pointer-events: none;
+}
+.turn-banner strong {
+  font-family: var(--font-display);
+}

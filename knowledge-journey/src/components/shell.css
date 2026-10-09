@@ -167,3 +167,30 @@
   font-weight: 600;
   font-size: 1.08rem;
 }
+.help-video {
+  width: min(1000px, 100%);
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+.help-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.help-head h2 {
+  color: var(--ink);
+  font-size: 1.4rem;
+}
+.help-player {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: #120b33;
+}
+.help-note {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}

@@ -30,7 +30,7 @@ test('a student completes the whole journey from the intro to the coronation', a
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'رحلة إلى كنوز المعرفة' })).toBeVisible();
   await expect(page.getByText('جنى الخاطري')).toBeVisible();
-  await page.getByRole('button', { name: 'ابدئي المغامرة' }).click({ force: true });
+  await page.getByRole('button', { name: 'لنبدأ المغامرة' }).click({ force: true });
   await page.getByRole('button', { name: /^فردي/ }).click();
   await page.getByPlaceholder('اكتبي اسمكِ هنا').fill('نورة');
   await page.getByRole('button', { name: 'انطلقي إلى الخريطة' }).click();
@@ -260,7 +260,7 @@ test('drag & drop works with a real touch gesture', async ({ page, context, brow
 test('group mode: teams take turns and score on the class board', async ({ page }) => {
   const errors = watchErrors(page);
   await page.goto('/');
-  await page.getByRole('button', { name: 'ابدئي المغامرة' }).click({ force: true });
+  await page.getByRole('button', { name: 'لنبدأ المغامرة' }).click({ force: true });
   await page.getByRole('button', { name: /^جماعي/ }).click();
   await page.locator('label.team-toggle', { hasText: 'فريق الجواهر' }).click();
   await page.locator('label.team-toggle', { hasText: 'فريق القمر' }).click();
@@ -283,4 +283,14 @@ test('group mode: teams take turns and score on the class board', async ({ page 
   await expect(bar.locator('.tb-team', { hasText: 'فريق النجوم' }).locator('.tb-score')).toHaveText('20');
   await expect(bar.locator('.tb-team[data-active="true"]')).toContainText('فريق اللؤلؤ');
   expect(errors).toEqual([]);
+});
+
+test('the how-to-use video opens and is playable', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /كيف أستخدم الموقع/ }).click();
+  const video = page.getByRole('dialog', { name: 'كيف أستخدم الموقع؟' }).locator('video');
+  await expect(video).toBeVisible();
+  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.duration), { timeout: 15_000 }).toBeGreaterThan(200);
+  await page.keyboard.press('Escape');
+  await expect(video).toBeHidden();
 });

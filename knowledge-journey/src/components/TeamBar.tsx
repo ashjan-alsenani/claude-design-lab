@@ -9,8 +9,25 @@ export function TeamBar() {
   const p = usePlay((x) => x);
   if (p.mode !== 'group') return null;
   const turn = currentTeam(p);
+  const turnInfo = TEAMS.find((t) => t.id === turn);
   return (
     <div className="teambar" role="region" aria-label="نقاط الفرق">
+      <AnimatePresence>
+        {turnInfo && p.turn > 0 && (
+          <motion.div
+            key={p.turn}
+            className="turn-banner"
+            aria-hidden
+            style={{ ['--team' as string]: turnInfo.color }}
+            initial={{ opacity: 0, y: -20, scale: 0.85 }}
+            animate={{ opacity: [0, 1, 1, 0], y: [-20, 0, 0, -10], scale: [0.85, 1, 1, 0.95] }}
+            transition={{ duration: 2.6, times: [0, 0.12, 0.8, 1], delay: 0.9 }}
+          >
+            <TeamEmblem id={turnInfo.id} size={40} />
+            الدور على <strong>{turnInfo.name}</strong>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <span className="sr-only" aria-live="polite">
         {turn ? `الدور على ${TEAMS.find((t) => t.id === turn)!.name}` : ''}
       </span>

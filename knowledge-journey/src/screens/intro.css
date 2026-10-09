@@ -200,9 +200,14 @@
 .intro-mode-star {
   animation: float 3.4s ease-in-out infinite;
 }
+.mode-sub {
+  color: var(--lav-100);
+  margin-top: -8px;
+}
 .mode-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  align-items: center;
   gap: 16px;
   width: 100%;
 }
@@ -251,4 +256,48 @@
 }
 .intro-teams .team-pick {
   justify-content: center;
+}
+
+.mode-choice.primary {
+  padding: 34px 26px;
+  box-shadow:
+    0 0 0 3px var(--gold-300),
+    0 0 60px rgb(255 214 110 / 0.35),
+    var(--shadow-lift);
+}
+.mode-choice.primary strong {
+  font-size: 2.3rem;
+}
+.mode-choice.secondary {
+  padding: 22px 18px;
+  opacity: 0.92;
+}
+.mode-choice.secondary strong {
+  font-size: 1.4rem;
+}
+.mode-choice.secondary .mode-icon {
+  width: 54px;
+  height: 54px;
+}
+.mode-badge {
+  padding: 3px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold-800) !important;
+  background: var(--gold-200);
+}
+@media (max-width: 640px) {
+  .mode-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .intro-top .btn span {
+    display: none;
+  }
+  .intro-top .btn {
+    padding: 0;
+    width: 46px;
+  }
 }

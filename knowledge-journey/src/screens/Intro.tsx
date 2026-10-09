@@ -7,6 +7,7 @@ import { SoundToggles } from '../components/Hud';
 import { confirmAsk } from '../components/Confirm';
 import { Icon } from '../components/Icon';
 import { TeamEmblem } from '../components/TeamEmblem';
+import { HelpVideoButton } from '../components/HelpVideo';
 import { useReducedMotion } from '../lib/motion';
 import { navigate } from '../lib/router';
 import { say } from '../state/guide';
@@ -92,6 +93,7 @@ export function Intro() {
           <span>لوحة المعلمة</span>
         </button>
         <div className="row-center">
+          <HelpVideoButton />
           <SoundToggles />
         </div>
       </div>
@@ -145,7 +147,7 @@ export function Intro() {
             >
               <button type="button" className="btn btn-gold btn-lg intro-start" onClick={() => (savedName ? start(true) : void startFresh())}>
                 <Icon name="sparkle" />
-                {savedName ? `تابعي المغامرة يا ${savedName}` : 'ابدئي المغامرة'}
+                {savedName ? `نكمل رحلة ${savedName}` : 'لنبدأ المغامرة'}
               </button>
               {savedName && (
                 <button type="button" className="btn btn-ghost btn-sm intro-new" onClick={() => void startFresh()}>
@@ -172,34 +174,36 @@ export function Intro() {
                 <StarSprite mood="wow" size={100} />
               </div>
               <h2 id="mode-title">كيف ستكون الرحلة؟</h2>
+              <p className="mode-sub">الرحلة مصمَّمة لتُلعب جماعيًا على السبورة، ويمكن لعبها فرديًا أيضًا.</p>
               <div className="mode-cards">
                 <button
                   type="button"
-                  className="mode-choice"
-                  onClick={() => {
-                    sfx('tap');
-                    setPhase('name');
-                  }}
-                >
-                  <span className="mode-icon">
-                    <Icon name="sparkle" size={34} />
-                  </span>
-                  <strong>فردي</strong>
-                  <span>طالبة واحدة تخوض الرحلة على جهازها، وتحصل على شهادة باسمها.</span>
-                </button>
-                <button
-                  type="button"
-                  className="mode-choice"
+                  className="mode-choice primary"
                   onClick={() => {
                     sfx('tap');
                     setPhase('teams');
                   }}
                 >
                   <span className="mode-icon">
-                    <Icon name="users" size={34} />
+                    <Icon name="users" size={40} />
                   </span>
                   <strong>جماعي</strong>
-                  <span>فعالية صفية على السبورة: الفرق تتناوب على كل سؤال، والنقاط تُجمع لكل فريق.</span>
+                  <span className="mode-badge">مقترح للسبورة</span>
+                  <span>فعالية للصف كله: الفرق تتناوب على كل سؤال في الجزر الثماني، والنقاط تُجمع لكل فريق حتى منصة التتويج.</span>
+                </button>
+                <button
+                  type="button"
+                  className="mode-choice secondary"
+                  onClick={() => {
+                    sfx('tap');
+                    setPhase('name');
+                  }}
+                >
+                  <span className="mode-icon">
+                    <Icon name="sparkle" size={28} />
+                  </span>
+                  <strong>فردي</strong>
+                  <span>لطالبة واحدة على جهازها، مع شهادة باسمها.</span>
                 </button>
               </div>
             </motion.section>

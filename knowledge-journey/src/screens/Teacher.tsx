@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useRef, useState } from 'react';
 import { confirmAsk } from '../components/Confirm';
+import { HelpVideoButton } from '../components/HelpVideo';
 import { Icon } from '../components/Icon';
 import { RichText } from '../components/RichText';
 import { ACTIVITIES } from '../data/activities';
@@ -38,6 +39,7 @@ export function Teacher() {
           الخريطة
         </button>
         <h1>لوحة المعلمة</h1>
+        <HelpVideoButton />
         <button type="button" className="btn btn-gold btn-sm" onClick={() => navigate({ name: 'arena' })}>
           <Icon name="users" />
           تشغيل المنافسة الصفية

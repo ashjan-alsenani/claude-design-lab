@@ -6,6 +6,7 @@ import { ActivityShell } from './components/ActivityShell';
 import { Sky } from './components/art/Sky';
 import { ConfettiLayer } from './components/Confetti';
 import { ConfirmLayer } from './components/Confirm';
+import { HelpVideoLayer } from './components/HelpVideo';
 import { Guide } from './components/Guide';
 import { useReducedMotionClass } from './lib/motion';
 import { parseHash, useHash, navigate } from './lib/router';
@@ -71,6 +72,7 @@ export default function App() {
       {route.name !== 'teacher' && route.name !== 'arena' && <Guide />}
       <ConfettiLayer />
       <ConfirmLayer />
+      <HelpVideoLayer />
     </MotionConfig>
   );
 }
