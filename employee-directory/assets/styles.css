@@ -4569,3 +4569,87 @@ a.tm-kpi:hover { border-color: var(--c); }
 @media print { .card-grid > .card { content-visibility: visible; } }
 .hier-item select.select-sm { padding-inline-end: 40px !important; min-width: 260px; }
 @media (max-width: 640px) { .hier-item select.select-sm { width: 100% !important; max-width: none; justify-self: stretch; } }
+
+/* =====================================================================
+   v73 subtle credit · employee file in My team · team-only accounts
+   ===================================================================== */
+.credit { display: flex; flex-wrap: wrap; gap: 0 5px; margin: 6px 4px 4px; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; font-size: 10.5px; line-height: 1.5; color: var(--faint); opacity: .7; }
+.credit strong { color: inherit; font-weight: 600; }
+.credit span + span::before { content: "·"; margin-inline-end: 5px; }
+.login-art .credit { position: absolute; bottom: 14px; inset-inline-start: 18px; margin: 0; padding: 0; background: none; border: 0; color: rgba(255,255,255,.6); width: auto; }
+.login-art .credit strong { color: inherit; }
+.rp-foot .credit { margin: 0 auto 6px; justify-content: center; }
+.h2-foot .credit { margin: 4px auto 0; justify-content: center; }
+html.tm-only .ws-switch { display: none !important; }
+/* employee file */
+.tf-crumb { display: flex; align-items: center; gap: 6px; margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.tf-crumb a { display: inline-flex; align-items: center; gap: 6px; color: var(--ds-act); font-weight: 600; text-decoration: none; }
+.tf-crumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.tf-hero { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; margin: 0 0 16px; padding: 22px 24px; border-radius: var(--ds-r-xl); border: 1px solid var(--line); background: var(--paper); box-shadow: var(--ds-sh-1); animation: rw-in .4s var(--ds-ease) both; }
+.tf-hero-who { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.tf-hero-who .avatar { flex: none; }
+.tf-hero h1 { margin: 0; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: var(--navy-txt); }
+.tf-alt { margin: 2px 0 0; color: var(--muted); font-size: 14.5px; }
+.tf-job { margin: 6px 0 8px; color: var(--ink); font-weight: 600; font-size: 15.5px; }
+.tf-chips, .tf-crit { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; }
+.tf-chip { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 999px; background: var(--canvas); color: var(--ink); font-size: 12.5px; font-weight: 600; }
+.tf-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.tf-facts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 0 0 16px; }
+.tf-facts strong { font-size: 20px; overflow-wrap: anywhere; }
+.tf-tabs { display: flex; gap: 4px; margin: 0 0 16px; padding: 5px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.tf-tabs::-webkit-scrollbar { display: none; }
+.tf-tabs button { flex: 1 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 42px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--muted); font: 600 14px var(--font); white-space: nowrap; cursor: pointer; transition: background-color .15s var(--ds-ease), color .15s var(--ds-ease); }
+.tf-tabs button:hover { color: var(--navy-txt); background: var(--canvas); }
+.tf-tabs button[aria-selected="true"] { background: var(--ds-act); color: #fff; }
+[data-theme="dark"] .tf-tabs button[aria-selected="true"] { color: #04211F; }
+.tf-tabs button:focus-visible { outline: 3px solid var(--ds-act-ring); outline-offset: 1px; }
+.tf-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.tf-one { display: grid; gap: 16px; }
+.tf-sec { animation: rw-in .35s var(--ds-ease) both; }
+.tf-sec .panel-title { flex-wrap: wrap; }
+.tf-ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; color: var(--c); background: color-mix(in srgb, var(--c) 12%, var(--paper)); }
+.tf-h-btn { margin-inline-start: auto; }
+.tf-dl { display: grid; gap: 0; margin: 0; }
+.tf-dl > div { display: grid; grid-template-columns: minmax(120px, 38%) minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.tf-dl > div:last-child { border-bottom: 0; }
+.tf-dl dt { color: var(--muted); font-size: 13.5px; }
+.tf-dl dd { margin: 0; color: var(--navy-txt); font-weight: 600; font-size: 14.5px; overflow-wrap: anywhere; }
+.tf-pre { margin: 0 0 10px; white-space: pre-wrap; line-height: 1.75; color: var(--ink); }
+.tf-list, .tf-people, .tf-plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tf-list li, .tf-people li, .tf-plan li { display: flex; align-items: center; gap: 10px; }
+.tf-li-ic { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; color: var(--c); background: color-mix(in srgb, var(--c) 12%, var(--paper)); }
+.tf-sub { margin: 14px 0 8px; font-size: 13.5px; color: var(--muted); }
+.tf-sub:first-child { margin-top: 0; }
+.tf-tag { flex: none; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+.tf-tag-ok { color: #15803D; background: color-mix(in srgb, #16A34A 12%, var(--paper)); }
+.tf-tag-soon { color: #B45309; background: color-mix(in srgb, #F59E0B 14%, var(--paper)); }
+.tf-tag-ex { color: #B91C1C; background: color-mix(in srgb, #DC2626 12%, var(--paper)); }
+[data-theme="dark"] .tf-tag-ok { color: #86EFAC; } [data-theme="dark"] .tf-tag-soon { color: #FCD34D; } [data-theme="dark"] .tf-tag-ex { color: #FCA5A5; }
+.tf-prog { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0 0 14px; }
+.tf-bar { flex: 1 1 200px; height: 10px; border-radius: 5px; background: var(--canvas); overflow: hidden; }
+.tf-bar i { display: block; height: 100%; border-radius: 5px; background: #7C3AED; transition: width .5s var(--ds-ease); }
+.tf-prog b { color: var(--navy-txt); }
+.tf-prog small { color: var(--muted); }
+.tf-plan li { padding: 8px 10px; border-radius: 12px; border: 1px solid var(--line); }
+.tf-plan li.is-done b { text-decoration: line-through; color: var(--muted); }
+.tf-plan select { flex: none; width: auto; min-width: 130px; min-height: 36px; }
+.tf-od { font-style: normal; color: #B91C1C; font-weight: 700; }
+[data-theme="dark"] .tf-od { color: #FCA5A5; }
+.tf-add { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.tf-add-row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(140px, 1fr) minmax(150px, 1fr) auto; gap: 10px; align-items: end; }
+.tf-add-row .field { margin: 0; }
+.tf-spark { height: 96px; }
+.tf-spark li { gap: 3px; }
+.tf-spark b { font-size: 11.5px; color: var(--navy-txt); min-height: 14px; }
+.tf-tw { margin-top: 12px; overflow-x: auto; }
+.tf-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.tf-table th, .tf-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: start; vertical-align: top; }
+.tf-table th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+.tm-open { margin-inline-start: auto; }
+@media (max-width: 1100px) { .tf-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); } .tf-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .tf-hero { padding: 18px 16px; } .tf-acts { width: 100%; } .tf-acts .btn { flex: 1 1 auto; justify-content: center; } .tf-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tf-dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } .tf-add-row { grid-template-columns: minmax(0, 1fr); } .tf-plan li { flex-wrap: wrap; } .tf-plan select { margin-inline-start: 40px; } }
+@media print { .tf-acts, .tf-tabs, .tf-crumb, .tf-add, .tf-h-btn, .tf-plan .icon-btn, .tm-notes .icon-btn { display: none !important; } .tf-sec, .tf-hero { animation: none !important; box-shadow: none; } }
+@media (prefers-reduced-motion: reduce) { .tf-sec, .tf-hero { animation: none !important; } }
+.credit { flex-direction: column; gap: 0; }
+.credit span + span::before { content: none; }
+.tf-facts strong { font-size: 18px; line-height: 1.25; }
