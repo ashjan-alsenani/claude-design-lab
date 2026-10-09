@@ -226,7 +226,7 @@ test("admin suspends a license and access stops; the owner is recognized", async
   const panel = admin.locator("section", { has: admin.getByRole("heading", { name: "Owner account" }) });
   await expect(panel).toBeVisible();
   await expect(panel.getByRole("link", { name: "Admin panel" })).toBeVisible();
-  await expect(panel.getByRole("link", { name: /Bridal Journey/ })).toHaveAttribute("href", "/en/app/bride-planner");
+  await expect(panel.getByRole("link", { name: /Bride of a Lifetime/ })).toHaveAttribute("href", "/en/app/bride-planner");
 });
 
 test("customers cannot open admin licensing", async ({ page }) => {

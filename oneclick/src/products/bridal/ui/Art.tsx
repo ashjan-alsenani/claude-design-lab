@@ -88,13 +88,13 @@ export function Petals({ count = 18 }: { count?: number }) {
 /** Product mark in the One Click style: the Bride-hue tile with a heart, the name, and "One Click". */
 export function BrandMark({ className = "" }: { className?: string }) {
   return (
-    <span className={`group inline-flex items-center gap-2.5 ${className}`}>
-      <span className="grid size-10 place-items-center rounded-[12px] bg-[#f0567a] text-white shadow-[0_4px_0_-1px_#c8325a] transition-transform duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-rotate-6 group-hover:scale-105">
+    <span className={`group inline-flex min-w-0 items-center gap-2.5 ${className}`}>
+      <span className="grid size-10 shrink-0 place-items-center rounded-[12px] bg-[#f0567a] text-white shadow-[0_4px_0_-1px_#c8325a] transition-transform duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-rotate-6 group-hover:scale-105">
         <HeartIcon size={22} weight="fill" />
       </span>
-      <span className="leading-none">
-        <span className="block text-[1.15rem] font-bold text-bj-ink">رحلة العروس</span>
-        <span className="mt-1 block text-[0.78rem] font-medium text-bj-muted" lang="en" dir="ltr">Bridal Journey · One Click</span>
+      <span className="min-w-0 leading-none">
+        <span className="block truncate text-[1.05rem] font-bold text-bj-ink sm:text-[1.15rem]">مفكّرة عروسة العُمر</span>
+        <span className="mt-1 hidden text-[0.78rem] font-medium text-bj-muted sm:block" lang="en" dir="ltr">Bride of a Lifetime · One Click</span>
       </span>
     </span>
   );

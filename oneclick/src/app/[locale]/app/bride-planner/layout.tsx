@@ -14,7 +14,7 @@ import { emptyWorkspace, type Workspace } from "@/products/bridal/model/types";
  * Authorized on the server by the licensing engine before any data is loaded. The URL
  * proves nothing: a shared link shows the friendly "not in your account" page.
  */
-export const metadata: Metadata = { title: "Bridal Journey", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Bride of a Lifetime", robots: { index: false, follow: false } };
 
 export default async function BridalLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;

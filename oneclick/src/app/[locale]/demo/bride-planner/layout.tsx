@@ -10,7 +10,7 @@ import { gulfToday } from "@/products/bridal/server/today";
  * changes live only in this browser tab and disappear on refresh. The real product (saved,
  * private, per account) is /app/bride-planner and requires a license.
  */
-export const metadata: Metadata = { title: "Bridal Journey · Demo", robots: { index: false, follow: true } };
+export const metadata: Metadata = { title: "Bride of a Lifetime · Demo", robots: { index: false, follow: true } };
 
 export default async function BridalDemoLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;

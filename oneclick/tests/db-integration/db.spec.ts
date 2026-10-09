@@ -58,7 +58,7 @@ test("owner signs in with an emailed code and controls the site; data lands in t
 
   // Owner opens the bridal planner without buying it and the plan is saved server-side.
   await page.goto("/en/app/bride-planner");
-  await page.getByRole("button", { name: "Start My Bridal Journey" }).click();
+  await page.getByRole("button", { name: "Start My Planner" }).click();
   await page.getByRole("textbox", { name: "What's your name?" }).fill("Noor");
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Continue" }).click();

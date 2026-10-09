@@ -38,10 +38,10 @@ async function finishWelcome(page: Page, name = "Test Customer") {
 test("landing page presents the product in both languages", async ({ page }) => {
   await page.goto("/en/products/bride-planner");
   // The standard One Click product page: name, price CTA, the live demo and a link to the full sample app.
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Bridal Journey");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Bride of a Lifetime");
   await expect(page.getByRole("link", { name: "Try the full app with a sample wedding" })).toHaveAttribute("href", "/en/demo/bride-planner");
   await page.goto("/ar/products/bride-planner");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("رحلة العروس");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("مفكّرة عروسة العُمر");
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });
@@ -84,12 +84,12 @@ test("licensed app: buy, onboard, plan, and the data persists in the account", a
   await expect(page.getByRole("heading", { name: "Payment confirmed (sandbox)" })).toBeVisible();
 
   await page.goto("/en/account/products");
-  await page.getByRole("listitem").filter({ hasText: "Bridal Journey" }).getByRole("link", { name: "Open product" }).click();
+  await page.getByRole("listitem").filter({ hasText: "Bride of a Lifetime" }).getByRole("link", { name: "Open product" }).click();
   await expect(page).toHaveURL(/\/en\/app\/bride-planner$/);
   // On a busy dev server the first tap can land before the app's script has loaded; tap until it opens.
   const nameBox = page.getByRole("textbox", { name: "What's your name?" });
   await expect(async () => {
-    await page.getByRole("button", { name: "Start My Bridal Journey" }).click();
+    await page.getByRole("button", { name: "Start My Planner" }).click();
     await expect(nameBox).toBeVisible({ timeout: 2000 });
   }).toPass({ timeout: 30_000 });
 

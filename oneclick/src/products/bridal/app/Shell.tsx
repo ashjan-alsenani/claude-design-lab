@@ -156,7 +156,7 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
       {/* Top bar: brand, main sections, then language, search, alerts and the bride */}
       <header className="sticky top-0 z-30 border-b border-bj-line/80 bg-bj-paper/80 backdrop-blur-xl">
         <div className="mx-auto flex h-[68px] max-w-[1320px] items-center gap-3 px-4 sm:px-6 lg:h-[76px] lg:px-8">
-          <Link href={href()} className="shrink-0" aria-label={t.brand}>
+          <Link href={href()} className="min-w-0" aria-label={t.brand}>
             <BrandMark />
           </Link>
           <span className="h-7 w-px shrink-0 bg-bj-line max-[359px]:hidden" aria-hidden="true" />

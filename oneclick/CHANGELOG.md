@@ -1,6 +1,9 @@
 # Changelog
 
-## 0.13.0 — 2026-10-09 — Bridal Journey in the One Click design
+## 0.13.0 — 2026-10-09 — «مفكّرة عروسة العُمر» (Bride of a Lifetime) in the One Click design
+- New product name: «مفكّرة عروسة العُمر» / Bride of a Lifetime (formerly «رحلة العروس» / Bridal
+  Journey). Addresses stay the same (/products/bride-planner, /app/bride-planner).
+- Small phones: the header hides the English subtitle so the longer name never causes sideways scrolling.
 - The bridal app now looks like the rest of One Click: Rubik, indigo text on the One Click base, the
   Bride pink with its deeper shade for text and buttons, white rounded cards, beige stat tiles and
   One Click's raised buttons.

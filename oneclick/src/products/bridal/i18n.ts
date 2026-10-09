@@ -3,7 +3,7 @@
  * elegant, not translated word for word); English mirrors it.
  */
 const ar = {
-  brand: "رحلة العروس",
+  brand: "مفكّرة عروسة العُمر",
   tagline: "كل ما تحتاجينه. ولا شيء يُنسى.",
   nav: {
     home: "الرئيسية",
@@ -62,10 +62,10 @@ const ar = {
     removePhoto: "إزالة الصورة",
   },
   welcome: {
-    eyebrow: "رحلة العروس",
+    eyebrow: "مفكّرة عروسة العُمر",
     title: "يا عروسة، رحلتك إلى يوم العمر تبدأ من هنا.",
     sub: "مساعدتك الشخصية لكل مهمة وموعد ودفعة وتفصيلة جميلة حتى يوم زفافك. أخبرينا عن زفافك مرة واحدة، ونرتّب لك كل شيء في وقته.",
-    cta: "ابدئي رحلتي",
+    cta: "ابدئي مفكّرتي",
     demo: "استكشفي زفافًا تجريبيًا",
     points: ["خطة مخصصة حسب موعد زفافك", "لا تنسين شيئًا، ولا تُرهقين بكل شيء دفعة واحدة", "الميزانية والموردون والمدعوون في مكان واحد"],
   },
@@ -415,7 +415,7 @@ const ar = {
 export type BridalCopy = typeof ar;
 
 const en: BridalCopy = {
-  brand: "Bridal Journey",
+  brand: "Bride of a Lifetime",
   tagline: "Everything you need. Nothing forgotten.",
   nav: { home: "Home", overview: "Overview", checklist: "Checklist", calendar: "Calendar", budget: "Budget", vendors: "Vendors", guests: "Guests", bride: "Bride", closet: "Bridal Closet", shopping: "Shopping", home_: "New Home", honeymoon: "Honeymoon", inspiration: "Inspiration", documents: "Documents", day: "Wedding Day", settings: "Settings", more: "More" },
   top: { search: "Search everything", notifications: "Notifications", saving: "Saving…", saved: "Saved", offline: "Not saved yet", demo: "Sample wedding: changes are not saved", exit: "Exit", switchLang: "العربية" },
@@ -426,10 +426,10 @@ const en: BridalCopy = {
     saveError: "We couldn't save this change. Please try again.", retry: "Try again", custom: "Your task", system: "From your plan", photo: "Photo", addPhoto: "Add photo", removePhoto: "Remove photo",
   },
   welcome: {
-    eyebrow: "Bridal Journey",
+    eyebrow: "Bride of a Lifetime",
     title: "Dear bride, your journey to the big day begins here.",
     sub: "Your personal planner for every task, appointment, payment and beautiful detail leading to your wedding day. Tell us about your wedding once, and we'll place everything at the right time.",
-    cta: "Start My Bridal Journey",
+    cta: "Start My Planner",
     demo: "Explore a sample wedding",
     points: ["A plan built around your wedding date", "Nothing forgotten, never everything at once", "Budget, vendors and guests in one place"],
   },

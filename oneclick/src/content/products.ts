@@ -12,7 +12,7 @@ export const products: Product[] = [
   {
     id: "prd_bride",
     slug: "bride-planner",
-    name: { en: "Bridal Journey", ar: "رحلة العروس" },
+    name: { en: "Bride of a Lifetime", ar: "مفكّرة عروسة العُمر" },
     tagline: { en: "Everything you need. Nothing forgotten.", ar: "كل ما تحتاجينه. ولا شيء يُنسى." },
     summary: {
       en: "An interactive wedding planner with a live countdown, guided checklist, budget tracker, guest list and vendor notes. Built around how weddings in the Gulf are actually planned.",

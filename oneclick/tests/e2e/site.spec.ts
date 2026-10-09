@@ -86,7 +86,7 @@ test("unknown pages show the branded 404", async ({ page }) => {
 
 test("SEO basics are present", async ({ page }) => {
   await page.goto("/en/products/bride-planner");
-  await expect(page).toHaveTitle(/Bridal Journey \| One Click/);
+  await expect(page).toHaveTitle(/Bride of a Lifetime \| One Click/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/en\/products\/bride-planner$/);
   await expect(page.locator('link[rel="alternate"][hreflang="ar"]')).toHaveCount(1);
   const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
