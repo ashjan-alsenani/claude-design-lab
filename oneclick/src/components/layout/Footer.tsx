@@ -41,7 +41,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
   return (
     <footer className="mt-24 border-t border-line bg-surface">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr] [&>*]:min-w-0">
           <div className="max-w-sm">
             <Logo locale={locale} />
             <p className="mt-4 text-ink-soft leading-relaxed">{d.footer.tagline}</p>
