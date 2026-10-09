@@ -198,7 +198,7 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute end-0 top-[calc(100%-6px)] z-40 grid w-[440px] grid-cols-2 gap-1 rounded-[20px] border border-bj-line bg-bj-paper p-2 shadow-[0_30px_60px_-30px_rgba(80,50,40,.3)]"
+                      className="absolute end-0 top-[calc(100%-6px)] z-40 grid w-[440px] grid-cols-2 gap-1 rounded-[20px] border border-bj-line bg-bj-paper p-2 shadow-[0_30px_60px_-30px_rgba(60,40,120,.3)]"
                     >
                       {moreNav.map((k) => {
                         const I = navIcons[k];
@@ -292,7 +292,7 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-4 bottom-24 z-50 mx-auto flex max-w-sm items-center gap-4 rounded-[22px] border border-bj-beige bg-bj-paper px-5 py-4 shadow-[0_24px_60px_-24px_rgba(80,50,40,.25)] lg:bottom-10"
+            className="fixed inset-x-4 bottom-24 z-50 mx-auto flex max-w-sm items-center gap-4 rounded-[22px] border border-bj-beige bg-bj-paper px-5 py-4 shadow-[0_24px_60px_-24px_rgba(60,40,120,.25)] lg:bottom-10"
             onClick={dismissCelebration}
           >
             <span className="relative grid size-14 shrink-0 place-items-center rounded-full bj-shine bg-[linear-gradient(135deg,#f6ebe6,#e9d3ca)] text-bj-gold-ink">

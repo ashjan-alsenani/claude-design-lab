@@ -102,7 +102,7 @@ function WheatMark({ className = "" }: { className?: string }) {
 export function BrandMark({ className = "" }: { className?: string }) {
   return (
     <span className={`group inline-flex items-center gap-2.5 ${className}`}>
-      <WheatMark className="size-9 text-[#b87962] transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-translate-y-0.5 group-hover:scale-110" />
+      <WheatMark className="size-9 text-[#f0567a] transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] group-hover:-translate-y-0.5 group-hover:scale-110" />
       <span className="leading-none">
         <span className="bj-glitter block text-[1.25rem] font-medium" lang="ar">رحلة العروس</span>
         <span className="bj-latin mt-1 block text-[0.82rem] italic text-bj-muted" lang="en" dir="ltr">Bridal Journey</span>

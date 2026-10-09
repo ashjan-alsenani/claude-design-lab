@@ -23,6 +23,7 @@ import {
   WarningCircleIcon,
   type Icon,
 } from "@phosphor-icons/react";
+import { Clicky } from "@/components/brand/Clicky";
 import { useBridal } from "../app/state";
 import { NoticeList } from "../app/Shell";
 import { alerts, budgetSummary, diffDays, focusTasks, groupTasks, paymentStatus, progress, progressMessage, type AreaKey } from "../model/engine";
@@ -96,12 +97,15 @@ export function Dashboard() {
         <Image src={blossom} alt="" className="bj-hero-blossom h-auto" aria-hidden="true" />
         <div className="relative px-4 pb-5 sm:px-6 lg:mx-auto lg:flex lg:min-h-[540px] lg:max-w-[1320px] lg:flex-col lg:px-8 lg:pb-[104px] lg:pt-14 lg:*:w-[min(600px,48%)]">
           <div className="-mt-12 lg:mt-0">
-            <p className="text-[13px] text-bj-ink-soft sm:text-[15px]" suppressHydrationWarning>
+            <p className="flex items-center gap-2 text-[13px] text-bj-ink-soft sm:text-[15px]" suppressHydrationWarning>
+              <Clicky size={40} mood="love" color="#f0567a" animate className="shrink-0" />
+              <span>
               {greet}
               {lang === "ar" ? " يا عروستنا " : ", "}
-              <span className="font-medium text-[#9b5f53]">{p.brideName}</span>
+              <span className="font-semibold text-[#c8325a]">{p.brideName}</span>
+              </span>
             </p>
-            <h1 className="mt-1 text-[2.6rem] font-normal leading-[1.15] text-[#9b5f53] sm:text-[3.4rem] lg:text-[clamp(3rem,4.6vw,4.1rem)]">{t.brand}</h1>
+            <h1 className="mt-2 text-[2.5rem] font-bold leading-[1.2] text-[#c8325a] sm:text-[3.4rem] lg:text-[clamp(3rem,4.6vw,4.1rem)]">{t.brand}</h1>
             <p className="mt-2 text-[15px] font-medium text-bj-ink-soft sm:text-[1.2rem]">{t.tagline}</p>
             {lang === "ar" && (
               <p className="bj-latin mt-1 text-[15px] italic text-bj-muted sm:text-[1.15rem]" dir="ltr" lang="en">
@@ -117,7 +121,7 @@ export function Dashboard() {
                 <>
                   <p className="flex items-baseline gap-2 text-[15px] font-medium text-bj-ink-soft sm:text-[19px]">
                     {t.dash.left && <span>{t.dash.left}</span>}
-                    <span className="text-[2.2rem] font-semibold leading-none tabular-nums text-[#5e2f28] sm:text-[2.7rem]">
+                    <span className="text-[2.2rem] font-semibold leading-none tabular-nums text-[#1e1b3a] sm:text-[2.7rem]">
                       <CountUp value={days} format={num} />
                     </span>
                     <span>{t.dash.daysWord}</span>
@@ -128,15 +132,15 @@ export function Dashboard() {
                 <p className="text-[1.3rem] font-medium leading-tight text-bj-ink">{days === 0 ? t.dash.weddingToday : t.dash.married}</p>
               )}
               <p className="mt-2.5 inline-flex items-center gap-1.5 text-[12px] text-bj-muted sm:text-[13px]">
-                <CalendarBlankIcon size={15} className="text-[#a86357]" />
+                <CalendarBlankIcon size={15} className="text-[#c8325a]" />
                 {date(p.weddingDate, "long")}
               </p>
               <Image src={sprig} alt="" aria-hidden="true" className="pointer-events-none absolute bottom-1.5 end-2.5 h-auto w-11 opacity-95 sm:w-14" />
             </div>
             <div className="bj-frost flex min-h-[150px] flex-col items-center justify-center gap-2.5 rounded-[18px] px-3 py-4 text-center sm:min-h-[168px]">
-              <ProgressRing value={prog.overall} size={ringSize} stroke={8} color="#7a7f6d">
+              <ProgressRing value={prog.overall} size={ringSize} stroke={8} color="#f0567a">
                 <span>
-                  <span className="block text-[1.45rem] font-semibold leading-none text-[#5e2f28] sm:text-[1.75rem]">
+                  <span className="block text-[1.45rem] font-semibold leading-none text-[#1e1b3a] sm:text-[1.75rem]">
                     <CountUp value={Math.round(prog.overall * 100)} format={pct} />
                   </span>
                   <span className="mt-1 block text-[11.5px] text-bj-ink-soft sm:text-[13px]">{t.dash.ready}</span>
@@ -158,9 +162,9 @@ export function Dashboard() {
             <li key={s.key}>
               <Link
                 href={href(s.key)}
-                className="bj-frost bj-icon-hover group relative flex h-full min-h-[66px] items-center gap-3 rounded-[16px] px-3.5 py-2.5 transition-[transform,box-shadow] duration-200 active:scale-[0.98] sm:min-h-[120px] sm:flex-col sm:justify-center sm:gap-1 sm:px-3 sm:pb-6 sm:pt-4 sm:text-center hover:shadow-[0_20px_40px_-24px_rgba(110,70,60,.5)]"
+                className="bj-frost bj-icon-hover group relative flex h-full min-h-[66px] items-center gap-3 rounded-[16px] px-3.5 py-2.5 transition-[transform,box-shadow] duration-200 active:scale-[0.98] sm:min-h-[120px] sm:flex-col sm:justify-center sm:gap-1 sm:px-3 sm:pb-6 sm:pt-4 sm:text-center hover:shadow-[0_20px_40px_-24px_rgba(60,40,120,.5)]"
               >
-                <span className="grid size-10 shrink-0 place-items-center rounded-[12px] bg-[#f3e6df] text-[#a86357] sm:mb-1 sm:size-11">
+                <span className="grid size-10 shrink-0 place-items-center rounded-[12px] bg-[#f3e6df] text-[#c8325a] sm:mb-1 sm:size-11">
                   <s.icon size={22} weight="duotone" className="bj-icon bj-icon-breathe" style={{ animationDelay: `${-i * 0.5}s` }} />
                 </span>
                 <span className="min-w-0">

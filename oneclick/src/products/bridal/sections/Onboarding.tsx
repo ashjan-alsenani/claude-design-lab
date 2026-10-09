@@ -72,7 +72,7 @@ export function Welcome({ onStart, exitHref }: { onStart: () => void; exitHref: 
 /** The approved bride photograph inside an arch, echoing the dashboard hero. */
 function BridePhoto({ alt, sizes, priority, className = "w-full" }: { alt: string; sizes: string; priority?: boolean; className?: string }) {
   return (
-    <div className={`relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[28px] border-4 border-bj-paper shadow-[0_30px_60px_-30px_rgba(110,70,60,.45)] ${className}`}>
+    <div className={`relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[28px] border-4 border-bj-paper shadow-[0_30px_60px_-30px_rgba(60,40,120,.45)] ${className}`}>
       <Image src={heroPhoto} quality={85} alt={alt} fill priority={priority} sizes={sizes} placeholder="blur" className="object-cover object-[32%_30%] ltr:-scale-x-100" />
     </div>
   );

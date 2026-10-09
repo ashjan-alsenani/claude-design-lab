@@ -82,7 +82,7 @@ export function ItemList({ list, title, sub, header = true, compact = false }: {
           {shown.map((it) => {
             const got = it.status === "bought" || it.status === "gift";
             return (
-              <li key={it.id} className={cx("flex items-center gap-1.5 rounded-[16px] border bg-[linear-gradient(180deg,#fffdfc,#fcf8f6)] shadow-[0_12px_30px_-26px_rgba(110,70,60,.35)] px-2.5 py-1.5", got ? "border-transparent" : "border-bj-line", it.status === "skip" && "opacity-55")}>
+              <li key={it.id} className={cx("flex items-center gap-1.5 rounded-[16px] border bg-[linear-gradient(180deg,#fffdfc,#fcf8f6)] shadow-[0_12px_30px_-26px_rgba(60,40,120,.35)] px-2.5 py-1.5", got ? "border-transparent" : "border-bj-line", it.status === "skip" && "opacity-55")}>
                 <CheckCircle checked={got} onClick={() => dispatch({ t: "put", c: "items", item: { ...it, status: got ? "need" : "bought" } })} label={`${statuses.bought}: ${it.name}`} size={22} />
                 {it.image && (
                   // eslint-disable-next-line @next/next/no-img-element

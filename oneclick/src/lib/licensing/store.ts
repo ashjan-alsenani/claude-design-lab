@@ -25,9 +25,12 @@ const MAX_LOGS = 5000;
 function trim(db: LicensingDb, maxLogs = MAX_LOGS) {
   if (db.accessLogs.length > maxLogs) db.accessLogs.splice(0, db.accessLogs.length - maxLogs);
   if (db.audit.length > maxLogs) db.audit.splice(0, db.audit.length - maxLogs);
-  const cutoff = Date.now() - 2 * 24 * 3600 * 1000;
-  // Verification challenges are short-lived; keep two days for rate limiting and forensics.
-  db.challenges = db.challenges.filter((c) => new Date(c.createdAt).getTime() > cutoff);
+  // Verification challenges are short-lived; keep two days for rate limiting and forensics. Measured
+  // from the newest challenge (written with the engine's clock), not the wall clock, so the store and
+  // the engine always agree on what "two days ago" means.
+  const times = db.challenges.map((c) => new Date(c.createdAt).getTime());
+  const cutoff = Math.max(0, ...times) - 2 * 24 * 3600 * 1000;
+  db.challenges = db.challenges.filter((c, i) => times[i] > cutoff);
 }
 
 export class MemoryLicensingStore implements LicensingStore {

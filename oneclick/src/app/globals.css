@@ -157,25 +157,26 @@
   --color-info: var(--oc-info);
 
   --font-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
-  --font-bj-serif: "BJ Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-bj-sans: "BJ Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-bj-serif: "Rubik", ui-sans-serif, system-ui, sans-serif;
+  --font-bj-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
 
-  /* Bridal Journey palette "Soft Modern": warm white, nude, blush, cocoa, charcoal (light only) */
-  --color-bj-ivory: #faf7f5;
+  /* Bridal Journey in the One Click family: One Click base and indigo ink, the Bride hue (#f0567a) for
+     decoration and its deeper shade (#c8325a, AA on white) for text and buttons (light only) */
+  --color-bj-ivory: #fff9f4;
   --color-bj-paper: #ffffff;
-  --color-bj-cream: #f6efeb;
-  --color-bj-champagne: #f3e8e3;
-  --color-bj-beige: #e9ddd7;
-  --color-bj-blush: #f7eeea;
-  --color-bj-rose: #8a5f55;
-  --color-bj-rose-soft: #f0e0da;
-  --color-bj-taupe: #c9a49a;
-  --color-bj-ink: #3b3432;
-  --color-bj-ink-soft: #5e5350;
-  --color-bj-muted: #756a66;
-  --color-bj-line: #efe6e2;
-  --color-bj-gold: #c9a49a;
-  --color-bj-gold-ink: #7d564d;
+  --color-bj-cream: #fdf0f2;
+  --color-bj-champagne: #fbe3e8;
+  --color-bj-beige: #f3d6dd;
+  --color-bj-blush: #fdecef;
+  --color-bj-rose: #c8325a;
+  --color-bj-rose-soft: #fbdde4;
+  --color-bj-taupe: #f08aa3;
+  --color-bj-ink: #1e1b3a;
+  --color-bj-ink-soft: #46416c;
+  --color-bj-muted: #6c6790;
+  --color-bj-line: #f1e4e6;
+  --color-bj-gold: #f0567a;
+  --color-bj-gold-ink: #c8325a;
   --color-bj-sage: #5f7f63;
   --color-bj-sage-soft: #e7efe6;
   --color-bj-amber: #9a6a2a;
@@ -373,7 +374,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 
 @font-face { font-family: "BJ Latin Serif"; src: url("../fonts/bridal/cormorant-garamond-latin-normal.woff2") format("woff2"); font-weight: 400 600; font-display: swap; }
 @font-face { font-family: "BJ Latin Serif"; src: url("../fonts/bridal/cormorant-garamond-latin-italic.woff2") format("woff2"); font-weight: 400 600; font-style: italic; font-display: swap; }
-.bj .bj-latin { font-family: "BJ Latin Serif", Georgia, serif; letter-spacing: 0.04em; }
+.bj .bj-latin { font-family: var(--font-sans); font-style: normal; }
 
 /* Glass: frosted white panels that sit over the hero scene (solid fallback without blur). */
 .bj .bj-glass { background: rgb(255 255 255 / 0.9); border: 1px solid rgb(255 255 255 / 0.8); box-shadow: 0 20px 50px -30px rgb(80 50 40 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.9); }
@@ -382,7 +383,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 
 .bj { font-family: var(--font-bj-sans); color: var(--color-bj-ink); background: var(--color-bj-ivory); -webkit-tap-highlight-color: transparent; }
 .bj :focus-visible { outline: 3px solid color-mix(in oklab, var(--color-bj-gold) 60%, transparent); outline-offset: 2px; border-radius: 10px; }
-.bj .bj-serif { font-family: var(--font-bj-serif); font-weight: 500; letter-spacing: -0.015em; }
+.bj .bj-serif { font-family: var(--font-bj-serif); font-weight: 700; letter-spacing: 0; }
 .bj[dir="rtl"] .bj-serif { letter-spacing: 0; line-height: 1.5; }
 
 /* ---------- Bridal Journey hero (the approved design: bridal-journey/index.html) ----------
@@ -391,7 +392,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
    photo sits on top and fades downward. Mirrors itself for left-to-right languages. */
 /* The dashboard hero bleeds to the screen edges; clip so 100vw never adds a sideways scroll. */
 .bj { overflow-x: clip; }
-.bj .bj-hero { position: relative; isolation: isolate; background: linear-gradient(180deg, #efe3df 0%, #f6ece6 62%, var(--color-bj-ivory) 100%); }
+.bj .bj-hero { position: relative; isolation: isolate; background: linear-gradient(180deg, #fde4ea 0%, #fdeff1 62%, var(--color-bj-ivory) 100%); }
 .bj .bj-hero-photo { position: relative; height: 290px; -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent); mask-image: linear-gradient(to bottom, #000 68%, transparent); }
 .bj .bj-hero-photo img { object-position: 40% 22%; }
 .bj[dir="ltr"] .bj-hero-photo img { object-position: 60% 22%; }
@@ -408,17 +409,17 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
   .bj[dir="ltr"] .bj-hero-blossom { transform: scaleX(-1); }
 }
 /* Section pages: a short blush band with the blossom, fading into the page like the home photo. */
-.bj .bj-band { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(120% 140% at 85% 0%, #f1e2dc 0%, rgb(241 226 220 / 0) 60%), linear-gradient(180deg, #f3e7e2 0%, #f7eee9 55%, var(--color-bj-ivory) 100%); }
-.bj[dir="ltr"] .bj-band { background: radial-gradient(120% 140% at 15% 0%, #f1e2dc 0%, rgb(241 226 220 / 0) 60%), linear-gradient(180deg, #f3e7e2 0%, #f7eee9 55%, var(--color-bj-ivory) 100%); }
+.bj .bj-band { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(120% 140% at 85% 0%, #fdd9e2 0%, rgb(253 217 226 / 0) 60%), linear-gradient(180deg, #fde6ec 0%, #fef1f3 55%, var(--color-bj-ivory) 100%); }
+.bj[dir="ltr"] .bj-band { background: radial-gradient(120% 140% at 15% 0%, #fdd9e2 0%, rgb(253 217 226 / 0) 60%), linear-gradient(180deg, #fde6ec 0%, #fef1f3 55%, var(--color-bj-ivory) 100%); }
 .bj .bj-band-blossom { position: absolute; top: 0; inset-inline-end: 0; width: 84px; mix-blend-mode: multiply; opacity: 0.6; pointer-events: none; -webkit-mask-image: radial-gradient(130% 100% at 100% 0, #000 40%, transparent 78%); mask-image: radial-gradient(130% 100% at 100% 0, #000 40%, transparent 78%); transform: scaleX(-1); }
 .bj[dir="ltr"] .bj-band-blossom { transform: none; }
 @media (min-width: 640px) { .bj .bj-band-blossom { width: 130px; opacity: 0.85; } }
 @media (min-width: 1024px) { .bj .bj-band-blossom { width: 190px; } }
 /* Cards on section pages: warm pearl instead of plain white, soft rose-tinted shadow. */
-.bj .bj-card { background: linear-gradient(180deg, #fffdfc 0%, #fcf8f6 100%); border: 1px solid rgb(236 224 218 / 0.9); box-shadow: 0 1px 2px rgb(110 70 60 / 0.04), 0 18px 40px -28px rgb(110 70 60 / 0.28); }
+.bj .bj-card { background: #ffffff; border: 1px solid var(--color-bj-line); box-shadow: 0 1px 2px rgb(60 40 120 / 0.04), 0 18px 40px -28px rgb(60 40 120 / 0.28); }
 /* Frosted panels in the approved warm tone. */
-.bj .bj-frost { background: rgb(250 243 239 / 0.86); border: 1px solid rgb(255 255 255 / 0.8); box-shadow: 0 14px 34px -22px rgb(110 70 60 / 0.42), 0 2px 6px -4px rgb(110 70 60 / 0.12); }
-@supports (backdrop-filter: blur(1px)) { .bj .bj-frost { background: rgb(250 243 239 / 0.8); -webkit-backdrop-filter: blur(12px) saturate(1.1); backdrop-filter: blur(12px) saturate(1.1); } }
+.bj .bj-frost { background: rgb(255 255 255 / 0.9); border: 1px solid rgb(255 255 255 / 0.8); box-shadow: 0 14px 34px -22px rgb(60 40 120 / 0.42), 0 2px 6px -4px rgb(60 40 120 / 0.12); }
+@supports (backdrop-filter: blur(1px)) { .bj .bj-frost { background: rgb(255 255 255 / 0.8); -webkit-backdrop-filter: blur(12px) saturate(1.1); backdrop-filter: blur(12px) saturate(1.1); } }
 @media (prefers-reduced-transparency: reduce) { .bj .bj-frost { background: #faf4f1; -webkit-backdrop-filter: none; backdrop-filter: none; } }
 @media (prefers-reduced-motion: no-preference) {
   .bj .bj-hero-photo img { animation: bj-settle 1.4s cubic-bezier(.23,1,.32,1) both; }
@@ -433,7 +434,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 @keyframes bj-settle { from { opacity: 0.5; scale: 1.04; } to { opacity: 1; scale: 1; } }
 
 /* Glitter text: a soft nude-gold gradient that slowly drifts, so names catch the light. */
-.bj .bj-glitter { background: linear-gradient(110deg, #8a5f55 0%, #a97d71 25%, #cfa99c 40%, #a0746a 55%, #8a5f55 75%, #b98f83 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bj .bj-glitter { background: linear-gradient(110deg, #c8325a 0%, #f0567a 30%, #ff8fa8 45%, #e2486e 60%, #c8325a 80%, #f0567a 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 /* Shine: a light sweep that crosses a card or button now and then. */
 .bj-shine { position: relative; overflow: hidden; isolation: isolate; }

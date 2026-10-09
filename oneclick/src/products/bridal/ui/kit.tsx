@@ -23,8 +23,8 @@ export function Button({ variant = "primary", size = "md", className, children, 
         size === "sm" && "h-9 px-4 text-[13px]",
         size === "md" && "h-11 px-5 text-sm",
         size === "lg" && "h-[52px] px-7 text-[15px]",
-        variant === "primary" && "bj-shine bg-[linear-gradient(135deg,#3b3432_0%,#5d514d_100%)] text-white shadow-[0_10px_24px_-12px_rgba(59,52,50,.65)] hover:shadow-[0_14px_28px_-12px_rgba(59,52,50,.7)] hover:brightness-[1.06]",
-        variant === "secondary" && "border border-bj-beige bg-bj-paper text-bj-ink hover:border-bj-taupe",
+        variant === "primary" && "bg-[#c8325a] font-semibold text-white shadow-[0_5px_0_-1px_#8f2242] hover:-translate-y-0.5 hover:bg-[#b82c51] active:translate-y-0 active:shadow-none",
+        variant === "secondary" && "border-2 border-bj-beige bg-bj-paper font-semibold text-bj-ink hover:border-bj-taupe",
         variant === "soft" && "bg-bj-cream text-bj-ink hover:bg-bj-champagne/70",
         variant === "ghost" && "text-bj-ink-soft hover:bg-bj-cream",
         variant === "danger" && "text-bj-alert hover:bg-bj-alert-soft",
@@ -75,7 +75,7 @@ export function SectionHeader({ eyebrow, title, sub, action, level = 1 }: { eyeb
       <div className="relative mx-auto flex max-w-[1320px] flex-wrap items-end justify-between gap-x-6 gap-y-4 px-4 pb-5 pt-6 sm:px-6 sm:pb-8 sm:pt-9 lg:px-8 lg:pb-12 lg:pt-14">
         <div className="min-w-0">
           {eyebrow && <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-bj-gold-ink">{eyebrow}</p>}
-          <h1 className="text-[2.3rem] font-normal leading-[1.15] text-[#9b5f53] sm:text-[2.9rem] lg:text-[3.3rem]">{title}</h1>
+          <h1 className="text-[2.2rem] font-bold leading-[1.2] text-[#c8325a] sm:text-[2.9rem] lg:text-[3.3rem]">{title}</h1>
           <span aria-hidden="true" className="mt-3 block h-px w-16 bg-[linear-gradient(90deg,#c9a49a,transparent)] rtl:bg-[linear-gradient(270deg,#c9a49a,transparent)]" />
           {sub && <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-bj-ink-soft">{sub}</p>}
         </div>
@@ -181,7 +181,7 @@ export function Sheet({ open, onClose, title, children, footer }: { open: boolea
       aria-labelledby={titleId}
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
-      className="bj m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 bg-bj-paper p-0 text-bj-ink shadow-[0_-20px_60px_-20px_rgba(80,50,40,.22)] open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:w-[440px] sm:rounded-none sm:rounded-s-[26px]"
+      className="bj m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 bg-bj-paper p-0 text-bj-ink shadow-[0_-20px_60px_-20px_rgba(60,40,120,.22)] open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:w-[440px] sm:rounded-none sm:rounded-s-[26px]"
     >
       <div className="flex items-center justify-between gap-3 border-b border-bj-line px-5 py-4">
         <h2 id={titleId} className="bj-serif text-[1.35rem] text-bj-ink">

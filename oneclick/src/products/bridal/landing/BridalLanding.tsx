@@ -94,7 +94,7 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
             </h1>
             <p className="mt-6 max-w-xl text-[16.5px] leading-relaxed text-bj-ink-soft">{c.sub}</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link href={buy} className={`${btn} bj-shine bg-bj-ink text-white shadow-[0_14px_30px_-14px_rgba(59,52,50,.6)] hover:-translate-y-0.5 hover:bg-[#4a413e] active:translate-y-0`}>
+              <Link href={buy} className={`${btn} bg-[#c8325a] font-semibold text-white shadow-[0_5px_0_-1px_#8f2242] hover:-translate-y-0.5 hover:bg-[#b82c51] active:translate-y-0 active:shadow-none`}>
                 {c.cta}
               </Link>
               <Link href={demo} className={`${btn} border-2 border-bj-beige bg-bj-paper text-bj-ink hover:border-bj-taupe`}>
@@ -150,12 +150,12 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
             <h2 className="bj-serif text-[2rem] text-bj-ink">{c.privacyTitle}</h2>
             <p className="mt-4 max-w-lg text-[15.5px] leading-relaxed text-bj-ink-soft">{c.privacy}</p>
           </div>
-          <div className="rounded-[26px] border border-[#e3cfc6] bg-bj-paper p-7 text-center shadow-[0_24px_60px_-36px_rgba(80,50,40,.22)]">
+          <div className="rounded-[26px] border border-[#e3cfc6] bg-bj-paper p-7 text-center shadow-[0_24px_60px_-36px_rgba(60,40,120,.22)]">
             <p className="text-[12px] uppercase tracking-[0.2em] text-bj-gold-ink">{c.price}</p>
             <p className="bj-serif mt-2 text-[3rem] leading-none text-bj-ink">{price}</p>
             <p className="mt-2 text-[13.5px] text-bj-muted">{c.once}</p>
             <div className="mt-6 flex flex-col gap-2.5">
-              <Link href={buy} className={`${btn} bj-shine bg-bj-ink text-white shadow-[0_14px_30px_-14px_rgba(59,52,50,.6)] hover:-translate-y-0.5 hover:bg-[#4a413e] active:translate-y-0`}>
+              <Link href={buy} className={`${btn} bg-[#c8325a] font-semibold text-white shadow-[0_5px_0_-1px_#8f2242] hover:-translate-y-0.5 hover:bg-[#b82c51] active:translate-y-0 active:shadow-none`}>
                 {c.cta}
               </Link>
               <Link href={demo} className={`${btn} border border-bj-line text-bj-ink hover:border-bj-taupe/50`}>
@@ -169,7 +169,7 @@ export function BridalLanding({ locale, price }: { locale: Locale; price: string
 
       <section className="px-5 py-20 text-center">
         <h2 className="bj-serif text-[2.2rem] text-bj-ink">{c.finalTitle}</h2>
-        <Link href={demo} className={`${btn} mt-7 bj-shine bg-bj-ink text-white shadow-[0_14px_30px_-14px_rgba(59,52,50,.6)] hover:-translate-y-0.5 hover:bg-[#4a413e] active:translate-y-0`}>
+        <Link href={demo} className={`${btn} mt-7 bg-[#c8325a] font-semibold text-white shadow-[0_5px_0_-1px_#8f2242] hover:-translate-y-0.5 hover:bg-[#b82c51] active:translate-y-0 active:shadow-none`}>
           {c.demo}
         </Link>
       </section>
