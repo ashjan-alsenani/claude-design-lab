@@ -8,4 +8,4 @@ dist/
 test-results/
 playwright-report/
 dist-artifact/
-scripts/.tts-cache/
+knowledge-journey/scripts/.tts-cache/
