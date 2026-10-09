@@ -4286,7 +4286,7 @@ a.wc-nm-a:hover { background: var(--canvas); }
 .rw-cats legend { margin-bottom: 8px; font-weight: 700; color: var(--navy-txt); font-size: 14px; }
 .rw-cat { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--line); cursor: pointer; transition: border-color .15s var(--ds-ease), background-color .15s var(--ds-ease); }
 .rw-cat input { position: absolute; opacity: 0; pointer-events: none; }
-.rw-cat > span { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.rw-cat .rw-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .rw-cat b { font-size: 14px; color: var(--navy-txt); }
 .rw-cat small { font-size: 12px; color: var(--muted); line-height: 1.5; }
 .rw-cat em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--c); }
@@ -4331,3 +4331,14 @@ a.wc-nm-a:hover { background: var(--canvas); }
 @media (max-width: 900px) { .rw-hero { grid-template-columns: minmax(0, 1fr); } .rw-hm { grid-template-columns: minmax(0, 1fr); } .rw-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .rw-cats { grid-template-columns: minmax(0, 1fr); } .rw-hero-a .btn { flex: 1 1 100%; justify-content: center; } .rw-hm-empty { flex-wrap: wrap; } .rw-hm-empty .btn { width: 100%; justify-content: center; } .rw-feed { grid-template-columns: minmax(0, 1fr); } }
 @media print { .rw-hero-a, .rw-chips, .rw-card-acts, .rw-sug, .rw-types .btn, .page-rw .sy-seg { display: none !important; } .rw-card, .rw-stat, .rw-type, .rw-spot { animation: none !important; } }
+
+/* v69 medals never stretch; award picker polish */
+span.rw-med { flex: 0 0 auto; aspect-ratio: 1; }
+.rw-cat { align-items: center; gap: 12px; padding: 12px 14px; min-height: 76px; }
+.rw-cat:hover { border-color: color-mix(in srgb, var(--c) 45%, var(--line)); }
+.rw-cat b { line-height: 1.35; }
+.rw-cat small { margin-top: 1px; }
+.rw-cat em { flex: none; align-self: flex-start; padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, var(--c) 10%, var(--paper)); }
+.rw-cat-ok { position: absolute; top: 8px; inset-inline-start: 8px; width: 18px; height: 18px; padding: 2px; border-radius: 50%; background: var(--c); color: #fff; opacity: 0; transform: scale(.6); transition: opacity .15s var(--ds-ease), transform .15s var(--ds-ease); }
+.rw-cat:has(input:checked) .rw-cat-ok { opacity: 1; transform: none; }
+.rw-cat:has(input:checked) { box-shadow: 0 0 0 1px var(--c) inset; }
