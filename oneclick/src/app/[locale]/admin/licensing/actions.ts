@@ -6,6 +6,8 @@ import { isLocale, type Locale } from "@/i18n/config";
 import { currentContext, licensing, licensingMode } from "@/lib/licensing/server";
 import { createTestPurchaseToken } from "@/lib/licensing/test-purchase";
 import { CUSTOM_STATUSES, getLeadStore, SUPPORT_STATUSES } from "@/lib/data/leads";
+import { isOpsAlertConfigured } from "@/lib/env";
+import { opsAlert } from "@/lib/ops/alert";
 
 /**
  * Admin licensing actions. Each one: re-checks the admin role on the server (engine
@@ -142,4 +144,12 @@ export async function unsubscribeAction(fd: FormData) {
   const ok = await getLeadStore().setStatus(s(fd, "reference"), "unsubscribed");
   if (ok) await licensing().engine.adminNote(ctx, `unsubscribed:${s(fd, "reference")}`);
   redirect(`/${locale}/admin/subscribers?${ok ? "ok=1" : "e=not_found"}`);
+}
+
+/** Sends one test push through OPS_ALERT_URL so the owner can confirm alerts reach the phone. */
+export async function sendTestAlertAction(fd: FormData) {
+  const { locale } = await admin(fd);
+  if (!isOpsAlertConfigured()) redirect(`/${locale}/admin?alert=off`);
+  const ok = await opsAlert(`test:${Date.now()}`, "One Click: test alert", "Test alert from the admin panel. If you can read this, email-failure alerts will reach you.\nتنبيه تجريبي من لوحة الإدارة. إذا وصلك، تنبيهات فشل الإيميل بتوصلك.");
+  redirect(`/${locale}/admin?alert=${ok ? "sent" : "failed"}`);
 }

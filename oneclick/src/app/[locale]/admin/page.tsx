@@ -11,10 +11,10 @@ import { getPaymentProvider } from "@/lib/payments";
 import { businessSettings } from "@/content/site";
 import { launchPlan, utmLink } from "@/content/social";
 import { formatMoney } from "@/lib/money";
-import { isEmailConfigured } from "@/lib/env";
+import { isEmailConfigured, isOpsAlertConfigured } from "@/lib/env";
 import { pageMetadata, siteUrl } from "@/lib/seo";
 import { currentContext, licensing } from "@/lib/licensing/server";
-import { createTestLinkAction } from "./licensing/actions";
+import { createTestLinkAction, sendTestAlertAction } from "./licensing/actions";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | undefined>> };
 
@@ -41,6 +41,7 @@ export default async function AdminPage({ params, searchParams }: Props) {
     { ok: payment.live, label: "Payment provider", detail: payment.live ? payment.displayName : "Not connected. Waiting for owner's bank decision." },
     { ok: authStatus() === "connected", label: "Customer accounts & database", detail: authStatus() === "connected" ? "Connected (Supabase)" : authStatus() === "demo" ? "Local SANDBOX (demo mode). Production uses Supabase." : "Not connected: set SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY and LICENSING_SECRET. Sign-in stays locked until then." },
     { ok: isEmailConfigured(), label: "Transactional email", detail: isEmailConfigured() ? "Connected (Resend)" : "Not connected: set EMAIL_PROVIDER=resend, RESEND_API_KEY and EMAIL_FROM. Sign-in codes cannot be delivered until then." },
+    { ok: isOpsAlertConfigured(), label: "Owner alerts (phone, no email needed)", detail: isOpsAlertConfigured() ? "Connected (ntfy). Email failures are pushed to your phone." : "Not connected: set OPS_ALERT_URL to your ntfy topic URL. Email failures are only logged until then." },
     { ok: businessSettings.showLegalIdentity, label: "Business identity (CR, address)", detail: "Hidden until owner provides final details." },
     { ok: false, label: "Legal pages", detail: "Drafts. Lawyer review required before launch." },
     { ok: false, label: "Analytics", detail: "Consent-ready. No provider connected." },
@@ -133,6 +134,15 @@ export default async function AdminPage({ params, searchParams }: Props) {
               </li>
             ))}
           </ul>
+          <form action={sendTestAlertAction} className="mt-4 flex flex-wrap items-center gap-3">
+            <input type="hidden" name="locale" value={locale} />
+            <button className="inline-flex h-10 items-center rounded-full border-2 border-line-strong px-5 text-sm font-semibold text-ink">Send a test alert to my phone</button>
+            {sp.alert && (
+              <span role="status" className="text-sm text-ink-soft">
+                {sp.alert === "sent" ? "Sent. Check the ntfy app on your phone." : sp.alert === "off" ? "OPS_ALERT_URL is not set." : "The alert service did not accept it. Check OPS_ALERT_URL."}
+              </span>
+            )}
+          </form>
         </section>
 
         <section aria-labelledby="h-requests" className="rounded-[var(--radius-lg)] border border-line bg-surface p-5">

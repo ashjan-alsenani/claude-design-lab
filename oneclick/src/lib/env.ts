@@ -33,3 +33,8 @@ export function missingEmailConfig(): string[] {
   if (!process.env.EMAIL_FROM) missing.push("EMAIL_FROM");
   return missing;
 }
+
+/** Owner alerts that do not depend on email (src/lib/ops/alert.ts). */
+export function isOpsAlertConfigured() {
+  return (process.env.OPS_ALERT_URL ?? "").startsWith("https://");
+}
