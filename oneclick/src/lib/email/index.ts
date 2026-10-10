@@ -1,7 +1,8 @@
 import "server-only";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { isDemoMode, isEmailConfigured } from "@/lib/env";
+import { isDemoMode, isEmailConfigured, missingEmailConfig } from "@/lib/env";
+import { opsAlert } from "@/lib/ops/alert";
 import type { EmailContent } from "./templates";
 
 export type SendResult = { sent: true; id: string } | { sent: false; reason: "not_connected" | "error" };
@@ -9,8 +10,10 @@ export type SendResult = { sent: true; id: string } | { sent: false; reason: "no
 /**
  * Email adapter: Resend (https://resend.com) when EMAIL_PROVIDER=resend, RESEND_API_KEY and
  * EMAIL_FROM are set. Without a provider, demo mode writes to the development mailbox and
- * production sends nothing. Failures are reported by status only; message bodies (which can hold
- * sign-in codes and personal data) are never logged.
+ * production sends nothing. Every production failure is logged and pushed to the owner through
+ * opsAlert (a channel that does not need this email service). Logs and alerts name only the
+ * message kind, the HTTP status and Resend's error name/message or the missing setting names:
+ * never the recipient, the body (which can hold sign-in codes) or a key.
  */
 export async function sendEmail(to: string, content: EmailContent, meta: { kind?: string } = {}): Promise<SendResult> {
   if (!isEmailConfigured()) {
@@ -18,6 +21,9 @@ export async function sendEmail(to: string, content: EmailContent, meta: { kind?
       await writeOutbox(to, content, meta.kind ?? "general");
       return { sent: true, id: "dev-mailbox" };
     }
+    const missing = missingEmailConfig().join(", ");
+    console.error(`email: not sent (${kind(meta)}): email is not configured, missing ${missing}`);
+    await opsAlert("email:not_configured", "One Click: emails are not being sent", `Email is not configured on the live site (missing: ${missing}). Sign-in codes cannot be delivered.\nالإيميل غير مضبوط في الموقع (ناقص: ${missing})، ورموز الدخول ما توصل.`);
     return { sent: false, reason: "not_connected" };
   }
   try {
@@ -39,16 +45,22 @@ export async function sendEmail(to: string, content: EmailContent, meta: { kind?
       // Resend's error name and message describe configuration problems (sender, key, domain), never
       // the message content, so they are safe to log and make failures diagnosable.
       const err = (await res.json().catch(() => ({}))) as { name?: string; message?: string };
-      console.error(`email: Resend responded ${res.status} (${meta.kind ?? "general"}) ${err.name ?? ""}: ${(err.message ?? "").slice(0, 200)}`);
+      const detail = `Resend responded ${res.status} ${err.name ?? ""}: ${(err.message ?? "").slice(0, 200)}`;
+      console.error(`email: not sent (${kind(meta)}): ${detail}`);
+      await opsAlert(`email:resend_${res.status}`, "One Click: email sending failed", `${detail}\nKind: ${kind(meta)}\nفشل إرسال الإيميل من الموقع.`);
       return { sent: false, reason: "error" };
     }
     const body = (await res.json().catch(() => ({}))) as { id?: string };
     return { sent: true, id: body.id ?? "" };
-  } catch {
-    console.error(`email: Resend request failed (${meta.kind ?? "general"})`);
+  } catch (e) {
+    const why = e instanceof Error ? e.name : "unknown";
+    console.error(`email: not sent (${kind(meta)}): Resend request failed (${why})`);
+    await opsAlert("email:unreachable", "One Click: email service unreachable", `Could not reach Resend (${why}). Kind: ${kind(meta)}\nتعذّر الوصول لخدمة الإيميل.`);
     return { sent: false, reason: "error" };
   }
 }
+
+const kind = (meta: { kind?: string }) => (meta.kind ?? "general").replace(/[^A-Za-z0-9_-]/g, "_");
 
 export { emailTemplates } from "./templates";
 

@@ -22,5 +22,14 @@ export function isLicensingSecretSet() {
 
 /** Transactional email: Resend, with an API key and a verified sender address. */
 export function isEmailConfigured() {
-  return process.env.EMAIL_PROVIDER === "resend" && Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM);
+  return missingEmailConfig().length === 0;
+}
+
+/** Names (never values) of the email settings that are missing, for logs and alerts. */
+export function missingEmailConfig(): string[] {
+  const missing: string[] = [];
+  if (process.env.EMAIL_PROVIDER !== "resend") missing.push("EMAIL_PROVIDER");
+  if (!process.env.RESEND_API_KEY) missing.push("RESEND_API_KEY");
+  if (!process.env.EMAIL_FROM) missing.push("EMAIL_FROM");
+  return missing;
 }

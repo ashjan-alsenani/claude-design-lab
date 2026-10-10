@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.13.2 — 2026-10-10 — Email cannot fail silently again
+- Cause of the outage: `RESEND_API_KEY` is no longer among the project's Vercel variables (the other
+  production variables are intact), so the live site took the "email not configured" path and
+  logged nothing. Details and evidence: docs/EMAIL_INCIDENT_2026-10-10.md.
+- Pre-deploy check (`scripts/check-production-env.mjs`, runs before `next build`): a production build
+  stops if a required setting is missing or Resend rejects the key (checked with an empty request,
+  so nothing is sent). The working live version then stays online. Preview/local builds only print.
+- Every production email failure is now logged (kind, status, missing setting names; never the
+  recipient, the code or a key) and pushed to the owner via `OPS_ALERT_URL` (ntfy, free), which does
+  not depend on the email service. Repeats are held back for 30 minutes.
+
 ## 0.13.1 — 2026-10-10 — Honest copy after the live audit
 - Product button: «احجز عند الإطلاق» / "Reserve at launch" → «نبّهني عند الإطلاق» / "Notify me at launch".
   It only records interest (product_notify); it never reserved anything.
