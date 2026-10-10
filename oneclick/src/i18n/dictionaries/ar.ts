@@ -56,6 +56,7 @@ export const ar: Dictionary = {
     bundle: "حزمة",
     "custom-service": "خدمة حسب الطلب",
   },
+  accessNote: { lifetime: "طول ما المنتج متوفر، مع تحديثاته" } as Partial<Record<string, string>>,
   access: {
     lifetime: "وصول مدى الحياة",
     subscription: "اشتراك",
@@ -128,7 +129,7 @@ export const ar: Dictionary = {
     related: "ممكن يعجبك أيضًا",
     buy: "احصل عليه",
     notifyMe: "نبّهني عند الإطلاق",
-    previewCta: "احجز عند الإطلاق",
+    previewCta: "نبّهني عند الإطلاق",
     paymentPending: "الشراء يفتح قريبًا. لم يتم ربط مزوّد الدفع بعد.",
     license: "ترخيص شخصي. راجع ترخيص المنتجات الرقمية.",
     support: "عندك سؤال؟ مركز المساعدة يغطي الوصول والحسابات والاسترجاع.",

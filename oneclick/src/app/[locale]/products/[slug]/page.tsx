@@ -93,6 +93,7 @@ export default async function ProductPage({ params }: Props) {
               <div>
                 <p className="text-3xl font-semibold tabular text-ink">{priceLabel}</p>
                 {!isFree && <p className="text-sm text-muted">{d.access[product.access]}</p>}
+                {!isFree && d.accessNote[product.access] && <p className="text-xs text-muted">{d.accessNote[product.access]}</p>}
               </div>
               <div className="flex items-center gap-2">
                 <ButtonLink href={primaryCta.href} size="lg">

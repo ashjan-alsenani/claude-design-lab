@@ -107,6 +107,7 @@ export default async function CheckoutPage({ params }: Props) {
             <div className="flex-1">
               <p className="font-semibold text-ink">{name}</p>
               <p className="text-sm text-muted">{d.access[product.access]}</p>
+              {d.accessNote[product.access] && <p className="text-xs text-muted">{d.accessNote[product.access]}</p>}
             </div>
           </div>
           <div className="mt-6 flex items-center justify-between border-t border-line pt-4">

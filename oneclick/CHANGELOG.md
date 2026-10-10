@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.13.1 — 2026-10-10 — Honest copy after the live audit
+- Product button: «احجز عند الإطلاق» / "Reserve at launch" → «نبّهني عند الإطلاق» / "Notify me at launch".
+  It only records interest (product_notify); it never reserved anything.
+- Bride planner page: removed two features that do not exist yet — "share progress with family" and
+  "printable summary view". They are replaced by real ones: payment/appointment reminders and
+  "download a copy of your data". The family-help FAQ now says plainly that sharing is not available yet.
+- Checkout: «ما تحتاج حساب» → «ما تحتاج تسجيل ولا كلمة مرور» with «بريدك هو حسابك…», matching how
+  sign-in really works (email + one-time code, account created automatically).
+- "Lifetime access" now carries a one-line definition on the product page and at checkout:
+  «طول ما المنتج متوفر، مع تحديثاته» / "For as long as the product is offered, with its updates".
+
 ## 0.13.0 — 2026-10-09 — «مفكّرة عروسة العُمر» (Bride of a Lifetime) in the One Click design
 - New product name: «مفكّرة عروسة العُمر» / Bride of a Lifetime (formerly «رحلة العروس» / Bridal
   Journey). Addresses stay the same (/products/bride-planner, /app/bride-planner).

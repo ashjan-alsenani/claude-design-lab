@@ -64,7 +64,7 @@ async function buy(page: Page, slug: string, outcome: "Simulate successful payme
   await expect(page.getByText("PAYMENT PROVIDER NOT YET CONNECTED")).toBeVisible();
   if (guestEmail) {
     // Buying needs no account: a guest sees that up front and only gives an email.
-    await expect(page.getByText("No account needed")).toBeVisible();
+    await expect(page.getByText("No sign-up or password needed")).toBeVisible();
     await page.locator("#sandbox-email").fill(guestEmail);
   }
   await page.getByRole("button", { name: outcome }).click();

@@ -33,7 +33,7 @@ export const products: Product[] = [
     benefits: [
       { en: "Always know the next task and its deadline", ar: "تعرفين دايمًا المهمة الجاية وموعدها" },
       { en: "See planned versus actual spending instantly", ar: "تشوفين المخطط مقابل المصروف الفعلي فورًا" },
-      { en: "Share progress with family without endless messages", ar: "تشاركين التقدم مع الأهل بدون رسائل لا تنتهي" },
+      { en: "Get a heads-up on payments and appointments before they slip", ar: "تنبيه بالدفعات والمواعيد قبل لا تفوتك" },
     ],
     features: [
       { title: { en: "Countdown & timeline", ar: "عدّ تنازلي وخط زمني" }, body: { en: "Tasks are grouped by months-to-go, so you only focus on what matters now.", ar: "المهام مقسمة حسب الأشهر المتبقية، فتركزين على المهم الحين بس." } },
@@ -44,7 +44,7 @@ export const products: Product[] = [
     included: [
       { en: "Interactive web planner (works on phone, tablet and computer)", ar: "مخطط تفاعلي على الويب (يشتغل على الجوال والتابلت والكمبيوتر)" },
       { en: "Editable starter checklist in Arabic and English", ar: "قائمة مهام جاهزة قابلة للتعديل بالعربي والإنجليزي" },
-      { en: "Printable summary view", ar: "عرض ملخص قابل للطباعة" },
+      { en: "Download a copy of your data anytime", ar: "تنزيل نسخة من بياناتك في أي وقت" },
       { en: "Product updates for the life of the product", ar: "تحديثات المنتج طوال عمر المنتج" },
     ],
     devices: { en: "Any modern browser on phone, tablet or computer", ar: "أي متصفح حديث على الجوال أو التابلت أو الكمبيوتر" },
@@ -60,7 +60,7 @@ export const products: Product[] = [
     isNew: true,
     demo: "bride",
     faqs: [
-      { q: { en: "Can my mother or sister help plan?", ar: "تقدر أمي أو أختي تساعدني في التخطيط؟" }, a: { en: "Shared access is planned for a later version. At launch, you can share a read-only printable summary.", ar: "المشاركة المباشرة مخطط لها في إصدار لاحق. عند الإطلاق تقدرين تشاركين ملخص قابل للطباعة." } },
+      { q: { en: "Can my mother or sister help plan?", ar: "تقدر أمي أو أختي تساعدني في التخطيط؟" }, a: { en: "Right now the planner lives in your own account and is not shared with others. Shared access for family is planned for a later version.", ar: "حاليًا المفكّرة في حسابك أنتِ وما تنشارك مع أحد. المشاركة مع الأهل مخطط لها في إصدار لاحق، وما هي متوفرة الحين." } },
       { q: { en: "Is it only for Omani weddings?", ar: "هل هو للأعراس العمانية فقط؟" }, a: { en: "No. The starter checklist reflects Gulf traditions, and every item is editable for any wedding.", ar: "لا. القائمة الجاهزة مستوحاة من عادات الخليج، وكل بند قابل للتعديل لأي عرس." } },
     ],
     sample: true,

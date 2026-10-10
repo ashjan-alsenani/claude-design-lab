@@ -56,6 +56,7 @@ export const en = {
     bundle: "Bundle",
     "custom-service": "Custom service",
   },
+  accessNote: { lifetime: "For as long as the product is offered, with its updates" } as Partial<Record<string, string>>,
   access: {
     lifetime: "Lifetime access",
     subscription: "Subscription",
@@ -128,7 +129,7 @@ export const en = {
     related: "You might also like",
     buy: "Get it",
     notifyMe: "Notify me at launch",
-    previewCta: "Reserve at launch",
+    previewCta: "Notify me at launch",
     paymentPending: "Purchasing opens soon. Payment provider not yet connected.",
     license: "Personal license. See Digital Product License.",
     support: "Questions? Our help center covers access, accounts and refunds.",

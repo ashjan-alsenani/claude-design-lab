@@ -232,8 +232,8 @@ const en = {
     },
   },
   checkout: {
-    guestTitle: "No account needed",
-    guestBody: "Buy with just your email. We'll email you a link to your product, and you open it with a one-time code sent to the same address. No password, no sign-up form.",
+    guestTitle: "No sign-up or password needed",
+    guestBody: "Your email is your account. We'll email you a link to your product and a one-time code to open it, and your products stay in your account on any device.",
     sandboxTitle: "SANDBOX TEST CHECKOUT",
     checkEmail: "Check your email: your purchase confirmation with the \"Open My Product\" button is on its way.",
     sandboxBody: "Simulate a payment to test the full flow: order, license, email, verification and My Products. No money moves and no card details are asked for.",
@@ -497,8 +497,8 @@ const ar: LicensingCopy = {
     },
   },
   checkout: {
-    guestTitle: "ما تحتاج حساب",
-    guestBody: "اشترِ ببريدك بس. بنرسل لك رابط منتجك على الإيميل، وتفتحه برمز يوصلك على نفس البريد. بدون كلمة مرور وبدون تسجيل.",
+    guestTitle: "ما تحتاج تسجيل ولا كلمة مرور",
+    guestBody: "بريدك هو حسابك. بنرسل لك رابط منتجك ورمز دخول على نفس البريد، وتلقى منتجاتك محفوظة في حسابك على أي جهاز.",
     sandboxTitle: "دفع تجريبي (SANDBOX)",
     checkEmail: "شيّك بريدك: وصلك تأكيد الشراء مع زر «افتح منتجي».",
     sandboxBody: "جرّب الدفع لاختبار الرحلة كاملة: الطلب والرخصة والبريد والتحقق و«منتجاتي». ما فيه دفع حقيقي ولا نطلب بيانات بطاقة.",

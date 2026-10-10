@@ -128,7 +128,7 @@ test("owner test link: a signed-out visitor buys, gets the email, verifies, and 
   await visitor.goto(link.pathname + link.search);
   await expect(visitor).toHaveURL(/\/en\/products$/);
   await visitor.goto("/en/checkout/grocery-list");
-  await expect(visitor.getByText("No account needed")).toBeVisible();
+  await expect(visitor.getByText("No sign-up or password needed")).toBeVisible();
   await visitor.locator("#sandbox-email").fill("visitor@oneclick.test");
   await visitor.getByRole("button", { name: "Simulate successful payment" }).click();
   await expect(visitor.getByText(/Check your email/)).toBeVisible();
