@@ -1,0 +1,182 @@
+[
+ {
+  "tag": "h1",
+  "cls": "text-[2rem] font-bold leading-[1.2] text",
+  "x": 17,
+  "y": 101,
+  "w": 357,
+  "h": 42,
+  "text": "الجهاز"
+ },
+ {
+  "tag": "ul",
+  "cls": "grid gap-2 md:grid-cols-2",
+  "x": 16,
+  "y": 408,
+  "w": 358,
+  "h": 1545,
+  "text": "عبايات مناسبات × ٣ عبايات عبايات يومية × ٣ عبايات "
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 408,
+  "w": 358,
+  "h": 83,
+  "text": "عبايات مناسبات × ٣ عبايات"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 500,
+  "w": 358,
+  "h": 83,
+  "text": "عبايات يومية × ٣ عبايات · أفنيوز مول · ٦٥ ريال سعو"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 591,
+  "w": 358,
+  "h": 83,
+  "text": "فساتين نهارية × ٥ ملابس"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 682,
+  "w": 358,
+  "h": 83,
+  "text": "ملابس الزيارات والعزايم × ٤ ملابس مناسبات"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 774,
+  "w": 358,
+  "h": 83,
+  "text": "أطقم نوم × ٦ ملابس نوم · أفنيوز مول · ١٢٥ ريال سعو"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 865,
+  "w": 358,
+  "h": 83,
+  "text": "ملابس داخلية × ٨ ملابس داخلية"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 956,
+  "w": 358,
+  "h": 83,
+  "text": "ملابس بيت مريحة × ٥ ملابس بيت"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1048,
+  "w": 358,
+  "h": 83,
+  "text": "كعب × ٢ أحذية · أفنيوز مول · ٨٥ ريال سعودي"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1139,
+  "w": 358,
+  "h": 83,
+  "text": "أحذية مسطحة وصنادل × ٣ أحذية"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1231,
+  "w": 358,
+  "h": 83,
+  "text": "حقائب يد × ٢ حقائب"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1322,
+  "w": 358,
+  "h": 83,
+  "text": "شيلات وأوشحة × ٦ إكسسوارات · أفنيوز مول · ٤٥ ريال "
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1413,
+  "w": 358,
+  "h": 83,
+  "text": "عطور ودهن عود × ٣ عطور"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1505,
+  "w": 358,
+  "h": 83,
+  "text": "أساسيات المكياج مكياج"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1596,
+  "w": 358,
+  "h": 83,
+  "text": "طقم العناية بالبشرة عناية بالبشرة · أفنيوز مول · ١"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1687,
+  "w": 358,
+  "h": 83,
+  "text": "طقم العناية بالشعر عناية بالشعر"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1779,
+  "w": 358,
+  "h": 83,
+  "text": "جلال الصلاة × ٢ ملابس صلاة"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1870,
+  "w": 358,
+  "h": 83,
+  "text": "منظمات للخزانة منظمات · أفنيوز مول · ٦٥ ريال سعودي"
+ },
+ {
+  "tag": "ul",
+  "cls": "mx-auto grid max-w-lg grid-cols-5",
+  "x": 0,
+  "y": 3136,
+  "w": 390,
+  "h": 64,
+  "text": "الرئيسية المهام الميزانية التقويم المزيد"
+ }
+]

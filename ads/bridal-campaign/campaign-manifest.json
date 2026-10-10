@@ -1,0 +1,1245 @@
+{
+  "campaign": "مفكّرة عروسة العُمر — Bride of a Lifetime · Instagram launch",
+  "product": "Interactive bridal planner on OneClick (oneclick.computer)",
+  "audience": "GCC brides, especially Saudi Arabia; engagement → milka → henna → wedding → sabahiya → new home → honeymoon",
+  "positioning": "Relief, excitement, elegance, organisation, confidence — a luxury bridal companion, not a software ad.",
+  "product_source": {
+    "site": "current OneClick site (branch claude/brave-fermi-t1pa59, commit b3b4800 = production)",
+    "route": "/ar/demo/bride-planner",
+    "data": "fictional sample wedding (Layan) set to Riyadh / SAR / 15 April 2027 → 187 days, 42% ready, plus one photographer payment due in 3 days, all entered through the app's own forms",
+    "capture_tools": "tools/capture/*.cjs",
+    "screenshots": "assets/screenshots/ (390 CSS px wide at 3x)"
+  },
+  "format": {
+    "reels": "1080×1920, 9:16, H.264 High, 30 fps, AAC 48 kHz, faststart",
+    "statics": "1080×1350 (4:5 feed) and 1080×1920 (9:16 story), PNG + JPG"
+  },
+  "safe_areas": {
+    "top_px": 230,
+    "bottom_px": 420,
+    "right_px": 130,
+    "left_px": 90,
+    "note": "Hooks start at y≈250; captions sit with their bottom edge 420 px above the frame bottom and 150 px clear of the right-side IG controls."
+  },
+  "design": {
+    "palette": {
+      "ivory": "#FBF6EF",
+      "warm_white": "#FFFCF7",
+      "champagne": "#E8DAC3",
+      "beige": "#EFE4D6",
+      "blush": "#EFD9D2",
+      "dusty_rose": "#C9979A",
+      "deep_rose_text": "#9A5F63",
+      "antique_gold": "#B19363",
+      "sage": "#A7BBA2",
+      "sage_deep": "#5E7C5C",
+      "warm_brown_text": "#3A2A23"
+    },
+    "type": {
+      "display": "Amiri 700 (SIL OFL)",
+      "captions_ui": "IBM Plex Sans Arabic 500–700 (SIL OFL)",
+      "latin_accent": "Cormorant Garamond (SIL OFL)"
+    },
+    "icons": "Phosphor Icons (MIT), extracted to tools/icons.json"
+  },
+  "voice": {
+    "status": "MISSING — not generated",
+    "reason": "No natural young Saudi female voice is available locally, and paid TTS/voice services were not authorised. No male or robotic substitute was used.",
+    "ready": [
+      "scripts/vo-recording-sheet.md",
+      "scripts/vo-timing.json",
+      "captions/*.srt|vtt (same timings)",
+      "audio/voice/*.timing-guide.wav",
+      "audio/music/*.vo-bed.wav (pre-ducked −13 dB)",
+      "tools/mix_vo.sh"
+    ],
+    "mix_spec": "VO −16 LUFS, music −30 LUFS (≈14 dB under) + sidechain ≈3 dB while speaking; limiter at −1 dBTP"
+  },
+  "music": {
+    "source": "Original, synthesised for this campaign by tools/music.py (piano, light strings, harp, warm pad; no drums, no heavy bass)",
+    "license": "Owned outright — no third-party samples; cleared for commercial advertising",
+    "export_level": "−18 LUFS integrated in the music-only exports, gentle fade-in/out"
+  },
+  "reels": [
+    {
+      "id": "01",
+      "slug": "01-forgetting",
+      "title": "زواجك قرب… وتحسين إنك ناسية شيء؟",
+      "angle": "Fear of forgetting → relief: scattered notes clear into one calm dashboard.",
+      "duration_s": 15.0,
+      "hook_on_screen": {
+        "A": "زواجك قرب… وتحسين إنك ناسية شيء؟",
+        "B": "كم ملاحظة كاتبتها عن زواجك؟"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.9,
+          "text": "زواجك قرب… وتحسين إنك ناسية شيء؟"
+        },
+        {
+          "start": 3.1,
+          "end": 5.9,
+          "text": "بين الفستان، القاعة، المواعيد والضيوف…"
+        },
+        {
+          "start": 6.2,
+          "end": 7.4,
+          "text": "لا تشيلين هم."
+        },
+        {
+          "start": 7.7,
+          "end": 10.2,
+          "text": "كل تجهيزاتك صارت بمكان واحد."
+        }
+      ],
+      "end_card": {
+        "tagline": "رتّبي رحلة زفافك 🤍",
+        "cta": "اكتشفي مفكّرتك الآن",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 11.3
+      },
+      "music": {
+        "theme": "morning",
+        "transpose": 0,
+        "seed": 11,
+        "bed": "audio/music/01-forgetting.wav",
+        "vo_ready_bed": "audio/music/01-forgetting.vo-bed.wav"
+      },
+      "product_screens": [
+        "dashboard-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/01-forgetting.mp4",
+        "export_probe": {
+          "seconds": 15.0,
+          "bytes": 5483954
+        },
+        "source": "video/01-forgetting/index.html",
+        "script": "scripts/01-forgetting.md",
+        "captions_srt": "captions/01-forgetting.srt",
+        "captions_vtt": "captions/01-forgetting.vtt",
+        "voice_timing_guide": "audio/voice/01-forgetting.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/01-forgetting-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/01-forgetting-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/01-forgetting-strip.jpg"
+      },
+      "alternate_hook_b": {
+        "replaces_first_seconds": 3.3,
+        "voiceover_line": {
+          "start": 0.2,
+          "end": 2.9,
+          "text": "كم ملاحظة كاتبتها عن زواجك؟"
+        },
+        "export": "exports/reels-alternates/01-forgetting-hook-b.mp4",
+        "source": "video/01-forgetting/hook-b.html",
+        "captions_srt": "captions/01-forgetting-hook-b.srt",
+        "captions_vtt": "captions/01-forgetting-hook-b.vtt",
+        "voice_timing_guide": "audio/voice/01-forgetting-hook-b.timing-guide.wav",
+        "thumbnail_cover": "exports/thumbnails/01-forgetting-hook-b-cover-1080x1920.jpg"
+      }
+    },
+    {
+      "id": "02",
+      "slug": "02-countdown",
+      "title": "كم باقي على زواجك؟",
+      "angle": "Countdown + readiness: the planner knows what is due now and what can wait.",
+      "duration_s": 14.6,
+      "hook_on_screen": {
+        "A": "كم باقي على زواجك؟",
+        "B": "باقي لك ١٨٧ يوم… تعرفين وش تسوين أول؟"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 1.9,
+          "text": "كم باقي على زواجك؟"
+        },
+        {
+          "start": 3.1,
+          "end": 4.4,
+          "text": "حطي تاريخ زواجك…"
+        },
+        {
+          "start": 4.7,
+          "end": 7.1,
+          "text": "وخلي مفكّرتك تقول لك وش عليك الحين،"
+        },
+        {
+          "start": 7.3,
+          "end": 8.6,
+          "text": "ووش باقي بعدين."
+        }
+      ],
+      "end_card": {
+        "tagline": "كل يوم… خطوته واضحة",
+        "cta": "ابدئي رحلتك",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 10.9
+      },
+      "music": {
+        "theme": "garden",
+        "transpose": 0,
+        "seed": 12,
+        "bed": "audio/music/02-countdown.wav",
+        "vo_ready_bed": "audio/music/02-countdown.vo-bed.wav"
+      },
+      "product_screens": [
+        "onb-date-empty.png",
+        "onb-date.png",
+        "dashboard-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/02-countdown.mp4",
+        "export_probe": {
+          "seconds": 14.6,
+          "bytes": 3743077
+        },
+        "source": "video/02-countdown/index.html",
+        "script": "scripts/02-countdown.md",
+        "captions_srt": "captions/02-countdown.srt",
+        "captions_vtt": "captions/02-countdown.vtt",
+        "voice_timing_guide": "audio/voice/02-countdown.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/02-countdown-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/02-countdown-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/02-countdown-strip.jpg"
+      },
+      "alternate_hook_b": {
+        "replaces_first_seconds": 3.0,
+        "voiceover_line": {
+          "start": 0.2,
+          "end": 2.9,
+          "text": "باقي لك ١٨٧ يوم… تعرفين وش تسوين أول؟"
+        },
+        "export": "exports/reels-alternates/02-countdown-hook-b.mp4",
+        "source": "video/02-countdown/hook-b.html",
+        "captions_srt": "captions/02-countdown-hook-b.srt",
+        "captions_vtt": "captions/02-countdown-hook-b.vtt",
+        "voice_timing_guide": "audio/voice/02-countdown-hook-b.timing-guide.wav",
+        "thumbnail_cover": "exports/thumbnails/02-countdown-hook-b-cover-1080x1920.jpg"
+      }
+    },
+    {
+      "id": "03",
+      "slug": "03-this-week",
+      "title": "مو لازم تسوين كل شيء اليوم.",
+      "angle": "Overwhelm → focus: 206 tasks shrink to the 4 that matter this week.",
+      "duration_s": 14.6,
+      "hook_on_screen": {
+        "A": "مو لازم تسوين كل شيء اليوم.",
+        "B": "٢٠٦ مهمة؟ لا تشيلين هم."
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.5,
+          "text": "مو لازم تسوين كل شيء اليوم."
+        },
+        {
+          "start": 2.8,
+          "end": 5.3,
+          "text": "بدل ما تتوترين من كل تجهيزات الزواج…"
+        },
+        {
+          "start": 5.6,
+          "end": 8.1,
+          "text": "ركزي بس على اللي عليك هالأسبوع."
+        }
+      ],
+      "end_card": {
+        "tagline": "خطوة بخطوة لين يومك 🤍",
+        "cta": "رتّبي يومك من اليوم",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 11.0
+      },
+      "music": {
+        "theme": "veil",
+        "transpose": 0,
+        "seed": 13,
+        "bed": "audio/music/03-this-week.wav",
+        "vo_ready_bed": "audio/music/03-this-week.vo-bed.wav"
+      },
+      "product_screens": [
+        "dashboard-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/03-this-week.mp4",
+        "export_probe": {
+          "seconds": 14.6,
+          "bytes": 4156523
+        },
+        "source": "video/03-this-week/index.html",
+        "script": "scripts/03-this-week.md",
+        "captions_srt": "captions/03-this-week.srt",
+        "captions_vtt": "captions/03-this-week.vtt",
+        "voice_timing_guide": "audio/voice/03-this-week.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/03-this-week-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/03-this-week-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/03-this-week-strip.jpg"
+      },
+      "alternate_hook_b": {
+        "replaces_first_seconds": 3.1,
+        "voiceover_line": {
+          "start": 0.2,
+          "end": 2.5,
+          "text": "٢٠٦ مهمة؟ لا تشيلين هم."
+        },
+        "export": "exports/reels-alternates/03-this-week-hook-b.mp4",
+        "source": "video/03-this-week/hook-b.html",
+        "captions_srt": "captions/03-this-week-hook-b.srt",
+        "captions_vtt": "captions/03-this-week-hook-b.vtt",
+        "voice_timing_guide": "audio/voice/03-this-week-hook-b.timing-guide.wav",
+        "thumbnail_cover": "exports/thumbnails/03-this-week-hook-b-cover-1080x1920.jpg"
+      }
+    },
+    {
+      "id": "04",
+      "slug": "04-budget",
+      "title": "وين راحت ميزانية الزواج؟",
+      "angle": "Money anxiety → control: paid, committed, remaining and every upcoming instalment.",
+      "duration_s": 14.6,
+      "hook_on_screen": {
+        "A": "وين راحت ميزانية الزواج؟",
+        "B": "كل ريال… تعرفين وين راح."
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.3,
+          "text": "وين راحت ميزانية الزواج؟"
+        },
+        {
+          "start": 2.6,
+          "end": 5.1,
+          "text": "القاعة، الفستان، التصوير، الورد…"
+        },
+        {
+          "start": 5.4,
+          "end": 6.9,
+          "text": "تابعي كل ريال دفعتيه،"
+        },
+        {
+          "start": 7.1,
+          "end": 8.7,
+          "text": "وكل دفعة باقي موعدها."
+        }
+      ],
+      "end_card": {
+        "tagline": "ميزانيتك قدامك دائمًا.",
+        "cta": "شوفي مفكّرتك",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 10.7
+      },
+      "music": {
+        "theme": "promise",
+        "transpose": 0,
+        "seed": 14,
+        "bed": "audio/music/04-budget.wav",
+        "vo_ready_bed": "audio/music/04-budget.vo-bed.wav"
+      },
+      "product_screens": [
+        "budget-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/04-budget.mp4",
+        "export_probe": {
+          "seconds": 14.6,
+          "bytes": 3707039
+        },
+        "source": "video/04-budget/index.html",
+        "script": "scripts/04-budget.md",
+        "captions_srt": "captions/04-budget.srt",
+        "captions_vtt": "captions/04-budget.vtt",
+        "voice_timing_guide": "audio/voice/04-budget.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/04-budget-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/04-budget-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/04-budget-strip.jpg"
+      },
+      "alternate_hook_b": {
+        "replaces_first_seconds": 3.1,
+        "voiceover_line": {
+          "start": 0.2,
+          "end": 2.3,
+          "text": "كل ريال تدفعينه… تعرفين وين راح."
+        },
+        "export": "exports/reels-alternates/04-budget-hook-b.mp4",
+        "source": "video/04-budget/hook-b.html",
+        "captions_srt": "captions/04-budget-hook-b.srt",
+        "captions_vtt": "captions/04-budget-hook-b.vtt",
+        "voice_timing_guide": "audio/voice/04-budget-hook-b.timing-guide.wav",
+        "thumbnail_cover": "exports/thumbnails/04-budget-hook-b-cover-1080x1920.jpg"
+      }
+    },
+    {
+      "id": "05",
+      "slug": "05-payments",
+      "title": "دفعة المصورة بعد ٣ أيام.",
+      "angle": "Reminders: payments and appointments surface before they are missed.",
+      "duration_s": 13.8,
+      "hook_on_screen": {
+        "A": "دفعة المصورة بعد ٣ أيام."
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.1,
+          "text": "دفعة المصورة بعد ٣ أيام."
+        },
+        {
+          "start": 2.4,
+          "end": 4.8,
+          "text": "ما عاد تحتاجين تحفظين كل موعد براسك."
+        },
+        {
+          "start": 5.1,
+          "end": 7.2,
+          "text": "مفكّرتك تذكرك بالمواعيد والدفعات"
+        },
+        {
+          "start": 7.4,
+          "end": 8.5,
+          "text": "قبل لا تفوتك."
+        }
+      ],
+      "end_card": {
+        "tagline": "ولا موعد يُنسى.",
+        "cta": "ابدئي رحلة زفافك",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 10.1
+      },
+      "music": {
+        "theme": "golden",
+        "transpose": 0,
+        "seed": 15,
+        "bed": "audio/music/05-payments.wav",
+        "vo_ready_bed": "audio/music/05-payments.vo-bed.wav"
+      },
+      "product_screens": [
+        "dashboard-tall.png",
+        "budget-tall.png",
+        "calendar-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/05-payments.mp4",
+        "export_probe": {
+          "seconds": 13.8,
+          "bytes": 3582781
+        },
+        "source": "video/05-payments/index.html",
+        "script": "scripts/05-payments.md",
+        "captions_srt": "captions/05-payments.srt",
+        "captions_vtt": "captions/05-payments.vtt",
+        "voice_timing_guide": "audio/voice/05-payments.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/05-payments-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/05-payments-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/05-payments-strip.jpg"
+      }
+    },
+    {
+      "id": "06",
+      "slug": "06-guests",
+      "title": "مين للحين ما رد على الدعوة؟",
+      "angle": "RSVP clarity: invited, confirmed, pending — the family question answered.",
+      "duration_s": 14.2,
+      "hook_on_screen": {
+        "A": "مين للحين ما رد على الدعوة؟"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.3,
+          "text": "مين للحين ما رد على الدعوة؟"
+        },
+        {
+          "start": 2.6,
+          "end": 3.4,
+          "text": "مين دعيتِ؟"
+        },
+        {
+          "start": 3.6,
+          "end": 4.3,
+          "text": "مين أكد؟"
+        },
+        {
+          "start": 4.5,
+          "end": 5.6,
+          "text": "ومين للحين ما رد؟"
+        },
+        {
+          "start": 5.9,
+          "end": 6.9,
+          "text": "كلها قدامك."
+        }
+      ],
+      "end_card": {
+        "tagline": "ضيوفك… مرتبين 🤍",
+        "cta": "ابدئي الآن على OneClick",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 10.7
+      },
+      "music": {
+        "theme": "morning",
+        "transpose": 2,
+        "seed": 16,
+        "bed": "audio/music/06-guests.wav",
+        "vo_ready_bed": "audio/music/06-guests.vo-bed.wav"
+      },
+      "product_screens": [
+        "guests-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/06-guests.mp4",
+        "export_probe": {
+          "seconds": 14.2,
+          "bytes": 3502173
+        },
+        "source": "video/06-guests/index.html",
+        "script": "scripts/06-guests.md",
+        "captions_srt": "captions/06-guests.srt",
+        "captions_vtt": "captions/06-guests.vtt",
+        "voice_timing_guide": "audio/voice/06-guests.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/06-guests-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/06-guests-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/06-guests-strip.jpg"
+      }
+    },
+    {
+      "id": "07",
+      "slug": "07-vendors",
+      "title": "قاعة؟ مصورة؟ ميكب؟ ورد؟",
+      "angle": "Vendor chaos → one contact book with price, deposit and what is left to pay.",
+      "duration_s": 14.0,
+      "hook_on_screen": {
+        "A": "قاعة؟ مصورة؟ ميكب؟ ورد؟"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.8,
+          "text": "قاعة؟ مصورة؟ ميكب؟ ورد؟"
+        },
+        {
+          "start": 3.1,
+          "end": 5.8,
+          "text": "كل مورد، رقمه، سعره، العربون والباقي…"
+        },
+        {
+          "start": 6.0,
+          "end": 7.0,
+          "text": "بمكان واحد."
+        }
+      ],
+      "end_card": {
+        "tagline": "كل تفاصيل زفافك في مكانها.",
+        "cta": "اكتشفي مفكّرتك الآن",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 10.5
+      },
+      "music": {
+        "theme": "promise",
+        "transpose": 2,
+        "seed": 17,
+        "bed": "audio/music/07-vendors.wav",
+        "vo_ready_bed": "audio/music/07-vendors.vo-bed.wav"
+      },
+      "product_screens": [
+        "vendors-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/07-vendors.mp4",
+        "export_probe": {
+          "seconds": 14.0,
+          "bytes": 3646220
+        },
+        "source": "video/07-vendors/index.html",
+        "script": "scripts/07-vendors.md",
+        "captions_srt": "captions/07-vendors.srt",
+        "captions_vtt": "captions/07-vendors.vtt",
+        "voice_timing_guide": "audio/voice/07-vendors.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/07-vendors-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/07-vendors-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/07-vendors-strip.jpg"
+      }
+    },
+    {
+      "id": "08",
+      "slug": "08-forgotten-details",
+      "title": "في أشياء ما نتذكرها إلا متأخر…",
+      "angle": "The small things (emergency kit, backup shoes, documents) remembered ahead of the day.",
+      "duration_s": 15.0,
+      "hook_on_screen": {
+        "A": "في أشياء ما نتذكرها إلا متأخر…"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.6,
+          "text": "في أشياء ما نتذكرها إلا متأخر…"
+        },
+        {
+          "start": 2.9,
+          "end": 4.1,
+          "text": "في تفاصيل صغيرة…"
+        },
+        {
+          "start": 4.3,
+          "end": 6.3,
+          "text": "بس يوم الزواج تصير مرّة مهمة."
+        },
+        {
+          "start": 6.6,
+          "end": 9.1,
+          "text": "عشان كذا مفكّرتك تذكرك فيها قبل يومك."
+        }
+      ],
+      "end_card": {
+        "tagline": "ولا تفصيلة تُنسى.",
+        "cta": "رتّبي يومك من اليوم",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 11.3
+      },
+      "music": {
+        "theme": "veil",
+        "transpose": 2,
+        "seed": 18,
+        "bed": "audio/music/08-forgotten-details.wav",
+        "vo_ready_bed": "audio/music/08-forgotten-details.vo-bed.wav"
+      },
+      "product_screens": [
+        "day-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/08-forgotten-details.mp4",
+        "export_probe": {
+          "seconds": 15.0,
+          "bytes": 3566867
+        },
+        "source": "video/08-forgotten-details/index.html",
+        "script": "scripts/08-forgotten-details.md",
+        "captions_srt": "captions/08-forgotten-details.srt",
+        "captions_vtt": "captions/08-forgotten-details.vtt",
+        "voice_timing_guide": "audio/voice/08-forgotten-details.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/08-forgotten-details-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/08-forgotten-details-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/08-forgotten-details-strip.jpg"
+      }
+    },
+    {
+      "id": "09",
+      "slug": "09-journey",
+      "title": "مو بس يوم الزواج…",
+      "angle": "Whole-journey scope: milka, henna, wedding, sabahiya and honeymoon in one plan.",
+      "duration_s": 14.8,
+      "hook_on_screen": {
+        "A": "مو بس يوم الزواج…"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 1.7,
+          "text": "مو بس يوم الزواج…"
+        },
+        {
+          "start": 2.0,
+          "end": 4.0,
+          "text": "من الملكة، للحناء، ليومك،"
+        },
+        {
+          "start": 4.2,
+          "end": 5.4,
+          "text": "وحتى شهر العسل…"
+        },
+        {
+          "start": 5.7,
+          "end": 7.7,
+          "text": "رحلتك كلها مرتبة معك."
+        }
+      ],
+      "end_card": {
+        "tagline": "رحلتك كاملة 🤍",
+        "cta": "ابدئي رحلة زفافك",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 11.1
+      },
+      "music": {
+        "theme": "henna",
+        "transpose": 0,
+        "seed": 19,
+        "bed": "audio/music/09-journey.wav",
+        "vo_ready_bed": "audio/music/09-journey.vo-bed.wav"
+      },
+      "product_screens": [
+        "honeymoon-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/09-journey.mp4",
+        "export_probe": {
+          "seconds": 14.8,
+          "bytes": 3504407
+        },
+        "source": "video/09-journey/index.html",
+        "script": "scripts/09-journey.md",
+        "captions_srt": "captions/09-journey.srt",
+        "captions_vtt": "captions/09-journey.vtt",
+        "voice_timing_guide": "audio/voice/09-journey.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/09-journey-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/09-journey-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/09-journey-strip.jpg"
+      }
+    },
+    {
+      "id": "10",
+      "slug": "10-progress",
+      "title": "٤٢٪ جاهزة",
+      "angle": "Momentum: every finished step visibly moves her closer.",
+      "duration_s": 13.2,
+      "hook_on_screen": {
+        "A": "٤٢٪ جاهزة"
+      },
+      "voiceover": [
+        {
+          "start": 0.4,
+          "end": 2.2,
+          "text": "كل ما تخلصين خطوة…"
+        },
+        {
+          "start": 2.5,
+          "end": 4.5,
+          "text": "تشوفين نفسك أقرب ليومك."
+        }
+      ],
+      "end_card": {
+        "tagline": "شوفي جاهزيتك تكبر.",
+        "cta": "ابدئي الآن على OneClick",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 9.7
+      },
+      "music": {
+        "theme": "garden",
+        "transpose": 3,
+        "seed": 20,
+        "bed": "audio/music/10-progress.wav",
+        "vo_ready_bed": "audio/music/10-progress.vo-bed.wav"
+      },
+      "product_screens": [
+        "dashboard-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/10-progress.mp4",
+        "export_probe": {
+          "seconds": 13.2,
+          "bytes": 2921456
+        },
+        "source": "video/10-progress/index.html",
+        "script": "scripts/10-progress.md",
+        "captions_srt": "captions/10-progress.srt",
+        "captions_vtt": "captions/10-progress.vtt",
+        "voice_timing_guide": "audio/voice/10-progress.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/10-progress-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/10-progress-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/10-progress-strip.jpg"
+      }
+    },
+    {
+      "id": "11",
+      "slug": "11-before-after",
+      "title": "قبل؟ ملاحظات بكل مكان. بعد؟ كل شيء واضح.",
+      "angle": "Before/after contrast: scattered notes vs. done / left / next.",
+      "duration_s": 14.0,
+      "hook_on_screen": {
+        "A": "قبل؟ / بعد؟"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 0.9,
+          "text": "قبل؟"
+        },
+        {
+          "start": 1.1,
+          "end": 2.5,
+          "text": "ملاحظات بكل مكان."
+        },
+        {
+          "start": 2.8,
+          "end": 3.4,
+          "text": "بعد؟"
+        },
+        {
+          "start": 3.6,
+          "end": 4.8,
+          "text": "كل شيء واضح…"
+        },
+        {
+          "start": 5.0,
+          "end": 7.4,
+          "text": "وش خلصتي، وش باقي، ووش بعده."
+        }
+      ],
+      "end_card": {
+        "tagline": "التحضير صار أهدأ.",
+        "cta": "اكتشفي مفكّرتك الآن",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 10.5
+      },
+      "music": {
+        "theme": "veil",
+        "transpose": -2,
+        "seed": 21,
+        "bed": "audio/music/11-before-after.wav",
+        "vo_ready_bed": "audio/music/11-before-after.vo-bed.wav"
+      },
+      "product_screens": [
+        "dashboard-tall.png",
+        "checklist-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/11-before-after.mp4",
+        "export_probe": {
+          "seconds": 14.0,
+          "bytes": 3522653
+        },
+        "source": "video/11-before-after/index.html",
+        "script": "scripts/11-before-after.md",
+        "captions_srt": "captions/11-before-after.srt",
+        "captions_vtt": "captions/11-before-after.vtt",
+        "voice_timing_guide": "audio/voice/11-before-after.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/11-before-after-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/11-before-after-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/11-before-after-strip.jpg"
+      }
+    },
+    {
+      "id": "12",
+      "slug": "12-wedding-week",
+      "title": "باقي ٧ أيام",
+      "angle": "Emotional permission: the final week is for enjoying, the planner holds the rest.",
+      "duration_s": 14.8,
+      "hook_on_screen": {
+        "A": "باقي ٧ أيام"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 1.7,
+          "text": "باقي أسبوع على يومك؟"
+        },
+        {
+          "start": 2.0,
+          "end": 4.4,
+          "text": "هالأسبوع مو وقت تفكرين وش نسيتي…"
+        },
+        {
+          "start": 4.6,
+          "end": 5.6,
+          "text": "وقت تستمتعين."
+        },
+        {
+          "start": 5.9,
+          "end": 7.8,
+          "text": "خلي مفكّرتك ترتب الباقي."
+        }
+      ],
+      "end_card": {
+        "tagline": "Wedding Week 🤍",
+        "cta": "رتّبي يومك من اليوم",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 11.1
+      },
+      "music": {
+        "theme": "golden",
+        "transpose": 2,
+        "seed": 22,
+        "bed": "audio/music/12-wedding-week.wav",
+        "vo_ready_bed": "audio/music/12-wedding-week.vo-bed.wav"
+      },
+      "product_screens": [
+        "day-tall.png"
+      ],
+      "scenario_note": "«باقي ٧ أيام» is an illustrative last-week scenario; every screen shown is real.",
+      "files": {
+        "export": "exports/reels/12-wedding-week.mp4",
+        "export_probe": {
+          "seconds": 14.8,
+          "bytes": 3618635
+        },
+        "source": "video/12-wedding-week/index.html",
+        "script": "scripts/12-wedding-week.md",
+        "captions_srt": "captions/12-wedding-week.srt",
+        "captions_vtt": "captions/12-wedding-week.vtt",
+        "voice_timing_guide": "audio/voice/12-wedding-week.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/12-wedding-week-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/12-wedding-week-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/12-wedding-week-strip.jpg"
+      }
+    },
+    {
+      "id": "13",
+      "slug": "13-bridal-shopping",
+      "title": "جهازك… وش باقي منه؟",
+      "angle": "Trousseau shopping: tick what she bought, see what is left.",
+      "duration_s": 14.2,
+      "hook_on_screen": {
+        "A": "جهازك… وش باقي منه؟"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 3.4,
+          "text": "فستانك، كعبك، عطرك، شنطتك وإكسسواراتك…"
+        },
+        {
+          "start": 3.7,
+          "end": 5.1,
+          "text": "علمي على اللي أخذتيه،"
+        },
+        {
+          "start": 5.3,
+          "end": 6.7,
+          "text": "وشوفي وش باقي لك."
+        }
+      ],
+      "end_card": {
+        "tagline": "كل تجهيزاتك معك.",
+        "cta": "شوفي مفكّرتك",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 10.7
+      },
+      "music": {
+        "theme": "morning",
+        "transpose": -2,
+        "seed": 23,
+        "bed": "audio/music/13-bridal-shopping.wav",
+        "vo_ready_bed": "audio/music/13-bridal-shopping.vo-bed.wav"
+      },
+      "product_screens": [
+        "closet-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/13-bridal-shopping.mp4",
+        "export_probe": {
+          "seconds": 14.2,
+          "bytes": 3744205
+        },
+        "source": "video/13-bridal-shopping/index.html",
+        "script": "scripts/13-bridal-shopping.md",
+        "captions_srt": "captions/13-bridal-shopping.srt",
+        "captions_vtt": "captions/13-bridal-shopping.vtt",
+        "voice_timing_guide": "audio/voice/13-bridal-shopping.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/13-bridal-shopping-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/13-bridal-shopping-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/13-bridal-shopping-strip.jpg"
+      }
+    },
+    {
+      "id": "14",
+      "slug": "14-new-home",
+      "title": "زواج… وتجهيز بيت بنفس الوقت؟",
+      "angle": "Double load: wedding + new home in one planner.",
+      "duration_s": 15.0,
+      "hook_on_screen": {
+        "A": "زواج… وتجهيز بيت بنفس الوقت؟"
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 2.4,
+          "text": "زواج… وتجهيز بيت بنفس الوقت؟"
+        },
+        {
+          "start": 2.7,
+          "end": 5.0,
+          "text": "إذا مع تجهيز الزواج تجهزين بيتك بعد…"
+        },
+        {
+          "start": 5.2,
+          "end": 6.6,
+          "text": "لا تشيلينهم كلهم براسك."
+        },
+        {
+          "start": 6.8,
+          "end": 8.2,
+          "text": "رتبي الاثنين مع بعض."
+        }
+      ],
+      "end_card": {
+        "tagline": "بيت جديد. بداية جديدة. 🤍",
+        "cta": "ابدئي رحلة زفافك",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 11.5
+      },
+      "music": {
+        "theme": "promise",
+        "transpose": -3,
+        "seed": 24,
+        "bed": "audio/music/14-new-home.wav",
+        "vo_ready_bed": "audio/music/14-new-home.vo-bed.wav"
+      },
+      "product_screens": [
+        "checklist-tall.png",
+        "home-tall.png",
+        "more-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/14-new-home.mp4",
+        "export_probe": {
+          "seconds": 15.0,
+          "bytes": 3516337
+        },
+        "source": "video/14-new-home/index.html",
+        "script": "scripts/14-new-home.md",
+        "captions_srt": "captions/14-new-home.srt",
+        "captions_vtt": "captions/14-new-home.vtt",
+        "voice_timing_guide": "audio/voice/14-new-home.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/14-new-home-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/14-new-home-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/14-new-home-strip.jpg"
+      }
+    },
+    {
+      "id": "15",
+      "slug": "15-hero",
+      "title": "يا عروسة… شوفي وش يصير لما كل شيء يكون مرتب.",
+      "angle": "Flagship: the whole journey in one premium sweep, bride → every feature → the day.",
+      "duration_s": 17.8,
+      "hook_on_screen": {
+        "A": "يا عروسة… شوفي وش يصير لما كل شيء يكون مرتب.",
+        "B": "عروسة ٢٠٢٧؟ هذي رحلتك… كاملة."
+      },
+      "voiceover": [
+        {
+          "start": 0.2,
+          "end": 3.4,
+          "text": "يا عروسة… شوفي وش يصير لما كل شيء يكون مرتب."
+        },
+        {
+          "start": 3.7,
+          "end": 4.7,
+          "text": "مو مجرد قائمة."
+        },
+        {
+          "start": 5.0,
+          "end": 6.3,
+          "text": "هذه رحلتك كاملة…"
+        },
+        {
+          "start": 6.6,
+          "end": 7.6,
+          "text": "من أول تجهيز"
+        },
+        {
+          "start": 7.8,
+          "end": 9.0,
+          "text": "إلى أجمل يوم."
+        }
+      ],
+      "end_card": {
+        "tagline": "رحلتك كاملة… بمكان واحد",
+        "cta": "اكتشفي مفكّرتك الآن",
+        "line": "الرابط في البايو",
+        "brand": "مفكّرة عروسة العُمر — على OneClick",
+        "starts_at_s": 14.0
+      },
+      "music": {
+        "theme": "golden",
+        "transpose": 0,
+        "seed": 25,
+        "bed": "audio/music/15-hero.wav",
+        "vo_ready_bed": "audio/music/15-hero.vo-bed.wav"
+      },
+      "product_screens": [
+        "dashboard-tall.png",
+        "budget-tall.png",
+        "calendar-tall.png",
+        "guests-tall.png",
+        "honeymoon-tall.png",
+        "day-tall.png"
+      ],
+      "scenario_note": null,
+      "files": {
+        "export": "exports/reels/15-hero.mp4",
+        "export_probe": {
+          "seconds": 17.8,
+          "bytes": 6783369
+        },
+        "source": "video/15-hero/index.html",
+        "script": "scripts/15-hero.md",
+        "captions_srt": "captions/15-hero.srt",
+        "captions_vtt": "captions/15-hero.vtt",
+        "voice_timing_guide": "audio/voice/15-hero.timing-guide.wav",
+        "voice_recording": null,
+        "thumbnail_cover": "exports/thumbnails/15-hero-cover-1080x1920.jpg",
+        "thumbnail_grid": "exports/thumbnails/15-hero-grid-1080x1350.jpg",
+        "preview_strip": "exports/thumbnails/previews/15-hero-strip.jpg"
+      },
+      "alternate_hook_b": {
+        "replaces_first_seconds": 3.6,
+        "voiceover_line": {
+          "start": 0.2,
+          "end": 3.4,
+          "text": "عروسة ٢٠٢٧؟ هذي رحلتك… كاملة."
+        },
+        "export": "exports/reels-alternates/15-hero-hook-b.mp4",
+        "source": "video/15-hero/hook-b.html",
+        "captions_srt": "captions/15-hero-hook-b.srt",
+        "captions_vtt": "captions/15-hero-hook-b.vtt",
+        "voice_timing_guide": "audio/voice/15-hero-hook-b.timing-guide.wav",
+        "thumbnail_cover": "exports/thumbnails/15-hero-hook-b-cover-1080x1920.jpg"
+      }
+    }
+  ],
+  "statics": [
+    {
+      "id": "01",
+      "slug": "01-hero",
+      "headline": "زواجك له ألف تفصيلة… خليها كلها بمكان واحد.",
+      "bonus": false,
+      "files": {
+        "feed_4x5_png": "exports/images/01-hero-feed-1080x1350.png",
+        "feed_4x5_jpg": "exports/images/01-hero-feed-1080x1350.jpg",
+        "story_9x16_png": "exports/images/01-hero-story-1080x1920.png",
+        "story_9x16_jpg": "exports/images/01-hero-story-1080x1920.jpg",
+        "source_feed": "static/01-hero/feed-4x5.html",
+        "source_story": "static/01-hero/story-9x16.html"
+      }
+    },
+    {
+      "id": "02",
+      "slug": "02-countdown",
+      "headline": "١٨٧ باقي على زفافك · ٤٢٪ جاهزة",
+      "bonus": false,
+      "files": {
+        "feed_4x5_png": "exports/images/02-countdown-feed-1080x1350.png",
+        "feed_4x5_jpg": "exports/images/02-countdown-feed-1080x1350.jpg",
+        "story_9x16_png": "exports/images/02-countdown-story-1080x1920.png",
+        "story_9x16_jpg": "exports/images/02-countdown-story-1080x1920.jpg",
+        "source_feed": "static/02-countdown/feed-4x5.html",
+        "source_story": "static/02-countdown/story-9x16.html"
+      }
+    },
+    {
+      "id": "03",
+      "slug": "03-this-week",
+      "headline": "وش باقي عليك هالأسبوع؟",
+      "bonus": false,
+      "files": {
+        "feed_4x5_png": "exports/images/03-this-week-feed-1080x1350.png",
+        "feed_4x5_jpg": "exports/images/03-this-week-feed-1080x1350.jpg",
+        "story_9x16_png": "exports/images/03-this-week-story-1080x1920.png",
+        "story_9x16_jpg": "exports/images/03-this-week-story-1080x1920.jpg",
+        "source_feed": "static/03-this-week/feed-4x5.html",
+        "source_story": "static/03-this-week/story-9x16.html"
+      }
+    },
+    {
+      "id": "04",
+      "slug": "04-before-after",
+      "headline": "من الفوضى… إلى رحلة مرتبة.",
+      "bonus": false,
+      "files": {
+        "feed_4x5_png": "exports/images/04-before-after-feed-1080x1350.png",
+        "feed_4x5_jpg": "exports/images/04-before-after-feed-1080x1350.jpg",
+        "story_9x16_png": "exports/images/04-before-after-story-1080x1920.png",
+        "story_9x16_jpg": "exports/images/04-before-after-story-1080x1920.jpg",
+        "source_feed": "static/04-before-after/feed-4x5.html",
+        "source_story": "static/04-before-after/story-9x16.html"
+      }
+    },
+    {
+      "id": "05",
+      "slug": "05-checklist",
+      "headline": "مو لازم تتذكرين كل شيء. إحنا تذكرناه لك.",
+      "bonus": false,
+      "files": {
+        "feed_4x5_png": "exports/images/05-checklist-feed-1080x1350.png",
+        "feed_4x5_jpg": "exports/images/05-checklist-feed-1080x1350.jpg",
+        "story_9x16_png": "exports/images/05-checklist-story-1080x1920.png",
+        "story_9x16_jpg": "exports/images/05-checklist-story-1080x1920.jpg",
+        "source_feed": "static/05-checklist/feed-4x5.html",
+        "source_story": "static/05-checklist/story-9x16.html"
+      }
+    },
+    {
+      "id": "06",
+      "slug": "06-full-journey",
+      "headline": "من الملكة إلى شهر العسل… كل رحلتك معك.",
+      "bonus": false,
+      "files": {
+        "feed_4x5_png": "exports/images/06-full-journey-feed-1080x1350.png",
+        "feed_4x5_jpg": "exports/images/06-full-journey-feed-1080x1350.jpg",
+        "story_9x16_png": "exports/images/06-full-journey-story-1080x1920.png",
+        "story_9x16_jpg": "exports/images/06-full-journey-story-1080x1920.jpg",
+        "source_feed": "static/06-full-journey/feed-4x5.html",
+        "source_story": "static/06-full-journey/story-9x16.html"
+      }
+    },
+    {
+      "id": "07",
+      "slug": "07-budget",
+      "headline": "استمتعي بالتجهيز… بدون ما تضيع منك الميزانية.",
+      "bonus": true,
+      "files": {
+        "feed_4x5_png": "exports/images/07-budget-feed-1080x1350.png",
+        "feed_4x5_jpg": "exports/images/07-budget-feed-1080x1350.jpg",
+        "story_9x16_png": "exports/images/07-budget-story-1080x1920.png",
+        "story_9x16_jpg": "exports/images/07-budget-story-1080x1920.jpg",
+        "source_feed": "static/07-budget/feed-4x5.html",
+        "source_story": "static/07-budget/story-9x16.html"
+      }
+    }
+  ],
+  "cta_rotation": [
+    "اكتشفي مفكّرتك الآن",
+    "ابدئي رحلة زفافك",
+    "رتّبي يومك من اليوم",
+    "شوفي مفكّرتك",
+    "ابدئي الآن على OneClick",
+    "ابدئي رحلتك"
+  ],
+  "policy": {
+    "no_price_or_free_claims": true,
+    "no_purchase_language": true,
+    "emoji_max": "one small heart/sparkle (drawn as SVG on screen)"
+  }
+}

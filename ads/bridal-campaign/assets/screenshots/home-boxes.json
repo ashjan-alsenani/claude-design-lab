@@ -1,0 +1,227 @@
+[
+ {
+  "tag": "h1",
+  "cls": "text-[2rem] font-bold leading-[1.2] text",
+  "x": 176,
+  "y": 101,
+  "w": 198,
+  "h": 42,
+  "text": "البيت الجديد"
+ },
+ {
+  "tag": "ul",
+  "cls": "grid gap-2 md:grid-cols-2",
+  "x": 16,
+  "y": 348,
+  "w": 358,
+  "h": 2002,
+  "text": "السرير والمرتبة غرفة النوم أطقم المفارش × ٣ المفار"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 348,
+  "w": 358,
+  "h": 83,
+  "text": "السرير والمرتبة غرفة النوم"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 440,
+  "w": 358,
+  "h": 83,
+  "text": "أطقم المفارش × ٣ المفارش"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 531,
+  "w": 358,
+  "h": 83,
+  "text": "المخدات واللحاف المفارش"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 622,
+  "w": 358,
+  "h": 83,
+  "text": "مناشف الحمام واليد × ٨ المناشف · ٢٦٠ ريال سعودي وص"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 714,
+  "w": 358,
+  "h": 83,
+  "text": "إكسسوارات الحمام الحمام"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 805,
+  "w": 358,
+  "h": 83,
+  "text": "أدوات المطبخ المطبخ"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 896,
+  "w": 358,
+  "h": 83,
+  "text": "القدور والمقالي أواني الطبخ"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 988,
+  "w": 358,
+  "h": 83,
+  "text": "الثلاجة الأجهزة · ١٩٠ ريال سعودي"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1079,
+  "w": 358,
+  "h": 83,
+  "text": "الغسالة الأجهزة"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1171,
+  "w": 358,
+  "h": 83,
+  "text": "الفرن والمايكروويف الأجهزة"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1262,
+  "w": 358,
+  "h": 83,
+  "text": "آلة القهوة الأجهزة"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1353,
+  "w": 358,
+  "h": 83,
+  "text": "طقم السفرة أطقم التقديم · ١٢٠ ريال سعودي وصل هدية"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1445,
+  "w": 358,
+  "h": 83,
+  "text": "الكاسات والفناجين الكاسات"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1536,
+  "w": 358,
+  "h": 83,
+  "text": "طقم القهوة العربية (دلة وفناجين) أطقم التقديم"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1627,
+  "w": 358,
+  "h": 83,
+  "text": "جلسة الصالة الصالة"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1719,
+  "w": 358,
+  "h": 83,
+  "text": "السجاد والستائر الصالة · ٢٦٠ ريال سعودي"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1810,
+  "w": 358,
+  "h": 83,
+  "text": "طاولة الطعام السفرة"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1902,
+  "w": 358,
+  "h": 83,
+  "text": "المكواة وسلال الغسيل الغسيل"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 1993,
+  "w": 358,
+  "h": 83,
+  "text": "أدوات التنظيف التنظيف"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 2084,
+  "w": 358,
+  "h": 83,
+  "text": "منظمات الخزائن منظمات · ١٩٠ ريال سعودي وصل هدية"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 2176,
+  "w": 358,
+  "h": 83,
+  "text": "البخور والمبخرة البخور والمعطرات"
+ },
+ {
+  "tag": "li",
+  "cls": "flex items-center gap-1.5 rounded-[16px]",
+  "x": 16,
+  "y": 2267,
+  "w": 358,
+  "h": 83,
+  "text": "المستلزمات الشخصية شخصي"
+ },
+ {
+  "tag": "ul",
+  "cls": "mx-auto grid max-w-lg grid-cols-5",
+  "x": 0,
+  "y": 3136,
+  "w": 390,
+  "h": 64,
+  "text": "الرئيسية المهام الميزانية التقويم المزيد"
+ }
+]

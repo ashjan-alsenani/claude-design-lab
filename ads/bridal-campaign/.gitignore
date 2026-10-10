@@ -1,0 +1,5 @@
+# Heavy, fully reproducible media (see README → Rebuild). Delivered separately.
+exports/
+audio/music/*.wav
+audio/voice/*.wav
+tools/__pycache__/

@@ -1,0 +1,236 @@
+[
+ {
+  "tag": "ul",
+  "cls": "grid grid-cols-2 gap-3 sm:grid-cols-3",
+  "x": 16,
+  "y": 167,
+  "w": 358,
+  "h": 732,
+  "text": "الموردون المدعوون العروس خزانة العروس الجهاز البيت"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 201,
+  "y": 167,
+  "w": 173,
+  "h": 112,
+  "text": "الموردون"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 201,
+  "y": 167,
+  "w": 173,
+  "h": 112,
+  "text": "الموردون"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 16,
+  "y": 167,
+  "w": 173,
+  "h": 112,
+  "text": "المدعوون"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 16,
+  "y": 167,
+  "w": 173,
+  "h": 112,
+  "text": "المدعوون"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 201,
+  "y": 291,
+  "w": 173,
+  "h": 112,
+  "text": "العروس"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 201,
+  "y": 291,
+  "w": 173,
+  "h": 112,
+  "text": "العروس"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 16,
+  "y": 291,
+  "w": 173,
+  "h": 112,
+  "text": "خزانة العروس"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 16,
+  "y": 291,
+  "w": 173,
+  "h": 112,
+  "text": "خزانة العروس"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 201,
+  "y": 415,
+  "w": 173,
+  "h": 112,
+  "text": "الجهاز"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 201,
+  "y": 415,
+  "w": 173,
+  "h": 112,
+  "text": "الجهاز"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 16,
+  "y": 415,
+  "w": 173,
+  "h": 112,
+  "text": "البيت الجديد"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 16,
+  "y": 415,
+  "w": 173,
+  "h": 112,
+  "text": "البيت الجديد"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 201,
+  "y": 539,
+  "w": 173,
+  "h": 112,
+  "text": "شهر العسل"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 201,
+  "y": 537,
+  "w": 173,
+  "h": 112,
+  "text": "شهر العسل"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 16,
+  "y": 539,
+  "w": 173,
+  "h": 112,
+  "text": "يوم الزفاف"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 16,
+  "y": 539,
+  "w": 173,
+  "h": 112,
+  "text": "يوم الزفاف"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 201,
+  "y": 663,
+  "w": 173,
+  "h": 112,
+  "text": "الإلهام"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 201,
+  "y": 663,
+  "w": 173,
+  "h": 112,
+  "text": "الإلهام"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 16,
+  "y": 663,
+  "w": 173,
+  "h": 112,
+  "text": "المستندات"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 16,
+  "y": 663,
+  "w": 173,
+  "h": 112,
+  "text": "المستندات"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 201,
+  "y": 787,
+  "w": 173,
+  "h": 112,
+  "text": "الإعدادات"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 201,
+  "y": 787,
+  "w": 173,
+  "h": 112,
+  "text": "الإعدادات"
+ },
+ {
+  "tag": "li",
+  "cls": "",
+  "x": 16,
+  "y": 787,
+  "w": 173,
+  "h": 112,
+  "text": "English"
+ },
+ {
+  "tag": "a",
+  "cls": "bj-icon-hover flex h-28 flex-col justify",
+  "x": 16,
+  "y": 787,
+  "w": 173,
+  "h": 112,
+  "text": "English"
+ },
+ {
+  "tag": "ul",
+  "cls": "mx-auto grid max-w-lg grid-cols-5",
+  "x": 0,
+  "y": 3136,
+  "w": 390,
+  "h": 64,
+  "text": "الرئيسية المهام الميزانية التقويم المزيد"
+ }
+]
