@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.14.0 — 2026-10-10 — Faster pages, instant clicks, Clicky cursor, safer saves
+Measured with Lighthouse (mobile, local production build, median of runs):
+home performance 83 → 95, first paint 1.5 s → 0.9 s, simulated LCP 4.1 s → 2.8 s, layout shift
+0.063 → 0; accessibility home 95 → 100, product list 98 → 100, product page 92 → 100.
+- Entrance motion is CSS only (`Reveal`): first-screen text is painted with the HTML instead of
+  waiting for JavaScript; lower sections reveal on scroll where the browser supports it.
+- Brand fonts are preloaded and cached for a year (`public/brand/fonts`), so text no longer jumps.
+- Decorative Clicky copies no longer blink forever (only the header logo does); the home product
+  parade shows 12 products instead of every product twice.
+- Server functions run in Singapore (`vercel.json` → `sin1`), next to the database, instead of
+  Washington: pages that read the database no longer cross the world twice per request.
+- A thin progress bar answers every internal click at once.
+- Clicky cursors on mouse/trackpad devices (arrow + winking face on links); touch, text fields,
+  disabled controls and the bridal product keep their usual cursors.
+- Accessibility: readable colored small text (`hueText`/`inkTint`), heading order in demos, product
+  list and product page, valid product specs list, language link name, 32 px footer/cookie targets.
+- Data safety: planner saves use compare-and-swap (`putIfVersion`) and retry on conflict, so two
+  devices saving at once never overwrite each other; the database allows one active newsletter /
+  notify-me sign-up per email (`20261010000000_unique_signups.sql`, applied to production).
+
 ## 0.13.2 — 2026-10-10 — Email cannot fail silently again
 - Cause of the outage: `RESEND_API_KEY` is no longer among the project's Vercel variables (the other
   production variables are intact), so the live site took the "email not configured" path and

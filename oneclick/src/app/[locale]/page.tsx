@@ -45,7 +45,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     }));
 
   const featured = products.filter((p) => p.status !== "coming-soon").slice(0, 5);
-  const parade = products.filter((p) => p.price !== null);
+  // The marquee repeats its row once, so every item costs twice; 12 fill the widest screen.
+  const parade = products.filter((p) => p.price !== null).sort((a, b) => Number(!!b.featured) - Number(!!a.featured)).slice(0, 12);
   const homeFaqs = faqs.filter((f) => ["what", "app", "lifetime", "payment", "languages"].includes(f.id)).map((f) => ({ q: tr(f.q, locale), a: tr(f.a, locale) }));
   const bento = categories.filter((c) => c.slug !== "templates-downloads").slice(0, 7);
 
@@ -55,13 +56,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <section className="relative overflow-hidden">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 sm:px-6 md:pt-16 lg:min-h-[min(780px,calc(100dvh-4rem))] lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:px-8 lg:pb-20">
           <div className="max-w-xl">
-            <Reveal>
+            <Reveal above>
               <HeroTitle full={d.home.heroTitle} prefix={d.home.heroPrefix} words={d.home.heroWords} />
             </Reveal>
-            <Reveal delay={0.08}>
+            <Reveal above delay={0.08}>
               <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-ink-soft sm:text-xl">{d.home.heroSub}</p>
             </Reveal>
-            <Reveal delay={0.16}>
+            <Reveal above delay={0.16}>
               <div className="mt-9 flex flex-wrap gap-3">
                 <ButtonLink href={`/${locale}/products`} size="lg">
                   {d.home.heroCta}

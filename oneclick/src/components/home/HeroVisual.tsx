@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { inkTint } from "@/lib/hues";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckRow, ProgressRing } from "@/framework";
 import { LogoMark } from "@/components/brand/Logo";
@@ -102,7 +103,7 @@ export function HeroVisual({ locale }: { locale: Locale }) {
                 color={item.hue}
                 onToggle={() => setDone((d) => ({ ...d, [item.id]: !d[item.id] }))}
                 meta={
-                  <span className="rounded-full px-2 py-0.5 text-[11px] font-medium" style={{ color: item.hue, background: `color-mix(in oklab, ${item.hue} 12%, transparent)` }}>
+                  <span className="rounded-full px-2 py-0.5 text-[11px] font-medium" style={{ color: inkTint(item.hue), background: `color-mix(in oklab, ${item.hue} 12%, transparent)` }}>
                     {item.tag[locale]}
                   </span>
                 }

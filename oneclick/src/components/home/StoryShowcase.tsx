@@ -7,7 +7,7 @@ import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import type { DemoId, Hue } from "@/content/types";
 import type { Locale } from "@/i18n/config";
 import { DemoById } from "@/components/demos/DemoById";
-import { hueVar } from "@/lib/hues";
+import { hueVar, inkTint } from "@/lib/hues";
 
 export type ShowcaseItem = {
   slug: string;
@@ -48,7 +48,7 @@ export function StoryShowcase({
               className="shrink-0 snap-start rounded-full border px-4 py-2 text-sm font-medium transition-colors"
               style={
                 active === i
-                  ? { borderColor: hueVar(it.hue), color: hueVar(it.hue), background: `color-mix(in oklab, ${hueVar(it.hue)} 10%, var(--oc-surface))` }
+                  ? { borderColor: hueVar(it.hue), color: inkTint(hueVar(it.hue)), background: `color-mix(in oklab, ${hueVar(it.hue)} 10%, var(--oc-surface))` }
                   : { borderColor: "var(--oc-line)", color: "var(--oc-ink-soft)" }
               }
             >
@@ -74,7 +74,7 @@ export function StoryShowcase({
               </li>
               <li>
                 <span className="absolute -start-[7px] mt-1.5 size-3 rounded-full" style={{ background: hue }} aria-hidden="true" />
-                <p className="text-sm font-medium" style={{ color: hue }}>
+                <p className="text-sm font-medium" style={{ color: inkTint(hue) }}>
                   {item.name}
                 </p>
                 <p className="mt-1 text-lg text-ink">{item.tagline}</p>

@@ -38,6 +38,8 @@ const nextConfig: NextConfig = {
     ];
     return [
       { source: "/:path*", headers: securityHeaders },
+      // Brand fonts are versioned in their file name (brand/fonts/rubik-*-v1.woff2), so they can be cached for good.
+      { source: "/brand/fonts/:file", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       ...["/:locale/account/:path*", "/:locale/account", "/:locale/app/:path*", "/:locale/admin/:path*", "/:locale/admin", "/:locale/claim", "/:locale/dev/:path*", "/:locale/checkout/:path*", "/api/download/:path*"].map((source) => ({
         source,
         headers: privateHeaders,

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import { preload } from "react-dom";
 import "../globals.css";
 import { isLocale, locales, localeMeta } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -8,6 +9,8 @@ import { Footer } from "@/components/layout/Footer";
 import { ConsentBanner } from "@/components/layout/ConsentBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { ChromeGate } from "@/components/layout/ChromeGate";
+import { NavProgress } from "@/components/layout/NavProgress";
+import { Suspense } from "react";
 import { organizationJsonLd, pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -37,6 +40,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   if (!isLocale(locale)) notFound();
   const d = getDictionary(locale);
   const meta = localeMeta[locale];
+  // Start the brand font downloads with the HTML instead of after the stylesheet (text settles sooner).
+  if (locale === "ar") preload("/brand/fonts/rubik-arabic-v1.woff2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+  preload("/brand/fonts/rubik-latin-v1.woff2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
 
   return (
     <html lang={meta.htmlLang} dir={meta.dir} suppressHydrationWarning>
@@ -44,6 +50,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
+        {/* Reads the search params, so it sits in its own Suspense boundary (pages stay static). */}
+        <Suspense fallback={null}>
+          <NavProgress />
+        </Suspense>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-on-primary"

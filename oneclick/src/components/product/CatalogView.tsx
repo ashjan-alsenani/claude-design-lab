@@ -48,9 +48,10 @@ export function CatalogView({
         </ul>
       </nav>
 
-      <p className="mt-6 text-sm text-muted" aria-live="polite">
+      {/* The count heads the product list, so each card's h3 sits under an h2. */}
+      <h2 className="mt-6 text-sm font-normal text-muted" aria-live="polite">
         {plural(locale, products.length, d.catalog.count)}
-      </p>
+      </h2>
 
       {products.length === 0 ? (
         <div className="mt-6 rounded-[var(--radius-lg)] border border-dashed border-line-strong px-6 py-16 text-center">

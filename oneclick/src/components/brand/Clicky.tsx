@@ -23,6 +23,7 @@ export function Clicky({
   color = "#12B5A6",
   body = false,
   animate = false,
+  blink = animate,
   wave = false,
   sparkle = true,
   className = "",
@@ -34,6 +35,8 @@ export function Clicky({
   color?: string;
   body?: boolean;
   animate?: boolean;
+  /** Occasional blink. Off by default for decorative copies (lists, cards, the parade). */
+  blink?: boolean;
   wave?: boolean;
   sparkle?: boolean;
   className?: string;
@@ -71,7 +74,7 @@ export function Clicky({
       )}
       <path d={BODY} fill={`url(#${id})`} />
       <path d="M20 30 Q22 16 38 13" stroke="#fff" strokeOpacity=".45" strokeWidth="5" strokeLinecap="round" fill="none" />
-      <Face mood={mood} />
+      <Face mood={mood} blink={blink} />
       {sparkle && (
         <path d="M84 2 L86.5 9.5 L94 12 L86.5 14.5 L84 22 L81.5 14.5 L74 12 L81.5 9.5 Z" fill="#FFC23D" className={animate ? "clicky-twinkle" : undefined} />
       )}
@@ -94,12 +97,12 @@ const eye = (cx: number) => (
   </g>
 );
 
-function Face({ mood }: { mood: ClickyMood }) {
+function Face({ mood, blink }: { mood: ClickyMood; blink: boolean }) {
   switch (mood) {
     case "wink":
       return (
         <g>
-          <g className="clicky-blink">{eye(36)}</g>
+          <g className={blink ? "clicky-blink" : undefined}>{eye(36)}</g>
           <path d="M56 46 Q64 38 72 46" stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" />
           {cheeks}
           {smile}
@@ -147,7 +150,7 @@ function Face({ mood }: { mood: ClickyMood }) {
     default:
       return (
         <g>
-          <g className="clicky-blink">
+          <g className={blink ? "clicky-blink" : undefined}>
             {eye(36)}
             {eye(64)}
           </g>

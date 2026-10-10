@@ -54,10 +54,10 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
             {cols.map((c) => (
               <div key={c.title}>
                 <h2 className="text-sm font-semibold text-ink">{c.title}</h2>
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-3 space-y-1">
                   {c.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-sm text-muted hover:text-ink">
+                      <Link href={l.href} className="inline-flex min-h-8 items-center text-sm text-muted hover:text-ink">
                         {l.label}
                       </Link>
                     </li>
@@ -67,10 +67,10 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
             ))}
             <div>
               <h2 className="text-sm font-semibold text-ink">{d.footer.legal}</h2>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-3 space-y-1">
                 {legalPages.map((p) => (
                   <li key={p.slug}>
-                    <Link href={L(`/legal/${p.slug}`)} className="text-sm text-muted [overflow-wrap:anywhere] hover:text-ink">
+                    <Link href={L(`/legal/${p.slug}`)} className="inline-flex min-h-8 items-center text-sm text-muted [overflow-wrap:anywhere] hover:text-ink">
                       {tr(p.title, locale)}
                     </Link>
                   </li>

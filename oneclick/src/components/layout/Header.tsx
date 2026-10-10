@@ -62,11 +62,11 @@ export function Header({ locale, d }: { locale: Locale; d: Pick<Dictionary, "nav
           <Link
             href={switchHref}
             hrefLang={alt}
-            lang={alt}
-            aria-label={d.a11y.switchLanguage}
             className="rounded-full px-3 py-2 text-sm font-medium text-ink-soft hover:bg-bg-sunken hover:text-ink"
           >
-            {alt === "ar" ? "عربي" : "EN"}
+            {/* The visible label stays part of the accessible name; the purpose follows for screen readers. */}
+            <span lang={alt}>{alt === "ar" ? "عربي" : "EN"}</span>
+            <span className="sr-only">, {d.a11y.switchLanguage}</span>
           </Link>
           <ThemeToggle label={d.a11y.toggleTheme} />
           <Link

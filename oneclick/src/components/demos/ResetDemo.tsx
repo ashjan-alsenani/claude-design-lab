@@ -104,7 +104,7 @@ export function ResetDemo({ locale, hue }: { locale: Locale; hue: string }) {
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {sections.map((s) => (
           <section key={s.title.en}>
-            <h4 className="px-2 text-xs font-semibold text-muted">{s.title[locale]}</h4>
+            <h3 className="px-2 text-xs font-semibold text-muted">{s.title[locale]}</h3>
             <ul>
               {s.items.map((i) => (
                 <li key={i.id}>

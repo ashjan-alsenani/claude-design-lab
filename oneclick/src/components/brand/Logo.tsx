@@ -13,7 +13,7 @@ export function Logo({ className = "", locale = "en" }: { className?: string; lo
   const ar = locale === "ar";
   return (
     <span className={`group inline-flex items-center gap-2 ${className}`} dir={ar ? "rtl" : "ltr"} lang={ar ? "ar" : "en"} style={{ fontFamily: "Rubik, sans-serif" }}>
-      <Clicky size={38} className="transition-transform duration-300 ease-[var(--ease-bounce)] group-hover:-rotate-6 group-hover:scale-110" />
+      <Clicky size={38} blink className="transition-transform duration-300 ease-[var(--ease-bounce)] group-hover:-rotate-6 group-hover:scale-110" />
       <span className={`font-bold text-ink ${ar ? "text-[1.45rem] leading-none" : "text-[1.4rem] tracking-[-0.01em]"}`}>{ar ? "ون كليك" : "One Click"}</span>
     </span>
   );

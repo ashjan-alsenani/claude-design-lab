@@ -87,7 +87,7 @@ export function BrideDemo({ locale, hue }: { locale: Locale; hue: string }) {
         <div id="bride-panel-tasks" role="tabpanel" aria-labelledby="bride-tab-tasks" className="mt-3 max-h-[280px] space-y-2 overflow-y-auto pe-1">
           {(Object.keys(phases) as (keyof typeof phases)[]).map((p) => (
             <section key={p}>
-              <h4 className="px-2 text-xs font-semibold text-muted">{phases[p][locale]}</h4>
+              <h3 className="px-2 text-xs font-semibold text-muted">{phases[p][locale]}</h3>
               <ul>
                 {items
                   .filter((i) => i.phase === p)

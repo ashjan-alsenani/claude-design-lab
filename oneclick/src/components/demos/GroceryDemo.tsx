@@ -120,9 +120,9 @@ export function GroceryDemo({ locale, hue }: { locale: Locale; hue: string }) {
       <div className="mt-4 max-h-[300px] space-y-3 overflow-y-auto pe-1">
         {grouped.map(({ s, list }) => (
           <section key={s} aria-label={sectionNames[s][locale]}>
-            <h4 className="px-2 text-xs font-semibold text-muted">
+            <h3 className="px-2 text-xs font-semibold text-muted">
               {sectionNames[s][locale]} <span className="font-normal">· {num(list.length, locale)}</span>
-            </h4>
+            </h3>
             <ul>
               <AnimatePresence initial={false}>
                 {list.map((i) => (

@@ -16,6 +16,12 @@ export type Stored<T> = { version: number; data: T | null };
 export interface ProductDataStore {
   get<T>(userId: string, productId: string): Promise<Stored<T>>;
   put<T>(userId: string, productId: string, data: T, version: number): Promise<void>;
+  /**
+   * Compare-and-swap write: stores `data` as `expected + 1` only if the stored version is still
+   * `expected` (0 = no row yet). Returns false when another save got there first, so the caller can
+   * re-read, re-apply its changes and try again instead of overwriting them.
+   */
+  putIfVersion<T>(userId: string, productId: string, data: T, expected: number): Promise<boolean>;
 }
 
 const safe = (s: string) => s.replace(/[^A-Za-z0-9_-]/g, "_");
@@ -44,6 +50,22 @@ class FileProductDataStore implements ProductDataStore {
     this.queue = run.catch(() => undefined);
     return run;
   }
+  putIfVersion<T>(u: string, p: string, data: T, expected: number) {
+    const run = this.queue.then(() => {
+      let current = 0;
+      try {
+        current = Number(JSON.parse(fs.readFileSync(this.file(u, p), "utf8")).version) || 0;
+      } catch {}
+      if (current !== expected) return false;
+      fs.mkdirSync(this.dir, { recursive: true });
+      const f = this.file(u, p);
+      fs.writeFileSync(`${f}.tmp`, JSON.stringify({ version: expected + 1, data }));
+      fs.renameSync(`${f}.tmp`, f);
+      return true;
+    });
+    this.queue = run.catch(() => undefined);
+    return run;
+  }
 }
 
 export class SupabaseProductDataStore implements ProductDataStore {
@@ -62,6 +84,19 @@ export class SupabaseProductDataStore implements ProductDataStore {
     });
     expectOk(r, "PRODUCT_DATA_WRITE");
   }
+  async putIfVersion<T>(u: string, p: string, data: T, expected: number) {
+    const body = { data, version: expected + 1, updated_at: new Date().toISOString() };
+    if (expected === 0) {
+      // First save: a plain insert. If a row appeared meanwhile, the primary key rejects it (409).
+      const r = await this.rest("oc_product_data", { method: "POST", body: { user_id: u, product_id: p, ...body }, prefer: "return=minimal" });
+      if (r.status === 409) return false;
+      expectOk(r, "PRODUCT_DATA_WRITE");
+      return true;
+    }
+    const r = await this.rest(`oc_product_data?user_id=${eq(u)}&product_id=${eq(p)}&version=eq.${expected}&select=version`, { method: "PATCH", body, prefer: "return=representation" });
+    expectOk(r, "PRODUCT_DATA_WRITE");
+    return Array.isArray(r.data) && r.data.length === 1;
+  }
 }
 
 class UnavailableProductDataStore implements ProductDataStore {
@@ -69,6 +104,9 @@ class UnavailableProductDataStore implements ProductDataStore {
     return { version: 0, data: null };
   }
   async put(): Promise<void> {
+    throw new Error("PRODUCT_DATA_NOT_CONNECTED");
+  }
+  async putIfVersion(): Promise<boolean> {
     throw new Error("PRODUCT_DATA_NOT_CONNECTED");
   }
 }

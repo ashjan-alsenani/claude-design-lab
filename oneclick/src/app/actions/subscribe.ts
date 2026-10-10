@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { z } from "zod";
-import { getLeadStore } from "@/lib/data/leads";
+import { DUPLICATE_LEAD, getLeadStore } from "@/lib/data/leads";
 import { newReference } from "@/lib/commerce/types";
 import { clientKey, rateLimit } from "@/lib/security/rate-limit";
 import { isDemoMode } from "@/lib/env";
@@ -44,6 +44,8 @@ export async function subscribe(input: unknown): Promise<SubscribeResult> {
     });
     return { ok: true };
   } catch (e) {
+    // Two sign-ups racing past the check above: the database keeps one, and both people are told yes.
+    if ((e as Error).message === DUPLICATE_LEAD) return { ok: true };
     console.error(`[${kind}] save failed`, (e as Error).message);
     return { ok: false, reason: "unavailable" };
   }

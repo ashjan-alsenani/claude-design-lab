@@ -5,14 +5,14 @@
 
 @font-face {
   font-family: "Rubik";
-  src: url("../fonts/Rubik-Variable-latin.woff2") format("woff2");
+  src: url("/brand/fonts/rubik-latin-v1.woff2") format("woff2");
   font-weight: 300 900;
   font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: "Rubik";
-  src: url("../fonts/Rubik-Variable-arabic.woff2") format("woff2");
+  src: url("/brand/fonts/rubik-arabic-v1.woff2") format("woff2");
   font-weight: 300 900;
   font-display: swap;
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
@@ -358,6 +358,19 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 }
 @keyframes art-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
+/* Entrance motion (components/ui/Reveal.tsx): CSS only, never hides content from a page that has
+   not run its JavaScript. First-screen content rises at first paint; the rest reveals on scroll
+   where scroll-driven animations exist. */
+@media (prefers-reduced-motion: no-preference) {
+  /* First screen: movement only. Text is fully opaque in the very first paint (fast LCP). */
+  .oc-rise { animation: oc-settle 0.7s var(--ease-out-soft) var(--rd, 0ms) both; }
+  @supports (animation-timeline: view()) {
+    .oc-reveal { animation: oc-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+  }
+}
+@keyframes oc-settle { from { translate: 0 calc(var(--ry, 20px) * 0.6); } to { translate: 0 0; } }
+@keyframes oc-rise { from { opacity: 0; translate: 0 var(--ry, 20px); } to { opacity: 1; translate: 0 0; } }
+
 /* Product parade marquee (the only marquee on the page) */
 @media (prefers-reduced-motion: no-preference) {
   .parade-track { animation: parade 48s linear infinite; }
@@ -429,3 +442,30 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 @keyframes bj-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 .bj-scroll-x { scrollbar-width: none; } .bj-scroll-x::-webkit-scrollbar { display: none; }
 .bj dialog::backdrop { background: rgb(59 52 50 / 0.3); backdrop-filter: blur(3px); }
+
+/* Navigation progress (components/layout/NavProgress.tsx): appears the instant an internal link is
+   clicked, so every click answers at once even while the next page is still on its way. */
+.oc-navbar { position: fixed; inset-inline: 0; top: 0; z-index: 60; height: 3px; pointer-events: none; transform-origin: 0 50%; background: linear-gradient(90deg, var(--oc-brand), var(--oc-accent)); }
+[dir="rtl"] .oc-navbar { transform-origin: 100% 50%; }
+@media (prefers-reduced-motion: no-preference) {
+  .oc-navbar[data-state="loading"] { animation: oc-nav-grow 8s cubic-bezier(.1,.7,.2,1) forwards; }
+  .oc-navbar[data-state="done"] { animation: oc-nav-done .35s ease-out forwards; }
+}
+@media (prefers-reduced-motion: reduce) { .oc-navbar[data-state="loading"] { transform: scaleX(.6); } .oc-navbar[data-state="done"] { opacity: 0; } }
+@keyframes oc-nav-grow { from { transform: scaleX(.08); } to { transform: scaleX(.92); } }
+@keyframes oc-nav-done { from { transform: scaleX(1); opacity: 1; } to { transform: scaleX(1); opacity: 0; } }
+
+/* Clicky cursors: only with a mouse or trackpad (never on touch). Text fields keep the text caret,
+   disabled controls keep "not-allowed", and the bridal product keeps its own quieter look.
+   Unlayered (beats Tailwind's cursor utilities) but wrapped in :where() (zero specificity), so the
+   later, more specific rules below win in order. */
+@media (pointer: fine) {
+  html { cursor: url("/brand/cursor/clicky-arrow-v1.svg") 3 2, auto; }
+  :where(a[href], button, [role="button"], [role="tab"], [role="link"], [role="checkbox"], [role="switch"], label[for], summary, select,
+    input[type="checkbox"], input[type="radio"], input[type="submit"], input[type="button"], .cursor-pointer) {
+    cursor: url("/brand/cursor/clicky-point-v1.svg") 16 16, pointer;
+  }
+  :where(input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"], [type="range"]), textarea, [contenteditable="true"]) { cursor: text; }
+  :where(:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
+  .bj, .bj * { cursor: revert-layer; }
+}

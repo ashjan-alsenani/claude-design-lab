@@ -29,6 +29,9 @@ export interface LeadStore {
 
 const FILE = path.join(process.cwd(), ".data", "leads.json");
 
+/** Thrown by save() when the same email is already signed up for the same thing. */
+export const DUPLICATE_LEAD = "LEAD_DUPLICATE";
+
 class LocalJsonStore implements LeadStore {
   readonly mode = "local-demo" as const;
   private async readAll(): Promise<StoredRecord[]> {
@@ -66,6 +69,8 @@ class SupabaseLeadStore implements LeadStore {
       body: { kind: record.kind, reference: record.reference, status: record.status, data: record.data, created_at: record.createdAt },
       prefer: "return=minimal",
     });
+    // 409 = the unique sign-up index (supabase/migrations/20261010000000_unique_signups.sql).
+    if (r.status === 409) throw new Error(DUPLICATE_LEAD);
     expectOk(r, "LEAD_WRITE");
   }
   async list(kind: StoredRecord["kind"]) {

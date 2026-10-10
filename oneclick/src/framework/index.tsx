@@ -90,7 +90,7 @@ export function StatTile({ label, value, sub, color }: { label: string; value: R
   return (
     <div className="rounded-[var(--radius-md)] bg-bg-sunken/70 p-3">
       <p className="text-xs text-muted">{label}</p>
-      <p className="mt-1 text-xl font-semibold tabular" style={{ color: color ?? "var(--oc-ink)" }}>
+      <p className="mt-1 text-xl font-semibold tabular" style={{ color: color ? `color-mix(in oklab, ${color} 58%, var(--oc-ink))` : "var(--oc-ink)" }}>
         {value}
       </p>
       {sub && <p className="mt-0.5 text-xs text-muted">{sub}</p>}

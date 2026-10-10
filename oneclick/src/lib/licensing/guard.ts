@@ -49,5 +49,6 @@ export async function productDataFor(productId: string) {
     ctx,
     get: <T>() => store.get<T>(userId, productId),
     put: <T>(data: T, version: number) => store.put<T>(userId, productId, data, version),
+    putIfVersion: <T>(data: T, expected: number) => store.putIfVersion<T>(userId, productId, data, expected),
   };
 }

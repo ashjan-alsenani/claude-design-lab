@@ -62,7 +62,7 @@ export function ConsentBanner({ d }: { d: Pick<Dictionary, "consent"> }) {
 
 export function CookieSettingsButton({ label }: { label: string }) {
   return (
-    <button type="button" className="self-start text-sm text-muted underline underline-offset-4 hover:text-ink" onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}>
+    <button type="button" className="inline-flex min-h-8 items-center self-start text-sm text-muted underline underline-offset-4 hover:text-ink" onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}>
       {label}
     </button>
   );

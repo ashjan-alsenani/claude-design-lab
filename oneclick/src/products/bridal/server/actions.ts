@@ -23,26 +23,33 @@ export async function bridalSync(rawOps: unknown, baseVersion: unknown): Promise
 
   const ops = z.array(opSchema).min(1).max(200).safeParse(rawOps);
   if (!ops.success) return { ok: false, reason: "invalid" };
-  let stored;
-  try {
-    stored = await store.get<Workspace>();
-  } catch {
-    return { ok: false, reason: "unavailable" };
+  // Optimistic concurrency: if another device saved between our read and our write, the write is
+  // refused, and the same operations are re-applied on top of that newer copy (nothing is lost).
+  let stored: { version: number; data: Workspace | null } | undefined;
+  let doc: Workspace | undefined;
+  let saved = false;
+  for (let attempt = 0; attempt < 4 && !saved; attempt++) {
+    try {
+      stored = await store.get<Workspace>();
+    } catch {
+      return { ok: false, reason: "unavailable" };
+    }
+    doc = stored.data ?? emptyWorkspace();
+    try {
+      for (const op of ops.data) doc = applyOp(doc, op);
+    } catch {
+      return { ok: false, reason: "invalid" };
+    }
+    doc.updatedAt = new Date().toISOString();
+    if (JSON.stringify(doc).length > MAX_DOC_BYTES) return { ok: false, reason: "too_large" };
+    try {
+      saved = await store.putIfVersion(doc, stored.version);
+    } catch {
+      return { ok: false, reason: "unavailable" };
+    }
   }
-  let doc = stored.data ?? emptyWorkspace();
-  try {
-    for (const op of ops.data) doc = applyOp(doc, op);
-  } catch {
-    return { ok: false, reason: "invalid" };
-  }
-  doc.updatedAt = new Date().toISOString();
-  if (JSON.stringify(doc).length > MAX_DOC_BYTES) return { ok: false, reason: "too_large" };
+  if (!saved || !stored || !doc) return { ok: false, reason: "unavailable" };
   const version = stored.version + 1;
-  try {
-    await store.put(doc, version);
-  } catch {
-    return { ok: false, reason: "unavailable" };
-  }
   // If another device changed the plan meanwhile, send the merged copy back.
   return { ok: true, version, doc: stored.version !== baseVersion ? doc : undefined };
 }

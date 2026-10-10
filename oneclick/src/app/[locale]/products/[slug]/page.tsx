@@ -7,7 +7,7 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { catalog } from "@/lib/data/catalog";
 import { products as allProducts } from "@/content/products";
 import { formatMoney, minorUnitDigits, toMajor } from "@/lib/money";
-import { hueSoft, hueVar } from "@/lib/hues";
+import { hueSoft, hueText, hueVar } from "@/lib/hues";
 import { breadcrumbJsonLd, faqJsonLd, localeUrl, pageMetadata, siteUrl } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/ui/PageHeader";
 import { ButtonLink } from "@/components/ui/Button";
@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: Props) {
               <span className="grid size-12 place-items-center rounded-[14px] bg-surface-raised shadow-soft" style={{ color: hue }}>
                 <ProductIcon hue={product.hue} size={26} />
               </span>
-              <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ color: hue, background: hueSoft(product.hue, 16) }}>
+              <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ color: hueText(product.hue), background: hueSoft(product.hue, 16) }}>
                 {d.status[product.status]}
               </span>
               {product.sample && <span className="rounded-full border border-line-strong px-3 py-1 text-xs font-medium text-muted">{d.common.sample}</span>}
@@ -112,7 +112,7 @@ export default async function ProductPage({ params }: Props) {
 
           {product.demo ? (
             <div id="demo" className="scroll-mt-24">
-              <p className="mb-3 text-sm font-medium text-ink-soft">{d.product.demo}</p>
+              <h2 className="mb-3 text-sm font-medium text-ink-soft">{d.product.demo}</h2>
               <DemoById id={product.demo} locale={locale} hue={hue} />
               <p className="mt-3 text-xs text-muted">{d.product.demoNote}</p>
               {fullDemo[product.slug] && (
@@ -202,7 +202,8 @@ export default async function ProductPage({ params }: Props) {
             </div>
           )}
         </div>
-        <dl className="grid grid-cols-2 gap-3 self-start">
+        <div className="grid grid-cols-2 gap-3 self-start">
+          <dl className="col-span-2 grid grid-cols-2 gap-3">
           {specs.map((s) => (
             <div key={s.label} className="rounded-[var(--radius-md)] bg-bg-sunken p-4">
               <dt className="flex items-center gap-2 text-xs font-medium text-muted">
@@ -212,6 +213,7 @@ export default async function ProductPage({ params }: Props) {
               <dd className="mt-1.5 text-sm font-medium text-ink">{s.value}</dd>
             </div>
           ))}
+          </dl>
           <div className="col-span-2 flex gap-3 rounded-[var(--radius-md)] border border-line p-4 text-sm text-ink-soft">
             <ShieldCheckIcon size={20} className="shrink-0 text-primary" />
             <p>
@@ -223,7 +225,7 @@ export default async function ProductPage({ params }: Props) {
               </Link>
             </p>
           </div>
-        </dl>
+        </div>
       </section>
 
       {/* FAQ */}

@@ -11,8 +11,8 @@ const exe = process.env.CHROMIUM_PATH || "/opt/pw-browsers/chromium-1194/chrome-
 const browser = await chromium.launch(fs.existsSync(exe) ? { executablePath: exe } : {});
 
 const fontCss = `
-@font-face{font-family:Rubik;src:url(file://${ROOT}/src/fonts/Rubik-Variable-latin.woff2) format("woff2");font-weight:300 900}
-@font-face{font-family:Rubik;src:url(file://${ROOT}/src/fonts/Rubik-Variable-arabic.woff2) format("woff2");font-weight:300 900;unicode-range:U+0600-06FF,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Rubik;src:url(file://${ROOT}/public/brand/fonts/rubik-latin-v1.woff2) format("woff2");font-weight:300 900}
+@font-face{font-family:Rubik;src:url(file://${ROOT}/public/brand/fonts/rubik-arabic-v1.woff2) format("woff2");font-weight:300 900;unicode-range:U+0600-06FF,U+FB50-FDFF,U+FE70-FEFF}
 *{margin:0;box-sizing:border-box}html,body{background:transparent;font-family:Rubik}`;
 
 const CLICKY = (face = "#12B5A6") => {
