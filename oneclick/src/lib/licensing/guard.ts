@@ -43,12 +43,29 @@ export async function productDataFor(productId: string) {
   if (!ctx) return null;
   const decision = await licensing().engine.canUserAccessProduct(ctx.user.id, productId, { sessionId: ctx.session.id, deviceId: ctx.session.deviceId, purpose: "open" });
   if (!decision.allowed) return null;
+  return { ctx, ...scoped(ctx.user.id, productId) };
+}
+
+/** One customer's documents for one product: the main document plus named side documents (e.g. uploaded photos). */
+function scoped(userId: string, productId: string) {
   const store = productData();
-  const userId = ctx.user.id;
+  const at = (key?: string) => (key ? `${productId}:${key}` : productId);
   return {
-    ctx,
-    get: <T>() => store.get<T>(userId, productId),
-    put: <T>(data: T, version: number) => store.put<T>(userId, productId, data, version),
-    putIfVersion: <T>(data: T, expected: number) => store.putIfVersion<T>(userId, productId, data, expected),
+    userId,
+    get: <T>(key?: string) => store.get<T>(userId, at(key)),
+    put: <T>(data: T, version: number, key?: string) => store.put<T>(userId, at(key), data, version),
+    putIfVersion: <T>(data: T, expected: number, key?: string) => store.putIfVersion<T>(userId, at(key), data, expected),
   };
+}
+
+/**
+ * A product's data opened on behalf of its OWNER by someone else: an invited helper (the caller
+ * has already checked the signed-in helper's grant) or a guest using one of the owner's public
+ * links (the caller has already checked the link). Only works while the owner still holds an
+ * active right to the product; never returns another product's data.
+ */
+export async function ownerProductData(ownerId: string, productId: string) {
+  const decision = await licensing().engine.canUserAccessProduct(ownerId, productId, { purpose: "open" });
+  if (!decision.allowed) return null;
+  return scoped(ownerId, productId);
 }

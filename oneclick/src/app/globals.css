@@ -570,3 +570,35 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 @keyframes dcl-arm-r { 0.00% { transform: rotate(80deg) } 2.50% { transform: rotate(60deg) } 5.00% { transform: rotate(80deg) } 7.50% { transform: rotate(60deg) } 10.00% { transform: rotate(80deg) } 12.50% { transform: rotate(60deg) } 15.00% { transform: rotate(80deg) } 17.50% { transform: rotate(60deg) } 20.00% { transform: rotate(80deg) } 22.50% { transform: rotate(60deg) } 25.00% { transform: rotate(80deg) } 27.50% { transform: rotate(60deg) } 30.00% { transform: rotate(80deg) } 32.50% { transform: rotate(60deg) } 35.00% { transform: rotate(80deg) } 37.50% { transform: rotate(60deg) } 40.00% { transform: rotate(80deg) } 42.50% { transform: rotate(60deg) } 45.00% { transform: rotate(80deg) } 47.50% { transform: rotate(60deg) } 50.00% { transform: rotate(80deg) } 52.50% { transform: rotate(60deg) } 55.00% { transform: rotate(80deg) } 57.50% { transform: rotate(60deg) } 60.00% { transform: rotate(80deg) } 62.50% { transform: rotate(60deg) } 65.00% { transform: rotate(80deg) } 75.00% { transform: rotate(0deg) } 87.50% { transform: rotate(10deg) } 100% { transform: rotate(80deg) } }
 @keyframes dcl-leg-l { 0% { transform: rotate(0deg) } 67.50% { transform: rotate(34deg) } 76.25% { transform: rotate(0deg) } 100% { transform: rotate(0deg) } }
 @keyframes dcl-leg-r { 0% { transform: rotate(0deg) } 67.50% { transform: rotate(-34deg) } 76.25% { transform: rotate(0deg) } 100% { transform: rotate(0deg) } }
+
+/* ───────── Hikayat Qudoom (حكاية قدوم): OneClick base + a soft motherhood layer ─────────
+   Four optional themes change the secondary colours and illustrations only; layout, type and
+   contrast stay the same (every --qd-primary passes AA on white and on the cream page). */
+.qd {
+  --qd-bg: #fff9f4; --qd-paper: #fffefc; --qd-ink: #1e1b3a; --qd-ink-soft: #46416c; --qd-muted: #6b6789; --qd-line: #efe5dc;
+  --qd-primary: #2f7a71; --qd-primary-deep: #1f5a53; --qd-tint: #e3f2ef; --qd-tint-2: #f1f8f6;
+  --qd-accent: #f2a57c; --qd-accent-soft: #fdeee4; --qd-sage: #5c8a62; --qd-sage-soft: #e7f0e5;
+  --qd-alert: #b4443b; --qd-alert-soft: #fbe8e5; --qd-amber: #94651d; --qd-amber-soft: #fbf0dd; --qd-lilac: #8b7cf6; --qd-lilac-soft: #efecfe;
+  font-family: var(--font-sans); color: var(--qd-ink); background: var(--qd-bg); -webkit-tap-highlight-color: transparent;
+}
+.qd[data-theme="moon"] { --qd-primary: #5a50b8; --qd-primary-deep: #3f378c; --qd-tint: #ecebfb; --qd-tint-2: #f5f4fd; --qd-accent: #f2c25b; --qd-accent-soft: #fdf4dc; }
+.qd[data-theme="garden"] { --qd-primary: #4b7a50; --qd-primary-deep: #355a39; --qd-tint: #e6f0e3; --qd-tint-2: #f2f7f0; --qd-accent: #f0a39b; --qd-accent-soft: #fdecea; }
+.qd[data-theme="pearl"] { --qd-primary: #8a6447; --qd-primary-deep: #664a33; --qd-tint: #f5ece4; --qd-tint-2: #faf5f0; --qd-accent: #d7b6a6; --qd-accent-soft: #f8efea; }
+.qd :focus-visible { outline: 3px solid color-mix(in oklab, var(--qd-primary) 55%, transparent); outline-offset: 2px; border-radius: 10px; }
+.qd .qd-card { background: var(--qd-paper); border: 1px solid var(--qd-line); box-shadow: 0 1px 2px rgb(60 40 30 / 0.04), 0 14px 34px -26px rgb(60 40 30 / 0.28); }
+.qd .qd-soft { background: var(--qd-tint-2); border: 1px solid color-mix(in oklab, var(--qd-primary) 14%, var(--qd-line)); }
+.qd .qd-scroll-x { scrollbar-width: none; } .qd .qd-scroll-x::-webkit-scrollbar { display: none; }
+.qd .qd-skeleton { background: linear-gradient(90deg, var(--qd-tint-2), var(--qd-tint), var(--qd-tint-2)); background-size: 200% 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .qd .qd-skeleton { animation: qd-shimmer 1.4s ease-in-out infinite; }
+  .qd .qd-page { animation: qd-fade 0.24s ease-out both; }
+  .qd .qd-pop { animation: qd-pop 0.5s cubic-bezier(.34,1.56,.64,1) both; }
+}
+@keyframes qd-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@keyframes qd-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes qd-pop { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+@media print {
+  .qd .qd-noprint { display: none !important; }
+  .qd .qd-print { box-shadow: none !important; border-color: #ddd !important; break-inside: avoid; }
+  .qd { background: #fff !important; }
+}
