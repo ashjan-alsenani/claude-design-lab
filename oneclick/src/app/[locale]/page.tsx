@@ -199,8 +199,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {clickyFamily.map((m, i) => (
             <li key={m.id} className={i === 0 ? "col-span-2 md:col-span-1" : ""}>
               <Reveal delay={i * 0.05} className="h-full">
-                <div
-                  className="group flex h-full flex-col items-center rounded-[var(--radius-lg)] border-2 px-4 pb-6 pt-7 text-center transition-transform duration-300 ease-[var(--ease-bounce)] hover:-translate-y-1"
+                <Link
+                  href={`/${locale}${m.link.path}`}
+                  className="group flex h-full flex-col items-center rounded-[var(--radius-lg)] border-2 px-4 pb-6 pt-7 text-center transition-transform duration-300 ease-[var(--ease-bounce)] hover:-translate-y-1 focus-visible:-translate-y-1 active:scale-[0.98]"
                   style={{ borderColor: `color-mix(in oklab, ${m.color} 35%, transparent)`, background: `color-mix(in oklab, ${m.color} 10%, var(--oc-surface))` }}
                 >
                   <Clicky size={92} color={m.color} mood={m.mood} accessory={m.accessory} body wave={m.id === "clicky"} className="transition-transform duration-300 ease-[var(--ease-bounce)] group-hover:-rotate-6 group-hover:scale-105" />
@@ -208,7 +209,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                     {m.name[locale]}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">{m.role[locale]}</p>
-                </div>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-bold" style={{ color: inkTint(m.color) }}>
+                    {m.link.label[locale]}
+                    <ArrowRightIcon size={16} weight="bold" className="flip-rtl transition-[translate] group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+                  </span>
+                </Link>
               </Reveal>
             </li>
           ))}

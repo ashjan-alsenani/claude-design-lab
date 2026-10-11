@@ -12,6 +12,9 @@
 - Every product has its own color (19, spread around the color wheel), its own icon and its own
   Clicky mood (`src/content/product-looks.ts`): product cards, product pages, checkout, the home
   parade, My Products and the product app screen. Collections keep their shared hue.
+- Each family card on the home page is a link to where that character lives (products, the bride's
+  planner, guides, help, account security), and the copy says where to find them instead of
+  suggesting they do things on their own.
 
 ## 0.14.1 — 2026-10-11 — Purchase party
 - After a successful purchase Clicky throws a party: a 6 s routine (bounce and wave, shoulder shimmy, disco point, hat flies off and lands back, spin), party hat, arms
