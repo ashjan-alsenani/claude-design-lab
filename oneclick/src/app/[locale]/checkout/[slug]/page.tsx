@@ -77,7 +77,7 @@ export default async function CheckoutPage({ params }: Props) {
                   </div>
                 )}
                 <div className="flex flex-wrap gap-2">
-                  <button name="outcome" value="succeeded" className={buttonClass("primary", "md")}>
+                  <button name="outcome" value="succeeded" data-buy className={buttonClass("primary", "md")}>
                     {t.succeed}
                   </button>
                   <button name="outcome" value="pending" className={buttonClass("secondary", "md")}>

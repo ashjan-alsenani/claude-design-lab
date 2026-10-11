@@ -20,7 +20,7 @@ home performance 83 → 95, first paint 1.5 s → 0.9 s, simulated LCP 4.1 s →
 - Server functions run in Singapore (`vercel.json` → `sin1`), next to the database, instead of
   Washington: pages that read the database no longer cross the world twice per request.
 - A thin progress bar answers every internal click at once.
-- Cursor is the One Click logo mark; over anything clickable it falls in love (heart eyes, pink) — mouse/trackpad only; touch, text fields,
+- Cursor is the One Click logo mark everywhere; only on the way to buying (checkout links, the pay button) it falls in love (heart eyes, pink) — mouse/trackpad only; touch, text fields,
   disabled controls and the bridal product keep their usual cursors.
 - Accessibility: readable colored small text (`hueText`/`inkTint`), heading order in demos, product
   list and product page, valid product specs list, language link name, 32 px footer/cookie targets.
