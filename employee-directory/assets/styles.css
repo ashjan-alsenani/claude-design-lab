@@ -4891,3 +4891,10 @@ html.tm-only .ws-switch { display: none !important; }
 @media (min-width: 1101px) { .oc-wrap.has-sel .oc-side { animation: he-in .3s var(--e-out) both; } }
 .oc-card-d b { color: color-mix(in srgb, var(--c) 70%, #000); }
 [data-theme="dark"] .oc-card-d b { color: color-mix(in srgb, var(--c) 45%, #fff); }
+.pf-rep-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.pf-rep-acts .btn { flex: 1 1 auto; justify-content: center; }
+.oc-mv-sel { margin: 4px 6px 0; color: var(--ds-act); font-weight: 700; font-size: 13px; min-height: 1.2em; }
+.oc-mv-it { position: relative; }
+.oc-mv-it::after { content: ""; position: absolute; inset-inline-end: 12px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 6px; border: 1.5px solid var(--line-strong, var(--line)); background: var(--paper); }
+.oc-mv-it:has(input:checked)::after { background: var(--ds-act) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 12px no-repeat; border-color: var(--ds-act); }
+.oc-mv-it .tm-tx { padding-inline-end: 28px; }
