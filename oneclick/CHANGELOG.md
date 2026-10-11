@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.14.1 — 2026-10-11 — Purchase party
-- After a successful purchase Clicky throws a party: party hat, bouncing to a beat, swaying, arms
+- After a successful purchase Clicky throws a party: a 6 s routine (bounce and wave, shoulder shimmy while laughing «هههه», disco point, hat flies off with tongue out, spin), party hat, arms
   up, kicks and a full spin every few beats, with rounds of confetti and floating music notes.
   CSS-only dance (`DancingClicky`), static and calm under reduced motion.
 
