@@ -1,0 +1,55 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><script src="../lib.js"></script></head><body><script>
+// 01 Opening (15 s): Clicky drops in and says hi → the logo builds → products burst out → "يومك، صار أحلى." → launch confetti → end card.
+const DUR = 15;
+const s = stage();
+const mint = blob(s, `width:900px;height:900px;left:90px;top:420px;border-radius:44% 56% 52% 48%/48% 44% 56% 52%;background:${mix(C.brand, 22)}`);
+const sun = blob(s, `width:300px;height:300px;right:70px;top:300px;border-radius:50%;background:${mix(C.sun, 55)}`);
+const lil = blob(s, `width:200px;height:200px;left:70px;top:1230px;border-radius:38%;background:${mix(C.lilac, 40)}`);
+const ck = makeClicky({ mood: "happy", size: 430 }); s.appendChild(ck);
+const hi = txt(`<div class="h1" style="font-size:150px">هلا! 👋</div>`, "top:330px");
+const me = txt(`<div style="font:500 64px R;color:${C.soft}">أنا كليكي</div>`, "top:540px");
+const logo = txt(`<div style="font:700 170px/1 R;letter-spacing:-5px;direction:ltr">One Click</div><div style="font:500 60px/1.5 R;color:${C.soft};margin-top:10px">ون كليك</div>`, "top:1120px");
+const what = txt(`<div class="h1" style="font-size:96px">مخططات ومنظّمات<br>لكل يومك</div>`, "top:300px");
+const chips = PRODUCTS.slice(0, 10).map(p => { const c = makeChip(p, .85); s.appendChild(c); return c; });
+const spots = [[300, 720], [790, 700], [280, 900], [800, 920], [300, 1090], [780, 1110], [310, 1280], [770, 1300], [540, 1460], [540, 620]];
+const slogan = txt(`<div class="h1" style="font-size:132px">يومك، صار <span class="u"><span>أحلى.</span>${UL(C.lilac)}</span></div><div style="font:500 52px/1.5 R;color:${C.soft};margin-top:40px">من سلطنة عُمان، لكل الخليج والعالم العربي</div>`, "top:420px");
+const open = txt(`<div class="h1" style="font-size:190px;color:${C.primary}">افتتحنا!</div><div style="font:500 60px R;color:${C.soft};margin-top:22px">ون كليك صار متاح لكم 🎉</div>`, "top:380px");
+s.append(hi, me, logo, what, slogan, open);
+const conf = document.createElement("div"); conf.style.cssText = "position:absolute;inset:0;pointer-events:none"; s.appendChild(conf);
+const pieces = makeConfetti(150, 7);
+const end = endCard(s);
+
+window.render = t => {
+  // background shapes breathe
+  mint.style.transform = `scale(${lerp(.6, 1, easeOut(prog(t, 0, 1.2))) * (1 + .02 * Math.sin(t * 1.4))}) rotate(${t * 3}deg)`;
+  sun.style.transform = `translateY(${Math.sin(t * 1.2) * 18}px) scale(${backOut(prog(t, .3, .8))})`;
+  lil.style.transform = `translateY(${Math.cos(t * 1.1) * 16}px) rotate(${12 + t * 4}deg) scale(${backOut(prog(t, .5, .8))})`;
+  // Clicky: drop + squash, wave, then move up to make room for the logo
+  const drop = prog(t, .1, .7), land = prog(t, .8, .5);
+  let y = lerp(-200, 1420, easeIn(drop)), squash = 1 - .25 * Math.sin(Math.PI * land) * (1 - land), sc = 1;
+  const up = easeInOut(prog(t, 3.0, .7)); y = lerp(y, 1080, up); sc = lerp(1, .8, up);
+  const exitC = easeInOut(prog(t, 4.6, .5));
+  setFace(ck, t > 2.2 && t < 3 ? "wink" : t > 3.2 ? "celebrate" : "happy");
+  const back = easeOut(prog(t, 8.7, .6)), gone = easeIn(prog(t, 12.6, .3));
+  if (t > 8.6) { setFace(ck, "celebrate"); setClicky(ck, { x: 540, y: lerp(2300, 1520, back), s: .95, wave: -.6 + Math.sin(t * 10) * .45, armL: -1.6 + Math.sin(t * 10) * .3, hop: t > 11.2 ? Math.abs(Math.sin(t * 7)) * 70 : Math.abs(Math.sin(t * 5)) * 20, op: 1 - gone }); }
+  else setClicky(ck, { x: 540, y, s: sc * (1 - exitC * .35), squash, wave: t > 1.1 ? Math.sin(t * 9) * .55 - .25 : 0, armL: t > 3.2 ? -1.6 + Math.sin(t * 9) * .2 : 0, op: 1 - easeIn(prog(t, 5.0, .4)), hop: t > 3.2 && t < 5 ? Math.abs(Math.sin(t * 6)) * 30 : 0 });
+  hi.style.opacity = win(t, 1.0, 3.0, .35, .3); hi.style.transform = `scale(${lerp(.6, 1, backOut(prog(t, 1.0, .5)))})`;
+  me.style.opacity = win(t, 1.5, 3.0, .35, .3); me.style.transform = `translateY(${(1 - easeOut(prog(t, 1.5, .4))) * 40}px)`;
+  logo.style.opacity = win(t, 3.3, 5.1, .4, .3); logo.style.transform = `scale(${lerp(.85, 1, backOut(prog(t, 3.3, .6)))})`;
+  // products burst out of the center and float
+  what.style.opacity = win(t, 5.3, 8.6, .4, .35); what.style.transform = `translateY(${(1 - easeOut(prog(t, 5.3, .5))) * 50}px)`;
+  chips.forEach((c, i) => {
+    const k = backOut(prog(t, 5.2 + i * .12, .7)), out = easeIn(prog(t, 8.3 + i * .03, .35));
+    const [tx, ty] = spots[i]; const x = lerp(540, tx, k), yy = lerp(1100, ty, k) + Math.sin(t * 2 + i) * 10 - out * 120;
+    c.style.opacity = clamp(prog(t, 5.2 + i * .12, .15)) * (1 - out);
+    c.style.transform = `translate(${x}px,${yy}px) translate(-50%,-50%) rotate(${(i % 2 ? 3 : -3) + Math.sin(t * 1.6 + i) * 2}deg) scale(${lerp(.3, 1, k)})`;
+  });
+  // slogan with drawn underline
+  slogan.style.opacity = win(t, 8.7, 11.2, .4, .3); slogan.style.transform = `translateY(${(1 - easeOut(prog(t, 8.7, .5))) * 50}px)`; setUL(slogan, easeOut(prog(t, 9.2, .7)));
+  // launch!
+  open.style.opacity = win(t, 11.2, 13.0, .3, .3); open.style.transform = `scale(${lerp(.5, 1, elastic(prog(t, 11.2, .9)))})`;
+  drawConfetti(conf, pieces, t, 11.25, 540, 1250);
+  end(t, 12.9);
+};
+render(0);
+</script></body></html>

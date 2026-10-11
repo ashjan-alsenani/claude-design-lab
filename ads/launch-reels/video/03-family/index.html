@@ -1,0 +1,62 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><script src="../lib.js"></script></head><body><script>
+// 03 Clicky family (16 s): title → each member gets the stage in their color → all five dance → حياة أكثر. → end card.
+const DUR = 16;
+const s = stage();
+const FAM = [
+  { name: "كليكي", role: "قائد العائلة", line: "يعرّفك على كل المنتجات", color: C.brand, mood: "wink", acc: "spark" },
+  { name: "توت", role: "رفيقة التسوّق", line: "تحفظ لك المفضلة وتفرح معك وقت الشراء", color: C.pink, mood: "love", acc: "heart" },
+  { name: "شمس", role: "صاحبة الأفكار", line: "نصايح وأدلة تسهّل يومك", color: C.sun, mood: "happy", acc: "bulb" },
+  { name: "مرجان", role: "المساعد", line: "معك إذا احتجت أي شي", color: C.coral, mood: "happy", acc: "chat" },
+  { name: "ليلك", role: "الحارس", line: "يحمي حسابك وبياناتك", color: C.lilac, mood: "happy", acc: "shield" },
+];
+const bgTint = blob(s, "inset:0;border-radius:0;opacity:0");
+const disc = blob(s, "width:820px;height:820px;left:130px;top:520px;border-radius:44% 56% 52% 48%/48% 44% 56% 52%;opacity:0");
+const title = txt(`<div style="font:500 60px R;color:${C.soft}">تعرّف على</div><div class="h1" style="font-size:150px;margin-top:6px">عائلة <span class="u"><span>كليكي</span>${UL(C.brand)}</span></div>`, "top:330px");
+const smalls = FAM.map(f => { const c = makeClicky({ color: f.color, mood: f.mood, acc: f.acc, size: 190 }); s.appendChild(c); return c; });
+const bigs = FAM.map(f => { const c = makeClicky({ color: f.color, mood: f.mood, acc: f.acc, size: 470 }); s.appendChild(c); return c; });
+const labels = FAM.map(f => txt(`<div style="display:inline-block;padding:12px 34px;border-radius:999px;background:#fffefc;border:4px solid ${mix(f.color, 45, "#fffefc")};font:700 46px R;color:color-mix(in oklab, ${f.color} 60%, ${INK})">${f.role}</div><div class="h1" style="font-size:170px;margin-top:22px;color:color-mix(in oklab, ${f.color} 62%, ${INK})">${f.name}</div><div style="font:500 52px/1.45 R;color:${C.soft};margin-top:14px">${f.line}</div>`, "top:240px"));
+const life = txt(`<div class="h1" style="font-size:170px">حياة <span class="u"><span>أكثر.</span>${UL(C.sun)}</span></div><div style="font:500 56px R;color:${C.soft};margin-top:22px">مع عائلة كليكي 💛</div>`, "top:360px");
+s.append(title, ...labels, life);
+const conf = document.createElement("div"); conf.style.cssText = "position:absolute;inset:0;pointer-events:none"; s.appendChild(conf);
+const pieces = makeConfetti(130, 11);
+const end = endCard(s);
+const T0 = 2.4, SLOT = 1.9;
+
+window.render = t => {
+  // background follows whoever is on stage
+  const idx = Math.floor((t - T0) / SLOT), inSlot = t >= T0 && idx < 5;
+  const col = inSlot ? FAM[idx].color : C.brand;
+  bgTint.style.background = mix(col, 9); bgTint.style.opacity = inSlot ? 1 : 0;
+  disc.style.background = mix(col, 26); disc.style.opacity = inSlot ? 1 : 0;
+  disc.style.transform = `rotate(${t * 8}deg) scale(${inSlot ? lerp(.85, 1, backOut(prog(t - T0 - idx * SLOT, 0, .5))) : 1})`;
+  // intro: title + the five peeking in a row
+  title.style.opacity = win(t, .1, 2.4, .35, .3); title.style.transform = `scale(${lerp(.7, 1, backOut(prog(t, .1, .5)))})`; setUL(title, easeOut(prog(t, .5, .6)));
+  const xs = [140, 340, 540, 740, 940];
+  smalls.forEach((c, i) => {
+    const k = backOut(prog(t, .3 + i * .12, .5)), out = easeIn(prog(t, 2.1, .3));
+    const k2 = easeOut(prog(t, 12.0 + i * .08, .5)), out2 = easeIn(prog(t, 14.0, .3));
+    const order = [2, 1, 3, 0, 4][i];                      // final lineup: Clicky in the middle
+    if (t < 11.9) setClicky(c, { x: xs[i], y: lerp(2000, 1450, k) + out * 600, s: 1, hop: Math.abs(Math.sin(t * 6 + i)) * 30, wave: Math.sin(t * 8 + i) * .5 - .2, op: t < 2.45 ? 1 : 0 });
+    else {
+      const dance = Math.abs(Math.sin(t * 7 + i * .9));
+      setFace(c, "celebrate");
+      setClicky(c, { x: [175, 355, 540, 725, 905][order], y: lerp(2100, 1430, k2) + out2 * 700, s: order === 2 ? 1.35 : 1.05, hop: dance * 90, rot: Math.sin(t * 7 + i) * 8, wave: -.7 + Math.sin(t * 12 + i) * .5, armL: -1.5 + Math.sin(t * 12 + i) * .4, op: 1 - out2 });
+    }
+  });
+  // spotlight per member
+  bigs.forEach((c, i) => {
+    const t0 = T0 + i * SLOT, kin = prog(t, t0, .55), kout = prog(t, t0 + SLOT - .3, .3);
+    const from = i % 2 ? -600 : 1680;
+    const x = lerp(from, 540, easeOut(kin)) + lerp(0, i % 2 ? 1300 : -1300, easeIn(kout));
+    const visible = t > t0 - .05 && t < t0 + SLOT + .05;
+    setClicky(c, { x, y: 1560, s: 1, squash: 1 - .2 * Math.sin(Math.PI * prog(t, t0 + .5, .25)), hop: kin >= 1 ? Math.abs(Math.sin((t - t0) * 6)) * 24 : 0, wave: Math.sin(t * 9) * .55 - .25, rot: (1 - easeOut(kin)) * (i % 2 ? -14 : 14), op: visible ? 1 : 0 });
+    const L = labels[i];
+    L.style.opacity = win(t, t0 + .15, t0 + SLOT, .3, .25);
+    L.style.transform = `translateY(${(1 - easeOut(prog(t, t0 + .15, .45))) * 50}px)`;
+  });
+  life.style.opacity = win(t, 12.0, 14.1, .35, .3); life.style.transform = `translateY(${(1 - easeOut(prog(t, 12.0, .45))) * 50}px)`; setUL(life, easeOut(prog(t, 12.3, .6)));
+  drawConfetti(conf, pieces, t, 12.1, 540, 1200);
+  end(t, 14.0);
+};
+render(0);
+</script></body></html>

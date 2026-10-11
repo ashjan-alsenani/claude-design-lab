@@ -1,0 +1,59 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><script src="../lib.js"></script></head><body><script>
+// 02 Less effort (14 s): every task falls in a messy pile → Clicky taps once → they snap into a tidy list → "and many more" → جهد أقل. حياة أكثر. → end card.
+const DUR = 14;
+const s = stage();
+const sun = blob(s, `width:260px;height:260px;left:-60px;top:250px;border-radius:50%;background:${mix(C.sun, 55)}`);
+const lil = blob(s, `width:220px;height:220px;right:-50px;top:1500px;border-radius:38%;background:${mix(C.lilac, 40)}`);
+const hook = txt(`<div class="h1" style="font-size:150px">مهامك كثيرة؟</div>`, "top:300px");
+const tidy = txt(`<div class="h1" style="font-size:92px">لكل مهمة… أداة</div><div style="font:500 54px R;color:${C.soft};margin-top:18px">تخلّصها بضغطة وحدة ✓</div>`, "top:250px");
+const R = seeded(3);
+const items = PRODUCTS.slice(0, 16).map((p, i) => {
+  const c = makeChip(p, .9); s.appendChild(c);
+  const col = i % 2, row = Math.floor(i / 2);
+  return { el: c, x0: 140 + R() * 800, rot0: (R() - .5) * 70, delay: i * .1, pileX: 170 + R() * 740, pileY: 1170 + R() * 330, pileRot: (R() - .5) * 50,
+           gx: col ? 285 : 795, gy: 560 + row * 112, w: 0 };
+});
+const ck = makeClicky({ mood: "wink", size: 360 }); s.appendChild(ck);
+const ripple = document.createElement("div"); ripple.style.cssText = `position:absolute;width:40px;height:40px;border-radius:50%;border:10px solid ${C.brand};left:520px;top:1300px;opacity:0`; s.appendChild(ripple);
+const more = document.createElement("div");
+more.style.cssText = `position:absolute;left:540px;top:1000px;display:flex;align-items:center;gap:16px;padding:22px 50px;border-radius:999px;border:5px dashed ${C.primary};background:#fffefc;color:${C.primary};font:700 64px R;direction:rtl;white-space:nowrap;box-shadow:0 18px 40px -20px rgba(30,27,58,.3)`;
+more.innerHTML = `والكثير غيرها <span style="font-size:72px">+</span>`; s.appendChild(more);
+const less = txt(`<div class="h1" style="font-size:170px">جهد <span class="u"><span>أقل.</span>${UL(C.lilac)}</span></div>`, "top:380px");
+const moreLife = txt(`<div class="h1" style="font-size:170px">حياة <span class="u"><span>أكثر.</span>${UL(C.sun)}</span></div>`, "top:620px");
+s.append(hook, tidy, less, moreLife);
+const end = endCard(s);
+
+window.render = t => {
+  sun.style.transform = `translateY(${Math.sin(t * 1.3) * 20}px) scale(${backOut(prog(t, .1, .8))})`;
+  lil.style.transform = `translateY(${Math.cos(t * 1.1) * 20}px) rotate(${12 + t * 5}deg) scale(${backOut(prog(t, .3, .8))})`;
+  hook.style.opacity = win(t, .1, 3.6, .3, .3); hook.style.transform = `scale(${lerp(.6, 1, backOut(prog(t, .1, .5)))}) rotate(${Math.sin(t * 8) * (t < 3.3 ? 1.2 : 0)}deg)`;
+  tidy.style.opacity = win(t, 3.9, 8.4, .4, .35); tidy.style.transform = `translateY(${(1 - easeOut(prog(t, 3.9, .5))) * 40}px)`;
+  // chips: fall → pile → snap into a grid → highlight wave → leave
+  items.forEach((it, i) => {
+    const w = it.el.offsetWidth, h = it.el.offsetHeight;
+    const f = prog(t, .35 + it.delay, .7);
+    let x = lerp(it.x0, it.pileX, f), y = lerp(-200, it.pileY, f < 1 ? easeIn(f) : 1), rot = lerp(it.rot0, it.pileRot, f);
+    if (f >= 1) { const b = prog(t, 1.05 + it.delay, .35); y -= Math.sin(Math.PI * b) * 40 * (1 - b); }
+    const g = easeInOut(prog(t, 3.75 + i * .03, .6));
+    x = lerp(x, it.gx, g); y = lerp(y, it.gy, g); rot = lerp(rot, 0, g);
+    const pulse = Math.max(0, Math.sin(Math.PI * prog(t, 5.0 + i * .15, .35))) * .12;
+    const out = easeIn(prog(t, 8.2 + (i % 2) * .05 + Math.floor(i / 2) * .03, .4));
+    it.el.style.opacity = clamp(prog(t, .35 + it.delay, .05)) * (1 - out);
+    it.el.style.transform = `translate(${x - w / 2}px,${y - h / 2 - out * 80}px) rotate(${rot}deg) scale(${1 + pulse})`;
+  });
+  // Clicky hops in, taps (squash + ripple), hops out
+  const inK = easeOut(prog(t, 2.6, .6)), outK = easeIn(prog(t, 4.3, .5));
+  const tap = prog(t, 3.5, .3);
+  setFace(ck, t > 3.5 ? "celebrate" : "wink");
+  setClicky(ck, { x: lerp(1300, 540, inK) + outK * 800, y: 1560, s: .95, squash: 1 - .28 * Math.sin(Math.PI * tap), hop: Math.abs(Math.sin(t * 9)) * 40 * (inK < 1 ? 1 : 0) + Math.abs(Math.sin(t * 9)) * 40 * outK, wave: -.3 + Math.sin(t * 9) * .4, op: t < 5 ? 1 : 0 });
+  const rp = prog(t, 3.6, .7); ripple.style.opacity = rp > 0 && rp < 1 ? (1 - rp) : 0; ripple.style.transform = `scale(${1 + rp * 22})`; ripple.style.top = "1400px";
+  // and many more
+  const m = backOut(prog(t, 8.5, .6)), mo = easeIn(prog(t, 10.1, .3));
+  more.style.opacity = clamp(prog(t, 8.5, .15)) * (1 - mo); more.style.transform = `translate(-50%,0) scale(${lerp(.3, 1, m)}) rotate(${-3 + Math.sin(t * 4) * 2}deg)`;
+  // slogan
+  less.style.opacity = win(t, 10.2, 12.2, .35, .3); less.style.transform = `translateY(${(1 - easeOut(prog(t, 10.2, .45))) * 50}px)`; setUL(less, easeOut(prog(t, 10.5, .6)));
+  moreLife.style.opacity = win(t, 10.8, 12.2, .35, .3); moreLife.style.transform = `translateY(${(1 - easeOut(prog(t, 10.8, .45))) * 50}px)`; setUL(moreLife, easeOut(prog(t, 11.1, .6)));
+  end(t, 12.1);
+};
+render(0);
+</script></body></html>
