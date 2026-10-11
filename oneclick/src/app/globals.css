@@ -469,3 +469,36 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
   :where(:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
   .bj, .bj * { cursor: revert-layer; }
 }
+
+/* Purchase party (components/brand/DancingClicky.tsx): a 0.5 s beat. Bounce, sway and a full spin
+   every 8 beats sit on separate wrappers so their transforms never fight. */
+.dc-arm-l, .dc-arm-r, .dc-leg-l, .dc-leg-r, .dc-hat { transform-box: fill-box; }
+.dc-arm-l { transform-origin: 100% 100%; }
+.dc-arm-r { transform-origin: 0% 100%; }
+.dc-leg-l, .dc-leg-r { transform-origin: 50% 0%; }
+.dc-hat { transform-origin: 50% 100%; transform: rotate(8deg); }
+.dc-note { opacity: 0; pointer-events: none; }
+.dc-note-0 { left: 4%; top: 30%; } .dc-note-1 { right: 2%; top: 22%; } .dc-note-2 { left: 14%; top: 8%; } .dc-note-3 { right: 12%; top: 46%; }
+@media (prefers-reduced-motion: no-preference) {
+  .dc-bounce { animation: dc-bounce .5s cubic-bezier(.3,0,.4,1) infinite; }
+  .dc-sway { transform-origin: 50% 90%; animation: dc-sway 1s ease-in-out infinite; }
+  .dc-spin { transform-origin: 50% 55%; animation: dc-spin 4s cubic-bezier(.6,0,.3,1) 1s infinite; }
+  .dc-shadow { animation: dc-shadow .5s cubic-bezier(.3,0,.4,1) infinite; }
+  .dc-arm-l { animation: dc-wave-l .5s ease-in-out infinite alternate; }
+  .dc-arm-r { animation: dc-wave-r .5s ease-in-out .25s infinite alternate; }
+  .dc-leg-l { animation: dc-kick-l .5s ease-in-out infinite alternate; }
+  .dc-leg-r { animation: dc-kick-r .5s ease-in-out .25s infinite alternate; }
+  .dc-hat { animation: dc-hat 1s ease-in-out infinite; }
+  .dc-note { animation: dc-note 2.4s ease-out infinite; }
+  .dc-note-1 { animation-delay: .6s; } .dc-note-2 { animation-delay: 1.2s; } .dc-note-3 { animation-delay: 1.8s; }
+}
+@keyframes dc-bounce { 0%, 100% { transform: translateY(0) scaleY(.96); } 45% { transform: translateY(-16%) scaleY(1.03); } }
+@keyframes dc-shadow { 0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; } 45% { transform: translateX(-50%) scale(.7); opacity: .5; } }
+@keyframes dc-sway { 0%, 100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
+@keyframes dc-spin { 0%, 78% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+@keyframes dc-wave-l { from { transform: rotate(-30deg); } to { transform: rotate(25deg); } }
+@keyframes dc-wave-r { from { transform: rotate(30deg); } to { transform: rotate(-25deg); } }
+@keyframes dc-kick-l { from { transform: rotate(0); } to { transform: rotate(28deg); } }
+@keyframes dc-kick-r { from { transform: rotate(0); } to { transform: rotate(-28deg); } }
+@keyframes dc-hat { 0%, 100% { transform: rotate(8deg); } 50% { transform: rotate(-10deg); } }
+@keyframes dc-note { 0% { opacity: 0; transform: translateY(10px) rotate(-10deg); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-70px) rotate(15deg); } }

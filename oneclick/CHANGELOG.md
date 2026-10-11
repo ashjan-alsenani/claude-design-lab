@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.14.1 — 2026-10-11 — Purchase party
+- After a successful purchase Clicky throws a party: party hat, bouncing to a beat, swaying, arms
+  up, kicks and a full spin every few beats, with rounds of confetti and floating music notes.
+  CSS-only dance (`DancingClicky`), static and calm under reduced motion.
+
 ## 0.14.0 — 2026-10-10 — Faster pages, instant clicks, Clicky cursor, safer saves
 Measured with Lighthouse (mobile, local production build, median of runs):
 home performance 83 → 95, first paint 1.5 s → 0.9 s, simulated LCP 4.1 s → 2.8 s, layout shift

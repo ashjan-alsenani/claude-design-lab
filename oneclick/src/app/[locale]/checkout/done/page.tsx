@@ -5,6 +5,8 @@ import { licensingCopy } from "@/i18n/licensing";
 import { licensingMode } from "@/lib/licensing/server";
 import { testPurchasesEnabled } from "@/lib/licensing/test-purchase";
 import { Clicky } from "@/components/brand/Clicky";
+import { DancingClicky } from "@/components/brand/DancingClicky";
+import { PurchaseParty } from "@/components/checkout/PurchaseParty";
 import { ButtonLink } from "@/components/ui/Button";
 import { SandboxBanner } from "@/components/account/SandboxBanner";
 
@@ -22,7 +24,15 @@ export default async function CheckoutDonePage({ params, searchParams }: { param
   return (
     <div className="mx-auto max-w-xl px-4 pb-10 pt-8 text-center">
       <SandboxBanner locale={locale} />
-      <Clicky size={130} mood={mood} body animate className="mx-auto" />
+      {r === "succeeded" ? (
+        // A successful purchase gets a party: Clicky dances while confetti rains.
+        <div className="relative">
+          <PurchaseParty />
+          <DancingClicky />
+        </div>
+      ) : (
+        <Clicky size={130} mood={mood} body animate className="mx-auto" />
+      )}
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-ink">{title}</h1>
       <p className="mt-3 leading-relaxed text-ink-soft">{body}</p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
