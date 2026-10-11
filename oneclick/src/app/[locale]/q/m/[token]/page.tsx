@@ -9,7 +9,7 @@ export const metadata = { title: "Hikayat Qudoom" };
 export default async function ManagePage({ params }: { params: Promise<{ locale: string; token: string }> }) {
   const { locale, token } = await params;
   if (!isLocale(locale)) notFound();
-  const view = await managePage(token).catch(() => null);
+  const view = await managePage(token, locale).catch(() => null);
   if (!view) return <Unavailable lang={locale} />;
   return <ManageCard lang={locale} token={token} view={view} />;
 }

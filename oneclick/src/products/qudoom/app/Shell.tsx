@@ -4,16 +4,17 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowCounterClockwiseIcon, BabyIcon, BagIcon, BedIcon, CalendarHeartIcon, CardsIcon, CloudCheckIcon, CloudSlashIcon, CoffeeIcon, DotsThreeOutlineIcon, GearSixIcon,
-  GiftIcon, HandHeartIcon, HeartIcon, HouseSimpleIcon, ImagesIcon, ShareNetworkIcon, SignOutIcon, SparkleIcon, StarIcon, UsersThreeIcon, WalletIcon, type Icon,
+  GiftIcon, HandHeartIcon, HeartIcon, LightbulbIcon, HouseSimpleIcon, ImagesIcon, ShareNetworkIcon, SignOutIcon, SparkleIcon, StarIcon, UsersThreeIcon, WalletIcon, type Icon,
 } from "@phosphor-icons/react";
 import { useQ } from "./state";
 import { groups, pages, type PageKey } from "../constants";
-import { QudoomMark } from "../ui/Art";
+import { SkyDecor } from "../ui/Art";
+import { BabyMascot } from "../ui/Mascot";
 import { Button, cx } from "../ui/kit";
 
 export const pageIcons: Record<PageKey, Icon> = {
   "": HouseSimpleIcon, items: BabyIcon, bag: BagIcon, nursery: BedIcon, mother: HandHeartIcon, events: StarIcon, visits: UsersThreeIcon, hospitality: CoffeeIcon,
-  favors: SparkleIcon, registry: GiftIcon, received: HeartIcon, budget: WalletIcon, calendar: CalendarHeartIcon, memories: ImagesIcon, cards: CardsIcon, share: ShareNetworkIcon, settings: GearSixIcon, more: DotsThreeOutlineIcon,
+  favors: SparkleIcon, ideas: LightbulbIcon, registry: GiftIcon, received: HeartIcon, budget: WalletIcon, calendar: CalendarHeartIcon, memories: ImagesIcon, cards: CardsIcon, share: ShareNetworkIcon, settings: GearSixIcon, more: DotsThreeOutlineIcon,
 };
 const groupIcons = { home: HouseSimpleIcon, prep: BabyIcon, reception: StarIcon, gifts: GiftIcon, more: DotsThreeOutlineIcon };
 
@@ -21,7 +22,7 @@ export function usePageLabel() {
   const { t, plan } = useQ();
   return (p: PageKey) => {
     if (p === "nursery" && plan.profile?.nurseryKind === "corner") return t.nav.nurseryCorner;
-    const map: Record<PageKey, string> = { "": t.nav.home, items: t.nav.items, bag: t.nav.bag, nursery: t.nav.nursery, mother: t.nav.mother, events: t.nav.events, visits: t.nav.visits, hospitality: t.nav.hospitality, favors: t.nav.favors, registry: t.nav.registry, received: t.nav.received, budget: t.nav.budget, calendar: t.nav.calendar, memories: t.nav.memories, cards: t.nav.cards, share: t.nav.share, settings: t.nav.settings, more: t.nav.more };
+    const map: Record<PageKey, string> = { "": t.nav.home, items: t.nav.items, bag: t.nav.bag, nursery: t.nav.nursery, mother: t.nav.mother, events: t.nav.events, visits: t.nav.visits, hospitality: t.nav.hospitality, favors: t.nav.favors, ideas: t.nav.ideas, registry: t.nav.registry, received: t.nav.received, budget: t.nav.budget, calendar: t.nav.calendar, memories: t.nav.memories, cards: t.nav.cards, share: t.nav.share, settings: t.nav.settings, more: t.nav.more };
     return map[p];
   };
 }
@@ -70,16 +71,21 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
           )}
         </div>
       )}
-      <header className="qd-noprint sticky top-0 z-30 border-b border-[var(--qd-line)] bg-[var(--qd-bg)]/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
-          <Link href={href()} className="flex min-w-0 items-center gap-2.5">
-            <QudoomMark size={34} />
+      <div className="relative">
+      <SkyDecor className="qd-noprint" />
+      <header className="qd-noprint relative z-30">
+        <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6">
+          <Link href={href()} className="flex min-w-0 items-center gap-2">
+            <BabyMascot size={34} theme={plan.profile?.theme} animate={false} />
             <span className="truncate font-bold">{mode === "helper" && access.ownerName ? t.top.helperOf(access.ownerName) : t.brand}</span>
           </Link>
           <span className="flex-1" />
           <SaveBadge state={saveState} retry={retry} mode={mode} />
           <Link href={switchHref} className="hidden h-10 items-center rounded-full px-3 text-[13px] font-medium text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)] sm:inline-flex" hrefLang={lang === "ar" ? "en" : "ar"}>
             {t.top.lang}
+          </Link>
+          <Link href={href("more")} className="grid size-10 place-items-center rounded-full bg-white/70 text-[var(--qd-ink-soft)] hover:bg-white lg:hidden" aria-label={t.nav.more} title={t.nav.more}>
+            <DotsThreeOutlineIcon size={19} weight="fill" />
           </Link>
           <Link href={exitHref} className="grid size-10 place-items-center rounded-full text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)]" aria-label={t.top.exit} title={t.top.exit}>
             <SignOutIcon size={19} className="rtl:-scale-x-100" />
@@ -89,7 +95,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
       {!online && <p className="qd-noprint bg-[var(--qd-amber-soft)] px-4 py-2 text-center text-[13px] text-[var(--qd-amber)]">{lang === "ar" ? "ما فيه اتصال بالإنترنت. تعديلاتك محفوظة هنا وبتنرسل أول ما يرجع الاتصال." : "You're offline. Your edits are kept here and will be sent when you're back online."}</p>}
       {remoteNote && <p className="qd-noprint bg-[var(--qd-tint)] px-4 py-2 text-center text-[13px] text-[var(--qd-primary-deep)]">{lang === "ar" ? "تحدّثت البيانات من جهاز أو شخص ثاني، ودمجناها مع تعديلاتك." : "The plan was updated from another device or person; we merged it with your edits."}</p>}
 
-      <div className="mx-auto flex max-w-6xl gap-8 px-4 pb-28 sm:px-6 lg:pb-12">
+      <div className="relative mx-auto flex max-w-6xl gap-8 px-4 pb-32 sm:px-6 lg:pb-12">
         <nav aria-label={t.brand} className="qd-noprint sticky top-20 hidden h-[calc(100dvh-6rem)] w-56 shrink-0 overflow-y-auto py-6 lg:block">
           {sideGroups.map((g) => (
             <div key={g.key} className="mb-4">
@@ -115,7 +121,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
           {tabs.length > 1 && (
             <nav aria-label={t.nav[group]} className="qd-noprint qd-scroll-x -mx-4 mb-5 flex gap-2 overflow-x-auto px-4 lg:hidden">
               {tabs.map((p) => (
-                <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={cx("h-10 shrink-0 whitespace-nowrap rounded-full border px-4 text-[14px] leading-[38px]", p === page ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-[var(--qd-line)] bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
+                <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={cx("h-10 shrink-0 whitespace-nowrap rounded-full border px-4 text-[14px] leading-[38px]", p === page ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-transparent bg-white/85 text-[var(--qd-ink-soft)] shadow-[0_4px_14px_-10px_rgb(30_27_58/.4)]")}>
                   {label(p)}
                 </Link>
               ))}
@@ -126,16 +132,17 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
           </div>
         </main>
       </div>
+      </div>
 
-      <nav aria-label={t.brand} className="qd-noprint fixed inset-x-0 bottom-0 z-30 border-t border-[var(--qd-line)] bg-[var(--qd-paper)]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
+      <nav aria-label={t.brand} className="qd-noprint fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 rounded-[28px] bg-white/95 shadow-[0_10px_34px_-12px_rgb(30_27_58/.35)] backdrop-blur lg:hidden">
         <ul className="mx-auto flex max-w-lg">
-          {navGroups.map((g) => {
+          {navGroups.filter((g) => g.key !== "more").map((g) => {
             const I = groupIcons[g.key];
             const on = g.key === group;
             return (
               <li key={g.key} className="flex-1">
-                <Link href={href(firstOf(g) || undefined)} aria-current={on ? "page" : undefined} className={cx("flex h-16 flex-col items-center justify-center gap-1 text-[11.5px]", on ? "font-semibold text-[var(--qd-primary)]" : "text-[var(--qd-muted)]")}>
-                  <I size={22} weight={on ? "fill" : "regular"} />
+                <Link href={href(firstOf(g) || undefined)} aria-current={on ? "page" : undefined} className={cx("flex h-16 flex-col items-center justify-center gap-0.5 text-[11.5px] font-semibold", on ? "text-[var(--qd-primary)]" : "text-[#8a86a8]")}>
+                  <span className={cx("grid h-8 w-12 place-items-center rounded-full transition-colors", on && "bg-[var(--qd-tint)]")}><I size={22} weight={on ? "fill" : "regular"} /></span>
                   {t.nav[g.key]}
                 </Link>
               </li>

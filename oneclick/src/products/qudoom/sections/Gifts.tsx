@@ -5,12 +5,12 @@ import { ArrowSquareOutIcon, CheckIcon, CopyIcon, GiftIcon, HeartIcon, LinkIcon,
 import { useQ } from "../app/state";
 import type { Gift, Priority, ReceivedGift, ReceivedKind } from "../model/types";
 import { EntitySheet, type Draft, type FieldSpec } from "../ui/EntitySheet";
-import { Badge, Bar, Button, Card, Chips, EmptyState, Field, PageHeader, TextArea } from "../ui/kit";
+import { Badge, Bar, Button, Card, Chips, EmptyState, Field, PageHeader, TextArea , IdeasLink } from "../ui/kit";
 import { useAddParam } from "./Lists";
 import { useLinkText } from "./Reception";
 
 export function RegistryPage() {
-  const { t, plan, dispatch, newId, num, money, access, pub, api, href, say } = useQ();
+  const { t, plan, dispatch, newId, num, money, access, pub, api, href, say, lang } = useQ();
   const [edit, setEdit] = useState<Partial<Gift> | null>(null);
   useAddParam(() => setEdit({ qtyNeeded: 1, priority: "essential" }));
   const url = useLinkText("gifts");
@@ -28,6 +28,7 @@ export function RegistryPage() {
   return (
     <div className="space-y-6">
       <PageHeader title={t.registry.title} sub={t.registry.sub} icon={<GiftIcon size={22} />} action={access.canEdit ? <Button onClick={() => setEdit({ qtyNeeded: 1, priority: "essential" })}><PlusIcon size={18} /> {t.registry.add}</Button> : undefined} />
+      {access.canEdit && <IdeasLink href={href("ideas")} label={lang === "ar" ? "أفكار هدايا جاهزة، أضيفيها بضغطة" : "Ready gift ideas, add with one tap"} />}
       <Card className="flex flex-wrap items-center gap-3 p-4">
         <LinkIcon size={20} className="text-[var(--qd-primary)]" />
         <div className="min-w-0 flex-1">
@@ -52,8 +53,8 @@ export function RegistryPage() {
             const c = pub?.gifts[g.id] ?? { reserved: 0, purchased: 0, names: [] };
             const avail = Math.max(0, g.qtyNeeded - c.reserved - c.purchased);
             return (
-              <li key={g.id}>
-                <button type="button" onClick={() => setEdit(g)} className="qd-card flex w-full gap-3 rounded-[20px] p-3.5 text-start">
+              <li key={g.id} className="min-w-0">
+                <button type="button" onClick={() => setEdit(g)} className="qd-card flex w-full min-w-0 gap-3 rounded-[20px] p-3.5 text-start">
                   <div className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-[14px] bg-[var(--qd-tint-2)]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     {g.fileId ? <img src={api.fileUrl(g.fileId)} alt="" className="size-full object-cover" /> : <GiftIcon size={26} className="text-[var(--qd-primary)]" />}

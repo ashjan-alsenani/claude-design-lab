@@ -61,3 +61,35 @@ export function QudoomMark({ size = 36 }: { size?: number }) {
     </svg>
   );
 }
+
+/** OneClick-style soft color blobs and a sparkle behind the page top. Decorative. */
+export function SkyDecor({ className = "" }: { className?: string }) {
+  return (
+    <div className={`pointer-events-none absolute inset-x-0 top-0 h-[360px] overflow-hidden ${className}`} aria-hidden="true">
+      <div className="absolute -start-20 top-20 size-56 rounded-full bg-[var(--qd-blob-1)]" />
+      <div className="absolute -end-14 top-44 size-40 rounded-full bg-[var(--qd-blob-2)]" />
+      <svg className="qd-twinkle absolute end-[22%] top-16 size-5" viewBox="0 0 20 20"><path d="M10 0 l2.6 7.4 7.4 2.6 -7.4 2.6 -2.6 7.4 -2.6 -7.4 -7.4 -2.6 7.4 -2.6z" fill="var(--qd-star)" /></svg>
+      <svg className="qd-twinkle absolute start-[38%] top-[230px] size-3.5" viewBox="0 0 20 20"><path d="M10 0 l2.6 7.4 7.4 2.6 -7.4 2.6 -2.6 7.4 -2.6 -7.4 -7.4 -2.6 7.4 -2.6z" fill="#ff8fab" /></svg>
+    </div>
+  );
+}
+
+/** Little baby footprints as a progress row (filled = done). */
+export function Footprints({ value, total = 10 }: { value: number; total?: number }) {
+  const on = Math.round(Math.max(0, Math.min(1, value)) * total);
+  return (
+    <div className="flex items-center justify-center gap-1.5" aria-hidden="true">
+      {Array.from({ length: total }, (_, i) => {
+        const c = i < on ? "var(--qd-primary)" : "color-mix(in oklab, var(--qd-primary) 18%, #fff)";
+        return (
+          <svg key={i} viewBox="0 0 20 28" className="h-7 w-5" style={{ transform: `rotate(${i % 2 ? 12 : -12}deg)` }}>
+            <ellipse cx="10" cy="17" rx="7" ry="9" fill={c} />
+            <circle cx="5" cy="5" r="2.4" fill={c} />
+            <circle cx="10" cy="3.5" r="2.4" fill={c} />
+            <circle cx="15" cy="5" r="2.4" fill={c} />
+          </svg>
+        );
+      })}
+    </div>
+  );
+}

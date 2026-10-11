@@ -6,7 +6,7 @@ import { useQ } from "../app/state";
 import { eventReadiness, favorTotal, guestsFor, hospCost, hospQty, manualLoad, slotKey, slotsOn, weekday, addDays } from "../model/engine";
 import type { EventArea, Favor, FavorStatus, HospItem, ReceptionEvent, ReceptionKind, Visit, VisitGroup, VisitSettings, VisitStatus, Window } from "../model/types";
 import { EntitySheet, type Draft, type FieldSpec } from "../ui/EntitySheet";
-import { Badge, Bar, Button, Card, Chips, EmptyState, Field, Fold, PageHeader, SectionTitle, Stat, TextArea, Toggle, cx, inputCls, type Tone } from "../ui/kit";
+import { Badge, Bar, Button, Card, Chips, EmptyState, Field, Fold, PageHeader, SectionTitle, Stat, TextArea, Toggle, cx, inputCls, type Tone , IdeasLink } from "../ui/kit";
 import { TaskList, useAddParam } from "./Lists";
 import { receptionNames, seedEvent } from "../model/seed";
 
@@ -149,7 +149,7 @@ export function VisitsPage() {
       <Chips label={t.visits.title} value={tab} onChange={setTab} options={[{ value: "list" as const, label: t.visits.title, count: plan.visits.length }, { value: "requests" as const, label: t.visits.requests, count: pending.length }, ...(mode === "helper" ? [] : [{ value: "hours" as const, label: t.visits.settings }, { value: "invite" as const, label: t.visits.link }])]} />
       {tab === "list" && (
         <>
-          <Chips label={t.common.status} value={filter} onChange={setFilter} options={[{ value: "all" as const, label: t.common.all }, ...(["confirmed", "requested", "waiting", "done", "declined", "cancelled"] as VisitStatus[]).map((s) => ({ value: s, label: t.status.visit[s], count: plan.visits.filter((v) => v.status === s).length }))]} />
+          {plan.visits.length > 6 && <Chips label={t.common.status} value={filter} onChange={setFilter} options={[{ value: "all" as const, label: t.common.all }, ...(["confirmed", "requested", "waiting", "done", "declined", "cancelled"] as VisitStatus[]).filter((s) => plan.visits.some((v) => v.status === s)).map((s) => ({ value: s, label: t.status.visit[s], count: plan.visits.filter((v) => v.status === s).length }))]} />}
           {list.length === 0 ? (
             <EmptyState icon={<UsersThreeIcon size={26} />} title={t.common.empty} />
           ) : (
@@ -382,7 +382,7 @@ export function HospitalityPage() {
 // ---------- Favors ----------
 const fTone: Record<FavorStatus, Tone> = { idea: "neutral", quote: "amber", sample: "lilac", approved: "primary", making: "accent", ready: "sage", received: "sage" };
 export function FavorsPage() {
-  const { t, plan, dispatch, newId, num, money, date, access, can } = useQ();
+  const { t, plan, dispatch, newId, num, money, date, access, can, href, lang } = useQ();
   const [edit, setEdit] = useState<Partial<Favor> | null>(null);
   useAddParam(() => setEdit(blank()));
   const blank = (): Partial<Favor> => ({ status: "idea", qtyBase: 0, qtyExtra: 0, unitMinor: 0, feesMinor: 0, depositMinor: 0, qtyReceived: 0, qtyGiven: 0, babyName: plan.profile?.babyName });
@@ -413,6 +413,7 @@ export function FavorsPage() {
   return (
     <div className="space-y-6">
       <PageHeader title={t.favorsT.title} sub={t.favorsT.sub} icon={<SparkleIcon size={22} />} action={access.canEdit ? <Button onClick={() => setEdit(blank())}><PlusIcon size={18} /> {t.favorsT.add}</Button> : undefined} />
+      {access.canEdit && <IdeasLink href={href("ideas")} label={lang === "ar" ? "أفكار توزيعات جاهزة، أضيفيها بضغطة" : "Ready favor ideas, add with one tap"} />}
       {plan.favors.length === 0 ? (
         <EmptyState icon={<SparkleIcon size={26} />} title={t.common.empty} />
       ) : (
@@ -423,22 +424,22 @@ export function FavorsPage() {
             const qty = f.qtyBase + f.qtyExtra;
             const step = (k: "qtyReceived" | "qtyGiven", d: number) => dispatch({ t: "put", c: "favors", item: { ...f, [k]: Math.max(0, f[k] + d) } });
             return (
-              <li key={f.id} className="qd-card rounded-[22px] p-4">
+              <li key={f.id} className="qd-card min-w-0 rounded-[22px] p-4">
                 <button type="button" onClick={() => setEdit(f)} className="w-full text-start">
                   <span className="flex items-center gap-2"><span className="min-w-0 flex-1 truncate text-[16px] font-semibold">{f.type}</span><Badge tone={fTone[f.status]}>{t.status.favor[f.status]}</Badge></span>
                   <span className="mt-1 block text-[13px] text-[var(--qd-muted)]">{[f.vendor, f.deliveryDate && `${t.favorsT.delivery}: ${date(f.deliveryDate)}`, f.eventId && plan.events.find((e) => e.id === f.eventId)?.name].filter(Boolean).join(" · ") || "—"}</span>
                   {f.printedText && <span className="mt-1 block text-[13px]">“{f.printedText}”</span>}
                 </button>
                 {can("budget") && (
-                  <div className="mt-3 grid grid-cols-3 gap-2">
+                  <div className="mt-3 grid grid-cols-3 gap-2 [&>*]:min-w-0">
                     <Stat label={t.money.total} value={money(total)} />
                     <Stat label={f.orderId ? t.money.paid : t.money.deposit} value={money(orderPaid)} tone="sage" />
                     <Stat label={t.money.remaining} value={money(Math.max(0, total - orderPaid))} />
                   </div>
                 )}
-                <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[12.5px]">
+                <div className="mt-3 grid grid-cols-2 gap-2 text-center text-[12.5px]">
                   {([["qtyReceived", t.favorsT.gotQty], ["qtyGiven", t.favorsT.given]] as const).map(([k, l]) => (
-                    <div key={k} className="rounded-[14px] bg-[var(--qd-tint-2)] p-2">
+                    <div key={k} className="min-w-0 rounded-[14px] bg-[var(--qd-tint-2)] p-2">
                       <p className="text-[var(--qd-muted)]">{l}</p>
                       <div className="mt-1 flex items-center justify-center gap-1">
                         {access.canEdit && <button type="button" aria-label={`− ${l}`} onClick={() => step(k, -1)} className="grid size-9 place-items-center rounded-full bg-[var(--qd-paper)]">−</button>}
@@ -447,10 +448,7 @@ export function FavorsPage() {
                       </div>
                     </div>
                   ))}
-                  <div className="rounded-[14px] bg-[var(--qd-tint-2)] p-2">
-                    <p className="text-[var(--qd-muted)]">{t.favorsT.leftQty}</p>
-                    <p className="mt-2.5 font-bold tabular-nums">{num(Math.max(0, f.qtyReceived - f.qtyGiven))} / {num(qty)}</p>
-                  </div>
+                  <p className="col-span-2 text-[13px] text-[var(--qd-muted)]">{t.favorsT.leftQty}: <b className="tabular-nums text-[var(--qd-ink)]">{num(Math.max(0, f.qtyReceived - f.qtyGiven))} / {num(qty)}</b></p>
                 </div>
               </li>
             );

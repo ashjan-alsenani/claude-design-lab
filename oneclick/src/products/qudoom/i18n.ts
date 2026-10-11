@@ -9,7 +9,7 @@ const ar = {
   nav: {
     home: "الرئيسية", prep: "التجهيزات", reception: "الاستقبال", gifts: "الهدايا", more: "المزيد",
     items: "أغراض البيبي", bag: "شنطة المستشفى", nursery: "غرفة البيبي", nurseryCorner: "ركن البيبي", mother: "تجهيزك أنتِ",
-    events: "خطط الاستقبال", visits: "الزيارات", hospitality: "الضيافة", favors: "التوزيعات",
+    events: "خطط الاستقبال", visits: "الزيارات", hospitality: "الضيافة", favors: "التوزيعات", ideas: "أفكار حلوة",
     registry: "قائمة الهدايا", received: "الهدايا المستلمة", budget: "الميزانية والطلبات", calendar: "التقويم", memories: "الذكريات", cards: "البطاقات", share: "المشاركة والمساعدات", settings: "الإعدادات",
   },
   top: { saving: "جارٍ الحفظ…", saved: "تم الحفظ", error: "تعذّر الحفظ", retry: "إعادة المحاولة", demo: "نسخة تجريبية ببيانات خيالية: التغييرات مؤقتة ولا تُحفظ", resetDemo: "إعادة تعيين", exit: "خروج", lang: "English", buy: "اشترِ المفكّرة", helperOf: (n: string) => `مفكّرة ${n} (مساعدة)` },
@@ -55,6 +55,8 @@ const ar = {
     quick: "إضافة سريعة", qItem: "غرض", qTask: "مهمة", qVisit: "زيارة", qGift: "هدية مستلمة", qOrder: "طلب", activity: "آخر نشاط",
     arrivedAsk: "وصل صغيرك؟", arrivedYes: "نعم، وصل صغيرنا", arrivedTitle: (n?: string) => (n ? `وصلت ${n} بالسلامة 🤍` : "وصل صغيرنا بالسلامة 🤍"), arrivedSub: "الحين وقت الراحة والزيارات والذكريات. خذي وقتك.", undoArrived: "تراجع",
     restTip: "راحتك أولًا. أي شي ثاني يقدر ينتظر.",
+    bigLeft: (n: string) => `باقي ${n} يوم`, andSee: (b?: string) => (b ? `ونشوف ${b}` : "ونشوف صغيرنا"), readyPct: (p: string) => `${p} جاهزة`, nextStep: "خطوتك الجاية", allDone: "كل شي قريب خلص. وقت ترتاحين 🤍",
+    tPrep: "أغراض البيبي", tBag: "شنطة المستشفى", tReception: "الاستقبال", tIdeas: "الهدايا والتوزيعات", tIdeasSub: "أفكار جاهزة ✨", ofN: (a: string, b: string) => `${a} من ${b}`, visitsN: (n: string) => `${n} زيارة مؤكدة`, soon: "قريبًا", all: "الكل",
   },
   prep: {
     title: "أغراض البيبي", sub: "قوائم اقتراحات تنظيمية تعدلينها على راحتك. مو كل أم تحتاج كل شي.", addItem: "إضافة غرض", searchPh: "ابحثي في الأغراض", ready: "جاهز", missing: "ناقص",
@@ -99,6 +101,11 @@ const ar = {
     where: "الدولة والعملة", budget: "ميزانية تقريبية", budgetHint: "اختياري. تقدرين تتركينها.", experience: "وش تحبين تشملين؟", presets: { prep: "التجهيزات فقط", prepReception: "التجهيزات والاستقبال", full: "التجربة الكاملة", custom: "أختار الأقسام بنفسي" },
     reception: "نوع الاستقبال اللي تخططين له", receptionHint: "اختاري اللي يناسبك، أو لا شي.", look: "اختاري الثيم", nurseryQ: "للبيبي غرفة أو ركن؟", done: "جاهزين! 🤍",
   },
+  ideasT: {
+    title: "أفكار حلوة 🎁", sub: "اختاري اللي يعجبك وأضيفيه بضغطة.", baby: "هدايا للبيبي", favor: "توزيعات", mother: "هدايا للأم",
+    addGift: "أضيفيها للقائمة", addFavor: "أضيفيها للتوزيعات", added: "مضافة", addedToast: "انضافت 🤍", price: { 1: "سعر بسيط", 2: "سعر متوسط", 3: "سعر أعلى" },
+    note: "الأسعار تقريبية وتختلف حسب المكان. ما فيه روابط متاجر أو إعلانات.",
+  },
   pub: {
     giftsTitle: (n: string) => `قائمة هدايا ${n}`, giftsSub: "شكرًا على محبتكم. اختاروا هدية واحجزوها حتى ما تتكرر.", reserve: "احجزي / احجز", reserveQty: "الكمية", yourName: "اسمك (اختياري)", hideName: "إخفاء اسمي عن الأم", reserveBtn: "تأكيد الحجز",
     reservedOk: "تم الحجز 🤍", reservedKeep: "احفظوا هذا الرابط لإدارة حجزكم (تأكيد الشراء أو الإلغاء):", expiresOn: (d: string) => `الحجز مؤقت وينتهي ${d} إذا ما تأكد الشراء.`, buyLink: "رابط الشراء", none: "كل الهدايا محجوزة حاليًا 🤍",
@@ -118,7 +125,7 @@ const en: Widen<QCopy> = {
   nav: {
     home: "Home", prep: "Preparations", reception: "Welcome", gifts: "Gifts", more: "More",
     items: "Baby things", bag: "Hospital bag", nursery: "Nursery", nurseryCorner: "Baby corner", mother: "For you",
-    events: "Welcome plans", visits: "Visits", hospitality: "Hospitality", favors: "Favors",
+    events: "Welcome plans", visits: "Visits", hospitality: "Hospitality", favors: "Favors", ideas: "Lovely ideas",
     registry: "Gift list", received: "Gifts received", budget: "Budget & orders", calendar: "Calendar", memories: "Memories", cards: "Cards", share: "Sharing & helpers", settings: "Settings",
   },
   top: { saving: "Saving…", saved: "Saved", error: "Couldn't save", retry: "Try again", demo: "Demo with fictional data: changes are temporary and not saved", resetDemo: "Reset", exit: "Exit", lang: "العربية", buy: "Get the planner", helperOf: (n: string) => `${n}'s planner (helper)` },
@@ -164,6 +171,8 @@ const en: Widen<QCopy> = {
     quick: "Quick add", qItem: "Item", qTask: "Task", qVisit: "Visit", qGift: "Gift received", qOrder: "Order", activity: "Recent activity",
     arrivedAsk: "Has your little one arrived?", arrivedYes: "Yes, our little one is here", arrivedTitle: (n?: string) => (n ? `${n} has arrived safely 🤍` : "Our little one has arrived safely 🤍"), arrivedSub: "Now it's time for rest, visits and memories. Take your time.", undoArrived: "Undo",
     restTip: "Your rest comes first. Everything else can wait.",
+    bigLeft: (n: string) => `${n} days to go`, andSee: (b?: string) => (b ? `until we meet ${b}` : "until we meet our little one"), readyPct: (p: string) => `${p} ready`, nextStep: "Your next step", allDone: "Nothing due soon. Time to rest 🤍",
+    tPrep: "Baby things", tBag: "Hospital bag", tReception: "Welcome", tIdeas: "Gifts & favors", tIdeasSub: "Ready ideas ✨", ofN: (a: string, b: string) => `${a} of ${b}`, visitsN: (n: string) => `${n} confirmed visits`, soon: "Coming up", all: "All",
   },
   prep: {
     title: "Baby things", sub: "Organizing suggestions you can edit freely. Not every mum needs every item.", addItem: "Add item", searchPh: "Search items", ready: "Ready", missing: "Missing",
@@ -207,6 +216,11 @@ const en: Widen<QCopy> = {
     you: "What should we call you?", youPh: "e.g. Rashid's mum", baby: "Baby's name (or a nickname)", babyPh: "Optional", due: "Expected date", dueHint: "Optional. It's an expected date, not a confirmation.", first: "Is this your first time as a mum?",
     where: "Country and currency", budget: "Rough budget", budgetHint: "Optional. You can leave it.", experience: "What would you like to include?", presets: { prep: "Preparations only", prepReception: "Preparations and welcome", full: "The full experience", custom: "I'll pick sections myself" },
     reception: "Which welcomes are you planning?", receptionHint: "Pick what suits you, or none.", look: "Choose your theme", nurseryQ: "A room or a corner for the baby?", done: "All set! 🤍",
+  },
+  ideasT: {
+    title: "Lovely ideas 🎁", sub: "Pick what you like and add it with one tap.", baby: "Gifts for baby", favor: "Favors", mother: "Gifts for mum",
+    addGift: "Add to the list", addFavor: "Add to favors", added: "Added", addedToast: "Added 🤍", price: { 1: "Budget-friendly", 2: "Mid-range", 3: "Splurge" },
+    note: "Prices vary by place. No store links or ads.",
   },
   pub: {
     giftsTitle: (n: string) => `${n}'s gift list`, giftsSub: "Thank you for your love. Pick a gift and reserve it so it isn't duplicated.", reserve: "Reserve", reserveQty: "Quantity", yourName: "Your name (optional)", hideName: "Hide my name from the mum", reserveBtn: "Confirm reservation",

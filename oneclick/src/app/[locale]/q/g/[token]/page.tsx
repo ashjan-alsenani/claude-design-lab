@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function GiftListPage({ params, searchParams }: { params: Promise<{ locale: string; token: string }>; searchParams: Promise<{ preview?: string }> }) {
   const { locale, token } = await params;
   if (!isLocale(locale)) notFound();
-  const data = await giftPage(token).catch(() => null);
+  const data = await giftPage(token, locale).catch(() => null);
   if (!data) return <Unavailable lang={locale} />;
   return <GiftListView lang={locale} token={token} head={data.head} gifts={data.gifts} reserveDays={data.reserveDays} preview={(await searchParams).preview === "1"} />;
 }

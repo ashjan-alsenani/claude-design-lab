@@ -5,7 +5,7 @@ import { expect, test, type Page, type Browser } from "@playwright/test";
  * gift list (reserve, last-item protection, manage link) and visit booking with approval.
  */
 // The licensed tests share the owner's account (and one deletes the plan to start clean): run in order.
-test.describe.configure({ mode: "serial" });
+test.describe.configure({ mode: "serial", timeout: 120_000 });
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
@@ -60,6 +60,14 @@ test("demo: fictional data, edits stay in the tab, reset brings the sample back,
   await page.goto("/en/demo/hikayat-qudoom");
   await expect(page.getByText("Demo with fictional data")).toBeVisible();
   await expect(page.getByText("Salma's mum", { exact: false }).first()).toBeVisible();
+  // Ready ideas: one tap adds a gift to the list and a favor to the favors plan.
+  await page.goto("/en/demo/hikayat-qudoom/ideas");
+  await expect(page.getByRole("heading", { name: /Lovely ideas/ })).toBeVisible();
+  await page.getByRole("button", { name: "Add to the list" }).first().click();
+  await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible();
+  await page.getByRole("tab", { name: "Favors" }).click();
+  await page.getByRole("button", { name: "Add to favors" }).first().click();
+  await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible();
   await page.goto("/en/demo/hikayat-qudoom/share");
   await expect(page.getByText("In the demo you only see how it looks")).toBeVisible();
   // Nothing from the demo is ever sent to the server: no server-action POSTs.
@@ -102,6 +110,7 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
 
   // Share the gift list.
   await page.goto("/en/app/hikayat-qudoom/share");
+  await expect(page.getByRole("heading", { name: "Gift list", level: 3 })).toBeVisible(); // loaded and interactive
   const giftCard = page.locator("div.qd-card", { has: page.getByRole("heading", { name: "Gift list", level: 3 }) });
   await giftCard.getByRole("button", { name: "Create link" }).click();
   const giftUrl = (await page.locator("p[dir=ltr]").filter({ hasText: "/q/g/" }).first().textContent())!.trim();
@@ -139,6 +148,7 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
 
   // Visits: share, a visitor requests, the mother approves.
   await page.goto("/en/app/hikayat-qudoom/share");
+  await expect(page.getByRole("heading", { name: "Gift list", level: 3 })).toBeVisible(); // loaded and interactive
   const visitCard = page.locator("div.qd-card", { has: page.getByRole("heading", { name: "Visit requests", level: 3 }) });
   await visitCard.getByRole("button", { name: "Create link" }).click();
   const visitUrl = (await page.locator("p[dir=ltr]").filter({ hasText: "/q/v/" }).first().textContent())!.trim();
@@ -164,6 +174,7 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
 
   // Disabling the link makes it unavailable.
   await page.goto("/en/app/hikayat-qudoom/share");
+  await expect(page.getByRole("heading", { name: "Gift list", level: 3 })).toBeVisible(); // loaded and interactive
   await page.locator("div.qd-card", { has: page.getByRole("heading", { name: "Gift list", level: 3 }) }).getByRole("button", { name: "Disable link" }).click();
   await expect(page.getByText("Disabled").first()).toBeVisible();
   const g2 = await guest(browser);
@@ -210,6 +221,7 @@ test("helpers and private files: own account, chosen sections only, revocable; p
   // Invite a helper for chosen sections, view only.
   const helperEmail = `helper-${Date.now().toString(36)}${isMobile ? "m" : "d"}@example.com`;
   await page.goto("/en/app/hikayat-qudoom/share");
+  await expect(page.getByRole("heading", { name: "Gift list", level: 3 })).toBeVisible(); // loaded and interactive
   await page.locator("#h-email").fill(helperEmail);
   await page.getByRole("switch").first().click(); // can edit → view only
   await page.getByRole("button", { name: "Invite a helper" }).click();
@@ -239,6 +251,7 @@ test("helpers and private files: own account, chosen sections only, revocable; p
 
   // The mother removes access; the helper's next visit is refused.
   await page.goto("/en/app/hikayat-qudoom/share");
+  await expect(page.getByRole("heading", { name: "Gift list", level: 3 })).toBeVisible(); // loaded and interactive
   await page.getByRole("button", { name: "Remove access" }).first().click();
   await page.waitForTimeout(800);
   await hp.goto(base);

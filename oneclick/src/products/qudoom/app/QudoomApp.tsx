@@ -27,6 +27,7 @@ const load = {
   money: () => import("../sections/Money"),
   memories: () => import("../sections/Memories"),
   share: () => import("../sections/Share"),
+  ideas: () => import("../sections/Ideas"),
   settings: () => import("../sections/Settings"),
 };
 const ItemsPage = dynamic(() => load.prep().then((m) => m.ItemsPage));
@@ -37,6 +38,7 @@ const EventsPage = dynamic(() => load.reception().then((m) => m.EventsPage));
 const VisitsPage = dynamic(() => load.reception().then((m) => m.VisitsPage));
 const HospitalityPage = dynamic(() => load.reception().then((m) => m.HospitalityPage));
 const FavorsPage = dynamic(() => load.reception().then((m) => m.FavorsPage));
+const IdeasPage = dynamic(() => load.ideas().then((m) => m.IdeasPage));
 const RegistryPage = dynamic(() => load.gifts().then((m) => m.RegistryPage));
 const ReceivedPage = dynamic(() => load.gifts().then((m) => m.ReceivedPage));
 const BudgetPage = dynamic(() => load.money().then((m) => m.BudgetPage));
@@ -116,6 +118,7 @@ function Router({ base, exitHref, buyHref, locale }: Props) {
     visits: <VisitsPage />,
     hospitality: <HospitalityPage />,
     favors: <FavorsPage />,
+    ideas: <IdeasPage />,
     registry: <RegistryPage />,
     received: <ReceivedPage />,
     budget: <BudgetPage />,

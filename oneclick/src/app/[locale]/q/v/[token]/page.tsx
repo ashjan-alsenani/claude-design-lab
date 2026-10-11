@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function VisitBookingPage({ params, searchParams }: { params: Promise<{ locale: string; token: string }>; searchParams: Promise<{ preview?: string }> }) {
   const { locale, token } = await params;
   if (!isLocale(locale)) notFound();
-  const data = await visitPage(token).catch(() => null);
+  const data = await visitPage(token, locale).catch(() => null);
   if (!data) return <Unavailable lang={locale} />;
   return <VisitBooker lang={locale} token={token} head={data.head} paused={data.paused} maxPeople={data.maxPeople} days={data.days} preview={(await searchParams).preview === "1"} />;
 }

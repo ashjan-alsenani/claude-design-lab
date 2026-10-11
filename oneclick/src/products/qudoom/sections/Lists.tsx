@@ -87,23 +87,22 @@ export function ItemList({ area, autoAdd = false }: { area: ItemArea; autoAdd?: 
   const missingCount = all.filter((i) => !itemDone(i) && i.status !== "skip").length;
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <div className="relative min-w-0 flex-1 basis-56">
-          <MagnifyingGlassIcon size={18} className="pointer-events-none absolute start-3.5 top-1/2 -translate-y-1/2 text-[var(--qd-muted)]" />
-          <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t.prep.searchPh} aria-label={t.prep.searchPh} className={`${inputCls} ps-10`} />
-        </div>
-        {access.canEdit && (
-          <Button onClick={openNew}>
-            <PlusIcon size={18} /> {t.prep.addItem}
-          </Button>
-        )}
-      </div>
+      {access.canEdit && (
+        <Button onClick={openNew}>
+          <PlusIcon size={18} /> {t.prep.addItem}
+        </Button>
+      )}
       <Chips label={t.prep.fields.cat} value={cat} onChange={setCat} options={[{ value: "all" as const, label: t.common.all, count: all.length }, ...cats.map((c) => ({ value: c, label: t.cats.item[c], count: all.filter((i) => i.cat === c).length }))]} />
-      <div className="flex flex-wrap items-center gap-x-6">
-        <div className="min-w-56"><Toggle checked={missing} onChange={setMissing} label={`${t.common.onlyMissing} (${num(missingCount)})`} /></div>
-        <div className="min-w-56"><Toggle checked={byPrio} onChange={setByPrio} label={t.common.sortPriority} /></div>
+      {/* Search and list options stay folded away so the page stays calm. */}
+      <details className="group rounded-[18px] bg-white/70 px-4 open:pb-3">
+        <summary className="flex h-11 cursor-pointer list-none items-center gap-2 text-[14px] font-semibold text-[var(--qd-ink-soft)]">
+          <MagnifyingGlassIcon size={17} /> {t.prep.searchPh}
+        </summary>
+        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t.prep.searchPh} aria-label={t.prep.searchPh} className={inputCls} />
+        <Toggle checked={missing} onChange={setMissing} label={`${t.common.onlyMissing} (${num(missingCount)})`} />
+        <Toggle checked={byPrio} onChange={setByPrio} label={t.common.sortPriority} />
         <Button size="sm" variant="ghost" onClick={copyText}><CopyIcon size={16} /> {t.prep.copyList}</Button>
-      </div>
+      </details>
       {shown.length === 0 ? (
         <EmptyState icon={<GiftIcon size={26} />} title={t.common.empty} action={access.canEdit ? <Button onClick={openNew}>{t.prep.addItem}</Button> : undefined} />
       ) : (

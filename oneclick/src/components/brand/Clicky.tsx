@@ -7,7 +7,7 @@ import type { CSSProperties } from "react";
  * Animations are CSS only (globals.css) and stop under prefers-reduced-motion.
  */
 export type ClickyMood = "happy" | "wink" | "celebrate" | "think" | "love" | "surprised";
-export type ClickyAccessory = "bulb" | "shield" | "heart" | "chat";
+export type ClickyAccessory = "bulb" | "shield" | "heart" | "chat" | "baby" | "bow";
 
 const INK = "#1E1B3A";
 const BODY = "M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z";
@@ -188,6 +188,23 @@ function Accessory({ kind }: { kind: ClickyAccessory }) {
         <g>
           <path d="M84 -4 L97 1 V11 C97 20 91 26 84 29 C77 26 71 20 71 11 V1 Z" fill="#fff" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
           <path d="M78.5 12 L82.5 16 L90 8" fill="none" stroke="#8B7CF6" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      );
+    case "baby":
+      // A newborn: one hair curl on top and a pacifier.
+      return (
+        <g>
+          <path d="M50 7 C46 -2 56 -5 57 1 C58 6 51 6 52 2" fill="none" stroke={INK} strokeWidth="3.5" strokeLinecap="round" />
+          <ellipse cx="50" cy="68" rx="13" ry="8" fill="#BDE3FF" stroke={INK} strokeWidth="2.5" />
+          <circle cx="50" cy="68" r="4.5" fill="#fff" stroke={INK} strokeWidth="2.5" />
+        </g>
+      );
+    case "bow":
+      return (
+        <g>
+          <path d="M50 10 L36 1 C31 -1 30 15 36 15 Z" fill="#FF8FAB" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
+          <path d="M50 10 L64 1 C69 -1 70 15 64 15 Z" fill="#FF8FAB" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
+          <circle cx="50" cy="9" r="4.5" fill="#FF5A7A" stroke={INK} strokeWidth="2.5" />
         </g>
       );
     case "heart":

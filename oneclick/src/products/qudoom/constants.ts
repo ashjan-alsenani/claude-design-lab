@@ -14,6 +14,7 @@ export const pages = {
   visits: "visits",
   hospitality: "hospitality",
   favors: "favors",
+  ideas: null,
   registry: "registry",
   received: "received",
   budget: "budget",
@@ -31,6 +32,6 @@ export const groups: { key: "home" | "prep" | "reception" | "gifts" | "more"; pa
   { key: "home", pages: [""] },
   { key: "prep", pages: ["items", "bag", "nursery", "mother"] },
   { key: "reception", pages: ["events", "visits", "hospitality", "favors"] },
-  { key: "gifts", pages: ["registry", "received"] },
+  { key: "gifts", pages: ["ideas", "registry", "received"] },
   { key: "more", pages: ["more", "budget", "calendar", "memories", "cards", "share", "settings"] },
 ];

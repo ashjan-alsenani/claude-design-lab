@@ -5,7 +5,7 @@ import { ArrowSquareOutIcon, CalendarHeartIcon, CheckCircleIcon, CopyIcon, EyeIc
 import { qCopy, type Lang } from "../i18n";
 import { currencyDigits, type Currency, type ThemeId } from "../model/types";
 import { toMajor } from "../model/engine";
-import type { GiftView, ManageView } from "../server/public";
+import type { DayView, GiftView, ManageView } from "../server/public";
 import { acceptHelperInvite, manageAction, requestVisit, reserveGift } from "../server/actions";
 import { QudoomMark } from "../ui/Art";
 import { Badge, Button, Card, Field, TextArea, Toggle, cx, inputCls } from "../ui/kit";
@@ -149,7 +149,7 @@ export function GiftListView({ lang, token, head, gifts: initial, reserveDays, p
                 <div className="flex items-start gap-3">
                   <div className="min-w-0 flex-1">
                     <p className="font-semibold">{g.name}</p>
-                    <p className="mt-0.5 text-[13px] text-[var(--qd-muted)]">{[g.spec, g.priceMinor !== undefined ? f.money(g.priceMinor, head.currency) : null].filter(Boolean).join(" · ")}</p>
+                    <p className="mt-0.5 text-[13px] text-[var(--qd-muted)]">{[g.spec, g.priceLabel ?? null].filter(Boolean).join(" · ")}</p>
                     {g.publicNote && <p className="mt-1.5 text-[13.5px] text-[var(--qd-ink-soft)]">{g.publicNote}</p>}
                   </div>
                   <Badge tone="primary">{t.qtyLeft(f.num(g.available))}</Badge>
@@ -197,7 +197,7 @@ export function GiftListView({ lang, token, head, gifts: initial, reserveDays, p
 }
 
 // ---------- visits ----------
-export function VisitBooker({ lang, token, head, paused, maxPeople, days, preview }: { lang: Lang; token: string; head: Head; paused: boolean; maxPeople: number; days: { date: string; times: string[] }[]; preview: boolean }) {
+export function VisitBooker({ lang, token, head, paused, maxPeople, days, preview }: { lang: Lang; token: string; head: Head; paused: boolean; maxPeople: number; days: DayView[]; preview: boolean }) {
   const t = qCopy[lang].pub;
   const f = fmt(lang);
   const [date, setDate] = useState(days[0]?.date ?? "");
@@ -244,7 +244,7 @@ export function VisitBooker({ lang, token, head, paused, maxPeople, days, previe
           <p className="flex items-center gap-2 text-[17px] font-semibold">
             <CheckCircleIcon size={22} weight="fill" className="text-[var(--qd-sage)]" /> {t.sent}
           </p>
-          <p className="text-[14px] text-[var(--qd-ink-soft)]">{f.date(date)} · {f.time(time)}</p>
+          <p className="text-[14px] text-[var(--qd-ink-soft)]">{day?.long} · {day?.times.find((x) => x.t === time)?.label}</p>
           <KeepLink lang={lang} url={done} label={t.visitKeep} />
         </Card>
       ) : paused ? (
@@ -258,14 +258,14 @@ export function VisitBooker({ lang, token, head, paused, maxPeople, days, previe
             <div className="qd-scroll-x -mx-1 mt-2 flex gap-2 overflow-x-auto px-1 pb-1">
               {days.map((d) => (
                 <button key={d.date} type="button" aria-pressed={date === d.date} onClick={() => (setDate(d.date), setTime(""))} className={cx("h-14 shrink-0 rounded-[14px] border px-3 text-[13px]", date === d.date ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-[var(--qd-line)] bg-[var(--qd-paper)]")}>
-                  {f.day(d.date)}
+                  {d.label}
                 </button>
               ))}
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
-              {day?.times.filter((x) => !taken.includes(`${date}T${x}`)).map((x) => (
+              {day?.times.filter((x) => !taken.includes(`${date}T${x.t}`)).map(({ t: x, label }) => (
                 <button key={x} type="button" aria-pressed={time === x} onClick={() => setTime(x)} className={cx("h-10 rounded-full border px-4 text-[13.5px]", time === x ? "border-[var(--qd-primary)] bg-[var(--qd-tint)] font-semibold text-[var(--qd-primary-deep)]" : "border-[var(--qd-line)] bg-[var(--qd-paper)]")}>
-                  {f.time(x)}
+                  {label}
                 </button>
               ))}
             </div>
@@ -322,7 +322,7 @@ export function ManageCard({ lang, token, view }: { lang: Lang; token: string; v
           <>
             <p className="text-[16px] font-semibold">{view.gift} {view.qty > 1 && `× ${f.num(view.qty)}`}</p>
             <Badge tone={status === "purchased" ? "sage" : status === "reserved" ? "amber" : "neutral"}>{status === "purchased" ? qCopy[lang].registry.purchased : status === "reserved" ? qCopy[lang].registry.reserved : status === "expired" ? t.expired : t.reqStatus.cancelled}</Badge>
-            {status === "reserved" && <p className="text-[13.5px] text-[var(--qd-ink-soft)]">{t.expiresOn(f.stamp(view.expiresAt))}</p>}
+            {status === "reserved" && <p className="text-[13.5px] text-[var(--qd-ink-soft)]">{t.expiresOn(view.expiresLabel)}</p>}
             {view.url && (status === "reserved" || status === "expired") && (
               <a href={view.url} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[var(--qd-primary)]">
                 <ArrowSquareOutIcon size={15} /> {t.buyLink}
@@ -337,7 +337,7 @@ export function ManageCard({ lang, token, view }: { lang: Lang; token: string; v
           </>
         ) : (
           <>
-            <p className="text-[16px] font-semibold">{t.whenLabel}: {f.date(view.date)} · {f.time(view.time)}</p>
+            <p className="text-[16px] font-semibold">{t.whenLabel}: {view.whenLabel}</p>
             <p className="text-[14px] text-[var(--qd-ink-soft)]">{t.people} {f.num(view.people)}</p>
             <Badge tone={status === "approved" ? "sage" : status === "pending" ? "amber" : "neutral"}>{t.reqStatus[status as keyof typeof t.reqStatus] ?? status}</Badge>
             {(status === "pending" || status === "approved") && (

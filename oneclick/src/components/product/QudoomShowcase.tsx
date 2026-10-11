@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRightIcon, BabyIcon, BagIcon, CalendarHeartIcon, CheckCircleIcon, CoffeeIcon, GiftIcon, HandHeartIcon, LockKeyIcon, ShieldCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/dist/ssr";
 import type { Locale } from "@/i18n/config";
+import { Clicky } from "@/components/brand/Clicky";
 
 /**
  * «حكاية قدوم» on its product page: a drawn preview of the app (no screenshots of real people,
@@ -28,8 +29,13 @@ export function QudoomPreview({ locale }: { locale: Locale }) {
     <div id="demo" className="scroll-mt-24">
       <div className="relative mx-auto max-w-[380px] rounded-[36px] border border-line bg-surface-raised p-3 shadow-soft" aria-label={ar ? "معاينة مرسومة للمفكّرة ببيانات تجريبية" : "Drawn preview of the planner with sample data"} role="img">
         <div className="rounded-[28px] p-5" style={{ background: `linear-gradient(180deg, ${C}1f 0%, transparent 70%)` }}>
-          <p className="text-xs font-medium text-muted">{ar ? "بيانات تجريبية" : "Sample data"}</p>
-          <p className="mt-1 text-xl font-semibold text-ink">{ar ? "يا هلا أم سلمى" : "Hello, Salma's mum"}</p>
+          <div className="flex items-end justify-between gap-3">
+            <div>
+              <p className="text-xs font-medium text-muted">{ar ? "بيانات تجريبية" : "Sample data"}</p>
+              <p className="mt-1 text-xl font-semibold text-ink">{ar ? "يا هلا أم سلمى 🤍" : "Hello, Salma's mum 🤍"}</p>
+            </div>
+            <Clicky size={64} color="#7cc4ff" accessory="baby" body />
+          </div>
           <div className="mt-4 flex items-center gap-4">
             <svg viewBox="0 0 64 64" className="size-20 shrink-0 -rotate-90" aria-hidden="true">
               <circle cx="32" cy="32" r="27" fill="none" stroke={`${C}33`} strokeWidth="8" />

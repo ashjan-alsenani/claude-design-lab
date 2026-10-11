@@ -575,17 +575,20 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
    Four optional themes change the secondary colours and illustrations only; layout, type and
    contrast stay the same (every --qd-primary passes AA on white and on the cream page). */
 .qd {
-  --qd-bg: #fff9f4; --qd-paper: #fffefc; --qd-ink: #1e1b3a; --qd-ink-soft: #46416c; --qd-muted: #6b6789; --qd-line: #efe5dc;
-  --qd-primary: #2f7a71; --qd-primary-deep: #1f5a53; --qd-tint: #e3f2ef; --qd-tint-2: #f1f8f6;
-  --qd-accent: #f2a57c; --qd-accent-soft: #fdeee4; --qd-sage: #5c8a62; --qd-sage-soft: #e7f0e5;
-  --qd-alert: #b4443b; --qd-alert-soft: #fbe8e5; --qd-amber: #94651d; --qd-amber-soft: #fbf0dd; --qd-lilac: #8b7cf6; --qd-lilac-soft: #efecfe;
-  font-family: var(--font-sans); color: var(--qd-ink); background: var(--qd-bg); -webkit-tap-highlight-color: transparent;
+  /* «حكاية قدوم» in the OneClick look: cream, Clicky teal, sunshine and soft color blobs. Primary keeps AA with white. */
+  --qd-bg: #fff9f4; --qd-paper: #ffffff; --qd-ink: #1e1b3a; --qd-ink-soft: #46416c; --qd-muted: #6c6790; --qd-line: #efe5dc;
+  --qd-primary: #0b7d73; --qd-primary-deep: #096a62; --qd-tint: #dcf5f1; --qd-tint-2: #f1faf8;
+  --qd-mascot: #7cc4ff; --qd-star: #ffc23d; --qd-blob-1: #fff1cc; --qd-blob-2: #dcf5f1; --qd-blob-3: #ffe3ec;
+  --qd-accent: #ffc23d; --qd-accent-soft: #fff1cc; --qd-sage: #16884a; --qd-sage-soft: #e1f5e9;
+  --qd-alert: #d63c3c; --qd-alert-soft: #fde8e8; --qd-amber: #a86400; --qd-amber-soft: #fff1cc; --qd-lilac: #8b7cf6; --qd-lilac-soft: #efecfe;
+  font-family: var(--font-sans); color: var(--qd-ink); background: var(--qd-bg);
+  -webkit-tap-highlight-color: transparent;
 }
-.qd[data-theme="moon"] { --qd-primary: #5a50b8; --qd-primary-deep: #3f378c; --qd-tint: #ecebfb; --qd-tint-2: #f5f4fd; --qd-accent: #f2c25b; --qd-accent-soft: #fdf4dc; }
-.qd[data-theme="garden"] { --qd-primary: #4b7a50; --qd-primary-deep: #355a39; --qd-tint: #e6f0e3; --qd-tint-2: #f2f7f0; --qd-accent: #f0a39b; --qd-accent-soft: #fdecea; }
-.qd[data-theme="pearl"] { --qd-primary: #8a6447; --qd-primary-deep: #664a33; --qd-tint: #f5ece4; --qd-tint-2: #faf5f0; --qd-accent: #d7b6a6; --qd-accent-soft: #f8efea; }
+.qd[data-theme="moon"] { --qd-primary: #5b4fd6; --qd-primary-deep: #463cb0; --qd-tint: #ece9ff; --qd-tint-2: #f6f4ff; --qd-mascot: #b8a6ff; --qd-blob-2: #ece9ff; }
+.qd[data-theme="garden"] { --qd-primary: #1f7a4a; --qd-primary-deep: #17603a; --qd-tint: #def5e6; --qd-tint-2: #f1fbf4; --qd-mascot: #7ed9a3; --qd-blob-2: #def5e6; }
+.qd[data-theme="pearl"] { --qd-primary: #c2477a; --qd-primary-deep: #9c3461; --qd-tint: #fde4ef; --qd-tint-2: #fff3f8; --qd-mascot: #ff9fb8; --qd-blob-2: #fde4ef; }
 .qd :focus-visible { outline: 3px solid color-mix(in oklab, var(--qd-primary) 55%, transparent); outline-offset: 2px; border-radius: 10px; }
-.qd .qd-card { background: var(--qd-paper); border: 1px solid var(--qd-line); box-shadow: 0 1px 2px rgb(60 40 30 / 0.04), 0 14px 34px -26px rgb(60 40 30 / 0.28); }
+.qd .qd-card { background: var(--qd-paper); border: 1px solid color-mix(in oklab, var(--qd-line) 70%, transparent); box-shadow: 0 8px 24px -16px rgb(30 27 58 / 0.28); }
 .qd .qd-soft { background: var(--qd-tint-2); border: 1px solid color-mix(in oklab, var(--qd-primary) 14%, var(--qd-line)); }
 .qd .qd-scroll-x { scrollbar-width: none; } .qd .qd-scroll-x::-webkit-scrollbar { display: none; }
 .qd .qd-skeleton { background: linear-gradient(90deg, var(--qd-tint-2), var(--qd-tint), var(--qd-tint-2)); background-size: 200% 100%; }
@@ -602,3 +605,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
   .qd .qd-print { box-shadow: none !important; border-color: #ddd !important; break-inside: avoid; }
   .qd { background: #fff !important; }
 }
+@media (prefers-reduced-motion: no-preference) {
+  .qd .qd-twinkle { animation: qd-twinkle 3.2s ease-in-out infinite; }
+}
+@keyframes qd-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
