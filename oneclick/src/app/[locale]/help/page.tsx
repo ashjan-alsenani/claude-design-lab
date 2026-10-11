@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FamilyMascot } from "@/components/brand/FamilyMascot";
 import { notFound } from "next/navigation";
 import { ChatCircleTextIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale, tr } from "@/i18n/config";
@@ -28,7 +29,7 @@ export default async function HelpPage({ params }: Props) {
     .filter((x) => x.items.length);
   return (
     <>
-      <PageHeader title={d.help.title} sub={d.help.sub} />
+      <PageHeader title={d.help.title} sub={d.help.sub} mascot={<FamilyMascot id="marjan" locale={locale} size={84} className="hidden sm:flex" />} />
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[220px_1fr] lg:px-8">
         <nav aria-label={d.help.title} className="lg:sticky lg:top-24 lg:self-start">
           <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">

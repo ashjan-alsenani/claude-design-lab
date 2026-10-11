@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import { FamilyMascot } from "@/components/brand/FamilyMascot";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { EnvelopeOpenIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale } from "@/i18n/config";
 import { fill, licensingCopy } from "@/i18n/licensing";
 import { COOKIE, licensing, licensingMode, safeNext } from "@/lib/licensing/server";
@@ -33,7 +33,7 @@ export default async function VerifyPage({ params, searchParams }: Props) {
     <div className="mx-auto max-w-lg px-4 pb-10 pt-8">
       <SandboxBanner locale={locale} />
       <section className="rounded-[var(--radius-xl)] border border-line bg-surface p-6 shadow-soft sm:p-8">
-        <EnvelopeOpenIcon size={40} weight="duotone" className="text-primary" />
+        <FamilyMascot id="lilac" locale={locale} size={64} body={false} className="items-start" />
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink">{t.verify.title}</h1>
         {!challenge ? (
           <>

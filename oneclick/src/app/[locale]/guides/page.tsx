@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FamilyMascot } from "@/components/brand/FamilyMascot";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, num, tr } from "@/i18n/config";
@@ -27,7 +28,7 @@ export default async function GuidesPage({ params }: Props) {
   const leadCat = getCategory(lead.category);
   return (
     <>
-      <PageHeader title={d.guides.title} sub={d.guides.sub} />
+      <PageHeader title={d.guides.title} sub={d.guides.sub} mascot={<FamilyMascot id="shams" locale={locale} size={84} className="hidden sm:flex" />} />
       <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr] lg:px-8">
         <Link href={`/${locale}/guides/${lead.slug}`} className="group relative flex min-h-80 flex-col justify-end overflow-hidden rounded-[var(--radius-xl)] p-8" style={{ background: hueSoft(leadCat?.hue ?? "brand", 18) }}>
           <span className="absolute start-8 top-8 grid size-14 place-items-center rounded-[16px] bg-surface-raised shadow-soft" style={{ color: hueVar(leadCat?.hue ?? "brand") }}>

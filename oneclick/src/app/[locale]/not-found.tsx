@@ -12,7 +12,7 @@ export default function NotFound() {
   const d = getDictionary(locale);
   return (
     <section className="mx-auto flex min-h-[60dvh] max-w-xl flex-col items-center justify-center px-4 py-24 text-center">
-      <Clicky size={110} body mood="surprised" animate />
+      <Clicky size={110} body mood="surprised" animate color="#FF6B6B" accessory="chat" />
       <p className="mt-6 text-sm font-medium text-muted tabular">404</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{d.errors.notFoundTitle}</h1>
       <p className="mt-3 text-lg text-ink-soft">{d.errors.notFoundBody}</p>

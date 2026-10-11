@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.15.0 — 2026-10-11 — The Clicky family
+- One character per brand color, each with a job (`src/content/clicky-family.ts`): Clicky (teal,
+  leader, welcomes), Warda (pink, love and joy: buying, the party, the bride's planner), Shams
+  (sunshine, ideas: guides), Marjan (coral, help: help, contact, page not found), Lilac (lilac,
+  guardian: sign-in code, devices, security, protected products). Role badges on the mark: heart,
+  bulb, chat bubble, shield.
+- "Meet the Clicky family" section on the home page; each member at their post across the site
+  (`FamilyMascot`); the purchase party is the whole family.
+- Clicky's arms and legs follow the page ink, so they stay visible in dark mode.
+
 ## 0.14.1 — 2026-10-11 — Purchase party
 - After a successful purchase Clicky throws a party: a 6 s routine (bounce and wave, shoulder shimmy, disco point, hat flies off and lands back, spin), party hat, arms
   up, kicks and a full spin every few beats, with rounds of confetti and floating music notes.

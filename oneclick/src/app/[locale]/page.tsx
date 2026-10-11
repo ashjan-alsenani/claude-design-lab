@@ -16,9 +16,10 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import { JsonLd } from "@/components/JsonLd";
 import { faqJsonLd } from "@/lib/seo";
-import { hueSoft, hueVar } from "@/lib/hues";
+import { hueSoft, hueVar, inkTint } from "@/lib/hues";
 import { Clicky, type ClickyMood } from "@/components/brand/Clicky";
 import { ProductArt } from "@/components/art/ProductArt";
+import { clickyFamily, familyCopy } from "@/content/clicky-family";
 
 const howMoods: ClickyMood[] = ["think", "wink", "celebrate"];
 const howColors = ["var(--oc-hue-planner)", "var(--oc-hue-bride)", "var(--oc-brand)"];
@@ -184,6 +185,34 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             ))}
           </ol>
         </div>
+      </section>
+
+      {/* THE CLICKY FAMILY: one character per brand color, each with a job on the site */}
+      <section aria-labelledby="family-title" className="mx-auto max-w-7xl px-4 pt-20 sm:px-6 lg:px-8 lg:pt-28">
+        <Reveal>
+          <h2 id="family-title" className="text-center text-3xl font-bold tracking-tight text-ink sm:text-[2.4rem]">
+            {familyCopy.title[locale]}
+          </h2>
+          <p className="mx-auto mt-3 max-w-[48ch] text-center text-lg text-ink-soft">{familyCopy.sub[locale]}</p>
+        </Reveal>
+        <ul className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
+          {clickyFamily.map((m, i) => (
+            <li key={m.id} className={i === 0 ? "col-span-2 md:col-span-1" : ""}>
+              <Reveal delay={i * 0.05} className="h-full">
+                <div
+                  className="group flex h-full flex-col items-center rounded-[var(--radius-lg)] border-2 px-4 pb-6 pt-7 text-center transition-transform duration-300 ease-[var(--ease-bounce)] hover:-translate-y-1"
+                  style={{ borderColor: `color-mix(in oklab, ${m.color} 35%, transparent)`, background: `color-mix(in oklab, ${m.color} 10%, var(--oc-surface))` }}
+                >
+                  <Clicky size={92} color={m.color} mood={m.mood} accessory={m.accessory} body wave={m.id === "clicky"} className="transition-transform duration-300 ease-[var(--ease-bounce)] group-hover:-rotate-6 group-hover:scale-105" />
+                  <h3 className="mt-4 text-xl font-bold" style={{ color: inkTint(m.color) }}>
+                    {m.name[locale]}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{m.role[locale]}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* CUSTOM SOLUTIONS: colorful band with Clicky */}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FamilyMascot } from "@/components/brand/FamilyMascot";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -23,7 +24,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
   const topic = sp.topic && sp.topic in d.contact.topics ? sp.topic : undefined;
   return (
     <>
-      <PageHeader title={d.contact.title} sub={d.contact.sub} />
+      <PageHeader title={d.contact.title} sub={d.contact.sub} mascot={<FamilyMascot id="marjan" locale={locale} size={84} className="hidden sm:flex" />} />
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <ContactForm d={{ contact: d.contact, custom: d.custom, form: d.form }} locale={locale} defaultTopic={topic} defaultReference={sp.ref?.slice(0, 80)} />
       </div>

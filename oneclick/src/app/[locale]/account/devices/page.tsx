@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FamilyMascot } from "@/components/brand/FamilyMascot";
 import { notFound } from "next/navigation";
 import { CheckCircleIcon, DesktopIcon, DeviceMobileIcon, WarningCircleIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale } from "@/i18n/config";
@@ -33,7 +34,10 @@ export default async function DevicesPage({ params, searchParams }: Props) {
 
   return (
     <AccountShell locale={locale} current="devices" sandbox={sandbox} user={ctx.user}>
-      <h1 className="text-3xl font-bold tracking-tight text-ink">{t.devices.title}</h1>
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="text-3xl font-bold tracking-tight text-ink">{t.devices.title}</h1>
+        <FamilyMascot id="lilac" locale={locale} size={52} body={false} />
+      </div>
       <p className="mt-1 max-w-2xl text-ink-soft">{fill(t.devices.sub, { n: limit })}</p>
       {notice && (
         <p role="status" className="mt-4 flex items-center gap-2 text-sm font-medium text-success">

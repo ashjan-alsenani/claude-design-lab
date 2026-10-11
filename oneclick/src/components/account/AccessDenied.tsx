@@ -19,7 +19,7 @@ export function AccessDenied({ locale, reason, productSlug }: { locale: Locale; 
   const deviceIssue = reason === "device_limit" || reason === "device_not_authorized";
   return (
     <div className="mx-auto flex max-w-xl flex-col items-center px-4 py-16 text-center">
-      <Clicky size={120} mood="think" body />
+      <Clicky size={120} mood="think" body color="#8B7CF6" accessory="shield" />
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-ink">{c.title}</h1>
       <p className="mt-3 max-w-md leading-relaxed text-ink-soft">{c.body}</p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">

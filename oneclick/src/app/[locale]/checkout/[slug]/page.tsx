@@ -10,6 +10,7 @@ import { hueSoft, hueVar } from "@/lib/hues";
 import { pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/ui/PageHeader";
 import { ProductIcon } from "@/components/product/ProductIcon";
+import { FamilyMascot } from "@/components/brand/FamilyMascot";
 import { NotifyForm } from "@/components/product/NotifyForm";
 import { CheckoutTracker } from "@/components/product/CheckoutTracker";
 import { buttonClass } from "@/components/ui/Button";
@@ -44,7 +45,11 @@ export default async function CheckoutPage({ params }: Props) {
     <div className="mx-auto max-w-5xl px-4 pb-10 pt-10 sm:px-6 md:pt-14">
       <CheckoutTracker productId={product.id} />
       <Breadcrumbs items={[{ href: `/${locale}/products/${product.slug}`, label: name }, { label: d.checkout.title }]} />
-      <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink">{d.checkout.title}</h1>
+      <div className="flex items-end justify-between gap-4">
+        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink">{d.checkout.title}</h1>
+        {/* Warda (love and joy) is with the customer at the moment of buying. */}
+        <FamilyMascot id="warda" locale={locale} size={64} body={false} />
+      </div>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
         <section aria-labelledby="pay-status">

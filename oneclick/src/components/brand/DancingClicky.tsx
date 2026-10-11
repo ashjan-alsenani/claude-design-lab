@@ -42,17 +42,17 @@ export function DancingClicky({ size = 170, color = "#12B5A6", hat = "#8B7CF6", 
                     </linearGradient>
                   </defs>
                   {/* legs (behind the body) */}
-                  <g stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none">
+                  <g stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" style={{ stroke: `var(--oc-ink, ${INK})` }}>
                     <path className="dc-leg-l" d="M38 90 L34 112 L24 112" />
                     <path className="dc-leg-r" d="M62 90 L66 112 L76 112" />
                   </g>
                   {/* arms: each group turns around its shoulder */}
                   <g className="dc-arm-l">
-                    <path d="M10 58 Q-6 44 -4 22" stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" />
+                    <path d="M10 58 Q-6 44 -4 22" stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" style={{ stroke: `var(--oc-ink, ${INK})` }} />
                     <circle cx="-4" cy="20" r="4.5" fill="#FFC23D" />
                   </g>
                   <g className="dc-arm-r">
-                    <path d="M90 58 Q106 44 104 22" stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" />
+                    <path d="M90 58 Q106 44 104 22" stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" style={{ stroke: `var(--oc-ink, ${INK})` }} />
                     <circle cx="104" cy="20" r="4.5" fill="#FF6B6B" />
                   </g>
                   <path d={BODY} fill={`url(#${id})`} />

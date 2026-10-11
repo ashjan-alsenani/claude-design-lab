@@ -26,7 +26,7 @@ export default async function CheckoutDonePage({ params, searchParams }: { param
       <SandboxBanner locale={locale} />
       {r === "succeeded" ? (
         // A successful purchase gets a party: Clicky dances while confetti rains.
-        // Clicky and its friends (the same mark in other brand colors) dance together.
+        // The whole Clicky family dances: Clicky, Warda, Shams, Marjan and Lilac (content/clicky-family.ts).
         <div className="relative">
           <PurchaseParty />
           {/* --dcs shrinks the whole party on phones so all five fit. */}
@@ -35,7 +35,7 @@ export default async function CheckoutDonePage({ params, searchParams }: { param
             <DancingClicky size={100} color="#FF6B6B" hat="#12B5A6" move="booty" mirror notes={false} className="-me-2" />
             <DancingClicky size={150} className="z-10" />
             <DancingClicky size={100} color="#F0567A" hat="#8B7CF6" move="headbang" notes={false} className="-ms-2" />
-            <DancingClicky size={84} color="#E0A500" hat="#FF6B6B" move="low" delay={1} mirror notes={false} className="-ms-3" />
+            <DancingClicky size={84} color="#FFC23D" hat="#FF6B6B" move="low" delay={1} mirror notes={false} className="-ms-3" />
           </div>
         </div>
       ) : (

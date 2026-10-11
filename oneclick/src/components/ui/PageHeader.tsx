@@ -25,12 +25,17 @@ export function Breadcrumbs({ items }: { items: { href?: string; label: string }
   );
 }
 
-export function PageHeader({ title, sub, crumbs, children }: { title: string; sub?: string; crumbs?: { href?: string; label: string }[]; children?: ReactNode }) {
+export function PageHeader({ title, sub, crumbs, mascot, children }: { title: string; sub?: string; crumbs?: { href?: string; label: string }[]; mascot?: ReactNode; children?: ReactNode }) {
   return (
     <header className="mx-auto max-w-7xl px-4 pb-10 pt-10 sm:px-6 md:pt-14 lg:px-8">
       {crumbs && <Breadcrumbs items={crumbs} />}
-      <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">{title}</h1>
-      {sub && <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-ink-soft">{sub}</p>}
+      <div className="flex items-end justify-between gap-6">
+        <div className="min-w-0">
+          <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">{title}</h1>
+          {sub && <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-ink-soft">{sub}</p>}
+        </div>
+        {mascot}
+      </div>
       {children}
     </header>
   );
