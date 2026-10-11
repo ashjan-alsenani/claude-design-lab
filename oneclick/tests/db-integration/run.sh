@@ -33,9 +33,10 @@ cd "$APP"
 NEXT_PUBLIC_SITE_URL=http://localhost:3600 npx next build >/dev/null
 env NODE_ENV=production NEXT_PUBLIC_SITE_URL=http://localhost:3600 SUPABASE_URL=http://localhost:54330 SUPABASE_SERVICE_ROLE_KEY="$SERVICE" \
   LICENSING_SECRET=local-test-licensing-secret-0123456789abcdef EMAIL_PROVIDER=resend RESEND_API_KEY=re_test_key \
-  EMAIL_FROM="One Click <hello@oneclick.test>" RESEND_API_URL=http://localhost:54331 ONECLICK_OWNER_EMAILS=owner@oneclick.test \
+  EMAIL_FROM="One Click <hello@oneclick.test>" RESEND_API_URL=http://localhost:54331 ONECLICK_OWNER_EMAILS=owner@oneclick.test,mum@oneclick.test \
   npx next start -p 3600 > "$W/next.log" 2>&1 &
 for i in $(seq 1 30); do curl -s -o /dev/null http://localhost:3600/en && break; sleep 2; done
 npx playwright test -c tests/db-integration/pw.config.ts
 P="psql -h /tmp -p 54329 -U postgres -At"
 echo "planner rows: $($P -c 'select count(*) from oc_product_data')  leads: $($P -c 'select count(*) from oc_leads')  events: $($P -c 'select count(*) from oc_licensing_events')"
+echo "qudoom claims: $($P -c "select status, count(*) from oc_qd_gift_claims group by 1")  visit requests: $($P -c "select status, count(*) from oc_qd_visit_requests group by 1")"

@@ -4,6 +4,9 @@ import { expect, test, type Page, type Browser } from "@playwright/test";
  * «حكاية قدوم»: sales page, isolated demo, the licensed app (setup → saved to the server), the public
  * gift list (reserve, last-item protection, manage link) and visit booking with approval.
  */
+// The licensed tests share the owner's account (and one deletes the plan to start clean): run in order.
+test.describe.configure({ mode: "serial" });
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
 });

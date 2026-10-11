@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.16.0 — 2026-10-11 — «حكاية قدوم» (Hikayat Qudoom)
+- New product for Gulf mothers: preparations (baby things, nursery, hospital bag, her rest plan),
+  welcome (receptions, visits by appointment, hospitality calculator, favors), gift list and
+  received gifts, budget/orders in 6 Gulf currencies, calendar with ICS, memories and cards.
+  Arabic first, full English, 4 themes. See `docs/QUDOOM.md`.
+- Saved on the server; public gift and visit links (random, revocable, expiring, noindex) with
+  database-level protection for the last gift and the last visit seats (`oc_qd_*`, additive migration).
+- Helpers with their own accounts, per-section, view or edit, revocable. Private photos never public.
+- Isolated demo with fictional data. Price and access length left for the owner (`pricePending`).
+
 ## 0.15.1 — 2026-10-11 — Toot joins the family
 - Warda is replaced by Toot (pink, the shopping buddy): keeps your favorites and celebrates every
   purchase; her home card links to Favorites. Checkout shows Toot.

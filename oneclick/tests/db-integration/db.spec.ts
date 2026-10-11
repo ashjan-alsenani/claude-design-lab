@@ -223,3 +223,47 @@ test("admin tools: inbox with owner email, newsletter saved, orders/customers/su
 
   expect(errors.filter((e) => /Content Security Policy|Refused to/.test(e))).toEqual([]);
 });
+
+test("«حكاية قدوم» on the database: saved plan, gift link with last-item protection, visit request and approval", async ({ page, browser }) => {
+  await page.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
+  // A second owner address (see run.sh): the first one already used its trusted devices above.
+  await signIn(page, "mum@oneclick.test");
+  await page.goto("/en/app/hikayat-qudoom");
+  await page.locator("#q-name").fill("Noor's mum");
+  await page.getByRole("button", { name: "Skip and start with a ready plan" }).click();
+  await expect(page.locator('[data-save="saved"]')).toBeVisible({ timeout: 15_000 });
+  await page.goto("/en/app/hikayat-qudoom/registry");
+  await page.getByRole("button", { name: "Wished gift" }).first().click();
+  await page.getByRole("dialog").getByLabel("Name", { exact: true }).fill("Baby monitor");
+  await page.getByRole("dialog").getByRole("button", { name: "Save" }).click();
+  await expect(page.locator('[data-save="saved"]')).toBeVisible({ timeout: 15_000 });
+
+  await page.goto("/en/app/hikayat-qudoom/share");
+  const card = (name: string) => page.locator("div.qd-card", { has: page.getByRole("heading", { name, level: 3 }) });
+  await card("Gift list").getByRole("button", { name: "Create link" }).click();
+  const gift = new URL((await page.locator("p[dir=ltr]").filter({ hasText: "/q/g/" }).first().textContent())!.trim()).pathname;
+  const guests = await Promise.all([0, 1, 2].map(async () => (await browser.newContext()).newPage()));
+  for (const g of guests) {
+    await g.goto(gift);
+    await g.getByRole("button", { name: "Reserve", exact: true }).click();
+  }
+  await Promise.all(guests.map((g) => g.getByRole("button", { name: "Confirm reservation" }).click()));
+  await page.waitForTimeout(2000);
+  let wins = 0;
+  for (const g of guests) wins += await g.getByText("Reserved 🤍").count();
+  expect(wins).toBe(1);
+
+  await card("Visit requests").getByRole("button", { name: "Create link" }).click();
+  const visit = new URL((await page.locator("p[dir=ltr]").filter({ hasText: "/q/v/" }).first().textContent())!.trim()).pathname;
+  const v = guests[0];
+  await v.goto(visit);
+  await v.locator("fieldset button[aria-pressed]").nth(1).click();
+  await v.locator("fieldset .flex-wrap button").first().click();
+  await v.locator("#v-name").fill("Aunt Huda");
+  await v.getByRole("button", { name: "Send request" }).click();
+  await expect(v.getByText("Request received")).toBeVisible();
+  await page.goto("/en/app/hikayat-qudoom/visits");
+  await page.getByRole("button", { name: /Requests from your link/ }).click();
+  await page.getByRole("button", { name: "Approve" }).first().click();
+  await expect(page.locator('[data-save="saved"]')).toBeVisible({ timeout: 15_000 });
+});
