@@ -26,7 +26,7 @@ publishing **PRODUCTION CONNECTION REQUIRES OWNER** (Meta Professional account +
   2. `خلّي يومك أسهل بضغطة وحدة 🖱️` / `مفكّرة العروسة، مخطط رمضان، الميزانية والمزيد` / `عربي + English · من عُمان 🇴🇲` / `جرّبها قبل لا تشتريها 👇`
   3. `أدوات رقمية جميلة لكل يوم ✨` / `من الفوضى إلى الوضوح، بضغطة وحدة` / `عربي + English · من عُمان 🇴🇲` / `👇 تصفّح وجرّب`
 - Link: `https://www.oneclick.computer/ar`
-- Clicky family highlight covers (1080×1920, character centered for the circle crop) in `docs/instagram/highlights/`:
+- Clicky family highlight covers (1080×1920, no text, character centered for the circle crop) in `docs/instagram/highlights/`:
   Clicky = منتجاتنا, Warda = العروسة, Shams = نصايح, Marjan = أسئلتكم, Lilac = حسابك, all five = عائلتنا.
 
 ## Formats
