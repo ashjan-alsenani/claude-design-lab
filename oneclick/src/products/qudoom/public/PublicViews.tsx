@@ -32,7 +32,7 @@ const fmt = (lang: Lang) => ({
 export function PublicFrame({ lang, theme, preview, children }: { lang: Lang; theme?: ThemeId; preview?: boolean; children: ReactNode }) {
   const t = qCopy[lang].pub;
   return (
-    <div className="qd min-h-dvh" data-theme={theme ?? "cloud"} dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
+    <div className="qd qd-wallpaper min-h-dvh" data-theme={theme ?? "cloud"} dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
       {preview && (
         <p className="flex items-center justify-center gap-2 bg-[var(--qd-ink)] px-4 py-2 text-center text-[13px] text-white">
           <EyeIcon size={16} /> {t.previewBanner} · {t.previewNoAction}

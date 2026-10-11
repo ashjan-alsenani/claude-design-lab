@@ -102,7 +102,7 @@ function Router({ base, exitHref, buyHref, locale }: Props) {
         </div>
       );
     return (
-      <div className="qd min-h-dvh" dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
+      <div className="qd qd-wallpaper min-h-dvh" dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
         <Setup />
       </div>
     );

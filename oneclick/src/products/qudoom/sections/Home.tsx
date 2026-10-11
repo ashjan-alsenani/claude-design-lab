@@ -30,10 +30,10 @@ export function Home() {
   };
 
   const doors: { to: string; show: boolean; color: string; icon: Icon; title: string; sub: string }[] = [
-    { to: "items", show: can("prep"), color: "#3da5ff", icon: BabyIcon, title: h.tPrep, sub: h.ofN(num(babyItems.filter(itemDone).length), num(babyItems.length)) },
-    { to: "bag", show: can("bag"), color: "#ff6b6b", icon: BagIcon, title: h.tBag, sub: h.ofN(num(bag.packed), num(bag.total)) },
-    { to: can("visits") ? "visits" : "events", show: can("visits") || can("reception"), color: "#8b7cf6", icon: StarIcon, title: h.tReception, sub: h.visitsN(num(confirmed)) },
-    { to: "ideas", show: can("registry") || can("favors"), color: "#ffb020", icon: GiftIcon, title: h.tIdeas, sub: h.tIdeasSub },
+    { to: "items", show: can("prep"), color: "#a9c1dc", icon: BabyIcon, title: h.tPrep, sub: h.ofN(num(babyItems.filter(itemDone).length), num(babyItems.length)) },
+    { to: "bag", show: can("bag"), color: "#e8a5b5", icon: BagIcon, title: h.tBag, sub: h.ofN(num(bag.packed), num(bag.total)) },
+    { to: can("visits") ? "visits" : "events", show: can("visits") || can("reception"), color: "#c9b8e0", icon: StarIcon, title: h.tReception, sub: h.visitsN(num(confirmed)) },
+    { to: "ideas", show: can("registry") || can("favors"), color: "#efd28f", icon: GiftIcon, title: h.tIdeas, sub: h.tIdeasSub },
   ];
 
   return (
@@ -50,7 +50,7 @@ export function Home() {
                 <span className="relative inline-block">
                   {h.bigLeft(num(daysLeft))}
                   <svg className="absolute -bottom-2 start-0 h-3 w-full" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M2 7 Q50 0 98 6" stroke="#ff8fab" strokeWidth="4" fill="none" strokeLinecap="round" />
+                    <path d="M2 7 Q50 0 98 6" stroke="#e8a5b5" strokeWidth="4" fill="none" strokeLinecap="round" />
                   </svg>
                 </span>
                 <br />
@@ -73,7 +73,7 @@ export function Home() {
         <section className="qd-card flex items-center gap-4 rounded-[26px] p-4">
           <svg viewBox="0 0 64 64" className="size-[68px] shrink-0 -rotate-90" aria-hidden="true">
             <circle cx="32" cy="32" r="26" fill="none" stroke="var(--qd-tint)" strokeWidth="9" />
-            <circle cx="32" cy="32" r="26" fill="none" stroke="#12b5a6" strokeWidth="9" strokeLinecap="round" strokeDasharray={`${(163.4 * prog.pct) / 100} 999`} />
+            <circle cx="32" cy="32" r="26" fill="none" stroke="var(--qd-primary)" strokeWidth="9" strokeLinecap="round" strokeDasharray={`${(163.4 * prog.pct) / 100} 999`} />
           </svg>
           <div className="min-w-0">
             <p className="text-[1.45rem] font-extrabold">{h.readyPct(pct(prog.pct))}</p>
@@ -97,12 +97,12 @@ export function Home() {
       )}
 
       {/* The one next step */}
-      <section className="rounded-[22px] border-2 border-dashed border-[var(--qd-star)] bg-[#fffaf0] p-4">
+      <section className="rounded-[22px] border-2 border-dashed border-[var(--qd-star)] bg-[var(--qd-paper)]/90 p-4">
         <p className="text-[13px] font-bold text-[var(--qd-amber)]">{h.nextStep}</p>
         {first ? (
           <div className="mt-2 flex items-center gap-3">
             {first.kind === "task" && access.canEdit ? (
-              <button type="button" onClick={() => toggle(first)} aria-label={first.title} className="grid size-8 shrink-0 place-items-center rounded-full border-[3px] border-[#12b5a6] text-[#12b5a6] hover:bg-[var(--qd-tint)]">
+              <button type="button" onClick={() => toggle(first)} aria-label={first.title} className="grid size-8 shrink-0 place-items-center rounded-full border-[3px] border-[var(--qd-primary)] text-[var(--qd-primary)] hover:bg-[var(--qd-tint)]">
                 <CheckIcon size={15} weight="bold" className="opacity-0 hover:opacity-100" />
               </button>
             ) : (
@@ -119,8 +119,8 @@ export function Home() {
       {/* Four doors */}
       <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {doors.filter((d) => d.show).map((d) => (
-          <Link key={d.title} href={href(d.to)} className="group rounded-[26px] p-4 transition-transform active:scale-[0.98]" style={{ background: `color-mix(in oklab, ${d.color} 15%, #fff)` }}>
-            <span className="grid size-12 place-items-center rounded-2xl text-white shadow-[0_6px_14px_-8px_rgb(30_27_58/.5)] transition-transform group-hover:-rotate-6" style={{ background: d.color }}>
+          <Link key={d.title} href={href(d.to)} className="group rounded-[26px] p-4 transition-transform active:scale-[0.98]" style={{ background: `color-mix(in oklab, ${d.color} 28%, var(--qd-paper))` }}>
+            <span className="grid size-12 place-items-center rounded-2xl transition-transform group-hover:-rotate-6" style={{ background: d.color, color: `color-mix(in oklab, ${d.color} 30%, #3b3346)` }}>
               <d.icon size={24} weight="fill" />
             </span>
             <p className="mt-3 text-[16.5px] font-bold">{d.title}</p>
@@ -141,7 +141,7 @@ export function Home() {
           <ul className="mt-2 divide-y divide-[var(--qd-line)]">
             {next.slice(1).map((e) => (
               <li key={`${e.kind}-${e.id}`} className="flex items-center gap-3 py-2.5">
-                <span className={cx("size-2.5 shrink-0 rounded-full", e.kind === "task" ? "bg-[#12b5a6]" : e.kind === "visit" ? "bg-[#8b7cf6]" : "bg-[#ffb020]")} />
+                <span className={cx("size-2.5 shrink-0 rounded-full", e.kind === "task" ? "bg-[#a8c09f]" : e.kind === "visit" ? "bg-[#c9b8e0]" : "bg-[#efd28f]")} />
                 <span className="min-w-0 flex-1 truncate text-[14.5px]">{e.title}</span>
                 <span className="shrink-0 text-[12.5px] text-[var(--qd-muted)]">{rel(e.date)}</span>
               </li>

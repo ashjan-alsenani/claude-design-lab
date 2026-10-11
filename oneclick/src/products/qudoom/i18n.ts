@@ -104,7 +104,7 @@ const ar = {
   ideasT: {
     title: "أفكار حلوة 🎁", sub: "اختاري اللي يعجبك وأضيفيه بضغطة.", baby: "هدايا للبيبي", favor: "توزيعات", mother: "هدايا للأم",
     addGift: "أضيفيها للقائمة", addFavor: "أضيفيها للتوزيعات", added: "مضافة", addedToast: "انضافت 🤍", price: { 1: "سعر بسيط", 2: "سعر متوسط", 3: "سعر أعلى" },
-    note: "الأسعار تقريبية وتختلف حسب المكان. ما فيه روابط متاجر أو إعلانات.",
+    note: "الأسعار تقريبية وتختلف حسب المكان. ما فيه روابط متاجر أو إعلانات.", count: (n: string) => `${n} فكرة توزيعات`, search: "ابحثي في الأفكار", allCats: "الكل", anyPrice: "أي سعر", more: "عرض المزيد", way: "طريقة التقديم", none: "ما لقينا شي بهالبحث.",
   },
   pub: {
     giftsTitle: (n: string) => `قائمة هدايا ${n}`, giftsSub: "شكرًا على محبتكم. اختاروا هدية واحجزوها حتى ما تتكرر.", reserve: "احجزي / احجز", reserveQty: "الكمية", yourName: "اسمك (اختياري)", hideName: "إخفاء اسمي عن الأم", reserveBtn: "تأكيد الحجز",
@@ -220,7 +220,7 @@ const en: Widen<QCopy> = {
   ideasT: {
     title: "Lovely ideas 🎁", sub: "Pick what you like and add it with one tap.", baby: "Gifts for baby", favor: "Favors", mother: "Gifts for mum",
     addGift: "Add to the list", addFavor: "Add to favors", added: "Added", addedToast: "Added 🤍", price: { 1: "Budget-friendly", 2: "Mid-range", 3: "Splurge" },
-    note: "Prices vary by place. No store links or ads.",
+    note: "Prices vary by place. No store links or ads.", count: (n: string) => `${n} favor ideas`, search: "Search ideas", allCats: "All", anyPrice: "Any price", more: "Show more", way: "How to present it", none: "Nothing matches that search.",
   },
   pub: {
     giftsTitle: (n: string) => `${n}'s gift list`, giftsSub: "Thank you for your love. Pick a gift and reserve it so it isn't duplicated.", reserve: "Reserve", reserveQty: "Quantity", yourName: "Your name (optional)", hideName: "Hide my name from the mum", reserveBtn: "Confirm reservation",

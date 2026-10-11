@@ -100,8 +100,12 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
 
   // A gift with exactly one left.
   await page.goto("/en/app/hikayat-qudoom/registry");
-  await page.getByRole("button", { name: "Wished gift" }).first().click();
   const dlg = page.getByRole("dialog");
+  // Retry until the page is interactive (a click before hydration does nothing).
+  await expect(async () => {
+    await page.getByRole("button", { name: "Wished gift" }).first().click();
+    await expect(dlg.getByLabel("Name", { exact: true })).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 30_000 });
   await dlg.getByLabel("Name", { exact: true }).fill("Baby monitor");
   await dlg.getByRole("button", { name: "Save" }).click();
   await saved(page);

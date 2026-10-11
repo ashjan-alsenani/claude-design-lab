@@ -314,7 +314,7 @@ export function Stat({ label, value, sub, tone }: { label: string; value: string
 /** A cheerful link to the ready ideas (gifts and favors). */
 export function IdeasLink({ href, label }: { href: string; label: string }) {
   return (
-    <a href={href} className="flex items-center gap-3 rounded-[22px] border-2 border-dashed border-[var(--qd-star)] bg-[#fffaf0] px-4 py-3 text-[15px] font-semibold">
+    <a href={href} className="flex items-center gap-3 rounded-[22px] border-2 border-dashed border-[var(--qd-star)] bg-[var(--qd-paper)]/90 px-4 py-3 text-[15px] font-semibold">
       <span className="grid size-9 place-items-center rounded-full bg-[var(--qd-star)] text-white">✨</span>
       <span className="flex-1">{label}</span>
       <span aria-hidden="true" className="text-[var(--qd-amber)] rtl:rotate-180">→</span>

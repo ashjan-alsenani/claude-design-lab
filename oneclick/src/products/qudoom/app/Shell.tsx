@@ -8,7 +8,6 @@ import {
 } from "@phosphor-icons/react";
 import { useQ } from "./state";
 import { groups, pages, type PageKey } from "../constants";
-import { SkyDecor } from "../ui/Art";
 import { BabyMascot } from "../ui/Mascot";
 import { Button, cx } from "../ui/kit";
 
@@ -54,7 +53,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
   const firstOf = (g: (typeof groups)[number]) => (g.key === "more" ? "more" : g.pages.find(visible) ?? "");
 
   return (
-    <div className="qd min-h-dvh" data-theme={plan.profile?.theme ?? "cloud"} dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
+    <div className="qd qd-wallpaper min-h-dvh" data-theme={plan.profile?.theme ?? "cloud"} dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
       <a href="#qd-main" className="sr-only focus:not-sr-only focus:fixed focus:start-3 focus:top-3 focus:z-50 focus:rounded-full focus:bg-[var(--qd-paper)] focus:px-4 focus:py-2">
         {lang === "ar" ? "تخطي إلى المحتوى" : "Skip to content"}
       </a>
@@ -72,9 +71,8 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
         </div>
       )}
       <div className="relative">
-      <SkyDecor className="qd-noprint" />
       <header className="qd-noprint relative z-30">
-        <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-3xl items-center gap-2 px-4 sm:px-6">
           <Link href={href()} className="flex min-w-0 items-center gap-2">
             <BabyMascot size={34} theme={plan.profile?.theme} animate={false} />
             <span className="truncate font-bold">{mode === "helper" && access.ownerName ? t.top.helperOf(access.ownerName) : t.brand}</span>
@@ -84,7 +82,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
           <Link href={switchHref} className="hidden h-10 items-center rounded-full px-3 text-[13px] font-medium text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)] sm:inline-flex" hrefLang={lang === "ar" ? "en" : "ar"}>
             {t.top.lang}
           </Link>
-          <Link href={href("more")} className="grid size-10 place-items-center rounded-full bg-white/70 text-[var(--qd-ink-soft)] hover:bg-white lg:hidden" aria-label={t.nav.more} title={t.nav.more}>
+          <Link href={href("more")} className="grid size-10 place-items-center rounded-full bg-white/70 text-[var(--qd-ink-soft)] hover:bg-white" aria-label={t.nav.more} title={t.nav.more}>
             <DotsThreeOutlineIcon size={19} weight="fill" />
           </Link>
           <Link href={exitHref} className="grid size-10 place-items-center rounded-full text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)]" aria-label={t.top.exit} title={t.top.exit}>
@@ -95,31 +93,27 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
       {!online && <p className="qd-noprint bg-[var(--qd-amber-soft)] px-4 py-2 text-center text-[13px] text-[var(--qd-amber)]">{lang === "ar" ? "ما فيه اتصال بالإنترنت. تعديلاتك محفوظة هنا وبتنرسل أول ما يرجع الاتصال." : "You're offline. Your edits are kept here and will be sent when you're back online."}</p>}
       {remoteNote && <p className="qd-noprint bg-[var(--qd-tint)] px-4 py-2 text-center text-[13px] text-[var(--qd-primary-deep)]">{lang === "ar" ? "تحدّثت البيانات من جهاز أو شخص ثاني، ودمجناها مع تعديلاتك." : "The plan was updated from another device or person; we merged it with your edits."}</p>}
 
-      <div className="relative mx-auto flex max-w-6xl gap-8 px-4 pb-32 sm:px-6 lg:pb-12">
-        <nav aria-label={t.brand} className="qd-noprint sticky top-20 hidden h-[calc(100dvh-6rem)] w-56 shrink-0 overflow-y-auto py-6 lg:block">
-          {sideGroups.map((g) => (
-            <div key={g.key} className="mb-4">
-              {g.key !== "home" && <p className="mb-1.5 px-3 text-[12px] font-semibold text-[var(--qd-muted)]">{t.nav[g.key]}</p>}
-              <ul className="space-y-0.5">
-                {g.pages.map((p) => {
-                  const I = pageIcons[p];
-                  const on = p === page;
-                  return (
-                    <li key={p}>
-                      <Link href={href(p || undefined)} aria-current={on ? "page" : undefined} className={cx("flex h-10 items-center gap-2.5 rounded-[12px] px-3 text-[14px] transition-colors", on ? "bg-[var(--qd-tint)] font-semibold text-[var(--qd-primary-deep)]" : "text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)]")}>
-                        <I size={18} weight={on ? "fill" : "regular"} />
-                        {label(p)}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
-        </nav>
+      {/* Desktop: the same four sections as a soft pill bar under the header (no side bar). */}
+      <nav aria-label={t.brand} className="qd-noprint relative mx-auto hidden max-w-3xl px-4 lg:block">
+        <ul className="flex justify-center gap-1 rounded-full bg-[var(--qd-paper)]/90 p-1.5 shadow-[0_6px_24px_-14px_rgb(59_51_70/.35)]">
+          {navGroups.map((g) => {
+            const I = groupIcons[g.key];
+            const on = g.key === group;
+            return (
+              <li key={g.key}>
+                <Link href={href(firstOf(g) || undefined)} aria-current={on ? "page" : undefined} className={cx("flex h-11 items-center gap-2 rounded-full px-5 text-[14.5px] font-semibold transition-colors", on ? "bg-[var(--qd-primary)] text-white" : "text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)]")}>
+                  <I size={19} weight={on ? "fill" : "regular"} />
+                  {t.nav[g.key]}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      <div className="relative mx-auto flex max-w-3xl px-4 pb-32 sm:px-6 lg:pb-12">
         <main id="qd-main" className="min-w-0 flex-1 py-5 sm:py-7">
           {tabs.length > 1 && (
-            <nav aria-label={t.nav[group]} className="qd-noprint qd-scroll-x -mx-4 mb-5 flex gap-2 overflow-x-auto px-4 lg:hidden">
+            <nav aria-label={t.nav[group]} className="qd-noprint qd-scroll-x -mx-4 mb-5 flex gap-2 overflow-x-auto px-4 lg:justify-center">
               {tabs.map((p) => (
                 <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={cx("h-10 shrink-0 whitespace-nowrap rounded-full border px-4 text-[14px] leading-[38px]", p === page ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-transparent bg-white/85 text-[var(--qd-ink-soft)] shadow-[0_4px_14px_-10px_rgb(30_27_58/.4)]")}>
                   {label(p)}

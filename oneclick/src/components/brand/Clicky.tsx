@@ -191,14 +191,8 @@ function Accessory({ kind }: { kind: ClickyAccessory }) {
         </g>
       );
     case "baby":
-      // A newborn: one hair curl on top and a pacifier.
-      return (
-        <g>
-          <path d="M50 7 C46 -2 56 -5 57 1 C58 6 51 6 52 2" fill="none" stroke={INK} strokeWidth="3.5" strokeLinecap="round" />
-          <ellipse cx="50" cy="68" rx="13" ry="8" fill="#BDE3FF" stroke={INK} strokeWidth="2.5" />
-          <circle cx="50" cy="68" r="4.5" fill="#fff" stroke={INK} strokeWidth="2.5" />
-        </g>
-      );
+      // A newborn: just one soft hair curl on top.
+      return <path d="M50 7 C46 -2 56 -5 57 1 C58 6 51 6 52 2" fill="none" stroke={INK} strokeWidth="3.5" strokeLinecap="round" />;
     case "bow":
       return (
         <g>
