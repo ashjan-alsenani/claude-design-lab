@@ -28,7 +28,7 @@ export default async function CheckoutDonePage({ params, searchParams }: { param
         // A successful purchase gets a party: Clicky dances while confetti rains.
         <div className="relative">
           <PurchaseParty />
-          <DancingClicky laugh={locale === "ar" ? "هههههه" : "hahaha"} />
+          <DancingClicky />
         </div>
       ) : (
         <Clicky size={130} mood={mood} body animate className="mx-auto" />
