@@ -48,6 +48,8 @@ export type Product = {
   status: ProductStatus;
   /** null = free. Prices are editable data, never hard-coded in components. */
   price: Money | null;
+  /** The owner hasn't set a price yet: not free, and not purchasable until she does. */
+  pricePending?: boolean;
   categories: string[];
   tags: string[];
   hue: Hue;

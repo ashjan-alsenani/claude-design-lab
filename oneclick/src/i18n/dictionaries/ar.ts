@@ -31,6 +31,8 @@ export const ar: Dictionary = {
     sample: "محتوى تجريبي",
     demoData: "بيانات تجريبية",
     free: "مجاني",
+    pricePending: "السعر يُعلن قريبًا",
+    accessPending: "تُحدد مع فتح الشراء",
     from: "من",
     learnMore: "اعرف أكثر",
     viewProduct: "عرض المنتج",

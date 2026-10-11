@@ -88,7 +88,7 @@ export function Setup() {
       <Field label={s.due} hint={s.dueHint} htmlFor="q-due">
         <input id="q-due" type="date" dir="ltr" className={`${inputCls} text-start`} value={due} onChange={(e) => setDue(e.target.value)} />
       </Field>
-      <fieldset>
+      <fieldset className="min-w-0">
         <legend className="mb-2 text-[13px] font-medium text-[var(--qd-ink-soft)]">{s.first}</legend>
         <div role="radiogroup" className="grid grid-cols-2 gap-2">
           <ChoiceCard selected={first === "yes"} onClick={() => setFirst(first === "yes" ? undefined : "yes")}>{t.common.yes}</ChoiceCard>

@@ -31,6 +31,8 @@ export const en = {
     sample: "Sample content",
     demoData: "Demo data",
     free: "Free",
+    pricePending: "Price coming soon",
+    accessPending: "Set when purchasing opens",
     from: "From",
     learnMore: "Learn more",
     viewProduct: "View product",

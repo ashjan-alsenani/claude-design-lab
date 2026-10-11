@@ -29,7 +29,7 @@ export function resolvePolicy(db: Readonly<LicensingDb>): LicensingPolicy {
 const hybridByDefault = new Set(["prd_bride", "prd_planner"]);
 
 export function defaultAccessType(p: Product): AccessType {
-  if (p.price === null) return "PUBLIC_FREE";
+  if (p.price === null && !p.pricePending) return "PUBLIC_FREE";
   if (p.kind === "custom-service") return "CUSTOM_SERVICE";
   if (p.kind === "download") return "SECURE_DOWNLOAD";
   if (hybridByDefault.has(p.id)) return "HYBRID";

@@ -161,7 +161,7 @@ function SaveBadge({ state, retry, mode }: { state: string; retry: () => void; m
     );
   if (state === "idle") return null;
   return (
-    <span role="status" className="inline-flex items-center gap-1.5 text-[12.5px] text-[var(--qd-muted)]">
+    <span role="status" data-save={state} className="inline-flex items-center gap-1.5 text-[12.5px] text-[var(--qd-muted)]">
       <CloudCheckIcon size={16} className={state === "saving" ? "animate-pulse" : "text-[var(--qd-sage)]"} />
       <span className="hidden sm:inline">{state === "saving" ? t.top.saving : t.top.saved}</span>
     </span>

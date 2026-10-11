@@ -1,7 +1,7 @@
 import { addDays, manualLoad, slotKey, slotsOn, todayIn } from "./engine";
 import type { Op } from "./schema";
 import type { Coll } from "./schema";
-import type { Gift, ItemArea, Plan, Priority, SectionId, TaskArea, VisitSettings } from "./types";
+import type { Gift, ItemArea, Plan, Priority, SectionId, TaskArea, ThemeId, VisitSettings } from "./types";
 
 /**
  * What the public links may know about a plan, and nothing more. Published to the database when
@@ -11,6 +11,7 @@ import type { Gift, ItemArea, Plan, Priority, SectionId, TaskArea, VisitSettings
 export type PublicGift = { id: string; name: string; qtyNeeded: number; priority: Priority; priceMinor?: number; spec?: string; url?: string; publicNote?: string };
 export type Projection = {
   name: string;
+  theme: ThemeId;
   lang: "ar" | "en";
   currency: string;
   tz: string;
@@ -25,7 +26,7 @@ export function projection(p: Plan, lang: "ar" | "en" = "ar"): Projection | null
   const gifts = p.profile.sections.registry === false ? [] : p.gifts.filter((g) => !g.hidden).map(publicGift);
   const { message: _m, ...settings } = p.visitSettings;
   const manual = Object.fromEntries(Object.entries(manualLoad(p)).filter(([k]) => k.slice(0, 10) >= today));
-  return { name: p.profile.motherName, lang, currency: p.profile.currency, tz, gifts, visits: { settings: p.profile.sections.visits === false ? { ...settings, paused: true } : settings, manual } };
+  return { name: p.profile.motherName, theme: p.profile.theme, lang, currency: p.profile.currency, tz, gifts, visits: { settings: p.profile.sections.visits === false ? { ...settings, paused: true } : settings, manual } };
 }
 
 const publicGift = (g: Gift): PublicGift => ({

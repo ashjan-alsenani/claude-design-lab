@@ -35,7 +35,7 @@ export function ProductCard({ product, locale, d, size = "md" }: { product: Prod
         </h3>
         <p className="mt-1.5 text-[0.95rem] leading-relaxed text-ink-soft">{tr(product.tagline, locale)}</p>
         <div className="mt-auto flex items-center justify-between pt-5 text-sm">
-          <span className="rounded-full px-3 py-1 font-bold tabular text-ink" style={{ background: toneSoft(look.color, 16) }}>{product.price ? formatMoney(product.price, locale) : d.common.free}</span>
+          <span className="rounded-full px-3 py-1 font-bold tabular text-ink" style={{ background: toneSoft(look.color, 16) }}>{product.price ? formatMoney(product.price, locale) : product.pricePending ? d.common.pricePending : d.common.free}</span>
           <span className="text-muted">{d.kind[product.kind]}</span>
         </div>
       </div>

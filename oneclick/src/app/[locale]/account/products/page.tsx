@@ -18,6 +18,7 @@ import { StatusPill, licenseTone } from "@/components/account/StatusPill";
 import { Clicky } from "@/components/brand/Clicky";
 import { deniedCopy } from "@/components/account/AccessDenied";
 import { downloadAction } from "../actions";
+import { helperPlanners } from "@/products/qudoom/server/helpers-list";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | undefined>> };
 
@@ -36,6 +37,8 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
   const items = await licensing().engine.myProducts(ctx.user.id);
   const name = ctx.user.name ?? ctx.user.email.split("@")[0];
   const isOwner = ctx.roles.includes("owner");
+  // «حكاية قدوم» planners other mothers invited this account to help with (their own grant, not a purchase).
+  const helping = await helperPlanners(ctx.user.id);
   const ownerApps = isOwner ? products.filter((p) => !p.includes?.length && opensInteractive(defaultSecurity(p).accessType)) : [];
 
   return (
@@ -54,6 +57,22 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
           </p>
         )}
       </header>
+
+      {helping.length > 0 && (
+        <section aria-labelledby="helping-h" className="mt-6 rounded-[var(--radius-xl)] border border-line bg-surface p-5">
+          <h2 id="helping-h" className="font-semibold text-ink">{locale === "ar" ? "مفكّرات أساعد فيها" : "Planners I help with"}</h2>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {helping.map((h) => (
+              <li key={h.id}>
+                <Link href={`/${locale}/shared/hikayat-qudoom/${h.id}`} className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-medium text-ink hover:border-primary">
+                  {locale === "ar" ? `حكاية قدوم · ${h.name}` : `Hikayat Qudoom · ${h.name}`}
+                  <ArrowRightIcon size={14} className="flip-rtl" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {isOwner && (
         <section aria-labelledby="owner-h" className="mt-6 rounded-[var(--radius-xl)] border border-line bg-surface p-5">

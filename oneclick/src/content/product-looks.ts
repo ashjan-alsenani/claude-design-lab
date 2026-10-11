@@ -46,6 +46,7 @@ export const productLooks: Record<string, ProductLook> = {
   prd_home: { color: "#06B6D4", icon: SprayBottleIcon, mood: "happy" },
   prd_travel: { color: "#0EA5E9", icon: AirplaneTiltIcon, mood: "wink" },
   prd_baby: { color: "#60A5FA", icon: BabyIcon, mood: "love" },
+  prd_qudoom: { color: "#E07A9A", icon: BabyIcon, mood: "love" },
   prd_planner: { color: "#3D7BFF", icon: CalendarCheckIcon, mood: "wink" },
   prd_ramadan: { color: "#4F46E5", icon: MoonStarsIcon, mood: "happy" },
   prd_study: { color: "#8B5CF6", icon: GraduationCapIcon, mood: "think" },

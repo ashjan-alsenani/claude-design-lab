@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckIcon, CoffeeIcon, CopyIcon, PencilSimpleIcon, PlusIcon, ShareNetworkIcon, SparkleIcon, StarIcon, UsersThreeIcon, XIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { eventReadiness, favorTotal, guestsFor, hospCost, hospQty, manualLoad, slotKey, slotsOn, weekday, addDays } from "../model/engine";
@@ -104,7 +104,16 @@ export function VisitsPage() {
   const [edit, setEdit] = useState<Partial<Visit> | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   useAddParam(() => setEdit({ group: "family", people: 1, status: "confirmed" }));
-  const pending = (pub?.requests ?? []).filter((r) => r.status === "pending");
+  const pending = (pub?.requests ?? []).filter((r) => r.status === "pending" || r.status === "expired");
+  // A visitor who cancels from her own link frees the seats in the database; mirror it in the list once.
+  useEffect(() => {
+    if (!access.canEdit) return;
+    for (const r of pub?.requests ?? []) {
+      if (r.status !== "cancelled") continue;
+      const v = plan.visits.find((x) => x.requestId === r.id && x.status === "confirmed");
+      if (v) dispatch({ t: "put", c: "visits", item: { ...v, status: "cancelled" } });
+    }
+  }, [pub, plan.visits, access.canEdit, dispatch]);
   const list = plan.visits.filter((v) => filter === "all" || v.status === filter).sort((a, b) => slotKey(a.confirmed ?? a.proposed ?? { date: "9999", time: "" }).localeCompare(slotKey(b.confirmed ?? b.proposed ?? { date: "9999", time: "" })));
   const load = manualLoad(plan);
   const over = (v: Partial<Visit>) => v.status === "confirmed" && v.confirmed && (load[slotKey(v.confirmed)] ?? 0) - (plan.visits.find((x) => x.id === v.id)?.people ?? 0) + (v.people ?? 0) > plan.visitSettings.maxPeople;
@@ -173,7 +182,7 @@ export function VisitsPage() {
               {pending.map((r) => (
                 <li key={r.id} className="qd-card flex flex-wrap items-center gap-3 rounded-[18px] p-4">
                   <div className="min-w-0 flex-1">
-                    <p className="font-semibold">{r.name}</p>
+                    <p className="flex items-center gap-2 font-semibold">{r.name}{r.status === "expired" && <Badge>{t.pub.reqStatus.expired}</Badge>}</p>
                     <p className="text-[13px] text-[var(--qd-muted)]">{num(r.people)} {t.visits.people} · {date(r.date, "weekday")} · {timeLabel(r.time)}</p>
                     {r.note && <p className="mt-1 text-[13px]">{r.note}</p>}
                   </div>
@@ -213,7 +222,7 @@ function VisitHours() {
   const setDay = (d: keyof VisitSettings["week"], wins: Window[]) => set({ week: { ...s.week, [d]: wins } });
   const preview = Array.from({ length: 7 }, (_, i) => addDays(today, i + 1)).map((d) => ({ d, slots: slotsOn(d, s) }));
   return (
-    <fieldset disabled={!access.canEdit} className="space-y-5">
+    <fieldset disabled={!access.canEdit} className="min-w-0 space-y-5">
       <Card className="p-4">
         <Toggle checked={s.paused} onChange={(v) => set({ paused: v })} label={t.visits.paused} />
       </Card>

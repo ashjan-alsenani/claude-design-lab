@@ -71,6 +71,11 @@ describe("every product in the catalog follows the ownership rules", () => {
       const stranger = await signIn("stranger@example.com");
       expect((await engine.checkAccess(stranger, product.id, p)).allowed).toBe(false);
 
+      // Price not set by the owner yet: not free, and it can't be bought (no fake checkout).
+      if (product.pricePending) {
+        expect((await engine.createOrder({ productIds: [product.id], purchaseEmail: "x@example.com", provider: "sandbox", sandbox: true, locale: "en" })).ok).toBe(false);
+        return;
+      }
       // Guest purchase: nothing opens until the purchase email is verified...
       const order = await pay("buyer@example.com", product.id);
       expect((await engine.checkAccess(stranger, product.id, p)).allowed).toBe(false);

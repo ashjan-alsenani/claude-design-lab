@@ -5,7 +5,7 @@ import { ArrowsClockwiseIcon, CopyIcon, EyeIcon, LinkBreakIcon, LinkIcon, Shield
 import { useQ } from "../app/state";
 import type { HelperInfo, LinkInfo, ShareKind } from "../app/api-types";
 import { allSections, type SectionId } from "../model/types";
-import { Badge, Button, Card, ChoiceCard, Field, PageHeader, SectionTitle, Toggle, inputCls } from "../ui/kit";
+import { Badge, Button, Card, ChoiceCard, Field, PageHeader, SectionTitle, Skeleton, Toggle, inputCls } from "../ui/kit";
 import { sectionLabel } from "./Setup";
 
 export function SharePage() {
@@ -17,10 +17,18 @@ export function SharePage() {
       <p className="rounded-[14px] bg-[var(--qd-tint-2)] px-4 py-3 text-[13.5px] leading-relaxed text-[var(--qd-ink-soft)]">{t.shareT.hidden}</p>
       <section className="space-y-3">
         <SectionTitle title={t.shareT.links} />
-        <div className="grid gap-3 lg:grid-cols-2">
-          <LinkCard kind="gifts" info={pub?.links.find((l) => l.kind === "gifts")} />
-          <LinkCard kind="visits" info={pub?.links.find((l) => l.kind === "visits")} />
-        </div>
+        {/* Wait for the real state, so "Create" never replaces a link that already exists. */}
+        {pub || mode === "demo" ? (
+          <div className="grid gap-3 lg:grid-cols-2">
+            <LinkCard kind="gifts" info={pub?.links.find((l) => l.kind === "gifts")} />
+            <LinkCard kind="visits" info={pub?.links.find((l) => l.kind === "visits")} />
+          </div>
+        ) : (
+          <div className="grid gap-3 lg:grid-cols-2" aria-busy="true">
+            <Skeleton className="h-48 rounded-[22px]" />
+            <Skeleton className="h-48 rounded-[22px]" />
+          </div>
+        )}
       </section>
       <Helpers helpers={pub?.helpers ?? []} />
     </div>

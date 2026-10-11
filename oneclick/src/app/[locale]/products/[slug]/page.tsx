@@ -20,11 +20,12 @@ import { ProductArt } from "@/components/art/ProductArt";
 import { FavoriteButton } from "@/components/product/FavoriteButton";
 import { ProductViewTracker } from "@/components/product/ProductViewTracker";
 import { JsonLd } from "@/components/JsonLd";
+import { QudoomPreview, QudoomStory } from "@/components/product/QudoomShowcase";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 /** Products with a full interactive app also link to its public sample (nothing saved). */
-const fullDemo: Record<string, string> = { "bride-planner": "/demo/bride-planner" };
+const fullDemo: Record<string, string> = { "bride-planner": "/demo/bride-planner", "hikayat-qudoom": "/demo/hikayat-qudoom" };
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => allProducts.filter((p) => p.status !== "archived").map((p) => ({ locale, slug: p.slug })));
@@ -50,13 +51,17 @@ export default async function ProductPage({ params }: Props) {
   const Glyph = look.icon;
   const name = tr(product.name, locale);
   const home = locale === "ar" ? "الرئيسية" : "Home";
-  const isFree = product.price === null;
+  const isFree = product.price === null && !product.pricePending;
+  const pending = !!product.pricePending;
   const soon = product.status === "coming-soon";
-  const priceLabel = product.price ? formatMoney(product.price, locale) : d.common.free;
+  const priceLabel = product.price ? formatMoney(product.price, locale) : pending ? d.common.pricePending : d.common.free;
+  const demoPath = fullDemo[product.slug];
   const faqItems = product.faqs.map((f) => ({ q: tr(f.q, locale), a: tr(f.a, locale) }));
 
   const primaryCta = isFree
     ? { href: "#demo", label: d.home.finalCta }
+    : pending && demoPath
+      ? { href: `/${locale}${demoPath}`, label: locale === "ar" ? "جرّبي العرض التجريبي" : "Try the demo" }
     : soon
       ? { href: `/${locale}/checkout/${product.slug}`, label: d.product.notifyMe }
       : product.status === "available"
@@ -65,7 +70,7 @@ export default async function ProductPage({ params }: Props) {
 
   const specs = [
     { icon: PackageIcon, label: d.product.type, value: d.kind[product.kind] },
-    { icon: KeyIcon, label: d.product.access, value: d.access[product.access] },
+    { icon: KeyIcon, label: d.product.access, value: pending ? d.common.accessPending : d.access[product.access] },
     { icon: DevicesIcon, label: d.product.devices, value: tr(product.devices, locale) },
     { icon: GlobeHemisphereEastIcon, label: d.product.languages, value: product.languages.map((l) => d.product.langNames[l]).join(locale === "ar" ? " و" : " & ") },
   ];
@@ -94,8 +99,8 @@ export default async function ProductPage({ params }: Props) {
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <div>
                 <p className="text-3xl font-semibold tabular text-ink">{priceLabel}</p>
-                {!isFree && <p className="text-sm text-muted">{d.access[product.access]}</p>}
-                {!isFree && d.accessNote[product.access] && <p className="text-xs text-muted">{d.accessNote[product.access]}</p>}
+                {!isFree && !pending && <p className="text-sm text-muted">{d.access[product.access]}</p>}
+                {!isFree && !pending && d.accessNote[product.access] && <p className="text-xs text-muted">{d.accessNote[product.access]}</p>}
               </div>
               <div className="flex items-center gap-2">
                 <ButtonLink href={primaryCta.href} size="lg">
@@ -112,7 +117,9 @@ export default async function ProductPage({ params }: Props) {
             )}
           </div>
 
-          {product.demo ? (
+          {product.slug === "hikayat-qudoom" ? (
+            <QudoomPreview locale={locale} />
+          ) : product.demo ? (
             <div id="demo" className="scroll-mt-24">
               <h2 className="mb-3 text-sm font-medium text-ink-soft">{d.product.demo}</h2>
               <DemoById id={product.demo} locale={locale} hue={hue} />
@@ -177,6 +184,8 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </section>
       )}
+
+      {product.slug === "hikayat-qudoom" && <QudoomStory locale={locale} />}
 
       {/* WHAT YOU GET + SPECS */}
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:px-8 lg:py-24">
