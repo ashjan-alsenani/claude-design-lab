@@ -16,6 +16,17 @@ publishing **PRODUCTION CONNECTION REQUIRES OWNER** (Meta Professional account +
 - Highlights + covers (`public/brand/instagram-highlight-*.png`): Products, Bride, Grocery,
   Planner, Tips, Custom.
 
+## Profile refresh (2026-10-11), awaiting the owner's pick
+- Avatar options (1080×1080, circle-safe) in `docs/instagram/`:
+  A: cream with a soft teal glow · B: brand teal with a white ring (stands out in the feed) · C: Clicky
+  with the family around him. `avatar-options-preview.png` shows each at profile and feed size.
+- Name field: `ون كليك | مخططات ومنظّمات رقمية`
+- Bio options (all under 150 characters; no "free"):
+  1. `جهد أقل، حياة أكثر ✨` / `مخططات ومنظّمات رقمية تسهّل يومك` / `👰 العروسة · 🌙 رمضان · 💰 الميزانية · 🧺 المقاضي` / `جرّبها قبل لا تشتريها 👇`
+  2. `خلّي يومك أسهل بضغطة وحدة 🖱️` / `مفكّرة العروسة، مخطط رمضان، الميزانية والمزيد` / `عربي + English · من عُمان 🇴🇲` / `جرّبها قبل لا تشتريها 👇`
+  3. `أدوات رقمية جميلة لكل يوم ✨` / `من الفوضى إلى الوضوح، بضغطة وحدة` / `عربي + English · من عُمان 🇴🇲` / `👇 تصفّح وجرّب`
+- Link: `https://www.oneclick.computer/ar`
+
 ## Formats
 - Reels 9:16, 7-20 s, hook in first 1-3 s, captions burned in, end card with mark + slogan.
 - Carousels 4:5, max 7 slides, problem → steps → result → CTA.
