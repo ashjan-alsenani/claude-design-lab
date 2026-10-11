@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.1 — 2026-10-11 — Toot joins the family
+- Warda is replaced by Toot (pink, the shopping buddy): keeps your favorites and celebrates every
+  purchase; her home card links to Favorites. Checkout shows Toot.
+
 ## 0.15.0 — 2026-10-11 — The Clicky family
 - One character per brand color, each with a job (`src/content/clicky-family.ts`): Clicky (teal,
   leader, welcomes), Warda (pink, love and joy: buying, the party, the bride's planner), Shams

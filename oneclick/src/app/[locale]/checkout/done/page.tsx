@@ -26,7 +26,7 @@ export default async function CheckoutDonePage({ params, searchParams }: { param
       <SandboxBanner locale={locale} />
       {r === "succeeded" ? (
         // A successful purchase gets a party: Clicky dances while confetti rains.
-        // The whole Clicky family dances: Clicky, Warda, Shams, Marjan and Lilac (content/clicky-family.ts).
+        // The whole Clicky family dances: Clicky, Toot, Shams, Marjan and Lilac (content/clicky-family.ts).
         <div className="relative">
           <PurchaseParty />
           {/* --dcs shrinks the whole party on phones so all five fit. */}

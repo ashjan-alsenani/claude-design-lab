@@ -2,12 +2,11 @@ import type { ClickyAccessory, ClickyMood } from "@/components/brand/Clicky";
 
 /**
  * The Clicky family: one character per brand color, each with a job on the site.
- * Clicky (teal) leads and welcomes; Warda (pink) is love and joy — buying, the party, the bride's
- * planner; Shams (sunshine) brings ideas — guides and tips; Marjan (coral) helps — help, contact,
+ * Clicky (teal) leads and welcomes; Toot (pink) keeps your favorites and celebrates every purchase; Shams (sunshine) brings ideas — guides and tips; Marjan (coral) helps — help, contact,
  * "page not found"; Lilac (lilac) guards — sign-in codes, devices, security, protected products.
  */
 export type FamilyMember = {
-  id: "clicky" | "warda" | "shams" | "marjan" | "lilac";
+  id: "clicky" | "toot" | "shams" | "marjan" | "lilac";
   name: { ar: string; en: string };
   role: { ar: string; en: string };
   color: string;
@@ -27,13 +26,13 @@ export const clickyFamily: FamilyMember[] = [
     link: { path: "/products", label: { ar: "تصفّح المنتجات", en: "Browse products" } },
   },
   {
-    id: "warda",
-    name: { ar: "وردة", en: "Warda" },
-    role: { ar: "الحب والفرح. تطلع لك وقت الشراء، وعلى مفكّرة العروسة.", en: "Love and joy. She shows up when you buy, and on the bride's planner." },
+    id: "toot",
+    name: { ar: "توت", en: "Toot" },
+    role: { ar: "رفيقة التسوّق. تحفظ لك اللي عجبك في المفضلة، وتفرح معك وقت الشراء.", en: "Your shopping buddy. Keeps what you like in Favorites and cheers when you buy." },
     color: "#F0567A",
     mood: "love",
     accessory: "heart",
-    link: { path: "/products/bride-planner", label: { ar: "مفكّرة العروسة", en: "The bride's planner" } },
+    link: { path: "/favorites", label: { ar: "المفضلة", en: "Favorites" } },
   },
   {
     id: "shams",

@@ -41,7 +41,7 @@ export function Clicky({
   blink?: boolean;
   wave?: boolean;
   sparkle?: boolean;
-  /** Family role badge (replaces the sparkle): Shams' bulb, Lilac's shield, Warda's heart, Marjan's chat. */
+  /** Family role badge (replaces the sparkle): Shams' bulb, Lilac's shield, Toot's heart, Marjan's chat. */
   accessory?: ClickyAccessory;
   className?: string;
   style?: CSSProperties;

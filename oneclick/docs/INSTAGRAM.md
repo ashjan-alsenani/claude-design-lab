@@ -27,7 +27,7 @@ publishing **PRODUCTION CONNECTION REQUIRES OWNER** (Meta Professional account +
   3. `أدوات رقمية جميلة لكل يوم ✨` / `من الفوضى إلى الوضوح، بضغطة وحدة` / `عربي + English · من عُمان 🇴🇲` / `👇 تصفّح وجرّب`
 - Link: `https://www.oneclick.computer/ar`
 - Clicky family highlight covers (1080×1920, no text, character centered for the circle crop) in `docs/instagram/highlights/`:
-  Clicky = منتجاتنا, Warda = العروسة, Shams = نصايح, Marjan = أسئلتكم, Lilac = حسابك, all five = عائلتنا.
+  Clicky = منتجاتنا, Toot = المفضلة, Shams = نصايح, Marjan = أسئلتكم, Lilac = حسابك, all five = عائلتنا.
 
 ## Formats
 - Reels 9:16, 7-20 s, hook in first 1-3 s, captions burned in, end card with mark + slogan.

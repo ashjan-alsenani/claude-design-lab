@@ -46,8 +46,8 @@ export default async function CheckoutPage({ params }: Props) {
       <Breadcrumbs items={[{ href: `/${locale}/products/${product.slug}`, label: name }, { label: d.checkout.title }]} />
       <div className="flex items-end justify-between gap-4">
         <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink">{d.checkout.title}</h1>
-        {/* Warda (love and joy) is with the customer at the moment of buying. */}
-        <FamilyMascot id="warda" locale={locale} size={64} body={false} />
+        {/* Toot (the shopping buddy) is with the customer at the moment of buying. */}
+        <FamilyMascot id="toot" locale={locale} size={64} body={false} />
       </div>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
