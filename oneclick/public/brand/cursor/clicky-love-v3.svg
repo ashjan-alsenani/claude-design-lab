@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="-4 -4 108 108">
+  <defs><linearGradient id="love" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9cb6"/><stop offset="1" stop-color="#f0567a"/></linearGradient></defs>
+  <path d="M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z" fill="url(#love)" stroke="#fff" stroke-width="8"/>
+  <path d="M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z" fill="none" stroke="#1E1B3A" stroke-opacity=".35" stroke-width="2"/>
+  <path d="M20 30 Q22 16 38 13" stroke="#fff" stroke-opacity=".5" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M36 57 C19 46 24 30 36 38 C48 30 53 46 36 57 Z" fill="#d6194a" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M64 57 C47 46 52 30 64 38 C76 30 81 46 64 57 Z" fill="#d6194a" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+  <g fill="#ffd3de"><ellipse cx="22" cy="65" rx="6.5" ry="4"/><ellipse cx="78" cy="65" rx="6.5" ry="4"/></g>
+  <path d="M38 66 L47 74 L64 60" fill="none" stroke="#1E1B3A" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M85 20 C75 13 78 4 85 9 C92 4 95 13 85 20 Z" fill="#fff" stroke="#d6194a" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>
