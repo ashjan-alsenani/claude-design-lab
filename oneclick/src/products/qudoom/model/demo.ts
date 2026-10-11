@@ -26,6 +26,7 @@ export function demoPlan(today: string, lang: "ar" | "en"): Plan {
       sections: sectionsFor("full"),
       receptionKinds: ["hospital", "home"],
       theme: "cloud",
+      babyGender: "girl",
       nurseryKind: "corner",
       createdAt: `${today}T08:00:00.000Z`,
     },

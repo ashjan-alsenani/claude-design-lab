@@ -63,10 +63,11 @@ test("demo: fictional data, edits stay in the tab, reset brings the sample back,
   // Ready ideas: one tap adds a gift to the list and a favor to the favors plan.
   await page.goto("/en/demo/hikayat-qudoom/ideas");
   await expect(page.getByRole("heading", { name: /Lovely ideas/ })).toBeVisible();
-  await page.getByRole("button", { name: "Add to the list" }).first().click();
+  await page.getByRole("button", { name: /Gifts for baby/ }).click();
+  await page.getByRole("button", { name: /^Add: / }).first().click();
   await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible();
-  await page.getByRole("tab", { name: "Favors" }).click();
-  await page.getByRole("button", { name: "Add to favors" }).first().click();
+  await page.getByRole("button", { name: /^🎀/ }).click();
+  await page.getByRole("button", { name: /^Add: / }).first().click();
   await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible();
   await page.goto("/en/demo/hikayat-qudoom/share");
   await expect(page.getByText("In the demo you only see how it looks")).toBeVisible();
@@ -94,7 +95,7 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   }
   await page.goto("/en/app/hikayat-qudoom");
   await page.locator("#q-name").fill("Noor's mum");
-  await page.getByRole("button", { name: "Skip and start with a ready plan" }).click();
+  await page.getByRole("button", { name: "Let's begin" }).click();
   await expect(page.getByText("Noor's mum").first()).toBeVisible();
   await saved(page);
 
@@ -193,7 +194,7 @@ test("helpers and private files: own account, chosen sections only, revocable; p
   await page.goto("/en/app/hikayat-qudoom");
   if (await page.locator("#q-name").isVisible().catch(() => false)) {
     await page.locator("#q-name").fill("Noor's mum");
-    await page.getByRole("button", { name: "Skip and start with a ready plan" }).click();
+    await page.getByRole("button", { name: "Let's begin" }).click();
     await saved(page);
   }
 

@@ -1,174 +1,140 @@
 "use client";
 
-import { useState } from "react";
-import {
-  BabyCarriageIcon, BathtubIcon, BedIcon, BookOpenIcon, CameraIcon, CheckIcon, CoffeeIcon, CookieIcon, CoffeeBeanIcon, DropIcon, FireIcon, FlowerIcon, FrameCornersIcon, GiftIcon,
-  HeartIcon, MoonStarsIcon, MusicNotesIcon, PenNibIcon, PlantIcon, PlusIcon, SparkleIcon, StarIcon, TShirtIcon, BabyIcon, CakeIcon, FlowerLotusIcon, PintGlassIcon, ShoppingBagIcon, type Icon,
-} from "@phosphor-icons/react";
+import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { CheckIcon, MagnifyingGlassIcon, PlusIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
-import { ideas, type Idea, type IdeaCat, type IdeaIcon } from "../model/ideas";
-import { favorBases, favorCats, favorIdeas, favorStyles, type FavorBase, type FavorCat } from "../model/favor-ideas";
+import { allIdeas, favorCats, ideaKinds, type AnyIdea, type IdeaKind } from "../model/all-ideas";
+import type { FavorCat } from "../model/favor-ideas";
 import { BabyMascot } from "../ui/Mascot";
 import { cx } from "../ui/kit";
 
-const icons: Record<IdeaIcon, Icon> = {
-  shirt: TShirtIcon, bed: BedIcon, bath: BathtubIcon, book: BookOpenIcon, camera: CameraIcon, stroller: BabyCarriageIcon, blanket: BabyIcon, toy: StarIcon, music: MusicNotesIcon,
-  frame: FrameCornersIcon, bottle: PintGlassIcon, moon: MoonStarsIcon, cookie: CookieIcon, candle: FireIcon, plant: PlantIcon, drop: DropIcon, candy: CakeIcon, coffee: CoffeeBeanIcon,
-  flower: FlowerIcon, soap: SparkleIcon, bag: ShoppingBagIcon, star: StarIcon, heart: HeartIcon, sparkle: SparkleIcon, gift: GiftIcon, spa: FlowerLotusIcon, cup: CoffeeIcon, pen: PenNibIcon,
-};
-
-/** Ready gift and favor ideas: tap once to add a gift to the list or a favor to the favors plan. */
+/**
+ * Ready ideas, all distinct: favors, gifts, decor, name signs, hospitality, photos, hospital,
+ * aqiqah, keepsakes and thank-you notes. Pick a kind, then add any idea with one tap; it lands in
+ * the right place (gift list, favors, hospitality, tasks, or the thank-you message).
+ */
 export function IdeasPage() {
-  const { t, lang, plan, dispatch, newId, access, say } = useQ();
-  const it = t.ideasT;
-  const [cat, setCat] = useState<IdeaCat>("baby");
-  const list = ideas.filter((x) => x.cat === cat && x.cat !== "favor");
-  const name = (x: Idea) => (lang === "ar" ? x.ar : x.en);
-  const has = (x: Idea) => (x.cat === "favor" ? plan.favors.some((f) => f.type === name(x)) : plan.gifts.some((g) => g.name === name(x)));
-  const add = (x: Idea) => {
-    if (has(x)) return;
-    const note = lang === "ar" ? x.arNote : x.enNote;
-    const ok =
-      x.cat === "favor"
-        ? dispatch({ t: "put", c: "favors", item: { id: newId("fv"), type: name(x), notes: note, qtyBase: 0, qtyExtra: 0, unitMinor: 0, feesMinor: 0, depositMinor: 0, status: "idea", qtyReceived: 0, qtyGiven: 0 } })
-        : dispatch({ t: "put", c: "gifts", item: { id: newId("gf"), name: name(x), spec: note, qtyNeeded: 1, priority: x.cat === "mother" ? "optional" : "essential" } });
-    if (ok) say(it.addedToast);
-  };
-  const tabs: { k: IdeaCat; l: string }[] = [
-    { k: "baby", l: it.baby },
-    { k: "favor", l: it.favor },
-    { k: "mother", l: it.mother },
-  ];
-  return (
-    <div className="space-y-5">
-      <header className="flex items-center gap-3">
-        <BabyMascot size={60} theme={plan.profile?.theme} mood="celebrate" />
-        <div>
-          <h1 className="text-[1.6rem] font-extrabold leading-tight">{it.title}</h1>
-          <p className="text-[14px] text-[var(--qd-muted)]">{it.sub}</p>
-        </div>
-      </header>
-      <div role="tablist" aria-label={it.title} className="qd-scroll-x -mx-4 flex gap-2 overflow-x-auto px-4">
-        {tabs.map((x) => (
-          <button key={x.k} type="button" role="tab" aria-selected={cat === x.k} onClick={() => setCat(x.k)} className={cx("h-10 shrink-0 rounded-full px-4 text-[14px] font-semibold transition-colors", cat === x.k ? "bg-[var(--qd-ink)] text-white" : "bg-white/90 text-[var(--qd-ink-soft)] shadow-[0_4px_14px_-10px_rgb(30_27_58/.4)]")}>
-            {x.l}
-          </button>
-        ))}
-      </div>
-      {cat === "favor" ? <FavorBrowser /> : (
-      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {list.map((x) => {
-          const I = icons[x.icon];
-          const done = has(x);
-          return (
-            <li key={x.id} className="qd-card flex flex-col rounded-[24px] p-3.5">
-              <span className="grid size-14 place-items-center rounded-[18px]" style={{ background: `color-mix(in oklab, ${x.color} 20%, #fff)`, color: `color-mix(in oklab, ${x.color} 80%, #1e1b3a)` }}>
-                <I size={28} weight="fill" />
-              </span>
-              <p className="mt-2.5 text-[15px] font-bold leading-snug">{name(x)}</p>
-              <p className="mt-0.5 flex-1 text-[12.5px] leading-snug text-[var(--qd-muted)]">{lang === "ar" ? x.arNote : x.enNote}</p>
-              <p className="mt-1.5 text-[12px] font-semibold text-[var(--qd-ink-soft)]">{"●".repeat(x.price)}<span className="opacity-30">{"●".repeat(3 - x.price)}</span> {it.price[x.price]}</p>
-              {access.canEdit && (
-                <button type="button" disabled={done} onClick={() => add(x)} className={cx("mt-3 inline-flex h-9 w-fit items-center gap-1 rounded-full px-3.5 text-[13px] font-bold transition-colors", done ? "bg-[var(--qd-sage-soft)] text-[var(--qd-sage)]" : "bg-[var(--qd-primary)] text-white active:scale-[0.97]")}>
-                  {done ? <CheckIcon size={14} weight="bold" /> : <PlusIcon size={14} weight="bold" />}
-                  {done ? it.added : x.cat === "favor" ? it.addFavor : it.addGift}
-                </button>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-      )}
-      <p className="text-[12.5px] text-[var(--qd-muted)]">{it.note}</p>
-    </div>
-  );
-}
-
-/** About a thousand favor ideas: 256 favors × 4 ways to present them. Search, filter, pick a style, add. */
-function FavorBrowser() {
   const { t, lang, plan, dispatch, newId, access, say, num } = useQ();
+  const reduce = useReducedMotion();
   const it = t.ideasT;
+  const [kind, setKind] = useState<IdeaKind>("favor");
   const [q, setQ] = useState("");
   const [fc, setFc] = useState<FavorCat | "all">("all");
   const [price, setPrice] = useState<0 | 1 | 2 | 3>(0);
-  const [shown, setShown] = useState(24);
-  const [style, setStyle] = useState<Record<string, string>>({});
-  const text = (b: FavorBase) => (lang === "ar" ? b.ar : b.en);
-  const needle = q.trim().toLowerCase();
-  const list = favorBases.filter((b) => (fc === "all" || b.cat === fc) && (!price || b.price === price) && (!needle || `${b.ar} ${b.en}`.toLowerCase().includes(needle)));
-  const nameOf = (b: FavorBase, sid: string) => {
-    const st = favorStyles.find((x) => x.id === sid)!;
-    return `${text(b)} ${lang === "ar" ? st.ar : st.en}`;
+  const [shown, setShown] = useState(20);
+  const ar = lang === "ar";
+  const text = (x: AnyIdea) => (ar ? x.ar : x.en).replace("{gift}", ar ? "الهدية" : "the gift").replace("{name}", ar ? "يا غالية" : "Dear");
+
+  const list = useMemo(() => {
+    const needle = q.trim().toLowerCase();
+    return allIdeas.filter((x) => x.kind === kind && (kind !== "favor" || fc === "all" || x.cat === fc) && (!price || x.price === price) && (!needle || `${x.ar} ${x.en}`.toLowerCase().includes(needle)));
+  }, [kind, fc, price, q]);
+
+  const has = (x: AnyIdea) => {
+    const n = text(x);
+    if (x.kind === "favor") return plan.favors.some((f) => f.type === n.slice(0, 80));
+    if (x.kind === "gift" || x.kind === "mother") return plan.gifts.some((g) => g.name === n.slice(0, 120));
+    if (x.kind === "hosp") return plan.hospitality.some((h) => h.name === n.slice(0, 80));
+    if (x.kind === "thanks") return plan.thankTemplate === (ar ? x.ar : x.en);
+    return plan.tasks.some((k) => k.title === n.slice(0, 160));
   };
-  const add = (b: FavorBase) => {
-    const sid = style[b.id] ?? favorStyles[0].id;
-    const name = nameOf(b, sid).slice(0, 80);
-    if (plan.favors.some((f) => f.type === name)) return;
-    if (dispatch({ t: "put", c: "favors", item: { id: newId("fv"), type: name, qtyBase: 0, qtyExtra: 0, unitMinor: 0, feesMinor: 0, depositMinor: 0, status: "idea", qtyReceived: 0, qtyGiven: 0 } })) say(it.addedToast);
+  const add = (x: AnyIdea) => {
+    if (has(x)) return;
+    const n = text(x);
+    let ok = false;
+    if (x.kind === "favor") ok = dispatch({ t: "put", c: "favors", item: { id: newId("fv"), type: n.slice(0, 80), qtyBase: 0, qtyExtra: 0, unitMinor: 0, feesMinor: 0, depositMinor: 0, status: "idea", qtyReceived: 0, qtyGiven: 0 } });
+    else if (x.kind === "gift" || x.kind === "mother") ok = dispatch({ t: "put", c: "gifts", item: { id: newId("gf"), name: n.slice(0, 120), qtyNeeded: 1, priority: x.kind === "mother" ? "optional" : "essential", ...(x.arNote ? { spec: (ar ? x.arNote : x.enNote ?? "").slice(0, 200) } : {}) } });
+    else if (x.kind === "hosp") ok = dispatch({ t: "put", c: "hospitality", item: { id: newId("hs"), name: n.slice(0, 80), kind: "custom", unit: "piece", perGuest: 1, servingsPerUnit: 1, reservePct: 10, source: { manual: 20 } } });
+    else if (x.kind === "thanks") ok = dispatch({ t: "thankTemplate", text: ar ? x.ar : x.en });
+    else ok = dispatch({ t: "put", c: "tasks", item: { id: newId("tk"), title: n.slice(0, 160), area: "reception", status: "todo" } });
+    if (ok) say(it.addedToast);
   };
-  const catOf = (c: FavorCat) => favorCats.find((x) => x.id === c)!;
+  const pick = (k: IdeaKind) => (setKind(k), setShown(20), setQ(""), setFc("all"), setPrice(0));
+  const meta = ideaKinds.find((k) => k.kind === kind)!;
+
   return (
-    <div className="space-y-4">
-      <p className="text-[14px] font-semibold text-[var(--qd-primary)]">{it.count(num(favorIdeas.length))}</p>
-      <input type="search" value={q} onChange={(e) => (setQ(e.target.value), setShown(24))} placeholder={it.search} aria-label={it.search} className="h-12 w-full rounded-full border border-[var(--qd-line)] bg-[var(--qd-paper)] px-5 text-[15px] outline-none focus:border-[var(--qd-primary)]" />
-      <div className="qd-scroll-x -mx-4 flex gap-2 overflow-x-auto px-4">
-        {[{ id: "all" as const, ar: it.allCats, en: it.allCats, color: "#d9cfc4" }, ...favorCats].map((c) => (
-          <button key={c.id} type="button" aria-pressed={fc === c.id} onClick={() => (setFc(c.id), setShown(24))} className={cx("flex h-10 shrink-0 items-center gap-2 rounded-full px-4 text-[13.5px] font-semibold", fc === c.id ? "bg-[var(--qd-primary)] text-white" : "bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
-            <span className="size-2.5 rounded-full" style={{ background: c.color }} />
-            {lang === "ar" ? c.ar : c.en}
-          </button>
-        ))}
+    <div className="space-y-5">
+      <header className="flex items-center gap-3">
+        <BabyMascot size={58} theme={plan.profile?.theme} mood="celebrate" />
+        <div>
+          <h1 className="text-[1.6rem] font-extrabold leading-tight">{it.title}</h1>
+          <p className="text-[14px] text-[var(--qd-muted)]">{it.totalCount(num(allIdeas.length))}</p>
+        </div>
+      </header>
+
+      {/* Kinds as friendly tiles */}
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+        {ideaKinds.map((k) => {
+          const on = k.kind === kind;
+          return (
+            <motion.button key={k.kind} type="button" whileTap={reduce ? undefined : { scale: 0.95 }} aria-pressed={on} onClick={() => pick(k.kind)} className={cx("flex flex-col items-center gap-1 rounded-[20px] border-2 px-1 py-2.5 text-center transition-colors", on ? "border-[var(--qd-primary)] bg-[var(--qd-paper)]" : "border-transparent bg-[var(--qd-paper)]/70")}>
+              <span className="grid size-10 place-items-center rounded-full text-[20px]" style={{ background: `color-mix(in oklab, ${k.color} 40%, var(--qd-paper))` }}>{k.emoji}</span>
+              <span className="text-[12.5px] font-bold leading-tight">{ar ? k.ar : k.en}</span>
+              <span className="text-[11px] text-[var(--qd-muted)]">{num(allIdeas.filter((x) => x.kind === k.kind).length)}</span>
+            </motion.button>
+          );
+        })}
       </div>
-      <div className="flex gap-2">
-        {([0, 1, 2, 3] as const).map((p) => (
-          <button key={p} type="button" aria-pressed={price === p} onClick={() => (setPrice(p), setShown(24))} className={cx("h-9 rounded-full px-3.5 text-[13px] font-semibold", price === p ? "bg-[var(--qd-ink)] text-white" : "bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
-            {p === 0 ? it.anyPrice : it.price[p]}
-          </button>
-        ))}
+
+      <div className="relative">
+        <MagnifyingGlassIcon size={18} className="pointer-events-none absolute start-4 top-1/2 -translate-y-1/2 text-[var(--qd-muted)]" />
+        <input type="search" value={q} onChange={(e) => (setQ(e.target.value), setShown(20))} placeholder={it.search} aria-label={it.search} className="h-12 w-full rounded-full border border-[var(--qd-line)] bg-[var(--qd-paper)] ps-11 pe-5 text-[15px] outline-none focus:border-[var(--qd-primary)]" />
       </div>
+
+      {kind === "favor" && (
+        <div className="space-y-2">
+          <div className="qd-scroll-x -mx-4 flex gap-2 overflow-x-auto px-4">
+            {[{ id: "all" as const, ar: it.allCats, en: it.allCats, color: "#d9cfc4" }, ...favorCats].map((c) => (
+              <button key={c.id} type="button" aria-pressed={fc === c.id} onClick={() => (setFc(c.id), setShown(20))} className={cx("flex h-9 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-[13px] font-semibold", fc === c.id ? "bg-[var(--qd-primary)] text-white" : "bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
+                <span className="size-2 rounded-full" style={{ background: c.color }} />
+                {ar ? c.ar : c.en}
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            {([0, 1, 2, 3] as const).map((p) => (
+              <button key={p} type="button" aria-pressed={price === p} onClick={() => (setPrice(p), setShown(20))} className={cx("h-8 rounded-full px-3 text-[12.5px] font-semibold", price === p ? "bg-[var(--qd-ink)] text-white" : "bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
+                {p === 0 ? it.anyPrice : it.price[p]}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {list.length === 0 ? (
         <p className="py-8 text-center text-[15px] text-[var(--qd-muted)]">{it.none}</p>
       ) : (
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {list.slice(0, shown).map((b) => {
-            const sid = style[b.id] ?? favorStyles[0].id;
-            const done = plan.favors.some((f) => f.type === nameOf(b, sid).slice(0, 80));
-            const c = catOf(b.cat);
-            return (
-              <li key={b.id} className="qd-card min-w-0 rounded-[22px] p-4">
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 grid size-11 shrink-0 place-items-center rounded-[14px]" style={{ background: `color-mix(in oklab, ${c.color} 45%, var(--qd-paper))`, color: `color-mix(in oklab, ${c.color} 35%, #3b3346)` }}>
-                    <GiftIcon size={22} weight="fill" />
-                  </span>
+        <ul className="grid gap-2.5 sm:grid-cols-2">
+          <AnimatePresence initial={false}>
+            {list.slice(0, shown).map((x, i) => {
+              const done = has(x);
+              const note = ar ? x.arNote : x.enNote;
+              const cat = x.cat ? favorCats.find((c) => c.id === x.cat) : undefined;
+              return (
+                <motion.li key={x.id} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { delay: Math.min(i, 10) * 0.025 } }} className="qd-card flex min-w-0 items-center gap-3 rounded-[20px] p-3.5">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-[14px] text-[19px]" style={{ background: `color-mix(in oklab, ${cat?.color ?? meta.color} 40%, var(--qd-paper))` }}>{meta.emoji}</span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-[15.5px] font-bold leading-snug">{text(b)}</p>
-                    <p className="mt-0.5 text-[12px] text-[var(--qd-muted)]">{lang === "ar" ? c.ar : c.en} · {it.price[b.price]}</p>
+                    <p className={cx("font-bold leading-snug", x.kind === "thanks" ? "text-[14px]" : "text-[15px]")}>{text(x)}</p>
+                    {(note || x.price || cat) && <p className="mt-0.5 truncate text-[12px] text-[var(--qd-muted)]">{[note, cat && (ar ? cat.ar : cat.en), x.price && it.price[x.price]].filter(Boolean).join(" · ")}</p>}
                   </div>
-                </div>
-                <p className="mt-3 text-[12px] font-semibold text-[var(--qd-ink-soft)]">{it.way}</p>
-                <div className="mt-1.5 flex flex-wrap gap-1.5">
-                  {favorStyles.map((st) => (
-                    <button key={st.id} type="button" aria-pressed={sid === st.id} onClick={() => setStyle((m) => ({ ...m, [b.id]: st.id }))} className={cx("rounded-full border px-3 py-1.5 text-[12px]", sid === st.id ? "border-[var(--qd-primary)] bg-[var(--qd-tint)] font-semibold text-[var(--qd-primary-deep)]" : "border-[var(--qd-line)] bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
-                      {lang === "ar" ? st.ar : st.en}
-                    </button>
-                  ))}
-                </div>
-                {access.canEdit && (
-                  <button type="button" disabled={done} onClick={() => add(b)} className={cx("mt-3 inline-flex h-9 items-center gap-1 rounded-full px-3.5 text-[13px] font-bold", done ? "bg-[var(--qd-sage-soft)] text-[var(--qd-sage)]" : "bg-[var(--qd-primary)] text-white")}>
-                    {done ? <CheckIcon size={14} weight="bold" /> : <PlusIcon size={14} weight="bold" />}
-                    {done ? it.added : it.addFavor}
-                  </button>
-                )}
-              </li>
-            );
-          })}
+                  {access.canEdit && (
+                    <motion.button whileTap={reduce ? undefined : { scale: 0.85 }} type="button" disabled={done} onClick={() => add(x)} aria-label={done ? it.added : `${t.common.add}: ${text(x)}`} title={done ? it.added : t.common.add} className={cx("grid size-10 shrink-0 place-items-center rounded-full transition-colors", done ? "bg-[var(--qd-sage-soft)] text-[var(--qd-sage)]" : "bg-[var(--qd-primary)] text-white")}>
+                      {done ? <CheckIcon size={18} weight="bold" /> : <PlusIcon size={18} weight="bold" />}
+                    </motion.button>
+                  )}
+                </motion.li>
+              );
+            })}
+          </AnimatePresence>
         </ul>
       )}
       {list.length > shown && (
-        <button type="button" onClick={() => setShown((n) => n + 24)} className="mx-auto block h-11 rounded-full border border-[var(--qd-line)] bg-[var(--qd-paper)] px-6 text-[14px] font-semibold">
+        <button type="button" onClick={() => setShown((n) => n + 20)} className="mx-auto block h-11 rounded-full border border-[var(--qd-line)] bg-[var(--qd-paper)] px-6 text-[14px] font-semibold">
           {it.more} ({num(list.length - shown)})
         </button>
       )}
+      <p className="text-[12.5px] text-[var(--qd-muted)]">{it.note}</p>
     </div>
   );
 }

@@ -56,6 +56,7 @@ const ar = {
     arrivedAsk: "وصل صغيرك؟", arrivedYes: "نعم، وصل صغيرنا", arrivedTitle: (n?: string) => (n ? `وصلت ${n} بالسلامة 🤍` : "وصل صغيرنا بالسلامة 🤍"), arrivedSub: "الحين وقت الراحة والزيارات والذكريات. خذي وقتك.", undoArrived: "تراجع",
     restTip: "راحتك أولًا. أي شي ثاني يقدر ينتظر.",
     bigLeft: (n: string) => `باقي ${n} يوم`, andSee: (b?: string) => (b ? `ونشوف ${b}` : "ونشوف صغيرنا"), readyPct: (p: string) => `${p} جاهزة`, nextStep: "خطوتك الجاية", allDone: "كل شي قريب خلص. وقت ترتاحين 🤍",
+    dash: { today: "اليوم لك", journey: "رحلتك للموعد", weeksLeft: (n: string) => `باقي ${n} أسبوع`, ready: "جاهزية", prep: "التجهيز", bag: "الشنطة", visits: "الزيارات", gifts: "الهدايا", favors: "التوزيعات", money: "الميزانية", reqs: (n: string) => `${n} طلب جديد`, reserved: (n: string) => `${n} محجوزة`, thanks: (n: string) => `${n} بانتظار الشكر`, favorsReady: (a: string, b: string) => `${a} من ${b} جاهزة`, spent: (a: string) => `${a} مدفوع`, noBudget: "بدون ميزانية محددة", idea: "فكرة اليوم ✨", another: "فكرة ثانية", open: "افتحي", now: "الآن", due: "الموعد" },
     tPrep: "أغراض البيبي", tBag: "شنطة المستشفى", tReception: "الاستقبال", tIdeas: "الهدايا والتوزيعات", tIdeasSub: "أفكار جاهزة ✨", ofN: (a: string, b: string) => `${a} من ${b}`, visitsN: (n: string) => `${n} زيارة مؤكدة`, soon: "قريبًا", all: "الكل",
   },
   prep: {
@@ -96,7 +97,7 @@ const ar = {
     export: "تصدير بياناتي", exportSub: "ملف JSON فيه كل بيانات المفكّرة.", del: "حذف بيانات المفكّرة", delSub: "يحذف بيانات «حكاية قدوم» فقط. حسابك في ون كليك ومشترياتك تبقى.", delConfirm: "متأكدة؟ بتنحذف كل بيانات المفكّرة وملفاتها وروابطها نهائيًا.", delDone: "انحذفت بيانات المفكّرة.", account: "حذف حساب ون كليك كامل يكون من صفحة حسابي.",
   },
   setup: {
-    welcome: "أهلًا فيك 🤍", welcomeSub: "خلّينا نرتّب استقبال صغيرك. أسئلة قليلة، وكلها تقدرين تغيرينها بعدين.", skip: "تخطي وابدئي بنسخة جاهزة", next: "التالي", back: "رجوع", start: "يلا نبدأ",
+    welcome: "أهلًا فيك 🤍", welcomeSub: "اختاري ولد ولا بنت، وكل شي ثاني جاهز لك.", genderQ: "صغيرك ولد ولا بنت؟", boy: "ولد", girl: "بنت", surprise: "مفاجأة", moreOpts: "خيارات إضافية (اختيارية)", ready: "جهّزنا لك القوائم والأفكار كلها، وتقدرين تعدلين أي شي.", skip: "تخطي وابدئي بنسخة جاهزة", next: "التالي", back: "رجوع", start: "يلا نبدأ",
     you: "وش تحبين نناديك؟", youPh: "مثال: أم راشد", baby: "اسم البيبي (أو اسم مؤقت)", babyPh: "اختياري", due: "الموعد المتوقع", dueHint: "اختياري. هو موعد متوقع، مو تأكيد.", first: "هذي أول تجربة أمومة لك؟",
     where: "الدولة والعملة", budget: "ميزانية تقريبية", budgetHint: "اختياري. تقدرين تتركينها.", experience: "وش تحبين تشملين؟", presets: { prep: "التجهيزات فقط", prepReception: "التجهيزات والاستقبال", full: "التجربة الكاملة", custom: "أختار الأقسام بنفسي" },
     reception: "نوع الاستقبال اللي تخططين له", receptionHint: "اختاري اللي يناسبك، أو لا شي.", look: "اختاري الثيم", nurseryQ: "للبيبي غرفة أو ركن؟", done: "جاهزين! 🤍",
@@ -104,7 +105,7 @@ const ar = {
   ideasT: {
     title: "أفكار حلوة 🎁", sub: "اختاري اللي يعجبك وأضيفيه بضغطة.", baby: "هدايا للبيبي", favor: "توزيعات", mother: "هدايا للأم",
     addGift: "أضيفيها للقائمة", addFavor: "أضيفيها للتوزيعات", added: "مضافة", addedToast: "انضافت 🤍", price: { 1: "سعر بسيط", 2: "سعر متوسط", 3: "سعر أعلى" },
-    note: "الأسعار تقريبية وتختلف حسب المكان. ما فيه روابط متاجر أو إعلانات.", count: (n: string) => `${n} فكرة توزيعات`, search: "ابحثي في الأفكار", allCats: "الكل", anyPrice: "أي سعر", more: "عرض المزيد", way: "طريقة التقديم", none: "ما لقينا شي بهالبحث.",
+    note: "الأسعار تقريبية وتختلف حسب المكان. ما فيه روابط متاجر أو إعلانات.", count: (n: string) => `${n} فكرة توزيعات`, totalCount: (n: string) => `${n} فكرة مختلفة، أضيفي أي وحدة بضغطة`, search: "ابحثي في الأفكار", allCats: "الكل", anyPrice: "أي سعر", more: "عرض المزيد", way: "طريقة التقديم", none: "ما لقينا شي بهالبحث.",
   },
   pub: {
     giftsTitle: (n: string) => `قائمة هدايا ${n}`, giftsSub: "شكرًا على محبتكم. اختاروا هدية واحجزوها حتى ما تتكرر.", reserve: "احجزي / احجز", reserveQty: "الكمية", yourName: "اسمك (اختياري)", hideName: "إخفاء اسمي عن الأم", reserveBtn: "تأكيد الحجز",
@@ -172,6 +173,7 @@ const en: Widen<QCopy> = {
     arrivedAsk: "Has your little one arrived?", arrivedYes: "Yes, our little one is here", arrivedTitle: (n?: string) => (n ? `${n} has arrived safely 🤍` : "Our little one has arrived safely 🤍"), arrivedSub: "Now it's time for rest, visits and memories. Take your time.", undoArrived: "Undo",
     restTip: "Your rest comes first. Everything else can wait.",
     bigLeft: (n: string) => `${n} days to go`, andSee: (b?: string) => (b ? `until we meet ${b}` : "until we meet our little one"), readyPct: (p: string) => `${p} ready`, nextStep: "Your next step", allDone: "Nothing due soon. Time to rest 🤍",
+    dash: { today: "Today for you", journey: "Your journey to the date", weeksLeft: (n: string) => `${n} weeks to go`, ready: "Ready", prep: "Preparations", bag: "Bag", visits: "Visits", gifts: "Gifts", favors: "Favors", money: "Budget", reqs: (n: string) => `${n} new requests`, reserved: (n: string) => `${n} reserved`, thanks: (n: string) => `${n} to thank`, favorsReady: (a: string, b: string) => `${a} of ${b} ready`, spent: (a: string) => `${a} paid`, noBudget: "No budget set", idea: "Idea of the day ✨", another: "Another idea", open: "Open", now: "Now", due: "Due" },
     tPrep: "Baby things", tBag: "Hospital bag", tReception: "Welcome", tIdeas: "Gifts & favors", tIdeasSub: "Ready ideas ✨", ofN: (a: string, b: string) => `${a} of ${b}`, visitsN: (n: string) => `${n} confirmed visits`, soon: "Coming up", all: "All",
   },
   prep: {
@@ -212,7 +214,7 @@ const en: Widen<QCopy> = {
     export: "Export my data", exportSub: "A JSON file with all your planner data.", del: "Delete planner data", delSub: "Deletes Hikayat Qudoom data only. Your OneClick account and purchases stay.", delConfirm: "Are you sure? All planner data, files and links will be deleted for good.", delDone: "Planner data deleted.", account: "Deleting your whole OneClick account happens from My account.",
   },
   setup: {
-    welcome: "Welcome 🤍", welcomeSub: "Let's get ready for your little one. A few questions, all changeable later.", skip: "Skip and start with a ready plan", next: "Next", back: "Back", start: "Let's begin",
+    welcome: "Welcome 🤍", welcomeSub: "Pick boy or girl, and everything else is ready for you.", genderQ: "Is your little one a boy or a girl?", boy: "Boy", girl: "Girl", surprise: "Surprise", moreOpts: "More options (optional)", ready: "Lists and ideas are all set up for you, and you can change anything.", skip: "Skip and start with a ready plan", next: "Next", back: "Back", start: "Let's begin",
     you: "What should we call you?", youPh: "e.g. Rashid's mum", baby: "Baby's name (or a nickname)", babyPh: "Optional", due: "Expected date", dueHint: "Optional. It's an expected date, not a confirmation.", first: "Is this your first time as a mum?",
     where: "Country and currency", budget: "Rough budget", budgetHint: "Optional. You can leave it.", experience: "What would you like to include?", presets: { prep: "Preparations only", prepReception: "Preparations and welcome", full: "The full experience", custom: "I'll pick sections myself" },
     reception: "Which welcomes are you planning?", receptionHint: "Pick what suits you, or none.", look: "Choose your theme", nurseryQ: "A room or a corner for the baby?", done: "All set! 🤍",
@@ -220,7 +222,7 @@ const en: Widen<QCopy> = {
   ideasT: {
     title: "Lovely ideas 🎁", sub: "Pick what you like and add it with one tap.", baby: "Gifts for baby", favor: "Favors", mother: "Gifts for mum",
     addGift: "Add to the list", addFavor: "Add to favors", added: "Added", addedToast: "Added 🤍", price: { 1: "Budget-friendly", 2: "Mid-range", 3: "Splurge" },
-    note: "Prices vary by place. No store links or ads.", count: (n: string) => `${n} favor ideas`, search: "Search ideas", allCats: "All", anyPrice: "Any price", more: "Show more", way: "How to present it", none: "Nothing matches that search.",
+    note: "Prices vary by place. No store links or ads.", count: (n: string) => `${n} favor ideas`, totalCount: (n: string) => `${n} different ideas, add any with one tap`, search: "Search ideas", allCats: "All", anyPrice: "Any price", more: "Show more", way: "How to present it", none: "Nothing matches that search.",
   },
   pub: {
     giftsTitle: (n: string) => `${n}'s gift list`, giftsSub: "Thank you for your love. Pick a gift and reserve it so it isn't duplicated.", reserve: "Reserve", reserveQty: "Quantity", yourName: "Your name (optional)", hideName: "Hide my name from the mum", reserveBtn: "Confirm reservation",

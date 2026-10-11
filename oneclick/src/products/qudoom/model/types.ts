@@ -18,6 +18,9 @@ export const currencyDigits: Record<Currency, number> = { OMR: 3, KWD: 3, BHD: 3
 export type Country = "OM" | "SA" | "AE" | "KW" | "BH" | "QA" | "other";
 
 export type ThemeId = "cloud" | "moon" | "garden" | "pearl";
+export type BabyGender = "boy" | "girl" | "surprise";
+/** The colour theme follows the baby: girl → pink (cloud), boy → navy (moon), surprise → neutral (garden). */
+export const themeFor = (g?: BabyGender): ThemeId => (g === "boy" ? "moon" : g === "girl" ? "cloud" : "garden");
 export type SectionId = "prep" | "bag" | "nursery" | "mother" | "reception" | "visits" | "hospitality" | "registry" | "received" | "favors" | "budget" | "calendar" | "memories";
 export const allSections: SectionId[] = ["prep", "bag", "nursery", "mother", "reception", "visits", "hospitality", "registry", "received", "favors", "budget", "calendar", "memories"];
 export type ExperiencePreset = "prep" | "prepReception" | "full" | "custom";
@@ -38,6 +41,8 @@ export type Profile = {
   sections: Record<SectionId, boolean>;
   receptionKinds: ReceptionKind[];
   theme: ThemeId;
+  /** Sets the colours: a boy in navy, a girl in pink, a surprise in calm neutrals. */
+  babyGender?: BabyGender;
   nurseryKind: "room" | "corner";
   /** Set by the mother herself ("وصل صغيرنا"), never automatically from the due date. */
   arrived?: { date?: string };

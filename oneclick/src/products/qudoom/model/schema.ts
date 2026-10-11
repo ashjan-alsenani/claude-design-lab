@@ -38,6 +38,7 @@ export const profileSchema = z.object({
   sections: z.record(section, z.boolean()),
   receptionKinds: z.array(receptionKind).check(z.maxLength(5)),
   theme: z.enum(["cloud", "moon", "garden", "pearl"]),
+  babyGender: opt(z.enum(["boy", "girl", "surprise"])),
   nurseryKind: z.enum(["room", "corner"]),
   arrived: opt(z.object({ date: opt(date) })),
   createdAt: z.string().check(z.maxLength(40)),

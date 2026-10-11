@@ -5,8 +5,8 @@ import { useState } from "react";
 import { DownloadSimpleIcon, GearSixIcon, TrashIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { parseMoney, toMajor } from "../model/engine";
-import { allSections, type Country, type Currency, type ReceptionKind, type ThemeId } from "../model/types";
-import { ThemeArt } from "../ui/Art";
+import { allSections, themeFor, type Country, type Currency, type ReceptionKind } from "../model/types";
+import { Clicky } from "@/components/brand/Clicky";
 import { Button, Card, ChoiceCard, Field, PageHeader, SectionTitle, Toggle, cx, inputCls, useConfirm } from "../ui/kit";
 import { countries, currencies, sectionLabel } from "./Setup";
 import { groups } from "../constants";
@@ -71,14 +71,17 @@ export function SettingsPage({ switchHref }: { switchHref: string }) {
         </div>
       </Card>
       <Card className="space-y-3 p-4 sm:p-5">
-        <SectionTitle title={t.settings.theme} />
-        <div role="radiogroup" className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {(["cloud", "moon", "garden", "pearl"] as ThemeId[]).map((th) => (
-            <button key={th} type="button" role="radio" aria-checked={p.theme === th} onClick={() => set({ theme: th })} data-theme={th} className={cx("qd overflow-hidden rounded-[18px] border-2 text-start", p.theme === th ? "border-[var(--qd-primary)]" : "border-[var(--qd-line)]")}>
-              <div className="h-16 bg-[var(--qd-tint)]"><ThemeArt theme={th} className="size-full" /></div>
-              <p className="px-3 py-2 text-[13.5px] font-semibold">{t.settings.themes[th]}</p>
-            </button>
-          ))}
+        <SectionTitle title={t.setup.genderQ} />
+        <div role="radiogroup" className="grid grid-cols-3 gap-2.5">
+          {([["boy", t.setup.boy, "#9db7dd"], ["girl", t.setup.girl, "#f2b8c6"], ["surprise", t.setup.surprise, "#c9d6b8"]] as const).map(([g, label, color]) => {
+            const on = (p.babyGender ?? (p.theme === "moon" ? "boy" : p.theme === "garden" ? "surprise" : "girl")) === g;
+            return (
+              <button key={g} type="button" role="radio" aria-checked={on} onClick={() => set({ babyGender: g, theme: themeFor(g) })} className={cx("flex flex-col items-center gap-1.5 rounded-[20px] border-2 py-3 transition-colors", on ? "border-[var(--qd-primary)] bg-[var(--qd-tint)]" : "border-transparent bg-[var(--qd-tint-2)]")}>
+                <Clicky size={40} color={color} accessory={g === "girl" ? "bow" : "baby"} mood={on ? "love" : "happy"} />
+                <span className="text-[14.5px] font-bold">{label}</span>
+              </button>
+            );
+          })}
         </div>
       </Card>
       <Card className="space-y-4 p-4 sm:p-5">

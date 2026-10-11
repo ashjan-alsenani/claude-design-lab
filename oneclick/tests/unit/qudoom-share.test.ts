@@ -62,3 +62,13 @@ describe("helpers", () => {
     expect(helperMayTouch(plan, { t: "del", c: "items", id: hidden.id }, ["prep"])).toBe(false);
   });
 });
+
+describe("ideas library", () => {
+  it("every idea is distinct, in both languages", async () => {
+    const { allIdeas } = await import("@/products/qudoom/model/all-ideas");
+    expect(allIdeas.length).toBeGreaterThan(600);
+    expect(new Set(allIdeas.map((x) => x.ar)).size).toBe(allIdeas.length);
+    expect(new Set(allIdeas.map((x) => x.en)).size).toBe(allIdeas.length);
+    expect(new Set(allIdeas.map((x) => x.id)).size).toBe(allIdeas.length);
+  });
+});
