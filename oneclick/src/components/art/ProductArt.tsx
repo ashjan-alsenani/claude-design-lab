@@ -1,13 +1,13 @@
 import type { ArtId, Hue } from "@/content/types";
 import { hueVar } from "@/lib/hues";
-import { Clicky } from "@/components/brand/Clicky";
+import { Clicky, type ClickyMood } from "@/components/brand/Clicky";
 
 /**
  * Original spot illustrations, one per product family. Flat, rounded, colorful shapes in the
  * brand palette; a product-colored Clicky peeks in. Decorative (aria-hidden).
  */
-export function ProductArt({ hue, art, className = "", clicky = true }: { hue: Hue; art?: ArtId; className?: string; clicky?: boolean }) {
-  const c = hueVar(hue);
+export function ProductArt({ hue, art, className = "", clicky = true, color, mood }: { hue: Hue; art?: ArtId; className?: string; clicky?: boolean; color?: string; mood?: ClickyMood }) {
+  const c = color ?? hueVar(hue);
   const scene = art ?? hue;
   return (
     <div className={`${/\b(absolute|fixed)\b/.test(className) ? "" : "relative"} ${className}`} aria-hidden="true">
@@ -22,7 +22,7 @@ export function ProductArt({ hue, art, className = "", clicky = true }: { hue: H
       </svg>
       {clicky && (
         <div className="absolute bottom-[4%] end-[6%] w-[24%]">
-          <Clicky size={100} color={c} mood={moods[hue]} animate sparkle={false} style={{ width: "100%", height: "auto" }} />
+          <Clicky size={100} color={c} mood={mood ?? moods[hue]} animate sparkle={false} style={{ width: "100%", height: "auto" }} />
         </div>
       )}
     </div>

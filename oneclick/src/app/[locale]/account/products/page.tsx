@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { productLook, toneSoft } from "@/content/product-looks";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRightIcon, DownloadSimpleIcon, WarningCircleIcon } from "@phosphor-icons/react/dist/ssr";
@@ -113,7 +114,7 @@ export default async function MyProductsPage({ params, searchParams }: Props) {
             return (
               <li key={license.id} className="flex min-w-0 flex-col overflow-hidden rounded-[var(--radius-xl)] border border-line bg-surface shadow-soft">
                 <div className="h-32 bg-bg-sunken">
-                  <ProductArt hue={product.hue} art={product.art} className="h-full w-full" />
+                  <ProductArt hue={product.hue} art={product.art} color={productLook(product).color} mood={productLook(product).mood} className="h-full w-full" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <div className="flex items-start justify-between gap-3">

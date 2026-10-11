@@ -9,6 +9,9 @@
 - "Meet the Clicky family" section on the home page; each member at their post across the site
   (`FamilyMascot`); the purchase party is the whole family.
 - Clicky's arms and legs follow the page ink, so they stay visible in dark mode.
+- Every product has its own color (19, spread around the color wheel), its own icon and its own
+  Clicky mood (`src/content/product-looks.ts`): product cards, product pages, checkout, the home
+  parade, My Products and the product app screen. Collections keep their shared hue.
 
 ## 0.14.1 — 2026-10-11 — Purchase party
 - After a successful purchase Clicky throws a party: a 6 s routine (bounce and wave, shoulder shimmy, disco point, hat flies off and lands back, spin), party hat, arms

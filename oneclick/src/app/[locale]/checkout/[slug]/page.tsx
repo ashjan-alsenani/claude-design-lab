@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { productLook, toneSoft } from "@/content/product-looks";
 import { notFound } from "next/navigation";
 import { EnvelopeSimpleIcon, LockSimpleIcon, PlugsIcon } from "@phosphor-icons/react/dist/ssr";
 import { isLocale, tr } from "@/i18n/config";
@@ -6,10 +7,8 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { catalog } from "@/lib/data/catalog";
 import { getPaymentProvider } from "@/lib/payments";
 import { formatMoney } from "@/lib/money";
-import { hueSoft, hueVar } from "@/lib/hues";
 import { pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/ui/PageHeader";
-import { ProductIcon } from "@/components/product/ProductIcon";
 import { FamilyMascot } from "@/components/brand/FamilyMascot";
 import { NotifyForm } from "@/components/product/NotifyForm";
 import { CheckoutTracker } from "@/components/product/CheckoutTracker";
@@ -106,8 +105,8 @@ export default async function CheckoutPage({ params }: Props) {
             {d.checkout.summary}
           </h2>
           <div className="mt-4 flex items-center gap-3">
-            <span className="grid size-12 place-items-center rounded-[14px]" style={{ background: hueSoft(product.hue, 18), color: hueVar(product.hue) }}>
-              <ProductIcon hue={product.hue} size={24} />
+            <span className="grid size-12 place-items-center rounded-[14px]" style={{ background: toneSoft(productLook(product).color, 18), color: productLook(product).color }}>
+              {(() => { const G = productLook(product).icon; return <G size={24} weight="duotone" />; })()}
             </span>
             <div className="flex-1">
               <p className="font-semibold text-ink">{name}</p>

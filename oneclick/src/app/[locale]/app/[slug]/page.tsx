@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { productLook, toneSoft } from "@/content/product-looks";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
@@ -40,7 +41,7 @@ export default async function ProductAppPage({ params }: Props) {
   if (!access.allowed) return <AccessDenied locale={locale} reason={access.decision.reason} productSlug={product.slug} />;
   const { ctx, decision } = access;
 
-  const color = hueVar(product.hue);
+  const color = productLook(product).color;
   return (
     <div className="mx-auto max-w-6xl px-4 pb-10 pt-6 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -62,7 +63,7 @@ export default async function ProductAppPage({ params }: Props) {
           <DemoById id={product.demo} locale={locale} hue={product.hue} />
         ) : (
           <section className="flex flex-col items-center rounded-[var(--radius-xl)] border border-line bg-surface px-6 py-12 text-center">
-            <ProductArt hue={product.hue} art={product.art} className="h-48 w-72 max-w-full" />
+            <ProductArt hue={product.hue} art={product.art} color={color} mood={productLook(product).mood} className="h-48 w-72 max-w-full" />
             <h2 className="mt-4 text-xl font-semibold text-ink">{t.viewer.workspaceTitle}</h2>
             <p className="mt-2 max-w-md text-ink-soft">{t.viewer.workspaceBody}</p>
           </section>

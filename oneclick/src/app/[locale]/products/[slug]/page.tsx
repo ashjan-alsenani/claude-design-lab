@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { productLook, toneSoft } from "@/content/product-looks";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRightIcon, CheckCircleIcon, DevicesIcon, GlobeHemisphereEastIcon, InfoIcon, KeyIcon, PackageIcon, ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr";
@@ -7,7 +8,7 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { catalog } from "@/lib/data/catalog";
 import { products as allProducts } from "@/content/products";
 import { formatMoney, minorUnitDigits, toMajor } from "@/lib/money";
-import { hueSoft, hueText, hueVar } from "@/lib/hues";
+import { inkTint } from "@/lib/hues";
 import { breadcrumbJsonLd, faqJsonLd, localeUrl, pageMetadata, siteUrl } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/ui/PageHeader";
 import { ButtonLink } from "@/components/ui/Button";
@@ -15,7 +16,6 @@ import { FaqList } from "@/components/ui/Faq";
 import { Reveal } from "@/components/ui/Reveal";
 import { DemoById } from "@/components/demos/DemoById";
 import { ProductCard } from "@/components/product/ProductCard";
-import { ProductIcon } from "@/components/product/ProductIcon";
 import { ProductArt } from "@/components/art/ProductArt";
 import { FavoriteButton } from "@/components/product/FavoriteButton";
 import { ProductViewTracker } from "@/components/product/ProductViewTracker";
@@ -45,7 +45,9 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound();
   const d = getDictionary(locale);
   const related = await catalog.related(product);
-  const hue = hueVar(product.hue);
+  const look = productLook(product);
+  const hue = look.color;
+  const Glyph = look.icon;
   const name = tr(product.name, locale);
   const home = locale === "ar" ? "الرئيسية" : "Home";
   const isFree = product.price === null;
@@ -72,15 +74,15 @@ export default async function ProductPage({ params }: Props) {
     <article>
       <ProductViewTracker productId={product.id} />
       {/* HERO */}
-      <section className="relative overflow-hidden" style={{ background: `linear-gradient(180deg, ${hueSoft(product.hue, 10)} 0%, var(--oc-bg) 100%)` }}>
+      <section className="relative overflow-hidden" style={{ background: `linear-gradient(180deg, ${toneSoft(look.color, 10)} 0%, var(--oc-bg) 100%)` }}>
         <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-8 sm:px-6 md:pt-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:px-8 lg:pb-24">
           <div>
             <Breadcrumbs items={[{ href: `/${locale}`, label: home }, { href: `/${locale}/products`, label: d.catalog.title }, { label: name }]} />
             <div className="mt-8 flex items-center gap-3">
               <span className="grid size-12 place-items-center rounded-[14px] bg-surface-raised shadow-soft" style={{ color: hue }}>
-                <ProductIcon hue={product.hue} size={26} />
+                <Glyph size={26} weight="duotone" />
               </span>
-              <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ color: hueText(product.hue), background: hueSoft(product.hue, 16) }}>
+              <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ color: inkTint(look.color), background: toneSoft(look.color, 16) }}>
                 {d.status[product.status]}
               </span>
               {product.sample && <span className="rounded-full border border-line-strong px-3 py-1 text-xs font-medium text-muted">{d.common.sample}</span>}
@@ -123,8 +125,8 @@ export default async function ProductPage({ params }: Props) {
               )}
             </div>
           ) : (
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-xl)]" style={{ background: hueSoft(product.hue, 18) }}>
-              <ProductArt hue={product.hue} art={product.art} className="absolute inset-6" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-xl)]" style={{ background: toneSoft(look.color, 18) }}>
+              <ProductArt hue={product.hue} art={product.art} color={look.color} mood={look.mood} className="absolute inset-6" />
               <p className="absolute bottom-5 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rounded-full bg-surface-raised px-4 py-1.5 text-sm font-semibold text-ink shadow-soft">{d.common.comingSoon}</p>
             </div>
           )}

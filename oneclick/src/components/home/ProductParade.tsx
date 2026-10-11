@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { productLook, toneSoft } from "@/content/product-looks";
 import type { Product } from "@/content/types";
 import { tr, type Locale } from "@/i18n/config";
-import { hueSoft, hueVar } from "@/lib/hues";
 import { Clicky } from "@/components/brand/Clicky";
 
 /**
@@ -16,9 +16,9 @@ export function ProductParade({ products, locale }: { products: Product[]; local
           href={`/${locale}/products/${p.slug}`}
           tabIndex={hidden ? -1 : undefined}
           className="flex items-center gap-2.5 whitespace-nowrap rounded-full border-2 bg-surface-raised py-2 pe-5 ps-2 text-[0.95rem] font-semibold text-ink shadow-soft transition-transform duration-300 ease-[var(--ease-bounce)] hover:-translate-y-1 hover:-rotate-2"
-          style={{ borderColor: hueSoft(p.hue, 45), background: hueSoft(p.hue, 10) }}
+          style={{ borderColor: toneSoft(productLook(p).color, 45), background: toneSoft(productLook(p).color, 10) }}
         >
-          <Clicky size={34} color={hueVar(p.hue)} mood={(["happy", "wink", "love", "celebrate"] as const)[i % 4]} sparkle={false} />
+          <Clicky size={34} color={productLook(p).color} mood={productLook(p).mood} sparkle={false} />
           {tr(p.name, locale).replace(/^(One Click|ون كليك) /, "")}
         </Link>
       </li>
