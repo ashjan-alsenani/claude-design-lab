@@ -2,8 +2,8 @@
  * Clicky's purchase-party dance: the logo mascot in a party hat doing a 6-second routine on a loop:
  * bounce and wave → shoulder shimmy → disco point → the hat flies off and lands back → a full spin. Pure SVG + CSS (globals.css, `.dc-*`), no JavaScript;
  * under prefers-reduced-motion it stands still, happy, in its hat.
- * Friends: the same mark in other brand colors. `delay` starts the routine at a different point
- * (a multiple of the 0.5 s beat keeps everyone on the beat) and `mirror` flips the moves.
+ * Friends: the same mark in other brand colors, each with its own `move`. `delay` shifts the start
+ * (multiples of the 0.5 s beat keep everyone on the beat) and `mirror` flips left and right.
  */
 const INK = "#1E1B3A";
 const BODY = "M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z";
@@ -15,15 +15,18 @@ const cheeks = (
   </g>
 );
 
-type Props = { size?: number; color?: string; hat?: string; delay?: number; mirror?: boolean; notes?: boolean; className?: string };
+/** Each friend has its own dance: hip wiggle, shimmy + backflip, head-bang jumps, or "get low". */
+export type DanceMove = "party" | "booty" | "flip" | "headbang" | "low";
+type Props = { size?: number; color?: string; hat?: string; delay?: number; mirror?: boolean; notes?: boolean; move?: DanceMove; className?: string };
 
-export function DancingClicky({ size = 170, color = "#12B5A6", hat = "#8B7CF6", delay = 0, mirror = false, notes = true, className = "" }: Props) {
+export function DancingClicky({ size = 170, color = "#12B5A6", hat = "#8B7CF6", delay = 0, mirror = false, notes = true, move = "party", className = "" }: Props) {
   const id = `dc-body-${color.replace(/[^a-z0-9]/gi, "")}`;
   return (
     <div
       aria-hidden="true"
-      className={`dc-stage relative ${className}`}
-      style={{ width: size, height: size * 1.25, ["--dcd" as string]: `${-delay}s`, transform: mirror ? "scaleX(-1)" : undefined }}
+      className={`dc-stage dc-move-${move} relative ${className}`}
+      // --dcs scales the whole party down on small screens (set by the parent row).
+      style={{ width: `calc(var(--dcs, 1) * ${size}px)`, height: `calc(var(--dcs, 1) * ${size * 1.25}px)`, ["--dcd" as string]: `${-delay}s`, transform: mirror ? "scaleX(-1)" : undefined }}
     >
       <div className="dc-shadow absolute bottom-[2%] left-1/2 h-[6%] w-[46%] -translate-x-1/2 rounded-[50%] bg-[color-mix(in_oklab,var(--oc-ink)_18%,transparent)]" />
       <div className="dc-bounce absolute inset-0">

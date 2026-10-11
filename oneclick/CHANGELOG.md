@@ -3,8 +3,9 @@
 ## 0.14.1 — 2026-10-11 — Purchase party
 - After a successful purchase Clicky throws a party: a 6 s routine (bounce and wave, shoulder shimmy, disco point, hat flies off and lands back, spin), party hat, arms
   up, kicks and a full spin every few beats, with rounds of confetti and floating music notes.
-  Clicky dances with its friends (the same mark in coral, pink, lilac and sunshine; two on phones,
-  four on wider screens), each starting the routine on a different beat. CSS-only dance
+  Clicky dances with four friends (the same mark in coral, pink, lilac and sunshine), each with its
+  own dance: hip wiggle, shoulder shimmy + backflip, head-bang jumps, and "get low" then spring up.
+  All five fit on phones (the row scales down). CSS-only dance
   (`DancingClicky`), static and calm under reduced motion.
 
 ## 0.14.0 — 2026-10-10 — Faster pages, instant clicks, Clicky cursor, safer saves
