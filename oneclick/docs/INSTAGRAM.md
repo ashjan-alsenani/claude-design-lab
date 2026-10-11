@@ -52,3 +52,8 @@ Expected requirements: Instagram Professional account linked to a Facebook Page,
 the content-publishing permission approved, long-lived tokens stored as server secrets, media at
 public HTTPS URLs, rate limits per 24 h. The `social_posts` table stores status, attempts and
 last error so nothing is silently lost.
+
+## Launch row captions (post in this order: post-1, post-2, post-3; images in `docs/instagram/launch/site/`)
+1. جهد أقل. ✨ / يومك فيه مهام كثيرة: مقاضي، ميزانية، دراسة، رمضان، ترتيب البيت، مهام الأطفال… والقائمة تطول. / في ون كليك سوّينا لكل مهمة أداة رقمية مرتبة، تفتحها من جوالك وتخلّصها بضغطة وحدة. / وهذي البداية بس، والكثير جاي 💚 / #ون_كليك #OneClick #تنظيم #مخطط #عمان
+2. هلا والله 👋 أنا كليكي، وهذي ون كليك. / علامة رقمية من سلطنة عُمان 🇴🇲 نصمم مخططات ومنظّمات تفاعلية بالعربي والإنجليزي، عشان يومك يصير أسهل وأحلى. / جرّب أي منتج قبل لا تشتريه، والرابط في البايو 🔗 / #ون_كليك #OneClick #صنع_في_عمان #مخططات_رقمية #عمان
+3. حياة أكثر 💛 / لما تخف عليك المهام، يصير عندك وقت أكثر لك ولأهلك. / تعرّفوا على عائلة كليكي، كل واحد منهم يساعدك في جزء من الموقع: 💚 كليكي يعرّفك على المنتجات · 💗 توت تحفظ لك المفضلة وتفرح معك وقت الشراء · 💛 شمس تشاركك النصايح والأدلة · ❤️ مرجان يساعدك إذا احتجت شي · 💜 ليلك يحمي حسابك / مين فيهم عجبك أكثر؟ قولوا لنا في التعليقات 👇 / #ون_كليك #OneClick #عائلة_كليكي #تنظيم_الوقت #عمان
