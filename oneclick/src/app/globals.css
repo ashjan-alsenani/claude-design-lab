@@ -482,17 +482,17 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 .dc-note { opacity: 0; pointer-events: none; }
 .dc-note-0 { left: 4%; top: 30%; } .dc-note-1 { right: 2%; top: 22%; } .dc-note-2 { left: 14%; top: 8%; } .dc-note-3 { right: 12%; top: 46%; }
 @media (prefers-reduced-motion: no-preference) {
-  .dc-bounce { animation: dc-bounce .5s cubic-bezier(.3,0,.4,1) infinite; }
-  .dc-shadow { animation: dc-shadow .5s cubic-bezier(.3,0,.4,1) infinite; }
-  .dc-jump { transform-origin: 50% 95%; animation: dc-jump 6s linear infinite; }
-  .dc-shimmy { transform-origin: 50% 80%; animation: dc-shimmy 6s steps(1, end) infinite; }
-  .dc-sway { transform-origin: 50% 90%; animation: dc-sway 6s ease-in-out infinite; }
-  .dc-spin { transform-origin: 50% 55%; animation: dc-spin 6s cubic-bezier(.5,0,.3,1) infinite; }
-  .dc-arm-l { animation: dc-arm-l 6s ease-in-out infinite; }
-  .dc-arm-r { animation: dc-arm-r 6s ease-in-out infinite; }
-  .dc-leg-l { animation: dc-leg-l 6s ease-in-out infinite; }
-  .dc-leg-r { animation: dc-leg-r 6s ease-in-out infinite; }
-  .dc-hat { animation: dc-hat 6s ease-in-out infinite; }
+  .dc-bounce { animation: dc-bounce .5s cubic-bezier(.3,0,.4,1) var(--dcd, 0s) infinite; }
+  .dc-shadow { animation: dc-shadow .5s cubic-bezier(.3,0,.4,1) var(--dcd, 0s) infinite; }
+  .dc-jump { transform-origin: 50% 95%; animation: dc-jump 6s linear var(--dcd, 0s) infinite; }
+  .dc-shimmy { transform-origin: 50% 80%; animation: dc-shimmy 6s steps(1, end) var(--dcd, 0s) infinite; }
+  .dc-sway { transform-origin: 50% 90%; animation: dc-sway 6s ease-in-out var(--dcd, 0s) infinite; }
+  .dc-spin { transform-origin: 50% 55%; animation: dc-spin 6s cubic-bezier(.5,0,.3,1) var(--dcd, 0s) infinite; }
+  .dc-arm-l { animation: dc-arm-l 6s ease-in-out var(--dcd, 0s) infinite; }
+  .dc-arm-r { animation: dc-arm-r 6s ease-in-out var(--dcd, 0s) infinite; }
+  .dc-leg-l { animation: dc-leg-l 6s ease-in-out var(--dcd, 0s) infinite; }
+  .dc-leg-r { animation: dc-leg-r 6s ease-in-out var(--dcd, 0s) infinite; }
+  .dc-hat { animation: dc-hat 6s ease-in-out var(--dcd, 0s) infinite; }
   .dc-note { animation: dc-note 2.4s ease-out infinite; }
   .dc-note-1 { animation-delay: .6s; } .dc-note-2 { animation-delay: 1.2s; } .dc-note-3 { animation-delay: 1.8s; }
 }

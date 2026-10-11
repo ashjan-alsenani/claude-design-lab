@@ -26,9 +26,16 @@ export default async function CheckoutDonePage({ params, searchParams }: { param
       <SandboxBanner locale={locale} />
       {r === "succeeded" ? (
         // A successful purchase gets a party: Clicky dances while confetti rains.
+        // Clicky and its friends (the same mark in other brand colors) dance together.
         <div className="relative">
           <PurchaseParty />
-          <DancingClicky />
+          <div className="flex items-end justify-center">
+            <DancingClicky size={78} color="#8B7CF6" hat="#FFC23D" delay={3} notes={false} className="-me-3 hidden sm:block" />
+            <DancingClicky size={98} color="#FF6B6B" hat="#12B5A6" delay={1.5} mirror notes={false} className="-me-2" />
+            <DancingClicky size={150} className="z-10" />
+            <DancingClicky size={98} color="#F0567A" hat="#8B7CF6" delay={4.5} notes={false} className="-ms-2" />
+            <DancingClicky size={78} color="#E0A500" hat="#FF6B6B" delay={2} mirror notes={false} className="-ms-3 hidden sm:block" />
+          </div>
         </div>
       ) : (
         <Clicky size={130} mood={mood} body animate className="mx-auto" />
