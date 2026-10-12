@@ -8,6 +8,7 @@ import { useQ } from "../app/state";
 import { bagProgress, budget, daysBetween, itemDone, progress, upcoming, type CalEntry } from "../model/engine";
 import { allIdeas } from "../model/all-ideas";
 import { BabyMascot } from "../ui/Mascot";
+import { useSteps } from "./Steps";
 import { cx } from "../ui/kit";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -65,6 +66,8 @@ export function Home() {
   const h = t.home;
   const d = h.dash;
   const prog = progress(plan);
+  const { list: stepList, done: stepDoneList, current: stepNow } = useSteps();
+  const stepDone = stepDoneList.filter(Boolean).length;
   const next = upcoming(plan, today, lang, 3);
   const arrived = !!p.arrived;
   const daysLeft = p.dueDate ? daysBetween(today, p.dueDate) : undefined;
@@ -162,6 +165,19 @@ export function Home() {
             {h.undoArrived}
           </button>
         )}
+      </motion.section>
+
+      {/* Step by step: where she is now */}
+      <motion.section variants={card}>
+        <Link href={href("steps")} className="group relative flex items-center gap-4 overflow-hidden rounded-[28px] bg-[var(--qd-primary)] p-5 text-white">
+          <span className="pointer-events-none absolute -end-6 -top-8 size-28 rounded-full bg-white/10" />
+          <span className="relative grid size-14 shrink-0 place-items-center rounded-full bg-white/15 text-[1.4rem] font-extrabold">{num(Math.min(stepNow + 1, stepList.length))}</span>
+          <span className="relative min-w-0 flex-1">
+            <span className="block text-[12.5px] font-semibold opacity-80">{t.nav.steps} · {lang === "ar" ? `${num(stepDone)} من ${num(stepList.length)}` : `${num(stepDone)} of ${num(stepList.length)}`}</span>
+            <span className="block text-[17px] font-extrabold leading-snug">{stepNow < stepList.length ? (lang === "ar" ? stepList[stepNow].ar[0] : stepList[stepNow].en[0]) : lang === "ar" ? "خلصتي كل الخطوات 🎉" : "All steps done 🎉"}</span>
+          </span>
+          <motion.span aria-hidden="true" className="relative text-[22px]" animate={reduce ? undefined : { x: lang === "ar" ? [0, -5, 0] : [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity }}>{lang === "ar" ? "←" : "→"}</motion.span>
+        </Link>
       </motion.section>
 
       {/* Today */}

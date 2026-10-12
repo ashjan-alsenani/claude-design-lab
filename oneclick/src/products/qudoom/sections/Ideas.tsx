@@ -7,6 +7,11 @@ import { useQ } from "../app/state";
 import { allIdeas, favorCats, ideaKinds, type AnyIdea, type IdeaKind } from "../model/all-ideas";
 import type { FavorCat } from "../model/favor-ideas";
 import { BabyMascot } from "../ui/Mascot";
+import { FavorArt } from "../ui/Illustrations";
+
+/** Each favor gets its own colour variation so the drawings don't all look alike. */
+const tints = ["#e8a5b5", "#a9c1dc", "#c9b8e0", "#efd28f", "#bcd3b3", "#f2a07b", "#7fb8e6", "#d9b38c", "#5fb9a0", "#d96aa4"];
+const favorTint = (id: string, base: string) => { let h = 0; for (const c of id) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h) % 3 === 0 ? base : tints[Math.abs(h) % tints.length]; };
 import { cx } from "../ui/kit";
 
 /**
@@ -113,7 +118,11 @@ export function IdeasPage() {
               const cat = x.cat ? favorCats.find((c) => c.id === x.cat) : undefined;
               return (
                 <motion.li key={x.id} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { delay: Math.min(i, 10) * 0.025 } }} className="qd-card flex min-w-0 items-center gap-3 rounded-[20px] p-3.5">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-[14px] text-[19px]" style={{ background: `color-mix(in oklab, ${cat?.color ?? meta.color} 40%, var(--qd-paper))` }}>{meta.emoji}</span>
+                  {x.kind === "favor" && x.cat ? (
+                    <FavorArt cat={x.cat} color={favorTint(x.id, cat?.color ?? meta.color)} className="size-16 shrink-0" />
+                  ) : (
+                    <span className="grid size-10 shrink-0 place-items-center rounded-[14px] text-[19px]" style={{ background: `color-mix(in oklab, ${cat?.color ?? meta.color} 40%, var(--qd-paper))` }}>{meta.emoji}</span>
+                  )}
                   <div className="min-w-0 flex-1">
                     <p className={cx("font-bold leading-snug", x.kind === "thanks" ? "text-[14px]" : "text-[15px]")}>{text(x)}</p>
                     {(note || x.price || cat) && <p className="mt-0.5 truncate text-[12px] text-[var(--qd-muted)]">{[note, cat && (ar ? cat.ar : cat.en), x.price && it.price[x.price]].filter(Boolean).join(" · ")}</p>}

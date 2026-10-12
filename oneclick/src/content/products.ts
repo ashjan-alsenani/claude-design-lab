@@ -114,7 +114,7 @@ export const products: Product[] = [
     kind: "interactive",
     // The owner decides the price and how long access lasts; until then it can't be bought.
     access: "lifetime",
-    status: "preview",
+    status: "coming-soon",
     price: null,
     pricePending: true,
     categories: ["family-kids"],

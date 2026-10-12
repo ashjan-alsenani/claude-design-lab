@@ -4,15 +4,16 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowCounterClockwiseIcon, BabyIcon, BagIcon, BedIcon, CalendarHeartIcon, CardsIcon, CloudCheckIcon, CloudSlashIcon, CoffeeIcon, DotsThreeOutlineIcon, GearSixIcon,
-  GiftIcon, HandHeartIcon, HeartIcon, LightbulbIcon, HouseSimpleIcon, ImagesIcon, ShareNetworkIcon, SignOutIcon, SparkleIcon, StarIcon, UsersThreeIcon, WalletIcon, type Icon,
+  GiftIcon, HandHeartIcon, HeartIcon, LightbulbIcon, MapTrifoldIcon, PaletteIcon, HouseSimpleIcon, ImagesIcon, ShareNetworkIcon, SignOutIcon, SparkleIcon, StarIcon, UsersThreeIcon, WalletIcon, type Icon,
 } from "@phosphor-icons/react";
 import { useQ } from "./state";
 import { groups, pages, type PageKey } from "../constants";
 import { BabyMascot } from "../ui/Mascot";
+import { Logo } from "@/components/brand/Logo";
 import { Button, cx } from "../ui/kit";
 
 export const pageIcons: Record<PageKey, Icon> = {
-  "": HouseSimpleIcon, items: BabyIcon, bag: BagIcon, nursery: BedIcon, mother: HandHeartIcon, events: StarIcon, visits: UsersThreeIcon, hospitality: CoffeeIcon,
+  "": HouseSimpleIcon, steps: MapTrifoldIcon, looks: PaletteIcon, items: BabyIcon, bag: BagIcon, nursery: BedIcon, mother: HandHeartIcon, events: StarIcon, visits: UsersThreeIcon, hospitality: CoffeeIcon,
   favors: SparkleIcon, ideas: LightbulbIcon, registry: GiftIcon, received: HeartIcon, budget: WalletIcon, calendar: CalendarHeartIcon, memories: ImagesIcon, cards: CardsIcon, share: ShareNetworkIcon, settings: GearSixIcon, more: DotsThreeOutlineIcon,
 };
 const groupIcons = { home: HouseSimpleIcon, prep: BabyIcon, reception: StarIcon, gifts: GiftIcon, more: DotsThreeOutlineIcon };
@@ -21,7 +22,7 @@ export function usePageLabel() {
   const { t, plan } = useQ();
   return (p: PageKey) => {
     if (p === "nursery" && plan.profile?.nurseryKind === "corner") return t.nav.nurseryCorner;
-    const map: Record<PageKey, string> = { "": t.nav.home, items: t.nav.items, bag: t.nav.bag, nursery: t.nav.nursery, mother: t.nav.mother, events: t.nav.events, visits: t.nav.visits, hospitality: t.nav.hospitality, favors: t.nav.favors, ideas: t.nav.ideas, registry: t.nav.registry, received: t.nav.received, budget: t.nav.budget, calendar: t.nav.calendar, memories: t.nav.memories, cards: t.nav.cards, share: t.nav.share, settings: t.nav.settings, more: t.nav.more };
+    const map: Record<PageKey, string> = { "": t.nav.home, steps: t.nav.steps, looks: t.nav.looks, items: t.nav.items, bag: t.nav.bag, nursery: t.nav.nursery, mother: t.nav.mother, events: t.nav.events, visits: t.nav.visits, hospitality: t.nav.hospitality, favors: t.nav.favors, ideas: t.nav.ideas, registry: t.nav.registry, received: t.nav.received, budget: t.nav.budget, calendar: t.nav.calendar, memories: t.nav.memories, cards: t.nav.cards, share: t.nav.share, settings: t.nav.settings, more: t.nav.more };
     return map[p];
   };
 }
@@ -39,7 +40,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
   const label = usePageLabel();
   const visible = usePageVisible();
   const group = groups.find((g) => g.pages.includes(page))?.key ?? "home";
-  const tabs = group === "home" || group === "more" ? [] : groups.find((g) => g.key === group)!.pages.filter(visible);
+  const tabs = group === "more" ? [] : groups.find((g) => g.key === group)!.pages.filter(visible);
   const [online, setOnline] = useState(true);
   useEffect(() => {
     const up = () => setOnline(true), down = () => setOnline(false);
@@ -73,9 +74,12 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
       <div className="relative">
       <header className="qd-noprint relative z-30">
         <div className="mx-auto flex h-16 max-w-3xl items-center gap-2 px-4 sm:px-6">
-          <Link href={href()} className="flex min-w-0 items-center gap-2">
-            <BabyMascot size={34} theme={plan.profile?.theme} animate={false} />
-            <span className="truncate font-bold">{mode === "helper" && access.ownerName ? t.top.helperOf(access.ownerName) : t.brand}</span>
+          <Link href={href()} className="flex min-w-0 items-center gap-2" aria-label={t.brand}>
+            <Logo locale={lang} className="shrink-0 [&>span:last-child]:text-[1.15rem] [&_svg]:size-8" />
+            <span className="flex min-w-0 items-center gap-1 rounded-full bg-[var(--qd-tint)] py-0.5 pe-3 ps-1 text-[13px] font-bold text-[var(--qd-primary-deep)]">
+              <BabyMascot size={24} theme={plan.profile?.theme} animate={false} />
+              <span className="truncate">{mode === "helper" && access.ownerName ? t.top.helperOf(access.ownerName) : t.brand}</span>
+            </span>
           </Link>
           <span className="flex-1" />
           <SaveBadge state={saveState} retry={retry} mode={mode} />

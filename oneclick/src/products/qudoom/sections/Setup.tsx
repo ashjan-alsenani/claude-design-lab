@@ -68,9 +68,9 @@ export function Setup() {
   };
 
   const options: { g: BabyGender; label: string; color: string; theme: ThemeId }[] = [
-    { g: "boy", label: s.boy, color: "#9db7dd", theme: "moon" },
-    { g: "girl", label: s.girl, color: "#f2b8c6", theme: "cloud" },
-    { g: "surprise", label: s.surprise, color: "#c9d6b8", theme: "garden" },
+    { g: "boy", label: s.boy, color: "#7ea6dc", theme: "moon" },
+    { g: "girl", label: s.girl, color: "#ff9fb8", theme: "cloud" },
+    { g: "surprise", label: s.surprise, color: "#12b5a6", theme: "garden" },
   ];
 
   return (
@@ -95,7 +95,7 @@ export function Setup() {
                 whileTap={reduce ? undefined : { scale: 0.95 }}
                 className={cx("flex flex-col items-center gap-1.5 rounded-[22px] border-2 px-2 py-3 transition-colors", gender === o.g ? "border-[var(--qd-primary)] bg-[var(--qd-tint)]" : "border-transparent bg-[var(--qd-tint-2)]")}
               >
-                <Clicky size={44} color={o.color} accessory={o.g === "girl" ? "bow" : "baby"} mood={gender === o.g ? "love" : "happy"} />
+                <Clicky size={44} color={o.color} accessory={o.g === "girl" ? "bow" : o.g === "boy" ? "cap" : "baby"} mood={gender === o.g ? "love" : "happy"} />
                 <span className="text-[15px] font-bold">{o.label}</span>
               </motion.button>
             ))}

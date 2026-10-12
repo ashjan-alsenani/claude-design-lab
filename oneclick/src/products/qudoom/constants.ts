@@ -6,6 +6,8 @@ export const QUDOOM_SLUG = "hikayat-qudoom";
 /** URL segment → the section it belongs to (for access checks and hiding switched-off sections). */
 export const pages = {
   "": null,
+  steps: null,
+  looks: "reception",
   items: "prep",
   bag: "bag",
   nursery: "nursery",
@@ -29,9 +31,9 @@ export type PageKey = keyof typeof pages;
 export const pageKeys = Object.keys(pages) as PageKey[];
 
 export const groups: { key: "home" | "prep" | "reception" | "gifts" | "more"; pages: PageKey[] }[] = [
-  { key: "home", pages: [""] },
+  { key: "home", pages: ["", "steps"] },
   { key: "prep", pages: ["items", "bag", "nursery", "mother"] },
-  { key: "reception", pages: ["events", "visits", "hospitality", "favors"] },
+  { key: "reception", pages: ["looks", "events", "visits", "hospitality", "favors"] },
   { key: "gifts", pages: ["ideas", "registry", "received"] },
   { key: "more", pages: ["more", "budget", "calendar", "memories", "cards", "share", "settings"] },
 ];

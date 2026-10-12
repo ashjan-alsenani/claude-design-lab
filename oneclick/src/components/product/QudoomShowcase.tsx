@@ -10,63 +10,6 @@ import { Clicky } from "@/components/brand/Clicky";
  */
 const C = "#E07A9A";
 
-export function QudoomPreview({ locale }: { locale: Locale }) {
-  const ar = locale === "ar";
-  const rows = ar
-    ? [
-        { icon: BabyIcon, t: "أغراض البيبي", v: "١٨ من ٢٤" },
-        { icon: BagIcon, t: "شنطة المستشفى", v: "جاهزة تقريبًا" },
-        { icon: UsersThreeIcon, t: "الزيارات", v: "طلب جديد" },
-        { icon: GiftIcon, t: "قائمة الهدايا", v: "٣ محجوزة" },
-      ]
-    : [
-        { icon: BabyIcon, t: "Baby things", v: "18 of 24" },
-        { icon: BagIcon, t: "Hospital bag", v: "Almost ready" },
-        { icon: UsersThreeIcon, t: "Visits", v: "1 new request" },
-        { icon: GiftIcon, t: "Gift list", v: "3 reserved" },
-      ];
-  return (
-    <div id="demo" className="scroll-mt-24">
-      <div className="relative mx-auto max-w-[380px] rounded-[36px] border border-line bg-surface-raised p-3 shadow-soft" aria-label={ar ? "معاينة مرسومة للمفكّرة ببيانات تجريبية" : "Drawn preview of the planner with sample data"} role="img">
-        <div className="rounded-[28px] p-5" style={{ background: `linear-gradient(180deg, ${C}1f 0%, transparent 70%)` }}>
-          <div className="flex items-end justify-between gap-3">
-            <div>
-              <p className="text-xs font-medium text-muted">{ar ? "بيانات تجريبية" : "Sample data"}</p>
-              <p className="mt-1 text-xl font-semibold text-ink">{ar ? "يا هلا أم سلمى 🤍" : "Hello, Salma's mum 🤍"}</p>
-            </div>
-            <Clicky size={64} color="#7cc4ff" accessory="baby" body />
-          </div>
-          <div className="mt-4 flex items-center gap-4">
-            <svg viewBox="0 0 64 64" className="size-20 shrink-0 -rotate-90" aria-hidden="true">
-              <circle cx="32" cy="32" r="27" fill="none" stroke={`${C}33`} strokeWidth="8" />
-              <circle cx="32" cy="32" r="27" fill="none" stroke={C} strokeWidth="8" strokeLinecap="round" strokeDasharray={`${2 * Math.PI * 27 * 0.64} 999`} />
-            </svg>
-            <div>
-              <p className="text-2xl font-semibold tabular text-ink">{ar ? "٦٤٪" : "64%"}</p>
-              <p className="text-sm text-ink-soft">{ar ? "باقي تقريبًا ٣٥ يوم على الموعد المتوقع" : "About 35 days to the expected date"}</p>
-            </div>
-          </div>
-          <ul className="mt-5 space-y-2">
-            {rows.map((r) => (
-              <li key={r.t} className="flex items-center gap-3 rounded-2xl bg-surface px-3 py-2.5">
-                <span className="grid size-9 place-items-center rounded-xl" style={{ background: `${C}1f`, color: C }}>
-                  <r.icon size={18} weight="duotone" />
-                </span>
-                <span className="flex-1 text-sm font-medium text-ink">{r.t}</span>
-                <span className="text-xs text-muted">{r.v}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <Link href={`/${locale}/demo/hikayat-qudoom`} className="mt-5 flex items-center justify-center gap-1.5 text-sm font-semibold text-primary hover:underline">
-        {ar ? "افتحي العرض التجريبي الكامل (بيانات وهمية، ما ينحفظ شي)" : "Open the full demo (fictional data, nothing is saved)"}
-        <ArrowRightIcon size={15} className="rtl:rotate-180" />
-      </Link>
-    </div>
-  );
-}
-
 export function QudoomStory({ locale }: { locale: Locale }) {
   const ar = locale === "ar";
   const journey = ar
@@ -164,5 +107,32 @@ export function QudoomStory({ locale }: { locale: Locale }) {
         </div>
       </section>
     </>
+  );
+}
+
+/** What's inside, as short cute points under the description. */
+export function QudoomBullets({ locale }: { locale: Locale }) {
+  const ar = locale === "ar";
+  const items: [string, string, string][] = [
+    ["🗺️", "خطوة بخطوة: تعرفين من وين تبدين ووش بعدها", "Step by step: where to start and what's next"],
+    ["🏠", "لوحة وحدة توريك كل شي: الأيام الباقية والجاهزية", "One dashboard for everything: days left and readiness"],
+    ["🧸", "أغراض البيبي وغرفته، بقوائم جاهزة", "Baby things and nursery, with ready lists"],
+    ["👜", "شنطة المستشفى: لك وللبيبي وللمرافقة", "Hospital bag: for you, baby and your companion"],
+    ["🎈", "١٠٠٠ شكل مرسوم لاستقبال البيبي", "1,000 illustrated welcome looks"],
+    ["🎀", "مئات أفكار التوزيعات بصورها", "Hundreds of favor ideas, each drawn"],
+    ["🎁", "قائمة هدايا يحجز منها الأهل بدون تكرار", "A gift list family can reserve, no duplicates"],
+    ["☕", "حاسبة ضيافة وزيارات بمواعيد", "Hospitality calculator and visits by appointment"],
+    ["💗", "وردي لو بنت، كحلي لو ولد", "Pink for a girl, navy for a boy"],
+    ["🔒", "خاصة في حسابك، والمشاركة باختيارك", "Private to you; share only what you choose"],
+  ];
+  return (
+    <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+      {items.map(([e, a, en]) => (
+        <li key={e} className="flex items-center gap-2.5 rounded-2xl bg-surface-raised/80 px-3 py-2 text-[0.95rem] font-medium text-ink shadow-soft">
+          <span className="grid size-8 shrink-0 place-items-center rounded-full text-base" style={{ background: "color-mix(in oklab, #ff9fb8 22%, #fff)" }}>{e}</span>
+          {ar ? a : en}
+        </li>
+      ))}
+    </ul>
   );
 }

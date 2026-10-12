@@ -20,12 +20,13 @@ import { ProductArt } from "@/components/art/ProductArt";
 import { FavoriteButton } from "@/components/product/FavoriteButton";
 import { ProductViewTracker } from "@/components/product/ProductViewTracker";
 import { JsonLd } from "@/components/JsonLd";
-import { QudoomPreview, QudoomStory } from "@/components/product/QudoomShowcase";
+import { QudoomBullets, QudoomStory } from "@/components/product/QudoomShowcase";
+import { QudoomPreviewAnimated } from "@/components/product/QudoomPreviewAnimated";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 /** Products with a full interactive app also link to its public sample (nothing saved). */
-const fullDemo: Record<string, string> = { "bride-planner": "/demo/bride-planner", "hikayat-qudoom": "/demo/hikayat-qudoom" };
+const fullDemo: Record<string, string> = { "bride-planner": "/demo/bride-planner" };
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => allProducts.filter((p) => p.status !== "archived").map((p) => ({ locale, slug: p.slug })));
@@ -60,8 +61,8 @@ export default async function ProductPage({ params }: Props) {
 
   const primaryCta = isFree
     ? { href: "#demo", label: d.home.finalCta }
-    : pending && demoPath
-      ? { href: `/${locale}${demoPath}`, label: locale === "ar" ? "جرّبي العرض التجريبي" : "Try the demo" }
+    : pending
+      ? { href: "#preview", label: locale === "ar" ? "شوفي وش فيها" : "See what's inside" }
     : soon
       ? { href: `/${locale}/checkout/${product.slug}`, label: d.product.notifyMe }
       : product.status === "available"
@@ -95,6 +96,7 @@ export default async function ProductPage({ params }: Props) {
             <h1 className="mt-5 text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-[3.4rem] sm:leading-[1.05]">{name}</h1>
             <p className="mt-4 text-xl leading-snug text-ink-soft">{tr(product.tagline, locale)}</p>
             <p className="mt-5 max-w-[56ch] leading-relaxed text-ink-soft">{tr(product.summary, locale)}</p>
+            {product.slug === "hikayat-qudoom" && <QudoomBullets locale={locale} />}
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <div>
@@ -118,7 +120,7 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           {product.slug === "hikayat-qudoom" ? (
-            <QudoomPreview locale={locale} />
+            <QudoomPreviewAnimated locale={locale} />
           ) : product.demo ? (
             <div id="demo" className="scroll-mt-24">
               <h2 className="mb-3 text-sm font-medium text-ink-soft">{d.product.demo}</h2>

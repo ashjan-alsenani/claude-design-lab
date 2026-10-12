@@ -46,7 +46,9 @@ test("sales page: no price invented, no buy button, demo linked, both languages"
   await page.goto("/en/products/hikayat-qudoom");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Hikayat Qudoom");
   await expect(page.getByText("Price coming soon").first()).toBeVisible();
-  await expect(page.getByRole("link", { name: "Try the demo" })).toHaveAttribute("href", "/en/demo/hikayat-qudoom");
+  await expect(page.getByRole("link", { name: "See what's inside" })).toHaveAttribute("href", "#preview");
+  // The moving preview plays by itself (no demo app).
+  await expect(page.locator("#preview")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Your privacy first" })).toBeVisible();
   await page.goto("/ar/products/hikayat-qudoom");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("حكاية قدوم");
@@ -56,27 +58,8 @@ test("sales page: no price invented, no buy button, demo linked, both languages"
   expect((await page.request.get("/ar/checkout/hikayat-qudoom")).status()).toBe(404);
 });
 
-test("demo: fictional data, edits stay in the tab, reset brings the sample back, no real links", async ({ page }) => {
-  await page.goto("/en/demo/hikayat-qudoom");
-  await expect(page.getByText("Demo with fictional data")).toBeVisible();
-  await expect(page.getByText("Salma's mum", { exact: false }).first()).toBeVisible();
-  // Ready ideas: one tap adds a gift to the list and a favor to the favors plan.
-  await page.goto("/en/demo/hikayat-qudoom/ideas");
-  await expect(page.getByRole("heading", { name: /Lovely ideas/ })).toBeVisible();
-  await page.getByRole("button", { name: /Gifts for baby/ }).click();
-  await page.getByRole("button", { name: /^Add: / }).first().click();
-  await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible();
-  await page.getByRole("button", { name: /^🎀/ }).click();
-  await page.getByRole("button", { name: /^Add: / }).first().click();
-  await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible();
-  await page.goto("/en/demo/hikayat-qudoom/share");
-  await expect(page.getByText("In the demo you only see how it looks")).toBeVisible();
-  // Nothing from the demo is ever sent to the server: no server-action POSTs.
-  const posts: string[] = [];
-  page.on("request", (r) => r.method() === "POST" && posts.push(r.url()));
-  await page.goto("/en/demo/hikayat-qudoom/bag");
-  await page.waitForLoadState("networkidle");
-  expect(posts).toEqual([]);
+test("no demo: the old demo address is gone", async ({ page }) => {
+  expect((await page.request.get("/en/demo/hikayat-qudoom")).status()).toBe(404);
 });
 
 test("licensed app: protected, set up, saved on the server; gift link + visit booking with DB-checked limits", async ({ page, browser, isMobile }) => {
@@ -99,6 +82,27 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await expect(page.getByText("Noor's mum").first()).toBeVisible();
   await saved(page);
 
+  // Step by step and the welcome looks are there from the start.
+  await page.goto("/en/app/hikayat-qudoom/steps");
+  await expect(page.getByText("Start here").first()).toBeVisible();
+  await page.goto("/en/app/hikayat-qudoom/looks");
+  await expect(page.getByText("1,000 illustrated looks", { exact: false })).toBeVisible();
+  // Ready ideas: one tap adds a gift to the list and a favor to the favors plan.
+  await page.goto("/en/app/hikayat-qudoom/ideas");
+  await expect(page.getByRole("heading", { name: /Lovely ideas/ })).toBeVisible();
+  await expect(async () => {
+    await page.getByRole("button", { name: /Gifts for baby/ }).click();
+    await expect(page.getByRole("button", { name: /Gifts for baby/ })).toHaveAttribute("aria-pressed", "true", { timeout: 2000 });
+  }).toPass({ timeout: 20_000 });
+  await expect(async () => {
+    await page.getByRole("button", { name: /^Add: / }).first().click();
+    await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 20_000 });
+  await page.getByRole("button", { name: /^🎀/ }).click();
+  await expect(async () => {
+    await page.getByRole("button", { name: /^Add: / }).first().click();
+    await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 20_000 });
   // A gift with exactly one left.
   await page.goto("/en/app/hikayat-qudoom/registry");
   const dlg = page.getByRole("dialog");
@@ -127,7 +131,7 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await a.p.goto(new URL(giftPath, page.url()).href);
   await b.p.goto(new URL(giftPath, page.url()).href);
   for (const g of [a.p, b.p]) {
-    await g.getByRole("button", { name: "Reserve", exact: true }).click();
+    await g.getByRole("listitem").filter({ hasText: "Baby monitor" }).getByRole("button", { name: "Reserve", exact: true }).click();
   }
   await Promise.all([a.p.getByRole("button", { name: "Confirm reservation" }).click(), b.p.getByRole("button", { name: "Confirm reservation" }).click()]);
   await a.p.waitForTimeout(1500);
@@ -143,7 +147,7 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await expect(winner.getByText("Thank you! Your purchase is recorded.")).toBeVisible();
   // The public page shows no guest names.
   await loser.reload();
-  await expect(loser.getByText("Every gift is reserved right now")).toBeVisible();
+  await expect(loser.getByRole("listitem").filter({ hasText: "Baby monitor" })).toHaveCount(0);
   await a.ctx.close();
   await b.ctx.close();
 

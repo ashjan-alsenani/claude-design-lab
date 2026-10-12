@@ -7,7 +7,7 @@ import type { CSSProperties } from "react";
  * Animations are CSS only (globals.css) and stop under prefers-reduced-motion.
  */
 export type ClickyMood = "happy" | "wink" | "celebrate" | "think" | "love" | "surprised";
-export type ClickyAccessory = "bulb" | "shield" | "heart" | "chat" | "baby" | "bow";
+export type ClickyAccessory = "bulb" | "shield" | "heart" | "chat" | "baby" | "bow" | "cap";
 
 const INK = "#1E1B3A";
 const BODY = "M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z";
@@ -193,6 +193,16 @@ function Accessory({ kind }: { kind: ClickyAccessory }) {
     case "baby":
       // A newborn: just one soft hair curl on top.
       return <path d="M50 7 C46 -2 56 -5 57 1 C58 6 51 6 52 2" fill="none" stroke={INK} strokeWidth="3.5" strokeLinecap="round" />;
+    case "cap":
+      // A newborn's soft knitted cap with a pompom (for a baby boy).
+      return (
+        <g>
+          <path d="M22 26 C24 4 76 4 78 26 Z" fill="#2C4E86" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
+          <path d="M19 27 Q50 19 81 27 L80 33 Q50 25 20 33 Z" fill="#9DBBE8" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
+          <circle cx="50" cy="3" r="6" fill="#9DBBE8" stroke={INK} strokeWidth="2.5" />
+          <path d="M36 12 Q38 9 41 10 M58 10 Q61 9 63 12" stroke="#9DBBE8" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+        </g>
+      );
     case "bow":
       return (
         <g>

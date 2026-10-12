@@ -73,11 +73,11 @@ export function SettingsPage({ switchHref }: { switchHref: string }) {
       <Card className="space-y-3 p-4 sm:p-5">
         <SectionTitle title={t.setup.genderQ} />
         <div role="radiogroup" className="grid grid-cols-3 gap-2.5">
-          {([["boy", t.setup.boy, "#9db7dd"], ["girl", t.setup.girl, "#f2b8c6"], ["surprise", t.setup.surprise, "#c9d6b8"]] as const).map(([g, label, color]) => {
+          {([["boy", t.setup.boy, "#7ea6dc"], ["girl", t.setup.girl, "#ff9fb8"], ["surprise", t.setup.surprise, "#12b5a6"]] as const).map(([g, label, color]) => {
             const on = (p.babyGender ?? (p.theme === "moon" ? "boy" : p.theme === "garden" ? "surprise" : "girl")) === g;
             return (
               <button key={g} type="button" role="radio" aria-checked={on} onClick={() => set({ babyGender: g, theme: themeFor(g) })} className={cx("flex flex-col items-center gap-1.5 rounded-[20px] border-2 py-3 transition-colors", on ? "border-[var(--qd-primary)] bg-[var(--qd-tint)]" : "border-transparent bg-[var(--qd-tint-2)]")}>
-                <Clicky size={40} color={color} accessory={g === "girl" ? "bow" : "baby"} mood={on ? "love" : "happy"} />
+                <Clicky size={40} color={color} accessory={g === "girl" ? "bow" : g === "boy" ? "cap" : "baby"} mood={on ? "love" : "happy"} />
                 <span className="text-[14.5px] font-bold">{label}</span>
               </button>
             );
