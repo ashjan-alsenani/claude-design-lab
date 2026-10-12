@@ -67,7 +67,7 @@ function motif(l: Look, area: { x: number; y: number; w: number; h: number }) {
   const { x, y, w, h } = area;
   const at = (fx: number, fy: number) => [x + w * fx, y + h * fy] as const;
   const out: ReactNode[] = [];
-  switch (l.theme) {
+  switch (l.motif) {
     case "clouds":
       out.push(cloud(...at(0.12, 0.25), 0.9, "#fff", "c1"), cloud(...at(0.62, 0.15), 0.75, "#fff", "c2"), cloud(...at(0.4, 0.55), 0.6, "#fff", "c3"));
       out.push(star(...at(0.35, 0.2), 4, accent, "s1"), star(...at(0.85, 0.45), 3.5, accent, "s2"), star(...at(0.15, 0.65), 3, accent, "s3"));
@@ -114,6 +114,141 @@ function motif(l: Look, area: { x: number; y: number; w: number; h: number }) {
         out.push(<g key={`cd${i}`}><rect x={cx - 3} y={cy - 12} width="6" height="14" rx="2" fill="#fff" /><ellipse cx={cx} cy={cy - 15} rx="2.2" ry="3.4" fill={accent} /></g>);
       });
       break;
+    case "stars":
+      [[0.12, 0.2, 6], [0.3, 0.55, 4], [0.5, 0.18, 7], [0.7, 0.5, 5], [0.88, 0.22, 6], [0.2, 0.8, 3.5], [0.8, 0.8, 4]].forEach(([fx, fy, r], i) => out.push(star(...at(fx, fy), r, i % 2 ? accent : "#fff", `st${i}`)));
+      break;
+    case "palm": {
+      const palmAt = (fx: number, s: number, k: string) => {
+        const [px, py] = at(fx, 0.95);
+        return (
+          <g key={k} transform={`translate(${px} ${py}) scale(${s})`}>
+            <path d="M0 0 q-3 -30 2 -56" stroke="#a07a4f" strokeWidth="5" fill="none" strokeLinecap="round" />
+            {[-60, -25, 10, 45, 80, 120].map((a) => <path key={a} d="M2 -56 q16 -6 30 6" stroke={main} strokeWidth="5" fill="none" strokeLinecap="round" transform={`rotate(${a} 2 -56)`} />)}
+            <circle cx="2" cy="-50" r="3.5" fill={accent} /><circle cx="7" cy="-48" r="3" fill={accent} />
+          </g>
+        );
+      };
+      out.push(palmAt(0.18, 0.9, "p1"), palmAt(0.82, 0.75, "p2"));
+      break;
+    }
+    case "lantern":
+      [[0.15, 0.1, 1], [0.38, 0.05, 0.8], [0.62, 0.12, 0.9], [0.85, 0.04, 0.75]].forEach(([fx, fy, s], i) => {
+        const [lx, ly] = at(fx, fy);
+        out.push(
+          <g key={`ln${i}`} transform={`translate(${lx} ${ly}) scale(${s})`}>
+            <path d={`M0 0 V${14 + i * 6}`} stroke={INK} strokeOpacity=".35" />
+            <g transform={`translate(0 ${14 + i * 6})`}>
+              <path d="M-4 0 h8 l5 8 v16 l-5 8 h-8 l-5 -8 v-16 z" fill={i % 2 ? accent : main} />
+              <rect x="-3" y="9" width="6" height="12" rx="2" fill="#fff6d6" opacity=".9" />
+            </g>
+          </g>,
+        );
+      });
+      break;
+    case "dhow": {
+      const [dx, dy] = at(0.5, 0.62);
+      out.push(
+        <g key="dhow" transform={`translate(${dx} ${dy})`}>
+          <path d="M-40 6 q40 18 80 0 l6 -10 h-92 z" fill="#a07a4f" />
+          <path d="M-2 -4 V-52" stroke="#7b5a3a" strokeWidth="2.5" />
+          <path d="M0 -50 q30 18 26 42 h-26 z" fill="#fff" stroke={main} strokeWidth="1.5" />
+          <path d="M-4 -40 q-22 14 -20 32 h20 z" fill={accent} opacity=".85" />
+        </g>,
+      );
+      const [sx, sy] = at(0, 0.82);
+      out.push(<path key="wv" d={`M${sx} ${sy} q${w / 8} -6 ${w / 4} 0 t${w / 4} 0 t${w / 4} 0 t${w / 4} 0`} stroke={main} strokeWidth="2.5" fill="none" />);
+      break;
+    }
+    case "dunes": {
+      const [bx, by] = at(0, 0.65);
+      out.push(<path key="d1" d={`M${bx} ${by + 20} q${w * 0.25} -34 ${w * 0.5} -6 t${w * 0.5} -4 V${by + 40} H${bx} z`} fill={accent} opacity=".7" />);
+      out.push(<path key="d2" d={`M${bx} ${by + 30} q${w * 0.3} -20 ${w * 0.6} 0 t${w * 0.4} -6 V${by + 40} H${bx} z`} fill={main} opacity=".55" />);
+      const [sx, sy] = at(0.78, 0.2);
+      out.push(<circle key="sun" cx={sx} cy={sy} r="12" fill={accent} opacity=".9" />);
+      break;
+    }
+    case "pearls": {
+      for (let r = 0; r < 3; r++) {
+        const [px, py] = at(0.1, 0.18 + r * 0.22);
+        for (let i = 0; i < 9; i++) out.push(<circle key={`pr${r}-${i}`} cx={px + i * (w * 0.1)} cy={py + Math.sin(i / 1.4) * 6} r={3.4} fill="#fff" stroke={main} strokeOpacity=".35" />);
+      }
+      const [ox, oy] = at(0.82, 0.78);
+      out.push(<g key="oy"><path d={`M${ox - 16} ${oy} q16 -22 32 0 z`} fill={accent} /><circle cx={ox} cy={oy - 4} r="4.5" fill="#fff" /></g>);
+      break;
+    }
+    case "arch": {
+      const [ax, ay] = at(0.5, 0.95);
+      const aw = Math.min(w, h) * 0.6;
+      out.push(<path key="ar" d={`M${ax - aw / 2} ${ay} V${ay - h * 0.55} a${aw / 2} ${aw / 2} 0 0 1 ${aw} 0 V${ay}`} fill="none" stroke={main} strokeWidth="5" />);
+      out.push(<path key="ar2" d={`M${ax - aw / 2 + 8} ${ay} V${ay - h * 0.55} a${aw / 2 - 8} ${aw / 2 - 8} 0 0 1 ${aw - 16} 0 V${ay}`} fill="none" stroke={accent} strokeWidth="2" strokeDasharray="3 4" />);
+      break;
+    }
+    case "rainbow": {
+      const [rx, ry] = at(0.5, 0.85);
+      const cols = [main, accent, "#fff", main];
+      cols.forEach((c, i) => out.push(<path key={`rb${i}`} d={`M${rx - 44 + i * 7} ${ry} a${44 - i * 7} ${44 - i * 7} 0 0 1 ${88 - i * 14} 0`} stroke={c} strokeWidth="6" fill="none" opacity={i === 2 ? 0.9 : 0.85} />));
+      out.push(cloud(rx - 62, ry - 4, 0.7, "#fff", "rc1"), cloud(rx + 36, ry - 4, 0.7, "#fff", "rc2"));
+      break;
+    }
+    case "hotair":
+      [[0.22, 0.3, 1, main], [0.72, 0.2, 0.8, accent], [0.5, 0.55, 0.55, "#fff"]].forEach(([fx, fy, s, c], i) => {
+        const [hx, hy] = at(fx as number, fy as number);
+        out.push(
+          <g key={`ha${i}`} transform={`translate(${hx} ${hy}) scale(${s})`}>
+            <path d="M0 -20 c-16 0 -18 18 -6 28 l3 6 h6 l3 -6 c12 -10 10 -28 -6 -28z" fill={c as string} stroke={INK} strokeOpacity=".2" />
+            <path d="M-3 14 l1 6 M3 14 l-1 6" stroke={INK} strokeOpacity=".4" /><rect x="-4" y="20" width="8" height="6" rx="1.5" fill="#a07a4f" />
+          </g>,
+        );
+      });
+      break;
+    case "tent": {
+      const [tx, ty] = at(0.5, 0.95);
+      out.push(<path key="tn" d={`M${tx - 50} ${ty} L${tx} ${ty - 56} L${tx + 50} ${ty} z`} fill={main} />);
+      out.push(<path key="td" d={`M${tx - 12} ${ty} L${tx} ${ty - 30} L${tx + 12} ${ty} z`} fill={accent} />);
+      out.push(<path key="tf" d={`M${tx} ${ty - 56} v-12 l12 4 l-12 4`} fill={accent} stroke={INK} strokeOpacity=".3" />);
+      break;
+    }
+    case "dallah": {
+      const [cx, cy] = at(0.5, 0.75);
+      out.push(
+        <g key="dl" transform={`translate(${cx} ${cy})`}>
+          <path d="M-12 18 q-6 -20 4 -30 q-2 -10 8 -14 q10 4 8 14 q10 10 4 30 z" fill={accent} />
+          <path d="M12 -2 q18 -6 22 -18 l2 2 q-4 16 -22 22" fill={accent} />
+          <circle cx="0" cy="-28" r="4" fill={main} />
+        </g>,
+      );
+      [0.2, 0.32, 0.68, 0.8].forEach((fx, i) => { const [ux, uy] = at(fx, 0.85); out.push(<path key={`cu${i}`} d={`M${ux - 5} ${uy} h10 l-2 8 h-6 z`} fill="#fff" stroke={main} strokeWidth="1" />); });
+      break;
+    }
+    case "honey": {
+      const hex = (x0: number, y0: number, r: number, c: string, k: string) => <polygon key={k} points={[0, 1, 2, 3, 4, 5].map((i) => `${(x0 + r * Math.cos((Math.PI / 3) * i)).toFixed(1)},${(y0 + r * Math.sin((Math.PI / 3) * i)).toFixed(1)}`).join(" ")} fill={c} />;
+      [[0.15, 0.3], [0.25, 0.48], [0.35, 0.3], [0.7, 0.62], [0.8, 0.44], [0.9, 0.62]].forEach(([fx, fy], i) => { const [hx, hy] = at(fx, fy); out.push(hex(hx, hy, 9, i % 2 ? accent : main, `hx${i}`)); });
+      [[0.55, 0.25], [0.45, 0.6]].forEach(([fx, fy], i) => {
+        const [bx, by] = at(fx, fy);
+        out.push(<g key={`be${i}`}><ellipse cx={bx} cy={by} rx="7" ry="5" fill="#f2c14e" /><path d={`M${bx - 2} ${by - 5} v10 M${bx + 2} ${by - 5} v10`} stroke={INK} strokeOpacity=".6" /><ellipse cx={bx - 3} cy={by - 6} rx="4" ry="3" fill="#fff" opacity=".8" /></g>);
+      });
+      break;
+    }
+    case "books": {
+      const [bx, by] = at(0.3, 0.92);
+      [main, accent, "#fff", main].forEach((c, i) => out.push(<rect key={`bk${i}`} x={bx - 26 + i * 2} y={by - 10 - i * 10} width={52 - i * 4} height="9" rx="2" fill={c} stroke={INK} strokeOpacity=".15" />));
+      const [ox, oy] = at(0.72, 0.55);
+      out.push(<path key="ob" d={`M${ox} ${oy} q-20 -8 -36 0 v26 q16 -8 36 0 z M${ox} ${oy} q20 -8 36 0 v26 q-16 -8 -36 0 z`} fill="#fff" stroke={main} strokeWidth="1.5" />);
+      out.push(star(...at(0.72, 0.18), 5, accent, "bs"));
+      break;
+    }
+    case "falcon": {
+      const [fx, fy] = at(0.5, 0.55);
+      out.push(
+        <g key="fc" transform={`translate(${fx} ${fy})`}>
+          <path d="M-6 26 h12 l-2 -6 h-8 z" fill="#7b5a3a" />
+          <path d="M0 -24 q10 2 10 12 q8 10 2 30 h-24 q-4 -20 4 -30 q-2 -10 8 -12z" fill={main} />
+          <path d="M6 -20 l8 3 l-6 2 z" fill={accent} /><circle cx="3" cy="-17" r="1.6" fill="#fff" />
+          <path d="M-6 0 q-14 6 -12 20" stroke={accent} strokeWidth="3" fill="none" />
+        </g>,
+      );
+      break;
+    }
     case "butterflies":
       [[0.15, 0.25], [0.35, 0.12], [0.7, 0.2], [0.88, 0.45], [0.1, 0.6]].forEach(([fx, fy], i) => out.push(butterfly(...at(fx, fy), 0.9, i % 2 ? main : accent, `bf${i}`)));
       break;
@@ -194,12 +329,57 @@ export function LookArt({ look, className = "" }: { look: Look; className?: stri
         </>
       );
       break;
+    case "entrance":
+      scene = (
+        <>
+          <rect x="110" y="40" width="100" height="142" rx="6" fill="#fff" stroke={main} strokeWidth="3" />
+          <path d="M110 40 a50 34 0 0 1 100 0" fill={soft} stroke={main} strokeWidth="3" />
+          <circle cx="196" cy="116" r="3.5" fill={accent} />
+          {motif(look, { x: 20, y: 18, w: 280, h: 70 })}
+          <rect x="128" y="172" width="64" height="10" rx="3" fill={accent} />
+          {[60, 260].map((cx, i) => <g key={cx}><rect x={cx - 9} y="150" width="18" height="30" rx="5" fill={i ? main : accent} /><rect x={cx - 5} y="158" width="10" height="12" rx="2" fill="#fff6d6" /></g>)}
+          {sign(60, 120, main, soft)}
+        </>
+      );
+      break;
+    case "shower":
+      scene = (
+        <>
+          {motif(look, { x: 20, y: 14, w: 280, h: 96 })}
+          <path d="M100 112 q60 -24 120 0" stroke={main} strokeWidth="3" fill="none" />
+          <rect x="96" y="132" width="128" height="12" rx="5" fill="#fff" />
+          <path d="M106 144 V182 M214 144 V182" stroke={INK} strokeOpacity=".3" strokeWidth="3" />
+          <rect x="146" y="104" width="28" height="12" rx="3" fill={accent} /><rect x="142" y="114" width="36" height="18" rx="4" fill={main} /><rect x="138" y="126" width="44" height="8" rx="3" fill={soft} stroke={main} />
+          {[112, 124, 196, 208].map((cx, i) => <rect key={cx} x={cx - 5} y="120" width="10" height="12" rx="2" fill={i % 2 ? accent : main} />)}
+          <path d="M40 182 v-40 a18 18 0 0 1 36 0 v40" fill={soft} stroke={accent} strokeWidth="2" />
+          {sign(270, 156, main, soft)}
+        </>
+      );
+      break;
+    case "reveal":
+      scene = (
+        <>
+          {motif(look, { x: 20, y: 120, w: 280, h: 60 })}
+          <path d="M160 140 V96" stroke={INK} strokeOpacity=".4" strokeWidth="1.5" />
+          <circle cx="160" cy="66" r="38" fill="#3f3b52" />
+          <ellipse cx="148" cy="52" rx="8" ry="12" fill="#fff" opacity=".18" />
+          <text x="160" y="78" textAnchor="middle" fontSize="34" fontWeight="700" fill="#fff">?</text>
+          {[[60, 40, "#f2a7bb"], [90, 70, "#9fc1ea"], [240, 48, "#f2a7bb"], [266, 80, "#9fc1ea"], [210, 24, "#9fc1ea"], [110, 22, "#f2a7bb"]].map(([cx, cy, c], i) => <rect key={i} x={cx as number} y={cy as number} width="6" height="10" rx="1.5" fill={c as string} transform={`rotate(${i * 37} ${cx} ${cy})`} />)}
+          {balloon(46, 110, 1.4, "#f2a7bb", "rv1")}{balloon(276, 112, 1.4, "#9fc1ea", "rv2")}
+        </>
+      );
+      break;
   }
+  const pattern = look.n % 4;
+  const flip = look.n % 2 === 1;
   return (
     <svg viewBox="0 0 320 200" className={className} aria-hidden="true" preserveAspectRatio="xMidYMid slice">
       <rect width="320" height="200" fill={`color-mix(in oklab, ${soft} 85%, #fff)`} />
+      {pattern === 1 && Array.from({ length: 40 }, (_, i) => <circle key={`pd${i}`} cx={(i % 10) * 34 + 10} cy={Math.floor(i / 10) * 44 + 14} r="2" fill={main} opacity=".12" />)}
+      {pattern === 2 && Array.from({ length: 12 }, (_, i) => <rect key={`ps${i}`} x={i * 28} y="0" width="12" height="182" fill={accent} opacity=".07" />)}
+      {pattern === 3 && <path d="M0 40 q40 -14 80 0 t80 0 t80 0 t80 0 M0 90 q40 -14 80 0 t80 0 t80 0 t80 0" stroke={main} strokeOpacity=".1" strokeWidth="6" fill="none" />}
       <rect y="182" width="320" height="18" fill={floor} />
-      {scene}
+      <g transform={flip ? "translate(320 0) scale(-1 1)" : undefined}>{scene}</g>
     </svg>
   );
 }

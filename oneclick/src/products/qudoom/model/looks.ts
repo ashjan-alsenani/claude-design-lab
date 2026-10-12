@@ -1,32 +1,75 @@
-/**
- * Welcome looks for the baby's arrival: 10 themes × 20 colour palettes × 5 places = 1,000 distinct
- * looks, each drawn as its own illustration (see ui/Illustrations) with a ready checklist of what
- * to prepare. Suggestions only; the mother adopts one and its checklist becomes her tasks.
- */
-export type LookTheme = "clouds" | "moon" | "garden" | "teddy" | "balloons" | "sea" | "sadu" | "minimal" | "gold" | "butterflies";
-export type LookPlace = "hospital" | "majlis" | "family" | "outdoor" | "aqiqah";
-export type Palette = { id: string; ar: string; en: string; main: string; soft: string; accent: string };
-export type Look = { id: string; theme: LookTheme; palette: Palette; place: LookPlace };
+import aqiqah from "./looks-data/aqiqah";
+import entrance from "./looks-data/entrance";
+import family from "./looks-data/family";
+import hospital from "./looks-data/hospital";
+import majlis from "./looks-data/majlis";
+import outdoor from "./looks-data/outdoor";
+import reveal from "./looks-data/reveal";
+import shower from "./looks-data/shower";
 
-export const themes: { id: LookTheme; ar: string; en: string }[] = [
-  { id: "clouds", ar: "غيوم ونجوم", en: "Clouds & stars" },
-  { id: "moon", ar: "قمر ونجوم الليل", en: "Moon & night stars" },
-  { id: "garden", ar: "حديقة ورد", en: "Flower garden" },
-  { id: "teddy", ar: "دبدوب", en: "Teddy bear" },
+/**
+ * Welcome looks: 500+ distinct setups, each one its own idea (not a colour swap of another), across
+ * the places a Gulf family welcomes a baby, with a regional flavour. Each comes with what to prepare;
+ * adopting one turns that list into her welcome tasks. Drawn in SVG (ui/Illustrations).
+ */
+export type LookMotif =
+  | "clouds" | "moon" | "garden" | "teddy" | "balloons" | "sea" | "sadu" | "minimal" | "gold" | "butterflies"
+  | "palm" | "lantern" | "dhow" | "dunes" | "pearls" | "arch" | "rainbow" | "hotair" | "tent" | "dallah" | "honey" | "books" | "stars" | "falcon";
+/** Kept for the theme photos (the first ten motifs). */
+export type LookTheme = LookMotif;
+export type LookPlace = "hospital" | "entrance" | "majlis" | "family" | "outdoor" | "aqiqah" | "shower" | "reveal";
+export type LookRegion = "gulf" | "sa" | "kw" | "ae" | "qa" | "bh" | "om";
+export type Palette = { id: string; ar: string; en: string; main: string; soft: string; accent: string };
+export type Look = { id: string; n: number; place: LookPlace; region: LookRegion; motif: LookMotif; palette: Palette; ar: string; en: string; arItems: string[]; enItems: string[] };
+
+export const motifs: { id: LookMotif; ar: string; en: string }[] = [
+  { id: "clouds", ar: "غيوم", en: "Clouds" },
+  { id: "moon", ar: "قمر وليل", en: "Moon & night" },
+  { id: "stars", ar: "نجوم", en: "Stars" },
+  { id: "garden", ar: "ورد وحدائق", en: "Flowers & gardens" },
+  { id: "teddy", ar: "دبدوب", en: "Teddy bears" },
   { id: "balloons", ar: "بالونات", en: "Balloons" },
-  { id: "sea", ar: "البحر", en: "By the sea" },
-  { id: "sadu", ar: "تراث خليجي (سدو)", en: "Gulf heritage (Sadu)" },
-  { id: "minimal", ar: "بسيط وأنيق", en: "Simple & elegant" },
-  { id: "gold", ar: "فخامة ذهبية", en: "Golden luxury" },
   { id: "butterflies", ar: "فراشات", en: "Butterflies" },
+  { id: "rainbow", ar: "ألوان مرحة", en: "Playful colours" },
+  { id: "honey", ar: "نحل وعسل", en: "Bees & honey" },
+  { id: "books", ar: "قصص وكتب", en: "Stories & books" },
+  { id: "hotair", ar: "مناطيد ورحلات", en: "Balloons & journeys" },
+  { id: "tent", ar: "خيام ومخيمات", en: "Tents & camps" },
+  { id: "sea", ar: "البحر", en: "The sea" },
+  { id: "dhow", ar: "سفن ومحامل", en: "Dhows & ships" },
+  { id: "pearls", ar: "لؤلؤ وغوص", en: "Pearls & diving" },
+  { id: "palm", ar: "نخيل وتمر", en: "Palms & dates" },
+  { id: "dunes", ar: "صحراء ورمال", en: "Desert & dunes" },
+  { id: "sadu", ar: "سدو وتراث", en: "Sadu & heritage" },
+  { id: "dallah", ar: "قهوة ودلال", en: "Coffee & dallahs" },
+  { id: "lantern", ar: "فوانيس", en: "Lanterns" },
+  { id: "arch", ar: "أقواس وعمارة", en: "Arches & architecture" },
+  { id: "falcon", ar: "صقور", en: "Falcons" },
+  { id: "gold", ar: "فخامة ذهبية", en: "Golden luxury" },
+  { id: "minimal", ar: "بسيط وأنيق", en: "Simple & elegant" },
 ];
+/** Older name for the ten photo themes. */
+export const themes = motifs;
 
 export const places: { id: LookPlace; ar: string; en: string }[] = [
   { id: "hospital", ar: "غرفة المستشفى", en: "Hospital room" },
-  { id: "majlis", ar: "مجلس البيت", en: "Home majlis" },
+  { id: "entrance", ar: "مدخل البيت", en: "Home entrance" },
+  { id: "majlis", ar: "المجلس", en: "Majlis" },
   { id: "family", ar: "تجمع العائلة", en: "Family gathering" },
-  { id: "outdoor", ar: "حديقة خارجية", en: "Garden outdoors" },
-  { id: "aqiqah", ar: "عشاء العقيقة", en: "Aqiqah dinner" },
+  { id: "outdoor", ar: "في الخارج", en: "Outdoors" },
+  { id: "aqiqah", ar: "العقيقة", en: "Aqiqah" },
+  { id: "shower", ar: "بيبي شاور", en: "Baby shower" },
+  { id: "reveal", ar: "كشف الجنس", en: "Gender reveal" },
+];
+
+export const regions: { id: LookRegion; ar: string; en: string }[] = [
+  { id: "gulf", ar: "خليجي عام", en: "Across the Gulf" },
+  { id: "sa", ar: "السعودية", en: "Saudi Arabia" },
+  { id: "kw", ar: "الكويت", en: "Kuwait" },
+  { id: "ae", ar: "الإمارات", en: "UAE" },
+  { id: "qa", ar: "قطر", en: "Qatar" },
+  { id: "bh", ar: "البحرين", en: "Bahrain" },
+  { id: "om", ar: "عُمان", en: "Oman" },
 ];
 
 export const palettes: Palette[] = [
@@ -50,42 +93,45 @@ export const palettes: Palette[] = [
   { id: "sage-white", ar: "أخضر هادئ وأبيض", en: "Sage & white", main: "#9cb59a", soft: "#eef4ec", accent: "#d8c7a4" },
   { id: "fuchsia-soft", ar: "فوشي ناعم وأبيض", en: "Soft fuchsia & white", main: "#d96aa4", soft: "#fcebf4", accent: "#f2b8d4" },
   { id: "sunshine", ar: "أصفر مشمس وأبيض", en: "Sunshine & white", main: "#f2c14e", soft: "#fff8e3", accent: "#e88c5c" },
+  { id: "pearl-grey", ar: "لؤلؤي ورمادي", en: "Pearl & grey", main: "#a7adb8", soft: "#f4f4f2", accent: "#e8dcc8" },
+  { id: "saffron-ivory", ar: "زعفراني وعاجي", en: "Saffron & ivory", main: "#e3a33a", soft: "#fdf5e4", accent: "#b5532f" },
+  { id: "sea-white", ar: "أزرق بحري وأبيض", en: "Sea blue & white", main: "#2f7fb5", soft: "#e8f3fa", accent: "#f2d9a6" },
+  { id: "sand-teal", ar: "رملي وفيروزي", en: "Sand & turquoise", main: "#d2b48c", soft: "#f8f1e6", accent: "#2f9c95" },
 ];
 
-export const looks: Look[] = places.flatMap((pl) => themes.flatMap((th) => palettes.map((pa) => ({ id: `${pl.id}.${th.id}.${pa.id}`, theme: th.id, palette: pa, place: pl.id }))));
+const blocks: Record<LookPlace, string> = { hospital, entrance, majlis, family, outdoor, aqiqah, shower, reveal };
+const byId = new Map(palettes.map((p) => [p.id, p]));
 
-const themeBits: Record<LookTheme, { ar: string[]; en: string[] }> = {
-  clouds: { ar: ["خلفية غيوم قطنية معلقة", "نجوم ورقية صغيرة"], en: ["Hanging cotton-cloud backdrop", "Small paper stars"] },
-  moon: { ar: ["قمر مضيء على الخلفية", "إضاءة نجوم خافتة"], en: ["Glowing moon on the backdrop", "Soft star lights"] },
-  garden: { ar: ["قوس ورد طبيعي", "مزهريات صغيرة على الطاولات"], en: ["Fresh-flower arch", "Small vases on the tables"] },
-  teddy: { ar: ["دبدوب كبير جنب لوحة الاسم", "مخدات بوجه دبدوب"], en: ["Big teddy beside the name sign", "Teddy-face cushions"] },
-  balloons: { ar: ["قوس بالونات بالألوان المختارة", "بالونات شفافة فيها ورود"], en: ["Balloon arch in the chosen colours", "Clear balloons with petals"] },
-  sea: { ar: ["أمواج قماش وأصداف", "سلال خوص وحبال"], en: ["Fabric waves and shells", "Woven baskets and rope"] },
-  sadu: { ar: ["مفارش بنقشة السدو", "دلة وفناجين للزينة"], en: ["Sadu-pattern runners", "Dallah and cups as decor"] },
-  minimal: { ar: ["خلفية سادة بخط أنيق", "ورد أبيض قليل"], en: ["Plain backdrop with elegant script", "A few white flowers"] },
-  gold: { ar: ["إطارات ذهبية وشموع", "مفارش ساتان"], en: ["Gold frames and candles", "Satin runners"] },
-  butterflies: { ar: ["فراشات ورقية طايرة على الجدار", "ورد ناعم بألوان باستيل"], en: ["Paper butterflies on the wall", "Soft pastel flowers"] },
-};
-const placeBits: Record<LookPlace, { ar: string[]; en: string[] }> = {
-  hospital: { ar: ["لافتة صغيرة على باب الغرفة", "صينية شوكولاتة وتمر للزوار", "توزيعات صغيرة للممرضات"], en: ["Small sign on the room door", "Chocolate & dates tray for visitors", "Little favors for the nurses"] },
-  majlis: { ar: ["ركن تصوير في المجلس", "ستاند قهوة وتمر", "مخدات مطرزة بالاسم"], en: ["Photo corner in the majlis", "Coffee & dates stand", "Name-embroidered cushions"] },
-  family: { ar: ["طاولة حلويات بطبقات", "شجرة أمنيات للضيوف", "ركن ألعاب للأطفال"], en: ["Tiered sweets table", "Wish tree for guests", "Kids' play corner"] },
-  outdoor: { ar: ["مظلة قماش وجلسات أرضية", "إضاءة خيوط", "ركن عصائر باردة"], en: ["Fabric canopy and floor seating", "String lights", "Cold-drinks corner"] },
-  aqiqah: { ar: ["سفرة بأطباق خليجية", "بطاقة دعاء للمولود", "ركن صدقة باسم المولود"], en: ["Gulf-style dinner table", "Prayer card for the baby", "Charity corner in the baby's name"] },
-};
+export const looks: Look[] = (Object.keys(blocks) as LookPlace[]).flatMap((place) =>
+  blocks[place]
+    .trim()
+    .split("\n")
+    .filter((l) => l.includes("|"))
+    .map((line, i) => {
+      const [region, motif, pal, ar, en, arItems, enItems] = line.split("|").map((x) => x.trim());
+      return {
+        id: `${place}-${i + 1}`,
+        n: i + 1,
+        place,
+        region: region as LookRegion,
+        motif: motif as LookMotif,
+        palette: byId.get(pal) ?? palettes[0],
+        ar,
+        en,
+        arItems: arItems.split("؛").map((x) => x.trim()).filter(Boolean),
+        enItems: enItems.split(";").map((x) => x.trim()).filter(Boolean),
+      };
+    }),
+);
 
 /** What to prepare for this look, in the mother's language. */
 export function lookChecklist(l: Look, lang: "ar" | "en"): string[] {
   const pa = lang === "ar" ? l.palette.ar : l.palette.en;
-  const base = lang === "ar" ? [`لوحة الاسم بألوان ${pa}`, `توزيعات مغلفة بألوان ${pa}`] : [`Name sign in ${pa}`, `Favors wrapped in ${pa}`];
-  return [...themeBits[l.theme][lang], ...base, ...placeBits[l.place][lang]];
+  return [...(lang === "ar" ? l.arItems : l.enItems), lang === "ar" ? `الألوان: ${pa}` : `Colours: ${pa}`];
 }
 
 /** A task made by adopting a look (its notes hold the look id; older ones start with a sparkle). */
 export const isLookTask = (t: { area: string; title: string; notes?: string }) =>
-  t.area === "reception" && (t.title.startsWith("\u2728") || /^(hospital|majlis|family|outdoor|aqiqah)\.[a-z]+\.[a-z-]+$/.test(t.notes ?? ""));
+  t.area === "reception" && (t.title.startsWith("✨") || /^(hospital|majlis|family|outdoor|aqiqah)\.[a-z]+\.[a-z-]+$/.test(t.notes ?? "") || /^look:[a-z]+-\d+$/.test(t.notes ?? ""));
 
-export function lookTitle(l: Look, lang: "ar" | "en") {
-  const th = themes.find((x) => x.id === l.theme)!;
-  return lang === "ar" ? `${th.ar} · ${l.palette.ar}` : `${th.en} · ${l.palette.en}`;
-}
+export const lookTitle = (l: Look, lang: "ar" | "en") => (lang === "ar" ? l.ar : l.en);

@@ -7,13 +7,12 @@ import { useQ } from "../app/state";
 import { allIdeas, favorCats, ideaKinds, type AnyIdea, type IdeaKind } from "../model/all-ideas";
 import type { FavorCat } from "../model/favor-ideas";
 import { BabyMascot } from "../ui/Mascot";
-import { FavorPhoto, Photo, ideaPhoto, kindPhoto } from "../ui/FavorPhoto";
+import { Photo, ideaPhoto, kindPhoto } from "../ui/FavorPhoto";
+import { IdeaArt } from "../ui/IdeaArt";
 import { IdeaSheet } from "../ui/IdeaSheet";
 import { KindIcon } from "../ui/KindIcon";
+import { Filter, FilterBar } from "../ui/Filter";
 
-/** Each favor gets its own colour variation so the drawings don't all look alike. */
-const tints = ["#e8a5b5", "#a9c1dc", "#c9b8e0", "#efd28f", "#bcd3b3", "#f2a07b", "#7fb8e6", "#d9b38c", "#5fb9a0", "#d96aa4"];
-const favorTint = (id: string, base: string) => { let h = 0; for (const c of id) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h) % 3 === 0 ? base : tints[Math.abs(h) % tints.length]; };
 import { cx } from "../ui/kit";
 
 /**
@@ -96,23 +95,10 @@ export function IdeasPage() {
       </div>
 
       {kind === "favor" && (
-        <div className="space-y-2">
-          <div className="qd-scroll-x -mx-4 flex gap-2 overflow-x-auto px-4">
-            {[{ id: "all" as const, ar: it.allCats, en: it.allCats, color: "#d9cfc4" }, ...favorCats].map((c) => (
-              <button key={c.id} type="button" aria-pressed={fc === c.id} onClick={() => (setFc(c.id), setShown(20))} className={cx("flex h-9 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-[13px] font-semibold", fc === c.id ? "bg-[var(--qd-primary)] text-white" : "bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
-                <span className="size-2 rounded-full" style={{ background: c.color }} />
-                {ar ? c.ar : c.en}
-              </button>
-            ))}
-          </div>
-          <div className="flex gap-2">
-            {([0, 1, 2, 3] as const).map((p) => (
-              <button key={p} type="button" aria-pressed={price === p} onClick={() => (setPrice(p), setShown(20))} className={cx("h-8 rounded-full px-3 text-[12.5px] font-semibold", price === p ? "bg-[var(--qd-ink)] text-white" : "bg-[var(--qd-paper)] text-[var(--qd-ink-soft)]")}>
-                {p === 0 ? it.anyPrice : it.price[p]}
-              </button>
-            ))}
-          </div>
-        </div>
+        <FilterBar active={fc !== "all" || price !== 0} onClear={() => (setFc("all"), setPrice(0), setShown(20))} clearLabel={ar ? "مسح" : "Clear"}>
+          <Filter label={ar ? "النوع" : "Type"} all={it.allCats} value={fc} onChange={(v) => (setFc(v), setShown(20))} options={favorCats.map((c) => ({ value: c.id, label: ar ? c.ar : c.en, count: allIdeas.filter((x) => x.cat === c.id).length }))} />
+          <Filter label={ar ? "السعر" : "Price"} all={it.anyPrice} value={price ? String(price) as "1" | "2" | "3" : "all"} onChange={(v) => (setPrice(v === "all" ? 0 : (Number(v) as 1 | 2 | 3)), setShown(20))} options={(["1", "2", "3"] as const).map((p) => ({ value: p, label: it.price[Number(p) as 1 | 2 | 3] }))} />
+        </FilterBar>
       )}
 
       {list.length === 0 ? (
@@ -126,13 +112,7 @@ export function IdeasPage() {
               const cat = x.cat ? favorCats.find((c) => c.id === x.cat) : undefined;
               return (
                 <motion.li key={x.id} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { delay: Math.min(i, 10) * 0.025 } }} className="qd-card flex min-w-0 items-center gap-3 rounded-[20px] p-3.5">
-                  {ideaPhoto(x) ? (
-                    <Photo src={ideaPhoto(x)!} className="size-16 shrink-0 rounded-[16px]" />
-                  ) : x.kind === "favor" && x.cat ? (
-                    <FavorPhoto cat={x.cat} color={favorTint(x.id, cat?.color ?? meta.color)} className="size-16 shrink-0" />
-                  ) : (
-                    <KindIcon kind={x.kind} color={meta.color} size={20} className="size-10" />
-                  )}
+                  {ideaPhoto(x) ? <Photo src={ideaPhoto(x)!} className="size-16 shrink-0 rounded-[16px]" /> : <IdeaArt idea={x} className="size-16" size={30} />}
                   <button type="button" onClick={() => setOpen(x)} className="min-w-0 flex-1 text-start">
                     <span className={cx("block font-bold leading-snug", x.kind === "thanks" ? "text-[14px]" : "text-[15px]")}>{text(x)}</span>
                     {(note || x.price || cat) && <span className="mt-0.5 block truncate text-[12px] text-[var(--qd-muted)]">{[note, cat && (ar ? cat.ar : cat.en), x.price && it.price[x.price]].filter(Boolean).join(" · ")}</span>}

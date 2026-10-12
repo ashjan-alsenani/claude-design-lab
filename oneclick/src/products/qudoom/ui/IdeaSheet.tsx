@@ -6,8 +6,7 @@ import { useQ } from "../app/state";
 import { favorCats, ideaKinds, type AnyIdea } from "../model/all-ideas";
 import { whereLinks, type WhereLink } from "../model/where";
 import { ideaPhoto, Photo } from "./FavorPhoto";
-import { FavorArt } from "./Illustrations";
-import { KindIcon } from "./KindIcon";
+import { IdeaArt } from "./IdeaArt";
 import { Sheet, inputCls } from "./kit";
 
 const linkIcons: Record<WhereLink["id"], Icon> = { maps: MapPinIcon, instagram: InstagramLogoIcon, shopping: TagIcon, noon: StorefrontIcon, amazon: StorefrontIcon, web: MagnifyingGlassIcon };
@@ -33,10 +32,8 @@ export function IdeaSheet({ idea, text, done, onAdd, onClose }: { idea: AnyIdea 
         <div className="relative overflow-hidden rounded-[22px] bg-[var(--qd-tint-2)]">
           {src ? (
             <div className="grid place-items-center py-4"><Photo src={src} alt={text} className="size-56 rounded-[22px] shadow-[0_18px_40px_-24px_rgba(90,85,112,.6)]" /></div>
-          ) : idea.kind === "favor" && idea.cat ? (
-            <div className="grid aspect-[4/3] place-items-center"><FavorArt cat={idea.cat} color={cat?.color ?? meta.color} className="size-40" /></div>
           ) : (
-            <div className="grid aspect-[4/3] place-items-center"><KindIcon kind={idea.kind} color={meta.color} size={56} className="size-28" /></div>
+            <div className="grid place-items-center py-4"><IdeaArt idea={idea} size={84} className="size-56 rounded-[22px]" /></div>
           )}
           {src && <span className="absolute bottom-2 start-2 rounded-full bg-white/85 px-2.5 py-1 text-[11.5px] font-semibold text-[var(--qd-ink-soft)]">{ar ? "صورة تقريبية بالذكاء الاصطناعي" : "Approximate AI photo"}</span>}
         </div>

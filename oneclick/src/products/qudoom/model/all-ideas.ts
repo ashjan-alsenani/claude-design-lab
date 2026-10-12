@@ -1,6 +1,7 @@
 import { favorBases, favorCats, type FavorCat } from "./favor-ideas";
 import { ideas as baseIdeas } from "./ideas";
 import { moreBlocks, moreFavorBlocks } from "./more-ideas";
+import { refreshed } from "./refresh-ideas";
 
 /**
  * Every ready idea in «حكاية قدوم», each one distinct (no repeats with a different wrapping).
@@ -477,7 +478,10 @@ const listed: AnyIdea[] = [
 ];
 
 /** Unique ids by position (each idea text is unique too; a unit test checks both). */
-export const allIdeas: AnyIdea[] = listed.map((x, i) => ({ ...x, id: `${x.kind}-${i}` }));
+export const allIdeas: AnyIdea[] = listed.map((x, i) => {
+  const r = refreshed[x.en];
+  return { ...x, ...(r ? { ar: r[0], en: r[1] } : {}), id: `${x.kind}-${i}` };
+});
 
 export const ideasOf = (kind: IdeaKind) => allIdeas.filter((x) => x.kind === kind);
 export { favorCats };

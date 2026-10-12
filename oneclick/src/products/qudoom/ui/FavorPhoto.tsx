@@ -20,9 +20,9 @@ export function ideaKey(en: string) {
   return (h >>> 0).toString(36);
 }
 /** The idea's own photo when there is one, else its category's or kind's sample. */
-export const ideaPhoto = (x: AnyIdea): string | undefined => ideaPhotoFiles[ideaKey(x.en)] ?? (x.kind === "favor" && x.cat ? favorPhotoFiles[x.cat] : kindPhoto(x.kind));
+export const ideaPhoto = (x: AnyIdea): string | undefined => ideaPhotoFiles[ideaKey(x.en)];
 /** A welcome look's own photo (place + theme + palette), then place + theme, then the theme sample. */
-export const lookPhotoFor = (l: Look): string | undefined => lookPhotoFiles[l.id] ?? lookPhotoFiles[`${l.place}.${l.theme}`] ?? lookPhotoFiles[l.theme];
+export const lookPhotoFor = (l: Look): string | undefined => lookPhotoFiles[`${l.place}.${l.motif}`];
 
 export function Photo({ src, className = "", alt = "" }: { src: string; className?: string; alt?: string }) {
   // eslint-disable-next-line @next/next/no-img-element
