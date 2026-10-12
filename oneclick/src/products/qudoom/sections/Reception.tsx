@@ -1,20 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CheckIcon, CoffeeIcon, CopyIcon, PencilSimpleIcon, PlusIcon, ShareNetworkIcon, SparkleIcon, StarIcon, UsersThreeIcon, XIcon } from "@phosphor-icons/react";
+import Link from "next/link";
+import { CheckIcon, CoffeeIcon, EnvelopeOpenIcon, CopyIcon, PencilSimpleIcon, PlusIcon, ShareNetworkIcon, SparkleIcon, StarIcon, UsersThreeIcon, XIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { eventReadiness, favorTotal, guestsFor, hospCost, hospQty, manualLoad, slotKey, slotsOn, weekday, addDays } from "../model/engine";
 import type { EventArea, Favor, FavorStatus, HospItem, ReceptionEvent, ReceptionKind, Visit, VisitGroup, VisitSettings, VisitStatus, Window } from "../model/types";
 import { EntitySheet, type Draft, type FieldSpec } from "../ui/EntitySheet";
 import { Badge, Bar, Button, Card, Chips, EmptyState, Field, Fold, PageHeader, SectionTitle, Stat, TextArea, Toggle, cx, inputCls, type Tone , IdeasLink } from "../ui/kit";
 import { TaskList, useAddParam } from "./Lists";
-import { receptionNames, seedEvent } from "../model/seed";
+import { hospCatalog, hospFromCatalog, hospGroupOf, receptionNames, seedEvent, type HospGroup } from "../model/seed";
 
+const lookPlaceOf: Record<ReceptionKind, string> = { hospital: "hospital", home: "entrance", family: "family", aqiqah: "aqiqah", shower: "shower", reveal: "reveal", custom: "majlis" };
 const areas: EventArea[] = ["decor", "nameboard", "flowers", "sweets", "hospitality", "favors", "photo", "other"];
 
 // ---------- Welcome plans ----------
 export function EventsPage() {
-  const { t, plan, dispatch, newId, lang, date, timeLabel, money, num, pct, access, can } = useQ();
+  const { t, plan, dispatch, newId, lang, date, timeLabel, money, num, pct, access, can, href } = useQ();
   const [edit, setEdit] = useState<Partial<ReceptionEvent> | null>(null);
   const [adding, setAdding] = useState<Record<string, string>>({});
   useAddParam(() => setEdit({ kind: "home", checks: [] }));
@@ -41,6 +43,17 @@ export function EventsPage() {
   return (
     <div className="space-y-6">
       <PageHeader title={t.reception.title} sub={t.reception.sub} icon={<StarIcon size={22} />} action={access.canEdit ? <Button onClick={() => setEdit({ kind: "home", checks: [] })}><PlusIcon size={18} /> {t.reception.add}</Button> : undefined} />
+      {access.canEdit && (["shower", "reveal"] as const).some((k) => !plan.events.some((e) => e.kind === k)) && (
+        <div className="rounded-[20px] bg-[var(--qd-paper)] p-4">
+          <p className="text-[14px] font-bold">{lang === "ar" ? "مناسبات اختيارية قبل الولادة" : "Optional events before the birth"}</p>
+          <p className="mt-0.5 text-[13px] text-[var(--qd-muted)]">{lang === "ar" ? "إذا تبينها، ضيفيها بضغطة وتجيك بقائمة تجهيز وأفكار ودعوة." : "If you'd like them, add with one tap: a checklist, ideas and an invitation come with it."}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {(["shower", "reveal"] as const).filter((k) => !plan.events.some((e) => e.kind === k)).map((k) => (
+              <Button key={k} size="sm" variant="secondary" onClick={() => dispatch({ t: "put", c: "events", item: { ...seedEvent(k, lang), id: newId("ev") } })}><PlusIcon size={16} /> {receptionNames[k][lang]}</Button>
+            ))}
+          </div>
+        </div>
+      )}
       {plan.events.length === 0 ? (
         <EmptyState icon={<StarIcon size={26} />} title={t.common.empty} sub={t.reception.sub} />
       ) : (
@@ -54,6 +67,10 @@ export function EventsPage() {
                   <Badge tone="primary">{t.cats.reception[e.kind]}</Badge>
                   <h2 className="mt-2 text-[1.3rem] font-bold">{e.name}</h2>
                   <p className="mt-1 text-[13.5px] text-[var(--qd-muted)]">{[e.date && date(e.date, "weekday"), e.time && timeLabel(e.time), e.place, e.expected !== undefined && `${num(e.expected)} ${t.visits.people}`, e.theme].filter(Boolean).join(" · ") || "—"}</p>
+                  <p className="mt-2 flex flex-wrap gap-2 text-[13px] font-semibold">
+                    <Link href={`${href("looks")}?place=${lookPlaceOf[e.kind]}`} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-tint)] px-3 text-[var(--qd-primary-deep)]"><SparkleIcon size={15} weight="fill" /> {lang === "ar" ? "أفكار لشكلها" : "Ideas for the look"}</Link>
+                    <Link href={href("invite")} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-tint)] px-3 text-[var(--qd-primary-deep)]"><EnvelopeOpenIcon size={15} weight="fill" /> {lang === "ar" ? "صممي الدعوة" : "Design the invitation"}</Link>
+                  </p>
                 </div>
                 {access.canEdit && <Button size="sm" variant="secondary" onClick={() => setEdit(e)}><PencilSimpleIcon size={16} /> {t.common.edit}</Button>}
               </div>
@@ -321,7 +338,7 @@ function VisitInvite() {
 
 // ---------- Hospitality ----------
 export function HospitalityPage() {
-  const { t, plan, dispatch, newId, num, money, access, can } = useQ();
+  const { t, plan, dispatch, newId, num, money, access, can, lang } = useQ();
   const [edit, setEdit] = useState<(Partial<HospItem> & { src?: string; manual?: number }) | null>(null);
   useAddParam(() => setEdit({ kind: "custom", unit: "piece", perGuest: 1, servingsPerUnit: 1, reservePct: 10, src: "manual", manual: 10 }));
   const units = Object.keys(t.cats.unit) as HospItem["unit"][];
@@ -347,33 +364,87 @@ export function HospitalityPage() {
     return dispatch({ t: "put", c: "hospitality", item: { ...rest, id: edit?.id ?? newId("hs"), source } });
   };
   const totalCost = plan.hospitality.reduce((s, h) => s + (hospCost(h, hospQty(h, guestsFor(h, plan))) ?? 0), 0);
+  const ar = lang === "ar";
+  const [undo, setUndo] = useState<HospItem | null>(null);
+  useEffect(() => {
+    if (!undo) return;
+    const id = setTimeout(() => setUndo(null), 6000);
+    return () => clearTimeout(id);
+  }, [undo]);
+  // One guest count for the whole list: the linked welcome plan's expected guests, or her own number.
+  const setGuests = (n: number) => {
+    const evIds = new Set(plan.hospitality.map((h) => h.source.eventId).filter(Boolean) as string[]);
+    for (const id of evIds) { const ev = plan.events.find((e) => e.id === id); if (ev) dispatch({ t: "put", c: "events", item: { ...ev, expected: n } }); }
+    for (const h of plan.hospitality) if (!h.source.eventId && !h.source.visitId) dispatch({ t: "put", c: "hospitality", item: { ...h, source: { manual: n } } });
+  };
+  const remove = (h: HospItem) => dispatch({ t: "del", c: "hospitality", id: h.id }) && setUndo(h);
+  const have = new Set(plan.hospitality.map((h) => h.name));
+  const missing = hospCatalog.filter((c) => !have.has(c.ar) && !have.has(c.en));
+  const firstSource = plan.hospitality[0]?.source ?? (plan.events[0] ? { eventId: plan.events[0].id } : { manual: 10 });
+  const addMissing = () => missing.forEach((c) => dispatch({ t: "put", c: "hospitality", item: { ...hospFromCatalog(c, lang, firstSource), id: newId("hs") } }));
+  const groupNames: Record<HospGroup | "other", string> = ar
+    ? { drinks: "المشروبات", sweets: "التمر والحلويات", savory: "الموالح", meal: "الوجبات", supplies: "الأدوات والتقديم", other: "أشياء أضفتيها" }
+    : { drinks: "Drinks", sweets: "Dates & sweets", savory: "Savouries", meal: "Meals", supplies: "Serving supplies", other: "Your own additions" };
+  const grouped = (["drinks", "sweets", "savory", "meal", "supplies", "other"] as const)
+    .map((g) => ({ g, items: plan.hospitality.filter((h) => (hospGroupOf(h.name) ?? (h.kind === "custom" ? "other" : h.kind === "meal" ? "meal" : h.kind === "savory" ? "savory" : ["coffee", "tea", "water", "juice"].includes(h.kind) ? "drinks" : "sweets")) === g) }))
+    .filter((x) => x.items.length);
   return (
     <div className="space-y-6">
-      <PageHeader title={t.hosp.title} sub={t.hosp.sub} icon={<CoffeeIcon size={22} />} action={access.canEdit ? <Button onClick={() => setEdit({ kind: "custom", unit: "piece", perGuest: 1, servingsPerUnit: 1, reservePct: 10, src: "manual", manual: 10 })}><PlusIcon size={18} /> {t.hosp.add}</Button> : undefined} />
+      <PageHeader title={t.hosp.title} sub={ar ? "جهزنا لك كل شي ممكن تحتاجينه بالكميات. احذفي اللي ما تبينه بضغطة ✕." : "We've listed everything you might need, with amounts. Remove what you won't serve with one tap on ✕."} icon={<CoffeeIcon size={22} />} action={access.canEdit ? <Button onClick={() => setEdit({ kind: "custom", unit: "piece", perGuest: 1, servingsPerUnit: 1, reservePct: 10, src: "manual", manual: 10 })}><PlusIcon size={18} /> {t.hosp.add}</Button> : undefined} />
+      {access.canEdit && missing.length > 0 && (
+        <div className="flex flex-wrap items-center gap-3 rounded-[18px] bg-[var(--qd-tint)] px-4 py-3">
+          <p className="min-w-0 flex-1 text-[14px] font-semibold text-[var(--qd-primary-deep)]">{ar ? `في قائمتنا الجاهزة ${num(missing.length)} عنصر مو عندك.` : `${num(missing.length)} items from our ready list aren't in yours.`}</p>
+          <Button size="sm" onClick={addMissing}><PlusIcon size={16} /> {ar ? "ضيفيهم كلهم" : "Add them all"}</Button>
+        </div>
+      )}
+      {plan.hospitality.length > 0 && (
+        <label className="flex flex-wrap items-center gap-3 rounded-[18px] bg-[var(--qd-paper)] px-4 py-3">
+          <span className="min-w-0 flex-1 text-[15px] font-bold">{ar ? "كم ضيف تتوقعين؟" : "How many guests do you expect?"}<span className="block text-[12.5px] font-normal text-[var(--qd-muted)]">{ar ? "كل الكميات تتحسب من هالرقم." : "Every amount is worked out from this."}</span></span>
+          <input type="number" inputMode="numeric" min={0} max={5000} value={guestsFor(plan.hospitality[0], plan) || ""} placeholder="0" disabled={!access.canEdit} onChange={(e) => setGuests(Math.max(0, Math.min(5000, Number(e.target.value) || 0)))} className={`${inputCls} w-28 text-center text-[1.2rem] font-bold`} aria-label={ar ? "عدد الضيوف" : "Guests"} />
+        </label>
+      )}
       <p className="rounded-[14px] bg-[var(--qd-tint-2)] px-4 py-3 text-[13px] leading-relaxed text-[var(--qd-ink-soft)]">{t.hosp.formula}</p>
       {plan.hospitality.length === 0 ? (
         <EmptyState icon={<CoffeeIcon size={26} />} title={t.common.empty} />
       ) : (
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {plan.hospitality.map((h) => {
-            const g = guestsFor(h, plan);
-            const q = hospQty(h, g);
-            const unit = h.unit === "custom" ? h.customUnit ?? t.cats.unit.custom : t.cats.unit[h.unit];
-            const cost = hospCost(h, q);
-            return (
-              <li key={h.id}>
-                <button type="button" onClick={() => setEdit(toDraft(h) as never)} className="qd-card flex w-full flex-col gap-2 rounded-[20px] p-4 text-start">
-                  <span className="flex items-center gap-2"><span className="min-w-0 flex-1 truncate font-semibold">{h.name}</span><Badge>{t.cats.hosp[h.kind]}</Badge></span>
-                  <span className="text-[1.6rem] font-bold tabular-nums text-[var(--qd-primary)]">{num(q)} <span className="text-[15px] font-semibold">{unit}</span></span>
-                  <span className="text-[12.5px] text-[var(--qd-muted)]">{t.hosp.guests}: {num(g)} · {t.hosp.perGuest}: {num(h.perGuest)} · {t.hosp.reserve}: {num(h.reservePct)}% · {t.common.estimated}</span>
-                  {can("budget") && cost !== undefined && <span className="text-[13px]">{t.hosp.cost}: <b>{money(cost)}</b></span>}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        grouped.map(({ g, items }) => (
+          <section key={g} className="space-y-2.5">
+            <h2 className="text-[15px] font-extrabold">{groupNames[g]} <span className="text-[13px] font-semibold text-[var(--qd-muted)]">({num(items.length)})</span></h2>
+            <ul className="grid gap-2.5 sm:grid-cols-2">
+              {items.map((h) => {
+                const gs = guestsFor(h, plan);
+                const q = hospQty(h, gs);
+                const unit = h.unit === "custom" ? h.customUnit ?? t.cats.unit.custom : t.cats.unit[h.unit];
+                const cost = hospCost(h, q);
+                return (
+                  <li key={h.id} className="qd-card flex items-stretch overflow-hidden rounded-[20px]">
+                    <button type="button" onClick={() => setEdit(toDraft(h) as never)} className="flex min-w-0 flex-1 flex-col gap-1 p-3.5 text-start">
+                      <span className="truncate font-semibold">{h.name}</span>
+                      <span className="text-[1.35rem] font-bold tabular-nums text-[var(--qd-primary)]">{num(q)} <span className="text-[14px] font-semibold">{unit}</span></span>
+                      <span className="text-[12px] text-[var(--qd-muted)]">{t.hosp.guests}: {num(gs)} · {t.hosp.perGuest}: {num(h.perGuest)} · {t.common.estimated}</span>
+                      {can("budget") && cost !== undefined && <span className="text-[12.5px]">{t.hosp.cost}: <b>{money(cost)}</b></span>}
+                    </button>
+                    {access.canEdit && (
+                      <button type="button" onClick={() => remove(h)} aria-label={ar ? `احذفي ${h.name}` : `Remove ${h.name}`} title={ar ? "احذفي" : "Remove"} className="grid w-12 shrink-0 place-items-center border-s border-[var(--qd-line)] text-[var(--qd-muted)] hover:bg-[var(--qd-alert-soft)] hover:text-[var(--qd-alert)]">
+                        <XIcon size={18} weight="bold" />
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))
       )}
       {can("budget") && totalCost > 0 && <Stat label={`${t.hosp.cost} · ${t.money.total}`} value={money(totalCost)} sub={t.common.estimated} />}
+      {undo && (
+        <div className="fixed inset-x-0 bottom-24 z-40 flex justify-center px-4 lg:bottom-8">
+          <p className="qd-pop flex items-center gap-3 rounded-full bg-[var(--qd-ink)] py-2 pe-2 ps-5 text-[14px] text-white shadow-lg">
+            {ar ? `انحذف: ${undo.name}` : `Removed: ${undo.name}`}
+            <button type="button" onClick={() => (dispatch({ t: "put", c: "hospitality", item: undo }), setUndo(null))} className="rounded-full bg-white/15 px-3 py-1 font-semibold hover:bg-white/25">{ar ? "تراجع" : "Undo"}</button>
+          </p>
+        </div>
+      )}
       <EntitySheet open={!!edit} onClose={() => setEdit(null)} title={edit?.id ? edit.name ?? "" : t.hosp.add} fields={fields} initial={(edit ?? {}) as Draft} onSave={save} onDelete={edit?.id ? () => dispatch({ t: "del", c: "hospitality", id: edit.id! }) : undefined} />
     </div>
   );

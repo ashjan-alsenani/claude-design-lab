@@ -58,12 +58,12 @@ export function MemoriesPage() {
 }
 
 // ---------- Cards ----------
-const templates: CardTemplate[] = ["arrived", "invite", "thanks", "favor"];
+const templates: CardTemplate[] = ["arrived", "thanks", "favor"];
 export function CardsPage() {
   const { t, plan, dispatch, newId, lang, date, access } = useQ();
   const p = plan.profile!;
   const blank = (tpl: CardTemplate): CardDesign => ({ id: newId("cd"), template: tpl, title: t.cardsT.defaults[tpl], name: p.babyName, text: tpl === "invite" ? undefined : undefined, date: p.arrived?.date, tone: "theme", showDate: tpl !== "favor", showDetails: tpl === "invite", details: undefined });
-  const [card, setCard] = useState<CardDesign>(() => plan.cards[0] ?? blank("arrived"));
+  const [card, setCard] = useState<CardDesign>(() => plan.cards.find((c) => c.template !== "invite") ?? blank("arrived"));
   const set = (patch: Partial<CardDesign>) => setCard((c) => ({ ...c, ...patch }));
   const canvas = useRef<HTMLCanvasElement>(null);
   const saved = plan.cards.some((c) => c.id === card.id);

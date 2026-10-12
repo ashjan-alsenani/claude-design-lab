@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRightIcon, BabyCarriageIcon, BabyIcon, BagIcon, BalloonIcon, BellRingingIcon, CalendarHeartIcon, CheckCircleIcon, CoffeeIcon, GiftIcon, HandbagIcon, HandHeartIcon, HouseIcon, ImageIcon, LockIcon, LockKeyIcon, MapPinIcon, MapTrifoldIcon, ShieldCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon, BabyCarriageIcon, BabyIcon, BagIcon, BalloonIcon, BellRingingIcon, CalendarHeartIcon, CheckCircleIcon, CoffeeIcon, ConfettiIcon, EnvelopeOpenIcon, GiftIcon, HandbagIcon, HandHeartIcon, HouseIcon, ImageIcon, LockIcon, LockKeyIcon, MapPinIcon, MapTrifoldIcon, ShieldCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import type { Locale } from "@/i18n/config";
 import { Clicky } from "@/components/brand/Clicky";
@@ -29,12 +29,12 @@ export function QudoomStory({ locale }: { locale: Locale }) {
   const gulf = ar
     ? [
         { icon: CoffeeIcon, t: "ضيافة على طريقتنا", b: "قهوة وتمر وحلويات بوحداتها (دلة، صينية، علبة)، وكميات تقديرية حسب عدد الضيوف." },
-        { icon: CalendarHeartIcon, t: "استقبال وعقيقة", b: "استقبال المستشفى والبيت وتجمع الأهل والعقيقة، لكل واحد قائمته." },
+        { icon: CalendarHeartIcon, t: "استقبال وعقيقة وشاور", b: "استقبال المستشفى والبيت وتجمع الأهل والعقيقة، وبيبي شاور وكشف الجنس إذا تبينها، لكل وحدة قائمتها." },
         { icon: HandHeartIcon, t: "عملات الخليج", b: "ريال عُماني وسعودي وقطري، درهم، دينار كويتي وبحريني، بالكسور الصحيحة لكل عملة." },
       ]
     : [
         { icon: CoffeeIcon, t: "Hospitality our way", b: "Coffee, dates and sweets in their real units (thermos, tray, box), with estimated quantities per guest count." },
-        { icon: CalendarHeartIcon, t: "Welcomes & aqiqah", b: "Hospital, home, family gatherings and aqiqah, each with its own checklist." },
+        { icon: CalendarHeartIcon, t: "Welcomes, aqiqah & showers", b: "Hospital, home, family gatherings and aqiqah, plus an optional baby shower or gender reveal, each with its own checklist." },
         { icon: HandHeartIcon, t: "Gulf currencies", b: "OMR, SAR, AED, KWD, BHD and QAR, each with its correct decimals." },
       ];
   const privacy = ar
@@ -120,12 +120,14 @@ export function QudoomBullets({ locale }: { locale: Locale }) {
     [BellRingingIcon, "تنبيهات لطيفة: لا تنسين، وموعدك بعد يومين", "Gentle reminders: don't forget, your appointment is in 2 days"],
     [BabyCarriageIcon, "أغراض البيبي وغرفته، بقوائم جاهزة", "Baby things and nursery, with ready lists"],
     [HandbagIcon, "شنطة المستشفى: لك وللبيبي وللمرافقة", "Hospital bag: for you, baby and your companion"],
-    [BalloonIcon, "١٠٠٠ شكل مرسوم لاستقبال البيبي", "1,000 illustrated welcome looks"],
-    [GiftIcon, "أكثر من ١١٠٠ فكرة للتوزيعات والهدايا", "Over 1,100 favor and gift ideas"],
-    [ImageIcon, "صور تقريبية بالذكاء الاصطناعي تشوفين فيها الشكل", "Approximate AI photos so you can see the look"],
+    [BalloonIcon, "٥٠٠ فكرة استقبال خليجية، كل وحدة غير", "500 Gulf welcome ideas, each one different"],
+    [EnvelopeOpenIcon, "استوديو دعوات فيه ٣٠٠ تصميم تعدلينه وتحمّلينه", "An invitation studio with 300 designs to edit and download"],
+    [ConfettiIcon, "بيبي شاور وكشف الجنس (اختياري)", "Baby shower and gender reveal (optional)"],
+    [GiftIcon, "أكثر من ١١٠٠ فكرة نادرة للتوزيعات والهدايا", "Over 1,100 rare favor and gift ideas"],
+    [ImageIcon, "٦٠٠ صورة واقعية بالذكاء الاصطناعي للتوزيعات", "600 realistic AI photos of favors"],
     [MapPinIcon, "وين تلاقينها: بحث عن محلات قريبة في مدينتك", "Where to find it: nearby shops in your city"],
     [HandHeartIcon, "قائمة هدايا يحجز منها الأهل بدون تكرار", "A gift list family can reserve, no duplicates"],
-    [CoffeeIcon, "حاسبة ضيافة وزيارات بمواعيد", "Hospitality calculator and visits by appointment"],
+    [CoffeeIcon, "قائمة ضيافة كاملة جاهزة بالكميات، احذفي اللي ما تبينه", "A full hospitality list with amounts; remove what you don't need"],
     [LockIcon, "خاصة في حسابك، والمشاركة باختيارك", "Private to you; share only what you choose"],
   ];
   return (

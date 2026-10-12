@@ -88,6 +88,8 @@ const eventChecks: Record<ReceptionKind, [EventArea, L][]> = {
   home: [["decor", { ar: "ترتيب ركن الاستقبال", en: "Set up the welcome corner" }], ["nameboard", { ar: "لوحة اسم البيبي", en: "Baby name sign" }], ["hospitality", { ar: "القهوة والتمر", en: "Coffee and dates" }], ["flowers", { ar: "ورد", en: "Flowers" }]],
   family: [["hospitality", { ar: "الضيافة", en: "Hospitality" }], ["sweets", { ar: "الحلويات", en: "Sweets" }], ["photo", { ar: "تصوير العائلة", en: "Family photos" }]],
   aqiqah: [["hospitality", { ar: "ترتيب الوليمة", en: "Arrange the meal" }], ["favors", { ar: "التوزيعات", en: "Favors" }], ["decor", { ar: "تجهيز المكان", en: "Prepare the place" }]],
+  shower: [["decor", { ar: "ديكور الشاور (اختاري فكرة من أشكال الاستقبال)", en: "Shower decor (pick an idea from Welcome looks)" }], ["sweets", { ar: "كيك وطاولة حلويات", en: "Cake and sweets table" }], ["other", { ar: "ألعاب للضيفات (تخمين الوزن، رسائل للبيبي)", en: "Guest games (guess the weight, letters to baby)" }], ["photo", { ar: "ركن تصوير", en: "Photo corner" }], ["other", { ar: "إرسال الدعوات من استوديو الدعوات", en: "Send invitations from the studio" }]],
+  reveal: [["other", { ar: "طريقة الكشف (بالونة، كيك، ظرف…)", en: "How to reveal (balloon, cake, envelope…)" }], ["other", { ar: "ظرف مختوم بالجواب من الطبيبة", en: "Sealed answer envelope from the doctor" }], ["decor", { ar: "ديكور بلونين", en: "Two-colour decor" }], ["other", { ar: "تصويت الضيوف ولد ولا بنت", en: "Guests vote boy or girl" }], ["photo", { ar: "تصوير لحظة الكشف بالفيديو", en: "Film the reveal moment" }]],
   custom: [["other", { ar: "أول خطوة", en: "First step" }]],
 };
 export const receptionNames: Record<ReceptionKind, L> = {
@@ -95,6 +97,8 @@ export const receptionNames: Record<ReceptionKind, L> = {
   home: { ar: "استقبال البيت", en: "Home welcome" },
   family: { ar: "تجمع العائلة", en: "Family gathering" },
   aqiqah: { ar: "العقيقة", en: "Aqiqah" },
+  shower: { ar: "بيبي شاور", en: "Baby shower" },
+  reveal: { ar: "حفلة كشف الجنس", en: "Gender reveal" },
   custom: { ar: "مناسبة خاصة", en: "Our own occasion" },
 };
 
@@ -117,11 +121,47 @@ export function seedEvent(kind: ReceptionKind, lang: Lang): ReceptionEvent {
   const checks: EventCheck[] = eventChecks[kind].map(([area, title]) => ({ id: sid("ck"), area, title: tx(title, lang), done: false }));
   return { id: sid("ev"), kind, name: tx(receptionNames[kind], lang), checks };
 }
+/** Everything a Gulf welcome usually needs, ready so she only removes what she won't serve. */
+export type HospGroup = "drinks" | "sweets" | "savory" | "meal" | "supplies";
+export const hospCatalog: { group: HospGroup; ar: string; en: string; kind: HospItem["kind"]; unit: HospItem["unit"]; perGuest: number; servingsPerUnit: number; reservePct: number }[] = [
+  { group: "drinks", ar: "قهوة عربية", en: "Arabic coffee", kind: "coffee", unit: "thermos", perGuest: 2, servingsPerUnit: 12, reservePct: 15 },
+  { group: "drinks", ar: "شاي أحمر", en: "Black tea", kind: "tea", unit: "thermos", perGuest: 1, servingsPerUnit: 10, reservePct: 15 },
+  { group: "drinks", ar: "شاي كرك", en: "Karak tea", kind: "tea", unit: "thermos", perGuest: 1, servingsPerUnit: 10, reservePct: 15 },
+  { group: "drinks", ar: "حليب بالزعفران والهيل", en: "Saffron-cardamom milk", kind: "tea", unit: "thermos", perGuest: 0.5, servingsPerUnit: 10, reservePct: 10 },
+  { group: "drinks", ar: "ماء", en: "Water", kind: "water", unit: "bottle", perGuest: 1, servingsPerUnit: 1, reservePct: 20 },
+  { group: "drinks", ar: "عصير برتقال", en: "Orange juice", kind: "juice", unit: "bottle", perGuest: 0.5, servingsPerUnit: 4, reservePct: 10 },
+  { group: "drinks", ar: "ليمون بالنعناع", en: "Mint lemonade", kind: "juice", unit: "bottle", perGuest: 0.5, servingsPerUnit: 4, reservePct: 10 },
+  { group: "drinks", ar: "لبن بارد", en: "Cold laban", kind: "juice", unit: "bottle", perGuest: 0.3, servingsPerUnit: 1, reservePct: 10 },
+  { group: "sweets", ar: "تمر", en: "Dates", kind: "dates", unit: "kg", perGuest: 3, servingsPerUnit: 60, reservePct: 10 },
+  { group: "sweets", ar: "تمر محشي", en: "Stuffed dates", kind: "dates", unit: "box", perGuest: 2, servingsPerUnit: 20, reservePct: 10 },
+  { group: "sweets", ar: "شوكولاتة", en: "Chocolates", kind: "chocolate", unit: "box", perGuest: 2, servingsPerUnit: 30, reservePct: 10 },
+  { group: "sweets", ar: "معمول", en: "Maamoul", kind: "sweets", unit: "box", perGuest: 2, servingsPerUnit: 24, reservePct: 10 },
+  { group: "sweets", ar: "كيك الاستقبال", en: "Welcome cake", kind: "sweets", unit: "piece", perGuest: 1, servingsPerUnit: 20, reservePct: 10 },
+  { group: "sweets", ar: "كب كيك", en: "Cupcakes", kind: "sweets", unit: "piece", perGuest: 1, servingsPerUnit: 1, reservePct: 10 },
+  { group: "sweets", ar: "لقيمات", en: "Luqaimat", kind: "sweets", unit: "tray", perGuest: 4, servingsPerUnit: 60, reservePct: 10 },
+  { group: "sweets", ar: "بسبوسة أو كنافة", en: "Basbousa or kunafa", kind: "sweets", unit: "tray", perGuest: 1, servingsPerUnit: 24, reservePct: 10 },
+  { group: "sweets", ar: "حلوى خليجية", en: "Gulf halwa", kind: "sweets", unit: "box", perGuest: 1, servingsPerUnit: 20, reservePct: 10 },
+  { group: "sweets", ar: "فواكه مقطعة", en: "Cut fruit", kind: "sweets", unit: "tray", perGuest: 1, servingsPerUnit: 20, reservePct: 10 },
+  { group: "savory", ar: "مكسرات", en: "Mixed nuts", kind: "savory", unit: "kg", perGuest: 1, servingsPerUnit: 30, reservePct: 10 },
+  { group: "savory", ar: "معجنات زعتر وجبن", en: "Za'atar and cheese pastries", kind: "savory", unit: "tray", perGuest: 2, servingsPerUnit: 30, reservePct: 10 },
+  { group: "savory", ar: "سمبوسة", en: "Sambousa", kind: "savory", unit: "tray", perGuest: 2, servingsPerUnit: 40, reservePct: 10 },
+  { group: "savory", ar: "ساندويتشات ميني", en: "Mini sandwiches", kind: "savory", unit: "tray", perGuest: 2, servingsPerUnit: 30, reservePct: 10 },
+  { group: "meal", ar: "عشاء الضيوف (مندي أو مجبوس)", en: "Guests' dinner (mandi or machboos)", kind: "meal", unit: "tray", perGuest: 1, servingsPerUnit: 6, reservePct: 10 },
+  { group: "meal", ar: "سلطة", en: "Salad", kind: "meal", unit: "plate", perGuest: 1, servingsPerUnit: 8, reservePct: 10 },
+  { group: "supplies", ar: "فناجين قهوة ورقية", en: "Paper coffee cups", kind: "custom", unit: "pack", perGuest: 3, servingsPerUnit: 50, reservePct: 20 },
+  { group: "supplies", ar: "أكواب عصير وماء", en: "Juice and water cups", kind: "custom", unit: "pack", perGuest: 2, servingsPerUnit: 50, reservePct: 20 },
+  { group: "supplies", ar: "صحون صغيرة", en: "Small plates", kind: "custom", unit: "pack", perGuest: 2, servingsPerUnit: 50, reservePct: 20 },
+  { group: "supplies", ar: "ملاعق وشوك", en: "Spoons and forks", kind: "custom", unit: "pack", perGuest: 2, servingsPerUnit: 50, reservePct: 20 },
+  { group: "supplies", ar: "مناديل", en: "Napkins", kind: "custom", unit: "pack", perGuest: 3, servingsPerUnit: 100, reservePct: 20 },
+  { group: "supplies", ar: "مناديل مبللة", en: "Wet wipes", kind: "custom", unit: "pack", perGuest: 1, servingsPerUnit: 80, reservePct: 20 },
+  { group: "supplies", ar: "ثلج", en: "Ice", kind: "custom", unit: "pack", perGuest: 0.1, servingsPerUnit: 1, reservePct: 20 },
+  { group: "supplies", ar: "بخور وفحم", en: "Bakhoor and charcoal", kind: "custom", unit: "box", perGuest: 0.05, servingsPerUnit: 1, reservePct: 0 },
+];
+export const hospGroupOf = (name: string): HospGroup | undefined => hospCatalog.find((c) => c.ar === name || c.en === name)?.group;
+export function hospFromCatalog(c: (typeof hospCatalog)[number], lang: Lang, source: HospItem["source"]): HospItem {
+  return { id: sid("hs"), name: lang === "ar" ? c.ar : c.en, kind: c.kind, unit: c.unit, perGuest: c.perGuest, servingsPerUnit: c.servingsPerUnit, reservePct: c.reservePct, source };
+}
 export function seedHospitality(lang: Lang, eventId?: string): HospItem[] {
   const src = eventId ? { eventId } : { manual: 10 };
-  return [
-    { id: sid("hs"), name: lang === "ar" ? "قهوة عربية" : "Arabic coffee", kind: "coffee", unit: "thermos", perGuest: 2, servingsPerUnit: 12, reservePct: 15, source: src },
-    { id: sid("hs"), name: lang === "ar" ? "تمر" : "Dates", kind: "dates", unit: "kg", perGuest: 3, servingsPerUnit: 60, reservePct: 10, source: src },
-    { id: sid("hs"), name: lang === "ar" ? "ماء" : "Water", kind: "water", unit: "bottle", perGuest: 1, servingsPerUnit: 1, reservePct: 20, source: src },
-  ];
+  return hospCatalog.map((c) => hospFromCatalog(c, lang, src));
 }

@@ -80,3 +80,10 @@ The app sections are: home, steps, looks, ideas, items, bag, nursery, mother, ev
 - **Favor photos**: AI sample photos made with Canva, one per favor category, are approximate (not the exact item). Every idea in a category shows its category's photo. Categories without a photo yet keep their drawing. Canva's free quota allows only a few images per cooldown, and the copies we can download are 200 px, so they are used as small thumbnails only.
 - **Data export**: the JSON export includes photo names and dates but not the photo files themselves.
 - **Visit approval**: requests always need the mother's approval. Instant auto-confirm is not offered.
+
+## v8
+- **Welcome looks**: 501 hand-written ideas in `model/looks-data/*` (hospital, entrance, majlis, family, outdoors, aqiqah, baby shower, gender reveal), tagged by Gulf country, style and colours; four dropdown filters plus search. Drawn in SVG (`ui/Illustrations` LookArt).
+- **Invitation studio** (`/invite`, replaces Visits in the Welcome tabs; Visits moved to More): 300 designs (`model/invites.ts`, 32 layouts), drawn on a canvas (`ui/InviteCanvas.ts`) with four self-hosted OFL Arabic fonts; download PNG, print, or save to `plan.cards` (template `invite`, extra optional fields).
+- **Hospitality**: a full ready list (`hospCatalog` in `model/seed.ts`, 32 items in 5 groups), one guest count for all amounts, one-tap remove with undo, "add the rest" for older plans.
+- **Ideas**: 97 near-duplicates replaced (`model/refresh-ideas.ts`); ideas without their own photo get an icon picked from what they are (`ui/IdeaArt.tsx`), never one repeated photo.
+- **Optional events**: baby shower and gender reveal as reception kinds, one-tap add on Welcome plans.

@@ -79,7 +79,7 @@ export function SettingsPage({ switchHref }: { switchHref: string }) {
         </div>
         <p className="pt-2 text-[13px] font-medium text-[var(--qd-ink-soft)]">{t.setup.reception}</p>
         <div className="grid gap-2 sm:grid-cols-3">
-          {(["hospital", "home", "family", "aqiqah", "custom"] as ReceptionKind[]).map((k) => <ChoiceCard key={k} multi selected={p.receptionKinds.includes(k)} onClick={() => set({ receptionKinds: p.receptionKinds.includes(k) ? p.receptionKinds.filter((x) => x !== k) : [...p.receptionKinds, k] })}>{t.cats.reception[k]}</ChoiceCard>)}
+          {(["hospital", "home", "family", "aqiqah", "shower", "reveal", "custom"] as ReceptionKind[]).map((k) => <ChoiceCard key={k} multi selected={p.receptionKinds.includes(k)} onClick={() => set({ receptionKinds: p.receptionKinds.includes(k) ? p.receptionKinds.filter((x) => x !== k) : [...p.receptionKinds, k] })}>{t.cats.reception[k]}</ChoiceCard>)}
         </div>
       </Card>
       <Card className="space-y-3 p-4 sm:p-5">

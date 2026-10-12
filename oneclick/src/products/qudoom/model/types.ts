@@ -24,7 +24,7 @@ export const themeFor = (g?: BabyGender): ThemeId => (g === "boy" ? "moon" : g =
 export type SectionId = "prep" | "bag" | "nursery" | "mother" | "reception" | "visits" | "hospitality" | "registry" | "received" | "favors" | "budget" | "calendar" | "memories";
 export const allSections: SectionId[] = ["prep", "bag", "nursery", "mother", "reception", "visits", "hospitality", "registry", "received", "favors", "budget", "calendar", "memories"];
 export type ExperiencePreset = "prep" | "prepReception" | "full" | "custom";
-export type ReceptionKind = "hospital" | "home" | "family" | "aqiqah" | "custom";
+export type ReceptionKind = "hospital" | "home" | "family" | "aqiqah" | "shower" | "reveal" | "custom";
 
 export type Profile = {
   motherName: string;
@@ -248,7 +248,9 @@ export type ApptKind = "medical" | "personal" | "other";
 export type Appointment = { id: string; title: string; kind: ApptKind; date: string; time?: string; place?: string; notes?: string };
 export type Memory = { id: string; title: string; date?: string; text?: string; fileId?: string; order: number };
 export type CardTemplate = "arrived" | "invite" | "thanks" | "favor";
-export type CardDesign = { id: string; template: CardTemplate; title: string; name?: string; text?: string; date?: string; tone: "theme" | "warm" | "calm"; showDate: boolean; showDetails: boolean; details?: string; fileId?: string };
+export type CardDesign = { id: string; template: CardTemplate; title: string; name?: string; text?: string; date?: string; tone: "theme" | "warm" | "calm"; showDate: boolean; showDetails: boolean; details?: string; fileId?: string;
+  /** Invitation studio: chosen design, font and the extra lines. */
+  design?: string; font?: "ruqaa" | "kufi" | "naskh" | "messiri" | "rubik"; occasion?: "welcome" | "aqiqah" | "shower" | "reveal"; opener?: string; time?: string; host?: string; note?: string };
 
 // ---------- Files (bytes live server-side, private; only metadata here) ----------
 export type FileMeta = { id: string; name: string; mime: string; size: number; createdAt: string; caption?: string; order?: number; board?: "nursery" | "memories" | "receipts" | "gifts" | "favors" | "items" };

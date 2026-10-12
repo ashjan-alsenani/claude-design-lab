@@ -100,7 +100,19 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await page.goto("/en/app/hikayat-qudoom/steps");
   await expect(page.getByText("Start here").first()).toBeVisible();
   await page.goto("/en/app/hikayat-qudoom/looks");
-  await expect(page.getByText("1,000 illustrated looks", { exact: false })).toBeVisible();
+  await expect(page.getByText("welcome ideas, each one different", { exact: false })).toBeVisible();
+  await page.getByLabel("Place").selectOption("shower");
+  await expect(page.getByText(/^\d+ ideas$/)).toBeVisible();
+  // Invitation studio: pick a design, then the editor with a download button appears.
+  await page.goto("/en/app/hikayat-qudoom/invite");
+  await expect(page.getByRole("heading", { name: "Invitation studio" })).toBeVisible();
+  await expect(async () => {
+    await page.locator("ul li button[aria-label*='·']").first().click();
+    await expect(page.getByRole("button", { name: "Download" })).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 20_000 });
+  // Hospitality comes as a full ready list; each item can be removed with one tap.
+  await page.goto("/en/app/hikayat-qudoom/hospitality");
+  await expect(page.getByRole("button", { name: "Remove Black tea" })).toBeVisible();
   // Ready ideas: one tap adds a gift to the list and a favor to the favors plan.
   await page.goto("/en/app/hikayat-qudoom/ideas");
   await expect(page.getByRole("heading", { name: /Lovely ideas/ })).toBeVisible();

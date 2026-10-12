@@ -82,12 +82,12 @@ export function QudoomPreviewAnimated({ locale }: { locale: Locale }) {
       ),
     },
     {
-      key: "looks", color: PINK, label: ar ? "١٠٠٠ شكل استقبال" : "1,000 welcome looks",
+      key: "looks", color: PINK, label: ar ? "٥٠٠ فكرة استقبال" : "500 welcome ideas",
       body: (
         <div className="space-y-2">
           <p className="text-[15px] font-extrabold text-[#3f3b52]">{ar ? "أشكال الاستقبال" : "Welcome looks"}</p>
           <div className="grid grid-cols-2 gap-2">
-            {[looks[101], looks[318], looks[540], looks[777], looks[205], looks[912]].map((l, k) => (
+            {[looks[3], looks[120], looks[200], looks[270], looks[340], looks[460]].map((l, k) => (
               <motion.div key={l.id} initial={reduce ? false : { opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 * k }} className="overflow-hidden rounded-[14px] bg-white shadow-sm">
                 <LookArt look={l} className="aspect-[16/10] w-full" />
               </motion.div>
