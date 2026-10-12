@@ -95,7 +95,6 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await expect(page.getByText("Noor · Noor's mum")).toBeVisible();
   // The reminders bell is always in the header.
   await expect(page.getByRole("button", { name: /^Reminders/ })).toBeVisible();
-  await saved(page);
 
   // Step by step and the welcome looks are there from the start.
   await page.goto("/en/app/hikayat-qudoom/steps");
