@@ -5182,3 +5182,19 @@ button.vg-kpi:active { transform: scale(.98); }
 .vg-bars .vg-bl { grid-area: l; white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.35; }
 .vg-bars .vg-bt { grid-area: bt; }
 .vg-bars b { grid-area: n; }
+
+/* ---------- v78 sections (department › section) ---------- */
+.card-sec { margin-top: -2px; color: var(--teal-txt, var(--teal)); font-weight: 500; }
+.oc-sec { background: color-mix(in srgb, var(--teal) 10%, var(--paper)); color: var(--teal-txt, var(--teal)); }
+.org-unit[open]:has(.ou-secs) { grid-column: 1 / -1; }
+.ou-secs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; padding: 12px; border-top: 1px solid var(--line); align-items: start; }
+.ou-sec { border: 1px solid var(--line); border-radius: 14px; background: var(--paper); overflow: hidden; }
+.ou-sec-h { display: flex; align-items: center; gap: 8px; margin: 0; padding: 10px 12px; font-size: 14.5px; font-weight: 700; color: var(--navy-txt, var(--ink)); background: color-mix(in srgb, var(--oc, var(--teal)) 8%, var(--paper)); border-bottom: 1px solid var(--line); }
+.ou-sec-h .ic { color: var(--oc, var(--teal)); flex: none; }
+.ou-sec-h span { flex: 1; min-width: 0; }
+.ou-sec-h em { font-style: normal; font-size: 13px; font-weight: 600; padding: 1px 9px; border-radius: 999px; background: var(--canvas); font-variant-numeric: tabular-nums; }
+.ou-sec .org-people { border-top: 0; padding: 6px 6px 8px; }
+.ou-sec .ou-tree { grid-template-columns: 1fr !important; }
+.lf-sec { display: flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 13.5px; font-weight: 500; color: var(--teal-txt, var(--teal)); }
+.org-xlsx { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.38); }
+.org-xlsx:hover { background: rgba(255,255,255,.2); color: #fff; }
