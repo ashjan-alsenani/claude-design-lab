@@ -130,7 +130,7 @@ function drawCard(c: HTMLCanvasElement, card: CardDesign, o: { lang: "ar" | "en"
   const W = c.width, H = c.height;
   const v = (n: string, f: string) => o.theme.getPropertyValue(n).trim() || f;
   const palettes = {
-    theme: { bg: v("--qd-tint-2", "#f1f8f6"), deco: v("--qd-tint", "#e3f2ef"), ink: "#1e1b3a", accent: v("--qd-primary", "#2f7a71"), soft: v("--qd-accent", "#f2a57c") },
+    theme: { bg: v("--qd-tint-2", "#f1f8f6"), deco: v("--qd-tint", "#e3f2ef"), ink: "#3f3b52", accent: v("--qd-primary", "#2f7a71"), soft: v("--qd-accent", "#f2a57c") },
     warm: { bg: "#fdf3ea", deco: "#f9e1cf", ink: "#3b2a22", accent: "#b2643a", soft: "#e9b48f" },
     calm: { bg: "#f2f4f8", deco: "#e2e7f1", ink: "#1e2440", accent: "#4f5d8f", soft: "#a9b6d6" },
   }[card.tone];

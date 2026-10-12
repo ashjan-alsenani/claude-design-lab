@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
-import { ArrowsClockwiseIcon, BabyIcon, BagIcon, CheckIcon, GiftIcon, PlusIcon, SparkleIcon, UsersThreeIcon, WalletIcon, type Icon } from "@phosphor-icons/react";
+import { ArrowsClockwiseIcon, BabyIcon, BagIcon, CheckIcon, GiftIcon, HeartIcon, PencilSimpleIcon, PlusIcon, SparkleIcon, UsersThreeIcon, WalletIcon, type Icon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { bagProgress, budget, daysBetween, itemDone, progress, upcoming, type CalEntry } from "../model/engine";
 import { allIdeas } from "../model/all-ideas";
 import { BabyMascot } from "../ui/Mascot";
 import { useSteps } from "./Steps";
+import { ProfileSheet } from "../ui/ProfileSheet";
+import { RemindersCard } from "../ui/Reminders";
 import { cx } from "../ui/kit";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -62,6 +64,7 @@ const card = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transiti
 export function Home() {
   const { plan, t, lang, today, num, pct, money, date, rel, href, dispatch, can, mode, access, pub, newId, say } = useQ();
   const reduce = useReducedMotion();
+  const [editing, setEditing] = useState(false);
   const p = plan.profile!;
   const h = t.home;
   const d = h.dash;
@@ -117,12 +120,17 @@ export function Home() {
       {/* Greeting + countdown + readiness */}
       <motion.section variants={card} className="qd-card relative overflow-hidden rounded-[32px] p-5 sm:p-6">
         <div className="pointer-events-none absolute -end-10 -top-10 size-40 rounded-full bg-[var(--qd-tint)]" />
-        <div className="relative flex items-center gap-4">
+        {mode !== "helper" && (
+          <button type="button" onClick={() => setEditing(true)} className="absolute end-3 top-3 z-10 flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-paper)] px-3 text-[13px] font-semibold text-[var(--qd-ink-soft)] shadow-sm ring-1 ring-[var(--qd-line)] hover:text-[var(--qd-primary)]">
+            <PencilSimpleIcon size={16} /> {lang === "ar" ? "تعديل المعلومات" : "Edit details"}
+          </button>
+        )}
+        <div className="relative flex items-center gap-4 pt-6 sm:pt-0">
           <motion.div animate={reduce ? undefined : { y: [0, -6, 0] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} className="shrink-0">
-            <BabyMascot size={84} theme={p.theme} mood={arrived ? "celebrate" : "love"} body />
+            <BabyMascot size={84} theme={p.theme} mood={arrived ? "celebrate" : "sweet"} body />
           </motion.div>
           <div className="min-w-0 flex-1">
-            <p className="text-[14px] font-semibold text-[var(--qd-primary)]">{h.hello(p.motherName)} 🤍</p>
+            <p className="text-[14px] font-semibold text-[var(--qd-primary)]">{h.hello(p.motherName)}</p>
             {arrived ? (
               <h1 className="mt-1 text-[1.6rem] font-extrabold leading-tight">{h.arrivedTitle(p.babyName)}</h1>
             ) : daysLeft !== undefined && daysLeft > 0 ? (
@@ -165,7 +173,11 @@ export function Home() {
             {h.undoArrived}
           </button>
         )}
+        <ProfileSheet open={editing} onClose={() => setEditing(false)} />
       </motion.section>
+
+      {/* Gentle reminders: don't forget, appointment soon */}
+      {mode !== "helper" && <motion.div variants={card}><RemindersCard /></motion.div>}
 
       {/* Step by step: where she is now */}
       <motion.section variants={card}>
@@ -174,7 +186,7 @@ export function Home() {
           <span className="relative grid size-14 shrink-0 place-items-center rounded-full bg-white/15 text-[1.4rem] font-extrabold">{num(Math.min(stepNow + 1, stepList.length))}</span>
           <span className="relative min-w-0 flex-1">
             <span className="block text-[12.5px] font-semibold opacity-80">{t.nav.steps} · {lang === "ar" ? `${num(stepDone)} من ${num(stepList.length)}` : `${num(stepDone)} of ${num(stepList.length)}`}</span>
-            <span className="block text-[17px] font-extrabold leading-snug">{stepNow < stepList.length ? (lang === "ar" ? stepList[stepNow].ar[0] : stepList[stepNow].en[0]) : lang === "ar" ? "خلصتي كل الخطوات 🎉" : "All steps done 🎉"}</span>
+            <span className="block text-[17px] font-extrabold leading-snug">{stepNow < stepList.length ? (lang === "ar" ? stepList[stepNow].ar[0] : stepList[stepNow].en[0]) : lang === "ar" ? "خلصتي كل الخطوات" : "All steps done"}</span>
           </span>
           <motion.span aria-hidden="true" className="relative text-[22px]" animate={reduce ? undefined : { x: lang === "ar" ? [0, -5, 0] : [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity }}>{lang === "ar" ? "←" : "→"}</motion.span>
         </Link>
@@ -239,7 +251,7 @@ export function Home() {
             <motion.div className="absolute top-1/2 -translate-y-1/2" initial={{ insetInlineStart: "0%" }} animate={{ insetInlineStart: `calc((100% - 4.5rem) * ${along})` }} transition={{ duration: 1.4, ease }}>
               <BabyMascot size={40} theme={p.theme} animate={false} />
             </motion.div>
-            <span className="absolute end-0 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-[var(--qd-tint)] text-[18px]">🍼</span>
+            <span className="absolute end-0 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-[var(--qd-tint)] text-[var(--qd-primary)]"><HeartIcon size={18} weight="fill" /></span>
           </div>
           <div className="mt-1 flex justify-between text-[12px] text-[var(--qd-muted)]">
             <span>{d.now}</span>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { CheckIcon, MapTrifoldIcon } from "@phosphor-icons/react";
+import { isLookTask } from "../model/looks";
 import { useQ } from "../app/state";
 import { bagProgress, daysBetween, itemDone } from "../model/engine";
 import type { Plan, SectionId } from "../model/types";
@@ -23,7 +24,7 @@ export const steps: Step[] = [
   { id: "items", to: "items", section: "prep", weeks: 14, ar: ["علّمي اللي عندك من أغراض البيبي", "القائمة جاهزة، بس اضغطي على اللي متوفر عندك."], en: ["Tick the baby things you already have", "The list is ready; just tap what you have."], done: (p) => { const l = p.items.filter((i) => i.area === "baby" && i.status !== "skip"); return pct(l.filter(itemDone).length, l.length) >= 0.5; } },
   { id: "nursery", to: "nursery", section: "nursery", weeks: 10, ar: ["جهزي غرفة أو ركن البيبي", "السرير والتخزين والإضاءة، خطوة خطوة."], en: ["Get the room or corner ready", "Bed, storage and light, one by one."], done: (p) => { const l = p.items.filter((i) => i.area === "nursery" && i.status !== "skip"); return pct(l.filter(itemDone).length, l.length) >= 0.5; } },
   { id: "favors", to: "ideas", section: "favors", weeks: 8, ar: ["اختاري التوزيعات واطلبيها بدري", "اختاري من مئات الأفكار، والطلب المبكر يريحك."], en: ["Pick your favors and order early", "Choose from hundreds of ideas; ordering early is calmer."], done: (p) => p.favors.some((f) => f.status !== "idea") },
-  { id: "look", to: "looks", section: "reception", weeks: 7, ar: ["اختاري شكل استقبال البيبي", "ألف شكل مرسوم بالألوان، اختاري اللي يشبهك."], en: ["Choose the welcome look", "A thousand illustrated looks; pick the one that feels like you."], done: (p) => p.tasks.some((t) => t.area === "reception" && t.title.startsWith("✨")) },
+  { id: "look", to: "looks", section: "reception", weeks: 7, ar: ["اختاري شكل استقبال البيبي", "ألف شكل مرسوم بالألوان، اختاري اللي يشبهك."], en: ["Choose the welcome look", "A thousand illustrated looks; pick the one that feels like you."], done: (p) => p.tasks.some(isLookTask) },
   { id: "registry", to: "registry", section: "registry", weeks: 6, ar: ["جهزي قائمة الهدايا وشاركي الرابط", "حتى ما تتكرر الهدايا، والأهل يعرفون اللي تحتاجينه."], en: ["Make the gift list and share it", "So gifts don't repeat and family knows what you need."], done: (p, c) => p.gifts.length >= 3 && c.links > 0 },
   { id: "bag", to: "bag", section: "bag", weeks: 5, ar: ["جهزي شنطة المستشفى", "شنطة لك، وللبيبي، وللمرافقة، والأوراق."], en: ["Pack the hospital bag", "One for you, one for baby, one for your companion, and papers."], done: (p) => { const b = bagProgress(p); return pct(b.packed, b.total) >= 0.8; } },
   { id: "rest", to: "mother", section: "mother", weeks: 4, ar: ["رتبي خطة راحتك بعد الولادة", "مين يساعد بالأكل والبيت والأهل في الأيام الأولى."], en: ["Plan your rest after birth", "Who helps with meals, home and family in the first days."], done: (p) => p.helpRows.some((r) => !!r.owner) },
@@ -60,7 +61,7 @@ export function StepsPage() {
   return (
     <div className="space-y-5">
       <header className="flex items-center gap-3">
-        <BabyMascot size={60} theme={plan.profile?.theme} mood="happy" body />
+        <BabyMascot size={60} theme={plan.profile?.theme} mood="sweet" body />
         <div className="min-w-0 flex-1">
           <h1 className="flex items-center gap-2 text-[1.6rem] font-extrabold leading-tight">
             <MapTrifoldIcon size={24} weight="fill" className="text-[var(--qd-primary)]" /> {t.nav.steps}

@@ -1,5 +1,6 @@
 import { favorBases, favorCats, type FavorCat } from "./favor-ideas";
 import { ideas as baseIdeas } from "./ideas";
+import { moreBlocks, moreFavorBlocks } from "./more-ideas";
 
 /**
  * Every ready idea in «حكاية قدوم», each one distinct (no repeats with a different wrapping).
@@ -8,18 +9,18 @@ import { ideas as baseIdeas } from "./ideas";
 export type IdeaKind = "favor" | "gift" | "mother" | "decor" | "sign" | "hosp" | "photo" | "aqiqah" | "hospital" | "keepsake" | "thanks";
 export type AnyIdea = { id: string; kind: IdeaKind; cat?: FavorCat; ar: string; en: string; arNote?: string; enNote?: string; price?: 1 | 2 | 3 };
 
-export const ideaKinds: { kind: IdeaKind; ar: string; en: string; emoji: string; color: string }[] = [
-  { kind: "favor", ar: "توزيعات", en: "Favors", emoji: "🎀", color: "#e8a5b5" },
-  { kind: "gift", ar: "هدايا للبيبي", en: "Gifts for baby", emoji: "🧸", color: "#a9c1dc" },
-  { kind: "mother", ar: "هدايا للأم", en: "Gifts for mum", emoji: "💐", color: "#c9b8e0" },
-  { kind: "decor", ar: "ديكور الاستقبال", en: "Welcome decor", emoji: "🎈", color: "#efd28f" },
-  { kind: "sign", ar: "لوحة الاسم", en: "Name sign", emoji: "🪧", color: "#d9b38c" },
-  { kind: "hosp", ar: "ضيافة", en: "Hospitality", emoji: "☕", color: "#bcd3b3" },
-  { kind: "photo", ar: "أفكار تصوير", en: "Photo ideas", emoji: "📷", color: "#a9c1dc" },
-  { kind: "hospital", ar: "استقبال المستشفى", en: "Hospital welcome", emoji: "🏥", color: "#f2b8c6" },
-  { kind: "aqiqah", ar: "العقيقة", en: "Aqiqah", emoji: "🌙", color: "#c9d6b8" },
-  { kind: "keepsake", ar: "ذكريات تبقى", en: "Keepsakes", emoji: "💌", color: "#e6c7a8" },
-  { kind: "thanks", ar: "رسائل شكر", en: "Thank-you notes", emoji: "🤍", color: "#e8a5b5" },
+export const ideaKinds: { kind: IdeaKind; ar: string; en: string; color: string }[] = [
+  { kind: "favor", ar: "توزيعات", en: "Favors", color: "#e8a5b5" },
+  { kind: "gift", ar: "هدايا للبيبي", en: "Gifts for baby", color: "#a9c1dc" },
+  { kind: "mother", ar: "هدايا للأم", en: "Gifts for mum", color: "#c9b8e0" },
+  { kind: "decor", ar: "ديكور الاستقبال", en: "Welcome decor", color: "#efd28f" },
+  { kind: "sign", ar: "لوحة الاسم", en: "Name sign", color: "#d9b38c" },
+  { kind: "hosp", ar: "ضيافة", en: "Hospitality", color: "#bcd3b3" },
+  { kind: "photo", ar: "أفكار تصوير", en: "Photo ideas", color: "#a9c1dc" },
+  { kind: "hospital", ar: "استقبال المستشفى", en: "Hospital welcome", color: "#f2b8c6" },
+  { kind: "aqiqah", ar: "العقيقة", en: "Aqiqah", color: "#c9d6b8" },
+  { kind: "keepsake", ar: "ذكريات تبقى", en: "Keepsakes", color: "#e6c7a8" },
+  { kind: "thanks", ar: "رسائل شكر", en: "Thank-you notes", color: "#e8a5b5" },
 ];
 
 const L = (kind: IdeaKind, block: string): AnyIdea[] =>
@@ -460,16 +461,19 @@ const listed: AnyIdea[] = [
 أول صورة أشعة في إطار|First scan in a frame
 مسبحة الأم في يوم الولادة|Mum's prayer beads from the birth day`),
   ...L("thanks", `
-شكرًا لمحبتكم وهديتكم الحلوة، فرحتنا اكتملت بوجودكم 🤍|Thank you for your love and lovely gift. You completed our joy 🤍
+شكرًا لمحبتكم وهديتكم الحلوة، فرحتنا اكتملت بوجودكم|Thank you for your love and lovely gift. You completed our joy
 الله يجزاكم خير على الهدية، وصلت وفرّحتنا كثير|May God reward you for the gift. It arrived and made us so happy
 شكرًا من القلب، هديتكم بتكون من أحلى ذكريات {gift}|Heartfelt thanks, your gift will be one of the sweetest memories
 وصلتنا هديتكم وكانت لمسة ما ننساها، الله لا يحرمنا منكم|Your gift was a touch we won't forget. May we never be without you
 {name} شكرًا على {gift}، الله يسعدك مثل ما أسعدتينا|{name}, thank you for {gift}. May you be as happy as you made us
-بيبينا يقول شكرًا 🍼 على الهدية الحلوة|Our baby says thank you 🍼 for the lovely gift
+بيبينا يقول شكرًا على الهدية الحلوة|Our baby says thank you for the lovely gift
 ممتنين لكم ولمحبتكم، الله يديم الود بيننا|Grateful for your love. May our bond last
 شكرًا على حضوركم وهديتكم، نوّرتوا فرحتنا|Thank you for coming and for your gift. You lit up our joy
 هديتكم وصلت وفيها ذوق ومحبة، شكرًا لكم|Your gift arrived full of taste and love. Thank you
 الله يرزقكم من حيث لا تحتسبون، شكرًا على الهدية|May you be blessed beyond measure. Thank you for the gift`),
+  // v6: five hundred more.
+  ...(Object.entries(moreFavorBlocks) as [FavorCat, string][]).flatMap(([cat, block]) => rareFavors(cat, block)),
+  ...(Object.entries(moreBlocks) as [IdeaKind, string][]).flatMap(([kind, block]) => L(kind, block)),
 ];
 
 /** Unique ids by position (each idea text is unique too; a unit test checks both). */

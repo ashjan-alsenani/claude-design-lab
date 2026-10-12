@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRightIcon, BabyIcon, BagIcon, CalendarHeartIcon, CheckCircleIcon, CoffeeIcon, GiftIcon, HandHeartIcon, LockKeyIcon, ShieldCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon, BabyCarriageIcon, BabyIcon, BagIcon, BalloonIcon, BellRingingIcon, CalendarHeartIcon, CheckCircleIcon, CoffeeIcon, GiftIcon, HandbagIcon, HandHeartIcon, HouseIcon, LockIcon, LockKeyIcon, MapTrifoldIcon, ShieldCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/dist/ssr";
+import type { Icon } from "@phosphor-icons/react";
 import type { Locale } from "@/i18n/config";
 import { Clicky } from "@/components/brand/Clicky";
 
@@ -113,23 +114,23 @@ export function QudoomStory({ locale }: { locale: Locale }) {
 /** What's inside, as short cute points under the description. */
 export function QudoomBullets({ locale }: { locale: Locale }) {
   const ar = locale === "ar";
-  const items: [string, string, string][] = [
-    ["🗺️", "خطوة بخطوة: تعرفين من وين تبدين ووش بعدها", "Step by step: where to start and what's next"],
-    ["🏠", "لوحة وحدة توريك كل شي: الأيام الباقية والجاهزية", "One dashboard for everything: days left and readiness"],
-    ["🧸", "أغراض البيبي وغرفته، بقوائم جاهزة", "Baby things and nursery, with ready lists"],
-    ["👜", "شنطة المستشفى: لك وللبيبي وللمرافقة", "Hospital bag: for you, baby and your companion"],
-    ["🎈", "١٠٠٠ شكل مرسوم لاستقبال البيبي", "1,000 illustrated welcome looks"],
-    ["🎀", "مئات أفكار التوزيعات بصورها", "Hundreds of favor ideas, each drawn"],
-    ["🎁", "قائمة هدايا يحجز منها الأهل بدون تكرار", "A gift list family can reserve, no duplicates"],
-    ["☕", "حاسبة ضيافة وزيارات بمواعيد", "Hospitality calculator and visits by appointment"],
-    ["💗", "وردي لو بنت، كحلي لو ولد", "Pink for a girl, navy for a boy"],
-    ["🔒", "خاصة في حسابك، والمشاركة باختيارك", "Private to you; share only what you choose"],
+  const items: [Icon, string, string][] = [
+    [MapTrifoldIcon, "خطوة بخطوة: تعرفين من وين تبدين ووش بعدها", "Step by step: where to start and what's next"],
+    [HouseIcon, "لوحة وحدة توريك كل شي: الأيام الباقية والجاهزية", "One dashboard for everything: days left and readiness"],
+    [BellRingingIcon, "تنبيهات لطيفة: لا تنسين، وموعدك بعد يومين", "Gentle reminders: don't forget, your appointment is in 2 days"],
+    [BabyCarriageIcon, "أغراض البيبي وغرفته، بقوائم جاهزة", "Baby things and nursery, with ready lists"],
+    [HandbagIcon, "شنطة المستشفى: لك وللبيبي وللمرافقة", "Hospital bag: for you, baby and your companion"],
+    [BalloonIcon, "١٠٠٠ شكل مرسوم لاستقبال البيبي", "1,000 illustrated welcome looks"],
+    [GiftIcon, "أكثر من ألف فكرة للتوزيعات والهدايا", "Over a thousand favor and gift ideas"],
+    [HandHeartIcon, "قائمة هدايا يحجز منها الأهل بدون تكرار", "A gift list family can reserve, no duplicates"],
+    [CoffeeIcon, "حاسبة ضيافة وزيارات بمواعيد", "Hospitality calculator and visits by appointment"],
+    [LockIcon, "خاصة في حسابك، والمشاركة باختيارك", "Private to you; share only what you choose"],
   ];
   return (
     <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-      {items.map(([e, a, en]) => (
-        <li key={e} className="flex items-center gap-2.5 rounded-2xl bg-surface-raised/80 px-3 py-2 text-[0.95rem] font-medium text-ink shadow-soft">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full text-base" style={{ background: "color-mix(in oklab, #ff9fb8 22%, #fff)" }}>{e}</span>
+      {items.map(([I, a, en]) => (
+        <li key={en} className="flex items-center gap-2.5 rounded-2xl bg-surface-raised/80 px-3 py-2 text-[0.95rem] font-medium text-ink shadow-soft">
+          <span className="grid size-8 shrink-0 place-items-center rounded-full text-[#b4486f]" style={{ background: "color-mix(in oklab, #ff9fb8 22%, #fff)" }}><I size={18} weight="duotone" aria-hidden="true" /></span>
           {ar ? a : en}
         </li>
       ))}

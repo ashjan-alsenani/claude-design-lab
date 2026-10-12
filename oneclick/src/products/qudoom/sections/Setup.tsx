@@ -78,7 +78,7 @@ export function Setup() {
       <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} className="mx-auto max-w-lg">
         <div className="qd-card rounded-[32px] p-6 text-center sm:p-8">
           <motion.div key={gender} initial={reduce ? false : { scale: 0.8, rotate: -6 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 260, damping: 14 }} className="mx-auto w-fit">
-            <BabyMascot size={104} theme={themeFor(gender)} mood="love" body />
+            <BabyMascot size={104} theme={themeFor(gender)} mood="sweet" body />
           </motion.div>
           <h1 className="mt-3 text-[1.9rem] font-extrabold">{s.welcome}</h1>
           <p className="mt-1 text-[15px] text-[var(--qd-ink-soft)]">{s.welcomeSub}</p>
@@ -95,7 +95,7 @@ export function Setup() {
                 whileTap={reduce ? undefined : { scale: 0.95 }}
                 className={cx("flex flex-col items-center gap-1.5 rounded-[22px] border-2 px-2 py-3 transition-colors", gender === o.g ? "border-[var(--qd-primary)] bg-[var(--qd-tint)]" : "border-transparent bg-[var(--qd-tint-2)]")}
               >
-                <Clicky size={44} color={o.color} accessory={o.g === "girl" ? "bow" : o.g === "boy" ? "cap" : "baby"} mood={gender === o.g ? "love" : "happy"} />
+                <Clicky size={44} color={o.color} ink="#5a5570" accessory={o.g === "girl" ? "girl" : o.g === "boy" ? "boy" : "baby"} mood={gender === o.g ? "love" : "sweet"} />
                 <span className="text-[15px] font-bold">{o.label}</span>
               </motion.button>
             ))}

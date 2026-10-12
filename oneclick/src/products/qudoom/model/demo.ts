@@ -58,7 +58,7 @@ export function demoPlan(today: string, lang: "ar" | "en"): Plan {
   p.favors = [
     {
       id: "fv-1", eventId: ev?.id, type: ar ? "علب شوكولاتة باسم البيبي" : "Chocolate boxes with the baby's name", vendor: ar ? "حلويات الندى" : "Al Nada Sweets",
-      printedText: ar ? "أهلًا بسلمى 🤍" : "Welcome Salma 🤍", babyName: ar ? "سلمى" : "Salma", qtyBase: 50, qtyExtra: 5, unitMinor: 1_200, feesMinor: 0, depositMinor: 20_000,
+      printedText: ar ? "أهلًا بسلمى" : "Welcome Salma", babyName: ar ? "سلمى" : "Salma", qtyBase: 50, qtyExtra: 5, unitMinor: 1_200, feesMinor: 0, depositMinor: 20_000,
       sampleApprovedOn: addDays(today, -1), deliveryDate: addDays(today, 40), status: "approved", qtyReceived: 0, qtyGiven: 0, orderId: "or-favors",
     },
   ];

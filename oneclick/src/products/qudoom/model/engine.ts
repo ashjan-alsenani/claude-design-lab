@@ -225,3 +225,38 @@ export function pendingDeliveries(p: Plan) {
 export function nextVisit(p: Plan, today: string) {
   return p.visits.filter((v) => v.status === "confirmed" && v.confirmed && v.confirmed.date >= today).sort((a, b) => slotKey(a.confirmed!).localeCompare(slotKey(b.confirmed!)))[0];
 }
+
+// ---------- Gentle reminders (in-app only; nothing is sent anywhere) ----------
+export type ReminderTone = "late" | "soon" | "info";
+export type Reminder = { id: string; tone: ReminderTone; kind: "appt" | "task" | "payment" | "visit" | "request" | "delivery" | "bag" | "thanks"; title: string; date?: string; time?: string; page: "calendar" | "budget" | "visits" | "bag" | "received" | "favors"; count?: number };
+/**
+ * What she shouldn't forget: appointments in the next 3 days, tasks that are late or due within
+ * 2 days, payments due or late, visits today or tomorrow, new visit requests, deliveries soon, the
+ * hospital bag in the last 4 weeks, and thank-yous waiting. Late first, then by date.
+ */
+export function reminders(p: Plan, today: string): Reminder[] {
+  const out: Reminder[] = [];
+  const on = p.profile?.sections;
+  const d = (iso: string) => daysBetween(today, iso);
+  for (const a of p.appointments) if (d(a.date) >= 0 && d(a.date) <= 3) out.push({ id: `a:${a.id}`, tone: "soon", kind: "appt", title: a.title, date: a.date, time: a.time, page: "calendar" });
+  for (const t of p.tasks) if (t.due && t.status === "todo" && d(t.due) <= 2) out.push({ id: `t:${t.id}`, tone: d(t.due) < 0 ? "late" : "soon", kind: "task", title: t.title, date: t.due, time: t.time, page: "calendar" });
+  for (const x of p.payments) if (x.due && !x.paidOn && d(x.due) <= 3) out.push({ id: `p:${x.id}`, tone: d(x.due) < 0 ? "late" : "soon", kind: "payment", title: x.label, date: x.due, page: "budget" });
+  if (on?.visits !== false) {
+    for (const v of p.visits) if (v.status === "confirmed" && v.confirmed && d(v.confirmed.date) >= 0 && d(v.confirmed.date) <= 1) out.push({ id: `v:${v.id}`, tone: "soon", kind: "visit", title: v.name, date: v.confirmed.date, time: v.confirmed.time, page: "visits" });
+    const req = p.visits.filter((v) => v.status === "requested").length;
+    if (req) out.push({ id: "requests", tone: "info", kind: "request", title: "", count: req, page: "visits" });
+  }
+  for (const o of p.orders) if (o.deliveryDate && (o.status === "ordered" || o.status === "shipped") && d(o.deliveryDate) >= 0 && d(o.deliveryDate) <= 2) out.push({ id: `o:${o.id}`, tone: "soon", kind: "delivery", title: o.title, date: o.deliveryDate, page: "budget" });
+  if (on?.favors !== false) for (const f of p.favors) if (f.deliveryDate && f.status !== "received" && f.status !== "idea" && d(f.deliveryDate) >= 0 && d(f.deliveryDate) <= 2) out.push({ id: `f:${f.id}`, tone: "soon", kind: "delivery", title: f.type, date: f.deliveryDate, page: "favors" });
+  const due = p.profile?.dueDate;
+  if (on?.bag !== false && due && !p.profile?.arrived && d(due) <= 28) {
+    const b = bagProgress(p);
+    if (b.total && b.packed < b.total) out.push({ id: "bag", tone: d(due) <= 14 ? "late" : "soon", kind: "bag", title: "", count: b.total - b.packed, page: "bag" });
+  }
+  if (on?.received !== false) {
+    const n = p.received.filter((r) => !r.thanked).length;
+    if (n) out.push({ id: "thanks", tone: "info", kind: "thanks", title: "", count: n, page: "received" });
+  }
+  const rank = { late: 0, soon: 1, info: 2 } as const;
+  return out.sort((a, b) => rank[a.tone] - rank[b.tone] || (a.date ?? "9999").localeCompare(b.date ?? "9999"));
+}

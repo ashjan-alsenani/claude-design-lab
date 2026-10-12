@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckCircleIcon, CheckIcon, SparkleIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
-import { lookChecklist, looks, lookTitle, palettes, places, themes, type Look, type LookPlace, type LookTheme } from "../model/looks";
+import { isLookTask, lookChecklist, looks, lookTitle, palettes, places, themes, type Look, type LookPlace, type LookTheme } from "../model/looks";
 import { LookArt } from "../ui/Illustrations";
 import { BabyMascot } from "../ui/Mascot";
 import { Sheet, cx } from "../ui/kit";
@@ -12,7 +12,7 @@ import { Sheet, cx } from "../ui/kit";
 /**
  * «أشكال الاستقبال»: 1,000 illustrated welcome looks (10 themes × 20 palettes × 5 places). Filter
  * by place, theme and colour; open one to see it big with everything to prepare; adopt it and its
- * checklist becomes her welcome tasks (marked ✨ so the step-by-step guide knows).
+ * checklist becomes her welcome tasks (the look id in its notes tells the step-by-step guide).
  */
 export function LooksPage() {
   const { t, lang, plan, dispatch, newId, access, say, num } = useQ();
@@ -24,16 +24,16 @@ export function LooksPage() {
   const [shown, setShown] = useState(12);
   const [open, setOpen] = useState<Look | null>(null);
   const list = useMemo(() => looks.filter((l) => (place === "all" || l.place === place) && (theme === "all" || l.theme === theme) && (pal === "all" || l.palette.id === pal)), [place, theme, pal]);
-  const chosen = plan.tasks.find((k) => k.area === "reception" && k.title.startsWith("✨"));
+  const chosen = plan.tasks.find(isLookTask);
   const reset = () => setShown(12);
 
   const adopt = (l: Look) => {
-    const title = `✨ ${lookTitle(l, lang)} · ${(ar ? places : places).find((p) => p.id === l.place)![ar ? "ar" : "en"]}`.slice(0, 160);
+    const title = `${ar ? "شكل الاستقبال" : "Welcome look"}: ${lookTitle(l, lang)} · ${(ar ? places : places).find((p) => p.id === l.place)![ar ? "ar" : "en"]}`.slice(0, 160);
     // Replace an earlier choice's headline; keep any tasks she already ticked.
     if (chosen) dispatch({ t: "del", c: "tasks", id: chosen.id });
     dispatch({ t: "put", c: "tasks", item: { id: newId("tk"), title, area: "reception", status: "todo", notes: l.id } });
     for (const item of lookChecklist(l, lang)) if (!plan.tasks.some((k) => k.title === item)) dispatch({ t: "put", c: "tasks", item: { id: newId("tk"), title: item.slice(0, 160), area: "reception", status: "todo" } });
-    say(ar ? "اعتمدنا الشكل، وانضافت قائمة التجهيز لمهام الاستقبال 🤍" : "Look adopted; its checklist is in your welcome tasks 🤍");
+    say(ar ? "اعتمدنا الشكل، وانضافت قائمة التجهيز لمهام الاستقبال" : "Look adopted; its checklist is in your welcome tasks");
     setOpen(null);
   };
 
@@ -55,7 +55,7 @@ export function LooksPage() {
 
       {chosen && (
         <p className="flex items-center gap-2 rounded-[18px] bg-[var(--qd-tint)] px-4 py-3 text-[14px] font-semibold text-[var(--qd-primary-deep)]">
-          <CheckCircleIcon size={20} weight="fill" /> {ar ? "شكلك المختار:" : "Your look:"} {chosen.title.replace("✨ ", "")}
+          <CheckCircleIcon size={20} weight="fill" /> {ar ? "شكلك المختار:" : "Your look:"} {chosen.title.replace(/^(\u2728 |شكل الاستقبال: |Welcome look: )/, "")}
         </p>
       )}
 

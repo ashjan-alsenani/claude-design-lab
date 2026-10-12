@@ -81,6 +81,10 @@ export function lookChecklist(l: Look, lang: "ar" | "en"): string[] {
   return [...themeBits[l.theme][lang], ...base, ...placeBits[l.place][lang]];
 }
 
+/** A task made by adopting a look (its notes hold the look id; older ones start with a sparkle). */
+export const isLookTask = (t: { area: string; title: string; notes?: string }) =>
+  t.area === "reception" && (t.title.startsWith("\u2728") || /^(hospital|majlis|family|outdoor|aqiqah)\.[a-z]+\.[a-z-]+$/.test(t.notes ?? ""));
+
 export function lookTitle(l: Look, lang: "ar" | "en") {
   const th = themes.find((x) => x.id === l.theme)!;
   return lang === "ar" ? `${th.ar} · ${l.palette.ar}` : `${th.en} · ${l.palette.en}`;

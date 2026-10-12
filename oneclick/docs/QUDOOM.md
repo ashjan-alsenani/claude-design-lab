@@ -7,7 +7,6 @@
 | Page | URL |
 | --- | --- |
 | Sales page | `/ar/products/hikayat-qudoom` |
-| Demo (fictional data, nothing saved) | `/ar/demo/hikayat-qudoom` |
 | The product (licensed) | `/ar/app/hikayat-qudoom/[section]` |
 | Helper view (invited account) | `/ar/shared/hikayat-qudoom/[grant]` |
 | Guest gift list | `/ar/q/g/[token]` (`?preview=1` for the mother's preview) |
@@ -15,7 +14,7 @@
 | A guest's own reservation or request | `/ar/q/m/[token]` |
 | Helper invite | `/ar/q/h/[token]` |
 
-The app sections are: home, items, bag, nursery, mother, events, visits, hospitality, favors, registry, received, budget, calendar, memories, cards, share, settings and more.
+The app sections are: home, steps, looks, ideas, items, bag, nursery, mother, events, visits, hospitality, favors, registry, received, budget, calendar, memories, cards, share, settings and more.
 
 ## The mother's journey
 
@@ -77,6 +76,7 @@ The app sections are: home, items, bag, nursery, mother, events, visits, hospita
 
 - **Gift photos on the public list**: guests see the name, details and store link, not the mother's uploaded photo. This avoids making private files public.
 - **Email**: helper invites are not emailed. The mother copies the link and sends it herself. This is deliberate, but an optional email could be added later.
-- **Reminders**: they are in-app only (home screen and calendar), with no push or SMS notifications.
+- **Reminders**: in-app only. The header bell and the «لا تنسين» card cover appointments within 3 days, tasks that are late or due within 2 days, payments, visits today or tomorrow, new visit requests, deliveries, the hospital bag in the last 4 weeks, and thank-yous still to send. There are no push or SMS notifications, and nothing is sent in the mother's name.
+- **Favor photos**: AI sample photos made with Canva, one per favor category, are approximate (not the exact item). Every idea in a category shows its category's photo. Categories without a photo yet keep their drawing. Canva's free quota allows only a few images per cooldown, and the copies we can download are 200 px, so they are used as small thumbnails only.
 - **Data export**: the JSON export includes photo names and dates but not the photo files themselves.
 - **Visit approval**: requests always need the mother's approval. Instant auto-confirm is not offered.

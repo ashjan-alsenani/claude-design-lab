@@ -7,7 +7,8 @@ import { useQ } from "../app/state";
 import { allIdeas, favorCats, ideaKinds, type AnyIdea, type IdeaKind } from "../model/all-ideas";
 import type { FavorCat } from "../model/favor-ideas";
 import { BabyMascot } from "../ui/Mascot";
-import { FavorArt } from "../ui/Illustrations";
+import { FavorPhoto } from "../ui/FavorPhoto";
+import { KindIcon } from "../ui/KindIcon";
 
 /** Each favor gets its own colour variation so the drawings don't all look alike. */
 const tints = ["#e8a5b5", "#a9c1dc", "#c9b8e0", "#efd28f", "#bcd3b3", "#f2a07b", "#7fb8e6", "#d9b38c", "#5fb9a0", "#d96aa4"];
@@ -74,7 +75,7 @@ export function IdeasPage() {
           const on = k.kind === kind;
           return (
             <motion.button key={k.kind} type="button" whileTap={reduce ? undefined : { scale: 0.95 }} aria-pressed={on} onClick={() => pick(k.kind)} className={cx("flex flex-col items-center gap-1 rounded-[20px] border-2 px-1 py-2.5 text-center transition-colors", on ? "border-[var(--qd-primary)] bg-[var(--qd-paper)]" : "border-transparent bg-[var(--qd-paper)]/70")}>
-              <span className="grid size-10 place-items-center rounded-full text-[20px]" style={{ background: `color-mix(in oklab, ${k.color} 40%, var(--qd-paper))` }}>{k.emoji}</span>
+              <KindIcon kind={k.kind} color={k.color} className="size-10" />
               <span className="text-[12.5px] font-bold leading-tight">{ar ? k.ar : k.en}</span>
               <span className="text-[11px] text-[var(--qd-muted)]">{num(allIdeas.filter((x) => x.kind === k.kind).length)}</span>
             </motion.button>
@@ -119,9 +120,9 @@ export function IdeasPage() {
               return (
                 <motion.li key={x.id} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { delay: Math.min(i, 10) * 0.025 } }} className="qd-card flex min-w-0 items-center gap-3 rounded-[20px] p-3.5">
                   {x.kind === "favor" && x.cat ? (
-                    <FavorArt cat={x.cat} color={favorTint(x.id, cat?.color ?? meta.color)} className="size-16 shrink-0" />
+                    <FavorPhoto cat={x.cat} color={favorTint(x.id, cat?.color ?? meta.color)} className="size-16 shrink-0" />
                   ) : (
-                    <span className="grid size-10 shrink-0 place-items-center rounded-[14px] text-[19px]" style={{ background: `color-mix(in oklab, ${cat?.color ?? meta.color} 40%, var(--qd-paper))` }}>{meta.emoji}</span>
+                    <KindIcon kind={x.kind} color={meta.color} size={20} className="size-10" />
                   )}
                   <div className="min-w-0 flex-1">
                     <p className={cx("font-bold leading-snug", x.kind === "thanks" ? "text-[14px]" : "text-[15px]")}>{text(x)}</p>

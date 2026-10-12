@@ -82,6 +82,21 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await expect(page.getByText("Noor's mum").first()).toBeVisible();
   await saved(page);
 
+  // Changing the baby's name is one clear button on the dashboard.
+  await expect(async () => {
+    await page.getByRole("button", { name: "Edit details" }).click();
+    await expect(page.locator("#ps-baby")).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 20_000 });
+  await page.locator("#ps-baby").fill("Noor");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.locator("#ps-baby")).toBeHidden();
+  await saved(page);
+  await page.goto("/en/app/hikayat-qudoom/settings");
+  await expect(page.getByText("Noor · Noor's mum")).toBeVisible();
+  // The reminders bell is always in the header.
+  await expect(page.getByRole("button", { name: /^Reminders/ })).toBeVisible();
+  await saved(page);
+
   // Step by step and the welcome looks are there from the start.
   await page.goto("/en/app/hikayat-qudoom/steps");
   await expect(page.getByText("Start here").first()).toBeVisible();
@@ -135,9 +150,9 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   }
   await Promise.all([a.p.getByRole("button", { name: "Confirm reservation" }).click(), b.p.getByRole("button", { name: "Confirm reservation" }).click()]);
   await a.p.waitForTimeout(1500);
-  const wins = (await a.p.getByText("Reserved 🤍").count()) + (await b.p.getByText("Reserved 🤍").count());
+  const wins = (await a.p.getByText("Reserved", { exact: true }).count()) + (await b.p.getByText("Reserved", { exact: true }).count());
   expect(wins).toBe(1);
-  const winner = (await a.p.getByText("Reserved 🤍").count()) ? a.p : b.p;
+  const winner = (await a.p.getByText("Reserved", { exact: true }).count()) ? a.p : b.p;
   const loser = winner === a.p ? b.p : a.p;
   await expect(loser.getByText("The last one was just reserved")).toBeVisible();
   // The winner's private manage link: confirm the purchase.

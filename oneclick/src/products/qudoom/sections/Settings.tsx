@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { DownloadSimpleIcon, GearSixIcon, TrashIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, GearSixIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { parseMoney, toMajor } from "../model/engine";
 import { allSections, themeFor, type Country, type Currency, type ReceptionKind } from "../model/types";
@@ -10,6 +10,8 @@ import { Clicky } from "@/components/brand/Clicky";
 import { Button, Card, ChoiceCard, Field, PageHeader, SectionTitle, Toggle, cx, inputCls, useConfirm } from "../ui/kit";
 import { countries, currencies, sectionLabel } from "./Setup";
 import { groups } from "../constants";
+import { ProfileSheet } from "../ui/ProfileSheet";
+import { BabyMascot } from "../ui/Mascot";
 import { pageIcons, usePageLabel, usePageVisible } from "../app/Shell";
 
 export function SettingsPage({ switchHref }: { switchHref: string }) {
@@ -17,6 +19,7 @@ export function SettingsPage({ switchHref }: { switchHref: string }) {
   const p = plan.profile!;
   const confirm = useConfirm();
   const [busy, setBusy] = useState(false);
+  const [editing, setEditing] = useState(false);
   const set = (patch: Partial<typeof p>) => dispatch({ t: "profile", patch });
   const exportData = () => {
     if (api.exportUrl) return void (window.location.href = api.exportUrl);
@@ -40,8 +43,17 @@ export function SettingsPage({ switchHref }: { switchHref: string }) {
     <div className="space-y-6">
       <PageHeader title={t.settings.title} sub={t.settings.sub} icon={<GearSixIcon size={22} />} />
       <Card className="space-y-4 p-4 sm:p-5">
+        <div className="flex flex-wrap items-center gap-3 rounded-[20px] bg-[var(--qd-tint-2)] p-3">
+          <BabyMascot size={48} theme={p.theme} animate={false} />
+          <div className="min-w-0 flex-1">
+            <p className="text-[15px] font-bold">{p.babyName || (lang === "ar" ? "البيبي" : "Baby")} · {p.motherName}</p>
+            <p className="text-[13px] text-[var(--qd-muted)]">{lang === "ar" ? "الاسم والموعد وولد ولا بنت" : "Names, due date, boy or girl"}</p>
+          </div>
+          <Button onClick={() => setEditing(true)}><PencilSimpleIcon size={17} /> {lang === "ar" ? "تعديل المعلومات" : "Edit details"}</Button>
+        </div>
+        <ProfileSheet open={editing} onClose={() => setEditing(false)} />
         <SectionTitle title={t.settings.profile} />
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div key={`${p.motherName}|${p.babyName ?? ""}|${p.dueDate ?? ""}`} className="grid gap-4 sm:grid-cols-2">
           <Field label={t.setup.you} htmlFor="s-name"><input id="s-name" className={inputCls} defaultValue={p.motherName} maxLength={60} onBlur={(e) => e.target.value.trim() && e.target.value !== p.motherName && set({ motherName: e.target.value.trim() })} /></Field>
           <Field label={t.setup.baby} htmlFor="s-baby"><input id="s-baby" className={inputCls} defaultValue={p.babyName ?? ""} maxLength={60} onBlur={(e) => e.target.value !== (p.babyName ?? "") && set({ babyName: e.target.value.trim() || undefined })} /></Field>
           <Field label={t.setup.due} hint={t.setup.dueHint} htmlFor="s-due"><input id="s-due" type="date" dir="ltr" className={`${inputCls} text-start`} defaultValue={p.dueDate ?? ""} onChange={(e) => set({ dueDate: e.target.value || undefined })} /></Field>
@@ -77,7 +89,7 @@ export function SettingsPage({ switchHref }: { switchHref: string }) {
             const on = (p.babyGender ?? (p.theme === "moon" ? "boy" : p.theme === "garden" ? "surprise" : "girl")) === g;
             return (
               <button key={g} type="button" role="radio" aria-checked={on} onClick={() => set({ babyGender: g, theme: themeFor(g) })} className={cx("flex flex-col items-center gap-1.5 rounded-[20px] border-2 py-3 transition-colors", on ? "border-[var(--qd-primary)] bg-[var(--qd-tint)]" : "border-transparent bg-[var(--qd-tint-2)]")}>
-                <Clicky size={40} color={color} accessory={g === "girl" ? "bow" : g === "boy" ? "cap" : "baby"} mood={on ? "love" : "happy"} />
+                <Clicky size={40} color={color} ink="#5a5570" accessory={g === "girl" ? "girl" : g === "boy" ? "boy" : "baby"} mood={on ? "love" : "sweet"} />
                 <span className="text-[14.5px] font-bold">{label}</span>
               </button>
             );

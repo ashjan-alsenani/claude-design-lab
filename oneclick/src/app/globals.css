@@ -577,7 +577,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 .qd {
   /* «حكاية قدوم» in the OneClick look (cream, Rubik, soft blobs, Clicky). The baby sets the colour:
      girl → pink (cloud), boy → navy (moon), surprise → Clicky teal (garden). Primary keeps AA with white. */
-  --qd-bg: #fff9f4; --qd-paper: #ffffff; --qd-ink: #1e1b3a; --qd-ink-soft: #46416c; --qd-muted: #6c6790; --qd-line: #efe5dc;
+  --qd-bg: #fff9f4; --qd-paper: #ffffff; --qd-ink: #3f3b52; --qd-ink-soft: #5f5b73; --qd-muted: #6c6790; --qd-line: #eee6df; --oc-ink: #5a5570;
   --qd-primary: #c7366b; --qd-primary-deep: #a32a57; --qd-tint: #ffe3ec; --qd-tint-2: #fff3f7;
   --qd-mascot: #ff9fb8; --qd-star: #ffc23d; --qd-blob-1: #fff1cc; --qd-blob-2: #ffe3ec; --qd-blob-3: #ffe3ec;
   --qd-accent: #ffc23d; --qd-accent-soft: #fff1cc; --qd-sage: #16884a; --qd-sage-soft: #e1f5e9;
@@ -594,7 +594,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
   background-repeat: no-repeat;
 }
 .qd :focus-visible { outline: 3px solid color-mix(in oklab, var(--qd-primary) 55%, transparent); outline-offset: 2px; border-radius: 10px; }
-.qd .qd-card { background: var(--qd-paper); border: 1px solid color-mix(in oklab, var(--qd-line) 70%, transparent); box-shadow: 0 8px 24px -16px rgb(30 27 58 / 0.28); }
+.qd .qd-card { background: var(--qd-paper); border: 1px solid color-mix(in oklab, var(--qd-line) 70%, transparent); box-shadow: 0 8px 24px -16px rgb(90 85 112 / 0.22); }
 .qd .qd-soft { background: var(--qd-tint-2); border: 1px solid color-mix(in oklab, var(--qd-primary) 14%, var(--qd-line)); }
 .qd .qd-scroll-x { scrollbar-width: none; } .qd .qd-scroll-x::-webkit-scrollbar { display: none; }
 .qd .qd-skeleton { background: linear-gradient(90deg, var(--qd-tint-2), var(--qd-tint), var(--qd-tint-2)); background-size: 200% 100%; }

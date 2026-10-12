@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from "react";
-import { CaretDownIcon, XIcon } from "@phosphor-icons/react";
+import { CaretDownIcon, SparkleIcon, XIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 
 /**
@@ -150,7 +150,7 @@ export function Sheet({ open, onClose, title, children, footer, wide }: { open: 
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
       data-theme={plan.profile?.theme ?? "cloud"}
-      className={cx("qd m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 p-0 shadow-[0_-20px_60px_-20px_rgba(60,40,30,.25)] backdrop:bg-[#1e1b3a]/30 open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:rounded-none sm:rounded-s-[26px]", wide ? "sm:w-[560px]" : "sm:w-[460px]")}
+      className={cx("qd m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-[26px] border-0 p-0 shadow-[0_-20px_60px_-20px_rgba(60,40,30,.25)] backdrop:bg-[#3f3b52]/25 open:flex open:flex-col sm:me-0 sm:ms-auto sm:mt-0 sm:h-dvh sm:max-h-dvh sm:rounded-none sm:rounded-s-[26px]", wide ? "sm:w-[560px]" : "sm:w-[460px]")}
     >
       <div className="flex items-center justify-between gap-3 border-b border-[var(--qd-line)] bg-[var(--qd-paper)] px-5 py-3.5">
         <h2 id={titleId} className="text-[1.2rem] font-bold">
@@ -174,7 +174,7 @@ export function Confirm({ open, text, yes, no, onYes, onNo }: { open: boolean; t
     if (d && !open && d.open) d.close();
   }, [open]);
   return (
-    <dialog ref={ref} onClose={onNo} className="qd m-auto w-[min(92vw,400px)] rounded-[22px] border border-[var(--qd-line)] p-6 backdrop:bg-[#1e1b3a]/30">
+    <dialog ref={ref} onClose={onNo} className="qd m-auto w-[min(92vw,400px)] rounded-[22px] border border-[var(--qd-line)] p-6 backdrop:bg-[#3f3b52]/25">
       <p className="text-[15px] leading-relaxed">{text}</p>
       <div className="mt-5 flex justify-end gap-2">
         <Button variant="ghost" onClick={onNo}>
@@ -315,7 +315,7 @@ export function Stat({ label, value, sub, tone }: { label: string; value: string
 export function IdeasLink({ href, label }: { href: string; label: string }) {
   return (
     <a href={href} className="flex items-center gap-3 rounded-[22px] border-2 border-dashed border-[var(--qd-star)] bg-[var(--qd-paper)]/90 px-4 py-3 text-[15px] font-semibold">
-      <span className="grid size-9 place-items-center rounded-full bg-[var(--qd-star)] text-white">✨</span>
+      <span className="grid size-9 place-items-center rounded-full bg-[var(--qd-star)] text-white"><SparkleIcon size={18} weight="fill" /></span>
       <span className="flex-1">{label}</span>
       <span aria-hidden="true" className="text-[var(--qd-amber)] rtl:rotate-180">→</span>
     </a>

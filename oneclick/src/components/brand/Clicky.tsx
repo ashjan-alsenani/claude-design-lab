@@ -6,8 +6,8 @@ import type { CSSProperties } from "react";
  * Moods change eyes and mouth; `body` adds arms and feet; any face color works.
  * Animations are CSS only (globals.css) and stop under prefers-reduced-motion.
  */
-export type ClickyMood = "happy" | "wink" | "celebrate" | "think" | "love" | "surprised";
-export type ClickyAccessory = "bulb" | "shield" | "heart" | "chat" | "baby" | "bow" | "cap";
+export type ClickyMood = "happy" | "wink" | "celebrate" | "think" | "love" | "surprised" | "sweet";
+export type ClickyAccessory = "bulb" | "shield" | "heart" | "chat" | "baby" | "bow" | "cap" | "boy" | "girl";
 
 const INK = "#1E1B3A";
 const BODY = "M50 6 C78 6 94 18 94 48 C94 80 78 94 50 94 C22 94 6 80 6 48 C6 18 22 6 50 6 Z";
@@ -31,6 +31,7 @@ export function Clicky({
   className = "",
   style,
   title,
+  ink = INK,
 }: {
   size?: number;
   mood?: ClickyMood;
@@ -46,6 +47,8 @@ export function Clicky({
   className?: string;
   style?: CSSProperties;
   title?: string;
+  /** Line colour for the face and badges (the baby planner uses a soft grey). */
+  ink?: string;
 }) {
   const h = body ? 126 : 100;
   const id = gid(color);
@@ -68,7 +71,7 @@ export function Clicky({
       </defs>
       {body && (
         // Limbs follow the page ink so they stay visible in dark mode (the face stays dark on the body).
-        <g stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" style={{ stroke: `var(--oc-ink, ${INK})` }}>
+        <g stroke={ink} strokeWidth="5" strokeLinecap="round" fill="none" style={{ stroke: `var(--oc-ink, ${ink})` }}>
           <path d="M38 92 L36 112" />
           <path d="M62 92 L64 112" />
           <path d="M28 114 L40 114" />
@@ -79,8 +82,8 @@ export function Clicky({
       )}
       <path d={BODY} fill={`url(#${id})`} />
       <path d="M20 30 Q22 16 38 13" stroke="#fff" strokeOpacity=".45" strokeWidth="5" strokeLinecap="round" fill="none" />
-      <Face mood={mood} blink={blink} />
-      {accessory && <Accessory kind={accessory} />}
+      <Face mood={mood} blink={blink} ink={ink} />
+      {accessory && <Accessory kind={accessory} ink={ink} />}
       {sparkle && !accessory && (
         <path d="M84 2 L86.5 9.5 L94 12 L86.5 14.5 L84 22 L81.5 14.5 L74 12 L81.5 9.5 Z" fill="#FFC23D" className={animate ? "clicky-twinkle" : undefined} />
       )}
@@ -94,17 +97,36 @@ const cheeks = (
     <ellipse cx="77" cy="63" rx="6.5" ry="4" />
   </g>
 );
-const smile = <path d="M38 64 L47 72 L64 58" fill="none" stroke={INK} strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" />;
-const eye = (cx: number) => (
-  <g>
-    <ellipse cx={cx} cy="44" rx="8.5" ry="10" fill="#fff" />
-    <circle cx={cx + 1.5} cy="46" r="5.5" fill={INK} />
-    <circle cx={cx + 3.5} cy="43.5" r="2" fill="#fff" />
-  </g>
-);
-
-function Face({ mood, blink }: { mood: ClickyMood; blink: boolean }) {
+function Face({ mood, blink, ink: INK }: { mood: ClickyMood; blink: boolean; ink: string }) {
+  const smile = <path d="M38 64 L47 72 L64 58" fill="none" stroke={INK} strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" />;
+  const eye = (cx: number) => (
+    <g>
+      <ellipse cx={cx} cy="44" rx="8.5" ry="10" fill="#fff" />
+      <circle cx={cx + 1.5} cy="46" r="5.5" fill={INK} />
+      <circle cx={cx + 3.5} cy="43.5" r="2" fill="#fff" />
+    </g>
+  );
   switch (mood) {
+    case "sweet":
+      // A baby face: big glossy eyes set a little lower, round rosy cheeks and a tiny smile.
+      return (
+        <g>
+          <g className={blink ? "clicky-blink" : undefined}>
+            {[35, 65].map((x) => (
+              <g key={x}>
+                <ellipse cx={x} cy="50" rx="9" ry="10.5" fill={INK} />
+                <circle cx={x + 3} cy="45.5" r="3.6" fill="#fff" />
+                <circle cx={x - 2.5} cy="54" r="1.7" fill="#fff" opacity=".85" />
+              </g>
+            ))}
+          </g>
+          <g fill="#FF8FAB" opacity=".7">
+            <ellipse cx="20" cy="66" rx="8" ry="5.5" />
+            <ellipse cx="80" cy="66" rx="8" ry="5.5" />
+          </g>
+          <path d="M44 67 Q50 73 56 67" fill="none" stroke={INK} strokeWidth="4.5" strokeLinecap="round" />
+        </g>
+      );
     case "wink":
       return (
         <g>
@@ -168,7 +190,7 @@ function Face({ mood, blink }: { mood: ClickyMood; blink: boolean }) {
 }
 
 /** Small role badges drawn at the top corner of the face (in the sparkle's place). */
-function Accessory({ kind }: { kind: ClickyAccessory }) {
+function Accessory({ kind, ink: INK }: { kind: ClickyAccessory; ink: string }) {
   switch (kind) {
     case "bulb":
       return (
@@ -201,6 +223,26 @@ function Accessory({ kind }: { kind: ClickyAccessory }) {
           <path d="M19 27 Q50 19 81 27 L80 33 Q50 25 20 33 Z" fill="#9DBBE8" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
           <circle cx="50" cy="3" r="6" fill="#9DBBE8" stroke={INK} strokeWidth="2.5" />
           <path d="M36 12 Q38 9 41 10 M58 10 Q61 9 63 12" stroke="#9DBBE8" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+        </g>
+      );
+    case "boy":
+      // A baby boy: a soft hair curl and a little bow tie under the chin.
+      return (
+        <g>
+          <path d="M50 7 C46 -2 56 -5 57 1 C58 6 51 6 52 2" fill="none" stroke={INK} strokeWidth="3.5" strokeLinecap="round" />
+          <path d="M50 86 L39 80 C35 79 35 93 39 92 Z" fill="#9DBBE8" stroke={INK} strokeWidth="2.2" strokeLinejoin="round" />
+          <path d="M50 86 L61 80 C65 79 65 93 61 92 Z" fill="#9DBBE8" stroke={INK} strokeWidth="2.2" strokeLinejoin="round" />
+          <circle cx="50" cy="86" r="3.6" fill="#5B82C2" stroke={INK} strokeWidth="2.2" />
+        </g>
+      );
+    case "girl":
+      // A baby girl: a soft bow set to one side with a tiny hair curl.
+      return (
+        <g>
+          <path d="M44 8 C42 -1 51 -3 51 2" fill="none" stroke={INK} strokeWidth="3.2" strokeLinecap="round" />
+          <path d="M70 12 L58 4 C53 2 53 17 58 17 Z" fill="#FFB3C7" stroke={INK} strokeWidth="2.2" strokeLinejoin="round" />
+          <path d="M70 12 L82 4 C87 2 87 17 82 17 Z" fill="#FFB3C7" stroke={INK} strokeWidth="2.2" strokeLinejoin="round" />
+          <circle cx="70" cy="11" r="4" fill="#FF7A9C" stroke={INK} strokeWidth="2.2" />
         </g>
       );
     case "bow":

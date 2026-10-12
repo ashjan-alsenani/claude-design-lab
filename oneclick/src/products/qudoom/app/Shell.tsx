@@ -8,6 +8,7 @@ import {
 } from "@phosphor-icons/react";
 import { useQ } from "./state";
 import { groups, pages, type PageKey } from "../constants";
+import { RemindersBell } from "../ui/Reminders";
 import { BabyMascot } from "../ui/Mascot";
 import { Logo } from "@/components/brand/Logo";
 import { Button, cx } from "../ui/kit";
@@ -83,6 +84,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
           </Link>
           <span className="flex-1" />
           <SaveBadge state={saveState} retry={retry} mode={mode} />
+          {plan.profile && <RemindersBell />}
           <Link href={switchHref} className="hidden h-10 items-center rounded-full px-3 text-[13px] font-medium text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)] sm:inline-flex" hrefLang={lang === "ar" ? "en" : "ar"}>
             {t.top.lang}
           </Link>

@@ -8,7 +8,7 @@ import type { Look } from "../model/looks";
  * (aria-hidden); the title next to each picture carries the meaning.
  */
 
-const INK = "#3b3346";
+const INK = "#7a7590";
 const star = (x: number, y: number, r: number, c: string, k?: string) => {
   const p: string[] = [];
   for (let i = 0; i < 10; i++) {
