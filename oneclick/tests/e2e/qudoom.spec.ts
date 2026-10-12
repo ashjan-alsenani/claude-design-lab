@@ -112,7 +112,7 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
     await page.getByRole("button", { name: /^Add: / }).first().click();
     await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible({ timeout: 2000 });
   }).toPass({ timeout: 20_000 });
-  await page.getByRole("button", { name: /^🎀/ }).click();
+  await page.getByRole("button", { name: /^Favors\s*[\d,]+$/ }).click();
   await expect(async () => {
     await page.getByRole("button", { name: /^Add: / }).first().click();
     await expect(page.getByRole("button", { name: "Added" }).first()).toBeVisible({ timeout: 2000 });
