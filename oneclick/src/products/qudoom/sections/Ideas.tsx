@@ -34,7 +34,12 @@ export function IdeasPage() {
 
   const list = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return allIdeas.filter((x) => x.kind === kind && (kind !== "favor" || fc === "all" || x.cat === fc) && (!price || x.price === price) && (!needle || `${x.ar} ${x.en}`.toLowerCase().includes(needle)));
+    const found = allIdeas.filter((x) => x.kind === kind && (kind !== "favor" || fc === "all" || x.cat === fc) && (!price || x.price === price) && (!needle || `${x.ar} ${x.en}`.toLowerCase().includes(needle)));
+    if (kind !== "favor" || fc !== "all") return found;
+    // All favors: take turns between categories so the first page shows a bit of everything.
+    const seen: Record<string, number> = {};
+    const order = found.map((x) => ({ x, n: (seen[x.cat ?? ""] = (seen[x.cat ?? ""] ?? -1) + 1), c: favorCats.findIndex((c) => c.id === x.cat) }));
+    return order.sort((a, b) => a.n - b.n || a.c - b.c).map((o) => o.x);
   }, [kind, fc, price, q]);
 
   const has = (x: AnyIdea) => {

@@ -60,7 +60,7 @@ function Row({ r, onGo }: { r: Reminder; onGo?: () => void }) {
 
 /** The bell in the header: a count and a sheet with every reminder. */
 export function RemindersBell() {
-  const { lang } = useQ();
+  const { lang, num } = useQ();
   const list = useReminders();
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
@@ -72,7 +72,7 @@ export function RemindersBell() {
         <motion.span animate={list.length && !reduce ? { rotate: [0, -14, 12, -8, 0] } : undefined} transition={{ duration: 0.9, delay: 0.8, repeat: list.length ? 2 : 0, repeatDelay: 4 }} className="grid place-items-center">
           {list.length ? <BellRingingIcon size={20} weight="duotone" /> : <BellIcon size={20} />}
         </motion.span>
-        {list.length > 0 && <span className="absolute -end-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-[var(--qd-primary)] px-1 text-[11px] font-bold text-white">{list.length > 9 ? "9+" : list.length}</span>}
+        {list.length > 0 && <span className="absolute -end-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-[var(--qd-primary)] px-1 text-[11px] font-bold text-white">{list.length > 9 ? `${num(9)}+` : num(list.length)}</span>}
       </button>
       <Sheet open={open} onClose={() => setOpen(false)} title={label}>
         {!open ? null : list.length ? (
@@ -88,7 +88,7 @@ export function RemindersBell() {
 
 /** «لا تنسين» on the dashboard: the top three, with a link to see all. */
 export function RemindersCard() {
-  const { lang } = useQ();
+  const { lang, num } = useQ();
   const list = useReminders();
   const [all, setAll] = useState(false);
   if (!list.length) return null;
@@ -99,11 +99,11 @@ export function RemindersCard() {
       <div className="mb-3 flex items-center gap-2">
         <span className="grid size-9 place-items-center rounded-full bg-[var(--qd-tint)] text-[var(--qd-primary)]"><BellRingingIcon size={19} weight="duotone" /></span>
         <h2 id="qd-rem" className="flex-1 text-[1.1rem] font-extrabold">{ar ? "لا تنسين" : "Don't forget"}</h2>
-        <span className="text-[13px] text-[var(--qd-muted)]">{list.length}</span>
+        <span className="text-[13px] text-[var(--qd-muted)]">{num(list.length)}</span>
       </div>
       <ul className="space-y-2">{shown.map((r) => <Row key={r.id} r={r} />)}</ul>
       {list.length > 3 && (
-        <button type="button" onClick={() => setAll(!all)} className="mt-2 text-[13px] font-semibold text-[var(--qd-primary)]">{all ? (ar ? "أقل" : "Show less") : ar ? `عرض الكل (${list.length})` : `Show all (${list.length})`}</button>
+        <button type="button" onClick={() => setAll(!all)} className="mt-2 text-[13px] font-semibold text-[var(--qd-primary)]">{all ? (ar ? "أقل" : "Show less") : ar ? `عرض الكل (${num(list.length)})` : `Show all (${list.length})`}</button>
       )}
     </section>
   );

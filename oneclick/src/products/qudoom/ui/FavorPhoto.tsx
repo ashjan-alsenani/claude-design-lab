@@ -9,6 +9,7 @@ export const favorPhotos: Partial<Record<FavorCat, string>> = {
   sweets: "/brand/qudoom/favors/sweets.webp",
   scents: "/brand/qudoom/favors/scents.webp",
   plants: "/brand/qudoom/favors/plants.webp",
+  keepsakes: "/brand/qudoom/favors/keepsakes.webp",
 };
 
 export function FavorPhoto({ cat, color, className = "" }: { cat: FavorCat; color: string; className?: string }) {
