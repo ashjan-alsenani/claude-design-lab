@@ -33,8 +33,8 @@ export function ProfileSheet({ open, onClose }: { open: boolean; onClose: () => 
       onClose={onClose}
       title={ar ? "تعديل المعلومات" : "Edit details"}
       footer={
-        <div className="flex gap-2">
-          <button type="button" onClick={save} disabled={!f.mother.trim()} className="h-12 flex-1 rounded-full bg-[var(--qd-primary)] text-[15px] font-bold text-white disabled:opacity-50">{ar ? "حفظ" : "Save"}</button>
+        <div className="flex w-full gap-2">
+          <button type="button" onClick={save} disabled={!f.mother.trim()} className="h-12 min-w-32 flex-1 rounded-full bg-[var(--qd-primary)] text-[15px] font-bold text-white disabled:opacity-50">{ar ? "حفظ" : "Save"}</button>
           <button type="button" onClick={onClose} className="h-12 rounded-full border border-[var(--qd-line)] px-5 text-[15px] font-semibold">{t.common.cancel}</button>
         </div>
       }
