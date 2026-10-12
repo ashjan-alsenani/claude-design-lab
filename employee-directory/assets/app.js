@@ -1226,13 +1226,13 @@ async function Hr(e,n,{store:r}){let T=Tx,ar=E()==="ar";e.innerHTML=`<div class=
  od=r.can("plans")?act.flatMap(p=>((Iplan(p.id)||{}).items||[]).filter(x=>x.status!=="done"&&x.due&&x.due<td).map(x=>({p,x,late:Math.round((new Date(td)-new Date(x.due))/864e5)}))).sort((x,y)=>y.late-x.late):[],
  aud=adm?(D.audit||[]).filter(z=>z.action!=="login").slice(-5).reverse():[],
  grp=Agrp().map(([k,l])=>({k,l,n:al.filter(z=>z.k===k).length})).filter(z=>z.n),
- href={team:"#/team",nom:"#/recognition",corr:"#/manage/requests",corrdone:"#/home",backup:"#/manage/site",anniv:"",succ:"#/succession",idp:"#/plans",cert:"#/attention",prof:"#/manage/quality"},icn={team:"clipboard-check",nom:"send",corr:"pencil",corrdone:"circle-check",backup:"save",anniv:"cake",succ:"crown",idp:"rocket",cert:"award",prof:"file-text"},
+ col={team:"#2563EB",nom:"#D97706",corr:"#7C3AED",corrdone:"#16A34A",backup:"#0891B2",anniv:"#0D9488",succ:"#E11D48",idp:"#7C3AED",cert:"#D97706",prof:"#2563EB"},href={team:"#/team",nom:"#/recognition",corr:"#/manage/requests",corrdone:"#/home",backup:"#/manage/site",anniv:"",succ:"#/succession",idp:"#/plans",cert:"#/attention",prof:"#/manage/quality"},icn={team:"clipboard-check",nom:"send",corr:"pencil",corrdone:"circle-check",backup:"save",anniv:"cake",succ:"crown",idp:"rocket",cert:"award",prof:"file-text"},
  why={team:T("تقييم المدير الشهري أساس التقدير والجوائز","The monthly manager rating drives recognition"),nom:T("ترشيحات من المدراء بانتظار الاعتماد","Manager nominations waiting for approval"),corr:T("طلبات من الموظفين لتصحيح بياناتهم","Employees asking to fix their data"),corrdone:T("تمت مراجعة طلباتك","Your requests were reviewed"),backup:T("البيانات محفوظة في هذا المتصفح فقط","Data lives in this browser only"),anniv:T("مناسبات خلال 30 يومًا","Coming up in 30 days"),succ:T("مناصب قيادية بلا خليفة جاهز","Leadership roles without a ready successor"),idp:T("بنود تجاوزت موعدها في خطط التطوير","Plan items past their due date"),cert:T("صلاحية تقديرية 3 سنوات من سنة الحصول","Estimated 3-year validity"),prof:T("ملفات مكتملة بأقل من 80%","Profiles under 80% complete")},
  chev=h(ar?"chevron-left":"chevron-right",16),
  cnt=(k,one,two,many,en)=>ar?(k===1?one:k===2?two:`${k} ${many}`):en,
  k2=act.filter(p=>Com(p)),om=Hpct(k2.filter(p=>Com(p)==="om").length,k2.length||N0),full=act.filter(p=>p.readiness==="Fully Capable").length,recR=act.filter(p=>p.readiness).length,fpc=N0?Math.round(full/N0*100):0,
  rt=act.filter(p=>Trate(p.id)).length,rpc=N0?Math.round(rt/N0*100):0,
- kpis=[
+ kc=["#0D9488","#2563EB","#16A34A","#7C3AED"],kpis=[
   ["users",N0,T("موظف نشط","Active employees"),T(`من ${o.length} في الدليل`,`of ${o.length} in the directory`),"#/directory",null],
   ["flag",om+"%",T("نسبة التعمين","Omanization"),T(`من ${k2.length} لديهم جنسية مسجّلة`,`of ${k2.length} with a recorded nationality`)+(N0-k2.length?T(` · ${N0-k2.length} غير مسجّل`,` · ${N0-k2.length} not recorded`):""),de.can("criticality")&&!Hhidden("criticality")?"#/criticality":"#/dashboard",om],
   ["award",fpc+"%",T("قادرون بالكامل","Fully capable"),T(`${full} من ${N0} نشطين`,`${full} of ${N0} active`)+(N0-recR?T(` · ${N0-recR} بلا تقييم جاهزية`,` · ${N0-recR} without a readiness rating`):""),"#/dashboard",fpc],
@@ -1244,21 +1244,22 @@ async function Hr(e,n,{store:r}){let T=Tx,ar=E()==="ar";e.innerHTML=`<div class=
   r.can("report")&&["printer",T("التقرير الشهري","Monthly report"),"#/report"],
   r.can("excel")&&["map-pin",T("أين يعمل كل موظف (Excel)","Where everyone works (Excel)"),"where"],
   ["tree",T("شجرة التبعية","Reporting tree"),"#/orgchart"]].filter(Boolean).slice(0,5),
- card=(cls,ic,tl,body,more="")=>`<section class="ho-card ${cls}"><header class="ho-ch"><h2>${h(ic,17)}<span>${a(tl)}</span></h2>${more}</header>${body}</section>`,
+ card=(cls,ic,tl,body,more="")=>`<section class="ho-card ${cls}" style="--c:${({"ho-focus":"#F97316","ho-od":"#7C3AED","ho-aud":"#2563EB","ho-ann":"#0D9488"})[cls]||"#0D9488"}"><header class="ho-ch"><h2>${h(ic,17)}<span>${a(tl)}</span></h2>${more}</header>${body}</section>`,
  calm=(ic,tx)=>`<p class="ho-calm">${h(ic,17)}<span>${a(tx)}</span></p>`,
  more=(hf,tx)=>`<a class="ho-more" href="${hf}">${a(tx)}${chev}</a>`,
  openW=(()=>{try{return localStorage.getItem("dtd-home-wide")==="1"}catch{return!1}})(),
  oc=typeof Occ==="function"?Occ(o,30):[];
  e.innerHTML=`<div class="page page-home ho">
-  <header class="page-head ho-head">
-   <div class="page-title"><p class="ho-date">${a(dayL)}</p><h1>${a(greet)}${nm?a(T("، ",", ")+nm):""}</h1><p class="page-sub">${a(T(`دليل موظفي ${Uc().siteAr||"الرقمية والتقنية"}: ابحث عن زميل، وتابع ما يحتاج إجراءً.`,`${Uc().siteEn||"Digital & Technology"} employee directory: find a colleague and follow up on what needs action.`))}</p></div>
-  </header>
+  <section class="ho-hero"><div class="ho-hero-in">
+   <div class="ho-hero-t"><p class="ho-date">${a(dayL)}</p><h1>${a(greet)}${nm?a(T("، ",", ")+nm):""}</h1><p class="ho-sub">${a(T(`دليل موظفي ${Uc().siteAr||"الرقمية والتقنية"}: ابحث عن زميل، وتابع ما يحتاج إجراءً.`,`${Uc().siteEn||"Digital & Technology"} employee directory: find a colleague and follow up on what needs action.`))}</p></div>
   <form class="ho-search" role="search" aria-label="${a(T("البحث عن موظف","Find an employee"))}">${h("search",19)}<label class="sr-only" for="h2q">${a(T("البحث عن موظف","Find an employee"))}</label><input id="h2q" type="search" autocomplete="off" placeholder="${a(T("ابحث عن موظف بالاسم أو الرقم الوظيفي أو المسمى…","Find an employee by name, employee no. or title…"))}"><button type="submit" class="btn btn-primary">${a(T("بحث","Search"))}</button></form>
   ${acts.length?`<nav class="ho-acts" aria-label="${a(T("إجراءات سريعة","Quick actions"))}">${acts.map(([ic,l,hf,pri])=>hf==="where"?`<button type="button" class="btn btn-ghost" data-xlsx="where">${h(ic,16)}<span>${a(l)}</span></button>`:`<a class="btn ${pri?"btn-primary":"btn-ghost"}" href="${hf}">${h(ic,16)}<span>${a(l)}</span></a>`).join("")}</nav>`:""}
-  <section class="ho-kpis" aria-label="${a(T("مؤشرات رئيسية","Key figures"))}">${kpis.map(([ic,v,l,sub,hf,pc])=>`<a class="ho-kpi" href="${hf}"><span class="ho-kpi-l">${h(ic,16)}<span>${a(l)}</span></span><strong>${String(v).replace(/^(\d+)(%?)$/,'<span data-countup>$1</span>$2')}</strong>${pc==null?"":`<span class="ho-bar" role="img" aria-label="${pc}%"><i style="width:${pc}%"></i></span>`}<small>${a(sub)}</small></a>`).join("")}</section>
+  </div><span class="ho-orb ho-orb1" aria-hidden="true"></span><span class="ho-orb ho-orb2" aria-hidden="true"></span><span class="ho-orb ho-orb3" aria-hidden="true"></span></section>
+  ${Hpulse(act,e.__hpSel)}
+  <section class="ho-kpis" aria-label="${a(T("مؤشرات رئيسية","Key figures"))}">${kpis.map(([ic,v,l,sub,hf,pc],i)=>`<a class="ho-kpi" href="${hf}" style="--c:${kc[i]};--i:${i}"><span class="ho-kpi-l">${h(ic,16)}<span>${a(l)}</span></span><strong>${String(v).replace(/^(\d+)(%?)$/,'<span data-countup>$1</span>$2')}</strong>${pc==null?"":`<span class="ho-bar" role="img" aria-label="${pc}%"><i style="width:${pc}%"></i></span>`}<small>${a(sub)}</small></a>`).join("")}</section>
   <div class="ho-grid">
    <div class="ho-main">
-    ${card("ho-focus","list-checks",T("يحتاج إجراءً","Needs action"),grp.length?`<ul class="ho-list">${grp.map(z=>`<li><${href[z.k]?`a href="${href[z.k]}"`:'button type="button" data-hm-bell'} class="ho-row"><span class="ho-ic">${h(icn[z.k],17)}</span><span class="ho-tx"><strong>${a(z.l)}</strong><small>${a(why[z.k])}</small></span><b class="ho-n">${z.n}</b>${chev}</${href[z.k]?"a":"button"}></li>`).join("")}</ul>`:calm("circle-check",T("لا يوجد ما يحتاج إجراءً الآن.","Nothing needs action right now.")),grp.length?`<button type="button" class="ho-more" data-hm-bell>${a(T("كل التنبيهات","All alerts"))}${chev}</button>`:"")}
+    ${card("ho-focus","list-checks",T("يحتاج إجراءً","Needs action"),grp.length?`<ul class="ho-list">${grp.map((z,i)=>`<li style="--c:${col[z.k]};--i:${i}"><${href[z.k]?`a href="${href[z.k]}"`:'button type="button" data-hm-bell'} class="ho-row"><span class="ho-ic">${h(icn[z.k],17)}</span><span class="ho-tx"><strong>${a(z.l)}</strong><small>${a(why[z.k])}</small></span><b class="ho-n">${z.n}</b>${chev}</${href[z.k]?"a":"button"}></li>`).join("")}</ul>`:calm("circle-check",T("لا يوجد ما يحتاج إجراءً الآن.","Nothing needs action right now.")),grp.length?`<button type="button" class="ho-more" data-hm-bell>${a(T("كل التنبيهات","All alerts"))}${chev}</button>`:"")}
     ${r.can("plans")?card("ho-od","rocket",T("خطط متأخرة","Overdue plan items"),od.length?`<ul class="ho-list">${od.slice(0,4).map(z=>`<li><button type="button" class="ho-row" data-idp="${z.p.id}">${ne(z.p,"sm")}<span class="ho-tx"><strong>${a(z.x.title)}</strong><small>${a(I(z.p))}</small></span><em class="ho-late">${a(T(`متأخر ${z.late} يوم`,`${z.late}d late`))}</em></button></li>`).join("")}</ul>`:calm("circle-check",T("كل بنود الخطط في موعدها.","All plan items are on time.")),more("#/plans",T("خطط التطوير","Development plans"))):""}
     ${adm?card("ho-aud","history",T("آخر التعديلات","Recent changes"),aud.length?`<ol class="ho-feed">${aud.map(z=>{let[ic,cl,lb]=Hact(z.action),emp=z.employee_id&&o.find(p=>p.id===z.employee_id),who=String(z.user_name||"").replace(/\s*<.*>$/,"");return`<li><span class="ho-feed-ic">${h(ic,14)}</span><p><strong>${a(lb)}</strong>${emp?` · <a href="#/employee/${emp.id}">${a(I(emp))}</a>`:""}<small>${a(who)} · ${a(Hrel(z.at))}</small></p></li>`}).join("")}</ol>`:calm("history",T("لا توجد تعديلات بعد.","No changes yet.")),more("#/manage/activity",T("سجل النشاط","Activity log"))):""}
    </div>
@@ -1269,9 +1270,8 @@ async function Hr(e,n,{store:r}){let T=Tx,ar=E()==="ar";e.innerHTML=`<div class=
     ${Hspot(o,act)}
    </aside>
   </div>
-  <details class="ho-wide"${openW?" open":""}><summary>${h("layout-grid",17)}<span><strong>${a(T("نظرة أوسع على الوحدات","Wider view of the units"))}</strong><small>${a(T("خريطة الوحدات التفاعلية وأبرز ما يستحق الانتباه","Interactive unit map and highlights worth a look"))}</small></span>${h("chevron-down",16,"ho-chev")}</summary><div class="ho-wide-b">${Hpulse(act,e.__hpSel)}${Hess(o,act,r.meta)}</div></details>
+  ${Hess(o,act,r.meta)}
  </div>`;Hwire(e);
- m(".ho-wide",e).addEventListener("toggle",z=>{try{localStorage.setItem("dtd-home-wide",z.target.open?"1":"0")}catch{}});
  (()=>{let k="dtd-tour-"+(r.user&&r.user.id),seen=r.isAdmin();try{seen=seen||!!localStorage.getItem(k)}catch{}seen||(()=>{let n2=0,go=()=>{if(!(location.hash.startsWith("#/home")||location.hash===""))return;if(m(".modal-wrap")&&n2++<600){setTimeout(go,500);return}Topen(0)};setTimeout(go,700)})()})();
  m(".ho-search",e).onsubmit=z=>{z.preventDefault();let v=m("#h2q",e).value.trim();window.__DTD_FOCUS_SEARCH=!0;v&&(window.__DTD_Q=v);mt("#/directory",{force:!0})};
  e.onclick=z=>{let b=z.target.closest("[data-hm-bell]");b&&(z.preventDefault(),z.stopPropagation(),setTimeout(()=>Bopen(),60))}}
@@ -2074,7 +2074,7 @@ var Dseen=new Set,
   el.innerHTML=`<span class="dk-pulse-dot" aria-hidden="true"></span><span class="dk-pulse-k">${a(T("نبض الفريق","Live insight"))}</span><span class="dk-pulse-track">${L2.map(([ic,tx],i2)=>`<span class="dk-pulse-item${i2===cur?" on":""}"${i2===cur?"":' aria-hidden="true"'}>${h(ic,15)}<span>${a(tx)}</span></span>`).join("")}</span><button type="button" class="dk-pulse-n" title="${a(T("المعلومة التالية","Next insight"))}" aria-label="${a(T("المعلومة التالية","Next insight"))}">${cur+1}/${L2.length}</button>`;
   let its=N(".dk-pulse-item",el),nEl=m(".dk-pulse-n",el),show=k2=>{its.forEach((x,i2)=>{x.classList.toggle("on",i2===k2);x.classList.toggle("off",i2!==k2&&x.classList.contains("on"));i2===k2?x.removeAttribute("aria-hidden"):x.setAttribute("aria-hidden","true")});cur=e.__pi=k2;nEl.textContent=`${k2+1}/${L2.length}`};
   if(L2.length<2)return;
-  el.onclick=z=>{z.target.closest(".dk-pulse-n")&&show((cur+1)%L2.length)}};
+  el.onclick=z=>{z.target.closest(".dk-pulse-n")&&show((cur+1)%L2.length)};if(_e())return;e.__pt=setInterval(()=>{if(!document.contains(el)){clearInterval(e.__pt);return}if(el.matches(":hover,:focus-within")||document.hidden)return;show((cur+1)%L2.length)},4200)};
 /* ---------- Workspaces: company staff vs vendor staff (separate data stores) ---------- */
 function Dvs(){let d=Da(),T0=new Date().toISOString(),main=null;try{main=JSON.parse(localStorage.getItem("dtd-review-v5")||"null")}catch{}
  let R=[
@@ -3396,7 +3396,7 @@ var Hpal=["#0D9488","#2563EB","#7C3AED","#D97706","#E11D48","#16A34A","#0891B2",
    pulse.addEventListener("mouseleave",()=>{pulse.classList.remove("is-hover");N(".hp-node.is-hl",e).forEach(x=>x.classList.remove("is-hl"))})}
   let hs=m(".hs",e);if(hs){let sl=N(".hs-slide",hs),dots=N("[data-hs-go]",hs),i=0,tm=null,
    go=k=>{i=(k+sl.length)%sl.length;sl.forEach((s2,j)=>{let on=j===i;s2.classList.toggle("is-on",on);on?(s2.removeAttribute("aria-hidden"),s2.removeAttribute("inert")):(s2.setAttribute("aria-hidden","true"),s2.setAttribute("inert",""))});dots.forEach((d,j)=>d.setAttribute("aria-current",String(j===i)))},
-   play=()=>{clearInterval(tm);if(!0)return;tm=setInterval(()=>{if(!document.body.contains(hs)){clearInterval(tm);return}document.hidden||go(i+1)},7000)};
+   play=()=>{clearInterval(tm);if(_e()||sl.length<2)return;tm=setInterval(()=>{if(!document.body.contains(hs)){clearInterval(tm);return}document.hidden||go(i+1)},7000)};
    hs.addEventListener("click",z=>{let b=z.target.closest("[data-hs]");if(b){go(i+ +b.dataset.hs);play();return}b=z.target.closest("[data-hs-go]");b&&(go(+b.dataset.hsGo),play())});
    hs.addEventListener("mouseenter",()=>clearInterval(tm));hs.addEventListener("mouseleave",play);hs.addEventListener("focusin",()=>clearInterval(tm));hs.addEventListener("focusout",z=>{hs.contains(z.relatedTarget)||play()});play()}};
 
