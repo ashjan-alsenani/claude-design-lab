@@ -189,7 +189,11 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await expect(v.p.getByText("Request received")).toBeVisible();
   await v.ctx.close();
   await page.goto("/en/app/hikayat-qudoom/visits");
-  await page.getByRole("button", { name: /Requests from your link/ }).click();
+  await expect(async () => {
+    const approve = page.getByRole("button", { name: "Approve" }).first();
+    if (!(await approve.isVisible())) await page.getByRole("button", { name: /Requests from your link/ }).click();
+    await expect(approve).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 20_000 });
   await page.getByRole("button", { name: "Approve" }).first().click();
   await saved(page);
   await page.getByRole("button", { name: /^Visits/ }).first().click();
