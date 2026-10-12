@@ -10,7 +10,6 @@ import { useQ } from "./state";
 import { groups, pages, type PageKey } from "../constants";
 import { RemindersBell } from "../ui/Reminders";
 import { BabyMascot } from "../ui/Mascot";
-import { Logo } from "@/components/brand/Logo";
 import { Button, cx } from "../ui/kit";
 
 export const pageIcons: Record<PageKey, Icon> = {
@@ -73,22 +72,41 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
         </div>
       )}
       <div className="relative">
-      <header className="qd-noprint relative z-30">
-        <div className="mx-auto flex h-16 max-w-3xl items-center gap-2 px-4 sm:px-6">
-          <Link href={href()} className="flex min-w-0 items-center gap-2" aria-label={t.brand}>
-            <Logo locale={lang} className="shrink-0 [&>span:last-child]:text-[1.15rem] [&_svg]:size-8" />
-            <span className="flex min-w-0 items-center gap-1 rounded-full bg-[var(--qd-tint)] py-0.5 pe-3 ps-1 text-[13px] font-bold text-[var(--qd-primary-deep)]">
-              <BabyMascot size={24} theme={plan.profile?.theme} animate={false} />
-              <span className="truncate">{mode === "helper" && access.ownerName ? t.top.helperOf(access.ownerName) : t.brand}</span>
+      <header className="qd-noprint relative z-30 border-b border-[var(--qd-line)] bg-[var(--qd-bg)]/90 backdrop-blur">
+        <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6 lg:h-[76px]">
+          <Link href={href()} className="flex min-w-0 shrink-0 items-center gap-2.5" aria-label={t.brand}>
+            <span className="grid size-10 shrink-0 place-items-center rounded-[14px] bg-[var(--qd-primary)] text-white shadow-[0_6px_16px_-8px_var(--qd-primary)] lg:size-11">
+              <BabyIcon size={22} weight="fill" />
             </span>
+            <span className="min-w-0 leading-tight">
+              <span className="block truncate text-[1.12rem] font-extrabold text-[var(--qd-ink)]">{mode === "helper" && access.ownerName ? t.top.helperOf(access.ownerName) : t.brand}</span>
+              <span className="hidden text-[12px] font-semibold text-[var(--qd-primary)] lg:block">{lang === "ar" ? "Hikayat Qudoom • One Click" : "حكاية قدوم • One Click"}</span>
+            </span>
+            <span className="ms-1 hidden border-s border-[var(--qd-line)] ps-3 sm:block"><BabyMascot size={30} theme={plan.profile?.theme} animate={false} /></span>
           </Link>
-          <span className="flex-1" />
+          {/* Desktop: the sections as plain text links, the current one underlined. */}
+          <nav aria-label={t.brand} className="mx-auto hidden h-full lg:block">
+            <ul className="flex h-full items-stretch gap-1">
+              {navGroups.map((g) => {
+                const on = g.key === group;
+                return (
+                  <li key={g.key} className="flex">
+                    <Link href={href(firstOf(g) || undefined)} aria-current={on ? "page" : undefined} className={cx("flex items-center border-b-2 px-3.5 text-[15px] font-semibold transition-colors", on ? "border-[var(--qd-primary)] text-[var(--qd-primary)]" : "border-transparent text-[var(--qd-ink-soft)] hover:text-[var(--qd-ink)]")}>
+                      {t.nav[g.key]}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+          <span className="flex-1 lg:hidden" />
           <SaveBadge state={saveState} retry={retry} mode={mode} />
-          {plan.profile && <RemindersBell />}
-          <Link href={switchHref} className="hidden h-10 items-center rounded-full px-3 text-[13px] font-medium text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)] sm:inline-flex" hrefLang={lang === "ar" ? "en" : "ar"}>
-            {t.top.lang}
+          <Link href={switchHref} className="hidden h-9 items-center rounded-full border border-[var(--qd-line)] bg-[var(--qd-paper)] p-0.5 text-[12.5px] font-semibold sm:inline-flex" hrefLang={lang === "ar" ? "en" : "ar"}>
+            <span className={cx("rounded-full px-2.5 py-1", lang === "ar" ? "bg-[var(--qd-tint)] text-[var(--qd-primary-deep)]" : "text-[var(--qd-muted)]")}>العربية</span>
+            <span className={cx("rounded-full px-2.5 py-1", lang === "en" ? "bg-[var(--qd-tint)] text-[var(--qd-primary-deep)]" : "text-[var(--qd-muted)]")}>EN</span>
           </Link>
-          <Link href={href("more")} className="grid size-10 place-items-center rounded-full bg-white/70 text-[var(--qd-ink-soft)] hover:bg-white" aria-label={t.nav.more} title={t.nav.more}>
+          {plan.profile && <RemindersBell />}
+          <Link href={href("more")} className="grid size-10 place-items-center rounded-full text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)]" aria-label={t.nav.more} title={t.nav.more}>
             <DotsThreeOutlineIcon size={19} weight="fill" />
           </Link>
           <Link href={exitHref} className="grid size-10 place-items-center rounded-full text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)]" aria-label={t.top.exit} title={t.top.exit}>
@@ -99,31 +117,14 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
       {!online && <p className="qd-noprint bg-[var(--qd-amber-soft)] px-4 py-2 text-center text-[13px] text-[var(--qd-amber)]">{lang === "ar" ? "ما فيه اتصال بالإنترنت. تعديلاتك محفوظة هنا وبتنرسل أول ما يرجع الاتصال." : "You're offline. Your edits are kept here and will be sent when you're back online."}</p>}
       {remoteNote && <p className="qd-noprint bg-[var(--qd-tint)] px-4 py-2 text-center text-[13px] text-[var(--qd-primary-deep)]">{lang === "ar" ? "تحدّثت البيانات من جهاز أو شخص ثاني، ودمجناها مع تعديلاتك." : "The plan was updated from another device or person; we merged it with your edits."}</p>}
 
-      {/* Desktop: the same four sections as a soft pill bar under the header (no side bar). */}
-      <nav aria-label={t.brand} className="qd-noprint relative mx-auto hidden max-w-3xl px-4 lg:block">
-        <ul className="flex justify-center gap-1 rounded-full bg-[var(--qd-paper)]/90 p-1.5 shadow-[0_6px_24px_-14px_rgb(59_51_70/.35)]">
-          {navGroups.map((g) => {
-            const I = groupIcons[g.key];
-            const on = g.key === group;
-            return (
-              <li key={g.key}>
-                <Link href={href(firstOf(g) || undefined)} aria-current={on ? "page" : undefined} className={cx("flex h-11 items-center gap-2 rounded-full px-5 text-[14.5px] font-semibold transition-colors", on ? "bg-[var(--qd-primary)] text-white" : "text-[var(--qd-ink-soft)] hover:bg-[var(--qd-tint-2)]")}>
-                  <I size={19} weight={on ? "fill" : "regular"} />
-                  {t.nav[g.key]}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-      <div className="relative mx-auto flex max-w-3xl px-4 pb-32 sm:px-6 lg:pb-12">
+      <div className="relative mx-auto flex max-w-6xl px-4 pb-32 sm:px-6 lg:pb-12">
         <main id="qd-main" className="min-w-0 flex-1 py-5 sm:py-7">
           {tabs.length > 1 && (
-            <nav aria-label={t.nav[group]} className="qd-noprint qd-scroll-x -mx-4 mb-5 flex gap-2 overflow-x-auto px-4 lg:justify-center">
+            <nav aria-label={t.nav[group]} className="qd-noprint qd-scroll-x -mx-4 mb-6 flex gap-2 overflow-x-auto px-4">
               {tabs.map((p) => {
                 const I = pageIcons[p];
                 return (
-                <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={cx("inline-flex h-10 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border pe-4 ps-3 text-[14px]", p === page ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-transparent bg-white/85 text-[var(--qd-ink-soft)] shadow-[0_4px_14px_-10px_rgb(30_27_58/.4)]")}>
+                <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={cx("inline-flex h-10 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border pe-4 ps-3 text-[14px]", p === page ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-[var(--qd-line)] bg-[var(--qd-paper)] text-[var(--qd-ink-soft)] hover:border-[var(--qd-primary)]")}>
                   <I size={17} weight={p === page ? "fill" : "duotone"} aria-hidden="true" />
                   {label(p)}
                 </Link>

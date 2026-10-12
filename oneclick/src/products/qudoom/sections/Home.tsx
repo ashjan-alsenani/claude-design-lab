@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
-import { ArrowsClockwiseIcon, BabyIcon, BagIcon, CheckIcon, GiftIcon, HeartIcon, PencilSimpleIcon, PlusIcon, SparkleIcon, UsersThreeIcon, WalletIcon, type Icon } from "@phosphor-icons/react";
+import { ArrowsClockwiseIcon, BabyIcon, CalendarBlankIcon, CaretLeftIcon, BagIcon, CheckIcon, GiftIcon, HeartIcon, PencilSimpleIcon, PlusIcon, SparkleIcon, UsersThreeIcon, WalletIcon, type Icon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { bagProgress, budget, daysBetween, itemDone, progress, upcoming, type CalEntry } from "../model/engine";
 import { allIdeas } from "../model/all-ideas";
@@ -82,6 +82,8 @@ export function Home() {
   const toThank = plan.received.filter((r) => !r.thanked).length;
   const favReady = plan.favors.filter((f) => f.status === "ready" || f.status === "received").length;
   const b = budget(plan);
+  const hour = new Date().getHours();
+  const greeting = lang === "ar" ? (hour < 12 ? "صباح الخير" : "مساء الخير") : hour < 12 ? "Good morning" : "Good evening";
   const [ideaShift, setIdeaShift] = useState(0);
   const pool = allIdeas.filter((x) => x.kind === "favor" || x.kind === "gift" || x.kind === "decor");
   const idea = pool[(Number(today.replaceAll("-", "")) + ideaShift * 7919) % pool.length];
@@ -117,51 +119,66 @@ export function Home() {
 
   return (
     <motion.div className="space-y-4" initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: reduce ? 0 : 0.07 } } }}>
-      {/* Greeting + countdown + readiness */}
-      <motion.section variants={card} className="qd-card relative overflow-hidden rounded-[32px] p-5 sm:p-6">
-        <div className="pointer-events-none absolute -end-10 -top-10 size-40 rounded-full bg-[var(--qd-tint)]" />
-        <div className="relative flex items-center gap-4">
-          <motion.div animate={reduce ? undefined : { y: [0, -6, 0] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} className="shrink-0">
-            <BabyMascot size={84} theme={p.theme} mood={arrived ? "celebrate" : "sweet"} body />
-          </motion.div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[14px] font-semibold text-[var(--qd-primary)]">{h.hello(p.motherName)}</p>
-            {arrived ? (
-              <h1 className="mt-1 text-[1.6rem] font-extrabold leading-tight">{h.arrivedTitle(p.babyName)}</h1>
-            ) : daysLeft !== undefined && daysLeft > 0 ? (
-              <h1 className="mt-1 text-[1.6rem] font-extrabold leading-tight">
-                <span className="text-[2.4rem] text-[var(--qd-primary)]"><Count to={daysLeft} fmt={num} /></span> {lang === "ar" ? "يوم" : "days"}
-                <span className="block text-[1rem] font-semibold text-[var(--qd-ink-soft)]">{h.andSee(p.babyName)}</span>
-              </h1>
-            ) : (
-              <h1 className="mt-1 text-[1.5rem] font-extrabold leading-tight">{daysLeft === 0 ? h.dueToday : h.lines[0]}</h1>
-            )}
-            {mode !== "helper" && (
-              <button type="button" onClick={() => setEditing(true)} className="mt-2 inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-paper)] px-3 text-[13px] font-semibold text-[var(--qd-ink-soft)] shadow-sm ring-1 ring-[var(--qd-line)] hover:text-[var(--qd-primary)]">
-                <PencilSimpleIcon size={16} /> {lang === "ar" ? "تعديل المعلومات" : "Edit details"}
-              </button>
-            )}
-          </div>
-          {!arrived && (
-            <div className="relative hidden shrink-0 sm:block">
-              <Ring pct={prog.pct} />
-              <span className="absolute inset-0 grid place-items-center text-center">
-                <span>
-                  <span className="block text-[1.35rem] font-extrabold"><Count to={prog.pct} fmt={(n) => pct(n)} /></span>
-                  <span className="block text-[11px] text-[var(--qd-muted)]">{d.ready}</span>
+      {/* Greeting + countdown + readiness, in the same layout as «مفكّرة عروسة العُمر» */}
+      <motion.section variants={card} className="relative overflow-hidden rounded-[32px] border border-[var(--qd-line)] bg-[linear-gradient(180deg,var(--qd-tint)_0%,#ffffff_75%)] p-5 shadow-[0_1px_2px_rgba(60,40,120,.05),0_10px_28px_-14px_rgba(60,40,120,.22)] sm:p-8 lg:p-10">
+        <span aria-hidden="true" className="pointer-events-none absolute -end-16 -top-20 size-64 rounded-full bg-[var(--qd-star)]/25" />
+        <span aria-hidden="true" className="pointer-events-none absolute -bottom-24 end-1/3 size-56 rounded-full border-[3px] border-dashed border-[var(--qd-primary)]/25" />
+        <div className="relative grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-10">
+          <div className="flex items-start gap-4 sm:gap-5">
+            <motion.div animate={reduce ? undefined : { y: [0, -6, 0] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} className="shrink-0">
+              <BabyMascot size={88} theme={p.theme} mood={arrived ? "celebrate" : "sweet"} body />
+            </motion.div>
+            <div className="min-w-0">
+              <p className="text-[14px] font-medium text-[var(--qd-muted)] sm:text-[15px]" suppressHydrationWarning>{greeting}</p>
+              <h1 className="mt-1 text-[2rem] font-bold leading-[1.2] text-[var(--qd-ink)] sm:text-[2.6rem]">
+                {lang === "ar" ? "يا هلا " : "Hello, "}
+                <span className="relative isolate inline-block text-[var(--qd-primary)]">
+                  {p.motherName}
+                  <span aria-hidden="true" className="absolute inset-x-0 -bottom-1 -z-10 h-2 rounded-full bg-[var(--qd-star)]/70" />
                 </span>
-              </span>
+              </h1>
+              <p className="mt-2 text-[15px] text-[var(--qd-ink-soft)] sm:text-[17px]">{arrived ? h.arrivedTitle(p.babyName) : lang === "ar" ? "كل اللي يحتاجه صغيرك. ولا شي يُنسى." : "Everything your little one needs. Nothing forgotten."}</p>
+              {mode !== "helper" && (
+                <button type="button" onClick={() => setEditing(true)} className="mt-3 inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-paper)] px-3 text-[13px] font-semibold text-[var(--qd-ink-soft)] ring-1 ring-[var(--qd-line)] hover:text-[var(--qd-primary)]">
+                  <PencilSimpleIcon size={16} /> {lang === "ar" ? "تعديل المعلومات" : "Edit details"}
+                </button>
+              )}
             </div>
-          )}
-        </div>
-        {!arrived && (
-          <div className="relative mt-4 flex items-center gap-3 sm:hidden">
-            <div className="flex-1"><Bar value={prog.pct / 100} /></div>
-            <span className="text-[14px] font-extrabold"><Count to={prog.pct} fmt={(n) => pct(n)} /> {d.ready}</span>
           </div>
-        )}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="flex min-h-[148px] flex-col justify-between rounded-[20px] bg-[var(--qd-warm)] p-4 sm:p-5">
+              <p className="text-[13px] font-medium text-[var(--qd-muted)]">{arrived ? (lang === "ar" ? "وصل بالسلامة" : "Arrived safely") : lang === "ar" ? `على قدوم ${p.babyName || "صغيرك"}` : `Until ${p.babyName || "your little one"} arrives`}</p>
+              {arrived ? (
+                <p className="text-[1.3rem] font-bold leading-tight text-[var(--qd-ink)]">{lang === "ar" ? "الحمد لله" : "Thank God"}</p>
+              ) : daysLeft !== undefined && daysLeft > 0 ? (
+                <p className="flex items-baseline gap-1.5">
+                  <span className="text-[2.6rem] font-bold leading-none tabular-nums text-[var(--qd-ink)] sm:text-[3rem]"><Count to={daysLeft} fmt={num} /></span>
+                  <span className="text-[15px] font-semibold text-[var(--qd-ink-soft)]">{lang === "ar" ? "يوم" : "days"}</span>
+                </p>
+              ) : (
+                <p className="text-[1.3rem] font-bold leading-tight text-[var(--qd-ink)]">{daysLeft === 0 ? h.dueToday : lang === "ar" ? "حددي الموعد" : "Set the date"}</p>
+              )}
+              <p className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-[var(--qd-ink-soft)]">
+                <CalendarBlankIcon size={15} weight="bold" className="text-[var(--qd-primary)]" />
+                {p.arrived?.date ? date(p.arrived.date, "long") : p.dueDate ? date(p.dueDate, "long") : "—"}
+              </p>
+            </div>
+            <div className="flex min-h-[148px] flex-col items-center justify-center gap-2 rounded-[20px] bg-[var(--qd-warm)] p-4 text-center sm:p-5">
+              <div className="relative">
+                <Ring pct={prog.pct} size={96} />
+                <span className="absolute inset-0 grid place-items-center">
+                  <span>
+                    <span className="block text-[1.4rem] font-bold leading-none text-[var(--qd-ink)] sm:text-[1.7rem]"><Count to={prog.pct} fmt={(n) => pct(n)} /></span>
+                    <span className="mt-1 block text-[11.5px] font-medium text-[var(--qd-muted)]">{d.ready}</span>
+                  </span>
+                </span>
+              </div>
+              <p className="text-[11.5px] leading-snug text-[var(--qd-muted)] sm:text-[12.5px]">{prog.pct >= 80 ? (lang === "ar" ? "تقريبًا كل شي جاهز" : "Almost everything is ready") : prog.pct >= 30 ? (lang === "ar" ? "تقدّم حلو، كملي على راحتك" : "Lovely progress, at your pace") : lang === "ar" ? "خطوة صغيرة كل يوم" : "One small step a day"}</p>
+            </div>
+          </div>
+        </div>
         {!arrived && mode !== "helper" && daysLeft !== undefined && daysLeft <= 14 && (
-          <div className="relative mt-4 flex flex-wrap items-center gap-3 rounded-[18px] bg-[var(--qd-tint-2)] px-4 py-3">
+          <div className="relative mt-5 flex flex-wrap items-center gap-3 rounded-[18px] bg-[var(--qd-paper)] px-4 py-3 ring-1 ring-[var(--qd-line)]">
             <span className="flex-1 text-[14.5px] font-semibold">{h.arrivedAsk}</span>
             <button type="button" onClick={() => dispatch({ t: "arrived", on: true, date: today })} className="h-10 rounded-full bg-[var(--qd-primary)] px-4 text-[14px] font-bold text-white">
               {h.arrivedYes}
@@ -174,6 +191,26 @@ export function Home() {
           </button>
         )}
         <ProfileSheet open={editing} onClose={() => setEditing(false)} />
+      </motion.section>
+
+      {/* One tile per part of the plan */}
+      <motion.section variants={card} aria-label={lang === "ar" ? "نظرة سريعة" : "Overview"}>
+        <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+          {tiles.filter((x) => x.show).map((x) => (
+            <li key={x.to}>
+              <Link href={href(x.to)} className="qd-card group relative flex h-full min-h-[66px] items-center gap-3 rounded-[20px] px-3.5 py-2.5 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 active:scale-[0.98] sm:min-h-[120px] sm:flex-col sm:justify-center sm:gap-1 sm:px-3 sm:pb-6 sm:pt-4 sm:text-center">
+                <span className="grid size-10 shrink-0 place-items-center rounded-[14px] bg-[var(--qd-tint)] text-[var(--qd-primary)] sm:mb-1 sm:size-11">
+                  <x.icon size={22} weight="duotone" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[14px] font-semibold text-[var(--qd-ink)] sm:text-[15.5px]">{x.title}</span>
+                  <span className="block truncate text-[11.5px] tabular-nums text-[var(--qd-muted)] sm:text-[13px]">{x.sub}</span>
+                </span>
+                <CaretLeftIcon size={14} className="absolute bottom-3 end-3.5 hidden text-[var(--qd-muted)] sm:block ltr:rotate-180" />
+              </Link>
+            </li>
+          ))}
+        </ul>
       </motion.section>
 
       {/* Gentle reminders: don't forget, appointment soon */}
@@ -192,8 +229,9 @@ export function Home() {
         </Link>
       </motion.section>
 
+      <div className="grid gap-4 lg:grid-cols-3 lg:gap-5">
       {/* Today */}
-      <motion.section variants={card} className="qd-card rounded-[28px] p-5">
+      <motion.section variants={card} className="qd-card h-full rounded-[28px] p-5">
         <div className="flex items-center justify-between">
           <h2 className="text-[17px] font-extrabold">{d.today}</h2>
           {can("calendar") && <Link href={href("calendar")} className="text-[13px] font-semibold text-[var(--qd-primary)]">{h.all}</Link>}
@@ -219,28 +257,9 @@ export function Home() {
         )}
       </motion.section>
 
-      {/* One tile per part of the plan */}
-      <motion.section variants={card} className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {tiles.filter((x) => x.show).map((x) => (
-          <motion.div key={x.to} whileHover={reduce ? undefined : { y: -3 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
-            <Link href={href(x.to)} className="qd-card block h-full rounded-[24px] p-4">
-              <div className="flex items-center justify-between">
-                <span className="grid size-10 place-items-center rounded-[14px]" style={{ background: `color-mix(in oklab, ${x.color} 45%, var(--qd-paper))`, color: `color-mix(in oklab, ${x.color} 30%, #3b3346)` }}>
-                  <x.icon size={21} weight="fill" />
-                </span>
-                <span className="text-[1.45rem] font-extrabold tabular-nums">{x.fmt ? x.fmt(0) : <Count to={x.value} fmt={num} />}</span>
-              </div>
-              <p className="mt-3 text-[15px] font-bold">{x.title}</p>
-              <p className="mt-0.5 truncate text-[12.5px] text-[var(--qd-muted)]">{x.sub}</p>
-              {x.bar !== undefined && <div className="mt-2.5"><Bar value={x.bar} /></div>}
-            </Link>
-          </motion.div>
-        ))}
-      </motion.section>
-
       {/* The road to the expected date */}
       {!arrived && along !== undefined && (
-        <motion.section variants={card} className="qd-card rounded-[28px] p-5">
+        <motion.section variants={card} className="qd-card h-full rounded-[28px] p-5">
           <div className="flex items-center justify-between">
             <h2 className="text-[17px] font-extrabold">{d.journey}</h2>
             <span className="text-[13px] font-semibold text-[var(--qd-muted)]">{d.weeksLeft(num(weeksLeft!))}</span>
@@ -262,7 +281,7 @@ export function Home() {
 
       {/* Idea of the day */}
       {idea && (
-        <motion.section variants={card} className="relative overflow-hidden rounded-[28px] bg-[var(--qd-tint)] p-5">
+        <motion.section variants={card} className="relative h-full overflow-hidden rounded-[28px] bg-[var(--qd-tint)] p-5">
           <div className="flex items-center justify-between gap-3">
             <p className="text-[13px] font-bold text-[var(--qd-primary-deep)]">{d.idea}</p>
             <button type="button" onClick={() => setIdeaShift((n) => n + 1)} className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-[var(--qd-primary-deep)]">
@@ -283,6 +302,7 @@ export function Home() {
           </div>
         </motion.section>
       )}
+      </div>
     </motion.div>
   );
 }

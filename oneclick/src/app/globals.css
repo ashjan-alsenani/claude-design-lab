@@ -577,7 +577,7 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 .qd {
   /* «حكاية قدوم» in the OneClick look (cream, Rubik, soft blobs, Clicky). The baby sets the colour:
      girl → pink (cloud), boy → navy (moon), surprise → Clicky teal (garden). Primary keeps AA with white. */
-  --qd-bg: #fff9f4; --qd-paper: #ffffff; --qd-ink: #3f3b52; --qd-ink-soft: #5f5b73; --qd-muted: #6c6790; --qd-line: #eee6df; --oc-ink: #5a5570;
+  --qd-bg: #fff9f4; --qd-paper: #ffffff; --qd-ink: #1e1b3a; --qd-ink-soft: #46416c; --qd-muted: #6c6790; --qd-line: #f1e4e6; --qd-warm: #fbf0e6; --oc-ink: #5a5570;
   --qd-primary: #c7366b; --qd-primary-deep: #a32a57; --qd-tint: #ffe3ec; --qd-tint-2: #fff3f7;
   --qd-mascot: #ff9fb8; --qd-star: #ffc23d; --qd-blob-1: #fff1cc; --qd-blob-2: #ffe3ec; --qd-blob-3: #ffe3ec;
   --qd-accent: #ffc23d; --qd-accent-soft: #fff1cc; --qd-sage: #16884a; --qd-sage-soft: #e1f5e9;
@@ -588,13 +588,10 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 .qd[data-theme="moon"] { --qd-primary: #1f3d6b; --qd-primary-deep: #162d50; --qd-tint: #e2eaf6; --qd-tint-2: #f1f5fb; --qd-mascot: #7ea6dc; --qd-blob-2: #e2eaf6; --qd-blob-3: #e2eaf6; }
 .qd[data-theme="garden"] { --qd-primary: #0b7d73; --qd-primary-deep: #096a62; --qd-tint: #dcf5f1; --qd-tint-2: #f1faf8; --qd-mascot: #12b5a6; --qd-blob-2: #dcf5f1; --qd-blob-3: #dcf5f1; }
 .qd[data-theme="pearl"] { --qd-primary: #8a6a1f; --qd-primary-deep: #6e5418; --qd-tint: #f6ead2; --qd-tint-2: #fbf5e8; --qd-mascot: #f3dca0; }
-/* The site's soft colour blobs behind the page (no busy patterns). */
-.qd.qd-wallpaper {
-  background-image: radial-gradient(circle at -4% 160px, var(--qd-blob-1) 0 150px, transparent 151px), radial-gradient(circle at 104% 360px, var(--qd-blob-2) 0 120px, transparent 121px);
-  background-repeat: no-repeat;
-}
+/* Same calm canvas as «مفكّرة عروسة العُمر»: plain ivory, no blobs or patterns. */
+.qd.qd-wallpaper { background-image: none; }
 .qd :focus-visible { outline: 3px solid color-mix(in oklab, var(--qd-primary) 55%, transparent); outline-offset: 2px; border-radius: 10px; }
-.qd .qd-card { background: var(--qd-paper); border: 1px solid color-mix(in oklab, var(--qd-line) 70%, transparent); box-shadow: 0 8px 24px -16px rgb(90 85 112 / 0.22); }
+.qd .qd-card { background: var(--qd-paper); border: 1px solid var(--qd-line); box-shadow: 0 1px 2px rgb(60 40 120 / 0.04), 0 18px 40px -28px rgb(60 40 120 / 0.28); }
 .qd .qd-soft { background: var(--qd-tint-2); border: 1px solid color-mix(in oklab, var(--qd-primary) 14%, var(--qd-line)); }
 .qd .qd-scroll-x { scrollbar-width: none; } .qd .qd-scroll-x::-webkit-scrollbar { display: none; }
 .qd .qd-skeleton { background: linear-gradient(90deg, var(--qd-tint-2), var(--qd-tint), var(--qd-tint-2)); background-size: 200% 100%; }
