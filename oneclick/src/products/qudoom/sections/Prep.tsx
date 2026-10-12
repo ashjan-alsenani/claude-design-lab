@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowDownIcon, ArrowUpIcon, BagIcon, BedIcon, CalendarPlusIcon, HandHeartIcon, PlusIcon, PrinterIcon, TrashIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
+import { ItemIcon } from "../ui/ItemIcon";
 import { bagProgress, progress } from "../model/engine";
 import type { Appointment, BagId, BagItem, FileMeta, HelpRow } from "../model/types";
 import { EntitySheet, FileInput, type Draft, type FieldSpec } from "../ui/EntitySheet";
@@ -68,6 +69,7 @@ export function BagPage() {
           <ul className="qd-card divide-y divide-[var(--qd-line)] rounded-[20px]">
             {list.map((b) => (
               <li key={b.id} className={cx("flex flex-wrap items-center gap-2 px-4 py-3", b.skip && "opacity-55")}>
+                <ItemIcon name={b.name} bag={b.bag} done={b.packed} />
                 <button type="button" onClick={() => setEdit(b)} className="min-h-11 min-w-0 flex-1 basis-40 text-start">
                   <span className="block text-[15px]">{b.name}{b.qty > 1 ? ` ×${num(b.qty)}` : ""}</span>
                   {b.notes && <span className="block truncate text-[12.5px] text-[var(--qd-muted)]">{b.notes}</span>}

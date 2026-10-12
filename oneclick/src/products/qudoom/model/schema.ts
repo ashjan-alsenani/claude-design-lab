@@ -31,6 +31,7 @@ export const profileSchema = z.object({
   dueDate: opt(date),
   firstTime: opt(z.enum(["yes", "no"])),
   country: z.enum(["OM", "SA", "AE", "KW", "BH", "QA", "other"]),
+  city: opt(text(60)),
   currency,
   timeZone: z.string().check(z.regex(/^[A-Za-z_]+(\/[A-Za-z_+-]+){0,2}$/), z.maxLength(40)),
   budgetMinor: opt(minor),

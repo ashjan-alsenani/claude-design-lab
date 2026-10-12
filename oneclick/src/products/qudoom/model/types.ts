@@ -33,6 +33,8 @@ export type Profile = {
   dueDate?: string;
   firstTime?: "yes" | "no";
   country: Country;
+  /** Optional, only to make "where to buy" searches local. */
+  city?: string;
   currency: Currency;
   /** IANA time zone used for "today" and visit slots, e.g. "Asia/Muscat". */
   timeZone: string;

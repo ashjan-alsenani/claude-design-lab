@@ -120,11 +120,15 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
         <main id="qd-main" className="min-w-0 flex-1 py-5 sm:py-7">
           {tabs.length > 1 && (
             <nav aria-label={t.nav[group]} className="qd-noprint qd-scroll-x -mx-4 mb-5 flex gap-2 overflow-x-auto px-4 lg:justify-center">
-              {tabs.map((p) => (
-                <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={cx("h-10 shrink-0 whitespace-nowrap rounded-full border px-4 text-[14px] leading-[38px]", p === page ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-transparent bg-white/85 text-[var(--qd-ink-soft)] shadow-[0_4px_14px_-10px_rgb(30_27_58/.4)]")}>
+              {tabs.map((p) => {
+                const I = pageIcons[p];
+                return (
+                <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={cx("inline-flex h-10 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border pe-4 ps-3 text-[14px]", p === page ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-transparent bg-white/85 text-[var(--qd-ink-soft)] shadow-[0_4px_14px_-10px_rgb(30_27_58/.4)]")}>
+                  <I size={17} weight={p === page ? "fill" : "duotone"} aria-hidden="true" />
                   {label(p)}
                 </Link>
-              ))}
+                );
+              })}
             </nav>
           )}
           <div key={page} className="qd-page">

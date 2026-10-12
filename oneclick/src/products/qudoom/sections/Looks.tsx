@@ -6,6 +6,7 @@ import { CheckCircleIcon, CheckIcon, SparkleIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { isLookTask, lookChecklist, looks, lookTitle, palettes, places, themes, type Look, type LookPlace, type LookTheme } from "../model/looks";
 import { LookArt } from "../ui/Illustrations";
+import { Photo, lookPhoto } from "../ui/FavorPhoto";
 import { BabyMascot } from "../ui/Mascot";
 import { Sheet, cx } from "../ui/kit";
 
@@ -59,6 +60,21 @@ export function LooksPage() {
         </p>
       )}
 
+      {themes.some((th) => lookPhoto(th.id)) && (
+        <section aria-label={ar ? "صور حقيقية تقريبية" : "Approximate real photos"}>
+          <p className="mb-2 text-[14px] font-bold">{ar ? "شوفيها كصور حقيقية" : "See them as real photos"}</p>
+          <div className="qd-scroll-x -mx-4 flex gap-3 overflow-x-auto px-4 pb-1">
+            {themes.filter((th) => lookPhoto(th.id)).map((th) => (
+              <button key={th.id} type="button" aria-pressed={theme === th.id} onClick={() => (setTheme(theme === th.id ? "all" : th.id), reset())} className={cx("w-36 shrink-0 overflow-hidden rounded-[20px] bg-[var(--qd-paper)] text-start ring-2", theme === th.id ? "ring-[var(--qd-primary)]" : "ring-transparent")}>
+                <Photo src={lookPhoto(th.id)!} className="aspect-square w-full" />
+                <span className="block truncate px-2.5 py-2 text-[13px] font-bold">{ar ? th.ar : th.en}</span>
+              </button>
+            ))}
+          </div>
+          <p className="mt-1 text-[11.5px] text-[var(--qd-muted)]">{ar ? "صور تقريبية بالذكاء الاصطناعي لفكرة كل طابع." : "Approximate AI photos of each theme."}</p>
+        </section>
+      )}
+
       <div className="space-y-2">
         <div className="qd-scroll-x -mx-4 flex gap-2 overflow-x-auto px-4">
           <Chip on={place === "all"} onClick={() => (setPlace("all"), reset())}>{ar ? "كل الأماكن" : "All places"}</Chip>
@@ -103,6 +119,12 @@ export function LooksPage() {
       <Sheet open={!!open} onClose={() => setOpen(null)} title={open ? lookTitle(open, lang) : ""} wide>
         {open && (
           <div className="space-y-4">
+            {lookPhoto(open.theme) && (
+              <figure className="relative overflow-hidden rounded-[18px]">
+                <Photo src={lookPhoto(open.theme)!} alt={lookTitle(open, lang)} className="aspect-[4/3] w-full" />
+                <figcaption className="absolute bottom-2 start-2 rounded-full bg-white/85 px-2.5 py-1 text-[11.5px] font-semibold text-[var(--qd-ink-soft)]">{ar ? "صورة تقريبية للطابع" : "Approximate photo of the theme"}</figcaption>
+              </figure>
+            )}
             <LookArt look={open} className="aspect-[16/10] w-full rounded-[18px]" />
             <p className="text-[14px] font-semibold text-[var(--qd-muted)]">{places.find((p) => p.id === open.place)![ar ? "ar" : "en"]}</p>
             <div>

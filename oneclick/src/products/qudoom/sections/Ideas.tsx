@@ -7,7 +7,8 @@ import { useQ } from "../app/state";
 import { allIdeas, favorCats, ideaKinds, type AnyIdea, type IdeaKind } from "../model/all-ideas";
 import type { FavorCat } from "../model/favor-ideas";
 import { BabyMascot } from "../ui/Mascot";
-import { FavorPhoto } from "../ui/FavorPhoto";
+import { FavorPhoto, Photo, kindPhoto } from "../ui/FavorPhoto";
+import { IdeaSheet } from "../ui/IdeaSheet";
 import { KindIcon } from "../ui/KindIcon";
 
 /** Each favor gets its own colour variation so the drawings don't all look alike. */
@@ -29,6 +30,7 @@ export function IdeasPage() {
   const [fc, setFc] = useState<FavorCat | "all">("all");
   const [price, setPrice] = useState<0 | 1 | 2 | 3>(0);
   const [shown, setShown] = useState(20);
+  const [open, setOpen] = useState<AnyIdea | null>(null);
   const ar = lang === "ar";
   const text = (x: AnyIdea) => (ar ? x.ar : x.en).replace("{gift}", ar ? "الهدية" : "the gift").replace("{name}", ar ? "يا غالية" : "Dear");
 
@@ -80,7 +82,7 @@ export function IdeasPage() {
           const on = k.kind === kind;
           return (
             <motion.button key={k.kind} type="button" whileTap={reduce ? undefined : { scale: 0.95 }} aria-pressed={on} onClick={() => pick(k.kind)} className={cx("flex flex-col items-center gap-1 rounded-[20px] border-2 px-1 py-2.5 text-center transition-colors", on ? "border-[var(--qd-primary)] bg-[var(--qd-paper)]" : "border-transparent bg-[var(--qd-paper)]/70")}>
-              <KindIcon kind={k.kind} color={k.color} className="size-10" />
+              {kindPhoto(k.kind) ? <Photo src={kindPhoto(k.kind)!} className="size-14 rounded-[16px]" /> : <KindIcon kind={k.kind} color={k.color} className="size-10" />}
               <span className="text-[12.5px] font-bold leading-tight">{ar ? k.ar : k.en}</span>
               <span className="text-[11px] text-[var(--qd-muted)]">{num(allIdeas.filter((x) => x.kind === k.kind).length)}</span>
             </motion.button>
@@ -129,10 +131,11 @@ export function IdeasPage() {
                   ) : (
                     <KindIcon kind={x.kind} color={meta.color} size={20} className="size-10" />
                   )}
-                  <div className="min-w-0 flex-1">
-                    <p className={cx("font-bold leading-snug", x.kind === "thanks" ? "text-[14px]" : "text-[15px]")}>{text(x)}</p>
-                    {(note || x.price || cat) && <p className="mt-0.5 truncate text-[12px] text-[var(--qd-muted)]">{[note, cat && (ar ? cat.ar : cat.en), x.price && it.price[x.price]].filter(Boolean).join(" · ")}</p>}
-                  </div>
+                  <button type="button" onClick={() => setOpen(x)} className="min-w-0 flex-1 text-start">
+                    <span className={cx("block font-bold leading-snug", x.kind === "thanks" ? "text-[14px]" : "text-[15px]")}>{text(x)}</span>
+                    {(note || x.price || cat) && <span className="mt-0.5 block truncate text-[12px] text-[var(--qd-muted)]">{[note, cat && (ar ? cat.ar : cat.en), x.price && it.price[x.price]].filter(Boolean).join(" · ")}</span>}
+                    {x.kind !== "thanks" && <span className="mt-1 block text-[12px] font-semibold text-[var(--qd-primary)]">{ar ? "شوفي الشكل ووين تلاقينها" : "See it & where to buy"}</span>}
+                  </button>
                   {access.canEdit && (
                     <motion.button whileTap={reduce ? undefined : { scale: 0.85 }} type="button" disabled={done} onClick={() => add(x)} aria-label={done ? it.added : `${t.common.add}: ${text(x)}`} title={done ? it.added : t.common.add} className={cx("grid size-10 shrink-0 place-items-center rounded-full transition-colors", done ? "bg-[var(--qd-sage-soft)] text-[var(--qd-sage)]" : "bg-[var(--qd-primary)] text-white")}>
                       {done ? <CheckIcon size={18} weight="bold" /> : <PlusIcon size={18} weight="bold" />}
@@ -150,6 +153,7 @@ export function IdeasPage() {
         </button>
       )}
       <p className="text-[12.5px] text-[var(--qd-muted)]">{it.note}</p>
+      <IdeaSheet idea={open} text={open ? text(open) : ""} done={open ? has(open) : false} onAdd={() => open && add(open)} onClose={() => setOpen(null)} />
     </div>
   );
 }

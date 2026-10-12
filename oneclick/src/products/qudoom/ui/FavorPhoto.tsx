@@ -1,21 +1,24 @@
 import type { FavorCat } from "../model/favor-ideas";
+import type { IdeaKind } from "../model/all-ideas";
+import type { LookTheme } from "../model/looks";
 import { FavorArt } from "./Illustrations";
+import { favorPhotoFiles, kindPhotoFiles, lookPhotoFiles } from "./photos.gen";
 
 /**
- * AI-made sample photos (Canva), one per favor category, to show roughly how a favor looks. They are
- * approximate pictures, not the exact item; a category without a photo yet falls back to its drawing.
+ * AI-made sample photos (Canva): one per favor category, per idea kind and per welcome theme. They
+ * show roughly how an idea looks, not the exact item. Anything without a photo yet keeps its drawing.
  */
-export const favorPhotos: Partial<Record<FavorCat, string>> = {
-  sweets: "/brand/qudoom/favors/sweets.webp",
-  scents: "/brand/qudoom/favors/scents.webp",
-  plants: "/brand/qudoom/favors/plants.webp",
-  keepsakes: "/brand/qudoom/favors/keepsakes.webp",
-  care: "/brand/qudoom/favors/care.webp",
-};
+export const favorPhoto = (cat: FavorCat): string | undefined => favorPhotoFiles[cat];
+export const kindPhoto = (kind: IdeaKind): string | undefined => kindPhotoFiles[kind] ?? (kind === "favor" ? favorPhotoFiles.sweets : undefined);
+export const lookPhoto = (theme: LookTheme): string | undefined => lookPhotoFiles[theme];
+
+export function Photo({ src, className = "", alt = "" }: { src: string; className?: string; alt?: string }) {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={src} alt={alt} loading="lazy" decoding="async" width={200} height={200} className={`object-cover ${className}`} />;
+}
 
 export function FavorPhoto({ cat, color, className = "" }: { cat: FavorCat; color: string; className?: string }) {
-  const src = favorPhotos[cat];
+  const src = favorPhoto(cat);
   if (!src) return <FavorArt cat={cat} color={color} className={className} />;
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt="" loading="lazy" decoding="async" width={200} height={200} className={`rounded-[16px] object-cover ${className}`} />;
+  return <Photo src={src} className={`rounded-[16px] ${className}`} />;
 }

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CopyIcon, GiftIcon, LinkSimpleIcon, MagnifyingGlassIcon, PlusIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
+import { ItemIcon } from "../ui/ItemIcon";
 import { itemDone } from "../model/engine";
 import type { Item, ItemArea, ItemCat, ItemStatus, Priority, Task, TaskArea } from "../model/types";
 import { EntitySheet, type Draft, type FieldSpec } from "../ui/EntitySheet";
@@ -117,7 +118,8 @@ export function ItemList({ area, autoAdd = false }: { area: ItemArea; autoAdd?: 
                   {list.map((i) => (
                     <li key={i.id} className={cx("flex items-center gap-1 pe-3 ps-1", i.status === "skip" && "opacity-55")}>
                       <CheckCircle checked={itemDone(i)} onClick={() => quick(i)} label={`${t.status.item.have}: ${i.name}`} disabled={!access.canEdit} />
-                      <button type="button" onClick={() => setEdit(i)} className="min-h-14 min-w-0 flex-1 py-2.5 text-start">
+                      <ItemIcon name={i.name} cat={i.cat} done={itemDone(i)} />
+                      <button type="button" onClick={() => setEdit(i)} className="min-h-14 min-w-0 flex-1 py-2.5 ps-2 text-start">
                         <span className={cx("block text-[15px]", itemDone(i) && "text-[var(--qd-muted)] line-through decoration-[var(--qd-muted)]/40")}>{i.name}</span>
                         <span className="mt-1 flex flex-wrap items-center gap-1.5 text-[12.5px] text-[var(--qd-muted)]">
                           <Badge tone={statusTone[i.status]}>{t.status.item[i.status]}</Badge>
