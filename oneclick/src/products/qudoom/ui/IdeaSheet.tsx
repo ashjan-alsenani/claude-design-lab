@@ -32,7 +32,7 @@ export function IdeaSheet({ idea, text, done, onAdd, onClose }: { idea: AnyIdea 
       <div className="space-y-4">
         <div className="relative overflow-hidden rounded-[22px] bg-[var(--qd-tint-2)]">
           {src ? (
-            <Photo src={src} alt={text} className="aspect-[4/3] w-full" />
+            <div className="grid place-items-center py-4"><Photo src={src} alt={text} className="size-56 rounded-[22px] shadow-[0_18px_40px_-24px_rgba(90,85,112,.6)]" /></div>
           ) : idea.kind === "favor" && idea.cat ? (
             <div className="grid aspect-[4/3] place-items-center"><FavorArt cat={idea.cat} color={cat?.color ?? meta.color} className="size-40" /></div>
           ) : (

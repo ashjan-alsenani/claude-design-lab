@@ -43,6 +43,8 @@ describe("ownership guard rails", () => {
   it("nothing protected sits in the public folder", () => {
     const pub = walk(path.join(root, "public")).map(rel);
     expect(pub.filter((f) => !f.startsWith("public/brand/"))).toEqual([]);
-    expect(pub.filter((f) => /\.(pdf|zip|docx?|xlsx?|epub|mp4|mp3)$/i.test(f))).toEqual([]);
+    // Public marketing media only, named one by one (never a paid deliverable).
+    const marketing = ["public/brand/qudoom/ad.mp4"];
+    expect(pub.filter((f) => /\.(pdf|zip|docx?|xlsx?|epub|mp4|mp3)$/i.test(f) && !marketing.includes(f))).toEqual([]);
   });
 });

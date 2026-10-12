@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRightIcon, BabyCarriageIcon, BabyIcon, BagIcon, BalloonIcon, BellRingingIcon, CalendarHeartIcon, CheckCircleIcon, CoffeeIcon, GiftIcon, HandbagIcon, HandHeartIcon, HouseIcon, LockIcon, LockKeyIcon, MapTrifoldIcon, ShieldCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon, BabyCarriageIcon, BabyIcon, BagIcon, BalloonIcon, BellRingingIcon, CalendarHeartIcon, CheckCircleIcon, CoffeeIcon, GiftIcon, HandbagIcon, HandHeartIcon, HouseIcon, ImageIcon, LockIcon, LockKeyIcon, MapPinIcon, MapTrifoldIcon, ShieldCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import type { Locale } from "@/i18n/config";
 import { Clicky } from "@/components/brand/Clicky";
@@ -121,7 +121,9 @@ export function QudoomBullets({ locale }: { locale: Locale }) {
     [BabyCarriageIcon, "أغراض البيبي وغرفته، بقوائم جاهزة", "Baby things and nursery, with ready lists"],
     [HandbagIcon, "شنطة المستشفى: لك وللبيبي وللمرافقة", "Hospital bag: for you, baby and your companion"],
     [BalloonIcon, "١٠٠٠ شكل مرسوم لاستقبال البيبي", "1,000 illustrated welcome looks"],
-    [GiftIcon, "أكثر من ألف فكرة للتوزيعات والهدايا", "Over a thousand favor and gift ideas"],
+    [GiftIcon, "أكثر من ١١٠٠ فكرة للتوزيعات والهدايا", "Over 1,100 favor and gift ideas"],
+    [ImageIcon, "صور تقريبية بالذكاء الاصطناعي تشوفين فيها الشكل", "Approximate AI photos so you can see the look"],
+    [MapPinIcon, "وين تلاقينها: بحث عن محلات قريبة في مدينتك", "Where to find it: nearby shops in your city"],
     [HandHeartIcon, "قائمة هدايا يحجز منها الأهل بدون تكرار", "A gift list family can reserve, no duplicates"],
     [CoffeeIcon, "حاسبة ضيافة وزيارات بمواعيد", "Hospitality calculator and visits by appointment"],
     [LockIcon, "خاصة في حسابك، والمشاركة باختيارك", "Private to you; share only what you choose"],

@@ -22,6 +22,7 @@ import { ProductViewTracker } from "@/components/product/ProductViewTracker";
 import { JsonLd } from "@/components/JsonLd";
 import { QudoomBullets, QudoomStory } from "@/components/product/QudoomShowcase";
 import { QudoomPreviewAnimated } from "@/components/product/QudoomPreviewAnimated";
+import { QudoomMedia } from "@/components/product/QudoomMedia";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -187,6 +188,7 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
+      {product.slug === "hikayat-qudoom" && <QudoomMedia locale={locale} />}
       {product.slug === "hikayat-qudoom" && <QudoomStory locale={locale} />}
 
       {/* WHAT YOU GET + SPECS */}

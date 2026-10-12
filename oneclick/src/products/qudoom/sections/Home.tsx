@@ -120,12 +120,7 @@ export function Home() {
       {/* Greeting + countdown + readiness */}
       <motion.section variants={card} className="qd-card relative overflow-hidden rounded-[32px] p-5 sm:p-6">
         <div className="pointer-events-none absolute -end-10 -top-10 size-40 rounded-full bg-[var(--qd-tint)]" />
-        {mode !== "helper" && (
-          <button type="button" onClick={() => setEditing(true)} className="absolute end-3 top-3 z-10 flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-paper)] px-3 text-[13px] font-semibold text-[var(--qd-ink-soft)] shadow-sm ring-1 ring-[var(--qd-line)] hover:text-[var(--qd-primary)]">
-            <PencilSimpleIcon size={16} /> {lang === "ar" ? "تعديل المعلومات" : "Edit details"}
-          </button>
-        )}
-        <div className="relative flex items-center gap-4 pt-6 sm:pt-0">
+        <div className="relative flex items-center gap-4">
           <motion.div animate={reduce ? undefined : { y: [0, -6, 0] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} className="shrink-0">
             <BabyMascot size={84} theme={p.theme} mood={arrived ? "celebrate" : "sweet"} body />
           </motion.div>
@@ -140,6 +135,11 @@ export function Home() {
               </h1>
             ) : (
               <h1 className="mt-1 text-[1.5rem] font-extrabold leading-tight">{daysLeft === 0 ? h.dueToday : h.lines[0]}</h1>
+            )}
+            {mode !== "helper" && (
+              <button type="button" onClick={() => setEditing(true)} className="mt-2 inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-paper)] px-3 text-[13px] font-semibold text-[var(--qd-ink-soft)] shadow-sm ring-1 ring-[var(--qd-line)] hover:text-[var(--qd-primary)]">
+                <PencilSimpleIcon size={16} /> {lang === "ar" ? "تعديل المعلومات" : "Edit details"}
+              </button>
             )}
           </div>
           {!arrived && (

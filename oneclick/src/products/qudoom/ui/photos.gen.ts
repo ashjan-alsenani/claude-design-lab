@@ -3,6 +3,7 @@ export const favorPhotoFiles: Record<string, string> = {
   "care": "/brand/qudoom/favors/care.webp",
   "drinks": "/brand/qudoom/favors/drinks.webp",
   "keepsakes": "/brand/qudoom/favors/keepsakes.webp",
+  "paper": "/brand/qudoom/favors/paper.webp",
   "plants": "/brand/qudoom/favors/plants.webp",
   "scents": "/brand/qudoom/favors/scents.webp",
   "sweets": "/brand/qudoom/favors/sweets.webp"
