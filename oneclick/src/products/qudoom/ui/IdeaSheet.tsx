@@ -5,7 +5,7 @@ import { ArrowSquareOutIcon, CheckIcon, InstagramLogoIcon, MagnifyingGlassIcon, 
 import { useQ } from "../app/state";
 import { favorCats, ideaKinds, type AnyIdea } from "../model/all-ideas";
 import { whereLinks, type WhereLink } from "../model/where";
-import { favorPhoto, kindPhoto, Photo } from "./FavorPhoto";
+import { ideaPhoto, Photo } from "./FavorPhoto";
 import { FavorArt } from "./Illustrations";
 import { KindIcon } from "./KindIcon";
 import { Sheet, inputCls } from "./kit";
@@ -24,7 +24,7 @@ export function IdeaSheet({ idea, text, done, onAdd, onClose }: { idea: AnyIdea 
   if (!idea) return <Sheet open={false} onClose={onClose} title="">{null}</Sheet>;
   const meta = ideaKinds.find((k) => k.kind === idea.kind)!;
   const cat = idea.cat ? favorCats.find((c) => c.id === idea.cat) : undefined;
-  const src = idea.kind === "favor" && idea.cat ? favorPhoto(idea.cat) : kindPhoto(idea.kind);
+  const src = ideaPhoto(idea);
   const links = whereLinks({ text, kind: idea.kind, country: p.country, city: p.city, lang });
   const note = ar ? idea.arNote : idea.enNote;
   return (

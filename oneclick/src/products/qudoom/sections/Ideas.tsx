@@ -7,7 +7,7 @@ import { useQ } from "../app/state";
 import { allIdeas, favorCats, ideaKinds, type AnyIdea, type IdeaKind } from "../model/all-ideas";
 import type { FavorCat } from "../model/favor-ideas";
 import { BabyMascot } from "../ui/Mascot";
-import { FavorPhoto, Photo, kindPhoto } from "../ui/FavorPhoto";
+import { FavorPhoto, Photo, ideaPhoto, kindPhoto } from "../ui/FavorPhoto";
 import { IdeaSheet } from "../ui/IdeaSheet";
 import { KindIcon } from "../ui/KindIcon";
 
@@ -126,7 +126,9 @@ export function IdeasPage() {
               const cat = x.cat ? favorCats.find((c) => c.id === x.cat) : undefined;
               return (
                 <motion.li key={x.id} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { delay: Math.min(i, 10) * 0.025 } }} className="qd-card flex min-w-0 items-center gap-3 rounded-[20px] p-3.5">
-                  {x.kind === "favor" && x.cat ? (
+                  {ideaPhoto(x) ? (
+                    <Photo src={ideaPhoto(x)!} className="size-16 shrink-0 rounded-[16px]" />
+                  ) : x.kind === "favor" && x.cat ? (
                     <FavorPhoto cat={x.cat} color={favorTint(x.id, cat?.color ?? meta.color)} className="size-16 shrink-0" />
                   ) : (
                     <KindIcon kind={x.kind} color={meta.color} size={20} className="size-10" />

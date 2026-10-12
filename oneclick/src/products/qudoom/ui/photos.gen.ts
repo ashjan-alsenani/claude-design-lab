@@ -13,3 +13,5 @@ export const favorPhotoFiles: Record<string, string> = {
 };
 export const kindPhotoFiles: Record<string, string> = {};
 export const lookPhotoFiles: Record<string, string> = {};
+/** One photo per idea, keyed by ideaKey (a hash of the English text, stable when ideas are added). */
+export const ideaPhotoFiles: Record<string, string> = {};

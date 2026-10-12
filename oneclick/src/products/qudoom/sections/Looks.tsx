@@ -6,7 +6,7 @@ import { CheckCircleIcon, CheckIcon, SparkleIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { isLookTask, lookChecklist, looks, lookTitle, palettes, places, themes, type Look, type LookPlace, type LookTheme } from "../model/looks";
 import { LookArt } from "../ui/Illustrations";
-import { Photo, lookPhoto } from "../ui/FavorPhoto";
+import { Photo, lookPhoto, lookPhotoFor } from "../ui/FavorPhoto";
 import { BabyMascot } from "../ui/Mascot";
 import { Sheet, cx } from "../ui/kit";
 
@@ -100,7 +100,7 @@ export function LooksPage() {
           {list.slice(0, shown).map((l, i) => (
             <motion.li key={l.id} initial={reduce ? false : { opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1, transition: { delay: Math.min(i, 8) * 0.03 } }}>
               <motion.button type="button" whileHover={reduce ? undefined : { y: -3 }} whileTap={reduce ? undefined : { scale: 0.97 }} onClick={() => setOpen(l)} className="qd-card block w-full overflow-hidden rounded-[22px] text-start">
-                <LookArt look={l} className="aspect-[16/10] w-full" />
+                {lookPhotoFor(l) && lookPhotoFor(l) !== lookPhoto(l.theme) ? <Photo src={lookPhotoFor(l)!} className="aspect-[16/10] w-full" /> : <LookArt look={l} className="aspect-[16/10] w-full" />}
                 <span className="block px-3 py-2.5">
                   <span className="block truncate text-[13.5px] font-bold">{lookTitle(l, lang)}</span>
                   <span className="block truncate text-[12px] text-[var(--qd-muted)]">{places.find((p) => p.id === l.place)![ar ? "ar" : "en"]}</span>
@@ -119,9 +119,9 @@ export function LooksPage() {
       <Sheet open={!!open} onClose={() => setOpen(null)} title={open ? lookTitle(open, lang) : ""} wide>
         {open && (
           <div className="space-y-4">
-            {lookPhoto(open.theme) && (
+            {lookPhotoFor(open) && (
               <figure className="relative overflow-hidden rounded-[18px]">
-                <Photo src={lookPhoto(open.theme)!} alt={lookTitle(open, lang)} className="aspect-[4/3] w-full" />
+                <Photo src={lookPhotoFor(open)!} alt={lookTitle(open, lang)} className="aspect-[4/3] w-full" />
                 <figcaption className="absolute bottom-2 start-2 rounded-full bg-white/85 px-2.5 py-1 text-[11.5px] font-semibold text-[var(--qd-ink-soft)]">{ar ? "صورة تقريبية للطابع" : "Approximate photo of the theme"}</figcaption>
               </figure>
             )}
