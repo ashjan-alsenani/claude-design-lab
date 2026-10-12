@@ -75,7 +75,7 @@ export function RemindersBell() {
         {list.length > 0 && <span className="absolute -end-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-[var(--qd-primary)] px-1 text-[11px] font-bold text-white">{list.length > 9 ? "9+" : list.length}</span>}
       </button>
       <Sheet open={open} onClose={() => setOpen(false)} title={label}>
-        {list.length ? (
+        {!open ? null : list.length ? (
           <ul className="space-y-2">{list.map((r) => <Row key={r.id} r={r} onGo={() => setOpen(false)} />)}</ul>
         ) : (
           <p className="py-6 text-center text-[15px] text-[var(--qd-muted)]">{ar ? "ما عندك شي مستعجل. استمتعي بيومك" : "Nothing urgent. Enjoy your day"}</p>
