@@ -11,7 +11,69 @@ export const favorPhotoFiles: Record<string, string> = {
   "scents": "/brand/qudoom/favors/scents.webp",
   "sweets": "/brand/qudoom/favors/sweets.webp"
 };
-export const kindPhotoFiles: Record<string, string> = {};
-export const lookPhotoFiles: Record<string, string> = {};
+export const kindPhotoFiles: Record<string, string> = {
+  "aqiqah": "/brand/qudoom/kinds/aqiqah.webp",
+  "decor": "/brand/qudoom/kinds/decor.webp",
+  "gift": "/brand/qudoom/kinds/gift.webp",
+  "hosp": "/brand/qudoom/kinds/hosp.webp",
+  "hospital": "/brand/qudoom/kinds/hospital.webp",
+  "keepsake": "/brand/qudoom/kinds/keepsake.webp",
+  "mother": "/brand/qudoom/kinds/mother.webp",
+  "photo": "/brand/qudoom/kinds/photo.webp",
+  "sign": "/brand/qudoom/kinds/sign.webp",
+  "thanks": "/brand/qudoom/kinds/thanks.webp"
+};
+export const lookPhotoFiles: Record<string, string> = {
+  "aqiqah.balloons": "/brand/qudoom/looks/aqiqah.balloons.webp",
+  "aqiqah.butterflies": "/brand/qudoom/looks/aqiqah.butterflies.webp",
+  "aqiqah.clouds": "/brand/qudoom/looks/aqiqah.clouds.webp",
+  "aqiqah.garden": "/brand/qudoom/looks/aqiqah.garden.webp",
+  "aqiqah.gold": "/brand/qudoom/looks/aqiqah.gold.webp",
+  "aqiqah.minimal": "/brand/qudoom/looks/aqiqah.minimal.webp",
+  "aqiqah.moon": "/brand/qudoom/looks/aqiqah.moon.webp",
+  "aqiqah.sadu": "/brand/qudoom/looks/aqiqah.sadu.webp",
+  "aqiqah.sea": "/brand/qudoom/looks/aqiqah.sea.webp",
+  "aqiqah.teddy": "/brand/qudoom/looks/aqiqah.teddy.webp",
+  "family.balloons": "/brand/qudoom/looks/family.balloons.webp",
+  "family.butterflies": "/brand/qudoom/looks/family.butterflies.webp",
+  "family.clouds": "/brand/qudoom/looks/family.clouds.webp",
+  "family.garden": "/brand/qudoom/looks/family.garden.webp",
+  "family.gold": "/brand/qudoom/looks/family.gold.webp",
+  "family.minimal": "/brand/qudoom/looks/family.minimal.webp",
+  "family.moon": "/brand/qudoom/looks/family.moon.webp",
+  "family.sadu": "/brand/qudoom/looks/family.sadu.webp",
+  "family.sea": "/brand/qudoom/looks/family.sea.webp",
+  "family.teddy": "/brand/qudoom/looks/family.teddy.webp",
+  "hospital.balloons": "/brand/qudoom/looks/hospital.balloons.webp",
+  "hospital.butterflies": "/brand/qudoom/looks/hospital.butterflies.webp",
+  "hospital.clouds": "/brand/qudoom/looks/hospital.clouds.webp",
+  "hospital.garden": "/brand/qudoom/looks/hospital.garden.webp",
+  "hospital.gold": "/brand/qudoom/looks/hospital.gold.webp",
+  "hospital.minimal": "/brand/qudoom/looks/hospital.minimal.webp",
+  "hospital.moon": "/brand/qudoom/looks/hospital.moon.webp",
+  "hospital.sadu": "/brand/qudoom/looks/hospital.sadu.webp",
+  "hospital.sea": "/brand/qudoom/looks/hospital.sea.webp",
+  "hospital.teddy": "/brand/qudoom/looks/hospital.teddy.webp",
+  "majlis.balloons": "/brand/qudoom/looks/majlis.balloons.webp",
+  "majlis.butterflies": "/brand/qudoom/looks/majlis.butterflies.webp",
+  "majlis.clouds": "/brand/qudoom/looks/majlis.clouds.webp",
+  "majlis.garden": "/brand/qudoom/looks/majlis.garden.webp",
+  "majlis.gold": "/brand/qudoom/looks/majlis.gold.webp",
+  "majlis.minimal": "/brand/qudoom/looks/majlis.minimal.webp",
+  "majlis.moon": "/brand/qudoom/looks/majlis.moon.webp",
+  "majlis.sadu": "/brand/qudoom/looks/majlis.sadu.webp",
+  "majlis.sea": "/brand/qudoom/looks/majlis.sea.webp",
+  "majlis.teddy": "/brand/qudoom/looks/majlis.teddy.webp",
+  "outdoor.balloons": "/brand/qudoom/looks/outdoor.balloons.webp",
+  "outdoor.butterflies": "/brand/qudoom/looks/outdoor.butterflies.webp",
+  "outdoor.clouds": "/brand/qudoom/looks/outdoor.clouds.webp",
+  "outdoor.garden": "/brand/qudoom/looks/outdoor.garden.webp",
+  "outdoor.gold": "/brand/qudoom/looks/outdoor.gold.webp",
+  "outdoor.minimal": "/brand/qudoom/looks/outdoor.minimal.webp",
+  "outdoor.moon": "/brand/qudoom/looks/outdoor.moon.webp",
+  "outdoor.sadu": "/brand/qudoom/looks/outdoor.sadu.webp",
+  "outdoor.sea": "/brand/qudoom/looks/outdoor.sea.webp",
+  "outdoor.teddy": "/brand/qudoom/looks/outdoor.teddy.webp"
+};
 /** One photo per idea, keyed by ideaKey (a hash of the English text, stable when ideas are added). */
-export const ideaPhotoFiles: Record<string, string> = {};
+export const ideaPhotoFiles: Record<string, string> = {"111kevo":"/brand/qudoom/ideas/111kevo.webp","11jewpa":"/brand/qudoom/ideas/11jewpa.webp","11w6biq":"/brand/qudoom/ideas/11w6biq.webp","12mdwmc":"/brand/qudoom/ideas/12mdwmc.webp","13w54bi":"/brand/qudoom/ideas/13w54bi.webp","147hkdv":"/brand/qudoom/ideas/147hkdv.webp","15adivj":"/brand/qudoom/ideas/15adivj.webp","177zocy":"/brand/qudoom/ideas/177zocy.webp","18mw2af":"/brand/qudoom/ideas/18mw2af.webp","1b1lsfh":"/brand/qudoom/ideas/1b1lsfh.webp","1blit5m":"/brand/qudoom/ideas/1blit5m.webp","1fpviyr":"/brand/qudoom/ideas/1fpviyr.webp","1ig682p":"/brand/qudoom/ideas/1ig682p.webp","1iphewf":"/brand/qudoom/ideas/1iphewf.webp","1krki9n":"/brand/qudoom/ideas/1krki9n.webp","1n1uad":"/brand/qudoom/ideas/1n1uad.webp","1p2td3v":"/brand/qudoom/ideas/1p2td3v.webp","1rl5w3u":"/brand/qudoom/ideas/1rl5w3u.webp","1rmqd57":"/brand/qudoom/ideas/1rmqd57.webp","1rr3ygs":"/brand/qudoom/ideas/1rr3ygs.webp","1rtigs1":"/brand/qudoom/ideas/1rtigs1.webp","1sar02d":"/brand/qudoom/ideas/1sar02d.webp","1tedd8g":"/brand/qudoom/ideas/1tedd8g.webp","1u1ytpl":"/brand/qudoom/ideas/1u1ytpl.webp","1vt3a0a":"/brand/qudoom/ideas/1vt3a0a.webp","1w7cf6c":"/brand/qudoom/ideas/1w7cf6c.webp","1x67abp":"/brand/qudoom/ideas/1x67abp.webp","1xv4dhd":"/brand/qudoom/ideas/1xv4dhd.webp","2oa6bx":"/brand/qudoom/ideas/2oa6bx.webp","2us2rf":"/brand/qudoom/ideas/2us2rf.webp","3656g3":"/brand/qudoom/ideas/3656g3.webp","4rg703":"/brand/qudoom/ideas/4rg703.webp","9bfua9":"/brand/qudoom/ideas/9bfua9.webp","a6b8gf":"/brand/qudoom/ideas/a6b8gf.webp","asznf7":"/brand/qudoom/ideas/asznf7.webp","dx0i3m":"/brand/qudoom/ideas/dx0i3m.webp","ejwife":"/brand/qudoom/ideas/ejwife.webp","hfcm8e":"/brand/qudoom/ideas/hfcm8e.webp","iczavc":"/brand/qudoom/ideas/iczavc.webp","jh7l82":"/brand/qudoom/ideas/jh7l82.webp","k8zgzl":"/brand/qudoom/ideas/k8zgzl.webp","ld44y6":"/brand/qudoom/ideas/ld44y6.webp","lvphwg":"/brand/qudoom/ideas/lvphwg.webp","m3gnio":"/brand/qudoom/ideas/m3gnio.webp","m5cb8x":"/brand/qudoom/ideas/m5cb8x.webp","nj9jbn":"/brand/qudoom/ideas/nj9jbn.webp","nzqij3":"/brand/qudoom/ideas/nzqij3.webp","ptn6w6":"/brand/qudoom/ideas/ptn6w6.webp","pvjcu8":"/brand/qudoom/ideas/pvjcu8.webp","pws6z0":"/brand/qudoom/ideas/pws6z0.webp","t35utp":"/brand/qudoom/ideas/t35utp.webp","ul1429":"/brand/qudoom/ideas/ul1429.webp","wavtp1":"/brand/qudoom/ideas/wavtp1.webp","wljous":"/brand/qudoom/ideas/wljous.webp","x34tls":"/brand/qudoom/ideas/x34tls.webp","xpok6r":"/brand/qudoom/ideas/xpok6r.webp","xxzxx5":"/brand/qudoom/ideas/xxzxx5.webp","zcqlhr":"/brand/qudoom/ideas/zcqlhr.webp"};
