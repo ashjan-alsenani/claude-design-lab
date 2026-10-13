@@ -1,0 +1,8 @@
+Arabic fonts for the Qudoom invitation studio (Arabic subsets, woff2), from Google Fonts.
+All are licensed under the SIL Open Font License 1.1 (https://openfontlicense.org): free to use,
+embed and redistribute; not sold on their own. Copyright stays with each font's authors.
+Families: Ruwudu, Vibes, Aref Ruqaa, Katibeh, Rakkas, Noto Nastaliq Urdu, Gulzar, Amiri, Scheherazade New,
+Noto Naskh Arabic, Markazi Text, Mirza, Lateef, Harmattan, Alkalami, Reem Kufi, Reem Kufi Fun, Kufam,
+Qahiri, Noto Kufi Arabic, El Messiri, Cairo, Tajawal, Almarai, Changa, Mada, IBM Plex Sans Arabic,
+Readex Pro, Alexandria, Noto Sans Arabic, Beiruti, Zain, Fustat, Rubik, Marhey, Lemonada,
+Baloo Bhaijaan 2, Playpen Sans Arabic, Handjet, Lalezar, Jomhuria, Badeen Display, Blaka, Blaka Hollow.

@@ -87,3 +87,18 @@ The app sections are: home, steps, looks, ideas, items, bag, nursery, mother, ev
 - **Hospitality**: a full ready list (`hospCatalog` in `model/seed.ts`, 32 items in 5 groups), one guest count for all amounts, one-tap remove with undo, "add the rest" for older plans.
 - **Ideas**: 97 near-duplicates replaced (`model/refresh-ideas.ts`); ideas without their own photo get an icon picked from what they are (`ui/IdeaArt.tsx`), never one repeated photo.
 - **Optional events**: baby shower and gender reveal as reception kinds, one-tap add on Welcome plans.
+
+## v9 — Invitation studio, story size
+
+- 300 designs at 1080×1920 (`model/invites.ts`). Each is a distinct idea: 45 motifs × their own layouts
+  (11 layouts) × 6 materials (knitted wool, stitched felt, cut paper, watercolour, fine line, gold on dark).
+  No motif repeats a layout (unit-tested), 8 colourways per material.
+- Art is SVG built in `ui/InviteArt.ts` (motif library + material filters/patterns + layouts) and drawn
+  onto a canvas with the words in `ui/InviteCanvas.ts`; text uses real glyph metrics so tall scripts fit.
+- 44 Arabic display fonts + 12 text fonts, self-hosted OFL woff2 (Arabic subsets) in
+  `public/brand/fonts/qudoom/inv`, loaded on demand (`model/inviteFonts.ts`). Studio shows each font with
+  the baby's name.
+- Words: 16 opening/dua sets with boy/girl forms (`{m|f}`), all editable. Saved cards store
+  `design~palette`, `font`, `bodyFont` (schema accepts older font names too).
+- Honest limit: the textures are drawn in code (no photos/AI images), so they are softer than real
+  knitted or quilled photography.

@@ -250,7 +250,7 @@ export type Memory = { id: string; title: string; date?: string; text?: string; 
 export type CardTemplate = "arrived" | "invite" | "thanks" | "favor";
 export type CardDesign = { id: string; template: CardTemplate; title: string; name?: string; text?: string; date?: string; tone: "theme" | "warm" | "calm"; showDate: boolean; showDetails: boolean; details?: string; fileId?: string;
   /** Invitation studio: chosen design, font and the extra lines. */
-  design?: string; font?: "ruqaa" | "kufi" | "naskh" | "messiri" | "rubik"; occasion?: "welcome" | "aqiqah" | "shower" | "reveal"; opener?: string; time?: string; host?: string; note?: string };
+  design?: string; font?: string; bodyFont?: string; occasion?: "welcome" | "aqiqah" | "shower" | "reveal"; opener?: string; time?: string; host?: string; note?: string };
 
 // ---------- Files (bytes live server-side, private; only metadata here) ----------
 export type FileMeta = { id: string; name: string; mime: string; size: number; createdAt: string; caption?: string; order?: number; board?: "nursery" | "memories" | "receipts" | "gifts" | "favors" | "items" };

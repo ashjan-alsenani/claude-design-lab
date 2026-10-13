@@ -14,6 +14,8 @@ const minor = z.int().check(z.minimum(0), z.maximum(10_000_000_000));
 const int = (min: number, max: number) => z.int().check(z.minimum(min), z.maximum(max));
 const num = (min: number, max: number) => z.number().check(z.minimum(min), z.maximum(max));
 const opt = z.optional;
+/** An invitation font id (studio fonts, plus the older five names). */
+const fontId = z.string().check(z.regex(/^[a-z0-9-]{1,40}$/));
 const url = z.string().check(z.maxLength(600), z.refine((s) => /^https?:\/\/[^\s]+$/.test(s), "url"));
 
 export const currency = z.enum(["OMR", "SAR", "AED", "KWD", "BHD", "QAR"]);
@@ -168,7 +170,7 @@ const itemSchemas = {
   payments: z.object({ id, orderId: opt(id), label: text(120, 1), amountMinor: minor, due: opt(date), paidOn: opt(date), notes: opt(text(300)) }),
   appointments: z.object({ id, title: text(120, 1), kind: z.enum(["medical", "personal", "other"]), date, time: opt(time), place: opt(text(120)), notes: opt(text(500)) }),
   memories: z.object({ id, title: text(120, 1), date: opt(date), text: opt(text(2000)), fileId: opt(id), order: int(0, 100_000) }),
-  cards: z.object({ id, template: z.enum(["arrived", "invite", "thanks", "favor"]), title: text(80, 1), name: opt(text(60)), text: opt(text(300)), date: opt(date), tone: z.enum(["theme", "warm", "calm"]), showDate: z.boolean(), showDetails: z.boolean(), details: opt(text(200)), fileId: opt(id), design: opt(text(60)), font: opt(z.enum(["ruqaa", "kufi", "naskh", "messiri", "rubik"])), occasion: opt(z.enum(["welcome", "aqiqah", "shower", "reveal"])), opener: opt(text(120)), time: opt(text(40)), host: opt(text(120)), note: opt(text(160)) }),
+  cards: z.object({ id, template: z.enum(["arrived", "invite", "thanks", "favor"]), title: text(80, 1), name: opt(text(60)), text: opt(text(300)), date: opt(date), tone: z.enum(["theme", "warm", "calm"]), showDate: z.boolean(), showDetails: z.boolean(), details: opt(text(200)), fileId: opt(id), design: opt(text(60)), font: opt(fontId), bodyFont: opt(fontId), occasion: opt(z.enum(["welcome", "aqiqah", "shower", "reveal"])), opener: opt(text(120)), time: opt(text(40)), host: opt(text(120)), note: opt(text(160)) }),
   files: z.object({ id, name: text(120, 1), mime: z.enum(["image/jpeg", "image/png", "image/webp", "application/pdf"]), size: int(1, 3_000_000), createdAt: z.string().check(z.maxLength(40)), caption: opt(text(200)), order: opt(int(0, 100_000)), board: opt(z.enum(["nursery", "memories", "receipts", "gifts", "favors", "items"])) }),
 } as const;
 

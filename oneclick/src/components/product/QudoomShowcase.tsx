@@ -121,7 +121,7 @@ export function QudoomBullets({ locale }: { locale: Locale }) {
     [BabyCarriageIcon, "أغراض البيبي وغرفته، بقوائم جاهزة", "Baby things and nursery, with ready lists"],
     [HandbagIcon, "شنطة المستشفى: لك وللبيبي وللمرافقة", "Hospital bag: for you, baby and your companion"],
     [BalloonIcon, "٥٠٠ فكرة استقبال خليجية، كل وحدة غير", "500 Gulf welcome ideas, each one different"],
-    [EnvelopeOpenIcon, "استوديو دعوات فيه ٣٠٠ تصميم تعدلينه وتحمّلينه", "An invitation studio with 300 designs to edit and download"],
+    [EnvelopeOpenIcon, "استوديو دعوات: ٣٠٠ تصميم بمقاس الستوري و٤٤ خط عربي", "An invitation studio: 300 story-size designs and 44 Arabic fonts"],
     [ConfettiIcon, "بيبي شاور وكشف الجنس (اختياري)", "Baby shower and gender reveal (optional)"],
     [GiftIcon, "أكثر من ١١٠٠ فكرة نادرة للتوزيعات والهدايا", "Over 1,100 rare favor and gift ideas"],
     [ImageIcon, "٦٠٠ صورة واقعية بالذكاء الاصطناعي للتوزيعات", "600 realistic AI photos of favors"],
