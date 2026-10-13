@@ -4,11 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpIcon, DownloadSimpleIcon, FloppyDiskIcon, PrinterIcon, TrashIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
+import { PageHeader } from "../ui/kit";
 import { inviteDesigns, inviteFonts, invitePalettes, inviteStyles, occasions, occasionText, type InviteDesign, type InviteFont, type InviteOccasion, type InviteStyle } from "../model/invites";
 import type { CardDesign } from "../model/types";
 import { drawInvite, INV_H, INV_W, loadInviteFonts, type InviteWords } from "../ui/InviteCanvas";
 import { Filter, FilterBar } from "../ui/Filter";
-import { BabyMascot } from "../ui/Mascot";
 import { Button, Field, cx, inputCls } from "../ui/kit";
 
 /**
@@ -123,13 +123,7 @@ export function StudioPage() {
 
   return (
     <div className="space-y-5">
-      <header className="qd-noprint flex items-center gap-3">
-        <BabyMascot size={58} theme={p?.theme} mood="celebrate" />
-        <div className="min-w-0">
-          <h1 className="text-[1.6rem] font-extrabold leading-tight">{ar ? "استوديو الدعوات" : "Invitation studio"}</h1>
-          <p className="text-[14px] text-[var(--qd-muted)]">{ar ? `${num(inviteDesigns.length)} تصميم. اختاري، عدّلي الكلام، وحمّليها صورة أو اطبعيها.` : `${num(inviteDesigns.length)} designs. Pick one, edit the words, then download or print.`}</p>
-        </div>
-      </header>
+      <div className="qd-noprint"><PageHeader title={ar ? "استوديو الدعوات" : "Invitation studio"} sub={ar ? `${num(inviteDesigns.length)} تصميم. اختاري، عدّلي الكلام، وحمّليها صورة أو اطبعيها.` : `${num(inviteDesigns.length)} designs. Pick one, edit the words, then download or print.`} /></div>
 
       <div role="group" aria-label={ar ? "المناسبة" : "Occasion"} className="qd-noprint grid grid-cols-2 gap-2 sm:grid-cols-4">
         {occasions.map((o) => (

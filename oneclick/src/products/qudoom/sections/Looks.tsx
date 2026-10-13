@@ -4,11 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckCircleIcon, CheckIcon, MagnifyingGlassIcon, SparkleIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
+import { PageHeader } from "../ui/kit";
 import { isLookTask, lookChecklist, looks, lookTitle, motifs, palettes, places, regions, type Look, type LookMotif, type LookPlace, type LookRegion } from "../model/looks";
 import { LookArt } from "../ui/Illustrations";
 import { Photo, lookPhotoFor } from "../ui/FavorPhoto";
 import { Filter, FilterBar } from "../ui/Filter";
-import { BabyMascot } from "../ui/Mascot";
 import { Sheet } from "../ui/kit";
 
 /**
@@ -63,13 +63,7 @@ export function LooksPage() {
 
   return (
     <div className="space-y-4">
-      <header className="flex items-center gap-3">
-        <BabyMascot size={58} theme={plan.profile?.theme} mood="celebrate" />
-        <div className="min-w-0">
-          <h1 className="text-[1.6rem] font-extrabold leading-tight">{t.nav.looks}</h1>
-          <p className="text-[14px] text-[var(--qd-muted)]">{ar ? `${num(looks.length)} فكرة استقبال، كل وحدة غير عن الثانية.` : `${num(looks.length)} welcome ideas, each one different.`}</p>
-        </div>
-      </header>
+      <PageHeader title={t.nav.looks} sub={ar ? `${num(looks.length)} فكرة استقبال، كل وحدة غير عن الثانية.` : `${num(looks.length)} welcome ideas, each one different.`} />
 
       {chosen && (
         <p className="flex items-center gap-2 rounded-[18px] bg-[var(--qd-tint)] px-4 py-3 text-[14px] font-semibold text-[var(--qd-primary-deep)]">

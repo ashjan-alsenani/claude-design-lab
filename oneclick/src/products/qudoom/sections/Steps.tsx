@@ -5,9 +5,9 @@ import { motion, useReducedMotion } from "motion/react";
 import { CheckIcon, MapTrifoldIcon } from "@phosphor-icons/react";
 import { isLookTask } from "../model/looks";
 import { useQ } from "../app/state";
+import { PageHeader } from "../ui/kit";
 import { bagProgress, daysBetween, itemDone } from "../model/engine";
 import type { Plan, SectionId } from "../model/types";
-import { BabyMascot } from "../ui/Mascot";
 import { cx } from "../ui/kit";
 
 /**
@@ -60,15 +60,7 @@ export function StepsPage() {
   const doneCount = done.filter(Boolean).length;
   return (
     <div className="space-y-5">
-      <header className="flex items-center gap-3">
-        <BabyMascot size={60} theme={plan.profile?.theme} mood="sweet" body />
-        <div className="min-w-0 flex-1">
-          <h1 className="flex items-center gap-2 text-[1.6rem] font-extrabold leading-tight">
-            <MapTrifoldIcon size={24} weight="fill" className="text-[var(--qd-primary)]" /> {t.nav.steps}
-          </h1>
-          <p className="text-[14px] text-[var(--qd-muted)]">{ar ? `خلصتي ${num(doneCount)} من ${num(list.length)}. ابدئي من الخطوة الملونة.` : `${num(doneCount)} of ${num(list.length)} done. Start with the highlighted step.`}</p>
-        </div>
-      </header>
+      <PageHeader title={t.nav.steps} sub={ar ? `خلصتي ${num(doneCount)} من ${num(list.length)}. ابدئي من الخطوة الملونة.` : `${num(doneCount)} of ${num(list.length)} done. Start with the highlighted step.`} />
       <ol className="relative space-y-3">
         <span aria-hidden="true" className="absolute bottom-6 start-[1.35rem] top-6 w-[3px] rounded-full bg-[var(--qd-line)]" />
         <motion.span aria-hidden="true" className="absolute start-[1.35rem] top-6 w-[3px] rounded-full bg-[var(--qd-primary)]" initial={{ height: 0 }} animate={{ height: `${(Math.min(current, list.length - 1) / Math.max(1, list.length - 1)) * 100}%` }} transition={{ duration: reduce ? 0 : 1.2, ease: [0.22, 1, 0.36, 1] }} />

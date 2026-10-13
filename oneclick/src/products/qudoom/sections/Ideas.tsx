@@ -4,9 +4,9 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckIcon, MagnifyingGlassIcon, PlusIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
+import { PageHeader } from "../ui/kit";
 import { allIdeas, favorCats, ideaKinds, type AnyIdea, type IdeaKind } from "../model/all-ideas";
 import type { FavorCat } from "../model/favor-ideas";
-import { BabyMascot } from "../ui/Mascot";
 import { Photo, ideaPhoto, kindPhoto } from "../ui/FavorPhoto";
 import { IdeaArt } from "../ui/IdeaArt";
 import { IdeaSheet } from "../ui/IdeaSheet";
@@ -67,13 +67,7 @@ export function IdeasPage() {
 
   return (
     <div className="space-y-5">
-      <header className="flex items-center gap-3">
-        <BabyMascot size={58} theme={plan.profile?.theme} mood="celebrate" />
-        <div>
-          <h1 className="text-[1.6rem] font-extrabold leading-tight">{it.title}</h1>
-          <p className="text-[14px] text-[var(--qd-muted)]">{it.totalCount(num(allIdeas.length))}</p>
-        </div>
-      </header>
+      <PageHeader title={it.title} sub={it.totalCount(num(allIdeas.length))} />
 
       {/* Kinds as friendly tiles */}
       <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">

@@ -46,22 +46,19 @@ export function IconButton({ label, className, children, ...rest }: { label: str
 
 export function Card({ className, children, as: As = "div", ...rest }: { className?: string; children: ReactNode; as?: "div" | "section" | "li" | "article" } & Record<string, unknown>) {
   return (
-    <As className={cx("qd-card rounded-[22px]", className)} {...rest}>
+    <As className={cx("qd-card rounded-[24px]", className)} {...rest}>
       {children}
     </As>
   );
 }
 
-/** Page title: where am I, what is here, what's next (the action). */
-export function PageHeader({ title, sub, action, icon }: { title: string; sub?: string; action?: ReactNode; icon?: ReactNode }) {
+/** Page title as in «مفكّرة عروسة العُمر»: big bold ink title, soft subtitle, the action at the end. */
+export function PageHeader({ title, sub, action }: { title: string; sub?: string; action?: ReactNode; icon?: ReactNode }) {
   return (
-    <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4 pt-1 sm:pt-3">
-      <div className="flex min-w-0 items-start gap-3">
-        {icon && <span className="mt-1 grid size-11 shrink-0 place-items-center rounded-[14px] bg-[var(--qd-tint)] text-[var(--qd-primary)]">{icon}</span>}
-        <div className="min-w-0">
-          <h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2.1rem]">{title}</h1>
-          {sub && <p className="mt-1.5 max-w-2xl text-[15px] leading-relaxed text-[var(--qd-ink-soft)]">{sub}</p>}
-        </div>
+    <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4 pt-2 sm:pt-4">
+      <div className="min-w-0">
+        <h1 className="text-[2rem] font-bold leading-[1.2] text-[var(--qd-ink)] sm:text-[2.5rem]">{title}</h1>
+        {sub && <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-[var(--qd-ink-soft)]">{sub}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
     </header>
@@ -71,7 +68,7 @@ export function SectionTitle({ title, sub, action }: { title: string; sub?: stri
   return (
     <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
       <div className="min-w-0">
-        <h2 className="text-[1.2rem] font-bold leading-snug">{title}</h2>
+        <h2 className="text-[1.5rem] font-bold leading-snug text-[var(--qd-ink)]">{title}</h2>
         {sub && <p className="mt-1 max-w-xl text-[13.5px] leading-relaxed text-[var(--qd-muted)]">{sub}</p>}
       </div>
       {action}
@@ -234,7 +231,7 @@ export function Chips<T extends string>({ value, onChange, options, label }: { v
   return (
     <div role="group" aria-label={label} className="qd-scroll-x -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
       {options.map((o) => (
-        <button key={o.value} type="button" aria-pressed={value === o.value} onClick={() => onChange(o.value)} className={cx("h-10 shrink-0 whitespace-nowrap rounded-full border px-4 text-[13.5px] transition-colors", value === o.value ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-[var(--qd-line)] bg-[var(--qd-paper)] text-[var(--qd-ink-soft)] hover:border-[color-mix(in_oklab,var(--qd-primary)_35%,var(--qd-line))]")}>
+        <button key={o.value} type="button" aria-pressed={value === o.value} onClick={() => onChange(o.value)} className={cx("h-9 shrink-0 whitespace-nowrap rounded-full border px-3.5 text-[13px] transition-colors", value === o.value ? "border-[var(--qd-primary)] bg-[var(--qd-primary)] font-semibold text-white" : "border-[var(--qd-line)] bg-[var(--qd-paper)] text-[var(--qd-ink-soft)] hover:border-[color-mix(in_oklab,var(--qd-primary)_35%,var(--qd-line))]")}>
           {o.label}
           {o.count !== undefined && <span className="ms-1.5 opacity-70">{num(o.count)}</span>}
         </button>
@@ -303,9 +300,9 @@ export function Fold({ title, count, children, defaultOpen = true, aside }: { ti
 }
 export function Stat({ label, value, sub, tone }: { label: string; value: string; sub?: string; tone?: "alert" | "sage" }) {
   return (
-    <div className="min-w-0 rounded-[16px] bg-[var(--qd-tint-2)] px-3.5 py-3">
-      <p className="text-[12px] text-[var(--qd-muted)]">{label}</p>
-      <p className={cx("mt-0.5 truncate text-[17px] font-bold tabular-nums", tone === "alert" && "text-[var(--qd-alert)]", tone === "sage" && "text-[#3f6a45]")}>{value}</p>
+    <div className="qd-card min-w-0 rounded-[20px] px-4 py-3.5">
+      <p className="text-[13px] font-medium text-[var(--qd-muted)]">{label}</p>
+      <p className={cx("mt-1 truncate text-[1.5rem] font-bold leading-tight tabular-nums text-[var(--qd-ink)]", tone === "alert" && "text-[var(--qd-alert)]", tone === "sage" && "text-[#3f6a45]")}>{value}</p>
       {sub && <p className="mt-0.5 text-[11.5px] text-[var(--qd-muted)]">{sub}</p>}
     </div>
   );
