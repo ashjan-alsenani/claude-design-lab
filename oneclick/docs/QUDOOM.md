@@ -102,3 +102,10 @@ The app sections are: home, steps, looks, ideas, items, bag, nursery, mother, ev
   `design~palette`, `font`, `bodyFont` (schema accepts older font names too).
 - Honest limit: the textures are drawn in code (no photos/AI images), so they are softer than real
   knitted or quilled photography.
+
+## v10 — Invitation studio removed
+
+At the owner's request the studio is gone (page, route, nav, art engine, the 44 fonts and the old
+`QD *` fonts). `/app/hikayat-qudoom/invite` now falls back to home. Saved invite cards are left
+untouched in each plan (schema still accepts them); they are simply not shown. Focus is the mother's
+own journey.

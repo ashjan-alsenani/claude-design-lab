@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CheckIcon, CoffeeIcon, EnvelopeOpenIcon, CopyIcon, PencilSimpleIcon, PlusIcon, ShareNetworkIcon, SparkleIcon, StarIcon, UsersThreeIcon, XIcon } from "@phosphor-icons/react";
+import { CheckIcon, CoffeeIcon, CopyIcon, PencilSimpleIcon, PlusIcon, ShareNetworkIcon, SparkleIcon, StarIcon, UsersThreeIcon, XIcon } from "@phosphor-icons/react";
 import { useQ } from "../app/state";
 import { eventReadiness, favorTotal, guestsFor, hospCost, hospQty, manualLoad, slotKey, slotsOn, weekday, addDays } from "../model/engine";
 import type { EventArea, Favor, FavorStatus, HospItem, ReceptionEvent, ReceptionKind, Visit, VisitGroup, VisitSettings, VisitStatus, Window } from "../model/types";
@@ -69,7 +69,6 @@ export function EventsPage() {
                   <p className="mt-1 text-[13.5px] text-[var(--qd-muted)]">{[e.date && date(e.date, "weekday"), e.time && timeLabel(e.time), e.place, e.expected !== undefined && `${num(e.expected)} ${t.visits.people}`, e.theme].filter(Boolean).join(" · ") || "—"}</p>
                   <p className="mt-2 flex flex-wrap gap-2 text-[13px] font-semibold">
                     <Link href={`${href("looks")}?place=${lookPlaceOf[e.kind]}`} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-tint)] px-3 text-[var(--qd-primary-deep)]"><SparkleIcon size={15} weight="fill" /> {lang === "ar" ? "أفكار لشكلها" : "Ideas for the look"}</Link>
-                    <Link href={href("invite")} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--qd-tint)] px-3 text-[var(--qd-primary-deep)]"><EnvelopeOpenIcon size={15} weight="fill" /> {lang === "ar" ? "صممي الدعوة" : "Design the invitation"}</Link>
                   </p>
                 </div>
                 {access.canEdit && <Button size="sm" variant="secondary" onClick={() => setEdit(e)}><PencilSimpleIcon size={16} /> {t.common.edit}</Button>}

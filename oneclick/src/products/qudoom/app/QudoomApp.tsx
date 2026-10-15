@@ -30,7 +30,6 @@ const load = {
   ideas: () => import("../sections/Ideas"),
   steps: () => import("../sections/Steps"),
   looks: () => import("../sections/Looks"),
-  studio: () => import("../sections/Studio"),
   settings: () => import("../sections/Settings"),
 };
 const ItemsPage = dynamic(() => load.prep().then((m) => m.ItemsPage));
@@ -43,7 +42,6 @@ const HospitalityPage = dynamic(() => load.reception().then((m) => m.Hospitality
 const FavorsPage = dynamic(() => load.reception().then((m) => m.FavorsPage));
 const StepsPage = dynamic(() => load.steps().then((m) => m.StepsPage));
 const LooksPage = dynamic(() => load.looks().then((m) => m.LooksPage));
-const StudioPage = dynamic(() => load.studio().then((m) => m.StudioPage));
 const IdeasPage = dynamic(() => load.ideas().then((m) => m.IdeasPage));
 const RegistryPage = dynamic(() => load.gifts().then((m) => m.RegistryPage));
 const ReceivedPage = dynamic(() => load.gifts().then((m) => m.ReceivedPage));
@@ -121,7 +119,6 @@ function Router({ base, exitHref, buyHref, locale }: Props) {
     nursery: <NurseryPage />,
     mother: <MotherPage />,
     events: <EventsPage />,
-    invite: <StudioPage />,
     visits: <VisitsPage />,
     hospitality: <HospitalityPage />,
     favors: <FavorsPage />,

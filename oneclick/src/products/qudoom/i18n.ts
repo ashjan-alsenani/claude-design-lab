@@ -9,7 +9,7 @@ const ar = {
   nav: {
     home: "الرئيسية", prep: "التجهيزات", reception: "الاستقبال", gifts: "الهدايا", more: "المزيد",
     items: "أغراض البيبي", bag: "شنطة المستشفى", nursery: "غرفة البيبي", nurseryCorner: "ركن البيبي", mother: "تجهيزك أنتِ",
-    events: "خطط الاستقبال", invite: "استوديو الدعوات", visits: "الزيارات", hospitality: "الضيافة", favors: "التوزيعات", ideas: "أفكار حلوة", steps: "خطوة بخطوة", looks: "أشكال الاستقبال",
+    events: "خطط الاستقبال", visits: "الزيارات", hospitality: "الضيافة", favors: "التوزيعات", ideas: "أفكار حلوة", steps: "خطوة بخطوة", looks: "أشكال الاستقبال",
     registry: "قائمة الهدايا", received: "الهدايا المستلمة", budget: "الميزانية والطلبات", calendar: "التقويم", memories: "الذكريات", cards: "البطاقات", share: "المشاركة والمساعدات", settings: "الإعدادات",
   },
   top: { saving: "جارٍ الحفظ…", saved: "تم الحفظ", error: "تعذّر الحفظ", retry: "إعادة المحاولة", demo: "نسخة تجريبية ببيانات خيالية: التغييرات مؤقتة ولا تُحفظ", resetDemo: "إعادة تعيين", exit: "خروج", lang: "English", buy: "اشترِ المفكّرة", helperOf: (n: string) => `مفكّرة ${n} (مساعدة)` },
@@ -126,7 +126,7 @@ const en: Widen<QCopy> = {
   nav: {
     home: "Home", prep: "Preparations", reception: "Welcome", gifts: "Gifts", more: "More",
     items: "Baby things", bag: "Hospital bag", nursery: "Nursery", nurseryCorner: "Baby corner", mother: "For you",
-    events: "Welcome plans", invite: "Invitation studio", visits: "Visits", hospitality: "Hospitality", favors: "Favors", ideas: "Lovely ideas", steps: "Step by step", looks: "Welcome looks",
+    events: "Welcome plans", visits: "Visits", hospitality: "Hospitality", favors: "Favors", ideas: "Lovely ideas", steps: "Step by step", looks: "Welcome looks",
     registry: "Gift list", received: "Gifts received", budget: "Budget & orders", calendar: "Calendar", memories: "Memories", cards: "Cards", share: "Sharing & helpers", settings: "Settings",
   },
   top: { saving: "Saving…", saved: "Saved", error: "Couldn't save", retry: "Try again", demo: "Demo with fictional data: changes are temporary and not saved", resetDemo: "Reset", exit: "Exit", lang: "العربية", buy: "Get the planner", helperOf: (n: string) => `${n}'s planner (helper)` },

@@ -614,11 +614,3 @@ html[lang="ar"] :is(h1, h2, h3, .display) {
 @keyframes qd-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
 
 /* Invitation studio display fonts (SIL Open Font License), loaded only when a card uses them. */
-@font-face { font-family: "QD Ruqaa"; src: url("/brand/fonts/qudoom/aref-ruqaa-arabic.woff2") format("woff2"); font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF; }
-@font-face { font-family: "QD Ruqaa"; src: url("/brand/fonts/qudoom/aref-ruqaa-latin.woff2") format("woff2"); font-weight: 700; font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }
-@font-face { font-family: "QD Kufi"; src: url("/brand/fonts/qudoom/reem-kufi-arabic.woff2") format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF; }
-@font-face { font-family: "QD Kufi"; src: url("/brand/fonts/qudoom/reem-kufi-latin.woff2") format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }
-@font-face { font-family: "QD Naskh"; src: url("/brand/fonts/qudoom/amiri-arabic.woff2") format("woff2"); font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF; }
-@font-face { font-family: "QD Naskh"; src: url("/brand/fonts/qudoom/amiri-latin.woff2") format("woff2"); font-weight: 700; font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }
-@font-face { font-family: "QD Messiri"; src: url("/brand/fonts/qudoom/el-messiri-arabic.woff2") format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF; }
-@font-face { font-family: "QD Messiri"; src: url("/brand/fonts/qudoom/el-messiri-latin.woff2") format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0000-00FF, U+2000-206F; }

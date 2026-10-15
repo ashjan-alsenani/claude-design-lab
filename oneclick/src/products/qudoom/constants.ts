@@ -13,7 +13,6 @@ export const pages = {
   nursery: "nursery",
   mother: "mother",
   events: "reception",
-  invite: "reception",
   visits: "visits",
   hospitality: "hospitality",
   favors: "favors",
@@ -34,7 +33,7 @@ export const pageKeys = Object.keys(pages) as PageKey[];
 export const groups: { key: "home" | "prep" | "reception" | "gifts" | "more"; pages: PageKey[] }[] = [
   { key: "home", pages: ["", "steps"] },
   { key: "prep", pages: ["items", "bag", "nursery", "mother"] },
-  { key: "reception", pages: ["looks", "events", "invite", "hospitality", "favors"] },
+  { key: "reception", pages: ["looks", "events", "hospitality", "favors"] },
   { key: "gifts", pages: ["ideas", "registry", "received"] },
   { key: "more", pages: ["more", "visits", "budget", "calendar", "memories", "cards", "share", "settings"] },
 ];

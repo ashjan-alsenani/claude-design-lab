@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import {
-  ArrowCounterClockwiseIcon, BabyIcon, BagIcon, BedIcon, CalendarHeartIcon, CardsIcon, CloudCheckIcon, CloudSlashIcon, CoffeeIcon, DotsThreeOutlineIcon, EnvelopeOpenIcon, GearSixIcon,
+  ArrowCounterClockwiseIcon, BabyIcon, BagIcon, BedIcon, CalendarHeartIcon, CardsIcon, CloudCheckIcon, CloudSlashIcon, CoffeeIcon, DotsThreeOutlineIcon, GearSixIcon,
   GiftIcon, HandHeartIcon, HeartIcon, LightbulbIcon, MapTrifoldIcon, PaletteIcon, HouseSimpleIcon, ImagesIcon, ShareNetworkIcon, SignOutIcon, SparkleIcon, StarIcon, UsersThreeIcon, WalletIcon, type Icon,
 } from "@phosphor-icons/react";
 import { useQ } from "./state";
@@ -13,7 +13,7 @@ import { BabyMascot } from "../ui/Mascot";
 import { Button, cx } from "../ui/kit";
 
 export const pageIcons: Record<PageKey, Icon> = {
-  "": HouseSimpleIcon, steps: MapTrifoldIcon, looks: PaletteIcon, items: BabyIcon, bag: BagIcon, nursery: BedIcon, mother: HandHeartIcon, events: StarIcon, invite: EnvelopeOpenIcon, visits: UsersThreeIcon, hospitality: CoffeeIcon,
+  "": HouseSimpleIcon, steps: MapTrifoldIcon, looks: PaletteIcon, items: BabyIcon, bag: BagIcon, nursery: BedIcon, mother: HandHeartIcon, events: StarIcon, visits: UsersThreeIcon, hospitality: CoffeeIcon,
   favors: SparkleIcon, ideas: LightbulbIcon, registry: GiftIcon, received: HeartIcon, budget: WalletIcon, calendar: CalendarHeartIcon, memories: ImagesIcon, cards: CardsIcon, share: ShareNetworkIcon, settings: GearSixIcon, more: DotsThreeOutlineIcon,
 };
 const groupIcons = { home: HouseSimpleIcon, prep: BabyIcon, reception: StarIcon, gifts: GiftIcon, more: DotsThreeOutlineIcon };
@@ -22,7 +22,7 @@ export function usePageLabel() {
   const { t, plan } = useQ();
   return (p: PageKey) => {
     if (p === "nursery" && plan.profile?.nurseryKind === "corner") return t.nav.nurseryCorner;
-    const map: Record<PageKey, string> = { "": t.nav.home, steps: t.nav.steps, looks: t.nav.looks, items: t.nav.items, bag: t.nav.bag, nursery: t.nav.nursery, mother: t.nav.mother, events: t.nav.events, invite: t.nav.invite, visits: t.nav.visits, hospitality: t.nav.hospitality, favors: t.nav.favors, ideas: t.nav.ideas, registry: t.nav.registry, received: t.nav.received, budget: t.nav.budget, calendar: t.nav.calendar, memories: t.nav.memories, cards: t.nav.cards, share: t.nav.share, settings: t.nav.settings, more: t.nav.more };
+    const map: Record<PageKey, string> = { "": t.nav.home, steps: t.nav.steps, looks: t.nav.looks, items: t.nav.items, bag: t.nav.bag, nursery: t.nav.nursery, mother: t.nav.mother, events: t.nav.events, visits: t.nav.visits, hospitality: t.nav.hospitality, favors: t.nav.favors, ideas: t.nav.ideas, registry: t.nav.registry, received: t.nav.received, budget: t.nav.budget, calendar: t.nav.calendar, memories: t.nav.memories, cards: t.nav.cards, share: t.nav.share, settings: t.nav.settings, more: t.nav.more };
     return map[p];
   };
 }

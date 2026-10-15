@@ -103,13 +103,10 @@ test("licensed app: protected, set up, saved on the server; gift link + visit bo
   await expect(page.getByText("welcome ideas, each one different", { exact: false })).toBeVisible();
   await page.getByLabel("Place").selectOption("shower");
   await expect(page.getByText(/^\d+ ideas$/)).toBeVisible();
-  // Invitation studio: pick a design, then the editor with a download button appears.
+  // The invitation studio is gone: its old address falls back to home and the nav has no link to it.
   await page.goto("/en/app/hikayat-qudoom/invite");
-  await expect(page.getByRole("heading", { name: "Invitation studio" })).toBeVisible();
-  await expect(async () => {
-    await page.locator("ul li button[aria-label*='·']").first().click();
-    await expect(page.getByRole("button", { name: "Download" })).toBeVisible({ timeout: 2000 });
-  }).toPass({ timeout: 20_000 });
+  await expect(page.getByRole("heading", { name: "Invitation studio" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Invitation studio" })).toHaveCount(0);
   // Hospitality comes as a full ready list; each item can be removed with one tap.
   await page.goto("/en/app/hikayat-qudoom/hospitality");
   await expect(page.getByRole("button", { name: "Remove Black tea" })).toBeVisible();
