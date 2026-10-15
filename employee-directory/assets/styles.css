@@ -5933,3 +5933,26 @@ select:disabled { opacity: .7; }
 .page-allow .al-sub { margin: 12px 0 4px !important; font-size: var(--fs-sm) !important; color: var(--muted); font-weight: 700; }
 .page-allow .al-text { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 @media (min-width: 1100px) { .al-grid > .al-wide > .al-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- v85 allowances: records view, details, import ---------- */
+.al-table tr.al-old td { color: var(--muted); }
+.al-name { font-weight: 700; text-align: start; }
+.al-dethead { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.al-dethead h3 { margin: 0; font-size: 19px; }
+.al-dethead .hint { margin: 2px 0 6px; }
+.al-rec { padding: 12px 14px; margin: 0 0 10px; border: 1px solid var(--line); border-top: 3px solid #0D9488; border-radius: 12px; background: var(--paper); }
+.al-rec.al-old { border-top-color: #94A3B8; }
+.al-rec h4 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 16px; }
+.al-hist { margin-top: 8px; }
+.al-hist summary { cursor: pointer; color: var(--accent-text); font-weight: 600; margin-bottom: 8px; }
+.al-imp .al-isteps { margin: 6px 0 14px; }
+.al-map td { vertical-align: middle; }
+.al-map select { min-width: 200px; }
+.al-ex { color: var(--muted); font-size: 12.5px; max-width: 260px; overflow-wrap: anywhere; }
+.al-prevwrap { max-height: 460px; overflow: auto; }
+.al-impk { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; margin: 10px 0; }
+.al-impk .al-kpi { min-height: 96px; cursor: default; }
+.al-inact { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+.al-legacy { margin-top: 10px; }
+.al-repp { margin-top: var(--s4); }
+@media (max-width: 760px) { .al-impk { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
