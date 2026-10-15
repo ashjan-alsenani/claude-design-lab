@@ -246,7 +246,7 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
           </div>
         </div>
         <div class="pf-actions">
-          ${window.__vBtns?window.__vBtns(i):""}${window.__crBtn?window.__crBtn(i):""}
+          ${window.__vBtns?window.__vBtns(i):""}${window.__crBtn?window.__crBtn(i):""}${window.__xpBtn?window.__xpBtn(i):""}
           ${l?`<a class="btn btn-primary" href="#/manage/edit/${i.id}">${h("pencil",17)}<span>${a(s?"تعديل البيانات":"Edit details")}</span></a>`:""}
           ${"email"in i&&i.email?`<a class="icon-btn pf-ibtn" href="mailto:${a(i.email)}" title="${a(s?"إرسال بريد":"Send email")}" aria-label="${a(s?"إرسال بريد":"Send email")}">${h("mail",19)}</a>`:""}
           <a class="icon-btn pf-ibtn" href="#/card/${i.id}" title="${a(s?"البطاقة الكاملة":"Full employee card")}" aria-label="${a(s?"البطاقة الكاملة":"Full employee card")}">${h("id-card",19)}</a>
@@ -4791,5 +4791,79 @@ window.__alProf=p=>{if(!Alok("view")||!Alscope(p.id))return"";let T=Tx,L2=Ald().
 document.addEventListener("click",z=>{let b=z.target.closest("[data-al-newfor]");if(!b)return;window.__alPre={emp:Number(b.dataset.alNewfor)};mt("#/allowances/new",{force:!0})});
 window.__alHas=()=>Ald().reqs.some(r=>!r.demo)||Ald().policy.versions.length>0;
 dt.splice(dt.findIndex(x=>x.nav==="recognition"),0,{re:/^\/allowances$/,view:Alpage,nav:"allowances",admin:!0,perm:"allowView"},{re:/^\/allowances\/([\w-]+)$/,view:Alpage,nav:"allowances",admin:!0,perm:"allowView",params:["id"]});
+
+/* ===================== v84: one employee, everything the site holds — a multi-sheet .xlsx =====================
+   Every sheet follows the same permission that shows that data on screen. Sheets the user can't see are
+   listed on the summary sheet as "not included" instead of being silently dropped.                       */
+window.__xpBtn=p=>de.can("excel")?`<button type="button" class="btn btn-ghost" data-xp-emp="${p.id}" title="${a(Tx("ملف Excel فيه كل ما يسجله الموقع عن هذا الموظف، كل نوع بيانات في ورقة","An Excel file with everything the site records about this employee, one sheet per data type"))}">${h("file-spreadsheet",17)}<span>${a(Tx("ملف Excel شامل","Full Excel file"))}</span></button>`:"";
+var Xpv=v=>v==null||v===""?null:v,
+ Xpd=v=>v&&/^\d{4}-\d{2}-\d{2}/.test(String(v))?{d:String(v).slice(0,10)}:Xpv(v),
+ Xpt=v=>v?String(v).replace("T"," ").slice(0,16):null,
+ Xpnm=id=>{let q=(de.employees||[]).find(x=>x.id===Number(id));return q?I(q):id==null?null:"#"+id},
+ Xpbuild=async id=>{let T=Tx,ar=E()==="ar",o=await de.loadEmployees(),p=o.find(x=>x.id===Number(id));if(!p)throw new Error(T("الموظف غير موجود","Employee not found"));
+  try{let full=await P("/api/employees/"+p.id);full&&(full.employee||full).id===p.id&&(p={...p,...(full.employee||full)})}catch{}
+  let meta=de.meta,S=[],idx=[],sheet=(nm,color,head,rows,ok=!0,why="")=>{idx.push([nm,ok?rows.length:null,ok?(rows.length?T("مضمّنة","Included"):T("لا توجد بيانات","No data")):T("غير مضمّنة — ","Not included — ")+why]);ok&&S.push({name:nm.slice(0,31),rtl:ar,color,rows:[head,...(rows.length?rows:[[T("لا توجد بيانات مسجلة.","No data recorded.")]])]})},
+  val=(f,v)=>{if(v==null||v==="")return null;if(f.type==="date")return Xpd(v);if(f.type==="number"&&!isNaN(+v))return+v;return f.type==="category"||f.type==="yesno"?B(v):typeof v==="object"?JSON.stringify(v):v},
+  sec=k=>{let s2=(meta.sections||[]).find(x=>x.key===k);return s2?s2[E()]||s2.en:k};
+  /* 1. all profile fields, by section */
+  let fr=[];(meta.sections||[]).forEach(sc=>meta.fields.filter(f=>f.section===sc.key&&f.key!=="reportingTo").forEach(f=>{let na=(p.na||[]).includes(f.key);fr.push([sec(sc.key),f[E()]||f.ar,na?T("لا ينطبق","Not applicable"):val(f,p[f.key]),f.custom?T("حقل مخصص","Custom field"):null,p._auto&&f.key in p._auto?T("محسوب تلقائيًا","Auto-calculated"):null])}));
+  meta.fields.filter(f=>!(meta.sections||[]).some(sc=>sc.key===f.section)&&f.key!=="reportingTo").forEach(f=>fr.push([T("أخرى","Other"),f[E()]||f.ar,val(f,p[f.key]),f.custom?T("حقل مخصص","Custom field"):null,null]));
+  let mg=p.reportingManager||(de.employees||[]).find(x=>x.id===p.reportingToId);
+  [[T("المدير المباشر","Direct manager"),mg?I(mg):p.reportingTo||null],[T("المستوى التنظيمي","Level"),p.level?p.level[ar?"ar":"en"]:null],[T("العمر","Age"),p.age??null],[T("مدة الخدمة","Service"),p.tenure?Je(p.tenure):null],[T("مدة الخدمة (سنوات)","Service (years)"),p.tenure?p.tenure.decimalYears:null],[T("رقم السجل الداخلي","Internal record id"),p.id]].forEach(([l,v])=>fr.push([T("محسوب من الدليل","Calculated from the directory"),l,Xpv(v),null,null]));
+  sheet(T("البيانات الكاملة","All profile data"),"0D9488",[T("القسم","Section"),T("الحقل","Field"),T("القيمة","Value"),T("نوع الحقل","Field kind"),T("ملاحظة","Note")],fr);
+  /* 2. reporting line & team */
+  let chain=[],seen=new Set([p.id]),c2=p.reportingToId;while(c2&&!seen.has(c2)){seen.add(c2);let z=o.find(x=>x.id===c2);if(!z)break;chain.push(z);c2=z.reportingToId}
+  let dr=o.filter(x=>x.reportingToId===p.id),all=typeof Sdesc=="function"?[...Sdesc(o,p.id)].map(i2=>o.find(x=>x.id===i2)).filter(Boolean).filter(x=>!dr.includes(x)):[],
+  rw=(rel,q,lv)=>[rel,lv??null,Xpv(q.empNo),I(q),q.jobTitle?B(q.jobTitle):null,q.department?B(q.department):null,q.orgSection?B(q.orgSection):null,q.status?B(q.status):null];
+  sheet(T("التبعية والفريق","Reporting & team"),"2563EB",[T("العلاقة","Relation"),T("المستوى في السلسلة","Chain level"),T("الرقم الوظيفي","Employee no."),T("الاسم","Name"),T("المسمى","Job title"),T("الإدارة","Department"),T("القسم","Section"),T("الحالة","Status")],[...chain.map((q,i2)=>rw(T("سلسلة التبعية (أعلى)","Reporting chain (above)"),q,i2+1)),...dr.map(q=>rw(T("مرؤوس مباشر","Direct report"),q)),...all.map(q=>rw(T("ضمن الفريق (غير مباشر)","In the team (indirect)"),q))]);
+  /* 3. qualifications & training (all columns) */
+  let qk=[["education",T("مؤهل علمي","Education")],["certifications",T("شهادة مهنية","Certification")],["technicalTraining",T("تدريب تقني","Technical training")],["softTraining",T("تدريب مهارات شخصية","Soft-skills training")]],qr=[];
+  qk.forEach(([k,l])=>(p[k]||[]).forEach(r=>qr.push([l,Xpv(r.qualification||r.title||r.name),Xpv(r.institution||r.provider||r.issuer),Xpv(r.major),r.year?+r.year||r.year:Xpd(r.date),Xpd(r.expiry||r.expires||r.validTo),Xpv(r.credentialId||r.ref),Xpv(r.notes)])));
+  sheet(T("المؤهلات والتدريب","Qualifications & training"),"7C3AED",[T("النوع","Type"),T("المؤهل / العنوان","Qualification / title"),T("الجهة","Institution / provider"),T("التخصص","Major"),T("السنة / التاريخ","Year / date"),T("الانتهاء","Expiry"),T("المرجع","Reference"),T("ملاحظات","Notes")],qr);
+  /* 4. talent, completeness, attention, follow-up */
+  let tr=[];try{let tz=Sz(p);tr.push([T("درجة الكفاءة","Talent score"),tz.s+"/100",null]);(tz.rs||[]).forEach(z=>tr.push([T("بند في درجة الكفاءة","Talent score item"),z[1],null]))}catch{}
+  try{let q=Qrow(p,Qf());tr.push([T("اكتمال البيانات","Profile completeness"),q.pc+"%",null]);q.miss.forEach(f=>tr.push([T("حقل ناقص","Missing field"),f.l,null]))}catch{}
+  try{Asc(p,meta).R.forEach(z=>tr.push([T("سبب «يحتاج متابعة»","“Needs attention” reason"),z[3],T("الأولوية ","Weight ")+z[1]]))}catch{}
+  let canFu=de.isAdmin()||de.can("edit"),fu=(Uc().followups||{})[p.id];canFu&&fu&&tr.push([T("متابعة مسجلة","Follow-up recorded"),Xpv(fu.note),Xpt(fu.at)]);
+  sheet(T("الكفاءة والمتابعة","Talent & attention"),"D97706",[T("البند","Item"),T("القيمة","Value"),T("تفاصيل","Details")],tr);
+  /* 5. monthly ratings + manager notes (same visibility as “My team”) */
+  let seeT=typeof Tsee=="function"&&Tsee(p.id),crit=typeof Tmcrit=="function"?Tmcrit():[],kinds=typeof Tmkinds=="function"?Tmkinds():[];
+  sheet(T("التقييمات الشهرية","Monthly ratings"),"16A34A",[T("الشهر","Month"),T("التقييم /5","Rating /5"),T("الوصف","Label"),...crit.map(z=>z[1]),T("ملاحظة المدير","Manager comment"),T("بواسطة","By"),T("التاريخ","Date")],seeT?Object.entries(Tmr()[p.id]||{}).filter(([,r])=>r&&r.v).sort((x,y)=>y[0].localeCompare(x[0])).map(([per,r])=>[per,r.v,Tmlv(r.v),...crit.map(z=>(r.c||{})[z[0]]??null),Xpv(r.note),Xpv(r.by),Xpt(r.at)]):[],seeT,T("للأدمن ومدراء السلسلة فقط","admins and managers in the chain only"));
+  sheet(T("ملاحظات المدير","Manager notes"),"16A34A",[T("النوع","Kind"),T("الملاحظة","Note"),T("بواسطة","By"),T("التاريخ","Date")],seeT?(Tmn()[p.id]||[]).slice().sort((x,y)=>y.at.localeCompare(x.at)).map(n2=>[(kinds.find(k=>k[0]===n2.kind)||[,,,n2.kind])[3],n2.text,Xpv(n2.by),Xpt(n2.at)]):[],seeT,T("للأدمن ومدراء السلسلة فقط","admins and managers in the chain only"));
+  /* 6. recognition & nominations */
+  let aw=(typeof Rwall=="function"?Rwall():[]).filter(w=>w.emp===p.id),nm=(typeof Tnom=="function"?Tnom():[]).filter(z=>z.emp===p.id),canN=typeof Rwcan=="function"&&Rwcan();
+  sheet(T("التقدير والترشيحات","Recognition & nominations"),"F59E0B",[T("السجل","Record"),T("الفئة","Category"),T("الفترة","Period"),T("الرسالة","Message"),T("الحالة","Status"),T("بواسطة","By"),T("التاريخ","Date")],[...aw.map(w=>[T("تقدير ممنوح","Award"),Rwcat(w.cat).t,Xpv(w.period),Xpv(w.msg),null,Xpv(w.by),Xpt(w.at)]),...(canN?nm.map(z=>[T("ترشيح","Nomination"),Rwcat(z.cat).t,Xpv(z.period),Xpv(z.msg),Xpv(z.status),Xpv(z.by),Xpt(z.at)]):[])]);
+  /* 7. development plan */
+  let canP=de.isAdmin()||de.can("plans"),pl=canP&&typeof Iplan=="function"?Iplan(p.id):null;
+  sheet(T("خطة التطوير","Development plan"),"0EA5E9",[T("النوع","Type"),T("البند","Item"),T("الحالة","Status"),T("الموعد","Due"),T("ملاحظات","Notes")],pl?(pl.items||[]).map(x=>[(Ity().find(z=>z[0]===x.type)||[,,x.type])[2],Xpv(x.title),(Ist().find(z=>z[0]===x.status)||[,x.status])[1],Xpd(x.due),Xpv(x.note)]):[],canP,T("تحتاج صلاحية خطط التطوير","needs the development-plans permission"));
+  /* 8. succession (as role holder and as candidate) */
+  let canS=de.isAdmin()||de.can("succession"),su=canS?Ui().succ||{}:{},sr=[],rd={now:T("جاهز الآن","Ready now"),"1y":T("خلال سنة","Within a year"),"2y":T("خلال سنتين","Within 2 years")};
+  canS&&(su[p.id]||[]).forEach(z=>sr.push([T("مرشح لمنصب هذا الموظف","Candidate for this employee's role"),Xpnm(z.emp),rd[z.ready]||z.ready||null]));
+  canS&&Object.entries(su).forEach(([pid,L2])=>(L2||[]).forEach(z=>{Number(z.emp)===p.id&&sr.push([T("هذا الموظف مرشح لمنصب","This employee is a candidate for the role of"),Xpnm(pid),rd[z.ready]||z.ready||null])}));
+  sheet(T("الإحلال","Succession"),"E11D48",[T("العلاقة","Relation"),T("الشخص","Person"),T("الجاهزية","Readiness")],sr,canS,T("تحتاج صلاحية الإحلال","needs the succession permission"));
+  /* 9. continuity / cover / knowledge transfer */
+  let canK=typeof Kcan=="function"&&Kcan(),kr=[];
+  canK&&Kd().recs.filter(r=>Kscope(r)&&!r.demo).forEach(r=>{let role=[[r.owner,T("صاحب المسؤولية","Holder")],[r.b1,T("البديل الأساسي","Primary backup")],[r.b2,T("البديل الإضافي","Additional backup")],[r.shadow,T("المرافق (Shadow)","Shadow")],[r.succ,T("المرشح للإحلال","Successor candidate")]].filter(([v])=>Number(v)===p.id).map(z=>z[1]);if(!role.length)return;let k=Kkt(r);
+   kr.push([role.join("، "),Xpv(r.resp||r.role),Xpv(r.service),Xpv(r.system),r.crit?Klab(Kcrit(),r.crit):null,Xpnm(r.owner),Xpnm(r.b1),Xpnm(r.b2),Klab(Kstage(),r.stage||"none"),Kready(r)?T("نعم","Yes"):T("لا","No"),`${k.dn}/${k.n}`,Xpd(r.leaveDate),Xpt(r.updated||r.at)])});
+  sheet(T("الاستمرارية ونقل المعرفة","Continuity & handover"),"0891B2",[T("دور الموظف","Employee's role"),T("المسؤولية","Responsibility"),T("الخدمة","Service"),T("النظام","System"),T("الأهمية","Criticality"),T("صاحبها","Holder"),T("البديل الأساسي","Primary backup"),T("البديل الإضافي","Additional backup"),T("الجاهزية","Readiness"),T("جاهز ومعتمد","Ready & approved"),T("مهام النقل المنجزة","KT tasks done"),T("مغادرة مؤكدة","Confirmed departure"),T("آخر تحديث","Updated")],kr,canK,T("تحتاج صلاحية الاستمرارية","needs the continuity permission"));
+  /* 10. certificates & cards issued in the studio */
+  let si=typeof Sd=="function"?Sd().issues.filter(x=>Number(x.emp)===p.id&&(typeof Sseen!="function"||Sseen(x))&&((typeof Scan=="function"&&Scan())||x.status==="approved")):[];
+  sheet(T("الشهادات والبطاقات","Certificates & cards"),"4F46E5",[T("الرقم","Reference"),T("القالب","Template"),T("الحالة","Status"),T("اللغة","Language"),T("الحجم","Size"),T("أنشأه","Created by"),T("التاريخ","Date"),T("اعتمده","Approved by"),T("تاريخ الاعتماد","Approved on")],si.map(x=>[x.no,ar?Stk(x.tpl).ar:Stk(x.tpl).en,Klab(Sst(),x.status),x.lang,x.size,Xpv(x.by),Xpt(x.at),Xpv(x.apprBy),Xpt(x.apprAt)]));
+  /* 11. technical allowances (own permission + amounts permission) */
+  let canA=typeof Alok=="function"&&Alok("view")&&Alscope(p.id),am=canA&&Alok("amt"),ar2=canA?Ald().reqs.filter(r=>!r.demo&&Number(r.emp)===p.id):[];
+  sheet(T("العلاوات الفنية","Technical allowances"),"0D9488",[T("المرجع","Reference"),T("نوع العلاوة","Allowance type"),T("نوع الطلب","Request type"),T("حالة الطلب","Request status"),T("حالة الصرف","Payment status"),...(am?[T("الحالي","Current"),T("المقترح","Proposed"),T("المعتمد","Approved")]:[]),T("السريان","Effective"),T("بدء الصرف","Payment start"),T("المراجعة القادمة","Next review"),T("آخر تحديث","Updated")],ar2.map(r=>[r.ref,Altl(r),Allab(AlKind(),r.kind),Allab(AlRS(),r.status),r.status==="approved"?Allab(AlPS(),(r.pay||{}).status||"not_started"):null,...(am?[r.cur==null?null:{n3:r.cur/1e3},r.prop==null?null:{n3:r.prop/1e3},r.status==="approved"&&(r.dec||{}).amt!=null?{n3:r.dec.amt/1e3}:null]:[]),Xpd((r.dec||{}).eff||r.effReq),Xpd((r.pay||{}).start),Xpd(r.nextReview),Xpt(r.updated)]),canA,T("تحتاج صلاحية العلاوات الفنية","needs the technical allowances permission"));
+  /* 12. correction requests */
+  let canC=de.isAdmin()||de.can("edit")||de.user&&de.user.empId===p.id,cr2=canC&&typeof Cr=="function"?Cr().filter(z=>z.empId===p.id):[],flab=k=>{let f=meta.fields.find(x=>x.key===k);return f?f[E()]||f.ar:k};
+  sheet(T("طلبات التصحيح","Correction requests"),"64748B",[T("التاريخ","Date"),T("الحقل","Field"),T("القيمة المطلوبة","Requested value"),T("الحالة","Status"),T("ملاحظة","Note"),T("مقدّم الطلب","Requested by")],cr2.flatMap(z=>(z.items&&z.items.length?z.items:[{}]).map(it=>[Xpt(z.at),it.field?flab(it.field):null,Xpv(it.val??it.value??it.to),Xpv(z.status),Xpv(z.note||z.reason),Xpv(z.byName)])),canC,T("تحتاج صلاحية التعديل","needs the edit permission"));
+  /* 13. activity log (admins) */
+  let canL=de.isAdmin(),lg=canL?(D.audit||[]).filter(x=>x.employee_id===p.id||x.details&&typeof x.details==="string"&&!/"allowance/.test(x.details)&&new RegExp(`"emp(Id)?":${p.id}[,}]`).test(x.details)).slice().reverse():[];
+  sheet(T("سجل النشاط","Activity log"),"334155",[T("التاريخ","Date"),T("الإجراء","Action"),T("المستخدم","User"),T("التفاصيل","Details")],lg.map(x=>[Xpt(x.at),Xpv(x.action),Xpv(x.user_name),Xpv(x.details)]),canL,T("للمسؤول فقط","administrators only"));
+  /* summary first */
+  let sm=[[T("الموظف","Employee"),I(p)],[T("الرقم الوظيفي","Employee no."),Xpv(p.empNo)],[T("الإدارة","Department"),p.department?B(p.department):null],[T("القسم","Section"),p.orgSection?B(p.orgSection):null],[T("المسمى","Job title"),p.jobTitle?B(p.jobTitle):null],[T("أُنشئ في","Generated"),Xpt(Te())],[T("بواسطة","By"),(de.user||{}).name||null],[T("ملاحظة","Note"),T("سري — للاستخدام الداخلي. كل ورقة تتبع نفس الصلاحية التي تُظهر بياناتها في الموقع.","Confidential — internal use. Each sheet follows the same permission that shows its data in the site.")],[],[T("الورقة","Sheet"),T("عدد الصفوف","Rows"),T("الحالة","Status")],...idx];
+  S.unshift({name:T("الملخص","Summary").slice(0,31),rtl:ar,color:"0F766E",rows:sm,widths:[34,28,60]});
+  return{S,p}};
+document.addEventListener("click",async z=>{let b=z.target.closest("[data-xp-emp]");if(!b)return;z.preventDefault();if(!de.can("excel"))return;let T=Tx;b.disabled=!0;
+ try{let{S,p}=await Xpbuild(b.dataset.xpEmp);Xz(S,`${Wsv?"vendors-":""}employee-${String(p.empNo||p.id).replace(/[^\w-]/g,"")}-full-${ze()}.xlsx`);ye("export",{id:p.id,emp_no:p.empNo},{fullEmployeeWorkbook:S.length});se();L(T(`تم تنزيل ملف Excel شامل (${S.length} أوراق).`,`Full Excel file downloaded (${S.length} sheets).`))}
+ catch(er){console.error(er);L(T("تعذّر إنشاء الملف: ","Couldn't create the file: ")+(er.message||er),"error")}finally{b.disabled=!1}});
 
 })();

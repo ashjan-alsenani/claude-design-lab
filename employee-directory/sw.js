@@ -1,5 +1,5 @@
 /* Offline cache for the app shell. Data stays in the browser's localStorage. */
-const CACHE = "dtd-v99";
+const CACHE = "dtd-v100";
 const SHELL = [
   "./",
   "index.html",
