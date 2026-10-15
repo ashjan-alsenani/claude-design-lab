@@ -5956,3 +5956,11 @@ select:disabled { opacity: .7; }
 .al-legacy { margin-top: 10px; }
 .al-repp { margin-top: var(--s4); }
 @media (max-width: 760px) { .al-impk { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+
+/* v86 allowances: Excel template */
+.al-tplbox{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;margin:4px 0 16px;padding:14px 16px;border:1px dashed color-mix(in srgb,var(--accent,#0D9488) 45%,transparent);border-radius:14px;background:color-mix(in srgb,var(--accent,#0D9488) 6%,transparent)}
+.al-tplic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:color-mix(in srgb,#16A34A 14%,transparent);color:#16A34A}
+.al-tplbox b{display:block;margin-bottom:2px}.al-tplbox p{margin:0;color:var(--muted,#64748b);font-size:.9em;line-height:1.6}
+.al-tplacts{display:flex;flex-wrap:wrap;gap:8px}
+.al-tplist{margin:12px 0 0;padding-inline-start:20px;display:grid;gap:8px;line-height:1.7}
+@media (max-width:720px){.al-tplbox{grid-template-columns:auto 1fr}.al-tplacts{grid-column:1/-1}}
