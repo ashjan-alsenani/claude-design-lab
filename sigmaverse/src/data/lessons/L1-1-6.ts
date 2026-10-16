@@ -1,0 +1,200 @@
+import type { Lesson } from '../types'
+
+export const lesson: Lesson = {
+  id: '1.1.6',
+  module: 1,
+  officialTitle: 'Six Sigma Roles & Responsibilities',
+  title: 'Six Sigma Roles and Responsibilities',
+  subtitle: 'Who sets direction, who selects projects, who leads, who coaches, and who owns the result',
+  readingMinutes: 15,
+  status: 'partial-source',
+  objectives: [
+    'Describe the responsibilities of the Executive Sponsor, Champion, Master Black Belt, Black Belt, Green Belt and Yellow Belt.',
+    'Explain the role of the Process Owner, the project team, stakeholders and the Finance Representative.',
+    'Compare typical time commitment and training depth across the belts.',
+    'Identify who selects projects, who removes barriers, who leads, who coaches and who owns the process after handover.',
+    'Build a simple RACI chart and a basic stakeholder analysis for a service project.',
+  ],
+  overview: [
+    "Six Sigma is a team sport with clearly defined positions. Projects fail far more often from unclear ownership than from bad statistics: a Green Belt with no Champion cannot get data released, a solution with no [[Process Owner]] decays the month after handover, and savings no one in Finance has checked are not believed. Knowing who does what is therefore both an exam topic and a survival skill.",
+    "This lesson walks through the roles from the top of the organisation to the front line, using the definitions in the supplied book glossary where they exist and clearly labelled supplementary context where they do not. Titles vary between companies and training bodies, so focus on the responsibility behind each title. The exam rewards knowing who **selects and sponsors**, who **leads**, who **coaches** and who **owns** the process.",
+  ],
+  sections: [
+    {
+      id: 'leadership',
+      title: 'Leadership: Executive Sponsor and Champion',
+      blocks: [
+        { kind: 'p', text: "The [[Executive Sponsor]] (senior leadership, sometimes called the deployment leader) decides that Lean Six Sigma will be used, links it to strategy, funds training and sets expectations for results. The book glossary (PDF 591) describes a similar Six Sigma Leader who coordinates the deployment and keeps everyone informed. Their time on any single project is small, but their visible support makes the programme credible." },
+        { kind: 'p', text: "The [[Champion]] is the senior manager closest to an individual project. The glossary (PDF 587) says a Champion recognises, defines, assigns and supports projects and is accountable for their results within their area. In practice the Champion **selects and scopes projects**, signs the charter, chairs tollgate reviews, **removes barriers** (data access, people's time, cross-department politics) and makes business trade-off decisions the team cannot." },
+        { kind: 'callout', tone: 'note', title: 'Titles vary', text: "Some organisations call the Champion the 'project sponsor', and some merge the Executive Sponsor and Champion roles in small deployments. Exam questions describe the responsibility; match the responsibility, not the job title on a business card." },
+      ],
+    },
+    {
+      id: 'belts',
+      title: 'The belts: expertise and time',
+      blocks: [
+        { kind: 'p', text: "The belt system signals depth of training and the size of projects a person can lead. Training lengths below are the book glossary's approximate figures; real programmes vary." },
+        { kind: 'list', items: [
+          "**[[Master Black Belt]]**: trained beyond Black Belt; the technical go-to expert who teaches and mentors Belts, reviews their projects and supports Champions (PDF 589). Usually full time in a deployment role. **Coaches.**",
+          "**[[Black Belt]]**: about four weeks of training; a **full-time** project leader of complex, often cross-functional projects, working under the direction of a Champion (PDF 587). Often coaches Green Belts.",
+          "**[[Green Belt]]**: about two weeks of training; a **part-time** role applying Six Sigma in their own area, leading smaller-scoped projects and supporting Black Belt projects (PDF 589).",
+          "**[[Yellow Belt]]**: about one week of training; participates as a team member on Green and Black Belt projects and applies the concepts in their own job (PDF 593).",
+        ] },
+        { kind: 'table', caption: 'Belt comparison', head: ['Role', 'Typical time on Six Sigma', 'Leads?', 'Coaches?', 'Typical project'], rows: [
+          ['Master Black Belt', 'Full time', 'Programme, strategic projects', 'Yes, Black and Green Belts', 'Portfolio level'],
+          ['Black Belt', 'Full time', 'Complex, cross-functional', 'Often, Green Belts', 'Several departments'],
+          ['Green Belt', 'Part time, alongside day job', 'Smaller, local scope', 'Rarely', 'Own team or process'],
+          ['Yellow Belt', 'As needed', 'No (team member)', 'No', 'Contributes to others\' projects'],
+        ] },
+      ],
+    },
+    {
+      id: 'process-and-support',
+      title: 'Process Owner, team, stakeholders and Finance',
+      blocks: [
+        { kind: 'p', text: "The **Process Owner** is accountable for the day-to-day performance of the process and its resources. The glossary (PDF 591) adds that they supply resources and functional expertise to projects and are accountable for implementing the solutions in their process. That is why the Process Owner signs off the control plan and **owns the process after handover**: the Belt moves on; the Process Owner stays." },
+        { kind: 'p', text: "The **project team** is the group of people, usually from the process itself, who map it, collect data, test ideas and pilot changes. Team members may be Yellow Belts or subject-matter experts with no belt at all. **[[Stakeholder|Stakeholders]]** are everyone affected by or able to affect the project: customers, upstream and downstream teams, IT, unions, regulators." },
+        { kind: 'p', text: "The [[Finance Representative]] provides an independent evaluation of hard and soft savings and supports both Champions and project leaders (PDF 588). They help estimate benefits in Define and verify realised benefits in Control, so savings claims are credible." },
+        { kind: 'callout', tone: 'trap', title: 'Leader versus owner', text: "The Belt **leads the project**; the Process Owner **owns the process**. At the end of Control, ownership of the improved process and its control plan transfers to the Process Owner, not to the Champion or the Black Belt." },
+      ],
+    },
+    {
+      id: 'raci',
+      title: 'Putting it together: a RACI example',
+      blocks: [
+        { kind: 'p', text: "A RACI chart assigns each activity one **A**ccountable person (the single owner of the outcome), one or more **R**esponsible people (who do the work), people to be **C**onsulted (two-way input) and people to be **I**nformed (one-way updates). Below is a sketch for a Green Belt project at Northwind Fibre to cut repeat field visits." },
+        { kind: 'table', caption: 'RACI for a repeat-visit reduction project', head: ['Activity', 'Champion', 'Green Belt', 'MBB', 'Process Owner', 'Finance Rep', 'Team'], rows: [
+          ['Select and scope project', 'A', 'C', 'C', 'C', 'I', 'I'],
+          ['Draft charter', 'A', 'R', 'C', 'C', 'C', 'I'],
+          ['Collect and analyse data', 'I', 'A', 'C', 'C', 'I', 'R'],
+          ['Remove cross-department barriers', 'A/R', 'C', 'I', 'C', 'I', 'I'],
+          ['Validate savings', 'I', 'C', 'I', 'C', 'A/R', 'I'],
+          ['Run the process after handover', 'I', 'I', 'I', 'A/R', 'I', 'R'],
+        ] },
+        { kind: 'callout', tone: 'tip', title: 'One A per row', text: "If a row has two A's, nobody is truly accountable. If a row has no R, nobody will do the work." },
+        { kind: 'advanced', title: 'Go deeper: basic stakeholder analysis', blocks: [
+          { kind: 'callout', tone: 'supplementary', title: 'Supplementary context', text: "Stakeholder analysis tools are not in the supplied glossary pages; this is standard change-management practice used in Define." },
+          { kind: 'p', text: "List each stakeholder group, rate their **influence** (high or low) and their current **attitude** (supportive, neutral, resistant), then note the attitude you need by the Improve phase. High-influence resisters need early, personal engagement; high-influence supporters can be enlisted as advocates; low-influence groups need clear information." },
+          { kind: 'table', head: ['Stakeholder', 'Influence', 'Now', 'Needed', 'Action'], rows: [
+            ['Field engineering manager', 'High', 'Resistant', 'Supportive', 'Champion meeting, share repeat-visit data'],
+            ['Dispatch team leads', 'Medium', 'Neutral', 'Supportive', 'Invite onto the team'],
+            ['Customer care agents', 'Low', 'Supportive', 'Supportive', 'Monthly update'],
+          ] },
+        ] },
+      ],
+    },
+  ],
+  whyItMatters: [
+    "Clear roles decide whether a project gets data, time and decisions when it needs them, and whether the gain survives after the project team disbands. Many 'failed' projects actually had sound analysis but no active Champion or no Process Owner willing to own the new way of working.",
+    "Exam items here are mostly short scenarios: 'who should remove this barrier?', 'who leads a cross-functional project full time?', 'who owns the control plan?'. Matching responsibility to role quickly is easy marks.",
+  ],
+  businessExample: {
+    title: 'Kestrel Mobile: the project that stalled until roles were fixed',
+    industry: 'Telecommunications, field service',
+    blocks: [
+      { kind: 'p', text: "A Kestrel Mobile Green Belt in the dispatch team chartered a project to reduce repeat field visits, then running at 17.3% of 9,412 monthly jobs. For six weeks the project stalled: the field engineering department would not release job-closure data, and nobody above the Green Belt had authority over both departments." },
+      { kind: 'p', text: "At the Measure tollgate the Master Black Belt pointed out the charter had no named Champion. The Head of Service Delivery, who managed both dispatch and field engineering, took the role. Within a week she had the data released, assigned two senior engineers to the team and asked Finance to estimate the cost of a repeat visit." },
+      { kind: 'p', text: "The analysis found that missing diagnostic notes drove most repeats. In Control, the field operations manager, as Process Owner, adopted the new mandatory diagnostic form and its weekly repeat-visit chart. The Finance Representative later verified the saving in truck rolls before the project was closed." },
+    ],
+  },
+  visual: {
+    diagram: 'roles',
+    title: 'The Six Sigma organisation',
+    caption: "Leadership sets direction, Champions sponsor projects, Belts lead and coach, Process Owners sustain results, and Finance validates the money.",
+  },
+  definitions: [
+    { term: 'Executive Sponsor', definition: "Senior leader who sets strategy for the deployment, funds it and holds the organisation to account for results (supplementary; compare the glossary's Six Sigma Leader, PDF 591)." },
+    { term: 'Champion', definition: "Manager who recognises, defines, assigns and supports projects, removes barriers and is accountable for their results (glossary PDF 587)." },
+    { term: 'Master Black Belt', definition: "Technical expert trained beyond Black Belt who teaches and mentors Belts and supports Champions (glossary PDF 589)." },
+    { term: 'Black Belt', definition: "Full-time project leader trained in DMAIC, analysis and change management, working under the direction of a Champion (glossary PDF 587)." },
+    { term: 'Green Belt', definition: "Part-time practitioner who leads smaller projects in their own area and supports Black Belt projects (glossary PDF 589)." },
+    { term: 'Yellow Belt', definition: "Team member with basic training who participates on Green and Black Belt projects and applies concepts in their own job (glossary PDF 593)." },
+    { term: 'Process Owner', definition: "Person accountable for process performance and resources, who implements and sustains project solutions (glossary PDF 591)." },
+    { term: 'Finance Representative', definition: "Independent evaluator of a project's hard and soft savings, supporting Champions and project leaders (glossary PDF 588)." },
+  ],
+  comparisons: [
+    {
+      title: 'Who does what',
+      head: ['Responsibility', 'Primary role', 'Common wrong answer'],
+      rows: [
+        ['Sets Six Sigma strategy, funds deployment', 'Executive Sponsor', 'Master Black Belt'],
+        ['Selects, scopes and sponsors projects', 'Champion', 'Black Belt'],
+        ['Removes organisational barriers', 'Champion', 'Green Belt'],
+        ['Leads complex projects full time', 'Black Belt', 'Master Black Belt'],
+        ['Leads smaller local projects part time', 'Green Belt', 'Yellow Belt'],
+        ['Trains and coaches Belts', 'Master Black Belt', 'Champion'],
+        ['Owns the process after handover', 'Process Owner', 'Black Belt or Champion'],
+        ['Validates savings', 'Finance Representative', 'Champion'],
+      ],
+    },
+  ],
+  misconceptions: [
+    { myth: "The Master Black Belt is the boss who approves projects.", reality: "The MBB is the technical expert and coach. Project selection and approval belong to the Champion (and leadership)." },
+    { myth: "The Black Belt owns the improved process once the project ends.", reality: "The Process Owner owns and sustains the process. The Belt hands over and moves to the next project." },
+    { myth: "Green Belts only assist and never lead projects.", reality: "Green Belts lead smaller-scoped projects in their own area, part time, and also support Black Belt projects." },
+    { myth: "Anyone senior can be the Champion in name only.", reality: "A Champion must actively remove barriers and attend tollgates. A passive Champion is one of the most common causes of stalled projects." },
+  ],
+  examTraps: [
+    { title: 'Full time versus part time', text: "Black Belt = full time on Six Sigma; Green Belt = part time alongside the day job. Distractors swap them." },
+    { title: 'Barrier removal', text: "When a team cannot get data, people or cooperation from another department, the answer is the **Champion**, not the MBB or the team leader." },
+    { title: 'After the project', text: "Questions asking who is accountable for sustaining gains or running the control plan after closure want the **Process Owner**." },
+    { title: 'Coach versus lead', text: "The MBB **coaches** and trains; the Black Belt **leads**. A question about who mentors Black Belts points to the MBB." },
+  ],
+  workedExamples: [
+    {
+      title: 'Matching scenarios to roles',
+      scenario: "During a Halden Health invoice-processing project: (1) the team needs the procurement system's data but IT refuses; (2) the Green Belt is unsure which hypothesis test to run; (3) the projected saving of 186,000 EUR per year needs checking; (4) after Control, someone must keep the new approval workflow running.",
+      steps: [
+        "(1) A cross-department barrier requiring authority: the Champion.",
+        "(2) A technical method question: the Master Black Belt (or a Black Belt acting as coach).",
+        "(3) Independent validation of savings: the Finance Representative.",
+        "(4) Sustaining the process after handover: the Process Owner (accounts payable manager).",
+      ],
+      answer: "Champion, Master Black Belt, Finance Representative, Process Owner.",
+    },
+    {
+      title: 'Fixing a broken RACI row',
+      scenario: "A draft RACI for a Northwind Fibre project shows 'Approve the project charter' with A for both the Champion and the Black Belt, and no R.",
+      steps: [
+        "Rule: each activity has exactly one A.",
+        "Who is accountable for approving the charter? The Champion, who sponsors the project and owns its results.",
+        "Who does the work of drafting and presenting it? The Black Belt, so the Black Belt is R.",
+        "Others (MBB, Process Owner, Finance) are C; the wider team is I.",
+      ],
+      answer: "Champion = A, Black Belt = R, MBB, Process Owner and Finance Representative = C, team = I.",
+    },
+  ],
+  activity: {
+    lab: 'roles',
+    prompt: "Match each responsibility card (select projects, remove barriers, lead full time, coach Belts, validate savings, own the process after handover) to the right role, then check your RACI against the model answer.",
+  },
+  checkQuestionIds: ['q-1.1.6-01', 'q-1.1.6-03', 'q-1.1.6-06'],
+  takeaways: [
+    "Leadership (Executive Sponsor) sets strategy and funds the deployment.",
+    "The Champion selects and sponsors projects, removes barriers and is accountable for results.",
+    "The Master Black Belt is the technical expert who trains and coaches; the Black Belt leads complex projects full time.",
+    "Green Belts lead smaller local projects part time; Yellow Belts participate as team members.",
+    "The Process Owner implements and sustains the solution and owns the process after handover.",
+    "The Finance Representative independently validates hard and soft savings.",
+    "Use RACI to make ownership explicit, with exactly one Accountable per activity.",
+  ],
+  flashcards: [
+    { front: 'Who selects and sponsors projects?', back: "The Champion." },
+    { front: 'Who removes organisational barriers?', back: "The Champion." },
+    { front: 'Who is the technical expert who trains and coaches Belts?', back: "The Master Black Belt." },
+    { front: 'Black Belt time commitment', back: "Full time; leads complex, often cross-functional projects." },
+    { front: 'Green Belt time commitment', back: "Part time; leads smaller projects in their own area and supports Black Belt projects." },
+    { front: 'Who owns the process after handover?', back: "The Process Owner." },
+    { front: 'Who validates savings?', back: "The Finance Representative." },
+    { front: 'RACI letters', back: "Responsible, Accountable (exactly one), Consulted, Informed." },
+  ],
+  sources: [
+    { source: 'syllabus', pdfPages: [7], note: 'Lists 1.1.6 Six Sigma Roles & Responsibilities as a Define topic.' },
+    { source: 'gb-501-600', pdfPages: [587], printedPages: [584], note: 'Glossary definitions of Black Belt and Champion.' },
+    { source: 'gb-501-600', pdfPages: [588], printedPages: [585], note: 'Glossary definition of Finance Representative.' },
+    { source: 'gb-501-600', pdfPages: [589], printedPages: [586], note: 'Glossary definitions of Green Belt and Master Black Belt.' },
+    { source: 'gb-501-600', pdfPages: [591], printedPages: [588], note: 'Glossary definitions of Process Owner and Six Sigma Leader.' },
+    { source: 'gb-501-600', pdfPages: [593], printedPages: [590], note: 'Glossary definition of Yellow Belt.' },
+    { source: 'supplementary', note: 'Executive Sponsor detail, team dynamics, RACI, stakeholder analysis and all examples are original explanatory content.' },
+  ],
+}
