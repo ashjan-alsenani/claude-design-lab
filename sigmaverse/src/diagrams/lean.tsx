@@ -76,19 +76,20 @@ function LeanFlowView({ step }: { step: number }) {
   const dur = useDur()
   const W = compact ? 380 : 720
   const e = compact ? 46 : 74
-  const bw = compact ? 62 : 120
-  const g = compact ? 44 : 80
+  const bw = compact ? 64 : 120
+  const g = compact ? 42 : 80
   const ex = compact ? 46 : 74
   const ox = (W - (e + 3 * bw + 2 * g + ex)) / 2
   const bh = compact ? 50 : 56
   const u = compact ? 9 : 13
   const sp = u + (compact ? 3 : 4)
   const cols = compact ? 2 : 3
-  const laneH = compact ? 140 : 146
+  const boxTop = compact ? 40 : 30
+  const laneH = compact ? 150 : 146
   const laneGap = compact ? 14 : 18
   const lanes = [compact ? 10 : 14, (compact ? 10 : 14) + laneH + laneGap]
   const legendY = lanes[1] + laneH + (compact ? 22 : 26)
-  const H = legendY + (compact ? 56 : 40)
+  const H = legendY + (compact ? 74 : 40)
 
   const zoneX: Record<Zone, number> = {
     entry: ox + e / 2,
@@ -100,7 +101,7 @@ function LeanFlowView({ step }: { step: number }) {
     exit: ox + e + 3 * bw + 2 * g + ex / 2,
   }
   const boxX = (i: number) => ox + e + i * (bw + g)
-  const floor = (lane: number) => lanes[lane] + 30 + bh
+  const floor = (lane: number) => lanes[lane] + boxTop + bh
 
   /** Position of the k-th unit placed in a zone (piles grow upward in a small grid). */
   const slot = (lane: number, zone: Zone, k: number) => {
@@ -171,8 +172,8 @@ function LeanFlowView({ step }: { step: number }) {
         )}
         {FLOW_STEPS.map((name, i) => (
           <g key={name} opacity={show ? 1 : 0.45}>
-            <rect x={boxX(i)} y={top + 30} width={bw} height={bh} rx={12} fill="var(--surface-2)" stroke="var(--line-2)" />
-            <text x={boxX(i) + bw / 2} y={top + 47} textAnchor="middle" fontFamily={SANS} fontSize={12.5} fontWeight={600} fill="var(--ink-2)">{name}</text>
+            <rect x={boxX(i)} y={top + boxTop} width={bw} height={bh} rx={12} fill="var(--surface-2)" stroke="var(--line-2)" />
+            <text x={boxX(i) + bw / 2} y={top + boxTop + 17} textAnchor="middle" fontFamily={SANS} fontSize={12} fontWeight={600} fill="var(--ink-2)">{name}</text>
           </g>
         ))}
         <line x1={ox} x2={W - ox} y1={floor(li)} y2={floor(li)} stroke="var(--line-2)" strokeWidth={1.2} opacity={show ? 1 : 0.4} />
@@ -251,9 +252,9 @@ function LeanFlowView({ step }: { step: number }) {
       <g>
         <rect x={ox} y={legendY - 10} width={14} height={12} rx={3} fill="var(--teal)" />
         <text x={ox + 20} y={legendY} fontFamily={SANS} fontSize={12.5} fill="var(--ink-2)">Value-added time</text>
-        <rect x={ox + (compact ? 132 : 160)} y={legendY - 10} width={14} height={12} rx={3} fill="var(--coral)" opacity={0.8} />
-        <text x={ox + (compact ? 152 : 180)} y={legendY} fontFamily={SANS} fontSize={12.5} fill="var(--ink-2)">Waiting (non-value-added)</text>
-        <Lines x={ox} y={legendY + 20} lines={wrap('Illustrative minutes. Supplementary: VA ratio (process cycle efficiency) = value-added time / lead time.', W - 2 * ox, 12)} size={12} lh={15} fill="var(--ink-3)" />
+        <rect x={ox + (compact ? 0 : 160)} y={legendY - 10 + (compact ? 18 : 0)} width={14} height={12} rx={3} fill="var(--coral)" opacity={0.8} />
+        <text x={ox + (compact ? 20 : 180)} y={legendY + (compact ? 18 : 0)} fontFamily={SANS} fontSize={12.5} fill="var(--ink-2)">Waiting (non-value-added)</text>
+        <Lines x={ox} y={legendY + (compact ? 38 : 20)} lines={wrap('Illustrative minutes. Supplementary: VA ratio (process cycle efficiency) = value-added time / lead time.', W - 2 * ox, 12)} size={12} lh={15} fill="var(--ink-3)" />
       </g>
     </svg>
   )
@@ -318,10 +319,10 @@ function LeanHistoryView({ step }: { step: number }) {
           const state = i === step ? 'active' : i < step ? 'done' : 'future'
           return (
             <motion.g key={e2.year} initial={false} animate={{ y: rowY(i), opacity: state === 'future' ? 0.32 : 1 }} transition={{ duration: dur(0.45), ease: EASE }}>
-              <text x={axisX - 16} y={5} textAnchor="end" fontFamily={DISPLAY} fontSize={state === 'active' ? 15 : 13.5} fontWeight={700} fill={state === 'future' ? 'var(--ink-3)' : `var(--${e2.era})`} className="tabular">{e2.year}</text>
+              <text x={axisX - 16} y={5} textAnchor="end" fontFamily={DISPLAY} fontSize={state === 'active' ? 14.5 : 13.5} fontWeight={700} fill={state === 'future' ? 'var(--ink-3)' : `var(--${e2.era})`} className="tabular">{e2.year}</text>
               {state === 'active' && <circle cx={axisX} cy={0} r={11} fill="none" stroke={`var(--${e2.era})`} strokeWidth={1.5} opacity={0.5} />}
               <circle cx={axisX} cy={0} r={state === 'active' ? 6.5 : 5} style={{ fill: state === 'future' ? 'var(--surface)' : `var(--${e2.era})`, transition: COLOR_T }} stroke={state === 'future' ? 'var(--line-2)' : `var(--${e2.era})`} strokeWidth={1.5} />
-              <text x={axisX + 18} y={5} fontFamily={SANS} fontSize={13} fontWeight={state === 'active' ? 700 : 600} fill={state === 'future' ? 'var(--ink-3)' : 'var(--ink)'}>{e2.title}</text>
+              <text x={axisX + 18} y={5} fontFamily={SANS} fontSize={12.5} fontWeight={state === 'active' ? 700 : 600} fill={state === 'future' ? 'var(--ink-3)' : 'var(--ink)'}>{e2.title}</text>
             </motion.g>
           )
         })}
@@ -462,7 +463,7 @@ function LeanVsSigmaView({ step }: { step: number }) {
   const M = compact ? { x: 12, y: 434, w: 356, h: 86 } : { x: 20, y: 266, w: 680, h: 84 }
   const H = M.y + M.h + (compact ? 12 : 16)
   const showTable = step >= 5
-  const panelFade = showTable ? 0.1 : 1
+  const panelFade = showTable ? 0 : 1
 
   // Lean bar
   const bx = P1.x + 18
@@ -548,7 +549,7 @@ function LeanVsSigmaView({ step }: { step: number }) {
           <motion.text x={bx + bwFull} y={by + 84} textAnchor="end" fontFamily={SANS} fontSize={12} fill="var(--ink-3)"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: dur(0.6) }}>was {LT_BEFORE}</motion.text>
         )}
-        <text x={P1.x + P1.w - 16} y={P1.y + P1.h - 12} textAnchor="end" fontFamily={SANS} fontSize={12} fill="var(--ink-3)">Illustrative</text>
+        <text x={P1.x + P1.w - 16} y={P1.y + 30} textAnchor="end" fontFamily={SANS} fontSize={12} fill="var(--ink-3)">Illustrative</text>
       </motion.g>
 
       {/* Six Sigma panel */}
@@ -584,9 +585,9 @@ function LeanVsSigmaView({ step }: { step: number }) {
       {/* Merge */}
       {!compact && step >= 4 && (
         <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: dur(0.4) }} fill="none" stroke="var(--indigo)" strokeWidth={1.6} strokeLinecap="round">
-          <motion.path d={`M ${P1.x + P1.w / 2} ${P1.y + P1.h} C ${P1.x + P1.w / 2} ${M.y - 4}, ${W / 2 - 40} ${P1.y + P1.h}, ${W / 2 - 20} ${M.y}`}
+          <motion.path d={`M ${P1.x + P1.w / 2} ${P1.y + P1.h} C ${P1.x + P1.w / 2} ${(P1.y + P1.h + M.y) / 2}, ${W / 2 - 24} ${(P1.y + P1.h + M.y) / 2}, ${W / 2 - 24} ${M.y}`}
             initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: dur(0.6), ease: EASE }} />
-          <motion.path d={`M ${P2.x + P2.w / 2} ${P2.y + P2.h} C ${P2.x + P2.w / 2} ${M.y - 4}, ${W / 2 + 40} ${P2.y + P2.h}, ${W / 2 + 20} ${M.y}`}
+          <motion.path d={`M ${P2.x + P2.w / 2} ${P2.y + P2.h} C ${P2.x + P2.w / 2} ${(P2.y + P2.h + M.y) / 2}, ${W / 2 + 24} ${(P2.y + P2.h + M.y) / 2}, ${W / 2 + 24} ${M.y}`}
             initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: dur(0.6), ease: EASE }} />
         </motion.g>
       )}
@@ -771,7 +772,7 @@ function WastesView({ step }: { step: number }) {
   const cardBody = (): { h: number; node: ReactNode } => {
     if (final) {
       const parts: ReactNode[] = []
-      parts.push(<text key="t" x={16} y={32} fontFamily={DISPLAY} fontSize={16.5} fontWeight={650} fill="var(--ink)">Same wastes, other names</text>)
+      parts.push(<text key="t" x={16} y={32} fontFamily={DISPLAY} fontSize={16.5} fontWeight={650} fill="var(--ink)">{compact ? 'Same wastes, other names' : 'Other names'}</text>)
       const rowH = compact ? 26 : 40
       MAPPING.forEach(([a, b], k) => {
         const y = 62 + k * rowH
@@ -795,14 +796,14 @@ function WastesView({ step }: { step: number }) {
     const y1 = 58
     const y2 = y1 + (ex.length - 1) * 18 + 30
     return {
-      h: y2 + (sp.length - 1) * 16 + 20,
+      h: y2 + 17 + (sp.length - 1) * 16 + 20,
       node: (
         <>
           <text x={16} y={32} fontFamily={DISPLAY} fontSize={18} fontWeight={700} fill="var(--coral)">{w.name}</text>
           <text x={cardW - 16} y={32} textAnchor="end" fontFamily={SANS} fontSize={12} fill="var(--ink-3)" className="tabular">{step + 1} of 7</text>
           <Lines x={16} y={y1} lines={ex} size={13} lh={18} fill="var(--ink)" />
-          <text x={16} y={y2} fontFamily={SANS} fontSize={12.5} fontWeight={700} fill="var(--ink-2)">Spot it: <tspan fontWeight={400}>{sp[0]}</tspan></text>
-          {sp.length > 1 && <Lines x={16} y={y2 + 16} lines={sp.slice(1)} size={12.5} lh={16} fill="var(--ink-2)" />}
+          <text x={16} y={y2} fontFamily={SANS} fontSize={12.5} fontWeight={700} fill="var(--ink-2)">Spot it</text>
+          <Lines x={16} y={y2 + 17} lines={sp} size={12.5} lh={16} fill="var(--ink-2)" />
         </>
       ),
     }
@@ -810,7 +811,7 @@ function WastesView({ step }: { step: number }) {
   const card = cardBody()
   const allCards = [...WASTES.map((_, i) => i)].map(i => {
     const w = WASTES[i]
-    return 58 + (wrap(w.example, inner, 13).length - 1) * 18 + 30 + (wrap(w.spot, inner, 12.5).length - 1) * 16 + 20
+    return 58 + (wrap(w.example, inner, 13).length - 1) * 18 + 30 + 17 + (wrap(w.spot, inner, 12.5).length - 1) * 16 + 20
   })
   const maxCardH = Math.max(...allCards, 170)
   const H = compact ? 384 + maxCardH + 12 : 476
@@ -1057,7 +1058,7 @@ function FiveSView({ step }: { step: number }) {
           {/* Red-tag area */}
           <motion.g {...fade(sorted)}>
             <rect x={368} y={214} width={102} height={78} rx={10} fill="var(--coral-soft)" stroke="var(--coral)" strokeWidth={1.5} strokeDasharray="5 4" />
-            <text x={419} y={234} textAnchor="middle" fontFamily={SANS} fontSize={14} fontWeight={700} fill="var(--coral)">Red-tag area</text>
+            <text x={419} y={234} textAnchor="middle" fontFamily={SANS} fontSize={13} fontWeight={700} fill="var(--coral)">Red-tag area</text>
           </motion.g>
 
           {/* Checklist board (Standardize) */}
@@ -1210,8 +1211,8 @@ function FiveSView({ step }: { step: number }) {
               </g>
             )}
             {sustain && (() => {
-              const chart = compact ? { x: 16, y: 86, w: 150, h: 62 } : { x: 16, y: 120, w: 160, h: 62 }
-              const cal = compact ? { x: 186, y: 92 } : { x: 16, y: 204 }
+              const chart = compact ? { x: 16, y: 98, w: 150, h: 50 } : { x: 16, y: 120, w: 160, h: 62 }
+              const cal = compact ? { x: 186, y: 94 } : { x: 16, y: 204 }
               const bwid = chart.w / AUDIT.length
               return (
                 <g>

@@ -75,7 +75,7 @@ interface CharterSection { id: string; title: string; fact?: string; row: number
 
 const SECTIONS: CharterSection[] = [
   { id: 'business', title: 'Business case', fact: 'Repeat visits cost about $522,500 a year', row: 0, col: 'full', h: 56 },
-  { id: 'problem', title: 'Problem statement', fact: '18.4% of fault visits repeat within 30 days (target 9%)', row: 1, col: 'full', h: 62 },
+  { id: 'problem', title: 'Problem statement', fact: '18.4% of visits repeat within 30 days (target 9%)', row: 1, col: 'full', h: 62 },
   { id: 'goal', title: 'Goal statement (SMART)', fact: '18.4% → 9.0% by 31 Mar 2027', row: 2, col: 'full', h: 54 },
   { id: 'scope', title: 'Scope', fact: 'In: residential fault visits. Out: installs, business', row: 3, col: 'left', h: 78 },
   { id: 'team', title: 'Team and roles', fact: 'Champion, Process Owner, Green Belt, team', row: 3, col: 'right', h: 78 },
@@ -151,7 +151,7 @@ function buildCard(i: number, w: number): { h: number; node: ReactNode } {
     y += 14 + (lines.length - 1) * 18.5 + 8
   }
   if (c.rows) {
-    const labelW = 64
+    const labelW = 74
     y += 6
     c.rows.forEach(([label, value], r) => {
       const lines = wrap(value, inner - labelW, 12.5)
@@ -260,7 +260,7 @@ function CharterView({ step }: { step: number }) {
               }}
             />
             <text x={b.x + 12} y={b.y + 20} fontFamily={SANS} fontSize={13} fontWeight={650} fill={state === 'future' ? 'var(--ink-3)' : state === 'active' ? 'var(--violet)' : 'var(--ink)'}>{s.title}</text>
-            {state === 'done' && (
+            {state === 'done' && s.id !== 'miles' && s.title.length * 7.6 + 40 < b.w && (
               <path d={`M ${b.x + b.w - 24} ${b.y + 15} l 4 4 l 7 -8`} fill="none" stroke="var(--good)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
             )}
             {/* Body: skeleton bars until revealed */}
@@ -361,8 +361,8 @@ const GAP = LADDER.goal - LADDER.baseline
 interface Rung { title: string; sub: string; hWide: number; hNarrow: number }
 const RUNGS: Rung[] = [
   { title: 'CTQ', sub: 'Customer requirement', hWide: 96, hNarrow: 146 },
-  { title: 'Project Y', sub: 'Primary metric', hWide: 132, hNarrow: 180 },
-  { title: 'Secondary metrics', sub: 'Guard rails, must not worsen', hWide: 104, hNarrow: 150 },
+  { title: 'Project Y', sub: 'Primary metric', hWide: 132, hNarrow: 192 },
+  { title: 'Secondary metrics', sub: 'Guard rails, must not worsen', hWide: 112, hNarrow: 150 },
   { title: 'Financial metric', sub: 'The Y in money', hWide: 84, hNarrow: 116 },
 ]
 const RUNG_FOR_STEP = [0, 1, 1, 2, 3]
@@ -378,11 +378,11 @@ function MetricLadderView({ step }: { step: number }) {
   let y = compact ? 12 : 16
   RUNGS.forEach(r => { tops.push(y); y += (compact ? r.hNarrow : r.hWide) + gap })
   const H = y - gap + (compact ? 12 : 16)
-  const cx = compact ? x0 + 16 : x0 + 190
-  const cw = compact ? w - 32 : w - 210
+  const cx = compact ? x0 + 16 : x0 + 228
+  const cw = compact ? w - 32 : w - 248
   const contentTop = (i: number) => tops[i] + (compact ? 62 : 22)
   const activeRung = RUNG_FOR_STEP[step]
-  const sx = (v: number) => cx + ((v - LADDER.min) / (LADDER.max - LADDER.min)) * cw
+  const sx = (v: number) => cx + 14 + ((v - LADDER.min) / (LADDER.max - LADDER.min)) * (cw - 30)
 
   const label = [
     'Metric ladder. CTQ: P2 incident restored within 4 hours.',
@@ -455,7 +455,7 @@ function MetricLadderView({ step }: { step: number }) {
       {/* Rung 2: project Y scale */}
       {step >= 1 && (() => {
         const t = contentTop(1)
-        const nameLines = wrap('P2 incidents restored within the 4-hour SLA, % per month', cw, 13)
+        const nameLines = wrap('P2 incidents restored within the 4-hour SLA, % per month', cw - 24, 13)
         const labelY = t + 12 + (nameLines.length - 1) * 17 + 26
         const trackY = labelY + 8
         const tickY = trackY + 32
@@ -463,7 +463,7 @@ function MetricLadderView({ step }: { step: number }) {
         return (
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: dur(0.4) }}>
             <Lines x={cx} y={t + 12} lines={nameLines} size={13} lh={17} fill="var(--ink)" weight={600} />
-            <rect x={sx(LADDER.min)} y={trackY} width={cw} height={16} rx={8} fill="var(--surface-3)" />
+            <rect x={sx(LADDER.min)} y={trackY} width={sx(LADDER.max) - sx(LADDER.min)} height={16} rx={8} fill="var(--surface-3)" />
             <motion.rect x={sx(LADDER.min)} y={trackY} height={16} rx={8} fill="var(--coral)" opacity={0.85}
               initial={{ width: 0 }} animate={{ width: sx(LADDER.baseline) - sx(LADDER.min) }} transition={{ duration: dur(0.7), ease: EASE }} />
             {showGoal && (
@@ -489,7 +489,7 @@ function MetricLadderView({ step }: { step: number }) {
             {showGoal && (
               <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: dur(0.4), delay: dur(0.2) }}>
                 <line x1={sx(LADDER.goal)} x2={sx(LADDER.goal)} y1={trackY - 6} y2={trackY + 20} stroke="var(--teal)" strokeWidth={2} />
-                <text x={sx(LADDER.goal)} y={labelY - 4} textAnchor="middle" fontFamily={SANS} fontSize={12} fontWeight={700} fill="var(--teal)">Goal {fmt(LADDER.goal, 1)}%</text>
+                <text x={sx(LADDER.goal)} y={labelY - 4} textAnchor="middle" fontFamily={SANS} fontSize={12} fontWeight={700} fill="var(--teal)">Goal {LADDER.goal.toFixed(1)}%</text>
                 <line x1={sx(LADDER.entitlement)} x2={sx(LADDER.entitlement)} y1={trackY - 3} y2={tickY + 6} stroke="var(--amber)" strokeWidth={2} strokeDasharray="3 2" />
                 <text x={sx(LADDER.entitlement) - 6} y={tickY + 18} textAnchor="end" fontFamily={SANS} fontSize={12} fontWeight={700} fill="var(--amber)">Entitlement {fmt(LADDER.entitlement, 1)}% (best month)</text>
               </motion.g>
@@ -505,14 +505,14 @@ function MetricLadderView({ step }: { step: number }) {
         return (
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: dur(0.4) }}>
             {items.map((name, k) => {
-              const rowY = compact ? t + k * 44 : t + 8 + k * 38
-              const laneX = compact ? cx : cx + 200
-              const laneY = compact ? rowY + 8 : rowY - 12
-              const laneW = compact ? cw - 96 : cw - 200 - 96
+              const rowY = t + (compact ? 0 : 6) + k * 44
+              const laneX = cx
+              const laneY = rowY + 8
+              const laneW = cw - 96
               const posts = Math.floor(laneW / 22)
               return (
                 <g key={name}>
-                  <text x={cx} y={compact ? rowY : rowY + 2} fontFamily={SANS} fontSize={12.5} fontWeight={600} fill="var(--ink)">{name}</text>
+                  <text x={cx} y={rowY} fontFamily={SANS} fontSize={12.5} fontWeight={600} fill="var(--ink)">{name}</text>
                   <rect x={laneX} y={laneY + 4} width={laneW} height={14} fill="var(--surface-2)" />
                   {[laneY + 2, laneY + 20].map(ry => (
                     <g key={ry}>
@@ -562,7 +562,7 @@ export const metricLadder: DiagramView = {
   steps: [
     'Start with the customer. The [[Voice of the Customer]], "when my service fails, get it back fast", becomes a measurable [[Critical to Quality]] requirement: a P2 incident restored within 4 hours.',
     `The CTQ becomes the **project Y**, the primary metric: P2 incidents restored within the 4-hour SLA. Kestrel Mobile's baseline is ${fmt(LADDER.baseline, 1)}% of incidents per month.`,
-    `Add the **goal** (${fmt(LADDER.goal, 1)}%) and the [[Entitlement]] (${fmt(LADDER.entitlement, 1)}%, the best month already achieved). The gap to close is ${fmt(GAP, 1)} percentage points; going beyond entitlement usually needs some redesign.`,
+    `Add the **goal** (${LADDER.goal.toFixed(1)}%) and the [[Entitlement]] (${fmt(LADDER.entitlement, 1)}%, the best month already achieved). The gap to close is ${fmt(GAP, 1)} percentage points; going beyond entitlement usually needs some redesign.`,
     '**Secondary (consequential) metrics** are guard rails, not targets: reopened incidents and engineer overtime must not rise while the project Y improves.',
     'A **financial metric** translates the project Y into money: service credits paid per month should fall. Every rung traces back to what the customer asked for.',
   ],
@@ -597,7 +597,7 @@ function BenefitsView({ step }: { step: number }) {
   const W = compact ? 380 : 720
   const H = compact ? 470 : 430
   const left = compact ? 52 : 70
-  const right = W - (compact ? 14 : 30)
+  const right = W - (compact ? 14 : 100)
   const top = compact ? 112 : 96
   const base = compact ? 368 : 336
   const yMax = 450
@@ -639,7 +639,7 @@ function BenefitsView({ step }: { step: number }) {
       {[0, 100, 200, 300, 400].map(v => (
         <g key={v}>
           <line x1={left} x2={right} y1={sy(v)} y2={sy(v)} stroke={v === 0 ? 'var(--line-2)' : 'var(--line)'} strokeWidth={v === 0 ? 1.5 : 1} />
-          <text x={left - 8} y={sy(v) + 4} textAnchor="end" fontFamily={SANS} fontSize={12} fill="var(--ink-3)" className="tabular">${v}k</text>
+          <text x={left - 8} y={sy(v) + 4} textAnchor="end" fontFamily={SANS} fontSize={12} fill="var(--ink-3)" className="tabular">{v === 0 ? '$0' : `$${v}k`}</text>
         </g>
       ))}
 
@@ -674,14 +674,11 @@ function BenefitsView({ step }: { step: number }) {
         )
       })}
 
-      {/* Finance verification stamp */}
+      {/* Finance verification under the Control bar */}
       {step >= 3 && (
-        <motion.g initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: dur(0.9), duration: dur(0.35), ease: EASE }}>
-          <g transform={`translate(${barX(3) + barW / 2} ${sy(REAL_TOTAL) - (compact ? 44 : 50)}) rotate(-6)`}>
-            <rect x={compact ? -38 : -50} y={-13} width={compact ? 76 : 100} height={24} rx={7} fill="var(--good-soft)" stroke="var(--good)" strokeWidth={1.5} />
-            <path d={`M ${compact ? -30 : -40} -1 l 4 4 l 7 -8`} fill="none" stroke="var(--good)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-            <text x={compact ? 5 : 6} y={4} textAnchor="middle" fontFamily={SANS} fontSize={12} fontWeight={700} fill="var(--good)">{compact ? 'Finance' : 'Finance verified'}</text>
-          </g>
+        <motion.g initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: dur(0.9), duration: dur(0.35), ease: EASE }}>
+          <path d={`M ${barX(3) + barW / 2 - 30} ${base + 49} l 3.5 3.5 l 6 -7`} fill="none" stroke="var(--good)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+          <text x={barX(3) + barW / 2 + 6} y={base + 53} textAnchor="middle" fontFamily={SANS} fontSize={12} fontWeight={700} fill="var(--good)">Finance</text>
         </motion.g>
       )}
 

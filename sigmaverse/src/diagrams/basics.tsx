@@ -81,7 +81,8 @@ function SigmaCurveView({ step }: { step: number }) {
   const base = n ? 238 : 262
   const H = base + 60
   const sx = (v: number) => padX + ((v - DOM[0]) / (DOM[1] - DOM[0])) * (W - 2 * padX)
-  const YMAX = 0.86
+  // Vertical scale is per phase: tall enough to show the wide curve's tails, then the narrow one.
+  const YMAX = step >= 3 ? 0.86 : 0.3
   const sy = (p: number) => base - (p / YMAX) * (base - top)
   const sd = step >= 3 ? 0.5 : START_SD
   const mean = step >= 4 ? 0.75 : 0
@@ -168,7 +169,7 @@ function SigmaCurveView({ step }: { step: number }) {
       </Show>
       {step === 0 && (
         <Show on dy={0} delay={0.3}>
-          <text x={sx(-4.2)} y={base - 12} fontSize={fs - 1} fill="var(--ink-3)">Each dot is one measured result</text>
+          <text x={padX} y={labelRow} fontSize={fs - 1} fill="var(--ink-3)">{n ? 'Dot = one result' : 'Each dot is one measured result'}</text>
         </Show>
       )}
 
@@ -217,7 +218,7 @@ function SigmaCurveView({ step }: { step: number }) {
       <Show on={step >= 4} dy={0}>
         <line x1={sx(0)} x2={sx(0.75) - 3} y1={peakY - 10} y2={peakY - 10} stroke={c('coral')} strokeWidth={2} />
         <path d={`M${sx(0.75)},${peakY - 10} l-7,-4.5 v9 z`} fill={c('coral')} />
-        <text x={sx(0.75) + 8} y={peakY - 6} fontSize={fs} fontWeight={700} fill={c('coral')}>1.5σ shift</text>
+        <text x={sx(0) - 8} y={peakY - 6} textAnchor="end" fontSize={fs} fontWeight={700} fill={c('coral')}>1.5σ shift</text>
         <circle cx={sx(SPEC)} cy={base} r={6} fill="none" stroke={c('coral')} strokeWidth={2} />
         <path d={`M${sx(SPEC) + 5},${base - 5} L${W - padX - 30},${n ? 50 : 52}`} stroke={c('coral')} strokeWidth={1.25} fill="none" />
       </Show>
@@ -304,7 +305,7 @@ function TimelineView({ step }: { step: number }) {
           const a = yOf(idx[0]) - 10
           const b = yOf(idx[idx.length - 1]) + 10
           return (
-            <motion.line key={k} x1={ax} x2={ax} y1={a} initial={{ y2: a }} animate={{ y2: k <= era ? b : a }} transition={t} stroke={c(e.tone)} strokeWidth={4} strokeLinecap="round" />
+            <motion.line key={k} x1={ax} x2={ax} y1={a} initial={{ y2: a, opacity: 0 }} animate={{ y2: k <= era ? b : a, opacity: k <= era ? 1 : 0 }} transition={t} stroke={c(e.tone)} strokeWidth={4} strokeLinecap="round" />
           )
         })}
         {EVENTS.map((ev, i) => {
@@ -330,8 +331,8 @@ function TimelineView({ step }: { step: number }) {
   const W = 760
   const H = 268
   const ay = 176
-  const x0 = 56
-  const gap = 64.8
+  const x0 = 64
+  const gap = 63.2
   const xOf = (i: number) => x0 + i * gap
   return (
     <Svg w={W} h={H} label={label}>
@@ -343,9 +344,9 @@ function TimelineView({ step }: { step: number }) {
         const on = k <= era
         return (
           <g key={k}>
-            <motion.line y1={ay} y2={ay} x1={a} initial={{ x2: a }} animate={{ x2: on ? b : a }} transition={t} stroke={c(e.tone)} strokeWidth={4} strokeLinecap="round" />
+            <motion.line y1={ay} y2={ay} x1={a} initial={{ x2: a, opacity: 0 }} animate={{ x2: on ? b : a, opacity: on ? 1 : 0 }} transition={t} stroke={c(e.tone)} strokeWidth={4} strokeLinecap="round" />
             <Show on={on}>
-              <text x={(a + b) / 2} y={24} textAnchor="middle" fontFamily={DISPLAY} fontSize={14} fontWeight={700} fill={k === era ? c(e.tone) : 'var(--ink-3)'}>{e.name}</text>
+              <text x={(a + b) / 2} y={24} textAnchor="middle" fontFamily={DISPLAY} fontSize={13} fontWeight={700} fill={k === era ? c(e.tone) : 'var(--ink-3)'}>{e.name}</text>
               <line x1={a} x2={b} y1={34} y2={34} stroke={c(e.tone)} strokeOpacity={k === era ? 1 : 0.4} strokeWidth={2} strokeLinecap="round" />
             </Show>
           </g>
@@ -410,7 +411,7 @@ function DmaicView({ step }: { step: number }) {
   const W = n ? 360 : 720
   const r = n ? 25 : 40
   const cy = n ? 82 : 104
-  const cxOf = (i: number) => (n ? 38 + i * 71 : 104 + i * 128)
+  const cxOf = (i: number) => (n ? 42 + i * 69 : 104 + i * 128)
   const focus = step === 0 ? -1 : step <= 5 ? step - 1 : 0
   const done = (i: number) => (step === 6 ? i > 0 : i < focus)
   const panelY = n ? 150 : 200
@@ -457,7 +458,7 @@ function DmaicView({ step }: { step: number }) {
 
       {/* "this course" tag on Define */}
       <Show on delay={0.5}>
-        <rect x={cxOf(0) - (n ? 34 : 40)} y={cy - r - (n ? 32 : 36)} width={n ? 68 : 80} height={22} rx={11} fill={soft('violet')} />
+        <rect x={cxOf(0) - (n ? 38 : 42)} y={cy - r - (n ? 32 : 36)} width={n ? 76 : 84} height={22} rx={11} fill={soft('violet')} />
         <text x={cxOf(0)} y={cy - r - (n ? 17 : 21)} textAnchor="middle" fontSize={n ? 11.5 : 12} fontWeight={700} fill={c('violet')}>This course</text>
       </Show>
 
@@ -637,7 +638,7 @@ function YfxView({ step }: { step: number }) {
       <Show on={step >= 2}>
         <rect x={proc.x} y={proc.y} width={proc.w} height={proc.h} rx={16} fill="var(--surface-2)" stroke={c('indigo')} strokeWidth={1.5} />
         <text x={pcx} y={proc.y + 28} textAnchor="middle" fontSize={fs} fontWeight={600} fill="var(--ink-2)">Fault restoration process</text>
-        <text x={pcx} y={proc.y + 58} textAnchor="middle" fontFamily={DISPLAY} fontSize={n ? 16 : 17} fontWeight={700} fill="var(--ink)">
+        <text x={pcx - (n ? 16 : 17) * 0.56 * 10.5} y={proc.y + 58} fontFamily={DISPLAY} fontSize={n ? 16 : 17} fontWeight={700} fill="var(--ink)">
           Y = f(<Sub base="X" sub="1" size={16} />, <Sub base="X" sub="2" size={16} />, <Sub base="X" sub="3" size={16} />, <Sub base="X" sub="4" size={16} />)
         </text>
         <Show on={step >= 3} dy={4}>
@@ -742,7 +743,7 @@ function VoicesView({ step }: { step: number }) {
       { text: 'Customers get service back sooner, the business pays fewer credits, and engineers waste less effort.' },
     ]
   } else if (step >= 5) {
-    title = 'Voice of the Process: the data'
+    title = 'Voice of the Process'
     tone = 'sky'
     lines = VOP_ROWS.flatMap(row => [{ text: row.what, strong: true }, { text: row.gap, tone: 'coral' as Tone }])
   }
@@ -864,9 +865,9 @@ function RolesView({ step }: { step: number }) {
         bb: { x: 265, y: 184, w: 190 },
         gb: { x: 265, y: 262, w: 190 },
         team: { x: 265, y: 340, w: 190 },
-        mbb: { x: 40, y: 223, w: 176 },
-        owner: { x: 504, y: 96, w: 176 },
-        finance: { x: 504, y: 184, w: 176 },
+        mbb: { x: 30, y: 223, w: 190 },
+        owner: { x: 496, y: 96, w: 200 },
+        finance: { x: 496, y: 184, w: 200 },
       }
   const stripY = (n ? 298 : 340) + nodeH + 20
   const H = stripY + 92
@@ -926,7 +927,7 @@ function RolesView({ step }: { step: number }) {
       })}
       {/* "alongside" label for side roles */}
       <Show on={shown('owner')}>
-        <text x={n ? 73 : 592} y={n ? 72 : 86} textAnchor="middle" fontSize={11.5} fill="var(--ink-3)">Alongside the project</text>
+        <text x={n ? 73 : 596} y={n ? 72 : 86} textAnchor="middle" fontSize={11.5} fill="var(--ink-3)">Alongside the project</text>
       </Show>
 
       {/* responsibilities strip */}

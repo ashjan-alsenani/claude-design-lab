@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { ArrowDown, ArrowUp, Check, Lock, Play, Sparkles } from 'lucide-react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import type { LabProps } from './registry'
 import { Feedback, KnowledgeCheck, LabShell, shuffle, type CheckItem } from './kit'
 import { useDur, useReduced } from '../lib/motion'
@@ -278,7 +278,7 @@ export default function FiveSLab({ embedded }: LabProps) {
       {shadowOn && SLOT.A.slice(0, useful.filter(i => i.freq === 'A').length).map(([x, y], i) => <rect key={i} x={x - 20} y={y - 18} width={40} height={36} rx={6} fill="none" stroke="var(--ink-3)" strokeDasharray="3 3" />)}
       {/* Dirt and hidden problems */}
       {DIRT.map(d => (
-        <g key={d.id} {...(view === 2 && !cleaned[d.id] ? { role: 'button', tabIndex: 0, 'aria-label': 'Dirty spot: clean it', onClick: () => clean(d), onKeyDown: (e: React.KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clean(d) } }, style: { cursor: 'pointer' } } : {})}>
+        <g key={d.id} {...(view === 2 && !cleaned[d.id] ? { role: 'button', tabIndex: 0, 'aria-label': 'Dirty spot: clean it', onClick: () => clean(d), onKeyDown: (e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clean(d) } }, style: { cursor: 'pointer' } } : {})}>
           <motion.ellipse cx={d.x} cy={d.y} rx={18} ry={10} fill="var(--amber)" initial={false} animate={{ opacity: cleaned[d.id] ? 0 : 0.45, scale: cleaned[d.id] ? 0.9 : 1 }} transition={{ duration: dur(0.4) }} style={{ transformOrigin: `${d.x}px ${d.y}px` }} />
           {view === 2 && !cleaned[d.id] && <circle cx={d.x} cy={d.y} r={20} fill="none" stroke="var(--amber)" strokeWidth={2} strokeDasharray="4 3" />}
           {cleaned[d.id] && d.problem && (

@@ -29,6 +29,17 @@ function useNarrow() {
 /** Approximate rendered width of a label (Figtree averages about 0.53em per character). */
 const textW = (s: string, size: number) => s.length * size * 0.53
 
+/** Greedy word wrap by approximate character count. */
+function wrapText(text: string, max: number): string[] {
+  const out: string[] = []
+  let cur = ''
+  for (const w of text.split(' ')) {
+    if (cur && (cur + ' ' + w).length > max) { out.push(cur); cur = w } else cur = cur ? `${cur} ${w}` : w
+  }
+  if (cur) out.push(cur)
+  return out
+}
+
 function Show({ on, children, delay = 0, dy = 8 }: { on: boolean; children: ReactNode; delay?: number; dy?: number }) {
   return (
     <motion.g
@@ -55,7 +66,7 @@ function Chip({ x, y, w, h = 32, text, tone, active, size = 12.5 }: { x: number;
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} rx={10} fill={active ? soft(tone) : 'var(--surface)'} stroke={active ? c(tone) : 'var(--line-2)'} strokeWidth={active ? 1.75 : 1.25} />
-      <text x={x + w / 2} y={y + h / 2 + size * 0.36} textAnchor="middle" fontSize={size} fontWeight={active ? 600 : 500} fill="var(--ink)">{text}</text>
+      <text x={x + w / 2} y={y + h / 2 + size * 0.36} textAnchor="middle" fontSize={size} fontWeight={500} fill="var(--ink)">{text}</text>
     </g>
   )
 }
@@ -89,7 +100,7 @@ function CountUp({ to, digits = 0, on = true }: { to: number; digits?: number; o
 /* 1. Process map (high-level SIPOC view)                              */
 /* ------------------------------------------------------------------ */
 
-const SUPPLIERS = ['Network monitoring', 'Customers', 'Parts depot']
+const SUPPLIERS = ['Monitoring system', 'Customers', 'Parts depot']
 const INPUTS = ['Alarm', 'Fault report', 'Spare parts', 'Engineers']
 const ACTIVITIES = ['Detect and log', 'Classify and prioritise', 'Diagnose the fault', 'Dispatch and repair', 'Verify and close']
 const OUTPUTS = ['Service restored', 'Closed ticket', 'Customer update']
@@ -292,14 +303,14 @@ export const processMap: DiagramView = {
 /* ------------------------------------------------------------------ */
 
 const BRANCHES: { driver: string; metric: string; spec: string }[] = [
-  { driver: 'Speed of answer', metric: 'Queue-to-answer time', spec: '95% of calls answered within 30 s' },
+  { driver: 'Speed of answer', metric: 'Queue-to-answer time', spec: '95% answered within 30 s' },
   { driver: 'Time to resolve', metric: 'Fault restoration time', spec: 'Restored within 4 h (USL)' },
   { driver: 'First contact resolution', metric: 'Resolved on first contact', spec: 'At least 80% of faults' },
 ]
-const LEVELS: { name: string; note: string; tone: Tone }[] = [
-  { name: 'Need', note: 'Vague, in their words', tone: 'coral' },
-  { name: 'Drivers', note: 'More specific', tone: 'amber' },
-  { name: 'CTQs', note: 'Measurable, with a limit', tone: 'teal' },
+const LEVELS: { name: string; note: string; chip: string; tone: Tone }[] = [
+  { name: 'Need', note: 'Vague, in their words', chip: 'Need: vague', tone: 'coral' },
+  { name: 'Drivers', note: 'More specific', chip: 'Driver: specific', tone: 'amber' },
+  { name: 'CTQs', note: 'Measurable, with a limit', chip: 'CTQ: measurable', tone: 'teal' },
 ]
 
 function DrawPath({ d, on, delay = 0, color = 'var(--line-2)' }: { d: string; on: boolean; delay?: number; color?: string }) {
@@ -338,7 +349,7 @@ function CtqTreeView({ step }: { step: number }) {
     const H = 360
     const ys = [92, 196, 300]
     const need = { x: 16, y: 164, w: 168, h: 64 }
-    const drv = { x: 244, w: 180, h: 48 }
+    const drv = { x: 234, w: 204, h: 48 }
     const ctq = { x: 484, w: 264, h: 64 }
     const heads = [need.x + need.w / 2, drv.x + drv.w / 2, ctq.x + ctq.w / 2]
     return (
@@ -354,8 +365,8 @@ function CtqTreeView({ step }: { step: number }) {
           </Show>
         ))}
         <Show on={levels} dy={0}>
-          <Arrow x1={heads[0] + 70} y1={38} x2={heads[1] - 62} y2={38} color="var(--line-2)" />
-          <Arrow x1={heads[1] + 58} y1={38} x2={heads[2] - 84} y2={38} color="var(--line-2)" />
+          <Arrow x1={heads[0] + 74} y1={39} x2={heads[1] - 52} y2={39} color="var(--line-2)" />
+          <Arrow x1={heads[1] + 52} y1={39} x2={heads[2] - 82} y2={39} color="var(--line-2)" />
         </Show>
 
         {BRANCHES.map((b, i) => {
@@ -428,7 +439,7 @@ function CtqTreeView({ step }: { step: number }) {
         {(() => {
           let x = 12
           return LEVELS.map(lv => {
-            const t = `${lv.name}: ${lv.note.split(',')[0].toLowerCase()}`
+            const t = lv.chip
             const w = textW(t, 12) + 20
             const g = (
               <g key={lv.name}>
@@ -528,7 +539,6 @@ function IcebergView({ step }: { step: number }) {
       {/* hidden mass */}
       <Show on={step >= 2} dy={-10}>
         <path d={pts(MASS)} fill={c('sky')} fillOpacity={0.2} stroke={c('sky')} strokeWidth={1.5} strokeLinejoin="round" />
-        <path d={`M${cx - 0.22 * hw},${wy} L${cx - 0.3 * hw},${wy + 120} L${cx + 0.1 * hw},${wy + 230}`} fill="none" stroke={c('sky')} strokeOpacity={0.35} strokeWidth={1} />
       </Show>
 
       {/* tip */}
@@ -541,7 +551,7 @@ function IcebergView({ step }: { step: number }) {
       <motion.line x1={0} x2={W} y1={wy} y2={wy} stroke={c('sky')} strokeWidth={2} initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: step >= 1 ? 1 : 0, opacity: step >= 1 ? 1 : 0 }} transition={{ duration: 0.8, ease: EASE }} />
       <Show on={step >= 1}>
         <text x={W - 12} y={wy - 10} textAnchor="end" fontSize={fs} fontWeight={600} fill="var(--ink-2)">Seen in the accounts</text>
-        <text x={W - 12} y={wy + 22} textAnchor="end" fontSize={fs} fontWeight={600} fill={c('sky')} stroke="var(--surface)" strokeWidth={4} paintOrder="stroke">Hidden, rarely measured</text>
+        <text x={12} y={wy + 22} fontSize={fs} fontWeight={600} fill={c('sky')}>{n ? 'Hidden below' : 'Hidden, rarely measured'}</text>
       </Show>
 
       {/* visible costs */}
@@ -573,7 +583,8 @@ function IcebergView({ step }: { step: number }) {
         {CATS.map((ct, i) => {
           const cols = n ? 2 : 4
           const cw = (W - 24) / cols
-          const x = 12 + (i % cols) * cw
+          const wideX = 12 + CATS.slice(0, i).reduce((sum, p) => sum + textW(p.name + (p.k === 'prevention' ? ' (the cure)' : ''), fs) + 48, 0)
+          const x = n ? 12 + (i % cols) * cw : wideX
           const y = wy + 264 + 26 + Math.floor(i / cols) * 26
           return (
             <g key={ct.k}>
@@ -628,7 +639,7 @@ function ParetoView({ step }: { step: number }) {
   const R = n ? 316 : 648
   const T = n ? 42 : 46
   const B = n ? 238 : 296
-  const H = n ? 330 : 370
+  const H = n ? 344 : 370
   const band = (R - L) / P_ROWS.length
   const barW = band * 0.64
   const xc = (i: number) => L + band * (i + 0.5)
@@ -673,7 +684,7 @@ function ParetoView({ step }: { step: number }) {
       ))}
       <line x1={L} x2={L} y1={T} y2={B} stroke="var(--ink-3)" strokeWidth={1.25} />
       <line x1={L} x2={R} y1={B} y2={B} stroke="var(--ink-3)" strokeWidth={1.25} />
-      <text x={n ? 4 : 16} y={T - 18} fontSize={fs} fontWeight={700} fill="var(--ink-2)">Contacts</text>
+      <text x={n ? 4 : 16} y={T - 24} fontSize={fs} fontWeight={700} fill="var(--ink-2)">Contacts</text>
 
       <Show on={lineOn} dy={0}>
         <line x1={R} x2={R} y1={T} y2={B} stroke={c('coral')} strokeWidth={1.25} />
@@ -683,7 +694,7 @@ function ParetoView({ step }: { step: number }) {
             <text x={R + 9} y={yR(f * 100) + 4} fontSize={fs} fill={c('coral')} className="tabular">{fmt(f * 100, 0)}%</text>
           </g>
         ))}
-        <text x={W - 4} y={T - 18} textAnchor="end" fontSize={fs} fontWeight={700} fill={c('coral')}>Cumulative %</text>
+        <text x={W - 4} y={T - 24} textAnchor="end" fontSize={fs} fontWeight={700} fill={c('coral')}>Cumulative %</text>
       </Show>
 
       {/* bars */}
@@ -733,9 +744,9 @@ function ParetoView({ step }: { step: number }) {
 
       {/* footer */}
       <AnimatePresence mode="wait">
-        <motion.text key={Math.min(step, 3)} x={W / 2} y={H - 10} textAnchor="middle" fontSize={n ? 12 : 13} fontWeight={600} fill={vital ? c('teal') : 'var(--ink-2)'}
+        <motion.text key={Math.min(step, 3)} x={W / 2} y={n ? H - 26 : H - 10} textAnchor="middle" fontSize={n ? 12 : 13} fontWeight={600} fill={vital ? c('teal') : 'var(--ink-2)'}
           initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-          {footer}
+          {(n ? wrapText(footer, 46) : [footer]).map((l, j) => <tspan key={j} x={W / 2} dy={j ? 16 : 0}>{l}</tspan>)}
         </motion.text>
       </AnimatePresence>
     </Svg>
@@ -919,7 +930,6 @@ function DpmoFlowView({ step }: { step: number }) {
               const rowH = n ? 21 : 24
               return (
                 <>
-                  {!n && <path d={`M${zoom.x + grid.cell + 3},${zoom.y + grid.cell / 2} C${zoom.x + 120},${zoom.y - 40} ${fx - 80},${fy + 40} ${fx - 4},${fy + 30}`} fill="none" stroke={c('sky')} strokeWidth={1.5} strokeDasharray="4 4" />}
                   <rect x={fx} y={fy} width={fw} height={20 + FIELDS.length * rowH} rx={10} fill="var(--surface)" stroke={c('sky')} strokeWidth={1.5} />
                   <text x={fx + 12} y={fy + 16} fontSize={11.5} fontWeight={700} fill={c('sky')}>Order form</text>
                   {FIELDS.map((f, j) => (

@@ -464,6 +464,8 @@ export default function CharterLab({ embedded }: LabProps) {
   const [d, setD] = useState<Draft>(loadDraft)
   const [exampleIdx, setExampleIdx] = useState(0)
   const [notice, setNotice] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const groups = useMemo(() => evaluate(d), [d])
   const all = groups.flatMap(g => g.checks)
   const readiness = all.length ? all.reduce((s, c) => s + LEVEL_W[c.level], 0) / all.length : 0
@@ -604,7 +606,7 @@ export default function CharterLab({ embedded }: LabProps) {
           <p className="mt-4 flex gap-2 text-xs leading-relaxed text-ink-3"><FileText className="size-4 shrink-0" />Rule-based checks look for patterns in your wording. They support, not replace, a tollgate review. Your draft is saved in this browser.</p>
         </div>
       </aside>
-      <PrintView d={d} />
+      {mounted && <PrintView d={d} />}
     </div>
   )
 

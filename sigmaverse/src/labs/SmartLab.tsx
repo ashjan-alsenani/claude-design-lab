@@ -14,7 +14,7 @@ const MONTHS = '(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|jun(e)?|jul(y)?|au
 const DATE_RE = new RegExp(`\\b(by|before|on|until)\\s+(the\\s+)?(end\\s+of\\s+)?(\\d{1,2}\\s+)?${MONTHS}\\b[^.,;]*|\\b(by|before)\\s+(q[1-4]|h[12]|\\d{1,2}/\\d{1,2}/\\d{2,4}|(19|20)\\d{2})\\b[^.,;]*|\\bwithin\\s+\\d+\\s+(days?|weeks?|months?)\\b|\\b\\d{4}-\\d{2}-\\d{2}\\b`, 'i')
 const VERB_RE = /^\s*(reduce|increase|decrease|improve|raise|lower|cut|shorten|lift|grow|achieve)\b/i
 const LOWER_VERBS = /^\s*(reduce|decrease|lower|cut|shorten)\b/i
-const METRIC_RE = /\b(rate|time|times|%|percent|percentage|number|count|days?|hours?|minutes?|cost|accuracy|yield|score|backlog|errors?|defects?|calls?|visits?|complaints?|dpmo|sla|nps|csat|duration)\b/i
+const METRIC_RE = /%|\b(rate|time|times|percent|percentage|number|count|days?|hours?|minutes?|cost|accuracy|yield|score|backlog|errors?|defects?|calls?|visits?|complaints?|dpmo|sla|nps|csat|duration)\b/i
 const VAGUE_RE = /\b(as much as possible|significantly|better|world[- ]class|asap|soon|a lot|somewhat|greatly|substantially|best possible)\b/i
 const SOLUTION_RE = /\b(by|through|using)\s+(implementing|deploying|installing|introducing|buying|hiring|automating|launching|rolling out|adding)\b|\b(implement|deploy|install|buy|hire|automate)\b/i
 const SCOPE_RE = /\b(for|in|at|across|on)\s+(the\s+)?[A-Za-z]+/i
@@ -105,21 +105,23 @@ function evaluate(goal: string, p: Parsed, achievableOk: boolean, entitlement: n
 const NAMES = ['Specific', 'Measurable', 'Achievable', 'Relevant', 'Time-bound']
 
 function rewrite(goal: string, p: Parsed, ctq: string): string {
-  const verb = p.lowerBetter === false ? 'Increase' : 'Reduce'
-  const metric = (p.metric && !VAGUE_RE.test(p.metric) ? p.metric : ctq.trim() || '[metric]').replace(SOLUTION_RE, '').trim()
+  const verb = p.lowerBetter === false ? 'Increase' : p.lowerBetter === true ? 'Reduce' : '[Reduce or Increase]'
+  const fromGoal = !!p.metric && !VAGUE_RE.test(p.metric)
+  const raw = (fromGoal ? p.metric : ctq.trim() || '[metric]').replace(SOLUTION_RE, '').trim()
+  const metric = /^[A-Z][A-Z]/.test(raw) ? raw : raw.charAt(0).toLowerCase() + raw.slice(1)
   const u = p.unit === '%' ? '%' : p.unit ? ` ${p.unit}` : ''
   const base = p.baseline !== null ? `${fmt(p.baseline)}${u}` : '[baseline]'
   const tgt = p.target !== null ? `${fmt(p.target)}${u}` : '[target]'
   const date = p.date ? p.date.replace(/^(by|before|on|until)\s+/i, '') : '[date]'
-  const scope = goal.match(/\b(for|in|at|across)\s+(the\s+)?[A-Z][\w-]*(\s[\w-]+){0,3}/)?.[0]
-  return `${verb} the ${metric.replace(/^the\s+/i, '')}${scope && !metric.includes(scope) ? ` ${scope}` : ''} from ${base} to ${tgt} by ${date}.`
+  const scope = fromGoal ? undefined : goal.split(/\s(?:from|by|to)\s/i)[0].match(/\b(for|in|at|across)\s+(the\s+)?[A-Z][\w-]*(\s[\w-]+){0,3}/)?.[0]
+  return `${verb} the ${metric.replace(/^the\s+/i, '')}${scope ? ` ${scope}` : ''} from ${base} to ${tgt} by ${date}.`
 }
 
 interface Example { goal: string; ctq: string; good: boolean; note: string }
 const EXAMPLES: Example[] = [
   { goal: 'Reduce the 30-day repeat visit rate for North region broadband faults from 18.4% to 9.0% by 31 Mar 2027.', ctq: 'Repeat visit rate', good: true, note: 'One metric, scope, baseline, target and date.' },
   { goal: 'Reduce the median invoice approval time at the Leeds centre from 11.3 to 5 working days by 30 Apr 2027.', ctq: 'Invoice approval time', good: true, note: 'Mirrors the problem statement metric and units.' },
-  { goal: 'Increase the share of P2 incidents restored within the 4-hour SLA from 81.3% to 90% by 30 Jun 2027.', ctq: 'P2 incidents restored within SLA', good: true, note: 'Higher is better here, so the verb is Increase.' },
+  { goal: 'Increase the share of P2 incidents restored within the 4-hour SLA in the Kestrel Mobile NOC from 81.3% to 90% by 30 Jun 2027.', ctq: 'P2 incidents restored within SLA', good: true, note: 'Higher is better here, so the verb is Increase.' },
   { goal: 'Improve first-time fix as much as possible.', ctq: 'First-time fix rate', good: false, note: 'No baseline, no target, no date.' },
   { goal: 'Reduce repeat visits by deploying remote line testing by June 2027.', ctq: 'Repeat visit rate', good: false, note: 'A solution smuggled into the goal, and no numbers.' },
   { goal: 'Make customers happier this year.', ctq: 'CSAT score', good: false, note: 'Not specific, not measurable, no real deadline.' },
