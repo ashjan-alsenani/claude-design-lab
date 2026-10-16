@@ -199,7 +199,7 @@ function LeanFlowView({ step }: { step: number }) {
             return (
               <motion.g key={z} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: dur(0.35), delay: dur(k * 0.12) }}>
                 <rect x={zoneX[z] - hw} y={floor(0) - rows * sp - 10} width={hw * 2} height={rows * sp + 8} rx={8} fill="var(--coral-soft)" stroke="var(--coral)" strokeWidth={1.2} />
-                {clock(zoneX[z], floor(0) - rows * sp - 20)}
+                {z !== 'entry' && clock(zoneX[z], floor(0) - rows * sp - 20)}
               </motion.g>
             )
           })}
@@ -321,7 +321,7 @@ function LeanHistoryView({ step }: { step: number }) {
               <text x={axisX - 16} y={5} textAnchor="end" fontFamily={DISPLAY} fontSize={state === 'active' ? 15 : 13.5} fontWeight={700} fill={state === 'future' ? 'var(--ink-3)' : `var(--${e2.era})`} className="tabular">{e2.year}</text>
               {state === 'active' && <circle cx={axisX} cy={0} r={11} fill="none" stroke={`var(--${e2.era})`} strokeWidth={1.5} opacity={0.5} />}
               <circle cx={axisX} cy={0} r={state === 'active' ? 6.5 : 5} style={{ fill: state === 'future' ? 'var(--surface)' : `var(--${e2.era})`, transition: COLOR_T }} stroke={state === 'future' ? 'var(--line-2)' : `var(--${e2.era})`} strokeWidth={1.5} />
-              <text x={axisX + 18} y={5} fontFamily={SANS} fontSize={13} fontWeight={state === 'active' ? 700 : 600} fill={state === 'future' ? 'var(--ink-3)' : 'var(--ink)'}>{wrap(e2.title, W - axisX - 30, 13)[0]}{wrap(e2.title, W - axisX - 30, 13).length > 1 ? '...' : ''}</text>
+              <text x={axisX + 18} y={5} fontFamily={SANS} fontSize={13} fontWeight={state === 'active' ? 700 : 600} fill={state === 'future' ? 'var(--ink-3)' : 'var(--ink)'}>{e2.title}</text>
             </motion.g>
           )
         })}
@@ -389,7 +389,6 @@ function LeanHistoryView({ step }: { step: number }) {
 
       {/* Detail band */}
       <rect x={24} y={282} width={672} height={118} rx={18} fill="var(--surface)" stroke="var(--line-2)" />
-      <rect x={24} y={282} width={8} height={118} rx={4} fill={`var(--${ev.era})`} opacity={0} />
       <AnimatePresence mode="wait" initial={false}>
         <motion.g key={step} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25, ease: EASE }}>
           <text x={48} y={338} fontFamily={DISPLAY} fontSize={34} fontWeight={700} fill={`var(--${ev.era})`} className="tabular">{ev.year}</text>
@@ -634,7 +633,7 @@ function LeanVsSigmaView({ step }: { step: number }) {
           const hRow = n * 16.5 + 18
           rows.push(
             <motion.g key={r.row} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: dur(0.35), delay: dur(0.15 + k * 0.15), ease: EASE }}>
-              <rect x={tX - 8} y={y} width={tLabelW + 2 * tColW + 24} height={hRow - 6} rx={12} fill={k % 2 === 0 ? 'var(--surface-2)' : 'var(--surface)'} stroke="var(--line)" />
+              <rect x={tX - 8} y={y} width={tLabelW + 2 * tColW + 16} height={hRow - 6} rx={12} fill={k % 2 === 0 ? 'var(--surface-2)' : 'var(--surface)'} stroke="var(--line)" />
               <text x={tX + 4} y={y + 21} fontFamily={SANS} fontSize={12.5} fontWeight={700} fill="var(--ink)">{r.row}</text>
               <Lines x={tX + tLabelW} y={y + 21} lines={r.l1} size={12.5} lh={16.5} fill="var(--ink-2)" />
               <Lines x={tX + tLabelW + tColW + 8} y={y + 21} lines={r.l2} size={12.5} lh={16.5} fill="var(--ink-2)" />
@@ -743,8 +742,8 @@ const MAPPING: [string, string][] = [['Correction', 'Defects'], ['Conveyance', '
 
 function Icon({ k, size, color }: { k: string; size: number; color: string }) {
   return (
-    <g transform={`translate(${-size / 2} ${-size / 2}) scale(${size / 24})`} fill="none" stroke={color} strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke">
-      <g style={{ vectorEffect: 'non-scaling-stroke' }}>{ICONS[k]}</g>
+    <g transform={`translate(${-size / 2} ${-size / 2}) scale(${size / 24})`} fill="none" stroke={color} strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
+      {ICONS[k]}
     </g>
   )
 }
@@ -773,19 +772,22 @@ function WastesView({ step }: { step: number }) {
     if (final) {
       const parts: ReactNode[] = []
       parts.push(<text key="t" x={16} y={32} fontFamily={DISPLAY} fontSize={16.5} fontWeight={650} fill="var(--ink)">Same wastes, other names</text>)
+      const rowH = compact ? 26 : 40
       MAPPING.forEach(([a, b], k) => {
-        const y = 62 + k * 26
+        const y = 62 + k * rowH
         parts.push(
           <g key={a}>
             <text x={16} y={y} fontFamily={SANS} fontSize={13} fontWeight={700} fill="var(--coral)">{a}</text>
-            <text x={compact ? 134 : 124} y={y} fontFamily={SANS} fontSize={13} fill="var(--ink-3)">=</text>
-            <text x={compact ? 150 : 138} y={y} fontFamily={SANS} fontSize={13} fill="var(--ink-2)">{b}</text>
+            {compact
+              ? <text x={134} y={y} fontFamily={SANS} fontSize={13} fill="var(--ink-2)">= {b}</text>
+              : <text x={28} y={y + 17} fontFamily={SANS} fontSize={13} fill="var(--ink-2)">= {b}</text>}
           </g>,
         )
       })
+      const ny = 62 + 3 * rowH + (compact ? 4 : -2)
       const note = wrap('On the exam, use the seven syllabus names.', inner, 12.5)
-      parts.push(<Lines key="n" x={16} y={62 + 3 * 26 + 4} lines={note} size={12.5} lh={16} fill="var(--ink-3)" />)
-      return { h: 62 + 3 * 26 + 4 + (note.length - 1) * 16 + 18, node: <>{parts}</> }
+      parts.push(<Lines key="n" x={16} y={ny} lines={note} size={12.5} lh={16} fill="var(--ink-3)" />)
+      return { h: ny + (note.length - 1) * 16 + 18, node: <>{parts}</> }
     }
     const w = WASTES[step]
     const ex = wrap(w.example, inner, 13)
@@ -835,7 +837,7 @@ function WastesView({ step }: { step: number }) {
         const state = final ? 'done' : i === step ? 'active' : i < step ? 'done' : 'future'
         return (
           <g key={w.key}>
-            <motion.g initial={false} animate={{ scale: state === 'active' ? 1.12 : 1 }} transition={{ duration: dur(0.35), ease: EASE }} style={{ originX: `${p.x}px`, originY: `${p.y}px` }}>
+            <motion.g initial={false} animate={{ scale: state === 'active' ? 1.12 : 1 }} transition={{ duration: dur(0.35), ease: EASE }}>
               <circle cx={p.x} cy={p.y} r={nr} strokeWidth={state === 'active' ? 2.2 : 1.4}
                 style={{
                   fill: state === 'active' ? 'var(--coral-soft)' : state === 'done' ? 'var(--surface)' : 'var(--surface-2)',
@@ -859,7 +861,7 @@ function WastesView({ step }: { step: number }) {
           <circle cx={eighth.x} cy={eighth.y} r={compact ? 22 : 26} fill="var(--surface)" stroke="var(--ink-3)" strokeWidth={1.6} strokeDasharray="5 4" />
           <g transform={`translate(${eighth.x} ${eighth.y})`}><Icon k="talent" size={compact ? 22 : 26} color="var(--ink-2)" /></g>
           <text x={eighth.x + (compact ? 32 : 38)} y={eighth.y - 4} fontFamily={SANS} fontSize={13} fontWeight={700} fill="var(--ink)">Non-Utilized Talent</text>
-          <text x={eighth.x + (compact ? 32 : 38)} y={eighth.y + 13} fontFamily={SANS} fontSize={12} fill="var(--ink-2)">8-waste model (DOWNTIME), not the syllabus list</text>
+          <Lines x={eighth.x + (compact ? 32 : 38)} y={eighth.y + 13} lines={compact ? ['8-waste model (DOWNTIME),', 'not the syllabus list'] : ['8-waste model (DOWNTIME), not the syllabus list']} size={12} lh={15} fill="var(--ink-2)" />
         </motion.g>
       )}
 
@@ -1185,7 +1187,7 @@ function FiveSView({ step }: { step: number }) {
                 <text x={30} y={37.5} textAnchor="middle" fontFamily={DISPLAY} fontSize={15} fontWeight={700} fill="var(--surface)">{step}</text>
               </g>
             )}
-            <text x={step > 0 ? 54 : 16} y={39} fontFamily={DISPLAY} fontSize={compact ? 19 : 18} fontWeight={700} fill="var(--ink)">{s.name}</text>
+            <text x={step > 0 ? 54 : 16} y={39} fontFamily={DISPLAY} fontSize={compact ? 19 : s.name.length > 12 ? 15 : 18} fontWeight={700} fill="var(--ink)">{s.name}</text>
             {step === 0 ? (
               <g>
                 <Lines x={16} y={70} lines={wrap(`Loose items in the work area: ${ITEMS.length}.`, card.w - 32, 13)} size={13} lh={18} fill="var(--ink)" />
@@ -1209,7 +1211,7 @@ function FiveSView({ step }: { step: number }) {
             )}
             {sustain && (() => {
               const chart = compact ? { x: 16, y: 86, w: 150, h: 62 } : { x: 16, y: 120, w: 160, h: 62 }
-              const cal = compact ? { x: 186, y: 92 } : { x: 16, y: 218 }
+              const cal = compact ? { x: 186, y: 92 } : { x: 16, y: 204 }
               const bwid = chart.w / AUDIT.length
               return (
                 <g>
@@ -1235,7 +1237,7 @@ function FiveSView({ step }: { step: number }) {
                         transition={{ duration: dur(0.2), delay: dur(0.4 + k * 0.05) }} />
                     )
                   })}
-                  <text x={compact ? cal.x : chart.x} y={compact ? cal.y + 80 : cal.y + 76} fontFamily={SANS} fontSize={12} fill="var(--ink-3)">Illustrative</text>
+                  <text x={compact ? cal.x : cal.x + 100} y={compact ? cal.y + 75 : cal.y + 40} fontFamily={SANS} fontSize={12} fill="var(--ink-3)">Illustrative</text>
                 </g>
               )
             })()}
