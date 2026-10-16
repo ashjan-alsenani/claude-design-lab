@@ -35,7 +35,8 @@ function buildMock(): Question[] {
 
 export default function Mock() {
   const minutes = useProfile(p => p.settings.mockMinutes)
-  const mocks = useProfile(p => p.attempts.filter(a => a.mode === 'mock').slice(0, 8))
+  const allAttempts = useProfile(p => p.attempts)
+  const mocks = allAttempts.filter(a => a.mode === 'mock').slice(0, 8)
   const [session, setSession] = useState<SessionConfig | null>(null)
   const start = () => setSession({ mode: 'mock', label: 'Define Mock Exam', questions: buildMock(), seconds: minutes * 60 })
   if (session) return <PracticeSession config={session} onExit={() => setSession(null)} onRetake={start} />

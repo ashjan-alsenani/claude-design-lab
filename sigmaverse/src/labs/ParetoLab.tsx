@@ -70,7 +70,7 @@ function ParetoChart({ rows, vital, mode, showCumLabels = true, unit }: { rows: 
   const yp = (p: number) => B - (p / 100) * (B - T)
   const cx = (i: number) => L + slot * i + slot / 2
   const pts = rows.map((p, i) => `${cx(i)} ${yp(p.cumPercent)}`)
-  const d = pts.length ? `M ${L} ${B} L ${pts.join(' L ')}` : ''
+  const d = pts.length ? `M ${pts.join(' L ')}` : ''
   const tilt = n > 6
   const fmtV = (v: number) => (mode === 'cost' ? money(v) : fmt(v, 0))
   const vitalPct = vital > 0 ? rows[vital - 1].cumPercent : 0
@@ -93,8 +93,8 @@ function ParetoChart({ rows, vital, mode, showCumLabels = true, unit }: { rows: 
           <g key={p.id}>
             <motion.rect width={bw} rx={5} initial={false} animate={{ x: cx(i) - bw / 2, y: B - h, height: h }} transition={{ duration: 0.6, ease: EASE }}
               fill={isV ? 'var(--teal)' : 'var(--line-2)'} />
-            <motion.text textAnchor="middle" fontSize={12} fontWeight={600} fill="var(--ink)" fontFamily="var(--font-sans)" initial={false}
-              animate={{ x: cx(i), y: B - h - 6 }} transition={{ duration: 0.6, ease: EASE }}>{fmtV(p.value)}</motion.text>
+            <motion.text textAnchor="middle" fontSize={12} fontWeight={600} fill={h > 26 ? (isV ? 'var(--surface)' : 'var(--ink)') : 'var(--ink)'} fontFamily="var(--font-sans)" initial={false}
+              animate={{ x: cx(i), y: h > 26 ? B - h + 18 : B - h - 8 }} transition={{ duration: 0.6, ease: EASE }}>{fmtV(p.value)}</motion.text>
             <motion.g initial={false} animate={{ x: cx(i), y: B + 16 }} transition={{ duration: 0.6, ease: EASE }}>
               <text textAnchor={tilt ? 'end' : 'middle'} transform={tilt ? 'rotate(-32)' : undefined} fontSize={12} fill={isV ? 'var(--ink)' : 'var(--ink-2)'} fontWeight={isV ? 600 : 400} fontFamily="var(--font-sans)">
                 {p.name.length > (tilt ? 16 : Math.floor(slot / 7)) ? `${p.name.slice(0, tilt ? 15 : Math.floor(slot / 7) - 1)}.` : p.name}
@@ -111,7 +111,7 @@ function ParetoChart({ rows, vital, mode, showCumLabels = true, unit }: { rows: 
           <motion.circle r={4.5} fill="var(--surface)" stroke="var(--violet)" strokeWidth={2.5} initial={false} animate={{ cx: cx(i), cy: yp(p.cumPercent) }} transition={{ duration: 0.6, ease: EASE }} />
           {showCumLabels && (
             <motion.text fontSize={12} textAnchor="middle" fill="var(--violet)" fontWeight={600} fontFamily="var(--font-sans)" initial={false}
-              animate={{ x: cx(i), y: yp(p.cumPercent) - 10 }} transition={{ duration: 0.6, ease: EASE }}>{fmt(p.cumPercent, 0)}%</motion.text>
+              animate={{ x: cx(i), y: Math.min(yp(p.cumPercent) - 10, (B - Math.max(1, B - yv(p.value))) - (B - yv(p.value) > 26 ? 10 : 24)) }} transition={{ duration: 0.6, ease: EASE }}>{fmt(p.cumPercent, 0)}%</motion.text>
           )}
         </g>
       ))}

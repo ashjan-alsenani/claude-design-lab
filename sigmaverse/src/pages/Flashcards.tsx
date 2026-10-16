@@ -108,7 +108,7 @@ function Study({ cards, all }: { cards: Card[]; all: Card[] }) {
       <div className="mt-5 grid grid-cols-4 gap-2">
         {(['again', 'hard', 'good', 'easy'] as Grade[]).map((g, i) => (
           <button key={g} disabled={!flipped} onClick={() => grade(g)} className={`btn flex-col !h-auto py-2.5 ${g === 'again' ? 'btn-soft text-bad' : g === 'easy' ? 'btn-soft text-good' : 'btn-soft'}`}>
-            <span className="capitalize">{g}</span>
+            <span>{g[0].toUpperCase() + g.slice(1)}</span>
             <span className="text-[11px] font-medium text-ink-3">{intervalLabel(st, g)} · {i + 1}</span>
           </button>
         ))}

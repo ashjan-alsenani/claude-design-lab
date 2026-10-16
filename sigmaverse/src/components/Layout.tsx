@@ -3,12 +3,12 @@ import {
   BookOpen, BookMarked, Calculator, ChartNoAxesColumn, FlaskConical, GraduationCap, Layers, LayoutDashboard,
   Library, Map, Menu, NotebookPen, PanelLeftClose, PanelLeftOpen, Search, Settings, ShieldAlert, Swords, Timer, X,
 } from 'lucide-react'
-import { Suspense, useEffect, useState, type ReactNode } from 'react'
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useReduced } from '../lib/motion'
 import { setSettings, useProfile, update, touch } from '../lib/store'
-import { CommandPalette } from './CommandPalette'
-import { Celebrations } from './Celebrations'
+const CommandPalette = lazy(() => import('./CommandPalette').then(m => ({ default: m.CommandPalette })))
+const Celebrations = lazy(() => import('./Celebrations').then(m => ({ default: m.Celebrations })))
 import { Logo } from './Logo'
 import { Kbd } from './ui'
 
@@ -111,6 +111,8 @@ export function Layout() {
   const speed = useProfile(p => p.settings.speed)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
+  const [paletteUsed, setPaletteUsed] = useState(false)
+  useEffect(() => { if (paletteOpen) setPaletteUsed(true) }, [paletteOpen])
   const loc = useLocation()
 
   useEffect(() => { setMobileOpen(false); window.scrollTo({ top: 0 }) }, [loc.pathname])
@@ -204,8 +206,10 @@ export function Layout() {
         )}
       </AnimatePresence>
 
-      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
-      <Celebrations />
+      <Suspense fallback={null}>
+        {paletteUsed && <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />}
+        <Celebrations />
+      </Suspense>
     </MotionConfig>
   )
 }

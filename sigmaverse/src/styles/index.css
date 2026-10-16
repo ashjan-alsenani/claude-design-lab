@@ -226,3 +226,7 @@
 @keyframes pulse-ring { 0% { transform: scale(0.9); opacity: 0.7; } 100% { transform: scale(1.6); opacity: 0; } }
 @keyframes flow { to { stroke-dashoffset: -24; } }
 .focus-reading .app-sidebar { display: none !important; }
+/* Grid tracks must be able to shrink below wide children (formulas, tables, charts). */
+.grid > * { min-width: 0; }
+/* Absolutely positioned children (e.g. sr-only labels) must be clipped by their scroll container. */
+.overflow-x-auto, .overflow-auto { position: relative; }

@@ -55,7 +55,8 @@ export default function Practice() {
   const [count, setCount] = useState(10)
   const [difficulty, setDifficulty] = useState<Difficulty | 'any'>('any')
   const [session, setSession] = useState<SessionConfig | null>(null)
-  const attempts = useProfile(p => p.attempts.filter(a => a.mode !== 'mock').slice(0, 6))
+  const allAttempts = useProfile(p => p.attempts)
+  const attempts = allAttempts.filter(a => a.mode !== 'mock').slice(0, 6)
   const hasWeak = useProfile(p => p.mistakes.length > 0 || Object.values(p.qstats).some(s => s.seen > s.correct))
 
   const available = useMemo(() => buildSet(mode, 999, lesson, difficulty).length, [mode, lesson, difficulty])

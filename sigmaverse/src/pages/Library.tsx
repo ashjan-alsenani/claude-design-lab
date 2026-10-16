@@ -181,7 +181,7 @@ function bookPage(source: SourceId | undefined, filePage: number) {
 function Viewer({ doc, initialPage, lessons, onClose }: { doc: LibraryDoc; initialPage: number; lessons: Lesson[]; onClose: () => void }) {
   const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null)
   const [page, setPage] = useState(Math.min(initialPage, doc.pageCount))
-  const [scale, setScale] = useState(1.2)
+  const [scale, setScale] = useState(1)
   const [err, setErr] = useState<string | null>(null)
   const [texts, setTexts] = useState<string[] | null>(null)
   const [indexing, setIndexing] = useState<string | null>(null)
@@ -213,7 +213,7 @@ function Viewer({ doc, initialPage, lessons, onClose }: { doc: LibraryDoc; initi
       c.width = vp.width; c.height = vp.height
       c.style.width = `${vp.width / dpr}px`; c.style.height = `${vp.height / dpr}px`
       task.current?.cancel()
-      task.current = pg.render({ canvas: c, canvasContext: c.getContext('2d')!, viewport: vp })
+      task.current = pg.render({ canvasContext: c.getContext('2d')!, viewport: vp })
       try { await task.current.promise } catch { /* cancelled */ }
     })()
     return () => { cancelled = true }
