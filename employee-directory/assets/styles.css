@@ -6161,3 +6161,10 @@ tr.ax-row{cursor:pointer}tr.ax-row:hover td{background:color-mix(in srgb,var(--a
 .ax-ltable .ax-b{white-space:normal}
 .ax-dsteps,.ax-steps{grid-template-columns:minmax(0,1fr)}.ax-dsteps .ax-sh{flex-wrap:wrap}
 @media (max-width:640px){.ax-dsteps p{padding-inline-start:0}}
+/* v91: compact status chips in tables (full wording in tooltip, file and exports) */
+.ax-ltable .ax-b,.ax-b{white-space:nowrap}
+.ax-bs{padding:2px 9px;font-size:.76rem;line-height:1.5;border-radius:999px}
+.ax-bs[data-k="out"],.ax-bs[data-k="wait"]{border-color:transparent;background:transparent;color:var(--muted,#94a3b8);font-weight:600;padding-inline:0}
+.ax-bs[data-k="out"] svg{opacity:.6}
+.ax{grid-template-columns:minmax(0,1fr)}.ax>*{min-width:0}
+.ax-bs{position:relative}

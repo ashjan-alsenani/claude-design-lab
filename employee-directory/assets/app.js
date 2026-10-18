@@ -4706,7 +4706,8 @@ var AxLVdef=()=>({1:{pos:"mgr",gr:"na"},2:{pos:"mgr",gr:"na"},3:{pos:"mgr",gr:"n
   let res=s1==="excl"?"excl":s1==="verify"?"verify":sup==="elig"||tech==="elig"?"elig":sup==="verify"||tech==="verify"?"verify":"none";
   return{p,f,s1,why,sup,supWhy,tech,techWhy,res}},
  AxR=()=>({elig:["badge-check",Tx("مؤهل مبدئيًا لعلاوة واحدة على الأقل","Initially eligible for at least one allowance"),"elig"],verify:["search",Tx("يحتاج تحقق","Needs verification"),"verify"],none:["x-circle",Tx("لا يستوفي معايير أي علاوة","Meets no allowance's criteria"),"no"],excl:["ban",Tx("مستبعد حسب توجيه المدير","Excluded by the manager's direction"),"excl"]}),
- Axb=(k,sm)=>{let x=AxS()[k]||AxR()[k];return`<span class="ax-b" data-t="${x[2]}">${h(x[0],sm?13:14)}<span>${a(x[1])}</span></span>`},
+ AxSH=()=>({pass:Tx("اجتاز","Passed"),excl:Tx("مستبعد","Excluded"),verify:Tx("يحتاج تحقق","Verify"),elig:Tx("مؤهل مبدئيًا","Eligible"),nsup:Tx("لا يستوفي","Not met"),ntech:Tx("لا يستوفي","Not met"),out:Tx("لا يُقيّم","Not assessed"),wait:Tx("بانتظار الخطوة 1","Pending step 1")}),
+ Axb=(k,sm)=>{let x=AxS()[k]||AxR()[k],sh=sm&&AxSH()[k];return sh?`<span class="ax-b ax-bs" data-t="${x[2]}" data-k="${k}" title="${a(x[1])}">${h(x[0],13)}<span>${a(sh)}</span><span class="sr-only"> — ${a(x[1])}</span></span>`:`<span class="ax-b" data-t="${x[2]}" data-k="${k}">${h(x[0],14)}<span>${a(x[1])}</span></span>`},
  Axrb=k=>{let x=AxR()[k];return`<span class="ax-b" data-t="${x[2]}">${h(x[0],14)}<span>${a(x[1])}</span></span>`},
  Axpeople=()=>(de.employees||[]).filter(p=>(!p.status||p.status==="Active")&&Alscope(p.id)),
  Axhas=p=>Ald().recs.some(r=>r.emp===p.id&&Alcurr(r)),
