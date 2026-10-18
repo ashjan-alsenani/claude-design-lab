@@ -6247,3 +6247,19 @@ details.ax-recs[open]{padding-bottom:18px}
 .ax-scope{flex:0 1 auto}.ax-scope>span{white-space:nowrap}.ax-scope select{width:auto;min-width:240px;max-width:360px}
 @media (max-width:640px){.ax-scope select{max-width:none;flex:1}}
 @media (max-width:640px){.ax-scope{flex:1 1 100%;min-width:0}.ax-scope select,.ax-scope x-sel{min-width:0!important;max-width:none;width:100%;flex:1 1 auto}}
+
+/* v94 allowances: policy definitions, comparison, qualifying period, payment status */
+.ax-mgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1280px){.ax-mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.ax-mgrid{grid-template-columns:1fr}}
+.ax-catl{margin:0;padding-inline-start:20px;display:grid;gap:3px;font-size:.9rem;line-height:1.6}
+.ax-stops{margin:16px 0 0;padding:14px 16px;border:1px dashed var(--line-strong,#cbd5e1);border-radius:14px;background:var(--paper,#fff)}
+.ax-stops-h{display:flex;align-items:center;gap:8px;margin:0 0 8px}.ax-stops-h svg{color:var(--ax-warn)}
+.ax-stops ul{margin:0 0 6px;padding-inline-start:20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px;font-size:.9rem;line-height:1.6}
+@media (max-width:760px){.ax-stops ul{grid-template-columns:1fr}}
+.ax-cmp{margin:0 0 12px}.ax-cmp table{min-width:640px}.ax-cmp th,.ax-cmp td{vertical-align:top;line-height:1.6;font-size:.88rem;white-space:normal}
+.ax-cmp tbody th{font-weight:700;color:var(--muted,#64748b);width:24%}.ax-cmp thead th:nth-child(2){color:#0369A1}.ax-cmp thead th:nth-child(3){color:#6D28D9}
+[data-theme="dark"] .ax-cmp thead th:nth-child(2){color:#7DD3FC}[data-theme="dark"] .ax-cmp thead th:nth-child(3){color:#C4B5FD}
+.ax-key{display:flex;gap:8px;align-items:flex-start;margin:0 0 12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ax-pass) 8%,transparent);line-height:1.75;font-size:.9rem}.ax-key svg{flex:none;margin-top:4px;color:var(--ax-pass)}
+.ax-pay{display:flex!important;align-items:center;gap:4px;margin-top:3px;font-weight:600}.ax-pay[data-k="stopped"],.ax-payli[data-k="stopped"] .ax-sh{color:var(--ax-warn)}.ax-pay[data-k="check"],.ax-payli[data-k="check"] .ax-sh{color:var(--ax-verify)}
+.ax-payli{border-style:dashed!important}
