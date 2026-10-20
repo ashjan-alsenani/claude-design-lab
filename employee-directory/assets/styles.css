@@ -6419,3 +6419,13 @@ body.pk-dw-open { overflow: hidden; }
 .pk-table td .pk-per { font-size: var(--fs-xs); color: var(--muted); }
 .pk-crit .al-pill, .pk-dhead .al-pill { align-self: start; justify-self: start; }
 .pk-wloc { display: inline-flex; align-items: center; gap: 4px; }
+.pk-of { margin-inline-start: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.pk-cap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(160px, 320px); align-items: center; gap: 6px 16px; margin: 0 0 var(--s3); padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--r-lg, 14px); background: var(--paper); }
+.pk-capl { display: grid; gap: 2px; min-width: 0; }
+.pk-capl small { color: var(--muted); font-size: var(--fs-sm); }
+.pk-capt { display: flex; height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.pk-capt i { display: block; width: var(--w); background: #2563EB; }
+.pk-capt i.pk-capreg { background: color-mix(in srgb, #0F766E 45%, var(--paper)); }
+.pk-cap > p { grid-column: 1 / -1; margin: 0; color: #B45309; font-size: var(--fs-sm); font-weight: 600; }
+.pk-capover { border-color: color-mix(in srgb, #D97706 40%, var(--line)); }
+@media (max-width: 640px) { .pk-cap { grid-template-columns: minmax(0, 1fr); } }
