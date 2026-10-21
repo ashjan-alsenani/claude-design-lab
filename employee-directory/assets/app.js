@@ -4800,6 +4800,7 @@ function Alexec(L2,st){let T=Tx,ALL=Axall(),depAll=[...new Set(ALL.map(x=>x.p.de
      ["search","verify",T("قيد المتابعة","Pending"),rv+vr+ny,T(`${rv} مراجعة تصنيف · ${vr} تحقق · ${ny} لم يكمل المدة`,`${rv} review · ${vr} verification · ${ny} period not yet met`),{k:"open"}],
      ["wallet","",T("مستفيدون حاليًا","Current beneficiaries"),ben.size,mon.length&&am?mon.map(z=>Alm3(z.sum)+" "+z.cur).join(" · ")+T(" شهريًا"," monthly"):T("حسب سجل العلاوات","from the allowance register"),{k:"ben"}]].map(([ic,t,l,v,sub,dj])=>`<button type="button" class="ax-kpi" data-t="${t}"${Axdj(dj)}><span class="ax-kpi-l">${h(ic,16)}<span>${a(l)}</span></span><b>${U(v)}</b><small>${a(sub)}</small>${more}</button>`).join("")}
  </section>
+ ${typeof Alnfpanel=="function"?Alnfpanel(st):""}
  <div class="ax-grid">
   <section class="panel ax-flow" data-tour="path"><h2 class="panel-title">${h("route",20)}<span>${a(T("مسار التقييم","Assessment path"))}</span></h2>
    <ol class="ax-steps">
@@ -4929,7 +4930,7 @@ var Axfacts=x=>{let T=Tx,f=x.f,YN=AxYN(),row=(l,k)=>`<div><dt>${a(l)}</dt><dd><s
    st={s1:T("الخطوة 1 — المنصب والمستوى: ","Step 1 — position & level: "),cat:T("التصنيف: ","Classification: "),sup:T("الأعمال الفنية المساعدة: ","Assistant technical work: "),tech:T("الأعمال الفنية: ","Technical work: "),svc:T("مدة الاستحقاق: ","Qualifying period: "),pay:T("الصرف: ","Payment: "),res:T("النتيجة: ","Result: ")},PAY={stopped:[,T("موقوف حاليًا","Currently suspended")],check:[,T("تكليف مؤقت يحتاج تأكيد","Temporary assignment to confirm")]};
    let t=lab[o.k]?lab[o.k][0]:st[o.k]+((o.k==="cat"?C[o.v]:o.k==="pay"?PAY[o.v]:S[o.v]||R[o.v])||[,""])[1],ds=lab[o.k]?lab[o.k][1]:o.k==="cat"&&o.v!=="review"?AxCAT()[o.v]:"";return[t+(d?" — "+d:""),ds]},
  Axpred=o=>x=>(o.dept==null||(x.p.department||"")===o.dept)&&(o.k==="all"?!0:o.k==="ben"?Axhas(x.p):o.k==="open"?x.res==="review"||x.res==="verify"||x.res==="notyet":o.k==="cond"?(x.cat==="sup"&&x.sup==="verify")||(x.cat==="spec"&&x.tech==="verify"):o.k==="noSup"?x.cat==="sup"&&x.sup==="verify":o.k==="noTech"?x.cat==="spec"&&x.tech==="verify":o.k==="mis1"?(x.res==="excl"||x.res==="none")&&Axhas(x.p):o.k==="mis2"?(x.res==="esup"||x.res==="etech")&&!Axhas(x.p):x[o.k]===o.v),
- Axdrill=(o,host)=>{if(o.k==="rules")return Axrules(host);let T=Tx,L3=Axall().filter(Axpred(o)),[title,desc]=AxDT(o),am=Alok("amt"),cur=p=>Ald().recs.filter(r=>r.emp===p.id&&Alcurr(r)&&Alrscope(r));
+ Axdrill=(o,host)=>{if(o.k==="rules")return Axrules(host);let T=Tx,L3=(o.k==="nf"&&typeof Alnfall=="function"?Alnfall():Axall()).filter(Axpred(o)),[title,desc]=AxDT(o),am=Alok("amt"),cur=p=>Ald().recs.filter(r=>r.emp===p.id&&Alcurr(r)&&Alrscope(r));
   Axmodal({title,wide:!0,body:`${desc?`<p class="ax-ldesc">${a(desc)}</p>`:""}<p class="ax-lcount"><b>${L3.length}</b> ${a(T("موظف",L3.length===1?"employee":"employees"))}${L3.length?` · ${a(T("اضغط على أي موظف لعرض ملفه الكامل.","Click any employee to see their full file."))}`:""}</p>
    ${L3.length?`<div class="table-wrap"><table class="table al-table ax-ltable"><thead><tr><th>${a(T("الموظف","Employee"))}</th><th>${a(T("الإدارة والمستوى","Department & level"))}</th><th>${a(T("1 · المنصب والمستوى","1 · Position & level"))}</th><th>${a(T("2 · التصنيف","2 · Classification"))}</th><th>${a(T("النتيجة وسببها","Result and reason"))}</th><th>${a(T("العلاوة الحالية","Current allowance"))}</th></tr></thead><tbody>
    ${L3.map(x=>{let C=cur(x.p);return`<tr class="ax-row" data-axl-emp="${x.p.id}"><td><button type="button" class="ae-who" data-axl-emp="${x.p.id}">${ne(x.p,"sm")}<span><b>${a(I(x.p))}${typeof Alnf=="function"?Alnf(x.p.id):""}</b><small><bdi>${a(x.p.empNo||"")}</bdi>${x.p.jobTitle?" · "+a(B(x.p.jobTitle)):""}</small></span></button></td><td>${a(x.p.department?B(x.p.department):"—")}<small class="ax-sub">${a(Axlv(x.p)||T("المستوى غير مسجل","Level not recorded"))}</small></td><td>${Axb(x.s1,1)}</td><td>${Axcb(x.cat,1)}</td><td>${Axres(x)}</td><td>${C.length?C.map(r=>`<span class="ax-cur">${a(r.type||"—")}${am?" · "+Alamt(r.amt,r.cur):""}</span>`).join(""):`<span class="ae-no">${a(T("لا توجد","None"))}</span>`}</td></tr>`}).join("")}</tbody></table></div>`:`<p class="ax-none">${h("info",15)} ${a(T("لا يوجد موظفون في هذه المجموعة.","No employees in this group."))}</p>`}`,
@@ -5017,15 +5018,17 @@ var AxMAX={sup:50,spec:100},
  Alcap=r=>{let rc=Alrcat(r),mx=AxMAX[rc.c];if(!mx||r.amt==null)return{k:"",l:""};if(r.cur!=="OMR"||r.freq!=="monthly")return{k:"nc",l:Tx("غير قابل للمقارنة (الحد شهري بالريال)","Not comparable (the cap is monthly, in OMR)")};
   let am=Alok("amt");return r.amt>mx*1000?{k:"over",l:am?Tx(`يتجاوز الحد (${mx} ر.ع.)`,`Over the cap (OMR ${mx})`):Tx("يتجاوز الحد الأعلى","Over the cap")}:{k:"ok",l:am?Tx(`ضمن الحد (${mx} ر.ع.)`,`Within the cap (OMR ${mx})`):Tx("ضمن الحد الأعلى","Within the cap")}},
  /* reasons a current record is paid to someone the rules say isn't entitled to it (the cap is a separate check) */
- Alnotr=(r,x)=>{let T=Tx,o=[];if(!Alcurr(r)||r.emp==null)return o;let p=Alemp(r.emp);if(!p)return o;
-  if(p.status&&p.status!=="Active"){o.push(T(`حالة الموظف «${B(p.status)}» والعلاوة ما زالت سارية.`,`Employee status is “${B(p.status)}” while the allowance is still current.`));return o}
+ Alnotx=(r,x)=>{let T=Tx,o=[],add=(k,t)=>o.push({k,t});if(!Alcurr(r)||r.emp==null)return o;let p=Alemp(r.emp);if(!p)return o;
+  if(p.status&&p.status!=="Active"){add("status",T(`حالة الموظف «${B(p.status)}» والعلاوة ما زالت سارية.`,`Employee status is “${B(p.status)}” while the allowance is still current.`));return o}
   x=x||Axevc(r.emp);if(!x)return o;let rc=Alrcat(r);
-  if(x.s1==="excl")o.push(T("مستبعد حسب القواعد (المستوى) ويتقاضى علاوة.","Excluded by the rules (level) yet receives an allowance."));
-  else{if(rc.c&&rc.c!=="other"&&(x.cat==="sup"||x.cat==="spec")&&rc.c!==x.cat)o.push(T("نوع العلاوة المسجلة لا يطابق تصنيف مهامه.","The recorded allowance type doesn't match the classification of their duties."));
-   if(x.res==="none")o.push(T("لا يستوفي شروط فئته.","Doesn't meet their category's conditions."));
-   if(x.res==="notyet"&&(!r.start||!x.svcDue||r.start<x.svcDue))o.push(T(`سارية قبل اكتمال مدة الاستحقاق (يستحق من ${Se(x.svcDue)}).`,`Current before the qualifying period ends (qualifies from ${Se(x.svcDue)}).`));
-   if(x.pay==="stopped")o.push(x.payWhy)}
+  if(x.s1==="excl")add("excl",T("مستبعد حسب القواعد (المستوى) ويتقاضى علاوة.","Excluded by the rules (level) yet receives an allowance."));
+  else{if(rc.c&&rc.c!=="other"&&(x.cat==="sup"||x.cat==="spec")&&rc.c!==x.cat)add("type",T("نوع العلاوة المسجلة لا يطابق تصنيف مهامه.","The recorded allowance type doesn't match the classification of their duties."));
+   if(x.res==="none")add("none",T("لا يستوفي شروط فئته.","Doesn't meet their category's conditions."));
+   if(x.res==="notyet"&&(!r.start||!x.svcDue||r.start<x.svcDue))add("notyet",T(`سارية قبل اكتمال مدة الاستحقاق (يستحق من ${Se(x.svcDue)}).`,`Current before the qualifying period ends (qualifies from ${Se(x.svcDue)}).`));
+   if(x.pay==="stopped")add("stop",x.payWhy)}
   return o},
+ Alnotr=(r,x)=>Alnotx(r,x).map(o=>o.t),
+ Alnotkeys=id=>{let p=Alemp(id);if(!p)return[];let R=Ald().recs.filter(r=>r.emp===p.id&&Alcurr(r)&&Alrscope(r));if(!R.length)return[];let x=Axev(p);return[...new Set(R.flatMap(r=>Alnotx(r,x).map(o=>o.k)))]},
  /* per employee, from a fresh evaluation, across their current records */
  Alnotent=id=>{let p=Alemp(id);if(!p)return[];let R=Ald().recs.filter(r=>r.emp===p.id&&Alcurr(r)&&Alrscope(r));if(!R.length)return[];let x=Axev(p);return[...new Set(R.flatMap(r=>Alnotr(r,x)))]},
  AlnfT=w=>Tx("لا يستحق حسب القواعد ويتقاضى علاوة حالية: ","Not entitled under the rules but receives a current allowance: ")+w.join(" "),
@@ -5074,6 +5077,25 @@ document.addEventListener("change",z=>{if(!z.target||z.target.id!=="al_comp")ret
 /* Excel gets the separate, typed columns behind the combined ones (amount stays a number) */
 var Alxcols=st=>{let all=Alcols(),by=k=>all.find(c=>c[0]===k),EX={who:["empNo","name","dept","level"],allow:["type","pcat"],amtx:["amt","freq","cap"]},out=[];
  Alvcols(st).forEach(c=>{(EX[c[0]]||[c[0]]).forEach(k=>{let x=by(k);x&&(Alok("amt")||!x[5])&&!out.includes(x)&&out.push(x)})});return out};
+
+/* ---------- v98 executive summary: people paid an allowance they aren't entitled to ---------- */
+var AlNFK=()=>({excl:Tx("مستبعد بالمستوى","Excluded by level"),none:Tx("لا يستوفي شروط فئته","Doesn't meet category conditions"),type:Tx("نوع العلاوة لا يطابق تصنيف مهامه","Type doesn't match their duties"),notyet:Tx("قبل اكتمال مدة الاستحقاق","Before the qualifying period ends"),stop:Tx("الصرف موقوف (إجازة، تدريب، غياب…)","Payment suspended (leave, training, absence…)"),status:Tx("الحالة الوظيفية ليست «نشط»","Employment status isn't Active")}),
+ /* everyone with a current record in scope, whatever their employment status */
+ Alnfall=()=>[...new Set(Ald().recs.filter(r=>r.emp!=null&&Alcurr(r)&&Alrscope(r)).map(r=>r.emp))].map(Alemp).filter(Boolean).map(Axev),
+ Alhb=(rows,max,sr)=>`<ul class="ax-hb" aria-label="${a(sr)}">${rows.map(([l,v,dj])=>`<li><button type="button" class="ax-hbb"${Axdj(dj)} title="${a(l+": "+v)}"><span class="ax-hbl">${a(l)}</span><span class="ax-hbt" aria-hidden="true"><i style="--w:${max?Math.max(3,Math.round(v/max*100)):0}%"></i></span><b>${U(v)}</b></button></li>`).join("")}</ul>`,
+ Alnfpanel=st=>{let T=Tx,K=AlNFK(),all=Alnfall().filter(x=>!st.sdept||x.p.department===st.sdept),ben=all.length,F=all.map(x=>({x,k:Alnotkeys(x.p.id)})).filter(z=>z.k.length),n=F.length,sd=st.sdept||null,
+   recs=Ald().recs.filter(r=>r.emp!=null&&Alcurr(r)&&Alrscope(r)&&F.some(z=>z.x.p.id===r.emp)&&Alnotx(r,Axev(Alemp(r.emp))).length),mon=Altot(recs,"monthly"),am=Alok("amt"),
+   byK=Object.keys(K).map(k=>[K[k],F.filter(z=>z.k.includes(k)).length,{k:"nf",v:k,...(sd?{dept:sd}:{})}]).filter(z=>z[1]).sort((x,y)=>y[1]-x[1]),
+   dm=new Map;F.forEach(z=>{let d=z.x.p.department||"";dm.set(d,(dm.get(d)||0)+1)});let byD=[...dm].map(([d,v])=>[d?B(d):T("إدارة غير محددة","Department not set"),v,{k:"nf",dept:d}]).sort((x,y)=>y[1]-x[1]),
+   mxK=Math.max(0,...byK.map(z=>z[1])),mxD=Math.max(0,...byD.map(z=>z[1]));
+  return`<section class="panel ax-nfp${n?"":" ax-nfp0"}" data-tour="nf" aria-labelledby="axnfT"><h2 class="panel-title" id="axnfT"><span class="al-nf" aria-hidden="true">!</span><span>${a(T("يتقاضون علاوة دون استحقاق","Paid an allowance without entitlement"))}</span></h2>
+   <p class="panel-note">${a(T("موظفون لهم سجل علاوة حالي بينما القواعد تقول إنهم لا يستحقونها. تجاوز الحد الأعلى وحده غير محسوب هنا. اضغط أي رقم أو شريط لعرض الأسماء.","People with a current allowance record whom the rules say aren't entitled to it. Being over the cap alone isn't counted here. Click any number or bar to see the names."))}</p>
+   ${n?`<div class="ax-nfbody"><button type="button" class="ax-nfhero"${Axdj({k:"nf",...(sd?{dept:sd}:{})})}><b>${U(n)}</b><span>${a(T(`من ${ben} مستفيد حاليًا`,`of ${ben} current beneficiar${ben===1?"y":"ies"}`))}</span><small>${a(T(`${Math.round(n/Math.max(1,ben)*100)}% من المستفيدين`,`${Math.round(n/Math.max(1,ben)*100)}% of beneficiaries`))}</small>${am&&mon.length?`<small class="ax-nfamt">${a(mon.map(z=>Alm3(z.sum)+" "+z.cur).join(" · ")+T(" شهريًا تُصرف لهم"," a month paid to them"))}</small>`:""}</button>
+    <div class="ax-nfch"><h3>${a(T("حسب السبب","By reason"))}</h3>${Alhb(byK,mxK,T("عدد الموظفين حسب سبب عدم الاستحقاق","People by reason"))}${byK.reduce((s2,z)=>s2+z[1],0)>n?`<small class="ax-sub">${a(T("قد يجتمع أكثر من سبب للموظف الواحد.","One person can have more than one reason."))}</small>`:""}</div>
+    <div class="ax-nfch"><h3>${a(T("حسب الإدارة","By department"))}</h3>${Alhb(byD,mxD,T("عدد الموظفين حسب الإدارة","People by department"))}</div></div>`
+   :`<p class="ax-nfok">${h("circle-check",18)}<span>${a(ben?T(`لا يوجد من يتقاضى علاوة دون استحقاق بين ${ben} مستفيد حالي.`,`Nobody among ${ben} current beneficiaries is paid without entitlement.`):T("لا توجد سجلات علاوة حالية.","No current allowance records."))}</span></p>`}</section>`};
+{let p0=Axpred;Axpred=o=>o.k!=="nf"?p0(o):x=>(o.dept==null||(x.p.department||"")===o.dept)&&(k=>o.v?k.includes(o.v):k.length>0)(Alnotkeys(x.p.id))}
+{let d0=AxDT;AxDT=o=>{if(o.k!=="nf")return d0(o);let T=Tx,d=o.dept!=null?(o.dept?B(o.dept):T("إدارة غير محددة","Department not set")):"";return[T("يتقاضون علاوة دون استحقاق","Paid an allowance without entitlement")+(o.v?" — "+AlNFK()[o.v]:"")+(d?" — "+d:""),T("لهم سجل علاوة حالي والقواعد تقول إنهم لا يستحقونها. مرّر المؤشر على علامة «!» لمعرفة السبب.","They have a current allowance record and the rules say they aren't entitled. Hover over the “!” for the reason.")]}}
 
 /* ===================== v96: Employee Benefits › Parking Allocation | مواقف الموظفين =====================
    Organises parking for the unit's employees. Two things are kept apart on purpose:
