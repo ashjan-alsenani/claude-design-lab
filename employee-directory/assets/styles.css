@@ -6429,3 +6429,13 @@ body.pk-dw-open { overflow: hidden; }
 .pk-cap > p { grid-column: 1 / -1; margin: 0; color: #B45309; font-size: var(--fs-sm); font-weight: 600; }
 .pk-capover { border-color: color-mix(in srgb, #D97706 40%, var(--line)); }
 @media (max-width: 640px) { .pk-cap { grid-template-columns: minmax(0, 1fr); } }
+/* v97: “not entitled but paid” marker next to a name */
+.al-nf { display: inline-grid; place-items: center; width: 18px; height: 18px; margin-inline-start: 6px; vertical-align: -3px; border-radius: 999px; background: #DC2626; color: #fff; font-size: 12px; font-weight: 800; line-height: 1; cursor: help; box-shadow: 0 0 0 2px color-mix(in srgb, #DC2626 22%, transparent); }
+.al-nfl { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0 4px; padding: 10px 12px; border-radius: var(--r); border: 1px solid color-mix(in srgb, #DC2626 30%, var(--line)); background: color-mix(in srgb, #DC2626 7%, var(--paper)); }
+.al-nfl .al-nf { margin: 2px 0 0; flex: none; }
+.al-nfl > span:last-child { display: grid; gap: 2px; }
+.al-nfl small { color: var(--muted); }
+.al-nfleg { display: flex; align-items: center; gap: 8px; margin: -4px 0 var(--s3); color: var(--muted); font-size: var(--fs-sm); }
+.al-nfleg .al-nf { margin: 0; flex: none; cursor: default; }
+.al-nmrow { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.al-nmrow .al-nf { margin-inline-start: 2px; vertical-align: 0; }
