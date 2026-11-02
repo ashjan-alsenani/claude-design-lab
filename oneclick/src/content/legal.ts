@@ -95,7 +95,7 @@ export const legalPages: LegalPage[] = [
         "## Analytics",
         "We do not currently use any analytics tool. If we add one, it will run only with your consent and without advertising profiles.",
         "## Service providers",
-        "We use trusted providers: Vercel for hosting, Supabase for the database, Resend for email and Thawani (Thawani Technologies, Oman) for payments. Each handles data only to provide its service, and some may process it outside Oman.",
+        "We use trusted providers: Vercel for hosting, Supabase for the database, Resend for email and Thawani in Oman for payments. Each handles data only to provide its service, and some may process it outside Oman.",
         "## Retention",
         "- Account, product data and security records: kept while your account is active.",
         "- Orders and their proof of delivery (including the related IP addresses and access times): kept for the period required by Omani tax and commercial law, and long enough to handle any payment dispute.",
