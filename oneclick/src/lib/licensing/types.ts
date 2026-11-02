@@ -120,7 +120,7 @@ export type License = {
   firstAccessedAt?: string;
   firstDownloadedAt?: string;
   accessCount?: number;
-  openTrail?: { at: string; device?: string }[];
+  openTrail?: { at: string; device?: string; ip?: string }[];
   statusReason?: string;
   /** Devices this license was opened on (for per-product device limits). */
   deviceIds: string[];
@@ -220,6 +220,8 @@ export type AccessLog = {
   productId?: string;
   licenseId?: string;
   deviceId?: string | null;
+  /** Client IP, for security and delivery evidence (see the Privacy Policy). */
+  ip?: string;
   reason?: string;
   meta?: Record<string, string | number | boolean | null>;
 };

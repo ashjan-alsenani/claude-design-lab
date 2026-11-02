@@ -1,5 +1,5 @@
 import { products } from "@/content/products";
-import { currentContext, licensing } from "@/lib/licensing/server";
+import { clientInfo, currentContext, licensing } from "@/lib/licensing/server";
 import { personalizedSamplePdf } from "@/lib/licensing/files";
 
 /**
@@ -10,8 +10,8 @@ import { personalizedSamplePdf } from "@/lib/licensing/files";
  */
 export async function GET(_req: Request, { params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
-  const ctx = await currentContext();
-  const r = await licensing().engine.redeemDownload(ctx, token);
+  const [ctx, client] = await Promise.all([currentContext(), clientInfo()]);
+  const r = await licensing().engine.redeemDownload(ctx, token, client);
   const headers = { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex" };
   if (!r.ok) return new Response("This download link is not valid for your account. Open My Products to get a new one.", { status: 403, headers });
   const product = products.find((p) => p.id === r.productId)!;

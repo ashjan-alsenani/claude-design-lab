@@ -2,7 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { redirect } from "next/navigation";
 import type { Locale } from "@/i18n/config";
-import { currentContext, licensing } from "./server";
+import { clientInfo, currentContext, licensing } from "./server";
 import { productData } from "./product-data";
 import type { SessionContext } from "./engine";
 import type { AccessDecision } from "./types";
@@ -22,8 +22,8 @@ export type ProductAccess = { allowed: true; ctx: SessionContext | null; decisio
 // Once per request: a layout and its page may both ask (Next.js renders them in parallel, so each
 // must check for itself), but the decision is made, and the access logged, only once.
 const decide = cache(async (productId: string) => {
-  const ctx = await currentContext();
-  return { ctx, decision: await licensing().engine.checkAccess(ctx, productId, "open") };
+  const [ctx, client] = await Promise.all([currentContext(), clientInfo()]);
+  return { ctx, decision: await licensing().engine.checkAccess(ctx, productId, "open", client) };
 });
 
 /** For product pages/layouts. Signed out → sign in and come back here. Otherwise the decision (render AccessDenied when not allowed). */

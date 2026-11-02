@@ -73,7 +73,8 @@ export type EngineDeps = {
   now?: () => Date;
 };
 
-export type ClientInfo = { userAgent?: string | null; deviceToken?: string | null };
+/** What the request tells us about the client. `ip` is recorded with security and delivery events (see the Privacy Policy). */
+export type ClientInfo = { userAgent?: string | null; deviceToken?: string | null; ip?: string | null };
 
 export type SessionContext = {
   user: User;
@@ -186,11 +187,11 @@ export function createLicensingEngine(deps: EngineDeps) {
   const url = (path: string) => `${deps.baseUrl.replace(/\/$/, "")}${path}`;
 
   /** Delivery evidence on the license itself: first open, a count, and the first 5 + latest 25 opens. */
-  function recordOpenTx(l: License, dev?: Device) {
+  function recordOpenTx(l: License, dev?: Device, ip?: string | null) {
     const at = iso();
     if (!l.firstAccessedAt) l.firstAccessedAt = at;
     l.accessCount = (l.accessCount ?? 0) + 1;
-    const trail = [...(l.openTrail ?? []), { at, ...(dev ? { device: dev.name } : {}) }];
+    const trail = [...(l.openTrail ?? []), { at, ...(dev ? { device: dev.name } : {}), ...(ip ? { ip } : {}) }];
     l.openTrail = trail.length > 30 ? [...trail.slice(0, 5), ...trail.slice(-25)] : trail;
   }
 
@@ -246,7 +247,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     return result;
   }
 
-  function verifyTx(db: LicensingDb, challengeId: string, code: string): { ok: true; challenge: Challenge } | VerifyFailure {
+  function verifyTx(db: LicensingDb, challengeId: string, code: string, ip?: string | null): { ok: true; challenge: Challenge } | VerifyFailure {
     const c = db.challenges.find((x) => x.id === challengeId);
     if (!c) return { ok: false, reason: "invalid" };
     if (c.lockedAt) return { ok: false, reason: "too_many_attempts" };
@@ -258,10 +259,10 @@ export function createLicensingEngine(deps: EngineDeps) {
       c.attempts += 1;
       if (c.attempts >= policy.otpMaxAttempts) {
         c.lockedAt = iso();
-        log(db, { event: "verification_locked", outcome: "suspicious", userId: c.userId ?? null, meta: { purpose: c.purpose } });
+        log(db, { event: "verification_locked", outcome: "suspicious", userId: c.userId ?? null, ip: ip ?? undefined, meta: { purpose: c.purpose } });
         return { ok: false, reason: "too_many_attempts" };
       }
-      log(db, { event: "verification_failed", outcome: "denied", userId: c.userId ?? null, meta: { purpose: c.purpose } });
+      log(db, { event: "verification_failed", outcome: "denied", userId: c.userId ?? null, ip: ip ?? undefined, meta: { purpose: c.purpose } });
       return { ok: false, reason: "invalid", attemptsLeft: policy.otpMaxAttempts - c.attempts };
     }
     c.consumedAt = iso();
@@ -296,11 +297,11 @@ export function createLicensingEngine(deps: EngineDeps) {
     for (const o of db.orders) if (!o.userId && o.purchaseEmail === user.email) o.userId = user.id;
   }
 
-  function addDeviceTx(db: LicensingDb, user: User, tokenHash: string, ua: string | null | undefined) {
+  function addDeviceTx(db: LicensingDb, user: User, tokenHash: string, ua: string | null | undefined, ip?: string | null) {
     const info = describeDevice(ua);
     const device: Device = { id: randomId("dev"), userId: user.id, tokenHash, name: info.name, platform: info.platform, firstVerifiedAt: iso(), lastUsedAt: iso(), status: "trusted" };
     db.devices.push(device);
-    log(db, { event: "device_added", outcome: "info", userId: user.id, deviceId: device.id, meta: { platform: info.platform } });
+    log(db, { event: "device_added", outcome: "info", userId: user.id, deviceId: device.id, ip: ip ?? undefined, meta: { platform: info.platform } });
     return device;
   }
 
@@ -318,7 +319,7 @@ export function createLicensingEngine(deps: EngineDeps) {
       audit(db, { actorId: user.id, action: "account_created", entity: "user", entityId: user.id });
     }
     if (user.accountStatus === "suspended" || user.accountStatus === "closed") {
-      log(db, { event: "signin_failed", outcome: "denied", userId: user.id, reason: "account_suspended" });
+      log(db, { event: "signin_failed", outcome: "denied", userId: user.id, ip: client.ip ?? undefined, reason: "account_suspended" });
       return { ok: false as const, reason: "account_suspended" as const };
     }
     if (verifiedNow) {
@@ -337,11 +338,11 @@ export function createLicensingEngine(deps: EngineDeps) {
       if (!verifiedNow) return { ok: false as const, reason: "device_verification_required" as const };
       const trusted = db.devices.filter((d) => d.userId === user.id && d.status === "trusted");
       if (trusted.length < policy.defaultDeviceLimit && !tooManyNewDevicesTx(db, user.id, policy)) {
-        device = addDeviceTx(db, user, tokenHash, client.userAgent);
+        device = addDeviceTx(db, user, tokenHash, client.userAgent, client.ip);
         if (trusted.length > 0) alert = { name: device.name };
       } else {
         deviceState = "pending";
-        log(db, { event: "device_pending", outcome: "info", userId: user.id, reason: "device_limit_reached" });
+        log(db, { event: "device_pending", outcome: "info", userId: user.id, ip: client.ip ?? undefined, reason: "device_limit_reached" });
       }
     }
 
@@ -367,7 +368,7 @@ export function createLicensingEngine(deps: EngineDeps) {
       old.revokedReason = "session_limit";
       log(db, { event: "session_revoked", outcome: "info", userId: user.id, reason: "session_limit" });
     }
-    log(db, { event: "signin", outcome: "allowed", userId: user.id, deviceId: device?.id ?? null, meta: { method: verifiedNow ? "code" : "password", deviceState } });
+    log(db, { event: "signin", outcome: "allowed", userId: user.id, deviceId: device?.id ?? null, ip: client.ip ?? undefined, meta: { method: verifiedNow ? "code" : "password", deviceState } });
     return { ok: true as const, userId: user.id, sessionToken, deviceToken, deviceState, alert, email: user.email };
   }
 
@@ -379,7 +380,7 @@ export function createLicensingEngine(deps: EngineDeps) {
   async function completeVerification(input: { challengeId: string; code: string; client: ClientInfo; locale: Locale; sessionToken?: string | null }): Promise<CompleteResult> {
     const sessionHash = input.sessionToken ? h(input.sessionToken) : null;
     const r = await deps.store.write((db) => {
-      const v = verifyTx(db, input.challengeId, input.code);
+      const v = verifyTx(db, input.challengeId, input.code, input.client.ip);
       if (!v.ok) return { kind: "failed" as const, reason: v.reason };
       const c = v.challenge;
       if (c.purpose === "email_change") {
@@ -421,7 +422,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     if (recentFailures >= 8) return { ok: false, reason: "rate_limited" };
     const ok = verifyPassword(input.password, user?.passwordHash);
     if (!user || !ok) {
-      await deps.store.write((db) => log(db, { event: "signin_failed", outcome: "denied", userId: user?.id ?? null, reason: "invalid_credentials" }));
+      await deps.store.write((db) => log(db, { event: "signin_failed", outcome: "denied", userId: user?.id ?? null, ip: input.client.ip ?? undefined, reason: "invalid_credentials" }));
       return { ok: false, reason: "invalid_credentials" };
     }
     const r = await deps.store.write((db) => signInTx(db, email, input.client, false, input.locale));
@@ -874,14 +875,14 @@ export function createLicensingEngine(deps: EngineDeps) {
    * Authorizes a protected request and records it. Also detects (without blocking)
    * concurrent use of one license on several devices and repeated denied attempts.
    */
-  async function checkAccess(ctx: SessionContext | null, productId: string, purpose: "open" | "download" = "open"): Promise<AccessDecision> {
+  async function checkAccess(ctx: SessionContext | null, productId: string, purpose: "open" | "download" = "open", client?: ClientInfo): Promise<AccessDecision> {
     if (deps.store.mode === "unavailable") {
       // No database: decide read-only (fails closed for everything except free products).
       return deps.store.read((db) => canUserAccessProduct(db, deps.products, { userId: ctx?.user.id, productId, purpose, owners }, now()));
     }
     return deps.store.write((db) => {
       const decision = canUserAccessProduct(db, deps.products, { userId: ctx?.user.id, productId, sessionId: ctx?.session.id, deviceId: ctx?.session.deviceId, purpose, owners }, now());
-      const base = { userId: ctx?.user.id ?? null, productId, deviceId: ctx?.session.deviceId ?? null };
+      const base = { userId: ctx?.user.id ?? null, productId, deviceId: ctx?.session.deviceId ?? null, ip: client?.ip ?? undefined };
       if (decision.allowed) {
         const l = decision.license && db.licenses.find((x) => x.id === decision.license!.id);
         if (l && ctx?.session.deviceId && !l.deviceIds.includes(ctx.session.deviceId)) l.deviceIds.push(ctx.session.deviceId);
@@ -892,7 +893,7 @@ export function createLicensingEngine(deps: EngineDeps) {
           dev.lastSessionId = ctx!.session.id;
         }
         if (purpose === "open") {
-          if (l) recordOpenTx(l, dev);
+          if (l) recordOpenTx(l, dev, client?.ip);
           log(db, { ...base, event: "product_open", outcome: "allowed", licenseId: l?.id, reason: decision.reason });
           if (l) {
             const since = now().getTime() - 2 * 60 * 1000;
@@ -962,18 +963,18 @@ export function createLicensingEngine(deps: EngineDeps) {
   }
 
   /** A download link only works for the same signed-in session, before it expires, and after re-checking the license. */
-  async function redeemDownload(ctx: SessionContext | null, token: string) {
+  async function redeemDownload(ctx: SessionContext | null, token: string, client?: ClientInfo) {
     const payload = verifySignedPayload<{ u: string; s: string; p: string; f: string; exp: number }>(deps.secret, token);
     if (!payload || payload.exp < now().getTime()) return { ok: false as const, reason: "link_expired" as const };
     if (!ctx || ctx.user.id !== payload.u || ctx.session.id !== payload.s) return { ok: false as const, reason: "not_your_link" as const };
-    const d = await checkAccess(ctx, payload.p, "download");
+    const d = await checkAccess(ctx, payload.p, "download", client);
     if (!d.allowed || !d.license) return { ok: false as const, reason: d.allowed ? ("no_license" as const) : d.reason };
     const license = d.license;
     await deps.store.write((db) => {
       db.downloads.push({ id: randomId("dl"), at: iso(), userId: ctx.user.id, productId: payload.p, licenseId: license.id, fileId: payload.f });
       const l = db.licenses.find((x) => x.id === license.id);
       if (l && !l.firstDownloadedAt) l.firstDownloadedAt = iso();
-      log(db, { event: "download", outcome: "allowed", userId: ctx.user.id, productId: payload.p, licenseId: license.id, deviceId: ctx.session.deviceId, meta: { file: payload.f } });
+      log(db, { event: "download", outcome: "allowed", userId: ctx.user.id, productId: payload.p, licenseId: license.id, deviceId: ctx.session.deviceId, ip: client?.ip ?? undefined, meta: { file: payload.f } });
     });
     return { ok: true as const, productId: payload.p, fileId: payload.f, license, settings: d.settings, user: ctx.user };
   }
@@ -1241,7 +1242,7 @@ export function createLicensingEngine(deps: EngineDeps) {
       const licenseIds = new Set(licenses.map((l) => l.id));
       const timeline = db.accessLogs
         .filter((e) => (e.licenseId && licenseIds.has(e.licenseId)) || e.meta?.order === order.id || (userId && e.userId === userId && ["signin", "signout", "device_added", "license_claimed"].includes(e.event)))
-        .map((e) => ({ at: e.at, event: e.event, outcome: e.outcome, product: e.productId ? productById(e.productId)?.name.en ?? e.productId : undefined, device: e.deviceId ? db.devices.find((d) => d.id === e.deviceId)?.name : undefined, reason: e.reason }))
+        .map((e) => ({ at: e.at, event: e.event, outcome: e.outcome, product: e.productId ? productById(e.productId)?.name.en ?? e.productId : undefined, device: e.deviceId ? db.devices.find((d) => d.id === e.deviceId)?.name : undefined, ip: e.ip, reason: e.reason }))
         .sort((x, y) => x.at.localeCompare(y.at));
       const downloads = db.downloads.filter((d) => licenseIds.has(d.licenseId)).map((d) => ({ at: d.at, file: d.fileId, product: productById(d.productId)?.name.en ?? d.productId }));
       return {

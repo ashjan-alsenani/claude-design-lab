@@ -465,7 +465,7 @@ describe("delivery evidence for disputes", () => {
     expect(ev.timeline.some((t) => t.event === "license_activated")).toBe(true);
 
     clock = new Date("2026-10-03T11:00:00Z");
-    await engine.checkAccess(a.ctx, GROCERY);
+    await engine.checkAccess(a.ctx, GROCERY, "open", { ip: "5.36.10.20" });
     clock = new Date("2026-10-04T09:30:00Z");
     await engine.checkAccess(a.ctx, GROCERY);
 
@@ -479,6 +479,8 @@ describe("delivery evidence for disputes", () => {
     expect(l.devices.length).toBe(1);
     expect(ev.customer?.email).toBe("sara@example.com");
     expect(ev.timeline.filter((t) => t.event === "product_open")).toHaveLength(2);
+    expect(l.openTrail?.[0].ip).toBe("5.36.10.20");
+    expect(ev.timeline.find((t) => t.event === "product_open")?.ip).toBe("5.36.10.20");
   });
 
   it("keeps the first opens forever while the trail stays short", async () => {
@@ -500,5 +502,14 @@ describe("delivery evidence for disputes", () => {
     const { order } = await pay("sara@example.com", [GROCERY], { userId: a.userId });
     await expect(engine.adminOrderEvidence(a.ctx, order.id)).rejects.toThrow("FORBIDDEN");
     await expect(engine.adminOrderEvidence(null, order.id)).rejects.toThrow("FORBIDDEN");
+  });
+});
+
+describe("IP address on security events", () => {
+  it("records the client IP with sign-in and new device", async () => {
+    await signIn("sara@example.com", { userAgent: ua.iphone, ip: "5.36.1.2" });
+    const logs = await store.read((db) => db.accessLogs);
+    expect(logs.find((x) => x.event === "signin")?.ip).toBe("5.36.1.2");
+    expect(logs.find((x) => x.event === "device_added")?.ip).toBe("5.36.1.2");
   });
 });

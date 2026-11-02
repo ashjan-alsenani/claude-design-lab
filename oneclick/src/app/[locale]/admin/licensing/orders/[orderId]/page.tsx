@@ -144,7 +144,7 @@ export default async function OrderEvidencePage({ params }: Props) {
                     <summary className="cursor-pointer text-primary">Opens on record ({l.openTrail.length})</summary>
                     <ul className="mt-2 grid gap-1 sm:grid-cols-2">
                       {l.openTrail.map((t, i) => (
-                        <li key={i} className="text-ink-soft">{when(t.at)}{t.device ? ` · ${t.device}` : ""}</li>
+                        <li key={i} className="text-ink-soft">{when(t.at)}{t.device ? ` · ${t.device}` : ""}{t.ip ? ` · IP ${t.ip}` : ""}</li>
                       ))}
                     </ul>
                   </details>
@@ -171,6 +171,7 @@ export default async function OrderEvidencePage({ params }: Props) {
                     {eventLabel[t.event] ?? t.event}
                     {t.product ? ` · ${t.product}` : ""}
                     {t.device ? ` · ${t.device}` : ""}
+                    {t.ip ? ` · IP ${t.ip}` : ""}
                     {t.outcome === "denied" || t.outcome === "suspicious" ? ` · ${t.outcome}${t.reason ? ` (${t.reason})` : ""}` : ""}
                   </span>
                 </li>

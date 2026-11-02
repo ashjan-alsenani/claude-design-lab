@@ -8,6 +8,7 @@ import { createRest } from "@/lib/supabase/rest";
 import { sendEmail } from "@/lib/email";
 import { siteUrl } from "@/lib/seo";
 import { SandboxProvider } from "@/lib/payments/sandbox";
+import { clientKey } from "@/lib/security/rate-limit";
 import { createLicensingEngine, type ClientInfo, type LicensingEngine, type SessionContext } from "./engine";
 import { FileLicensingStore, SupabaseLicensingStore, UnavailableLicensingStore, type LicensingStore } from "./store";
 
@@ -80,7 +81,10 @@ export const cookieOptions = (maxAgeSeconds: number) => ({
 
 export async function clientInfo(): Promise<ClientInfo> {
   const [c, h] = await Promise.all([cookies(), headers()]);
-  return { userAgent: h.get("user-agent"), deviceToken: c.get(COOKIE.device)?.value ?? null };
+  // The hosting platform sets the forwarding headers; keep only a well-formed IPv4/IPv6 address.
+  const ip = clientKey(h);
+  const validIp = /^[0-9a-fA-F:.]{3,45}$/.test(ip) ? ip : null;
+  return { userAgent: h.get("user-agent"), deviceToken: c.get(COOKIE.device)?.value ?? null, ip: validIp };
 }
 
 /** Current signed-in context, resolved from the HttpOnly session cookie (once per request). */
