@@ -1,7 +1,8 @@
 // Locale registry. Adding a language = add it here + a dictionary file + content strings.
 export const locales = ["en", "ar"] as const;
 export type Locale = (typeof locales)[number];
-export const defaultLocale: Locale = "en";
+/** The site opens in Arabic; English is one tap away and remembered once chosen. */
+export const defaultLocale: Locale = "ar";
 
 export const localeMeta: Record<Locale, { dir: "ltr" | "rtl"; label: string; htmlLang: string; ogLocale: string }> = {
   en: { dir: "ltr", label: "English", htmlLang: "en", ogLocale: "en_US" },

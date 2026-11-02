@@ -25,7 +25,7 @@ export function pageMetadata(opts: {
   const description = opts.description ?? d.meta.siteDescription;
   const languages: Record<string, string> = {};
   for (const l of locales) languages[localeMeta[l].htmlLang] = localeUrl(l, opts.path);
-  languages["x-default"] = localeUrl("en", opts.path);
+  languages["x-default"] = localeUrl("ar", opts.path);
   const image = opts.image ?? `${siteUrl}/brand/og-default.png`;
   return {
     title: { absolute: title },

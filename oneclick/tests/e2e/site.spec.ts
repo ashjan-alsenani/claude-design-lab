@@ -5,9 +5,15 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("oc-consent", "essential"));
 });
 
-test("root redirects to a locale", async ({ page }) => {
+test("the site opens in Arabic, even for an English browser, and remembers English once chosen", async ({ browser }) => {
+  const ctx = await browser.newContext({ locale: "en-US", extraHTTPHeaders: { "Accept-Language": "en-US,en;q=0.9" } });
+  const page = await ctx.newPage();
   await page.goto("/");
-  await expect(page).toHaveURL(/\/(en|ar)$/);
+  await expect(page).toHaveURL(/\/ar$/);
+  await page.goto("/en");
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/en$/);
+  await ctx.close();
 });
 
 test("English is LTR and Arabic is RTL", async ({ page }) => {
