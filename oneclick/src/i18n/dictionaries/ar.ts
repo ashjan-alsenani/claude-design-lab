@@ -256,6 +256,8 @@ export const ar: Dictionary = {
     summary: "ملخص الطلب",
     total: "المجموع",
     notify: "نبّهني لما يتوفر",
+    refundNote: "لا يُسترجع المبلغ عند تغيير الرأي، فجرّب العرض المجاني قبل الشراء.",
+    refundLink: "سياسة الاسترجاع",
   },
   admin: {
     title: "الإدارة",

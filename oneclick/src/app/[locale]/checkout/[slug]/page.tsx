@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { productLook, toneSoft } from "@/content/product-looks";
 import { notFound } from "next/navigation";
-import { EnvelopeSimpleIcon, LockSimpleIcon, PlugsIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUUpLeftIcon, EnvelopeSimpleIcon, LockSimpleIcon, PlugsIcon } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
 import { isLocale, tr } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { catalog } from "@/lib/data/catalog";
@@ -130,6 +131,13 @@ export default async function CheckoutPage({ params }: Props) {
           <p className="mt-4 flex items-start gap-2 text-xs text-muted">
             <LockSimpleIcon size={14} className="mt-0.5 shrink-0" />
             {d.common.priceNote}
+          </p>
+          <p className="mt-2 flex items-start gap-2 text-xs text-muted">
+            <ArrowUUpLeftIcon size={14} className="mt-0.5 shrink-0" />
+            <span>
+              {d.checkout.refundNote}{" "}
+              <Link href={`/${locale}/legal/refunds`} className="font-semibold text-ink-soft underline underline-offset-2">{d.checkout.refundLink}</Link>
+            </span>
           </p>
         </aside>
       </div>

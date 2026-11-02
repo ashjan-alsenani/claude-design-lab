@@ -256,6 +256,8 @@ export const en = {
     summary: "Order summary",
     total: "Total",
     notify: "Notify me when it's available",
+    refundNote: "No refunds for a change of mind, so try the free demo before you buy.",
+    refundLink: "Refund Policy",
   },
   admin: {
     title: "Admin",
