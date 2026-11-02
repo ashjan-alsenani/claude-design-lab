@@ -27,9 +27,9 @@ export default async function QudoomHelperLayout({ children, params }: { childre
   const h = await helperData(helperId);
   if (!h) {
     return (
-      <main className="mx-auto grid min-h-[60dvh] max-w-md place-items-center px-6 text-center" dir={locale === "ar" ? "rtl" : "ltr"}>
+      <div className="mx-auto grid min-h-[60dvh] max-w-md place-items-center px-6 text-center" dir={locale === "ar" ? "rtl" : "ltr"}>
         <p className="text-lg text-ink-soft">{qCopy[locale].help.noAccess}</p>
-      </main>
+      </div>
     );
   }
   const { version, plan } = await readPlan(h.data);

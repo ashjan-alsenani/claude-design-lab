@@ -243,7 +243,7 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1320px] px-4 pb-32 pt-6 sm:px-6 lg:px-8 lg:pb-16 lg:pt-8">
+      <div className="mx-auto max-w-[1320px] px-4 pb-32 pt-6 sm:px-6 lg:px-8 lg:pb-16 lg:pt-8">
         {/* The new section shows at once with a short CSS fade; no waiting for the old one to leave. */}
         <div key={section} className="bj-page">
           {children}
@@ -257,7 +257,7 @@ export function Shell({ section, children, exitHref, buyHref }: { section: Secti
             One Click
           </Link>
         </footer>
-      </main>
+      </div>
 
       {/* Mobile bottom navigation */}
       <nav aria-label={t.brand} className="fixed inset-x-0 bottom-0 z-40 border-t border-bj-line bg-bj-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden">

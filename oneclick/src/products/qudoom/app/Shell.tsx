@@ -118,7 +118,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
       {remoteNote && <p className="qd-noprint bg-[var(--qd-tint)] px-4 py-2 text-center text-[13px] text-[var(--qd-primary-deep)]">{lang === "ar" ? "تحدّثت البيانات من جهاز أو شخص ثاني، ودمجناها مع تعديلاتك." : "The plan was updated from another device or person; we merged it with your edits."}</p>}
 
       <div className="relative mx-auto flex max-w-6xl px-4 pb-32 sm:px-6 lg:pb-12">
-        <main id="qd-main" className="min-w-0 flex-1 py-5 sm:py-7">
+        <div id="qd-main" className="min-w-0 flex-1 py-5 sm:py-7">
           {tabs.length > 1 && (
             <nav aria-label={t.nav[group]} className="qd-noprint qd-scroll-x -mx-4 mb-6 flex gap-2 overflow-x-auto px-4">
               {tabs.map((p) => {
@@ -135,7 +135,7 @@ export function Shell({ page, children, exitHref, buyHref, switchHref }: { page:
           <div key={page} className="qd-page">
             {children}
           </div>
-        </main>
+        </div>
       </div>
       </div>
 

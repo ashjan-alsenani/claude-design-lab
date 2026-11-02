@@ -38,7 +38,7 @@ export function PublicFrame({ lang, theme, preview, children }: { lang: Lang; th
           <EyeIcon size={16} /> {t.previewBanner} · {t.previewNoAction}
         </p>
       )}
-      <main className="mx-auto max-w-2xl px-4 pb-16 pt-8 sm:px-6">{children}</main>
+      <div className="mx-auto max-w-2xl px-4 pb-16 pt-8 sm:px-6">{children}</div>
       <footer className="mx-auto flex max-w-2xl items-center justify-center gap-2 px-4 pb-10 text-[12.5px] text-[var(--qd-muted)]">
         <QudoomMark size={20} /> {t.madeWith}
       </footer>
