@@ -60,8 +60,8 @@ export const faqs: Faq[] = [
     group: "payment",
     q: { en: "Can I get a refund?", ar: "أقدر أسترجع فلوسي؟" },
     a: {
-      en: "We don't refund a change of mind, because every product has a free demo you can try fully before buying. We refund in full if the product doesn't work and we can't fix it, if you were charged by mistake, or if there's a problem on our side.",
-      ar: "ما نسترجع إذا تغيّر رأيك، لأن كل منتج له عرض مجاني تجرّبه كامل قبل الشراء. ونرجّع المبلغ كامل إذا المنتج ما اشتغل وما قدرنا نصلحه، أو انخصم منك بالغلط، أو صارت مشكلة من عندنا.",
+      en: "We don't refund a change of mind, because each product page explains it fully before you buy, with a video on how to use it and a free demo where available. We refund in full if the product doesn't work and we can't fix it, if you were charged by mistake, or if there's a problem on our side.",
+      ar: "ما نسترجع إذا تغيّر رأيك أو ما عجبك المنتج، لأن صفحة كل منتج تشرحه كامل قبل الشراء، مع فيديو لطريقة الاستخدام وعرض مجاني متى توفّر. ونرجّع المبلغ كامل إذا المنتج ما اشتغل وما قدرنا نصلحه، أو انخصم منك بالغلط، أو صارت مشكلة من عندنا.",
     },
   },
   {

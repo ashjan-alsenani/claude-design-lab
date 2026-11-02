@@ -155,15 +155,15 @@ export const legalPages: LegalPage[] = [
   {
     slug: "refunds",
     title: { en: "Refund Policy", ar: "سياسة الاسترجاع" },
-    summary: { en: "Try the free demo before you buy. Refunds are for products that don't work, charges made in error, or problems on our side.", ar: "جرّب العرض المجاني قبل الشراء. الاسترجاع يكون إذا لم يعمل المنتج، أو خُصم المبلغ بالخطأ، أو حدثت مشكلة من جهتنا." },
+    summary: { en: "Get to know the product before you buy. After purchase, refunds are only for technical faults, charges made in error, or problems on our side.", ar: "تعرّف على المنتج قبل الشراء. بعد الشراء يكون الاسترجاع فقط للأعطال الفنية، أو الخصم بالخطأ، أو المشكلات من جهتنا." },
     updated: "2026-11-02",
     final: true,
     body: {
       en: [
-        "Our products are digital and you get them the moment you pay. That is why every product has a free demo: try it fully before buying, so you know exactly what you are getting.",
+        "Our products are digital and you get them the moment you pay. That is why each product page explains it fully before you buy: its features, pictures, a video showing how to use it, and a free demo where one is available.",
         "## No refunds for a change of mind",
-        "Because you can try the product before buying, we do not refund a purchase because you changed your mind or no longer need it.",
-        "## When we refund in full",
+        "Because you can get to know the product before buying, we do not refund a purchase because you changed your mind, did not like it, or no longer need it.",
+        "## When we refund in full (technical and other reasons)",
         "- The product does not work as described and we cannot fix it within 14 days of your report.",
         "- You were charged twice or charged by mistake.",
         "- You could not reach your product because of a problem on our side that we could not solve.",
@@ -181,10 +181,10 @@ export const legalPages: LegalPage[] = [
         "This policy does not reduce any right you have under the Consumer Protection Law of the Sultanate of Oman.",
       ],
       ar: [
-        "منتجاتنا رقمية وتصلك لحظة الدفع. ولهذا لكل منتج عرض مجاني: جرّبه كاملًا قبل الشراء لتعرف بالضبط ما ستحصل عليه.",
+        "منتجاتنا رقمية وتصلك لحظة الدفع. ولهذا تشرح صفحة كل منتج كل شيء قبل الشراء: المميزات والصور وفيديو يوضح طريقة الاستخدام، وعرضًا تجريبيًا مجانيًا متى توفّر.",
         "## لا استرجاع عند تغيير الرأي",
-        "لأنك تستطيع تجربة المنتج قبل شرائه، لا نسترجع المبلغ إذا غيّرت رأيك أو لم تعد بحاجة إلى المنتج.",
-        "## متى نعيد المبلغ كاملًا",
+        "لأنك تستطيع التعرّف على المنتج قبل شرائه، لا نسترجع المبلغ إذا غيّرت رأيك أو لم يعجبك المنتج أو لم تعد بحاجة إليه.",
+        "## متى نعيد المبلغ كاملًا (الأسباب الفنية وغيرها)",
         "- إذا لم يعمل المنتج كما هو موصوف ولم نتمكن من إصلاحه خلال ١٤ يومًا من بلاغك.",
         "- إذا خُصم المبلغ منك مرتين أو خُصم بالخطأ.",
         "- إذا تعذّر عليك الوصول إلى منتجك بسبب مشكلة من جهتنا لم نتمكن من حلّها.",
