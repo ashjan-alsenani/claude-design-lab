@@ -256,7 +256,7 @@ export const en = {
     summary: "Order summary",
     total: "Total",
     notify: "Notify me when it's available",
-    refundNote: "Get to know the product before you buy. After purchase, refunds are only for technical faults or a mistake on our side.",
+    refundNote: "Get to know the product before you buy. After purchase, we refund only if the product does not work and we cannot fix it, or you were charged by mistake.",
     refundLink: "Refund Policy",
   },
   admin: {

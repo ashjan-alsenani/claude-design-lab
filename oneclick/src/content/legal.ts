@@ -155,7 +155,7 @@ export const legalPages: LegalPage[] = [
   {
     slug: "refunds",
     title: { en: "Refund Policy", ar: "سياسة الاسترجاع" },
-    summary: { en: "Get to know the product before you buy. After purchase, refunds are only for technical faults, charges made in error, or problems on our side.", ar: "تعرّف على المنتج قبل الشراء. بعد الشراء يكون الاسترجاع فقط للأعطال الفنية، أو الخصم بالخطأ، أو المشكلات من جهتنا." },
+    summary: { en: "Get to know the product before you buy. After purchase, we refund only if the product does not work and we cannot fix it, you were charged by mistake, or a problem on our side stops you using it.", ar: "تعرّف على المنتج قبل الشراء. بعد الشراء نعيد المبلغ فقط إذا لم يعمل المنتج ولم نتمكن من إصلاحه، أو خُصم المبلغ بالخطأ، أو منعتك مشكلة من جهتنا من استخدامه." },
     updated: "2026-11-02",
     final: true,
     body: {
@@ -163,7 +163,7 @@ export const legalPages: LegalPage[] = [
         "Our products are digital and you get them the moment you pay. That is why each product page explains it fully before you buy: its features, pictures, a video showing how to use it, and a free demo where one is available.",
         "## No refunds for a change of mind",
         "Because you can get to know the product before buying, we do not refund a purchase because you changed your mind, did not like it, or no longer need it.",
-        "## When we refund in full (technical and other reasons)",
+        "## When we refund in full",
         "- The product does not work as described and we cannot fix it within 14 days of your report.",
         "- You were charged twice or charged by mistake.",
         "- You could not reach your product because of a problem on our side that we could not solve.",
@@ -184,7 +184,7 @@ export const legalPages: LegalPage[] = [
         "منتجاتنا رقمية وتصلك لحظة الدفع. ولهذا تشرح صفحة كل منتج كل شيء قبل الشراء: المميزات والصور وفيديو يوضح طريقة الاستخدام، وعرضًا تجريبيًا مجانيًا متى توفّر.",
         "## لا استرجاع عند تغيير الرأي",
         "لأنك تستطيع التعرّف على المنتج قبل شرائه، لا نسترجع المبلغ إذا غيّرت رأيك أو لم يعجبك المنتج أو لم تعد بحاجة إليه.",
-        "## متى نعيد المبلغ كاملًا (الأسباب الفنية وغيرها)",
+        "## متى نعيد المبلغ كاملًا",
         "- إذا لم يعمل المنتج كما هو موصوف ولم نتمكن من إصلاحه خلال ١٤ يومًا من بلاغك.",
         "- إذا خُصم المبلغ منك مرتين أو خُصم بالخطأ.",
         "- إذا تعذّر عليك الوصول إلى منتجك بسبب مشكلة من جهتنا لم نتمكن من حلّها.",
