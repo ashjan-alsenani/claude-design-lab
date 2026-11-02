@@ -60,8 +60,8 @@ export const faqs: Faq[] = [
     group: "payment",
     q: { en: "Can I get a refund?", ar: "أقدر أسترجع فلوسي؟" },
     a: {
-      en: "Yes, in the situations described in our Refund Policy, for example if a product does not work as described. Try the free demo first so you know what you are getting.",
-      ar: "نعم، في الحالات الموضحة في سياسة الاسترجاع، مثل لو المنتج ما اشتغل مثل الوصف. جرّب العرض المجاني أول عشان تعرف وش بتحصل.",
+      en: "Yes. Within 7 days of buying you get your money back in full, no questions asked. After that, we refund in the cases in our Refund Policy, for example if a product does not work as described.",
+      ar: "نعم. خلال ٧ أيام من الشراء ترجع لك فلوسك كاملة بدون أسئلة. وبعدها نرجّعها في الحالات الموضحة في سياسة الاسترجاع، مثل لو المنتج ما اشتغل مثل الوصف.",
     },
   },
   {

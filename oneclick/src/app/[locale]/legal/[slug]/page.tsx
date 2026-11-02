@@ -51,12 +51,14 @@ export default async function LegalPage({ params }: Props) {
           </ul>
         </nav>
         <div className="order-1 lg:order-2">
+          {!page.final && (
           <p role="note" className="mb-8 flex max-w-[68ch] gap-3 rounded-[var(--radius-md)] border border-warning/40 bg-accent-soft p-4 text-sm text-ink-soft">
             <WarningIcon size={20} className="shrink-0 text-warning" />
             {ar
               ? "مسودة قيد المراجعة القانونية. سيتم تحديث هذه الصفحة واعتمادها قبل الإطلاق التجاري. النصوص بين [أقواس] تُستكمل لاحقًا."
               : "Draft pending legal review. This page will be finalized before commercial launch. Text in [brackets] will be completed later."}
           </p>
+          )}
           <RichText paragraphs={page.body[locale]} />
         </div>
       </div>
