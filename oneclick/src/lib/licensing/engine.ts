@@ -185,6 +185,15 @@ export function createLicensingEngine(deps: EngineDeps) {
   };
   const url = (path: string) => `${deps.baseUrl.replace(/\/$/, "")}${path}`;
 
+  /** Delivery evidence on the license itself: first open, a count, and the first 5 + latest 25 opens. */
+  function recordOpenTx(l: License, dev?: Device) {
+    const at = iso();
+    if (!l.firstAccessedAt) l.firstAccessedAt = at;
+    l.accessCount = (l.accessCount ?? 0) + 1;
+    const trail = [...(l.openTrail ?? []), { at, ...(dev ? { device: dev.name } : {}) }];
+    l.openTrail = trail.length > 30 ? [...trail.slice(0, 5), ...trail.slice(-25)] : trail;
+  }
+
   function log(db: LicensingDb, e: Omit<AccessLog, "id" | "at">) {
     db.accessLogs.push({ id: randomId("log"), at: iso(), ...e, meta: redact(e.meta) });
   }
@@ -775,7 +784,18 @@ export function createLicensingEngine(deps: EngineDeps) {
     const content = bound
       ? emailTemplates.productsReady(loc, { ...receipt, url: url(path) })
       : emailTemplates.claimProduct(loc, { ...receipt, url: url(`/${loc}/claim?t=${claimToken}`) });
-    await deps.mail(order.purchaseEmail, content, { kind: bound ? "products_ready" : "claim_product" });
+    // Record when the access email went out: part of the proof that the product was delivered.
+    let sent = true;
+    try {
+      await deps.mail(order.purchaseEmail, content, { kind: bound ? "products_ready" : "claim_product" });
+    } catch (e) {
+      sent = false;
+      throw e;
+    } finally {
+      await deps.store
+        .write((db) => log(db, { event: sent ? "access_email_sent" : "access_email_failed", outcome: "info", userId: order.userId, meta: { order: order.id, kind: bound ? "products_ready" : "claim_product" } }))
+        .catch(() => undefined);
+    }
   }
 
   /**
@@ -787,7 +807,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     const r = await deps.store.write((db) => {
       if (db.paymentEvents.some((e) => e.provider === provider && e.eventId === ev.eventId)) return { outcome: "duplicate" as const };
       const record = <T extends string>(outcome: T, orderId = ev.orderId) => {
-        db.paymentEvents.push({ provider, eventId: ev.eventId, orderId, type: ev.type, receivedAt: iso(), outcome });
+        db.paymentEvents.push({ provider, eventId: ev.eventId, orderId, type: ev.type, receivedAt: iso(), outcome, amountMinor: ev.amount.amountMinor, currency: ev.amount.currency, providerReference: ev.providerReference, occurredAt: ev.occurredAt });
         const bad = ["unknown_order", "provider_mismatch", "amount_mismatch", "order_closed"].includes(outcome);
         log(db, { event: "payment_event", outcome: bad ? "suspicious" : "info", reason: outcome, meta: { type: ev.type, provider } });
         return outcome;
@@ -872,6 +892,7 @@ export function createLicensingEngine(deps: EngineDeps) {
           dev.lastSessionId = ctx!.session.id;
         }
         if (purpose === "open") {
+          if (l) recordOpenTx(l, dev);
           log(db, { ...base, event: "product_open", outcome: "allowed", licenseId: l?.id, reason: decision.reason });
           if (l) {
             const since = now().getTime() - 2 * 60 * 1000;
@@ -950,6 +971,8 @@ export function createLicensingEngine(deps: EngineDeps) {
     const license = d.license;
     await deps.store.write((db) => {
       db.downloads.push({ id: randomId("dl"), at: iso(), userId: ctx.user.id, productId: payload.p, licenseId: license.id, fileId: payload.f });
+      const l = db.licenses.find((x) => x.id === license.id);
+      if (l && !l.firstDownloadedAt) l.firstDownloadedAt = iso();
       log(db, { event: "download", outcome: "allowed", userId: ctx.user.id, productId: payload.p, licenseId: license.id, deviceId: ctx.session.deviceId, meta: { file: payload.f } });
     });
     return { ok: true as const, productId: payload.p, fileId: payload.f, license, settings: d.settings, user: ctx.user };
@@ -1179,7 +1202,7 @@ export function createLicensingEngine(deps: EngineDeps) {
   }
 
   /** Orders, newest first. `q` matches order number, email or product; test orders are labelled, and can be hidden. */
-  async function adminOrders(ctxIn: SessionContext | null, filter: { q?: string; status?: string; hideTests?: boolean } = {}) {
+  async function adminOrders(ctxIn: SessionContext | null, filter: { q?: string; status?: string; hideTests?: boolean; limit?: number } = {}) {
     requireAdmin(ctxIn);
     const q = filter.q?.trim().toLowerCase();
     return deps.store.read((db) =>
@@ -1193,8 +1216,44 @@ export function createLicensingEngine(deps: EngineDeps) {
         })
         .filter((r) => !q || [r.order.id, r.order.purchaseEmail, ...r.products].some((v) => v.toLowerCase().includes(q)))
         .sort((a, b) => b.order.createdAt.localeCompare(a.order.createdAt))
-        .slice(0, 200)
+        .slice(0, filter.limit ?? 200)
     );
+  }
+
+  /**
+   * Everything that proves an order was paid for and delivered, in one place: the order, the
+   * payment events from the provider, when access was activated and emailed, and when and on which
+   * devices the customer signed in, opened or downloaded the product. For answering a dispute.
+   */
+  async function adminOrderEvidence(ctxIn: SessionContext | null, orderId: string) {
+    requireAdmin(ctxIn);
+    return deps.store.read((db) => {
+      const order = db.orders.find((o) => o.id === orderId);
+      if (!order) return null;
+      const items = db.orderItems.filter((i) => i.orderId === order.id).map((i) => ({ ...i, name: productById(i.productId)?.name.en ?? i.productId }));
+      const licenses = db.licenses.filter((l) => l.orderId === order.id).map((l) => ({
+        ...structuredClone(l),
+        productName: productById(l.productId)?.name.en ?? l.productId,
+        devices: l.deviceIds.map((id) => db.devices.find((d) => d.id === id)).filter(Boolean).map((d) => ({ name: d!.name, firstVerifiedAt: d!.firstVerifiedAt, lastUsedAt: d!.lastUsedAt })),
+      }));
+      const userId = order.userId ?? licenses.find((l) => l.userId)?.userId ?? null;
+      const user = userId ? db.users.find((u) => u.id === userId) : undefined;
+      const licenseIds = new Set(licenses.map((l) => l.id));
+      const timeline = db.accessLogs
+        .filter((e) => (e.licenseId && licenseIds.has(e.licenseId)) || e.meta?.order === order.id || (userId && e.userId === userId && ["signin", "signout", "device_added", "license_claimed"].includes(e.event)))
+        .map((e) => ({ at: e.at, event: e.event, outcome: e.outcome, product: e.productId ? productById(e.productId)?.name.en ?? e.productId : undefined, device: e.deviceId ? db.devices.find((d) => d.id === e.deviceId)?.name : undefined, reason: e.reason }))
+        .sort((x, y) => x.at.localeCompare(y.at));
+      const downloads = db.downloads.filter((d) => licenseIds.has(d.licenseId)).map((d) => ({ at: d.at, file: d.fileId, product: productById(d.productId)?.name.en ?? d.productId }));
+      return {
+        order: structuredClone(order),
+        items,
+        payments: db.paymentEvents.filter((e) => e.orderId === order.id).map((e) => ({ ...e })),
+        customer: user ? { email: user.email, name: user.name ?? null, createdAt: user.createdAt, emailVerifiedAt: user.emailVerifiedAt ?? null } : null,
+        licenses,
+        downloads,
+        timeline,
+      };
+    });
   }
 
   /** Customer accounts, newest first, with what they own and when they were last seen. */
@@ -1286,6 +1345,7 @@ export function createLicensingEngine(deps: EngineDeps) {
     adminNote,
     adminBusiness,
     adminOrders,
+    adminOrderEvidence,
     adminCustomers,
   };
 }

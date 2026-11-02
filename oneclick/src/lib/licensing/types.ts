@@ -115,6 +115,12 @@ export type License = {
   claimedAt?: string;
   /** Last time the product was opened or downloaded with this license. */
   lastAccessedAt?: string;
+  /** Delivery evidence, kept for the life of the license (never trimmed): when the customer first
+   *  opened or downloaded the product, how often they opened it, and a short trail of opens. */
+  firstAccessedAt?: string;
+  firstDownloadedAt?: string;
+  accessCount?: number;
+  openTrail?: { at: string; device?: string }[];
   statusReason?: string;
   /** Devices this license was opened on (for per-product device limits). */
   deviceIds: string[];
@@ -196,6 +202,8 @@ export type AccessEvent =
   | "license_claimed"
   | "license_activated"
   | "payment_event"
+  | "access_email_sent"
+  | "access_email_failed"
   | "concurrent_use"
   | "too_many_devices"
   | "repeated_denials"
@@ -227,7 +235,7 @@ export type AuditEntry = {
   details?: Record<string, string | number | boolean | null>;
 };
 
-export type PaymentEventRecord = { provider: string; eventId: string; orderId: string; type: string; receivedAt: string; outcome: string };
+export type PaymentEventRecord = { provider: string; eventId: string; orderId: string; type: string; receivedAt: string; outcome: string; amountMinor?: number; currency?: string; providerReference?: string; occurredAt?: string };
 
 export type DownloadRecord = { id: string; at: string; userId: string; productId: string; licenseId: string; fileId: string };
 

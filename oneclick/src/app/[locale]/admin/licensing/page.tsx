@@ -8,7 +8,7 @@ import type { LicenseStatus } from "@/lib/licensing/types";
 import { pageMetadata } from "@/lib/seo";
 import { StatusPill, licenseTone } from "@/components/account/StatusPill";
 import { grantAction, licenseAction, policyAction, productSecurityAction, resendAccessAction } from "./actions";
-import { formatMoney } from "@/lib/money";
+import { formatMoney, minorUnitDigits, toMajor } from "@/lib/money";
 import { Card, Confirm, Flash, Hidden, btn, field, when } from "./ui";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | undefined>> };
@@ -104,8 +104,23 @@ async function OrdersTab({ locale, sp, back }: { locale: string; sp: Record<stri
   const hideTests = sp.tests === "hide";
   const status = (["all", "paid", "pending", "failed", "refunded", "chargeback", "cancelled"] as const).find((x) => x === sp.status) ?? "all";
   const rows = await licensing().engine.adminOrders(ctx, { q: sp.q, status, hideTests });
+  // Every matching order (not just the 200 shown), to match against the payment provider's statements.
+  const all = await licensing().engine.adminOrders(ctx, { q: sp.q, status, hideTests, limit: 100_000 });
+  const cell = (v: string | number | undefined | null) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const csv = [
+    ["order", "created_utc", "paid_utc", "status", "amount", "currency", "provider", "provider_reference", "test", "purchase_email", "products"].join(","),
+    ...all.map((r) =>
+      [r.order.id, r.order.createdAt, r.order.paidAt, r.order.status, toMajor({ amountMinor: r.order.totalMinor, currency: r.order.currency }).toFixed(minorUnitDigits[r.order.currency]), r.order.currency, r.order.provider, r.order.externalPaymentReference, r.order.sandbox ? "yes" : "no", r.order.purchaseEmail, r.products.join(" + ")].map(cell).join(",")
+    ),
+  ].join("\n");
   return (
     <Card title="Orders">
+      <p className="mb-3 flex flex-wrap items-center gap-3 text-sm text-ink-soft">
+        <a href={`data:text/csv;charset=utf-8,${encodeURIComponent("\uFEFF" + csv)}`} download={`oneclick-orders-${new Date().toISOString().slice(0, 10)}.csv`} className="inline-flex h-10 items-center rounded-full border border-line-strong px-4 text-sm font-semibold text-ink">
+          Download orders CSV ({all.length})
+        </a>
+        Match these against your payment provider&apos;s statement: order, amount, paid time and provider reference.
+      </p>
       <form className="flex flex-wrap gap-2" action={back}>
         <input type="hidden" name="tab" value="orders" />
         <input name="q" defaultValue={sp.q} placeholder="Order number, email or product" aria-label="Search orders" className={`${field} min-w-0 flex-1`} />
@@ -126,7 +141,7 @@ async function OrdersTab({ locale, sp, back }: { locale: string; sp: Record<stri
         <table className="w-full min-w-[760px] text-left text-sm">
           <thead className="text-xs text-muted">
             <tr>
-              <th className="px-3 py-2 font-medium">Order</th>
+              <th className="px-3 py-2 font-medium">Order (open for evidence)</th>
               <th className="px-3 py-2 font-medium">Customer</th>
               <th className="px-3 py-2 font-medium">Products</th>
               <th className="px-3 py-2 font-medium">Total</th>
@@ -145,7 +160,7 @@ async function OrdersTab({ locale, sp, back }: { locale: string; sp: Record<stri
             {rows.map((r) => (
               <tr key={r.order.id} className="align-top">
                 <td className="px-3 py-3">
-                  <p className="font-mono text-xs text-ink">{r.order.id}</p>
+                  <Link href={`/${locale}/admin/licensing/orders/${encodeURIComponent(r.order.id)}`} className="font-mono text-xs text-primary underline underline-offset-4">{r.order.id}</Link>
                   <p className="text-xs text-muted">{when(r.order.createdAt)}</p>
                   {r.order.sandbox && <span className="mt-1 inline-block rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-semibold text-warning">TEST</span>}
                 </td>

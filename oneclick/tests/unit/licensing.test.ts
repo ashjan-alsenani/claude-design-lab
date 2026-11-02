@@ -449,3 +449,56 @@ describe("downloads", () => {
     expect((await engine.createDownloadLink(a.ctx, GROCERY, "printable")).ok).toBe(false); // interactive-only product
   });
 });
+
+describe("delivery evidence for disputes", () => {
+  it("records payment details, the access email, first and repeated opens, and builds the order report", async () => {
+    const a = await signIn("sara@example.com");
+    const { order } = await pay("sara@example.com", [GROCERY], { userId: a.userId });
+    const admin = await signIn("owner@example.com", { userAgent: ua.mac });
+
+    // Before any open: the report says it was not opened (cancellable under the policy).
+    let ev = (await engine.adminOrderEvidence(admin.ctx, order.id))!;
+    expect(ev.order.status).toBe("paid");
+    expect(ev.payments[0]).toMatchObject({ type: "payment.succeeded", amountMinor: order.totalMinor, currency: order.currency, providerReference: "sbx_1" });
+    expect(ev.licenses[0].firstAccessedAt).toBeUndefined();
+    expect(ev.timeline.some((t) => t.event === "access_email_sent")).toBe(true);
+    expect(ev.timeline.some((t) => t.event === "license_activated")).toBe(true);
+
+    clock = new Date("2026-10-03T11:00:00Z");
+    await engine.checkAccess(a.ctx, GROCERY);
+    clock = new Date("2026-10-04T09:30:00Z");
+    await engine.checkAccess(a.ctx, GROCERY);
+
+    ev = (await engine.adminOrderEvidence(admin.ctx, order.id))!;
+    const l = ev.licenses[0];
+    expect(l.firstAccessedAt).toBe("2026-10-03T11:00:00.000Z");
+    expect(l.lastAccessedAt).toBe("2026-10-04T09:30:00.000Z");
+    expect(l.accessCount).toBe(2);
+    expect(l.openTrail?.map((t) => t.at)).toEqual(["2026-10-03T11:00:00.000Z", "2026-10-04T09:30:00.000Z"]);
+    expect(l.openTrail?.[0].device).toBeTruthy();
+    expect(l.devices.length).toBe(1);
+    expect(ev.customer?.email).toBe("sara@example.com");
+    expect(ev.timeline.filter((t) => t.event === "product_open")).toHaveLength(2);
+  });
+
+  it("keeps the first opens forever while the trail stays short", async () => {
+    const a = await signIn("sara@example.com");
+    await pay("sara@example.com", [GROCERY], { userId: a.userId });
+    for (let i = 0; i < 40; i++) {
+      clock = new Date(Date.UTC(2026, 9, 5, 0, i));
+      await engine.checkAccess(a.ctx, GROCERY);
+    }
+    const lic = (await store.read((db) => db.licenses))[0];
+    expect(lic.accessCount).toBe(40);
+    expect(lic.openTrail).toHaveLength(30);
+    expect(lic.openTrail![0].at).toBe(lic.firstAccessedAt);
+    expect(lic.openTrail![29].at).toBe(lic.lastAccessedAt);
+  });
+
+  it("only admins can read the evidence report", async () => {
+    const a = await signIn("sara@example.com");
+    const { order } = await pay("sara@example.com", [GROCERY], { userId: a.userId });
+    await expect(engine.adminOrderEvidence(a.ctx, order.id)).rejects.toThrow("FORBIDDEN");
+    await expect(engine.adminOrderEvidence(null, order.id)).rejects.toThrow("FORBIDDEN");
+  });
+});

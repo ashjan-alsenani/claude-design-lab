@@ -243,3 +243,19 @@ licensing code is written per product.
 - Email: Resend adapter in `src/lib/email/index.ts`. Bodies are never logged.
 - Verified by `tests/db-integration/run.sh`: PostgreSQL 16 + PostgREST + mock Resend against a production build
   (owner sign-in by emailed code, admin, planner save, custom request; anon key denied).
+
+## Delivery evidence (for payment disputes)
+
+Kept automatically for every order, so a "paid but never received" dispute can be answered:
+
+- **Payment**: each verified provider event is stored with amount, currency, provider reference and time
+  (`paymentEvents`); the order keeps `paidAt` and `externalPaymentReference`. Access is granted only from a
+  verified event whose amount and currency match the order.
+- **Delivery**: `license.activatedAt`, plus an `access_email_sent` / `access_email_failed` log entry when the
+  access email goes out.
+- **Use**: on the license itself (never trimmed): `firstAccessedAt`, `lastAccessedAt`, `accessCount`,
+  `firstDownloadedAt`, and `openTrail` (first 5 + latest 25 opens with device name). Every sign-in, open and
+  download is also appended to `oc_licensing_events` (full history).
+- **Admin**: Orders → click an order number for the evidence report (print / save as PDF, or JSON). The Orders
+  tab also downloads a CSV of all orders to reconcile against the provider's statements.
+- Card details are never collected or stored: customers pay on the provider's hosted page.
