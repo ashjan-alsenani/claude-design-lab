@@ -60,8 +60,8 @@ export const faqs: Faq[] = [
     group: "payment",
     q: { en: "Can I get a refund?", ar: "أقدر أسترجع فلوسي؟" },
     a: {
-      en: "We don't refund a change of mind, because each product page explains it fully before you buy, with a video on how to use it and a free demo where available. We refund in full if the product doesn't work and we can't fix it, if you were charged by mistake, or if there's a problem on our side.",
-      ar: "ما نسترجع إذا تغيّر رأيك أو ما عجبك المنتج، لأن صفحة كل منتج تشرحه كامل قبل الشراء، مع فيديو لطريقة الاستخدام وعرض مجاني متى توفّر. ونرجّع المبلغ كامل إذا المنتج ما اشتغل وما قدرنا نصلحه، أو انخصم منك بالغلط، أو صارت مشكلة من عندنا.",
+      en: "Before you open the product or download the file, you can cancel for a full refund. After that, there is no refund just for a change of mind, but we fix, replace or refund a product that is faulty or doesn't match its description, refund wrong charges, and refund if a problem on our side stops you using it.",
+      ar: "قبل ما تفتح المنتج أو تنزّل الملف تقدر تلغي الشراء وترجع لك فلوسك كاملة. بعدها ما فيه استرجاع لمجرد تغيير الرأي، بس نصلح أو نستبدل أو نرجّع المبلغ لو المنتج فيه عيب أو ما يطابق الوصف، ونرجّع أي مبلغ انخصم بالغلط، ونرجّع لو مشكلة من عندنا منعتك تستخدمه.",
     },
   },
   {

@@ -256,8 +256,8 @@ export const en = {
     summary: "Order summary",
     total: "Total",
     notify: "Notify me when it's available",
-    refundNote: "Get to know the product before you buy. After purchase, we refund only if the product does not work and we cannot fix it, or you were charged by mistake.",
-    refundLink: "Refund Policy",
+    refundNote: "You can cancel for a full refund before opening the product or downloading the file. After that, there is no refund just for a change of mind.",
+    refundLink: "Cancellation and refund policy",
   },
   admin: {
     title: "Admin",
