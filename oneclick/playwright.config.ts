@@ -2,8 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 import fs from "node:fs";
 
 // Uses the preinstalled Chromium when present (cloud dev containers), otherwise Playwright's own.
-const localChromium = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome";
-const launchOptions = fs.existsSync(localChromium) ? { executablePath: localChromium } : {};
+// "/opt/pw-browsers/chromium" is a stable link to whichever build the container ships.
+const localChromium = ["/opt/pw-browsers/chromium", "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"].find((p) => fs.existsSync(p));
+const launchOptions = localChromium ? { executablePath: localChromium } : {};
 const PORT = Number(process.env.E2E_PORT || 3100);
 
 export default defineConfig({
