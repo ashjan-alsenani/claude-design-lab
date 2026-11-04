@@ -5729,6 +5729,34 @@ document.addEventListener("click",async z=>{let b=z.target.closest("[data-xp-emp
  try{let{S,p}=await Xpbuild(b.dataset.xpEmp);Xz(S,`${Wsv?"vendors-":""}employee-${String(p.empNo||p.id).replace(/[^\w-]/g,"")}-full-${ze()}.xlsx`);ye("export",{id:p.id,emp_no:p.empNo},{fullEmployeeWorkbook:S.length});se();L(T(`تم تنزيل ملف Excel شامل (${S.length} أوراق).`,`Full Excel file downloaded (${S.length} sheets).`))}
  catch(er){console.error(er);L(T("تعذّر إنشاء الملف: ","Couldn't create the file: ")+(er.message||er),"error")}finally{b.disabled=!1}});
 
+/* ---------- v102: fictional Support & operations employees, so every allowance result appears in the sample ----------
+   Added once, and only to the untouched sample dataset (the original 19 people). Imported or edited data is never changed. */
+(()=>{try{if(D.supV1)return;let E0=D.employees||[],orig=E0.length===19&&E0.every(e=>/^500(0[1-9]|1[0-9])$/.test(String(e.emp_no)));D.supV1=1;
+ if(!orig||!(D.levels||[]).some(l=>l.id===6)){se();return}
+ let now=Te(),td=ze(),addD=(d0,n)=>{let x=new Date(d0+"T00:00:00Z");x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)},
+  mk=(id,no,en,ar,g,dob,dept,sec,title,hire,mgrId,mgr,duties,skills,phone)=>({id,emp_no:no,data:JSON.stringify({education:[{qualification:"Diploma",institution:"Higher College of Technology",major:"Information Technology",year:String(Number(hire.slice(0,4))-2),notes:null}],certifications:[],technicalTraining:[{title:"Field Service Safety",provider:null,date:hire.slice(0,4),notes:null}],softTraining:[],
+   empNo:no,nameEn:en,nameAr:ar,email:en.toLowerCase().replace(/^(\w+).*?([\w-]+)$/,"$1.$2").replace(/al-/,"")+"@example.com",phone,gender:g,dob,nationality:"Oman",nationalityCategory:"Omani",status:"Active",company:"Omantel",unit:"Digital & Technology",department:dept,jobTitle:title,hireDate:hire,lastWorkingDate:null,contractType:"Permanent",payroll:"OT-PAY-01",location:"Muscat HQ",providerType:"Omantel",assignment:"Operations",reportingTo:mgr,duties,focusArea:"Service operations",functionalCategory:"Technical",careerInterest:null,skillCategory:"Operations",skillSubcat:skills,skillsetType:"Technical",skillCriticality:"Medium",staffCriticality:"Medium",resourceType:"Single Skilled",readiness:"Capable",upskilling:"No",importRef:"sample-support",flags:[],orgSection:sec,reportingToId:mgrId}),
+   photo:null,level_id:6,level_confirmed:1,level_source:"admin",display_order:300+id,created_at:now,created_by:"Sample data",updated_at:now,updated_by:"Sample data"}),
+  P=[mk(20,"50020","Hilal Saeed Al-Kindi","هلال سعيد الكندي","Male","1994-05-12","Digital IT Infrastructure","Network Engineering","Field Support Technician","2019-04-14",4,"Yousuf Ali Al-Abri","Installs and activates customer broadband and fibre services on site.\nRestores service after faults, working directly with subscribers.","Fibre installation, Service activation, Fault restoration","+968 9020 0020"),
+   mk(21,"50021","Asma Rashid Al-Hinai","أسماء راشد الهنائية","Female","1993-11-03","Digital Service Operations","Service Delivery","Technical Support Coordinator","2018-02-18",5,"Aisha Nasser Al-Kharusi","Schedules field technicians and prepares their work orders.\nProvides technical support to the technicians who install and restore services.","Work-order planning, Technical support, Field coordination","+968 9021 0021"),
+   mk(22,"50022","Yaqoob Nasser Al-Wahaibi","يعقوب ناصر الوهيبي","Male","1996-07-21","Digital IT Infrastructure","Network Engineering","Network Operations Technician","2020-03-01",4,"Yousuf Ali Al-Abri","Recently moved into technical work: activates and restores network services for subscribers.","Network activation, Service restoration","+968 9022 0022"),
+   mk(23,"50023","Muna Khalfan Al-Saadi","منى خلفان السعدية","Female","1995-01-09","Digital Service Operations","Service Desk","Administrative Assistant","2017-09-10",5,"Aisha Nasser Al-Kharusi","Handles office correspondence, filing and meeting arrangements for the team.","Office administration, Document control","+968 9023 0023"),
+   mk(24,"50024","Talal Hamood Al-Busaidi","طلال حمود البوسعيدي","Male","1991-12-30","Digital IT Infrastructure","Systems & Compute","Service Operations Technician","2016-06-05",4,"Yousuf Ali Al-Abri","Installs and restores secure connectivity at subscriber premises, working directly with customers.","Secure connectivity, Site installation","+968 9024 0024"),
+   mk(25,"50025","Ruqaya Salim Al-Mamari","رقية سالم المعمرية","Female","1997-04-17","Applications Operations","Application Support","Operations Support Officer","2021-01-24",3,"Mariam Said Al-Balushi","Supports daily operations of business applications.","Application monitoring, User support","+968 9025 0025")];
+ if(P.some(x=>E0.some(e=>e.id===x.id||String(e.emp_no)===x.emp_no))){se();return}
+ D.employees.push(...P);
+ /* eligibility facts (fictional): one person per result */
+ let d=Ald(),el=d.elig&&typeof d.elig==="object"?d.elig:(d.elig={}),f=el.facts||(el.facts={}),by="Sample data",fx=(o)=>({cat:"",basis:"",sup:"",adm:"",cust:"",task:"",entry:"",techStart:"",susp:"",note:"بيانات تجريبية",at:now,by,...o});
+ f[20]=fx({cat:"spec",basis:"Documented duties",task:"yes",cust:"yes",entry:"new"});
+ f[21]=fx({cat:"sup",basis:"Documented duties",sup:"yes",adm:"yes",task:"no",cust:"no",entry:"new"});
+ f[22]=fx({cat:"spec",basis:"Documented duties",task:"yes",cust:"yes",entry:"transfer",techStart:addD(td,-30)});
+ f[23]=fx({cat:"sup",basis:"Documented duties",sup:"no",adm:"no",task:"no",cust:"no",entry:"new"});
+ f[24]=fx({cat:"spec",basis:"Documented duties",task:"yes",cust:"yes",entry:"new",susp:"leave"});
+ /* 25 has no recorded facts: shows as needing review */
+ let A="علاوة الأعمال الفنية المساعدة",TW="علاوة الأعمال الفنية";el.tmap=Object.assign({[A]:"sup",[TW]:"spec"},el.tmap||{});
+ Array.isArray(d.recs)||(d.recs=[]);let R=(id,emp,type,amt,start)=>({id:"smp-"+id,emp,empNo:"500"+emp,type,amt,cur:"OMR",freq:"monthly",status:"سارية",start,end:"",ref:"SMP-"+emp,src:"بيانات تجريبية",created:now,updated:now,hist:[]});
+ d.recs.push(R(1,20,TW,1e5,"2025-01-01"),R(2,21,A,5e4,"2025-01-01"),R(3,22,TW,1e5,addD(td,-15)),R(4,23,A,5e4,"2025-06-01"),R(5,24,TW,1e5,"2024-09-01"));
+ se()}catch(x){console.error(x)}})();
 /* ---------- v101: scroll areas show which edge has more content ---------- */
 (()=>{let SEL=".table-wrap,.dx-tw,.km-wrap,.rp-tw",upd=el=>{let mx=el.scrollWidth-el.clientWidth;if(mx<4){el.removeAttribute("data-sx");return}let x=Math.abs(el.scrollLeft),v=(x>2?"s":"")+(x<mx-2?"e":"");el.dataset.sx!==v&&(el.dataset.sx=v)},all=()=>document.querySelectorAll(SEL).forEach(upd),t3=0;
  document.addEventListener("scroll",z=>{let el=z.target;el&&el.matches&&el.matches(SEL)&&upd(el)},!0);addEventListener("resize",()=>{clearTimeout(t3);t3=setTimeout(all,120)});new MutationObserver(()=>{clearTimeout(t3);t3=setTimeout(all,160)}).observe(document.documentElement,{childList:!0,subtree:!0})})();
