@@ -6537,3 +6537,15 @@ body.pk-dw-open { overflow: hidden; }
 /* home search: a clear white ring on the teal banner */
 .ho-hero .ho-search:focus-within { border-color: #fff; box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(11, 110, 104, .55); }
 .ax-none { margin: 0 0 var(--s3); }
+
+/* v104: spacing so blocks never sit on top of each other */
+.page-pk > .note-box { margin-top: var(--s5); }
+.page-pk .panel > .btn + .table-wrap, .page-pk .panel > .btn + .al-empty-s { margin-top: var(--s3); }
+.np-block + .btn { margin-top: var(--s3); }
+/* data menu: on phones it opens as a full-width sheet under the top bar, never past the screen edge */
+@media (max-width: 640px) {
+  .demo-pop { position: fixed; top: 60px; inset-inline: 12px; width: auto; max-height: calc(100vh - 140px); overflow: auto; }
+}
+/* eligibility file header: the result never squeezes into a thin column next to the name */
+.ae-dhead .ax-res { min-width: 220px; flex: 1 1 220px; }
+@media (max-width: 640px) { .ae-dhead .ax-res { flex-basis: 100%; max-width: none; } }

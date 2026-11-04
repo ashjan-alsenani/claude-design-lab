@@ -5757,6 +5757,27 @@ document.addEventListener("click",async z=>{let b=z.target.closest("[data-xp-emp
  Array.isArray(d.recs)||(d.recs=[]);let R=(id,emp,type,amt,start)=>({id:"smp-"+id,emp,empNo:"500"+emp,type,amt,cur:"OMR",freq:"monthly",status:"سارية",start,end:"",ref:"SMP-"+emp,src:"بيانات تجريبية",created:now,updated:now,hist:[]});
  d.recs.push(R(1,20,TW,1e5,"2025-01-01"),R(2,21,A,5e4,"2025-01-01"),R(3,22,TW,1e5,addD(td,-15)),R(4,23,A,5e4,"2025-06-01"),R(5,24,TW,1e5,"2024-09-01"));
  se()}catch(x){console.error(x)}})();
+/* ---------- v103: fictional parking sample — spaces, allocations, a waiting list ----------
+   Added once, only to the untouched sample (sample people 50001–50025 and no parking records yet). */
+(()=>{try{if(D.pkSmp1)return;let E0=D.employees||[],orig=E0.length===25&&E0.every(e=>/^500(0[1-9]|1[0-9]|2[0-5])$/.test(String(e.emp_no))),pk=D.park||{};D.pkSmp1=1;
+ if(!orig||(pk.spots||[]).length||(pk.asg||[]).length||(pk.wait||[]).length){se();return}
+ let now=Te(),td=ze(),addD=(d0,n)=>{let x=new Date(d0+"T00:00:00Z");x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)},by="Sample data",
+  raw=id=>{let e=E0.find(x=>x.id===id);if(!e)return null;let d={};try{d=JSON.parse(e.data)}catch{}return{e,d}},
+  snap=id=>{let r=raw(id);return r?{lv:r.e.level_id??null,unit:String(r.d.unit||"").trim(),dept:String(r.d.department||"").trim(),loc:String(r.d.location||"").trim(),st:String(r.d.status||"").trim()}:null};
+ if([1,2,3,4,5,6,7,8,9,10,19].some(id=>!raw(id))){se();return}
+ let d=D.park=pk;d.spots=[];d.asg=[];d.wait=[];d.exc=Array.isArray(d.exc)?d.exc:[];d.imports=d.imports||[];d.log=d.log||[];
+ let S=(n,type,bind,pos,note)=>({id:"PK-smp"+String(n).padStart(2,"0"),no:"P-"+String(n).padStart(2,"0"),site:"Muscat HQ",bld:"Tower A",zone:n<=6?"B1":"B2",type,bind,pos:pos||"",note:note||"",blocks:[],at:now,by,src:"بيانات تجريبية"});
+ d.spots.push(S(1,"cov","pos","Vice President, Digital & Technology Operations"),S(2,"cov","pos","General Manager, Digital Service Operations"),S(3,"cov","emp"),S(4,"std","emp"),S(5,"std","emp"),S(6,"std","emp"),S(7,"std","emp"),S(8,"ev","emp"),S(9,"std","emp"),S(10,"acc","emp","","مخصص لذوي الإعاقة"),S(11,"std","emp"),S(12,"std","emp"));
+ let sp=n=>"PK-smp"+String(n).padStart(2,"0");
+ sp&&d.spots.find(x=>x.id===sp(11)).blocks.push({id:"PB-smp11",kind:"res",from:td,to:addD(td,14),note:"زوار ورشة عمل (تجريبي)",at:now,by});
+ d.spots.find(x=>x.id===sp(12)).blocks.push({id:"PB-smp12",kind:"oos",from:addD(td,-10),to:"",note:"صيانة الأرضية (تجريبي)",at:now,by});
+ /* the Manager (M) level isn't in the rule; a documented exception shows "eligible by exception" */
+ d.exc.push({id:"PX-smp1",emp:4,kind:"elig",ref:"EX-SMP-01",date:"2026-01-15",until:"",note:"استثناء تجريبي: مناوبات ليلية لإدارة البنية التحتية",at:now,by});
+ let A=(n,emp,from,note,exc)=>({id:"PA-smp"+String(n).padStart(2,"0"),spot:sp(n),emp,from,to:"",note:note||"",exc:exc||"",snap:snap(emp),at:now,by});
+ d.asg.push(A(1,1,"2024-01-01","مرتبط بمنصب نائب الرئيس"),A(2,2,"2024-01-01","مرتبط بمنصب المدير العام"),A(3,3,"2024-03-01"),A(4,4,"2026-02-01","وفق الاستثناء EX-SMP-01","EX-SMP-01"),A(5,5,"2025-01-12"),A(6,6,"2025-04-06"),A(7,7,"2025-06-01"),A(8,8,"2025-09-14","سيارة كهربائية"),
+  A(9,19,"2023-05-01","لم يُحرَّر بعد انتهاء الخدمة (تجريبي)"));
+ d.wait.push({id:"PW-smp1",emp:9,at:"2026-08-10",ord:1,why:"أقدم طلب مسجّل (تجريبي)",at2:now,by,hist:[{at:now,by,to:1,why:"أقدم طلب مسجّل (تجريبي)"}]},{id:"PW-smp2",emp:10,at:"2026-09-03",ord:2,why:"بعد الطلب الأول حسب تاريخ الإدراج (تجريبي)",at2:now,by,hist:[{at:now,by,to:2,why:"بعد الطلب الأول حسب تاريخ الإدراج (تجريبي)"}]});
+ se()}catch(x){console.error(x)}})();
 /* ---------- v101: scroll areas show which edge has more content ---------- */
 (()=>{let SEL=".table-wrap,.dx-tw,.km-wrap,.rp-tw",upd=el=>{let mx=el.scrollWidth-el.clientWidth;if(mx<4){el.removeAttribute("data-sx");return}let x=Math.abs(el.scrollLeft),v=(x>2?"s":"")+(x<mx-2?"e":"");el.dataset.sx!==v&&(el.dataset.sx=v)},all=()=>document.querySelectorAll(SEL).forEach(upd),t3=0;
  document.addEventListener("scroll",z=>{let el=z.target;el&&el.matches&&el.matches(SEL)&&upd(el)},!0);addEventListener("resize",()=>{clearTimeout(t3);t3=setTimeout(all,120)});new MutationObserver(()=>{clearTimeout(t3);t3=setTimeout(all,160)}).observe(document.documentElement,{childList:!0,subtree:!0})})();
