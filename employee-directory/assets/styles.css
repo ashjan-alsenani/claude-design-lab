@@ -6573,3 +6573,25 @@ body.pk-dw-open { overflow: hidden; }
 }
 .wc-chip small, .ax-legb small, .dx-s-l small { font-size: 12px; }
 .ax-grid { align-items: stretch; }
+
+/* ===================== v105 one page-header pattern on every page ===================== */
+.ph-k { margin: 0 0 4px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.ho-head .ho-search { flex: 1 1 100%; max-width: none; order: 3; }
+.ho-head .ho-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.page-home > .ho-head { margin-bottom: 0; }
+/* recognition: employee of the month gets its own panel under the header */
+.rw-spot-panel { padding: 0; border: 0; background: none; box-shadow: none; }
+.rw-spot-panel .rw-spot { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; justify-items: start; text-align: start; gap: 4px 18px; }
+.rw-spot-panel .rw-spot > .rw-spot-ph { grid-row: 1 / span 6; margin: 0; }
+.rw-spot-panel .rw-spot-empty { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 0; text-align: start; }
+.rw-spot-panel .rw-spot-empty h2 { margin: 0; }
+.rw-spot-panel .rw-spot-empty p { margin: 0; max-width: 60ch; }
+@media (max-width: 640px) {
+  .rw-spot-panel .rw-spot { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+  .rw-spot-panel .rw-spot > .rw-spot-ph { grid-row: auto; }
+  .rw-spot-panel .rw-spot-empty { flex-direction: column; text-align: center; }
+  .ho-head .ho-acts .btn { flex: 1 1 calc(50% - 8px); justify-content: center; }
+}
+/* parking: the "without entitlement" panel now opens the employees tab */
+#pkBody > .pk-nfp { margin-bottom: 16px; }
+.page-rw > .rw-spot-panel { margin-bottom: var(--s4); }
