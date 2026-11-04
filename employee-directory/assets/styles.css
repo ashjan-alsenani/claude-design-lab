@@ -6472,3 +6472,26 @@ body.pk-dw-open { overflow: hidden; }
 .pk-nfon { border-color: color-mix(in srgb, #DC2626 30%, var(--line)); background: color-mix(in srgb, #DC2626 6%, var(--paper)); }
 .pk-nfon .al-nf { margin: 0; cursor: default; flex: none; }
 .pk-nfp { margin-bottom: var(--s4); }
+
+/* ===================== v100 review fixes ===================== */
+/* home banner: the main action stays a solid white button (the light-theme gradient rule was painting it teal on teal) */
+.ho-hero .ho-acts .btn.btn-primary, :root:not([data-theme="dark"]) .ho-hero .ho-acts .btn.btn-primary { background: #fff; border-color: #fff; color: #0B6E68; }
+.ho-hero .ho-acts .btn.btn-primary:hover, :root:not([data-theme="dark"]) .ho-hero .ho-acts .btn.btn-primary:hover { background: #E9FBF8; }
+/* phone top bar: the notification count sits inside the bell's corner, with room between buttons */
+@media (max-width: 640px) {
+  .bell-btn { margin-inline: 2px; }
+  .bell-badge { top: 1px; inset-inline-end: 1px; min-width: 16px; height: 16px; padding: 0 4px; font-size: 10px; line-height: 16px; box-shadow: 0 0 0 1.5px var(--paper); }
+  /* page tabs wrap instead of hiding the last ones off-screen */
+  .al-tabs { flex-wrap: wrap; overflow-x: visible; row-gap: 2px; }
+  .al-tabs [role=tab] { min-height: 44px; }
+}
+.nf-acts { display: flex; justify-content: center; margin-top: var(--s3); }
+.ax-cmp:focus-visible { outline: 3px solid var(--ds-act-ring); outline-offset: 2px; }
+/* narrow phones (≤400px): the top bar fits — only the language you can switch to, no menu arrow; ≤340px also drops the small save-status icon (saving still confirms with a message) */
+@media (max-width: 400px) {
+  .lang-seg button[aria-pressed="true"] { display: none; }
+  .lang-seg button { min-width: 36px; min-height: 30px; }
+  .user-btn > .ic { display: none; }
+}
+@media (max-width: 340px) { .topbar .save-state { display: none; } }
+.pk-banner bdi { white-space: nowrap; }
