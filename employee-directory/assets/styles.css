@@ -6487,11 +6487,53 @@ body.pk-dw-open { overflow: hidden; }
 }
 .nf-acts { display: flex; justify-content: center; margin-top: var(--s3); }
 .ax-cmp:focus-visible { outline: 3px solid var(--ds-act-ring); outline-offset: 2px; }
-/* narrow phones (≤400px): the top bar fits — only the language you can switch to, no menu arrow; ≤340px also drops the small save-status icon (saving still confirms with a message) */
-@media (max-width: 400px) {
+/* narrow phones (≤430px): the top bar fits — only the language you can switch to, no menu arrow; ≤340px also drops the small save-status icon (saving still confirms with a message) */
+@media (max-width: 430px) {
   .lang-seg button[aria-pressed="true"] { display: none; }
   .lang-seg button { min-width: 36px; min-height: 30px; }
   .user-btn > .ic { display: none; }
 }
 @media (max-width: 340px) { .topbar .save-state { display: none; } }
 .pk-banner bdi { white-space: nowrap; }
+
+/* ===================== v101 design suggestions ===================== */
+/* home: the full "quick numbers" grid is folded under one summary row */
+.he-fold { margin-top: var(--s5); border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper); box-shadow: var(--sh-1); }
+.he-fold > summary { display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; list-style: none; }
+.he-fold > summary::-webkit-details-marker { display: none; }
+.he-fold > summary > .ic:first-child { color: #D97706; }
+.he-fold > summary > span { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.he-fold > summary small { color: var(--muted); font-size: var(--fs-sm); }
+.he-fold > summary > .ic:last-child { color: var(--faint); transition: transform var(--dur-2) var(--ease-out); }
+.he-fold[open] > summary > .ic:last-child { transform: rotate(180deg); }
+.he-fold > summary:focus-visible { outline: 3px solid var(--ds-act-ring); outline-offset: 2px; border-radius: var(--r-lg); }
+.he-fold > .he { margin: 0; padding: 0 18px 18px; }
+.he-fold > .he > .he-h { display: none; }
+/* directory cards: profile completeness is a quiet note, shown only under 80% */
+.pill-miss { background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
+.pill-miss .ic { color: var(--faint); }
+/* directory on phones: the main action keeps its label */
+.page-directory .head-actions .btn-primary span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+/* top bar: one labelled data menu on phones */
+.demo-badge .db-s { display: none; }
+@media (max-width: 640px) {
+  .topbar .save-state { display: none; }
+  .topbar .demo-badge { width: auto; padding: 0 10px; }
+  .topbar .demo-badge .db-s { display: inline; font-size: 12px; font-weight: 700; color: var(--ink); }
+}
+@media (max-width: 360px) {
+  .topbar .demo-badge { width: 32px; padding: 0; }
+  .topbar .demo-badge .db-s { display: none; }
+}
+/* sign-in: how to get access; the feature list reads as text, not as buttons */
+.ln-access { margin: 12px 0 0; text-align: center; color: var(--muted); font-size: var(--fs-sm); line-height: 1.6; }
+.ln-points li { padding: 2px 6px; border: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; color: var(--ink); font-weight: 500; }
+/* wide tables: the edge with more content fades, so sideways scrolling is discoverable */
+[data-sx="e"] { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+[data-sx="s"] { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
+[data-sx="se"] { -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] [data-sx="e"] { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] [data-sx="s"] { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+/* home search: a clear white ring on the teal banner */
+.ho-hero .ho-search:focus-within { border-color: #fff; box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(11, 110, 104, .55); }
+.ax-none { margin: 0 0 var(--s3); }
