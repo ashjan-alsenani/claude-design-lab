@@ -5178,7 +5178,11 @@ var PkRES=()=>({ok:[Tx("مؤهل","Eligible"),"#16A34A","badge-check"],exc:[Tx("
   else if(cr.some(c=>c.r==="no")){res="no";why=cr.find(c=>c.r==="no").why}
   else{let c=cr.find(c=>c.r==="unk");res="chk";why=c.l+": "+c.why}
   return{res,why,cr,cats,ex}},
- Pkokel=r=>r==="ok"||r==="exc";
+ Pkokel=r=>r==="ok"||r==="exc",
+ /* holds a current or upcoming space while the rules say "not eligible" (exceptions count as eligible; "needs verification" isn't judged) */
+ Pknfk=x=>x.al.k==="on"&&x.e.res==="no"?x.e.cr.filter(c=>c.r==="no").map(c=>c.k):[],
+ PkNFK=()=>({lv:Tx("المستوى غير مشمول","Level not included"),unit:Tx("خارج نطاق الوحدة","Outside the unit scope"),st:Tx("الحالة الوظيفية غير مشمولة","Employment status not included"),loc:Tx("موقع العمل غير مشمول","Work location not included")}),
+ Pknfmark=x=>{let k=Pknfk(x);if(!k.length)return"";let t2=Tx("لديه موقف دون استحقاق حسب القواعد: ","Holds a space without entitlement under the rules: ")+x.e.cr.filter(c=>c.r==="no").map(c=>c.why).join(" • ");return` <span class="al-nf" role="img" aria-label="${a(t2)}" title="${a(t2)}">!</span>`};
 
 /* ---------------- allocation ---------------- */
 var Pkasgs=emp=>Pkd().asg.filter(x=>x.emp===emp),
@@ -5248,6 +5252,7 @@ async function Pkrender(e,n,{store:r}){let T=Tx;e.innerHTML=`<div class="page"><
    ${!d.spots.length&&!d.asg.length?Pkempty(canM,canI):""}
    <div class="pk-scope"><label for="pk_site">${h("map-pin",15)}<span>${a(T("الموقع أو المبنى","Location or building"))}</span></label><select id="pk_site">${Pkopts([...new Set(d.spots.map(s=>s.site).filter(Boolean))].sort(),st.site,T("كل المواقع","All locations"))}</select>${st.site?`<small>${a(T("بطاقات المواقف تتبع الموقع المختار، وبطاقات الموظفين تتبع موقع العمل أو موقع الموقف المخصص.","Space cards follow the chosen location; people cards follow their work location or allocated space's location."))}</small>`:""}</div>
    ${Pkkpis(rows,st)}
+   ${Pknfpanel(rows,st)}
    <div class="tabs al-tabs" role="tablist" aria-label="${a(T("أقسام صفحة المواقف","Parking sections"))}">${tabs.map(([k,ic,l])=>`<button type="button" role="tab" data-pk-tab="${k}" aria-selected="${st.tab===k}">${h(ic,16)}<span>${a(l)}</span></button>`).join("")}</div>
    <div id="pkBody">${st.tab==="spots"?Pkspots(st):st.tab==="wait"?Pkwaitv(rows,st):st.tab==="rules"?Pkrulesv():Pkempv(rows,st)}</div>
    <p class="note-box">${h("info",16)}<span>${a(T("بيانات المواقف منفصلة عن العلاوات، وأهليتها لا تعتمد على قواعد العلاوات. الأهلية تُحسب من القواعد المضبوطة هنا، والتخصيص من السجلات فقط: لا يُخصص موقف ولا يُدرج أحد في الانتظار تلقائيًا. إخفاء الأزرار حسب الصلاحية ليس حماية أمنية في ملف HTML محلي.","Parking data is separate from allowances and its eligibility doesn't use the allowance rules. Eligibility comes from the rules set here and allocation only from records: no space is allocated and nobody is wait-listed automatically. Hiding buttons by permission isn't security in a local HTML file."))}</span></p>
@@ -5276,9 +5281,20 @@ var Pkopts=(vals,cur,all,lab)=>`<option value="">${a(all)}</option>`+vals.map(v=
 
 var Pkcapbar=(rows,st)=>{let T=Tx,d=Pkd(),cap=d.rules.cap;if(!cap)return"";let reg=d.spots.length,el=rows.filter(x=>Pkokel(x.e.res)).length,on=d.spots.filter(s=>Pkstat(s)==="asg").length,over=el>cap;
   return`<div class="pk-cap${over?" pk-capover":""}"><div class="pk-capl"><b>${a(T(`سعة الوحدة: ${cap} موقفًا`,`Unit capacity: ${cap} spaces`))}</b><small>${a(T(`مسجل ${reg} · غير مسجل بعد ${Math.max(0,cap-reg)} · مخصص الآن ${on} · المؤهلون ${el}`,`${reg} recorded · ${Math.max(0,cap-reg)} not yet recorded · ${on} allocated now · ${el} eligible`))}</small></div><div class="pk-capt" role="img" aria-label="${a(T(`${reg} من ${cap} مسجلة، ${on} مخصصة`,`${reg} of ${cap} recorded, ${on} allocated`))}"><i style="--w:${Math.min(100,Math.round(on/cap*100))}%"></i><i class="pk-capreg" style="--w:${Math.min(100,Math.round(Math.max(0,reg-on)/cap*100))}%"></i></div>${over?`<p>${h("alert-triangle",14)} ${a(T(`عدد المؤهلين (${el}) أكبر من السعة (${cap}). من يُخصص له يحدده المسؤول؛ لا يوجد ترتيب تلقائي.`,`Eligible people (${el}) exceed the capacity (${cap}). An administrator decides who is allocated; there's no automatic order.`))}</p>`:""}</div>`};
+var Pknfpanel=(rows,st)=>{let T=Tx,K=PkNFK(),R=rows.filter(x=>Pkinsite(x.p,x.al,st.site)),hold=R.filter(x=>x.al.k==="on"),F=R.map(x=>({x,k:Pknfk(x)})).filter(z=>z.k.length),n=F.length,orph=st.site?0:Pkorph().length,
+   byK=Object.keys(K).map(k=>[K[k],F.filter(z=>z.k.includes(k)).length,{tab:"emp",nf:k}]).filter(z=>z[1]).sort((x,y)=>y[1]-x[1]),
+   dm=new Map;F.forEach(z=>{let d=z.x.p.department||"";dm.set(d,(dm.get(d)||0)+1)});let byD=[...dm].map(([d,v])=>[d?B(d):T("إدارة غير محددة","Department not set"),v,{tab:"emp",nf:"all",dept:d}]).sort((x,y)=>y[1]-x[1]),
+   mx=L2=>Math.max(0,...L2.map(z=>z[1])),cap=Pkd().rules.cap,
+   hb=(L2,sr)=>`<ul class="ax-hb" aria-label="${a(sr)}">${L2.map(([l,v,go])=>`<li><button type="button" class="ax-hbb" data-pk-go='${a(JSON.stringify(go))}' title="${a(l+": "+v)}"><span class="ax-hbl">${a(l)}</span><span class="ax-hbt" aria-hidden="true"><i style="--w:${mx(L2)?Math.max(3,Math.round(v/mx(L2)*100)):0}%"></i></span><b>${U(v)}</b></button></li>`).join("")}</ul>`;
+  return`<section class="panel ax-nfp pk-nfp${n||orph?"":" ax-nfp0"}" aria-labelledby="pknfT"><h2 class="panel-title" id="pknfT"><span class="al-nf" aria-hidden="true">!</span><span>${a(T("لديهم موقف دون استحقاق","Holding a space without entitlement"))}</span></h2>
+   <p class="panel-note">${a(T("موظفون لهم تخصيص موقف حالي أو قادم بينما نتيجتهم «غير مؤهل» حسب القواعد. أصحاب الاستثناء الموثق لا يُحسبون، ولا من نتيجتهم «يحتاج تحقق». اضغط أي رقم أو شريط لعرض الأسماء. لا يُنهى أي تخصيص تلقائيًا.","People with a current or upcoming space whose result is “Not eligible” under the rules. Documented exceptions and “needs verification” aren't counted. Click any number or bar to see the names. No allocation is ended automatically."))}</p>
+   ${n?`<div class="ax-nfbody"><button type="button" class="ax-nfhero" data-pk-go='${a(JSON.stringify({tab:"emp",nf:"all"}))}'><b>${U(n)}</b><span>${a(T(`من ${hold.length} لديهم موقف`,`of ${hold.length} holding a space`))}</span><small>${a(T(`${Math.round(n/Math.max(1,hold.length)*100)}% من أصحاب المواقف`,`${Math.round(n/Math.max(1,hold.length)*100)}% of space holders`))}</small>${cap&&!st.site?`<small class="ax-nfamt">${a(T(`${n} من سعة ${cap} موقفًا`,`${n} of the ${cap}-space capacity`))}</small>`:""}${orph?`<small>${a(T(`+ ${orph} تخصيص لموظف غير موجود في الدليل`,`+ ${orph} allocation(s) for someone not in the directory`))}</small>`:""}</button>
+    <div class="ax-nfch"><h3>${a(T("حسب السبب","By reason"))}</h3>${hb(byK,T("عدد الموظفين حسب سبب عدم الاستحقاق","People by reason"))}${byK.reduce((s2,z)=>s2+z[1],0)>n?`<small class="ax-sub">${a(T("قد يجتمع أكثر من سبب للموظف الواحد.","One person can have more than one reason."))}</small>`:""}</div>
+    <div class="ax-nfch"><h3>${a(T("حسب الإدارة","By department"))}</h3>${hb(byD,T("عدد الموظفين حسب الإدارة","People by department"))}</div></div>`
+   :`<p class="ax-nfok">${h(orph?"alert-triangle":"circle-check",18)}<span>${a(orph?T(`لا يوجد موظف غير مؤهل لديه موقف، لكن ${orph} تخصيص قائم لموظف غير موجود في الدليل.`,`No ineligible employee holds a space, but ${orph} allocation(s) belong to someone not in the directory.`):hold.length?T(`لا يوجد من لديه موقف دون استحقاق بين ${hold.length} من أصحاب المواقف.`,`Nobody among ${hold.length} space holders lacks entitlement.`):T("لا توجد تخصيصات حالية.","No current allocations."))}</span></p>`}</section>`};
 /* ---- employees & allocations ---- */
 var PkCOLS=()=>{let T=Tx,RS=PkRES(),AL=PkAL();return[
-  ["name",T("الموظف","Employee"),x=>I(x.p),x=>`<button type="button" class="pk-who" data-pk-emp="${x.p.id}">${ne(x.p,"sm")}<span><b>${a(I(x.p))}</b><small><bdi>${a(x.p.empNo||"")}</bdi></small></span></button>`],
+  ["name",T("الموظف","Employee"),x=>I(x.p),x=>`<button type="button" class="pk-who" data-pk-emp="${x.p.id}">${ne(x.p,"sm")}<span><b>${a(I(x.p))}${Pknfmark(x)}</b><small><bdi>${a(x.p.empNo||"")}</bdi></small></span></button>`],
   ["dept",T("الإدارة والقسم وموقع العمل","Department, section & work location"),x=>Pkv(x.p,"department"),x=>`<div class="ax-who2"><span>${a(x.p.department?B(x.p.department):"—")}</span><small>${a(x.p.orgSection?B(x.p.orgSection):"")}</small><small class="pk-wloc">${h("map-pin",12)} ${a(x.p.location?B(x.p.location):T("موقع العمل غير مسجل","No work location"))}</small></div>`],
   ["title",T("المسمى والمستوى","Job title & level"),x=>Pkv(x.p,"jobTitle"),x=>`<div class="ax-who2"><span>${a(x.p.jobTitle||"—")}</span><small>${a(Pklvl(x.p)||T("المستوى غير مسجل","No level"))}</small></div>`],
   ["elig",T("الأهلية وسببها","Eligibility & reason"),x=>x.e.res,x=>`<div class="ax-who2">${Pkpill(RS[x.e.res][0],RS[x.e.res][1],RS[x.e.res][2])}<small class="ax-why" title="${a(x.e.why)}">${a(x.e.why)}</small></div>`],
@@ -5289,9 +5305,9 @@ var PkCOLS=()=>{let T=Tx,RS=PkRES(),AL=PkAL();return[
   if(q&&![p.nameAr,p.nameEn,p.empNo,p.jobTitle,p.department,(x.al.a&&(Pkspot(x.al.a.spot)||{}).no)||"",x.note].some(v=>String(v||"").toLowerCase().includes(q)))return!1;
   if(st.el==="okx"){if(!Pkokel(x.e.res))return!1}else if(st.el&&x.e.res!==st.el)return!1;
   if(st.al==="noon"){if(x.al.k==="on")return!1}else if(st.al&&x.al.k!==st.al)return!1;
-  if(st.dept&&p.department!==st.dept)return!1;if(st.rev&&!x.rv.length)return!1;return Pkinsite(p,x.al,st.site)})},
+  if(st.dept&&p.department!==st.dept)return!1;if(st.rev&&!x.rv.length)return!1;if(st.nf){let k=Pknfk(x);if(!k.length||st.nf!=="all"&&!k.includes(st.nf))return!1}return Pkinsite(p,x.al,st.site)})},
  Pksort=(L2,st)=>{let c=PkCOLS().find(z=>z[0]===st.sort)||PkCOLS()[0];return L2.slice().sort((x,y)=>String(c[2](x)??"").localeCompare(String(c[2](y)??""),E(),{numeric:!0})*st.dir||I(x.p).localeCompare(I(y.p),E()))},
- Pkempv=(rows,st)=>{let T=Tx,RS=PkRES(),AL=PkAL(),cols=PkCOLS(),F=Pksort(Pkfilt(rows,st),st),per=25,pages=Math.max(1,Math.ceil(F.length/per));st.pg=Math.min(st.pg,pages-1);let P2=F.slice(st.pg*per,st.pg*per+per),orph=Pkorph(),any=st.q||st.el||st.al||st.dept||st.rev;
+ Pkempv=(rows,st)=>{let T=Tx,RS=PkRES(),AL=PkAL(),cols=PkCOLS(),F=Pksort(Pkfilt(rows,st),st),per=25,pages=Math.max(1,Math.ceil(F.length/per));st.pg=Math.min(st.pg,pages-1);let P2=F.slice(st.pg*per,st.pg*per+per),orph=Pkorph(),any=st.q||st.el||st.al||st.dept||st.rev||st.nf;
   return`<div class="dir-bar al-bar-f"><div class="dir-row"><div class="search">${h("search",16)}<label class="sr-only" for="pk_q">${a(T("بحث","Search"))}</label><input id="pk_q" type="search" placeholder="${a(T("ابحث بالاسم أو الرقم الوظيفي أو رقم الموقف أو الملاحظات…","Search by name, employee no., space number or notes…"))}" value="${a(st.q)}"></div></div>
   <div class="dir-row al-frow">
    <label class="sr-only" for="pk_el">${a(T("الأهلية","Eligibility"))}</label><select id="pk_el">${Pkopts(["ok","exc","okx","no","chk"],st.el,T("كل نتائج الأهلية","All eligibility results"),k=>k==="okx"?T("مؤهل أو مؤهل باستثناء","Eligible or by exception"):RS[k][0])}</select>
@@ -5300,6 +5316,7 @@ var PkCOLS=()=>{let T=Tx,RS=PkRES(),AL=PkAL();return[
    <label class="check pk-chk"><input type="checkbox" id="pk_rev"${st.rev?" checked":""}><span>${a(T("تحتاج مراجعة فقط","Needs review only"))}</span></label>
    ${any?`<button type="button" class="btn btn-ghost btn-sm" data-pk-clear>${h("x",14)}<span>${a(T("مسح الفلاتر","Clear filters"))}</span></button>`:""}</div></div>
   ${orph.length&&!st.site?`<p class="pk-banner pk-warn">${h("alert-triangle",16)}<span>${a(T(`${orph.length} تخصيص قائم لموظف لم يعد موجودًا في الدليل. راجعها من «سجل المواقف».`,`${orph.length} active allocation(s) belong to someone no longer in the directory. Review them under “Parking spaces”.`))}</span></p>`:""}
+  ${st.nf?`<p class="pk-banner pk-nfon"><span class="al-nf" aria-hidden="true">!</span><span>${a(T("يعرض: لديهم موقف دون استحقاق","Showing: holding a space without entitlement")+(st.nf!=="all"?" — "+PkNFK()[st.nf]:"")+(st.dept?" — "+B(st.dept):""))}</span><button type="button" class="btn btn-ghost btn-sm" data-pk-clear>${h("x",14)}<span>${a(T("عرض الكل","Show all"))}</span></button></p>`:""}
   <p class="al-count">${a(T(`${F.length} من ${rows.length} موظف`,`${F.length} of ${rows.length} employees`))}</p>
   ${F.length?`<div class="table-card"><div class="table-wrap"><table class="table al-table pk-table"><thead><tr>${cols.map(c=>`<th scope="col" aria-sort="${st.sort===c[0]?(st.dir>0?"ascending":"descending"):"none"}"><button type="button" class="th-sort" data-pk-sort="${c[0]}">${a(c[1])}${st.sort===c[0]?h(st.dir>0?"chevron-up":"chevron-down",13):""}</button></th>`).join("")}</tr></thead>
   <tbody>${P2.map(x=>`<tr${x.rv.length?' class="pk-rvrow"':""}>${cols.map(c=>`<td>${c[3](x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div>
@@ -5573,7 +5590,7 @@ function Pkwire(e){let st=e.__pk,P=()=>e.__pkPaint(),close=()=>{let dd=m("detail
   nav=tab=>{st.tab=tab;try{history.replaceState(history.state,"","#/parking"+(tab==="emp"?"":"/"+tab))}catch{}};
  e.onclick=async z=>{let b;
   if(b=z.target.closest("[data-pk-tab]")){nav(b.dataset.pkTab);st.focus=`[data-pk-tab="${st.tab}"][role=tab]`;P();return}
-  if(b=z.target.closest("[data-pk-go]")){let f=JSON.parse(b.dataset.pkGo||"{}");nav(f.tab||"emp");if(f.tab==="spots"){st.sst=f.sst||"";st.sq="";st.stype=""}else if(f.tab==="emp"){Object.assign(st,{q:"",el:f.el||"",al:f.al||"",dept:"",rev:f.rev||"",pg:0})}P();let t2=m("#pkBody",e);t2&&t2.scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(b=z.target.closest("[data-pk-go]")){let f=JSON.parse(b.dataset.pkGo||"{}");nav(f.tab||"emp");if(f.tab==="spots"){st.sst=f.sst||"";st.sq="";st.stype=""}else if(f.tab==="emp"){Object.assign(st,{q:"",el:f.el||"",al:f.al||"",dept:f.dept!=null&&f.nf?f.dept:"",rev:f.rev||"",nf:f.nf||"",pg:0})}P();let t2=m("#pkBody",e);t2&&t2.scrollIntoView({behavior:"smooth",block:"start"});return}
   if(z.target.closest("[data-pk-addspot]")){close();Pkspotform(null);return}
   if(z.target.closest("[data-pk-types]")){close();Pktypes();return}
   if(z.target.closest("[data-pk-imp]")){close();Pkimp();return}
@@ -5584,7 +5601,7 @@ function Pkwire(e){let st=e.__pk,P=()=>e.__pkPaint(),close=()=>{let dd=m("detail
   if(await Pkact(z))return;
   if(b=z.target.closest("[data-pk-sort]")){let k=b.dataset.pkSort;st.dir=st.sort===k?-st.dir:1;st.sort=k;st.focus=`[data-pk-sort="${k}"]`;P();return}
   if(b=z.target.closest("[data-pk-pg]")){st.pg+=Number(b.dataset.pkPg);P();return}
-  if(z.target.closest("[data-pk-clear]")){Object.assign(st,{q:"",el:"",al:"",dept:"",rev:"",pg:0});P();return}
+  if(z.target.closest("[data-pk-clear]")){Object.assign(st,{q:"",el:"",al:"",dept:"",rev:"",nf:"",pg:0});P();return}
   if(z.target.closest("[data-pk-sclear]")){Object.assign(st,{sq:"",sst:"",stype:""});P();return}
   if(b=z.target.closest("[data-pk-view]")){st.view=b.dataset.pkView;try{localStorage.setItem("dtd-pk-view",st.view)}catch{}st.focus=`[data-pk-view="${st.view}"]`;P();return}
   if(z.target.closest("[data-pk-rsave]")){Pkrsave(e);return}

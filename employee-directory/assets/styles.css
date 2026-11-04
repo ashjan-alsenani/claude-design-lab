@@ -6468,3 +6468,7 @@ body.pk-dw-open { overflow: hidden; }
 @media (max-width: 1100px) { .ax-nfbody { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .ax-nfhero { grid-column: 1 / -1; } }
 @media (max-width: 640px) { .ax-nfbody { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .ax-nfhero { transition: none; } }
+
+.pk-nfon { border-color: color-mix(in srgb, #DC2626 30%, var(--line)); background: color-mix(in srgb, #DC2626 6%, var(--paper)); }
+.pk-nfon .al-nf { margin: 0; cursor: default; flex: none; }
+.pk-nfp { margin-bottom: var(--s4); }
