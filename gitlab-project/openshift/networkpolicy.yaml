@@ -1,0 +1,17 @@
+# Only the OpenShift router may reach the pods. Outbound traffic (database, identity provider) is not restricted
+# here; add an egress policy if your cluster requires one.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: employee-directory-ingress
+spec:
+  podSelector:
+    matchLabels: { app.kubernetes.io/component: web }
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              policy-group.network.openshift.io/ingress: ""
+      ports:
+        - { protocol: TCP, port: 8080 }

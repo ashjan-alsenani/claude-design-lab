@@ -2,18 +2,20 @@
 .env
 .env.*
 !.env.example
+openshift/secret.yaml
 
 # Dependencies and build output
 node_modules/
 dist/
-dist-single/
+dist-test/
+server-dist/
+test-output/
+*.tsbuildinfo
 *.zip
 
-# Test output
-tests/*.png
-tests/**/*.png
-test-results/
-playwright-report/
+# Data exports (confidential HR data)
+employee-directory-*.json
+*backup*.json
 
 # OS and editor files
 .DS_Store

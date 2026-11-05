@@ -1,0 +1,1599 @@
+{
+ "app": "dtd-directory",
+ "version": 1,
+ "savedAt": "2026-11-05T05:55:59.876Z",
+ "data": {
+  "role": "admin",
+  "employees": [
+   {
+    "id": 1,
+    "emp_no": "50001",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Engineering\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Electrical Engineering\",\"year\":\"1997\",\"notes\":null},{\"qualification\":\"Master of Business Administration\",\"institution\":\"University of Strathclyde\",\"major\":\"Business Administration\",\"year\":\"2008\",\"notes\":null}],\"certifications\":[{\"title\":\"PMP (PMI)\",\"provider\":null,\"date\":\"2010\",\"notes\":null},{\"title\":\"ITIL 4 Strategic Leader\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"technicalTraining\":[],\"softTraining\":[{\"title\":\"Executive Leadership Programme\",\"provider\":null,\"date\":\"2019\",\"notes\":null},{\"title\":\"Negotiation for Leaders\",\"provider\":null,\"date\":\"2016\",\"notes\":null}],\"empNo\":\"50001\",\"nameEn\":\"Ahmed Salim Al-Rashdi\",\"nameAr\":\"أحمد سالم الراشدي\",\"email\":\"ahmed.rashdi@example.com\",\"phone\":\"+968 9001 0001\",\"gender\":\"Male\",\"dob\":\"1974-03-11\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital & Technology\",\"jobTitle\":\"Vice President, Digital & Technology Operations\",\"hireDate\":\"2001-09-02\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":null,\"duties\":\"Leads the digital service operations strategy across Digital & Technology.\\nSets governance for managed-service vendors and SLAs.\\nChairs the monthly operations performance review.\",\"focusArea\":\"Digital transformation\",\"functionalCategory\":\"Leadership\",\"careerInterest\":null,\"skillCategory\":\"Leadership\",\"skillSubcat\":\"Strategic leadership, Digital transformation, Vendor governance, Portfolio management\",\"skillsetType\":\"Functional\",\"skillCriticality\":\"High\",\"staffCriticality\":\"High\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"orgSection\":\"Leadership office\"}",
+    "photo": null,
+    "level_id": 1,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 90,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 2,
+    "emp_no": "50002",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Computer Science\",\"year\":\"2002\",\"notes\":null}],\"certifications\":[{\"title\":\"ITIL 4 Managing Professional\",\"provider\":null,\"date\":\"2020\",\"notes\":null},{\"title\":\"COBIT 2019 Foundation\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"technicalTraining\":[],\"softTraining\":[{\"title\":\"Leading High-Performing Teams\",\"provider\":null,\"date\":\"2018\",\"notes\":null}],\"empNo\":\"50002\",\"nameEn\":\"Khalid Hamed Al-Hinai\",\"nameAr\":\"خالد حمد الهنائي\",\"email\":\"khalid.hinai@example.com\",\"phone\":\"+968 9002 0002\",\"gender\":\"Male\",\"dob\":\"1980-07-22\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Service Operations\",\"jobTitle\":\"General Manager, Digital Service Operations\",\"hireDate\":\"2005-02-13\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":\"Ahmed Salim Al-Rashdi\",\"duties\":\"Manages the Digital Service Operations unit and its service owners.\\nOwns SLA governance and payment governance for managed services.\\nReports operational performance to the VP.\",\"focusArea\":\"SLA governance\",\"functionalCategory\":\"Leadership\",\"careerInterest\":\"Enterprise architecture\",\"skillCategory\":\"Service Management\",\"skillSubcat\":\"ITIL, SLA governance, Vendor management, Reporting\",\"skillsetType\":\"Functional\",\"skillCriticality\":\"High\",\"staffCriticality\":\"High\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":1,\"roleStartDate\":\"2014-02-13\",\"orgSection\":\"Leadership office\"}",
+    "photo": null,
+    "level_id": 2,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 100,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 3,
+    "emp_no": "50003",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Engineering\",\"institution\":\"Muscat College\",\"major\":\"Computer Engineering\",\"year\":\"2008\",\"notes\":null},{\"qualification\":\"Master of Science\",\"institution\":\"University of Leeds\",\"major\":\"Information Systems\",\"year\":\"2014\",\"notes\":null}],\"certifications\":[{\"title\":\"ITIL 4 Foundation (Axelos)\",\"provider\":null,\"date\":\"2019\",\"notes\":null},{\"title\":\"PMP (PMI)\",\"provider\":null,\"date\":\"2017\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"UNIX Shell Scripting\",\"provider\":null,\"date\":\"7-11 Dec 2014\",\"notes\":null},{\"title\":\"Oracle Database Administration\",\"provider\":null,\"date\":\"2016\",\"notes\":null}],\"softTraining\":[{\"title\":\"Presentation Skills\",\"provider\":null,\"date\":\"2018\",\"notes\":null}],\"empNo\":\"50003\",\"nameEn\":\"Mariam Said Al-Balushi\",\"nameAr\":\"مريم سعيد البلوشية\",\"email\":\"mariam.balushi@example.com\",\"phone\":\"+968 9003 0003\",\"gender\":\"Female\",\"dob\":\"1986-01-30\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Applications Operations\",\"jobTitle\":\"Senior Manager, Application Operations\",\"applications\":\"Siebel CRM, Oracle BRM, ServiceNow, Jira\",\"hireDate\":\"2009-10-04\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":\"Khalid Hamed Al-Hinai\",\"duties\":\"Leads application operations for customer-facing and billing platforms.\\nManages release governance and application stability.\\nCoordinates with the managed-service vendor on incidents and problems.\",\"focusArea\":\"Application stability\",\"functionalCategory\":\"Operations\",\"careerInterest\":\"Data analytics and AI\",\"skillCategory\":\"Application Management\",\"skillSubcat\":\"Application support, Release management, Problem management, SQL\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"High\",\"staffCriticality\":\"High\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[{\"id\":\"i1-0\",\"code\":\"duplicate_training_removed\",\"params\":{\"list\":\"technicalTraining\",\"title\":\"UNIX Shell Scripting\",\"date\":\"7-11 Dec 2014\"},\"info\":true}],\"reportingToId\":2,\"roleStartDate\":\"2019-10-04\",\"orgSection\":\"Leadership office\"}",
+    "photo": null,
+    "level_id": 3,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 10,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 4,
+    "emp_no": "50004",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Engineering\",\"institution\":\"Higher College of Technology\",\"major\":\"Communications Engineering\",\"year\":\"2006\",\"notes\":null}],\"certifications\":[{\"title\":\"CCNP Enterprise (Cisco)\",\"provider\":null,\"date\":\"2015\",\"notes\":null},{\"title\":\"AWS Solutions Architect Associate\",\"provider\":null,\"date\":\"2022\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"VMware vSphere\",\"provider\":null,\"date\":\"2018\",\"notes\":null}],\"softTraining\":[{\"title\":\"Time Management\",\"provider\":null,\"date\":\"2017\",\"notes\":null}],\"empNo\":\"50004\",\"nameEn\":\"Yousuf Ali Al-Abri\",\"nameAr\":\"يوسف علي العبري\",\"email\":\"yousuf.abri@example.com\",\"phone\":\"+968 9004 0004\",\"gender\":\"Male\",\"dob\":\"1983-05-18\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital IT Infrastructure\",\"jobTitle\":\"Manager, IT Infrastructure\",\"hireDate\":\"2008-06-01\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":\"Khalid Hamed Al-Hinai\",\"duties\":\"Manages data-centre, network and cloud infrastructure operations.\\nOwns capacity planning and infrastructure availability targets.\",\"focusArea\":\"Infrastructure availability\",\"functionalCategory\":\"Operations\",\"careerInterest\":\"Cloud architecture\",\"skillCategory\":\"Infrastructure\",\"skillSubcat\":\"Data centre, Networking, Cloud, Capacity planning\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"High\",\"staffCriticality\":\"High\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":2,\"roleStartDate\":\"2013-06-01\",\"orgSection\":\"Leadership office\"}",
+    "photo": null,
+    "level_id": 7,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 160,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 5,
+    "emp_no": "50005",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Information Systems\",\"year\":\"2012\",\"notes\":null}],\"certifications\":[{\"title\":\"ITIL 4 Foundation\",\"provider\":null,\"date\":\"2018\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"Power BI Desktop\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"softTraining\":[{\"title\":\"Communication Skills\",\"provider\":null,\"date\":\"2019\",\"notes\":null}],\"empNo\":\"50005\",\"nameEn\":\"Aisha Nasser Al-Kharusi\",\"nameAr\":\"عائشة ناصر الخروصية\",\"email\":\"aisha.kharusi@example.com\",\"phone\":\"+968 9005 0005\",\"gender\":\"Female\",\"dob\":\"1990-11-09\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Service Operations\",\"jobTitle\":\"Service Delivery Lead\",\"hireDate\":\"2013-04-21\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"actingRole\":\"Acting\",\"actingUnit\":\"Digital Service Desk\",\"actingSince\":\"2026-07-01\",\"reportingTo\":\"Khalid Hamed Al-Hinai\",\"duties\":\"Leads the service delivery team and daily operations review.\\nTracks KPIs and escalations with vendor service managers.\",\"focusArea\":\"Service delivery\",\"functionalCategory\":\"Operations\",\"careerInterest\":\"Product management\",\"skillCategory\":\"Service Management\",\"skillSubcat\":\"Service delivery, KPI tracking, Incident management, Power BI\",\"skillsetType\":\"Functional\",\"skillCriticality\":\"High\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":2,\"orgSection\":\"Service Delivery\"}",
+    "photo": null,
+    "level_id": 4,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 110,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 6,
+    "emp_no": "50006",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"German University of Technology in Oman\",\"major\":\"Cyber Security\",\"year\":\"2015\",\"notes\":null}],\"certifications\":[{\"title\":\"CompTIA Security+\",\"provider\":null,\"date\":\"2019\",\"notes\":null},{\"title\":\"CISSP (ISC2)\",\"provider\":null,\"date\":\"2023\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"Splunk Fundamentals\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"softTraining\":[{\"title\":\"Critical Thinking\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"empNo\":\"50006\",\"nameEn\":\"Noura Khalfan Al-Amri\",\"nameAr\":\"نورة خلفان العامرية\",\"email\":\"noura.amri@example.com\",\"phone\":\"+968 9006 0006\",\"gender\":\"Female\",\"dob\":\"1993-02-14\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Network & Security Operations\",\"jobTitle\":\"Information Security Specialist\",\"hireDate\":\"2016-08-14\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Seconded\",\"reportingTo\":\"Yousuf Ali Al-Abri\",\"duties\":\"Monitors security events and supports incident response.\\nReviews access controls and vulnerability remediation.\",\"focusArea\":\"Security operations\",\"functionalCategory\":\"Technical\",\"careerInterest\":\"Cloud security\",\"skillCategory\":\"Cyber Security\",\"skillSubcat\":\"Information security, Risk management, ITIL, SIEM\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"High\",\"staffCriticality\":\"High\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Partially Capable\",\"upskilling\":\"Yes\",\"importRef\":null,\"flags\":[],\"reportingToId\":4,\"roleStartDate\":\"2021-08-14\",\"orgSection\":\"Security Operations Center\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 60,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 7,
+    "emp_no": "50007",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Computer Science\",\"year\":\"2017\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Oracle SQL Fundamentals\",\"provider\":null,\"date\":\"2019\",\"notes\":null},{\"title\":\"Spring Boot Microservices\",\"provider\":null,\"date\":\"2022\",\"notes\":null}],\"softTraining\":[{\"title\":\"Teamwork and Collaboration\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"empNo\":\"50007\",\"nameEn\":\"Salim Saif Al-Harthi\",\"nameAr\":\"سالم سيف الحارثي\",\"email\":\"salim.harthi@example.com\",\"phone\":\"+968 9007 0007\",\"gender\":\"Male\",\"dob\":\"1994-09-03\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Applications Operations\",\"jobTitle\":\"Application Developer\",\"hireDate\":\"2018-01-07\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Seconded\",\"reportingTo\":\"Mariam Said Al-Balushi\",\"duties\":\"Develops and maintains internal applications and integrations.\\nSupports production fixes for customer applications.\",\"focusArea\":\"Application development\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Application Development\",\"skillSubcat\":\"Application development, SQL, Power BI, Java\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Partially Capable\",\"upskilling\":\"Yes\",\"importRef\":null,\"flags\":[],\"reportingToId\":3,\"roleStartDate\":\"2019-01-07\",\"orgSection\":\"Application Development\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 20,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 8,
+    "emp_no": "50008",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Business Administration\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Management Information Systems\",\"year\":\"2011\",\"notes\":null}],\"certifications\":[{\"title\":\"PMP (PMI)\",\"provider\":null,\"date\":\"2018\",\"notes\":null},{\"title\":\"PRINCE2 Foundation\",\"provider\":null,\"date\":\"2016\",\"notes\":null}],\"technicalTraining\":[],\"softTraining\":[{\"title\":\"Stakeholder Management\",\"provider\":null,\"date\":\"2019\",\"notes\":null}],\"empNo\":\"50008\",\"nameEn\":\"Fatma Rashid Al-Maamari\",\"nameAr\":\"فاطمة راشد المعمرية\",\"email\":\"fatma.maamari@example.com\",\"phone\":\"+968 9008 0008\",\"gender\":\"Female\",\"dob\":\"1989-12-25\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Service Operations\",\"jobTitle\":\"IT Project Manager\",\"hireDate\":\"2014-09-28\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Seconded\",\"reportingTo\":\"Ahmed Salim Al-Rashdi\",\"duties\":\"Manages technology projects from initiation to closure.\\nTracks scope, budget and risks with business stakeholders.\",\"focusArea\":\"Project delivery\",\"functionalCategory\":\"Functional\",\"careerInterest\":\"Portfolio management\",\"skillCategory\":\"Project Management\",\"skillSubcat\":\"Project management, ITIL, Power BI, Risk management\",\"skillsetType\":\"Functional\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":1,\"orgSection\":\"Project Management Office\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 120,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 9,
+    "emp_no": "50009",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Statistics\",\"year\":\"2018\",\"notes\":null}],\"certifications\":[{\"title\":\"Microsoft Power BI Data Analyst\",\"provider\":null,\"date\":\"2022\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"Python for Data Analysis\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"softTraining\":[{\"title\":\"Storytelling with Data\",\"provider\":null,\"date\":\"2022\",\"notes\":null}],\"empNo\":\"50009\",\"nameEn\":\"Huda Mohammed Al-Mukhaini\",\"nameAr\":\"هدى محمد المخينية\",\"email\":\"huda.mukhaini@example.com\",\"phone\":\"+968 9009 0009\",\"gender\":\"Female\",\"dob\":\"1996-04-17\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Data Analytics & AI Platforms\",\"jobTitle\":\"Data Analyst\",\"hireDate\":\"2020-03-01\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Seconded\",\"reportingTo\":\"Mariam Said Al-Balushi\",\"duties\":\"Builds operational dashboards and data quality checks.\\nAnalyses incident and SLA trends for monthly reporting.\",\"focusArea\":\"Data quality\",\"functionalCategory\":\"Technical\",\"careerInterest\":\"Machine learning\",\"skillCategory\":\"Data Analytics\",\"skillSubcat\":\"Data analysis, SQL, Power BI, Python\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Partially Capable\",\"upskilling\":\"Yes\",\"importRef\":null,\"flags\":[],\"reportingToId\":3,\"roleStartDate\":\"2024-03-01\",\"orgSection\":\"Business Intelligence & Reporting\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 70,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 10,
+    "emp_no": "50010",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\\nBachelor\",\"institution\":\"Higher College of Technology\",\"major\":\"Networking\",\"year\":\"2012\",\"notes\":\"Combined source text kept as-is for review.\"}],\"certifications\":[{\"title\":\"CCNA (Cisco)\",\"provider\":null,\"date\":\"2014\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"CCNA (Cisco)\",\"provider\":null,\"date\":\"2014\",\"notes\":null},{\"title\":\"Fortinet NSE 4\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50010\",\"nameEn\":\"Sultan Khamis Al-Busaidi\",\"nameAr\":\"سلطان خميس البوسعيدي\",\"email\":\"sultan.busaidi@example.com\",\"phone\":\"+968 9010 0010\",\"gender\":\"Male\",\"dob\":\"1991-06-06\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital IT Infrastructure\",\"jobTitle\":\"Network Engineer\",\"hireDate\":\"2015-11-15\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":\"Yousuf Ali Al-Abri\",\"duties\":\"Operates and troubleshoots core and enterprise networks.\\nImplements network changes during maintenance windows.\",\"focusArea\":\"Network reliability\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Infrastructure\",\"skillSubcat\":\"Routing and switching, Firewalls, Cisco\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"High\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[{\"id\":\"i1-0\",\"code\":\"education_ambiguous\"},{\"id\":\"i1-1\",\"code\":\"training_classification\",\"params\":{\"title\":\"CCNA (Cisco)\",\"lists\":[\"certifications\",\"technicalTraining\"]}}],\"reportingToId\":4,\"roleStartDate\":\"2018-11-15\",\"orgSection\":\"Network Engineering\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 170,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 11,
+    "emp_no": "50011",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Engineering\",\"institution\":\"Caledonian College of Engineering\",\"major\":\"Computer Engineering\",\"year\":\"2010\",\"notes\":null}],\"certifications\":[{\"title\":\"Red Hat Certified System Administrator\",\"provider\":null,\"date\":\"2017\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"Ansible Automation\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"softTraining\":[{\"title\":\"Problem Solving\",\"provider\":null,\"date\":\"2018\",\"notes\":null}],\"empNo\":\"50011\",\"nameEn\":\"Hamed Saleh Al-Siyabi\",\"nameAr\":\"حمد صالح السيابي\",\"email\":\"hamed.siyabi@example.com\",\"phone\":\"+968 9011 0011\",\"gender\":\"Male\",\"dob\":\"1988-08-19\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital IT Infrastructure\",\"jobTitle\":\"Systems Engineer\",\"hireDate\":\"2012-05-20\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":\"Yousuf Ali Al-Abri\",\"duties\":\"Administers Linux and Windows server platforms.\\nAutomates routine operations and patching.\",\"focusArea\":\"Platform automation\",\"functionalCategory\":\"Technical\",\"careerInterest\":\"DevOps\",\"skillCategory\":\"Infrastructure\",\"skillSubcat\":\"Linux, Windows Server, Automation, Ansible\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":4,\"orgSection\":\"Systems & Compute\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 180,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 12,
+    "emp_no": "50012",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Business Administration\",\"institution\":\"University of Nizwa\",\"major\":\"Management Information Systems\",\"year\":\"2017\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Agile Scrum Fundamentals\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"softTraining\":[{\"title\":\"Business Writing\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"empNo\":\"50012\",\"nameEn\":\"Zainab Abdullah Al-Lawati\",\"nameAr\":\"زينب عبدالله اللواتية\",\"email\":\"zainab.lawati@example.com\",\"phone\":\"+968 9012 0012\",\"gender\":\"Female\",\"dob\":\"1995-10-02\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Applications Operations\",\"jobTitle\":\"Business Analyst\",\"hireDate\":\"2019-02-17\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Seconded\",\"reportingTo\":\"Mariam Said Al-Balushi\",\"duties\":\"Gathers requirements and writes user stories for application changes.\\nSupports user acceptance testing.\",\"focusArea\":\"Requirements management\",\"functionalCategory\":\"Functional\",\"careerInterest\":\"Product management\",\"skillCategory\":\"Business Analysis\",\"skillSubcat\":\"Business analysis, Process mapping, UAT\",\"skillsetType\":\"Functional\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Low\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Partially Capable\",\"upskilling\":\"Yes\",\"importRef\":null,\"flags\":[],\"reportingToId\":3,\"roleStartDate\":\"2022-02-17\",\"orgSection\":\"Business Analysis\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 30,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 13,
+    "emp_no": "50013",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Technology\",\"institution\":\"Anna University\",\"major\":\"Computer Science\",\"year\":\"2009\",\"notes\":null}],\"certifications\":[{\"title\":\"ITIL 4 Foundation\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"Oracle SQL Fundamentals\",\"provider\":null,\"date\":\"2019\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50013\",\"nameEn\":\"Rahul Menon\",\"nameAr\":null,\"email\":\"rahul.menon@example.com\",\"phone\":\"+968 9013 0013\",\"gender\":\"Male\",\"dob\":\"1987-03-29\",\"nationality\":\"India\",\"nationalityCategory\":\"Expat\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Applications Operations\",\"jobTitle\":\"Application Support Engineer\",\"hireDate\":\"2021-07-11\",\"lastWorkingDate\":null,\"contractType\":\"Fixed Term\",\"payroll\":\"TCS-PAY\",\"location\":\"Onsite\",\"providerType\":\"TCS\",\"assignment\":\"Seconded\",\"reportingTo\":\"Mariam Said Al-Balushi\",\"duties\":\"Provides L2 support for billing and CRM applications.\\nHandles incident resolution within SLA targets.\",\"focusArea\":\"Application stability\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Application Management\",\"skillSubcat\":\"Application support, SQL, Linux, Java\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":null,\"resourceType\":\"Single Skilled\",\"readiness\":\"Partially Capable\",\"upskilling\":\"Yes\",\"importRef\":null,\"flags\":[],\"reportingToId\":3,\"roleStartDate\":\"2022-07-11\",\"orgSection\":\"Application Support\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 40,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 14,
+    "emp_no": "50014",
+    "data": "{\"education\":[{\"qualification\":\"Master of Computer Applications\",\"institution\":\"University of Kerala\",\"major\":\"Computer Applications\",\"year\":\"2013\",\"notes\":null}],\"certifications\":[{\"title\":\"Oracle Database Administrator Certified Professional\",\"provider\":null,\"date\":\"2016\",\"notes\":null}],\"technicalTraining\":[],\"softTraining\":[],\"empNo\":\"50014\",\"nameEn\":\"Priya Nair\",\"nameAr\":null,\"email\":\"priya.nair@example.com\",\"phone\":\"+968 9014 0014\",\"gender\":\"Female\",\"dob\":\"1990-12-12\",\"nationality\":\"India\",\"nationalityCategory\":\"Expat\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Data Analytics & AI Platforms\",\"jobTitle\":\"Database Administrator\",\"hireDate\":\"2022-01-09\",\"lastWorkingDate\":null,\"contractType\":\"Fixed Term\",\"payroll\":\"TCS-PAY\",\"location\":\"Onsite\",\"providerType\":\"TCS\",\"assignment\":\"Seconded\",\"reportingTo\":\"Mariam Said Al-Balushi\",\"duties\":\"Administers Oracle and PostgreSQL databases.\\nManages backups, performance tuning and access requests.\",\"focusArea\":\"Database reliability\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Database\",\"skillSubcat\":\"Oracle, PostgreSQL, Performance tuning\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"High\",\"staffCriticality\":null,\"resourceType\":\"Single Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":3,\"orgSection\":\"Data Platforms & Databases\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 80,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 15,
+    "emp_no": "50015",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Computer Engineering\",\"year\":\"2019\",\"notes\":null}],\"certifications\":[{\"title\":\"AWS Solutions Architect Associate\",\"provider\":null,\"date\":\"2023\",\"notes\":null}],\"technicalTraining\":[{\"title\":\"Kubernetes Fundamentals\",\"provider\":null,\"date\":\"2022\",\"notes\":null},{\"title\":\"Docker Essentials\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50015\",\"nameEn\":\"Majid Hilal Al-Saadi\",\"nameAr\":\"ماجد هلال السعدي\",\"email\":\"majid.saadi@example.com\",\"phone\":\"+968 9015 0015\",\"gender\":\"Male\",\"dob\":\"1997-01-21\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital IT Infrastructure\",\"jobTitle\":\"Cloud Engineer\",\"hireDate\":\"2021-10-03\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Seconded\",\"reportingTo\":\"Yousuf Ali Al-Abri\",\"duties\":\"Builds and operates cloud landing zones and CI/CD pipelines.\",\"focusArea\":\"Cloud adoption\",\"functionalCategory\":\"Technical\",\"careerInterest\":\"Cloud architecture\",\"skillCategory\":\"Cloud\",\"skillSubcat\":\"AWS, Kubernetes, CI/CD, Terraform\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Partially Capable\",\"upskilling\":\"Yes\",\"importRef\":null,\"flags\":[],\"reportingToId\":4,\"roleStartDate\":\"2024-10-03\",\"orgSection\":\"Cloud Platforms\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 190,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 16,
+    "emp_no": "50016",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Engineering\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Industrial Engineering\",\"year\":\"2015\",\"notes\":null}],\"certifications\":[{\"title\":\"Lean Six Sigma Green Belt (IASSC)\",\"provider\":null,\"date\":\"2022\",\"notes\":null}],\"technicalTraining\":[],\"softTraining\":[{\"title\":\"Facilitation Skills\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"empNo\":\"50016\",\"nameEn\":\"Laila Juma Al-Riyami\",\"nameAr\":\"ليلى جمعة الريامية\",\"email\":\"laila.riyami@example.com\",\"phone\":\"+968 9016 0016\",\"gender\":\"Female\",\"dob\":\"1992-05-27\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Service Operations\",\"jobTitle\":\"Process Excellence Specialist\",\"hireDate\":\"2017-06-18\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportsToPosition\":\"M|Digital Service Desk\",\"intendedManager\":\"__current\",\"reportingTo\":\"Aisha Nasser Al-Kharusi\",\"duties\":\"Maps and improves operational processes.\\nRuns Lean Six Sigma improvement projects.\",\"focusArea\":\"Process improvement\",\"functionalCategory\":\"Operations\",\"careerInterest\":null,\"skillCategory\":\"Process Excellence\",\"skillSubcat\":\"Lean Six Sigma, KPI design, Process mapping\",\"skillsetType\":\"Functional\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Low\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":5,\"roleStartDate\":\"2020-06-18\",\"orgSection\":\"Service Delivery\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 130,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 17,
+    "emp_no": "50017",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Computer Science\",\"year\":\"2007\",\"notes\":null},{\"qualification\":\"Master of Science\",\"institution\":\"University of Manchester\",\"major\":\"Software Engineering\",\"year\":\"2013\",\"notes\":null}],\"certifications\":[{\"title\":\"TOGAF 9 Certified\",\"provider\":null,\"date\":\"2015\",\"notes\":null}],\"technicalTraining\":[],\"softTraining\":[{\"title\":\"Executive Communication\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"empNo\":\"50017\",\"nameEn\":\"Badr Ahmed Al-Shukaili\",\"nameAr\":\"بدر أحمد الشكيلي\",\"email\":\"badr.shukaili@example.com\",\"phone\":\"+968 9017 0017\",\"gender\":\"Male\",\"dob\":\"1985-09-14\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Enterprise Architecture & Standards\",\"jobTitle\":\"Enterprise Architect\",\"hireDate\":\"2011-01-16\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":\"Ahmed Salim Al-Rashdi\",\"duties\":\"Maintains the enterprise architecture roadmap and standards.\\nReviews solution designs for alignment.\",\"focusArea\":\"Architecture governance\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Architecture\",\"skillSubcat\":\"TOGAF, Solution design, Integration\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"High\",\"staffCriticality\":\"High\",\"resourceType\":\"Multi Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":1,\"orgSection\":\"Architecture Governance\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 150,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 18,
+    "emp_no": "50018",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\",\"institution\":\"Higher College of Technology\",\"major\":\"Information Technology\",\"year\":\"2019\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"ITIL 4 Foundation\",\"provider\":null,\"date\":\"2023\",\"notes\":null}],\"softTraining\":[{\"title\":\"Customer Service Excellence\",\"provider\":null,\"date\":\"2022\",\"notes\":null}],\"empNo\":\"50018\",\"nameEn\":\"Omar Khalid Al-Habsi\",\"nameAr\":\"عمر خالد الحبسي\",\"email\":\"omar.habsi@example.com\",\"phone\":\"+968 9018 0018\",\"gender\":\"Male\",\"dob\":\"1998-02-08\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Transferred\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Service Operations\",\"jobTitle\":\"Service Desk Analyst\",\"hireDate\":\"2022-09-04\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Seconded\",\"reportingTo\":\"Aisha Nasser Al-Kharusi\",\"duties\":\"Logs and triages user requests and incidents.\",\"focusArea\":\"User support\",\"functionalCategory\":\"Operations\",\"careerInterest\":\"Application development\",\"skillCategory\":\"Service Management\",\"skillSubcat\":\"Service desk, Incident logging, ITIL\",\"skillsetType\":\"Functional\",\"skillCriticality\":\"Low\",\"staffCriticality\":\"Low\",\"resourceType\":\"Single Skilled\",\"readiness\":null,\"upskilling\":null,\"importRef\":null,\"flags\":[],\"reportingToId\":5,\"roleStartDate\":\"2023-09-04\",\"orgSection\":\"Service Desk\"}",
+    "photo": null,
+    "level_id": 6,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 140,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 19,
+    "emp_no": "50019",
+    "data": "{\"education\":[{\"qualification\":\"Bachelor of Science\",\"institution\":\"Sultan Qaboos University\",\"major\":\"Computer Science\",\"year\":\"2007\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[],\"softTraining\":[],\"empNo\":\"50019\",\"nameEn\":\"Saif Mubarak Al-Mahrouqi\",\"nameAr\":\"سيف مبارك المحروقي\",\"email\":\"saif.mahrouqi@example.com\",\"phone\":\"+968 9019 0019\",\"gender\":\"Male\",\"dob\":\"1984-04-04\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Resigned\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Applications Operations\",\"jobTitle\":\"Senior Application Analyst\",\"hireDate\":\"2010-03-14\",\"lastWorkingDate\":\"2025-12-31\",\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Governance\",\"reportingTo\":\"Mariam Said Al-Balushi\",\"duties\":\"Supported billing application change requests.\",\"focusArea\":null,\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Application Management\",\"skillSubcat\":\"Billing systems, SQL\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Fully Capable\",\"upskilling\":\"No\",\"importRef\":null,\"flags\":[],\"reportingToId\":3,\"roleStartDate\":\"2018-03-14\",\"orgSection\":\"Application Support\"}",
+    "photo": null,
+    "level_id": 5,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 50,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner (import)",
+    "updated_at": "2026-10-05T07:23:09.703Z",
+    "updated_by": "Directory owner (import)"
+   },
+   {
+    "id": 20,
+    "emp_no": "50020",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\",\"institution\":\"Higher College of Technology\",\"major\":\"Information Technology\",\"year\":\"2017\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Field Service Safety\",\"provider\":null,\"date\":\"2019\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50020\",\"nameEn\":\"Hilal Saeed Al-Kindi\",\"nameAr\":\"هلال سعيد الكندي\",\"email\":\"hilal.kindi@example.com\",\"phone\":\"+968 9020 0020\",\"gender\":\"Male\",\"dob\":\"1994-05-12\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital IT Infrastructure\",\"jobTitle\":\"Field Support Technician\",\"hireDate\":\"2019-04-14\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Operations\",\"reportingTo\":\"Yousuf Ali Al-Abri\",\"duties\":\"Installs and activates customer broadband and fibre services on site.\\nRestores service after faults, working directly with subscribers.\",\"focusArea\":\"Service operations\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Operations\",\"skillSubcat\":\"Fibre installation, Service activation, Fault restoration\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Capable\",\"upskilling\":\"No\",\"importRef\":\"sample-support\",\"flags\":[],\"orgSection\":\"Network Engineering\",\"reportingToId\":4}",
+    "photo": null,
+    "level_id": 6,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 320,
+    "created_at": "2026-11-05T05:55:53.478Z",
+    "created_by": "Sample data",
+    "updated_at": "2026-11-05T05:55:53.478Z",
+    "updated_by": "Sample data"
+   },
+   {
+    "id": 21,
+    "emp_no": "50021",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\",\"institution\":\"Higher College of Technology\",\"major\":\"Information Technology\",\"year\":\"2016\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Field Service Safety\",\"provider\":null,\"date\":\"2018\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50021\",\"nameEn\":\"Asma Rashid Al-Hinai\",\"nameAr\":\"أسماء راشد الهنائية\",\"email\":\"asma.hinai@example.com\",\"phone\":\"+968 9021 0021\",\"gender\":\"Female\",\"dob\":\"1993-11-03\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Service Operations\",\"jobTitle\":\"Technical Support Coordinator\",\"hireDate\":\"2018-02-18\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Operations\",\"reportingTo\":\"Aisha Nasser Al-Kharusi\",\"duties\":\"Schedules field technicians and prepares their work orders.\\nProvides technical support to the technicians who install and restore services.\",\"focusArea\":\"Service operations\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Operations\",\"skillSubcat\":\"Work-order planning, Technical support, Field coordination\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Capable\",\"upskilling\":\"No\",\"importRef\":\"sample-support\",\"flags\":[],\"orgSection\":\"Service Delivery\",\"reportingToId\":5}",
+    "photo": null,
+    "level_id": 6,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 321,
+    "created_at": "2026-11-05T05:55:53.478Z",
+    "created_by": "Sample data",
+    "updated_at": "2026-11-05T05:55:53.478Z",
+    "updated_by": "Sample data"
+   },
+   {
+    "id": 22,
+    "emp_no": "50022",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\",\"institution\":\"Higher College of Technology\",\"major\":\"Information Technology\",\"year\":\"2018\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Field Service Safety\",\"provider\":null,\"date\":\"2020\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50022\",\"nameEn\":\"Yaqoob Nasser Al-Wahaibi\",\"nameAr\":\"يعقوب ناصر الوهيبي\",\"email\":\"yaqoob.wahaibi@example.com\",\"phone\":\"+968 9022 0022\",\"gender\":\"Male\",\"dob\":\"1996-07-21\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital IT Infrastructure\",\"jobTitle\":\"Network Operations Technician\",\"hireDate\":\"2020-03-01\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Operations\",\"reportingTo\":\"Yousuf Ali Al-Abri\",\"duties\":\"Recently moved into technical work: activates and restores network services for subscribers.\",\"focusArea\":\"Service operations\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Operations\",\"skillSubcat\":\"Network activation, Service restoration\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Capable\",\"upskilling\":\"No\",\"importRef\":\"sample-support\",\"flags\":[],\"orgSection\":\"Network Engineering\",\"reportingToId\":4}",
+    "photo": null,
+    "level_id": 6,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 322,
+    "created_at": "2026-11-05T05:55:53.478Z",
+    "created_by": "Sample data",
+    "updated_at": "2026-11-05T05:55:53.478Z",
+    "updated_by": "Sample data"
+   },
+   {
+    "id": 23,
+    "emp_no": "50023",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\",\"institution\":\"Higher College of Technology\",\"major\":\"Information Technology\",\"year\":\"2015\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Field Service Safety\",\"provider\":null,\"date\":\"2017\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50023\",\"nameEn\":\"Muna Khalfan Al-Saadi\",\"nameAr\":\"منى خلفان السعدية\",\"email\":\"muna.saadi@example.com\",\"phone\":\"+968 9023 0023\",\"gender\":\"Female\",\"dob\":\"1995-01-09\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital Service Operations\",\"jobTitle\":\"Administrative Assistant\",\"hireDate\":\"2017-09-10\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Operations\",\"reportingTo\":\"Aisha Nasser Al-Kharusi\",\"duties\":\"Handles office correspondence, filing and meeting arrangements for the team.\",\"focusArea\":\"Service operations\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Operations\",\"skillSubcat\":\"Office administration, Document control\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Capable\",\"upskilling\":\"No\",\"importRef\":\"sample-support\",\"flags\":[],\"orgSection\":\"Service Desk\",\"reportingToId\":5}",
+    "photo": null,
+    "level_id": 6,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 323,
+    "created_at": "2026-11-05T05:55:53.478Z",
+    "created_by": "Sample data",
+    "updated_at": "2026-11-05T05:55:53.478Z",
+    "updated_by": "Sample data"
+   },
+   {
+    "id": 24,
+    "emp_no": "50024",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\",\"institution\":\"Higher College of Technology\",\"major\":\"Information Technology\",\"year\":\"2014\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Field Service Safety\",\"provider\":null,\"date\":\"2016\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50024\",\"nameEn\":\"Talal Hamood Al-Busaidi\",\"nameAr\":\"طلال حمود البوسعيدي\",\"email\":\"talal.busaidi@example.com\",\"phone\":\"+968 9024 0024\",\"gender\":\"Male\",\"dob\":\"1991-12-30\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Digital IT Infrastructure\",\"jobTitle\":\"Service Operations Technician\",\"hireDate\":\"2016-06-05\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Operations\",\"reportingTo\":\"Yousuf Ali Al-Abri\",\"duties\":\"Installs and restores secure connectivity at subscriber premises, working directly with customers.\",\"focusArea\":\"Service operations\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Operations\",\"skillSubcat\":\"Secure connectivity, Site installation\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Capable\",\"upskilling\":\"No\",\"importRef\":\"sample-support\",\"flags\":[],\"orgSection\":\"Systems & Compute\",\"reportingToId\":4}",
+    "photo": null,
+    "level_id": 6,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 324,
+    "created_at": "2026-11-05T05:55:53.478Z",
+    "created_by": "Sample data",
+    "updated_at": "2026-11-05T05:55:53.478Z",
+    "updated_by": "Sample data"
+   },
+   {
+    "id": 25,
+    "emp_no": "50025",
+    "data": "{\"education\":[{\"qualification\":\"Diploma\",\"institution\":\"Higher College of Technology\",\"major\":\"Information Technology\",\"year\":\"2019\",\"notes\":null}],\"certifications\":[],\"technicalTraining\":[{\"title\":\"Field Service Safety\",\"provider\":null,\"date\":\"2021\",\"notes\":null}],\"softTraining\":[],\"empNo\":\"50025\",\"nameEn\":\"Ruqaya Salim Al-Mamari\",\"nameAr\":\"رقية سالم المعمرية\",\"email\":\"ruqaya.mamari@example.com\",\"phone\":\"+968 9025 0025\",\"gender\":\"Female\",\"dob\":\"1997-04-17\",\"nationality\":\"Oman\",\"nationalityCategory\":\"Omani\",\"status\":\"Active\",\"company\":\"Omantel\",\"unit\":\"Digital & Technology\",\"department\":\"Applications Operations\",\"jobTitle\":\"Operations Support Officer\",\"hireDate\":\"2021-01-24\",\"lastWorkingDate\":null,\"contractType\":\"Permanent\",\"payroll\":\"OT-PAY-01\",\"location\":\"Muscat HQ\",\"providerType\":\"Omantel\",\"assignment\":\"Operations\",\"reportingTo\":\"Mariam Said Al-Balushi\",\"duties\":\"Supports daily operations of business applications.\",\"focusArea\":\"Service operations\",\"functionalCategory\":\"Technical\",\"careerInterest\":null,\"skillCategory\":\"Operations\",\"skillSubcat\":\"Application monitoring, User support\",\"skillsetType\":\"Technical\",\"skillCriticality\":\"Medium\",\"staffCriticality\":\"Medium\",\"resourceType\":\"Single Skilled\",\"readiness\":\"Capable\",\"upskilling\":\"No\",\"importRef\":\"sample-support\",\"flags\":[],\"orgSection\":\"Application Support\",\"reportingToId\":3}",
+    "photo": null,
+    "level_id": 6,
+    "level_confirmed": 1,
+    "level_source": "admin",
+    "display_order": 325,
+    "created_at": "2026-11-05T05:55:53.478Z",
+    "created_by": "Sample data",
+    "updated_at": "2026-11-05T05:55:53.478Z",
+    "updated_by": "Sample data"
+   }
+  ],
+  "levels": [
+   {
+    "id": 1,
+    "rank": 1,
+    "name_en": "Vice President (VP)",
+    "name_ar": "نائب الرئيس (VP)",
+    "leadership": 1
+   },
+   {
+    "id": 2,
+    "rank": 2,
+    "name_en": "General Manager (GM)",
+    "name_ar": "مدير عام (GM)",
+    "leadership": 1
+   },
+   {
+    "id": 3,
+    "rank": 3,
+    "name_en": "Senior Manager (SM)",
+    "name_ar": "مدير أول (SM)",
+    "leadership": 1
+   },
+   {
+    "id": 4,
+    "rank": 5,
+    "name_en": "Team Leader (TL)",
+    "name_ar": "قائد فريق (TL)",
+    "leadership": 0
+   },
+   {
+    "id": 5,
+    "rank": 6,
+    "name_en": "Professionals & specialists",
+    "name_ar": "المتخصصون والمهنيون",
+    "leadership": 0
+   },
+   {
+    "id": 6,
+    "rank": 7,
+    "name_en": "Support & operations",
+    "name_ar": "الدعم والتشغيل",
+    "leadership": 0
+   },
+   {
+    "id": 7,
+    "rank": 4,
+    "name_en": "Manager (M)",
+    "name_ar": "مدير (M)",
+    "leadership": 0
+   }
+  ],
+  "restricted": [
+   "phone",
+   "dob",
+   "payroll",
+   "careerInterest",
+   "staffCriticality"
+  ],
+  "importRecords": [
+   {
+    "id": 1,
+    "batch_id": 1,
+    "emp_no": "50001",
+    "row_number": 2,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50001\",\"Full Name in English\":\"Ahmed Salim Al-Rashdi\",\"Full Name in Arabic\":\"أحمد سالم الراشدي\",\"Email Address\":\"ahmed.rashdi@example.com\",\"Phone Number\":\"+968 9001 0001\",\"Gender\":\"Male\",\"Date of Birth\":\"1974-03-11\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Digital Service Operations\",\"Job Title\":\"Vice President, Digital & Technology Operations\",\"Hire Date\":\"2001-09-02\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"\",\"Main Duties\":\"Leads the digital service operations strategy across Digital & Technology.\\nSets governance for managed-service vendors and SLAs.\\nChairs the monthly operations performance review.\",\"Priority List\":\"Digital transformation\",\"Category\":\"Leadership\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Bachelor of Engineering\\nMaster of Business Administration\",\"Competency Faculty\":\"Sultan Qaboos University\\nUniversity of Strathclyde\",\"Competency Major\":\"Electrical Engineering\\nBusiness Administration\",\"Competency Graduation Year\":\"1997\\n2008\",\"SkillCategory\":\"Leadership\",\"SkillSet SubCat\":\"Strategic leadership, Digital transformation, Vendor governance, Portfolio management\",\"SkillsetType\":\"Functional\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"High\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"PMP (PMI) 2010\\nITIL 4 Strategic Leader 2021\",\"Technical Training\":\"\",\"Soft Skills Training\":\"Executive Leadership Programme 2019\\nNegotiation for Leaders 2016\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 2,
+    "batch_id": 1,
+    "emp_no": "50002",
+    "row_number": 3,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50002\",\"Full Name in English\":\"Khalid Hamed Al-Hinai\",\"Full Name in Arabic\":\"خالد حمد الهنائي\",\"Email Address\":\"khalid.hinai@example.com\",\"Phone Number\":\"+968 9002 0002\",\"Gender\":\"Male\",\"Date of Birth\":\"1980-07-22\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Digital Service Operations\",\"Job Title\":\"General Manager, Digital Service Operations\",\"Hire Date\":\"2005-02-13\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Ahmed Salim Al-Rashdi\",\"Main Duties\":\"Manages the Digital Service Operations unit and its service owners.\\nOwns SLA governance and payment governance for managed services.\\nReports operational performance to the VP.\",\"Priority List\":\"SLA governance\",\"Category\":\"Leadership\",\"Preferred Other Domain\":\"Enterprise architecture\",\"Qualification\":\"Bachelor of Science\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Computer Science\",\"Competency Graduation Year\":\"2002\",\"SkillCategory\":\"Service Management\",\"SkillSet SubCat\":\"ITIL, SLA governance, Vendor management, Reporting\",\"SkillsetType\":\"Functional\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"High\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"ITIL 4 Managing Professional 2020\\nCOBIT 2019 Foundation 2021\",\"Technical Training\":\"\",\"Soft Skills Training\":\"Leading High-Performing Teams 2018\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 3,
+    "batch_id": 1,
+    "emp_no": "50003",
+    "row_number": 4,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50003\",\"Full Name in English\":\"Mariam Said Al-Balushi\",\"Full Name in Arabic\":\"مريم سعيد البلوشية\",\"Email Address\":\"mariam.balushi@example.com\",\"Phone Number\":\"+968 9003 0003\",\"Gender\":\"Female\",\"Date of Birth\":\"1986-01-30\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Application Operations\",\"Job Title\":\"Senior Manager, Application Operations\",\"Hire Date\":\"2009-10-04\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Khalid Hamed Al-Hinai\",\"Main Duties\":\"Leads application operations for customer-facing and billing platforms.\\nManages release governance and application stability.\\nCoordinates with the managed-service vendor on incidents and problems.\",\"Priority List\":\"Application stability\",\"Category\":\"Operations\",\"Preferred Other Domain\":\"Data analytics and AI\",\"Qualification\":\"Bachelor of Engineering\\nMaster of Science\",\"Competency Faculty\":\"Muscat College\\nUniversity of Leeds\",\"Competency Major\":\"Computer Engineering\\nInformation Systems\",\"Competency Graduation Year\":\"2008\\n2014\",\"SkillCategory\":\"Application Management\",\"SkillSet SubCat\":\"Application support, Release management, Problem management, SQL\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"High\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"ITIL 4 Foundation (Axelos) 2019\\nPMP (PMI) 2017\",\"Technical Training\":\"UNIX Shell Scripting (7-11 Dec 2014)\\nUNIX Shell Scripting (7-11 Dec 2014)\\nOracle Database Administration 2016\",\"Soft Skills Training\":\"Presentation Skills 2018\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 4,
+    "batch_id": 1,
+    "emp_no": "50004",
+    "row_number": 5,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50004\",\"Full Name in English\":\"Yousuf Ali Al-Abri\",\"Full Name in Arabic\":\"يوسف علي العبري\",\"Email Address\":\"yousuf.abri@example.com\",\"Phone Number\":\"+968 9004 0004\",\"Gender\":\"Male\",\"Date of Birth\":\"1983-05-18\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"IT Infrastructure\",\"Job Title\":\"Manager, IT Infrastructure\",\"Hire Date\":\"2008-06-01\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Khalid Hamed Al-Hinai\",\"Main Duties\":\"Manages data-centre, network and cloud infrastructure operations.\\nOwns capacity planning and infrastructure availability targets.\",\"Priority List\":\"Infrastructure availability\",\"Category\":\"Operations\",\"Preferred Other Domain\":\"Cloud architecture\",\"Qualification\":\"Bachelor of Engineering\",\"Competency Faculty\":\"Higher College of Technology\",\"Competency Major\":\"Communications Engineering\",\"Competency Graduation Year\":\"2006\",\"SkillCategory\":\"Infrastructure\",\"SkillSet SubCat\":\"Data centre, Networking, Cloud, Capacity planning\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"High\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"CCNP Enterprise (Cisco) 2015\\nAWS Solutions Architect Associate 2022\",\"Technical Training\":\"VMware vSphere 2018\",\"Soft Skills Training\":\"Time Management 2017\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 5,
+    "batch_id": 1,
+    "emp_no": "50005",
+    "row_number": 6,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50005\",\"Full Name in English\":\"Aisha Nasser Al-Kharusi\",\"Full Name in Arabic\":\"عائشة ناصر الخروصية\",\"Email Address\":\"aisha.kharusi@example.com\",\"Phone Number\":\"+968 9005 0005\",\"Gender\":\"Female\",\"Date of Birth\":\"1990-11-09\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Digital Service Operations\",\"Job Title\":\"Service Delivery Lead\",\"Hire Date\":\"2013-04-21\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Khalid Hamed Al-Hinai\",\"Main Duties\":\"Leads the service delivery team and daily operations review.\\nTracks KPIs and escalations with vendor service managers.\",\"Priority List\":\"Service delivery\",\"Category\":\"Operations\",\"Preferred Other Domain\":\"Product management\",\"Qualification\":\"Bachelor of Science\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Information Systems\",\"Competency Graduation Year\":\"2012\",\"SkillCategory\":\"Service Management\",\"SkillSet SubCat\":\"Service delivery, KPI tracking, Incident management, Power BI\",\"SkillsetType\":\"Functional\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"ITIL 4 Foundation 2018\",\"Technical Training\":\"Power BI Desktop 2021\",\"Soft Skills Training\":\"Communication Skills 2019\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 6,
+    "batch_id": 1,
+    "emp_no": "50006",
+    "row_number": 7,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50006\",\"Full Name in English\":\"Noura Khalfan Al-Amri\",\"Full Name in Arabic\":\"نورة خلفان العامرية\",\"Email Address\":\"noura.amri@example.com\",\"Phone Number\":\"+968 9006 0006\",\"Gender\":\"Female\",\"Date of Birth\":\"1993-02-14\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Cyber Security\",\"Job Title\":\"Information Security Specialist\",\"Hire Date\":\"2016-08-14\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Yousuf Ali Al-Abri\",\"Main Duties\":\"Monitors security events and supports incident response.\\nReviews access controls and vulnerability remediation.\",\"Priority List\":\"Security operations\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"Cloud security\",\"Qualification\":\"Bachelor of Science\",\"Competency Faculty\":\"German University of Technology in Oman\",\"Competency Major\":\"Cyber Security\",\"Competency Graduation Year\":\"2015\",\"SkillCategory\":\"Cyber Security\",\"SkillSet SubCat\":\"Information security, Risk management, ITIL, SIEM\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"High\",\"Resource Type\":\"Single Skilled\",\"Resources Capability Readiness\":\"Partially Capable\",\"Upskilling Required\":\"Yes\",\"Professional Certifications\":\"CompTIA Security+ 2019\\nCISSP (ISC2) 2023\",\"Technical Training\":\"Splunk Fundamentals 2020\",\"Soft Skills Training\":\"Critical Thinking 2021\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 7,
+    "batch_id": 1,
+    "emp_no": "50007",
+    "row_number": 8,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50007\",\"Full Name in English\":\"Salim Saif Al-Harthi\",\"Full Name in Arabic\":\"سالم سيف الحارثي\",\"Email Address\":\"salim.harthi@example.com\",\"Phone Number\":\"+968 9007 0007\",\"Gender\":\"Male\",\"Date of Birth\":\"1994-09-03\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Application Operations\",\"Job Title\":\"Application Developer\",\"Hire Date\":\"2018-01-07\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Mariam Said Al-Balushi\",\"Main Duties\":\"Develops and maintains internal applications and integrations.\\nSupports production fixes for customer applications.\",\"Priority List\":\"Application development\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Bachelor of Science\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Computer Science\",\"Competency Graduation Year\":\"2017\",\"SkillCategory\":\"Application Development\",\"SkillSet SubCat\":\"Application development, SQL, Power BI, Java\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Partially Capable\",\"Upskilling Required\":\"Yes\",\"Professional Certifications\":\"\",\"Technical Training\":\"Oracle SQL Fundamentals 2019\\nSpring Boot Microservices 2022\",\"Soft Skills Training\":\"Teamwork and Collaboration 2020\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 8,
+    "batch_id": 1,
+    "emp_no": "50008",
+    "row_number": 9,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50008\",\"Full Name in English\":\"Fatma Rashid Al-Maamari\",\"Full Name in Arabic\":\"فاطمة راشد المعمرية\",\"Email Address\":\"fatma.maamari@example.com\",\"Phone Number\":\"+968 9008 0008\",\"Gender\":\"Female\",\"Date of Birth\":\"1989-12-25\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Digital Service Operations\",\"Job Title\":\"IT Project Manager\",\"Hire Date\":\"2014-09-28\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Ahmed Salim Al-Rashdi\",\"Main Duties\":\"Manages technology projects from initiation to closure.\\nTracks scope, budget and risks with business stakeholders.\",\"Priority List\":\"Project delivery\",\"Category\":\"Functional\",\"Preferred Other Domain\":\"Portfolio management\",\"Qualification\":\"Bachelor of Business Administration\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Management Information Systems\",\"Competency Graduation Year\":\"2011\",\"SkillCategory\":\"Project Management\",\"SkillSet SubCat\":\"Project management, ITIL, Power BI, Risk management\",\"SkillsetType\":\"Functional\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"PMP (PMI) 2018\\nPRINCE2 Foundation 2016\",\"Technical Training\":\"\",\"Soft Skills Training\":\"Stakeholder Management 2019\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 9,
+    "batch_id": 1,
+    "emp_no": "50009",
+    "row_number": 10,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50009\",\"Full Name in English\":\"Huda Mohammed Al-Mukhaini\",\"Full Name in Arabic\":\"هدى محمد المخينية\",\"Email Address\":\"huda.mukhaini@example.com\",\"Phone Number\":\"+968 9009 0009\",\"Gender\":\"Female\",\"Date of Birth\":\"1996-04-17\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Data & Analytics\",\"Job Title\":\"Data Analyst\",\"Hire Date\":\"2020-03-01\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Mariam Said Al-Balushi\",\"Main Duties\":\"Builds operational dashboards and data quality checks.\\nAnalyses incident and SLA trends for monthly reporting.\",\"Priority List\":\"Data quality\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"Machine learning\",\"Qualification\":\"Bachelor of Science\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Statistics\",\"Competency Graduation Year\":\"2018\",\"SkillCategory\":\"Data Analytics\",\"SkillSet SubCat\":\"Data analysis, SQL, Power BI, Python\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Partially Capable\",\"Upskilling Required\":\"Yes\",\"Professional Certifications\":\"Microsoft Power BI Data Analyst 2022\",\"Technical Training\":\"Python for Data Analysis 2021\",\"Soft Skills Training\":\"Storytelling with Data 2022\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 10,
+    "batch_id": 1,
+    "emp_no": "50010",
+    "row_number": 11,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50010\",\"Full Name in English\":\"Sultan Khamis Al-Busaidi\",\"Full Name in Arabic\":\"سلطان خميس البوسعيدي\",\"Email Address\":\"sultan.busaidi@example.com\",\"Phone Number\":\"+968 9010 0010\",\"Gender\":\"Male\",\"Date of Birth\":\"1991-06-06\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"IT Infrastructure\",\"Job Title\":\"Network Engineer\",\"Hire Date\":\"2015-11-15\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Yousuf Ali Al-Abri\",\"Main Duties\":\"Operates and troubleshoots core and enterprise networks.\\nImplements network changes during maintenance windows.\",\"Priority List\":\"Network reliability\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Diploma\\nBachelor\",\"Competency Faculty\":\"Higher College of Technology\",\"Competency Major\":\"Networking\",\"Competency Graduation Year\":\"2012\",\"SkillCategory\":\"Infrastructure\",\"SkillSet SubCat\":\"Routing and switching, Firewalls, Cisco\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Single Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"CCNA (Cisco) 2014\",\"Technical Training\":\"CCNA (Cisco) 2014\\nFortinet NSE 4 2020\",\"Soft Skills Training\":\"\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 11,
+    "batch_id": 1,
+    "emp_no": "50011",
+    "row_number": 12,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50011\",\"Full Name in English\":\"Hamed Saleh Al-Siyabi\",\"Full Name in Arabic\":\"حمد صالح السيابي\",\"Email Address\":\"hamed.siyabi@example.com\",\"Phone Number\":\"+968 9011 0011\",\"Gender\":\"Male\",\"Date of Birth\":\"1988-08-19\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"IT Infrastructure\",\"Job Title\":\"Systems Engineer\",\"Hire Date\":\"2012-05-20\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Yousuf Ali Al-Abri\",\"Main Duties\":\"Administers Linux and Windows server platforms.\\nAutomates routine operations and patching.\",\"Priority List\":\"Platform automation\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"DevOps\",\"Qualification\":\"Bachelor of Engineering\",\"Competency Faculty\":\"Caledonian College of Engineering\",\"Competency Major\":\"Computer Engineering\",\"Competency Graduation Year\":\"2010\",\"SkillCategory\":\"Infrastructure\",\"SkillSet SubCat\":\"Linux, Windows Server, Automation, Ansible\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"Red Hat Certified System Administrator 2017\",\"Technical Training\":\"Ansible Automation 2021\",\"Soft Skills Training\":\"Problem Solving 2018\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 12,
+    "batch_id": 1,
+    "emp_no": "50012",
+    "row_number": 13,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50012\",\"Full Name in English\":\"Zainab Abdullah Al-Lawati\",\"Full Name in Arabic\":\"زينب عبدالله اللواتية\",\"Email Address\":\"zainab.lawati@example.com\",\"Phone Number\":\"+968 9012 0012\",\"Gender\":\"Female\",\"Date of Birth\":\"1995-10-02\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Application Operations\",\"Job Title\":\"Business Analyst\",\"Hire Date\":\"2019-02-17\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Mariam Said Al-Balushi\",\"Main Duties\":\"Gathers requirements and writes user stories for application changes.\\nSupports user acceptance testing.\",\"Priority List\":\"Requirements management\",\"Category\":\"Functional\",\"Preferred Other Domain\":\"Product management\",\"Qualification\":\"Bachelor of Business Administration\",\"Competency Faculty\":\"University of Nizwa\",\"Competency Major\":\"Management Information Systems\",\"Competency Graduation Year\":\"2017\",\"SkillCategory\":\"Business Analysis\",\"SkillSet SubCat\":\"Business analysis, Process mapping, UAT\",\"SkillsetType\":\"Functional\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Low\",\"Resource Type\":\"Single Skilled\",\"Resources Capability Readiness\":\"Partially Capable\",\"Upskilling Required\":\"Yes\",\"Professional Certifications\":\"\",\"Technical Training\":\"Agile Scrum Fundamentals 2020\",\"Soft Skills Training\":\"Business Writing 2021\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 13,
+    "batch_id": 1,
+    "emp_no": "50013",
+    "row_number": 14,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50013\",\"Full Name in English\":\"Rahul Menon\",\"Full Name in Arabic\":\"\",\"Email Address\":\"rahul.menon@example.com\",\"Phone Number\":\"+968 9013 0013\",\"Gender\":\"Male\",\"Date of Birth\":\"1987-03-29\",\"Age\":\"\",\"Nationality\":\"Indian\",\"Nationality Category\":\"Expat\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Application Operations\",\"Job Title\":\"Application Support Engineer\",\"Hire Date\":\"2021-07-11\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Fixed Term\",\"Payroll\":\"TCS-PAY\",\"Location\":\"Onsite\",\"Type\":\"TCS\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Mariam Said Al-Balushi\",\"Main Duties\":\"Provides L2 support for billing and CRM applications.\\nHandles incident resolution within SLA targets.\",\"Priority List\":\"Application stability\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Bachelor of Technology\",\"Competency Faculty\":\"Anna University\",\"Competency Major\":\"Computer Science\",\"Competency Graduation Year\":\"2009\",\"SkillCategory\":\"Application Management\",\"SkillSet SubCat\":\"Application support, SQL, Linux, Java\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"\",\"Resource Type\":\"Single Skilled\",\"Resources Capability Readiness\":\"Partially Capable\",\"Upskilling Required\":\"Yes\",\"Professional Certifications\":\"ITIL 4 Foundation 2020\",\"Technical Training\":\"Oracle SQL Fundamentals 2019\",\"Soft Skills Training\":\"\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 14,
+    "batch_id": 1,
+    "emp_no": "50014",
+    "row_number": 15,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50014\",\"Full Name in English\":\"Priya Nair\",\"Full Name in Arabic\":\"\",\"Email Address\":\"priya.nair@example.com\",\"Phone Number\":\"+968 9014 0014\",\"Gender\":\"Female\",\"Date of Birth\":\"1990-12-12\",\"Age\":\"\",\"Nationality\":\"Indian\",\"Nationality Category\":\"Expat\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Data & Analytics\",\"Job Title\":\"Database Administrator\",\"Hire Date\":\"2022-01-09\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Fixed Term\",\"Payroll\":\"TCS-PAY\",\"Location\":\"Onsite\",\"Type\":\"TCS\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Mariam Said Al-Balushi\",\"Main Duties\":\"Administers Oracle and PostgreSQL databases.\\nManages backups, performance tuning and access requests.\",\"Priority List\":\"Database reliability\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Master of Computer Applications\",\"Competency Faculty\":\"University of Kerala\",\"Competency Major\":\"Computer Applications\",\"Competency Graduation Year\":\"2013\",\"SkillCategory\":\"Database\",\"SkillSet SubCat\":\"Oracle, PostgreSQL, Performance tuning\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"\",\"Resource Type\":\"Single Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"Oracle Database Administrator Certified Professional 2016\",\"Technical Training\":\"\",\"Soft Skills Training\":\"\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 15,
+    "batch_id": 1,
+    "emp_no": "50015",
+    "row_number": 16,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50015\",\"Full Name in English\":\"Majid Hilal Al-Saadi\",\"Full Name in Arabic\":\"ماجد هلال السعدي\",\"Email Address\":\"majid.saadi@example.com\",\"Phone Number\":\"+968 9015 0015\",\"Gender\":\"Male\",\"Date of Birth\":\"1997-01-21\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"IT Infrastructure\",\"Job Title\":\"Cloud Engineer\",\"Hire Date\":\"2021-10-03\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Yousuf Ali Al-Abri\",\"Main Duties\":\"Builds and operates cloud landing zones and CI/CD pipelines.\",\"Priority List\":\"Cloud adoption\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"Cloud architecture\",\"Qualification\":\"Bachelor of Science\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Computer Engineering\",\"Competency Graduation Year\":\"2019\",\"SkillCategory\":\"Cloud\",\"SkillSet SubCat\":\"AWS, Kubernetes, CI/CD, Terraform\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Partially Capable\",\"Upskilling Required\":\"Yes\",\"Professional Certifications\":\"AWS Solutions Architect Associate 2023\",\"Technical Training\":\"Kubernetes Fundamentals 2022\\nDocker Essentials 2021\",\"Soft Skills Training\":\"\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 16,
+    "batch_id": 1,
+    "emp_no": "50016",
+    "row_number": 17,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50016\",\"Full Name in English\":\"Laila Juma Al-Riyami\",\"Full Name in Arabic\":\"ليلى جمعة الريامية\",\"Email Address\":\"laila.riyami@example.com\",\"Phone Number\":\"+968 9016 0016\",\"Gender\":\"Female\",\"Date of Birth\":\"1992-05-27\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Digital Service Operations\",\"Job Title\":\"Process Excellence Specialist\",\"Hire Date\":\"2017-06-18\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Aisha Nasser Al-Kharusi\",\"Main Duties\":\"Maps and improves operational processes.\\nRuns Lean Six Sigma improvement projects.\",\"Priority List\":\"Process improvement\",\"Category\":\"Operations\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Bachelor of Engineering\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Industrial Engineering\",\"Competency Graduation Year\":\"2015\",\"SkillCategory\":\"Process Excellence\",\"SkillSet SubCat\":\"Lean Six Sigma, KPI design, Process mapping\",\"SkillsetType\":\"Functional\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Low\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"Lean Six Sigma Green Belt (IASSC) 2022\",\"Technical Training\":\"\",\"Soft Skills Training\":\"Facilitation Skills 2020\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 17,
+    "batch_id": 1,
+    "emp_no": "50017",
+    "row_number": 18,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50017\",\"Full Name in English\":\"Badr Ahmed Al-Shukaili\",\"Full Name in Arabic\":\"بدر أحمد الشكيلي\",\"Email Address\":\"badr.shukaili@example.com\",\"Phone Number\":\"+968 9017 0017\",\"Gender\":\"Male\",\"Date of Birth\":\"1985-09-14\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Active\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Enterprise Architecture\",\"Job Title\":\"Enterprise Architect\",\"Hire Date\":\"2011-01-16\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Ahmed Salim Al-Rashdi\",\"Main Duties\":\"Maintains the enterprise architecture roadmap and standards.\\nReviews solution designs for alignment.\",\"Priority List\":\"Architecture governance\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Bachelor of Science\\nMaster of Science\",\"Competency Faculty\":\"Sultan Qaboos University\\nUniversity of Manchester\",\"Competency Major\":\"Computer Science\\nSoftware Engineering\",\"Competency Graduation Year\":\"2007\\n2013\",\"SkillCategory\":\"Architecture\",\"SkillSet SubCat\":\"TOGAF, Solution design, Integration\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"High\",\"Staff Criticality\":\"High\",\"Resource Type\":\"Multi Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"TOGAF 9 Certified 2015\",\"Technical Training\":\"\",\"Soft Skills Training\":\"Executive Communication 2020\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 18,
+    "batch_id": 1,
+    "emp_no": "50018",
+    "row_number": 19,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50018\",\"Full Name in English\":\"Omar Khalid Al-Habsi\",\"Full Name in Arabic\":\"عمر خالد الحبسي\",\"Email Address\":\"omar.habsi@example.com\",\"Phone Number\":\"+968 9018 0018\",\"Gender\":\"Male\",\"Date of Birth\":\"1998-02-08\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"On Leave\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Digital Service Operations\",\"Job Title\":\"Service Desk Analyst\",\"Hire Date\":\"2022-09-04\",\"Last Working Date\":\"\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Seconded\",\"Reporting To\":\"Aisha Nasser Al-Kharusi\",\"Main Duties\":\"Logs and triages user requests and incidents.\",\"Priority List\":\"User support\",\"Category\":\"Operations\",\"Preferred Other Domain\":\"Application development\",\"Qualification\":\"Diploma\",\"Competency Faculty\":\"Higher College of Technology\",\"Competency Major\":\"Information Technology\",\"Competency Graduation Year\":\"2019\",\"SkillCategory\":\"Service Management\",\"SkillSet SubCat\":\"Service desk, Incident logging, ITIL\",\"SkillsetType\":\"Functional\",\"Skill Criticality\":\"Low\",\"Staff Criticality\":\"Low\",\"Resource Type\":\"Single Skilled\",\"Resources Capability Readiness\":\"\",\"Upskilling Required\":\"\",\"Professional Certifications\":\"\",\"Technical Training\":\"ITIL 4 Foundation 2023\",\"Soft Skills Training\":\"Customer Service Excellence 2022\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   },
+   {
+    "id": 19,
+    "batch_id": 1,
+    "emp_no": "50019",
+    "row_number": 20,
+    "action": "created",
+    "raw": "{\"Employee Number\":\"50019\",\"Full Name in English\":\"Saif Mubarak Al-Mahrouqi\",\"Full Name in Arabic\":\"سيف مبارك المحروقي\",\"Email Address\":\"saif.mahrouqi@example.com\",\"Phone Number\":\"+968 9019 0019\",\"Gender\":\"Male\",\"Date of Birth\":\"1984-04-04\",\"Age\":\"\",\"Nationality\":\"Omani\",\"Nationality Category\":\"Omani\",\"Employment Status\":\"Resigned\",\"Company\":\"Omantel\",\"Unit Name\":\"Digital & Technology\",\"Organization\":\"Application Operations\",\"Job Title\":\"Senior Application Analyst\",\"Hire Date\":\"2010-03-14\",\"Last Working Date\":\"2025-12-31\",\"Actual Years of Service\":\"\",\"Contract Type\":\"Permanent\",\"Payroll\":\"OT-PAY-01\",\"Location\":\"Muscat HQ\",\"Type\":\"Omantel\",\"Seconded/Governanace\":\"Governance\",\"Reporting To\":\"Mariam Said Al-Balushi\",\"Main Duties\":\"Supported billing application change requests.\",\"Priority List\":\"\",\"Category\":\"Technical\",\"Preferred Other Domain\":\"\",\"Qualification\":\"Bachelor of Science\",\"Competency Faculty\":\"Sultan Qaboos University\",\"Competency Major\":\"Computer Science\",\"Competency Graduation Year\":\"2007\",\"SkillCategory\":\"Application Management\",\"SkillSet SubCat\":\"Billing systems, SQL\",\"SkillsetType\":\"Technical\",\"Skill Criticality\":\"Medium\",\"Staff Criticality\":\"Medium\",\"Resource Type\":\"Single Skilled\",\"Resources Capability Readiness\":\"Fully Capable\",\"Upskilling Required\":\"No\",\"Professional Certifications\":\"\",\"Technical Training\":\"\",\"Soft Skills Training\":\"\"}",
+    "notes": null,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner"
+   }
+  ],
+  "batches": [
+   {
+    "id": 1,
+    "filename": "demo-fictional.tsv",
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "created_by": "Directory owner",
+    "summary": "{\"created\":19,\"updated\":0,\"skippedUpdates\":0,\"unchanged\":0,\"rejected\":0,\"duplicateGroups\":0,\"cleanup\":1}"
+   }
+  ],
+  "audit": [
+   {
+    "id": 1,
+    "at": "2026-10-05T07:23:09.666Z",
+    "user_name": "Directory owner <owner@example.com>",
+    "action": "login",
+    "employee_id": null,
+    "emp_no": null,
+    "details": null
+   },
+   {
+    "id": 2,
+    "at": "2026-10-05T07:23:09.707Z",
+    "user_name": "Directory owner <owner@example.com>",
+    "action": "import",
+    "employee_id": null,
+    "emp_no": null,
+    "details": "{\"batch\":1,\"filename\":\"demo-fictional.tsv\",\"created\":19,\"updated\":0,\"skippedUpdates\":0,\"unchanged\":0,\"rejected\":0,\"duplicateGroups\":0,\"cleanup\":1}"
+   }
+  ],
+  "users": [
+   {
+    "id": 1,
+    "email": "owner",
+    "name": "Directory owner",
+    "role": "admin",
+    "active": 1,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "last_login": "2026-11-05T05:55:53.400Z"
+   },
+   {
+    "id": 2,
+    "email": "viewer@review.local",
+    "name": "Review Viewer",
+    "role": "viewer",
+    "active": 1,
+    "created_at": "2026-10-05T07:23:09.703Z",
+    "last_login": null
+   }
+  ],
+  "nextId": 1000,
+  "orgV": 1,
+  "statusV": 1,
+  "roleV": 1,
+  "secV2": 1,
+  "secV": 1,
+  "rtV": 1,
+  "supV1": 1,
+  "allow": {
+   "recs": [
+    {
+     "id": "smp-1",
+     "emp": 20,
+     "empNo": "50020",
+     "type": "علاوة الأعمال الفنية",
+     "amt": 100000,
+     "cur": "OMR",
+     "freq": "monthly",
+     "status": "سارية",
+     "start": "2025-01-01",
+     "end": "",
+     "ref": "SMP-20",
+     "src": "بيانات تجريبية",
+     "created": "2026-11-05T05:55:53.478Z",
+     "updated": "2026-11-05T05:55:53.478Z",
+     "hist": []
+    },
+    {
+     "id": "smp-2",
+     "emp": 21,
+     "empNo": "50021",
+     "type": "علاوة الأعمال الفنية المساعدة",
+     "amt": 50000,
+     "cur": "OMR",
+     "freq": "monthly",
+     "status": "سارية",
+     "start": "2025-01-01",
+     "end": "",
+     "ref": "SMP-21",
+     "src": "بيانات تجريبية",
+     "created": "2026-11-05T05:55:53.478Z",
+     "updated": "2026-11-05T05:55:53.478Z",
+     "hist": []
+    },
+    {
+     "id": "smp-3",
+     "emp": 22,
+     "empNo": "50022",
+     "type": "علاوة الأعمال الفنية",
+     "amt": 100000,
+     "cur": "OMR",
+     "freq": "monthly",
+     "status": "سارية",
+     "start": "2026-10-21",
+     "end": "",
+     "ref": "SMP-22",
+     "src": "بيانات تجريبية",
+     "created": "2026-11-05T05:55:53.478Z",
+     "updated": "2026-11-05T05:55:53.478Z",
+     "hist": []
+    },
+    {
+     "id": "smp-4",
+     "emp": 23,
+     "empNo": "50023",
+     "type": "علاوة الأعمال الفنية المساعدة",
+     "amt": 50000,
+     "cur": "OMR",
+     "freq": "monthly",
+     "status": "سارية",
+     "start": "2025-06-01",
+     "end": "",
+     "ref": "SMP-23",
+     "src": "بيانات تجريبية",
+     "created": "2026-11-05T05:55:53.478Z",
+     "updated": "2026-11-05T05:55:53.478Z",
+     "hist": []
+    },
+    {
+     "id": "smp-5",
+     "emp": 24,
+     "empNo": "50024",
+     "type": "علاوة الأعمال الفنية",
+     "amt": 100000,
+     "cur": "OMR",
+     "freq": "monthly",
+     "status": "سارية",
+     "start": "2024-09-01",
+     "end": "",
+     "ref": "SMP-24",
+     "src": "بيانات تجريبية",
+     "created": "2026-11-05T05:55:53.478Z",
+     "updated": "2026-11-05T05:55:53.478Z",
+     "hist": []
+    }
+   ],
+   "imports": [],
+   "cfg2": {
+    "inactive": []
+   },
+   "elig": {
+    "facts": {
+     "20": {
+      "cat": "spec",
+      "basis": "Documented duties",
+      "sup": "",
+      "adm": "",
+      "cust": "yes",
+      "task": "yes",
+      "entry": "new",
+      "techStart": "",
+      "susp": "",
+      "note": "بيانات تجريبية",
+      "at": "2026-11-05T05:55:53.478Z",
+      "by": "Sample data"
+     },
+     "21": {
+      "cat": "sup",
+      "basis": "Documented duties",
+      "sup": "yes",
+      "adm": "yes",
+      "cust": "no",
+      "task": "no",
+      "entry": "new",
+      "techStart": "",
+      "susp": "",
+      "note": "بيانات تجريبية",
+      "at": "2026-11-05T05:55:53.478Z",
+      "by": "Sample data"
+     },
+     "22": {
+      "cat": "spec",
+      "basis": "Documented duties",
+      "sup": "",
+      "adm": "",
+      "cust": "yes",
+      "task": "yes",
+      "entry": "transfer",
+      "techStart": "2026-10-06",
+      "susp": "",
+      "note": "بيانات تجريبية",
+      "at": "2026-11-05T05:55:53.478Z",
+      "by": "Sample data"
+     },
+     "23": {
+      "cat": "sup",
+      "basis": "Documented duties",
+      "sup": "no",
+      "adm": "no",
+      "cust": "no",
+      "task": "no",
+      "entry": "new",
+      "techStart": "",
+      "susp": "",
+      "note": "بيانات تجريبية",
+      "at": "2026-11-05T05:55:53.478Z",
+      "by": "Sample data"
+     },
+     "24": {
+      "cat": "spec",
+      "basis": "Documented duties",
+      "sup": "",
+      "adm": "",
+      "cust": "yes",
+      "task": "yes",
+      "entry": "new",
+      "techStart": "",
+      "susp": "leave",
+      "note": "بيانات تجريبية",
+      "at": "2026-11-05T05:55:53.478Z",
+      "by": "Sample data"
+     }
+    },
+    "tmap": {
+     "علاوة الأعمال الفنية المساعدة": "sup",
+     "علاوة الأعمال الفنية": "spec"
+    }
+   }
+  },
+  "pkSmp1": 1,
+  "park": {
+   "spots": [
+    {
+     "id": "PK-smp01",
+     "no": "P-01",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B1",
+     "type": "cov",
+     "bind": "pos",
+     "pos": "Vice President, Digital & Technology Operations",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp02",
+     "no": "P-02",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B1",
+     "type": "cov",
+     "bind": "pos",
+     "pos": "General Manager, Digital Service Operations",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp03",
+     "no": "P-03",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B1",
+     "type": "cov",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp04",
+     "no": "P-04",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B1",
+     "type": "std",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp05",
+     "no": "P-05",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B1",
+     "type": "std",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp06",
+     "no": "P-06",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B1",
+     "type": "std",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp07",
+     "no": "P-07",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B2",
+     "type": "std",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp08",
+     "no": "P-08",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B2",
+     "type": "ev",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp09",
+     "no": "P-09",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B2",
+     "type": "std",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp10",
+     "no": "P-10",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B2",
+     "type": "acc",
+     "bind": "emp",
+     "pos": "",
+     "note": "مخصص لذوي الإعاقة",
+     "blocks": [],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp11",
+     "no": "P-11",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B2",
+     "type": "std",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [
+      {
+       "id": "PB-smp11",
+       "kind": "res",
+       "from": "2026-11-05",
+       "to": "2026-11-19",
+       "note": "زوار ورشة عمل (تجريبي)",
+       "at": "2026-11-05T05:55:53.487Z",
+       "by": "Sample data"
+      }
+     ],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    },
+    {
+     "id": "PK-smp12",
+     "no": "P-12",
+     "site": "Muscat HQ",
+     "bld": "Tower A",
+     "zone": "B2",
+     "type": "std",
+     "bind": "emp",
+     "pos": "",
+     "note": "",
+     "blocks": [
+      {
+       "id": "PB-smp12",
+       "kind": "oos",
+       "from": "2026-10-26",
+       "to": "",
+       "note": "صيانة الأرضية (تجريبي)",
+       "at": "2026-11-05T05:55:53.487Z",
+       "by": "Sample data"
+      }
+     ],
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "src": "بيانات تجريبية"
+    }
+   ],
+   "asg": [
+    {
+     "id": "PA-smp01",
+     "spot": "PK-smp01",
+     "emp": 1,
+     "from": "2024-01-01",
+     "to": "",
+     "note": "مرتبط بمنصب نائب الرئيس",
+     "exc": "",
+     "snap": {
+      "lv": 1,
+      "unit": "Digital & Technology",
+      "dept": "Digital & Technology",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp02",
+     "spot": "PK-smp02",
+     "emp": 2,
+     "from": "2024-01-01",
+     "to": "",
+     "note": "مرتبط بمنصب المدير العام",
+     "exc": "",
+     "snap": {
+      "lv": 2,
+      "unit": "Digital & Technology",
+      "dept": "Digital Service Operations",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp03",
+     "spot": "PK-smp03",
+     "emp": 3,
+     "from": "2024-03-01",
+     "to": "",
+     "note": "",
+     "exc": "",
+     "snap": {
+      "lv": 3,
+      "unit": "Digital & Technology",
+      "dept": "Applications Operations",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp04",
+     "spot": "PK-smp04",
+     "emp": 4,
+     "from": "2026-02-01",
+     "to": "",
+     "note": "وفق الاستثناء EX-SMP-01",
+     "exc": "EX-SMP-01",
+     "snap": {
+      "lv": 7,
+      "unit": "Digital & Technology",
+      "dept": "Digital IT Infrastructure",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp05",
+     "spot": "PK-smp05",
+     "emp": 5,
+     "from": "2025-01-12",
+     "to": "",
+     "note": "",
+     "exc": "",
+     "snap": {
+      "lv": 4,
+      "unit": "Digital & Technology",
+      "dept": "Digital Service Operations",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp06",
+     "spot": "PK-smp06",
+     "emp": 6,
+     "from": "2025-04-06",
+     "to": "",
+     "note": "",
+     "exc": "",
+     "snap": {
+      "lv": 5,
+      "unit": "Digital & Technology",
+      "dept": "Digital Network & Security Operations",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp07",
+     "spot": "PK-smp07",
+     "emp": 7,
+     "from": "2025-06-01",
+     "to": "",
+     "note": "",
+     "exc": "",
+     "snap": {
+      "lv": 5,
+      "unit": "Digital & Technology",
+      "dept": "Applications Operations",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp08",
+     "spot": "PK-smp08",
+     "emp": 8,
+     "from": "2025-09-14",
+     "to": "",
+     "note": "سيارة كهربائية",
+     "exc": "",
+     "snap": {
+      "lv": 5,
+      "unit": "Digital & Technology",
+      "dept": "Digital Service Operations",
+      "loc": "Muscat HQ",
+      "st": "Active"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    },
+    {
+     "id": "PA-smp09",
+     "spot": "PK-smp09",
+     "emp": 19,
+     "from": "2023-05-01",
+     "to": "",
+     "note": "لم يُحرَّر بعد انتهاء الخدمة (تجريبي)",
+     "exc": "",
+     "snap": {
+      "lv": 5,
+      "unit": "Digital & Technology",
+      "dept": "Applications Operations",
+      "loc": "Muscat HQ",
+      "st": "Resigned"
+     },
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    }
+   ],
+   "wait": [
+    {
+     "id": "PW-smp1",
+     "emp": 9,
+     "at": "2026-08-10",
+     "ord": 1,
+     "why": "أقدم طلب مسجّل (تجريبي)",
+     "at2": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "hist": [
+      {
+       "at": "2026-11-05T05:55:53.487Z",
+       "by": "Sample data",
+       "to": 1,
+       "why": "أقدم طلب مسجّل (تجريبي)"
+      }
+     ]
+    },
+    {
+     "id": "PW-smp2",
+     "emp": 10,
+     "at": "2026-09-03",
+     "ord": 2,
+     "why": "بعد الطلب الأول حسب تاريخ الإدراج (تجريبي)",
+     "at2": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data",
+     "hist": [
+      {
+       "at": "2026-11-05T05:55:53.487Z",
+       "by": "Sample data",
+       "to": 2,
+       "why": "بعد الطلب الأول حسب تاريخ الإدراج (تجريبي)"
+      }
+     ]
+    }
+   ],
+   "exc": [
+    {
+     "id": "PX-smp1",
+     "emp": 4,
+     "kind": "elig",
+     "ref": "EX-SMP-01",
+     "date": "2026-01-15",
+     "until": "",
+     "note": "استثناء تجريبي: مناوبات ليلية لإدارة البنية التحتية",
+     "at": "2026-11-05T05:55:53.487Z",
+     "by": "Sample data"
+    }
+   ],
+   "imports": [],
+   "log": [],
+   "notes": {},
+   "types": [
+    {
+     "id": "std",
+     "ar": "عادي",
+     "en": "Standard"
+    },
+    {
+     "id": "cov",
+     "ar": "مظلّل",
+     "en": "Covered"
+    },
+    {
+     "id": "acc",
+     "ar": "لذوي الإعاقة",
+     "en": "Accessible"
+    },
+    {
+     "id": "ev",
+     "ar": "شحن السيارات الكهربائية",
+     "en": "EV charging"
+    }
+   ],
+   "rules": {
+    "ver": 2,
+    "src": "rule",
+    "set": true,
+    "cap": 20,
+    "cats": [
+     {
+      "id": "c1",
+      "name": "VP",
+      "lv": [
+       1
+      ],
+      "titles": []
+     },
+     {
+      "id": "c2",
+      "name": "General Manager",
+      "lv": [
+       2
+      ],
+      "titles": []
+     },
+     {
+      "id": "c3",
+      "name": "Senior Manager",
+      "lv": [
+       3
+      ],
+      "titles": []
+     },
+     {
+      "id": "c4",
+      "name": "Senior Proficient",
+      "lv": [
+       4,
+       5
+      ],
+      "titles": []
+     }
+    ],
+    "unit": {
+     "mode": "list",
+     "vals": [
+      "Digital & Technology"
+     ]
+    },
+    "st": {
+     "mode": "list",
+     "vals": [
+      "Active"
+     ]
+    },
+    "loc": {
+     "mode": "any",
+     "vals": []
+    },
+    "at": "",
+    "by": ""
+   }
+  },
+  "ui": {
+   "hiddenCharts": [],
+   "hiddenKpis": [],
+   "chartOrder": [],
+   "kpiOrder": [],
+   "customCharts": [],
+   "hiddenPages": [],
+   "siteAr": "",
+   "siteEn": "",
+   "idp": {},
+   "succ": {},
+   "dismissed": {},
+   "followups": {},
+   "noms": [],
+   "mrate": {},
+   "awards": []
+  },
+  "corrections": [],
+  "vacancies": [
+   {
+    "id": 1793858158463,
+    "title": "Senior Cloud Engineer",
+    "unit": "Digital IT Infrastructure",
+    "src": "Budget 2026 (V2)",
+    "yr": "2026",
+    "replOf": "Saif Mubarak Al-Mahrouqi",
+    "exec": "Khalid Hamed Al-Hinai",
+    "sum": "In progress",
+    "rec": "Interviews",
+    "fb": "Three candidates shortlisted; second-round interviews next week.",
+    "reportsToId": 4,
+    "since": "2026-05-10",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   },
+   {
+    "id": 1793858158464,
+    "title": "Data Engineer",
+    "unit": "Data Analytics & AI Platforms",
+    "src": "New headcount 2026",
+    "yr": "2026",
+    "replOf": null,
+    "exec": "Ahmed Salim Al-Rashdi",
+    "sum": "Open",
+    "rec": "Advertised on careers portal",
+    "fb": "Posted on the careers portal and LinkedIn; 41 applications so far.",
+    "reportsToId": 9,
+    "since": "2026-07-01",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   },
+   {
+    "id": 1793858158465,
+    "title": "Network Security Specialist",
+    "unit": "Digital Network & Security Operations",
+    "src": "Budget 2025 (carry-forward)",
+    "yr": "2025",
+    "replOf": "Ali Nasser Al-Habsi",
+    "exec": "Khalid Hamed Al-Hinai",
+    "sum": "In progress",
+    "rec": "Offer sent",
+    "fb": "Offer sent on 2 Oct; awaiting the candidate's acceptance.",
+    "reportsToId": 6,
+    "since": "2025-11-20",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   },
+   {
+    "id": 1793858158466,
+    "title": "Service Desk Analyst",
+    "unit": "Digital Service Operations",
+    "src": "Replacement budget",
+    "yr": "2026",
+    "replOf": "Maryam Khalfan Al-Shidi",
+    "exec": "Khalid Hamed Al-Hinai",
+    "sum": "On hold",
+    "rec": "JD approved",
+    "fb": "Hiring paused until the Q1 headcount review.",
+    "reportsToId": 2,
+    "since": "2026-02-15",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   },
+   {
+    "id": 1793858158467,
+    "title": "Enterprise Architect",
+    "unit": "Enterprise Architecture & Standards",
+    "src": "Budget 2026 (V2)",
+    "yr": "2026",
+    "replOf": null,
+    "exec": "Ahmed Salim Al-Rashdi",
+    "sum": "Open",
+    "rec": "JD under approval",
+    "fb": "Job description under review with HR business partner.",
+    "reportsToId": 17,
+    "since": "2026-08-01",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   },
+   {
+    "id": 1793858158468,
+    "title": "Applications Support Engineer",
+    "unit": "Applications Operations",
+    "src": "Replacement budget",
+    "yr": "2026",
+    "replOf": "Said Hamood Al-Rawahi",
+    "exec": "Khalid Hamed Al-Hinai",
+    "sum": "Filled",
+    "rec": "Joined",
+    "fb": "Joined on 1 September; onboarding plan in place.",
+    "reportsToId": 3,
+    "since": "2026-03-01",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   },
+   {
+    "id": 1793858158469,
+    "title": "DevOps Engineer",
+    "unit": "Digital IT Infrastructure",
+    "src": "New headcount 2027",
+    "yr": "2027",
+    "replOf": null,
+    "exec": "Khalid Hamed Al-Hinai",
+    "sum": "Open",
+    "rec": "Screening CVs",
+    "fb": "12 CVs received from the agency; screening in progress.",
+    "reportsToId": 4,
+    "since": "2026-09-01",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   },
+   {
+    "id": 1793858158470,
+    "title": "IT Project Manager",
+    "unit": "Digital Service Operations",
+    "src": "Budget 2026 (V2)",
+    "yr": "2026",
+    "replOf": null,
+    "exec": "Khalid Hamed Al-Hinai",
+    "sum": "Cancelled",
+    "rec": "Withdrawn",
+    "fb": "Role merged into the PMO lead position.",
+    "reportsToId": 2,
+    "since": "2026-01-12",
+    "coveredById": null,
+    "note": null,
+    "created_at": "2026-11-05T05:55:58.463Z",
+    "updated_at": "2026-11-05T05:55:58.463Z",
+    "hist": [
+     {
+      "at": "2026-11-05T05:55:58.463Z",
+      "by": "—",
+      "t": "Created as sample"
+     }
+    ]
+   }
+  ],
+  "vacSeed": 1
+ }
+}

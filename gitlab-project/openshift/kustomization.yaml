@@ -1,0 +1,20 @@
+# Apply with:  oc apply -k openshift/   (after creating the Secret; see README.md, "Deploy to OpenShift")
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+labels:
+  - pairs:
+      app.kubernetes.io/name: employee-directory
+      app.kubernetes.io/part-of: employee-directory
+    includeSelectors: true
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - route.yaml
+  - networkpolicy.yaml
+  - poddisruptionbudget.yaml
+images:
+  # The pipeline replaces this with the image it pushed (registry/path:commit).
+  - name: employee-directory
+    newName: REGISTRY/GROUP/employee-directory
+    newTag: latest

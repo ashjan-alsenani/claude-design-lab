@@ -1,21 +1,46 @@
 {
   "name": "employee-directory",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Digital & Technology employee directory: a static web app (HTML, CSS, JavaScript) with fictional sample data.",
-  "engines": { "node": ">=20" },
+  "description": "Digital & Technology employee directory: web app (Vite + TypeScript) with a Node.js + PostgreSQL server and company sign-in (OIDC).",
+  "engines": { "node": ">=22" },
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "build:single": "node scripts/build.mjs --single",
-    "serve": "node scripts/serve.mjs",
-    "start": "node scripts/build.mjs && node scripts/serve.mjs",
-    "check": "node scripts/check.mjs",
-    "test": "node tests/run-all.mjs",
-    "hash-password": "node scripts/hash-password.mjs"
+    "dev": "vite",
+    "dev:server": "tsx watch server/src/index.ts",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:test": "vite build --mode standalone",
+    "build:server": "tsc -p server/tsconfig.json",
+    "start": "node server-dist/server/src/index.js",
+    "typecheck": "tsc -p tsconfig.json && tsc -p server/tsconfig.json --noEmit",
+    "check": "npm run typecheck && node tools/check.mjs",
+    "db:migrate": "node server-dist/tools/db.js migrate",
+    "db:seed": "node server-dist/tools/db.js seed",
+    "db:export": "node server-dist/tools/db.js export",
+    "test": "npm run test:server && npm run test:e2e",
+    "test:server": "node --test \"server-dist/tests/server/*.test.js\"",
+    "test:e2e": "node tests/e2e/run-all.mjs",
+    "test:e2e:server": "node tests/e2e-server/run-all.mjs"
+  },
+  "dependencies": {
+    "connect-pg-simple": "10.0.0",
+    "express": "5.1.0",
+    "express-session": "1.18.2",
+    "openid-client": "5.7.1",
+    "pg": "8.16.3"
   },
   "devDependencies": {
+    "@types/connect-pg-simple": "7.0.3",
+    "@types/express": "5.0.3",
+    "@types/express-session": "1.18.2",
+    "@types/node": "22.18.0",
+    "@types/pg": "8.15.5",
     "axe-core": "4.10.2",
-    "playwright": "1.63.0"
+    "oidc-provider": "9.5.1",
+    "playwright": "1.63.0",
+    "tsx": "4.20.5",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
   }
 }

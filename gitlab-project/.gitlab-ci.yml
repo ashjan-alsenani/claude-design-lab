@@ -1,99 +1,94 @@
-# GitLab CI/CD for the employee directory (static web app).
+# GitLab CI/CD for the employee directory.
 #
-# Stages run on every push: check -> build -> test.
-# The container image is built only when BUILD_IMAGE is "true".
-# Production deployment is OFF until IT sets DEPLOY_ENABLED to "true" and fills in deploy/deploy.sh.
-# See docs/IT-SETUP.md for every variable.
+#   check  → type checks and static checks
+#   test   → server tests against a PostgreSQL service, browser tests (standalone + shared version)
+#   build  → container image (UBI Node.js) pushed to the project's container registry
+#   deploy → OpenShift; OFF until IT sets DEPLOY_ENABLED=true and the OPENSHIFT_* variables. Manual, default branch only.
 #
-# Images are pulled from Docker Hub and the Microsoft registry by default. If your runners can't reach them,
-# set NODE_IMAGE, PLAYWRIGHT_IMAGE and NGINX_IMAGE to mirrors in your internal registry.
+# Images come from Docker Hub, Microsoft and Red Hat registries by default. If your runners can't reach them,
+# point the *_IMAGE variables at internal mirrors. See docs/IT-SETUP.md.
 
 variables:
   NODE_IMAGE: "node:22-bookworm-slim"
   PLAYWRIGHT_IMAGE: "mcr.microsoft.com/playwright:v1.63.0-noble"   # must match devDependencies.playwright
-  NGINX_IMAGE: "nginxinc/nginx-unprivileged:1.27-alpine"
+  POSTGRES_IMAGE: "postgres:16-alpine"
   KANIKO_IMAGE: "gcr.io/kaniko-project/executor:v1.23.2-debug"
-  BASE_PATH: "/employee-directory/"
+  OC_IMAGE: "quay.io/openshift/origin-cli:4.16"
+  UBI_NODE_IMAGE: "registry.access.redhat.com/ubi9/nodejs-22:latest"
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
-  # Fictional owner used only to test sign-in inside the pipeline; never deployed.
-  TEST_OWNER_USERNAME: "ci.owner"
-  TEST_OWNER_PASSWORD: "ci-only-test-password-2026"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+  # Throwaway test database for the jobs below (a CI service container, not company data).
+  POSTGRES_DB: directory_ci
+  POSTGRES_USER: directory
+  POSTGRES_PASSWORD: ci-only-password
+  CI_DATABASE_URL: "postgres://directory:ci-only-password@postgres:5432/directory_ci"
 
-stages: [check, build, test, package, deploy]
+stages: [check, test, build, deploy]
 
 default:
   interruptible: true
-
-.npm:
-  image: $NODE_IMAGE
   cache:
     key: { files: [package-lock.json] }
     paths: [.npm/]
-  before_script:
-    - node --version
-    - PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit --no-fund
 
 check:
   stage: check
-  extends: .npm
+  image: $NODE_IMAGE
   script:
-    - npm run build
+    - npm ci --no-audit --no-fund
     - npm run check
-
-build:
-  stage: build
-  extends: .npm
-  script:
-    # Production settings come from protected, masked CI/CD variables (OWNER_*, CREDIT_*).
-    # On the default branch the build fails if the owner account isn't configured.
-    - if [ "$CI_COMMIT_BRANCH" = "$CI_DEFAULT_BRANCH" ] && [ "$DEPLOY_ENABLED" = "true" ]; then export REQUIRE_OWNER=true; fi
-    - npm run build:single
-  artifacts:
-    name: "employee-directory-$CI_COMMIT_SHORT_SHA"
-    paths: [dist/, dist-single/]
-    expire_in: 30 days
-
-browser-tests:
-  stage: test
-  image: $PLAYWRIGHT_IMAGE
-  cache:
-    key: { files: [package-lock.json] }
-    paths: [.npm/]
-  script:
-    - PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit --no-fund
-    # Build a test copy with the fictional CI owner (not the production settings).
-    - export OWNER_USERNAME="$TEST_OWNER_USERNAME" OWNER_PASSWORD_SHA256="$(printf '%s' "$TEST_OWNER_PASSWORD" | node scripts/hash-password.mjs)" OWNER_DISPLAY_NAME="CI Owner"
     - npm run build
-    - (PORT=8080 BASE_PATH="$BASE_PATH" node scripts/serve.mjs > serve.log 2>&1 &)
-    - for i in $(seq 1 30); do node -e "fetch('http://127.0.0.1:8080$BASE_PATH').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))" && break; sleep 1; done
-    - BASE_URL="http://127.0.0.1:8080$BASE_PATH" npm test
   artifacts:
-    when: on_failure
-    paths: [tests/*.png, serve.log]
+    paths: [dist/, server-dist/]
     expire_in: 7 days
 
-container-image:
-  stage: package
-  needs: [build]
+tests:
+  stage: test
+  image: $PLAYWRIGHT_IMAGE
+  services:
+    - name: $POSTGRES_IMAGE
+      alias: postgres
+  script:
+    - npm ci --no-audit --no-fund
+    - npm run build && npm run build:test
+    - TEST_DATABASE_URL="$CI_DATABASE_URL" npm run test:server
+    - npm run test:e2e
+    - E2E_DATABASE_URL="$CI_DATABASE_URL" npm run test:e2e:server
+  artifacts:
+    when: on_failure
+    paths: [test-output/]
+    expire_in: 7 days
+
+image:
+  stage: build
+  needs: [check, tests]
   image: { name: $KANIKO_IMAGE, entrypoint: [""] }
   rules:
-    - if: '$BUILD_IMAGE == "true" && $CI_REGISTRY_IMAGE'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_REGISTRY_IMAGE
+    - if: $BUILD_IMAGE == "true" && $CI_REGISTRY_IMAGE
   script:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(printf '%s:%s' "$CI_REGISTRY_USER" "$CI_REGISTRY_PASSWORD" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context "$CI_PROJECT_DIR" --dockerfile deploy/Dockerfile
-      --build-arg NGINX_IMAGE="$NGINX_IMAGE" --build-arg BASE_PATH="$BASE_PATH"
+    - /kaniko/executor --context "$CI_PROJECT_DIR" --dockerfile Dockerfile
+      --build-arg NODE_IMAGE="$UBI_NODE_IMAGE"
       --destination "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
       $( [ "$CI_COMMIT_BRANCH" = "$CI_DEFAULT_BRANCH" ] && echo --destination "$CI_REGISTRY_IMAGE:latest" )
 
-deploy-production:
+deploy-openshift:
   stage: deploy
-  needs: [build, browser-tests]
-  image: $NODE_IMAGE
+  needs: [image]
+  image: { name: $OC_IMAGE, entrypoint: [""] }
   environment: { name: production, url: $PRODUCTION_URL }
+  resource_group: production
   rules:
-    # Disabled until IT supplies the company settings. Even then it runs only on the default branch, by hand.
-    - if: '$DEPLOY_ENABLED == "true" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    # Disabled until IT supplies the settings. Then: default branch only, started by hand.
+    - if: $DEPLOY_ENABLED == "true" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
   script:
-    - sh deploy/deploy.sh
+    - test -n "$OPENSHIFT_SERVER" && test -n "$OPENSHIFT_TOKEN" && test -n "$OPENSHIFT_PROJECT" || { echo "Set OPENSHIFT_SERVER, OPENSHIFT_TOKEN and OPENSHIFT_PROJECT"; exit 1; }
+    - oc login --server="$OPENSHIFT_SERVER" --token="$OPENSHIFT_TOKEN" ${OPENSHIFT_CA_FILE:+--certificate-authority="$OPENSHIFT_CA_FILE"}
+    - oc project "$OPENSHIFT_PROJECT"
+    - oc get secret employee-directory-secrets >/dev/null || { echo "Create the employee-directory-secrets Secret first (openshift/secret.example.yaml)"; exit 1; }
+    - cd openshift && sed -i "s#newName: .*#newName: $CI_REGISTRY_IMAGE#; s#newTag: .*#newTag: $CI_COMMIT_SHORT_SHA#" kustomization.yaml && cd ..
+    - oc apply -k openshift/
+    - oc rollout status deployment/employee-directory --timeout=180s

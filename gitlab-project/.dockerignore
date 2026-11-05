@@ -1,8 +1,11 @@
 node_modules
-dist-single
-tests
-docs
+dist
+dist-test
+server-dist
+test-output
 .git
 .env
 .env.*
+!.env.example
 *.zip
+*.mp4

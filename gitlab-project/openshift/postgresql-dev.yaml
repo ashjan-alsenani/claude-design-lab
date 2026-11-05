@@ -1,0 +1,39 @@
+# OPTIONAL, for a test/staging namespace only: a single PostgreSQL pod with a persistent volume.
+# Production should use the company's managed PostgreSQL (backups, high availability). Not part of kustomization.yaml.
+#   oc create secret generic directory-db --from-literal=POSTGRESQL_USER=directory \
+#     --from-literal=POSTGRESQL_PASSWORD="$(openssl rand -hex 16)" --from-literal=POSTGRESQL_DATABASE=directory
+#   oc apply -f openshift/postgresql-dev.yaml
+# Then DATABASE_URL = postgres://directory:<password>@directory-db:5432/directory  (and DATABASE_SSL=disable)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: { name: directory-db }
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 2Gi } }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: directory-db }
+spec:
+  replicas: 1
+  strategy: { type: Recreate }
+  selector: { matchLabels: { app: directory-db } }
+  template:
+    metadata: { labels: { app: directory-db } }
+    spec:
+      containers:
+        - name: postgresql
+          image: quay.io/sclorg/postgresql-16-c9s:latest
+          ports: [{ containerPort: 5432 }]
+          envFrom: [{ secretRef: { name: directory-db } }]
+          volumeMounts: [{ name: data, mountPath: /var/lib/pgsql/data }]
+          readinessProbe: { exec: { command: [/usr/libexec/check-container] }, periodSeconds: 10 }
+          resources: { requests: { cpu: 50m, memory: 128Mi }, limits: { memory: 512Mi } }
+      volumes: [{ name: data, persistentVolumeClaim: { claimName: directory-db } }]
+---
+apiVersion: v1
+kind: Service
+metadata: { name: directory-db }
+spec:
+  selector: { app: directory-db }
+  ports: [{ port: 5432, targetPort: 5432 }]

@@ -1,0 +1,14 @@
+# HTTPS at the router; the app is served under BASE_PATH (/employee-directory/).
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: employee-directory
+  annotations:
+    haproxy.router.openshift.io/timeout: 60s
+spec:
+  host: REPLACE-WITH-ROUTE-HOST     # remove this line to let OpenShift generate a host
+  to: { kind: Service, name: employee-directory }
+  port: { targetPort: http }
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

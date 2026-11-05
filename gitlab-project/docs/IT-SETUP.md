@@ -1,45 +1,68 @@
 # What IT still needs to configure
 
-The project builds, checks and tests itself in GitLab without any settings. Production deployment stays off until the items below are done.
+The project builds and tests itself in GitLab with no company settings. Production deployment stays **off** until the items below are done.
 
-## 1. GitLab CI/CD variables (Settings → CI/CD → Variables)
+## 1. Identity provider (company sign-in)
+
+- Register an application (in Entra ID: App registrations → New registration).
+  - **Redirect URI (Web):** `https://<route-host>/employee-directory/auth/callback`
+  - **Front-channel / post-logout URL:** `https://<route-host>/employee-directory/`
+  - Create a **client secret**. The app uses the authorization-code flow with PKCE.
+- Make sure the ID token or userinfo includes the user's email.
+  - For Entra ID, set `OIDC_EMAIL_CLAIM=preferred_username`, or add the optional `email` claim.
+- Optional: limit sign-in to a group. Set `OIDC_ALLOWED_GROUPS` and include the groups claim.
+- Put the issuer URL and client ID in `openshift/configmap.yaml`. The client secret goes in the Secret (§3).
+
+## 2. PostgreSQL
+
+- A PostgreSQL 14+ database with its own user that owns the database (the app creates its tables on start).
+- **Backups and point-in-time recovery:** the app does not back itself up.
+- TLS: set `DATABASE_SSL=require`, or `verify` when the server certificate is trusted inside the cluster.
+- For a test namespace only, `openshift/postgresql-dev.yaml` runs a single PostgreSQL pod.
+
+## 3. OpenShift
+
+- A project (namespace) for the app.
+- Create the Secret `employee-directory-secrets` with:
+  - `DATABASE_URL`
+  - `SESSION_SECRET` (64 random hex characters)
+  - `OIDC_CLIENT_SECRET`
+
+  `openshift/secret.example.yaml` shows the command.
+- Fill in the placeholders in `openshift/configmap.yaml`:
+  - `PUBLIC_URL`
+  - `OIDC_ISSUER_URL`
+  - `OIDC_CLIENT_ID`
+  - `ADMIN_EMAILS` (the first administrator)
+- Fill in the `host` in `openshift/route.yaml`.
+- The image runs as non-root with an arbitrary UID, on port 8080. Probes are `/healthz` (liveness) and `/readyz` (readiness, checks the database).
+- Allow outbound traffic from the pods to the database and to the identity provider. `openshift/networkpolicy.yaml` limits only inbound traffic, to the router.
+- The cluster must be able to pull from the GitLab container registry. Give it an image pull secret if the registry is private.
+
+## 4. GitLab CI/CD variables (Settings → CI/CD → Variables)
 
 | Variable | Protected / masked | Value |
 |---|---|---|
-| `OWNER_USERNAME` | protected | The owner's sign-in name (for example an employee ID). |
-| `OWNER_PASSWORD_SHA256` | protected, masked | Output of `npm run hash-password` for a long password (12+ characters). |
-| `OWNER_DISPLAY_NAME` | protected | Name shown for the owner. |
-| `OWNER_LOGIN_ALIASES` | protected | Optional extra sign-in names, comma-separated. |
-| `CREDIT_NAME`, `CREDIT_TEAM` | — | Optional footer credit. Leave unset to hide it. |
-| `BASE_PATH` | — | URL path the site is served under. Default `/employee-directory/`. |
-| `PRODUCTION_URL` | — | Public URL, shown in GitLab's environment page. |
-| `BUILD_IMAGE` | — | `true` to build the container image into the project registry. |
-| `DEPLOY_ENABLED` | protected | `true` only once everything below is ready. |
-| `DEPLOY_METHOD` and that method's settings | protected | `static-copy`, `kubernetes` or `custom`; see `deploy/deploy.sh`. |
+| `DEPLOY_ENABLED` | protected | `true` once everything above is ready |
+| `OPENSHIFT_SERVER` | protected | API URL, e.g. `https://api.cluster.example:6443` |
+| `OPENSHIFT_TOKEN` | protected, masked | Token of a service account with edit rights in the project |
+| `OPENSHIFT_PROJECT` | protected | The namespace |
+| `OPENSHIFT_CA_FILE` | protected (File type) | Only if the API certificate isn't publicly trusted |
+| `PRODUCTION_URL` | — | `https://<route-host>/employee-directory/` |
 
-## 2. Runner and images
+Runners need the Docker executor. They must reach these images, or set the `*_IMAGE` variables to internal mirrors:
+- `node:22-bookworm-slim`
+- `mcr.microsoft.com/playwright:v1.63.0-noble`
+- `postgres:16-alpine`
+- `gcr.io/kaniko-project/executor:v1.23.2-debug`
+- `quay.io/openshift/origin-cli:4.16`
+- `registry.access.redhat.com/ubi9/nodejs-22`
 
-- A GitLab runner with the Docker executor.
-- Access to these images, or internal mirrors set through `NODE_IMAGE`, `PLAYWRIGHT_IMAGE`, `NGINX_IMAGE` and `KANIKO_IMAGE`:
-  - `node:22-bookworm-slim`
-  - `mcr.microsoft.com/playwright:v1.63.0-noble`
-  - `nginxinc/nginx-unprivileged:1.27-alpine`
-  - `gcr.io/kaniko-project/executor:v1.23.2-debug`
-- Access to the npm registry (or an internal mirror) for `axe-core` and `playwright`. These are test-only; the site itself has no runtime packages.
+They also need the npm registry, or an internal mirror.
 
-## 3. Hosting
+## 5. Before real employee data goes in
 
-- Choose static hosting or container hosting, and complete the matching block in `deploy/deploy.sh`. Remove its `exit 1`.
-- Serve over **HTTPS**. Offline support needs it.
-- Keep the response headers from `deploy/nginx.conf`: the Content-Security-Policy, and `no-cache` for HTML, JavaScript and CSS (file names have no version hash, so this is how updates reach browsers).
-- Container: port **8080**, health check **`/healthz`**, runs as a non-root user. nginx writes its configuration at start-up, so if your platform requires a read-only filesystem, mount writable `/etc/nginx/conf.d` and `/tmp`. That setup wasn't tested.
-- Restrict access to the corporate network, or put it behind your sign-in gateway.
-
-## 4. Before real employee data is entered
-
-These are open decisions, not configuration. The details are in `docs/HANDOVER.md`, section 3.
-
-- **B1:** data is stored per browser and isn't shared. A server-side database and API are needed.
-- **B2:** permissions are enforced only in the browser. Server-side authorization is needed.
-- **B3:** sign-in is local. Your organization's SSO should replace it.
-- Approval from the data owner and from IT security.
+- The data owner (HR) and IT security approve the deployment and the data classification.
+- Decide who the first administrators are (`ADMIN_EMAILS`). They then add everyone else in **Users & access**, using each person's sign-in email.
+- Keep `DEFAULT_ROLE=none` unless every signed-in employee should get read-only access.
+- Load the real data from a backup of the current site (README.md §4), or start empty (`INITIAL_DATA=empty`) and import from Excel inside the app.
