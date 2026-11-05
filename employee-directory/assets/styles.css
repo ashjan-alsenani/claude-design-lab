@@ -980,7 +980,6 @@ kbd { display: inline-grid; place-items: center; min-width: 26px; height: 24px; 
 .chart-add-ic { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 18px; background: linear-gradient(140deg, #A78BFA, #7C3AED); color: #fff; box-shadow: 0 12px 24px -12px #7C3AED; }
 .chart-add strong { font-size: 18px; }
 .chart-add small { color: var(--muted); font-size: 15px; }
-.dk-edit-btn { background: #fff !important; color: #5B21B6 !important; }
 .site-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
 .site-grid > .panel + .panel { margin-top: 0; }
 .site-form { display: grid; gap: 12px; }
@@ -2691,10 +2690,10 @@ button.tz-val:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 
 .field .na-chk { visibility: visible !important; }
 }
 .org-inf { display: inline-flex; align-items: center; gap: 4px; margin-inline-end: 6px; padding: 1px 8px; border-radius: 999px; background: var(--teal-soft); color: var(--teal-strong); font-size: 13px; font-weight: 600; vertical-align: 1px; }
-.org-infnote { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 12px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); font-size: 15px; line-height: 1.5; }
+.org-infnote { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 12px; padding: 10px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); font-size: 15px; line-height: 1.5; }
 .org-infnote > span { flex: 1 1 300px; }
-.org-infbtn { background: #fff !important; color: var(--navy) !important; border: 0; font-weight: 600; }
-.org-infbtn:hover { background: #F1F5F9 !important; }
+.org-infbtn { background: var(--paper) !important; color: var(--ink) !important; border: 1px solid var(--line-strong); font-weight: 600; }
+.org-infbtn:hover { background: var(--surface-3) !important; }
 .ua-wrap { max-height: 52vh; overflow: auto; margin-top: 10px; }
 .ua-wrap th:first-child, .ua-wrap td:first-child { width: 40px; }
 .sk-chips { list-style: none; margin: 4px 0 10px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; border: 1px dashed var(--line-strong); border-radius: 12px; background: #FAFBFD; }
@@ -6595,3 +6594,15 @@ body.pk-dw-open { overflow: hidden; }
 /* parking: the "without entitlement" panel now opens the employees tab */
 #pkBody > .pk-nfp { margin-bottom: 16px; }
 .page-rw > .rw-spot-panel { margin-bottom: var(--s4); }
+
+/* v106 dark mode: surfaces that were hard-coded light */
+[data-theme="dark"] .row-unmapped td { background: var(--warn-soft); }
+[data-theme="dark"] .samples span, [data-theme="dark"] .dv { background: var(--surface-3); color: var(--muted); }
+[data-theme="dark"] .dv-to { background: var(--teal-soft); color: var(--teal-strong); }
+[data-theme="dark"] .list-row { background: var(--surface-2); }
+[data-theme="dark"] .cropper { background: var(--surface-3); }
+[data-theme="dark"] .preview-card { background: var(--surface-2); }
+[data-theme="dark"] .lg-box:not(:has(img)) { background: var(--surface-2); }
+[data-theme="dark"] .oc-banner { background: linear-gradient(120deg, rgba(243,131,178,.14), rgba(245,191,79,.12)); border-color: rgba(243,131,178,.3); }
+[data-theme="dark"] .oc-banner strong { color: var(--rose-strong); }
+[data-theme="dark"] .oc-banner p { color: var(--ink); }
