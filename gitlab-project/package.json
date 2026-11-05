@@ -1,0 +1,21 @@
+{
+  "name": "employee-directory",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Digital & Technology employee directory: a static web app (HTML, CSS, JavaScript) with fictional sample data.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:single": "node scripts/build.mjs --single",
+    "serve": "node scripts/serve.mjs",
+    "start": "node scripts/build.mjs && node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node tests/run-all.mjs",
+    "hash-password": "node scripts/hash-password.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.2",
+    "playwright": "1.63.0"
+  }
+}

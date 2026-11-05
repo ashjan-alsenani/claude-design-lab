@@ -1,0 +1,23 @@
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+dist/
+dist-single/
+*.zip
+
+# Test output
+tests/*.png
+tests/**/*.png
+test-results/
+playwright-report/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
