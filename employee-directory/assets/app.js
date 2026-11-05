@@ -5193,7 +5193,7 @@ var Pkasgs=emp=>Pkd().asg.filter(x=>x.emp===emp),
  Pkcur=s=>Pkd().asg.find(x=>x.spot===s.id&&Pknow(x))||null,
  Pksnap=p=>({lv:p&&p.level?p.level.id:null,unit:Pkv(p,"unit"),dept:Pkv(p,"department"),loc:Pkv(p,"location"),st:Pkv(p,"status")}),
  /* changes since an allocation was recorded (or last reviewed): reported, never acted on */
- Pkchg=x=>{let T=Tx,p=Pkemp(x.emp);if(!p)return[T("الموظف لم يعد موجودًا في الدليل","The employee is no longer in the directory")];let s0=x.snap,o=[];if(!s0)return o;let n=Pksnap(p);
+ Pkchg=x=>{let T=Tx,p=Pkemp(x.emp);if(!p&&!de.employees){if(!window.__pkLoad){window.__pkLoad=1;let h0=location.hash;de.loadEmployees().then(()=>{if(location.hash===h0&&!(ae&&ae.view&&ae.view.isDirty&&ae.view.isDirty())){let y=scrollY;ta(!0).then(()=>scrollTo(0,y))}}).catch(()=>{}).finally(()=>{window.__pkLoad=0})}return[]}if(!p)return[T("الموظف لم يعد موجودًا في الدليل","The employee is no longer in the directory")];let s0=x.snap,o=[];if(!s0)return o;let n=Pksnap(p);
   s0.lv!==n.lv&&o.push(T("تغيّر المستوى الوظيفي","The job level changed"));(s0.unit!==n.unit||s0.dept!==n.dept)&&o.push(T("تغيّرت الإدارة أو الوحدة","The department or unit changed"));s0.loc!==n.loc&&o.push(T("تغيّر موقع العمل","The work location changed"));
   let ended=!!(p.lastWorkingDate&&p.lastWorkingDate<=ze());ended?o.push(T("انتهت الخدمة","Service has ended")):s0.st!==n.st&&o.push(T("تغيّرت الحالة الوظيفية","The employment status changed"));return o},
  /* every overlap in the data: two people on one space, one person on two spaces without an exception, or an allocation over a reservation / out-of-service period */

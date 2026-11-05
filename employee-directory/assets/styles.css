@@ -6677,3 +6677,8 @@ h1.pg-focus:focus, h1.pg-focus:focus-visible { outline: none; }
   #view .tab-pane[hidden] { display: none !important; }
   body[data-pdate]::after { content: attr(data-pdate); display: block; margin-top: 16px; padding-top: 8px; border-top: 1px solid #cbd5e1; color: #475569; font-size: 11px; }
 }
+
+/* v110 profile: one even 16px rhythm between cards (the grid gap and a card margin were adding up to 34px) */
+.page-profile .pf-main, .page-profile .pf-side { gap: 16px; }
+.page-profile .pf-main > .panel, .page-profile .pf-side > .panel { margin: 0 !important; }
+.page-profile .panel .al-pills + * { margin-top: 10px; }
