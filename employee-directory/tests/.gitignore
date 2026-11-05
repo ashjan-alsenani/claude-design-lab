@@ -1,1 +1,4 @@
 node_modules/
+# screenshots the checks write while running
+*.png
+v99/
