@@ -6662,3 +6662,18 @@ body.pk-dw-open { overflow: hidden; }
   .page-profile .pf-stat-ic .ic { width: 17px; height: 17px; }
   .page-profile .pf-stat dd { font-size: 17px; }
 }
+
+/* v108: headings that receive focus after navigation don't show a ring */
+h1.pg-focus:focus, h1.pg-focus:focus-visible { outline: none; }
+.empty .empty-h1 { margin: 0; font-size: var(--fs-xl); line-height: 1.3; }
+.empty .empty-h1 + p { max-width: 52ch; margin: 6px auto 16px; color: var(--muted); }
+.idle-warn { position: fixed; z-index: 1000; inset-inline: 16px; bottom: 16px; margin-inline: auto; max-width: 560px; display: flex; align-items: center; gap: 10px; }
+.idle-warn span { flex: 1; }
+
+/* v109 print: any page prints as a clean, dated record without on-screen controls */
+@media print {
+  #view .btn, #view .icon-btn, #view .pf-actions, #view .head-actions, #view .card-act, #view .hp-acts,
+  #view [role=tablist], #view .tabs, .toast, .idle-warn, .skip-link { display: none !important; }
+  #view .tab-pane[hidden] { display: none !important; }
+  body[data-pdate]::after { content: attr(data-pdate); display: block; margin-top: 16px; padding-top: 8px; border-top: 1px solid #cbd5e1; color: #475569; font-size: 11px; }
+}

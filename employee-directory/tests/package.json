@@ -1,0 +1,13 @@
+{
+  "name": "employee-directory-tests",
+  "private": true,
+  "type": "module",
+  "description": "Browser checks for the employee directory. Serve the site first, then run npm test.",
+  "scripts": {
+    "test": "node run-all.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.2",
+    "playwright": "1.63.0"
+  }
+}
