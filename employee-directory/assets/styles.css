@@ -6606,3 +6606,59 @@ body.pk-dw-open { overflow: hidden; }
 [data-theme="dark"] .oc-banner { background: linear-gradient(120deg, rgba(243,131,178,.14), rgba(245,191,79,.12)); border-color: rgba(243,131,178,.3); }
 [data-theme="dark"] .oc-banner strong { color: var(--rose-strong); }
 [data-theme="dark"] .oc-banner p { color: var(--ink); }
+
+/* v107 employee profile: a confident identity header and colour-coded sections */
+.page-profile .pf-hero { --tn: var(--tone, #0D9488); border-color: color-mix(in srgb, var(--tn) 22%, var(--line)); box-shadow: var(--sh-2); }
+.page-profile .pf-cover { display: block; height: 132px; background:
+  radial-gradient(520px 200px at 88% -30%, color-mix(in srgb, var(--tn) 55%, #fff) 0%, transparent 62%),
+  radial-gradient(420px 180px at 8% 130%, color-mix(in srgb, #2BB3A6 45%, transparent) 0%, transparent 65%),
+  linear-gradient(115deg, color-mix(in srgb, var(--tn) 88%, #0B1220), color-mix(in srgb, var(--tn) 50%, #1E3A8A)); }
+.page-profile .pf-hero-body { padding: 18px 28px 22px; gap: 20px 24px; }
+.page-profile .pf-avatar { margin-top: -74px; }
+.page-profile .pf-avatar .avatar { width: 124px !important; height: 124px !important; font-size: 42px !important; border-radius: 50%; box-shadow: 0 0 0 5px var(--paper), 0 18px 34px -16px color-mix(in srgb, var(--tn) 75%, transparent) !important; }
+.page-profile .pf-avatar .avatar img { border-radius: 50%; }
+.page-profile .pf-id { gap: 6px; }
+.page-profile .pf-name { font-size: 30px; line-height: 1.2; letter-spacing: -.01em; }
+.page-profile .pf-alt { font-size: 15px; color: var(--muted); }
+.page-profile .pf-role { font-size: 16px; font-weight: 600; color: var(--ink); }
+.page-profile .pf-role > span + span::before, .page-profile .pf-role .sep { color: var(--faint); }
+.page-profile .pf-actions { align-self: flex-start; }
+.page-profile .pf-stats { background: color-mix(in srgb, var(--tn) 4%, var(--paper)); }
+.page-profile .pf-stat { align-items: center; gap: 14px; padding: 16px 24px; }
+.page-profile .pf-stat-ic { width: 44px; height: 44px; border-radius: 12px; border: 0; background: color-mix(in srgb, var(--c) 15%, var(--paper)); color: var(--c); }
+.page-profile .pf-stat-ic .ic { width: 20px; height: 20px; }
+.page-profile .pf-stat dt { font-size: 13px; color: var(--muted); }
+.page-profile .pf-stat dd { font-size: 22px; line-height: 1.25; }
+.page-profile .pf-stat p { font-size: 13px; color: var(--muted); }
+/* section icons take each card's own colour so the page reads as distinct groups */
+.page-profile .panel-title > .ic, .page-profile .panel-title > svg.ic { background: color-mix(in srgb, var(--ec, var(--pc)) 15%, var(--paper)) !important; color: var(--ec, var(--pc)) !important; width: 34px !important; height: 34px !important; padding: 7px !important; border-radius: 10px !important; }
+.page-profile .pf-facts li { align-items: center; padding: 10px 4px; }
+.page-profile .pf-facts li > .ic { --fc: #0D9488; width: 34px; height: 34px; padding: 8px; margin-top: 0; box-sizing: border-box; border-radius: 10px; background: color-mix(in srgb, var(--fc) 14%, var(--paper)); color: var(--fc); }
+.page-profile .pf-facts li:nth-child(2) > .ic { --fc: #2563EB; }
+.page-profile .pf-facts li:nth-child(3) > .ic { --fc: #7C3AED; }
+.page-profile .pf-facts li:nth-child(4) > .ic { --fc: #D97706; }
+.page-profile .pf-facts li:nth-child(5) > .ic { --fc: #DB2777; }
+.page-profile .pf-facts li:nth-child(6) > .ic { --fc: #0891B2; }
+.page-profile .pf-facts li:nth-child(7) > .ic { --fc: #16A34A; }
+[data-theme="dark"] .page-profile .pf-facts li > .ic { color: color-mix(in srgb, var(--fc) 60%, #fff); }
+[data-theme="dark"] .page-profile .pf-stat-ic { color: color-mix(in srgb, var(--c) 60%, #fff); }
+[data-theme="dark"] .page-profile .panel-title > .ic { color: color-mix(in srgb, var(--ec, var(--pc)) 65%, #fff) !important; }
+.page-profile .pf-facts li > span { font-size: 15px; color: var(--ink); }
+.page-profile .pf-facts small { font-size: 13px; }
+.page-profile .dl dt, .page-profile dl:not(.pf-stat dl) dt { color: var(--muted); }
+.page-profile .dl dd { color: var(--ink); font-weight: 600; }
+/* the side column is taller than the screen, so a sticky column hid its lower cards */
+.page-profile .pf-side { position: static; }
+@media (max-width: 640px) {
+  .page-profile .pf-cover { height: 96px; }
+  .page-profile .pf-hero-body { padding: 14px 16px 18px; gap: 12px 16px; }
+  .page-profile .pf-avatar { margin-top: -60px; }
+  .page-profile .pf-avatar .avatar { width: 96px !important; height: 96px !important; font-size: 32px !important; }
+  .page-profile .pf-name { font-size: 24px; }
+  .page-profile .pf-role { gap: 2px 0; line-height: 1.45; }
+  .page-profile .pf-role .pf-sep { flex-basis: 100%; height: 0; overflow: hidden; }
+  .page-profile .pf-stat { flex-direction: column; align-items: flex-start; padding: 14px; gap: 8px; }
+  .page-profile .pf-stat-ic { width: 34px; height: 34px; border-radius: 10px; }
+  .page-profile .pf-stat-ic .ic { width: 17px; height: 17px; }
+  .page-profile .pf-stat dd { font-size: 17px; }
+}
