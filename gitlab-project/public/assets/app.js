@@ -141,7 +141,7 @@ D.employees.forEach((e,ix)=>{let d;try{d=JSON.parse(e.data)}catch{return}if(d.ro
  e.innerHTML=`<div class="page page-directory">
    <header class="page-head">
     <div class="page-title"><h1>${a(t("dirTitle"))}</h1><p class="page-sub">${a(T(`${o.length} موظفًا في الدليل. ابحث بالاسم أو الرقم الوظيفي أو المسمى، وصفِّ النتائج حسب الإدارة والقسم والمستوى.`,`${o.length} people in the directory. Search by name, employee number or title, and filter by department, section and level.`))}</p></div>
-    <div class="head-actions">${r.can("excel")?`<button type="button" class="btn btn-ghost" data-xlsx="dir">${h("download",16)}<span>${a(T("تنزيل Excel","Download Excel"))}</span></button><button type="button" class="btn btn-ghost" data-xlsx="where">${h("map-pin",16)}<span>${a(T("أين يعمل كل موظف","Where everyone works"))}</span></button>`:""}${r.can("add")?`<a class="btn btn-primary" href="#/manage/new">${h("plus",16)}<span>${a(t("addEmployee"))}</span></a>`:""}</div>
+    <div class="head-actions">${r.can("excel")?`<button type="button" class="btn btn-ghost" data-xlsx="dir">${h("download",16)}<span>${a(T("تنزيل Excel","Download Excel"))}</span></button>${window.__xpAllBtn?window.__xpAllBtn():""}<button type="button" class="btn btn-ghost" data-xlsx="where">${h("map-pin",16)}<span>${a(T("أين يعمل كل موظف","Where everyone works"))}</span></button>`:""}${r.can("add")?`<a class="btn btn-primary" href="#/manage/new">${h("plus",16)}<span>${a(t("addEmployee"))}</span></a>`:""}</div>
    </header>
    <section class="dir-bar" aria-label="${a(t("searchLabel"))}">
     <div class="dir-row">
@@ -5751,6 +5751,35 @@ var Xpv=v=>v==null||v===""?null:v,
 document.addEventListener("click",async z=>{let b=z.target.closest("[data-xp-emp]");if(!b)return;z.preventDefault();if(!de.can("excel"))return;let T=Tx;b.disabled=!0;
  try{let{S,p}=await Xpbuild(b.dataset.xpEmp);Xz(S,`${Wsv?"vendors-":""}employee-${String(p.empNo||p.id).replace(/[^\w-]/g,"")}-full-${ze()}.xlsx`);ye("export",{id:p.id,emp_no:p.empNo},{fullEmployeeWorkbook:S.length});se();L(T(`تم تنزيل ملف Excel شامل (${S.length} أوراق).`,`Full Excel file downloaded (${S.length} sheets).`))}
  catch(er){console.error(er);L(T("تعذّر إنشاء الملف: ","Couldn't create the file: ")+(er.message||er),"error")}finally{b.disabled=!1}});
+/* ===================== v112: everyone, every detail — one workbook for all employees =====================
+   Built from the same per-employee workbook (Xpbuild), so each row follows the same permission as the
+   one-employee file. "All profile data" becomes one row per employee with a column per field; every other
+   sheet keeps one row per record, with the employee's number and name in front.                            */
+window.__xpAllBtn=()=>de.can("excel")?`<button type="button" class="btn btn-ghost" data-xp-all title="${a(Tx("ملف Excel واحد لكل الموظفين، فيه كل ما يسجله الموقع عن كل موظف","One Excel file for everyone, with everything the site records about each employee"))}">${h("file-spreadsheet",16)}<span>${a(Tx("كل الموظفين بكامل بياناتهم","Everyone, every detail"))}</span></button>`:"";
+var Xpall=async prog=>{let T=Tx,o=await de.loadEmployees(),L2=[...o].sort((x,y)=>String(x.empNo||"").localeCompare(String(y.empNo||""),void 0,{numeric:!0})||x.id-y.id),
+  PN=T("البيانات الكاملة","All profile data").slice(0,31),SM=T("الملخص","Summary").slice(0,31),NI=T("غير مضمّنة","Not included"),
+  cols=[],ck=new Map,prof=[],order=[],M=new Map,miss={},why={};
+ for(let i=0;i<L2.length;i++){let q=L2[i],r;try{r=await Xpbuild(q.id)}catch(er){console.error(er);continue}
+  let pre=[Xpv(r.p.empNo),I(r.p)],line={};
+  r.S.forEach(sh=>{if(sh.name===SM){let at=sh.rows.findIndex(x=>x[0]===T("الورقة","Sheet"));sh.rows.slice(at+1).forEach(([nm,,st])=>{if(String(st||"").startsWith(NI)){let k=String(nm).slice(0,31);miss[k]=(miss[k]||0)+1;why[k]=String(st).slice(NI.length).replace(/^\s*—\s*/,"")}});return}
+   let[head,...rows]=sh.rows;if(rows.length===1&&rows[0].length===1)rows=[];
+   if(sh.name===PN){rows.forEach(x=>{let k=x[0]+"|"+x[1];ck.has(k)||(ck.set(k,cols.length),cols.push(x[1]));line[k]=x[2]});return}
+   M.has(sh.name)||(M.set(sh.name,{name:sh.name,rtl:sh.rtl,color:sh.color,rows:[[T("الرقم الوظيفي","Employee no."),T("الموظف","Employee"),...head]]}),order.push(sh.name));
+   rows.forEach(x=>M.get(sh.name).rows.push([...pre,...x]))});
+  prof.push(line);prog&&prog(i+1,L2.length);i%5===4&&await new Promise(z=>setTimeout(z))}
+ let keys=[...ck.keys()],PS={name:PN,rtl:E()==="ar",color:"0D9488",rows:[cols,...prof.map(l=>keys.map(k=>l[k]??null))]},
+  out=[PS,...order.map(n=>M.get(n))],
+  sm=[[T("الملف","File"),T("كل الموظفين بكامل بياناتهم","Everyone, every detail")],[T("عدد الموظفين","Employees"),prof.length],[T("أُنشئ في","Generated"),Xpt(Te())],[T("بواسطة","By"),(de.user||{}).name||null],
+   [T("ملاحظة","Note"),T("سري — للاستخدام الداخلي. كل ورقة تتبع نفس الصلاحية التي تُظهر بياناتها في الموقع. «البيانات الكاملة» صف لكل موظف، وباقي الأوراق صف لكل سجل مع رقم الموظف واسمه.","Confidential — internal use. Each sheet follows the same permission that shows its data in the site. “All profile data” has one row per employee; the other sheets have one row per record, with the employee's number and name.")],[],
+   [T("الورقة","Sheet"),T("عدد الصفوف","Rows"),T("الحالة","Status")],
+   ...out.map(s=>[s.name,s.rows.length-1,miss[s.name]?T(`مضمّنة؛ غير مضمّنة لـ${miss[s.name]} موظف — `,`Included; not included for ${miss[s.name]} employee(s) — `)+why[s.name]:s.rows.length>1?T("مضمّنة","Included"):T("لا توجد بيانات","No data")]),
+   ...Object.keys(miss).filter(k=>!M.has(k)&&k!==PN).map(k=>[k,null,NI+" — "+why[k]])];
+ out.unshift({name:SM,rtl:E()==="ar",color:"0F766E",rows:sm,widths:[34,28,70]});
+ return{S:out,n:prof.length}};
+document.addEventListener("click",async z=>{let b=z.target.closest("[data-xp-all]");if(!b||b.disabled)return;z.preventDefault();if(!de.can("excel"))return;let T=Tx,sp=b.querySelector("span"),lb=sp.textContent;b.disabled=!0;b.setAttribute("aria-busy","true");
+ try{let{S,n}=await Xpall((i,t2)=>{sp.textContent=T(`جارٍ التجهيز… ${i}/${t2}`,`Preparing… ${i}/${t2}`)});Xz(S,`${Wsv?"vendors-":""}employees-all-full-${ze()}.xlsx`);ye("export",null,{allEmployeesWorkbook:n,sheets:S.length});se();L(T(`تم تنزيل ملف Excel لكل الموظفين (${n} موظف، ${S.length} أوراق).`,`Excel file for everyone downloaded (${n} employees, ${S.length} sheets).`))}
+ catch(er){console.error(er);L(T("تعذّر إنشاء الملف: ","Couldn't create the file: ")+(er.message||er),"error")}finally{sp.textContent=lb;b.disabled=!1;b.removeAttribute("aria-busy")}});
+
 
 /* ---------- v102: fictional Support & operations employees, so every allowance result appears in the sample ----------
    Added once, and only to the untouched sample dataset (the original 19 people). Imported or edited data is never changed. */
