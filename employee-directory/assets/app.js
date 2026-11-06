@@ -5712,8 +5712,39 @@ var Xpv=v=>v==null||v===""?null:v,
   /* 13. activity log (admins) */
   let canL=de.isAdmin(),lg=canL?(D.audit||[]).filter(x=>x.employee_id===p.id||x.details&&typeof x.details==="string"&&!/"allowance/.test(x.details)&&new RegExp(`"emp(Id)?":${p.id}[,}]`).test(x.details)).slice().reverse():[];
   sheet(T("سجل النشاط","Activity log"),"334155",[T("التاريخ","Date"),T("الإجراء","Action"),T("المستخدم","User"),T("التفاصيل","Details")],lg.map(x=>[Xpt(x.at),Xpv(x.action),Xpv(x.user_name),Xpv(x.details)]),canL,T("للمسؤول فقط","administrators only"));
+  /* 14. parking: eligibility, every allocation, waiting list, exceptions, review points, parking log (v111) */
+  let canPk=typeof Pkok=="function"&&Pkok("view")&&Pkscope(p.id),pkr=[];
+  if(canPk){let d=Pkd(),e2=Pkelig(p),RS=PkRES(),AL=PkAL(),al=Pkalloc(p.id),man=Pkok("man"),ok3=r=>r==="ok"?T("مستوفٍ","Met"):r==="no"?T("غير مستوفٍ","Not met"):T("غير محدد","Unknown");
+   pkr.push([T("الوضع الحالي","Current status"),T("التخصيص","Allocation"),AL[al.k][0],null,al.k==="wait"&&al.w?T("الترتيب ","Position ")+al.w.ord:null,null,null]);
+   pkr.push([T("الأهلية","Eligibility"),T("النتيجة","Result"),RS[e2.res][0],null,Xpv(e2.why),null,null]);
+   e2.cr.forEach(c=>pkr.push([T("الأهلية","Eligibility"),c.l,Xpv(c.v),null,ok3(c.r)+" — "+c.why,null,null]));
+   d.asg.filter(x=>x.emp===p.id).slice().sort((x,y)=>String(y.from).localeCompare(String(x.from))).forEach(x=>{let s=Pkspot(x.spot)||{},st=x.void?T("ملغى","Cancelled"):Pknow(x)?T("حالي","Current"):Pkfut(x)?T("قادم","Upcoming"):T("منتهٍ","Ended");
+    pkr.push([T("تخصيص موقف","Allocation"),T("الموقف ","Space ")+(s.no||x.spot||"—"),st,Pkper(x.from,x.to),[[s.site,s.bld,s.zone].filter(Boolean).join(" · "),s.type?Pktype(s.type):"",man&&x.plate?T("اللوحة: ","Plate: ")+x.plate:"",x.exc?T("استثناء: ","Exception: ")+x.exc:"",x.note||"",x.void&&x.void.why?T("سبب الإلغاء: ","Cancelled because: ")+x.void.why:""].filter(Boolean).join(" • ")||null,Xpv(x.by),Xpt(x.at)])});
+   d.wait.filter(x=>x.emp===p.id).forEach(x=>pkr.push([T("قائمة الانتظار","Waiting list"),x.out?T("خرج من القائمة","Left the list"):T("الترتيب ","Position ")+x.ord,x.out?Xpv(x.out.why):T("في الانتظار","Waiting"),Xpd(x.at),Xpv(x.why),Xpv(x.by),Xpt(x.at2)]));
+   d.exc.filter(x=>x.emp===p.id).forEach(x=>pkr.push([T("استثناء موثق","Documented exception"),x.kind==="multi"?T("أكثر من موقف","More than one space"):T("الأهلية","Eligibility"),x.off?T("ملغى","Withdrawn"):T("ساري","In force"),Pkper(x.date,x.until),[x.ref,x.note].filter(Boolean).join(" • ")||null,Xpv(x.by),Xpt(x.at)]));
+   Pkrev(p).forEach(r=>pkr.push([T("نقطة مراجعة","Review point"),null,Xpv(r),null,null,null,null]));
+   d.log.filter(x=>x.emp===p.id).slice().reverse().forEach(x=>pkr.push([T("سجل المواقف","Parking log"),Xpv(x.act),null,null,Xpv(x.txt),Xpv(x.by),Xpt(x.at)]))}
+  sheet(T("المواقف","Parking"),"2563EB",[T("السجل","Record"),T("البند","Item"),T("الحالة / القيمة","Status / value"),T("الفترة","Period"),T("التفاصيل","Details"),T("بواسطة","By"),T("التاريخ","Recorded")],pkr,canPk,T("تحتاج صلاحية المواقف","needs the parking permission"));
+  /* 15. criticality assessment, as calculated by the site */
+  let canCr=typeof Cper=="function"&&de.can("criticality")&&!Wsv&&!(p.restricted||[]).includes("critPerf"),crr=[];
+  if(canCr){let c=Cper(p),fl=k=>{let f=meta.fields.find(x=>x.key===k);return f?f[E()]||f.ar:k};
+   c.d.forEach(z=>crr.push([fl(z.k),z.v?z.v+"/5":null,z.v&&z.auto?T("محسوب تلقائيًا","Auto-calculated"):null]));
+   crr.push([T("المجموع","Total"),c.n?c.sum+"/"+c.max:null,c.full?null:T(`مكتمل ${c.n} من 5`,`${c.n} of 5 scored`)]);
+   crr.push([T("درجة الأهمية الحرجة","Criticality"),c.lvl?Klab(Kcrit(),c.lvl):null,c.prov?T("مبدئية (بيانات ناقصة)","Provisional (incomplete scores)"):null]);
+   c.eval&&crr.push([T("تقييم الإدارة","Business evaluation"),c.eval,null]);
+   try{Cact(c,de.employees||[]).forEach(z=>crr.push([T("إجراء مقترح","Suggested action"),z[2],null]))}catch{}}
+  sheet(T("الأهمية الحرجة","Criticality"),"DC2626",[T("البند","Item"),T("القيمة","Value"),T("ملاحظة","Note")],crr,canCr,T("تحتاج صلاحية الأهمية الحرجة","needs the criticality permission"));
+  /* 16. data confirmation by email + greetings sent */
+  let canV=de.isAdmin()||de.can("edit"),vr=[];
+  if(canV){let v=(D.verify||{})[p.id],VS={sent:T("بانتظار الرد","Awaiting reply"),confirmed:T("بياناته صحيحة","Confirmed"),update:T("يحتاج تحديث","Needs update")};
+   vr.push([T("تأكيد البيانات","Data confirmation"),v&&v.status?VS[v.status]||v.status:T("لم يُرسل","Not sent"),v?Xpt(v.sentAt):null,v?Xpt(v.at):null,v?Xpv(v.note):null]);
+   Object.entries(Uc().greetSent||{}).forEach(([k,at])=>{let[kd,id,yr]=k.split(":");Number(id)===p.id&&vr.push([kd==="bday"?T("تهنئة عيد ميلاد","Birthday greeting"):T("تهنئة ذكرى الخدمة","Work-anniversary greeting"),T("أُعدّت للإرسال","Prepared for sending"),Xpt(at),null,yr||null])})}
+  sheet(T("التأكيد والتهاني","Confirmation & greetings"),"9333EA",[T("البند","Item"),T("الحالة","Status"),T("تاريخ الإرسال","Sent"),T("آخر تحديث","Updated"),T("ملاحظة / السنة","Note / year")],vr,canV,T("تحتاج صلاحية التعديل","needs the edit permission"));
+  /* 17. import history: every import row that created or updated this record */
+  let canI=de.isAdmin(),ir=canI?(D.importRecords||[]).filter(x=>String(x.emp_no)===String(p.empNo)).slice().reverse().map(x=>[Xpt(x.created_at),Xpv(x.filename),x.row_number??null,Xpv(x.action),Xpv(x.created_by),Xpv(x.notes)]):[];
+  sheet(T("سجل الاستيراد","Import history"),"475569",[T("التاريخ","Date"),T("الملف","File"),T("رقم الصف","Row"),T("الإجراء","Action"),T("بواسطة","By"),T("ملاحظات","Notes")],ir,canI,T("للمسؤول فقط","administrators only"));
   /* summary first */
-  let sm=[[T("الموظف","Employee"),I(p)],[T("الرقم الوظيفي","Employee no."),Xpv(p.empNo)],[T("الإدارة","Department"),p.department?B(p.department):null],[T("القسم","Section"),p.orgSection?B(p.orgSection):null],[T("المسمى","Job title"),p.jobTitle?B(p.jobTitle):null],[T("أُنشئ في","Generated"),Xpt(Te())],[T("بواسطة","By"),(de.user||{}).name||null],[T("ملاحظة","Note"),T("سري — للاستخدام الداخلي. كل ورقة تتبع نفس الصلاحية التي تُظهر بياناتها في الموقع.","Confidential — internal use. Each sheet follows the same permission that shows its data in the site.")],[],[T("الورقة","Sheet"),T("عدد الصفوف","Rows"),T("الحالة","Status")],...idx];
+  let sm=[[T("الموظف","Employee"),I(p)],[T("الرقم الوظيفي","Employee no."),Xpv(p.empNo)],[T("الإدارة","Department"),p.department?B(p.department):null],[T("القسم","Section"),p.orgSection?B(p.orgSection):null],[T("المسمى","Job title"),p.jobTitle?B(p.jobTitle):null],[T("أُنشئ في","Generated"),Xpt(Te())],[T("بواسطة","By"),(de.user||{}).name||null],[T("الصورة الشخصية","Profile photo"),p.photo?T("مسجلة في الموقع","Recorded in the site"):T("غير مسجلة","Not recorded")],[T("ملاحظة","Note"),T("سري — للاستخدام الداخلي. كل ورقة تتبع نفس الصلاحية التي تُظهر بياناتها في الموقع.","Confidential — internal use. Each sheet follows the same permission that shows its data in the site.")],[],[T("الورقة","Sheet"),T("عدد الصفوف","Rows"),T("الحالة","Status")],...idx];
   S.unshift({name:T("الملخص","Summary").slice(0,31),rtl:ar,color:"0F766E",rows:sm,widths:[34,28,60]});
   return{S,p}};
 document.addEventListener("click",async z=>{let b=z.target.closest("[data-xp-emp]");if(!b)return;z.preventDefault();if(!de.can("excel"))return;let T=Tx;b.disabled=!0;

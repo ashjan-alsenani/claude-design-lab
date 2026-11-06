@@ -1,0 +1,47 @@
+// The profile's "Full Excel file": one workbook with every kind of data the site holds about one employee.
+import {chromium} from 'playwright';
+import {readFileSync} from 'node:fs';
+import {inflateRawSync} from 'node:zlib';
+const BASE=process.env.BASE_URL||'http://127.0.0.1:8098/employee-directory/';
+let F=0;const ok=(n,v,x='')=>{v||F++;console.log(v?'PASS':'FAIL',n,v?'':x)};
+// minimal .xlsx (zip) reader: file name -> text
+const unzip=buf=>{const out={};let i=0;while(buf.readUInt32LE(i)===0x04034b50){const m=buf.readUInt16LE(i+8),cs=buf.readUInt32LE(i+18),nl=buf.readUInt16LE(i+26),el=buf.readUInt16LE(i+28),nm=buf.slice(i+30,i+30+nl).toString(),d=buf.slice(i+30+nl+el,i+30+nl+el+cs);out[nm]=(m===8?inflateRawSync(d):d).toString('utf8');i+=30+nl+el+cs}return out};
+const b=await chromium.launch();
+const c=await b.newContext({viewport:{width:1440,height:900},acceptDownloads:true});
+await c.addInitScript(()=>{if(!sessionStorage.getItem('t-init')){sessionStorage.setItem('t-init','1');sessionStorage.setItem('dtd-review-auth','1');localStorage.setItem('dtd-lang','ar')}});
+const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));const W=t=>p.waitForTimeout(t||400);
+await p.goto(BASE+'#/home');await p.waitForFunction(()=>localStorage.getItem('dtd-review-v5'),null,{timeout:20000});await W(1000);
+// fictional records for employee 4 in every module the export reads
+await p.evaluate(()=>{const D=JSON.parse(localStorage.getItem('dtd-review-v5')),T='2026-09-01T08:00:00.000Z';
+ D.park=D.park||{};D.park.spots=[...(D.park.spots||[]),{id:'PK-T1',no:'Z-77',site:'Muscat HQ',bld:'B2',zone:'North',type:'std',bind:'emp',blocks:[],at:T,by:'t'}];
+ D.park.asg=[...(D.park.asg||[]).filter(x=>x.emp!==4),{id:'PA-T1',spot:'PK-T1',emp:4,from:'2026-01-01',to:'',note:'Test allocation',plate:'TEST-4411',exc:'',at:T,by:'Tester'},{id:'PA-T0',spot:'PK-T1',emp:4,from:'2025-01-01',to:'2025-06-30',note:'',at:T,by:'Tester',void:{at:T,by:'Tester',why:'Entered twice'}}];
+ D.park.wait=[...(D.park.wait||[]),{id:'PW-T1',emp:4,at:'2025-12-01',ord:9,why:'Night shifts',at2:T,by:'Tester',out:{at:T,by:'Tester',why:'Allocated a space'}}];
+ D.park.exc=[...(D.park.exc||[]),{id:'PX-T1',emp:4,kind:'multi',ref:'EX-TEST-9',date:'2026-01-01',until:'',note:'Two sites',at:T,by:'Tester'}];
+ D.park.log=[...(D.park.log||[]),{at:T,by:'Tester',act:'allocate',txt:'Z-77 test log line',emp:4}];
+ D.verify={...(D.verify||{}),4:{status:'update',note:'Phone changed',sentAt:T,at:T}};
+ D.ui=D.ui||{};D.ui.greetSent={...(D.ui.greetSent||{}),'bday:4:2026':T};
+ localStorage.setItem('dtd-review-v5',JSON.stringify(D))});
+const run=async lang=>{await p.evaluate(l=>localStorage.setItem('dtd-lang',l),lang);await p.goto(BASE+'#/employee/4');await p.reload();await W(1500);
+ const btn=p.locator('[data-xp-emp="4"]');ok(`${lang}: button on the profile`,await btn.count()===1);
+ const [dl]=await Promise.all([p.waitForEvent('download'),btn.click()]);const path=await dl.path();const z=unzip(readFileSync(path));
+ const wb=z['xl/workbook.xml']||'',names=[...wb.matchAll(/<sheet [^>]*name="([^"]+)"/g)].map(m=>m[1].replace(/&amp;/g,'&')),all=Object.entries(z).filter(([k])=>/^xl\/(worksheets|sharedStrings)/.test(k)).map(([,v])=>v).join('\n');
+ console.log(lang,dl.suggestedFilename(),names.length,'sheets:',names.join(' | '));
+ return {names,all,fn:dl.suggestedFilename()}};
+let r=await run('en');
+ok('file name',/^employee-\w+-full-\d{4}-\d{2}-\d{2}\.xlsx$/.test(r.fn),r.fn);
+for(const s of ['Summary','All profile data','Reporting & team','Qualifications & training','Monthly ratings','Technical allowances','Parking','Criticality','Confirmation & greetings','Import history','Activity log'])ok('sheet: '+s,r.names.includes(s));
+ok('19 sheets (summary + 18)',r.names.length===19,r.names.length);
+ok('parking: current allocation, space, location, plate',/Z-77/.test(r.all)&&/Muscat HQ · B2 · North/.test(r.all)&&/TEST-4411/.test(r.all));
+ok('parking: cancelled allocation with reason',/Cancelled/.test(r.all)&&/Entered twice/.test(r.all));
+ok('parking: waiting list, exception, log',/Allocated a space/.test(r.all)&&/EX-TEST-9/.test(r.all)&&/Z-77 test log line/.test(r.all));
+ok('parking: eligibility criteria',/Eligibility/.test(r.all)&&/Included level or job/.test(r.all));
+ok('confirmation status and greeting',/Needs update/.test(r.all)&&/Phone changed/.test(r.all)&&/Birthday greeting/.test(r.all));
+ok('criticality total and level',/Criticality/.test(r.all)&&/Total/.test(r.all));
+ok('import history rows',/demo-fictional\.tsv|\.tsv|\.xlsx/.test(r.all));
+ok('profile photo line on the summary',/Profile photo/.test(r.all));
+r=await run('ar');
+ok('Arabic sheet names',r.names.includes('المواقف')&&r.names.includes('الأهمية الحرجة')&&r.names.includes('التأكيد والتهاني')&&r.names.includes('سجل الاستيراد'),r.names.join('|'));
+ok('Arabic content',/ملغى/.test(r.all)&&/يحتاج تحديث/.test(r.all)&&/تهنئة عيد ميلاد/.test(r.all));
+ok('right-to-left sheets',/rightToLeft="1"/.test(r.all));
+await p.setViewportSize({width:390,height:844});await W(500);ok('phone: button reachable, no horizontal scroll',await p.locator('[data-xp-emp="4"]').isVisible()&&await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ok('no JS errors',!errs.length,errs.join(' | '));console.log(F?F+' FAILED':'ALL PASS');await b.close();process.exit(F?1:0);
